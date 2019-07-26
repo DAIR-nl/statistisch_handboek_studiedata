@@ -1,0 +1,60 @@
+---
+title: "One sample T-toets"
+author: "Irene van der Staaij"
+date: "7/26/2019"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Gebruik
+
+De *One sample t-toets* wordt gebruikt wanneer er een hypothese is over het gemiddelde in één groep. Als je wilt toetsen of het gemiddelde van een variabele (bijvoorbeeld lengte) in een populatie gelijk is aan een bepaalde, vooraf gespecificeerde, waarde kun je de One sample t-toets gebruiken[^1].
+
+## Voorbeeld uit het onderwijs
+
+De opleidingsdirecteur van de opleiding Economie wil weten of het gemiddelde eindexamencijfer voor Wiskunde A van haar VWO studenten lager is dan het landelijke gemiddelde, zodat zij kan bepalen of het zinnig is om een zomercursus statistiek te starten.
+
+## Assumpties
+
+### Normaliteit 
+Een aanname van de t-toets is dat de data normaal verdeeld is. Dit hoeft niet het geval te zijn (vooral bij een kleine dataset n < 30). Controleer of de data normaal verdeeld is visueel met een histogram of Q-Q plot, of statistisch met de Kolmogorov-Smirnov Test (……) [^3] of de Shapiro-Wilk Test (voor n = < 50)[^2]. Als aan deze assumptie niet voldaan wordt, gebruik dan de Wilcoxon Signed Rank Test[^4]
+
+## Uitvoering in R
+
+```{r ttest}
+set.seed(100)
+x <- rnorm(50, mean = 10, sd = 0.5)
+t.test(x, mu = 10) # testing if mean of x could be
+
+```
+
+## Toelichting op de output
+df = n -1 
+p-value is flink boven de 0.05, dus niet significant, sterker nog hij is bijna 0.5 dus het is net als  kop of munt gooien. 
+
+## Rapportage
+
+## Verder lezen
+ 
+[^1]: amc-wiki.
+[^2]: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php.
+[^3]: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit
+[^4]: http://r-statistics.co/Statistical-Tests-in-R.html
+
+Open Intro Statistics Third Edition 
+
+
+## Achtergrond info
+
+De t-toets wordt ingezet wanneer de data numeriek en (gedeeltelijk) normaal verdeeld is, maar de keuze welke t-toets men kiest is afhankelijk van het aantal groepen wat je bekijkt en de relatie tussen de twee groepen. 
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

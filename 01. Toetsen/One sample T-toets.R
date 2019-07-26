@@ -25,7 +25,7 @@
 ## http://r-statistics.co/Statistical-Tests-in-R.html
 
 ## T-toets
-set.seed(100)
+set.seed(120)
 x <- rnorm(50, mean = 10, sd = 0.5)
 t.test(x, mu = 10) # testing if mean of x could be
 

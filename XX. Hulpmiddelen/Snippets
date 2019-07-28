@@ -1,0 +1,83 @@
+snippet intro
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## ${1:Titel van het bestand} ####
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## R code voor Student Analytics Vrije Universiteit Amsterdam
+	## Copyright `r format(Sys.time(), "%Y")` VU
+	## Web Page: http://www.vu.nl
+	## Contact: Theo Bakker (t.c.bakker@vu.nl)
+	## Project: Versnellingsagenda - Statistisch Handboek HO
+  ##
+	## Doel: ${3:Doel}
+	##
+	## Afhankelijkheden: ${4:Afhankelijkheid}
+	##
+	## Datasets: ${5:Datasets}
+	##
+	## Opmerkingen: 
+	## 1) ${6:Geen}.
+	## 2) ___
+	##
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## Geschiedenis:
+	## `r format(Sys.time(), "%d-%m-%Y")`: TB: Aanmaak bestand
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+snippet datuminit
+	## `r format(Sys.time(), "%d-%m-%Y")`: TB: ${1:Commentaar}
+	
+
+snippet blok_voorbereiden
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## VOORBEREIDEN ####
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+	
+	# Bepaal de netwerk directory en lees de functies en libraries in
+	source("99. Functies & Libraries/00. Voorbereidingen.R")
+	
+snippet blok_voorbereiden
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+	## VOORBEREIDEN ####
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+	
+	# Bepaal de netwerk directory en lees de functies en libraries in
+	source("99. Functies & Libraries/00. Voorbereidingen.R")
+
+snippet blok_bibliotheken
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## 0. BIBLIOTHEKEN ####
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+snippet blok_inlezen
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## 1. INLEZEN ####
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## Lees alle benodigde bestanden in:
+	
+snippet blok_bewerken
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## 2. BEWERKEN ####
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+snippet blok_einde	
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## EINDE ####
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+snippet blok_opruimen
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## RUIM OP ####
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+snippet blok_opruimen_en_bewaren	
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## BEWAAR & RUIM OP ####
+	## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+snippet blok_subblok
+	## xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+	## 
+
+snippet blok_subsubblok
+	## _____________________________________________________________________________
+	## 

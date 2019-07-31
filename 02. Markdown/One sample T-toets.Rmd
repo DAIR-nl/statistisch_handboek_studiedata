@@ -1,14 +1,26 @@
 ---
 title: "One sample T-toets"
-author: "Irene van der Staaij"
+author: "Irene van der Staaij & Megiel Kerkhoven"
 date: "7/26/2019"
 output:
   html_document: default
-  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r aanmaken data, include=FALSE, echo=TRUE}
+  set.seed(100)  
+  Wiskundecijfers_level1 <- sample(4:10, 20, replace = TRUE)
+  Wiskunde_cijfers_level2 <- sample(5:9, 30, replace=TRUE)
+  Wiskunde_cijfers_level3 <- sample(6:8, 60, replace=TRUE)
+  Wiskunde_cijfers_level4 <- sample(6:7, 80, replace=TRUE)
+  Wiskunde_cijfers_level2_tot_level4 = c(Wiskunde_cijfers_level2, 
+                                         Wiskunde_cijfers_level3, 
+                                         Wiskunde_cijfers_level4)
+  
+  Wiskunde_cijfers <- append(Wiskundecijfers_level1, Wiskunde_cijfers_level2_tot_level4)
 ```
 
 ## Gebruik
@@ -22,7 +34,11 @@ De opleidingsdirecteur van de opleiding Economie wil weten of het gemiddelde ein
 ## Assumpties
 
 ### Normaliteit 
-Een aanname van de t-toets is dat de data normaal verdeeld is. Dit hoeft niet het geval te zijn (vooral bij een kleine dataset n < 30). Controleer of de data normaal verdeeld is visueel met een histogram of Q-Q plot, of statistisch met de Kolmogorov-Smirnov Test (……) [^3] of de Shapiro-Wilk Test (voor n = < 50)[^2]. Als aan deze assumptie niet voldaan wordt, gebruik dan de Wilcoxon Signed Rank Test[^4]
+Een aanname van de t-toets is dat de data normaal verdeeld is. Dit hoeft niet het geval te zijn (vooral bij een kleine dataset n < 30). Controleer of de data normaal verdeeld is visueel met een histogram of Q-Q plot, of statistisch met de Kolmogorov-Smirnov Test (……) [^2] of de Shapiro-Wilk Test (voor n = < 50)[^3]. Als aan deze assumptie niet voldaan wordt, gebruik dan de Wilcoxon Signed Rank Test[^4]
+
+```{r histogram voor normaliteit}
+hist(Wiskunde_cijfers)
+```
 
 ## Uitvoering in R
 
@@ -42,8 +58,8 @@ p-value is flink boven de 0.05, dus niet significant, sterker nog hij is bijna 0
 ## Verder lezen
  
 [^1]: amc-wiki.
-[^2]: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php.
-[^3]: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit
+[^2]: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit
+[^3]: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php
 [^4]: http://r-statistics.co/Statistical-Tests-in-R.html
 
 Open Intro Statistics Third Edition 
@@ -53,8 +69,4 @@ Open Intro Statistics Third Edition
 
 De t-toets wordt ingezet wanneer de data numeriek en (gedeeltelijk) normaal verdeeld is, maar de keuze welke t-toets men kiest is afhankelijk van het aantal groepen wat je bekijkt en de relatie tussen de twee groepen. 
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

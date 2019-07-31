@@ -39,7 +39,7 @@ H~A~: Het gemiddelde cijfer voor wiskunde A van VWO studenten bij de opleiding E
 ## Assumpties
 
 ### Normaliteit 
-Een aanname van de t-toets is dat de data normaal verdeeld is. Dit hoeft niet het geval te zijn (vooral bij een kleine dataset n < 30). Controleer of de data normaal verdeeld is visueel met een histogram of Q-Q plot, of statistisch met de Kolmogorov-Smirnov Test (……) [^2] of de Shapiro-Wilk Test (voor n = < 50)[^3]. Als aan deze assumptie niet voldaan wordt, gebruik dan de Wilcoxon Signed Rank Test[^4]
+Een aanname van de t-toets is dat de data normaal verdeeld is. Dit hoeft niet het geval te zijn (vooral bij een kleine dataset n < 30). Controleer of de data normaal verdeeld is visueel met een histogram of Q-Q plot, of statistisch met de Kolmogorov-Smirnov Test (……) [^2] of de Shapiro-Wilk Test (voor n = < 50)[^3]. Als aan deze assumptie niet voldaan wordt, gebruik dan de Wilcoxon Signed Rank Test[^4].
 
 ```{r histogram voor normaliteit}
 hist(Wiskunde_cijfers)

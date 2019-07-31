@@ -25,11 +25,16 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Gebruik
 
-De *One sample t-toets* wordt gebruikt wanneer er een hypothese is over het gemiddelde in één groep. Als je wilt toetsen of het gemiddelde van een variabele (bijvoorbeeld lengte) in een populatie gelijk is aan een bepaalde, vooraf gespecificeerde, waarde kun je de One sample t-toets gebruiken[^1].
+Gebruik de *One sample t-toets* bij een hypothese over het gemiddelde in één groep, bijvoorbeeld gemiddeld tentamencijfer.[^1].
 
 ## Voorbeeld uit het onderwijs
 
 De opleidingsdirecteur van de opleiding Economie wil weten of het gemiddelde eindexamencijfer voor Wiskunde A van haar VWO studenten lager is dan het landelijke gemiddelde, zodat zij kan bepalen of het zinnig is om een zomercursus statistiek te starten.
+
+H0: Het gemiddelde cijfer voor wiskunde A van VWO studenten bij de opleiding Economie is een zes, µ = 6. 
+
+HA: Het gemiddelde cijfer voor wiskunde A van VWO studenten bij de opleiding Economie is anders dan een zes,  µ ≠ 6.
+
 
 ## Assumpties
 

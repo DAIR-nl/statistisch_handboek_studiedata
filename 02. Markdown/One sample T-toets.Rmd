@@ -11,6 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
+## inladen packages
+
+## aanmaken dummydata
 set.seed(95)
 
 level1_cijfers <- c(4, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10)
@@ -47,22 +50,39 @@ H~A~: Het gemiddelde cijfer voor wiskunde A van VWO studenten bij de opleiding E
 ### Normaliteit 
 Een aanname van de t-toets is dat de data normaal verdeeld is. Dit hoeft niet het geval te zijn (vooral bij een kleine dataset n < 30). Controleer of de data normaal verdeeld is visueel met een histogram of Q-Q plot, of statistisch met de Kolmogorov-Smirnov Test (……) [^2] of de Shapiro-Wilk Test (voor n = < 50)[^3]. Als aan deze assumptie niet voldaan wordt, gebruik dan de Wilcoxon Signed Rank Test[^4].
 
+
+
+## Uitvoering in R
+Voor de uitvoering in R is er een dummydataset ingeladen met gemiddelde cijfers in Wiskunde A van 165 middelbare scholieren.
+
+### Normaliteit
 ```{r histogram voor normaliteit}
 hist(Wiskunde_cijfers)
 ```
 
-## Uitvoering in R
+* @IvdS hier een stuk over de interpretatie van het histogram
+```` {r Kolmogorov-Smirnov Test, warning=FALSE}
+x <-rnorm(230)
+ks.test(Wiskunde_cijfers, x)
+````
 
+* @IvdS hier een stuk over de interpretatie van de Kolmogorov Smirnov Test
+``` {r Shapiro-Wilk Test, warning=FALSE}
+shapiro.test(Wiskunde_cijfers)
+```
+
+* @IvdS hier een stuk over de interpretatie van de Shapiro Test
+
+### One sample T-toets
 ```{r ttest}
-set.seed(100)
-x <- rnorm(50, mean = 10, sd = 0.5)
-t.test(x, mu = 10) # testing if mean of x could be
-
+t.test(Wiskunde_cijfers, mu = 6.9) # testen of het gemiddelde van onze studenten afwijkt van het landelijk gemiddelde (6.9)
 ```
 
 ## Toelichting op de output
 df = n -1 
-p-value is flink boven de 0.05, dus niet significant, sterker nog hij is bijna 0.5 dus het is net als  kop of munt gooien. 
+p-value is flink boven de 0.05, dus niet significant, sterker nog hij is bijna 0.5 dus het is net als  kop of munt gooien.
+
+* @IvdS de code gaat nu over onze dummydata, de wiskundecijfers. Kan je de interpretatie aanpassen?
 
 ## Rapportage
 

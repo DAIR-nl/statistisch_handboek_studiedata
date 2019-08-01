@@ -11,16 +11,22 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-  set.seed(100)  
-  Wiskundecijfers_level1 <- sample(4:10, 20, replace = TRUE)
-  Wiskunde_cijfers_level2 <- sample(5:9, 30, replace=TRUE)
-  Wiskunde_cijfers_level3 <- sample(6:8, 60, replace=TRUE)
-  Wiskunde_cijfers_level4 <- sample(6:7, 80, replace=TRUE)
-  Wiskunde_cijfers_level2_tot_level4 = c(Wiskunde_cijfers_level2, 
-                                         Wiskunde_cijfers_level3, 
-                                         Wiskunde_cijfers_level4)
-  
-  Wiskunde_cijfers <- append(Wiskundecijfers_level1, Wiskunde_cijfers_level2_tot_level4)
+set.seed(97)
+
+level1_cijfers <- c(4, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10)
+level2_cijfers <- c(5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0)
+level3_cijfers <- c(6.0, 6.5, 7.0, 7.5, 8.0, 8.5)
+level4_cijfers <- c(6.0, 6.5, 7.0, 7.5)
+
+Wiskundecijfers_level1 <- sample(level1_cijfers, 20, replace = TRUE)
+Wiskunde_cijfers_level2 <- sample(level2_cijfers, 30, replace=TRUE)
+Wiskunde_cijfers_level3 <- sample(level3_cijfers, 60, replace=TRUE)
+Wiskunde_cijfers_level4 <- sample(level4_cijfers, 80, replace=TRUE)
+Wiskunde_cijfers_level2_tot_level4 = c(Wiskunde_cijfers_level2,
+                                      Wiskunde_cijfers_level3,
+                                      Wiskunde_cijfers_level4)
+
+Wiskunde_cijfers <- append(Wiskundecijfers_level1, Wiskunde_cijfers_level2_tot_level4)
 ```
 
 ## Gebruik

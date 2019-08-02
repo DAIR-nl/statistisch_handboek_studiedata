@@ -4,6 +4,7 @@ author: "Irene van der Staaij & Megiel Kerkhoven"
 date: "7/26/2019"
 output:
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -57,6 +58,7 @@ Voor de uitvoering in R is er een dummydataset genaamd Wiskunde_cijfers ingelade
 ```{r histogram voor normaliteit}
 hist(Wiskunde_cijfers)
 ```
+
 De histogram laat een belvorm zien vergelijkbaar aan een normaalverdeling, veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling.
 
 

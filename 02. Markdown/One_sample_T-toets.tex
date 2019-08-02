@@ -1,0 +1,293 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={One sample T-toets},
+            pdfauthor={Irene van der Staaij \& Megiel Kerkhoven},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{One sample T-toets}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Irene van der Staaij \& Megiel Kerkhoven}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{7/26/2019}
+
+
+\begin{document}
+\maketitle
+
+\hypertarget{gebruik}{%
+\subsection{Gebruik}\label{gebruik}}
+
+Gebruik de \emph{One sample t-toets} bij een hypothese over het
+gemiddelde in één groep, bijvoorbeeld gemiddeld
+tentamencijfer.\footnote{\href{https://wikistatistiek.amc.nl/index.php/T-toets\#one_sample_t-toets}{Wiki
+  Statistiek Academischi Medisch Centrum}}.
+
+\hypertarget{voorbeeld-uit-het-onderwijs}{%
+\subsection{Voorbeeld uit het
+onderwijs}\label{voorbeeld-uit-het-onderwijs}}
+
+De opleidingsdirecteur van de opleiding Economie wil weten of het
+gemiddelde eindexamencijfer voor Wiskunde A van haar VWO studenten lager
+is dan het landelijke gemiddelde, zodat zij kan bepalen of het zinnig is
+om een zomercursus statistiek te starten.
+
+H\textsubscript{0}: Het gemiddelde cijfer voor wiskunde A van VWO
+studenten bij de opleiding Economie is een 6,9, µ = 6,9.
+
+H\textsubscript{A}: Het gemiddelde cijfer voor wiskunde A van VWO
+studenten bij de opleiding Economie is anders dan een 6,9, µ ≠ 6,9.
+
+\hypertarget{assumpties}{%
+\subsection{Assumpties}\label{assumpties}}
+
+\hypertarget{normaliteit}{%
+\subsubsection{Normaliteit}\label{normaliteit}}
+
+De t-toets gaat er vanuit dat de data normaal verdeeld is, dit hoeft
+vooral bij kleine steekproeven niet het geval te zijn. Checkt de data
+visueel op normaliteit door het maken van een dataplot: een histogram of
+een boxplot. Of een toets normaal verdeeld is wordt getoetst door de The
+Kolmogorov-Smirnov Test en voor een kleinere steekproef de The
+Shapiro-Wilk Test \footnote{\href{https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit}{UvA
+  Wiki Methodologiewinkel}}. Wanneer aan de assumptie niet wordt
+voldaan, voer de non-parametrische toets de Wilcoxon Signed Rank Test
+uit. \footnote{\url{http://r-statistics.co/Statistical-Tests-in-R.html}}
+
+\hypertarget{uitvoering-in-r}{%
+\subsection{Uitvoering in R}\label{uitvoering-in-r}}
+
+Voor de uitvoering in R is er een dummydataset genaamd Wiskunde\_cijfers
+ingeladen met gemiddelde cijfers in Wiskunde A van 165 middelbare
+scholieren.
+
+\hypertarget{normaliteit-1}{%
+\subsubsection{Normaliteit}\label{normaliteit-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{hist}\NormalTok{(Wiskunde_cijfers)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{One_sample_T-toets_files/figure-latex/histogram voor normaliteit-1.pdf}
+De histogram laat een belvorm zien vergelijkbaar aan een
+normaalverdeling, veel waardes liggen rondom het gemiddelde en weinig
+bij de staarten van de verdeling.
+
+\hypertarget{section}{%
+\subsubsection{}\label{section}}
+
+\hypertarget{kolmogorov-smirnov}{%
+\paragraph{Kolmogorov-Smirnov}\label{kolmogorov-smirnov}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x <-}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{230}\NormalTok{)}
+\KeywordTok{ks.test}\NormalTok{(Wiskunde_cijfers, x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Two-sample Kolmogorov-Smirnov test
+## 
+## data:  Wiskunde_cijfers and x
+## D = 1, p-value < 2.2e-16
+## alternative hypothesis: two-sided
+\end{verbatim}
+
+De kolmogorov-smirnov test is een non-parametrische toets, die het
+verschil in vorm tussen twee verdelingen toetst. In dit geval toetst
+deze test het verschil tussen de normaal verdeling en de verdeling van
+de steekproef.Wanneer de p-waarde kleiner is dan 0.05 is er een verschil
+tussen beide verdelingen.
+
+In dit geval is p \textgreater{} 0.05, dus is de verdeling van de data
+niet significant verschillend van de normaal verdeling.
+
+\hypertarget{shapiro-wilk-test}{%
+\paragraph{Shapiro-Wilk Test}\label{shapiro-wilk-test}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{shapiro.test}\NormalTok{(Wiskunde_cijfers)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  Wiskunde_cijfers
+## W = 0.96197, p-value = 0.0001752
+\end{verbatim}
+
+De Shapiro-Wilk Test is een soort gelijke test als de Kolmogorov-smirnov
+test en wordt vooral gebruikt bij kleine steekproeven. Wanneer de
+p-waarde groter is dan 0.05 is de verdeling van de data niet significant
+verschillend van de normaal verdeling. Huidige p-waarde is 000, dus niet
+significant verschillend.
+
+\hypertarget{one-sample-t-toets}{%
+\subsubsection{One sample T-toets}\label{one-sample-t-toets}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{t.test}\NormalTok{(Wiskunde_cijfers, }\DataTypeTok{mu =} \FloatTok{6.9}\NormalTok{) }\CommentTok{# testen of het gemiddelde van onze studenten afwijkt van het landelijk gemiddelde (6.9)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  One Sample t-test
+## 
+## data:  Wiskunde_cijfers
+## t = 1.2029, df = 164, p-value = 0.2307
+## alternative hypothesis: true mean is not equal to 6.9
+## 95 percent confidence interval:
+##  6.835857 7.164143
+## sample estimates:
+## mean of x 
+##         7
+\end{verbatim}
+
+\hypertarget{toelichting-op-de-output}{%
+\subsection{Toelichting op de output}\label{toelichting-op-de-output}}
+
+Het gemiddelde van de steekproef is ** Degrees of freedom (df) = n -1 =
+50 -1 = 49 p-waarde: boven de 0.05, dus de H\textsubscript{0} wordt niet
+verworpen. 95-betrouwbaarheidsinterval: Bij herhaling van het onderzoek
+zal in 95\% van de gevallen een interval uitkomen waarbij mu er in valt.
+
+\hypertarget{rapportage}{%
+\subsection{Rapportage}\label{rapportage}}
+
+\hypertarget{verder-lezen}{%
+\subsection{Verder lezen}\label{verder-lezen}}
+
+Open Intro Statistics Third Edition
+
+\hypertarget{achtergrond-info}{%
+\subsection{Achtergrond info}\label{achtergrond-info}}
+
+De t-toets wordt ingezet wanneer de data numeriek en (gedeeltelijk)
+normaal verdeeld is, maar de keuze welke t-toets men kiest is
+afhankelijk van het aantal groepen wat je bekijkt en de relatie tussen
+de twee groepen.
+
+
+\end{document}

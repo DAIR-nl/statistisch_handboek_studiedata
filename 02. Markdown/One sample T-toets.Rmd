@@ -51,7 +51,7 @@ H~A~: Het gemiddelde cijfer voor wiskunde A van VWO studenten bij de opleiding E
 De t-toets gaat er vanuit dat de data normaal verdeeld is, dit hoeft vooral bij kleine steekproeven niet het geval te zijn. Checkt de data visueel op normaliteit door het maken van een dataplot: een histogram of een boxplot. Of een toets normaal verdeeld is wordt getoetst  door de The Kolmogorov-Smirnov Test en voor een kleinere steekproef de The Shapiro-Wilk Test [^2]. Wanneer aan de assumptie niet wordt voldaan, voer de non-parametrische toets de Wilcoxon Signed Rank Test uit. [^3]
 
 ## Uitvoering in R
-Voor de uitvoering in R is er een dummydataset ingeladen met gemiddelde cijfers in Wiskunde A van 165 middelbare scholieren.
+Voor de uitvoering in R is er een dummydataset genaamd Wiskunde_cijfers ingeladen met gemiddelde cijfers in Wiskunde A van 165 middelbare scholieren.
 
 ### Normaliteit
 ```{r histogram voor normaliteit}
@@ -86,7 +86,7 @@ p-value is flink boven de 0.05, dus niet significant, sterker nog hij is bijna 0
 ## Rapportage
 
 ## Verder lezen
- 
+
 [^1]: [Wiki Statistiek Academischi Medisch Centrum](https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets)
 [^2]: [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit)
 [^3]: http://r-statistics.co/Statistical-Tests-in-R.html

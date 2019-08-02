@@ -20,5 +20,5 @@ Wiskunde_cijfers_level2_tot_level7 = c(Wiskunde_cijfers_level2,
                                        Wiskunde_cijfers_level5,
                                        Wiskunde_cijfers_level6,
                                        Wiskunde_cijfers_level7)
-Wiskunde_cijfers <- c(7.0)
+
 Wiskunde_cijfers <- append(Wiskundecijfers_level1, Wiskunde_cijfers_level2_tot_level7)

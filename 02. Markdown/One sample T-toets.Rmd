@@ -4,6 +4,7 @@ author: "Irene van der Staaij & Megiel Kerkhoven"
 date: "7/26/2019"
 output:
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -57,16 +58,14 @@ Voor de uitvoering in R is er een dummydataset genaamd Wiskunde_cijfers ingelade
 ```{r histogram voor normaliteit}
 hist(Wiskunde_cijfers)
 ```
+De histogram laat een belvorm zien vergelijkbaar aan een normaalverdeling, veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling.
 
-<<<<<<< HEAD
-* @IvdS hier een stuk over de interpretatie van het histogram
+
 
 ### {.tabset .tabset-fade .tabset.pills}
 #### Kolmogorov-Smirnov
-=======
-De histogram laat een belvorm zien vergelijkbaar aan een normaalverdeling, veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling.
 
->>>>>>> 5f482614ffdc722dfbc76a067361285f92871426
+
 ```` {r Kolmogorov-Smirnov Test, warning=FALSE}
 x <-rnorm(230)
 ks.test(Wiskunde_cijfers, x)

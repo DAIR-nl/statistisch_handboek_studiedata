@@ -69,16 +69,17 @@ De histogram laat een belvorm zien vergelijkbaar aan een normaalverdeling, veel 
 x <-rnorm(230)
 ks.test(Wiskunde_cijfers, x)
 ````
+De kolmogorov-smirnov test is een non-parametrische toets, die het verschil in vorm tussen twee verdelingen toetst. In dit geval toetst deze test het verschil tussen de normaal verdeling en de verdeling van de steekproef.Wanneer de p-waarde kleiner is dan 0.05 is er een verschil tussen beide verdelingen. 
 
-* @IvdS hier een stuk over de interpretatie van de Kolmogorov Smirnov Test
+In dit geval is p > 0.05, dus is de verdeling van de data niet significant verschillend van de normaal verdeling. 
 
 #### Shapiro-Wilk Test
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 shapiro.test(Wiskunde_cijfers)
 ```
 
-* @IvdS hier een stuk over de interpretatie van de Shapiro Test
-
+De Shapiro-Wilk Test is een soort gelijke test als de Kolmogorov-smirnov test en wordt vooral gebruikt bij kleine steekproeven. Wanneer de p-waarde groter is dan 0.05 is de verdeling van de data niet significant verschillend van de normaal verdeling.
+Huidige p-waarde is 000, dus niet significant verschillend. 
 
 
 ### One sample T-toets
@@ -87,10 +88,11 @@ t.test(Wiskunde_cijfers, mu = 6.9) # testen of het gemiddelde van onze studenten
 ```
 
 ## Toelichting op de output
-df = n -1 
-p-value is flink boven de 0.05, dus niet significant, sterker nog hij is bijna 0.5 dus het is net als  kop of munt gooien.
+Het gemiddelde van de steekproef is **
+Degrees of freedom (df) = n -1 = 50 -1 = 49
+p-waarde: boven de 0.05, dus de H~0~ wordt niet verworpen. 
+95-betrouwbaarheidsinterval: Bij herhaling van het onderzoek zal in 95% van de gevallen een interval uitkomen waarbij mu er in valt. 
 
-* @IvdS de code gaat nu over onze dummydata, de wiskundecijfers. Kan je de interpretatie aanpassen?
 
 ## Rapportage
 

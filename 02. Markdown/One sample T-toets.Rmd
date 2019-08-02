@@ -4,7 +4,6 @@ author: "Irene van der Staaij & Megiel Kerkhoven"
 date: "7/26/2019"
 output:
   html_document: default
-  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}

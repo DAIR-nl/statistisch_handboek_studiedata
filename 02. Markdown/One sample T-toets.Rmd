@@ -69,8 +69,7 @@ De histogram laat een belvorm zien vergelijkbaar aan een normaalverdeling, veel 
 x <-rnorm(230)
 ks.test(Wiskunde_cijfers, x)
 ````
-
-* @IvdS hier een stuk over de interpretatie van de Kolmogorov Smirnov Test
+De kolmogorov-smirnov test is een non-parametrische toets, die het verschil in vorm tussen twee verdelingen toetst. In dit geval toetst deze test het verschil tussen de normaal verdeling en de verdeling van de steekproef.
 
 #### Shapiro-Wilk Test
 ``` {r Shapiro-Wilk Test, warning=FALSE}

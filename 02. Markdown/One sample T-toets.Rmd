@@ -85,7 +85,7 @@ p-value is flink boven de 0.05, dus niet significant, sterker nog hij is bijna 0
 ## Rapportage
 
 ## Verder lezen
- 
+
 [^1]: [amc-wiki](https://wikistatistiek.amc.nl).
 [^2]: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit
 [^3]: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php

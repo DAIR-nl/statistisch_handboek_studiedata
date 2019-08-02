@@ -40,15 +40,15 @@ Gebruik de *One sample t-toets* bij een hypothese over het gemiddelde in één g
 
 De opleidingsdirecteur van de opleiding Economie wil weten of het gemiddelde eindexamencijfer voor Wiskunde A van haar VWO studenten lager is dan het landelijke gemiddelde, zodat zij kan bepalen of het zinnig is om een zomercursus statistiek te starten.
 
-H~0~: Het gemiddelde cijfer voor wiskunde A van VWO studenten bij de opleiding Economie is een zes, µ = 6. 
+H~0~: Het gemiddelde cijfer voor wiskunde A van VWO studenten bij de opleiding Economie is een 6,9, µ = 6,9. 
 
-H~A~: Het gemiddelde cijfer voor wiskunde A van VWO studenten bij de opleiding Economie is anders dan een zes,  µ ≠ 6.
+H~A~: Het gemiddelde cijfer voor wiskunde A van VWO studenten bij de opleiding Economie is anders dan een 6,9,  µ ≠ 6,9.
 
 
 ## Assumpties
 
 ### Normaliteit 
-De t-toets gaat er vanuit dat de data normaal verdeeld is, dit hoeft vooral bij kleine steekproeven niet het geval te zijn. Checkt de data visueel op normaliteit door het maken van een dataplot: een histogram of een boxplot. Normaliteit wordt getoetst  door de The Kolmogorov-Smirnov Test [^2]en de The Shapiro-Wilk Test (voor n = < 50) [^3]. Wanneer aan de assumptie niet wordt voldaan, voer de Wilcoxon Signed Rank Test uit. [^4]
+De t-toets gaat er vanuit dat de data normaal verdeeld is, dit hoeft vooral bij kleine steekproeven niet het geval te zijn. Checkt de data visueel op normaliteit door het maken van een dataplot: een histogram of een boxplot. Of een toets normaal verdeeld is wordt getoetst  door de The Kolmogorov-Smirnov Test en voor een kleinere steekproef de The Shapiro-Wilk Test [^2]. Wanneer aan de assumptie niet wordt voldaan, voer de non-parametrische toets de Wilcoxon Signed Rank Test uit. [^3]
 
 ## Uitvoering in R
 Voor de uitvoering in R is er een dummydataset ingeladen met gemiddelde cijfers in Wiskunde A van 165 middelbare scholieren.
@@ -58,7 +58,8 @@ Voor de uitvoering in R is er een dummydataset ingeladen met gemiddelde cijfers 
 hist(Wiskunde_cijfers)
 ```
 
-* @IvdS hier een stuk over de interpretatie van het histogram
+De histogram laat een belvorm zien vergelijkbaar aan een normaalverdeling, veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling.
+
 ```` {r Kolmogorov-Smirnov Test, warning=FALSE}
 x <-rnorm(230)
 ks.test(Wiskunde_cijfers, x)
@@ -86,10 +87,9 @@ p-value is flink boven de 0.05, dus niet significant, sterker nog hij is bijna 0
 
 ## Verder lezen
  
-[^1]: [amc-wiki](https://wikistatistiek.amc.nl).
-[^2]: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit
-[^3]: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php
-[^4]: http://r-statistics.co/Statistical-Tests-in-R.html
+[^1]: [Wiki Statistiek Academischi Medisch Centrum](https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets)
+[^2]: [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit)
+[^3]: http://r-statistics.co/Statistical-Tests-in-R.html
 
 Open Intro Statistics Third Edition 
 

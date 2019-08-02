@@ -59,17 +59,24 @@ hist(Wiskunde_cijfers)
 ```
 
 * @IvdS hier een stuk over de interpretatie van het histogram
+
+### {.tabset .tabset-fade .tabset.pills}
+#### Kolmogorov-Smirnov
 ```` {r Kolmogorov-Smirnov Test, warning=FALSE}
 x <-rnorm(230)
 ks.test(Wiskunde_cijfers, x)
 ````
 
 * @IvdS hier een stuk over de interpretatie van de Kolmogorov Smirnov Test
+
+#### Shapiro-Wilk Test
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 shapiro.test(Wiskunde_cijfers)
 ```
 
 * @IvdS hier een stuk over de interpretatie van de Shapiro Test
+
+
 
 ### One sample T-toets
 ```{r ttest}

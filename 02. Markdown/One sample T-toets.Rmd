@@ -45,6 +45,12 @@ H~0~: Het gemiddelde cijfer voor wiskunde A van VWO studenten bij de opleiding E
 
 H~A~: Het gemiddelde cijfer voor wiskunde A van VWO studenten bij de opleiding Economie is anders dan een 6,9,  µ ≠ 6,9.
 
+De bachelorcoördinator van de opleiding wiskunde vraagt zich af of het wiskundeprogramma te zwaar is, daarom vraagt zij aan de studenten een schatting hoeveel uur de studenten per week aan de studie kwijt zijn. Ze wilt de schatting vergelijken met de 40 uur per week wat er staat voor het besteden aan de studie.  
+
+H~0~: Het gemiddeld aantal uur studeren van wiskunde studenten bij de opleiding Wiskunde is 40, µ = 40. 
+
+H~A~: Het gemiddeld aantal uur studeren van wiskunde studenten bij de opleiding wiskunde is anders dan 40,  µ ≠ 40.
+
 
 ## Assumpties
 

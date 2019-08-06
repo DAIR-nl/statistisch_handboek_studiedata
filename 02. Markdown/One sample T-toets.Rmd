@@ -39,11 +39,11 @@ Gebruik de *One sample t-toets* bij een hypothese over het gemiddelde in één g
 
 ## Voorbeeld uit het onderwijs
 
-De opleidingsdirecteur van de opleiding Economie wil weten of het gemiddelde eindexamencijfer voor Wiskunde A van haar VWO studenten lager is dan het landelijke gemiddelde, zodat zij kan bepalen of het zinnig is om een zomercursus statistiek te starten.
+De bachelorcoördinator van de opleiding wiskunde vraagt zich af of het wiskundeprogramma te zwaar is, daarom vraagt zij aan de studenten een schatting te maken hoeveel uur ze per week aan de studie kwijt zijn. De coördinator wilt de schatting vergelijken met de 40 uur per week wat er staat voor het besteden aan de studie.  
 
-H~0~: Het gemiddelde cijfer voor wiskunde A van VWO studenten bij de opleiding Economie is een 6,9, µ = 6,9. 
+H~0~: Het gemiddeld aantal uur studeren van wiskunde studenten bij de opleiding Wiskunde is 40, µ = 40. 
 
-H~A~: Het gemiddelde cijfer voor wiskunde A van VWO studenten bij de opleiding Economie is anders dan een 6,9,  µ ≠ 6,9.
+H~A~: Het gemiddeld aantal uur studeren van wiskunde studenten bij de opleiding wiskunde is anders dan 40,  µ ≠ 40.
 
 
 ## Assumpties
@@ -69,7 +69,7 @@ De histogram laat een belvorm zien vergelijkbaar aan een normaalverdeling, veel 
 
 ```` {r Kolmogorov-Smirnov Test, warning=FALSE}
 x <-rnorm(230)
-ks.test(Wiskunde_cijfers, x)
+#ks.test(Wiskunde_cijfers, x)
 ````
 De kolmogorov-smirnov test is een non-parametrische toets, die het verschil in vorm tussen twee verdelingen toetst. In dit geval toetst deze test het verschil tussen de normaal verdeling en de verdeling van de steekproef.Wanneer de p-waarde kleiner is dan 0.05 is er een verschil tussen beide verdelingen. 
 

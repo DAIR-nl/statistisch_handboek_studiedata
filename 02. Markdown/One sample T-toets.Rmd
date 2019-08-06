@@ -38,31 +38,38 @@ Wiskunde_cijfers <- append(Wiskundecijfers_level1, Wiskunde_cijfers_level2_tot_l
 
 ## Gebruik
 
-Gebruik de *One sample t-toets* bij een hypothese over het gemiddelde in één groep, bijvoorbeeld gemiddeld tentamencijfer.[^1].
+De *One sample t-toets* kan gebruikt worden om aan de hand van één steekproef het gemiddelde van de totale populatie te vergelijken met een vooraf opgestelde hypothese [^1]. 
 
 ## Voorbeeld uit het onderwijs
 
-De bachelorcoördinator van de opleiding wiskunde vraagt zich af of het wiskundeprogramma te zwaar is, daarom vraagt zij aan de studenten een schatting te maken hoeveel uur ze per week aan de studie kwijt zijn. De coördinator wilt de schatting vergelijken met de 40 uur per week wat er staat voor het besteden aan de studie.  
+De bachelorcoördinator van de opleiding Wiskunde vraagt zich af of het wiskundeprogramma te zwaar is, daarom vraagt zij aan de studenten een schatting te maken hoeveel tijd ze per week aan de studie kwijt zijn. De coördinator wilt de schatting vergelijken met de 40 uur per week, die er staan voor het besteden aan de studie.
 
-H~0~: Het gemiddeld aantal uur studeren van wiskunde studenten bij de opleiding Wiskunde is 40, µ = 40. 
+H~0~: Het gemiddeld aantal uur studeren van wiskunde studenten bij de opleiding Wiskunde is 40, µ <= 40. (minder on gelijk aan 40 uur is niet te zwaar)
 
-H~A~: Het gemiddeld aantal uur studeren van wiskunde studenten bij de opleiding wiskunde is anders dan 40,  µ ≠ 40.
+H~A~: Het gemiddeld aantal uur studeren van wiskunde studenten bij de opleiding Wiskunde is anders dan 40,  µ > 40. (meer dan 40 uur is te zwaar)
 
 
 ## Assumpties
 
 ### Normaliteit 
-De t-toets gaat er vanuit dat de data normaal verdeeld is, dit hoeft vooral bij kleine steekproeven niet het geval te zijn. Checkt de data visueel op normaliteit door het maken van een dataplot: een histogram of een boxplot. Of een toets normaal verdeeld is wordt getoetst  door de The Kolmogorov-Smirnov Test en voor een kleinere steekproef de The Shapiro-Wilk Test [^2]. Wanneer aan de assumptie niet wordt voldaan, voer de non-parametrische toets de Wilcoxon Signed Rank Test uit. [^3]
+De t-toets gaat er vanuit dat de data normaal verdeeld is, bij kleine steekproeven is dit vaker niet het geval. 
+
+Controleer de data met deze stappen:
+1. Controleer visueel door het maken van een dataplot: een histogram of een boxplot. 
+2. Toets daarna of de data normaal verdeeld is met de The Kolmogorov-Smirnov Test of bij een kleinere steekproef, n < 30, met de The Shapiro-Wilk Test [^2]. 
+
+Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, dus aan de assumptie niet wordt voldaan, dan mag de t-toets niet gebruikt worden. Gebruik in dat geval de Wilcoxon Signed Rank Test uit. [^3]
 
 ## Uitvoering in R
 Voor de uitvoering in R is er een dummydataset genaamd Wiskunde_cijfers ingeladen met gemiddelde cijfers in Wiskunde A van 165 middelbare scholieren.
 
-### Normaliteit
+### Test assumpties: normaliteit
+1. visualiseren van de data met behulp van een histogram
 ```{r histogram voor normaliteit}
 hist(Wiskunde_cijfers)
 ```
 
-De histogram laat een belvorm zien vergelijkbaar aan een normaalverdeling, veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling.
+De histogram laat een belvorm zien vergelijkbaar aan een normaalverdeling, veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.  
 
 
 

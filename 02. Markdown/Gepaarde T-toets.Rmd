@@ -14,7 +14,35 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
+set.seed(2)
 
+mu <- 3.6
+sigma <- 0.6
+evaluatie_rating_geen_tutor <- rnorm(250, mu, sigma)
+
+evaluatie_rating_geen_tutor <- evaluatie_rating_geen_tutor[evaluatie_rating_geen_tutor <= 5 & evaluatie_rating_geen_tutor >= 1]
+evaluatie_rating_geen_tutor <- sapply (evaluatie_rating_geen_tutor, round, 3)
+
+mu <- 3.4
+sigma <- 0.7
+evaluatie_rating_wel_tutor <- rnorm(250, mu, sigma)
+
+evaluatie_rating_wel_tutor <- evaluatie_rating_wel_tutor[evaluatie_rating_wel_tutor <= 5 & evaluatie_rating_wel_tutor >= 1]
+evaluatie_rating_wel_tutor <- sapply (evaluatie_rating_wel_tutor, round, 3)
+
+mu <- 3.6
+sigma <- 0.6
+evaluatie_rating_geen_tutor_n30 <- rnorm(30, mu, sigma)
+
+evaluatie_rating_geen_tutor_n30 <- evaluatie_rating_geen_tutor_n30[evaluatie_rating_geen_tutor_n30 <= 5 & evaluatie_rating_geen_tutor_n30 >= 1]
+evaluatie_rating_geen_tutor_n30 <- sapply (evaluatie_rating_geen_tutor_n30, round, 3)
+
+mu <- 3.4
+sigma <- 0.7
+evaluatie_rating_wel_tutor_n30 <- rnorm(30, mu, sigma)
+
+evaluatie_rating_wel_tutor_n30 <- evaluatie_rating_wel_tutor_n30[evaluatie_rating_wel_tutor_n30 <= 5 & evaluatie_rating_wel_tutor_n30 >= 1]
+evaluatie_rating_wel_tutor_n30 <- sapply (evaluatie_rating_wel_tutor_n30, round, 3)
 ```
 
 ## Gebruik
@@ -28,29 +56,32 @@ knitr::opts_chunk$set(echo = TRUE)
 ### Normaliteit
 
 ```{r Assumptietest}
-hist()
+hist(evaluatie_rating_geen_tutor)
+hist(evaluatie_rating_wel_tutor)
 ```
 
 ### {.tabset .tabset-fade .tabset.pills}
-#### Kolmogorov-Smirnov
+#### Lilliefors Test
 
 
-```` {r Kolmogorov-Smirnov Test, warning=FALSE}
-x <-rnorm(230)
-#ks.test(Wiskunde_cijfers, x)
+```` {r Lilliefors Test, warning=FALSE}
+library(nortest)
+lillie.test(evaluatie_rating_geen_tutor)
+lillie.test(evaluatie_rating_wel_tutor)
 ````
 
 
 #### Shapiro-Wilk Test
 ``` {r Shapiro-Wilk Test, warning=FALSE}
-shapiro.test(Wiskunde_cijfers)
+shapiro.test(evaluatie_rating_geen_tutor_n30)
+shapiro.test(evaluatie_rating_wel_tutor_n30)
 ```
 
 
 ### statistische toets in R
 
 ```{r statistische toets}
-t.test(x, y, paired=TRUE)
+t.test(evaluatie_rating_wel_tutor, evaluatie_rating_geen_tutor, paired=TRUE)
 ```
 
 ## Toelichting op de output

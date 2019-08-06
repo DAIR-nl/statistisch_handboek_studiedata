@@ -100,7 +100,7 @@ p-waarde: boven de 0.05, dus de H~0~ wordt niet verworpen.
 
 ## Verder lezen
 
-[^1]: [Wiki Statistiek Academischi Medisch Centrum](https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets)
+[^1]: [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets)
 [^2]: [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit)
 [^3]: http://r-statistics.co/Statistical-Tests-in-R.html
 

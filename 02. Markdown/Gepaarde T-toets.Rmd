@@ -1,0 +1,67 @@
+---
+title: "Gepaarde T-toets"
+author: "Irene van der Staaij & Megiel Kerkhoven"
+date: "1 Oktober 2019"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    theme: united
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r aanmaken data, include=FALSE, echo=TRUE}
+
+```
+
+## Gebruik
+
+## Voorbeeld uit het onderwijs
+
+## Assumpties
+
+## Uitvoering in R
+
+### Normaliteit
+
+```{r Assumptietest}
+hist()
+```
+
+### {.tabset .tabset-fade .tabset.pills}
+#### Kolmogorov-Smirnov
+
+
+```` {r Kolmogorov-Smirnov Test, warning=FALSE}
+x <-rnorm(230)
+#ks.test(Wiskunde_cijfers, x)
+````
+De kolmogorov-smirnov test is een non-parametrische toets, die het verschil in vorm tussen twee verdelingen toetst. In dit geval toetst deze test het verschil tussen de normaal verdeling en de verdeling van de steekproef.Wanneer de p-waarde kleiner is dan 0.05 is er een verschil tussen beide verdelingen. 
+
+In dit geval is p > 0.05, dus is de verdeling van de data niet significant verschillend van de normaal verdeling. 
+
+#### Shapiro-Wilk Test
+``` {r Shapiro-Wilk Test, warning=FALSE}
+shapiro.test(Wiskunde_cijfers)
+```
+
+De Shapiro-Wilk Test is een soort gelijke test als de Kolmogorov-smirnov test en wordt vooral gebruikt bij kleine steekproeven. Wanneer de p-waarde groter is dan 0.05 is de verdeling van de data niet significant verschillend van de normaal verdeling.
+Huidige p-waarde is 000, dus niet significant verschillend. 
+
+### statistische toets in R
+
+```{r statistische toets}
+t.test(x, y, paired=TRUE)
+```
+
+## Toelichting op de output
+
+## Rapportage
+
+## Verder lezen
+
+## Achtergrond info
+

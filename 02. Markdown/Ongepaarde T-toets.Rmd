@@ -1,0 +1,80 @@
+---
+title: "Ongepaarde t-toets"
+author: "Irene van der Staaij & Megiel Kerkhoven"
+date: "1 Oktober 2019"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    theme: united
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r aanmaken data, include=FALSE, echo=TRUE}
+set.seed(1)
+
+mu <- 6.3
+sigma <- 1.2
+cijfers_gem_2010 <- rnorm(180, mu, sigma)
+cijfers_gem_2010 <- cijfers_gem_2010 [cijfers_gem_2010 <= 10 & cijfers_gem_2010 >= 1]
+cijfers_gem_2010 <- sapply (cijfers_gem_2010, round, 3)
+
+mu <- 6.6
+sigma <- 1.2
+cijfers_gem_2011 <- rnorm(160, mu, sigma)
+cijfers_gem_2011 <- cijfers_gem_2011 [cijfers_gem_2011 <= 10 & cijfers_gem_2011 >= 1]
+cijfers_gem_2011 <- sapply (cijfers_gem_2011, round, 3)
+
+mu <- 6.6
+sigma <- 1.2
+cijfers_gem_2011_n30 <- rnorm(30, mu, sigma)
+cijfers_gem_2011_n30 <- cijfers_gem_2011 [cijfers_gem_2011 <= 10 & cijfers_gem_2011 >= 1]
+cijfers_gem_2011_n30 <- sapply (cijfers_gem_2011, round, 3)
+```
+
+## Gebruik
+
+## Voorbeeld uit het onderwijs
+
+## Assumpties
+
+## Uitvoering in R
+
+### Normaliteit
+
+```{r Assumptietest}
+hist(cijfers_gem_2011)
+```
+
+### {.tabset .tabset-fade .tabset.pills}
+#### Lilliefors Test
+
+
+```` {r Lilliefors Test, warning=FALSE}
+library(nortest)
+lillie.test(cijfers_gem_2011)
+````
+
+
+#### Shapiro-Wilk Test
+``` {r Shapiro-Wilk Test, warning=FALSE}
+shapiro.test(cijfers_gem_2011_n30)
+```
+
+
+### statistische toets in R
+
+```{r statistische toets}
+t.test(cijfers_gem_2010, cijfers_gem_2011)
+```
+
+## Toelichting op de output
+
+## Rapportage
+
+## Verder lezen
+
+## Achtergrond info

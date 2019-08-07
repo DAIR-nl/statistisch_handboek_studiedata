@@ -42,6 +42,7 @@ cijfers_gem_2011_n30 <- sapply (cijfers_gem_2011, round, 3)
 ## Assumpties
 
 ## Uitvoering in R
+Voor de uitvoering in R is er data ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Statistiek. De data is beschikbaar voor het cohort gestart in 2010 en voor het cohort gestart in 2011. Vanaf 2011 heeft de opleiding een Bindend Studieadvies (BSA) die de selectiviteit van het eerste jaar moet vergroten.
 
 ### Normaliteit
 

@@ -22,6 +22,12 @@ cijfers_gem_2010 <- rnorm(180, mu, sigma)
 cijfers_gem_2010 <- cijfers_gem_2010 [cijfers_gem_2010 <= 10 & cijfers_gem_2010 >= 1]
 cijfers_gem_2010 <- sapply (cijfers_gem_2010, round, 3)
 
+mu <- 6.3
+sigma <- 1.2
+cijfers_gem_2010_n30 <- rnorm(30, mu, sigma)
+cijfers_gem_2010_n30 <- cijfers_gem_2010_n30 [cijfers_gem_2010_n30 <= 10 & cijfers_gem_2010_n30 >= 1]
+cijfers_gem_2010_n30 <- sapply (cijfers_gem_2010_n30, round, 3)
+
 mu <- 6.6
 sigma <- 1.2
 cijfers_gem_2011 <- rnorm(160, mu, sigma)
@@ -42,11 +48,13 @@ cijfers_gem_2011_n30 <- sapply (cijfers_gem_2011, round, 3)
 ## Assumpties
 
 ## Uitvoering in R
+Voor de uitvoering in R is er data ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Statistiek. De data is beschikbaar voor het cohort gestart in 2010 en voor het cohort gestart in 2011. Vanaf 2011 heeft de opleiding een Bindend Studieadvies (BSA) die de selectiviteit van het eerste jaar moet vergroten.
 
 ### Normaliteit
 
 ```{r Assumptietest}
 hist(cijfers_gem_2011)
+hist(cijfers_gem_2010)
 ```
 
 ### {.tabset .tabset-fade .tabset.pills}
@@ -56,12 +64,14 @@ hist(cijfers_gem_2011)
 ```` {r Lilliefors Test, warning=FALSE}
 library(nortest)
 lillie.test(cijfers_gem_2011)
+lillie.test(cijfers_gem_2010)
 ````
 
 
 #### Shapiro-Wilk Test
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 shapiro.test(cijfers_gem_2011_n30)
+shapiro.test(cijfers_gem_2010_n30)
 ```
 
 

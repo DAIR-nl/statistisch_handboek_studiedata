@@ -1,5 +1,5 @@
 ---
-title: " "
+title: "Chi-kwadraat toets"
 author: "Irene van der Staaij & Megiel Kerkhoven"
 date: "1 Oktober 2019"
 output: 

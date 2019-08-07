@@ -19,10 +19,20 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Gebruik
+De Chi-kwadraat toets wordt gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde categorische variabelen, door middel van een kruistabel [1]
 
 ## Voorbeeld uit het onderwijs
+De studieadviseur van de opleiding filosofie vraagt zich af of de studenten met een functiebeperking vaker uitvallen dan de student zonder functiebeperking sinds de invoering van het leenstelsel?
+
+H~0~: De verhouding uitval van het aantal studenten met een functiebeperking voor of na de invoering van het leenstelsel is gelijk gebleven.
+
+H~A~: De verhouding uitval van het aantal studenten met een functiebeperking voor of na de invoering van het leenstelsel is anders.
 
 ## Assumpties
+1. De metingen zijn op nominaal niveau, dit betekent automatisch dat er geen ordening tussen de groepen gemaakt kan worden. 
+2. De groepen zijn onafhankelijk van elkaar. 
+3. De groepsgrootte van de verwachtte waarde is per cel niet kleiner 5, bij de geobserveerde waarde is de groepsgrootte niet minder dan 10. Gebruik de Fisher’s exact toets wanneer de groepen kleiner zijn. [^2] 
+
 
 ## Uitvoering in R
 
@@ -40,8 +50,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Toelichting op de output
 
+Continuïteitscorrectie bij df=1
+
 ## Rapportage
 
 ## Verder lezen
+[1] http://r-statistics.co/Statistical-Tests-in-R.html
+[2] https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets
 
 ## Achtergrond info
+
+

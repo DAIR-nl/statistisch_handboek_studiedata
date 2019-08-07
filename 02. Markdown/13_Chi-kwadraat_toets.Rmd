@@ -8,14 +8,14 @@ output:
     toc_float: TRUE
     theme: united
 ---
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-
+decimalen <- rnorm (953, 0.479, 0.1)
+uitval_fb <- matrix(c(2001:2953, sapply(decimalen, round)), byrow = FALSE, nrow = 953)
 ```
 
 ## Gebruik

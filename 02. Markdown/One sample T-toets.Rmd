@@ -18,22 +18,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ## inladen packages
 
 ## aanmaken dummydata
-set.seed(95)
-
-level1_cijfers <- c(4, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10)
-level2_cijfers <- c(5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0)
-level3_cijfers <- c(6.0, 6.5, 7.0, 7.5, 8.0, 8.5)
-level4_cijfers <- c(6.5, 7.0, 7.5)
-
-Wiskundecijfers_level1 <- sample(level1_cijfers, 15, replace = TRUE)
-Wiskunde_cijfers_level2 <- sample(level2_cijfers, 40, replace=TRUE)
-Wiskunde_cijfers_level3 <- sample(level3_cijfers, 60, replace=TRUE)
-Wiskunde_cijfers_level4 <- sample(level4_cijfers, 50, replace=TRUE)
-Wiskunde_cijfers_level2_tot_level4 = c(Wiskunde_cijfers_level2,
-                                      Wiskunde_cijfers_level3,
-                                      Wiskunde_cijfers_level4)
-
-Wiskunde_cijfers <- append(Wiskundecijfers_level1, Wiskunde_cijfers_level2_tot_level4)
+set.seed(0)
+decimalen <- 2 * rnorm(160, 7.0, 1.9)
+Wiskunde_cijfers <- (0.5 * round(decimalen))[decimalen <= 20 & decimalen >= 9]
 ```
 
 ## Gebruik

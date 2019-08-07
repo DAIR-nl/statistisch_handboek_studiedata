@@ -14,8 +14,21 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-decimalen <- rnorm (953, 0.479, 0.1)
-uitval_fb <- matrix(c(2001:2953, sapply(decimalen, round)), byrow = FALSE, nrow = 953)
+set.seed(0)
+
+decimalen_geen_ls <- rnorm (853, 0.491, 0.1)
+waardes <- sapply(decimalen_geen_ls, round)
+geen_ls_matrix <- matrix(c(2146:2999, waardes), byrow = FALSE, nrow = 953)
+uitval_fb_geen_ls <- data.frame(geen_ls_matrix)
+names (uitval_fb_geen_ls) [1] <- "Studentnummer"
+names (uitval_fb_geen_ls) [2] <- "Uitval"
+
+decimalen_wel_ls <- rnorm (740, 0.491, 0.14)
+waardes <- sapply(decimalen_wel_ls, round)
+wel_ls_matrix <- matrix(c(3260:3999, sapply(decimalen_wel_ls, round)), byrow = FALSE, nrow = 840)
+uitval_fb_wel_ls <- data.frame(wel_ls_matrix)
+names (uitval_fb_wel_ls) [1] <- "Studentnummer"
+names (uitval_fb_wel_ls) [2] <- "Uitval"
 ```
 
 ## Gebruik
@@ -25,18 +38,19 @@ uitval_fb <- matrix(c(2001:2953, sapply(decimalen, round)), byrow = FALSE, nrow 
 ## Assumpties
 
 ## Uitvoering in R
-Voor de uitvoering in R is er data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. 
+Voor de uitvoering in R is er data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. De data is binair (wel of geen uitval) en op basis van het studentnummer.
 
-### Assumpties testen in R
+### Is de data categorisch?
 
 ```{r}
-
+print(uitval_fb_geen_ls[1:30, ], row.names = FALSE)
+print(uitval_fb_wel_ls[1:30, ], row.names = FALSE)
 ```
 
 ### statistische toets in R
 
 ```{r}
-
+chisq.test(uitval_fb_wel_ls, uitval_fb_geen_ls)
 ```
 
 ## Toelichting op de output

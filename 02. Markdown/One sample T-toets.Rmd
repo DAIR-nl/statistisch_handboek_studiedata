@@ -30,15 +30,9 @@ De *One sample t-toets* kan gebruikt worden om aan de hand van één steekproef 
 ## Voorbeeld uit het onderwijs
 De opleidingsdirecteur van de opleiding Werktuigbouwkunde wil weten of het gemiddelde eindexamencijfer voor de exacte vakken van haar VWO studenten lager is dan het landelijke gemiddelde, zodat zij kan bepalen of het curriculum van de inleidende vakken genoeg aansluiten bij de eerstejaars studenten. 
 
-Is het gemiddelde cijfer van een cohort bij opleiding X een 6 (zesjescultuur)? 
-H0:  Het gemiddelde cijfer van een cohort bij opleiding X is een zes, µ = 6. 
-HA: Het gemiddelde cijfer van de student is anders dan een zes,  µ ≠ 6
+H~0~: Het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die beginnen aan de Bachelor Werktuigbouwkunde is hoger dan of gelijk aan het landelijkge gemiddelde, µ >= . 
 
-De bachelorcoördinator van de opleiding Wiskunde vraagt zich af of het wiskundeprogramma te zwaar is, daarom vraagt zij aan de studenten een schatting te maken hoeveel tijd ze per week aan de studie kwijt zijn. De coördinator wilt de schatting vergelijken met de 40 uur per week, die er staan voor het besteden aan de studie.
-
-H~0~: Het gemiddeld aantal uur studeren van wiskunde studenten bij de opleiding Wiskunde is 40, µ <= 40. (minder of gelijk aan 40 uur is niet te zwaar)
-
-H~A~: Het gemiddeld aantal uur studeren van wiskunde studenten bij de opleiding Wiskunde is meer dan 40,  µ > 40. (meer dan 40 uur is te zwaar)
+H~A~: Het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die beginnen aan de Bachelor Werktuigbouwkunde is lager dan het landelijkge gemiddelde, µ >= . 
 
 
 ## Assumpties

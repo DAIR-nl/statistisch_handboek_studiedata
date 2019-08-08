@@ -28,12 +28,17 @@ Wiskunde_cijfers <- (0.5 * round(decimalen))[decimalen <= 20 & decimalen >= 9]
 De *One sample t-toets* kan gebruikt worden om aan de hand van één steekproef het gemiddelde van de totale populatie te vergelijken met een vooraf opgestelde hypothese [^1]. 
 
 ## Voorbeeld uit het onderwijs
+De opleidingsdirecteur van de opleiding Werktuigbouwkunde wil weten of het gemiddelde eindexamencijfer voor de exacte vakken van haar VWO studenten lager is dan het landelijke gemiddelde, zodat zij kan bepalen of het curriculum van de inleidende vakken genoeg aansluiten bij de eerstejaars studenten. 
+
+Is het gemiddelde cijfer van een cohort bij opleiding X een 6 (zesjescultuur)? 
+H0:  Het gemiddelde cijfer van een cohort bij opleiding X is een zes, µ = 6. 
+HA: Het gemiddelde cijfer van de student is anders dan een zes,  µ ≠ 6
 
 De bachelorcoördinator van de opleiding Wiskunde vraagt zich af of het wiskundeprogramma te zwaar is, daarom vraagt zij aan de studenten een schatting te maken hoeveel tijd ze per week aan de studie kwijt zijn. De coördinator wilt de schatting vergelijken met de 40 uur per week, die er staan voor het besteden aan de studie.
 
-H~0~: Het gemiddeld aantal uur studeren van wiskunde studenten bij de opleiding Wiskunde is 40, µ <= 40. (minder on gelijk aan 40 uur is niet te zwaar)
+H~0~: Het gemiddeld aantal uur studeren van wiskunde studenten bij de opleiding Wiskunde is 40, µ <= 40. (minder of gelijk aan 40 uur is niet te zwaar)
 
-H~A~: Het gemiddeld aantal uur studeren van wiskunde studenten bij de opleiding Wiskunde is anders dan 40,  µ > 40. (meer dan 40 uur is te zwaar)
+H~A~: Het gemiddeld aantal uur studeren van wiskunde studenten bij de opleiding Wiskunde is meer dan 40,  µ > 40. (meer dan 40 uur is te zwaar)
 
 
 ## Assumpties
@@ -41,8 +46,8 @@ H~A~: Het gemiddeld aantal uur studeren van wiskunde studenten bij de opleiding 
 ### Normaliteit 
 De t-toets gaat er vanuit dat de data normaal verdeeld is, bij kleine steekproeven is dit vaker niet het geval. 
 
-Controleer de data met deze stappen:
-1. Controleer visueel door het maken van een dataplot: een histogram of een boxplot. 
+Controleer de data met deze stappen:  
+1. Controleer visueel door het maken van een dataplot: een histogram of een boxplot.  
 2. Toets daarna of de data normaal verdeeld is met de The Kolmogorov-Smirnov Test of bij een kleinere steekproef, n < 30, met de The Shapiro-Wilk Test [^2]. 
 
 Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, dus aan de assumptie niet wordt voldaan, dan mag de t-toets niet gebruikt worden. Gebruik in dat geval de Wilcoxon Signed Rank Test uit. [^3]

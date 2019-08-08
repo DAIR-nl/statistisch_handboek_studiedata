@@ -32,12 +32,11 @@ De opleidingsdirecteur van de opleiding Werktuigbouwkunde wil weten of het gemid
 
 H~0~: Het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die beginnen aan de Bachelor Werktuigbouwkunde is hoger dan of gelijk aan het landelijkge gemiddelde, µ >= . 
 
-H~A~: Het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die beginnen aan de Bachelor Werktuigbouwkunde is lager dan het landelijkge gemiddelde, µ >= . 
+H~A~: Het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die beginnen aan de Bachelor Werktuigbouwkunde is lager dan het landelijkge gemiddelde, µ < . 
 
 
-## Assumpties
 
-### Normaliteit 
+## Normaliteit 
 De t-toets gaat er vanuit dat de data normaal verdeeld is, bij kleine steekproeven is dit vaker niet het geval. 
 
 Controleer de data met deze stappen:  
@@ -50,14 +49,16 @@ Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, dus 
 Voor de uitvoering in R is er een dummydataset genaamd Wiskunde_cijfers ingeladen met gemiddelde cijfers in Wiskunde A van 165 middelbare scholieren.
 
 ### Test assumpties: normaliteit
-1. visualiseren van de data met behulp van een histogram
+Visualiseren van de data met behulp van een histogram
 ```{r histogram voor normaliteit}
 hist(Wiskunde_cijfers)
 ```
 
 De histogram laat een belvorm zien vergelijkbaar aan een normaalverdeling, veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.  
 
+***
 
+Toets normaliteit met de The Kolmogorov-Smirnov Test of met de The Shapiro-Wilk Test (n < 30). 
 
 ### {.tabset .tabset-fade .tabset.pills}
 #### Kolmogorov-Smirnov

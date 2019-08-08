@@ -1,0 +1,64 @@
+---
+title: "Mann-Whitney U toets"
+author: "Irene van der Staaij & Megiel Kerkhoven"
+date: "1 Oktober 2019"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    theme: united
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r aanmaken data, include=FALSE, echo=TRUE}
+set.seed(0)
+
+goede_student_ec <- c(0, 3, 6, 6, 6, 6, 6, 6, 6)
+matige_student_ec <- c(0, 0, 0, 3, 6, 6, 6, 6, 6)
+slechte_student_ec <- c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6)
+
+resultaten_nl_studenten<- rbind (
+                                  t(replicate(401, sample(goede_student_ec, 11, replace = TRUE))), 
+                                  t(replicate(203, sample(matige_student_ec, 11, replace = TRUE))),
+                                  t(replicate(309, sample(slechte_student_ec, 11, replace = TRUE))))
+punten_jaar2_nl <- margin.table(resultaten_nl_studenten, 1)
+
+resultaten_internationale_studenten <- rbind (
+                                  t(replicate(250, sample(goede_student_ec, 11, replace = TRUE))), 
+                                  t(replicate(100, sample(matige_student_ec, 11, replace = TRUE))),
+                                  t(replicate(200, sample(slechte_student_ec, 11, replace = TRUE))))
+punten_jaar2_inter <- margin.table(resultaten_internationale_studenten, 1)
+```
+
+## Gebruik
+
+## Voorbeeld uit het onderwijs
+
+## Assumpties
+
+## Uitvoering in R
+
+### Assumpties testen in R
+
+```{r}
+
+```
+
+### statistische toets in R
+
+```{r}
+wilcox.test(resultaten_nl_studenten$totaal,
+            resultaten_internationale_studenten$totaal)
+```
+
+## Toelichting op de output
+
+## Rapportage
+
+## Verder lezen
+
+## Achtergrond info

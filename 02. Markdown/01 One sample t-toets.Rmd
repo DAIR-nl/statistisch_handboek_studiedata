@@ -18,9 +18,22 @@ knitr::opts_chunk$set(echo = TRUE)
 ## inladen packages
 
 ## aanmaken dummydata
-set.seed(0)
-decimalen <- 2 * rnorm(160, 7.0, 1.9)
-Wiskunde_cijfers <- (0.5 * round(decimalen))[decimalen <= 20 & decimalen >= 9]
+set.seed(1)
+
+decimalen_wiskunde <- rnorm(160, 7.0, 2.6)
+Wiskunde_eindcijfer <- round(decimalen_wiskunde, 1)[decimalen_wiskunde <= 10 & decimalen_wiskunde >= 4.5]
+
+decimalen_scheikunde <- rnorm(160, 6.7, 2.2)
+scheikunde_eindcijfer <- round(decimalen_scheikunde, 1)[decimalen_scheikunde <= 10 & decimalen_scheikunde >= 4.5]
+
+decimalen_natuurkunde <- rnorm(160, 6.9, 2.4)
+natuurkunde_eindcijfer <- round(decimalen_natuurkunde, 1)[decimalen_natuurkunde <= 10 & decimalen_natuurkunde >= 4.5]
+
+wns_eindcijfers <- cbind(Wiskunde_eindcijfer, scheikunde_eindcijfer, natuurkunde_eindcijfer)
+
+gemiddeld_cijfer_wns <- apply(wns_eindcijfers, 1, mean)
+
+gemiddeld_cijfer_wns_n30 <- sample(gemiddeld_cijfer_wns, 30)
 ```
 
 ## Gebruik
@@ -30,9 +43,9 @@ De *One sample t-toets* kan gebruikt worden om aan de hand van één steekproef 
 ## Voorbeeld uit het onderwijs
 De opleidingsdirecteur van de opleiding Werktuigbouwkunde wil weten of het gemiddelde eindexamencijfer voor de exacte vakken van haar VWO studenten lager is dan het landelijke gemiddelde, zodat zij kan bepalen of het curriculum van de inleidende vakken genoeg aansluiten bij de eerstejaars studenten. 
 
-H~0~: Het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die beginnen aan de Bachelor Werktuigbouwkunde is hoger dan of gelijk aan het landelijkge gemiddelde, µ >= . 
+H~0~: Het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die beginnen aan de Bachelor Werktuigbouwkunde is hoger dan of gelijk aan het landelijk gemiddelde, µ >= . 
 
-H~A~: Het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die beginnen aan de Bachelor Werktuigbouwkunde is lager dan het landelijkge gemiddelde, µ < . 
+H~A~: Het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die beginnen aan de Bachelor Werktuigbouwkunde is lager dan het landelijk gemiddelde, µ < . 
 
 
 
@@ -46,12 +59,12 @@ Controleer de data met deze stappen:
 Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, dus aan de assumptie niet wordt voldaan, dan mag de t-toets niet gebruikt worden. Gebruik in dat geval de Wilcoxon Signed Rank Test uit. [^3]
 
 ## Uitvoering in R
-Voor de uitvoering in R is er een dummydataset genaamd Wiskunde_cijfers ingeladen met gemiddelde cijfers in Wiskunde A van 165 middelbare scholieren.
+Voor de uitvoering in R is er een dummydataset genaamd gemiddeld_cijfer_wns ingeladen met gemiddelde cijfers in Wiskunde A van 165 middelbare scholieren.
 
 ### Test assumpties: normaliteit
 Visualiseren van de data met behulp van een histogram
 ```{r histogram voor normaliteit}
-hist(Wiskunde_cijfers)
+hist(gemiddeld_cijfer_wns)
 ```
 
 De histogram laat een belvorm zien vergelijkbaar aan een normaalverdeling, veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.  
@@ -63,10 +76,10 @@ Toets normaliteit met de Kolmogorov-Smirnov Test of met de Shapiro-Wilk Test (n 
 ### {.tabset .tabset-fade .tabset.pills}
 #### Kolmogorov-Smirnov
 
-```` {r Kolmogorov-Smirnov Test, warning=FALSE}
+```{r Kolmogorov-Smirnov Test, warning=FALSE}
 library(nortest)
-lillie.test (Wiskunde_cijfers)
-````
+lillie.test (gemiddeld_cijfer_wns)
+```
 De kolmogorov-smirnov test is een non-parametrische toets, die het verschil in vorm tussen twee verdelingen toetst. In dit geval toetst deze test het verschil tussen de normaal verdeling en de verdeling van de steekproef.Wanneer de p-waarde kleiner is dan 0.05 is er een verschil tussen beide verdelingen. 
 
 In dit geval is p > 0.05, dus is de verdeling van de data niet significant verschillend van de normaal verdeling. 
@@ -75,7 +88,7 @@ In dit geval is p > 0.05, dus is de verdeling van de data niet significant versc
 
 #### Shapiro-Wilk Test
 ``` {r Shapiro-Wilk Test, warning=FALSE}
-shapiro.test(Wiskunde_cijfers)
+shapiro.test(gemiddeld_cijfer_wns_n30)
 ```
 
 De Shapiro-Wilk Test is een soort gelijke test als de Kolmogorov-smirnov test en wordt vooral gebruikt bij kleine steekproeven. Wanneer de p-waarde groter is dan 0.05 is de verdeling van de data niet significant verschillend van de normaal verdeling.
@@ -85,7 +98,7 @@ Huidige p-waarde is 000, dus niet significant verschillend.
 
 ### One sample T-toets
 ```{r ttest}
-t.test(Wiskunde_cijfers, mu = 6.9) # testen of het gemiddelde van onze studenten afwijkt van het landelijk gemiddelde (6.9)
+t.test(gemiddeld_cijfer_wns, mu = 6.8) 
 ```
 
 ## Toelichting op de output

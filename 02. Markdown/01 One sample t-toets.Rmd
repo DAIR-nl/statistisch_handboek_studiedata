@@ -41,7 +41,7 @@ De t-toets gaat er vanuit dat de data normaal verdeeld is, bij kleine steekproev
 
 Controleer de data met deze stappen:  
 1. Controleer visueel door het maken van een dataplot: een histogram of een boxplot.  
-2. Toets daarna of de data normaal verdeeld is met de The Kolmogorov-Smirnov Test of bij een kleinere steekproef, n < 30, met de The Shapiro-Wilk Test [^2]. 
+2. Toets daarna of de data normaal verdeeld is met de Kolmogorov-Smirnov Test of bij een kleinere steekproef met de Shapiro-Wilk Test [^2]. 
 
 Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, dus aan de assumptie niet wordt voldaan, dan mag de t-toets niet gebruikt worden. Gebruik in dat geval de Wilcoxon Signed Rank Test uit. [^3]
 
@@ -58,7 +58,7 @@ De histogram laat een belvorm zien vergelijkbaar aan een normaalverdeling, veel 
 
 ***
 
-Toets normaliteit met de The Kolmogorov-Smirnov Test of met de The Shapiro-Wilk Test (n < 30). 
+Toets normaliteit met de Kolmogorov-Smirnov Test of met de Shapiro-Wilk Test (n < 50[^4] ). 
 
 ### {.tabset .tabset-fade .tabset.pills}
 #### Kolmogorov-Smirnov
@@ -71,6 +71,8 @@ De kolmogorov-smirnov test is een non-parametrische toets, die het verschil in v
 
 In dit geval is p > 0.05, dus is de verdeling van de data niet significant verschillend van de normaal verdeling. 
 
+***
+
 #### Shapiro-Wilk Test
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 shapiro.test(Wiskunde_cijfers)
@@ -79,6 +81,7 @@ shapiro.test(Wiskunde_cijfers)
 De Shapiro-Wilk Test is een soort gelijke test als de Kolmogorov-smirnov test en wordt vooral gebruikt bij kleine steekproeven. Wanneer de p-waarde groter is dan 0.05 is de verdeling van de data niet significant verschillend van de normaal verdeling.
 Huidige p-waarde is 000, dus niet significant verschillend. 
 
+***
 
 ### One sample T-toets
 ```{r ttest}
@@ -99,7 +102,7 @@ p-waarde: boven de 0.05, dus de H~0~ wordt niet verworpen.
 [^1]: [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets)
 [^2]: [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit)
 [^3]: http://r-statistics.co/Statistical-Tests-in-R.html
-
+[^4]: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php 
 Open Intro Statistics Third Edition 
 
 

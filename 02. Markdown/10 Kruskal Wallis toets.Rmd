@@ -51,7 +51,7 @@ Voor de uitvoering in R is er data ingeladen met studieresultaten van de Master 
 ### De data bekijken
 ```{r de data exploreren, collapse=TRUE}
 head(resultaten_arbeidsrecht)
-levels (resultaten_arbeidsrecht$vooropleiding)
+levels(resultaten_arbeidsrecht$vooropleiding)
 
 
 ```

@@ -1,5 +1,5 @@
 ---
-title: "Wilcoxon signed rank toets"
+title: "Kruskal Wallis toets"
 author: "Irene van der Staaij & Megiel Kerkhoven"
 date: "Oktober 2019"
 output: 

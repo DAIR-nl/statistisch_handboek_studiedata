@@ -18,14 +18,14 @@ set.seed(0)
 
 decimalen_geen_ls <- rnorm (853, 0.491, 0.1)
 waardes <- sapply(decimalen_geen_ls, round)
-geen_ls_matrix <- matrix(c(2146:2999, waardes), byrow = FALSE, nrow = 953)
+geen_ls_matrix <- matrix(c(sample(3000000:3400000, 853), waardes), byrow = FALSE, nrow = 953)
 uitval_fb_geen_ls <- data.frame(geen_ls_matrix)
 names (uitval_fb_geen_ls) [1] <- "Studentnummer"
 names (uitval_fb_geen_ls) [2] <- "Uitval"
 
 decimalen_wel_ls <- rnorm (740, 0.491, 0.14)
 waardes <- sapply(decimalen_wel_ls, round)
-wel_ls_matrix <- matrix(c(3260:3999, sapply(decimalen_wel_ls, round)), byrow = FALSE, nrow = 840)
+wel_ls_matrix <- matrix(c(sample(3500000:4000000, 740), sapply(decimalen_wel_ls, round)), byrow = FALSE, nrow = 840)
 uitval_fb_wel_ls <- data.frame(wel_ls_matrix)
 names (uitval_fb_wel_ls) [1] <- "Studentnummer"
 names (uitval_fb_wel_ls) [2] <- "Uitval"

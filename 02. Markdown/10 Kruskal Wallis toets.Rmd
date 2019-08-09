@@ -22,13 +22,15 @@ seed <- sample(c(1, 2, 3, 4), 300, replace=TRUE)
 vooropleiding <-  ifelse(seed == 1, "Rechtsgeleerdheid", 
                   ifelse(seed == 2, "Notarieel recht",
                   ifelse(seed == 3, "Fiscaal recht",
-                  ifelse(seed == 4, "schakelprogramma",
+                  ifelse(seed == 4, "Schakelprogramma",
                                  NA))))
 
 ## 300 waarnemingen voor puntenaantallen, random gesampled uit een lijst mogelijkheden
 punten_mogelijkheden <- c(6, 12, 18, 24, 30, 36, 36, 42, 42, 42, 48, 48, 48, 48, 54, 54, 54, 60, 60, 60, 60, 60, 60)
 Ec_jaar1 <- sample (punten_mogelijkheden, 300, replace=TRUE)
-resultaten_arbeidsrecht <- data.frame(vooropleiding, Ec_jaar1)
+
+studentnr <- sample(3000000:4000000, 300)
+resultaten_arbeidsrecht <- data.frame(studentnr, vooropleiding, Ec_jaar1)
 
 ## puntencorrectie om fiscaal en notarieel +6 punten te geven en rechtsgeleerdheid -6 punten
 resultaten_arbeidsrecht$Ec_jaar1 [vooropleiding == "Fiscaal recht" | vooropleiding == "Notarieel recht"] <-
@@ -44,7 +46,8 @@ resultaten_arbeidsrecht$Ec_jaar1 [vooropleiding == "Rechtsgeleerdheid"] <-
 ## Assumpties
 
 ## Uitvoering in R
-Voor de uitvoering in R is er data ingeladen met studieresultaten van de Master arbeidsrecht per vooropleiding. 
+Voor de uitvoering in R is er data ingeladen met studieresultaten van de Master arbeidsrecht per vooropleiding.
+
 ### De data bekijken
 ```{r de data exploreren, collapse=TRUE}
 head(resultaten_arbeidsrecht)
@@ -60,7 +63,7 @@ Er is te zien dat er vier groepen naar vooropleiding in de data te vinden zijn: 
 mean(resultaten_arbeidsrecht$Ec_jaar1 [vooropleiding=="Rechtsgeleerdheid"])
 mean(resultaten_arbeidsrecht$Ec_jaar1 [vooropleiding=="Notarieel recht"])
 mean(resultaten_arbeidsrecht$Ec_jaar1 [vooropleiding=="Fiscaal recht"])
-mean(resultaten_arbeidsrecht$Ec_jaar1 [vooropleiding=="schakelprogramma"])
+mean(resultaten_arbeidsrecht$Ec_jaar1 [vooropleiding=="Schakelprogramma"])
 ```
 
 #### package 'dplyr'

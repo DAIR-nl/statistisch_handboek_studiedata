@@ -1,0 +1,56 @@
+---
+title: "15 Chi-kwadraat & Fisher-Freeman-Halton exact toets"
+author: "Irene van der Staaij & Megiel Kerkhoven"
+date: "Oktober 2019"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    theme: united
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r aanmaken data, include=FALSE, echo=TRUE}
+jaartallen <- c(2011, 2012, 2013, 2014, 2015, 2016, 2017)
+pos_bsa <- c(222, 227, 252, 203, 321, 290, 360)
+neg_bsa <- c(52, 51, 56, 48, 60, 55, 64)
+bsa_kt <- data.frame(pos_bsa, neg_bsa)
+bsa_kt <- t(bsa_kt)
+colnames(bsa_kt) <- jaartallen
+```
+
+## Gebruik
+
+## Voorbeeld uit het onderwijs
+
+## Assumpties
+
+## Uitvoering in R
+Voor de uitvoering in R is er een dataset (`bsa_kt`) ingeladen over het BSA per inschrijvingsjaar van de faculteit sociale wetenschappen. De data is beschikbaar van 2011 tot 2017.  
+
+### De data bekijken
+```{r}
+bsa_kt
+```
+
+### {.tabset .tabset-fade .tabset.pills}
+#### Chi-kwadraat
+Om `chisq.test()` in R te gebruiken moet de data in een kruistabel staan.
+```{r collapse=TRUE}
+chisq.test(bsa_kt[2:3])
+```
+
+#### Fisher-Freeman-Halton exact toets
+
+
+## Toelichting op de output
+
+## Rapportage
+
+## Verder lezen
+
+## Achtergrond info

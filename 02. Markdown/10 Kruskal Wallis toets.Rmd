@@ -30,7 +30,7 @@ punten_mogelijkheden <- c(6, 12, 18, 24, 30, 36, 36, 42, 42, 42, 48, 48, 48, 48,
 Ec_jaar1 <- sample (punten_mogelijkheden, 300, replace=TRUE)
 resultaten_arbeidsrecht <- data.frame(vooropleiding, Ec_jaar1)
 
-## puntencorrectie om fiscaal en notariaal +6 punten te geven en rechtsgeleerdheid -6 punten
+## puntencorrectie om fiscaal en notarieel +6 punten te geven en rechtsgeleerdheid -6 punten
 resultaten_arbeidsrecht$Ec_jaar1 [vooropleiding == "Fiscaal recht" | vooropleiding == "Notarieel recht"] <-
   resultaten_arbeidsrecht$Ec_jaar1 [vooropleiding == "Fiscaal recht" | vooropleiding == "Notarieel recht"] + 6
 resultaten_arbeidsrecht$Ec_jaar1 [vooropleiding == "Rechtsgeleerdheid"] <-

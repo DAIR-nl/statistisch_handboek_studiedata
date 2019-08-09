@@ -1,0 +1,93 @@
+---
+title: "Wilcoxon signed rank toets"
+author: "Irene van der Staaij & Megiel Kerkhoven"
+date: "Oktober 2019"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    theme: united
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r aanmaken data, include=FALSE, echo=TRUE}
+set.seed(8)
+# 3
+## 300 waarnemingen voor vooropleiding
+seed <- sample(c(1, 2, 3, 4), 300, replace=TRUE)
+vooropleiding <-  ifelse(seed == 1, "Rechtsgeleerdheid", 
+                  ifelse(seed == 2, "Notarieel recht",
+                  ifelse(seed == 3, "Fiscaal recht",
+                  ifelse(seed == 4, "schakelprogramma",
+                                 NA))))
+
+## 300 waarnemingen voor puntenaantallen, random gesampled uit een lijst mogelijkheden
+punten_mogelijkheden <- c(6, 12, 18, 24, 30, 36, 36, 42, 42, 42, 48, 48, 48, 48, 54, 54, 54, 60, 60, 60, 60, 60, 60)
+Ec_jaar1 <- sample (punten_mogelijkheden, 300, replace=TRUE)
+resultaten_arbeidsrecht <- data.frame(vooropleiding, Ec_jaar1)
+
+## puntencorrectie om fiscaal en notariaal +6 punten te geven en rechtsgeleerdheid -6 punten
+resultaten_arbeidsrecht$Ec_jaar1 [vooropleiding == "Fiscaal recht" | vooropleiding == "Notarieel recht"] <-
+  resultaten_arbeidsrecht$Ec_jaar1 [vooropleiding == "Fiscaal recht" | vooropleiding == "Notarieel recht"] + 6
+resultaten_arbeidsrecht$Ec_jaar1 [vooropleiding == "Rechtsgeleerdheid"] <-
+  resultaten_arbeidsrecht$Ec_jaar1 [vooropleiding == "Rechtsgeleerdheid"] - 6
+```
+
+## Gebruik
+
+## Voorbeeld uit het onderwijs
+
+## Assumpties
+
+## Uitvoering in R
+Voor de uitvoering in R is er data ingeladen met studieresultaten van de Master arbeidsrecht per vooropleiding. 
+### De data bekijken
+```{r de data exploreren, collapse=TRUE}
+head(resultaten_arbeidsrecht)
+levels (resultaten_arbeidsrecht$vooropleiding)
+
+
+```
+Er is te zien dat er vier groepen naar vooropleiding in de data te vinden zijn: Fiscaal recht, Notarieel recht, Rechtsgeleerdheid en een schakelprogramma. Voor elke student (een rij) is er te zien hoeveel studiepunten er zijn gehaald in het eerste jaar. `mean()` kan het gemiddelde aantal punten per vooropleiding geven.
+
+### {.tabset .tabset-fade .tabset.pills}
+#### base R
+``` {r gemiddeldes per vooropleiding base, collapse=TRUE}
+mean(resultaten_arbeidsrecht$Ec_jaar1 [vooropleiding=="Rechtsgeleerdheid"])
+mean(resultaten_arbeidsrecht$Ec_jaar1 [vooropleiding=="Notarieel recht"])
+mean(resultaten_arbeidsrecht$Ec_jaar1 [vooropleiding=="Fiscaal recht"])
+mean(resultaten_arbeidsrecht$Ec_jaar1 [vooropleiding=="schakelprogramma"])
+```
+
+#### package 'dplyr'
+``` {r gemiddeldes per vooropleiding dplyr, warning=FALSE, message=FALSE}
+library(dplyr)
+group_by(resultaten_arbeidsrecht, vooropleiding) %>%
+  summarise(
+    count = n(),
+    mean = mean(Ec_jaar1),
+    median = median(Ec_jaar1)
+  )
+```
+### Statistische toets in R
+
+```{r kruskal test}
+kruskal.test(Ec_jaar1 ~ vooropleiding, resultaten_arbeidsrecht)
+```
+**interpretatie**
+
+Om te weten welke groepen verschillen is er in `pairwise.wilcox.test()` een correctie beschikbaar voor *multiple testing*
+``` {r pairwise wilcox test}
+pairwise.wilcox.test(resultaten_arbeidsrecht$Ec_jaar1, resultaten_arbeidsrecht$vooropleiding, p.adjust.method = "BH")
+```
+## Toelichting op de output
+
+## Rapportage
+
+## Verder lezen
+
+## Achtergrond info

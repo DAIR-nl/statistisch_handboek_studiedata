@@ -49,11 +49,15 @@ chisq.test(uitval_functiebeperking)
 ```
 
 ## Toelichting op de output
-vrijheidsgraden *df*: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval is *df* = 1. Wanneer het aantal vrijheidsgraden 1 is, wordt de continuïteitscorrectie van Yates toegepast.
+Vrijheidsgraden *df*: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval is *df* = 1. Wanneer het aantal vrijheidsgraden 1 is, wordt de continuïteitscorrectie van Yates toegepast.  
+p-waarde < 0.05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen 
 
 
 ## Rapportage
+Om te toetsen of studenten met een functiebeperking vaker uitvallen dan de student zonder functiebeperking sinds de invoering van het leenstelsel, is de Chi-kwadraat toets uitgevoerd. $x^2$ = 4.4086, df = 1, p-value = 0.03576 
 
+
+ 
 ## Referenties
 [^1]: http://r-statistics.co/Statistical-Tests-in-R.html
 [^2]: https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets

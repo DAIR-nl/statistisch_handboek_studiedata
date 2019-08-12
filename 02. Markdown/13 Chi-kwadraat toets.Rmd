@@ -32,8 +32,8 @@ H~A~: De verhouding uitval van het aantal studenten met een functiebeperking voo
 
 ## Assumpties
 1. De variabelen zijn op nominaal niveau gemeten, dit betekent automatisch dat er geen ordening tussen de groepen gemaakt kan worden en dat de groepen onafhankelijk van elkaar zijn.  
-2. De groepsgrootte van de verwachtte waarde is per cel niet kleiner dan 5, bij de geobserveerde waarde is de groepsgrootte niet minder dan 10. Gebruik de Fisher’s exact toets wanneer de groepen kleiner zijn.[^2]  
-3. Elke cel van de verwachte waarde is groter dan 0. [^3] 
+2. De groepsgrootte van de verwachtte waarde is per cel niet kleiner dan 5, bij de geobserveerde waarde is de groepsgrootte niet minder dan 10. Gebruik de Fisher’s exact toets wanneer de groepen kleiner zijn [^2].  
+3. Elke cel van de verwachte waarde is groter dan 0 [^3]. 
 
 
 ## Uitvoering in R
@@ -42,14 +42,15 @@ Voor de uitvoering in R is er data ingeladen over de uitval van studenten met ee
 uitval_functiebeperking
 ```
 
-### statistische toets in R
+### Statistische toets in R
 De functie `chisq.test()` werkt het beste als deze een kruistabel als input krijgt. De eerste twee rijen van deze tabel worden gezien als de groepen die vergeleken moeten worden.
 ```{r}
 chisq.test(uitval_functiebeperking)
 ```
 
 ## Toelichting op de output
-vrijheidsgraden *df*: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval is *df* = 1. Aangezien in dit geval het aantal vrijheidsgraden 1 is, wordt de continuïteitscorrectie van Yates toegepast. 
+vrijheidsgraden *df*: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval is *df* = 1. Wanneer het aantal vrijheidsgraden 1 is, wordt de continuïteitscorrectie van Yates toegepast.
+
 
 ## Rapportage
 

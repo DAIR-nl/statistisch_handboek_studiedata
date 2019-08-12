@@ -32,6 +32,10 @@ Resultaten_internationale_studenten <- rbind (
                                   t(replicate(100, sample(Matige_student_ec, 11, replace = TRUE))),
                                   t(replicate(200, sample(Slechte_student_ec, 11, replace = TRUE))))
 Punten_jaar2_inter <- margin.table(Resultaten_internationale_studenten, 1)
+
+Resultaten_internationale_studenten <- data.frame(Resultaten_internationale_studenten, Punten_jaar2_inter)
+Resultaten_nl_studenten <- data.frame(Resultaten_nl_studenten, Punten_jaar2_nl)
+
 ```
 
 ## Gebruik
@@ -42,17 +46,17 @@ Punten_jaar2_inter <- margin.table(Resultaten_internationale_studenten, 1)
 
 ## Uitvoering in R
 
-### Assumpties testen in R
-
+### De data bekijken
+Gebruik `head()` in R om de eerste vijf regels te bekijken
 ```{r}
-
+head(Resultaten_nl_studenten)
+head(Resultaten_internationale_studenten)
 ```
 
-### statistische toets in R
-
+### De Mann-Whitney U toets in R
+Gebruik `wilcox.test()` met twee argumenten om een Mann-Whitney U toets te doen in R
 ```{r}
-wilcox.test(Resultaten_nl_studenten$totaal,
-            Resultaten_internationale_studenten$totaal)
+wilcox.test(Resultaten_nl_studenten$Punten_jaar2_nl, Resultaten_internationale_studenten$Punten_jaar2)
 ```
 
 ## Toelichting op de output

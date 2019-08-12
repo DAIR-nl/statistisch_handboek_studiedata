@@ -104,8 +104,8 @@ t.test(gemiddeld_cijfer_wns, mu = 6.8)
 
 Het gemiddelde van de steekproef is 7.08  
 Degrees of freedom, *df* = *n* -1 = 122-1 = 121  
-p-waarde < 0.05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
-95-betrouwbaarheidsinterval: Bij herhaling van het onderzoek zal in 95% van de gevallen een interval uitkomen waarbij µ in valt. In dit geval loopt het interval tussen 6.93 en de 7.23. 
+p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
+95-betrouwbaarheidsinterval: Bij herhaling van het onderzoek zal in 95% van de gevallen een interval uitkomen waarbij µ in valt. In dit geval loopt het interval tussen 6,93 en de 7,23. 
 
 
 ## Rapportage

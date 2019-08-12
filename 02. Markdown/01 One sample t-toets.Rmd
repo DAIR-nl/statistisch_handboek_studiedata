@@ -49,7 +49,7 @@ H~A~: Het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten
 
 
 
-## Normaliteit 
+## Assumpties: Normaliteit 
 De t-toets gaat er vanuit dat de data normaal verdeeld is, bij kleine steekproeven is dit vaker niet het geval. 
 
 Controleer de data met deze stappen:  

@@ -33,8 +33,9 @@ colnames(bsa_kt) <- jaartallen
 Voor de uitvoering in R is er een dataset (`bsa_kt`) ingeladen over het BSA per inschrijvingsjaar van de faculteit sociale wetenschappen. De data is beschikbaar van 2011 tot 2017.
 
 ### De data bekijken
-```{r}
+```{r, collapse=TRUE}
 bsa_kt
+barplot(bsa_kt, beside = TRUE, legend.text = TRUE)
 ```
 
 ### {.tabset .tabset-fade .tabset.pills}

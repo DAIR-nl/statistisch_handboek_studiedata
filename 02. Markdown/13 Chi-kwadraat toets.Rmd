@@ -38,6 +38,8 @@ H~A~: De verhouding uitval van het aantal studenten met een functiebeperking voo
 
 ## Uitvoering in R
 Voor de uitvoering in R is er data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. De data `Uitval_functiebeperking` is binair (wel of geen uitval). 
+
+### De data bekijken
 ```{r}
 Uitval_functiebeperking
 ```

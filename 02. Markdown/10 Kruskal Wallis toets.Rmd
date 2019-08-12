@@ -19,10 +19,10 @@ set.seed(8)
 # 3
 ## 300 waarnemingen voor Vooropleiding
 Seed <- sample(c(1, 2, 3, 4), 300, replace=TRUE)
-Vooropleiding <-  ifelse(seed == 1, "Rechtsgeleerdheid", 
-                  ifelse(seed == 2, "Notarieel recht",
-                  ifelse(seed == 3, "Fiscaal recht",
-                  ifelse(seed == 4, "Schakelprogramma",
+Vooropleiding <-  ifelse(Seed == 1, "Rechtsgeleerdheid", 
+                  ifelse(Seed == 2, "Notarieel recht",
+                  ifelse(Seed == 3, "Fiscaal recht",
+                  ifelse(Seed == 4, "Schakelprogramma",
                                  NA))))
 
 ## 300 waarnemingen voor puntenaantallen, random gesampled uit een lijst mogelijkheden
@@ -52,13 +52,11 @@ Voor de uitvoering in R is er data ingeladen met studieresultaten van de Master 
 ```{r de data exploreren, collapse=TRUE}
 head(Resultaten_arbeidsrecht)
 levels(Resultaten_arbeidsrecht$Vooropleiding)
-
-
 ```
 Er is te zien dat er vier groepen naar vooropleiding in de data te vinden zijn: Fiscaal recht, Notarieel recht, Rechtsgeleerdheid en een schakelprogramma. Voor elke student (een rij) is er te zien hoeveel studiepunten er zijn gehaald in het eerste jaar. `mean()` kan het gemiddelde aantal punten per vooropleiding geven.
 
 ### {.tabset .tabset-fade .tabset.pills}
-#### base R
+#### in base R
 ``` {r gemiddeldes per vooropleiding base, collapse=TRUE}
 mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Rechtsgeleerdheid"])
 mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Notarieel recht"])
@@ -66,7 +64,7 @@ mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Fiscaal recht"])
 mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Schakelprogramma"])
 ```
 
-#### package 'dplyr'
+#### in package 'dplyr'
 ``` {r gemiddeldes per vooropleiding dplyr, warning=FALSE, message=FALSE}
 library(dplyr)
 group_by(Resultaten_arbeidsrecht, Vooropleiding) %>%

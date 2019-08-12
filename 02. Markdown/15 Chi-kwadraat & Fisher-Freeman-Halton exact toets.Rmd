@@ -16,8 +16,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 jaartallen <- c(2011, 2012, 2013, 2014, 2015, 2016, 2017)
-pos_bsa <- c(222, 227, 252, 203, 321, 290, 360)
-neg_bsa <- c(52, 51, 56, 48, 60, 55, 64)
+pos_bsa <- c(2431, 2271, 2325, 2170, 2410, 2313, 2600)
+neg_bsa <- c(521, 513, 564, 480, 600, 550, 680)
 bsa_kt <- data.frame(pos_bsa, neg_bsa)
 bsa_kt <- t(bsa_kt)
 colnames(bsa_kt) <- jaartallen
@@ -30,7 +30,7 @@ colnames(bsa_kt) <- jaartallen
 ## Assumpties
 
 ## Uitvoering in R
-Voor de uitvoering in R is er een dataset (`bsa_kt`) ingeladen over het BSA per inschrijvingsjaar van de faculteit sociale wetenschappen. De data is beschikbaar van 2011 tot 2017.  
+Voor de uitvoering in R is er een dataset (`bsa_kt`) ingeladen over het BSA per inschrijvingsjaar van de faculteit sociale wetenschappen. De data is beschikbaar van 2011 tot 2017.
 
 ### De data bekijken
 ```{r}
@@ -41,7 +41,7 @@ bsa_kt
 #### Chi-kwadraat
 Om `chisq.test()` in R te gebruiken moet de data in een kruistabel staan.
 ```{r collapse=TRUE}
-chisq.test(bsa_kt[2:3])
+chisq.test(bsa_kt)
 ```
 
 #### Fisher-Freeman-Halton exact toets

@@ -49,7 +49,7 @@ chisq.test(uitval_functiebeperking)
 ```
 
 ## Toelichting op de output
-Continuïteitscorrectie bij df=1
+vrijheidsgraden *df*: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval is *df* = 1. Aangezien in dit geval het aantal vrijheidsgraden 1 is, wordt de continuïteitscorrectie van Yates toegepast. 
 
 ## Rapportage
 

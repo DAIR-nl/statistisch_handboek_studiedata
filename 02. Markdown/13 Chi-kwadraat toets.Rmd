@@ -14,21 +14,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-set.seed(0)
-
-decimalen_geen_ls <- rnorm (853, 0.491, 0.1)
-waardes <- sapply(decimalen_geen_ls, round)
-geen_ls_matrix <- matrix(c(sample(3000000:3400000, 853), waardes), byrow = FALSE, nrow = 953)
-uitval_fb_geen_ls <- data.frame(geen_ls_matrix)
-names (uitval_fb_geen_ls) [1] <- "Studentnummer"
-names (uitval_fb_geen_ls) [2] <- "Uitval"
-
-decimalen_wel_ls <- rnorm (740, 0.491, 0.14)
-waardes <- sapply(decimalen_wel_ls, round)
-wel_ls_matrix <- matrix(c(sample(3500000:4000000, 740), sapply(decimalen_wel_ls, round)), byrow = FALSE, nrow = 840)
-uitval_fb_wel_ls <- data.frame(wel_ls_matrix)
-names (uitval_fb_wel_ls) [1] <- "Studentnummer"
-names (uitval_fb_wel_ls) [2] <- "Uitval"
+geen_ls_uitval <- c(375, 496)
+wel_ls_uitval <- c(369, 394)
+uitval_functiebeperking <- t(data.frame(geen_ls_uitval, wel_ls_uitval))
+colnames(uitval_functiebeperking) <- c("wel uitval", "geen uitval")
 ```
 
 ## Gebruik
@@ -48,26 +37,18 @@ H~A~: De verhouding uitval van het aantal studenten met een functiebeperking voo
 
 
 ## Uitvoering in R
-Voor de uitvoering in R is er data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. De data is binair (wel of geen uitval) en op basis van het studentnummer.
-
-### Tabel
-Fequentie van de geoberveerde data, uitval van studenten met en zonder een functiebeperking voor en na de invoering van het leenstelsel
-
-### Is de data categorisch?
-
+Voor de uitvoering in R is er data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. De data `uitval_functiebeperking` is binair (wel of geen uitval). 
 ```{r}
-print(uitval_fb_geen_ls[1:30, ], row.names = FALSE)
-print(uitval_fb_wel_ls[1:30, ], row.names = FALSE)
+uitval_functiebeperking
 ```
 
 ### statistische toets in R
-
+De functie `chisq.test()` werkt het beste als deze een kruistabel als input krijgt. De eerste twee rijen van deze tabel worden gezien als de groepen die vergeleken moeten worden.
 ```{r}
-chisq.test(uitval_fb_wel_ls, uitval_fb_geen_ls)
+chisq.test(uitval_functiebeperking)
 ```
 
 ## Toelichting op de output
-
 Continuïteitscorrectie bij df=1
 
 ## Rapportage

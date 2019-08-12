@@ -18,31 +18,31 @@ set.seed(2)
 
 mu <- 3.6
 sigma <- 0.6
-evaluatie_score_geen_tutor <- rnorm(250, mu, sigma)
+Evaluatie_score_geen_tutor <- rnorm(250, mu, sigma)
 
-evaluatie_score_geen_tutor <- evaluatie_score_geen_tutor[evaluatie_score_geen_tutor <= 5 & evaluatie_score_geen_tutor >= 1]
-evaluatie_score_geen_tutor <- sapply (evaluatie_score_geen_tutor, round, 3)
+Evaluatie_score_geen_tutor <- Evaluatie_score_geen_tutor[Evaluatie_score_geen_tutor <= 5 & Evaluatie_score_geen_tutor >= 1]
+Evaluatie_score_geen_tutor <- sapply (Evaluatie_score_geen_tutor, round, 3)
 
 mu <- 3.4
 sigma <- 0.7
-evaluatie_score_wel_tutor <- rnorm(250, mu, sigma)
+Evaluatie_score_wel_tutor <- rnorm(250, mu, sigma)
 
-evaluatie_score_wel_tutor <- evaluatie_score_wel_tutor[evaluatie_score_wel_tutor <= 5 & evaluatie_score_wel_tutor >= 1]
-evaluatie_score_wel_tutor <- sapply (evaluatie_score_wel_tutor, round, 3)
+Evaluatie_score_wel_tutor <- Evaluatie_score_wel_tutor[Evaluatie_score_wel_tutor <= 5 & Evaluatie_score_wel_tutor >= 1]
+Evaluatie_score_wel_tutor <- sapply (Evaluatie_score_wel_tutor, round, 3)
 
 mu <- 3.6
 sigma <- 0.6
-evaluatie_score_geen_tutor_n30 <- rnorm(30, mu, sigma)
+Evaluatie_score_geen_tutor_n30 <- rnorm(30, mu, sigma)
 
-evaluatie_score_geen_tutor_n30 <- evaluatie_score_geen_tutor_n30[evaluatie_score_geen_tutor_n30 <= 5 & evaluatie_score_geen_tutor_n30 >= 1]
-evaluatie_score_geen_tutor_n30 <- sapply (evaluatie_score_geen_tutor_n30, round, 3)
+Evaluatie_score_geen_tutor_n30 <- Evaluatie_score_geen_tutor_n30[Evaluatie_score_geen_tutor_n30 <= 5 & Evaluatie_score_geen_tutor_n30 >= 1]
+Evaluatie_score_geen_tutor_n30 <- sapply (Evaluatie_score_geen_tutor_n30, round, 3)
 
 mu <- 3.4
 sigma <- 0.7
-evaluatie_score_wel_tutor_n30 <- rnorm(30, mu, sigma)
+Evaluatie_score_wel_tutor_n30 <- rnorm(30, mu, sigma)
 
-evaluatie_score_wel_tutor_n30 <- evaluatie_score_wel_tutor_n30[evaluatie_score_wel_tutor_n30 <= 5 & evaluatie_score_wel_tutor_n30 >= 1]
-evaluatie_score_wel_tutor_n30 <- sapply (evaluatie_score_wel_tutor_n30, round, 3)
+Evaluatie_score_wel_tutor_n30 <- Evaluatie_score_wel_tutor_n30[Evaluatie_score_wel_tutor_n30 <= 5 & Evaluatie_score_wel_tutor_n30 >= 1]
+Evaluatie_score_wel_tutor_n30 <- sapply (Evaluatie_score_wel_tutor_n30, round, 3)
 ```
 
 ## Gebruik
@@ -57,8 +57,8 @@ Voor de uitvoering in R is er data ingeladen met evaluatie-scores van studenten 
 ### Normaliteit
 
 ```{r Assumptietest}
-hist(evaluatie_score_geen_tutor)
-hist(evaluatie_score_wel_tutor)
+hist(Evaluatie_score_geen_tutor)
+hist(Evaluatie_score_wel_tutor)
 ```
 
 ### {.tabset .tabset-fade .tabset.pills}
@@ -67,22 +67,22 @@ hist(evaluatie_score_wel_tutor)
 
 ```` {r Lilliefors Test, warning=FALSE}
 library(nortest)
-lillie.test(evaluatie_score_geen_tutor)
-lillie.test(evaluatie_score_wel_tutor)
+lillie.test(Evaluatie_score_geen_tutor)
+lillie.test(Evaluatie_score_wel_tutor)
 ````
 
 
 #### Shapiro-Wilk Test
 ``` {r Shapiro-Wilk Test, warning=FALSE}
-shapiro.test(evaluatie_score_geen_tutor_n30)
-shapiro.test(evaluatie_score_wel_tutor_n30)
+shapiro.test(Evaluatie_score_geen_tutor_n30)
+shapiro.test(Evaluatie_score_wel_tutor_n30)
 ```
 
 
 ### statistische toets in R
 
 ```{r statistische toets}
-t.test(evaluatie_score_wel_tutor, evaluatie_score_geen_tutor, paired=TRUE)
+t.test(Evaluatie_score_wel_tutor, Evaluatie_score_geen_tutor, paired=TRUE)
 ```
 
 ## Toelichting op de output

@@ -17,21 +17,21 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 set.seed(0)
 
-goede_student_ec <- c(0, 3, 6, 6, 6, 6, 6, 6, 6)
-matige_student_ec <- c(0, 0, 0, 3, 6, 6, 6, 6, 6)
-slechte_student_ec <- c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6)
+Goede_student_ec <- c(0, 3, 6, 6, 6, 6, 6, 6, 6)
+Matige_student_ec <- c(0, 0, 0, 3, 6, 6, 6, 6, 6)
+Slechte_student_ec <- c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6)
 
-resultaten_nl_studenten<- rbind (
-                                  t(replicate(401, sample(goede_student_ec, 11, replace = TRUE))), 
-                                  t(replicate(203, sample(matige_student_ec, 11, replace = TRUE))),
-                                  t(replicate(309, sample(slechte_student_ec, 11, replace = TRUE))))
-punten_jaar2_nl <- margin.table(resultaten_nl_studenten, 1)
+Resultaten_nl_studenten <- rbind (
+                                  t(replicate(401, sample(Goede_student_ec, 11, replace = TRUE))), 
+                                  t(replicate(203, sample(Matige_student_ec, 11, replace = TRUE))),
+                                  t(replicate(309, sample(Slechte_student_ec, 11, replace = TRUE))))
+Punten_jaar2_nl <- margin.table(Resultaten_nl_studenten, 1)
 
-resultaten_internationale_studenten <- rbind (
-                                  t(replicate(250, sample(goede_student_ec, 11, replace = TRUE))), 
-                                  t(replicate(100, sample(matige_student_ec, 11, replace = TRUE))),
-                                  t(replicate(200, sample(slechte_student_ec, 11, replace = TRUE))))
-punten_jaar2_inter <- margin.table(resultaten_internationale_studenten, 1)
+Resultaten_internationale_studenten <- rbind (
+                                  t(replicate(250, sample(Goede_student_ec, 11, replace = TRUE))), 
+                                  t(replicate(100, sample(Matige_student_ec, 11, replace = TRUE))),
+                                  t(replicate(200, sample(Slechte_student_ec, 11, replace = TRUE))))
+Punten_jaar2_inter <- margin.table(Resultaten_internationale_studenten, 1)
 ```
 
 ## Gebruik
@@ -51,8 +51,8 @@ punten_jaar2_inter <- margin.table(resultaten_internationale_studenten, 1)
 ### statistische toets in R
 
 ```{r}
-wilcox.test(resultaten_nl_studenten$totaal,
-            resultaten_internationale_studenten$totaal)
+wilcox.test(Resultaten_nl_studenten$totaal,
+            Resultaten_internationale_studenten$totaal)
 ```
 
 ## Toelichting op de output

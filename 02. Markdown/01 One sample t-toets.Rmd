@@ -20,20 +20,20 @@ knitr::opts_chunk$set(echo = TRUE)
 ## aanmaken dummydata
 set.seed(1)
 
-decimalen_wiskunde <- rnorm(160, 7.0, 2.6)
-Wiskunde_eindcijfer <- round(decimalen_wiskunde, 1)[decimalen_wiskunde <= 10 & decimalen_wiskunde >= 4.5]
+Decimalen_wiskunde <- rnorm(160, 7.0, 2.6)
+Wiskunde_eindcijfer <- round(Decimalen_wiskunde, 1)[Decimalen_wiskunde <= 10 & Decimalen_wiskunde >= 4.5]
 
-decimalen_scheikunde <- rnorm(160, 6.7, 2.2)
-scheikunde_eindcijfer <- round(decimalen_scheikunde, 1)[decimalen_scheikunde <= 10 & decimalen_scheikunde >= 4.5]
+Decimalen_scheikunde <- rnorm(160, 6.7, 2.2)
+Scheikunde_eindcijfer <- round(Decimalen_scheikunde, 1)[Decimalen_scheikunde <= 10 & Decimalen_scheikunde >= 4.5]
 
-decimalen_natuurkunde <- rnorm(160, 6.9, 2.4)
-natuurkunde_eindcijfer <- round(decimalen_natuurkunde, 1)[decimalen_natuurkunde <= 10 & decimalen_natuurkunde >= 4.5]
+Decimalen_natuurkunde <- rnorm(160, 6.9, 2.4)
+Natuurkunde_eindcijfer <- round(Decimalen_natuurkunde, 1)[Decimalen_natuurkunde <= 10 & Decimalen_natuurkunde >= 4.5]
 
-wns_eindcijfers <- cbind(Wiskunde_eindcijfer, scheikunde_eindcijfer, natuurkunde_eindcijfer)
+Wns_eindcijfers <- cbind(Wiskunde_eindcijfer, Scheikunde_eindcijfer, Natuurkunde_eindcijfer)
 
-gemiddeld_cijfer_wns <- apply(wns_eindcijfers, 1, mean)
+Gemiddeld_cijfer_wns <- apply(Wns_eindcijfers, 1, mean)
 
-gemiddeld_cijfer_wns_n30 <- sample(gemiddeld_cijfer_wns, 30)
+Gemiddeld_cijfer_wns_n30 <- sample(Gemiddeld_cijfer_wns, 30)
 ```
 
 ## Gebruik
@@ -59,14 +59,14 @@ Controleer de data met deze stappen:
 Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, dus aan de assumptie niet wordt voldaan, dan kan de t-toets niet gebruikt worden. Gebruik in dat geval de Wilcoxon Signed Rank Test. [^3]
 
 ## Uitvoering in R
-Voor de uitvoering in R is er een dummydataset genaamd gemiddeld_cijfer_wns ingeladen met de gemiddelde cijfers van Wiskunde, Natuurkunde en Scheikunde van 122 middelbare scholieren.
+Voor de uitvoering in R is er een dummydataset genaamd Gemiddeld_cijfer_wns ingeladen met de gemiddelde cijfers van Wiskunde, Natuurkunde en Scheikunde van 122 middelbare scholieren.
 
 ### Test assumpties: normaliteit
 Het bekijken van de data kan via `mean()`, `sd()` en visueel met behulp van een histogram via `hist()`.
 ```{r histogram voor normaliteit, collapse=TRUE}
-mean(gemiddeld_cijfer_wns)
-sd(gemiddeld_cijfer_wns)
-hist(gemiddeld_cijfer_wns)
+mean(Gemiddeld_cijfer_wns)
+sd(Gemiddeld_cijfer_wns)
+hist(Gemiddeld_cijfer_wns)
 ```
 
 De histogram laat een belvorm zien vergelijkbaar aan een normaalverdeling, veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
@@ -79,8 +79,8 @@ Toets normaliteit met de Kolmogorov-Smirnov Test of met de Shapiro-Wilk Test (*n
 #### Kolmogorov-Smirnov
 
 ```{r Kolmogorov-Smirnov Test, warning=FALSE}
-
-#lillie.test (gemiddeld_cijfer_wns)
+import(nortest)
+lillie.test (Gemiddeld_cijfer_wns)
 ```
 De Kolmogorov-Smirnov test is een non-parametrische toets, die het verschil in vorm tussen twee verdelingen toetst. In dit geval toetst deze test het verschil tussen de normaalverdeling en de verdeling van de steekproef. Wanneer de p-waarde kleiner is dan 0,05 is er een verschil tussen beide verdelingen. 
 
@@ -90,7 +90,7 @@ In dit geval is *p* > 0,05, dus is de verdeling van de data niet significant ver
 
 #### Shapiro-Wilk Test
 ``` {r Shapiro-Wilk Test, warning=FALSE}
-shapiro.test(gemiddeld_cijfer_wns_n30)
+shapiro.test(Gemiddeld_cijfer_wns_n30)
 ```
 
 De Shapiro-Wilk Test is een soort gelijke test als de Kolmogorov-Smirnov test en wordt vooral gebruikt bij kleine steekproeven. Wanneer de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normaalverdeling.
@@ -101,7 +101,7 @@ Ook bij deze test is *p* > 0,05, dus is er geen significant verschil tussen de v
 
 ### One sample t-toets
 ```{r ttest}
-t.test(gemiddeld_cijfer_wns, mu = 6.8) 
+t.test(Gemiddeld_cijfer_wns, mu = 6.8) 
 ```
 
 Het gemiddelde van de steekproef is 7.08  

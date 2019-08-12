@@ -14,10 +14,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-geen_ls_uitval <- c(375, 496)
-wel_ls_uitval <- c(369, 394)
-uitval_functiebeperking <- t(data.frame(geen_ls_uitval, wel_ls_uitval))
-colnames(uitval_functiebeperking) <- c("wel uitval", "geen uitval")
+Geen_ls_uitval <- c(375, 496)
+Wel_ls_uitval <- c(369, 394)
+Uitval_functiebeperking <- t(data.frame(Geen_ls_uitval, Wel_ls_uitval))
+colnames(Uitval_functiebeperking) <- c("Wel uitval", "Geen uitval")
 ```
 
 ## Gebruik
@@ -37,15 +37,15 @@ H~A~: De verhouding uitval van het aantal studenten met een functiebeperking voo
 
 
 ## Uitvoering in R
-Voor de uitvoering in R is er data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. De data `uitval_functiebeperking` is binair (wel of geen uitval). 
+Voor de uitvoering in R is er data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. De data `Uitval_functiebeperking` is binair (wel of geen uitval). 
 ```{r}
-uitval_functiebeperking
+Uitval_functiebeperking
 ```
 
 ### Statistische toets in R
 De functie `chisq.test()` werkt het beste als deze een kruistabel als input krijgt. De eerste twee rijen van deze tabel worden gezien als de groepen die vergeleken moeten worden.
 ```{r}
-chisq.test(uitval_functiebeperking)
+chisq.test(Uitval_functiebeperking)
 ```
 
 ## Toelichting op de output

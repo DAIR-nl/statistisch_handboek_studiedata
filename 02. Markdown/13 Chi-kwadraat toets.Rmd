@@ -18,6 +18,11 @@ Geen_ls_uitval <- c(375, 496)
 Wel_ls_uitval <- c(369, 394)
 Uitval_functiebeperking <- t(data.frame(Geen_ls_uitval, Wel_ls_uitval))
 colnames(Uitval_functiebeperking) <- c("Wel uitval", "Geen uitval")
+
+Geen_ls_uitval_n10 <- c(8, 14)
+Wel_ls_uitval_n10 <- c(5, 16)
+Uitval_functiebeperking_n10 <- t(data.frame(Geen_ls_uitval_n10, Wel_ls_uitval_n10))
+colnames(Uitval_functiebeperking_n10) <- c("Wel uitval", "Geen uitval")
 ```
 
 ## Gebruik
@@ -40,14 +45,20 @@ H~A~: De verhouding uitval van het aantal studenten met een functiebeperking voo
 Voor de uitvoering in R is er data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. De data `Uitval_functiebeperking` is binair (wel of geen uitval). 
 
 ### De data bekijken
-```{r}
+```{r dataview}
 Uitval_functiebeperking
 ```
 
-### Statistische toets in R
-De functie `chisq.test()` werkt het beste als deze een kruistabel als input krijgt. De eerste twee rijen van deze tabel worden gezien als de groepen die vergeleken moeten worden.
-```{r}
+### {.tabset .tabset-fade}
+#### Chi-kwadraat toets
+Om `chisq.test()` in R te gebruiken moet de data in een kruistabel staan.
+```{r chi2}
 chisq.test(Uitval_functiebeperking)
+```
+
+#### Fisher's exact toets
+```{r fishers exact}
+fisher.test(Uitval_functiebeperking_n10)
 ```
 
 ## Toelichting op de output

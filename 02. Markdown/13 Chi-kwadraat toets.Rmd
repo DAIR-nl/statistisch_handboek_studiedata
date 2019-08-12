@@ -50,6 +50,9 @@ H~A~: De verhouding uitval van het aantal studenten met een functiebeperking voo
 ## Uitvoering in R
 Voor de uitvoering in R is er data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. De data is binair (wel of geen uitval) en op basis van het studentnummer.
 
+### Tabel
+Fequentie van de geoberveerde data, uitval van studenten met en zonder een functiebeperking voor en na de invoering van het leenstelsel
+
 ### Is de data categorisch?
 
 ```{r}

@@ -53,10 +53,9 @@ Continuïteitscorrectie bij df=1
 
 ## Rapportage
 
-## Verder lezen
+## Referenties
 [^1]: http://r-statistics.co/Statistical-Tests-in-R.html
 [^2]: https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets
 [^3]: https://wiki.uva.nl/methodologiewinkel/index.php/Chi-square_test#Assumpties 
-## Achtergrond info
 
 

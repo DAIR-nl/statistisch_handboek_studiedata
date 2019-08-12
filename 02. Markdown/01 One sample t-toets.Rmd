@@ -62,9 +62,9 @@ Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, dus 
 Voor de uitvoering in R is er een dummydataset genaamd gemiddeld_cijfer_wns ingeladen met de gemiddelde cijfers van Wiskunde, Natuurkunde en Scheikunde van 122 middelbare scholieren.
 
 ### Test assumpties: normaliteit
-Visualiseren van de data met behulp van een histogram kan met `hist()`. Het gemiddelde en de standaardeviatie met 
+Het bekijken van de data kan via `mean()`, `sd()` en visueel met behulp van een histogram via `hist()`.
 ```{r histogram voor normaliteit, collapse=TRUE}
-summary(gemiddeld_cijfer_wns)
+mean(gemiddeld_cijfer_wns)
 sd(gemiddeld_cijfer_wns)
 hist(gemiddeld_cijfer_wns)
 ```

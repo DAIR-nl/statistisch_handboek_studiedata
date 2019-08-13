@@ -59,7 +59,7 @@ De data is niet normaal verdeeld. Gebruik bij normaal verdeelde data een One-sam
 
 ### Tekentoets 
 Voer een tweezijdige tekentoets uit met het aantal alumni dat meer dan modaal (€36.000[^1]) verdient en het totaal aantal alumni in de dataset.   
-```{r}
+```{r Tekentoets}
 boven_modaal <- length(Jaarlijks_inkomen[Jaarlijks_inkomen > 36000])
 totaal_alumni <- length(Jaarlijks_inkomen)
 

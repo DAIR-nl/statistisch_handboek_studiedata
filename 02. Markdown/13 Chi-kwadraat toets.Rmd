@@ -58,16 +58,17 @@ Om `chisq.test()` in R te gebruiken moet de data in een kruistabel staan.
 chisq.test(Uitval_functiebeperking)
 ```
 
+Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval is *df* = 1. Wanneer het aantal vrijheidsgraden 1 is, wordt de continuïteitscorrectie van Yates toegepast.  
+p-waarde < 0,05 , dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen 
+
 #### Fisher's exact toets
 Wanneer de frequenties laag zijn en de *chi-kwadraat toets* niet uitgevoerd kan worden, wordt de *Fisher's exact toets* gebruikt. De *Fisher's exact toets* is conservatiever dan de *chi-kwadraat toets* en daardoor zal verschillen in verhoudingen bij de  *chi-kwadraat toets* eerder significant bevonden worden dan *Fisher's exact toets*. De *Fisher's exact toets* wordt ook bij hoge frequenties gebruikt. 
 
 ```{r fishers exact}
 fisher.test(Uitval_functiebeperking_n10)
 ```
-
-## Toelichting op de output
-Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval is *df* = 1. Wanneer het aantal vrijheidsgraden 1 is, wordt de continuïteitscorrectie van Yates toegepast.  
-p-waarde < 0,05 , dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen 
+ 
+testtesttest
 
 
 ## Rapportage

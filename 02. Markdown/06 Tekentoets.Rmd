@@ -1,0 +1,47 @@
+---
+title: "06 Tekentoets"
+author: "Irene van der Staaij & Megiel Kerkhoven"
+date: "Oktober 2019"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    theme: united
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r aanmaken data, include=FALSE, echo=TRUE}
+
+```
+
+## Gebruik
+
+## Voorbeeld uit het onderwijs
+
+## Assumpties
+
+## Uitvoering in R
+
+### Assumpties testen in R
+
+```{r}
+
+```
+
+### statistische toets in R
+
+```{r}
+
+```
+
+## Toelichting op de output
+
+## Rapportage
+
+## Referenties
+
+## Achtergrond info

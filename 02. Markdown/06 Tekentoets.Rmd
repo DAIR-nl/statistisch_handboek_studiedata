@@ -15,7 +15,19 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-
+set.seed(1)
+Maandelijks <- c(1616:7000)
+p <- c(rep(0.4, 385),      #1616-2000
+       rep(0.55, 400),     #2000-2400
+       rep(0.7, 400),      #2401-2800
+       rep(0.8, 400),      #2801-3200
+       rep(0.65, 400),      #3201-3600
+       rep(0.45, 400),      #3601-4000
+       rep(0.2, 1000),     #4001-5000
+       rep(0.1, 1000),     #5001-6000
+       rep(0.01, 1000)     #6001-7000
+       )
+Jaarlijks_inkomen <- replicate(2314, 13*(sample(Maandelijks, 1, replace=TRUE, p)))
 ```
 
 ## Gebruik
@@ -25,17 +37,32 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Assumpties
 
 ## Uitvoering in R
+Voor de uitvoering in R is er data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij. De directeur wil kijken hoe zijn oud-studenten scoren ten opzichte van gemiddelde inkomens in Nederland.
 
-### Assumpties testen in R
-
-```{r}
-
+### De data bekijken
+Bekijk de data door het gemiddelde, de standaardafwijking, de mediaan en een histogram op te vragen.
+```{r data bekijken, collapse=TRUE}
+mean(Jaarlijks_inkomen)
+sd(Jaarlijks_inkomen)
+median(Jaarlijks_inkomen)
+hist(Jaarlijks_inkomen)
 ```
 
-### statistische toets in R
+### Normaliteit testen
+Test of de data normaal verdeeld is met een lillie-test
+```{r normaliteit, warning=FALSE}
+library (nortest)
+lillie.test(Jaarlijks_inkomen)
+```
+De data is niet normaal verdeeld. Gebruik bij normaal verdeelde data een One-sample t-toets.
 
+### Tekentoets 
+Voer een tweezijdige tekentoets uit met het aantal alumni dat meer dan modaal (€36.000[^1]) verdient en het totaal aantal alumni in de dataset.   
 ```{r}
+boven_modaal <- length(Jaarlijks_inkomen[Jaarlijks_inkomen > 36000])
+totaal_alumni <- length(Jaarlijks_inkomen)
 
+binom.test(boven_modaal, totaal_alumni, alternative = "two.sided")
 ```
 
 ## Toelichting op de output
@@ -43,5 +70,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Rapportage
 
 ## Referenties
+[^1]: Bruto modaal inkomen 2019, Centraal Planbureau
 
 ## Achtergrond info

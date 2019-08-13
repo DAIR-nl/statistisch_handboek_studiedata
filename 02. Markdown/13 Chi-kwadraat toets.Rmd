@@ -65,7 +65,7 @@ fisher.test(Uitval_functiebeperking_n10)
 ```
 
 ## Toelichting op de output
-Vrijheidsgraden *df*: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval is *df* = 1. Wanneer het aantal vrijheidsgraden 1 is, wordt de continuïteitscorrectie van Yates toegepast.  
+Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval is *df* = 1. Wanneer het aantal vrijheidsgraden 1 is, wordt de continuïteitscorrectie van Yates toegepast.  
 p-waarde < 0,05 , dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen 
 
 

@@ -53,12 +53,13 @@ Uitval_functiebeperking
 ### {.tabset .tabset-fade}
 #### Chi-kwadraat toets
 Om `chisq.test()` in R te gebruiken moet de data in een kruistabel staan.  
-Wanneer de frequenties laag zijn, wordt ook wel de Fisher's exact toets gebruikt. 
+
 ```{r chi2}
 chisq.test(Uitval_functiebeperking)
 ```
 
 #### Fisher's exact toets
+Wanneer de frequenties laag zijn, wordt ook wel de Fisher's exact toets gebruikt. 
 ```{r fishers exact}
 fisher.test(Uitval_functiebeperking_n10)
 ```
@@ -70,7 +71,7 @@ p-waarde < 0,05 , dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
 
 ## Rapportage
 Om te toetsen of studenten met een functiebeperking vaker uitvallen dan de student zonder functiebeperking sinds de invoering van het leenstelsel, is de Chi-kwadraat toets uitgevoerd.  
-\( \chi \)^2^ (1)  	$\approx$ 4,41  
+\( \chi \)^2^ (1) \(\approx\) 4,41  
 p-waarde < 0,05 , dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen  
 
 

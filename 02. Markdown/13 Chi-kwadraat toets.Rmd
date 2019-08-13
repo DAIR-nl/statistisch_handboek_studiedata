@@ -26,10 +26,10 @@ colnames(Uitval_functiebeperking_n10) <- c("Wel uitval", "Geen uitval")
 ```
 
 ## Gebruik
-De Chi-kwadraat toets wordt gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde categorische variabelen, door middel van een kruistabel [^1]
+De *Chi-kwadraat toets* wordt gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde categorische variabelen, door middel van een kruistabel [^1].
 
 ## Voorbeeld uit het onderwijs
-De studieadviseur van de opleiding filosofie vraagt zich af of de studenten met een functiebeperking vaker uitvallen dan de student zonder functiebeperking sinds de invoering van het leenstelsel?
+De studieadviseur van de opleiding filosofie vraagt zich af of de studenten met een functiebeperking vaker uitvallen dan de studenten zonder functiebeperking sinds de invoering van het leenstelsel?
 
 H~0~: De verhouding uitval van het aantal studenten met een functiebeperking voor of na de invoering van het leenstelsel is gelijk gebleven.
 
@@ -49,9 +49,11 @@ Voor de uitvoering in R is er data ingeladen over de uitval van studenten met ee
 Uitval_functiebeperking
 ```
 
+### Chi-kwadraat toets
 ### {.tabset .tabset-fade}
 #### Chi-kwadraat toets
-Om `chisq.test()` in R te gebruiken moet de data in een kruistabel staan.
+Om `chisq.test()` in R te gebruiken moet de data in een kruistabel staan.  
+Wanneer de frequenties laag zijn, wordt ook wel de Fisher's exact toets gebruikt. 
 ```{r chi2}
 chisq.test(Uitval_functiebeperking)
 ```

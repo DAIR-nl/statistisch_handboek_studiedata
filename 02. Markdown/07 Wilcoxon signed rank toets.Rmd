@@ -1,0 +1,104 @@
+---
+title: "07 Wilcoxon signed rank toets"
+author: "Irene van der Staaij & Megiel Kerkhoven"
+date: "Oktober 2019"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    theme: united
+---
+
+<style>
+  .col2 {
+    columns: 2 200px;         /* number of columns and width in pixels*/
+    -webkit-columns: 2 200px; /* chrome, safari */
+    -moz-columns: 2 200px;    /* firefox */
+  }
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r aanmaken data, include=FALSE, echo=TRUE}
+set.seed(1)
+Mogelijkheden <- c(1616:7000)
+
+p_t1 <- c(
+       rep(0.4,  385),     #1616-2000
+       rep(0.55, 400),     #2000-2400
+       rep(0.7,  400),     #2401-2800
+       rep(0.8,  400),     #2801-3200
+       rep(0.65, 400),     #3201-3600
+       rep(0.45, 400),     #3601-4000
+       rep(0.2,  1000),    #4001-5000
+       rep(0.1,  1000),    #5001-6000
+       rep(0.01, 1000)     #6001-7000
+       )
+Jaarlijks_inkomen_t1 <- replicate(2207, 13*(sample(Mogelijkheden, 1, replace=TRUE, p_t1)))
+Jaarlijks_inkomen_t1 <- order
+p_t5 <- c(
+       rep(0.4,  385),     #1616-2000
+       rep(0.5,  400),     #2000-2400
+       rep(0.65, 400),     #2401-2800
+       rep(0.8,  400),     #2801-3200
+       rep(0.8,  400),     #3201-3600
+       rep(0.55, 400),     #3601-4000
+       rep(0.25, 1000),    #4001-5000
+       rep(0.1,  1000),    #5001-6000
+       rep(0.03, 1000)     #6001-7000
+       )
+Jaarlijks_inkomen_t5 <- replicate(2207, 13*(sample(Mogelijkheden, 1, replace=TRUE, p_t5)))
+```
+
+## Gebruik
+
+## Voorbeeld uit het onderwijs
+
+## Assumpties
+
+## Uitvoering in R
+Voor de uitvoering in R is er data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkeld 4 jaar nadat zij afgestudeerd zijn.
+
+### De data bekijken
+Bekijk de data door het gemiddelde, de standaardafwijking, de mediaan en een histogram op te vragen.
+
+<div class="col2">
+```{r, data bekijken, collapse=TRUE}
+mean(Jaarlijks_inkomen_t1)
+sd(Jaarlijks_inkomen_t1)
+median(Jaarlijks_inkomen_t1)
+hist(Jaarlijks_inkomen_t1)
+mean(Jaarlijks_inkomen_t5)
+sd(Jaarlijks_inkomen_t5)
+median(Jaarlijks_inkomen_t5)
+hist(Jaarlijks_inkomen_t5)
+```
+</div>
+
+### Normaliteit testen
+Test of de data normaal verdeeld is met een lilliefors-test
+```{r library nortest, warning=FALSE}
+library(nortest)
+```
+<div class="col2">
+```{r normaliteitstest, warning=FALSE}
+lillie.test(Jaarlijks_inkomen_t1)
+lillie.test(Jaarlijks_inkomen_t5)
+```
+</div>
+
+### Wilcoxon signed rank toets
+Voer een Wilcoxon signed rank toets uit met `paired=TRUE`.
+```{r}
+wilcox.test(Jaarlijks_inkomen_t1, Jaarlijks_inkomen_t5, paired=TRUE)
+```
+
+## Toelichting op de output
+
+## Rapportage
+
+## Referenties
+
+## Achtergrond info

@@ -8,6 +8,13 @@ output:
     toc_float: TRUE
     theme: united
 ---
+<style>
+  .col2 {
+    columns: 2 200px;         /* number of columns and width in pixels*/
+    -webkit-columns: 2 200px; /* chrome, safari */
+    -moz-columns: 2 200px;    /* firefox */
+  }
+</style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -51,32 +58,35 @@ Cijfers_gem_2011_n30 <- sapply (Cijfers_gem_2011, round, 3)
 Voor de uitvoering in R is er data ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Statistiek. De data is beschikbaar voor het cohort gestart in 2010 en voor het cohort gestart in 2011. Vanaf 2011 heeft de opleiding een Bindend Studieadvies (BSA) die de selectiviteit van het eerste jaar moet vergroten.
 
 ### Normaliteit
-
+<div class="col2">
 ```{r Assumptietest}
 hist(Cijfers_gem_2011)
 hist(Cijfers_gem_2010)
 ```
+</div>
 
 ### {.tabset .tabset-fade .tabset.pills}
 #### Lilliefors Test
 
-
-```` {r Lilliefors Test, warning=FALSE}
+```{r library nortest, warning=FALSE}
 library(nortest)
+```
+<div class="col2">
+```` {r Lilliefors Test, warning=FALSE}
 lillie.test(Cijfers_gem_2011)
 lillie.test(Cijfers_gem_2010)
 ````
-
+</div>
 
 #### Shapiro-Wilk Test
+<div class="col2">
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 shapiro.test(Cijfers_gem_2011_n30)
 shapiro.test(Cijfers_gem_2010_n30)
 ```
+</div>
 
-
-### statistische toets in R
-
+### Ongepaarde t-toets
 ```{r statistische toets}
 t.test(Cijfers_gem_2010, Cijfers_gem_2011)
 ```

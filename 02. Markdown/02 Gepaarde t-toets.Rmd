@@ -8,6 +8,13 @@ output:
     toc_float: TRUE
     theme: united
 ---
+<style>
+  .col2 {
+    columns: 2 200px;         /* number of columns and width in pixels*/
+    -webkit-columns: 2 200px; /* chrome, safari */
+    -moz-columns: 2 200px;    /* firefox */
+  }
+</style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -20,28 +27,32 @@ mu <- 3.6
 sigma <- 0.6
 Evaluatie_score_geen_tutor <- rnorm(250, mu, sigma)
 
-Evaluatie_score_geen_tutor <- Evaluatie_score_geen_tutor[Evaluatie_score_geen_tutor <= 5 & Evaluatie_score_geen_tutor >= 1]
+Evaluatie_score_geen_tutor <- Evaluatie_score_geen_tutor[Evaluatie_score_geen_tutor <= 5 
+                                                         & Evaluatie_score_geen_tutor >= 1]
 Evaluatie_score_geen_tutor <- sapply (Evaluatie_score_geen_tutor, round, 3)
 
 mu <- 3.4
 sigma <- 0.7
 Evaluatie_score_wel_tutor <- rnorm(250, mu, sigma)
 
-Evaluatie_score_wel_tutor <- Evaluatie_score_wel_tutor[Evaluatie_score_wel_tutor <= 5 & Evaluatie_score_wel_tutor >= 1]
+Evaluatie_score_wel_tutor <- Evaluatie_score_wel_tutor[Evaluatie_score_wel_tutor <= 5 
+                                                       & Evaluatie_score_wel_tutor >= 1]
 Evaluatie_score_wel_tutor <- sapply (Evaluatie_score_wel_tutor, round, 3)
 
 mu <- 3.6
 sigma <- 0.6
 Evaluatie_score_geen_tutor_n30 <- rnorm(30, mu, sigma)
 
-Evaluatie_score_geen_tutor_n30 <- Evaluatie_score_geen_tutor_n30[Evaluatie_score_geen_tutor_n30 <= 5 & Evaluatie_score_geen_tutor_n30 >= 1]
+Evaluatie_score_geen_tutor_n30 <- Evaluatie_score_geen_tutor_n30[Evaluatie_score_geen_tutor_n30 <= 5 
+                                                                 & Evaluatie_score_geen_tutor_n30 >= 1]
 Evaluatie_score_geen_tutor_n30 <- sapply (Evaluatie_score_geen_tutor_n30, round, 3)
 
 mu <- 3.4
 sigma <- 0.7
 Evaluatie_score_wel_tutor_n30 <- rnorm(30, mu, sigma)
 
-Evaluatie_score_wel_tutor_n30 <- Evaluatie_score_wel_tutor_n30[Evaluatie_score_wel_tutor_n30 <= 5 & Evaluatie_score_wel_tutor_n30 >= 1]
+Evaluatie_score_wel_tutor_n30 <- Evaluatie_score_wel_tutor_n30[Evaluatie_score_wel_tutor_n30 <= 5 
+                                                               & Evaluatie_score_wel_tutor_n30 >= 1]
 Evaluatie_score_wel_tutor_n30 <- sapply (Evaluatie_score_wel_tutor_n30, round, 3)
 ```
 
@@ -55,29 +66,32 @@ Evaluatie_score_wel_tutor_n30 <- sapply (Evaluatie_score_wel_tutor_n30, round, 3
 Voor de uitvoering in R is er data ingeladen met evaluatie-scores van studenten die geen tutorgesprek hebben gehad en van studenten die wel een tutorgesprek hebben gehad. 
 
 ### Normaliteit
-
+<div class="col2">
 ```{r Assumptietest}
 hist(Evaluatie_score_geen_tutor)
 hist(Evaluatie_score_wel_tutor)
 ```
+</div>
 
 ### {.tabset .tabset-fade .tabset.pills}
 #### Lilliefors Test
-
-
-```` {r Lilliefors Test, warning=FALSE}
+```{r library nortest, warning=FALSE}
 library(nortest)
+```
+<div class ="col2">
+```` {r Lilliefors Test, warning=FALSE}
 lillie.test(Evaluatie_score_geen_tutor)
 lillie.test(Evaluatie_score_wel_tutor)
 ````
-
+</div>
 
 #### Shapiro-Wilk Test
+<div class ="col2">
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 shapiro.test(Evaluatie_score_geen_tutor_n30)
 shapiro.test(Evaluatie_score_wel_tutor_n30)
 ```
-
+</div>
 
 ### statistische toets in R
 

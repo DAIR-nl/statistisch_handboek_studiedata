@@ -118,5 +118,5 @@ Een One sample t-toets is uitgevoerd om te toetsen of het gemiddelde eindexamenc
 
 [^1]: [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets)
 [^2]: [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit)
-[^3]: http://r-statistics.co/Statistical-Tests-in-R.html
+[^3]: [r-statistics.co]http://r-statistics.co/Statistical-Tests-in-R.html
 [^4]: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  

@@ -111,7 +111,7 @@ p-waarde < 0.05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
 
 
 ## Rapportage
-Een One sample t-toets is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die later Werktuigbouwkunde zijn gaan studeren, hoger is dan het landelijke gemiddelde. Het gemiddelde van de steekproef van 7,08 (*sd* = 0,8) was significant anders dan het landelijk gemiddelde van een 6,8, *t*(121) = 3,76, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het gemiddelde van de steekproef heeft een reikwijdte van 6,93 tot 7,23. De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer hoger ligt voor de VWO studenten die later Werktuigbouwkunde zijn gaan studeren, dan het landelijk gemiddelde. 
+Een *One sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die later Werktuigbouwkunde zijn gaan studeren, hoger is dan het landelijke gemiddelde. Het gemiddelde van de steekproef van 7,08 (*sd* = 0,8) was significant anders dan het landelijk gemiddelde van een 6,8, *t*(121) = 3,76, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het gemiddelde van de steekproef heeft een reikwijdte van 6,93 tot 7,23. De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer hoger ligt voor de VWO studenten die later Werktuigbouwkunde zijn gaan studeren, dan het landelijk gemiddelde. 
 
 
 ## Referenties

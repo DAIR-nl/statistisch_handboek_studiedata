@@ -26,30 +26,23 @@ set.seed(1)
 Mogelijkheden <- c(1616:7000)
 
 p_t1 <- c(
-       rep(0.4,  385),     #1616-2000
-       rep(0.55, 400),     #2000-2400
-       rep(0.7,  400),     #2401-2800
-       rep(0.8,  400),     #2801-3200
-       rep(0.65, 400),     #3201-3600
-       rep(0.45, 400),     #3601-4000
-       rep(0.2,  1000),    #4001-5000
-       rep(0.1,  1000),    #5001-6000
-       rep(0.01, 1000)     #6001-7000
-       )
+  rep(0.4,  385),     #1616-2000
+  rep(0.55, 400),     #2000-2400
+  rep(0.7,  400),     #2401-2800
+  rep(0.8,  400),     #2801-3200
+  rep(0.65, 400),     #3201-3600
+  rep(0.45, 400),     #3601-4000
+  rep(0.2,  1000),    #4001-5000
+  rep(0.1,  1000),    #5001-6000
+  rep(0.01, 1000)     #6001-7000
+)
 Jaarlijks_inkomen_t1 <- replicate(2207, 13*(sample(Mogelijkheden, 1, replace=TRUE, p_t1)))
-Jaarlijks_inkomen_t1 <- order
-p_t5 <- c(
-       rep(0.4,  385),     #1616-2000
-       rep(0.5,  400),     #2000-2400
-       rep(0.65, 400),     #2401-2800
-       rep(0.8,  400),     #2801-3200
-       rep(0.8,  400),     #3201-3600
-       rep(0.55, 400),     #3601-4000
-       rep(0.25, 1000),    #4001-5000
-       rep(0.1,  1000),    #5001-6000
-       rep(0.03, 1000)     #6001-7000
-       )
-Jaarlijks_inkomen_t5 <- replicate(2207, 13*(sample(Mogelijkheden, 1, replace=TRUE, p_t5)))
+
+
+Promotie_mogelijkheden <- c(0, 650, 1300, 2600, 6500, -650, -1300, -2600)
+Weging                 <- c(500,50,   20,   15,   10,   40,    10,     5)
+Opslag <- sample(Promotie_mogelijkheden, 2207, replace=TRUE, Weging)
+Jaarlijks_inkomen_t5 <- Jaarlijks_inkomen_t1 + Opslag
 ```
 
 ## Gebruik
@@ -91,8 +84,8 @@ lillie.test(Jaarlijks_inkomen_t5)
 
 ### Wilcoxon signed rank toets
 Voer een Wilcoxon signed rank toets uit met `paired=TRUE`.
-```{r}
-wilcox.test(Jaarlijks_inkomen_t1, Jaarlijks_inkomen_t5, paired=TRUE)
+```{r wilcox test}
+wilcox.test(Jaarlijks_inkomen_t5, Jaarlijks_inkomen_t1, paired=TRUE, alternative = "greater")
 ```
 
 ## Toelichting op de output

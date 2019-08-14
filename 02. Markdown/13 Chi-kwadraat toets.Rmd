@@ -19,10 +19,10 @@ Wel_ls_uitval <- c(369, 394)
 Uitval_functiebeperking <- t(data.frame(Geen_ls_uitval, Wel_ls_uitval))
 colnames(Uitval_functiebeperking) <- c("Wel uitval", "Geen uitval")
 
-Geen_ls_uitval_n10 <- c(8, 14)
-Wel_ls_uitval_n10 <- c(5, 16)
-Uitval_functiebeperking_n10 <- t(data.frame(Geen_ls_uitval_n10, Wel_ls_uitval_n10))
-colnames(Uitval_functiebeperking_n10) <- c("Wel uitval", "Geen uitval")
+Geen_ls_uitval_n43 <- c(8, 14)
+Wel_ls_uitval_n43 <- c(5, 16)
+Uitval_functiebeperking_n43 <- t(data.frame(Geen_ls_uitval_n43, Wel_ls_uitval_n43))
+colnames(Uitval_functiebeperking_n43) <- c("Wel uitval", "Geen uitval")
 ```
 
 ## Gebruik
@@ -59,18 +59,21 @@ chisq.test(Uitval_functiebeperking)
 ```
 
 Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval is *df* = 1. Wanneer het aantal vrijheidsgraden 1 is, wordt de continuïteitscorrectie van Yates toegepast.  
-p-waarde < 0,05 , dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen 
+p-waarde < 0,05 , dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen  
 
 #### Fisher's exact toets
 De *Fisher's exact toets* wordt ook gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde nominale variabelen, door middel van een kruistabel. In tegenstelling tot de *chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage frequenties ingezet worden. De *Fisher's exact toets* is conservatiever dan de *chi-kwadraat toets*[^2].
 
+Voor de uitvoering in R is er data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel, alle groepen hebben een laag aantal per cel, variërend aantal van 5 tot 16. Ook hier is de data `Uitval_functiebeperking_n43` is binair. 
+
+
 ```{r fishers exact}
 
-fisher.test(Uitval_functiebeperking_n10)
+fisher.test(Uitval_functiebeperking_n43)
 ```
 
-output output output
-
+p-waarde > 0,05 , dus de H~0~ wordt aangenomen
+Het 95% betrouwbaarheidsinterval is groot, tussen de 0,41 en de 8,78.   
 
 ## Rapportage
 Om te toetsen of studenten met een functiebeperking vaker uitvallen dan de student zonder functiebeperking sinds de invoering van het leenstelsel, is de *Chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de conclusie dat de verhouding uitval van het aantal studenten met een functiebeperking voor of na de invoering van het leenstelsel niet gelijk is gebleven, \( \chi \)^2^ (1) \(\approx\) 4,41, *p* < 0,01.

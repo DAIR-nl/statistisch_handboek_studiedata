@@ -101,7 +101,7 @@ Ook bij deze test is *p* > 0,05, dus is er geen significant verschil tussen de v
 
 ### One sample t-toets
 ```{r ttest}
-t.test(Gemiddeld_cijfer_wns, mu = 6.8) 
+t.test(Gemiddeld_cijfer_wns, mu = 6.8, alternative="greater")
 ```
 
 Het gemiddelde van de steekproef is 7,08  

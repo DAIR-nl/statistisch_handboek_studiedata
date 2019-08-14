@@ -95,7 +95,7 @@ shapiro.test(Gemiddeld_cijfer_wns_n30)
 
 De Shapiro-Wilk Test is een soort gelijke test als de Kolmogorov-Smirnov test en wordt vooral gebruikt bij kleine steekproeven. Wanneer de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normaalverdeling.
 
-Ook bij deze test is *p* > 0,05, dus is er geen significant verschil tussen de verdeling van de steekproef en de normaal verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de One sample-t-toets kan uitvoerd worden. 
+Voor de uitvoering in R is er een dummydataset genaamd Gemiddeld_cijfer_wns_n30 ingeladen met de gemiddelde cijfers van Wiskunde, Natuurkunde en Scheikunde van 30 middelbare scholieren. De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normaalverdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de One sample-t-toets kan uitvoerd worden.
 
 ***
 

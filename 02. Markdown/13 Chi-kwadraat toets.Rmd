@@ -65,18 +65,17 @@ p-waarde < 0,05 , dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
 De *Fisher's exact toets* wordt ook gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde nominale variabelen, door middel van een kruistabel. In tegenstelling tot de *chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage frequenties ingezet worden. De *Fisher's exact toets* is conservatiever dan de *chi-kwadraat toets*[^2].
 
 ```{r fishers exact}
+
 fisher.test(Uitval_functiebeperking_n10)
 ```
- 
-testtesttest
+
+output output output
 
 
 ## Rapportage
 Om te toetsen of studenten met een functiebeperking vaker uitvallen dan de student zonder functiebeperking sinds de invoering van het leenstelsel, is de *Chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de conclusie dat de verhouding uitval van het aantal studenten met een functiebeperking voor of na de invoering van het leenstelsel niet gelijk is gebleven, \( \chi \)^2^ (1) \(\approx\) 4,41, *p* < 0,01.
  
 ## Referenties
-[^1]: [r-statistics.co]http://r-statistics.co/Statistical-Tests-in-R.html
-[^2]: [Wiki Statistiek Academisch Medisch Centrum]https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets
-[^3]: [UvA Wiki Methodologiewinkel]https://wiki.uva.nl/methodologiewinkel/index.php/Chi-square_test#Assumpties 
-
-
+[^1]: [r-statistics.co](http://r-statistics.co/Statistical-Tests-in-R.html)
+[^2]: [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets)
+[^3]: [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Chi-square_test#Assumpties )

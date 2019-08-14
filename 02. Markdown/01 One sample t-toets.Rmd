@@ -54,9 +54,9 @@ De t-toets gaat er vanuit dat de data normaal verdeeld is, bij kleine steekproev
 
 Controleer de data met deze stappen:  
 1. Controleer visueel door het maken van een dataplot: een histogram of een boxplot.  
-2. Toets daarna of de data normaal verdeeld is met de Kolmogorov-Smirnov Test of bij een kleinere steekproef met de Shapiro-Wilk Test [^2]. 
+2. Toets daarna of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef met de *Shapiro-Wilk test* [^2]. 
 
-Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, dus aan de assumptie niet wordt voldaan, dan kan de t-toets niet gebruikt worden. Gebruik in dat geval de Wilcoxon Signed Rank Test [^3].
+Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, dus aan de assumptie niet wordt voldaan, dan kan de t-toets niet gebruikt worden. Gebruik in dat geval de *Wilcoxon Signed Rank Test* [^3].
 
 ## Uitvoering in R
 Voor de uitvoering in R is er een dummydataset genaamd Gemiddeld_cijfer_wns ingeladen met de gemiddelde cijfers van Wiskunde, Natuurkunde en Scheikunde van 122 middelbare scholieren.
@@ -73,7 +73,7 @@ De histogram laat een belvorm zien vergelijkbaar aan een normaalverdeling, veel 
 
 ***
 
-Toets normaliteit met de Kolmogorov-Smirnov Test of met de Shapiro-Wilk Test (*n* < 50[^4] ). 
+Toets normaliteit met de *Kolmogorov-Smirnov test* of met de *Shapiro-Wilk test* (*n* < 50[^4] ). 
 
 ### {.tabset .tabset-fade .tabset.pills}
 #### Kolmogorov-Smirnov
@@ -82,18 +82,18 @@ Toets normaliteit met de Kolmogorov-Smirnov Test of met de Shapiro-Wilk Test (*n
 library(nortest)
 lillie.test (Gemiddeld_cijfer_wns)
 ```
-De Kolmogorov-Smirnov test is een non-parametrische toets, die het verschil in vorm tussen twee verdelingen toetst. In dit geval toetst deze test het verschil tussen de normaalverdeling en de verdeling van de steekproef. Wanneer de p-waarde kleiner is dan 0,05 is er een verschil tussen beide verdelingen. 
+De *Kolmogorov-Smirnov test* is een non-parametrische toets, die het verschil in vorm tussen twee verdelingen toetst. In dit geval toetst deze test het verschil tussen de normaalverdeling en de verdeling van de steekproef. Wanneer de p-waarde kleiner is dan 0,05 is er een verschil tussen beide verdelingen. 
 
 In dit geval is *p* > 0,05, dus is de verdeling van de data niet significant verschillend van de normaalverdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de One sample-t-toets kan uitvoert worden.  
 
 ***
 
-#### Shapiro-Wilk Test
+#### Shapiro-Wilk test
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 shapiro.test(Gemiddeld_cijfer_wns_n30)
 ```
 
-De Shapiro-Wilk Test is een soort gelijke test als de Kolmogorov-Smirnov test en wordt vooral gebruikt bij kleine steekproeven. Wanneer de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normaalverdeling.
+De *Shapiro-Wilk test* is een soort gelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Wanneer de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normaalverdeling.
 
 Voor de uitvoering in R is er een dummydataset genaamd Gemiddeld_cijfer_wns_n30 ingeladen met de gemiddelde cijfers van Wiskunde, Natuurkunde en Scheikunde van 30 middelbare scholieren. De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normaalverdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de One sample-t-toets kan uitvoerd worden.
 

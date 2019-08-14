@@ -118,5 +118,5 @@ Een One sample t-toets is uitgevoerd om te toetsen of het gemiddelde eindexamenc
 
 [^1]: van Geloven, N. (2016, May 25). T-toets [Wiki Statistiek Academisch Medisch Centrum]. Retrieved from: https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets  
 [^2]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. Retrieved from: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
-[^3]: Prabhakaran, S. (2016-2017). [r-statistics.co]. Retrieved from http://r-statistics.co/Statistical-Tests-in-R.html  
-[^4]: Laerd statistics. (2018). Retrieved from: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
+[^3]: Prabhakaran, S. (2016-2017). Statistical Tests [r-statistics.co]. Retrieved from http://r-statistics.co/Statistical-Tests-in-R.html  
+[^4]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. Retrieved from: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  

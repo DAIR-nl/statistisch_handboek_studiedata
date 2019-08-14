@@ -72,13 +72,14 @@ Voor de uitvoering in R is er data ingeladen over de uitval van studenten met ee
 fisher.test(Uitval_functiebeperking_n43)
 ```
 
-p-waarde > 0,05 , dus de H~0~ wordt aangenomen
+p-waarde > 0,05 , dus de H~0~ wordt aangenomen  
+De odds op het hebben van een cardiovasculaire aandoening voor rokers is 3,9 keer zo groot als de odds op het hebben van deze aandoening voor niet-rokers. Deze associatie blijkt ook significant te zijn: p < 0,001 (Chi-kwadraat toets). 
 Het 95% betrouwbaarheidsinterval is groot, tussen de 0,41 en de 8,78.   
 
 ## Rapportage
 Om te toetsen of studenten met een functiebeperking vaker uitvallen dan de student zonder functiebeperking sinds de invoering van het leenstelsel, is de *Chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de conclusie dat de verhouding uitval van het aantal studenten met een functiebeperking voor of na de invoering van het leenstelsel niet gelijk is gebleven, \( \chi \)^2^ (1) \(\approx\) 4,41, *p* < 0,01.
  
 ## Referenties
-[^1]: [r-statistics.co](http://r-statistics.co/Statistical-Tests-in-R.html)
-[^2]: [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets)
-[^3]: [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Chi-square_test#Assumpties )
+[^1]: Prabhakaran, S. (2016-2017). Statistical Tests [r-statistics.co]. Retrieved from: http://r-statistics.co/Statistical-Tests-in-R.html
+[^2]: van Geloven, N. (2015, August 20). Chi-kwadraat toets [Wiki Statistiek Academisch Medisch Centrum]. Retrieved from: https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets
+[^3]: Chi-square test (2017, November 13). [UvA Wiki Methodologiewinkel]. Retrieved from: https://wiki.uva.nl/methodologiewinkel/index.php/Chi-square_test#Assumpties 

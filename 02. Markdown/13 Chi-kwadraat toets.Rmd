@@ -62,7 +62,7 @@ Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. I
 p-waarde < 0,05 , dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen 
 
 #### Fisher's exact toets
-Wanneer de frequenties laag zijn en de *chi-kwadraat toets* niet uitgevoerd kan worden, wordt de *Fisher's exact toets* gebruikt. De *Fisher's exact toets* is conservatiever dan de *chi-kwadraat toets* en daardoor zal verschillen in verhoudingen bij de  *chi-kwadraat toets* eerder significant bevonden worden dan *Fisher's exact toets*. De *Fisher's exact toets* wordt ook bij hoge frequenties gebruikt. 
+De *Fisher's exact toets* wordt ook gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde nominale variabelen, door middel van een kruistabel. In tegenstelling tot de *chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage frequenties ingezet worden. De *Fisher's exact toets* is conservatiever dan de *chi-kwadraat toets*.
 
 ```{r fishers exact}
 fisher.test(Uitval_functiebeperking_n10)

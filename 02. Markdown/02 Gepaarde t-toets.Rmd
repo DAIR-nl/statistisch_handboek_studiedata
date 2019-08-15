@@ -60,7 +60,11 @@ Evaluatie_score_wel_tutor_n30 <- sapply (Evaluatie_score_wel_tutor_n30, round, 3
 Wanneer gemiddelden meerdere malen gemeten wordt, bijvoorbeeld meten voor en na een interventie, en de andere variabelen blijven gelijk, wordt de *Gepaarde t-toets* gebruikt [^1]. 
 
 ## Voorbeeld uit het onderwijs
-Geven studenten in opleiding X nadat ze met hun tutor hebben gesproken hun opleiding een hoger cijfer?
+De opleidingsdirecteur van de lerarenopleiding vraagt zich af of de studenten, nadat ze met hun tutor hebben gesproken, de lerarenopleiding een ander cijfer geven? Ze vraagt of de studenten een vragenlijst in wil vullen (T~0~) en nadat de studenten naar hun tutor geweest zijn (T~1~). 
+
+H~0~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is niet veranderd na een gesprek met hun tutor, µ~T0~ = µ~T1~. 
+
+H~A~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is veranderd na een gesprek met hun tutor, µ~T0~ ≠ µ~T1~. 
 
 ## Assumpties
 

@@ -29,7 +29,7 @@ colnames(Uitval_functiebeperking_n43) <- c("Wel uitval", "Geen uitval")
 De *Chi-kwadraat toets* wordt gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde categorische variabelen, door middel van een kruistabel [^1].
 
 ## Voorbeeld uit het onderwijs
-De studieadviseur van de opleiding filosofie vraagt zich af of de studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel?
+De studentendecaan vraagt zich af of de studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel?
 
 H~0~: De verhouding uitval van het aantal studenten met een functiebeperking voor of na de invoering van het leenstelsel is gelijk gebleven.
 

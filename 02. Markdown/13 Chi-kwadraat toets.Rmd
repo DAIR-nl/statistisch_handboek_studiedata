@@ -64,7 +64,7 @@ p-waarde < 0,05 , dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
 #### Fisher's exact toets
 De *Fisher's exact toets* wordt ook gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde nominale variabelen, door middel van een kruistabel. In tegenstelling tot de *chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage frequenties ingezet worden. De *Fisher's exact toets* is conservatiever dan de *chi-kwadraat toets*[^2].
 
-Voor de uitvoering in R is er data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel, alle groepen hebben een laag aantal per cel, variërend aantal van 5 tot 16. Ook hier is de data `Uitval_functiebeperking_n43` is binair. 
+Voor de uitvoering in R is er data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel, alle groepen hebben een laag aantal per cel, variërend van 5 tot 16. Ook hier is de data `Uitval_functiebeperking_n43` binair. 
 
 
 ```{r fishers exact}
@@ -73,7 +73,7 @@ fisher.test(Uitval_functiebeperking_n43)
 ```
 
 p-waarde > 0,05 , dus de H~0~ wordt aangenomen  
-De odds op het hebben van een cardiovasculaire aandoening voor rokers is 3,9 keer zo groot als de odds op het hebben van deze aandoening voor niet-rokers. Deze associatie blijkt ook significant te zijn: p < 0,001 (Chi-kwadraat toets). 
+De odds op het uitvallen van studenten met een functiebeperking onder het leenstelsel is 1,8 keer zo groot als de odds op het uitvallen van studenten met een functiebeperking voor leenstelsel. Deze associatie blijkt niet significant te zijn: p < 0,51  
 Het 95% betrouwbaarheidsinterval is groot, tussen de 0,41 en de 8,78.   
 
 ## Rapportage

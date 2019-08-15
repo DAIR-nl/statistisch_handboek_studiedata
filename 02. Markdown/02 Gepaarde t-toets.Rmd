@@ -57,7 +57,7 @@ Evaluatie_score_wel_tutor_n30 <- sapply (Evaluatie_score_wel_tutor_n30, round, 3
 ```
 
 ## Gebruik
-Bij het toetsen van de hypothese of het gemiddelde van twee variabelen aan elkaar gelijk zijn kan de *t-toets* toegepast worden.  Wanneer de variabelen gepaard zijn, bijvoorbeeld door een herhaalde meting, wordt de *Gepaarde t-toets*  toegepast. [^1]. Ook wanneer gematchte personen uit twee verschillende groepen, die veel overeenkomsten vertonen met elkaar, gekoppeld worden, kan een *Gepaarde t-toets* toegepast worden.
+Bij het toetsen van de hypothese of het gemiddelde van twee variabelen aan elkaar gelijk zijn kan de *t-toets* toegepast worden.  Wanneer de variabelen gepaard zijn, bijvoorbeeld bij een herhaalde meting, wordt de *Gepaarde t-toets*  toegepast. [^1]. Ook wanneer gematchte personen uit twee verschillende groepen, die veel overeenkomsten vertonen met elkaar, gekoppeld worden, kan een *Gepaarde t-toets* toegepast worden.
 
 ## Voorbeeld uit het onderwijs
 De opleidingsdirecteur van de lerarenopleiding vraagt zich af of de studenten, nadat ze met hun tutor hebben gesproken, de lerarenopleiding een ander cijfer geven? Ze vraagt of de studenten een vragenlijst in wil vullen (T~0~) en nadat de studenten naar hun tutor geweest zijn (T~1~). 
@@ -67,8 +67,17 @@ H~0~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is niet ver
 H~A~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is veranderd na een gesprek met hun tutor, µ~T0~ ≠ µ~T1~. 
 
 ## Assumpties
-- normaal?
-- variabelen
+### 1. normaliteit
+De t-toets gaat er vanuit dat de data normaal verdeeld is, bij kleine steekproeven is dit vaker niet het geval. 
+
+Controleer de data met deze stappen:  
+1. Controleer visueel door het maken van een dataplot: een histogram of een boxplot.  
+2. Toets daarna of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef met de *Shapiro-Wilk test* [^2]. 
+
+Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, dus aan de assumptie niet wordt voldaan, dan kan de t-toets niet gebruikt worden.
+
+### 2. 
+
 - geen assumptie: naar effect size (eta square)
 ## Uitvoering in R
 Voor de uitvoering in R is er data ingeladen met evaluatie-scores van studenten die geen tutorgesprek hebben gehad en van studenten die wel een tutorgesprek hebben gehad. 

@@ -1,5 +1,5 @@
 ---
-title: "Gepaarde T-toets"
+title: "Gepaarde t-toets"
 author: "Irene van der Staaij & Megiel Kerkhoven"
 date: "1 Oktober 2019"
 output: 
@@ -57,8 +57,10 @@ Evaluatie_score_wel_tutor_n30 <- sapply (Evaluatie_score_wel_tutor_n30, round, 3
 ```
 
 ## Gebruik
+Wanneer gemiddelden meerdere malen gemeten wordt, bijvoorbeeld meten voor en na een interventie, en de andere variabelen blijven gelijk, wordt de *Gepaarde t-toets* gebruikt [^1]. 
 
 ## Voorbeeld uit het onderwijs
+Geven studenten in opleiding X nadat ze met hun tutor hebben gesproken hun opleiding een hoger cijfer?
 
 ## Assumpties
 
@@ -103,7 +105,6 @@ t.test(Evaluatie_score_wel_tutor, Evaluatie_score_geen_tutor, paired=TRUE)
 
 ## Rapportage
 
-## Verder lezen
-
-## Achtergrond info
+## Referenties
+[^1]: van Geloven, N. (2016, May 25). T-toets [Wiki Statistiek Academisch Medisch Centrum]. Retrieved from: https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets  
 

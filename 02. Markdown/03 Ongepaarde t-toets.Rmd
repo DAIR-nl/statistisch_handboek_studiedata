@@ -52,11 +52,24 @@ Cijfers_gem_2011_n30 <- sapply (Cijfers_gem_2011, round, 3)
 Bij het toetsen van de hypothese of het gemiddelde van twee variabelen aan elkaar gelijk zijn kan de *t-toets* toegepast worden. Wanneer het de gemiddelden van twee aparte groepen betreft, kan de *Ongepaarde t-toets* toegepast worden [^1].
 
 ## Voorbeeld uit het onderwijs
+Is het gemiddelde cijfer van de opleiding Statistiek op 1 februari gestegen na invoering van het BSA? De data is beschikbaar voor het cohort gestart in 2010 en voor het cohort gestart in 2011. Vanaf 2011 heeft de opleiding een Bindend Studieadvies (BSA) die de selectiviteit van het eerste jaar moet vergroten.
 
 ## Assumpties
+### Normaliteit
+De t-toets gaat er vanuit dat de data normaal verdeeld is, bij kleine steekproeven is dit vaker niet het geval. 
+
+Controleer de data met deze stappen:  
+1. Controleer visueel door het maken van een dataplot: een histogram of een boxplot.  
+2. Toets daarna of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef met de *Shapiro-Wilk test* [^2]. 
+
+Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, dus aan de assumptie niet wordt voldaan, dan kan de t-toets niet gebruikt worden.
+
+### homogeniteit van varianties 
+De *Ongepaarde t-toets* gaat er ook van uit dat van beide groepen dezelfde variantie (spreiding) heeft, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Wanneer de test significant is 
+
 
 ## Uitvoering in R
-Voor de uitvoering in R is er data ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Statistiek. De data is beschikbaar voor het cohort gestart in 2010 en voor het cohort gestart in 2011. Vanaf 2011 heeft de opleiding een Bindend Studieadvies (BSA) die de selectiviteit van het eerste jaar moet vergroten.
+Voor de uitvoering in R is er data ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Statistiek. 
 
 ### Normaliteit
 <div class="col2">

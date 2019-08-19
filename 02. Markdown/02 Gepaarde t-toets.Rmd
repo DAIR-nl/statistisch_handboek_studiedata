@@ -131,6 +131,7 @@ t.test(Evaluatie_score_wel_tutor, Evaluatie_score_geen_tutor, paired=TRUE)
 # Vrijheidsgraden: df = n~1~ + n~2~  - 2 = 247  
 #p-waarde < 0.05, dus de H0 wordt verworpen en de HA wordt aangenomen  
 #95-betrouwbaarheidsinterval: Bij herhaling van het onderzoek zal in 95% van de gevallen een interval uitkomen waarbij µ in valt. In dit geval loopt het interval tussen 0,27 en de 0,04.  
+# aantekening: verschil gemiddelde 
 
 ## Rapportage
 #Een *Gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde cijfer wat studenten geven voor de opleiding niet is veranderd na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ en het gemiddelde van T~1~ is significant *t*(247) = -2.7787, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het gemiddelde van de steekproef heeft een reikwijdte van 0,27 tot 0,04. De resultaten ondersteunen de conclusie dat de studenten na een gesprek met de tutor de opleiding anders beoordelen dan voordat ze een gesprek hebben gehad met de tutor. 

@@ -84,7 +84,7 @@ lillie.test (Gemiddeld_cijfer_wns)
 ```
 De *Kolmogorov-Smirnov test* is een non-parametrische toets, die het verschil in vorm tussen twee verdelingen toetst. In dit geval toetst deze test het verschil tussen de normaalverdeling en de verdeling van de steekproef. Wanneer de p-waarde kleiner is dan 0,05 is er een verschil tussen beide verdelingen. 
 
-In dit geval is *p* > 0,05, dus is de verdeling van de data niet significant verschillend van de normaalverdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de One sample-t-toets kan uitvoert worden.  
+In dit geval is *p* > 0,05, dus is de verdeling van de data niet significant verschillend van de normaalverdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *One sample t-toets* kan uitgevoerd worden.  
 
 ***
 
@@ -95,7 +95,7 @@ shapiro.test(Gemiddeld_cijfer_wns_n30)
 
 De *Shapiro-Wilk test* is een soort gelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Wanneer de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normaalverdeling.
 
-Voor de uitvoering in R is er een dummydataset genaamd Gemiddeld_cijfer_wns_n30 ingeladen met de gemiddelde cijfers van Wiskunde, Natuurkunde en Scheikunde van 30 middelbare scholieren. De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normaalverdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de One sample-t-toets kan uitvoerd worden.
+Voor de uitvoering in R is er een dummydataset genaamd Gemiddeld_cijfer_wns_n30 ingeladen met de gemiddelde cijfers van Wiskunde, Natuurkunde en Scheikunde van 30 middelbare scholieren. De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normaalverdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de One sample-t-toets kan uitgevoerd worden.
 
 ***
 

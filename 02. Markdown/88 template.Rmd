@@ -32,7 +32,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```
 
-### statistische toets in R
+### Statistische toets in R
 
 ```{r}
 

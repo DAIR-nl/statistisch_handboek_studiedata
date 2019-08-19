@@ -76,7 +76,7 @@ De histogram laat een belvorm zien vergelijkbaar aan een normaalverdeling, veel 
 Toets normaliteit met de *Kolmogorov-Smirnov test* of met de *Shapiro-Wilk test* (*n* < 50[^4] ). 
 
 ### {.tabset .tabset-fade .tabset.pills}
-#### Kolmogorov-Smirnov
+#### Kolmogorov-Smirnov (met Lilliefors correctie) 
 
 ```{r Kolmogorov-Smirnov Test, warning=FALSE}
 library(nortest)

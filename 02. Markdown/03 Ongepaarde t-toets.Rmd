@@ -49,6 +49,7 @@ Cijfers_gem_2011_n30 <- sapply (Cijfers_gem_2011, round, 3)
 ```
 
 ## Gebruik
+Bij het toetsen van de hypothese of het gemiddelde van twee variabelen aan elkaar gelijk zijn kan de *t-toets* toegepast worden. Wanneer het de gemiddelden van twee aparte groepen betreft, kan de *Ongepaarde t-toets* toegepast worden [^1].
 
 ## Voorbeeld uit het onderwijs
 
@@ -95,6 +96,5 @@ t.test(Cijfers_gem_2010, Cijfers_gem_2011)
 
 ## Rapportage
 
-## Verder lezen
-
-## Achtergrond info
+## Referenties
+[^1]: van Geloven, N. (2016, May 25). T-toets [Wiki Statistiek Academisch Medisch Centrum]. Retrieved from: https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets  

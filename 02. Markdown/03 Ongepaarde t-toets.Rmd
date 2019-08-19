@@ -65,8 +65,8 @@ Controleer de data met deze stappen:
 Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, dus aan de assumptie niet wordt voldaan, dan kan de t-toets niet gebruikt worden.
 
 ### homogeniteit van varianties 
-De *Ongepaarde t-toets* gaat er ook van uit dat van beide groepen dezelfde variantie (spreiding) heeft, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Wanneer de test significant is 
-
+De *Ongepaarde t-toets* gaat er ook van uit dat van beide groepen dezelfde variantie (spreiding) heeft, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Wanneer de test significant is de spreiding van de groepen verschillend en wordt de assumptie geschonden. 
+# variantie (not)equal
 
 ## Uitvoering in R
 Voor de uitvoering in R is er data ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Statistiek. 

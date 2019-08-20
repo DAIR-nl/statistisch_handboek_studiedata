@@ -1,0 +1,48 @@
+---
+title: "One-way ANOVA"
+author: "Irene van der Staaij & Megiel Kerkhoven"
+date: "Oktober 2019"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    theme: united
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r aanmaken data, include=FALSE, echo=TRUE}
+
+```
+
+## Gebruik
+De *One-way ANOVA* wordt gebruikt bij het toetsen of het gemiddelde van drie of meer groepen aan elkaar gelijk zijn. De te vergelijken groepen zijn ongepaard en daarmee onafhankelijk van elkaar.  
+
+## Voorbeeld uit het onderwijs
+
+## Assumpties
+
+## Uitvoering in R
+
+### Assumpties testen in R
+
+```{r}
+
+```
+
+### Statistische toets in R
+
+```{r}
+
+```
+
+## Toelichting op de output
+
+## Rapportage
+
+## Referenties
+
+## Achtergrond info

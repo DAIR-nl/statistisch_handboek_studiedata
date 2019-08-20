@@ -90,7 +90,7 @@ hist(Evaluatie_score_wel_tutor)
 ```
 </div>
 
-Beide histogrammen laten een belvorm zien vergelijkbaar aan een normaalverdeling, veel waardes liggen rondom het gemiddelde. Het histogram "wel een tutor" lijkt scheef verdeelt. Voer de *Kolmogorov-Smirnov test* of de *Shapiro-Wilk test* uit om te toetsen of de histogrammen normaal verdeeld zijn.  
+Beide histogrammen laten een belvorm zien vergelijkbaar aan een normaalverdeling, veel waardes liggen rondom het gemiddelde. Het histogram "wel een tutor" lijkt scheef verdeelt. Voer de *Kolmogorov-Smirnov test* of de *Shapiro-Wilk test* uit om te toetsen of de histogrammen normaalverdeeld zijn.  
 
 ### {.tabset .tabset-fade .tabset.pills}
 #### Kolmogorov-Smirnov (met Lilliefors correctie)

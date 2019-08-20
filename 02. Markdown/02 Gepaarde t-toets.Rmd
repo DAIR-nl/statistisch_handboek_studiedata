@@ -67,7 +67,7 @@ H~0~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is niet ver
 H~A~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is veranderd na een gesprek met hun tutor, µ~T0~ ≠ µ~T1~. 
 
 ## Assumpties: Normaliteit
-De t-toets gaat er vanuit dat de data normaal verdeeld is, bij kleine steekproeven is dit vaker niet het geval. 
+De t-toets gaat ervan uit dat de data normaal verdeeld is, bij kleine steekproeven is dit vaker niet het geval. 
 
 Controleer de data met deze stappen:  
 1. Controleer visueel door het maken van een dataplot: een histogram of een boxplot.  
@@ -90,7 +90,7 @@ hist(Evaluatie_score_wel_tutor)
 ```
 </div>
 
-Beide histogrammen laten een belvorm zien vergelijkbaar aan een normaalverdeling, veel waardes liggen rondom het gemiddelde. De historgam "wel een tutor" lijkt scheef verdeelt. Voer de *Kolmogorov-Smirnov test* of de *Shapiro-Wilk test* uit om te toetsen of de histogrammen normaal verdeeld zijn.  
+Beide histogrammen laten een belvorm zien vergelijkbaar aan een normaalverdeling, veel waardes liggen rondom het gemiddelde. Het histogram "wel een tutor" lijkt scheef verdeelt. Voer de *Kolmogorov-Smirnov test* of de *Shapiro-Wilk test* uit om te toetsen of de histogrammen normaal verdeeld zijn.  
 
 ### {.tabset .tabset-fade .tabset.pills}
 #### Kolmogorov-Smirnov (met Lilliefors correctie)

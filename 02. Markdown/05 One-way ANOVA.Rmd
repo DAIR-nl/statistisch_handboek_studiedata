@@ -22,8 +22,26 @@ knitr::opts_chunk$set(echo = TRUE)
 De *One-way ANOVA* wordt gebruikt bij het toetsen of het gemiddelde van drie of meer groepen aan elkaar gelijk zijn. De te vergelijken groepen zijn ongepaard en daarmee onafhankelijk van elkaar.  
 
 ## Voorbeeld uit het onderwijs
+Of het cijfer van de 4 profielen gelijk zijn aan elkaar (sowieso scheefverdeeld, dus slecht voorbeeld?)
+verschil van IQ van studenten tussen Beta opleidingen  
+
 
 ## Assumpties
+1. Normaal Verdeeld – De afhankelijke variabele moet voor iedere groep normaal verdeeld moeten zijn, zie Normaliteit.
+
+2. Niveau van de variabelen - De onafhankelijke variabelen zijn op categorisch niveau en de afhankelijke variabelen zijn continu of op interval niveau.
+
+3. Homogeniteit van Varianties - De variantie van de afhankelijke variabele moet voor iedere groep ruwweg hetzelfde zijn.
+
+4. Onafhankelijkheid - De scores zijn onafhankelijk, zie Onafhankelijkheid.
+
+Wanneer er niet wordt voldaan aan de aanname van normaliteit kan de One-way ANOVA nog steeds worden uitgevoerd omdat de F-test robuust is.
+
+Anders kan de non-parametrische variant worden uitgevoerd: de Kruskal-Wallis test. 
+
+https://wiki.uva.nl/methodologiewinkel/index.php/One-way_ANOVA Deze pagina is het laatst bewerkt op 8 jul 2014 om 13:41.
+
+Met bijvoorbeeld 'Levene's Test for equality of variance' kun je testen of de variantie in de groepen gelijk verondersteld kan worden. Indien niet aan deze voorwaarden voldaan is, kan een niet parametrische Kruskal Wallis analyse overwogen worden.https://wikistatistiek.amc.nl/index.php/One-way_ANOVA
 
 ## Uitvoering in R
 
@@ -45,4 +63,3 @@ De *One-way ANOVA* wordt gebruikt bij het toetsen of het gemiddelde van drie of 
 
 ## Referenties
 
-## Achtergrond info

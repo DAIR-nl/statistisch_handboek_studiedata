@@ -56,7 +56,7 @@ Is het gemiddelde cijfer van de opleiding Statistiek op 1 februari gestegen na i
 
 ## Assumpties
 ### Normaliteit
-De t-toets gaat er vanuit dat de data normaal verdeeld is, bij kleine steekproeven is dit vaker niet het geval. 
+De t-toets gaat ervan uit dat de data normaal verdeeld is, bij kleine steekproeven is dit vaker niet het geval. 
 
 Controleer de data met deze stappen:  
 1. Controleer visueel door het maken van een dataplot: een histogram of een boxplot.  

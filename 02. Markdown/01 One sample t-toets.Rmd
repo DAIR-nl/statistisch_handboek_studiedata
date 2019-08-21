@@ -38,25 +38,23 @@ Gemiddeld_cijfer_wns_n30 <- sample(Gemiddeld_cijfer_wns, 30)
 
 ## Gebruik
 
-De *One sample t-toets* kan gebruikt worden om aan de hand van één steekproef het gemiddelde van de totale populatie te vergelijken met een vooraf opgestelde hypothese [^1]. 
+De *one sample t-toets* kan gebruikt worden om aan de hand van één steekproef het gemiddelde van de totale populatie te vergelijken met een vooraf opgestelde hypothese [^1]. 
 
 ## Voorbeeld uit het onderwijs
 De opleidingsdirecteur van de opleiding Werktuigbouwkunde wil weten of het gemiddelde eindexamencijfer voor de exacte vakken, wiskunde, scheikunde en natuurkunde, van haar VWO studenten hoger is dan het landelijke gemiddelde, zodat zij kan bepalen of het curriculum van de inleidende vakken genoeg aansluiten bij de eerstejaars studenten. 
 
-H~0~: Het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die beginnen aan de Bachelor Werktuigbouwkunde is lager dan of gelijk aan het landelijk gemiddelde, µ >= 6,8. 
+H~0~: Het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die beginnen aan de Bachelor Werktuigbouwkunde is lager dan of gelijk aan het landelijk gemiddelde, µ ≤ 6,8. 
 
-H~A~: Het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die beginnen aan de Bachelor Werktuigbouwkunde is hoger dan het landelijk gemiddelde, µ < 6,8. 
+H~A~: Het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die beginnen aan de Bachelor Werktuigbouwkunde is hoger dan het landelijk gemiddelde, µ > 6,8. 
 
 
 
 ## Assumpties: Normaliteit 
-De t-toets gaat er vanuit dat de data normaal verdeeld is, bij kleine steekproeven is dit vaker niet het geval. 
-
-Controleer de data met deze stappen:  
+De t-toets gaat er vanuit dat de data normaal verdeeld is. Controleer deze assumptie met de volgende stappen:  
 1. Controleer visueel door het maken van een dataplot: een histogram of een boxplot.  
 2. Toets daarna of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef met de *Shapiro-Wilk test* [^2]. 
 
-Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, dus aan de assumptie niet wordt voldaan, dan kan de t-toets niet gebruikt worden. Gebruik in dat geval de *Wilcoxon Signed Rank Test* [^3].
+Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is dan kan de t-toets niet gebruikt worden. Gebruik in dat geval de *Wilcoxon Signed Rank Test* [^3].
 
 ## Uitvoering in R
 Voor de uitvoering in R is er een dummydataset genaamd Gemiddeld_cijfer_wns ingeladen met de gemiddelde cijfers van Wiskunde, Natuurkunde en Scheikunde van 122 middelbare scholieren.
@@ -69,7 +67,7 @@ sd(Gemiddeld_cijfer_wns)
 hist(Gemiddeld_cijfer_wns)
 ```
 
-De histogram laat een belvorm zien vergelijkbaar aan een normaalverdeling, veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
+De histogram laat een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
 
 ***
 
@@ -82,9 +80,9 @@ Toets normaliteit met de *Kolmogorov-Smirnov test* of met de *Shapiro-Wilk test*
 library(nortest)
 lillie.test (Gemiddeld_cijfer_wns)
 ```
-De *Kolmogorov-Smirnov test* is een non-parametrische toets, die het verschil in vorm tussen twee verdelingen toetst. In dit geval toetst deze test het verschil tussen de normaalverdeling en de verdeling van de steekproef. Wanneer de p-waarde kleiner is dan 0,05 is er een verschil tussen beide verdelingen. 
+De *Kolmogorov-Smirnov test* is een non-parametrische toets, die het verschil in vorm tussen twee verdelingen toetst. In dit geval toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. Wanneer de p-waarde kleiner is dan 0,05 is er een verschil tussen beide verdelingen. 
 
-In dit geval is *p* > 0,05, dus is de verdeling van de data niet significant verschillend van de normaalverdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *One sample t-toets* kan uitgevoerd worden.  
+In dit geval is *p* > 0,05, dus is de verdeling van de data niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *One sample t-toets* kan uitgevoerd worden.  
 
 ***
 
@@ -93,9 +91,9 @@ In dit geval is *p* > 0,05, dus is de verdeling van de data niet significant ver
 shapiro.test(Gemiddeld_cijfer_wns_n30)
 ```
 
-De *Shapiro-Wilk test* is een soort gelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Wanneer de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normaalverdeling.
+De *Shapiro-Wilk test* is een soort gelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Wanneer de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.
 
-Voor de uitvoering in R is er een dummydataset genaamd Gemiddeld_cijfer_wns_n30 ingeladen met de gemiddelde cijfers van Wiskunde, Natuurkunde en Scheikunde van 30 middelbare scholieren. De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normaalverdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de One sample-t-toets kan uitgevoerd worden.
+Voor de uitvoering in R is er een dummydataset genaamd Gemiddeld_cijfer_wns_n30 ingeladen met de gemiddelde cijfers van Wiskunde, Natuurkunde en Scheikunde van 30 middelbare scholieren. De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de One sample-t-toets kan uitgevoerd worden.
 
 ***
 
@@ -107,11 +105,11 @@ t.test(Gemiddeld_cijfer_wns, mu = 6.8, alternative="greater")
 Het gemiddelde van de steekproef is 7,08  
 Degrees of freedom, *df* = *n* -1 = 122-1 = 121  
 p-waarde < 0.05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen  
-95-betrouwbaarheidsinterval: Bij herhaling van het onderzoek zal in 95% van de gevallen een interval uitkomen waarbij µ in valt. In dit geval loopt het interval tussen 6,93 en de 7,23. 
+95%-betrouwbaarheidsinterval: Bij herhaling van het onderzoek zal in 95% van de gevallen een interval uitkomen waarbij µ in valt. In dit geval loopt het interval tussen 6,93 en de 7,23. 
 
 
 ## Rapportage
-Een *One sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die later Werktuigbouwkunde zijn gaan studeren, hoger is dan het landelijke gemiddelde. Het gemiddelde van de steekproef van 7,08 (*sd* = 0,8) was significant anders dan het landelijk gemiddelde van een 6,8, *t*(121) = 3,76, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het gemiddelde van de steekproef heeft een reikwijdte van 6,93 tot 7,23. De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer hoger ligt voor de VWO studenten die later Werktuigbouwkunde zijn gaan studeren, dan het landelijk gemiddelde. 
+Een *One sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die later Werktuigbouwkunde zijn gaan studeren, hoger is dan het landelijke gemiddelde. Het gemiddelde van de steekproef van 7,08 (*sd* = 0,8) was significant hoger dan het landelijk gemiddelde van een 6,8, *t*(121) = 3,76, *p* < 0,01. Het 95%-betrouwbaarheidsinterval voor het gemiddelde van de steekproef heeft een reikwijdte van 6,93 tot 7,23. De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer hoger ligt voor de VWO studenten die later Werktuigbouwkunde zijn gaan studeren, dan het landelijk gemiddelde. 
 
 
 ## Referenties

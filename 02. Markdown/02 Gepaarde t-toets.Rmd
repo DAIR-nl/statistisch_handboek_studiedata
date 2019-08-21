@@ -57,26 +57,24 @@ Evaluatie_score_wel_tutor_n30 <- sapply (Evaluatie_score_wel_tutor_n30, round, 3
 ```
 
 ## Gebruik
-Bij het toetsen van de hypothese of het gemiddelde van twee variabelen aan elkaar gelijk zijn kan de *t-toets* toegepast worden.  Wanneer de variabelen gepaard zijn, bijvoorbeeld bij een herhaalde meting, wordt de *Gepaarde t-toets*  toegepast. [^1]. Ook wanneer gematchte personen uit twee verschillende groepen, die veel overeenkomsten vertonen met elkaar, gekoppeld worden, kan een *Gepaarde t-toets* toegepast worden.
+Bij het toetsen van de hypothese of het gemiddelde van twee variabelen aan elkaar gelijk zijn kan de *t-toets* toegepast worden.  Wanneer de variabelen gepaard zijn, bijvoorbeeld bij een herhaalde meting, wordt de *gepaarde t-toets*  toegepast. [^1]. Ook wanneer gematchte personen uit twee verschillende groepen, die veel overeenkomsten vertonen met elkaar, gekoppeld worden, kan een *gepaarde t-toets* toegepast worden.
 
 ## Voorbeeld uit het onderwijs
-De opleidingsdirecteur van de lerarenopleiding vraagt zich af of de studenten, nadat ze met hun tutor hebben gesproken, de lerarenopleiding een ander cijfer geven? Ze vraagt of de studenten een vragenlijst in wil vullen (T~0~) en nadat de studenten naar hun tutor geweest zijn (T~1~). 
+De opleidingsdirecteur van de lerarenopleiding vraagt zich af of de studenten, nadat ze met hun tutor hebben gesproken, de lerarenopleiding een ander cijfer geven. Ze vraagt of de studenten een vragenlijst in willeb vullen (T~0~) en nog een keer nadat de studenten naar hun tutor geweest zijn (T~1~). 
 
 H~0~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is niet veranderd na een gesprek met hun tutor, µ~T0~ = µ~T1~. 
 
 H~A~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is veranderd na een gesprek met hun tutor, µ~T0~ ≠ µ~T1~. 
 
 ## Assumpties: Normaliteit
-De t-toets gaat ervan uit dat de data normaal verdeeld is, bij kleine steekproeven is dit vaker niet het geval. 
-
-Controleer de data met deze stappen:  
-1. Controleer visueel door het maken van een dataplot: een histogram of een boxplot.  
+De t-toets gaat ervan uit dat de data normaal verdeeld is.  
+1. Controleer visueel of de data normaalverdeel is door het maken van een dataplot: een histogram of een boxplot.  
 2. Toets daarna of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef met de *Shapiro-Wilk test* [^2]. 
 
-Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, dus aan de assumptie niet wordt voldaan, dan kan de t-toets niet gebruikt worden.
+Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, kan de *t-toets* niet gebruikt worden.
 
-## Effect size
-Om te bepalen of de gevonden p-waarde betekenisvol is kan een effectmaat berekend worden. Cohen's d berekent de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele. Een indicatie om d te interpreteren is: d <= 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.  
+## Effectmaat
+Om te bepalen of de gevonden p-waarde betekenisvol is kan een effectmaat berekend worden. Cohen's d berekent de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele. Een indicatie om d te interpreteren is: d ≤ 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.  
 
 ## Uitvoering in R
 Voor de uitvoering in R is er data ingeladen met evaluatie-scores van studenten die geen tutorgesprek hebben gehad en van studenten die wel een tutorgesprek hebben gehad. 
@@ -90,7 +88,7 @@ hist(Evaluatie_score_wel_tutor)
 ```
 </div>
 
-Beide histogrammen laten een belvorm zien vergelijkbaar aan een normaalverdeling, veel waardes liggen rondom het gemiddelde. Het histogram "wel een tutor" lijkt scheef verdeelt. Voer de *Kolmogorov-Smirnov test* of de *Shapiro-Wilk test* uit om te toetsen of de histogrammen normaalverdeeld zijn.  
+Beide histogrammen laten een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Het histogram "wel een tutor" lijkt iets scheef verdeeld. Voer de *Kolmogorov-Smirnov test* of de *Shapiro-Wilk test* uit om te toetsen of de histogrammen normaal verdeeld zijn.  
 
 ### {.tabset .tabset-fade .tabset.pills}
 #### Kolmogorov-Smirnov (met Lilliefors correctie)
@@ -104,7 +102,7 @@ lillie.test(Evaluatie_score_wel_tutor)
 ````
 </div>
 
-De *Kolmogorov-Smirnov* test is een non-parametrische toets, die het verschil in vorm tussen twee verdelingen toetst. In dit geval toetst deze test het verschil tussen de normaalverdeling en de verdeling van de steekproef. Wanneer de p-waarde kleiner is dan 0,05 is er een verschil tussen beide verdelingen.  
+De *Kolmogorov-Smirnov* test is een non-parametrische toets, die het verschil in vorm tussen twee verdelingen toetst. Wanneer de p-waarde kleiner is dan 0,05 is er een verschil tussen beide verdelingen.  
 
 In dit geval zijn van beide groepen de p-waarde > 0,05, dus is de verdeling van de data niet significant verschillend van de normaalverdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *Gepaarde t-toets* kan uitgevoerd worden.  
 den.
@@ -117,9 +115,9 @@ shapiro.test(Evaluatie_score_wel_tutor_n30)
 ```
 </div>
 
-De *Shapiro-Wilk test* is een soort gelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Ook bij deze toets geldt dat wanneer de p-waarde groter is dan 0,05 de verdeling van de data niet significant verschillend is van de normaalverdeling.  
+De *Shapiro-Wilk test* wordt vooral gebruikt bij kleine steekproeven, maar kan ook bij grotere streekproeven. Ook bij deze toets geldt dat wanneer de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.  
 
-In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, dus is de verdeling van beide groepen niet significant verschillend van de normaalverdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *Gepaarde t-toets* kan uitgevoerd worden.  
+In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, dus is de verdeling van beide groepen niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *gepaarde t-toets* kan uitgevoerd worden.  
 
 
 ### Statistische toets in R
@@ -127,16 +125,18 @@ In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, 
 ```{r statistische toets}
 t.test(Evaluatie_score_wel_tutor, Evaluatie_score_geen_tutor, paired=TRUE)
 ```
+t (247) = -2.7787, p < 0.01  
+Vrijheidsgraden: df = *n*- 1 = 247  
+p-waarde < 0.05, dus de H~A~ wordt aangenomen  
+95%-betrouwbaarheidsinterval: bij herhaling van het onderzoek zal in 95% van de gevallen een interval uitkomen waarbij µ in valt. In dit geval loopt het interval tussen -0,27 en de -0,04.  
+
 ```{r opmerking}
-#t (247) = -2.7787, p < 0.01  
-# Vrijheidsgraden: df = *n*- 1 = 247  
-#p-waarde < 0.05, dus de H0 wordt verworpen en de HA wordt aangenomen  
-#95-betrouwbaarheidsinterval: Bij herhaling van het onderzoek zal in 95% van de gevallen een interval uitkomen waarbij µ in valt. In dit geval loopt het interval tussen 0,27 en de 0,04.  
 # aantekening: verschil gemiddelde 
 
-## Rapportage
-#Een *Gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde cijfer wat studenten geven voor de opleiding niet is veranderd na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ en het gemiddelde van T~1~ is significant *t*(247) = -2.7787, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het gemiddelde van de steekproef heeft een reikwijdte van 0,27 tot 0,04. De resultaten ondersteunen de conclusie dat de studenten na een gesprek met de tutor de opleiding anders beoordelen dan voordat ze een gesprek hebben gehad met de tutor. 
 ```
+## Rapportage
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde cijfer wat studenten geven voor de opleiding niet is veranderd na een gesprek met een tutor. Het verschil tussen het gemiddelde van T~0~ en het gemiddelde van T~1~ is significant *t*(247) = -2.7787, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het gemiddelde van de steekproef heeft een reikwijdte van -0,27 tot -0,04. De resultaten ondersteunen de conclusie dat de studenten na een gesprek met de tutor de opleiding anders beoordelen dan voordat ze een gesprek hebben gehad met de tutor. 
+
 
 ## Referenties
 [^1]: van Geloven, N. (2016, May 25). T-toets [Wiki Statistiek Academisch Medisch Centrum]. Retrieved from: https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets  

@@ -127,6 +127,7 @@ In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, 
 ```{r statistische toets}
 t.test(Evaluatie_score_wel_tutor, Evaluatie_score_geen_tutor, paired=TRUE)
 ```
+```{r opmerking}
 #t (247) = -2.7787, p < 0.01  
 # Vrijheidsgraden: df = *n*- 1 = 247  
 #p-waarde < 0.05, dus de H0 wordt verworpen en de HA wordt aangenomen  
@@ -135,6 +136,7 @@ t.test(Evaluatie_score_wel_tutor, Evaluatie_score_geen_tutor, paired=TRUE)
 
 ## Rapportage
 #Een *Gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde cijfer wat studenten geven voor de opleiding niet is veranderd na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ en het gemiddelde van T~1~ is significant *t*(247) = -2.7787, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het gemiddelde van de steekproef heeft een reikwijdte van 0,27 tot 0,04. De resultaten ondersteunen de conclusie dat de studenten na een gesprek met de tutor de opleiding anders beoordelen dan voordat ze een gesprek hebben gehad met de tutor. 
+```
 
 ## Referenties
 [^1]: van Geloven, N. (2016, May 25). T-toets [Wiki Statistiek Academisch Medisch Centrum]. Retrieved from: https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets  

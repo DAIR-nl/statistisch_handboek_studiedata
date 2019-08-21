@@ -128,7 +128,7 @@ In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, 
 t.test(Evaluatie_score_wel_tutor, Evaluatie_score_geen_tutor, paired=TRUE)
 ```
 #t (247) = -2.7787, p < 0.01  
-# Vrijheidsgraden: df = n~1~ + n~2~  - 2 = 247  
+# Vrijheidsgraden: df = *n*- 1 = 247  
 #p-waarde < 0.05, dus de H0 wordt verworpen en de HA wordt aangenomen  
 #95-betrouwbaarheidsinterval: Bij herhaling van het onderzoek zal in 95% van de gevallen een interval uitkomen waarbij µ in valt. In dit geval loopt het interval tussen 0,27 en de 0,04.  
 # aantekening: verschil gemiddelde 

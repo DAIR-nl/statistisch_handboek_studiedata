@@ -107,6 +107,8 @@ t.test(Cijfers_gem_2010, Cijfers_gem_2011)
 
 ## Toelichting op de output
 
+# Vrijheidsgraden: df = n~1~ + n~2~ 2
+
 ## Rapportage
 
 ## Referenties

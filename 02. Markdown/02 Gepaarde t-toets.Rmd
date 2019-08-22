@@ -57,20 +57,18 @@ Evaluatie_score_wel_tutor_n30 <- sapply (Evaluatie_score_wel_tutor_n30, round, 3
 ```
 
 ## Gebruik
-Bij het toetsen van de hypothese of het gemiddelde van twee variabelen aan elkaar gelijk zijn kan de *t-toets* toegepast worden.  Wanneer de variabelen gepaard zijn, bijvoorbeeld bij een herhaalde meting, wordt de *gepaarde t-toets*  toegepast. [^1]. Ook wanneer gematchte personen uit twee verschillende groepen, die veel overeenkomsten vertonen met elkaar, gekoppeld worden, kan een *gepaarde t-toets* toegepast worden.
+Bij het toetsen van de hypothese of het gemiddelde van twee groepen aan elkaar gelijk zijn kan de *t-toets* toegepast worden.  Wanneer de groepen gepaard zijn, bijvoorbeeld bij een herhaalde meting, wordt de *gepaarde t-toets* toegepast [^1]. Ook wanneer gematchte personen uit twee verschillende groepen, die veel overeenkomsten vertonen met elkaar, gekoppeld worden, kan een *gepaarde t-toets* toegepast worden.
 
 ## Voorbeeld uit het onderwijs
-De opleidingsdirecteur van de lerarenopleiding vraagt zich af of de studenten, nadat ze met hun tutor hebben gesproken, de lerarenopleiding een ander cijfer geven. Ze vraagt of de studenten een vragenlijst in willeb vullen (T~0~) en nog een keer nadat de studenten naar hun tutor geweest zijn (T~1~). 
+De opleidingsdirecteur van de lerarenopleiding vraagt zich af of de studenten, nadat ze met hun tutor hebben gesproken, de lerarenopleiding een ander cijfer geven. Ze vraagt of de studenten twee keer een vragenlijst in willen vullen, één keer voordat ze met hun tutor hebben gesproken T~0~ en nog een keer nadat ze met hun tutor hebben gesproken (T~1~). 
 
-H~0~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is niet veranderd na een gesprek met hun tutor, µ~T0~ = µ~T1~. 
-
+H~0~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is niet veranderd na een gesprek met hun tutor, µ~T0~ = µ~T1~.  
 H~A~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is veranderd na een gesprek met hun tutor, µ~T0~ ≠ µ~T1~. 
 
 ## Assumpties: Normaliteit
 De t-toets gaat ervan uit dat de data normaal verdeeld is.  
 1. Controleer visueel of de data normaalverdeel is door het maken van een dataplot: een histogram of een boxplot.  
-2. Toets daarna of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef met de *Shapiro-Wilk test* [^2]. 
-
+2. Toets daarna of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef met de *Shapiro-Wilk test* [^2].  
 Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, kan de *t-toets* niet gebruikt worden.
 
 ## Effectmaat
@@ -88,7 +86,7 @@ hist(Evaluatie_score_wel_tutor)
 ```
 </div>
 
-Beide histogrammen laten een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Het histogram "wel een tutor" lijkt iets scheef verdeeld. Voer de *Kolmogorov-Smirnov test* of de *Shapiro-Wilk test* uit om te toetsen of de histogrammen normaal verdeeld zijn.  
+Beide histogrammen laten een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Het histogram "wel een tutor" lijkt licht scheef verdeeld. Voer de *Kolmogorov-Smirnov test* of de *Shapiro-Wilk test* uit om te toetsen of de histogrammen normaal verdeeld zijn.  
 
 ### {.tabset .tabset-fade .tabset.pills}
 #### Kolmogorov-Smirnov (met Lilliefors correctie)
@@ -104,7 +102,7 @@ lillie.test(Evaluatie_score_wel_tutor)
 
 De *Kolmogorov-Smirnov* test is een non-parametrische toets, die het verschil in vorm tussen twee verdelingen toetst. Wanneer de p-waarde kleiner is dan 0,05 is er een verschil tussen beide verdelingen.  
 
-In dit geval zijn van beide groepen de p-waarde > 0,05, dus is de verdeling van de data niet significant verschillend van de normaalverdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *Gepaarde t-toets* kan uitgevoerd worden.  
+In dit geval zijn van beide groepen de p-waarde > 0,05, dus is de verdeling van de data niet significant verschillend van de normaalverdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *gepaarde t-toets* kan uitgevoerd worden.  
 den.
 
 #### Shapiro-Wilk Test
@@ -115,7 +113,7 @@ shapiro.test(Evaluatie_score_wel_tutor_n30)
 ```
 </div>
 
-De *Shapiro-Wilk test* wordt vooral gebruikt bij kleine steekproeven, maar kan ook bij grotere streekproeven. Ook bij deze toets geldt dat wanneer de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.  
+De *Shapiro-Wilk test* wordt vooral gebruikt bij kleine steekproeven. Ook bij deze toets geldt dat wanneer de p-waarde > 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.  
 
 In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, dus is de verdeling van beide groepen niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *gepaarde t-toets* kan uitgevoerd worden.  
 
@@ -135,11 +133,10 @@ p-waarde < 0.05, dus de H~A~ wordt aangenomen
 
 ```
 ## Rapportage
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde cijfer wat studenten geven voor de opleiding niet is veranderd na een gesprek met een tutor. Het verschil tussen het gemiddelde van T~0~ en het gemiddelde van T~1~ is significant *t*(247) = -2.7787, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het gemiddelde van de steekproef heeft een reikwijdte van -0,27 tot -0,04. De resultaten ondersteunen de conclusie dat de studenten na een gesprek met de tutor de opleiding anders beoordelen dan voordat ze een gesprek hebben gehad met de tutor. 
-
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde cijfer wat studenten geven voor de opleiding gelijk is gebleven na een gesprek met een tutor. Het verschil tussen het gemiddelde van T~0~ en het gemiddelde van T~1~ is significant *t*(247) = -2.7787, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het gemiddelde van de steekproef heeft een reikwijdte van -0,27 tot -0,04. De resultaten ondersteunen de conclusie dat de studenten na een gesprek met de tutor de opleiding anders beoordelen dan voordat ze een gesprek hebben gehad met de tutor. 
 
 ## Referenties
 [^1]: van Geloven, N. (2016, May 25). T-toets [Wiki Statistiek Academisch Medisch Centrum]. Retrieved from: https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets  
 [^2]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. Retrieved from: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
-[^3]: The Statistics Tutor’s  Quick Guide to Commonly Used Statistical Tests  - Ellen Marshall, University of Sheffield 
+[^3]: E Marshall, E Boggis - Statstutor Community Project, 2016 - statstutor.ac.uk The Statistics Tutor’s  Quick Guide to Commonly Used Statistical Tests  - Ellen Marshall, University of Sheffield 
 

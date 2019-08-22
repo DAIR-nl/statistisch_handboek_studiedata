@@ -66,14 +66,7 @@ Evaluatie_score_wel_tutor_n30 <- sapply (Evaluatie_score_wel_tutor_n30, round, 3
 Evaluatie_score_wel_tutor_n30 <- sort(Evaluatie_score_geen_tutor_n30)
 Evaluatie_score_wel_tutor_n30 <- Evaluatie_score_wel_tutor_n30[volgorde_n30]
 ```
-<div class="col2">
-```{r test}
-Evaluatie_score_geen_tutor
-Evaluatie_score_geen_tutor_n30
-Evaluatie_score_wel_tutor
-Evaluatie_score_wel_tutor_n30
-```
-</div>
+
 ## Gebruik
 Bij het toetsen van de hypothese of het gemiddelde van twee groepen aan elkaar gelijk zijn kan de *t-toets* toegepast worden.  Wanneer de groepen gepaard zijn, bijvoorbeeld bij een herhaalde meting, wordt de *gepaarde t-toets* toegepast [^1]. Ook wanneer gematchte personen uit twee verschillende groepen, die veel overeenkomsten vertonen met elkaar, gekoppeld worden, kan een *gepaarde t-toets* toegepast worden.
 
@@ -94,7 +87,6 @@ Om te bepalen of de gevonden p-waarde betekenisvol is kan een effectmaat bereken
 
 ## Uitvoering in R
 Voor de uitvoering in R is er data ingeladen met evaluatie-scores van studenten die geen tutorgesprek hebben gehad en van studenten die wel een tutorgesprek hebben gehad. 
-
 
 ### Test assumpties: Normaliteit
 <div class="col2">

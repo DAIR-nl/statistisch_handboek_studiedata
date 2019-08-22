@@ -79,22 +79,24 @@ Voor de uitvoering in R is er data (`Cijfers_gem`) ingeladen met gemiddelde cijf
 
 ### De data bekijken
 ```{r}
-Cijfers_gem[175:185,]
+Cijfers_gem[sample(1:340, 10),]
 ```
-De data is verdeeld in 2 kolommen, het cijfer en het startjaar. De eerste 180 observaties komen uit 2010.
+De data is verdeeld in 2 kolommen, het cijfer en het startjaar.
 
 ### data beschrijven en normaliteit
+selecteer beide groepen om het gemiddelde, de standaarddeviatie en het histogram uit te draaien.
+```{r data selecteren}
+Cijfers_2010 <- Cijfers_gem[Cijfers_gem$Startjaar==2010,]
+Cijfers_2011 <- Cijfers_gem[Cijfers_gem$Startjaar==2011,]
+```
 <div class="col2">
 ```{r Assumptietest, collapse=TRUE}
-Cijfers_2010 <- (Cijfers_gem[1:180, 1])
-mean(Cijfers_2010)
-sd(Cijfers_2010)
-hist(Cijfers_2010)
-Cijfers_2011 <- (Cijfers_gem[181:340, 1])
-mean(Cijfers_2011)
-sd(Cijfers_2011)
-hist(Cijfers_2011)
-
+mean(Cijfers_2010$Cijfers)
+sd(Cijfers_2010$Cijfers)
+hist(Cijfers_2010$Cijfers)
+mean(Cijfers_2011$Cijfers)
+sd(Cijfers_2011$Cijfers)
+hist(Cijfers_2011$Cijfers)
 ```
 </div>
 gemiddelde 2010 met standaarddeviate: 6,37 (1,12)  
@@ -112,8 +114,8 @@ library(nortest)
 ```
 <div class="col2">
 ``` {r Lilliefors Test, warning=FALSE}
-lillie.test(Cijfers_2010)
-lillie.test(Cijfers_2011)
+lillie.test(Cijfers_2010$Cijfers)
+lillie.test(Cijfers_2011$Cijfers)
 ```
 </div>
 
@@ -131,6 +133,7 @@ shapiro.test(Cijfers_2010_n30)
 In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, dus is de verdeling van beide groepen niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *ongepaarde t-toets* kan uitgevoerd worden.
 
 ### Levene's test
+De `leveneTest()` heeft in R 2 argumenten. Het eerste argument is een vector met de data van beide groepen. Het tweede argument is een factor waarin de groepen worden gedefinieerd of een vector die logisch om te zetten is naar een factor. `Cijfers_gem$Startjaar` is een vector met twee waardes (2010 en 2011). Dit kan R makkelijk omzetten naar een factor bestaande uit de waardes 2010 en 2011.
 ```{r Levenes test, message=FALSE, warning=FALSE, collapse=TRUE}
 library(car)
 leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Startjaar)

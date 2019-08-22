@@ -26,6 +26,11 @@ De *one-way ANOVA* wordt gebruikt bij het toetsen of het gemiddelde van drie of 
 ```{r opmerking}
 # Of het cijfer van de 4 profielen gelijk zijn aan elkaar (sowieso scheefverdeeld, dus slecht voorbeeld?)
 # verschil van IQ van studenten tussen Beta opleidingen  
+
+#H~0~ het gemiddelde van alle groepen zijn gelijk aan elkaar H~A~ tenminste van één groep is het gemiddelde niet gelijk aan het gemiddelde van de anderen groepen. 
+
+#posthoc Tukey 
+
 ```
 
 ## Assumpties

@@ -112,8 +112,8 @@ library(nortest)
 ```
 <div class="col2">
 ``` {r Lilliefors Test, warning=FALSE}
-lillie.test(Cijfers_2011)
 lillie.test(Cijfers_2010)
+lillie.test(Cijfers_2011)
 ```
 </div>
 

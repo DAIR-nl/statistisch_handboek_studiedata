@@ -22,6 +22,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 set.seed(2)
+volgorde <- sample(1:246, 246)
+volgorde_n30 <- sample(1:30, 30)
 
 mu <- 3.6
 sigma <- 0.6
@@ -30,14 +32,19 @@ Evaluatie_score_geen_tutor <- rnorm(250, mu, sigma)
 Evaluatie_score_geen_tutor <- Evaluatie_score_geen_tutor[Evaluatie_score_geen_tutor <= 5 
                                                          & Evaluatie_score_geen_tutor >= 1]
 Evaluatie_score_geen_tutor <- sapply (Evaluatie_score_geen_tutor, round, 3)
+Evaluatie_score_geen_tutor <- sort(Evaluatie_score_geen_tutor)
+Evaluatie_score_geen_tutor <- Evaluatie_score_geen_tutor[volgorde]
 
 mu <- 3.4
-sigma <- 0.7
-Evaluatie_score_wel_tutor <- rnorm(250, mu, sigma)
+sigma <- 0.9
+Evaluatie_score_wel_tutor <- rnorm(300, mu, sigma)
 
 Evaluatie_score_wel_tutor <- Evaluatie_score_wel_tutor[Evaluatie_score_wel_tutor <= 5 
                                                        & Evaluatie_score_wel_tutor >= 1]
 Evaluatie_score_wel_tutor <- sapply (Evaluatie_score_wel_tutor, round, 3)
+Evaluatie_score_wel_tutor <- sort(Evaluatie_score_wel_tutor)
+Evaluatie_score_wel_tutor <- Evaluatie_score_wel_tutor[sample(-283:-1, 41)]
+Evaluatie_score_wel_tutor <- Evaluatie_score_wel_tutor[volgorde]
 
 mu <- 3.6
 sigma <- 0.6
@@ -46,6 +53,8 @@ Evaluatie_score_geen_tutor_n30 <- rnorm(30, mu, sigma)
 Evaluatie_score_geen_tutor_n30 <- Evaluatie_score_geen_tutor_n30[Evaluatie_score_geen_tutor_n30 <= 5 
                                                                  & Evaluatie_score_geen_tutor_n30 >= 1]
 Evaluatie_score_geen_tutor_n30 <- sapply (Evaluatie_score_geen_tutor_n30, round, 3)
+Evaluatie_score_geen_tutor_n30 <- sort(Evaluatie_score_geen_tutor_n30)
+Evaluatie_score_geen_tutor_n30 <- Evaluatie_score_geen_tutor_n30[volgorde_n30]
 
 mu <- 3.4
 sigma <- 0.7
@@ -54,8 +63,17 @@ Evaluatie_score_wel_tutor_n30 <- rnorm(30, mu, sigma)
 Evaluatie_score_wel_tutor_n30 <- Evaluatie_score_wel_tutor_n30[Evaluatie_score_wel_tutor_n30 <= 5 
                                                                & Evaluatie_score_wel_tutor_n30 >= 1]
 Evaluatie_score_wel_tutor_n30 <- sapply (Evaluatie_score_wel_tutor_n30, round, 3)
+Evaluatie_score_wel_tutor_n30 <- sort(Evaluatie_score_geen_tutor_n30)
+Evaluatie_score_wel_tutor_n30 <- Evaluatie_score_wel_tutor_n30[volgorde_n30]
 ```
-
+<div class="col2">
+```{r test}
+Evaluatie_score_geen_tutor
+Evaluatie_score_geen_tutor_n30
+Evaluatie_score_wel_tutor
+Evaluatie_score_wel_tutor_n30
+```
+</div>
 ## Gebruik
 Bij het toetsen van de hypothese of het gemiddelde van twee groepen aan elkaar gelijk zijn kan de *t-toets* toegepast worden.  Wanneer de groepen gepaard zijn, bijvoorbeeld bij een herhaalde meting, wordt de *gepaarde t-toets* toegepast [^1]. Ook wanneer gematchte personen uit twee verschillende groepen, die veel overeenkomsten vertonen met elkaar, gekoppeld worden, kan een *gepaarde t-toets* toegepast worden.
 
@@ -80,8 +98,12 @@ Voor de uitvoering in R is er data ingeladen met evaluatie-scores van studenten 
 
 ### Test assumpties: Normaliteit
 <div class="col2">
-```{r Assumptietest}
+```{r Assumptietest, collapse=TRUE}
+mean(Evaluatie_score_geen_tutor)
+sd(Evaluatie_score_geen_tutor)
 hist(Evaluatie_score_geen_tutor)
+mean(Evaluatie_score_wel_tutor)
+sd(Evaluatie_score_wel_tutor)
 hist(Evaluatie_score_wel_tutor)
 ```
 </div>
@@ -94,10 +116,10 @@ Beide histogrammen laten een belvorm zien vergelijkbaar aan een normale verdelin
 library(nortest)
 ```
 <div class ="col2">
-```` {r Lilliefors Test, warning=FALSE}
+``` {r Lilliefors Test, warning=FALSE}
 lillie.test(Evaluatie_score_geen_tutor)
 lillie.test(Evaluatie_score_wel_tutor)
-````
+```
 </div>
 
 De *Kolmogorov-Smirnov* test is een non-parametrische toets, die het verschil in vorm tussen twee verdelingen toetst. Wanneer de p-waarde kleiner is dan 0,05 is er een verschil tussen beide verdelingen.  
@@ -131,7 +153,6 @@ t.test(Evaluatie_score_wel_tutor, Evaluatie_score_geen_tutor, paired=TRUE)
 t (247) = -2.7787, p < 0.01  
 Vrijheidsgraden: df = *n*- 1 = 247  
 p-waarde < 0.05, dus de H~A~ wordt aangenomen  
-<<<<<<< HEAD
 95%-betrouwbaarheidsinterval: bij herhaling van het onderzoek zal in 95% van de gevallen een interval uitkomen waarbij µ in valt. In dit geval loopt het interval tussen -0,27 en de -0,04.  
 
 

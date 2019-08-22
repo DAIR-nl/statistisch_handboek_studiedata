@@ -134,8 +134,12 @@ t.test(Evaluatie_score_wel_tutor, Evaluatie_score_geen_tutor, paired=TRUE)
 t (247) = -2.7787, p < 0.01  
 Vrijheidsgraden: df = *n*- 1 = 247  
 p-waarde < 0.05, dus de H~A~ wordt aangenomen  
+<<<<<<< HEAD
 95%-betrouwbaarheidsinterval: bij herhaling van het onderzoek zal in 95% van de gevallen een interval uitkomen waarbij µ in valt. In dit geval loopt het interval tussen -0,27 en de -0,04.  
 >>>>>>> 4793c0acd296b9c6863042bc53d5b214c97e9b77
+=======
+95%-betrouwbaarheidsinterval loopt tussen -0,27 en -0,04  
+>>>>>>> 7d1eee10f381aed30693c3cc8ad3a336b5f47e80
 
 ```{r opmerking}
 # aantekening: verschil gemiddelde 

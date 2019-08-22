@@ -25,27 +25,33 @@ set.seed(1)
 
 mu <- 6.3
 sigma <- 1.2
-Cijfers_gem_2010 <- rnorm(180, mu, sigma)
-Cijfers_gem_2010 <- Cijfers_gem_2010 [Cijfers_gem_2010 <= 10 & Cijfers_gem_2010 >= 1]
-Cijfers_gem_2010 <- sapply (Cijfers_gem_2010, round, 3)
+Cijfers_2010 <- rnorm(180, mu, sigma)
+Cijfers_2010 <- Cijfers_2010 [Cijfers_2010 <= 10 & Cijfers_2010 >= 1]
+Cijfers_2010 <- sapply (Cijfers_2010, round, 3)
 
 mu <- 6.3
 sigma <- 1.2
-Cijfers_gem_2010_n30 <- rnorm(30, mu, sigma)
-Cijfers_gem_2010_n30 <- Cijfers_gem_2010_n30 [Cijfers_gem_2010_n30 <= 10 & Cijfers_gem_2010_n30 >= 1]
-Cijfers_gem_2010_n30 <- sapply (Cijfers_gem_2010_n30, round, 3)
+Cijfers_2010_n30 <- rnorm(30, mu, sigma)
+Cijfers_2010_n30 <- Cijfers_2010_n30 [Cijfers_2010_n30 <= 10 & Cijfers_2010_n30 >= 1]
+Cijfers_2010_n30 <- sapply (Cijfers_2010_n30, round, 3)
 
 mu <- 6.6
 sigma <- 1.2
-Cijfers_gem_2011 <- rnorm(160, mu, sigma)
-Cijfers_gem_2011 <- Cijfers_gem_2011 [Cijfers_gem_2011 <= 10 & Cijfers_gem_2011 >= 1]
-Cijfers_gem_2011 <- sapply (Cijfers_gem_2011, round, 3)
+Cijfers_2011 <- rnorm(160, mu, sigma)
+Cijfers_2011 <- Cijfers_2011 [Cijfers_2011 <= 10 & Cijfers_2011 >= 1]
+Cijfers_2011 <- sapply (Cijfers_2011, round, 3)
 
 mu <- 6.6
 sigma <- 1.2
-Cijfers_gem_2011_n30 <- rnorm(30, mu, sigma)
-Cijfers_gem_2011_n30 <- Cijfers_gem_2011 [Cijfers_gem_2011 <= 10 & Cijfers_gem_2011 >= 1]
-Cijfers_gem_2011_n30 <- sapply (Cijfers_gem_2011, round, 3)
+Cijfers_2011_n30 <- rnorm(30, mu, sigma)
+Cijfers_2011_n30 <- Cijfers_2011_n30 [Cijfers_2011_n30 <= 10 & Cijfers_2011_n30 >= 1]
+Cijfers_2011_n30 <- sapply (Cijfers_2011, round, 3)
+
+Cijfers <- c(Cijfers_2010, Cijfers_2011)
+Jaartal <- c(replicate(180, 2010), replicate(160, 2011))
+Cijfers_verbetering <- data.frame(Cijfers, Jaartal)
+
+
 ```
 
 ## Gebruik
@@ -64,18 +70,26 @@ Controleer de data met deze stappen:
 
 Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, dus aan de assumptie niet wordt voldaan, dan kan de t-toets niet gebruikt worden.
 
-### homogeniteit van varianties 
+### Homogeniteit van varianties 
 De *Ongepaarde t-toets* gaat er ook van uit dat van beide groepen dezelfde variantie (spreiding) heeft, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Wanneer de test significant is de spreiding van de groepen verschillend en wordt de assumptie geschonden. 
 # variantie (not)equal
 
 ## Uitvoering in R
-Voor de uitvoering in R is er data ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Statistiek. 
+Voor de uitvoering in R is er data (`Cijfers_verbetering`) ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Statistiek. De data bevat zowel cijfers van 180 studenten begonnen in 2010 als cijfers van 160 studenten begonnen in 2011.
+
+### De data bekijken
+```{r}
+Cijfers_verbetering[175:185,]
+```
+De data is verdeeld in 2 kolommen, het cijfer en het startjaar
 
 ### Normaliteit
 <div class="col2">
 ```{r Assumptietest}
-hist(Cijfers_gem_2011)
-hist(Cijfers_gem_2010)
+Cijfers_2010 <- (Cijfers_verbetering[1:180, 1])
+hist(Cijfers_2010)
+Cijfers_2011 <- (Cijfers_verbetering[181:340, 1])
+hist(Cijfers_2011)
 ```
 </div>
 
@@ -86,23 +100,27 @@ hist(Cijfers_gem_2010)
 library(nortest)
 ```
 <div class="col2">
-```` {r Lilliefors Test, warning=FALSE}
-lillie.test(Cijfers_gem_2011)
-lillie.test(Cijfers_gem_2010)
-````
+``` {r Lilliefors Test, warning=FALSE}
+lillie.test(Cijfers_2011)
+lillie.test(Cijfers_2010)
+```
 </div>
 
 #### Shapiro-Wilk Test
 <div class="col2">
 ``` {r Shapiro-Wilk Test, warning=FALSE}
-shapiro.test(Cijfers_gem_2011_n30)
-shapiro.test(Cijfers_gem_2010_n30)
+shapiro.test(Cijfers_2011_n30)
+shapiro.test(Cijfers_2010_n30)
 ```
 </div>
-
+### Levene's test
+```{r Levenes test, message=FALSE, warning=FALSE, collapse=TRUE}
+library(car)
+leveneTest(Cijfers_verbetering$Cijfers, Cijfers_verbetering$Jaartal)
+```
 ### Ongepaarde t-toets
 ```{r statistische toets}
-t.test(Cijfers_gem_2010, Cijfers_gem_2011)
+t.test(Cijfers_2010, Cijfers_2011)
 ```
 
 ## Toelichting op de output

@@ -48,8 +48,8 @@ Cijfers_2011_n30 <- Cijfers_2011_n30 [Cijfers_2011_n30 <= 10 & Cijfers_2011_n30 
 Cijfers_2011_n30 <- sapply (Cijfers_2011, round, 3)
 
 Cijfers <- c(Cijfers_2010, Cijfers_2011)
-Jaartal <- c(replicate(180, 2010), replicate(160, 2011))
-Cijfers_verbetering <- data.frame(Cijfers, Jaartal)
+Startjaar <- c(replicate(180, 2010), replicate(160, 2011))
+Cijfers_verbetering <- data.frame(Cijfers, Startjaar)
 
 
 ```
@@ -81,15 +81,20 @@ Voor de uitvoering in R is er data (`Cijfers_verbetering`) ingeladen met gemidde
 ```{r}
 Cijfers_verbetering[175:185,]
 ```
-De data is verdeeld in 2 kolommen, het cijfer en het startjaar
+De data is verdeeld in 2 kolommen, het cijfer en het startjaar. De eerste 180 observaties komen uit 2010.
 
 ### Normaliteit
 <div class="col2">
-```{r Assumptietest}
+```{r Assumptietest, collapse=TRUE}
 Cijfers_2010 <- (Cijfers_verbetering[1:180, 1])
+mean(Cijfers_2010)
+sd(Cijfers_2010)
 hist(Cijfers_2010)
 Cijfers_2011 <- (Cijfers_verbetering[181:340, 1])
+mean(Cijfers_2011)
+sd(Cijfers_2011)
 hist(Cijfers_2011)
+
 ```
 </div>
 
@@ -116,7 +121,7 @@ shapiro.test(Cijfers_2010_n30)
 ### Levene's test
 ```{r Levenes test, message=FALSE, warning=FALSE, collapse=TRUE}
 library(car)
-leveneTest(Cijfers_verbetering$Cijfers, Cijfers_verbetering$Jaartal)
+leveneTest(Cijfers_verbetering$Cijfers, Cijfers_verbetering$Startjaar)
 ```
 ### Ongepaarde t-toets
 ```{r statistische toets}

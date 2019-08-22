@@ -83,12 +83,16 @@ Cijfers_gem[sample(1:340, 10),]
 ```
 De data is verdeeld in 2 kolommen, het cijfer en het startjaar.
 
+<<<<<<< HEAD
+### Normaliteit
+=======
 ### data beschrijven en normaliteit
 Selecteer beide groepen om het gemiddelde, de standaarddeviatie en het histogram uit te draaien. Sla de selectie op in een vector.
 ```{r data selecteren}
 Cijfers_2010 <- Cijfers_gem[Cijfers_gem$Startjaar==2010,]
 Cijfers_2011 <- Cijfers_gem[Cijfers_gem$Startjaar==2011,]
 ```
+>>>>>>> 2ca05aa4345e135a0ca860b523d0b229b9ef2fbb
 <div class="col2">
 ```{r Assumptietest, collapse=TRUE}
 mean(Cijfers_2010$Cijfers)

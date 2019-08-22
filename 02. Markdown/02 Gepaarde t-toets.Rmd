@@ -122,7 +122,7 @@ lillie.test(Evaluatie_score_wel_tutor)
 ```
 </div>
 
-De *Kolmogorov-Smirnov* test is een non-parametrische toets, die het verschil in vorm tussen twee verdelingen toetst. Wanneer de p-waarde kleiner is dan 0,05 is er een verschil tussen beide verdelingen.  
+De *Kolmogorov-Smirnov test* is een non-parametrische toets, die het verschil in vorm tussen twee verdelingen toetst. Wanneer de p-waarde kleiner is dan 0,05 is er een verschil tussen beide verdelingen.  
 
 In dit geval zijn van beide groepen de p-waarde > 0,05, dus is de verdeling van de data niet significant verschillend van de normaalverdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *gepaarde t-toets* kan uitgevoerd worden.  
 den.
@@ -139,15 +139,15 @@ De *Shapiro-Wilk test* wordt vooral gebruikt bij kleine steekproeven. Ook bij de
 
 In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, dus is de verdeling van beide groepen niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *gepaarde t-toets* kan uitgevoerd worden.  
 
+### Gepaarde t-toets
+```{r statistische toets}
+t.test(Evaluatie_score_wel_tutor, Evaluatie_score_geen_tutor, paired=TRUE)
+```
+
 ### Cohen's d
 ```{r Cohen s d}
 library(effsize)
 cohen.d(Evaluatie_score_geen_tutor, Evaluatie_score_wel_tutor)
-```
-
-### Gepaarde t-toets
-```{r statistische toets}
-t.test(Evaluatie_score_wel_tutor, Evaluatie_score_geen_tutor, paired=TRUE)
 ```
 
 t (247) = -2.7787, p < 0.01  

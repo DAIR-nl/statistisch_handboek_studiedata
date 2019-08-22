@@ -66,11 +66,11 @@ Controleer of de groepen normaal zijn verdeeld:
 1. Controleer visueel door het maken van een dataplot, bijvoorbeeld een boxplot.  
 2. Toets daarna of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef met de *Shapiro-Wilk test* [^2]. 
 
-Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, dus aan de assumptie niet wordt voldaan, dan kan de t-toets niet gebruikt worden.
+Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, kan de t-toets niet gebruikt worden.
 
 ### Homogeniteit van varianties 
-De *Ongepaarde t-toets* gaat er ook van uit dat van beide groepen dezelfde variantie (spreiding) heeft, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Wanneer de test significant is de spreiding van de groepen verschillend en wordt de assumptie geschonden. 
-# variantie (not)equal
+De *Ongepaarde t-toets* gaat er ook van uit dat van beide groepen dezelfde variantie (spreiding) heeft, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Bij een *p* > 0,05 is de spreiding van de groepen verschillend en wordt de assumptie geschonden. 
+
 
 ## Uitvoering in R
 Voor de uitvoering in R is er data (`Cijfers_gem`) ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Statistiek. De data bevat zowel cijfers van 180 studenten begonnen in 2010 als cijfers van 160 studenten begonnen in 2011.

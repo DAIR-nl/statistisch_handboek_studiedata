@@ -121,12 +121,19 @@ De *Shapiro-Wilk test* is een soort gelijke test als de *Kolmogorov-Smirnov test
 
 In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, dus is de verdeling van beide groepen niet significant verschillend van de normaalverdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *Gepaarde t-toets* kan uitgevoerd worden.  
 
+### Cohen's d
+```{r Cohen s d}
+library(effsize)
+cohen.d(Evaluatie_score_geen_tutor, Evaluatie_score_wel_tutor)
+```
 
-### Statistische toets in R
+
+### Gepaarde t-toets
 
 ```{r statistische toets}
 t.test(Evaluatie_score_wel_tutor, Evaluatie_score_geen_tutor, paired=TRUE)
 ```
+
 ```{r opmerking}
 #t (247) = -2.7787, p < 0.01  
 # Vrijheidsgraden: df = *n*- 1 = 247  

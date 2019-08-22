@@ -83,7 +83,7 @@ Cijfers_gem[175:185,]
 ```
 De data is verdeeld in 2 kolommen, het cijfer en het startjaar. De eerste 180 observaties komen uit 2010.
 
-### data beschrijven en normaliteit
+### Normaliteit
 <div class="col2">
 ```{r Assumptietest, collapse=TRUE}
 Cijfers_2010 <- (Cijfers_gem[1:180, 1])

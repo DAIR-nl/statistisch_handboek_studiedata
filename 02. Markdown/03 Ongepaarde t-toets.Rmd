@@ -61,16 +61,18 @@ Bij het toetsen of het gemiddelde van twee variabelen aan elkaar gelijk zijn kan
 Is het gemiddelde cijfer van de opleiding Statistiek op 1 februari gestegen na invoering van het BSA? De data is beschikbaar voor het cohort gestart in 2010 en voor het cohort gestart in 2011. Vanaf 2011 heeft de opleiding een Bindend Studieadvies (BSA) die de selectiviteit van het eerste jaar moet vergroten.
 
 ## Assumpties
-### Normaliteit
-Controleer of de groepen normaal zijn verdeeld:
+### Normaliteit  
+Controleer of de groepen normaal zijn verdeeld:  
 1. Controleer visueel door het maken van een dataplot, bijvoorbeeld een boxplot.  
 2. Toets daarna of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef met de *Shapiro-Wilk test* [^2]. 
 
-Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, kan de t-toets niet gebruikt worden.
+Wanneer uit bovenstaande tests blijkt dat de steekproef niet normaal verdeeld is, kan de t-toets niet gebruikt worden, maar wel de *Mann-Whitney U toets*, ook bekend als de *Wilcoxon rank-sum toets*.  
 
 ### Homogeniteit van varianties 
-De *Ongepaarde t-toets* gaat er ook van uit dat van beide groepen dezelfde variantie (spreiding) heeft, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Bij een *p* > 0,05 is de spreiding van de groepen verschillend en wordt de assumptie geschonden. 
+De *ongepaarde t-toets* gaat er ook van uit dat beide groepen dezelfde spreiding heeft, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Bij een *p* > 0,05 is de spreiding van de groepen verschillend en wordt de assumptie geschonden. 
 
+## Effectmaat
+Om te bepalen of de gevonden p-waarde betekenisvol is kan een effectmaat berekend worden. Cohen's d berekent de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele. Een indicatie om d te interpreteren is: d ≤ 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect. 
 
 ## Uitvoering in R
 Voor de uitvoering in R is er data (`Cijfers_gem`) ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Statistiek. De data bevat zowel cijfers van 180 studenten begonnen in 2010 als cijfers van 160 studenten begonnen in 2011.
@@ -81,7 +83,7 @@ Cijfers_gem[175:185,]
 ```
 De data is verdeeld in 2 kolommen, het cijfer en het startjaar. De eerste 180 observaties komen uit 2010.
 
-### Normaliteit
+### data beschrijven en normaliteit
 <div class="col2">
 ```{r Assumptietest, collapse=TRUE}
 Cijfers_2010 <- (Cijfers_gem[1:180, 1])
@@ -95,6 +97,12 @@ hist(Cijfers_2011)
 
 ```
 </div>
+gemiddelde 2010 met standaarddeviate: 6,37 (1,12)  
+gemiddelde 2011 met standaarddeviate: 6,61(1,2)   
+
+Beide histogrammen laten een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  
+
+Voer de *Kolmogorov-Smirnov test* of de *Shapiro-Wilk test* uit om te toetsen of de histogrammen normaal verdeeld zijn.  
 
 ### {.tabset .tabset-fade .tabset.pills}
 #### Lilliefors Test
@@ -109,6 +117,10 @@ lillie.test(Cijfers_2010)
 ```
 </div>
 
+De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen de twee verdelingen. Wanneer *p* < 0,05 is er een verschil tussen beide verdelingen.
+
+In dit geval zijn van beide groepen de p-waarde > 0,05, dus is de verdeling van de data niet significant verschillend van de normaalverdeling en kan *ongepaarde t-toets* uitgevoerd worden.
+
 #### Shapiro-Wilk Test
 <div class="col2">
 ``` {r Shapiro-Wilk Test, warning=FALSE}
@@ -116,19 +128,24 @@ shapiro.test(Cijfers_2011_n30)
 shapiro.test(Cijfers_2010_n30)
 ```
 </div>
+In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, dus is de verdeling van beide groepen niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *ongepaarde t-toets* kan uitgevoerd worden.
+
 ### Levene's test
 ```{r Levenes test, message=FALSE, warning=FALSE, collapse=TRUE}
 library(car)
 leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Startjaar)
 ```
+De *ongepaarde t-toets* gaat er ook van uit dat beide groepen dezelfde spreiding heeft, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Bij een *p* > 0,05 is de spreiding van de groepen verschillend en wordt de assumptie geschonden. 
+
 ### Ongepaarde t-toets
 ```{r statistische toets}
 t.test(Cijfers_2010, Cijfers_2011)
 ```
 
-## Toelichting op de output
+Vrijheidsgraden: df = n~1~ + n~2~ 2
 
-# Vrijheidsgraden: df = n~1~ + n~2~ 2
+### Cohen's d 
+
 
 ## Rapportage
 

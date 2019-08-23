@@ -9,6 +9,12 @@ output:
     toc_float: yes
 ---
 
+```{r opmerking, include=FALSE, eval=FALSE}
+# Overweging alleen Shapiro-Wilk test. De test wordt steeds meer gebruikt wegens de rekenkracht van computers, maar Kolmogorov (met Lillifors) is nog wel bekend en daarom geliefd. Shapiro-Wilk is preciezer, en conservatiever.  
+# Mean en sd erbij gezet wegens beschrijven data en wordt gebruikt in rapport
+
+```
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 #opties voor themes: spacelab, readable, united, yeti
@@ -70,6 +76,7 @@ hist(Gemiddeld_cijfer_wns)
 De histogram laat een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
 
 ***
+
 
 Toets normaliteit met de *Kolmogorov-Smirnov test* of met de *Shapiro-Wilk test* (*n* < 50[^4] ). 
 

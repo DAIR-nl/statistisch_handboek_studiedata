@@ -10,9 +10,9 @@ output:
 ---
 <style>
   .col2 {
-    columns: 2 200px;         /* number of columns and width in pixels*/
-    -webkit-columns: 2 200px; /* chrome, safari */
-    -moz-columns: 2 200px;    /* firefox */
+    columns: 2 200px;
+    -webkit-columns: 2 200px;
+    -moz-columns: 2 200px;
   }
 </style>
 
@@ -92,14 +92,11 @@ Cijfers_2011 <- Cijfers_gem[Cijfers_gem$Startjaar==2011,]
 ```
 
 <div class="col2">
-#### 2010
 ```{r Data beschrijven 1, collapse=TRUE}
 mean(Cijfers_2010$Cijfers)
 sd(Cijfers_2010$Cijfers)
 ```
 gemiddelde 2010 met standaarddeviate: 6,37 (1,12)
-
-#### 2011
 ```{r Data beschrijven 2, collapse=TRUE}
 mean(Cijfers_2011$Cijfers)
 sd(Cijfers_2011$Cijfers)

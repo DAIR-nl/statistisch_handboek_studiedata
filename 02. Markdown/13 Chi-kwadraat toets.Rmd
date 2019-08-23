@@ -26,7 +26,7 @@ colnames(Uitval_functiebeperking_n43) <- c("Wel uitval", "Geen uitval")
 ```
 
 ## Gebruik
-De *Chi-kwadraat toets* wordt gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde categorische variabelen, door middel van een kruistabel [^1].
+De *chi-kwadraat toets* wordt gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde categorische variabelen, door middel van een kruistabel [^1].
 
 ## Voorbeeld uit het onderwijs
 De studentendecaan vraagt zich af of de studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel.
@@ -37,7 +37,7 @@ H~A~: De verhouding uitval van het aantal studenten met een functiebeperking na 
 
 ## Assumpties
 1. De variabelen zijn op nominaal niveau gemeten, dit betekent automatisch dat er geen ordening tussen de groepen gemaakt kan worden en dat de groepen onafhankelijk van elkaar zijn.  
-2. De groepsgrootte van de verwachtte waarde is per cel niet kleiner dan 5, bij de geobserveerde waarde is de groepsgrootte niet minder dan 10. Gebruik de Fisher’s exact toets wanneer de groepen kleiner zijn [^2].  
+2. De groepsgrootte van de verwachtte waarde is per cel niet kleiner dan 5, bij de geobserveerde waarde is de groepsgrootte niet minder dan 10. Gebruik de *Fisher’s exact toets* wanneer de groepen kleiner zijn [^2].  
 3. Elke cel van de verwachte waarde is groter dan 0 [^3]. 
 
 
@@ -80,8 +80,7 @@ Het 95% betrouwbaarheidsinterval is groot, tussen de 0,41 en de 8,78.
 # nieuwe hypothese
 # chi en ongeveer teken
 ```
-
-Om te toetsen of studenten met een functiebeperking vaker uitvallen dan de student zonder functiebeperking sinds de invoering van het leenstelsel, is de *Chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de conclusie dat de verhouding uitval van het aantal studenten met een functiebeperking voor of na de invoering van het leenstelsel niet gelijk is gebleven, χ^2^ (1) ≈ 4,41, *p* < 0,01.
+Om te toetsen of studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel, is de *chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de conclusie dat de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel niet gelijk is gebleven, χ^2^ (1) ≈ 4,41, *p* < 0,01.
  
 ## Referenties
 [^1]: Prabhakaran, S. (2016-2017). Statistical Tests [r-statistics.co]. Retrieved from: http://r-statistics.co/Statistical-Tests-in-R.html

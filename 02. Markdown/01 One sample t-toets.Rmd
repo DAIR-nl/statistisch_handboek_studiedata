@@ -105,7 +105,7 @@ Voor de uitvoering in R is er een dummydataset genaamd Gemiddeld_cijfer_wns_n30 
 ***
 
 ### One sample t-toets
-Gebruik `t.test()`om een eenzijdige t-toets uit te voeren. Specifeer hierbij welke alternatieve hypothese er getoetst wordt. 
+Gebruik `t.test()`om een t-toets uit te voeren. Geef het gemiddelde waarmee wordt vergeleken en specifeer welke alternatieve hypothese er getoetst wordt.
 ```{r ttest}
 t.test(Gemiddeld_cijfer_wns, mu = 6.8, alternative="greater")
 ```

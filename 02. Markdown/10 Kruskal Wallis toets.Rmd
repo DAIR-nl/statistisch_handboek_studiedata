@@ -83,7 +83,7 @@ kruskal.test(Ec_jaar1 ~ Vooropleiding, Resultaten_arbeidsrecht)
 
 Om te weten welke groepen verschillen is er in `pairwise.wilcox.test()` een correctie beschikbaar voor *multiple testing*
 ``` {r pairwise wilcox test}
-pairwise.wilcox.test(Resultaten_arbeidsrecht$Ec_jaar1, Resultaten_arbeidsrecht$Vooropleiding, p.adjust.method = "BH")
+pairwise.wilcox.test(Resultaten_arbeidsrecht$Ec_jaar1, Resultaten_arbeidsrecht$Vooropleiding, p.adjust.method = "bonferroni")
 ```
 ## Toelichting op de output
 

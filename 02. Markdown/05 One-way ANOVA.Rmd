@@ -8,6 +8,13 @@ output:
     toc_float: TRUE
     theme: united
 ---
+<style>
+  .col2 {
+    columns: 2 200px;
+    -webkit-columns: 2 200px;
+    -moz-columns: 2 200px;
+  }
+</style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -197,14 +204,16 @@ boxplot(Huurprijs ~ Opleiding, Huurprijs_per_opleiding, las= 2, horizontal=TRUE)
 ```
 
 ### Assumpties testen in R
-```{r Assumpties}
+```{r lillietest voorbereiden}
 library(nortest)
 huurprijslijst <- Huurprijs_per_opleiding %>%
   split(Opleiding)
+```
+
+```{r lillietest}
 for (. in huurprijslijst){
   print(lillie.test(.$Huurprijs))
 }
-
 ```
 
 

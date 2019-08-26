@@ -48,8 +48,8 @@ Cijfers_2011_n30 <- Cijfers_2011_n30 [Cijfers_2011_n30 <= 10 & Cijfers_2011_n30 
 Cijfers_2011_n30 <- sapply (Cijfers_2011, round, 3)
 
 Cijfers <- c(Cijfers_2010, Cijfers_2011)
-Startjaar <- c(replicate(180, 2010), replicate(160, 2011))
-Cijfers_gem <- data.frame(Cijfers, Startjaar)
+Cohort <- c(replicate(180, 2010), replicate(160, 2011))
+Cijfers_gem <- data.frame(Cijfers, Cohort)
 
 
 ```
@@ -85,14 +85,14 @@ Voor de uitvoering in R is er data (`Cijfers_gem`) ingeladen met gemiddelde cijf
 ```{r data bekijken}
 Cijfers_gem[sample(1:340, 10),]
 ```
-De data is verdeeld in 2 kolommen, het cijfer en het startjaar.
+De data is verdeeld in 2 kolommen, het cijfer en het Cohort.
 
 
 ### Test assumpties: normaliteit
 Selecteer beide groepen om het gemiddelde, de standaarddeviatie en het histogram uit te draaien. Sla de selectie op in een vector.
 ```{r data selecteren}
-Cijfers_2010 <- Cijfers_gem[Cijfers_gem$Startjaar==2010,]
-Cijfers_2011 <- Cijfers_gem[Cijfers_gem$Startjaar==2011,]
+Cijfers_2010 <- Cijfers_gem[Cijfers_gem$Cohort==2010,]
+Cijfers_2011 <- Cijfers_gem[Cijfers_gem$Cohort==2011,]
 ```
 
 <div class="col2">
@@ -116,7 +116,7 @@ hist(Cijfers_2011$Cijfers)
 Beide histogrammen laten een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  
 
 ### {.tabset .tabset-fade .tabset.pills}
-#### Lilliefors Test
+#### Kolmogorov-Smirnov (met Lilliefors correctie)
 
 ```{r library nortest, warning=FALSE}
 library(nortest)
@@ -142,10 +142,10 @@ shapiro.test(Cijfers_2010_n30)
 In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, dus is de verdeling van beide groepen niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *ongepaarde t-toets* kan uitgevoerd worden.
 
 ### Levene's test
-De `leveneTest()` heeft in R twee argumenten. Het eerste argument is een vector met de data van beide groepen. Het tweede argument is een factor waarin de groepen worden gedefinieerd of een vector die logisch om te zetten is naar een factor. `Cijfers_gem$Startjaar` is een vector met twee waardes (2010 en 2011). Dit kan R makkelijk omzetten naar een factor bestaande uit de waardes 2010 en 2011.
+De `leveneTest()` heeft in R twee argumenten. Het eerste argument is een vector met de data van beide groepen. Het tweede argument is een factor waarin de groepen worden gedefinieerd of een vector die logisch om te zetten is naar een factor.
 ```{r Levenes test, message=FALSE, warning=FALSE, collapse=TRUE}
 library(car)
-leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Startjaar)
+leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 ```
 *F(1,338)* = 0,92(1), p-waarde ≈ 0,034, de groepen zijn niet verschillend in spreiding.  
 Vrijheidsgraden: het eerste cijfer zijn het #groepen - 1 en de tweede: *n~1~* + *n~2~* -2

@@ -56,6 +56,5 @@ Voor de uitvoering in R is er een dataset ingeladen genaamd
 
 ## Rapportage
 
-## Referenties
 
-## Achtergrond info
+

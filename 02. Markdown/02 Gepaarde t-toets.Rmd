@@ -27,44 +27,45 @@ volgorde_n30 <- sample(1:30, 30)
 
 mu <- 3.6
 sigma <- 0.6
-Evaluatie_score_geen_tutor <- rnorm(250, mu, sigma)
+Evaluatie_score_voor_tutorgesprek <- rnorm(250, mu, sigma)
 
-Evaluatie_score_geen_tutor <- Evaluatie_score_geen_tutor[Evaluatie_score_geen_tutor <= 5 
-                                                         & Evaluatie_score_geen_tutor >= 1]
-Evaluatie_score_geen_tutor <- sapply (Evaluatie_score_geen_tutor, round, 3)
-Evaluatie_score_geen_tutor <- sort(Evaluatie_score_geen_tutor)
-Evaluatie_score_geen_tutor <- Evaluatie_score_geen_tutor[volgorde]
+Evaluatie_score_voor_tutorgesprek <- Evaluatie_score_voor_tutorgesprek[Evaluatie_score_voor_tutorgesprek <= 5 
+                                                         & Evaluatie_score_voor_tutorgesprek >= 1]
+Evaluatie_score_voor_tutorgesprek <- sapply (Evaluatie_score_voor_tutorgesprek, round, 3)
+Evaluatie_score_voor_tutorgesprek <- sort(Evaluatie_score_voor_tutorgesprek)
+Evaluatie_score_voor_tutorgesprek <- Evaluatie_score_voor_tutorgesprek[volgorde]
 
 mu <- 3.4
 sigma <- 0.9
-Evaluatie_score_wel_tutor <- rnorm(300, mu, sigma)
+Evaluatie_score_na_tutorgesprek <- rnorm(300, mu, sigma)
 
-Evaluatie_score_wel_tutor <- Evaluatie_score_wel_tutor[Evaluatie_score_wel_tutor <= 5 
-                                                       & Evaluatie_score_wel_tutor >= 1]
-Evaluatie_score_wel_tutor <- sapply (Evaluatie_score_wel_tutor, round, 3)
-Evaluatie_score_wel_tutor <- sort(Evaluatie_score_wel_tutor)
-Evaluatie_score_wel_tutor <- Evaluatie_score_wel_tutor[sample(-283:-1, 41)]
-Evaluatie_score_wel_tutor <- Evaluatie_score_wel_tutor[volgorde]
+Evaluatie_score_na_tutorgesprek <- Evaluatie_score_na_tutorgesprek[Evaluatie_score_na_tutorgesprek <= 5 
+                                                       & Evaluatie_score_na_tutorgesprek >= 1]
+Evaluatie_score_na_tutorgesprek <- sapply (Evaluatie_score_na_tutorgesprek, round, 3)
+Evaluatie_score_na_tutorgesprek <- sort(Evaluatie_score_na_tutorgesprek)
+Evaluatie_score_na_tutorgesprek <- Evaluatie_score_na_tutorgesprek[sample(-283:-1, 41)]
+Evaluatie_score_na_tutorgesprek <- Evaluatie_score_na_tutorgesprek[volgorde]
 
 mu <- 3.6
 sigma <- 0.6
-Evaluatie_score_geen_tutor_n30 <- rnorm(30, mu, sigma)
+Evaluatie_score_voor_tutorgesprek_n30 <- rnorm(30, mu, sigma)
 
-Evaluatie_score_geen_tutor_n30 <- Evaluatie_score_geen_tutor_n30[Evaluatie_score_geen_tutor_n30 <= 5 
-                                                                 & Evaluatie_score_geen_tutor_n30 >= 1]
-Evaluatie_score_geen_tutor_n30 <- sapply (Evaluatie_score_geen_tutor_n30, round, 3)
-Evaluatie_score_geen_tutor_n30 <- sort(Evaluatie_score_geen_tutor_n30)
-Evaluatie_score_geen_tutor_n30 <- Evaluatie_score_geen_tutor_n30[volgorde_n30]
+Evaluatie_score_voor_tutorgesprek_n30 <- Evaluatie_score_voor_tutorgesprek_n30[Evaluatie_score_voor_tutorgesprek_n30 <= 5 
+                                                                 & Evaluatie_score_voor_tutorgesprek_n30 >= 1]
+Evaluatie_score_voor_tutorgesprek_n30 <- sapply (Evaluatie_score_voor_tutorgesprek_n30, round, 3)
+Evaluatie_score_voor_tutorgesprek_n30 <- sort(Evaluatie_score_voor_tutorgesprek_n30)
+Evaluatie_score_voor_tutorgesprek_n30 <- Evaluatie_score_voor_tutorgesprek_n30[volgorde_n30]
 
-mu <- 3.4
-sigma <- 0.7
-Evaluatie_score_wel_tutor_n30 <- rnorm(30, mu, sigma)
+set.seed(1) ## binnen seed 1 geen significantie
+mu <- 3.5
+sigma <- 0.4
+Evaluatie_score_na_tutorgesprek_n30 <- rnorm(30, mu, sigma)
 
-Evaluatie_score_wel_tutor_n30 <- Evaluatie_score_wel_tutor_n30[Evaluatie_score_wel_tutor_n30 <= 5 
-                                                               & Evaluatie_score_wel_tutor_n30 >= 1]
-Evaluatie_score_wel_tutor_n30 <- sapply (Evaluatie_score_wel_tutor_n30, round, 3)
-Evaluatie_score_wel_tutor_n30 <- sort(Evaluatie_score_geen_tutor_n30)
-Evaluatie_score_wel_tutor_n30 <- Evaluatie_score_wel_tutor_n30[volgorde_n30]
+Evaluatie_score_na_tutorgesprek_n30 <- Evaluatie_score_na_tutorgesprek_n30[Evaluatie_score_na_tutorgesprek_n30 <= 5 
+                                                               & Evaluatie_score_na_tutorgesprek_n30 >= 1]
+Evaluatie_score_na_tutorgesprek_n30 <- sapply (Evaluatie_score_na_tutorgesprek_n30, round, 3)
+Evaluatie_score_na_tutorgesprek_n30 <- sort(Evaluatie_score_na_tutorgesprek_n30)
+Evaluatie_score_na_tutorgesprek_n30 <- Evaluatie_score_na_tutorgesprek_n30[volgorde_n30]
 ```
 
 ```{r opmerking, include=FALSE, eval=FALSE}
@@ -99,12 +100,12 @@ Voor de uitvoering in R is er data ingeladen met evaluatie-scores van studenten 
 ### Test assumpties: Normaliteit
 <div class="col2">
 ```{r Assumptietest, collapse=TRUE}
-mean(Evaluatie_score_geen_tutor)
-sd(Evaluatie_score_geen_tutor)
-hist(Evaluatie_score_geen_tutor)
-mean(Evaluatie_score_wel_tutor)
-sd(Evaluatie_score_wel_tutor)
-hist(Evaluatie_score_wel_tutor)
+mean(Evaluatie_score_voor_tutorgesprek)
+sd(Evaluatie_score_voor_tutorgesprek)
+hist(Evaluatie_score_voor_tutorgesprek)
+mean(Evaluatie_score_na_tutorgesprek)
+sd(Evaluatie_score_na_tutorgesprek)
+hist(Evaluatie_score_na_tutorgesprek)
 ```
 </div>
 
@@ -117,8 +118,8 @@ library(nortest)
 ```
 <div class ="col2">
 ``` {r Lilliefors Test, warning=FALSE}
-lillie.test(Evaluatie_score_geen_tutor)
-lillie.test(Evaluatie_score_wel_tutor)
+lillie.test(Evaluatie_score_voor_tutorgesprek)
+lillie.test(Evaluatie_score_na_tutorgesprek)
 ```
 </div>
 
@@ -129,8 +130,8 @@ In dit geval is van beide groepen de p-waarde > 0,05, dus is de verdeling van de
 #### Shapiro-Wilk Test
 <div class ="col2">
 ``` {r Shapiro-Wilk Test, warning=FALSE}
-shapiro.test(Evaluatie_score_geen_tutor_n30)
-shapiro.test(Evaluatie_score_wel_tutor_n30)
+shapiro.test(Evaluatie_score_voor_tutorgesprek_n30)
+shapiro.test(Evaluatie_score_na_tutorgesprek_n30)
 ```
 </div>
 
@@ -140,7 +141,7 @@ In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, 
 
 ### Gepaarde t-toets
 ```{r statistische toets}
-t.test(Evaluatie_score_wel_tutor, Evaluatie_score_geen_tutor, paired=TRUE)
+t.test(Evaluatie_score_na_tutorgesprek, Evaluatie_score_voor_tutorgesprek, paired=TRUE)
 ```
 *t* (247) = -2,7787, *p* < 0,01  
 Vrijheidsgraden: *df* = *n* -1 = 247  
@@ -151,7 +152,7 @@ Het verschil tussen beide groepen is 0,25
 ### Cohen's d
 ```{r Cohen s d}
 library(effsize)
-cohen.d(Evaluatie_score_geen_tutor, Evaluatie_score_wel_tutor)
+cohen.d(Evaluatie_score_voor_tutorgesprek, Evaluatie_score_na_tutorgesprek)
 ```
 *d* = 0,36, wat een klein tot gemiddeld effect is
 

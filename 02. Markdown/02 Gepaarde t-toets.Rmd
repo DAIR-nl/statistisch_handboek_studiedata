@@ -84,7 +84,7 @@ H~0~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is niet ver
 H~A~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is veranderd na een gesprek met hun tutor, µ~T0~ ≠ µ~T1~ 
 
 ## Assumpties: Normaliteit
-De t-toets gaat ervan uit dat de data normaal verdeeld is.  
+De *t-toets* gaat ervan uit dat de data normaal verdeeld is.  
 1. Controleer visueel of de data normaalverdeel is door het maken van een dataplot: een histogram of een boxplot.  
 2. Toets daarna of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef met de *Shapiro-Wilk test* [^2].  
 

@@ -70,6 +70,7 @@ Evaluatie_score_wel_tutor_n30 <- Evaluatie_score_wel_tutor_n30[volgorde_n30]
 ```{r opmerking, include=FALSE, eval=FALSE}
 # ipv Cohen's d kan ook eta squared gebruikt worden om effectmaat te berekenen. Wordt vaak wel gedaan bij de ANOVA. 
 # doorlinken naar de Wilcoxon Signed Rank Test
+# plek van Mean en SD
 ```
 
 
@@ -123,7 +124,7 @@ lillie.test(Evaluatie_score_wel_tutor)
 
 De *Kolmogorov-Smirnov test* is een non-parametrische toets, die het verschil in vorm tussen de twee verdelingen toetst. Wanneer de p-waarde kleiner is dan 0,05 is er een verschil tussen beide verdelingen.  
 
-In dit geval zijn van beide groepen de p-waarde > 0,05, dus is de verdeling van de data niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *gepaarde t-toets* kan uitgevoerd worden. 
+In dit geval is van beide groepen de p-waarde > 0,05, dus is de verdeling van de data niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *gepaarde t-toets* kan uitgevoerd worden. 
 
 #### Shapiro-Wilk Test
 <div class ="col2">
@@ -155,7 +156,7 @@ cohen.d(Evaluatie_score_geen_tutor, Evaluatie_score_wel_tutor)
 *d* = 0,36, wat een klein tot gemiddeld effect is
 
 ## Rapportage
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde cijfer wat studenten geven voor de opleiding gelijk is gebleven na een gesprek met een tutor. Het verschil tussen het gemiddelde van T~0~ (3.65) en het gemiddelde van T~1~ (3.4) is significant *t*(247) = -2.7787, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het gemiddelde van de steekproef heeft een reikwijdte van -0,27 tot -0,04.  
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde cijfer wat studenten geven voor de opleiding gelijk is gebleven na een gesprek met een tutor. Het verschil tussen het gemiddelde van T~0~ (3,65) en het gemiddelde van T~1~ (3.4) is significant *t*(247) = -2.7787, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen heeft een reikwijdte van -0,27 tot -0,04. Het effect is klein tot gemiddeld, *d* = 0,36.    
 De resultaten ondersteunen de conclusie dat de studenten na een gesprek met de tutor de opleiding anders beoordelen dan voordat ze een gesprek hebben gehad met de tutor. 
 
 ## Referenties

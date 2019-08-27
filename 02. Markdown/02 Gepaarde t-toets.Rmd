@@ -79,17 +79,17 @@ Evaluatie_score_na_tutorgesprek_n30 <- Evaluatie_score_na_tutorgesprek_n30[volgo
 Bij het toetsen of het gemiddelde van twee groepen aan elkaar gelijk zijn kan de *t-toets* toegepast worden. De *gepaarde t-toets* kan toegepast worden wanneer de groepen gepaard zijn, bijvoorbeeld bij een herhaalde meting [^1]. Wanneer personen uit twee verschillende groepen, die met elkaar veel overeenkomsten vertonen, gekoppeld worden, kan ook een *gepaarde t-toets* gebruikt worden.
 
 ## Voorbeeld uit het onderwijs
-De opleidingsdirecteur van de lerarenopleiding vraagt zich af of haar studenten, nadat ze met hun tutor hebben gesproken, de lerarenopleiding een ander cijfer geven. Ze vraagt of de studenten twee keer een vragenlijst in willen vullen, één keer voordat ze met hun tutor hebben gesproken T~0~ en nog een keer nadat ze met hun tutor hebben gesproken (T~1~). 
+Ter voorbereiding op een visitatie vraagt de opleidingsdirecteur van de lerarenopleiding zich af of haar studenten, nadat ze met hun tutor hebben gesproken, de opleiding een ander cijfer geven. Ze vraagt of de studenten twee keer een vragenlijst in willen vullen, één keer voordat ze met hun tutor hebben gesproken T~0~ en nog een keer nadat ze met hun tutor hebben gesproken (T~1~). 
 
 H~0~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is niet veranderd na een gesprek met hun tutor, µ~T0~ = µ~T1~  
 H~A~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is veranderd na een gesprek met hun tutor, µ~T0~ ≠ µ~T1~ 
 
 ## Assumpties: Normaliteit
 De *t-toets* gaat ervan uit dat de data normaal verdeeld is.  
-1. Controleer visueel of de data normaalverdeel is door het maken van een dataplot: een histogram of een boxplot.  
+1. Controleer visueel of de data normaal verdeel is door het maken van een dataplot: een histogram of een boxplot.  
 2. Toets daarna of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef met de *Shapiro-Wilk test* [^2].  
 
-Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, kan de *t-toets* niet gebruikt worden, gebruik in dat geval de *Wilcoxon Signed Rank Test* [^3].
+Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, kan de *t-toets* niet gebruikt worden. Gebruik in dat geval de *Wilcoxon Signed Rank Test* [^3].
 
 ## Effectmaat
 Om te bepalen of de gevonden p-waarde betekenisvol is kan een effectmaat berekend worden. Cohen's *d* berekent de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele. Een indicatie om *d* te interpreteren is: *d* ≤ 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.  

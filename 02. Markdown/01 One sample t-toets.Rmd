@@ -102,7 +102,7 @@ Voor de uitvoering in R is er een dummydataset genaamd Gemiddeld_cijfer_wns_n30 
 ### One sample t-toets
 Gebruik `t.test()`om een t-toets uit te voeren. Geef het gemiddelde waarmee wordt vergeleken en specifieer welke alternatieve hypothese er getoetst wordt.
 ```{r ttest}
-t.test(Gemiddeld_cijfer_wns, mu = 6.8, alternative="greater")
+t.test(Gemiddeld_cijfer_wns, mu = 6.8, alternative = "greater")
 ```
 * Het gemiddelde van de steekproef is 7,08  
 * Vrijheidsgraden, *df* = *n* -1 = 122-1 = 121  

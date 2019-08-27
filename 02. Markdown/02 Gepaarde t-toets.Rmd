@@ -72,6 +72,7 @@ Evaluatie_score_na_tutorgesprek_n30 <- Evaluatie_score_na_tutorgesprek_n30[volgo
 # ipv Cohen's d kan ook eta squared gebruikt worden om effectmaat te berekenen. Wordt vaak wel gedaan bij de ANOVA. 
 # doorlinken naar de Wilcoxon Signed Rank Test
 # plek van Mean en SD
+# https://wikistatistiek.amc.nl/index.php/Matchen machten AMC
 ```
 
 
@@ -96,7 +97,7 @@ Om te bepalen of de gevonden p-waarde betekenisvol is kan een effectmaat bereken
 
 Cohen's *d* berekent de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele. Een indicatie om *d* te interpreteren is: *d* ≤ 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect [^4].  
 
-Eta squared η 
+Eta squared (η^2) berekent de proportie van de variantie in de afhankelijke variabele wat verklaard wordt door de onafhankelijke variabele. In dit geval berekent het de proportie van de variantie in de hoogte van het cijfer wat verklaard kan worden door het tutorgesprek. Een indicatie om η^2 te interpreteren is: η^2 = 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en > 0,14 is een groot effect [^5]. 
 
 ## Uitvoering in R
 Voor de uitvoering in R is er data ingeladen met evaluatie-scores van studenten voor en nadat zij een tutorgesprek hebben gehad. 
@@ -169,4 +170,4 @@ De resultaten ondersteunen de conclusie dat de studenten na een gesprek met de t
 [^2]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. Retrieved from: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
 [^3]: van Geloven, N. (2013, 25 September). Wilcoxon signed rank toets [Wiki Statistiek Academisch Medisch Centrum]. Retrieved from: https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets
 [^4]: E Marshall, E Boggis - Statstutor Community Project, 2016 - statstutor.ac.uk The Statistics Tutor’s  Quick Guide to Commonly Used Statistical Tests  - Ellen Marshall, University of Sheffield 
-
+[^5]: Eta-squared. (2019 May 14). Retrieved from: https://en.wikiversity.org/wiki/Eta-squared 

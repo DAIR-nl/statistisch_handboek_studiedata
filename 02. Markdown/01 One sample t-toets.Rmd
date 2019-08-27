@@ -10,18 +10,18 @@ output:
 ---
 
 ```{r opmerking, include=FALSE, eval=FALSE}
-# link maken naar Wilcoxon Signed Rank Test
+# TODO: een link maken naar Wilcoxon Signed Rank Test
 ```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-#opties voor themes: spacelab, readable, united, yeti
+# Opties voor themes: spacelab, readable, united, yeti
 ```
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-## inladen packages
+## Laad packages in
 
-## aanmaken dummydata
+## Maak dummydata aan
 set.seed(1)
 
 Decimalen_wiskunde <- rnorm(160, 7.0, 2.6)
@@ -33,11 +33,11 @@ Scheikunde_eindcijfer <- round(Decimalen_scheikunde, 1)[Decimalen_scheikunde <= 
 Decimalen_natuurkunde <- rnorm(160, 6.9, 2.4)
 Natuurkunde_eindcijfer <- round(Decimalen_natuurkunde, 1)[Decimalen_natuurkunde <= 10 & Decimalen_natuurkunde >= 4.5]
 
-Wns_eindcijfers <- cbind(Wiskunde_eindcijfer, Scheikunde_eindcijfer, Natuurkunde_eindcijfer)
+WNS_eindcijfers <- cbind(Wiskunde_eindcijfer, Scheikunde_eindcijfer, Natuurkunde_eindcijfer)
 
-Gemiddeld_cijfer_wns <- apply(Wns_eindcijfers, 1, mean)
+Gemiddeld_cijfer_WNS <- apply(WNS_eindcijfers, 1, mean)
 
-Gemiddeld_cijfer_wns_n30 <- sample(Gemiddeld_cijfer_wns, 30)
+Gemiddeld_cijfer_WNS_n30 <- sample(Gemiddeld_cijfer_WNS, 30)
 ```
 
 ## Gebruik
@@ -63,9 +63,9 @@ Voor de uitvoering in R is er een dummydataset genaamd Gemiddeld_cijfer_wns inge
 ### Test assumpties: normaliteit
 Bekijk de data via `mean()`, `sd()` en `hist()`.
 ```{r histogram voor normaliteit, collapse=TRUE}
-mean(Gemiddeld_cijfer_wns)
-sd(Gemiddeld_cijfer_wns)
-hist(Gemiddeld_cijfer_wns)
+mean(Gemiddeld_cijfer_WNS)
+sd(Gemiddeld_cijfer_WNS)
+hist(Gemiddeld_cijfer_WNS)
 ```
 
 Het histogram laat een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
@@ -80,7 +80,7 @@ Toets op normaliteit met de *Kolmogorov-Smirnov test* of met de *Shapiro-Wilk te
 
 ```{r Kolmogorov-Smirnov Test, warning=FALSE}
 library(nortest)
-lillie.test (Gemiddeld_cijfer_wns)
+lillie.test(Gemiddeld_cijfer_WNS)
 ```
 De *Kolmogorov-Smirnov test* is een non-parametrische toets, die het verschil in vorm tussen twee verdelingen toetst. In dit geval toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. Wanneer de p-waarde kleiner is dan 0,05 is er een verschil tussen beide verdelingen. 
 
@@ -90,7 +90,7 @@ In dit geval is *p* > 0,05. De verdeling van de data is niet significant verschi
 
 #### Shapiro-Wilk test
 ``` {r Shapiro-Wilk Test, warning=FALSE}
-shapiro.test(Gemiddeld_cijfer_wns_n30)
+shapiro.test(Gemiddeld_cijfer_WNS_n30)
 ```
 
 De *Shapiro-Wilk test* is een soort gelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Wanneer de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.
@@ -102,7 +102,7 @@ Voor de uitvoering in R is er een dummydataset genaamd Gemiddeld_cijfer_wns_n30 
 ### One sample t-toets
 Gebruik `t.test()`om een t-toets uit te voeren. Geef het gemiddelde waarmee wordt vergeleken en specifieer welke alternatieve hypothese er getoetst wordt.
 ```{r ttest}
-t.test(Gemiddeld_cijfer_wns, mu = 6.8, alternative = "greater")
+t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "greater")
 ```
 * Het gemiddelde van de steekproef is 7,08  
 * Vrijheidsgraden, *df* = *n* -1 = 122-1 = 121  

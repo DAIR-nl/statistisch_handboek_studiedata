@@ -104,7 +104,6 @@ Gebruik `t.test()`om een t-toets uit te voeren. Geef het gemiddelde waarmee word
 ```{r ttest}
 t.test(Gemiddeld_cijfer_wns, mu = 6.8, alternative="greater")
 ```
-Samenvatting output:  
 * Het gemiddelde van de steekproef is 7,08  
 * Vrijheidsgraden, *df* = *n* -1 = 122-1 = 121  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen  

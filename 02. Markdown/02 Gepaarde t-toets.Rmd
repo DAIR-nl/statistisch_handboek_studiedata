@@ -164,7 +164,13 @@ cohen.d(Evaluatie_score_voor_tutorgesprek, Evaluatie_score_na_tutorgesprek)
 *d* = 0,36. De sterkte van het effect van de tutor op het cijfer is klein tot gemiddeld. 
 
 #### Eta-squared
-
+```{r eta-squared}
+#ik heb geen optie gevonden die etasq uitrekent zonder anova.
+t <- 17.713
+df <- 245
+Eta2 <- (t^2) / (t^2 + 245)
+Eta2
+```
 ##### Dit is een titel die werkt in een tab
 
 

@@ -1,7 +1,7 @@
 ---
 title: "Mann-Whitney U toets"
 author: "Irene van der Staaij & Megiel Kerkhoven"
-date: "1 Oktober 2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document:
     toc: TRUE
@@ -63,6 +63,3 @@ wilcox.test(Resultaten_nl_studenten$Punten_jaar2_nl, Resultaten_internationale_s
 
 ## Rapportage
 
-## Verder lezen
-
-## Achtergrond info

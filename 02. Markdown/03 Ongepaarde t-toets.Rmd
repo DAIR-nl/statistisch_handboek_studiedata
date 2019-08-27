@@ -91,26 +91,26 @@ De data is verdeeld in 2 kolommen, het cijfer en het Cohort.
 ### Test assumpties: normaliteit
 Selecteer beide groepen om het gemiddelde, de standaarddeviatie en het histogram uit te draaien. Sla de selectie op in een vector.
 ```{r data selecteren}
-Cijfers_2010 <- Cijfers_gem[Cijfers_gem$Cohort==2010,]
-Cijfers_2011 <- Cijfers_gem[Cijfers_gem$Cohort==2011,]
+Cijfers_2010 <- Cijfers_gem[Cijfers_gem$Cohort==2010,1]
+Cijfers_2011 <- Cijfers_gem[Cijfers_gem$Cohort==2011,1]
 ```
 
 <div class="col2">
 ```{r Data beschrijven 1, collapse=TRUE}
-mean(Cijfers_2010$Cijfers)
-sd(Cijfers_2010$Cijfers)
+mean(Cijfers_2010)
+sd(Cijfers_2010)
 ```
 gemiddelde 2010 (standaarddeviate): 6,37 (1,12)
 ```{r Data beschrijven 2, collapse=TRUE}
-mean(Cijfers_2011$Cijfers)
-sd(Cijfers_2011$Cijfers)
+mean(Cijfers_2011)
+sd(Cijfers_2011)
 ```
 gemiddelde 2011 (standaarddeviate): 6,61(1,2) </div>
 
 <div class="col2">
 ```{r histogram, collapse=TRUE}
-hist(Cijfers_2010$Cijfers)
-hist(Cijfers_2011$Cijfers)
+hist(Cijfers_2010)
+hist(Cijfers_2011)
 ```
 </div>
 Beide histogrammen laten een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  
@@ -123,8 +123,8 @@ library(nortest)
 ```
 <div class="col2">
 ``` {r Lilliefors Test, warning=FALSE}
-lillie.test(Cijfers_2010$Cijfers)
-lillie.test(Cijfers_2011$Cijfers)
+lillie.test(Cijfers_2010)
+lillie.test(Cijfers_2011)
 ```
 </div>
 

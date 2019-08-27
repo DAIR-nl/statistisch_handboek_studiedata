@@ -109,7 +109,7 @@ hist(Evaluatie_score_na_tutorgesprek)
 ```
 </div>
 
-Beide histogrammen laten een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Het histogram "na het tutorgesprek" lijkt licht scheef verdeeld.   
+Beide histogrammen laten een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Het histogram `Evaluatie_score_na_tutorgesprek` lijkt licht scheef verdeeld.   
 
 ### {.tabset .tabset-fade .tabset.pills}
 #### Kolmogorov-Smirnov (met Lilliefors correctie)

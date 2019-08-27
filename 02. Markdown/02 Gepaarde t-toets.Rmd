@@ -95,7 +95,7 @@ Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, kan 
 Om te bepalen of de gevonden p-waarde betekenisvol is kan een effectmaat berekend worden. Cohen's *d* berekent de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele. Een indicatie om *d* te interpreteren is: *d* ≤ 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.  
 
 ## Uitvoering in R
-Voor de uitvoering in R is er data ingeladen met evaluatie-scores van studenten die geen tutorgesprek hebben gehad en van studenten die wel een tutorgesprek hebben gehad. 
+Voor de uitvoering in R is er data ingeladen met evaluatie-scores van studenten voor en nadat zij een tutorgesprek hebben gehad. 
 
 ### Test assumpties: Normaliteit
 <div class="col2">
@@ -109,7 +109,7 @@ hist(Evaluatie_score_na_tutorgesprek)
 ```
 </div>
 
-Beide histogrammen laten een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Het histogram "wel een tutor" lijkt licht scheef verdeeld.   
+Beide histogrammen laten een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Het histogram "na het tutorgesprek" lijkt licht scheef verdeeld.   
 
 ### {.tabset .tabset-fade .tabset.pills}
 #### Kolmogorov-Smirnov (met Lilliefors correctie)

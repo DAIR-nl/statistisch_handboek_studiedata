@@ -1,7 +1,7 @@
 ---
 title: "06 Tekentoets"
 author: "Irene van der Staaij & Megiel Kerkhoven"
-date: "Oktober 2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document:
     toc: TRUE
@@ -70,5 +70,5 @@ binom.test(boven_modaal, totaal_alumni, alternative = "two.sided")
 
 ## Rapportage
 
-## Referenties
+
 [^1]: Bruto modaal inkomen 2019, Centraal Planbureau

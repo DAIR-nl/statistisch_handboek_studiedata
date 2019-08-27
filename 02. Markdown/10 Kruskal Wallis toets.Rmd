@@ -1,7 +1,7 @@
 ---
 title: "Kruskal Wallis toets"
 author: "Irene van der Staaij & Megiel Kerkhoven"
-date: "Oktober 2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document:
     toc: TRUE
@@ -88,7 +88,3 @@ pairwise.wilcox.test(Resultaten_arbeidsrecht$Ec_jaar1, Resultaten_arbeidsrecht$V
 ## Toelichting op de output
 
 ## Rapportage
-
-## Verder lezen
-
-## Achtergrond info

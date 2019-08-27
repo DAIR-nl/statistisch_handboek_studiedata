@@ -1,7 +1,7 @@
 ---
 title: "Ongepaarde t-toets"
 author: "Irene van der Staaij & Megiel Kerkhoven"
-date: "1 Oktober 2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document:
     toc: TRUE
@@ -161,7 +161,7 @@ t.test(Cijfers_2010, Cijfers_2011)
 
 ## Rapportage
 
-## Referenties
+
 [^1]: van Geloven, N. (2016, May 25). T-toets [Wiki Statistiek Academisch Medisch Centrum]. Retrieved from: https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets 
 [^2]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. Retrieved from: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
 [^2]: https://wikistatistiek.amc.nl/index.php/One-way_ANOVA

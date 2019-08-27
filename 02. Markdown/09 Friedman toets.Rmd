@@ -1,7 +1,7 @@
 ---
 title: "09 Friedman toets"
 author: "Irene van der Staaij & Megiel Kerkhoven"
-date: "Oktober 2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document:
     toc: TRUE
@@ -44,6 +44,3 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Rapportage
 
-## Referenties
-
-## Achtergrond info

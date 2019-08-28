@@ -1,0 +1,86 @@
+---
+title: "Moet de data tidy zijn voor cohen.d()?"
+author: "Megiel Kerkhoven"
+date: "21 augustus 2019"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    theme: united
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+---
+<style>
+  .col2 {
+    columns: 2 200px;         /* number of columns and width in pixels*/
+    -webkit-columns: 2 200px; /* chrome, safari */
+    -moz-columns: 2 200px;    /* firefox */
+  }
+</style>
+
+
+```{r aanmaken data, include=FALSE, echo=TRUE}
+set.seed(2)
+
+mu <- 3.6
+sigma <- 0.6
+Evaluatie_score_geen_tutor <- rnorm(250, mu, sigma)
+
+Evaluatie_score_geen_tutor <- Evaluatie_score_geen_tutor[Evaluatie_score_geen_tutor <= 5 
+                                                         & Evaluatie_score_geen_tutor >= 1]
+Evaluatie_score_geen_tutor <- sapply (Evaluatie_score_geen_tutor, round, 3)
+
+mu <- 3.4
+sigma <- 0.7
+Evaluatie_score_wel_tutor <- rnorm(250, mu, sigma)
+
+Evaluatie_score_wel_tutor <- Evaluatie_score_wel_tutor[Evaluatie_score_wel_tutor <= 5 
+                                                       & Evaluatie_score_wel_tutor >= 1]
+Evaluatie_score_wel_tutor <- sapply (Evaluatie_score_wel_tutor, round, 3)
+
+Evaluatie_tidy <- data.frame(c(Evaluatie_score_geen_tutor, Evaluatie_score_wel_tutor), c(replicate(248, 0), replicate(248, 1)))
+colnames(Evaluatie_tidy) <- c("Evaluatie_score", "tutorgesprek")
+```
+
+# Vraag
+Moet de data tidy (1 rij, 1 observatie) zijn voor het gebruik van `cohen.d()`?  We vergelijken een dataformaat met twee groepen in dezelfde tabel en een dataformaat met twee vectoren met twee verschillende groepen. De eerste manier is:
+``` {r bekijk tidy, collapse=TRUE}
+head(Evaluatie_tidy)
+tail(Evaluatie_tidy)
+```
+De tweede manier is als twee aparte groepen:
+<div class="col2">
+```{r bekijk niet tidy}
+head(Evaluatie_score_geen_tutor)
+
+head(Evaluatie_score_wel_tutor)
+```
+</div>
+
+# Berekening
+``` {r library}
+library(effsize)
+```
+
+<div class="col2">
+### Tidy
+```{r tidy}
+cohen.d(Evaluatie_score_geen_tutor, Evaluatie_score_wel_tutor)
+```
+.
+
+### Niet tidy
+``` {r niet tidy}
+cohen.d(Evaluatie_tidy, factor(Evaluatie_tidy$tutorgesprek))
+```
+</div>
+
+# Conclusie
+Het maakt niet uit of je in Cohen.d() twee vectoren gebruikt (niet tidy) of 1 vector en een factor (tidy). Dit weten we omdat we dezelfde uitkomsten krijgen voor beide manieren.
+

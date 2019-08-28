@@ -22,6 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Laad packages in
 
 ## Maak dummydata aan
+RNGkind(sample.kind = "Rounding")
 set.seed(1)
 
 Decimalen_wiskunde <- rnorm(160, 7.0, 2.6)
@@ -58,24 +59,43 @@ De t-toets gaat er vanuit dat de data normaal verdeeld is. Controleer deze assum
 Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is dan kan de t-toets niet gebruikt worden. Gebruik in dat geval de *Wilcoxon Signed Rank Test* [^3].
 
 ## Uitvoering in R
-Voor de uitvoering in R is er een dummydataset genaamd Gemiddeld_cijfer_wns ingeladen met de gemiddelde cijfers van Wiskunde, Natuurkunde en Scheikunde van 122 middelbare scholieren.
+Twee dummy dummydatasets genaamd `Gemiddeld_cijfer_WNS` en `Gemiddeld_cijfer_WNS_n30` zijn ingeladen met de gemiddelde eindexamencijfers van Wiskunde, Natuurkunde en Scheikunde uit Studielink. Het eerste bestand bevat 122 middelbare scholierenstudenten en het tweede bevat 30 studenten.
 
-### Test assumpties: normaliteit
-Bekijk de data via `mean()`, `sd()` en `hist()`.
-```{r histogram voor normaliteit, collapse=TRUE}
+### Test assumpties: normaliteit {.tabset .tabset-fade .tabset.pills}
+Bekijk de data via `mean()`, `sd()`.
+```{r de data bekijken, collapse=TRUE}
 mean(Gemiddeld_cijfer_WNS)
 sd(Gemiddeld_cijfer_WNS)
-hist(Gemiddeld_cijfer_WNS)
+```
+Geef normaliteit visueel weer met een histogram of Q-Q plot. 
+
+#### Histogram
+Gebruik `hist()`
+```{r Histogram}
+hist(Gemiddeld_cijfer_WNS, 
+     probability = TRUE,
+     main = "Histogram van Gemiddeld_cijfer_WNS",
+     xlab = "Gemiddeld_cijfer_WNS",
+     ylab = "Dichtheid")
+lines(density(Gemiddeld_cijfer_WNS), col = 2)
 ```
 
 Het histogram laat een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
 
-***
+#### Q-Q plot
+Gebruik `qqnorm()` en `qqline()`. Gebruik `pch = 20`om gevulde datapunten te creëren.
+```{r qqplot}
+qqnorm(Gemiddeld_cijfer_WNS, pch = 20)
+qqline(Gemiddeld_cijfer_WNS)
+```
 
+
+### {.toc-ignore}
+***
 Er zijn meerdere manieren om normaliteit te toetsen, hierbij een toelichting bij twee veel gebruikte toetsen.  
 Toets op normaliteit met de *Kolmogorov-Smirnov test* of met de *Shapiro-Wilk test* (*n* < 50[^4] ).  
 
-### {.tabset .tabset-fade .tabset.pills}
+### {.toc-ignore .tabset .tabset-fade .tabset.pills}
 #### Kolmogorov-Smirnov (met Lilliefors correctie) 
 
 ```{r Kolmogorov-Smirnov Test, warning=FALSE}
@@ -86,8 +106,6 @@ De *Kolmogorov-Smirnov test* is een non-parametrische toets, die het verschil in
 
 In dit geval is *p* > 0,05. De verdeling van de data is niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *one sample t-toets* kan uitgevoerd worden.  
 
-***
-
 #### Shapiro-Wilk test
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 shapiro.test(Gemiddeld_cijfer_WNS_n30)
@@ -97,6 +115,7 @@ De *Shapiro-Wilk test* is een soort gelijke test als de *Kolmogorov-Smirnov test
 
 Voor de uitvoering in R is er een dummydataset genaamd Gemiddeld_cijfer_wns_n30 ingeladen met de gemiddelde cijfers van Wiskunde, Natuurkunde en Scheikunde van 30 middelbare scholieren. De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *one sample-t-toets* kan uitgevoerd worden.
 
+### {.toc-ignore}
 ***
 
 ### One sample t-toets

@@ -1,6 +1,5 @@
 ---
 title: "Gepaarde t-toets"
-author: "Irene van der Staaij & Megiel Kerkhoven"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document:
@@ -21,19 +20,16 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
+RNGkind(sample.kind = "Rounding")
 set.seed(1)
-volgorde <- sample(1:246, 246)
-volgorde_n30 <- sample(1:30, 30)
 
+## Maak ruwe data aan
 mu <- 3.6
 sigma <- 0.6
 Evaluatie_score_voor_tutorgesprek <- rnorm(250, mu, sigma)
 
 Evaluatie_score_voor_tutorgesprek <- Evaluatie_score_voor_tutorgesprek[Evaluatie_score_voor_tutorgesprek <= 5 
                                                                        & Evaluatie_score_voor_tutorgesprek >= 1]
-Evaluatie_score_voor_tutorgesprek <- sapply (Evaluatie_score_voor_tutorgesprek, round, 3)
-Evaluatie_score_voor_tutorgesprek <- sort(Evaluatie_score_voor_tutorgesprek)
-Evaluatie_score_voor_tutorgesprek <- Evaluatie_score_voor_tutorgesprek[volgorde]
 
 mu <- 3.4
 sigma <- 0.9
@@ -41,11 +37,23 @@ Evaluatie_score_na_tutorgesprek <- rnorm(260, mu, sigma)
 
 Evaluatie_score_na_tutorgesprek <- Evaluatie_score_na_tutorgesprek[Evaluatie_score_na_tutorgesprek <= 5 
                                                                    & Evaluatie_score_na_tutorgesprek >= 1]
-Evaluatie_score_na_tutorgesprek <- sapply (Evaluatie_score_na_tutorgesprek, round, 3)
-Evaluatie_score_na_tutorgesprek <- sort(Evaluatie_score_na_tutorgesprek)
+## Stel volgorde en lengte van steekproef vast
+volgorde <- sample(1:length(Evaluatie_score_voor_tutorgesprek), length(Evaluatie_score_voor_tutorgesprek))
+volgorde_n30 <- sample(1:30, 30)
 Verschil_grootte <- length(Evaluatie_score_na_tutorgesprek) - length(Evaluatie_score_voor_tutorgesprek)
+
+## Rond evaluatiecijfers af
+Evaluatie_score_voor_tutorgesprek <- sapply (Evaluatie_score_voor_tutorgesprek, round, 3)
+Evaluatie_score_na_tutorgesprek <- sapply (Evaluatie_score_na_tutorgesprek, round, 3)
+
+## Definiëer lengte in steekproef en hussel paren
+Evaluatie_score_voor_tutorgesprek <- sort(Evaluatie_score_voor_tutorgesprek)
+Evaluatie_score_voor_tutorgesprek <- Evaluatie_score_voor_tutorgesprek[volgorde]
+Evaluatie_score_na_tutorgesprek <- sort(Evaluatie_score_na_tutorgesprek)
 Evaluatie_score_na_tutorgesprek <- Evaluatie_score_na_tutorgesprek[sample(-283:-1, Verschil_grootte)]
 Evaluatie_score_na_tutorgesprek <- Evaluatie_score_na_tutorgesprek[volgorde]
+
+
 
 mu <- 3.6
 sigma <- 0.6

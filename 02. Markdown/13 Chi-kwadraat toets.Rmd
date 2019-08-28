@@ -12,7 +12,6 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 Geen_leenstelsel <- c(375, 496)
 Wel_leenstelsel <- c(369, 394)
@@ -65,7 +64,6 @@ p-waarde < 0,05 , dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
 De *Fisher's exact toets* wordt ook gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde nominale variabelen, door middel van een kruistabel. In tegenstelling tot de *chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage frequenties ingezet worden. De *Fisher's exact toets* is conservatiever dan de *chi-kwadraat toets*[^2].
 
 Voor de uitvoering in R is er data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel, alle groepen hebben een laag aantal per cel, variërend van 5 tot 16. Ook hier is de data `Uitval_functiebeperking_n43` binair. 
-
 
 ```{r fishers exact}
 fisher.test(Uitval_functiebeperking_n43)

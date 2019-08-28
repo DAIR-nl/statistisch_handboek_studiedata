@@ -1,0 +1,68 @@
+---
+title: "Vanaf wanneer zijn discrete getallen bij benadering continu?"
+author: "Megiel Kerkhoven"
+date: "7 augustus 2019"
+output: 
+  html_document:
+    theme: united
+---
+```{r verborgen, include=FALSE}
+library(nortest)
+```
+## Analyse
+
+### Steekproeven met 1 decimaal
+De normaliteitstesten die we gebruiken hebben meer kans om discrete samples af te wijzen als de steekproef erg groot wordt. Ik heb een simulatie gedaan waarin er steeds een grotere steekproef uit een normaalverdeling (mu=6.9, sigma=2.0, afgerond op 1 decimaal) wordt genomen. R doet per steekproefgrootte duizend herhalingen om de kans op afwijzing voor die steekproefgrootte te bepalen. Hieronder is het percentage steekproeven dat door de KStest als niet normaal verdeeld wordt beschouwd:
+
+```{r grote sample size 1 decimaal, warning=FALSE, echo=FALSE}
+library (nortest)
+x <- replicate(1000, { # 1000 testen per verdeling
+  c(lillie.test(sapply(rnorm(10, 6.9, 2.0), round, 1))$p.value,
+    lillie.test(sapply(rnorm(100, 6.9, 2.0), round, 1))$p.value,
+    lillie.test(sapply(rnorm(1000, 6.9, 2.0), round, 1))$p.value,
+    lillie.test(sapply(rnorm(10000, 6.9, 2.0), round, 1))$p.value
+    )
+} 
+)
+View (x)
+rownames(x) <- c("n=10", "n=100","n=1000", "n=10000")
+rowMeans(x<0.05) #geeft de proportie van de 1000 tests aan die normaliteit afwijzen
+```
+Je ziet dat de kans op afwijzing van normale verdeling van 6% bij een steekproef van 10 naar 100% bij een steekproef van 10000 loopt. Als je een Q-Q plot maakt van een grote steekproef zou je echter een andere conclusie trekken dan je op basis van de KStest van dezelfde steekproef zou doen:
+``` {r qqplot grote steekproef, collapse=TRUE}
+set.seed(0)
+x <- sapply(rnorm(10000, 6.9, 2.0), round, 1)
+qqnorm(x)
+qqline(x)
+lillie.test(x)
+```
+
+
+```{r unset seed, include=FALSE}
+set.seed(Sys.time())
+```
+
+### Steekproeven met 2 decimalen
+Zodra we echter steekproeven gaan trekken uit een minder discrete normaalverdeling (mu=6.9, sigma=2.0, afgerond op 2 decimalen) is dat effect pas veel later te zien (vanaf n=100 000).
+```{r grote sample size 2 decimalen, warning=FALSE, echo=FALSE}
+
+x <- replicate(1000, { # 1000 testen per verdeling
+  c(lillie.test(sapply(rnorm(10, 6.9, 2.0), round, 2))$p.value,
+    lillie.test(sapply(rnorm(100, 6.9, 2.0), round, 2))$p.value,
+    lillie.test(sapply(rnorm(1000, 6.9, 2.0), round, 2))$p.value,
+    lillie.test(sapply(rnorm(10000, 6.9, 2.0), round, 2))$p.value,
+    lillie.test(sapply(rnorm(100000, 6.9, 2.0), round, 2))$p.value
+    )
+} 
+)
+rownames(x) <- c("n=10", "n=100","n=1000", "n=10000", "n=100000")
+rowMeans(x<0.05) #geeft de proportie van de 1000 tests aan die normaliteit afwijzen
+```
+
+## Conclusies
+- In feite betekent dit dat KStesten niet te gebruiken zijn bij discrete getallen met 1 cijfer achter de komma. Als de steekproef groter wordt dan 100 is het namelijk al grotendeels gokken of deze als normaal verdeeld wordt beoordeeld. Bij n=1000 geldt namelijk al dat bijna een derde van de steekproeven, getrokken uit een normale verdeling, afgewezen worden.
+
+- Bij discrete getallen met 2 cijfers achter de komma zie je dat dit probleem pas bij een veel grotere steekproefgrootte optreedt. Deze zouden bij benadering dus kunnen worden gezien als continu. 
+
+[^1]: https://stats.stackexchange.com/questions/2492/is-normality-testing-essentially-useless/2501#2501
+

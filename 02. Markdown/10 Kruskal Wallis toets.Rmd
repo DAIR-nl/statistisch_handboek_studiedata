@@ -15,10 +15,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
+RNGkind(sample.kind = "Rounding")
 set.seed(8)
+RNGkind(sample.kind = "Rounding")
 # 3
 ## 300 waarnemingen voor Vooropleiding
-Seed <- sample(c(1, 2, 3, 4), 300, replace=TRUE)
+Seed <- sample(c(1, 2, 3, 4), 300, replace = TRUE)
 Vooropleiding <-  ifelse(Seed == 1, "Rechtsgeleerdheid", 
                   ifelse(Seed == 2, "Notarieel recht",
                   ifelse(Seed == 3, "Fiscaal recht",
@@ -27,7 +29,7 @@ Vooropleiding <-  ifelse(Seed == 1, "Rechtsgeleerdheid",
 
 ## 300 waarnemingen voor puntenaantallen, random gesampled uit een lijst mogelijkheden
 Punten_mogelijkheden <- c(6, 12, 18, 24, 30, 36, 36, 42, 42, 42, 48, 48, 48, 48, 54, 54, 54, 60, 60, 60, 60, 60, 60)
-Ec_jaar1 <- sample (Punten_mogelijkheden, 300, replace=TRUE)
+Ec_jaar1 <- sample(Punten_mogelijkheden, 300, replace = TRUE)
 
 Studentnr <- sample(3000000:4000000, 300)
 Resultaten_arbeidsrecht <- data.frame(Studentnr, Vooropleiding, Ec_jaar1)

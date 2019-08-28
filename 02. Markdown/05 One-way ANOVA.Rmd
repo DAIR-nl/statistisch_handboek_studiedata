@@ -27,6 +27,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Doel: tidy data met een kolom reistijd (value) en een kolom opleidng (factor)
 library(dplyr)
+RNGkind(sample.kind = "Rounding")
 set.seed(0)
 
 Studiegrootte <- 311
@@ -192,15 +193,15 @@ Elke groep heeft geen overlap met één van de andere groepen en de groepen kunn
 Voor de uitvoering in R is er een dataset ingeladen genaamd `Reistijd_per_opleiding`. Deze bevat data de reistijden van uitwonende studenten per opleiding.
 
 ### De data bekijken
-Gebruik een sample om de data te bekijken
+Gebruik `head()` om de data te bekijken
 ```{r de data bekijken}
 head(Reistijd_per_opleiding)
 ```
 ```{r de data visualiseren}
 levels(Reistijd_per_opleiding$Opleiding)
 library(graphics)
-par(mar=c(3,12,1,0)+.1)
-boxplot(Reistijd ~ Opleiding, Reistijd_per_opleiding, las= 2, horizontal=TRUE)
+par(mar = c(3, 12, 1, 0) + .1)
+boxplot(Reistijd ~ Opleiding, Reistijd_per_opleiding, las = 2, horizontal = TRUE)
 ```
 
 ### Assumpties testen in R
@@ -211,7 +212,7 @@ Reistijdlijst <- Reistijd_per_opleiding %>%
 ```
 
 ```{r lillietest}
-for (. in Reistijdlijst){
+for (. in Reistijdlijst) {
   print(lillie.test(.$Reistijd))
 }
 ```

@@ -15,6 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
+RNGkind(sample.kind = "Rounding")
 set.seed(0)
 
 Goede_student_ec <- c(0, 3, 6, 6, 6, 6, 6, 6, 6)

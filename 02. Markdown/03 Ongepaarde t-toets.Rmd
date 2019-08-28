@@ -21,6 +21,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
+RNGkind(sample.kind = "Rounding")
+RNGkind(sample.kind = "Rounding")
 set.seed(1)
 
 mu <- 6.3

@@ -84,16 +84,16 @@ Evaluatie_score_na_tutorgesprek_n30 <- Evaluatie_score_na_tutorgesprek_n30[volgo
 ```
 
 
-## Gebruik
+## 1 Toepassing
 Bij het toetsen of het gemiddelde van twee groepen aan elkaar gelijk zijn kan de *t-toets* toegepast worden. De *gepaarde t-toets* kan toegepast worden wanneer de groepen gepaard zijn, bijvoorbeeld bij een herhaalde meting. Wanneer personen uit twee verschillende groepen, die met elkaar veel overeenkomsten vertonen, gekoppeld worden, kan ook een *gepaarde t-toets* gebruikt worden [^1].
 
-## Voorbeeld uit het onderwijs
+## 2 Onderwijscasus
 Ter voorbereiding op een visitatie vraagt de opleidingsdirecteur van de lerarenopleiding zich af of haar studenten, nadat ze met hun tutor hebben gesproken, de opleiding een ander cijfer geven. Ze vraagt of de studenten twee keer een vragenlijst in willen vullen, één keer voordat ze met hun tutor hebben gesproken (T~0~) en nog een keer nadat ze met hun tutor hebben gesproken (T~1~). 
 
 H~0~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is niet veranderd na een gesprek met hun tutor, µ~T0~ = µ~T1~  
 H~A~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is veranderd na een gesprek met hun tutor, µ~T0~ ≠ µ~T1~ 
 
-## Assumpties: Normaliteit
+## 3 Assumpties: Normaliteit
 De *t-toets* gaat ervan uit dat de data normaal verdeeld is.  
 1. Controleer visueel of de data normaal verdeel is door het maken van een dataplot: een histogram of een boxplot.  
 2. Toets daarna of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef met de *Shapiro-Wilk test* [^2].  
@@ -107,7 +107,7 @@ Cohen's *d* berekent de sterkte van het effect van een onafhankelijke variabele 
 
 Eta squared (η^2) berekent de proportie van de variantie in de afhankelijke variabele wat verklaard wordt door de onafhankelijke variabele. In dit geval berekent het de proportie van de variantie in de hoogte van het cijfer wat verklaard kan worden door het tutorgesprek. Een indicatie om η^2 te interpreteren is: η^2 = 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en > 0,14 is een groot effect [^5]. 
 
-## Uitvoering in R
+## 4 Uitvoering in R
 Voor de uitvoering in R is er data ingeladen met evaluatie-scores van studenten voor en nadat zij een tutorgesprek hebben gehad. 
 
 ### Test assumpties: Normaliteit
@@ -154,7 +154,7 @@ In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, 
 
 ### Gepaarde t-toets
 ```{r statistische toets}
-t.test(Evaluatie_score_voor_tutorgesprek, Evaluatie_score_na_tutorgesprek, paired=TRUE)
+t.test(Evaluatie_score_voor_tutorgesprek, Evaluatie_score_na_tutorgesprek, paired = TRUE)
 ```
 * *t* (247) = 17,997, *p* < 0,01  
 * Vrijheidsgraden: *df* = *n* -1 = 245 
@@ -173,16 +173,16 @@ cohen.d(Evaluatie_score_voor_tutorgesprek, Evaluatie_score_na_tutorgesprek)
 
 #### Eta-squared
 ```{r eta-squared}
-#ik heb geen optie gevonden die etasq uitrekent zonder anova.
+#ik heb geen optie gevonden die etasq uitrekent zonder anova. Gebruik je deze eigenlijk wel voor t-toets?
 t <- 17.713
 df <- 245
 Eta2 <- (t^2) / (t^2 + 245)
 Eta2
 ```
-##### Dit is een titel die werkt in een tab
 
 
-## Rapportage
+
+## 5 Rapportage
 Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde cijfer, wat studenten geven voor de opleiding, gelijk is gebleven na een gesprek met een tutor. Het verschil tussen het gemiddelde van T~0~ (3,65) en het gemiddelde van T~1~ (3,4) is significant *t* (247) = -2,7787, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen heeft een reikwijdte van -0,27 tot -0,04. Het effect is klein tot gemiddeld, *d* = 0,36.    
 De resultaten ondersteunen de conclusie dat de studenten na een gesprek met de tutor de opleiding anders beoordelen dan voordat ze een gesprek hebben gehad met de tutor. 
 

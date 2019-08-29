@@ -34,13 +34,13 @@ Bsa_kt_n10 <- t(Bsa_kt_n10)
 colnames (Bsa_kt_n10) <- Landen_instroom
 ```
 
-## Gebruik
+## 1 Toepassing
 
-## Voorbeeld uit het onderwijs
+## 2 Onderwijscasus
 
-## Assumpties
+## 3 Assumpties
 
-## Uitvoering in R
+## 4 Uitvoering in R
 Voor de uitvoering in R is er een dataset (`Bsa_kt`) ingeladen over het BSA per instroomland van de faculteit Sociale Wetenschappen.
 
 ### De data bekijken
@@ -65,4 +65,4 @@ fisher.test(Bsa_kt, simulate.p.value = TRUE)
 
 ## Toelichting op de output
 
-## Rapportage
+## 5 Rapportage

@@ -39,13 +39,13 @@ Resultaten_nl_studenten <- data.frame(Resultaten_nl_studenten, Punten_jaar2_nl)
 
 ```
 
-## Gebruik
+## 1 Toepassing
 
-## Voorbeeld uit het onderwijs
+## 2 Onderwijscasus
 
-## Assumpties
+## 3 Assumpties
 
-## Uitvoering in R
+## 4 Uitvoering in R
 
 ### De data bekijken
 Gebruik `head()` in R om de eerste vijf regels te bekijken
@@ -62,5 +62,5 @@ wilcox.test(Resultaten_nl_studenten$Punten_jaar2_nl, Resultaten_internationale_s
 
 ## Toelichting op de output
 
-## Rapportage
+## 5 Rapportage
 

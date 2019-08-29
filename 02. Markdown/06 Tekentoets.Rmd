@@ -32,13 +32,13 @@ p_2014 <- c(
 Jaarlijks_inkomen <- replicate(2314, 13*(sample(Mogelijkheden, 1, replace=TRUE, p_2014)))
 ```
 
-## Gebruik
+## 1 Toepassing
 
-## Voorbeeld uit het onderwijs
+## 2 Onderwijscasus
 
-## Assumpties
+## 3 Assumpties
 
-## Uitvoering in R
+## 4 Uitvoering in R
 Voor de uitvoering in R is er data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij. De directeur wil kijken hoe zijn oud-studenten scoren ten opzichte van gemiddelde inkomens in Nederland.
 
 ### De data bekijken
@@ -69,7 +69,7 @@ binom.test(boven_modaal, totaal_alumni, alternative = "two.sided")
 
 ## Toelichting op de output
 
-## Rapportage
+## 5 Rapportage
 
 
 [^1]: Bruto modaal inkomen 2019, Centraal Planbureau

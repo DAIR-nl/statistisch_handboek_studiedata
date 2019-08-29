@@ -20,13 +20,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```
 
-## Gebruik
+## 1 Toepassing
 
-## Voorbeeld uit het onderwijs
+## 2 Onderwijscasus
 
-## Assumpties
+## 3 Assumpties
 
-## Uitvoering in R
+## 4 Uitvoering in R
 
 ### Assumpties testen in R
 
@@ -42,5 +42,5 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Toelichting op de output
 
-## Rapportage
+## 5 Rapportage
 

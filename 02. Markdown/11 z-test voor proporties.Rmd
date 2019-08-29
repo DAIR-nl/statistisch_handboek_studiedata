@@ -35,13 +35,13 @@ Eerder_wo <- round (rnorm(aantal_studenten, 0.4, 0.1))
 Aanmeldingen_tweedekans <- data.frame(Studentnr, Eerder_wo)
 ```
 
-## Gebruik
+## 1 Toepassing
 
-## Voorbeeld uit het onderwijs
+## 2 Onderwijscasus
 
-## Assumpties
+## 3 Assumpties
 
-## Uitvoering in R
+## 4 Uitvoering in R
 Voor de uitvoering in R is er een dataset ingeladen genaamd `Aanmeldingen_tweedekans`. Dit is een dataframe met binaire data over de aanmeldingen van studenten en of zij al eerder op het WO hebben gezeten.
 
 ### De data bekijken

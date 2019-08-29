@@ -155,10 +155,10 @@ Reistijd_per_opleiding <- Reistijd_per_opleiding %>%
   mutate(Reistijd = if_else(Reistijd < 0, Reistijd*-1, Reistijd))
 ```
 
-## Gebruik
+## 1 Toepassing
 De *one-way ANOVA* wordt gebruikt bij het toetsen of het gemiddelde van drie of meer groepen aan elkaar gelijk zijn. De te vergelijken groepen zijn ongepaard en daarmee onafhankelijk van elkaar.  
 
-## Voorbeeld uit het onderwijs
+## 2 Onderwijscasus
 Het hoofd communicatie wil in verband met wervingsactiviteiten weten wat de reistijd is van studenten aan verschillende opleidingen voor en na de invoering van het leenstelsel. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten per opleiding
 
 ```{r opmerking, include=FALSE, eval=FALSE}
@@ -170,7 +170,7 @@ Het hoofd communicatie wil in verband met wervingsactiviteiten weten wat de reis
 #posthoc Tukey 
 ```
 
-## Assumpties
+## 3 Assumpties
 Controleer of de steekproef aan de volgende assumpties voldoen: 
 1. Normaliteit 
 2. Homogeniteit van varianties
@@ -189,7 +189,7 @@ Controleer of de spreiding van iedere groep ongeveer hetzelfde is, dit kan getoe
 Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. 
 
 
-## Uitvoering in R
+## 4 Uitvoering in R
 Voor de uitvoering in R is er een dataset ingeladen genaamd `Reistijd_per_opleiding`. Deze bevat data de reistijden van uitwonende studenten per opleiding.
 
 ### De data bekijken
@@ -228,7 +228,7 @@ summary(res.aov)
 
 ## Toelichting op de output
 
-## Rapportage
+## 5 Rapportage
 
 
 [^1]: https://wiki.uva.nl/methodologiewinkel/index.php/One-way_ANOVA Deze pagina is het laatst bewerkt op 8 jul 2014 om 13:41.

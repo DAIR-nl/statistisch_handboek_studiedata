@@ -1,0 +1,89 @@
+---
+title: '18 Chi-kwadraat (trend)'
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    theme: united
+---
+
+<style>
+  .col2 {
+    columns: 2 200px;
+    -webkit-columns: 2 200px;
+    -moz-columns: 2 200px;
+  }
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r aanmaken data, include=FALSE, echo=TRUE}
+library(dplyr)
+set.seed(1)
+Nom_vwo <- c(rep(1, 160), rep(2, 140), rep(3, 60), rep(4, 22))
+Nom_niet_vwo <- c(rep(1, 113), rep(2, 71), rep(3, 30), rep(4, 6))
+Nominaal_num <- c(Nom_vwo, Nom_niet_vwo)
+Nominaal_cat <- Nominaal_num
+Nominaal_cat[Nominaal_cat == 1] <- "Nominaal"
+Nominaal_cat[Nominaal_cat == 2] <- "Nominaal + 1"
+Nominaal_cat[Nominaal_cat == 3] <- "Nominaal + 2"
+Nominaal_cat[Nominaal_cat == 4] <- "Nominaal + 3 of meer"
+
+direct_vwo <- c(rep(1, length(Nom_vwo)), rep(0, length(Nom_niet_vwo)))
+Afstudeertijd <- data.frame( direct_vwo, Nominaal_cat, Nominaal_num)
+colnames(Afstudeertijd) <- c("Direct van het VWO", "Nominaal_cat", "Nominaal_num")
+
+Afstudeertijd <- sample_n(Afstudeertijd, nrow(Afstudeertijd))
+View(Afstudeertijd)
+
+```
+
+## 1 Toepassing
+
+## 2 Onderwijscasus
+
+## 3 Assumpties
+
+## 4 Uitvoering in R
+Voor de uitvoering in R is er een dataset ingeladen genaamd
+
+### De data bekijken
+```{r data bekijken}
+
+```
+
+### Assumpties testen in R
+
+```{r}
+
+```
+
+### Statistische toets in R
+`prop.trend.test()` lijkt niet te doen wat we willen en is bovendien een erg oude en niet veel gebruikte functie. SPSS rekent chi-kwadraat voor lineariteit uit volgens advies van Agresti (1996) [^1]. Het is echter maar de vraag hoe goed ze daar de correlatie berekenen.  Je zult namelijk de ordinale veriabele om moeten zetten in een numerieke. David Howell van de Universiteit van Vermont legt dit uit [^2]. Hij zet zijn ordinale variabele met 4 categorieën om in 1, 2, 3, 4. Chi-kwadraat kan worden gevonden door M^2 = (N - 1)r^2
+```{r pearson}
+cor.test(Afstudeertijd$`Direct van het VWO`, Afstudeertijd$Nominaal_num)
+r <- cor(Afstudeertijd$`Direct van het VWO`, Afstudeertijd$Nominaal_num)
+n <- nrow(Afstudeertijd)
+chi <- (n - 1) * r^2
+chi
+```
+Of via Kendall's tau als de meeteenheid van Afstudeertijd niet oke, maar wel ordinaal is:
+```{r tau}
+cor.test(Afstudeertijd$`Direct van het VWO`, Afstudeertijd$Nominaal_num, method = "kendall")
+t <- cor(Afstudeertijd$`Direct van het VWO`, Afstudeertijd$Nominaal_num, method = "kendall")
+n <- nrow(Afstudeertijd)
+chi <- (n - 1) * t^2
+chi
+
+```
+
+## Toelichting op de output
+
+## 5 Rapportage
+
+[^1]: Agresti, A. (1996) An introduction to categorical data analysis. New York: Wiley.
+[^2]: https://www.uvm.edu/~dhowell/StatPages/More_Stuff/OrdinalChisq/OrdinalChiSq.html

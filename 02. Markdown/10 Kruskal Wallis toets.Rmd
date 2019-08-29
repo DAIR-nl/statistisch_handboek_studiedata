@@ -41,13 +41,13 @@ Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding == "Rechtsgeleerdheid"] <-
   Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding == "Rechtsgeleerdheid"] - 6
 ```
 
-## Gebruik
+## 1 Toepassing
 
-## Voorbeeld uit het onderwijs
+## 2 Onderwijscasus
 
-## Assumpties
+## 3 Assumpties
 
-## Uitvoering in R
+## 4 Uitvoering in R
 Voor de uitvoering in R is er data ingeladen met studieresultaten van de Master arbeidsrecht per vooropleiding.
 
 ### De data bekijken
@@ -89,4 +89,4 @@ pairwise.wilcox.test(Resultaten_arbeidsrecht$Ec_jaar1, Resultaten_arbeidsrecht$V
 ```
 ## Toelichting op de output
 
-## Rapportage
+## 5 Rapportage

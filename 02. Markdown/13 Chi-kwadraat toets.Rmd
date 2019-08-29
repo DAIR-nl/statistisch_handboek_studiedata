@@ -24,23 +24,23 @@ Uitval_functiebeperking_n43 <- t(data.frame(Geen_leenstelsel_n43, Wel_leenstelse
 colnames(Uitval_functiebeperking_n43) <- c("Wel uitval", "Geen uitval")
 ```
 
-## Gebruik
+## 1 Toepassing
 De *chi-kwadraat toets* wordt gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde categorische variabelen, door middel van een kruistabel [^1].
 
-## Voorbeeld uit het onderwijs
+## 2 Onderwijscasus
 De studentendecaan vraagt zich af of de studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel.
 
 H~0~: De verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel is gelijk gebleven.
 
 H~A~: De verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel is veranderd.
 
-## Assumpties
+## 3 Assumpties
 1. De variabelen zijn op nominaal niveau gemeten, dit betekent automatisch dat er geen ordening tussen de groepen gemaakt kan worden en dat de groepen onafhankelijk van elkaar zijn.  
 2. De groepsgrootte van de verwachtte waarde is per cel niet kleiner dan 5, bij de geobserveerde waarde is de groepsgrootte niet minder dan 10. Gebruik de *Fisher’s exact toets* wanneer de groepen kleiner zijn [^2].  
 3. Elke cel van de verwachte waarde is groter dan 0 [^3]. 
 
 
-## Uitvoering in R
+## 4 Uitvoering in R
 Voor de uitvoering in R is er data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. De data `Uitval_functiebeperking` is binair (wel of geen uitval). 
 
 ### De data bekijken
@@ -73,7 +73,7 @@ p-waarde > 0,05 , dus de H~O~ wordt niet verworpen
 De kans op het uitvallen van studenten met een functiebeperking onder het leenstelsel is 1,8 keer zo groot als de kans op het uitvallen van studenten met een functiebeperking voor leenstelsel. Deze associatie blijkt niet significant te zijn: p < 0,51  
 Het 95% betrouwbaarheidsinterval is groot, tussen de 0,41 en de 8,78.   
 
-## Rapportage
+## 5 Rapportage
 ```{r opmerking, include=FALSE, eval=FALSE}
 # nieuwe hypothese
 # chi en ongeveer teken

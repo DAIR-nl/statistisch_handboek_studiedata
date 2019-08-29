@@ -60,13 +60,13 @@ Cijfers_gem <- data.frame(Cijfers, Cohort)
 # doorlinken naar de Mann-Whitney U toets, ook bekend als de Wilcoxon rank-sum toets  
 ```
 
-## Gebruik
+## 1 Toepassing
 Bij het toetsen of het gemiddelde van twee variabelen aan elkaar gelijk zijn kan de *t-toets* gebruikt worden. Wanneer het gaat om de gemiddelden van twee aparte groepen, kan de *ongepaarde t-toets* toegepast worden [^1].
 
-## Voorbeeld uit het onderwijs
+## 2 Onderwijscasus
 Is het gemiddelde cijfer van de opleiding Statistiek op 1 februari gestegen na invoering van het BSA? De data is beschikbaar voor het cohort gestart in 2010 en voor het cohort gestart in 2011. Vanaf 2011 heeft de opleiding een Bindend Studieadvies (BSA) die de selectiviteit van het eerste jaar moet vergroten.
 
-## Assumpties
+## 3 Assumpties
 ### Normaliteit  
 Controleer of de groepen normaal zijn verdeeld:  
 1. Controleer visueel door het maken van een dataplot, bijvoorbeeld een boxplot.  
@@ -80,7 +80,7 @@ De *ongepaarde t-toets* gaat er ook van uit dat beide groepen dezelfde spreiding
 ## Effectmaat
 Om te bepalen of de gevonden p-waarde betekenisvol is kan een effectmaat berekend worden. Cohen's d berekent de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele. Een indicatie om *d* te interpreteren is: d ≤ 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect. 
 
-## Uitvoering in R
+## 4 Uitvoering in R
 Voor de uitvoering in R is er data (`Cijfers_gem`) ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Statistiek. De data bevat zowel cijfers van 180 studenten begonnen in 2010 als cijfers van 160 studenten begonnen in 2011.
 
 ### De data bekijken
@@ -161,7 +161,7 @@ t.test(Cijfers_2010, Cijfers_2011)
 ### Cohen's d 
 
 
-## Rapportage
+## 5 Rapportage
 
 
 [^1]: van Geloven, N. (2016, May 25). T-toets [Wiki Statistiek Academisch Medisch Centrum]. Retrieved from: https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets 

@@ -18,11 +18,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Case: Een opleiding heeft een internationale instroom uit diverse landen. Krijgen studenten uit bepaalde landen vaker een positief BSA dan studenten uit andere landen?
 
 RNGkind(sample.kind = "Rounding")
-set.seed (1) #noodzakelijk omdat we simulate.p.values gebruiken bij de fisher.test
+set.seed(1) #noodzakelijk omdat we simulate.p.values gebruiken bij de fisher.test
 Landen_instroom <- c("NL", "GE", "IT", "UK", "BE", "ES", "US")  ##ISO-codes
 Pos_bsa <- c(1171, 213,  60, 119,  45,  81, 270)
 Verhouding <- c(0.1, 0.14, 0.36, 0.04, 0.12, 0.22, 0.19)
-Neg_bsa <- round(Pos_bsa*Verhouding)
+Neg_bsa <- round(Pos_bsa * Verhouding)
 Bsa_kt <- data.frame(Pos_bsa, Neg_bsa)
 Bsa_kt <- t(Bsa_kt)
 colnames(Bsa_kt) <- Landen_instroom

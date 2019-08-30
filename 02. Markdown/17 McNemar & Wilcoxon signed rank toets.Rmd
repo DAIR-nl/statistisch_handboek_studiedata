@@ -25,6 +25,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Beoordelen studenten een opleiding anders net na het afstuderen en 5 jaar na dato? Studenten worden gevraagd antwoord te geven op de vraag: 
 ## Hoe goed heeft deze studie je voorbereid op de arbeidsmarkt (erg goed, goed, neutraal, slecht, erg slecht)
 ## TODO: paren
+RNGkind(sample.kind = "Rounding")
+set.seed(0)
+
 teller_2014 <- c(140, 120, 60, 25, 33)
 
 erg_goed <-   rep("erg goed",        teller_2014[1])
@@ -36,9 +39,9 @@ erg_slecht <- rep("erg slecht",      teller_2014[5])
 eval_2014 <- c(erg_goed, goed, neutraal, slecht, erg_slecht)
 jaar_2014 <- rep(2014, length(eval_2014))
 
-## helaas vullen later minder mensen de evaluatie in
+
 Verschil <- c(12, 4, -1, -10, -5)
-teller_2019 <- teller_2019 + Verschil
+teller_2019 <- teller_2014 + Verschil
 
 
 erg_goed <-   rep("erg goed",        teller_2019[1])
@@ -47,11 +50,22 @@ neutraal <-   rep("neutraal",        teller_2019[3])
 slecht <-     rep("slecht",          teller_2019[4])
 erg_slecht <- rep("erg slecht",      teller_2019[5])
 
-eval_2019 <- c(erg_goed, goed, neutraal, slecht, erg slecht)
+eval_2019 <- c(erg_goed, goed, neutraal, slecht, erg_slecht)
 jaar_2019 <- rep(2019, length(eval_2019))
 
-Eval_curriculum <- data.frame(c(eval_2014, eval_2019), c(jaar_2014, jaar_2019))
-colnames(Eval_curriculum) <- c("evaluatie")
+## Hussel wat waardes in 2019 om minder gelijke paren te krijgen
+eval_2019 <- eval_2019[c(1:140, 347:359, 152:274, 141:145, 278:330, 146:151, 335:346, 360:378, 275:277, 331:334)]
+st_nr <- sample(600000:700000, 378)
+
+## Hussel beide vervolgens op de geordende volgorde van het st_nr
+eval_2019 <- eval_2019[order(st_nr)]
+eval_2014 <- eval_2014[order(st_nr)]
+
+
+Eval_curriculum <- data.frame(c(eval_2014, eval_2019), c(jaar_2014, jaar_2019), c(st_nr, st_nr))
+
+colnames(Eval_curriculum) <- c("Waardering", "Jaar", "studentnr")
+View(Eval_curriculum)
 
 
 ```
@@ -63,24 +77,39 @@ colnames(Eval_curriculum) <- c("evaluatie")
 ## 3 Assumpties
 
 ## 4 Uitvoering in R
-Er is een dataset ingeladen genaamd
+Er is een dataset ingeladen genaamd `Eval_curriculum`. Deze bevat curriculum evaluaties van de opleiding Geschiedenis. De studenten zijn gevraagd hun opleiding te waarderen net na hun afstuderen (2014) en 5 jaar na dato (2019)
 
 ### De data bekijken
+Bekijk de data met `head()`
 ```{r data bekijken}
+head(Eval_curriculum)
+```
 
+De data is gesorteerd op jaar. Gebruik `order()` op studentnummer om de paren beter te kunnen bekijken.
+```{r data sorteren}
+Eval_curriculum <- Eval_curriculum[order(Eval_curriculum$studentnr),]
+head(Eval_curriculum)
 ```
 
 ### Assumpties testen in R
-
+@IvdS heeft deze situatie assumpties? Misschien dat er voor elk paar twee observaties zijn?
 ```{r}
 
 ```
 
-### Statistische toets in R
+### Statistische toets in R {.tabset .tabset-fade}
 
-```{r}
+#### McNemar toets
+```{r McNemar}
 
 ```
+
+#### Wilcoxon Signed Rank toets
+```{r Wilcoxon Signed Rank}
+
+```
+
+### {.toc-ignore}
 
 ## Toelichting op de output
 

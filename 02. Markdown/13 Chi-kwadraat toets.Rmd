@@ -48,8 +48,7 @@ Voor de uitvoering in R is er data ingeladen over de uitval van studenten met ee
 Uitval_functiebeperking
 ```
 
-### Chi-kwadraat toets
-### {.tabset .tabset-fade}
+### Chi-kwadraat toets {.tabset .tabset-fade}
 #### Chi-kwadraat toets
 Om `chisq.test()` in R te gebruiken moet de data in een kruistabel staan.  
 

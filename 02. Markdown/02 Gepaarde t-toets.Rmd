@@ -1,7 +1,6 @@
 ---
 title: "Gepaarde t-toets"
-author: "Irene van der Staaij & Megiel Kerkhoven"
-date: "1 Oktober 2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document:
     toc: TRUE
@@ -21,94 +20,109 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-set.seed(2)
-volgorde <- sample(1:246, 246)
-volgorde_n30 <- sample(1:30, 30)
+RNGkind(sample.kind = "Rounding")
+set.seed(1)
 
+## Maak ruwe data aan
 mu <- 3.6
 sigma <- 0.6
-Evaluatie_score_geen_tutor <- rnorm(250, mu, sigma)
+Evaluatie_score_voor_tutorgesprek <- rnorm(250, mu, sigma)
 
-Evaluatie_score_geen_tutor <- Evaluatie_score_geen_tutor[Evaluatie_score_geen_tutor <= 5 
-                                                         & Evaluatie_score_geen_tutor >= 1]
-Evaluatie_score_geen_tutor <- sapply (Evaluatie_score_geen_tutor, round, 3)
-Evaluatie_score_geen_tutor <- sort(Evaluatie_score_geen_tutor)
-Evaluatie_score_geen_tutor <- Evaluatie_score_geen_tutor[volgorde]
+Evaluatie_score_voor_tutorgesprek <- Evaluatie_score_voor_tutorgesprek[Evaluatie_score_voor_tutorgesprek <= 5 
+                                                                       & Evaluatie_score_voor_tutorgesprek >= 1]
 
 mu <- 3.4
 sigma <- 0.9
-Evaluatie_score_wel_tutor <- rnorm(300, mu, sigma)
+Evaluatie_score_na_tutorgesprek <- rnorm(260, mu, sigma)
 
-Evaluatie_score_wel_tutor <- Evaluatie_score_wel_tutor[Evaluatie_score_wel_tutor <= 5 
-                                                       & Evaluatie_score_wel_tutor >= 1]
-Evaluatie_score_wel_tutor <- sapply (Evaluatie_score_wel_tutor, round, 3)
-Evaluatie_score_wel_tutor <- sort(Evaluatie_score_wel_tutor)
-Evaluatie_score_wel_tutor <- Evaluatie_score_wel_tutor[sample(-283:-1, 41)]
-Evaluatie_score_wel_tutor <- Evaluatie_score_wel_tutor[volgorde]
+Evaluatie_score_na_tutorgesprek <- Evaluatie_score_na_tutorgesprek[Evaluatie_score_na_tutorgesprek <= 5 
+                                                                   & Evaluatie_score_na_tutorgesprek >= 1]
+## Stel volgorde en lengte van steekproef vast
+volgorde <- sample(1:length(Evaluatie_score_voor_tutorgesprek), length(Evaluatie_score_voor_tutorgesprek))
+volgorde_n30 <- sample(1:30, 30)
+Verschil_grootte <- length(Evaluatie_score_na_tutorgesprek) - length(Evaluatie_score_voor_tutorgesprek)
+
+## Rond evaluatiecijfers af
+Evaluatie_score_voor_tutorgesprek <- sapply (Evaluatie_score_voor_tutorgesprek, round, 3)
+Evaluatie_score_na_tutorgesprek <- sapply (Evaluatie_score_na_tutorgesprek, round, 3)
+
+## Definiëer lengte in steekproef en hussel paren
+Evaluatie_score_voor_tutorgesprek <- sort(Evaluatie_score_voor_tutorgesprek)
+Evaluatie_score_voor_tutorgesprek <- Evaluatie_score_voor_tutorgesprek[volgorde]
+Evaluatie_score_na_tutorgesprek <- sort(Evaluatie_score_na_tutorgesprek)
+Evaluatie_score_na_tutorgesprek <- Evaluatie_score_na_tutorgesprek[sample(-283:-1, Verschil_grootte)]
+Evaluatie_score_na_tutorgesprek <- Evaluatie_score_na_tutorgesprek[volgorde]
+
+
 
 mu <- 3.6
 sigma <- 0.6
-Evaluatie_score_geen_tutor_n30 <- rnorm(30, mu, sigma)
+Evaluatie_score_voor_tutorgesprek_n30 <- rnorm(30, mu, sigma)
 
-Evaluatie_score_geen_tutor_n30 <- Evaluatie_score_geen_tutor_n30[Evaluatie_score_geen_tutor_n30 <= 5 
-                                                                 & Evaluatie_score_geen_tutor_n30 >= 1]
-Evaluatie_score_geen_tutor_n30 <- sapply (Evaluatie_score_geen_tutor_n30, round, 3)
-Evaluatie_score_geen_tutor_n30 <- sort(Evaluatie_score_geen_tutor_n30)
-Evaluatie_score_geen_tutor_n30 <- Evaluatie_score_geen_tutor_n30[volgorde_n30]
+Evaluatie_score_voor_tutorgesprek_n30 <- Evaluatie_score_voor_tutorgesprek_n30[Evaluatie_score_voor_tutorgesprek_n30 <= 5 
+                                                                 & Evaluatie_score_voor_tutorgesprek_n30 >= 1]
+Evaluatie_score_voor_tutorgesprek_n30 <- sapply (Evaluatie_score_voor_tutorgesprek_n30, round, 3)
+Evaluatie_score_voor_tutorgesprek_n30 <- sort(Evaluatie_score_voor_tutorgesprek_n30)
+Evaluatie_score_voor_tutorgesprek_n30 <- Evaluatie_score_voor_tutorgesprek_n30[volgorde_n30]
 
-mu <- 3.4
-sigma <- 0.7
-Evaluatie_score_wel_tutor_n30 <- rnorm(30, mu, sigma)
+mu <- 3.5
+sigma <- 0.4
+Evaluatie_score_na_tutorgesprek_n30 <- rnorm(30, mu, sigma)
 
-Evaluatie_score_wel_tutor_n30 <- Evaluatie_score_wel_tutor_n30[Evaluatie_score_wel_tutor_n30 <= 5 
-                                                               & Evaluatie_score_wel_tutor_n30 >= 1]
-Evaluatie_score_wel_tutor_n30 <- sapply (Evaluatie_score_wel_tutor_n30, round, 3)
-Evaluatie_score_wel_tutor_n30 <- sort(Evaluatie_score_geen_tutor_n30)
-Evaluatie_score_wel_tutor_n30 <- Evaluatie_score_wel_tutor_n30[volgorde_n30]
+Evaluatie_score_na_tutorgesprek_n30 <- Evaluatie_score_na_tutorgesprek_n30[Evaluatie_score_na_tutorgesprek_n30 <= 5 
+                                                               & Evaluatie_score_na_tutorgesprek_n30 >= 1]
+Evaluatie_score_na_tutorgesprek_n30 <- sapply (Evaluatie_score_na_tutorgesprek_n30, round, 3)
+Evaluatie_score_na_tutorgesprek_n30 <- sort(Evaluatie_score_na_tutorgesprek_n30)
+Evaluatie_score_na_tutorgesprek_n30 <- Evaluatie_score_na_tutorgesprek_n30[volgorde_n30]
 ```
 
 ```{r opmerking, include=FALSE, eval=FALSE}
 # ipv Cohen's d kan ook eta squared gebruikt worden om effectmaat te berekenen. Wordt vaak wel gedaan bij de ANOVA. 
 # doorlinken naar de Wilcoxon Signed Rank Test
 # plek van Mean en SD
+# https://wikistatistiek.amc.nl/index.php/Matchen machten AMC
 ```
 
 
-## Gebruik
-Bij het toetsen of het gemiddelde van twee groepen aan elkaar gelijk zijn kan de *t-toets* toegepast worden. De *gepaarde t-toets* kan toegepast worden wanneer de groepen gepaard zijn, bijvoorbeeld bij een herhaalde meting [^1]. Wanneer personen uit twee verschillende groepen, die met elkaar veel overeenkomsten vertonen, gekoppeld worden, kan ook een *gepaarde t-toets* gebruikt worden.
+## 1 Toepassing
+Bij het toetsen of het gemiddelde van twee groepen aan elkaar gelijk zijn kan de *t-toets* toegepast worden. De *gepaarde t-toets* kan toegepast worden wanneer de groepen gepaard zijn, bijvoorbeeld bij een herhaalde meting. Wanneer personen uit twee verschillende groepen, die met elkaar veel overeenkomsten vertonen, gekoppeld worden, kan ook een *gepaarde t-toets* gebruikt worden [^1].
 
-## Voorbeeld uit het onderwijs
-De opleidingsdirecteur van de lerarenopleiding vraagt zich af of haar studenten, nadat ze met hun tutor hebben gesproken, de lerarenopleiding een ander cijfer geven. Ze vraagt of de studenten twee keer een vragenlijst in willen vullen, één keer voordat ze met hun tutor hebben gesproken T~0~ en nog een keer nadat ze met hun tutor hebben gesproken (T~1~). 
+## 2 Onderwijscasus
+Ter voorbereiding op een visitatie vraagt de opleidingsdirecteur van de lerarenopleiding zich af of haar studenten, nadat ze met hun tutor hebben gesproken, de opleiding een ander cijfer geven. Ze vraagt of de studenten twee keer een vragenlijst in willen vullen, één keer voordat ze met hun tutor hebben gesproken (T~0~) en nog een keer nadat ze met hun tutor hebben gesproken (T~1~). 
 
 H~0~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is niet veranderd na een gesprek met hun tutor, µ~T0~ = µ~T1~  
 H~A~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is veranderd na een gesprek met hun tutor, µ~T0~ ≠ µ~T1~ 
 
-## Assumpties: Normaliteit
+## 3 Assumpties: Normaliteit
 De *t-toets* gaat ervan uit dat de data normaal verdeeld is.  
-1. Controleer visueel of de data normaalverdeel is door het maken van een dataplot: een histogram of een boxplot.  
+1. Controleer visueel of de data normaal verdeel is door het maken van een dataplot: een histogram of een boxplot.  
 2. Toets daarna of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef met de *Shapiro-Wilk test* [^2].  
 
-Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, kan de *t-toets* niet gebruikt worden, gebruik in dat geval de *Wilcoxon Signed Rank Test* [^3].
+Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, kan de *t-toets* niet gebruikt worden. Gebruik in dat geval de *Wilcoxon Signed Rank Test* [^3].
 
 ## Effectmaat
-Om te bepalen of de gevonden p-waarde betekenisvol is kan een effectmaat berekend worden. Cohen's *d* berekent de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele. Een indicatie om *d* te interpreteren is: *d* ≤ 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.  
+Om te bepalen of de gevonden p-waarde betekenisvol is kan een effectmaat berekend worden, er zijn meerdere effect maten te berekenen. Hier worden twee effectmaten besproken die veel voorkomen, Cohen's *d* en eta squared.   
 
-## Uitvoering in R
-Voor de uitvoering in R is er data ingeladen met evaluatie-scores van studenten die geen tutorgesprek hebben gehad en van studenten die wel een tutorgesprek hebben gehad. 
+Cohen's *d* berekent de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele. Een indicatie om *d* te interpreteren is: *d* ≤ 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect [^4].  
+
+Eta squared (η^2) berekent de proportie van de variantie in de afhankelijke variabele wat verklaard wordt door de onafhankelijke variabele. In dit geval berekent het de proportie van de variantie in de hoogte van het cijfer wat verklaard kan worden door het tutorgesprek. Een indicatie om η^2 te interpreteren is: η^2 = 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en > 0,14 is een groot effect [^5]. 
+
+## 4 Uitvoering in R
+Voor de uitvoering in R is er data ingeladen met evaluatie-scores van studenten voor en nadat zij een tutorgesprek hebben gehad. 
 
 ### Test assumpties: Normaliteit
 <div class="col2">
 ```{r Assumptietest, collapse=TRUE}
-mean(Evaluatie_score_geen_tutor)
-sd(Evaluatie_score_geen_tutor)
-hist(Evaluatie_score_geen_tutor)
-mean(Evaluatie_score_wel_tutor)
-sd(Evaluatie_score_wel_tutor)
-hist(Evaluatie_score_wel_tutor)
+mean(Evaluatie_score_voor_tutorgesprek)
+sd(Evaluatie_score_voor_tutorgesprek)
+hist(Evaluatie_score_voor_tutorgesprek)
+mean(Evaluatie_score_na_tutorgesprek)
+sd(Evaluatie_score_na_tutorgesprek)
+hist(Evaluatie_score_na_tutorgesprek)
 ```
 </div>
 
-Beide histogrammen laten een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Het histogram "wel een tutor" lijkt licht scheef verdeeld.   
+Beide histogrammen laten een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Het histogram `Evaluatie_score_na_tutorgesprek` lijkt licht scheef verdeeld. Voer de *Kolmogorov-Smirnov test* of de *Shapiro-Wilk test* uit om te toetsen of de histogrammen normaal verdeeld zijn.   
 
 ### {.tabset .tabset-fade .tabset.pills}
 #### Kolmogorov-Smirnov (met Lilliefors correctie)
@@ -117,8 +131,8 @@ library(nortest)
 ```
 <div class ="col2">
 ``` {r Lilliefors Test, warning=FALSE}
-lillie.test(Evaluatie_score_geen_tutor)
-lillie.test(Evaluatie_score_wel_tutor)
+lillie.test(Evaluatie_score_voor_tutorgesprek)
+lillie.test(Evaluatie_score_na_tutorgesprek)
 ```
 </div>
 
@@ -129,8 +143,8 @@ In dit geval is van beide groepen de p-waarde > 0,05, dus is de verdeling van de
 #### Shapiro-Wilk Test
 <div class ="col2">
 ``` {r Shapiro-Wilk Test, warning=FALSE}
-shapiro.test(Evaluatie_score_geen_tutor_n30)
-shapiro.test(Evaluatie_score_wel_tutor_n30)
+shapiro.test(Evaluatie_score_voor_tutorgesprek_n30)
+shapiro.test(Evaluatie_score_na_tutorgesprek_n30)
 ```
 </div>
 
@@ -140,28 +154,41 @@ In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, 
 
 ### Gepaarde t-toets
 ```{r statistische toets}
-t.test(Evaluatie_score_wel_tutor, Evaluatie_score_geen_tutor, paired=TRUE)
+t.test(Evaluatie_score_voor_tutorgesprek, Evaluatie_score_na_tutorgesprek, paired = TRUE)
 ```
-*t* (247) = -2,7787, *p* < 0,01  
-Vrijheidsgraden: *df* = *n* -1 = 247  
-p-waarde < 0,05, dus de H~A~ wordt aangenomen  
-95%-betrouwbaarheidsinterval: het interval loopt tussen -0,27 en de -0,04.
-Het verschil tussen beide groepen is 0,25
+* *t* (247) = 17,997, *p* < 0,01  
+* Vrijheidsgraden: *df* = *n* -1 = 245 
+* p-waarde < 0,05, dus de H~A~ wordt aangenomen  
+* 95%-betrouwbaarheidsinterval: het interval loopt tussen 0,25 en de 0.32
+* Het verschil tussen beide groepen is 0,29
 
-### Cohen's d
+### Effectmaat{.tabset .tabset-fade .tabset.pills}
+
+#### Cohen's d
 ```{r Cohen s d}
 library(effsize)
-cohen.d(Evaluatie_score_geen_tutor, Evaluatie_score_wel_tutor)
+cohen.d(Evaluatie_score_voor_tutorgesprek, Evaluatie_score_na_tutorgesprek)
 ```
-*d* = 0,36, wat een klein tot gemiddeld effect is
+*d* = 0,36. De sterkte van het effect van de tutor op het cijfer is klein tot gemiddeld. 
 
-## Rapportage
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde cijfer wat studenten geven voor de opleiding gelijk is gebleven na een gesprek met een tutor. Het verschil tussen het gemiddelde van T~0~ (3,65) en het gemiddelde van T~1~ (3,4) is significant *t* (247) = -2,7787, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen heeft een reikwijdte van -0,27 tot -0,04. Het effect is klein tot gemiddeld, *d* = 0,36.    
+#### Eta-squared
+```{r eta-squared}
+#ik heb geen optie gevonden die etasq uitrekent zonder anova. Gebruik je deze eigenlijk wel voor t-toets?
+t <- 17.713
+df <- 245
+Eta2 <- (t^2) / (t^2 + 245)
+Eta2
+```
+
+
+
+## 5 Rapportage
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde cijfer, wat studenten geven voor de opleiding, gelijk is gebleven na een gesprek met een tutor. Het verschil tussen het gemiddelde van T~0~ (3,65) en het gemiddelde van T~1~ (3,4) is significant *t* (247) = -2,7787, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen heeft een reikwijdte van -0,27 tot -0,04. Het effect is klein tot gemiddeld, *d* = 0,36.    
 De resultaten ondersteunen de conclusie dat de studenten na een gesprek met de tutor de opleiding anders beoordelen dan voordat ze een gesprek hebben gehad met de tutor. 
 
-## Referenties
-[^1]: van Geloven, N. (2016, May 25). T-toets [Wiki Statistiek Academisch Medisch Centrum]. Retrieved from: https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets
+
+[^1]: Student's t-test [Wikipedia]. (2019 August 21). Retrieved from: https://en.wikipedia.org/wiki/Student%27s_t-test
 [^2]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. Retrieved from: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
 [^3]: van Geloven, N. (2013, 25 September). Wilcoxon signed rank toets [Wiki Statistiek Academisch Medisch Centrum]. Retrieved from: https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets
 [^4]: E Marshall, E Boggis - Statstutor Community Project, 2016 - statstutor.ac.uk The Statistics Tutor’s  Quick Guide to Commonly Used Statistical Tests  - Ellen Marshall, University of Sheffield 
-
+[^5]: Eta-squared. (2019 May 14). Retrieved from: https://en.wikiversity.org/wiki/Eta-squared 

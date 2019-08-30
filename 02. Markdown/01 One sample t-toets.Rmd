@@ -1,7 +1,7 @@
 ---
 title: "One sample t-toets"
 author: "Irene van der Staaij & Megiel Kerkhoven"
-date: "Oktober 2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   html_document:
     theme: united
@@ -10,21 +10,19 @@ output:
 ---
 
 ```{r opmerking, include=FALSE, eval=FALSE}
-# Overweging alleen Shapiro-Wilk test. De test wordt steeds meer gebruikt wegens de rekenkracht van computers, maar Kolmogorov (met Lillifors) is nog wel bekend en daarom geliefd. Shapiro-Wilk is preciezer, en conservatiever.  
-# Mean en sd erbij gezet wegens beschrijven data en wordt gebruikt in rapport
-# Willen we een link maken naar Wilcoxon Signed Rank Test? 
-
+# TODO: een link maken naar Wilcoxon Signed Rank Test
 ```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-#opties voor themes: spacelab, readable, united, yeti
+# Opties voor themes: spacelab, readable, united, yeti
 ```
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-## inladen packages
+## Laad packages in
 
-## aanmaken dummydata
+## Maak dummydata aan
+RNGkind(sample.kind = "Rounding")
 set.seed(1)
 
 Decimalen_wiskunde <- rnorm(160, 7.0, 2.6)
@@ -36,92 +34,150 @@ Scheikunde_eindcijfer <- round(Decimalen_scheikunde, 1)[Decimalen_scheikunde <= 
 Decimalen_natuurkunde <- rnorm(160, 6.9, 2.4)
 Natuurkunde_eindcijfer <- round(Decimalen_natuurkunde, 1)[Decimalen_natuurkunde <= 10 & Decimalen_natuurkunde >= 4.5]
 
-Wns_eindcijfers <- cbind(Wiskunde_eindcijfer, Scheikunde_eindcijfer, Natuurkunde_eindcijfer)
+WNS_eindcijfers <- cbind(Wiskunde_eindcijfer, Scheikunde_eindcijfer, Natuurkunde_eindcijfer)
 
-Gemiddeld_cijfer_wns <- apply(Wns_eindcijfers, 1, mean)
+Gemiddeld_cijfer_WNS <- apply(WNS_eindcijfers, 1, mean)
 
-Gemiddeld_cijfer_wns_n30 <- sample(Gemiddeld_cijfer_wns, 30)
+Gemiddeld_cijfer_WNS_n30 <- sample(Gemiddeld_cijfer_WNS, 30)
 ```
 
 ## Gebruik
-
 De *one sample t-toets* kan gebruikt worden om aan de hand van één steekproef het gemiddelde van de totale populatie te vergelijken met een vooraf opgestelde hypothese [^1]. 
 
 ## Voorbeeld uit het onderwijs
-De opleidingsdirecteur van de opleiding Werktuigbouwkunde wil weten of het gemiddelde eindexamencijfer voor de exacte vakken, wiskunde, scheikunde en natuurkunde, van haar VWO studenten hoger is dan het landelijk gemiddelde, zodat zij kan bepalen of het curriculum van de inleidende vakken genoeg aansluiten bij de eerstejaars studenten. 
+De opleidingsdirecteur van de opleiding Werktuigbouwkunde wil weten of het gemiddelde eindexamencijfer voor de exacte vakken, wiskunde, scheikunde en natuurkunde, van haar VWO studenten hoger is dan het landelijk gemiddelde. Zo kan zij bepalen of het curriculum van de inleidende vakken genoeg aansluiten bij de eerstejaars studenten. 
 
 H~0~: Het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die beginnen aan de Bachelor Werktuigbouwkunde is lager dan of gelijk aan het landelijk gemiddelde, µ ≤ 6,8. 
 
 H~A~: Het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die beginnen aan de Bachelor Werktuigbouwkunde is hoger dan het landelijk gemiddelde, µ > 6,8. 
 
-
-
-## Assumpties: Normaliteit 
+## 3 Assumpties: Normaliteit 
 De t-toets gaat er vanuit dat de data normaal verdeeld is. Controleer deze assumptie met de volgende stappen:  
-1. Controleer visueel door het maken van een dataplot: een histogram of een boxplot.  
+1. Controleer de data visueel door het maken van een dataplot: een histogram of een boxplot.  
 2. Toets daarna of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef met de *Shapiro-Wilk test* [^2]. 
 
 Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is dan kan de t-toets niet gebruikt worden. Gebruik in dat geval de *Wilcoxon Signed Rank Test* [^3].
 
-## Uitvoering in R
-Voor de uitvoering in R is er een dummydataset genaamd Gemiddeld_cijfer_wns ingeladen met de gemiddelde cijfers van Wiskunde, Natuurkunde en Scheikunde van 122 middelbare scholieren.
+## 4 Uitvoering in R
+Twee dummy dummydatasets genaamd `Gemiddeld_cijfer_WNS` en `Gemiddeld_cijfer_WNS_n30` zijn ingeladen met de gemiddelde eindexamencijfers van Wiskunde, Natuurkunde en Scheikunde uit Studielink. Het eerste bestand bevat 122 middelbare scholierenstudenten en het tweede bevat 30 studenten.
 
-### Test assumpties: normaliteit
-Bekijk de data via `mean()`, `sd()` en `hist()`.
-```{r histogram voor normaliteit, collapse=TRUE}
-mean(Gemiddeld_cijfer_wns)
-sd(Gemiddeld_cijfer_wns)
-hist(Gemiddeld_cijfer_wns)
+### Test assumpties: normaliteit {.tabset .tabset-fade .tabset.pills}
+Bekijk de data via `mean()`, `sd()`.
+```{r de data bekijken, collapse=TRUE}
+mean(Gemiddeld_cijfer_WNS)
+sd(Gemiddeld_cijfer_WNS)
+```
+Geef normaliteit visueel weer met een histogram of Q-Q plot. 
+
+#### Histogram 1
+Gebruik `hist()`
+```{r Histogram1}
+hist(Gemiddeld_cijfer_WNS,
+     main = "Histogram van Gemiddeld_cijfer_WNS",
+     xlab = "Gemiddeld_cijfer_WNS",
+     ylab = "Frequentie"
+     )
+```
+Het histogram laat een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
+
+#### Histogram 2
+Gebruik `hist()`
+```{r Histogram2}
+hist(scale(Gemiddeld_cijfer_WNS), 
+     freq = FALSE,
+     main = "Histogram van Gemiddeld_cijfer_WNS",
+     xlab = "Gemiddeld_cijfer_WNS",
+     ylab = "Dichtheid",
+     breaks = c(seq(-3, 3, 1)),
+     ylim = c(0, 0.4)
+     )
+
+
+lines(density(scale(Gemiddeld_cijfer_WNS)), col = 2)
 ```
 
-De histogram laat een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
+#### Histogram 3
+Gebruik `hist()`
+```{r Histogram3}
+h <- hist(Gemiddeld_cijfer_WNS, plot = FALSE)
+h$density <- h$density*0.5
+plot(h, 
+     freq = FALSE,
+     main = "Histogram van Gemiddeld_cijfer_WNS",
+     xlab = "Gemiddeld_cijfer_WNS",
+     ylab = "Dichtheid",
+     ylim = c(0, 0.5)
+     )
+lines(density(Gemiddeld_cijfer_WNS), col = 2)
+```
+Het histogram laat een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
 
+#### GGplot
+```{r barchart, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(plotly)
+h <- ggplot(data.frame(Gemiddeld_cijfer_WNS), aes(x = Gemiddeld_cijfer_WNS)) +
+  geom_histogram(aes(y = ..density..),
+                 binwidth = 0.5, color = "grey30", fill = "#f28763") + 
+  geom_density(alpha = .2) +
+  ylab("Kans") +
+  xlab("Gemiddeld_cijfer_WNS") +
+  labs(title = "Eindcijfers Wiskunde, Natuurkunde en Scheikunde", subtitle = "Eerstejaarsstudenten Werktuigbouwkunde")                
+ggplotly(h)
+```
+
+
+#### Q-Q plot
+Gebruik `qqnorm()` en `qqline()`. Gebruik `pch = 20`om gevulde datapunten te creëren.
+```{r qqplot}
+qqnorm(Gemiddeld_cijfer_WNS, pch = 20)
+qqline(Gemiddeld_cijfer_WNS)
+```
+
+### {.toc-ignore}
 ***
+Er zijn meerdere manieren om normaliteit te toetsen, hierbij een toelichting bij twee veel gebruikte toetsen.  
+Toets op normaliteit met de *Kolmogorov-Smirnov test* of met de *Shapiro-Wilk test* (*n* < 50[^4] ).  
 
-
-Toets normaliteit met de *Kolmogorov-Smirnov test* of met de *Shapiro-Wilk test* (*n* < 50[^4] ). 
-
-### {.tabset .tabset-fade .tabset.pills}
+### {.toc-ignore .tabset .tabset-fade .tabset.pills}
 #### Kolmogorov-Smirnov (met Lilliefors correctie) 
 
 ```{r Kolmogorov-Smirnov Test, warning=FALSE}
 library(nortest)
-lillie.test (Gemiddeld_cijfer_wns)
+lillie.test(Gemiddeld_cijfer_WNS)
 ```
 De *Kolmogorov-Smirnov test* is een non-parametrische toets, die het verschil in vorm tussen twee verdelingen toetst. In dit geval toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. Wanneer de p-waarde kleiner is dan 0,05 is er een verschil tussen beide verdelingen. 
 
-In dit geval is *p* > 0,05, dus is de verdeling van de data niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *One sample t-toets* kan uitgevoerd worden.  
-
-***
+In dit geval is *p* > 0,05. De verdeling van de data is niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *one sample t-toets* kan uitgevoerd worden.  
 
 #### Shapiro-Wilk test
 ``` {r Shapiro-Wilk Test, warning=FALSE}
-shapiro.test(Gemiddeld_cijfer_wns_n30)
+shapiro.test(Gemiddeld_cijfer_WNS_n30)
 ```
 
 De *Shapiro-Wilk test* is een soort gelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Wanneer de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.
 
-Voor de uitvoering in R is er een dummydataset genaamd Gemiddeld_cijfer_wns_n30 ingeladen met de gemiddelde cijfers van Wiskunde, Natuurkunde en Scheikunde van 30 middelbare scholieren. De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de One sample-t-toets kan uitgevoerd worden.
+Voor de uitvoering in R is er een dummydataset genaamd Gemiddeld_cijfer_wns_n30 ingeladen met de gemiddelde cijfers van Wiskunde, Natuurkunde en Scheikunde van 30 middelbare scholieren. De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *one sample-t-toets* kan uitgevoerd worden.
 
+### {.toc-ignore}
 ***
 
 ### One sample t-toets
-Gebruik `t.test()`om een t-toets uit te voeren. Geef het gemiddelde waarmee wordt vergeleken en specifeer welke alternatieve hypothese er getoetst wordt.
+Gebruik `t.test()`om een t-toets uit te voeren. Geef het gemiddelde waarmee wordt vergeleken en specifieer welke alternatieve hypothese er getoetst wordt.
 ```{r ttest}
-t.test(Gemiddeld_cijfer_wns, mu = 6.8, alternative="greater")
+t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "greater")
 ```
+* Het gemiddelde van de steekproef is 7,08  
+* Vrijheidsgraden, *df* = *n* -1 = 122-1 = 121  
+* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen  
+* 95%-betrouwbaarheidsinterval: Bij herhaling van het onderzoek zal in 95% van de gevallen een interval uitkomen waarbij µ in valt. In dit geval loopt het interval tussen 6,96 en oneindig. 
 
-Het gemiddelde van de steekproef is 7,08  
-Degrees of freedom, *df* = *n* -1 = 122-1 = 121  
-p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen  
-95%-betrouwbaarheidsinterval: Bij herhaling van het onderzoek zal in 95% van de gevallen een interval uitkomen waarbij µ in valt. In dit geval loopt het interval tussen 6,95 en de 7,23. 
+## 5 Rapportage
+De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die later Werktuigbouwkunde zijn gaan studeren, hoger is dan het landelijk gemiddelde. Het gemiddelde van de steekproef van 7,08 (*sd* = 0,8) was significant hoger dan het landelijk gemiddelde van een 6,8, *t* (121) = 3,76, *p* < 0,01. Het 95%-betrouwbaarheidsinterval voor het gemiddelde van de steekproef heeft een reikwijdte van 6,96 tot oneindig.   
+
+De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer hoger ligt voor de VWO studenten die later Werktuigbouwkunde zijn gaan studeren, dan het landelijk gemiddelde. 
 
 
-## Rapportage
-Een *One sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van de VWO studenten die later Werktuigbouwkunde zijn gaan studeren, hoger is dan het landelijke gemiddelde. Het gemiddelde van de steekproef van 7,08 (*sd* = 0,8) was significant hoger dan het landelijk gemiddelde van een 6,8, *t* (121) = 3,76, *p* < 0,01. Het 95%-betrouwbaarheidsinterval voor het gemiddelde van de steekproef heeft een reikwijdte van 6,93 tot 7,23. De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer hoger ligt voor de VWO studenten die later Werktuigbouwkunde zijn gaan studeren, dan het landelijk gemiddelde. 
-
-
-## Referenties
 [^1]: van Geloven, N. (2016, May 25). T-toets [Wiki Statistiek Academisch Medisch Centrum]. Retrieved from: https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets
 [^2]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. Retrieved from: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
 [^3]: Prabhakaran, S. (2016-2017). Statistical Tests [r-statistics.co]. Retrieved from http://r-statistics.co/Statistical-Tests-in-R.html  

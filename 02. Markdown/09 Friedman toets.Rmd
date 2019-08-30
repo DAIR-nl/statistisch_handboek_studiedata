@@ -1,7 +1,7 @@
 ---
 title: "09 Friedman toets"
 author: "Irene van der Staaij & Megiel Kerkhoven"
-date: "Oktober 2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document:
     toc: TRUE
@@ -20,13 +20,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```
 
-## Gebruik
+## 1 Toepassing
 
-## Voorbeeld uit het onderwijs
+## 2 Onderwijscasus
 
-## Assumpties
+## 3 Assumpties
 
-## Uitvoering in R
+## 4 Uitvoering in R
 
 ### Assumpties testen in R
 
@@ -42,8 +42,5 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Toelichting op de output
 
-## Rapportage
+## 5 Rapportage
 
-## Referenties
-
-## Achtergrond info

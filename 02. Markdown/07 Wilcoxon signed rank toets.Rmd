@@ -1,7 +1,7 @@
 ---
 title: "07 Wilcoxon signed rank toets"
 author: "Irene van der Staaij & Megiel Kerkhoven"
-date: "Oktober 2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document:
     toc: TRUE
@@ -11,9 +11,9 @@ output:
 
 <style>
   .col2 {
-    columns: 2 200px;         /* number of columns and width in pixels*/
-    -webkit-columns: 2 200px; /* chrome, safari */
-    -moz-columns: 2 200px;    /* firefox */
+    columns: 2 200px;
+    -webkit-columns: 2 200px;
+    -moz-columns: 2 200px;
   }
 </style>
 
@@ -22,6 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
+RNGkind(sample.kind = "Rounding")
 set.seed(1)
 Mogelijkheden <- c(1616:7000)
 
@@ -45,13 +46,13 @@ Opslag <- sample(Promotie_mogelijkheden, 307, replace=TRUE, Weging)
 Jaarlijks_inkomen_t5 <- Jaarlijks_inkomen_t1 + Opslag
 ```
 
-## Gebruik
+## 1 Toepassing
 
-## Voorbeeld uit het onderwijs
+## 2 Onderwijscasus
 
-## Assumpties
+## 3 Assumpties
 
-## Uitvoering in R
+## 4 Uitvoering in R
 Voor de uitvoering in R is er data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkeld 4 jaar nadat zij afgestudeerd zijn.
 
 ### De data bekijken
@@ -90,8 +91,5 @@ wilcox.test(Jaarlijks_inkomen_t5, Jaarlijks_inkomen_t1, paired=TRUE, alternative
 
 ## Toelichting op de output
 
-## Rapportage
+## 5 Rapportage
 
-## Referenties
-
-## Achtergrond info

@@ -1,0 +1,71 @@
+---
+title: "09 z-test voor proporties"
+author: "Irene van der Staaij & Megiel Kerkhoven"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    theme: united
+---
+
+<style>
+  .col2 {
+    columns: 2 200px;
+    -webkit-columns: 2 200px;
+    -moz-columns: 2 200px;
+  }
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r aanmaken data, include=FALSE, echo=TRUE}
+## case: Heeft een Universiteit relatief veel tweedekansstudenten in vergelijking met het landelijke gemiddelde?]
+RNGkind(sample.kind = "Rounding")
+set.seed (7)
+aantal_studenten <- 28348
+Studentnr <- sample(5000000:6000000, aantal_studenten)
+
+Eerder_wo <- round (rnorm(aantal_studenten, 0.4, 0.1))
+
+
+Aanmeldingen_tweedekans <- data.frame(Studentnr, Eerder_wo)
+```
+
+## 1 Toepassing
+
+## 2 Onderwijscasus
+
+## 3 Assumpties
+
+## 4 Uitvoering in R
+Voor de uitvoering in R is er een dataset ingeladen genaamd `Aanmeldingen_tweedekans`. Dit is een dataframe met binaire data over de aanmeldingen van studenten en of zij al eerder op het WO hebben gezeten.
+
+### De data bekijken
+```{r data bekijken, collapse=TRUE}
+head(Aanmeldingen_tweedekans)
+mean(Aanmeldingen_tweedekans$Eerder_wo)
+```
+
+### Assumpties testen in R
+@IvdS z-test heeft geen assumpties denk ik?
+```{r assumptietest}
+
+```
+
+### Statistische toets in R
+
+```{r}
+prop.test(x = sum(Aanmeldingen_tweedekans$Eerder_wo), 
+          n = length(Aanmeldingen_tweedekans$Eerder_wo), 
+          p = 0.15,
+          alternative = "greater")
+```
+
+## Toelichting op de output
+
+
+

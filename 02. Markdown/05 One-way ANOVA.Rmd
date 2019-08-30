@@ -1,13 +1,20 @@
 ---
 title: "One-way ANOVA"
 author: "Irene van der Staaij & Megiel Kerkhoven"
-date: "Oktober 2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document:
     toc: TRUE
     toc_float: TRUE
     theme: united
 ---
+<style>
+  .col2 {
+    columns: 2 200px;
+    -webkit-columns: 2 200px;
+    -moz-columns: 2 200px;
+  }
+</style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -15,143 +22,144 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-## De rector van een Universiteit wil weten wat de invloed is van de stijgende huurprijzen in haar stad op de studeerbaarheid van specifieke opleidingen. 
-## Ze is specifiek geïnteresseerd in de vraag of er opleidingen zijn met studenten met een relatief hogere of een relatief lagere huurprijs. 
-## Ze heeft daarom data verzameld over de huurprijs van uitwonende studenten per opleiding
+## Het hoofd communicatie wil in verband met wervingsactiviteiten weten wat de reistijd is van studenten aan verschillende opleidingen.
 
-## Doel: tidy data met een kolom huurprijs (value) en een kolom opleidng (factor)
+
+## Doel: tidy data met een kolom reistijd (value) en een kolom opleidng (factor)
 library(dplyr)
+RNGkind(sample.kind = "Rounding")
 set.seed(0)
 
 Studiegrootte <- 311
-huurprijs_gem <- rnorm(1, 420, 120)
-sd_gem <- rnorm(1, 120, 30)
-Huurprijs_gsk <- round(rnorm(2.1*Studiegrootte, huurprijs_gem, sd_gem), 2)
+reistijd_gem <- rnorm(1, 45, 9)
+sd_gem <- rnorm(1, 23, 8)
+reistijd_gsk <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_gsk <- replicate(2.1*Studiegrootte, "Geneeskunde")
 
 Studiegrootte <- 33
-huurprijs_gem <- rnorm(1, 420, 120)
-sd_gem <- rnorm(1, 120, 30)
-Huurprijs_soc <- round(rnorm(2.1*Studiegrootte, huurprijs_gem, sd_gem), 2)
+reistijd_gem <- rnorm(1, 45, 9)
+sd_gem <- rnorm(1, 23, 8)
+reistijd_soc <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_soc <- replicate(2.1*Studiegrootte, "Sociologie")
 
 Studiegrootte <- 73
-huurprijs_gem <- rnorm(1, 420, 120)
-sd_gem <- rnorm(1, 120, 30)
-Huurprijs_aee <- round(rnorm(2.1*Studiegrootte, huurprijs_gem, sd_gem), 2)
+reistijd_gem <- rnorm(1, 45, 9)
+sd_gem <- rnorm(1, 23, 8)
+reistijd_aee <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_aee <- replicate(2.1*Studiegrootte, "Aarde en economie")
 
 Studiegrootte <- 23
-huurprijs_gem <- rnorm(1, 420, 120)
-sd_gem <- rnorm(1, 120, 30)
-Huurprijs_atc <- round(rnorm(2.1*Studiegrootte, huurprijs_gem, sd_gem), 2)
+reistijd_gem <- rnorm(1, 45, 9)
+sd_gem <- rnorm(1, 23, 8)
+reistijd_atc <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_atc <- replicate(2.1*Studiegrootte, "Arabische Taal en Cultuur")
 
 Studiegrootte <- 212
-huurprijs_gem <- rnorm(1, 420, 90)
-sd_gem <- rnorm(1, 120, 30)
-Huurprijs_bfk <- round(rnorm(2.1*Studiegrootte, huurprijs_gem, sd_gem), 2)
+reistijd_gem <- rnorm(1, 45, 9)
+sd_gem <- rnorm(1, 23, 8)
+reistijd_bfk <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_bfk <- replicate(2.1*Studiegrootte, "Bedrijfskunde")
 
 Studiegrootte <- 68
-huurprijs_gem <- rnorm(1, 420, 120)
-sd_gem <- rnorm(1, 120, 30)
-Huurprijs_cvt <- round(rnorm(2.1*Studiegrootte, huurprijs_gem, sd_gem), 2)
+reistijd_gem <- rnorm(1, 45, 9)
+sd_gem <- rnorm(1, 23, 8)
+reistijd_cvt <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_cvt <- replicate(2.1*Studiegrootte, "Civiele techniek")
 
 Studiegrootte <- 41
-huurprijs_gem <- rnorm(1, 420, 120)
-sd_gem <- rnorm(1, 120, 30)
-Huurprijs_ect <- round(rnorm(2.1*Studiegrootte, huurprijs_gem, sd_gem), 2)
+reistijd_gem <- rnorm(1, 45, 9)
+sd_gem <- rnorm(1, 23, 8)
+reistijd_ect <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_ect <- replicate(2.1*Studiegrootte, "Econometrie")
 
 Studiegrootte <- 267
-huurprijs_gem <- rnorm(1, 420, 120)
-sd_gem <- rnorm(1, 120, 30)
-Huurprijs_psy <- round(rnorm(2.1*Studiegrootte, huurprijs_gem, sd_gem), 2)
+reistijd_gem <- rnorm(1, 45, 9)
+sd_gem <- rnorm(1, 23, 8)
+reistijd_psy <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_psy <- replicate(2.1*Studiegrootte, "Psychologie")
 
 Studiegrootte <- 61
-huurprijs_gem <- rnorm(1, 420, 120)
-sd_gem <- rnorm(1, 120, 30)
-Huurprijs_gsc <- round(rnorm(2.1*Studiegrootte, huurprijs_gem, sd_gem), 2)
+reistijd_gem <- rnorm(1, 45, 9)
+sd_gem <- rnorm(1, 23, 8)
+reistijd_gsc <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_gsc <- replicate(2.1*Studiegrootte, "Geschiedenis")
 
 Studiegrootte <- 140
-huurprijs_gem <- rnorm(1, 420, 120)
-sd_gem <- rnorm(1, 120, 30)
-Huurprijs_csc <- round(rnorm(2.1*Studiegrootte, huurprijs_gem, sd_gem), 2)
+reistijd_gem <- rnorm(1, 45, 9)
+sd_gem <- rnorm(1, 23, 8)
+reistijd_csc <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_csc <- replicate(2.1*Studiegrootte, "Computer science")
 
 Studiegrootte <- 82
-huurprijs_gem <- rnorm(1, 420, 120)
-sd_gem <- rnorm(1, 120, 30)
-Huurprijs_ids <- round(rnorm(2.1*Studiegrootte, huurprijs_gem, sd_gem), 2)
+reistijd_gem <- rnorm(1, 45, 9)
+sd_gem <- rnorm(1, 23, 8)
+reistijd_ids <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_ids <- replicate(2.1*Studiegrootte, "Industrial design")
 
 Studiegrootte <- 105
-huurprijs_gem <- rnorm(1, 420, 120)
-sd_gem <- rnorm(1, 120, 30)
-Huurprijs_las <- round(rnorm(2.1*Studiegrootte, huurprijs_gem, sd_gem), 2)
+reistijd_gem <- rnorm(1, 45, 9)
+sd_gem <- rnorm(1, 23, 8)
+reistijd_las <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_las <- replicate(2.1*Studiegrootte, "Liberal arts and Sciences")
 
-Studiegrootte <- 
-huurprijs_gem <- rnorm(1, 420, 120)
-sd_gem <- rnorm(1, 120, 30)
-Huurprijs_kgs <- round(rnorm(2.1*Studiegrootte, huurprijs_gem, sd_gem), 2)
+Studiegrootte <- 71
+reistijd_gem <- rnorm(1, 45, 9)
+sd_gem <- rnorm(1, 23, 8)
+reistijd_kgs <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_kgs <- replicate(2.1*Studiegrootte, "Kunstgeschiedenis")
 
 Studiegrootte <- 29
-huurprijs_gem <- rnorm(1, 420, 120)
-sd_gem <- rnorm(1, 120, 30)
-Huurprijs_fil <- round(rnorm(2.1*Studiegrootte, huurprijs_gem, sd_gem), 2)
+reistijd_gem <- rnorm(1, 45, 9)
+sd_gem <- rnorm(1, 23, 8)
+reistijd_fil <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_fil <- replicate(2.1*Studiegrootte, "Filosofie")
 
 Studiegrootte <- 81
-huurprijs_gem <- rnorm(1, 420, 120)
-sd_gem <- rnorm(1, 120, 30)
-Huurprijs_sck <- round(rnorm(2.1*Studiegrootte, huurprijs_gem, sd_gem), 2)
+reistijd_gem <- rnorm(1, 45, 9)
+sd_gem <- rnorm(1, 23, 8)
+reistijd_sck <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_sck <- replicate(2.1*Studiegrootte, "Scheikunde")
 
 Studiegrootte <- 61
-huurprijs_gem <- rnorm(1, 420, 120)
-sd_gem <- rnorm(1, 120, 30)
-Huurprijs_pws <- round(rnorm(2.1*Studiegrootte, huurprijs_gem, sd_gem), 2)
+reistijd_gem <- rnorm(1, 45, 9)
+sd_gem <- rnorm(1, 25, 8)
+reistijd_pws <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_pws <- replicate(2.1*Studiegrootte, "Pedagogische wetenschappen")
 
 Studiegrootte <- 84
-huurprijs_gem <- rnorm(1, 420, 120)
-sd_gem <- rnorm(1, 120, 30)
-Huurprijs_wis <- round(rnorm(2.1*Studiegrootte, huurprijs_gem, sd_gem), 2)
+reistijd_gem <- rnorm(1, 45, 9)
+sd_gem <- rnorm(1, 23, 8)
+reistijd_wis <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_wis <- replicate(2.1*Studiegrootte, "Wiskunde")
 
 
 
-Huurprijs <- c(Huurprijs_aee, Huurprijs_atc, Huurprijs_bfk, Huurprijs_csc, Huurprijs_cvt,
-               Huurprijs_ect, Huurprijs_fil, Huurprijs_gsc, Huurprijs_gsk, Huurprijs_ids, 
-               Huurprijs_kgs, Huurprijs_las, Huurprijs_psy, Huurprijs_pws, Huurprijs_sck, 
-               Huurprijs_soc, Huurprijs_wis)
+Reistijd <- c(reistijd_aee, reistijd_atc, reistijd_bfk, reistijd_csc, reistijd_cvt,
+               reistijd_ect, reistijd_fil, reistijd_gsc, reistijd_gsk, reistijd_ids, 
+               reistijd_kgs, reistijd_las, reistijd_psy, reistijd_pws, reistijd_sck, 
+               reistijd_soc, reistijd_wis)
 
 Opleiding <- c(namenlijst_aee, namenlijst_atc, namenlijst_bfk, namenlijst_csc, namenlijst_cvt,
                namenlijst_ect, namenlijst_fil, namenlijst_gsc, namenlijst_gsk, namenlijst_ids,
                namenlijst_kgs, namenlijst_las, namenlijst_psy, namenlijst_pws, namenlijst_sck,
                namenlijst_soc, namenlijst_wis)
 
-Huurprijs_per_opleiding <- data.frame(Huurprijs, Opleiding)
-colnames(Huurprijs_per_opleiding) <- c("Huurprijs", "Opleiding")
+Opleiding <- Opleiding[order(Reistijd)]
+Reistijd <- sort(Reistijd)
+
+Reistijd_per_opleiding <- data.frame(Reistijd, Opleiding)
+colnames(Reistijd_per_opleiding) <- c("Reistijd", "Opleiding")
 
 
-Huurprijs_per_opleiding <- Huurprijs_per_opleiding %>%
-  mutate(Huurprijs = if_else(Huurprijs < 0, Huurprijs*-1, Huurprijs))
-  
-
+Reistijd_per_opleiding <- Reistijd_per_opleiding %>%
+  mutate(Reistijd = if_else(Reistijd < 0, Reistijd*-1, Reistijd))
 ```
 
-## Gebruik
+## 1 Toepassing
 De *one-way ANOVA* wordt gebruikt bij het toetsen of het gemiddelde van drie of meer groepen aan elkaar gelijk zijn. De te vergelijken groepen zijn ongepaard en daarmee onafhankelijk van elkaar.  
 
-## Voorbeeld uit het onderwijs
-De rector van een Universiteit wil weten wat de invloed is van de stijgende huurprijzen in haar stad op de studeerbaarheid van specifieke opleidingen. Ze is specifiek geïnteresseerd in de vraag of er opleidingen zijn met studenten met een relatief hogere of een relatief lagere huurprijs. Ze heeft daarom data verzameld over de huurprijs van uitwonende studenten per opleiding
+## 2 Onderwijscasus
+Het hoofd communicatie wil in verband met wervingsactiviteiten weten wat de reistijd is van studenten aan verschillende opleidingen voor en na de invoering van het leenstelsel. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten per opleiding
 
 ```{r opmerking, include=FALSE, eval=FALSE}
 # Of het cijfer van de 4 profielen gelijk zijn aan elkaar (sowieso scheefverdeeld, dus slecht voorbeeld?)
@@ -162,7 +170,7 @@ De rector van een Universiteit wil weten wat de invloed is van de stijgende huur
 #posthoc Tukey 
 ```
 
-## Assumpties
+## 3 Assumpties
 Controleer of de steekproef aan de volgende assumpties voldoen: 
 1. Normaliteit 
 2. Homogeniteit van varianties
@@ -181,46 +189,48 @@ Controleer of de spreiding van iedere groep ongeveer hetzelfde is, dit kan getoe
 Elke groep heeft geen overlap met Ã©Ã©n van de andere groepen en de groepen kunnen elkaars deelname niet beÃ¯nvloeden. 
 
 
-## Uitvoering in R
-Voor de uitvoering in R is er een dataset ingeladen genaamd `Huurprijs_per_opleiding`. Deze bevat data de huurprijzen van uitwonende studenten per opleiding.
+## 4 Uitvoering in R
+Voor de uitvoering in R is er een dataset ingeladen genaamd `Reistijd_per_opleiding`. Deze bevat data de reistijden van uitwonende studenten per opleiding.
 
 ### De data bekijken
-Gebruik een sample om de data te bekijken
+Gebruik `head()` om de data te bekijken
 ```{r de data bekijken}
-Huurprijs_per_opleiding[sample(1:4349, 15),]
+head(Reistijd_per_opleiding)
 ```
 ```{r de data visualiseren}
-levels(Huurprijs_per_opleiding$Opleiding)
+levels(Reistijd_per_opleiding$Opleiding)
 library(graphics)
-par(mar=c(3,12,1,0)+.1)
-boxplot(Huurprijs ~ Opleiding, Huurprijs_per_opleiding, las= 2, horizontal=TRUE)
+par(mar = c(3, 12, 1, 0) + .1)
+boxplot(Reistijd ~ Opleiding, Reistijd_per_opleiding, las = 2, horizontal = TRUE)
 ```
 
 ### Assumpties testen in R
-```{r Assumpties}
+```{r lillietest voorbereiden}
 library(nortest)
-huurprijslijst <- Huurprijs_per_opleiding %>%
+Reistijdlijst <- Reistijd_per_opleiding %>%
   split(Opleiding)
-for (. in huurprijslijst){
-  print(lillie.test(.$Huurprijs))
-}
+```
 
+```{r lillietest}
+for (. in Reistijdlijst) {
+  print(lillie.test(.$Reistijd))
+}
 ```
 
 
 ### Statistische toets in R
 
 ```{r ANOVA}
-res.aov <- aov(Huurprijs ~ Opleiding, Huurprijs_per_opleiding)
+res.aov <- aov(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 summary(res.aov)
 ```
 
 
 ## Toelichting op de output
 
-## Rapportage
+## 5 Rapportage
 
-## Referenties
+
 [^1]: https://wiki.uva.nl/methodologiewinkel/index.php/One-way_ANOVA Deze pagina is het laatst bewerkt op 8 jul 2014 om 13:41.
 [^2]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. Retrieved from: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
 

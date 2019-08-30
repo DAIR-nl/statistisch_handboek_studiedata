@@ -1,0 +1,87 @@
+---
+title: '17: McNemar toets / Wilcoxon signed rank toets'
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    theme: united
+---
+
+<style>
+  .col2 {
+    columns: 2 200px;
+    -webkit-columns: 2 200px;
+    -moz-columns: 2 200px;
+  }
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r aanmaken data, include=FALSE, echo=TRUE}
+## Beoordelen studenten een opleiding anders net na het afstuderen en 5 jaar na dato? Studenten worden gevraagd antwoord te geven op de vraag: 
+## Hoe goed heeft deze studie je voorbereid op de arbeidsmarkt (erg goed, goed, neutraal, slecht, erg slecht)
+## TODO: paren
+teller_2014 <- c(140, 120, 60, 25, 33)
+
+erg_goed <-   rep("erg goed",        teller_2014[1])
+goed <-       rep("goed",            teller_2014[2])
+neutraal <-   rep("neutraal",        teller_2014[3])
+slecht <-     rep("slecht",          teller_2014[4])
+erg_slecht <- rep("erg slecht",      teller_2014[5])
+
+eval_2014 <- c(erg_goed, goed, neutraal, slecht, erg_slecht)
+jaar_2014 <- rep(2014, length(eval_2014))
+
+## helaas vullen later minder mensen de evaluatie in
+Verschil <- c(12, 4, -1, -10, -5)
+teller_2019 <- teller_2019 + Verschil
+
+
+erg_goed <-   rep("erg goed",        teller_2019[1])
+goed <-       rep("goed",            teller_2019[2])
+neutraal <-   rep("neutraal",        teller_2019[3])
+slecht <-     rep("slecht",          teller_2019[4])
+erg_slecht <- rep("erg slecht",      teller_2019[5])
+
+eval_2019 <- c(erg_goed, goed, neutraal, slecht, erg slecht)
+jaar_2019 <- rep(2019, length(eval_2019))
+
+Eval_curriculum <- data.frame(c(eval_2014, eval_2019), c(jaar_2014, jaar_2019))
+colnames(Eval_curriculum) <- c("evaluatie")
+
+
+```
+
+## 1 Toepassing
+
+## 2 Onderwijscasus
+
+## 3 Assumpties
+
+## 4 Uitvoering in R
+Er is een dataset ingeladen genaamd
+
+### De data bekijken
+```{r data bekijken}
+
+```
+
+### Assumpties testen in R
+
+```{r}
+
+```
+
+### Statistische toets in R
+
+```{r}
+
+```
+
+## Toelichting op de output
+
+## 5 Rapportage

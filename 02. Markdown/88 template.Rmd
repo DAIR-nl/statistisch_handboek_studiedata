@@ -1,7 +1,6 @@
 ---
-title: " "
-author: "Irene van der Staaij & Megiel Kerkhoven"
-date: "Oktober 2019"
+title: "Template"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document:
     toc: TRUE
@@ -26,14 +25,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```
 
-## Gebruik
+## 1 Toepassing
 
-## Voorbeeld uit het onderwijs
+## 2 Onderwijscasus
 
-## Assumpties
+## 3 Assumpties
 
-## Uitvoering in R
-Voor de uitvoering in R is er een dataset ingeladen genaamd
+## 4 Uitvoering in R
+Er is een dataset ingeladen genaamd
 
 ### De data bekijken
 ```{r data bekijken}
@@ -54,8 +53,7 @@ Voor de uitvoering in R is er een dataset ingeladen genaamd
 
 ## Toelichting op de output
 
-## Rapportage
+## 5 Rapportage
 
-## Referenties
 
-## Achtergrond info
+

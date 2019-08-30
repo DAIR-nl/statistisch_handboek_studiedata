@@ -1,7 +1,7 @@
 ---
 title: "Mann-Whitney U toets"
 author: "Irene van der Staaij & Megiel Kerkhoven"
-date: "1 Oktober 2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document:
     toc: TRUE
@@ -15,6 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
+RNGkind(sample.kind = "Rounding")
 set.seed(0)
 
 Goede_student_ec <- c(0, 3, 6, 6, 6, 6, 6, 6, 6)
@@ -38,13 +39,13 @@ Resultaten_nl_studenten <- data.frame(Resultaten_nl_studenten, Punten_jaar2_nl)
 
 ```
 
-## Gebruik
+## 1 Toepassing
 
-## Voorbeeld uit het onderwijs
+## 2 Onderwijscasus
 
-## Assumpties
+## 3 Assumpties
 
-## Uitvoering in R
+## 4 Uitvoering in R
 
 ### De data bekijken
 Gebruik `head()` in R om de eerste vijf regels te bekijken
@@ -61,8 +62,5 @@ wilcox.test(Resultaten_nl_studenten$Punten_jaar2_nl, Resultaten_internationale_s
 
 ## Toelichting op de output
 
-## Rapportage
+## 5 Rapportage
 
-## Verder lezen
-
-## Achtergrond info

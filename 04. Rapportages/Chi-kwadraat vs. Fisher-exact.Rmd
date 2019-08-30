@@ -1,0 +1,83 @@
+---
+title: "Chi kwadraat vs Fisher exact"
+subtitle: "Een vergelijking tussen de werking van 2 toetsen"
+author: "Megiel Kerkhoven"
+date: "26 augustus 2019"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    theme: united
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<style>
+  .col2 {
+    columns: 2 200px;
+    -webkit-columns: 2 200px;
+    -moz-columns: 2 200px;
+  }
+</style>
+
+
+```{r set seed, include=FALSE}
+set.seed(1)
+```
+
+## Probleem
+Om er achter te komen of een verschil in proporties tussen meerdere groepen significant is kan je kiezen tussen de Chi-kwadraat toets en de Fisher-Freeman-Halton exact toets. Deze verschillen in werking en zullen dus ook verschillende uitslagen hebben. Sommige verschillen zullen in de ene toets wel significant zijn en in de andere toets niet, en vice versa. Ik zal een aantal voorbeelden laten zien om het verschil tussen de tests te laten zien.
+
+## Verchillen in uitval naar herkomstland
+
+### Verhouding 1
+```{r voorbeeld1}
+Landen_instroom <- c("NL", "GE", "IT", "UK", "BE", "ES", "US")  ## ISO-country-codes
+Pos_bsa <- c(1171, 213,  60, 119,  45,  81, 270)                ## De hoeveelheid studenten met een positief bsa
+Verhouding <- c(0.1, 0.14, 0.36, 0.04, 0.12, 0.22, 0.19)        ## De verhouding uitval
+Neg_bsa <- round(Pos_bsa*Verhouding)                            ## De hoeveelheid uitval
+Bsa_kt <- data.frame(Pos_bsa, Neg_bsa)
+Bsa_kt <- t(Bsa_kt)
+colnames(Bsa_kt) <- Landen_instroom
+Bsa_kt
+```
+
+<div class="col2">
+```{r chisqtest1}
+chisq.test(Bsa_kt)
+```
+Let hier vooral op beide p-waardes, deze zijn zometeen van belang
+ 
+```{R fishertest1}
+fisher.test(Bsa_kt, simulate.p.value = TRUE)
+```
+</div>
+
+### Verhouding 2
+
+In het volgende voorbeeld heb ik de uitvalpercentages verdubbeld. De verhouding uitval verandert hierdoor. De verhouding uitval tussen de groepen veranderd hierdoor niet. Hiervoor is de Chi-kwadraat wel gevoelig maar de Fisher's exact niet.
+```{r voorbeeld2}
+Landen_instroom <- c("NL", "GE", "IT", "UK", "BE", "ES", "US")  ## ISO-country-codes
+Pos_bsa <- c(1171, 213,  60, 119,  45,  81, 270)                ## De hoeveelheid studenten met een positief bsa
+Verhouding <- c(0.1, 0.14, 0.36, 0.04, 0.12, 0.22, 0.19) * 2    ## De verhouding uitval
+Neg_bsa <- round(Pos_bsa*Verhouding)                            ## De hoeveelheid uitval
+Bsa_kt <- data.frame(Pos_bsa, Neg_bsa)
+Bsa_kt <- t(Bsa_kt)                        
+colnames(Bsa_kt) <- Landen_instroom
+Bsa_kt
+```
+<div class="col2">
+```{r chisqtest2}
+chisq.test(Bsa_kt)
+```
+De p-waarde van de Chi-kwadraat verandert wel, die van de Fisher niet.
+
+```{R fishertest2}
+fisher.test(Bsa_kt, simulate.p.value = TRUE)
+```
+</div>
+
+## Vraag
+* Hoezo is de p-waarde van de Chi-Kwadraat afhankelijk van de interne verhouding bij de paartjes in plaats van alleen het verschil in verhoudingen tussen de paartjes?

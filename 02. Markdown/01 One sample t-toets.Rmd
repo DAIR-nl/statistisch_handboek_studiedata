@@ -118,10 +118,11 @@ library(ggplot2)
 library(plotly)
 h <- ggplot(data.frame(Gemiddeld_cijfer_WNS), aes(x = Gemiddeld_cijfer_WNS)) +
   geom_histogram(aes(y = ..density..),
-                 binwidth = 0.5, color = "grey30", fill = "#f28763") + 
+                 binwidth = 0.5, color = "grey30", fill = "#bd8835") + 
   geom_density(alpha = .2) +
   ylab("Kans") +
   xlab("Gemiddeld_cijfer_WNS") +
+  scale_x_continuous(labels = as.character(seq(5.5, 9, 0.5)), breaks = seq(5.5, 9, 0.5))
   labs(title = "Eindcijfers Wiskunde, Natuurkunde en Scheikunde", subtitle = "Eerstejaarsstudenten Werktuigbouwkunde")                
 ggplotly(h)
 ```

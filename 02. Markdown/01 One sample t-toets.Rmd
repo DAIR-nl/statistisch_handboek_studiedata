@@ -63,7 +63,7 @@ De t-toets gaat ervan uit dat de data normaal verdeeld is. Controleer deze assum
 Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test* [^4].
 
 ## 4 Uitvoering in R
-Twee dummy datasets `Gemiddeld_cijfer_WNS` en `Gemiddeld_cijfer_WNS_n30` zijn ingeladen met de gemiddelde eindexamencijfers van wiskunde, natuurkunde en scheikunde uit Studielink. Het eerste bestand bevat 122 middelbare scholierenstudenten en het tweede bevat 30 studenten.
+Twee dummy datasets `Gemiddeld_cijfer_WNS` en `Gemiddeld_cijfer_WNS_n30` zijn ingeladen met de gemiddelde eindexamencijfers van wiskunde, natuurkunde en scheikunde van eerstejaars Werktuigbouwkunde (uit Studielink). Het eerste bestand bevat 122 middelbare scholierenstudenten en het tweede bevat 30 studenten.
 
 ### 4.1 Test assumpties: normaliteit {.tabset .tabset-fade .tabset.pills}
 Bekijk de data via `mean()`, `sd()`.
@@ -120,12 +120,12 @@ library(ggplot2)
 library(plotly)
 h <- ggplot(data.frame(Gemiddeld_cijfer_WNS), aes(x = Gemiddeld_cijfer_WNS)) +
   geom_histogram(aes(y = ..density..),
-                 binwidth = 0.5, color = "grey30", fill = "#bd8835") + 
-  geom_density(alpha = .2) +
-  ylab("Kans") +
+                 binwidth = 0.5, color = "grey30", fill = "#D17A53") + 
+  geom_density(alpha = .2, adjust = 1) +
+  ylab("Frequentiedichtheid") +
   xlab("Gemiddeld_cijfer_WNS") +
-  scale_x_continuous(labels = as.character(seq(5.5, 9, 0.5)), breaks = seq(5.5, 9, 0.5))
-  labs(title = "Eindcijfers Wiskunde, Natuurkunde en Scheikunde", subtitle = "Eerstejaarsstudenten Werktuigbouwkunde")                
+  scale_x_continuous(labels = as.character(seq(5.5, 9, 0.5)), breaks = seq(5.5, 9, 0.5)) +
+  labs(title = "Eindcijfers Wiskunde, Natuurkunde en Scheikunde", subtitle = "Eerstejaarsstudenten Werktuigbouwkunde")
 ggplotly(h)
 ```
 Het histogram laat een belcurve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
@@ -136,7 +136,13 @@ Gebruik `qqnorm()` en `qqline()`. Gebruik `pch = 20`om gevulde datapunten te cre
 qqnorm(Gemiddeld_cijfer_WNS, pch = 20)
 qqline(Gemiddeld_cijfer_WNS)
 ```
+
 Wanneer over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is. In dit geval liggen de meeste punten op de lijn behalve bij de uiteinden. 
+
+#### Boxplot
+``` {r Boxplot}
+boxplot(Gemiddeld_cijfer_WNS)
+```
 
 ### {.toc-ignore}
 ***
@@ -184,7 +190,6 @@ De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor
 
 [^1]: van Geloven, N. (2016, May 25). T-toets [Wiki Statistiek Academisch Medisch Centrum]. Verkregen van: https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets
 [^2]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. Verkregen van: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
-
 [^3]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. Verkregen van: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
 [^4]: Prabhakaran, S. (2016-2017). Statistical Tests [r-statistics.co]. Verkregen van: http://r-statistics.co/Statistical-Tests-in-R.html  
 [^5]: Knottnerus, J. A., & Bouter, L. M. (2001). The ethics of sample size: Two-sided testing and one-sided thinking. *Journal of Clinical Epidemiology, 54*(2), 109-110.

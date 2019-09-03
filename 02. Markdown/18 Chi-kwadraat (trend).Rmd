@@ -71,7 +71,8 @@ n <- nrow(Afstudeertijd)
 chi <- (n - 1) * r^2
 chi
 ```
-Of via Kendall's tau als de meeteenheid van Afstudeertijd niet oke, maar wel ordinaal is:
+
+Of via Kendall's tau als de afstanden tussen de waardedes in `Nominaal_num` niet als gelijk gezien mogen worden. De variabele wordt nog wel als ordinaal gezien:
 ```{r tau}
 cor.test(Afstudeertijd$`Direct van het VWO`, Afstudeertijd$Nominaal_num, method = "kendall")
 t <- cor(Afstudeertijd$`Direct van het VWO`, Afstudeertijd$Nominaal_num, method = "kendall")

@@ -28,6 +28,8 @@ knitr::opts_chunk$set(echo = TRUE)
 RNGkind(sample.kind = "Rounding")
 set.seed(0)
 
+st_nr <- sample(600000:700000, 378)
+
 teller_2014 <- c(140, 120, 60, 25, 33)
 
 erg_goed <-   rep("erg goed",        teller_2014[1])
@@ -39,23 +41,17 @@ erg_slecht <- rep("erg slecht",      teller_2014[5])
 eval_2014 <- c(erg_goed, goed, neutraal, slecht, erg_slecht)
 jaar_2014 <- rep(2014, length(eval_2014))
 
+erg_goed <- c(rep("erg goed", teller_2014[1] - 23), rep("goed", 18), rep("neutraal", 3), rep("slecht", 1), rep("erg slecht", 1))
+goed <- c(rep("erg goed", 31), rep("goed", teller_2014[2] - 43), rep("neutraal", 6), rep("slecht", 4), rep("erg slecht", 2))
+neutraal <- c(rep("erg goed", 9), rep("goed", 16), rep("neutraal", teller_2014[3]-28), rep("slecht", 2), rep("erg slecht", 1))
+slecht <- c(rep("erg goed", 3), rep("goed", 4), rep("neutraal", 3), rep("slecht", teller_2014[4]-11), rep("erg slecht", 1))
+erg_slecht <- c(rep("erg goed", 3), rep("goed", 1), rep("neutraal", 8), rep("slecht", 3), rep("erg slecht", teller_2014[5]-15))
 
-Verschil <- c(12, 4, -1, -10, -5)
-teller_2019 <- teller_2014 + Verschil
-
-
-erg_goed <-   rep("erg goed",        teller_2019[1])
-goed <-       rep("goed",            teller_2019[2])
-neutraal <-   rep("neutraal",        teller_2019[3])
-slecht <-     rep("slecht",          teller_2019[4])
-erg_slecht <- rep("erg slecht",      teller_2019[5])
 
 eval_2019 <- c(erg_goed, goed, neutraal, slecht, erg_slecht)
 jaar_2019 <- rep(2019, length(eval_2019))
 
-## Hussel wat waardes in 2019 om minder gelijke paren te krijgen
-eval_2019 <- eval_2019[c(1:140, 347:359, 152:274, 141:145, 278:330, 146:151, 335:346, 360:378, 275:277, 331:334)]
-st_nr <- sample(600000:700000, 378)
+
 
 ## Hussel beide vervolgens op de geordende volgorde van het st_nr
 eval_2019 <- eval_2019[order(st_nr)]
@@ -65,7 +61,6 @@ eval_2014 <- eval_2014[order(st_nr)]
 Eval_curriculum <- data.frame(c(eval_2014, eval_2019), c(jaar_2014, jaar_2019), c(st_nr, st_nr))
 
 colnames(Eval_curriculum) <- c("Waardering", "Jaar", "studentnr")
-View(Eval_curriculum)
 
 
 ```
@@ -85,11 +80,16 @@ Bekijk de data met `head()`
 head(Eval_curriculum)
 ```
 
-De data is gesorteerd op jaar. Gebruik `order()` op studentnummer om de paren beter te kunnen bekijken.
+De data is gesorteerd op jaar. Gebruik `order()` op studentnummer en splits de data om de paren beter te kunnen bekijken.
 ```{r data sorteren}
 Eval_curriculum <- Eval_curriculum[order(Eval_curriculum$studentnr),]
-head(Eval_curriculum)
+Eval_2014 <- Eval_curriculum[seq(1, nrow(Eval_curriculum)-1, 2), 1]
+Eval_2019 <- Eval_curriculum[seq(2, nrow(Eval_curriculum), 2), 1]
+Eval_curriculum_gepaard <- data.frame(Eval_2014, Eval_2019)
+head(Eval_curriculum_gepaard)
 ```
+
+
 
 ### Assumpties testen in R
 @IvdS heeft deze situatie assumpties? Misschien dat er voor elk paar twee observaties zijn?
@@ -100,13 +100,35 @@ head(Eval_curriculum)
 ### Statistische toets in R {.tabset .tabset-fade}
 
 #### McNemar toets
-```{r McNemar}
+Om `mcnemar.test()` te gebruiken moet de data eerst worden omgezet in een gepaarde kruistabel. Deze data gaat over paren, niet over observaties. Eerst moeten de categorieën voor de paren worden aangemaakt
+```{r kruistabel alfabetisch}
+Eval_curriculum_kt <- table(Eval_curriculum_gepaard$Eval_2014, Eval_curriculum_gepaard$Eval_2019)
+Eval_curriculum_kt
+```
 
+De categorieën staan nu nog op alfabetische volgorde. Verander deze volgorde zodat de categorieën verlopen zoals de ordinale variabele.
+```{r kruistabel ordinaal}
+Eval_curriculum_kt <- Eval_curriculum_kt[c(1, 3, 4, 5, 2), c(1, 3, 4, 5, 2)]
+Eval_curriculum_kt
+```
+
+Voer verolgens de test uit met `mcnemar.test()`.
+```{r McNemar}
+mcnemar.test(Eval_curriculum_kt)
 ```
 
 #### Wilcoxon Signed Rank toets
-```{r Wilcoxon Signed Rank}
+Om de wilcoxon Signed Rank toets te doen moet de ordinale data worden getransformeerd naar numerieke data. Hiervoor gebruiken we de rang van de categorieën (5 voor erg goed, 1 voor erg slecht)
+```{r Wilcoxon Signed Rank voorbereiden}
+Eval_curriculum$Waardering_num[Eval_curriculum$Waardering == "erg goed"] <- 5
+Eval_curriculum$Waardering_num[Eval_curriculum$Waardering == "goed"] <- 4
+Eval_curriculum$Waardering_num[Eval_curriculum$Waardering == "neutraal"] <- 3
+Eval_curriculum$Waardering_num[Eval_curriculum$Waardering == "slecht"] <- 2
+Eval_curriculum$Waardering_num[Eval_curriculum$Waardering == "erg slecht"] <- 1
 
+wilcox.test(Eval_curriculum$Waardering_num[Eval_curriculum$Jaar == 2014],
+            Eval_curriculum$Waardering_num[Eval_curriculum$Jaar == 2019],
+            paired = TRUE)
 ```
 
 ### {.toc-ignore}

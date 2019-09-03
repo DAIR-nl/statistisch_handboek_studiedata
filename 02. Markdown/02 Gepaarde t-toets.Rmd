@@ -101,11 +101,9 @@ De *t-toets* gaat ervan uit dat de data normaal verdeeld is.
 Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, kan de *t-toets* niet gebruikt worden. Gebruik in dat geval de *Wilcoxon Signed Rank Test* [^3].
 
 ## Effectmaat
-Om te bepalen of de gevonden p-waarde betekenisvol is kan een effectmaat berekend worden, er zijn meerdere effect maten te berekenen. Hier worden twee effectmaten besproken die veel voorkomen, Cohen's *d* en eta squared.   
+Om te bepalen of de gevonden p-waarde betekenisvol is kan een effectmaat berekend worden. Een veel voorkomende maat is de Cohen's *d*.    
 
 Cohen's *d* berekent de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele. Een indicatie om *d* te interpreteren is: *d* ≤ 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect [^4].  
-
-Eta squared (η^2) berekent de proportie van de variantie in de afhankelijke variabele wat verklaard wordt door de onafhankelijke variabele. In dit geval berekent het de proportie van de variantie in de hoogte van het cijfer wat verklaard kan worden door het tutorgesprek. Een indicatie om η^2 te interpreteren is: η^2 = 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en > 0,14 is een groot effect [^5]. 
 
 ## 4 Uitvoering in R
 Voor de uitvoering in R is er data ingeladen met evaluatie-scores van studenten voor en nadat zij een tutorgesprek hebben gehad. 
@@ -122,7 +120,7 @@ hist(Evaluatie_score_na_tutorgesprek)
 ```
 </div>
 
-Beide histogrammen laten een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Het histogram `Evaluatie_score_na_tutorgesprek` lijkt licht scheef verdeeld. Voer de *Kolmogorov-Smirnov test* of de *Shapiro-Wilk test* uit om te toetsen of de histogrammen normaal verdeeld zijn.   
+Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Het histogram `Evaluatie_score_na_tutorgesprek` lijkt licht scheef verdeeld. Voer de *Kolmogorov-Smirnov test* of de *Shapiro-Wilk test* uit om te toetsen of de histogrammen normaal verdeeld zijn.   
 
 ### {.tabset .tabset-fade .tabset.pills}
 #### Kolmogorov-Smirnov (met Lilliefors correctie)
@@ -136,7 +134,7 @@ lillie.test(Evaluatie_score_na_tutorgesprek)
 ```
 </div>
 
-De *Kolmogorov-Smirnov test* is een non-parametrische toets, die het verschil in vorm tussen de twee verdelingen toetst. Wanneer de p-waarde kleiner is dan 0,05 is er een verschil tussen beide verdelingen.  
+De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen de twee verdelingen. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.  
 
 In dit geval is van beide groepen de p-waarde > 0,05, dus is de verdeling van de data niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *gepaarde t-toets* kan uitgevoerd worden. 
 

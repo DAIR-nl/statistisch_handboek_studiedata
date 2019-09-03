@@ -1,0 +1,59 @@
+---
+title: "12 McNemar toets"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    theme: united
+---
+
+<style>
+  .col2 {
+    columns: 2 200px;
+    -webkit-columns: 2 200px;
+    -moz-columns: 2 200px;
+  }
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r aanmaken data, include=FALSE, echo=TRUE}
+
+```
+
+## 1 Toepassing
+
+## 2 Onderwijscasus
+
+## 3 Assumpties
+
+## 4 Uitvoering in R
+Er is een dataset ingeladen genaamd
+
+### De data bekijken
+```{r data bekijken}
+
+```
+
+### Assumpties testen in R
+
+```{r}
+
+```
+
+### Statistische toets in R
+
+```{r}
+
+```
+
+## Toelichting op de output
+
+## 5 Rapportage
+
+
+

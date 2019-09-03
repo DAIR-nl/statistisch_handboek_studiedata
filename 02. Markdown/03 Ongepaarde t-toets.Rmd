@@ -64,7 +64,7 @@ Cijfers_gem <- data.frame(Cijfers, Cohort)
 Bij het toetsen of het gemiddelde van twee variabelen aan elkaar gelijk zijn kan de *t-toets* gebruikt worden. Wanneer het gaat om de gemiddelden van twee onafhankelijke groepen, kan de *ongepaarde t-toets* toegepast worden [^1].
 
 ## 2 Onderwijscasus
-Is het gemiddelde cijfer van de opleiding Taalwetenschap op 1 februari gestegen na invoering van het BSA? De data is beschikbaar voor het cohort gestart in 2010 en voor het cohort gestart in 2011. Vanaf 2011 heeft de opleiding een Bindend Studieadvies (BSA) die de selectiviteit van het eerste jaar moet vergroten.
+Vanaf 2011 heeft de Taalwetenschap opleiding een Bindend Studieadvies (BSA) die de selectiviteit van het eerste jaar moet vergroten. Is het gemiddelde cijfer van de opleiding Taalwetenschap op 1 februari gestegen na invoering van het BSA? De data is beschikbaar voor het cohort gestart in 2010 en voor het cohort gestart in 2011.
 
 ## 3 Assumpties
 ### Normaliteit  
@@ -75,13 +75,13 @@ Controleer of de groepen normaal zijn verdeeld:
 Wanneer uit bovenstaande tests blijkt dat de steekproef niet normaal verdeeld is, kan de t-toets niet gebruikt worden, maar wel de *Mann-Whitney U toets*, ook bekend als de *Wilcoxon rank-sum toets* [^4].  
 
 ### Homogeniteit van varianties 
-De *ongepaarde t-toets* gaat er ook van uit dat beide groepen dezelfde spreiding heeft, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Bij een *p* > 0,05 is de spreiding van de groepen verschillend en wordt de assumptie geschonden. Let op, de interpretatie van de *p* is bij de *Levene's Test* tegengesteld aan de interpretatie van *p* bij een *t-toets*.
+De *ongepaarde t-toets* gaat er ook van uit dat beide groepen dezelfde spreiding heeft, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Bij een *p* > 0,05 is de spreiding van de groepen verschillend en wordt de assumptie geschonden. Let op, de interpretatie van de p-waarde is bij de *Levene's Test* tegengesteld aan de interpretatie van een p-waarde bij een *t-toets*.
 
 ## Effectmaat
-Om te bepalen of de gevonden p-waarde betekenisvol is kan een effectmaat berekend worden. Cohen's d berekent de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele. Een indicatie om *d* te interpreteren is: d ≤ 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect. 
+Om te bepalen of de gevonden p-waarde betekenisvol is kan een effectmaat berekend worden. Cohen's d berekent de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele. Een indicatie om *d* te interpreteren is: d ≤ 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect [^5].
 
 ## 4 Uitvoering in R
-Voor de uitvoering in R is er data (`Cijfers_gem`) ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Statistiek. De data bevat zowel cijfers van 180 studenten begonnen in 2010 als cijfers van 160 studenten begonnen in 2011.
+Voor de uitvoering in R is er data (`Cijfers_gem`) ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap. De data bevat zowel cijfers van 180 studenten begonnen in 2010 als cijfers van 160 studenten begonnen in 2011.
 
 ### De data bekijken
 ```{r data bekijken}
@@ -115,7 +115,8 @@ hist(Cijfers_2010)
 hist(Cijfers_2011)
 ```
 </div>
-Beide histogrammen laten een belvorm zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  
+Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  
+Voer de *Kolmogorov-Smirnov test* of de *Shapiro-Wilk test* uit om te toetsen of beide groepen normaal verdeeld zijn.
 
 ### {.tabset .tabset-fade .tabset.pills}
 #### Kolmogorov-Smirnov (met Lilliefors correctie)
@@ -130,9 +131,9 @@ lillie.test(Cijfers_2011)
 ```
 </div>
 
-De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen de twee verdelingen. Wanneer *p* < 0,05 is er een verschil tussen beide verdelingen.
+De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen de twee verdelingen.In dit geval toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van een normale verdeling.
 
-In dit geval zijn van beide groepen de p-waarde > 0,05, dus is de verdeling van de data niet significant verschillend van de normaalverdeling en de *ongepaarde t-toets* kan uitgevoerd worden.
+In dit geval is van beide groepen de p-waarde > 0,05; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *ongepaarde t-toets* kan uitgevoerd worden.
 
 #### Shapiro-Wilk Test
 <div class="col2">
@@ -141,6 +142,8 @@ shapiro.test(Cijfers_2011_n30)
 shapiro.test(Cijfers_2010_n30)
 ```
 </div>
+De *Shapiro-Wilk test* wordt vooral gebruikt bij kleine steekproeven. Ook bij deze toets geldt dat wanneer de p-waarde > 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.  
+
 In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, dus is de verdeling van beide groepen niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *ongepaarde t-toets* kan uitgevoerd worden.
 
 ### Levene's test
@@ -149,17 +152,23 @@ De `leveneTest()` heeft in R twee argumenten. Het eerste argument is een vector 
 library(car)
 leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 ```
-*F(1,338)* = 0,92(1), p-waarde ≈ 0,034, de groepen zijn niet verschillend in spreiding.  
-Vrijheidsgraden: het eerste cijfer zijn het #groepen - 1 en de tweede: *n~1~* + *n~2~* -2
+*F(1, 338)* = 0,92, p-waarde = 0,034, de groepen zijn niet verschillend in spreiding.  
+Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 1) en de tweede cijfer (*n~1~* + *n~2~* - 2 = 338)
+Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. 
 
 ### Ongepaarde t-toets
 ```{r statistische toets}
 t.test(Cijfers_2010, Cijfers_2011)
 ```
+* *t* (326.37) = 13,575 *p* < 0,01  
+* Vrijheidsgraden: *df* = *n* -1 = 247.  
+* p-waarde < 0,05, dus de H~A~ wordt aangenomen  
+* 95%-betrouwbaarheidsinterval; bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. 95%-betrouwbaarheidsinterval: 0,22 tot 0,29
 
 
 ### Cohen's d 
 
+*d* = ... De sterkte van het effect van de tutor op het cijfer is klein tot gemiddeld.
 
 ## 5 Rapportage
 
@@ -168,4 +177,5 @@ t.test(Cijfers_2010, Cijfers_2011)
 [^2]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. Verkregen van: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
 [^3]: https://wikistatistiek.amc.nl/index.php/One-way_ANOVA
 [^4]: van Geloven, N. (2018, 13 maart). Mann-Whitney U toets [Wiki Statistiek Academisch Medisch Centrum]. Verkregen van: https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets
+[^5]: Marshall, E., & Boggis, E. (2016). The statistics tutor’s quick guide to commonly used statistical tests. *Statstutor Community Project.*
 

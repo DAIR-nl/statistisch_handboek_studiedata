@@ -100,15 +100,15 @@ H~A~: Het gemiddelde cijfer wat de studenten geven voor de opleiding is verander
 
 ## 3 Assumpties: Normaliteit
 De *t-toets* gaat ervan uit dat de data normaal verdeeld is.  
-1. Controleer visueel of de data normaal verdeel is door het maken van een dataplot: een histogram of een boxplot.  
-2. Toets daarna of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef met de *Shapiro-Wilk test* [^2].  
+1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot. 
+2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^2]) met de *Shapiro-Wilk test* [^3].  
 
-Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, kan de *t-toets* niet gebruikt worden. Gebruik in dat geval de *Wilcoxon Signed Rank Test* [^3].
+Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, kan de *t-toets* niet gebruikt worden. Gebruik in dat geval de *Wilcoxon Signed Rank Test* [^4].
 
 ## Effectmaat
 Om te bepalen of de gevonden p-waarde betekenisvol is kan een effectmaat berekend worden. Een veel voorkomende maat is de Cohen's *d*.    
 
-Cohen's *d* berekent de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele. Een indicatie om *d* te interpreteren is: *d* ≤ 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect [^4].  
+Cohen's *d* berekent de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele. Een indicatie om *d* te interpreteren is: *d* ≤ 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect [^5].  
 
 ## 4 Uitvoering in R
 Voor de uitvoering in R is er data ingeladen met evaluatie-scores van studenten voor en nadat zij een tutorgesprek hebben gehad. 
@@ -124,6 +124,8 @@ sd(Evaluatie_score_na_tutorgesprek)
 hist(Evaluatie_score_na_tutorgesprek)
 ```
 </div>
+gemiddelde voor tutor gesprek (standaarddeviatie): 3,60 (0,56)  
+gemiddelde na tutor gesprek (standaarddeviatie): 3,34 (0,85)
 
 Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Het histogram `Evaluatie_score_na_tutorgesprek` lijkt licht scheef verdeeld. Voer de *Kolmogorov-Smirnov test* of de *Shapiro-Wilk test* uit om te toetsen of de histogrammen normaal verdeeld zijn.   
 
@@ -139,9 +141,9 @@ lillie.test(Evaluatie_score_na_tutorgesprek)
 ```
 </div>
 
-De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen de twee verdelingen. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.  
+De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen de twee verdelingen.In dit geval toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van een normale verdeling.  
 
-In dit geval is van beide groepen de p-waarde > 0,05, dus is de verdeling van de data niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *gepaarde t-toets* kan uitgevoerd worden. 
+In dit geval is van beide groepen de p-waarde > 0,05; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *gepaarde t-toets* kan uitgevoerd worden. 
 
 #### Shapiro-Wilk Test
 <div class ="col2">
@@ -159,11 +161,11 @@ In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, 
 ```{r statistische toets}
 t.test(Evaluatie_score_voor_tutorgesprek, Evaluatie_score_na_tutorgesprek, paired = TRUE)
 ```
-* *t* (247) = 17,997, *p* < 0,01  
-* Vrijheidsgraden: *df* = *n* -1 = 245 
+* *t* (247) = 13,575 *p* < 0,01  
+* Vrijheidsgraden: *df* = *n* -1 = 247 
 * p-waarde < 0,05, dus de H~A~ wordt aangenomen  
-* 95%-betrouwbaarheidsinterval: het interval loopt tussen 0,25 en de 0.32
-* Het verschil tussen beide groepen is 0,29
+* 95%-betrouwbaarheidsinterval; bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. 95%-betrouwbaarheidsinterval: 0,22 tot 0,29
+* Het verschil tussen beide groepen: *MD* = 0,26
 
 ### Effectmaat{.tabset .tabset-fade .tabset.pills}
 
@@ -183,15 +185,14 @@ Eta2 <- (t^2) / (t^2 + 245)
 Eta2
 ```
 
-
-
 ## 5 Rapportage
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde cijfer, wat studenten geven voor de opleiding, gelijk is gebleven na een gesprek met een tutor. Het verschil tussen het gemiddelde van T~0~ (3,65) en het gemiddelde van T~1~ (3,4) is significant *t* (247) = -2,7787, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen heeft een reikwijdte van -0,27 tot -0,04. Het effect is klein tot gemiddeld, *d* = 0,36.    
-De resultaten ondersteunen de conclusie dat de studenten na een gesprek met de tutor de opleiding anders beoordelen dan voordat ze een gesprek hebben gehad met de tutor. 
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde cijfer, wat studenten geven voor de opleiding, gelijk is gebleven na een gesprek met een tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = 3,65, *SD~T0~* = 0,56) en het gemiddelde van T~1~ (*M~T1~* = 3,4, *SD~T1~* = 0,85) is significant, *t* (247) = -2,7787, *p* < 0,01. Opvallend aan deze data is dat het gemiddelde van T~1~ lager is dan T~0~. Het effect is klein tot gemiddeld, *d* = 0,36. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van -0,27 tot -0,04. 
 
+Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding slechter beoordelen dan daarvoor.  
 
-[^1]: Student's t-test [Wikipedia]. (2019 August 21). Retrieved from: https://en.wikipedia.org/wiki/Student%27s_t-test
-[^2]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. Retrieved from: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
-[^3]: van Geloven, N. (2013, 25 September). Wilcoxon signed rank toets [Wiki Statistiek Academisch Medisch Centrum]. Retrieved from: https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets
-[^4]: E Marshall, E Boggis - Statstutor Community Project, 2016 - statstutor.ac.uk The Statistics Tutor’s  Quick Guide to Commonly Used Statistical Tests  - Ellen Marshall, University of Sheffield 
-[^5]: Eta-squared. (2019 May 14). Retrieved from: https://en.wikiversity.org/wiki/Eta-squared 
+[^1]: Student's t-test [Wikipedia]. (2019 August 21). Verkregen van: https://en.wikipedia.org/wiki/Student%27s_t-test
+[^2]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. Verkregen van: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
+[^3]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. Verkregen van: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
+[^4]: van Geloven, N. (2013, 25 September). Wilcoxon signed rank toets [Wiki Statistiek Academisch Medisch Centrum]. Verkregen van: https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets
+[^5]: Marshall, E., & Boggis, E. (2016). The statistics tutor’s quick guide to commonly used statistical tests. *Statstutor Community Project.*
+

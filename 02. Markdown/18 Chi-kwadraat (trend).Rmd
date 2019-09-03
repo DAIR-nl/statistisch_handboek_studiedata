@@ -16,6 +16,10 @@ output:
   }
 </style>
 
+``` {r versiegeschiedenis, include = FALSE, eval = FALSE}
+## versie 0.1     3-9-19
+```
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -38,7 +42,6 @@ Afstudeertijd <- data.frame( direct_vwo, Nominaal_cat, Nominaal_num)
 colnames(Afstudeertijd) <- c("Direct van het VWO", "Nominaal_cat", "Nominaal_num")
 
 Afstudeertijd <- sample_n(Afstudeertijd, nrow(Afstudeertijd))
-View(Afstudeertijd)
 
 ```
 

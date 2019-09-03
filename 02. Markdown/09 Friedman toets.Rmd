@@ -9,6 +9,10 @@ output:
     theme: united
 ---
 
+``` {r versiegeschiedenis, include = FALSE, eval = FALSE}
+## versie 0     3-9-19
+```
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```

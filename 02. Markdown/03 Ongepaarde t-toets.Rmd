@@ -8,6 +8,8 @@ output:
     toc_float: TRUE
     theme: united
 ---
+
+
 <style>
   .col2 {
     columns: 2 200px;
@@ -15,6 +17,10 @@ output:
     -moz-columns: 2 200px;
   }
 </style>
+
+``` {r versiegeschiedenis, include = FALSE, eval = FALSE}
+## versie 0.1     3-9-19
+```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)

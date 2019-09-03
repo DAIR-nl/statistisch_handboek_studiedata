@@ -8,6 +8,9 @@ output:
     toc: yes
     toc_float: yes
 ---
+``` {r versiegeschiedenis, include = FALSE, eval = FALSE}
+## versie 0.4     3-9-19
+```
 
 ```{r opmerking, include=FALSE, eval=FALSE}
 # TODO: een link maken naar Wilcoxon Signed Rank Test

@@ -204,6 +204,16 @@ par(mar = c(3, 12, 1, 0) + .1)
 boxplot(Reistijd ~ Opleiding, Reistijd_per_opleiding, las = 2, horizontal = TRUE)
 ```
 
+Een andere optie zijn deze ridges:
+```{r ridges, warning = FALSE, message = FALSE}
+library(tidyverse)
+library(ggridges)
+
+ggplot(Reistijd_per_opleiding, aes(Reistijd, Opleiding)) +
+  geom_density_ridges(rel_min_height=.01)
+```
+
+
 ### Assumpties testen in R
 ```{r lillietest voorbereiden}
 library(nortest)

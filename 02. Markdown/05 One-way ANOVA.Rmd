@@ -23,6 +23,12 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+```{r opmerking, include=FALSE, eval=FALSE}
+
+
+#posthoc Tukey 
+```
+
 
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
@@ -163,31 +169,27 @@ Reistijd_per_opleiding <- Reistijd_per_opleiding %>%
 De *one-way ANOVA* wordt gebruikt bij het toetsen of het gemiddelde van drie of meer groepen aan elkaar gelijk zijn. De te vergelijken groepen zijn ongepaard en daarmee onafhankelijk van elkaar.  
 
 ## 2 Onderwijscasus
-Het hoofd communicatie wil in verband met wervingsactiviteiten weten wat de reistijd is van studenten aan verschillende opleidingen voor en na de invoering van het leenstelsel. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten per opleiding
+Het hoofd communicatie wil in verband met wervingsactiviteiten weten wat de reistijd is van studenten, aan verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten per opleiding. 
 
-```{r opmerking, include=FALSE, eval=FALSE}
-# Of het cijfer van de 4 profielen gelijk zijn aan elkaar (sowieso scheefverdeeld, dus slecht voorbeeld?)
-# verschil van IQ van studenten tussen Beta opleidingen  
-
-#H~0~ het gemiddelde van alle groepen zijn gelijk aan elkaar H~A~ tenminste van één groep is het gemiddelde niet gelijk aan het gemiddelde van de anderen groepen. 
-
-#posthoc Tukey 
-```
+H~0~: De gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar: µ~0~ = µ~1~ = µ~2~ ... µ~n~  
+H~A~: Tenminste voor één opleiding is de gemiddelde reistijd niet gelijk aan de gemiddelde reistijd van studenten voor de andere opleidingen. µ~0~ ≠ µ~1~ = µ~2~ ... = µ~n~
 
 ## 3 Assumpties
-Controleer of de steekproef aan de volgende assumpties voldoen: 
-1. Normaliteit 
-2. Homogeniteit van varianties
-3. Onafhankelijkheid
-Wanneer de data niet voldoet aan één van deze assumpties kan de de *Kruskal-Wallis test* uitgevoerd worden [^1]
+Controleer of de steekproef aan de volgende assumpties voldoen:  
+1. Normaliteit  
+2. Homogeniteit van varianties  
+3. Onafhankelijkheid   
+
+Als de data niet voldoet aan één van deze assumpties kan de test *one -way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden.  
+Een toest die niet uitgaat van normaal verdeelde data is de *Kruskal-Wallis test*, deze toest kan in plaats van de *one -way ANOVA* uitgevoerd worden [^1]. 
 
 ### 1. Normaliteit 
-Controleer of de groepen normaal zijn verdeeld:
-1. Controleer visueel door het maken van een dataplot, bijvoorbeeld een boxplot.  
-2. Toets daarna of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef met de *Shapiro-Wilk test*. 
+Controleer de assumptie van normaliteit met de volgende stappen:  
+1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.  
+2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^2]) met de *Shapiro-Wilk test* [^3].  
 
 ### 2. Homogeniteit van Varianties
-Controleer of de spreiding van iedere groep ongeveer hetzelfde is, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Wanneer de test significant is, is de spreiding van de groepen verschillend.[^2]  
+Controleer of de spreiding van iedere groep ongeveer hetzelfde is, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Wanneer de test significant is, is de spreiding van de groepen verschillend.[^4]  
 
 ### 3. Onafhankelijkheid
 Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. 
@@ -232,21 +234,32 @@ for (. in Reistijdlijst) {
 ```
 
 
-### Statistische toets in R
-
+### One way ANOVA 
 ```{r ANOVA}
 res.aov <- aov(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 summary(res.aov)
 ```
 
 
-## Toelichting op de output
+### Post-hoc vergelijking 
+De *one-way ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden, welke groep anders is wordt niet gespecificeerd. Als er bij de *one-way ANOVA* uitkomt dat er een significant verschil is tussen de groepen kan een post-hoc vergelijking gedaan worden om te bepalen welke groepen significant verschillen.  
+Er zijn meerdere post-hoc vergelijkingen:
+* *Tukey* wordt gebruikt als de assumptie van gelijke varianties is voldaan
+* Dunnet's *C* wordt gebruikt bij ongelijke varianties 
+
 
 ## 5 Rapportage
 
 
-[^1]: https://wiki.uva.nl/methodologiewinkel/index.php/One-way_ANOVA Deze pagina is het laatst bewerkt op 8 jul 2014 om 13:41.
-[^2]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. Retrieved from: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
+[^1]: One-way ANOVA. (8 juli 2017). [UvA Wiki Methodologiewinkel]. Verkregen van:  https://wiki.uva.nl/methodologiewinkel/index.php/One-way_ANOVA 
+[^2]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. Verkregen van: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
+[^3]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. Verkregen van: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
 
 [^2]: https://wikistatistiek.amc.nl/index.php/One-way_ANOVA
 
+
+
+[^1]: van Geloven, N. (2016, May 25). T-toets [Wiki Statistiek Academisch Medisch Centrum]. Verkregen van: https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets
+
+[^4]: Prabhakaran, S. (2016-2017). Statistical Tests [r-statistics.co]. Verkregen van: http://r-statistics.co/Statistical-Tests-in-R.html  
+[^5]: Knottnerus, J. A., & Bouter, L. M. (2001). The ethics of sample size: Two-sided testing and one-sided thinking. *Journal of Clinical Epidemiology, 54*(2), 109-110.

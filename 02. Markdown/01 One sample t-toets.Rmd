@@ -191,8 +191,8 @@ De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamen
 De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor de exacte vakken hoger ligt voor studenten Werktuigbouwkunde met een vwo vooropleiding, dan het landelijk gemiddelde.
 
 
-[^1]: van Geloven, N. (2016, May 25). T-toets [Wiki Statistiek Academisch Medisch Centrum]. Verkregen van: https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets
+[^1]: van Geloven, N. (25 mei 2016). T-toets [Wiki Statistiek Academisch Medisch Centrum]. Verkregen van: https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets
 [^2]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. Verkregen van: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
-[^3]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. Verkregen van: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
+[^3]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel]. Verkregen van: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
 [^4]: Prabhakaran, S. (2016-2017). Statistical Tests [r-statistics.co]. Verkregen van: http://r-statistics.co/Statistical-Tests-in-R.html  
 [^5]: Knottnerus, J. A., & Bouter, L. M. (2001). The ethics of sample size: Two-sided testing and one-sided thinking. *Journal of Clinical Epidemiology, 54*(2), 109-110.

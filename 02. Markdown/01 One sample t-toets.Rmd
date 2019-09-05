@@ -50,7 +50,7 @@ Gemiddeld_cijfer_WNS_n30 <- sample(Gemiddeld_cijfer_WNS, 30)
 De *one sample t-toets* wordt gebruikt om aan de hand van één steekproef het gemiddelde van de totale populatie te vergelijken met een vooraf opgestelde hypothese [^1]. 
 
 ## 2 Onderwijscasus
-De opleidingsdirecteur van de opleiding Werktuigbouwkunde wil weten of het gemiddelde eindexamencijfer voor de exacte vakken (wiskunde, scheikunde en natuurkunde) van vwo studenten hoger is dan het landelijk gemiddelde. Zo kan zij bepalen of het curriculum van de inleidende vakken genoeg aansluit bij eerstejaars studenten met een vwo vooropleiding.
+De opleidingsdirecteur van de opleiding Werktuigbouwkunde wil weten of het gemiddelde eindexamencijfer voor de exacte vakken (wiskunde, scheikunde en natuurkunde) van vwo studenten hoger is dan het landelijk gemiddelde (6,8)[^2]. Zo kan zij bepalen of het curriculum van de inleidende vakken genoeg aansluit bij eerstejaars studenten met een vwo vooropleiding.
 
 H~0~: Het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde is lager dan of gelijk aan het landelijk gemiddelde: µ = 6,8. 
 
@@ -60,10 +60,10 @@ H~A~: Het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten di
 ### 3.1 Normaliteit 
 De t-toets gaat ervan uit dat de data normaal verdeeld is. Controleer deze assumptie met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
-2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^2]) met de *Shapiro-Wilk test* [^3].  
+2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^3]) met de *Shapiro-Wilk test* [^4].  
 3. Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld, transformeer de data en kijk daarna of het normaal verdeeld is.
 
-Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test* [^4].
+Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test* [^5].
 
 ## 4 Uitvoering in R
 Twee dummy datasets `Gemiddeld_cijfer_WNS` en `Gemiddeld_cijfer_WNS_n30` zijn ingeladen met de gemiddelde eindexamencijfers van wiskunde, natuurkunde en scheikunde van eerstejaars Werktuigbouwkunde (uit Studielink). Het eerste bestand bevat 122 middelbare scholierenstudenten en het tweede bevat 30 studenten.
@@ -175,7 +175,7 @@ De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen d
 ***
 
 ### 4.2 One sample t-toets
-Gebruik `t.test()`om een t-toets uit te voeren. Geef het gemiddelde waarmee wordt vergeleken en specifieer welke alternatieve hypothese er getoetst wordt. In de praktijk wordt meestal tweezijdig getoetst[^5]. 
+Gebruik `t.test()`om een t-toets uit te voeren. Geef het gemiddelde waarmee wordt vergeleken en specifieer welke alternatieve hypothese er getoetst wordt. In de praktijk wordt meestal tweezijdig getoetst[^6]. 
 ```{r ttest}
 t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 ```
@@ -192,7 +192,8 @@ De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor
 
 
 [^1]: van Geloven, N. (25 mei 2016). T-toets [Wiki Statistiek Academisch Medisch Centrum]. Verkregen van: https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets
-[^2]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. Verkregen van: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
-[^3]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel]. Verkregen van: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
-[^4]: Prabhakaran, S. (2016-2017). Statistical Tests [r-statistics.co]. Verkregen van: http://r-statistics.co/Statistical-Tests-in-R.html  
-[^5]: Knottnerus, J. A., & Bouter, L. M. (2001). The ethics of sample size: Two-sided testing and one-sided thinking. *Journal of Clinical Epidemiology, 54*(2), 109-110.
+[^2]: Centraal Instituut voor Toetsontwikkeling (2018). Examenverslag 2018. Verkregen van: https://www.cito.nl/onderwijs/voortgezet-onderwijs/centrale-examens-voortgezet-onderwijs/tools-en-informatie-voor-docenten/examenverslagen/examenverslag-2018
+[^3]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. Verkregen van: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
+[^4]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel]. Verkregen van: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
+[^5]: Prabhakaran, S. (2016-2017). Statistical Tests [r-statistics.co]. Verkregen van: http://r-statistics.co/Statistical-Tests-in-R.html  
+[^6]: Knottnerus, J. A., & Bouter, L. M. (2001). The ethics of sample size: Two-sided testing and one-sided thinking. *Journal of Clinical Epidemiology, 54*(2), 109-110.

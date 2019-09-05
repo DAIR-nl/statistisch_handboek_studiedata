@@ -113,7 +113,8 @@ gemiddelde 2010 (standaarddeviatie): 6,37 (1,12)
 mean(Cijfers_2011)
 sd(Cijfers_2011)
 ```
-gemiddelde 2011 (standaarddeviatie): 6,61(1,2) </div>
+gemiddelde 2011 (standaarddeviatie): 6,61(1,2) 
+</div>
 
 <div class="col2">
 ```{r histogram, collapse=TRUE}
@@ -163,8 +164,9 @@ Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groep
 Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. 
 
 ### Ongepaarde t-toets
+Voer een ongepaarde `t.test()` uit met `paired = FALSE` en `var.equal = TRUE`. Gebruik `var.equal = FALSE` als de uitslag van de *Levene's test* is dat de groepen verschillen in variantie.
 ```{r statistische toets}
-t.test(Cijfers_2010, Cijfers_2011)
+t.test(Cijfers_2010, Cijfers_2011, paired = FALSE, var.equal = TRUE, )
 ```
 * *t* (326.37) = 13,575 *p* < 0,01  
 * Vrijheidsgraden: *df* = *n* -1 = 247.  
@@ -173,7 +175,13 @@ t.test(Cijfers_2010, Cijfers_2011)
 
 
 ### Cohen's d 
-
+#### Cohen's d
+Gebruik `cohen.d()` met `paired = FALSE` om het effect te meten.
+```{r Cohen s d}
+library(effsize)
+cohen.d(Cijfers_2010, Cijfers_2011, paired = FALSE)
+```
+*d* = 0,09. De sterkte van het effect van de tutor op het cijfer is minimaal. 
 *d* = ... De sterkte van het effect van de tutor op het cijfer is klein tot gemiddeld.
 
 ## 5 Rapportage

@@ -18,6 +18,7 @@ output:
 
 ``` {r versiegeschiedenis, include = FALSE, eval = FALSE}
 ## versie 0.1     3-9-19
+## versie 0.2     4-9-19
 ```
 
 ```{r setup, include=FALSE}

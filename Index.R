@@ -36,25 +36,28 @@
 library(stringr)
 library(rlist)
 library(rmarkdown)
+library(ggplot2)
+library(rapport)
 
 toetsenlijst <- list.files(path = "02. Markdown/")
 toetsenlijst <- sapply("02. Markdown", paste, toetsenlijst,  sep ="/")
-html_indices <- grep(".html", toetsenlijst)
+toetsenlijst <- toetsenlijst [-1]
+    html_indices <- grep(".html", toetsenlijst)
 html_paginas <- toetsenlijst[html_indices]
 toetsenlijst <- toetsenlijst[-html_indices]
 
 
 Bekijk_voortgang <- function(){
-  toetsenlijst <- list.files(path = "02. Markdown/")
   toetsnummers <- str_extract(toetsenlijst, "[0-9]+")
   toetsenlijst <- sapply("02. Markdown", paste, toetsenlijst,  sep ="/")
   html_indices <- grep(".html", toetsenlijst)
   html_paginas <- toetsenlijst[html_indices]
-  toetsenlijst <- toetsenlijst[-html_indices]
+  if (!is_empty(html_indices)) {
+    toetsenlijst <- toetsenlijst[-html_indices] }
   
   versies <- list()
   for (toetsnaam in toetsenlijst) {
-    toetspagina <- read_file(toetspagina)
+    toetspagina <- read_file(toetsnaam)
     if (str_detect(tolower("versie 1.0", toetspagina()))) {
       versie <- 7
     } else if (str_detect(tolower("versie 0.6", toetspagina))) {
@@ -94,7 +97,7 @@ Bekijk_voortgang <- function(){
 
 sapply(html_paginas, file.remove)
 sapply(toetsenlijst, render)
-
+  
 ## als je 1 specifieke pagina wil renderen gebruik je in de console `render(toetsenlijst[toetsnummer]`.
 
 

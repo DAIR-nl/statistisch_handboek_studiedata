@@ -1,6 +1,6 @@
 ---
 title: "Ongepaarde t-toets"
-author: "Irene van der Staaij & Megiel Kerkhoven"
+author: "SURF versnellingsagenda Statistisch Handboek Hoger Onderwijs, © 2019"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document:

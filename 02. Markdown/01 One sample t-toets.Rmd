@@ -1,7 +1,7 @@
 ---
 title: "One sample t-toets"
-author: "Irene van der Staaij & Megiel Kerkhoven"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+author: "SURF versnellingsagenda Statistisch Handboek Hoger Onderwijs, © 2019"
+date: "`r format(Sys.time(), '%d-%m-%y')`"
 output:
   html_document:
     theme: united
@@ -76,46 +76,6 @@ sd(Gemiddeld_cijfer_WNS)
 ```
 Geef normaliteit visueel weer met een histogram, boxplot of Q-Q plot. 
 
-#### Histogram 1
-Gebruik `hist()`
-```{r Histogram1}
-hist(Gemiddeld_cijfer_WNS,
-     main = "Histogram van Gemiddeld_cijfer_WNS",
-     xlab = "Gemiddeld_cijfer_WNS",
-     ylab = "Frequentie"
-     )
-```
-
-#### Histogram 2
-Gebruik `hist()`
-```{r Histogram2}
-hist(scale(Gemiddeld_cijfer_WNS), 
-     freq = FALSE,
-     main = "Histogram van Gemiddeld_cijfer_WNS",
-     xlab = "Gemiddeld_cijfer_WNS",
-     ylab = "Dichtheid",
-     breaks = c(seq(-3, 3, 1)),
-     ylim = c(0, 0.4)
-     )
-
-
-lines(density(scale(Gemiddeld_cijfer_WNS)), col = 2)
-```
-
-#### Histogram 3
-Gebruik `hist()`
-```{r Histogram3}
-h <- hist(Gemiddeld_cijfer_WNS, plot = FALSE)
-h$density <- h$density*0.5
-plot(h, 
-     freq = FALSE,
-     main = "Histogram van Gemiddeld_cijfer_WNS",
-     xlab = "Gemiddeld_cijfer_WNS",
-     ylab = "Dichtheid",
-     ylim = c(0, 0.5)
-     )
-lines(density(Gemiddeld_cijfer_WNS), col = 2)
-```
 
 #### Histogram met GGplot
 ```{r barchart, warning=FALSE, message=FALSE}
@@ -123,7 +83,7 @@ library(ggplot2)
 library(plotly)
 h <- ggplot(data.frame(Gemiddeld_cijfer_WNS), aes(x = Gemiddeld_cijfer_WNS)) +
   geom_histogram(aes(y = ..density..),
-                 binwidth = 0.5, color = "grey30", fill = "#D17A53") + 
+                 binwidth = 0.5, color = "grey30", fill = "#0089CF") + 
   geom_density(alpha = .2, adjust = 1) +
   ylab("Frequentiedichtheid") +
   xlab("Gemiddeld_cijfer_WNS") +
@@ -144,7 +104,8 @@ Wanneer over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen
 
 #### Boxplot
 ``` {r Boxplot}
-boxplot(Gemiddeld_cijfer_WNS)
+boxplot(Gemiddeld_cijfer_WNS, xlab = "Werktuigbouwkunde", ylab = "Gemiddeld_cijfer_WNS")
+
 ```
 
 ### {.toc-ignore}

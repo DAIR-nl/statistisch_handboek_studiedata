@@ -15,7 +15,6 @@ output:
 ```{r opmerking, include=FALSE, eval=FALSE}
 # TODO: een link maken naar Wilcoxon Signed Rank Test
 # TODO: Uitleg transformeren data 
-#: vraag Martijn en Sandjai, bij een niet normale verdeling toch t-toets uitvoeren? 
 ```
 
 ```{r setup, include=FALSE}

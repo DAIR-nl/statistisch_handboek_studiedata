@@ -1,5 +1,6 @@
 ---
 title: "Gepaarde t-toets"
+author: "SURF versnellingsagenda Statistisch Handboek Hoger Onderwijs, © 2019"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document:
@@ -91,7 +92,8 @@ Evaluatie_score_na_tutorgesprek_n30 <- Evaluatie_score_na_tutorgesprek_n30[volgo
 
 
 ## 1 Toepassing
-Bij het toetsen of het gemiddelde van twee groepen aan elkaar gelijk zijn kan de *t-toets* toegepast worden. De *gepaarde t-toets* kan toegepast worden wanneer de groepen gepaard zijn, bijvoorbeeld bij een herhaalde meting. Wanneer personen uit twee verschillende groepen, die met elkaar veel overeenkomsten vertonen, gekoppeld worden, kan ook een *gepaarde t-toets* gebruikt worden [^1].
+Bij het toetsen of het gemiddelde van twee groepen aan elkaar gelijk zijn kan de *t-toets* toegepast worden. De *gepaarde t-toets* kan toegepast worden wanneer de groepen gepaard zijn, bijvoorbeeld bij een herhaalde meting. 
+Pas ook de *gepaarde t-toets* toe wanneer karakteristieken van groepspersonen aan elkaar gematched worden [^1]. 
 
 ## 2 Onderwijscasus
 Ter voorbereiding op een visitatie vraagt de opleidingsdirecteur van de lerarenopleiding zich af wat voor cijfer haar studenten de opleiding geven. Zij vraagt zich af of het tutorgesprek hier een rol in speelt. Ze vraagt of de studenten twee keer een vragenlijst in willen vullen. Eerst voordat ze met hun tutor hebben gesproken (T~0~) en daarna nadat ze met hun tutor hebben gesproken (T~1~). 
@@ -99,17 +101,20 @@ Ter voorbereiding op een visitatie vraagt de opleidingsdirecteur van de lerareno
 H~0~: Het gemiddelde cijfer wat de studenten geven aan de opleiding is niet veranderd na het gesprek met hun tutor, µ~T0~ = µ~T1~  
 H~A~: Het gemiddelde cijfer wat de studenten geven aan de opleiding is veranderd na het gesprek met hun tutor, µ~T0~ ≠ µ~T1~ 
 
-## 3 Assumpties: Normaliteit
+## 3 Assumpties: 
+Controleer of de steekproef aan de assumptie van normaliteit voldoet.  
+
+Wanneer uit één van de tests blijkt dat de data niet normaal verdeeld is, kan de *t-toets* niet gebruikt worden. Gebruik in dat geval de *Wilcoxon Signed Rank Test* [^4].
+
+### 3.1 Normaliteit
 De *t-toets* gaat ervan uit dat de data normaal verdeeld is.  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.  
 2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^2]) met de *Shapiro-Wilk test* [^3].  
 
-Wanneer uit één van de bovenstaande tests blijkt dat de data niet normaal verdeeld is, kan de *t-toets* niet gebruikt worden. Gebruik in dat geval de *Wilcoxon Signed Rank Test* [^4].
-
 ## Effectmaat
-Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een veel voorkomende effectmaat is Cohen's *d*.    
+Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een veel voorkomende effectmaat is Cohen's *d*. Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer.  
 
-Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer. Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect [^5].  
+Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect [^5].  
 
 ## 4 Uitvoering in R
 Voor de uitvoering in R is er data ingeladen met evaluatie-scores van studenten voor en nadat zij een tutorgesprek hebben gehad. 
@@ -206,8 +211,8 @@ Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde cijfer geli
 Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding slechter beoordelen dan daarvoor.  
 
 [^1]: Student's t-test [Wikipedia]. (2019 August 21). Verkregen van: https://en.wikipedia.org/wiki/Student%27s_t-test
-[^2]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. Verkregen van: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
-[^3]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. Verkregen van: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
-[^4]: van Geloven, N. (2013, 25 September). Wilcoxon signed rank toets [Wiki Statistiek Academisch Medisch Centrum]. Verkregen van: https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets
+[^2]: van Geloven, N. (2013, 25 September). Wilcoxon signed rank toets [Wiki Statistiek Academisch Medisch Centrum]. Verkregen van: https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets
+[^3]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. Verkregen van: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
+[^4]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. Verkregen van: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
 [^5]: Marshall, E., & Boggis, E. (2016). The statistics tutor’s quick guide to commonly used statistical tests. *Statstutor Community Project.*
 

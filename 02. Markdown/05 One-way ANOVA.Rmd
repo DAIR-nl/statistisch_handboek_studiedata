@@ -1,12 +1,7 @@
 ---
 title: "One-way ANOVA"
-<<<<<<< HEAD
 author: "© 2019, SURF Versnellingsagenda Statistisch Handboek Hoger Onderwijs"
 date: "`r format(Sys.time(), '%d-%m-%y')`"
-=======
-author: "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
->>>>>>> 7468b740b80aef8792088ce4e206ca99e9f49d69
 output: 
   html_document:
     toc: TRUE

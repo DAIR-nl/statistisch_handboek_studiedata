@@ -1,6 +1,6 @@
 ---
 title: "One-way ANOVA"
-author: "© 2019, SURF Versnellingsagenda Statistisch Handboek Hoger Onderwijs"
+author: "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document:
@@ -166,7 +166,8 @@ Reistijd_per_opleiding <- Reistijd_per_opleiding %>%
 ```
 
 ## 1 Toepassing
-De *one-way ANOVA* wordt gebruikt bij het toetsen of het gemiddelde van drie of meer groepen aan elkaar gelijk zijn. De te vergelijken groepen zijn ongepaard en daarmee onafhankelijk van elkaar.  
+Bij het toetsen of het gemiddelde van drie of meer onafhankelijke groepen aan elkaar gelijk zijn, wordt de *one-way ANOVA* gebruikt [^1]. 
+
 
 ## 2 Onderwijscasus
 Het hoofd communicatie wil in verband met wervingsactiviteiten weten wat de reistijd is van studenten, aan verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten per opleiding. 
@@ -252,6 +253,8 @@ Er zijn meerdere post-hoc vergelijkingen:
 
 
 [^1]: One-way ANOVA. (8 juli 2017). [UvA Wiki Methodologiewinkel]. Verkregen van:  https://wiki.uva.nl/methodologiewinkel/index.php/One-way_ANOVA 
+
+
 [^2]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. Verkregen van: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
 [^3]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. Verkregen van: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
 

@@ -1,6 +1,6 @@
 ---
 title: "One sample t-toets"
-author: "SURF versnellingsagenda Statistisch Handboek Hoger Onderwijs, © 2019"
+author: "© 2019, SURF Versnellingsagenda Statistisch Handboek Hoger Onderwijs"
 date: "`r format(Sys.time(), '%d-%m-%y')`"
 output:
   html_document:
@@ -106,6 +106,7 @@ Wanneer over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen
 boxplot(Gemiddeld_cijfer_WNS, xlab = "Werktuigbouwkunde", ylab = "Gemiddeld_cijfer_WNS")
 
 ```
+
 De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte vakken voor de opleiding Werktuigbouwkunde weer. 
 
 ### {.toc-ignore}

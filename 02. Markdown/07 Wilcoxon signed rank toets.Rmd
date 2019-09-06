@@ -1,6 +1,6 @@
 ---
 title: "07 Wilcoxon signed rank toets"
-author: "SURF versnellingsagenda Statistisch Handboek Hoger Onderwijs, © 2019"
+author: author: "© 2019, SURF Versnellingsagenda Statistisch Handboek Hoger Onderwijs"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document:

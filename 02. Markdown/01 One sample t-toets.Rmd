@@ -1,6 +1,6 @@
 ---
 title: "One sample t-toets"
-author: "© 2019, SURF Versnellingsagenda Statistisch Handboek Hoger Onderwijs"
+author: "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
 date: "`r format(Sys.time(), '%d-%m-%y')`"
 output:
   html_document:
@@ -99,7 +99,7 @@ qqnorm(Gemiddeld_cijfer_WNS, pch = 20)
 qqline(Gemiddeld_cijfer_WNS)
 ```
 
-Wanneer over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is. In dit geval liggen de meeste punten op de lijn behalve bij de uiteinden. 
+Wanneer over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is. In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. 
 
 #### Boxplot
 ``` {r Boxplot}
@@ -120,7 +120,7 @@ Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef 
 library(nortest)
 lillie.test(Gemiddeld_cijfer_WNS)
 ```
-De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen twee verdelingen. In dit geval toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.
+De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen twee verdelingen. In deze casus toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is een correctie die wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.
 
 De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *one sample-t-toets* kan uitgevoerd worden.  
 
@@ -145,7 +145,7 @@ t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 * Vrijheidsgraden, *df* = *n* -1 = 122-1 = 121  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
 * *t* (121) = 3,76, *p* < 0,01
-* 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In dit geval is het interval tussen 6,96 en 7,23. 
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen 6,96 en 7,23. 
 
 ## 5 Rapportage
 De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren, hoger is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = 7,08, *SD* = 0,8) is significant hoger dan het landelijk gemiddelde van 6,8, *t* (121) = 3,76, *p* < 0,01. 
@@ -153,9 +153,9 @@ De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamen
 De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor de exacte vakken hoger ligt voor studenten Werktuigbouwkunde met een vwo vooropleiding, dan het landelijk gemiddelde.
 
 
-[^1]: van Geloven, N. (25 mei 2016). T-toets [Wiki Statistiek Academisch Medisch Centrum]. Verkregen van: https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets
-[^2]: Centraal Instituut voor Toetsontwikkeling (2018). Examenverslag 2018. Verkregen van: https://www.cito.nl/onderwijs/voortgezet-onderwijs/centrale-examens-voortgezet-onderwijs/tools-en-informatie-voor-docenten/examenverslagen/examenverslag-2018
-[^3]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. Verkregen van: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
-[^4]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel]. Verkregen van: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
-[^5]: Prabhakaran, S. (2016-2017). Statistical Tests [r-statistics.co]. Verkregen van: http://r-statistics.co/Statistical-Tests-in-R.html  
+[^1]: van Geloven, N. (25 mei 2016). T-toets [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets
+[^2]: Centraal Instituut voor Toetsontwikkeling (2018). Examenverslag 2018. https://www.cito.nl/onderwijs/voortgezet-onderwijs/centrale-examens-voortgezet-onderwijs/tools-en-informatie-voor-docenten/examenverslagen/examenverslag-2018
+[^3]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
+[^4]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel]. https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
+[^5]: Prabhakaran, S. (2016-2017). Statistical Tests [r-statistics.co]. http://r-statistics.co/Statistical-Tests-in-R.html  
 [^6]: Knottnerus, J. A., & Bouter, L. M. (2001). The ethics of sample size: Two-sided testing and one-sided thinking. *Journal of Clinical Epidemiology, 54*(2), 109-110.

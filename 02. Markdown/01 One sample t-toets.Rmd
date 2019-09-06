@@ -60,7 +60,7 @@ H~A~: Het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten di
 De t-toets gaat ervan uit dat de data normaal verdeeld is. Controleer deze assumptie met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
 2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^3]) met de *Shapiro-Wilk test* [^4].  
-3. Wanneer uit bovenstaande tests blijkt dat de data niet normaal verdeeld, transformeer de data en kijk daarna of het normaal verdeeld is.
+3. Als uit bovenstaande tests blijkt dat de data niet normaal verdeeld, transformeer de data en kijk daarna of het normaal verdeeld is.
 
 Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test* [^5].
 
@@ -99,7 +99,7 @@ qqnorm(Gemiddeld_cijfer_WNS, pch = 20)
 qqline(Gemiddeld_cijfer_WNS)
 ```
 
-Wanneer over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is. In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. 
+Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is. In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. 
 
 #### Boxplot
 ``` {r Boxplot}

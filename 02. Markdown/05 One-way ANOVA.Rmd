@@ -1,7 +1,12 @@
 ---
 title: "One-way ANOVA"
+<<<<<<< HEAD
 author: "© 2019, SURF Versnellingsagenda Statistisch Handboek Hoger Onderwijs"
 date: "`r format(Sys.time(), '%d-%m-%y')`"
+=======
+author: "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+>>>>>>> 7468b740b80aef8792088ce4e206ca99e9f49d69
 output: 
   html_document:
     toc: TRUE
@@ -166,13 +171,13 @@ Reistijd_per_opleiding <- Reistijd_per_opleiding %>%
 ```
 
 ## 1 Toepassing
-De *one-way ANOVA* wordt gebruikt bij het toetsen of het gemiddelde van drie of meer groepen aan elkaar gelijk zijn. De te vergelijken groepen zijn ongepaard en daarmee onafhankelijk van elkaar.  
+Bij het toetsen of het gemiddelde van drie of meer onafhankelijke groepen aan elkaar gelijk zijn, wordt de *one-way ANOVA* gebruikt [^1]. 
 
 ## 2 Onderwijscasus
 Het hoofd communicatie wil in verband met wervingsactiviteiten weten wat de reistijd is van studenten, aan verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten per opleiding. 
 
 H~0~: De gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar: µ~0~ = µ~1~ = µ~2~ ... µ~n~  
-H~A~: Tenminste voor één opleiding is de gemiddelde reistijd niet gelijk aan de gemiddelde reistijd van studenten voor de andere opleidingen. µ~0~ ≠ µ~1~ = µ~2~ ... = µ~n~
+H~A~: Tenminste voor één opleiding is de gemiddelde reistijd niet gelijk aan de gemiddelde reistijd van studenten voor andere opleidingen. µ~0~ ≠ µ~1~ = µ~2~ ... = µ~n~
 
 ## 3 Assumpties
 Controleer of de steekproef aan de volgende assumpties voldoen:  
@@ -181,15 +186,15 @@ Controleer of de steekproef aan de volgende assumpties voldoen:
 3. Onafhankelijkheid   
 
 Als de data niet voldoet aan één van deze assumpties kan de test *one -way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden.  
-Een toest die niet uitgaat van normaal verdeelde data is de *Kruskal-Wallis test*, deze toest kan in plaats van de *one -way ANOVA* uitgevoerd worden [^1]. 
-
 ### 1. Normaliteit 
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.  
 2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^2]) met de *Shapiro-Wilk test* [^3].  
 
+Als er geen sprake is van normaliteit, gebruik de *Kruskal-Wallis test* [^4].  
+
 ### 2. Homogeniteit van Varianties
-Controleer of de spreiding van iedere groep ongeveer hetzelfde is, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Wanneer de test significant is, is de spreiding van de groepen verschillend.[^4]  
+Controleer of de spreiding van iedere groep ongeveer hetzelfde is, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Wanneer de test significant is, is de spreiding van de groepen verschillend.[^5]  
 
 ### 3. Onafhankelijkheid
 Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. 
@@ -249,13 +254,17 @@ Er zijn meerdere post-hoc vergelijkingen:
 
 
 ## 5 Rapportage
+[^1]: van Geloven, N. (May 25 2016). One-way ANOVA [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/One-way_ANOVA
+[^2]: van Geloven, N. (2013, 25 September). Wilcoxon signed rank toets [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets
+[^3]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
+[^4]: One-way ANOVA. (8 juli 2014). [UvA Wiki Methodologiewinkel]. https://wiki.uva.nl/methodologiewinkel/index.php/One-way_ANOVA
 
 
-[^1]: One-way ANOVA. (8 juli 2017). [UvA Wiki Methodologiewinkel]. Verkregen van:  https://wiki.uva.nl/methodologiewinkel/index.php/One-way_ANOVA 
+
 [^2]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. Verkregen van: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
 [^3]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. Verkregen van: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
 
-[^2]: https://wikistatistiek.amc.nl/index.php/One-way_ANOVA
+
 
 
 

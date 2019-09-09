@@ -45,7 +45,7 @@ colnames (Bsa_kt_n10) <- Landen_instroom
 ## 3 Assumpties
 
 ## 4 Uitvoering in R
-Voor de uitvoering in R is er een dataset (`Bsa_kt`) ingeladen over het BSA per instroomland van de faculteit Sociale Wetenschappen.
+Er is een dataset (`Bsa_kt`) ingeladen over het BSA per instroomland van de faculteit Sociale Wetenschappen.
 
 ### De data bekijken
 ```{r, collapse=TRUE}

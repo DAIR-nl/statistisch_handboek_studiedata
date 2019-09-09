@@ -51,7 +51,7 @@ Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding == "Rechtsgeleerdheid"] <-
 ## 3 Assumpties
 
 ## 4 Uitvoering in R
-Voor de uitvoering in R is er data ingeladen met studieresultaten van de Master arbeidsrecht per vooropleiding.
+Er is data ingeladen met studieresultaten van de Master arbeidsrecht per vooropleiding.
 
 ### De data bekijken
 ```{r de data exploreren, collapse=TRUE}

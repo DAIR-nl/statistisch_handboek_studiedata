@@ -43,7 +43,7 @@ Jaarlijks_inkomen <- replicate(2314, 13*(sample(Mogelijkheden, 1, replace=TRUE, 
 ## 3 Assumpties
 
 ## 4 Uitvoering in R
-Voor de uitvoering in R is er data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij. De directeur wil kijken hoe zijn oud-studenten scoren ten opzichte van gemiddelde inkomens in Nederland.
+Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij. De directeur wil kijken hoe zijn oud-studenten scoren ten opzichte van gemiddelde inkomens in Nederland.
 
 ### De data bekijken
 Bekijk de data door het gemiddelde, de standaardafwijking, de mediaan en een histogram op te vragen.

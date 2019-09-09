@@ -79,7 +79,7 @@ H~A~: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taal
 De *t-toets* gaat ervan uit dat de data normaal verdeeld is. Controleer deze assumptie met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
 2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^2]) met de *Shapiro-Wilk test* [^3].  
-3. Als uit bovenstaande tests blijkt dat de data niet normaal verdeeld, transformeer de data en kijk daarna of het normaal verdeeld is.
+3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data en kijk daarna of het normaal verdeeld is.
 
 Wanneer uit bovenstaande tests blijkt dat de steekproef niet normaal verdeeld is, kan de t-toets niet gebruikt worden, maar wel de *Mann-Whitney U toets*, ook bekend als de *Wilcoxon rank-sum toets* [^1]. Als er geen sprake is van normaliteit, gebruik de *Mann-Whitney U toets*, ook bekend als de *Wilcoxon rank-sum toets* [^4].  
 

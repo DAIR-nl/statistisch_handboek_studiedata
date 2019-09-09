@@ -221,6 +221,7 @@ boxplot(Tevredenheidscijfer_na_tutorgesprek,
 </div>
 De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte vakken voor de opleiding Werktuigbouwkunde weer. 
 
+### {.toc-ignore}
 
 ***
 ### {.toc-ignore .tabset .tabset-fade .tabset.pills}

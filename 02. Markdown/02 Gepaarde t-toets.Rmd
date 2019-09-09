@@ -117,7 +117,7 @@ Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5
 ## 5 Uitvoering in R
 Er is data ingeladen met tevredenheidscijfers van studenten voor (T~0~) en nadat (T~1~) zij een tutorgesprek hebben gehad. 
 
-### 5.1 Test assumpties: Normaliteit {.tabset .tabset-fade .tabset.pills}
+### 5.1 Test assumpties: Normaliteit 
 <div class="col2">
 ```{r beschrijvende gegevens na tutor, collapse = TRUE}
 mean(
@@ -224,7 +224,7 @@ De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte
 ### {.toc-ignore}
 
 ***
-### {.toc-ignore .tabset .tabset-fade .tabset.pills}
+### {.toc-ignore}
 
 Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef lijkende verdeling, normaal verdeel is, kan de normaliteit getoets worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 

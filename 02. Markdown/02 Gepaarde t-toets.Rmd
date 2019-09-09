@@ -112,10 +112,10 @@ Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test* [^
 ## 4 Effectmaat
 Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer.  
 
-Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect [^6].  
+Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect [^6].  
 
 ## 5 Uitvoering in R
-Er is data ingeladen met tevredenheidscijfers van studenten voor en nadat zij een tutorgesprek hebben gehad. 
+Er is data ingeladen met tevredenheidscijfers van studenten voor (T~0~) en nadat (T~1~) zij een tutorgesprek hebben gehad. 
 
 ### 5.1 Test assumpties: Normaliteit
 <div class="col2">
@@ -159,7 +159,7 @@ ggplot(
   scale_x_continuous(
     labels = as.character(seq(1, 5, 0.5)),
     breaks = seq(1, 5, 0.5)) +
-  labs(title = "Tevredenheidscijfers",
+  labs(expression(paste("Tevredenheidscijfers (", T[0], ")")),
        subtitle = "Lerarenopleiding")
 ```
 
@@ -178,8 +178,7 @@ ggplot(
   scale_x_continuous(
     labels = as.character(seq(1, 5, 0.5)),
     breaks = seq(1, 5, 0.5)) +
-  labs(title = "Tevredenheidscijfers",
-       subtitle = "Lerarenopleiding")
+  labs(expression(paste("Tevredenheidscijfers (", T[1], ")")))
 ```
 
 </div>
@@ -204,7 +203,7 @@ lillie.test(Tevredenheidscijfer_na_tutorgesprek)
 ```
 </div>
 
-De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen de twee verdelingen. In dit geval toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is een correctie die wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van een normale verdeling.  
+De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen de twee verdelingen. In dit geval toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is een correctie op de *Kolmogorov-Smirnov test*, die wordt gebruikt als het gemiddelde van de steekproef niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van een normale verdeling.  
 
 In dit geval is van beide groepen de p-waarde > 0,05; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *gepaarde t-toets* kan uitgevoerd worden. 
 
@@ -230,7 +229,7 @@ Gebruik `t.test()` met `paired = TRUE`.
 t.test(Tevredenheidscijfer_voor_tutorgesprek, Tevredenheidscijfer_na_tutorgesprek, paired = TRUE)
 ```
 
-* *t* (247) = -13,575 *p* < 0,01  
+* *t* (247) = -13,58 *p* < 0,01  
 * Vrijheidsgraden: *df* = *n* -1 = 247 
 * p-waarde < 0,05, dus de H~A~ wordt aangenomen  
 * 95%-betrouwbaarheidsinterval; bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. 95%-betrouwbaarheidsinterval: -0,22 tot -0,29
@@ -254,14 +253,14 @@ Eta2
 ```
 
 ## 6 Rapportage
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde cijfer gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = 3,4, *SD~T0~* = 0,85) en het gemiddelde van T~1~ (*M~T1~* = 3,65, *SD~T1~* = 0,56) is significant, *t* (247) = -13,575, *p* < 0,01. Het valt op dat het gemiddelde van T~1~ hoger is dan T~0~. Het effect is minimaal, *d* = 0,09. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van -0,22 tot -0,29. 
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tevredenheidscijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = 3,4, *SD~T0~* = 0,85) en het gemiddelde van T~1~ (*M~T1~* = 3,60, *SD~T1~* = 0,56) is significant, *t* (247) = -13,8, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van -0,22 tot -0,29. Het valt op dat het gemiddelde van T~1~ hoger is dan T~0~. Het effect is minimaal, *d* = 0,09. 
 
 Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor, maar het effect is minimaal.  
 
-[^1]: Student's t-test [Wikipedia]. (2019 August 21). https://en.wikipedia.org/wiki/Student%27s_t-test
-[^2]: Van Geloven, N. (2013, 25 September). Matchen [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/Matchen
-[^3]: van Geloven, N. (2013, 25 September). Wilcoxon signed rank toets [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets
+[^1]: Student's t-test [Wikipedia]. (21 augustus 2019). https://en.wikipedia.org/wiki/Student%27s_t-test
+[^2]: Van Geloven, N. (25 september 2013). Matchen [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/Matchen
+[^3]: van Geloven, N. (25 september2013). Wilcoxon signed rank toets [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets
 [^4]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
-[^5]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
+[^5]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel]. https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
 [^6]: Marshall, E., & Boggis, E. (2016). The statistics tutor’s quick guide to commonly used statistical tests. *Statstutor Community Project.*
 

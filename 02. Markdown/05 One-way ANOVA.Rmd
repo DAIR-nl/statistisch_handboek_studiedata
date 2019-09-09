@@ -180,7 +180,8 @@ Controleer of de steekproef aan de volgende assumpties voldoen:
 2. Homogeniteit van varianties  
 3. Onafhankelijkheid   
 
-Als de data niet voldoet aan één van deze assumpties kan de test *one -way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden.  
+Als de data niet voldoet aan één van deze assumpties kan de test *one -way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden.
+
 ### 1. Normaliteit
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.  
@@ -200,7 +201,7 @@ Elke groep heeft geen overlap met één van de andere groepen en de groepen kunn
 
 
 ## 4 Uitvoering in R
-Voor de uitvoering in R is er een dataset ingeladen genaamd `Reistijd_per_opleiding`. Deze bevat data de reistijden van uitwonende studenten per opleiding.
+Er is een dataset ingeladen genaamd `Reistijd_per_opleiding`. Deze bevat data de reistijden van uitwonende studenten per opleiding.
 
 ### De data bekijken
 Gebruik `head()` om de data te bekijken

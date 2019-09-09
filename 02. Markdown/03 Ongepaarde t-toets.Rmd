@@ -204,7 +204,6 @@ cohen.d(Cijfers_2010, Cijfers_2011, paired = FALSE)
 ## 6 Rapportage
 
 
-
 [^1]: van Geloven, N. (25 maart 2016). T-toets [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/T-toets#ongepaarde_t-toets
 [^2]: van Geloven, N. (25 September 2013). Wilcoxon signed rank toets [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets
 [^3]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics.https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  

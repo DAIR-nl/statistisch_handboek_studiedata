@@ -35,7 +35,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 RNGkind(sample.kind = "Rounding")
-set.seed(1)
+set.seed(2)
 
 ## Maak ruwe data aan
 mu <- 3.6
@@ -117,7 +117,7 @@ Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5
 ## 5 Uitvoering in R
 Er is data ingeladen met tevredenheidscijfers van studenten voor (T~0~) en nadat (T~1~) zij een tutorgesprek hebben gehad. 
 
-### 5.1 Test assumpties: Normaliteit
+### 5.1 Test assumpties: Normaliteit {.tabset .tabset-fade .tabset.pills}
 <div class="col2">
 ```{r beschrijvende gegevens na tutor, collapse = TRUE}
 mean(
@@ -139,6 +139,7 @@ Gemiddeld tevredenheidscijfer na tutorgesprek (standaardafwijking): 3,60 (0,56)
 
 </div>
 
+#### Histogram
 ```{r library ggplot}
 library(ggplot2)
 ```
@@ -146,8 +147,7 @@ library(ggplot2)
 <div class ="col2">
 ```{r histogram voor tutorgesprek}
 ggplot(
-  data.frame(
-    Tevredenheidscijfer_voor_tutorgesprek),
+  data.frame(Tevredenheidscijfer_voor_tutorgesprek),
   aes(x = Tevredenheidscijfer_voor_tutorgesprek)) +
   geom_histogram(aes(y = ..density..),
                  binwidth = 0.5, 
@@ -159,14 +159,15 @@ ggplot(
   scale_x_continuous(
     labels = as.character(seq(1, 5, 0.5)),
     breaks = seq(1, 5, 0.5)) +
-  labs(expression(paste("Tevredenheidscijfers (", T[0], ")")),
-       subtitle = "Lerarenopleiding")
+    coord_fixed(ylim = c(0, 0.6),
+              xlim = c(1, 5),
+              ratio = 4) +
+  labs(title = expression(paste("Tevredenheidscijfers (", T[0], ")")))
 ```
 
 ```{r histogram na tutorgesprek}
 ggplot(
-  data.frame(
-    Tevredenheidscijfer_na_tutorgesprek),
+  data.frame(Tevredenheidscijfer_na_tutorgesprek),
   aes(x = Tevredenheidscijfer_na_tutorgesprek)) +
   geom_histogram(aes(y = ..density..),
                  binwidth = 0.5, 
@@ -178,17 +179,51 @@ ggplot(
   scale_x_continuous(
     labels = as.character(seq(1, 5, 0.5)),
     breaks = seq(1, 5, 0.5)) +
-  labs(expression(paste("Tevredenheidscijfers (", T[1], ")")))
+  coord_fixed(ylim = c(0, 0.6),
+              xlim = c(1, 5),
+              ratio = 4) +
+  labs(title = expression(paste("Tevredenheidscijfers (", T[1], ")")))
 ```
 
 </div>
-
-
 Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Het histogram `Tevredenheidscijfer_voor_tutorgesprek` lijkt licht scheef verdeeld. 
 
-### {.toc-ignore .tabset .tabset-fade .tabset.pills}
+
+#### Q-Q plot
+Gebruik `qqnorm()` en `qqline()`. Gebruik `pch = 20`om gevulde datapunten te creëren.
+
+<div class ="col2">
+```{r qqplot voor tutor}
+qqnorm(Tevredenheidscijfer_voor_tutorgesprek , pch = 20)
+qqline(Tevredenheidscijfer_voor_tutorgesprek)
+```
+
+```{r qqplot na tutor}
+qqnorm(Tevredenheidscijfer_na_tutorgesprek, pch = 20)
+qqline(Tevredenheidscijfer_na_tutorgesprek)
+```
+</div>
+Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is. In deze casus liggen .... 
+
+#### Boxplot
+<div class ="col2">
+``` {r Boxplot na}
+boxplot(Tevredenheidscijfer_voor_tutorgesprek, 
+        xlab = "Lerarenopleiding", 
+        ylab = "Tevredenheidscijfer_voor_tutorgesprek")
+```
+
+``` {r Boxplot voor}
+boxplot(Tevredenheidscijfer_na_tutorgesprek, 
+        xlab = "Lerarenopleiding", 
+        ylab = "Tevredenheidscijfer_na_tutorgesprek")
+```
+</div>
+De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte vakken voor de opleiding Werktuigbouwkunde weer. 
+
 
 ***
+### {.toc-ignore .tabset .tabset-fade .tabset.pills}
 
 Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef lijkende verdeling, normaal verdeel is, kan de normaliteit getoets worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 

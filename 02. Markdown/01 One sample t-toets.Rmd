@@ -65,7 +65,7 @@ De t-toets gaat ervan uit dat de data normaal verdeeld is. Controleer deze assum
 Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test* [^5].
 
 ## 4 Uitvoering in R
-Twee dummy datasets `Gemiddeld_cijfer_WNS` en `Gemiddeld_cijfer_WNS_n30` zijn ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde (uit Studielink). Het eerste bestand bevat 122 middelbare scholierenstudenten en het tweede bevat 30 studenten.
+Er zijn twee dummy datasets `Gemiddeld_cijfer_WNS` en `Gemiddeld_cijfer_WNS_n30` ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde (uit Studielink). Het eerste bestand bevat 122 middelbare scholierenstudenten en het tweede bevat 30 studenten.
 
 ### 4.1 Test assumpties: normaliteit {.tabset .tabset-fade .tabset.pills}
 Bekijk de data via `mean()`, `sd()`.

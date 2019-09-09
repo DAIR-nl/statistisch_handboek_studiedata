@@ -71,7 +71,8 @@ Bij het toetsen of het gemiddelde van twee groepen aan elkaar gelijk zijn wordt 
 ## 2 Onderwijscasus
 Vanaf 2011 heeft de opleiding Taalwetenschap een Bindend Studieadvies (BSA) die de selectiviteit van het eerste jaar moet vergroten. Zij vraagt zich af of het gemiddelde cijfer van de opleiding Taalwetenschap op 1 februari, na invoering van het BSA, gestegen is. De data is beschikbaar voor het cohort gestart in 2010 en voor het cohort gestart in 2011.
 
-H~0~: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taalwetenschap is niet veranderd na de invoer van het BSA, µ~0~ = µ~1~
+H~0~: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taalwetenschap is niet veranderd na de invoer van het BSA, µ~0~ = µ~1~  
+
 H~A~: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taalwetenschap is veranderd na de invoer van het BSA, µ~0~ ≠ µ~1~
 
 ## 3 Assumpties
@@ -81,7 +82,7 @@ De *t-toets* gaat ervan uit dat de data normaal verdeeld is. Controleer deze ass
 2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^2]) met de *Shapiro-Wilk test* [^3].  
 3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data en kijk daarna of het normaal verdeeld is.
 
-Wanneer uit bovenstaande tests blijkt dat de steekproef niet normaal verdeeld is, kan de t-toets niet gebruikt worden, maar wel de *Mann-Whitney U toets*, ook bekend als de *Wilcoxon rank-sum toets* [^1]. Als er geen sprake is van normaliteit, gebruik de *Mann-Whitney U toets*, ook bekend als de *Wilcoxon rank-sum toets* [^4].  
+Als er geen sprake is van normaliteit, gebruik de *Mann-Whitney U toets*, ook bekend als de *Wilcoxon rank-sum toets* [^4].  
 
 
 ### 3.2 Homogeniteit van varianties 
@@ -94,7 +95,11 @@ Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een
 Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect [^6].
 
 ## 5 Uitvoering in R
+<<<<<<< HEAD
 Er is data (`Cijfers_gem`) ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap. De data bevat zowel cijfers van 180 studenten begonnen in 2010 als cijfers van 160 studenten begonnen in 2011.
+=======
+Er is een dummy dataset met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap (`Cijfers_gem`) ingeladen met cijfers van 180 studenten begonnen in 2010 als cijfers van 160 studenten begonnen in 2011.
+>>>>>>> 6fb27e07dc6d4be721ab5fd7ebcb51ec164d78bb
 
 ### 5.1 De data bekijken
 ```{r data bekijken}
@@ -176,7 +181,7 @@ De `leveneTest()` heeft in R twee argumenten. Het eerste argument is een vector 
 library(car)
 leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 ```
-*F(1, 338)* = 0,92, p-waarde = 0,034, de groepen zijn niet verschillend in spreiding.  
+*F*(1, 338) = 0,92, p-waarde = 0,034, de groepen zijn niet verschillend in spreiding.  
 Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 1) en de tweede cijfer (*n~1~* + *n~2~* - 2 = 338)
 Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. 
 
@@ -191,18 +196,17 @@ t.test(Cijfers_2010, Cijfers_2011, paired = FALSE, var.equal = TRUE)
 * 95%-betrouwbaarheidsinterval; bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. 95%-betrouwbaarheidsinterval: 0,22 tot 0,29
 
 
-
 ### 5.5 Effectmaat: Cohen's d 
 Gebruik `cohen.d()` met `paired = FALSE` om het effect te meten.
 ```{r Cohen s d}
 library(effsize)
 cohen.d(Cijfers_2010, Cijfers_2011, paired = FALSE)
 ```
-*d* = 0,09. De sterkte van het effect van de tutor op het cijfer is minimaal. 
+*d* = 0,21. De sterkte van het effect van de tutor op het cijfer is minimaal. 
 
 
 ## 6 Rapportage
-
+Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = 6,37, *SD~2010~* = ,11) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = 6,61, *SD~2011~* = 1,2) is significant, *t* (338) = -1,93, *p* < 0,05. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van -0,49 tot 0. Het effect is klein, *d* = 0,21. 
 
 [^1]: van Geloven, N. (25 maart 2016). T-toets [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/T-toets#ongepaarde_t-toets
 [^2]: van Geloven, N. (25 September 2013). Wilcoxon signed rank toets [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets

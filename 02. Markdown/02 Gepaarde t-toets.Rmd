@@ -97,6 +97,7 @@ Bij het toetsen of het gemiddelde van twee groepen aan elkaar gelijk zijn, wordt
 Ter voorbereiding op een visitatie vraagt de opleidingsdirecteur van de lerarenopleiding zich af welk tevredenheidscijfer haar studenten de opleiding geven. En zij vraagt zich af of het voeren van een tutorgesprek een rol speelt in de hoogte van het cijfer. Ze laat de studenten twee keer een vragenlijst invullen: voordat ze met hun tutor hebben gesproken (T~0~) en nadat ze met hun tutor hebben gesproken (T~1~). 
 
 H~0~: Het gemiddelde tevredenheidscijfer dat de studenten geven aan de opleiding is niet veranderd na het gesprek met hun tutor, µ~T0~ = µ~T1~  
+
 H~A~: Het gemiddelde tevredenheidscijfer dat de studenten geven aan de opleiding is veranderd na het gesprek met hun tutor, µ~T0~ ≠ µ~T1~ 
 
 
@@ -115,7 +116,7 @@ Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een
 Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect [^6].  
 
 ## 5 Uitvoering in R
-Er is data ingeladen met tevredenheidscijfers van studenten voor (T~0~) en nadat (T~1~) zij een tutorgesprek hebben gehad. 
+Er is een dummy dataset ingeladen met `Tevredenheidscijfer_voor_tutorgesprek` (T~0~) en met `Tevredenheidscijfer_na_tutorgesprek` (T~1~). 
 
 ### 5.1 Test assumpties: Normaliteit
 <div class="col2">
@@ -230,10 +231,10 @@ t.test(Tevredenheidscijfer_voor_tutorgesprek, Tevredenheidscijfer_na_tutorgespre
 ```
 
 * *t* (247) = -13,58 *p* < 0,01  
-* Vrijheidsgraden: *df* = *n* -1 = 247 
+* Vrijheidsgraden: *df* = *n* -1 = 247  
 * p-waarde < 0,05, dus de H~A~ wordt aangenomen  
-* 95%-betrouwbaarheidsinterval; bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. 95%-betrouwbaarheidsinterval: -0,22 tot -0,29
-* Het verschil tussen beide groepen: *MD* = -0,26
+* 95%-betrouwbaarheidsinterval; bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. 95%-betrouwbaarheidsinterval: -0,22 tot -0,29  
+* Het verschil tussen beide groepen: *MD* = -0,26  
 
 ### 5.3 Effectmaat: Cohen's d
 Gebruik `cohen.d()` met `paired = TRUE` om het effect te meten.

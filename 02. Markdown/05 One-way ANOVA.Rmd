@@ -1,6 +1,6 @@
 ---
 title: "One-way ANOVA"
-author: "© 2019, SURF Versnellingsagenda Statistisch Handboek Hoger Onderwijs"
+author: "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
 date: "`r format(Sys.time(), '%d-%m-%y')`"
 output: 
   html_document:
@@ -33,7 +33,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## Het hoofd communicatie wil in verband met wervingsactiviteiten weten wat de reistijd is van studenten aan verschillende opleidingen.
-
+## 3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data en kijk daarna of het normaal verdeeld is.
 
 ## Doel: tidy data met een kolom reistijd (value) en een kolom opleidng (factor)
 library(dplyr)
@@ -172,6 +172,7 @@ Bij het toetsen of het gemiddelde van drie of meer onafhankelijke groepen aan el
 In verband met wervingsactiviteiten wil het hoofd van de afdeling Communicatie weten wat de reistijd is van studenten aan verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten per opleiding. 
 
 H~0~: De gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar: µ~0~ = µ~1~ = µ~2~ ... µ~n~  
+
 H~A~: Tenminste voor één opleiding is de gemiddelde reistijd niet gelijk aan de gemiddelde reistijd van studenten voor andere opleidingen. µ~0~ ≠ µ~1~ = µ~2~ ... = µ~n~
 
 ## 3 Assumpties
@@ -180,29 +181,33 @@ Controleer of de steekproef aan de volgende assumpties voldoen:
 2. Homogeniteit van varianties  
 3. Onafhankelijkheid   
 
-Als de data niet voldoet aan één van deze assumpties kan de test *one -way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden.  
-### 1. Normaliteit
+Als de data niet voldoet aan één van deze assumpties kan de test *one -way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden.
+
+### 3.1 Normaliteit
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.  
 2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^2]) met de *Shapiro-Wilk test* [^3].  
 
-```{r opmerking, include=FALSE, eval=FALSE}
-# 3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data en kijk daarna of het normaal verdeeld is.
-```
-
 Als er geen sprake is van normaliteit, gebruik de *Kruskal-Wallis test* [^4].  
 
-### 2. Homogeniteit van Varianties
+### 3.2 Homogeniteit van Varianties
 Controleer of de spreiding van iedere groep ongeveer hetzelfde is, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Wanneer de test significant is, is de spreiding van de groepen verschillend.[^5]  
 
-### 3. Onafhankelijkheid
-Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. 
+### 3.3 Onafhankelijkheid
+Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
 
+### 4 Post-hoc vergelijking 
+De *one-way ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Welke groep anders is wordt niet gespecificeerd. Als er bij de *one-way ANOVA* uitkomt dat er een significant verschil is tussen de groepen kan een post-hoc vergelijking gedaan worden om te bepalen welke groepen significant verschillen.  
 
-## 4 Uitvoering in R
-Voor de uitvoering in R is er een dataset ingeladen genaamd `Reistijd_per_opleiding`. Deze bevat data de reistijden van uitwonende studenten per opleiding.
+Er zijn meerdere post-hoc vergelijkingen: 
 
-### De data bekijken
+* *Tukey* wordt gebruikt als de assumptie van gelijke varianties is voldaan  
+* Dunnet's *C* wordt gebruikt bij ongelijke varianties  
+
+## 5 Uitvoering in R
+Er is een dummy dataset met de reistijden van uitwonende studenten per opleiding is ingeladen genaamd `Reistijd_per_opleiding`. 
+
+### 5.1 De data bekijken
 Gebruik `head()` om de data te bekijken
 ```{r de data bekijken}
 head(Reistijd_per_opleiding)
@@ -213,8 +218,7 @@ library(graphics)
 par(mar = c(3, 12, 1, 0) + .1)
 boxplot(Reistijd ~ Opleiding, Reistijd_per_opleiding, las = 2, horizontal = TRUE)
 ```
-
-Een andere optie zijn deze ridges:
+Een andere optie zijn ridges:
 ```{r ridges, warning = FALSE, message = FALSE}
 library(tidyverse)
 library(ggridges)
@@ -223,8 +227,7 @@ ggplot(Reistijd_per_opleiding, aes(Reistijd, Opleiding)) +
   geom_density_ridges(rel_min_height=.01)
 ```
 
-
-### Assumpties testen in R
+### 5.2 Test assumpties: normaliteit 
 ```{r lillietest voorbereiden}
 library(nortest)
 Reistijdlijst <- Reistijd_per_opleiding %>%
@@ -236,38 +239,22 @@ for (. in Reistijdlijst) {
   print(lillie.test(.$Reistijd))
 }
 ```
+### 5.3 Test assumpties: Levene's Test
 
-
-### One way ANOVA 
+### 5.4 One way ANOVA 
 ```{r ANOVA}
 res.aov <- aov(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 summary(res.aov)
 ```
 
-
-### Post-hoc vergelijking 
-De *one-way ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden, welke groep anders is wordt niet gespecificeerd. Als er bij de *one-way ANOVA* uitkomt dat er een significant verschil is tussen de groepen kan een post-hoc vergelijking gedaan worden om te bepalen welke groepen significant verschillen.  
-Er zijn meerdere post-hoc vergelijkingen:
-* *Tukey* wordt gebruikt als de assumptie van gelijke varianties is voldaan
-* Dunnet's *C* wordt gebruikt bij ongelijke varianties 
+## 6 Rapportage
+Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De onafhankelijke variabele, opleiding, is onderverdeeld in drie niveau's **(Opleiding 1, 2, 3 )** en de afhankelijke variabele is de reistijd van de studenten. The *one way ANOVA* was significant **F(1, 338) = 0,92, p-waarde = 0,034** 
+**effect **
+**posthoc en uitkomsten **
 
 
-## 5 Rapportage
-[^1]: van Geloven, N. (May 25 2016). One-way ANOVA [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/One-way_ANOVA
-[^2]: van Geloven, N. (2013, 25 September). Wilcoxon signed rank toets [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets
-[^3]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
-[^4]: One-way ANOVA. (8 juli 2014). [UvA Wiki Methodologiewinkel]. https://wiki.uva.nl/methodologiewinkel/index.php/One-way_ANOVA
-
-
-
-[^2]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. Verkregen van: https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
-[^3]: Normaliteit. (14 jul 2014). [UvA Wiki Methodologiewinkel]. Verkregen van: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
-
-
-
-
-
-[^1]: van Geloven, N. (2016, May 25). T-toets [Wiki Statistiek Academisch Medisch Centrum]. Verkregen van: https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets
-
-[^4]: Prabhakaran, S. (2016-2017). Statistical Tests [r-statistics.co]. Verkregen van: http://r-statistics.co/Statistical-Tests-in-R.html  
-[^5]: Knottnerus, J. A., & Bouter, L. M. (2001). The ethics of sample size: Two-sided testing and one-sided thinking. *Journal of Clinical Epidemiology, 54*(2), 109-110.
+[^1]: van Geloven, N. (25 mei 2016). One-way ANOVA [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/One-way_ANOVA
+[^2]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
+[^3]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel]. https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
+[^4]: van Geloven, N. (21 maart 2018). Kruskal Wallis [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis
+[^5]: Analysis of variance. (7 september 2019). [Wikipedia] https://en.wikipedia.org/wiki/Analysis_of_variance 

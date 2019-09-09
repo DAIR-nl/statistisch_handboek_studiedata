@@ -141,11 +141,14 @@ Gebruik `t.test()`om een t-toets uit te voeren. Geef het gemiddelde waarmee word
 ```{r ttest}
 t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 ```
+```{r ttest als item, echo = FALSE}
+t <- t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
+```
 * Het gemiddelde van de steekproef is 7,08  
-* Vrijheidsgraden, *df* = *n* -1 = 122-1 = 121  
+* Vrijheidsgraden, *df* = *n* -1 = `r t$parameter+1`-1 = `r t$parameter`  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
-* *t* (121) = 3,76, *p* < 0,01
-* 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen 6,96 en 7,23. 
+* *t* (`r t$parameter`) = `r t$statistic` , *p* < 0,01
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen 6,93 en 7,23.
 
 ## 5 Rapportage
 De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren, hoger is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = 7,08, *SD* = 0,8) is significant hoger dan het landelijk gemiddelde van 6,8, *t* (121) = 3,76, *p* < 0,01. 

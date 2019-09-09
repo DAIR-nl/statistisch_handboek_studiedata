@@ -38,10 +38,10 @@ Studentnr <- sample(3000000:4000000, 300)
 Resultaten_arbeidsrecht <- data.frame(Studentnr, Vooropleiding, Ec_jaar1)
 
 ## puntencorrectie om fiscaal en notarieel +6 punten te geven en rechtsgeleerdheid -6 punten
-Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding == "Fiscaal recht" | Vooropleiding == "Notarieel recht"] <-
-  Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding == "Fiscaal recht" | Vooropleiding == "Notarieel recht"] + 6
-Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding == "Rechtsgeleerdheid"] <-
-  Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding == "Rechtsgeleerdheid"] - 6
+Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Fiscaal recht" | Vooropleiding == "Notarieel recht"] <-
+  Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Fiscaal recht" | Vooropleiding == "Notarieel recht"] + 6
+Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Rechtsgeleerdheid"] <-
+  Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Rechtsgeleerdheid"] - 6
 ```
 
 ## 1 Toepassing

@@ -95,11 +95,9 @@ Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een
 Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect [^6].
 
 ## 5 Uitvoering in R
-<<<<<<< HEAD
-Er is data (`Cijfers_gem`) ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap. De data bevat zowel cijfers van 180 studenten begonnen in 2010 als cijfers van 160 studenten begonnen in 2011.
-=======
-Er is een dummy dataset met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap (`Cijfers_gem`) ingeladen met cijfers van 180 studenten begonnen in 2010 als cijfers van 160 studenten begonnen in 2011.
->>>>>>> 6fb27e07dc6d4be721ab5fd7ebcb51ec164d78bb
+Er is een dummy dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap genaamd `Cijfers_gem`. De data bevat zowel cijfers van 180 studenten begonnen in 2010 als cijfers van 160 studenten begonnen in 2011.
+
+
 
 ### 5.1 De data bekijken
 ```{r data bekijken}

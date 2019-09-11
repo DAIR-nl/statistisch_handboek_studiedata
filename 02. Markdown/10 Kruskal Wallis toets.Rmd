@@ -18,9 +18,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
+## De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht vraagt zich af of de vooropleiding van zijn studenten te maken heeft met hoe snel zij afstuderen.  Zij bekijkt daarom het aantal punten behaald in het eerste jaar naar vooropleiding. Zij vraagt zich af: Welke vooropleidng levert de studenten die het meeste punten halen?
+
 RNGkind(sample.kind = "Rounding")
 set.seed(8)
-RNGkind(sample.kind = "Rounding")
 # 3
 ## 300 waarnemingen voor Vooropleiding
 Seed <- sample(c(1, 2, 3, 4), 300, replace = TRUE)

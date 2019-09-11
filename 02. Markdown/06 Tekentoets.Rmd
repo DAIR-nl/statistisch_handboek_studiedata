@@ -19,6 +19,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
+## De directeur van de Academie Mens & Maatschappij wil kijken hoeveel alumni van zijn opleiding verdienen in vergelijking met de rest van Nederland. Hij neemt hiervooor het bruto modaal inkomen. 
+
+
 RNGkind(sample.kind = "Rounding")
 set.seed(1)
 Mogelijkheden <- c(1616:7000)

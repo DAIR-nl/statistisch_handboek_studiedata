@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-#case: Is het gemiddelde inkomen van studenten met een Masterdiploma in opleiding X gestegen tussen 1, 5 jaar en 9 jaar na het afstuderen?
+
 
 
 ```

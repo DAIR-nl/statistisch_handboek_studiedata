@@ -27,7 +27,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-## case: Heeft een Universiteit relatief veel tweedekansstudenten in vergelijking met het landelijke gemiddelde?]
+## De controller van een Universiteit is geïnteresseerd in de instroom van tweedekansstudenten. Zij vraagt zich af: Heeft onze Universiteit relatief veel tweedekansstudenten in vergelijking met het landelijke gemiddelde?
 RNGkind(sample.kind = "Rounding")
 set.seed (7)
 aantal_studenten <- 28348

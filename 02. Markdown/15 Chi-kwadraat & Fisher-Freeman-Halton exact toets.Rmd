@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-## Case: Een opleiding heeft een internationale instroom uit diverse landen. Krijgen studenten uit bepaalde landen vaker een positief BSA dan studenten uit andere landen?
+## De opleidingsdirecteur van de Bachelor Anthropologie vraagt zich af wat de invloed is van de instroom van internationale studenten. Krijgen studenten uit bepaalde landen vaker een positief BSA dan studenten uit andere landen?
 
 RNGkind(sample.kind = "Rounding")
 set.seed(1) #noodzakelijk omdat we simulate.p.values gebruiken bij de fisher.test

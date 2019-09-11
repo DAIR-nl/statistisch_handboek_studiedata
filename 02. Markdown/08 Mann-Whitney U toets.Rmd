@@ -18,6 +18,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
+## De directeur van een hogeschool vraagt zich af of wat de invloed is van internationalisering op zijn instelling. Hij gebruikt hiervoor het totaal aantal punten behaald in het tweedejaar zodat uitval een minder grote rol speelt. Hij vraagt zich daarom af: is het behaald aantal EC in het tweede jaar van internationale studenten hoger dan van de Nederlandse studenten?
+
 RNGkind(sample.kind = "Rounding")
 set.seed(0)
 
@@ -29,7 +31,7 @@ Resultaten_nl_studenten <- rbind (
                                   t(replicate(401, sample(Goede_student_ec, 11, replace = TRUE))), 
                                   t(replicate(203, sample(Matige_student_ec, 11, replace = TRUE))),
                                   t(replicate(309, sample(Slechte_student_ec, 11, replace = TRUE))))
-Punten_jaar2_nl <- margin.table(Resultaten_nl_studenten, 1)
+Punten_jaar2_NL <- margin.table(Resultaten_nl_studenten, 1)
 
 Resultaten_internationale_studenten <- rbind (
                                   t(replicate(250, sample(Goede_student_ec, 11, replace = TRUE))), 
@@ -37,8 +39,7 @@ Resultaten_internationale_studenten <- rbind (
                                   t(replicate(200, sample(Slechte_student_ec, 11, replace = TRUE))))
 Punten_jaar2_inter <- margin.table(Resultaten_internationale_studenten, 1)
 
-Resultaten_internationale_studenten <- data.frame(Resultaten_internationale_studenten, Punten_jaar2_inter)
-Resultaten_nl_studenten <- data.frame(Resultaten_nl_studenten, Punten_jaar2_nl)
+
 
 ```
 
@@ -49,18 +50,18 @@ Resultaten_nl_studenten <- data.frame(Resultaten_nl_studenten, Punten_jaar2_nl)
 ## 3 Assumpties
 
 ## 4 Uitvoering in R
-
+Er is data ingeladen met het aantal punten studenten in hun tweede jaar halen. `Punten_jaar2_NL` bevat Nederlandse studenten, `Punten_jaar2_inter` bevat internationale studenten. 
 ### De data bekijken
 Gebruik `head()` in R om de eerste vijf regels te bekijken
-```{r}
-head(Resultaten_nl_studenten)
-head(Resultaten_internationale_studenten)
+```{r data bekijken, collapse = TRUE}
+head(Punten_jaar2_NL)
+head(Punten_jaar2_inter)
 ```
 
 ### De Mann-Whitney U toets in R
 Gebruik `wilcox.test()` met twee argumenten om een Mann-Whitney U toets te doen in R
-```{r}
-wilcox.test(Resultaten_nl_studenten$Punten_jaar2_nl, Resultaten_internationale_studenten$Punten_jaar2)
+```{r Mann Whitney U toets}
+wilcox.test(Punten_jaar2_NL, Punten_jaar2_inter)
 ```
 
 ## Toelichting op de output

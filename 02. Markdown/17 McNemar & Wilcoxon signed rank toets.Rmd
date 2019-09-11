@@ -29,7 +29,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## Beoordelen studenten een opleiding anders net na het afstuderen en 5 jaar na dato? Studenten worden gevraagd antwoord te geven op de vraag: 
 ## Hoe goed heeft deze studie je voorbereid op de arbeidsmarkt (erg goed, goed, neutraal, slecht, erg slecht)
-## TODO: paren
 RNGkind(sample.kind = "Rounding")
 set.seed(0)
 

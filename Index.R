@@ -175,7 +175,7 @@ rmarkdown::render("../02. Markdown/01 One sample t-toets_TB.Rmd")
 
 ## TB: licht toe wat je hier precies doet; gebruik magrittr pipes
 ## TB: volg de naamconventies; zie hiervoor de stijlgids
-# toetsenlijst <- list.files(path = "02. Markdown/")
+toetsenlijst <- list.files(path = "02. Markdown/")
 # toetsenlijst <- sapply("02. Markdown", paste, toetsenlijst,  sep = "/")
 # toetsenlijst <- toetsenlijst[-1] ## TB: waarom -1?
 # html_indices <- grep(".html", toetsenlijst)

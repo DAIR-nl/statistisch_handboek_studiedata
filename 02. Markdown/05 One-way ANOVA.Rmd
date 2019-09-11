@@ -23,7 +23,8 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-```{r opmerking, include=FALSE, eval=FALSE}
+
+```{r opmerking 1, include=FALSE, eval=FALSE}
 
 
 #posthoc Tukey 
@@ -181,14 +182,18 @@ Controleer of de steekproef aan de volgende assumpties voldoen:
 2. Homogeniteit van varianties  
 3. Onafhankelijkheid   
 
-Als de data niet voldoet aan één van deze assumpties kan de test *one -way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden.
+Als de data niet voldoet aan één van deze assumpties kan de test *one -way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden. 
 
 ### 3.1 Normaliteit
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.  
 2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^2]) met de *Shapiro-Wilk test* [^3].  
 
-Als er geen sprake is van normaliteit, gebruik de *Kruskal-Wallis test* [^4].  
+Als er geen sprake is van normaliteit, gebruik de *Kruskal-Wallis test* [^4]. 
+
+```{r opmerking 2, include=FALSE, eval=FALSE}
+# 3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data en kijk daarna of het normaal verdeeld is.
+```
 
 ### 3.2 Homogeniteit van Varianties
 Controleer of de spreiding van iedere groep ongeveer hetzelfde is, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Wanneer de test significant is, is de spreiding van de groepen verschillend.[^5]  
@@ -196,7 +201,7 @@ Controleer of de spreiding van iedere groep ongeveer hetzelfde is, dit kan getoe
 ### 3.3 Onafhankelijkheid
 Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
 
-### 4 Post-hoc vergelijking 
+## 4 Post-hoc vergelijking 
 De *one-way ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Welke groep anders is wordt niet gespecificeerd. Als er bij de *one-way ANOVA* uitkomt dat er een significant verschil is tussen de groepen kan een post-hoc vergelijking gedaan worden om te bepalen welke groepen significant verschillen.  
 
 Er zijn meerdere post-hoc vergelijkingen: 
@@ -218,7 +223,7 @@ library(graphics)
 par(mar = c(3, 12, 1, 0) + .1)
 boxplot(Reistijd ~ Opleiding, Reistijd_per_opleiding, las = 2, horizontal = TRUE)
 ```
-Een andere optie zijn ridges:
+
 ```{r ridges, warning = FALSE, message = FALSE}
 library(tidyverse)
 library(ggridges)

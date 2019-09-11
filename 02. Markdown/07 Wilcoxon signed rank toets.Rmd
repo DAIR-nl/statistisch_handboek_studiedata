@@ -57,7 +57,7 @@ Jaarlijks_inkomen_t5 <- Jaarlijks_inkomen_t1 + Opslag
 ## 3 Assumpties
 
 ## 4 Uitvoering in R
-Voor de uitvoering in R is er data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkeld 4 jaar nadat zij afgestudeerd zijn.
+Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkeld 4 jaar nadat zij afgestudeerd zijn.
 
 ### De data bekijken
 Bekijk de data door het gemiddelde, de standaardafwijking, de mediaan en een histogram op te vragen.

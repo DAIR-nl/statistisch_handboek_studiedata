@@ -46,7 +46,7 @@ Aanmeldingen_tweedekans <- data.frame(Studentnr, Eerder_wo)
 ## 3 Assumpties
 
 ## 4 Uitvoering in R
-Voor de uitvoering in R is er een dataset ingeladen genaamd `Aanmeldingen_tweedekans`. Dit is een dataframe met binaire data over de aanmeldingen van studenten en of zij al eerder op het WO hebben gezeten.
+Er is een dataset ingeladen genaamd `Aanmeldingen_tweedekans`. Dit is een dataframe met binaire data over de aanmeldingen van studenten en of zij al eerder op het WO hebben gezeten.
 
 ### De data bekijken
 ```{r data bekijken, collapse=TRUE}

@@ -53,7 +53,7 @@ Afstudeertijd <- sample_n(Afstudeertijd, nrow(Afstudeertijd))
 ## 3 Assumpties
 
 ## 4 Uitvoering in R
-Voor de uitvoering in R is er een dataset ingeladen genaamd
+Er is een dataset ingeladen genaamd
 
 ### De data bekijken
 ```{r data bekijken}

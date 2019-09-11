@@ -89,18 +89,26 @@ lTitels    <- c("One sample t-toets")
 sCopyright <- "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
 sVersie    <- "0.4"
 sTheme     <- "united"
-sToc       <- yes
-sToc_float <- yes
+sToc       <- "yes"
+sToc_float <- "yes"
 
 ## KOPPEN
-lKoppen <- c(
-  "## 1 Toepassing",
-  "## 2 Onderwijscasus",
-  "## 3 Assumpties",
-  "## 4 Uitvoering in R",
-  "## 5 Rapportage",
-  "## Noten"
+lOnderdelen <- c(
+  "Toepassing test",
+  "Onderwijscasus",
+  "Assumpties",
+  "Uitvoering in R",
+  "Rapportage",
+  "Noten"
 )
+
+## Loop over lOnderdelen en maak op basis hiervan de Koppen
+lKoppen <- vector()
+n <- 0
+for (i in lOnderdelen) {
+  n <- n + 1
+  lKoppen <- c(lKoppen, paste0("## ", n , " ", i))
+}
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 03 DEFINIEER CODEBLOCKS ####

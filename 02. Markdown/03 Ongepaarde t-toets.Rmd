@@ -87,7 +87,7 @@ Als er geen sprake is van normaliteit, gebruik de *Mann-Whitney U toets*, ook be
 
 
 ## Homogeniteit van varianties 
-De *ongepaarde t-toets* gaat er ook van uit dat beide groepen dezelfde spreiding heeft, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Bij een *p* > 0,05 is de spreiding van de groepen verschillend en wordt de assumptie geschonden. Let op, de interpretatie van de p-waarde is bij de *Levene's Test* tegengesteld aan de interpretatie van een p-waarde bij een *t-toets* [^5]. 
+De *ongepaarde t-toets* gaat er ook van uit dat beide groepen dezelfde spreiding heeft, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Bij een *p* < 0,05 is de spreiding van de groepen verschillend en wordt de assumptie geschonden. [^5]. 
 
 
 # Effectmaat
@@ -176,7 +176,7 @@ De `leveneTest()` heeft in R twee argumenten. Het eerste argument is een vector 
 library(car)
 leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 ```
-*F*(1, 338) = 0,92, p-waarde = 0,034, de groepen zijn niet verschillend in spreiding.  
+*F*(1, 338) = 0,92, p-waarde = 0,34, de groepen zijn niet verschillend in spreiding.  
 Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 1) en de tweede cijfer (*n~1~* + *n~2~* - 2 = 338)
 Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. 
 

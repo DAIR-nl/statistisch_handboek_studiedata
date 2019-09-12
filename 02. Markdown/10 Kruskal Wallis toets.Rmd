@@ -47,17 +47,19 @@ Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Rechtsgeleerdheid"] <-
 ```
 
 # Toepassing
-De *Kruskal Wallis toets* wordt gebruikt om te toetsen of de medianen van meerdere groepen significant verschillen van elkaar.   
-
-In plaats van het gebruiken van ruwe scores, ordent de Kruskal-Wallis test de scores van laag naar hoog een geeft ze een rangnummer. De laagste score krijgt dan rang 1, de enerlaagste score rang 2 enzovoort. Binnen een groep worden de rangen bij elkaar opgeteld waarna de teststatistiek wordt berekend. Door het ordenen en nummeren van scores verdwijnt het mogelijke effect dat uitbijters of een scheve verdeling kunnen hebben.  https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test 
-
+De *Kruskal Wallis toets* wordt gebruikt om te toetsen of de medianen van meerdere groepen significant verschillen. Een kenmerk van de data is dat deze numeriek en ongepaard is.  
+Deze toets wordt ook vaak gebruikt in plaats van de *one way ANOVA*; Wanneer de assumpties van normaliteit en/of van Homogeniteit van Varianties worden geschonden.  
 
 # Onderwijscasus
 De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht vraagt zich af of het type vooropleiding bepalend is voor hoeveel vakken de studenten afronden in het eerste jaar. 
 
-## De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht vraagt zich af of de vooropleiding van zijn studenten te maken heeft met hoe snel zij afstuderen.  Zij bekijkt daarom het aantal punten behaald in het eerste jaar naar vooropleiding. Zij vraagt zich af: Welke vooropleidng levert de studenten die het meeste punten halen?
+###### De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht vraagt zich af of de vooropleiding van zijn studenten te maken heeft met hoe snel zij afstuderen.  Zij bekijkt daarom het aantal punten behaald in het eerste jaar naar vooropleiding. Zij vraagt zich af: Welke vooropleidng levert de studenten die het meeste punten halen?
 
 # Assumpties
+- data continu (andy field 654 note 3)
+
+
+
 
 # Uitvoering in R
 Er is data ingeladen met studieresultaten van de Master arbeidsrecht per vooropleiding.

@@ -189,6 +189,7 @@ Als de data niet voldoet aan één van deze assumpties kan de test *one -way ANO
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.  
 2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^2]) met de *Shapiro-Wilk test* [^3].  
+3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is.
 
 Als er geen sprake is van normaliteit, gebruik de *Kruskal-Wallis test* [^4]. 
 

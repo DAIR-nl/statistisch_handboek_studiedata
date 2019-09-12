@@ -21,11 +21,11 @@ output:
 ``` {r versiegeschiedenis, include = FALSE, eval = FALSE}
 ## versie 0.1     3-9-19
 ## versie 0.2     4-9-19
+## versie 0.3     5-9-19   
 ```
 ```{r opmerking, include=FALSE, eval=FALSE}
 # ipv Cohen's d kan ook eta squared gebruikt worden om effectmaat te berekenen. Wordt vaak wel gedaan bij de ANOVA. 
 # doorlinken naar de Wilcoxon Signed Rank Test
-# Voorbeeld, teveel neigen naar een Likert-schaal?
 # linken naar blz transformeren data 
 
 ```
@@ -91,19 +91,11 @@ Tevredenheidscijfer_na_tutorgesprek_n30 <- sort(Tevredenheidscijfer_na_tutorgesp
 Tevredenheidscijfer_na_tutorgesprek_n30 <- Tevredenheidscijfer_na_tutorgesprek_n30[volgorde_n30]
 ```
 
-<<<<<<< HEAD
-## 1 Toepassing
+# 1 Toepassing
 Bij het toetsen of het gemiddelde van twee groepen aan elkaar gelijk zijn, wordt de *t-toets* gebruikt. De *gepaarde t-toets* wordt gebruikt bij een herhaalde meting van dezelfde groep [^1]. 
 
-## 2 Onderwijscasus
-Ter voorbereiding op een visitatie vraagt de opleidingsdirecteur van de lerarenopleiding zich af of het gemiddelde tentamencijfer veranderd na een gesprek met een tutorgesprek. Ze bekijkt het gemiddelde tentamencijfer van de onderwijsperiode voor het tutorgesprek (T~0~) en het gemiddelde cijfer van de onderwijsperiode erop (T~1~). 
-=======
-# Toepassing
-Bij het toetsen of het gemiddelde van twee groepen aan elkaar gelijk zijn, wordt de *t-toets* gebruikt. De *gepaarde t-toets* wordt gebruikt 1) bij een herhaalde meting van dezelfde groep [^1] of 2) als personen van de ene groep, door middel van overeenkomstige kernmerken, gekoppeld worden aan personen van de andere groep [^2]. 
-
-# Onderwijscasus
-Ter voorbereiding op een visitatie vraagt de opleidingsdirecteur van de lerarenopleiding zich af welk tevredenheidscijfer haar studenten de opleiding geven. En zij vraagt zich af of het voeren van een tutorgesprek een rol speelt in de hoogte van het cijfer. Ze laat de studenten twee keer een vragenlijst invullen: voordat ze met hun tutor hebben gesproken (T~0~) en nadat ze met hun tutor hebben gesproken (T~1~). 
->>>>>>> 0cafe50d8f0125900eb990fb1b5d384eb257bb8a
+# 2 Onderwijscasus
+Ter voorbereiding op een visitatie vraagt de opleidingsdirecteur van de lerarenopleiding zich af of het gemiddelde tentamencijfer veranderd na een tutorgesprek. Ze bekijkt het gemiddelde tentamencijfer van de onderwijsperiode voor het tutorgesprek (T~0~) en het gemiddelde cijfer van de onderwijsperiode erop (T~1~). 
 
 H~0~: Het gemiddelde tentamencijfer per onderwijsperiode verandert niet na het tutorgesprek, µ~T0~ = µ~T1~  
 
@@ -115,22 +107,16 @@ H~A~: Het gemiddelde tentamencijfer per onderwijsperiode verandert na het tutorg
 De *t-toets* gaat ervan uit dat de data normaal verdeeld is. Controleer deze assumptie met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.  
 2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^3]) met de *Shapiro-Wilk test* [^4].  
-3. Als uit bovenstaande tests blijkt dat de data niet normaal verdeeld is, transformeer de data en kijk daarna of het normaal verdeeld is.  
+3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is.  
 
 Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test* [^5].
 
 # Effectmaat
 Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer.  
-
 Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect [^6].  
 
-<<<<<<< HEAD
-## 5 Uitvoering in R
+# 5 Uitvoering in R
 Er is een dataset ingeladen met `Tevredenheidscijfer_voor_tutorgesprek` (T~0~) en met `Tevredenheidscijfer_na_tutorgesprek` (T~1~). 
-=======
-# Uitvoering in R
-Er is een dummy dataset ingeladen met `Tevredenheidscijfer_voor_tutorgesprek` (T~0~) en met `Tevredenheidscijfer_na_tutorgesprek` (T~1~). 
->>>>>>> 0cafe50d8f0125900eb990fb1b5d384eb257bb8a
 
 ## Test assumpties: Normaliteit 
 <div class="col2">
@@ -241,7 +227,7 @@ De boxplotten geven de spreiding van het gemiddelde tenamencijfer per periode we
 ***
 
 
-Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef lijkende verdeling, normaal verdeel is, kan de normaliteit getoets worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
+Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef lijkende verdeling, normaal verdeeld is, kan de normaliteit getoets worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov (met Lilliefors correctie)
 ```{r library nortest, warning=FALSE}

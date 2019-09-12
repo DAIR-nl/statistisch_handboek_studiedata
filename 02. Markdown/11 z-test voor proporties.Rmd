@@ -6,6 +6,7 @@ output:
   html_document:
     toc: TRUE
     toc_float: TRUE
+    number_sections: TRUE
     theme: united
 ---
 
@@ -39,28 +40,28 @@ Eerder_wo <- round (rnorm(aantal_studenten, 0.4, 0.1))
 Aanmeldingen_tweedekans <- data.frame(Studentnr, Eerder_wo)
 ```
 
-## 1 Toepassing
+# Toepassing
 
-## 2 Onderwijscasus
+# Onderwijscasus
 
-## 3 Assumpties
+# Assumpties
 
-## 4 Uitvoering in R
+# Uitvoering in R
 Er is een dataset ingeladen genaamd `Aanmeldingen_tweedekans`. Dit is een dataframe met binaire data over de aanmeldingen van studenten en of zij al eerder op het WO hebben gezeten.
 
-### De data bekijken
+## De data bekijken
 ```{r data bekijken, collapse=TRUE}
 head(Aanmeldingen_tweedekans)
 mean(Aanmeldingen_tweedekans$Eerder_wo)
 ```
 
-### Assumpties testen in R
+## Assumpties testen in R
 @IvdS z-test heeft geen assumpties denk ik?
 ```{r assumptietest}
 
 ```
 
-### Statistische toets in R
+## Statistische toets in R
 
 ```{r}
 prop.test(x = sum(Aanmeldingen_tweedekans$Eerder_wo), 
@@ -69,7 +70,7 @@ prop.test(x = sum(Aanmeldingen_tweedekans$Eerder_wo),
           alternative = "greater")
 ```
 
-## Toelichting op de output
+# Toelichting op de output
 
 
 

@@ -6,6 +6,7 @@ output:
   html_document:
     toc: TRUE
     toc_float: TRUE
+    number_sections: TRUE
     theme: united
 ---
 
@@ -24,27 +25,27 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```
 
-## 1 Toepassing
+# Toepassing
 
-## 2 Onderwijscasus
+# Onderwijscasus
 
-## 3 Assumpties
+# Assumpties
 
-## 4 Uitvoering in R
+# Uitvoering in R
 
-### Assumpties testen in R
-
-```{r}
-
-```
-
-### statistische toets in R
+## Assumpties testen in R
 
 ```{r}
 
 ```
 
-## Toelichting op de output
+## Friedman toets
 
-## 5 Rapportage
+```{r}
+
+```
+
+# Toelichting op de output
+
+# Rapportage
 

@@ -6,6 +6,7 @@ output:
   html_document:
     toc: TRUE
     toc_float: TRUE
+    number_sections: TRUE
     theme: united
 ---
 
@@ -38,35 +39,35 @@ Beroep_FOS_functiebeperking <-
                          "Na mail"   = c("Wel FOS",  "Geen FOS")))
 ```
 
-## 1 Toepassing
+# Toepassing
 
-## 2 Onderwijscasus
+# Onderwijscasus
 
-## 3 Assumpties
+# Assumpties
 
-## 4 Uitvoering in R
+# Uitvoering in R
 Er is een dataset ingeladen genaamd `Beroep_FOS_functiebeperking`. Dit is een kruistabel die de aantallen studenten die een beroep doen op de FOS vergelijkt voor en na de mail van de decaan. 
 
-### De data bekijken
+## De data bekijken
 ```{r data bekijken}
 Beroep_FOS_functiebeperking
 ```
 
-### Assumpties testen in R
+## Assumpties testen in R
 
 ```{r}
 ## @IvdS deze toets heeft geen assumpties toch?
 ```
 
-### Statistische toets in R
+## Statistische toets in R
 
 ```{r}
 mcnemar.test(Beroep_FOS_functiebeperking)
 ```
 
-## Toelichting op de output
+# Toelichting op de output
 
-## 5 Rapportage
+# Rapportage
 
 
 

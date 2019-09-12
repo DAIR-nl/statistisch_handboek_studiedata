@@ -6,6 +6,7 @@ output:
   html_document:
     toc: TRUE
     toc_float: TRUE
+    number_sections: TRUE
     theme: united
 ---
 
@@ -26,35 +27,35 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```
 
-## 1 Toepassing
+# Toepassing
 
-## 2 Onderwijscasus
+# Onderwijscasus
 
-## 3 Assumpties
+# Assumpties
 
-## 4 Uitvoering in R
+# Uitvoering in R
 Er is een dataset ingeladen genaamd
 
-### De data bekijken
+## De data bekijken
 ```{r data bekijken}
 
 ```
 
-### Assumpties testen in R
+## Assumpties testen in R
 
 ```{r}
 
 ```
 
-### Statistische toets in R
+## Statistische toets in R
 
 ```{r}
 
 ```
 
-## Toelichting op de output
+# Toelichting op de output
 
-## 5 Rapportage
+# Rapportage
 
 
 

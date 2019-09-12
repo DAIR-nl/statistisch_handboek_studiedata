@@ -6,6 +6,7 @@ output:
   html_document:
     toc: TRUE
     toc_float: TRUE
+    number_sections: TRUE
     theme: united
 ---
 
@@ -45,24 +46,24 @@ Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Rechtsgeleerdheid"] <-
   Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Rechtsgeleerdheid"] - 6
 ```
 
-## 1 Toepassing
+# Toepassing
 
-## 2 Onderwijscasus
+# Onderwijscasus
 
-## 3 Assumpties
+# Assumpties
 
-## 4 Uitvoering in R
+# Uitvoering in R
 Er is data ingeladen met studieresultaten van de Master arbeidsrecht per vooropleiding.
 
-### De data bekijken
+## De data bekijken
 ```{r de data exploreren, collapse=TRUE}
 head(Resultaten_arbeidsrecht)
 levels(Resultaten_arbeidsrecht$Vooropleiding)
 ```
 Er is te zien dat er vier groepen naar vooropleiding in de data te vinden zijn: Fiscaal recht, Notarieel recht, Rechtsgeleerdheid en een schakelprogramma. Voor elke student (een rij) is er te zien hoeveel studiepunten er zijn gehaald in het eerste jaar. `mean()` kan het gemiddelde aantal punten per vooropleiding geven.
 
-### {.tabset .tabset-fade .tabset.pills}
-#### in base R
+### 
+## in base R
 ``` {r gemiddeldes per vooropleiding base, collapse=TRUE}
 mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Rechtsgeleerdheid"])
 mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Notarieel recht"])
@@ -70,7 +71,7 @@ mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Fiscaal recht"])
 mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Schakelprogramma"])
 ```
 
-#### in package 'dplyr'
+## in package 'dplyr'
 ``` {r gemiddeldes per vooropleiding dplyr, warning=FALSE, message=FALSE}
 library(dplyr)
 group_by(Resultaten_arbeidsrecht, Vooropleiding) %>%
@@ -80,17 +81,17 @@ group_by(Resultaten_arbeidsrecht, Vooropleiding) %>%
     median = median(Ec_jaar1)
   )
 ```
-### Statistische toets in R
+
+## Kruskal Wallis toets
 
 ```{r kruskal test}
 kruskal.test(Ec_jaar1 ~ Vooropleiding, Resultaten_arbeidsrecht)
 ```
-**interpretatie**
 
 Om te weten welke groepen verschillen is er in `pairwise.wilcox.test()` een correctie beschikbaar voor *multiple testing*
 ``` {r pairwise wilcox test}
 pairwise.wilcox.test(Resultaten_arbeidsrecht$Ec_jaar1, Resultaten_arbeidsrecht$Vooropleiding, p.adjust.method = "bonferroni")
 ```
-## Toelichting op de output
+# Toelichting op de output
 
-## 5 Rapportage
+# Rapportage

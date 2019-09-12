@@ -81,13 +81,13 @@ H~A~: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taal
 De *t-toets* gaat ervan uit dat de data normaal verdeeld is. Controleer deze assumptie met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
 2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^2]) met de *Shapiro-Wilk test* [^3].  
-3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data en kijk daarna of het normaal verdeeld is.
+3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is.
 
 Als er geen sprake is van normaliteit, gebruik de *Mann-Whitney U toets*, ook bekend als de *Wilcoxon rank-sum toets* [^4].  
 
 
 ## Homogeniteit van varianties 
-De *ongepaarde t-toets* gaat er ook van uit dat beide groepen dezelfde spreiding heeft, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Bij een *p* > 0,05 is de spreiding van de groepen verschillend en wordt de assumptie geschonden. Let op, de interpretatie van de p-waarde is bij de *Levene's Test* tegengesteld aan de interpretatie van een p-waarde bij een *t-toets* [^5]. 
+De *ongepaarde t-toets* gaat er ook van uit dat beide groepen dezelfde spreiding heeft, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Bij een *p* < 0,05 is de spreiding van de groepen verschillend en wordt de assumptie geschonden. [^5]. 
 
 
 # Effectmaat
@@ -137,7 +137,7 @@ Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeli
 
 ***
 
-Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef lijkende verdeling, normaal verdeel is, kan de normaliteit getoets worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
+Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef lijkende verdeling, normaal verdeeld is, kan de normaliteit getoets worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov (met Lilliefors correctie)
 
@@ -176,7 +176,7 @@ De `leveneTest()` heeft in R twee argumenten. Het eerste argument is een vector 
 library(car)
 leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 ```
-*F*(1, 338) = 0,92, p-waarde = 0,034, de groepen zijn niet verschillend in spreiding.  
+*F*(1, 338) = 0,92, p-waarde = 0,34, de groepen zijn niet verschillend in spreiding.  
 Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 1) en de tweede cijfer (*n~1~* + *n~2~* - 2 = 338)
 Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. 
 

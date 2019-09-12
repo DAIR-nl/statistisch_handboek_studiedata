@@ -6,6 +6,7 @@ output:
   html_document:
     toc: TRUE
     toc_float: TRUE
+    number_sections: TRUE
     theme: united
 ---
 
@@ -38,35 +39,35 @@ Bsa_kt_n10 <- t(Bsa_kt_n10)
 colnames (Bsa_kt_n10) <- Landen_instroom
 ```
 
-## 1 Toepassing
+# Toepassing
 
-## 2 Onderwijscasus
+# Onderwijscasus
 
-## 3 Assumpties
+# Assumpties
 
-## 4 Uitvoering in R
+# Uitvoering in R
 Er is een dataset (`Bsa_kt`) ingeladen over het BSA per instroomland van de faculteit Sociale Wetenschappen.
 
-### De data bekijken
+## De data bekijken
 ```{r, collapse=TRUE}
 Bsa_kt
 barplot(Bsa_kt, beside = TRUE, legend.text = TRUE)
 ```
 
-### {.tabset .tabset-fade}
-#### Chi-kwadraat toets
+
+## Chi-kwadraat toets
 Om `chisq.test()` in R te gebruiken moet de data in een kruistabel staan.
 ```{r collapse=TRUE}
 chisq.test(Bsa_kt)
 ```
 
-#### Fisher-Freeman-Halton exact toets
+## Fisher-Freeman-Halton exact toets
 Gebruik `simulate.p.value = TRUE` bij `fisher.test()` om de p-waardes via een Monte Carlo simulatie te laten uitrekenen. Dit is nodig voor tabellen die groter zijn dan 2 bij 2.
 ``` {r fisher toets}
 fisher.test(Bsa_kt_n10, simulate.p.value = TRUE)
 fisher.test(Bsa_kt, simulate.p.value = TRUE)
 ```
 
-## Toelichting op de output
+# Toelichting op de output
 
-## 5 Rapportage
+# Rapportage

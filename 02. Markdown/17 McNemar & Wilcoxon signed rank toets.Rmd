@@ -6,6 +6,7 @@ output:
   html_document:
     toc: TRUE
     toc_float: TRUE
+    number_sections: TRUE
     theme: united
 ---
 
@@ -69,16 +70,16 @@ colnames(Eval_curriculum) <- c("Waardering", "Jaar", "studentnr")
 
 ```
 
-## 1 Toepassing
+# Toepassing
 
-## 2 Onderwijscasus
+# Onderwijscasus
 
-## 3 Assumpties
+# Assumpties
 
-## 4 Uitvoering in R
+# Uitvoering in R
 Er is een dataset ingeladen genaamd `Eval_curriculum`. Deze bevat curriculum evaluaties van de opleiding Geschiedenis. De studenten zijn gevraagd hun opleiding te waarderen net na hun afstuderen (2014) en 5 jaar na dato (2019)
 
-### De data bekijken
+## De data bekijken
 Bekijk de data met `head()`
 ```{r data bekijken}
 head(Eval_curriculum)
@@ -95,15 +96,15 @@ head(Eval_curriculum_gepaard)
 
 
 
-### Assumpties testen in R
+## Assumpties testen in R
 @IvdS heeft deze situatie assumpties? Misschien dat er voor elk paar twee observaties zijn?
 ```{r}
 
 ```
 
-### Statistische toets in R {.tabset .tabset-fade}
 
-#### McNemar toets
+
+## McNemar toets
 Om `mcnemar.test()` te gebruiken moet de data eerst worden omgezet in een gepaarde kruistabel. Deze data gaat over paren, niet over observaties. Eerst moeten de categorieën voor de paren worden aangemaakt
 ```{r kruistabel alfabetisch}
 Eval_curriculum_kt <- table(Eval_curriculum_gepaard$Eval_2014, Eval_curriculum_gepaard$Eval_2019)
@@ -121,7 +122,7 @@ Voer verolgens de test uit met `mcnemar.test()`.
 mcnemar.test(Eval_curriculum_kt)
 ```
 
-#### Wilcoxon Signed Rank toets
+## Wilcoxon Signed Rank toets
 Om de wilcoxon Signed Rank toets te doen moet de ordinale data worden getransformeerd naar numerieke data. Hiervoor gebruiken we de rang van de categorieën (5 voor erg goed, 1 voor erg slecht)
 ```{r Wilcoxon Signed Rank voorbereiden}
 Eval_curriculum$Waardering_num[Eval_curriculum$Waardering == "erg goed"] <- 5
@@ -135,8 +136,8 @@ wilcox.test(Eval_curriculum$Waardering_num[Eval_curriculum$Jaar == 2014],
             paired = TRUE)
 ```
 
-### {.toc-ignore}
 
-## Toelichting op de output
 
-## 5 Rapportage
+# Toelichting op de output
+
+# Rapportage

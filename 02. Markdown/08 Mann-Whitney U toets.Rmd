@@ -6,6 +6,7 @@ output:
   html_document:
     toc: TRUE
     toc_float: TRUE
+    number_sections: TRUE
     theme: united
 ---
 
@@ -43,28 +44,29 @@ Punten_jaar2_inter <- margin.table(Resultaten_internationale_studenten, 1)
 
 ```
 
-## 1 Toepassing
+# Toepassing
 
-## 2 Onderwijscasus
+# Onderwijscasus
 
-## 3 Assumpties
+# Assumpties
 
-## 4 Uitvoering in R
+# Uitvoering in R
 Er is data ingeladen met het aantal punten studenten in hun tweede jaar halen. `Punten_jaar2_NL` bevat Nederlandse studenten, `Punten_jaar2_inter` bevat internationale studenten. 
-### De data bekijken
+
+## De data bekijken
 Gebruik `head()` in R om de eerste vijf regels te bekijken
 ```{r data bekijken, collapse = TRUE}
 head(Punten_jaar2_NL)
 head(Punten_jaar2_inter)
 ```
 
-### De Mann-Whitney U toets in R
+## De Mann-Whitney U toets in R
 Gebruik `wilcox.test()` met twee argumenten om een Mann-Whitney U toets te doen in R
 ```{r Mann Whitney U toets}
 wilcox.test(Punten_jaar2_NL, Punten_jaar2_inter)
 ```
 
-## Toelichting op de output
+# Toelichting op de output
 
-## 5 Rapportage
+# Rapportage
 

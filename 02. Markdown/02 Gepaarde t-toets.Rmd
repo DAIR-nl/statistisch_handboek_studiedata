@@ -6,6 +6,7 @@ output:
   html_document:
     toc: TRUE
     toc_float: TRUE
+    number_sections: TRUE
     theme: united
 ---
 
@@ -90,10 +91,10 @@ Tevredenheidscijfer_na_tutorgesprek_n30 <- sort(Tevredenheidscijfer_na_tutorgesp
 Tevredenheidscijfer_na_tutorgesprek_n30 <- Tevredenheidscijfer_na_tutorgesprek_n30[volgorde_n30]
 ```
 
-## 1 Toepassing
+# Toepassing
 Bij het toetsen of het gemiddelde van twee groepen aan elkaar gelijk zijn, wordt de *t-toets* gebruikt. De *gepaarde t-toets* wordt gebruikt 1) bij een herhaalde meting van dezelfde groep [^1] of 2) als personen van de ene groep, door middel van overeenkomstige kernmerken, gekoppeld worden aan personen van de andere groep [^2]. 
 
-## 2 Onderwijscasus
+# Onderwijscasus
 Ter voorbereiding op een visitatie vraagt de opleidingsdirecteur van de lerarenopleiding zich af welk tevredenheidscijfer haar studenten de opleiding geven. En zij vraagt zich af of het voeren van een tutorgesprek een rol speelt in de hoogte van het cijfer. Ze laat de studenten twee keer een vragenlijst invullen: voordat ze met hun tutor hebben gesproken (T~0~) en nadat ze met hun tutor hebben gesproken (T~1~). 
 
 H~0~: Het gemiddelde tevredenheidscijfer dat de studenten geven aan de opleiding is niet veranderd na het gesprek met hun tutor, µ~T0~ = µ~T1~  
@@ -101,8 +102,8 @@ H~0~: Het gemiddelde tevredenheidscijfer dat de studenten geven aan de opleiding
 H~A~: Het gemiddelde tevredenheidscijfer dat de studenten geven aan de opleiding is veranderd na het gesprek met hun tutor, µ~T0~ ≠ µ~T1~ 
 
 
-## 3 Assumpties
-### 3.1 Normaliteit
+# Assumpties
+## Normaliteit
 De *t-toets* gaat ervan uit dat de data normaal verdeeld is. Controleer deze assumptie met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.  
 2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^3]) met de *Shapiro-Wilk test* [^4].  
@@ -110,15 +111,15 @@ De *t-toets* gaat ervan uit dat de data normaal verdeeld is. Controleer deze ass
 
 Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test* [^5].
 
-## 4 Effectmaat
+# Effectmaat
 Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer.  
 
 Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect [^6].  
 
-## 5 Uitvoering in R
+# Uitvoering in R
 Er is een dummy dataset ingeladen met `Tevredenheidscijfer_voor_tutorgesprek` (T~0~) en met `Tevredenheidscijfer_na_tutorgesprek` (T~1~). 
 
-### 5.1 Test assumpties: Normaliteit 
+## Test assumpties: Normaliteit 
 <div class="col2">
 ```{r beschrijvende gegevens na tutor, collapse = TRUE}
 mean(
@@ -140,7 +141,7 @@ Gemiddeld tevredenheidscijfer na tutorgesprek (standaardafwijking): 3,60 (0,56)
 
 </div>
 
-#### Histogram
+### Histogram
 ```{r library ggplot}
 library(ggplot2)
 ```
@@ -190,7 +191,7 @@ ggplot(
 Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Het histogram `Tevredenheidscijfer_voor_tutorgesprek` lijkt licht scheef verdeeld. 
 
 
-#### Q-Q plot
+### Q-Q plot
 Gebruik `qqnorm()` en `qqline()`. Gebruik `pch = 20`om gevulde datapunten te creëren.
 
 <div class ="col2">
@@ -206,7 +207,7 @@ qqline(Tevredenheidscijfer_na_tutorgesprek)
 </div>
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is. In deze casus liggen .... 
 
-#### Boxplot
+### Boxplot
 <div class ="col2">
 ``` {r Boxplot na}
 boxplot(Tevredenheidscijfer_voor_tutorgesprek, 
@@ -222,14 +223,14 @@ boxplot(Tevredenheidscijfer_na_tutorgesprek,
 </div>
 De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte vakken voor de opleiding Werktuigbouwkunde weer. 
 
-### {.toc-ignore}
+
 
 ***
-### {.toc-ignore}
+
 
 Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef lijkende verdeling, normaal verdeel is, kan de normaliteit getoets worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
-#### Kolmogorov-Smirnov (met Lilliefors correctie)
+### Kolmogorov-Smirnov (met Lilliefors correctie)
 ```{r library nortest, warning=FALSE}
 library(nortest)
 ```
@@ -244,7 +245,7 @@ De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen de twee verdelin
 
 In dit geval is van beide groepen de p-waarde > 0,05; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *gepaarde t-toets* kan uitgevoerd worden. 
 
-#### Shapiro-Wilk Test
+### Shapiro-Wilk Test
 <div class ="col2">
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 shapiro.test(Tevredenheidscijfer_voor_tutorgesprek_n30)
@@ -256,10 +257,10 @@ De *Shapiro-Wilk test* is een soort gelijke test als de *Kolmogorov-Smirnov test
 
 In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05. De verdeling van beide groepen is niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan. De *gepaarde t-toets* kan uitgevoerd worden.  
 
-### {.toc-ignore}
+
 
 ***
-### 5.2 Gepaarde t-toets
+## Gepaarde t-toets
 
 Gebruik `t.test()` met `paired = TRUE`. 
 ```{r statistische toets}
@@ -272,7 +273,7 @@ t.test(Tevredenheidscijfer_voor_tutorgesprek, Tevredenheidscijfer_na_tutorgespre
 * 95%-betrouwbaarheidsinterval; bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. 95%-betrouwbaarheidsinterval: -0,22 tot -0,29  
 * Het verschil tussen beide groepen: *MD* = -0,26  
 
-### 5.3 Effectmaat: Cohen's d
+## Effectmaat: Cohen's d
 Gebruik `cohen.d()` met `paired = TRUE` om het effect te meten.
 ```{r Cohen s d}
 library(effsize)
@@ -289,7 +290,7 @@ Eta2 <- (t^2) / (t^2 + 245)
 Eta2
 ```
 
-## 6 Rapportage
+# Rapportage
 Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tevredenheidscijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = 3,4, *SD~T0~* = 0,85) en het gemiddelde van T~1~ (*M~T1~* = 3,60, *SD~T1~* = 0,56) is significant, *t* (247) = -13,8, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van -0,22 tot -0,29. Het valt op dat het gemiddelde van T~1~ hoger is dan T~0~. Het effect is minimaal, *d* = 0,09. 
 
 Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor, maar het effect is minimaal.  

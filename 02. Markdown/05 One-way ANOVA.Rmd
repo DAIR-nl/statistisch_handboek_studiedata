@@ -6,6 +6,7 @@ output:
   html_document:
     toc: TRUE
     toc_float: TRUE
+    number_sections: TRUE
     theme: united
 ---
 <style>
@@ -166,17 +167,17 @@ Reistijd_per_opleiding <- Reistijd_per_opleiding %>%
   mutate(Reistijd = if_else(Reistijd < 0, Reistijd*-1, Reistijd))
 ```
 
-## 1 Toepassing
+# Toepassing
 Bij het toetsen of het gemiddelde van drie of meer onafhankelijke groepen aan elkaar gelijk zijn, wordt de *one-way ANOVA* gebruikt [^1]. 
 
-## 2 Onderwijscasus
+# Onderwijscasus
 In verband met wervingsactiviteiten wil het hoofd van de afdeling Communicatie weten wat de reistijd is van studenten aan verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten per opleiding. 
 
 H~0~: De gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar: µ~0~ = µ~1~ = µ~2~ ... µ~n~  
 
 H~A~: Tenminste voor één opleiding is de gemiddelde reistijd niet gelijk aan de gemiddelde reistijd van studenten voor andere opleidingen. µ~0~ ≠ µ~1~ = µ~2~ ... = µ~n~
 
-## 3 Assumpties
+# Assumpties
 Controleer of de steekproef aan de volgende assumpties voldoen:  
 1. Normaliteit  
 2. Homogeniteit van varianties  
@@ -184,7 +185,7 @@ Controleer of de steekproef aan de volgende assumpties voldoen:
 
 Als de data niet voldoet aan één van deze assumpties kan de test *one -way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden. 
 
-### 3.1 Normaliteit
+## Normaliteit
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.  
 2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^2]) met de *Shapiro-Wilk test* [^3].  
@@ -195,13 +196,13 @@ Als er geen sprake is van normaliteit, gebruik de *Kruskal-Wallis test* [^4].
 # 3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data en kijk daarna of het normaal verdeeld is.
 ```
 
-### 3.2 Homogeniteit van Varianties
+## Homogeniteit van Varianties
 Controleer of de spreiding van iedere groep ongeveer hetzelfde is, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Wanneer de test significant is, is de spreiding van de groepen verschillend.[^5]  
 
-### 3.3 Onafhankelijkheid
+## Onafhankelijkheid
 Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
 
-## 4 Post-hoc vergelijking 
+# Post-hoc vergelijking 
 De *one-way ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Welke groep anders is wordt niet gespecificeerd. Als er bij de *one-way ANOVA* uitkomt dat er een significant verschil is tussen de groepen kan een post-hoc vergelijking gedaan worden om te bepalen welke groepen significant verschillen.  
 
 Er zijn meerdere post-hoc vergelijkingen: 
@@ -209,10 +210,10 @@ Er zijn meerdere post-hoc vergelijkingen:
 * *Tukey* wordt gebruikt als de assumptie van gelijke varianties is voldaan  
 * Dunnet's *C* wordt gebruikt bij ongelijke varianties  
 
-## 5 Uitvoering in R
+# Uitvoering in R
 Er is een dummy dataset met de reistijden van uitwonende studenten per opleiding is ingeladen genaamd `Reistijd_per_opleiding`. 
 
-### 5.1 De data bekijken
+## De data bekijken
 Gebruik `head()` om de data te bekijken
 ```{r de data bekijken}
 head(Reistijd_per_opleiding)
@@ -232,7 +233,7 @@ ggplot(Reistijd_per_opleiding, aes(Reistijd, Opleiding)) +
   geom_density_ridges(rel_min_height=.01)
 ```
 
-### 5.2 Test assumpties: normaliteit 
+## Test assumpties: normaliteit 
 ```{r lillietest voorbereiden}
 library(nortest)
 Reistijdlijst <- Reistijd_per_opleiding %>%
@@ -244,15 +245,15 @@ for (. in Reistijdlijst) {
   print(lillie.test(.$Reistijd))
 }
 ```
-### 5.3 Test assumpties: Levene's Test
+## Test assumpties: Levene's test
 
-### 5.4 One way ANOVA 
+## One way ANOVA 
 ```{r ANOVA}
 res.aov <- aov(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 summary(res.aov)
 ```
 
-## 6 Rapportage
+# Rapportage
 Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De onafhankelijke variabele, opleiding, is onderverdeeld in drie niveau's **(Opleiding 1, 2, 3 )** en de afhankelijke variabele is de reistijd van de studenten. The *one way ANOVA* was significant **F(1, 338) = 0,92, p-waarde = 0,034** 
 **effect **
 **posthoc en uitkomsten **

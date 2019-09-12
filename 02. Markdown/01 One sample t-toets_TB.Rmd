@@ -61,7 +61,7 @@ Gemiddeld_cijfer_WNS_n30 <- sample(Gemiddeld_cijfer_WNS, 30)
 `r lKoppen[4]`
 `r lText.4.Uitvoering`
 
-`r lText.4.1.1.Uitvoering`  {.tabset .tabset-fade .tabset.pills}
+`r lText.4.1.1.Uitvoering`  
 `r lText.4.1.2.Uitvoering`
 ```{r de data bekijken, collapse=TRUE}
 mean(Gemiddeld_cijfer_WNS)
@@ -69,7 +69,7 @@ sd(Gemiddeld_cijfer_WNS)
 ```
 `r lText.4.1.3.Uitvoering`
 
-#### Histogram met GGplot
+### Histogram met GGplot
 ```{r barchart, warning=FALSE, message=FALSE}
 library(ggplot2)
 library(plotly)
@@ -85,7 +85,7 @@ ggplotly(h)
 ```
 Het histogram laat een belcurve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
 
-#### Q-Q plot
+### Q-Q plot
 Gebruik `qqnorm()` en `qqline()`. Gebruik `pch = 20` om gevulde datapunten te creëren.
 ```{r qqplot}
 qqnorm(Gemiddeld_cijfer_WNS, pch = 20)
@@ -94,7 +94,7 @@ qqline(Gemiddeld_cijfer_WNS)
 
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is. In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. 
 
-#### Boxplot
+### Boxplot
 ``` {r Boxplot}
 boxplot(Gemiddeld_cijfer_WNS, xlab = "Werktuigbouwkunde", ylab = "Gemiddeld_cijfer_WNS")
 
@@ -102,12 +102,12 @@ boxplot(Gemiddeld_cijfer_WNS, xlab = "Werktuigbouwkunde", ylab = "Gemiddeld_cijf
 
 De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte vakken voor de opleiding Werktuigbouwkunde weer. 
 
-### {.toc-ignore}
+
 ***
 Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef lijkende verdeling, normaal verdeel is, kan de normaliteit getoets worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.  
 
-### {.toc-ignore .tabset .tabset-fade .tabset.pills}
-#### Kolmogorov-Smirnov (met Lilliefors correctie) 
+
+### Kolmogorov-Smirnov (met Lilliefors correctie) 
 
 ```{r Kolmogorov-Smirnov Test, warning=FALSE}
 library(nortest)
@@ -117,7 +117,7 @@ De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen twee verdelingen
 
 De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *one sample-t-toets* kan uitgevoerd worden.  
 
-#### Shapiro-Wilk test
+### Shapiro-Wilk Test
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 shapiro.test(Gemiddeld_cijfer_WNS_n30)
 ```
@@ -126,7 +126,7 @@ De *Shapiro-Wilk test* is een soort gelijke test als de *Kolmogorov-Smirnov test
 
 De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *one sample-t-toets* kan uitgevoerd worden.
 
-### {.toc-ignore}
+
 ***
 [//]: # 4.2 Toets
 [//]: # 4.2.1 Inleiding

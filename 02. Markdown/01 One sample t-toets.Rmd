@@ -2,11 +2,12 @@
 title: "One sample t-toets"
 author: "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
 date: "`r format(Sys.time(), '%d-%m-%y')`"
-output:
+output: 
   html_document:
+    toc: TRUE
+    toc_float: TRUE
+    number_sections: TRUE
     theme: united
-    toc: yes
-    toc_float: yes
 ---
 ``` {r versiegeschiedenis, include = FALSE, eval = FALSE}
 ## versie 0.4     3-9-19
@@ -45,18 +46,18 @@ Gemiddeld_cijfer_WNS <- apply(WNS_eindcijfers, 1, mean)
 Gemiddeld_cijfer_WNS_n30 <- sample(Gemiddeld_cijfer_WNS, 30)
 ```
 
-## 1 Toepassing
+# 1 Toepassing
 De *one sample t-toets* wordt gebruikt om aan de hand van één steekproef het gemiddelde van de totale populatie te vergelijken met een vooraf opgestelde hypothese [^1]. 
 
-## 2 Onderwijscasus
+# 2 Onderwijscasus
 De opleidingsdirecteur van de opleiding Werktuigbouwkunde wil weten of het gemiddelde eindexamencijfer voor de exacte vakken (Wiskunde, Natuurkunde en Scheikunde; WNS) van vwo studenten hoger is dan het landelijk gemiddelde (6,8)[^2]. Zo kan zij bepalen of het curriculum van de inleidende vakken genoeg aansluit bij eerstejaars studenten met een vwo vooropleiding.
 
 H~0~: Het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde is gelijk aan het landelijk gemiddelde: µ = 6,8. 
 
 H~A~: Het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde is anders dan het landelijk gemiddelde: µ ≠ 6,8. 
 
-## 3 Assumpties
-### 3.1 Normaliteit 
+# Assumpties
+## Normaliteit 
 De t-toets gaat ervan uit dat de data normaal verdeeld is. Controleer deze assumptie met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
 2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^3]) met de *Shapiro-Wilk test* [^4].  
@@ -64,10 +65,10 @@ De t-toets gaat ervan uit dat de data normaal verdeeld is. Controleer deze assum
 
 Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test* [^5].
 
-## 4 Uitvoering in R
-Er zijn twee datasets `Gemiddeld_cijfer_WNS` en `Gemiddeld_cijfer_WNS_n30` ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde (uit Studielink). Het eerste bestand bevat 122 middelbare scholierenstudenten en het tweede bevat 30 studenten.
+# Uitvoering in R
+Er zijn twee datasets `Gemiddeld_cijfer_WNS` en `Gemiddeld_cijfer_WNS_n30` ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde. Het eerste bestand bevat 122 middelbare scholierenstudenten en het tweede bevat 30 studenten.
 
-### 4.1 Test assumpties: normaliteit {.tabset .tabset-fade .tabset.pills}
+### 4.1 Test assumpties: normaliteit 
 Bekijk de data via `mean()`, `sd()`.
 ```{r de data bekijken, collapse=TRUE}
 mean(Gemiddeld_cijfer_WNS)
@@ -76,7 +77,7 @@ sd(Gemiddeld_cijfer_WNS)
 Geef normaliteit visueel weer met een histogram, boxplot of Q-Q plot. 
 
 
-#### Histogram met GGplot
+### Histogram met GGplot
 ```{r barchart, warning=FALSE, message=FALSE}
 library(ggplot2)
 library(plotly)
@@ -92,7 +93,7 @@ ggplotly(h)
 ```
 Het histogram laat een belcurve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
 
-#### Q-Q plot
+### Q-Q plot
 Gebruik `qqnorm()` en `qqline()`. Gebruik `pch = 20`om gevulde datapunten te creëren.
 ```{r qqplot}
 qqnorm(Gemiddeld_cijfer_WNS, pch = 20)
@@ -101,7 +102,7 @@ qqline(Gemiddeld_cijfer_WNS)
 
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is. In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. 
 
-#### Boxplot
+### Boxplot
 ``` {r Boxplot}
 boxplot(Gemiddeld_cijfer_WNS, xlab = "Werktuigbouwkunde", ylab = "Gemiddeld_cijfer_WNS")
 
@@ -109,12 +110,12 @@ boxplot(Gemiddeld_cijfer_WNS, xlab = "Werktuigbouwkunde", ylab = "Gemiddeld_cijf
 
 De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte vakken voor de opleiding Werktuigbouwkunde weer. 
 
-### {.toc-ignore}
+
 ***
 Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef lijkende verdeling, normaal verdeel is, kan de normaliteit getoets worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.  
 
-### {.toc-ignore .tabset .tabset-fade .tabset.pills}
-#### Kolmogorov-Smirnov (met Lilliefors correctie) 
+
+### Kolmogorov-Smirnov (met Lilliefors correctie) 
 
 ```{r Kolmogorov-Smirnov Test, warning=FALSE}
 library(nortest)
@@ -124,7 +125,7 @@ De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen twee verdelingen
 
 De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *one sample-t-toets* kan uitgevoerd worden.  
 
-#### Shapiro-Wilk test
+### Shapiro-Wilk Test
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 shapiro.test(Gemiddeld_cijfer_WNS_n30)
 ```
@@ -133,10 +134,10 @@ De *Shapiro-Wilk test* is een soort gelijke test als de *Kolmogorov-Smirnov test
 
 De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *one sample-t-toets* kan uitgevoerd worden.
 
-### {.toc-ignore}
+
 ***
 
-### 4.2 One sample t-toets
+##  One sample t-toets
 Gebruik `t.test()`om een t-toets uit te voeren. Geef het gemiddelde waarmee wordt vergeleken en specifieer welke alternatieve hypothese er getoetst wordt. 
 ```{r ttest}
 t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
@@ -147,10 +148,10 @@ t <- t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 * Het gemiddelde van de steekproef is 7,08  
 * Vrijheidsgraden, *df* = *n* -1 = `r t$parameter+1`-1 = `r t$parameter`  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
-* *t* (`r t$parameter`) = `r t$statistic` , *p* < 0,01
+* *t* (`r t$parameter`) = 3,76 , *p* < 0,01
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen 6,93 en 7,23.
 
-## 5 Rapportage
+# Rapportage
 De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren, anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = 7,08, *SD* = 0,8) is significant hoger dan het landelijk gemiddelde van 6,8, *t* (121) = 3,76, *p* < 0,01. 
 
 De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor de exacte vakken hoger ligt voor studenten Werktuigbouwkunde met een vwo vooropleiding, dan het landelijk gemiddelde.

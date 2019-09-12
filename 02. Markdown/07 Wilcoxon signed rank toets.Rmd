@@ -6,7 +6,6 @@ output:
   html_document:
     toc: TRUE
     toc_float: TRUE
-    number_sections: TRUE
     theme: united
 ---
 
@@ -51,16 +50,16 @@ Opslag <- sample(Promotie_mogelijkheden, 307, replace=TRUE, Weging)
 Jaarlijks_inkomen_t5 <- Jaarlijks_inkomen_t1 + Opslag
 ```
 
-# Toepassing
+## 1 Toepassing
 
-# Onderwijscasus
+## 2 Onderwijscasus
 
-# Assumpties
+## 3 Assumpties
 
-# Uitvoering in R
-Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkeld 4 jaar nadat zij afgestudeerd zijn.
+## 4 Uitvoering in R
+Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij genaamd `Jaarlijks_inkomen`. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkeld 4 jaar nadat zij afgestudeerd zijn.
 
-## De data bekijken
+### De data bekijken
 Bekijk de data door het gemiddelde, de standaardafwijking, de mediaan en een histogram op te vragen.
 
 <div class="col2">
@@ -76,7 +75,7 @@ hist(Jaarlijks_inkomen_t5)
 ```
 </div>
 
-## Normaliteit testen
+### Normaliteit testen
 Test of de data normaal verdeeld is met een lilliefors-test
 ```{r library nortest, warning=FALSE}
 library(nortest)
@@ -88,13 +87,13 @@ lillie.test(Jaarlijks_inkomen_t5)
 ```
 </div>
 
-## Wilcoxon signed rank toets
+### Wilcoxon signed rank toets
 Voer een Wilcoxon signed rank toets uit met `paired=TRUE`.
 ```{r wilcox test}
 wilcox.test(Jaarlijks_inkomen_t5, Jaarlijks_inkomen_t1, paired=TRUE, alternative = "greater")
 ```
 
-# Toelichting op de output
+## Toelichting op de output
 
-# Rapportage
+## 5 Rapportage
 

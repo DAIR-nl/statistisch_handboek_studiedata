@@ -5,9 +5,11 @@ date: "`r format(Sys.time(), '%d-%m-%y')`"
 output: 
   html_document:
     toc: TRUE
-    toc_float: TRUE
+    toc_float:
+      collapsed: FALSE 
     number_sections: TRUE
     theme: united
+    
 ---
 
 <style>
@@ -39,18 +41,18 @@ RNGkind(sample.kind = "Rounding")
 set.seed(2)
 
 ## Maak ruwe data aan
-mu <- 3.6
-sigma <- 0.6
+mu <- 7.2
+sigma <- 1.2
 Tevredenheidscijfer_na_tutorgesprek <- rnorm(250, mu, sigma)
 
-Tevredenheidscijfer_na_tutorgesprek <- Tevredenheidscijfer_na_tutorgesprek[Tevredenheidscijfer_na_tutorgesprek <= 5 
+Tevredenheidscijfer_na_tutorgesprek <- Tevredenheidscijfer_na_tutorgesprek[Tevredenheidscijfer_na_tutorgesprek <= 10 
                                                                        & Tevredenheidscijfer_na_tutorgesprek >= 1]
 
-mu <- 3.4
-sigma <- 0.9
+mu <- 6.8
+sigma <- 1.8
 Tevredenheidscijfer_voor_tutorgesprek <- rnorm(260, mu, sigma)
 
-Tevredenheidscijfer_voor_tutorgesprek <- Tevredenheidscijfer_voor_tutorgesprek[Tevredenheidscijfer_voor_tutorgesprek <= 5 
+Tevredenheidscijfer_voor_tutorgesprek <- Tevredenheidscijfer_voor_tutorgesprek[Tevredenheidscijfer_voor_tutorgesprek <= 10 
                                                                    & Tevredenheidscijfer_voor_tutorgesprek >= 1]
 ## Stel volgorde en lengte van steekproef vast
 volgorde <- sample(1:length(Tevredenheidscijfer_na_tutorgesprek), length(Tevredenheidscijfer_na_tutorgesprek))
@@ -70,21 +72,21 @@ Tevredenheidscijfer_voor_tutorgesprek <- Tevredenheidscijfer_voor_tutorgesprek[v
 
 
 
-mu <- 3.6
-sigma <- 0.6
+mu <- 7.2
+sigma <- 1.2
 Tevredenheidscijfer_voor_tutorgesprek_n30 <- rnorm(30, mu, sigma)
 
-Tevredenheidscijfer_voor_tutorgesprek_n30 <- Tevredenheidscijfer_voor_tutorgesprek_n30[Tevredenheidscijfer_voor_tutorgesprek_n30 <= 5 
+Tevredenheidscijfer_voor_tutorgesprek_n30 <- Tevredenheidscijfer_voor_tutorgesprek_n30[Tevredenheidscijfer_voor_tutorgesprek_n30 <= 10 
                                                                  & Tevredenheidscijfer_voor_tutorgesprek_n30 >= 1]
-Tevredenheidscijfer_voor_tutorgesprek_n30 <- sapply (Tevredenheidscijfer_voor_tutorgesprek_n30, round, 3)
+Tevredenheidscijfer_voor_tutorgesprek_n30 <- sapply(Tevredenheidscijfer_voor_tutorgesprek_n30, round, 3)
 Tevredenheidscijfer_voor_tutorgesprek_n30 <- sort(Tevredenheidscijfer_voor_tutorgesprek_n30)
 Tevredenheidscijfer_voor_tutorgesprek_n30 <- Tevredenheidscijfer_voor_tutorgesprek_n30[volgorde_n30]
 
-mu <- 3.5
-sigma <- 0.4
+mu <- 7.0
+sigma <- 0.8
 Tevredenheidscijfer_na_tutorgesprek_n30 <- rnorm(30, mu, sigma)
 
-Tevredenheidscijfer_na_tutorgesprek_n30 <- Tevredenheidscijfer_na_tutorgesprek_n30[Tevredenheidscijfer_na_tutorgesprek_n30 <= 5 
+Tevredenheidscijfer_na_tutorgesprek_n30 <- Tevredenheidscijfer_na_tutorgesprek_n30[Tevredenheidscijfer_na_tutorgesprek_n30 <= 10 
                                                                & Tevredenheidscijfer_na_tutorgesprek_n30 >= 1]
 Tevredenheidscijfer_na_tutorgesprek_n30 <- sapply(Tevredenheidscijfer_na_tutorgesprek_n30, round, 3)
 Tevredenheidscijfer_na_tutorgesprek_n30 <- sort(Tevredenheidscijfer_na_tutorgesprek_n30)
@@ -117,7 +119,7 @@ Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een
 Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect [^6].  
 
 # Uitvoering in R
-Er is een dummy dataset ingeladen met `Tevredenheidscijfer_voor_tutorgesprek` (T~0~) en met `Tevredenheidscijfer_na_tutorgesprek` (T~1~). 
+Er is een dataset ingeladen met `Tevredenheidscijfer_voor_tutorgesprek` (T~0~) en met `Tevredenheidscijfer_na_tutorgesprek` (T~1~). 
 
 ## Test assumpties: Normaliteit 
 <div class="col2">
@@ -159,11 +161,11 @@ ggplot(
   ylab("Frequentiedichtheid") +
   xlab("Tevredenheidscijfer_voor_tutorgesprek") +
   scale_x_continuous(
-    labels = as.character(seq(1, 5, 0.5)),
-    breaks = seq(1, 5, 0.5)) +
-    coord_fixed(ylim = c(0, 0.6),
-              xlim = c(1, 5),
-              ratio = 4) +
+    labels = as.character(seq(1, 10, 0.5)),
+    breaks = seq(1, 10, 0.5)) +
+    coord_fixed(ylim = c(0, 0.3),
+              xlim = c(1, 10),
+              ratio = 18) +
   labs(title = expression(paste("Tevredenheidscijfers (", T[0], ")")))
 ```
 
@@ -179,11 +181,11 @@ ggplot(
   ylab("Frequentiedichtheid") +
   xlab("Tevredenheidscijfer_na_tutorgesprek") +
   scale_x_continuous(
-    labels = as.character(seq(1, 5, 0.5)),
-    breaks = seq(1, 5, 0.5)) +
-  coord_fixed(ylim = c(0, 0.6),
-              xlim = c(1, 5),
-              ratio = 4) +
+    labels = as.character(seq(1, 10, 0.5)),
+    breaks = seq(1, 10, 0.5)) +
+  coord_fixed(ylim = c(0, 0.3),
+              xlim = c(1, 10),
+              ratio = 18) +
   labs(title = expression(paste("Tevredenheidscijfers (", T[1], ")")))
 ```
 
@@ -196,12 +198,12 @@ Gebruik `qqnorm()` en `qqline()`. Gebruik `pch = 20`om gevulde datapunten te cre
 
 <div class ="col2">
 ```{r qqplot voor tutor}
-qqnorm(Tevredenheidscijfer_voor_tutorgesprek , pch = 20)
+qqnorm(Tevredenheidscijfer_voor_tutorgesprek , pch = 1)
 qqline(Tevredenheidscijfer_voor_tutorgesprek)
 ```
 
 ```{r qqplot na tutor}
-qqnorm(Tevredenheidscijfer_na_tutorgesprek, pch = 20)
+qqnorm(Tevredenheidscijfer_na_tutorgesprek, pch = 1)
 qqline(Tevredenheidscijfer_na_tutorgesprek)
 ```
 </div>
@@ -210,9 +212,9 @@ Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen wor
 ### Boxplot
 <div class ="col2">
 ``` {r Boxplot na}
-boxplot(Tevredenheidscijfer_voor_tutorgesprek, 
-        xlab = "Lerarenopleiding", 
-        ylab = "Tevredenheidscijfer_voor_tutorgesprek")
+boxplot(Tevredenheidscijfer_voor_tutorgesprek,
+      xlab = "Lerarenopleiding", 
+      ylab = "Tevredenheidscijfer_voor_tutorgesprek")
 ```
 
 ``` {r Boxplot voor}

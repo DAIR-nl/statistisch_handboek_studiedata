@@ -6,7 +6,6 @@ output:
   html_document:
     toc: TRUE
     toc_float: TRUE
-    number_sections: TRUE
     theme: united
 ---
 
@@ -20,9 +19,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-## De directeur van de Academie Mens & Maatschappij wil kijken hoeveel alumni van zijn opleiding verdienen in vergelijking met de rest van Nederland. Hij neemt hiervooor het bruto modaal inkomen. 
-
-
 RNGkind(sample.kind = "Rounding")
 set.seed(1)
 Mogelijkheden <- c(1616:7000)
@@ -40,16 +36,16 @@ p_2014 <- c(
 Jaarlijks_inkomen <- replicate(2314, 13*(sample(Mogelijkheden, 1, replace=TRUE, p_2014)))
 ```
 
-# Toepassing
+## 1 Toepassing
 
-# Onderwijscasus
+## 2 Onderwijscasus
 
-# Assumpties
+## 3 Assumpties
 
-# Uitvoering in R
-Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij. De directeur wil kijken hoe zijn oud-studenten scoren ten opzichte van gemiddelde inkomens in Nederland.
+## 4 Uitvoering in R
+Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij genaamd `Jaarlijks_inkomen`. De directeur wil kijken hoe zijn oud-studenten scoren ten opzichte van gemiddelde inkomens in Nederland.
 
-## De data bekijken
+### De data bekijken
 Bekijk de data door het gemiddelde, de standaardafwijking, de mediaan en een histogram op te vragen.
 ```{r data bekijken, collapse=TRUE}
 mean(Jaarlijks_inkomen)
@@ -58,7 +54,7 @@ median(Jaarlijks_inkomen)
 hist(Jaarlijks_inkomen)
 ```
 
-## Normaliteit testen
+### Normaliteit testen
 Test of de data normaal verdeeld is met een lilliefors-test
 ```{r normaliteit, warning=FALSE}
 library (nortest)
@@ -66,7 +62,7 @@ lillie.test(Jaarlijks_inkomen)
 ```
 De data is niet normaal verdeeld. Gebruik bij normaal verdeelde data een One-sample t-toets.
 
-## Tekentoets 
+### Tekentoets 
 Voer een tweezijdige tekentoets uit met het aantal alumni dat meer dan modaal (€36.000[^1]) verdient en het totaal aantal alumni in de dataset.   
 ```{r Tekentoets}
 boven_modaal <- length(Jaarlijks_inkomen[Jaarlijks_inkomen > 36000])
@@ -75,9 +71,9 @@ totaal_alumni <- length(Jaarlijks_inkomen)
 binom.test(boven_modaal, totaal_alumni, alternative = "two.sided")
 ```
 
-# Toelichting op de output
+## Toelichting op de output
 
-# Rapportage
+## 5 Rapportage
 
 
 [^1]: Bruto modaal inkomen 2019, Centraal Planbureau

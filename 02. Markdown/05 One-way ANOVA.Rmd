@@ -5,15 +5,15 @@ date: "`r format(Sys.time(), '%d-%m-%y')`"
 output: 
   html_document:
     toc: TRUE
-    toc_float: TRUE
+    toc_float:  TRUE
     number_sections: TRUE
     theme: united
 ---
 <style>
-  .col2 {
-    columns: 2 200px;
-    -webkit-columns: 2 200px;
-    -moz-columns: 2 200px;
+    .col3 {
+    columns: 3 100px;
+    -webkit-columns: 3 100px;
+    -moz-columns: 3 100px;
   }
 </style>
 
@@ -37,124 +37,31 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Het hoofd communicatie wil in verband met wervingsactiviteiten weten wat de reistijd is van studenten aan verschillende opleidingen.
 ## 3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data en kijk daarna of het normaal verdeeld is.
 
-## Doel: tidy data met een kolom reistijd (value) en een kolom opleidng (factor)
+## Doel: tidy data met een kolom reistijd (value) en een kolom opleiding (factor)
 library(dplyr)
 RNGkind(sample.kind = "Rounding")
-set.seed(0)
-
-Studiegrootte <- 311
-reistijd_gem <- rnorm(1, 45, 9)
-sd_gem <- rnorm(1, 23, 8)
-reistijd_gsk <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
-namenlijst_gsk <- replicate(2.1*Studiegrootte, "Geneeskunde")
-
-Studiegrootte <- 33
-reistijd_gem <- rnorm(1, 45, 9)
-sd_gem <- rnorm(1, 23, 8)
-reistijd_soc <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
-namenlijst_soc <- replicate(2.1*Studiegrootte, "Sociologie")
-
-Studiegrootte <- 73
-reistijd_gem <- rnorm(1, 45, 9)
-sd_gem <- rnorm(1, 23, 8)
-reistijd_aee <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
-namenlijst_aee <- replicate(2.1*Studiegrootte, "Aarde en economie")
-
-Studiegrootte <- 23
-reistijd_gem <- rnorm(1, 45, 9)
-sd_gem <- rnorm(1, 23, 8)
-reistijd_atc <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
-namenlijst_atc <- replicate(2.1*Studiegrootte, "Arabische Taal en Cultuur")
-
-Studiegrootte <- 212
-reistijd_gem <- rnorm(1, 45, 9)
-sd_gem <- rnorm(1, 23, 8)
-reistijd_bfk <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
-namenlijst_bfk <- replicate(2.1*Studiegrootte, "Bedrijfskunde")
-
-Studiegrootte <- 68
-reistijd_gem <- rnorm(1, 45, 9)
-sd_gem <- rnorm(1, 23, 8)
-reistijd_cvt <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
-namenlijst_cvt <- replicate(2.1*Studiegrootte, "Civiele techniek")
-
-Studiegrootte <- 41
-reistijd_gem <- rnorm(1, 45, 9)
-sd_gem <- rnorm(1, 23, 8)
-reistijd_ect <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
-namenlijst_ect <- replicate(2.1*Studiegrootte, "Econometrie")
-
-Studiegrootte <- 267
-reistijd_gem <- rnorm(1, 45, 9)
-sd_gem <- rnorm(1, 23, 8)
-reistijd_psy <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
-namenlijst_psy <- replicate(2.1*Studiegrootte, "Psychologie")
-
-Studiegrootte <- 61
-reistijd_gem <- rnorm(1, 45, 9)
-sd_gem <- rnorm(1, 23, 8)
-reistijd_gsc <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
-namenlijst_gsc <- replicate(2.1*Studiegrootte, "Geschiedenis")
-
-Studiegrootte <- 140
-reistijd_gem <- rnorm(1, 45, 9)
-sd_gem <- rnorm(1, 23, 8)
-reistijd_csc <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
-namenlijst_csc <- replicate(2.1*Studiegrootte, "Computer science")
-
-Studiegrootte <- 82
-reistijd_gem <- rnorm(1, 45, 9)
-sd_gem <- rnorm(1, 23, 8)
-reistijd_ids <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
-namenlijst_ids <- replicate(2.1*Studiegrootte, "Industrial design")
-
-Studiegrootte <- 105
-reistijd_gem <- rnorm(1, 45, 9)
-sd_gem <- rnorm(1, 23, 8)
-reistijd_las <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
-namenlijst_las <- replicate(2.1*Studiegrootte, "Liberal arts and Sciences")
-
-Studiegrootte <- 71
-reistijd_gem <- rnorm(1, 45, 9)
-sd_gem <- rnorm(1, 23, 8)
-reistijd_kgs <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
-namenlijst_kgs <- replicate(2.1*Studiegrootte, "Kunstgeschiedenis")
+set.seed(2)
 
 Studiegrootte <- 29
-reistijd_gem <- rnorm(1, 45, 9)
-sd_gem <- rnorm(1, 23, 8)
+reistijd_gem <- 35
+sd_gem <- 12
 reistijd_fil <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_fil <- replicate(2.1*Studiegrootte, "Filosofie")
 
-Studiegrootte <- 81
-reistijd_gem <- rnorm(1, 45, 9)
-sd_gem <- rnorm(1, 23, 8)
-reistijd_sck <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
-namenlijst_sck <- replicate(2.1*Studiegrootte, "Scheikunde")
+Studiegrootte <- 23
+reistijd_gem <- 45
+sd_gem <- 13
+reistijd_atc <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
+namenlijst_atc <- replicate(2.1*Studiegrootte, "Arabische Taal en Cultuur")
 
-Studiegrootte <- 61
-reistijd_gem <- rnorm(1, 45, 9)
-sd_gem <- rnorm(1, 25, 8)
-reistijd_pws <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
-namenlijst_pws <- replicate(2.1*Studiegrootte, "Pedagogische wetenschappen")
+Studiegrootte <- 71
+reistijd_gem <- 36
+sd_gem <- 11
+reistijd_gsc <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
+namenlijst_gsc <- replicate(2.1*Studiegrootte, "Geschiedenis")
 
-Studiegrootte <- 84
-reistijd_gem <- rnorm(1, 45, 9)
-sd_gem <- rnorm(1, 23, 8)
-reistijd_wis <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
-namenlijst_wis <- replicate(2.1*Studiegrootte, "Wiskunde")
-
-
-
-Reistijd <- c(reistijd_aee, reistijd_atc, reistijd_bfk, reistijd_csc, reistijd_cvt,
-               reistijd_ect, reistijd_fil, reistijd_gsc, reistijd_gsk, reistijd_ids, 
-               reistijd_kgs, reistijd_las, reistijd_psy, reistijd_pws, reistijd_sck, 
-               reistijd_soc, reistijd_wis)
-
-Opleiding <- c(namenlijst_aee, namenlijst_atc, namenlijst_bfk, namenlijst_csc, namenlijst_cvt,
-               namenlijst_ect, namenlijst_fil, namenlijst_gsc, namenlijst_gsk, namenlijst_ids,
-               namenlijst_kgs, namenlijst_las, namenlijst_psy, namenlijst_pws, namenlijst_sck,
-               namenlijst_soc, namenlijst_wis)
+Reistijd <- c(reistijd_atc, reistijd_gsc, reistijd_fil)
+Opleiding <- c(namenlijst_atc, namenlijst_gsc, namenlijst_fil)
 
 Opleiding <- Opleiding[order(Reistijd)]
 Reistijd <- sort(Reistijd)
@@ -211,41 +118,90 @@ Er zijn meerdere post-hoc vergelijkingen:
 * Dunnet's *C* wordt gebruikt bij ongelijke varianties  
 
 # Uitvoering in R
-Er is een dummy dataset met de reistijden van uitwonende studenten per opleiding is ingeladen genaamd `Reistijd_per_opleiding`. 
+Er is een dataset ingeladen met de reistijden van uitwonende studenten per opleiding is ingeladen genaamd `Reistijd_per_opleiding`. 
 
 ## De data bekijken
 Gebruik `head()` om de data te bekijken
 ```{r de data bekijken}
 head(Reistijd_per_opleiding)
 ```
+
+Voor de volgende analyses is het handig om de verschillende groepen uit te splitsen
+
+```{r subset}
+Reistijd_atc <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding == "Arabische Taal en Cultuur"]
+Reistijd_fil <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding == "Filosofie"]
+Reistijd_gsc <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding == "Geschiedenis"]
+```
+
 ```{r de data visualiseren}
 levels(Reistijd_per_opleiding$Opleiding)
 library(graphics)
-par(mar = c(3, 12, 1, 0) + .1)
-boxplot(Reistijd ~ Opleiding, Reistijd_per_opleiding, las = 2, horizontal = TRUE)
+boxplot(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 ```
 
-```{r ridges, warning = FALSE, message = FALSE}
-library(tidyverse)
-library(ggridges)
 
-ggplot(Reistijd_per_opleiding, aes(Reistijd, Opleiding)) +
-  geom_density_ridges(rel_min_height=.01)
-```
 
 ## Test assumpties: normaliteit 
-```{r lillietest voorbereiden}
-library(nortest)
-Reistijdlijst <- Reistijd_per_opleiding %>%
-  split(Opleiding)
+### Histogram
+```{r lib ggplot2}
+library(ggplot2)
 ```
 
-```{r lillietest}
-for (. in Reistijdlijst) {
-  print(lillie.test(.$Reistijd))
-}
+```{r histogram atc}
+ggplot(Reistijd_per_opleiding,
+  aes(x = Reistijd)) +
+  geom_histogram(aes(y = ..density..),
+                 binwidth = 10,
+                 color = "grey30",
+                 fill = "#0089CF") +
+  facet_wrap(~ Opleiding) +
+  geom_density(alpha = .2, adjust = 1) +
+  ylab("Frequentiedichtheid") +
+  labs(title = "Reistijd")
+
+ggplot(Reistijd_per_opleiding,
+  aes(x = Reistijd)) +
+  geom_histogram(aes(y = ..density..),
+                 color = "grey30",
+                 fill = "#0089CF") +
+  facet_wrap(~ Opleiding) +
+  geom_density(alpha = .2, adjust = 1) +
+  ylab("Frequentiedichtheid") +
+  labs(title = "Reistijd")
 ```
+
+<div class ="col3">
+
+```{r qqplot atc}
+qqnorm(Reistijd_atc, pch = 1)
+qqline(Reistijd_atc)
+```
+
+```{r qqplot fil}
+qqnorm(Reistijd_fil, pch = 1)
+qqline(Reistijd_fil)
+```
+
+```{r qqplot gsc}
+qqnorm(Reistijd_gsc, pch = 1)
+qqline(Reistijd_gsc)
+```
+</div>
+
+```{r lillietest, collapse=TRUE}
+library("nortest")
+lillie.test(Reistijd_atc)
+lillie.test(Reistijd_fil)
+lillie.test(Reistijd_gsc)
+```
+
 ## Test assumpties: Levene's test
+
+```{r LeveneTest, warning = FALSE, message = FALSE}
+library(car)
+leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
+```
 
 ## One way ANOVA 
 ```{r ANOVA}

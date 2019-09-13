@@ -96,10 +96,10 @@ Tentamencijfer_na_tutorgesprek_n30 <- sort(Tentamencijfer_na_tutorgesprek_n30)
 Tentamencijfer_na_tutorgesprek_n30 <- Tentamencijfer_na_tutorgesprek_n30[volgorde_n30]
 ```
 
-# 1 Toepassing
+# Toepassing
 Bij het toetsen of het gemiddelde van twee groepen aan elkaar gelijk zijn, wordt de *t-toets* gebruikt. De *gepaarde t-toets* wordt gebruikt bij een herhaalde meting van dezelfde groep [^1]. 
 
-# 2 Onderwijscasus
+# Onderwijscasus
 Ter voorbereiding op een visitatie vraagt de opleidingsdirecteur van de lerarenopleiding zich af of het gemiddelde tentamencijfer veranderd na een tutorgesprek. Ze bekijkt het gemiddelde tentamencijfer van de onderwijsperiode voor het tutorgesprek (T~0~) en het gemiddelde cijfer van de onderwijsperiode erop (T~1~). 
 
 H~0~: Het gemiddelde tentamencijfer per onderwijsperiode verandert niet na het tutorgesprek, µ~T0~ = µ~T1~  
@@ -228,10 +228,7 @@ boxplot(Tentamencijfer_na_tutorgesprek,
 </div>
 De boxplotten geven de spreiding van het gemiddelde tentamencijfer per periode weer voor de Lerarenopleiding. 
 
-
-
 ***
-
 
 Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef lijkende verdeling, normaal verdeeld is, kan de normaliteit getoetst worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
@@ -263,7 +260,6 @@ shapiro.test(Tentamencijfer_na_tutorgesprek_n30)
 De *Shapiro-Wilk test* is een soort gelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling. 
 
 In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05. De verdeling van beide groepen is niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan. De *gepaarde t-toets* kan uitgevoerd worden.  
-
 
 
 ***
@@ -302,9 +298,9 @@ Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencij
 
 Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor, maar het effect is minimaal.  
 
-[^1]: Student's t-test [Wikipedia]. (21 augustus 2019). https://en.wikipedia.org/wiki/Student%27s_t-test
-[^3]: van Geloven, N. (25 september2013). Wilcoxon signed rank toets [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets
-[^4]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
-[^5]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel]. https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
-[^6]: Marshall, E., & Boggis, E. (2016). The statistics tutor’s quick guide to commonly used statistical tests. *Statstutor Community Project.*
+[^1]: Wikipedia (21 augustus 2019). *Student's t-test*. https://en.wikipedia.org/wiki/Student%27s_t-test
+[^3]: van Geloven, N. (25 september2013). *Wilcoxon signed rank toets*.  https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets
+[^4]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
+[^5]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
+[^6]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf 
 

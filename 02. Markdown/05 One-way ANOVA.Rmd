@@ -249,8 +249,8 @@ Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de
 **posthoc en uitkomsten **
 
 
-[^1]: van Geloven, N. (25 mei 2016). One-way ANOVA [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/One-way_ANOVA
-[^2]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
-[^3]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel]. https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
-[^4]: van Geloven, N. (21 maart 2018). Kruskal Wallis [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis
-[^5]: Analysis of variance. (7 september 2019). [Wikipedia] https://en.wikipedia.org/wiki/Analysis_of_variance 
+[^1]: van Geloven, N. (25 mei 2016). *One-way ANOVA*. https://wikistatistiek.amc.nl/index.php/One-way_ANOVA
+[^2]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
+[^3]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
+[^4]: van Geloven, N. (21 maart 2018). *Kruskal Wallis* https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis
+[^5]: Wikipedia (7 september 2019). *Analysis of variance*. https://en.wikipedia.org/wiki/Analysis_of_variance 

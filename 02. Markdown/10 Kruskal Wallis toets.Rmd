@@ -127,7 +127,7 @@ pairwise.wilcox.test(Resultaten_arbeidsrecht$Ec_jaar1, Resultaten_arbeidsrecht$V
 # Rapportage
 Om te toetsen of ........... is de *chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de conclusie dat ..................., χ^2^ (3) ≈ 33,07, *p* < 0,01.
 
-[^1]: Kruskal-Wallis Test 7 jul 2014 https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test 
-[^2]: https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis Kruskal Wallis 21 March 2018 	dr. ir. N. van Geloven
-[^3]: https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS  21 November 2017
-[^4]: https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test
+[^1]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test* https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test 
+[^2]: van Geloven, N. (21 maart 2018). *Kruskal Wallis* https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis 
+[^3]: van Geloven, N. (21 November 2017).*KEUZE TOETS* https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS
+[^4]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test* https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test

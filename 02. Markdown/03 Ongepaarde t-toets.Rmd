@@ -228,10 +228,11 @@ cohen.d(Cijfers_2010, Cijfers_2011, paired = FALSE)
 # Rapportage
 Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = 6,37, *SD~2010~* = ,11) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = 6,61, *SD~2011~* = 1,2) is significant, *t* (338) = -1,93, *p* < 0,05. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van -0,49 tot 0. Het effect is klein, *d* = 0,21. 
 
-[^1]: van Geloven, N. (25 maart 2016). T-toets [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/T-toets#ongepaarde_t-toets
-[^2]: van Geloven, N. (25 September 2013). Wilcoxon signed rank toets [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets
-[^3]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics.https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
-[^4]: van Geloven, N. (2018, 13 maart). Mann-Whitney U toets [Wiki Statistiek Academisch Medisch Centrum].  https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets
-[^5]: One-way ANOVA. (8 juli 2014). [UvA Wiki Methodologiewinkel]. https://wiki.uva.nl/methodologiewinkel/index.php/One-way_ANOVA
-[^6]: Marshall, E., & Boggis, E. (2016). The statistics tutor’s quick guide to commonly used statistical tests. *Statstutor Community Project.*
+[^1]: van Geloven, N. (25 maart 2016). *T-toets*. https://wikistatistiek.amc.nl/index.php/T-toets#ongepaarde_t-toets
+[^2]: van Geloven, N. (25 september 2013). *Wilcoxon signed rank toets*. https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets
+[^3]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
+[^4]: van Geloven, N. (13 maart 2018). *Mann-Whitney U toets*. https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets
+[^5]: Universiteit van Amsterdam (8 juli 2014). *One-way ANOVA*. https://wiki.uva.nl/methodologiewinkel/index.php/One-way_ANOVA
+[^6]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf 
+
 

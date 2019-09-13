@@ -124,10 +124,9 @@ Om te weten welke groepen verschillen is er in `pairwise.wilcox.test()` een corr
 ``` {r pairwise wilcox test}
 pairwise.wilcox.test(Resultaten_arbeidsrecht$Ec_jaar1, Resultaten_arbeidsrecht$Vooropleiding, p.adjust.method = "bonferroni")
 ```
-# Toelichting op de output
+# Rapportage
 Om te toetsen of ........... is de *chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de conclusie dat ..................., χ^2^ (3) ≈ 33,07, *p* < 0,01.
 
-# Rapportage
 [^1]: Kruskal-Wallis Test 7 jul 2014 https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test 
 [^2]: https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis Kruskal Wallis 21 March 2018 	dr. ir. N. van Geloven
 [^3]: https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS  21 November 2017

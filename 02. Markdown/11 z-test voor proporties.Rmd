@@ -1,5 +1,5 @@
 ---
-title: "09 z-test voor proporties"
+title: "09 z-toets voor proporties"
 author: "© 2019, SURF Versnellingsagenda Statistisch Handboek Hoger Onderwijs"
 date: "`r format(Sys.time(), '%d-%m-%y')`"
 output: 
@@ -41,6 +41,8 @@ Aanmeldingen_tweedekans <- data.frame(Studentnr, Eerder_wo)
 ```
 
 # Toepassing
+Gebruik de z-toets bij het vergelijken van twee proporties. De z-toets kan ook worden gebruikt als 
+
 
 # Onderwijscasus
 

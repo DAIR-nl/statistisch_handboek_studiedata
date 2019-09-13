@@ -131,7 +131,7 @@ mean(
 sd(Tentamencijfer_voor_tutorgesprek)
 ```
 
-Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): 3,34 (0,85)
+Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): 6,8 (1,7)
 
 
 
@@ -141,7 +141,7 @@ mean(
 sd(Tentamencijfer_na_tutorgesprek)
 ```
 
-Gemiddeld tentamencijfer na tutorgesprek (standaardafwijking): 3,60 (0,56)
+Gemiddeld tentamencijfer na tutorgesprek (standaardafwijking): 7,0 (1,4)
 
 </div>
 
@@ -168,7 +168,7 @@ ggplot(
     coord_fixed(ylim = c(0, 0.3),
               xlim = c(1, 10),
               ratio = 18) +
-  labs(title = expression(paste("tentamencijfers (", T[0], ")")))
+  labs(title = expression(paste("Tentamencijfers (", T[0], ")")))
 ```
 
 ```{r histogram na tutorgesprek}
@@ -188,7 +188,7 @@ ggplot(
   coord_fixed(ylim = c(0, 0.3),
               xlim = c(1, 10),
               ratio = 18) +
-  labs(title = expression(paste("tentamencijfers (", T[1], ")")))
+  labs(title = expression(paste("Tentamencijfers (", T[1], ")")))
 ```
 
 </div>
@@ -294,7 +294,7 @@ Eta2
 ```
 
 # Rapportage
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = 3,4, *SD~T0~* = 0,85) en het gemiddelde van T~1~ (*M~T1~* = 3,60, *SD~T1~* = 0,56) is significant, *t* (247) = -13,8, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van -0,22 tot -0,29. Het valt op dat het gemiddelde van T~1~ hoger is dan T~0~. Het effect is minimaal, *d* = 0,09. 
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = 6,8, *SD~T0~* = 1,7) en het gemiddelde van T~1~ (*M~T1~* = 7,0, *SD~T1~* = 1,4) is significant, *t* (233) = -9,96, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van -0,24 tot -0,16. Het valt op dat het gemiddelde van T~1~ hoger is dan T~0~. Het effect is minimaal, *d* = 0,09. 
 
 Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor, maar het effect is minimaal.  
 

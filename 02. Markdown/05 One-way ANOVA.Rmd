@@ -240,6 +240,10 @@ Gebruik `aov()` voor een ANOVA. Geef het resultat overzichtelijk weer met `summa
 ```{r ANOVA}
 res.aov <- aov(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 summary(res.aov)
+```
+
+## Tukey's toets
+```{r TukeyHSD}
 TukeyHSD(res.aov)
 ```
 

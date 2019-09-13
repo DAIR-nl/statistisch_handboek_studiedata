@@ -156,9 +156,8 @@ De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamen
 
 De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor de exacte vakken hoger ligt voor studenten Werktuigbouwkunde met een vwo vooropleiding, dan het landelijk gemiddelde.
 
-
-[^1]: van Geloven, N. (25 mei 2016). T-toets [Wiki Statistiek Academisch Medisch Centrum]. https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets
-[^2]: Centraal Instituut voor Toetsontwikkeling (2018). Examenverslag 2018. https://www.cito.nl/onderwijs/voortgezet-onderwijs/centrale-examens-voortgezet-onderwijs/tools-en-informatie-voor-docenten/examenverslagen/examenverslag-2018
-[^3]: Laerd statistics. (2018). Testing for Normality using SPSS Statistics. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
-[^4]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel]. https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
-[^5]: Prabhakaran, S. (2016-2017). Statistical Tests [r-statistics.co]. http://r-statistics.co/Statistical-Tests-in-R.html  
+[^1]: van Geloven, N. (25 mei 2016). *T-toets* https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets
+[^2]: Centraal Instituut voor Toetsontwikkeling (2018). *Examenverslag 2018*. https://www.cito.nl/onderwijs/voortgezet-onderwijs/centrale-examens-voortgezet-onderwijs/tools-en-informatie-voor-docenten/examenverslagen/examenverslag-2018
+[^3]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
+[^4]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
+[^5]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html  

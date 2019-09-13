@@ -21,6 +21,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht vraagt zich af of de vooropleiding van zijn studenten te maken heeft met hoe snel zij afstuderen. Zij bekijkt daarom het aantal punten behaald in het eerste jaar naar vooropleiding. Zij vraagt zich af: Welke vooropleidng levert de studenten die het meeste punten halen?
 
+## H0 en H1 medianen of gemiddelden, ook in toepassing 
+## is het wel interessant om gemiddelden te tonen? 
+
+## link naar Mann W-U test 
+
 RNGkind(sample.kind = "Rounding")
 set.seed(8)
 # 3
@@ -48,30 +53,44 @@ Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Rechtsgeleerdheid"] <-
 
 # Toepassing
 De *Kruskal Wallis toets* wordt gebruikt om te toetsen of de medianen van meerdere groepen significant verschillen. Een kenmerk van de data is dat deze numeriek en ongepaard is.  
-Deze toets wordt ook vaak gebruikt in plaats van de *one way ANOVA*; Wanneer de assumpties van normaliteit en/of van Homogeniteit van Varianties worden geschonden.  
+
+Een belangrijke realisatie bij de *Kruskal Wallis toets* is dat de toets de scores van laag naar hoog ordend en ze een rangnummer geeft. Op deze wijze zijn outliers en de assumptie normaliteit geen probleem meer [^1]. Vandaar dat deze toets in plaats van de de *one way ANOVA* gebruikt wordt wanneer de assumpties van normaliteit en/of van Homogeniteit van Varianties worden geschonden [^2].  
 
 # Onderwijscasus
-De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht vraagt zich af of het type vooropleiding bepalend is voor hoeveel vakken de studenten afronden in het eerste jaar. 
+De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht buigt zich over het vraagstuk van de afstudeersnelheid van de studenten. Hierbij vraagt hij zich af of het type vooropleiding bepalend is voor hoeveel vakken de studenten afronden in het eerste jaar. Hij kijkt naar de vier meest gangbare vooropleidingen die de studenten doorlopen voordat ze met de Master Arbeidsrecht beginnen; de Bachelors Fiscaal recht, Notarieel recht, Rechtsgeleerdheid en een schakelprogramma.  
 
-###### De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht vraagt zich af of de vooropleiding van zijn studenten te maken heeft met hoe snel zij afstuderen.  Zij bekijkt daarom het aantal punten behaald in het eerste jaar naar vooropleiding. Zij vraagt zich af: Welke vooropleidng levert de studenten die het meeste punten halen?
+H~0~: De vooropleiding is niet bepalend voor het aantal vakken die de Masterstudenten Arbeidsrecht behalen in het eerste jaar. De gemiddelde rank is per groep ongeveer gelijk aan elkaar. 
+
+H~1~: De vooropleiding is bepalend voor het aantal vakken die de Masterstudenten Arbeidsrecht behalen in het eerste jaar. De gemiddelde rank is per groep ongeveer gelijk aan elkaar. 
 
 # Assumpties
-- data continu (andy field 654 note 3)
+Controleer of de data aan de volgende assumpties voldoen: numerieke data, onafhankelijkheid en het aantal groepen is > 2. 
 
+## Numerieke data
+Gebruik de *Kruskal Wallis toets* bij (semi-)continue data. Semi-continue data is als de data gehele getallen bevat met veel verschillende waardes[^3]. Een voorbeeld hiervan is de aanwezigheid van studenten tijdens de jaaropening. 
 
+## Onafhankelijkheid 
+Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
 
+## aantal groepen
+Het aantal groepen is > 2. Bij 2 groepen gebruik de *Mann-Whitney U toets*
+
+# Post-hoc toets 
+De *Kruskal Wallis Toets* toetst of één of meerdere groepen verschillen. Welke groep verschilt wordt niet gespecificeerd. Als er een verschil zit tussen de groepen kan de *Mann-Whitney U toets* als post-hoc vergelijking gedaan worden, om te bepalen welke groepen significant verschillen. 
+
+Gebruik de *Bonferroni correctie* om Type I fouten te voorkomen. Pas de p-waarde aan door alpha te delen door het aantal uitgevoerde toetsen [^4].
 
 # Uitvoering in R
-Er is data ingeladen met studieresultaten van de Master arbeidsrecht per vooropleiding.
+Er is data ingeladen met studieresultaten van de Master arbeidsrecht per vooropleiding: Fiscaal recht, Notarieel recht, Rechtsgeleerdheid en een schakelprogramma.
 
 ## De data bekijken
 ```{r de data exploreren, collapse=TRUE}
 head(Resultaten_arbeidsrecht)
 levels(Resultaten_arbeidsrecht$Vooropleiding)
 ```
-Er is te zien dat er vier groepen naar vooropleiding in de data te vinden zijn: Fiscaal recht, Notarieel recht, Rechtsgeleerdheid en een schakelprogramma. Voor elke student (een rij) is er te zien hoeveel studiepunten er zijn gehaald in het eerste jaar. `mean()` kan het gemiddelde aantal punten per vooropleiding geven.
+Voor elke student (een rij) is er te zien hoeveel studiepunten er zijn gehaald in het eerste jaar en welke vooropleiding de student afgerond heeft.  
+`mean()` geeft het gemiddelde aantal punten per vooropleiding.
 
-### 
 ## in base R
 ``` {r gemiddeldes per vooropleiding base, collapse=TRUE}
 mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Rechtsgeleerdheid"])
@@ -96,11 +115,20 @@ group_by(Resultaten_arbeidsrecht, Vooropleiding) %>%
 ```{r kruskal test}
 kruskal.test(Ec_jaar1 ~ Vooropleiding, Resultaten_arbeidsrecht)
 ```
+df: het aantal groepen - 1
+p-waarde < 0,05 , dus de H~0~ wordt verworpen en de H~A~ aangenomen 
+chi-squared: 33,07 
 
+# Post-hoc toets: Mann-Whitney U toets
 Om te weten welke groepen verschillen is er in `pairwise.wilcox.test()` een correctie beschikbaar voor *multiple testing*
 ``` {r pairwise wilcox test}
 pairwise.wilcox.test(Resultaten_arbeidsrecht$Ec_jaar1, Resultaten_arbeidsrecht$Vooropleiding, p.adjust.method = "bonferroni")
 ```
 # Toelichting op de output
+Om te toetsen of ........... is de *chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de conclusie dat ..................., χ^2^ (3) ≈ 33,07, *p* < 0,01.
 
 # Rapportage
+[^1]: Kruskal-Wallis Test 7 jul 2014 https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test 
+[^2]: https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis Kruskal Wallis 21 March 2018 	dr. ir. N. van Geloven
+[^3]: https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS  21 November 2017
+[^4]: https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test

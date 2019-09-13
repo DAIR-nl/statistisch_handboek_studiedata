@@ -127,15 +127,42 @@ sd(Cijfers_2011)
 Gemiddelde tentamencijfer 2011 (standaarddeviatie): 6,61(1,2) 
 </div>
 
-<div class="col2">
+### Histogram
+
 ```{r histogram, collapse=TRUE}
-hist(Cijfers_2010)
-hist(Cijfers_2011)
+library(ggplot2)
 ```
-</div>
+```{r histogram atc}
+ggplot(Cijfers_gem,
+  aes(x = Cijfers)) +
+  geom_histogram(aes(y = ..density..),
+                 color = "grey30",
+                 fill = "#0089CF") +
+  facet_wrap(~ Cohort) +
+  geom_density(alpha = .2, adjust = 1) +
+  ylab("Frequentiedichtheid") +
+  labs(title = "Taalwetenschap gemiddelde cijfers jaar 1")
+```
+
 Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  
 
-***
+### Q-Q plot
+<div class ="col2">
+```{r qqplot atc}
+qqnorm(Cijfers_2010, pch = 1)
+qqline(Cijfers_2010)
+```
+```{r qqplot fil}
+qqnorm(Cijfers_2011, pch = 1)
+qqline(Cijfers_2011)
+```
+</div>
+
+### Boxplot
+```{r boxplot}
+library(graphics)
+boxplot(Cijfers ~ Cohort, Cijfers_gem)
+```
 
 Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef lijkende verdeling, normaal verdeeld is, kan de normaliteit getoetst worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
@@ -144,6 +171,7 @@ Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef 
 ```{r library nortest, warning=FALSE}
 library(nortest)
 ```
+
 <div class="col2">
 ``` {r Lilliefors Test, warning=FALSE}
 lillie.test(Cijfers_2010)
@@ -165,8 +193,6 @@ shapiro.test(Cijfers_2010_n30)
 De Shapiro-Wilk test is een soort gelijke test als de Kolmogorov-Smirnov test en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.
 
 In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, dus is de verdeling van beide groepen niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *ongepaarde t-toets* kan uitgevoerd worden.
-
-
 
 
 ***

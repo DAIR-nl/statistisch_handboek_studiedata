@@ -195,7 +195,7 @@ ggplot(Reistijd_per_opleiding,
 
 ### Q-Q plot
 
-Gebruik `boxplot()` met `pch = 1` om een boxplot te maken met kleine cirkels. 
+Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een boxplot te maken met kleine cirkels. 
 
 <div class ="col3">
 ```{r qqplot atc}

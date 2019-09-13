@@ -42,54 +42,58 @@ set.seed(2)
 
 ## Maak ruwe data aan
 mu <- 7.2
-sigma <- 1.2
-Tevredenheidscijfer_na_tutorgesprek <- rnorm(250, mu, sigma)
+sigma <- 1.5
+Tentamencijfer_na_tutorgesprek <- rnorm(250, mu, sigma)
 
-Tevredenheidscijfer_na_tutorgesprek <- Tevredenheidscijfer_na_tutorgesprek[Tevredenheidscijfer_na_tutorgesprek <= 10 
-                                                                       & Tevredenheidscijfer_na_tutorgesprek >= 1]
+Tentamencijfer_na_tutorgesprek <- 
+  Tentamencijfer_na_tutorgesprek[Tentamencijfer_na_tutorgesprek <= 10
+                                 & Tentamencijfer_na_tutorgesprek >= 1]
 
 mu <- 6.8
 sigma <- 1.8
-Tevredenheidscijfer_voor_tutorgesprek <- rnorm(260, mu, sigma)
+Tentamencijfer_voor_tutorgesprek <- rnorm(260, mu, sigma)
 
-Tevredenheidscijfer_voor_tutorgesprek <- Tevredenheidscijfer_voor_tutorgesprek[Tevredenheidscijfer_voor_tutorgesprek <= 10 
-                                                                   & Tevredenheidscijfer_voor_tutorgesprek >= 1]
+Tentamencijfer_voor_tutorgesprek <- 
+  Tentamencijfer_voor_tutorgesprek[Tentamencijfer_voor_tutorgesprek <= 10
+                                   & Tentamencijfer_voor_tutorgesprek >= 1]
+
 ## Stel volgorde en lengte van steekproef vast
-volgorde <- sample(1:length(Tevredenheidscijfer_na_tutorgesprek), length(Tevredenheidscijfer_na_tutorgesprek))
+volgorde <- sample(1:length(Tentamencijfer_na_tutorgesprek), length(Tentamencijfer_na_tutorgesprek))
 volgorde_n30 <- sample(1:30, 30)
-Verschil_grootte <- length(Tevredenheidscijfer_voor_tutorgesprek) - length(Tevredenheidscijfer_na_tutorgesprek)
+Verschil_grootte <- length(Tentamencijfer_voor_tutorgesprek) - length(Tentamencijfer_na_tutorgesprek)
 
 ## Rond evaluatiecijfers af
-Tevredenheidscijfer_na_tutorgesprek <- sapply(Tevredenheidscijfer_na_tutorgesprek, round, 3)
-Tevredenheidscijfer_voor_tutorgesprek <- sapply(Tevredenheidscijfer_voor_tutorgesprek, round, 3)
+Tentamencijfer_na_tutorgesprek <- sapply(Tentamencijfer_na_tutorgesprek, round, 3)
+Tentamencijfer_voor_tutorgesprek <- sapply(Tentamencijfer_voor_tutorgesprek, round, 3)
 
 ## Definiëer lengte in steekproef en hussel paren
-Tevredenheidscijfer_na_tutorgesprek <- sort(Tevredenheidscijfer_na_tutorgesprek)
-Tevredenheidscijfer_na_tutorgesprek <- Tevredenheidscijfer_na_tutorgesprek[volgorde]
-Tevredenheidscijfer_voor_tutorgesprek <- sort(Tevredenheidscijfer_voor_tutorgesprek)
-Tevredenheidscijfer_voor_tutorgesprek <- Tevredenheidscijfer_voor_tutorgesprek[sample(-283:-1, Verschil_grootte)]
-Tevredenheidscijfer_voor_tutorgesprek <- Tevredenheidscijfer_voor_tutorgesprek[volgorde]
+Tentamencijfer_na_tutorgesprek <- sort(Tentamencijfer_na_tutorgesprek)
+Tentamencijfer_na_tutorgesprek <- Tentamencijfer_na_tutorgesprek[volgorde]
+Tentamencijfer_voor_tutorgesprek <- sort(Tentamencijfer_voor_tutorgesprek)
+Tentamencijfer_voor_tutorgesprek <- Tentamencijfer_voor_tutorgesprek[sample(-283:-1, Verschil_grootte)]
+Tentamencijfer_voor_tutorgesprek <- Tentamencijfer_voor_tutorgesprek[volgorde]
 
 
 mu <- 7.2
 sigma <- 1.2
-Tevredenheidscijfer_voor_tutorgesprek_n30 <- rnorm(30, mu, sigma)
+Tentamencijfer_voor_tutorgesprek_n30 <- rnorm(30, mu, sigma)
 
-Tevredenheidscijfer_voor_tutorgesprek_n30 <- Tevredenheidscijfer_voor_tutorgesprek_n30[Tevredenheidscijfer_voor_tutorgesprek_n30 <= 10 
-                                                                 & Tevredenheidscijfer_voor_tutorgesprek_n30 >= 1]
-Tevredenheidscijfer_voor_tutorgesprek_n30 <- sapply(Tevredenheidscijfer_voor_tutorgesprek_n30, round, 3)
-Tevredenheidscijfer_voor_tutorgesprek_n30 <- sort(Tevredenheidscijfer_voor_tutorgesprek_n30)
-Tevredenheidscijfer_voor_tutorgesprek_n30 <- Tevredenheidscijfer_voor_tutorgesprek_n30[volgorde_n30]
+Tentamencijfer_voor_tutorgesprek_n30 <- Tentamencijfer_voor_tutorgesprek_n30[Tentamencijfer_voor_tutorgesprek_n30 <= 10 
+                                                                 & Tentamencijfer_voor_tutorgesprek_n30 >= 1]
+Tentamencijfer_voor_tutorgesprek_n30 <- sapply(Tentamencijfer_voor_tutorgesprek_n30, round, 3)
+Tentamencijfer_voor_tutorgesprek_n30 <- sort(Tentamencijfer_voor_tutorgesprek_n30)
+Tentamencijfer_voor_tutorgesprek_n30 <- Tentamencijfer_voor_tutorgesprek_n30[volgorde_n30]
 
 mu <- 7.0
 sigma <- 0.8
-Tevredenheidscijfer_na_tutorgesprek_n30 <- rnorm(30, mu, sigma)
+Tentamencijfer_na_tutorgesprek_n30 <- rnorm(30, mu, sigma)
 
-Tevredenheidscijfer_na_tutorgesprek_n30 <- Tevredenheidscijfer_na_tutorgesprek_n30[Tevredenheidscijfer_na_tutorgesprek_n30 <= 10 
-                                                               & Tevredenheidscijfer_na_tutorgesprek_n30 >= 1]
-Tevredenheidscijfer_na_tutorgesprek_n30 <- sapply(Tevredenheidscijfer_na_tutorgesprek_n30, round, 3)
-Tevredenheidscijfer_na_tutorgesprek_n30 <- sort(Tevredenheidscijfer_na_tutorgesprek_n30)
-Tevredenheidscijfer_na_tutorgesprek_n30 <- Tevredenheidscijfer_na_tutorgesprek_n30[volgorde_n30]
+Tentamencijfer_na_tutorgesprek_n30 <-
+  Tentamencijfer_na_tutorgesprek_n30[Tentamencijfer_na_tutorgesprek_n30 <= 10 &
+                                      Tentamencijfer_na_tutorgesprek_n30 >= 1]
+Tentamencijfer_na_tutorgesprek_n30 <- sapply(Tentamencijfer_na_tutorgesprek_n30, round, 3)
+Tentamencijfer_na_tutorgesprek_n30 <- sort(Tentamencijfer_na_tutorgesprek_n30)
+Tentamencijfer_na_tutorgesprek_n30 <- Tentamencijfer_na_tutorgesprek_n30[volgorde_n30]
 ```
 
 # 1 Toepassing
@@ -117,14 +121,14 @@ Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een
 Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect [^6].  
 
 # Uitvoering in R
-Er is een dataset ingeladen met `Tevredenheidscijfer_voor_tutorgesprek` (T~0~) en met `Tevredenheidscijfer_na_tutorgesprek` (T~1~). 
+Er is een dataset ingeladen met `Tentamencijfer_voor_tutorgesprek` (T~0~) en met `Tentamencijfer_na_tutorgesprek` (T~1~). 
 
 ## Test assumpties: Normaliteit 
 <div class="col2">
 ```{r beschrijvende gegevens na tutor, collapse = TRUE}
 mean(
-  Tevredenheidscijfer_voor_tutorgesprek)
-sd(Tevredenheidscijfer_voor_tutorgesprek)
+  Tentamencijfer_voor_tutorgesprek)
+sd(Tentamencijfer_voor_tutorgesprek)
 ```
 
 Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): 3,34 (0,85)
@@ -133,8 +137,8 @@ Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): 3,34 (0,85)
 
 ```{r Assumptietest, collapse=TRUE}
 mean(
-  Tevredenheidscijfer_na_tutorgesprek)
-sd(Tevredenheidscijfer_na_tutorgesprek)
+  Tentamencijfer_na_tutorgesprek)
+sd(Tentamencijfer_na_tutorgesprek)
 ```
 
 Gemiddeld tentamencijfer na tutorgesprek (standaardafwijking): 3,60 (0,56)
@@ -149,60 +153,61 @@ library(ggplot2)
 <div class ="col2">
 ```{r histogram voor tutorgesprek}
 ggplot(
-  data.frame(Tevredenheidscijfer_voor_tutorgesprek),
-  aes(x = Tevredenheidscijfer_voor_tutorgesprek)) +
+  data.frame(Tentamencijfer_voor_tutorgesprek),
+  aes(x = Tentamencijfer_voor_tutorgesprek)) +
   geom_histogram(aes(y = ..density..),
                  binwidth = 0.5, 
                  color = "grey30", 
                  fill = "#0089CF") + 
   geom_density(alpha = .2, adjust = 1) +
   ylab("Frequentiedichtheid") +
-  xlab("Tevredenheidscijfer_voor_tutorgesprek") +
+  xlab("Tentamencijfer_voor_tutorgesprek") +
   scale_x_continuous(
     labels = as.character(seq(1, 10, 0.5)),
     breaks = seq(1, 10, 0.5)) +
     coord_fixed(ylim = c(0, 0.3),
               xlim = c(1, 10),
               ratio = 18) +
-  labs(title = expression(paste("Tevredenheidscijfers (", T[0], ")")))
+  labs(title = expression(paste("tentamencijfers (", T[0], ")")))
 ```
 
 ```{r histogram na tutorgesprek}
 ggplot(
-  data.frame(Tevredenheidscijfer_na_tutorgesprek),
-  aes(x = Tevredenheidscijfer_na_tutorgesprek)) +
+  data.frame(Tentamencijfer_na_tutorgesprek),
+  aes(x = Tentamencijfer_na_tutorgesprek)) +
   geom_histogram(aes(y = ..density..),
                  binwidth = 0.5, 
                  color = "grey30", 
                  fill = "#0089CF") + 
   geom_density(alpha = .2, adjust = 1) +
   ylab("Frequentiedichtheid") +
-  xlab("Tevredenheidscijfer_na_tutorgesprek") +
+  xlab("Tentamencijfer_na_tutorgesprek") +
   scale_x_continuous(
     labels = as.character(seq(1, 10, 0.5)),
     breaks = seq(1, 10, 0.5)) +
   coord_fixed(ylim = c(0, 0.3),
               xlim = c(1, 10),
               ratio = 18) +
-  labs(title = expression(paste("Tevredenheidscijfers (", T[1], ")")))
+  labs(title = expression(paste("tentamencijfers (", T[1], ")")))
 ```
 
 </div>
-Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling. Veel waardes liggen rondom de gemiddeldes. Het histogram `Tevredenheidscijfer_voor_tutorgesprek` lijkt licht scheef verdeeld. 
+Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling. Veel waardes liggen rondom de gemiddeldes. Het histogram `Tentamencijfer_voor_tutorgesprek` lijkt licht scheef verdeeld. 
 
 
 ### Q-Q plot
-Gebruik `qqnorm()` en `qqline()`. Gebruik `pch = 20`om gevulde datapunten te creëren.
-
+Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een boxplot te maken met kleine cirkels.
 <div class ="col2">
 ```{r qqplot voor tutor}
-qqnorm(Tevredenheidscijfer_voor_tutorgesprek , pch = 1)
-qqline(Tevredenheidscijfer_voor_tutorgesprek)
+qqnorm(Tentamencijfer_voor_tutorgesprek , 
+       pch = 1)
+qqline(Tentamencijfer_voor_tutorgesprek)
 ```
 
 ```{r qqplot na tutor}
-qqnorm(Tevredenheidscijfer_na_tutorgesprek, pch = 1)
-qqline(Tevredenheidscijfer_na_tutorgesprek)
+qqnorm(Tentamencijfer_na_tutorgesprek, 
+       pch = 1)
+qqline(Tentamencijfer_na_tutorgesprek)
 ```
 </div>
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is. In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. 
@@ -210,15 +215,15 @@ Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen wor
 ### Boxplot
 <div class ="col2">
 ``` {r Boxplot na}
-boxplot(Tevredenheidscijfer_voor_tutorgesprek,
+boxplot(Tentamencijfer_voor_tutorgesprek,
       xlab = "Lerarenopleiding", 
-      ylab = "Tevredenheidscijfer_voor_tutorgesprek")
+      ylab = "Tentamencijfer_voor_tutorgesprek")
 ```
 
 ``` {r Boxplot voor}
-boxplot(Tevredenheidscijfer_na_tutorgesprek, 
+boxplot(Tentamencijfer_na_tutorgesprek, 
         xlab = "Lerarenopleiding", 
-        ylab = "Tevredenheidscijfer_na_tutorgesprek")
+        ylab = "Tentamencijfer_na_tutorgesprek")
 ```
 </div>
 De boxplotten geven de spreiding van het gemiddelde tentamencijfer per periode weer voor de Lerarenopleiding. 
@@ -237,9 +242,9 @@ library(nortest)
 <div class ="col2">
 ``` {r Lilliefors Test, warning=FALSE}
 lillie.test(
-  Tevredenheidscijfer_voor_tutorgesprek)
+  Tentamencijfer_voor_tutorgesprek)
 lillie.test(
-  Tevredenheidscijfer_na_tutorgesprek)
+  Tentamencijfer_na_tutorgesprek)
 ```
 </div>
 
@@ -250,8 +255,8 @@ In dit geval is van beide groepen de p-waarde > 0,05; er is geen significant ver
 ### Shapiro-Wilk Test
 <div class ="col2">
 ``` {r Shapiro-Wilk Test, warning=FALSE}
-shapiro.test(Tevredenheidscijfer_voor_tutorgesprek_n30)
-shapiro.test(Tevredenheidscijfer_na_tutorgesprek_n30)
+shapiro.test(Tentamencijfer_voor_tutorgesprek_n30)
+shapiro.test(Tentamencijfer_na_tutorgesprek_n30)
 ```
 </div>
 
@@ -266,20 +271,20 @@ In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05. 
 
 Gebruik `t.test()` met `paired = TRUE`. 
 ```{r statistische toets}
-t.test(Tevredenheidscijfer_voor_tutorgesprek, Tevredenheidscijfer_na_tutorgesprek, paired = TRUE)
+t.test(Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgesprek, paired = TRUE)
 ```
 
-* *t* (247) = -13,58 *p* < 0,01  
-* Vrijheidsgraden: *df* = *n* -1 = 247  
+* *t* (247) = -9,96 *p* < 0,01  
+* Vrijheidsgraden: *df* = *n* -1 = 233
 * p-waarde < 0,05, dus de H~A~ wordt aangenomen  
-* 95%-betrouwbaarheidsinterval; bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. 95%-betrouwbaarheidsinterval: -0,22 tot -0,29  
-* Het verschil tussen beide groepen: *MD* = -0,26  
+* 95%-betrouwbaarheidsinterval; bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. 95%-betrouwbaarheidsinterval: -0,24 tot -0,16  
+* Het verschil tussen beide groepen: *MD* = -0,20
 
 ## Effectmaat: Cohen's d
 Gebruik `cohen.d()` met `paired = TRUE` om het effect te meten.
 ```{r Cohen s d}
 library(effsize)
-cohen.d(Tevredenheidscijfer_voor_tutorgesprek, Tevredenheidscijfer_na_tutorgesprek, paired = TRUE)
+cohen.d(Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgesprek, paired = TRUE)
 ```
 *d* = -0,09. De sterkte van het effect van de tutor op het cijfer is minimaal. 
 
@@ -293,7 +298,7 @@ Eta2
 ```
 
 # Rapportage
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tevredenheidscijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = 3,4, *SD~T0~* = 0,85) en het gemiddelde van T~1~ (*M~T1~* = 3,60, *SD~T1~* = 0,56) is significant, *t* (247) = -13,8, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van -0,22 tot -0,29. Het valt op dat het gemiddelde van T~1~ hoger is dan T~0~. Het effect is minimaal, *d* = 0,09. 
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = 3,4, *SD~T0~* = 0,85) en het gemiddelde van T~1~ (*M~T1~* = 3,60, *SD~T1~* = 0,56) is significant, *t* (247) = -13,8, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van -0,22 tot -0,29. Het valt op dat het gemiddelde van T~1~ hoger is dan T~0~. Het effect is minimaal, *d* = 0,09. 
 
 Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor, maar het effect is minimaal.  
 

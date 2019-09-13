@@ -96,9 +96,7 @@ Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een
 Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect [^6].
 
 # Uitvoering in R
-Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap genaamd `Cijfers_gem`. De data bevat zowel cijfers van 180 studenten begonnen in 2010 als cijfers van 160 studenten begonnen in 2011.
-
-
+Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap genaamd `Cijfers_gem`. De data bevat cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
 
 ## De data bekijken
 ```{r data bekijken}
@@ -147,6 +145,7 @@ ggplot(Cijfers_gem,
 Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  
 
 ### Q-Q plot
+Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een boxplot te maken met kleine cirkels.
 <div class ="col2">
 ```{r qqplot atc}
 qqnorm(Cijfers_2010, pch = 1)

@@ -74,7 +74,7 @@ Er is data ingeladen over de uitval van studenten met een functiebeperking voor 
 fisher.test(Uitval_functiebeperking_n43)
 ```
 
-p-waarde > 0,05 , dus de H~O~ wordt niet verworpen  
+p-waarde > 0,05 , dus de H~0~ wordt niet verworpen  
 De kans op het uitvallen van studenten met een functiebeperking onder het leenstelsel is 1,8 keer zo groot als de kans op het uitvallen van studenten met een functiebeperking voor leenstelsel. Deze associatie blijkt niet significant te zijn: p < 0,51  
 Het 95% betrouwbaarheidsinterval is groot, tussen de 0,41 en de 8,78.   
 

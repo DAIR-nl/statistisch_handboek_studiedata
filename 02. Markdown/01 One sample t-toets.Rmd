@@ -112,7 +112,7 @@ De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte
 
 
 ***
-Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef lijkende verdeling, normaal verdeeld is, kan de normaliteit getoets worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.  
+Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef lijkende verdeling, normaal verdeeld is, kan de normaliteit getoetst worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.  
 
 
 ### Kolmogorov-Smirnov (met Lilliefors correctie) 

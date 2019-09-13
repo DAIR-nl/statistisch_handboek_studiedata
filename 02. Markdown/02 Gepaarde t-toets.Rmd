@@ -117,11 +117,7 @@ Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test* [^
 Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer.  
 Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect [^6].  
 
-<<<<<<< HEAD
 # Uitvoering in R
-=======
-# 5 Uitvoering in R
->>>>>>> b2176c75fce1d039ceda07730b95cd970ceafd07
 Er is een dataset ingeladen met `Tevredenheidscijfer_voor_tutorgesprek` (T~0~) en met `Tevredenheidscijfer_na_tutorgesprek` (T~1~). 
 
 ## Test assumpties: Normaliteit 
@@ -226,14 +222,14 @@ boxplot(Tevredenheidscijfer_na_tutorgesprek,
         ylab = "Tevredenheidscijfer_na_tutorgesprek")
 ```
 </div>
-De boxplotten geven de spreiding van het gemiddelde tenamencijfer per periode weer voor de Lerarenopleiding. 
+De boxplotten geven de spreiding van het gemiddelde tentamencijfer per periode weer voor de Lerarenopleiding. 
 
 
 
 ***
 
 
-Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef lijkende verdeling, normaal verdeeld is, kan de normaliteit getoets worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
+Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef lijkende verdeling, normaal verdeeld is, kan de normaliteit getoetst worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov (met Lilliefors correctie)
 ```{r library nortest, warning=FALSE}

@@ -25,6 +25,11 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r set-options, echo=FALSE, cache=FALSE}
+options(width = 80)
+## Zodat de TukeyHSD naast elkaar geprint wordt
+```
+
 ```{r opmerking 1, include=FALSE, eval=FALSE}
 
 
@@ -40,7 +45,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Doel: tidy data met een kolom reistijd (value) en een kolom opleiding (factor)
 library(dplyr)
 RNGkind(sample.kind = "Rounding")
-set.seed(2)
+set.seed(3)
 
 Studiegrootte <- 29
 reistijd_gem <- 35
@@ -122,33 +127,46 @@ Er zijn meerdere post-hoc vergelijkingen:
 Er is een dataset ingeladen met de reistijden van uitwonende studenten per opleiding is ingeladen genaamd `Reistijd_per_opleiding`. 
 
 ## De data bekijken
-Gebruik `head()` om de data te bekijken
+Gebruik `head()` om de data te bekijken.
 ```{r de data bekijken}
 head(Reistijd_per_opleiding)
 ```
 
-Voor de volgende analyses is het handig om de verschillende groepen uit te splitsen
+Gebruik vervolgens `levels()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
+```{r de data visualiseren}
+levels(Reistijd_per_opleiding$Opleiding)
+```
 
+Voor `mean()`, `sd()`, `boxplot()` en voor `lillie.test()` is het handig om eerst de verschillende groepen op te slaan in een vector.
 ```{r subset}
 Reistijd_atc <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding == "Arabische Taal en Cultuur"]
 Reistijd_fil <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding == "Filosofie"]
 Reistijd_gsc <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding == "Geschiedenis"]
 ```
 
-```{r de data visualiseren}
-levels(Reistijd_per_opleiding$Opleiding)
-library(graphics)
-boxplot(Reistijd ~ Opleiding, Reistijd_per_opleiding)
+Bekijk het gemiddelde en de standaardafwijking met `mean()` en `sd()`.
+
+<div class ="col3">
+
+```{r descriptives atc, collapse=TRUE}
+mean(Reistijd_atc)
+sd(Reistijd_atc)
 ```
-
-
+```{r descriptives fil, collapse=TRUE}
+mean(Reistijd_fil)
+sd(Reistijd_fil)
+```
+```{r descriptives gsc, collapse=TRUE}
+mean(Reistijd_gsc)
+sd(Reistijd_gsc)
+```
+</div>
 
 ## Test assumpties: normaliteit 
 ### Histogram
 ```{r lib ggplot2}
 library(ggplot2)
 ```
-
 ```{r histogram atc}
 ggplot(Reistijd_per_opleiding,
   aes(x = Reistijd)) +
@@ -161,6 +179,9 @@ ggplot(Reistijd_per_opleiding,
   ylab("Frequentiedichtheid") +
   labs(title = "Reistijd")
 
+
+## Hoeveel bins willen we?
+
 ggplot(Reistijd_per_opleiding,
   aes(x = Reistijd)) +
   geom_histogram(aes(y = ..density..),
@@ -172,23 +193,33 @@ ggplot(Reistijd_per_opleiding,
   labs(title = "Reistijd")
 ```
 
-<div class ="col3">
+### Q-Q plot
 
+Gebruik `boxplot()` met `pch = 1` om een boxplot te maken met kleine cirkels. 
+
+<div class ="col3">
 ```{r qqplot atc}
 qqnorm(Reistijd_atc, pch = 1)
 qqline(Reistijd_atc)
 ```
-
 ```{r qqplot fil}
 qqnorm(Reistijd_fil, pch = 1)
 qqline(Reistijd_fil)
 ```
-
 ```{r qqplot gsc}
 qqnorm(Reistijd_gsc, pch = 1)
 qqline(Reistijd_gsc)
 ```
 </div>
+
+### Boxplot
+
+```{r boxplot}
+library(graphics)
+boxplot(Reistijd ~ Opleiding, Reistijd_per_opleiding)
+```
+
+### Kolmogorov-Smirnov (met Lilliefors correctie) 
 
 ```{r lillietest, collapse=TRUE}
 library("nortest")
@@ -205,9 +236,11 @@ leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
 ```
 
 ## One way ANOVA 
+Gebruik `aov()` voor een ANOVA. Geef het resultat overzichtelijk weer met `summary()`. Gebruik vervolgens `TukeyHSD()` om een Tukey-test te doen om te kijken welke verschillen significant zijn.
 ```{r ANOVA}
 res.aov <- aov(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 summary(res.aov)
+TukeyHSD(res.aov)
 ```
 
 # Rapportage

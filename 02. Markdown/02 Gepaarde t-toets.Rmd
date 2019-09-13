@@ -71,7 +71,6 @@ Tevredenheidscijfer_voor_tutorgesprek <- Tevredenheidscijfer_voor_tutorgesprek[s
 Tevredenheidscijfer_voor_tutorgesprek <- Tevredenheidscijfer_voor_tutorgesprek[volgorde]
 
 
-
 mu <- 7.2
 sigma <- 1.2
 Tevredenheidscijfer_voor_tutorgesprek_n30 <- rnorm(30, mu, sigma)
@@ -237,8 +236,10 @@ library(nortest)
 ```
 <div class ="col2">
 ``` {r Lilliefors Test, warning=FALSE}
-lillie.test(Tevredenheidscijfer_voor_tutorgesprek)
-lillie.test(Tevredenheidscijfer_na_tutorgesprek)
+lillie.test(
+  Tevredenheidscijfer_voor_tutorgesprek)
+lillie.test(
+  Tevredenheidscijfer_na_tutorgesprek)
 ```
 </div>
 

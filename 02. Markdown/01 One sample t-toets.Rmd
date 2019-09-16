@@ -46,10 +46,10 @@ Gemiddeld_cijfer_WNS <- apply(WNS_eindcijfers, 1, mean)
 Gemiddeld_cijfer_WNS_n30 <- sample(Gemiddeld_cijfer_WNS, 30)
 ```
 
-# 1 Toepassing
+# Toepassing
 De *one sample t-toets* wordt gebruikt om aan de hand van één steekproef het gemiddelde van de totale populatie te vergelijken met een vooraf opgestelde hypothese [^1]. 
 
-# 2 Onderwijscasus
+# Onderwijscasus
 De opleidingsdirecteur van de opleiding Werktuigbouwkunde wil weten of het gemiddelde eindexamencijfer voor de exacte vakken (Wiskunde, Natuurkunde en Scheikunde; WNS) van vwo studenten hoger is dan het landelijk gemiddelde (6,8)[^2]. Zo kan zij bepalen of het curriculum van de inleidende vakken genoeg aansluit bij eerstejaars studenten met een vwo vooropleiding.
 
 H~0~: Het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde is gelijk aan het landelijk gemiddelde: µ = 6,8. 
@@ -68,14 +68,13 @@ Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test* [^
 # Uitvoering in R
 Er zijn twee datasets `Gemiddeld_cijfer_WNS` en `Gemiddeld_cijfer_WNS_n30` ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde. Het eerste bestand bevat 122 middelbare scholierenstudenten en het tweede bevat 30 studenten.
 
-### 4.1 Test assumpties: normaliteit 
+### Test assumpties: normaliteit 
 Bekijk de data via `mean()`, `sd()`.
 ```{r de data bekijken, collapse=TRUE}
 mean(Gemiddeld_cijfer_WNS)
 sd(Gemiddeld_cijfer_WNS)
 ```
 Geef normaliteit visueel weer met een histogram, boxplot of Q-Q plot. 
-
 
 ### Histogram met GGplot
 ```{r barchart, warning=FALSE, message=FALSE}

@@ -31,7 +31,7 @@ colnames(Uitval_functiebeperking_n43) <- c("Wel uitval", "Geen uitval")
 ```
 
 # Toepassing
-De *chi-kwadraat toets* wordt gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde categorische variabelen, door middel van een kruistabel [^1].
+De *chi-kwadraat toets* wordt gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde categorische variabelen, door middel van een kruistabel.[^1]
 
 # Onderwijscasus
 De studentendecaan vraagt zich af of de studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel.
@@ -42,8 +42,8 @@ H~A~: De verhouding uitval van het aantal studenten met een functiebeperking na 
 
 # Assumpties
 1. De variabelen zijn op nominaal niveau gemeten, dit betekent automatisch dat er geen ordening tussen de groepen gemaakt kan worden en dat de groepen onafhankelijk van elkaar zijn.  
-2. De groepsgrootte van de verwachtte waarde is per cel niet kleiner dan 5, bij de geobserveerde waarde is de groepsgrootte niet minder dan 10. Gebruik de *Fisher’s exact toets* wanneer de groepen kleiner zijn [^2].  
-3. Elke cel van de verwachte waarde is groter dan 0 [^3]. 
+2. De groepsgrootte van de verwachtte waarde is per cel niet kleiner dan 5, bij de geobserveerde waarde is de groepsgrootte niet minder dan 10. Gebruik de *Fisher’s exact toets* wanneer de groepen kleiner zijn.[^2]  
+3. Elke cel van de verwachte waarde is groter dan 0.[^3] 
 
 
 # Uitvoering in R
@@ -66,7 +66,7 @@ Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. I
 p-waarde < 0,05 , dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen  
 
 ## Fisher's exact toets
-De *Fisher's exact toets* wordt ook gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde nominale variabelen, door middel van een kruistabel. In tegenstelling tot de *chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage frequenties ingezet worden. De *Fisher's exact toets* is conservatiever dan de *chi-kwadraat toets*[^2].
+De *Fisher's exact toets* wordt ook gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde nominale variabelen, door middel van een kruistabel. In tegenstelling tot de *chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage frequenties ingezet worden. De *Fisher's exact toets* is conservatiever dan de *chi-kwadraat toets*.[^2]
 
 Er is data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel, alle groepen hebben een laag aantal per cel, variërend van 5 tot 16. Ook hier is de data `Uitval_functiebeperking_n43` binair. 
 

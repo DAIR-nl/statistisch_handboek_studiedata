@@ -70,7 +70,7 @@ Er is een dataset ingeladen genaamd
 ```
 
 ## Statistische toets in R
-`prop.trend.test()` lijkt niet te doen wat we willen en is bovendien een erg oude en niet veel gebruikte functie. SPSS rekent chi-kwadraat voor lineariteit uit volgens advies van Agresti (1996) [^1]. Het is echter maar de vraag hoe goed ze daar de correlatie berekenen.  Je zult namelijk de ordinale veriabele om moeten zetten in een numerieke. David Howell van de Universiteit van Vermont legt dit uit [^2]. Hij zet zijn ordinale variabele met 4 categorieën om in 1, 2, 3, 4. Chi-kwadraat kan worden gevonden door M^2 = (N - 1)r^2
+`prop.trend.test()` lijkt niet te doen wat we willen en is bovendien een erg oude en niet veel gebruikte functie. SPSS rekent chi-kwadraat voor lineariteit uit volgens advies van Agresti (1996).[^1] Het is echter maar de vraag hoe goed ze daar de correlatie berekenen.  Je zult namelijk de ordinale veriabele om moeten zetten in een numerieke. David Howell van de Universiteit van Vermont legt dit uit.[^2] Hij zet zijn ordinale variabele met 4 categorieën om in 1, 2, 3, 4. Chi-kwadraat kan worden gevonden door M^2 = (N - 1)r^2
 ```{r pearson}
 cor.test(Afstudeertijd$`Direct van het VWO`, Afstudeertijd$Nominaal_num)
 r <- cor(Afstudeertijd$`Direct van het VWO`, Afstudeertijd$Nominaal_num)

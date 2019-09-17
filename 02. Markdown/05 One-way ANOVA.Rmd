@@ -80,7 +80,7 @@ Reistijd_per_opleiding <- Reistijd_per_opleiding %>%
 ```
 
 # Toepassing
-Bij het toetsen of het gemiddelde van drie of meer onafhankelijke groepen aan elkaar gelijk zijn, wordt de *one-way ANOVA* gebruikt [^1]. 
+Bij het toetsen of het gemiddelde van drie of meer onafhankelijke groepen aan elkaar gelijk zijn, wordt de *one-way ANOVA* gebruikt.[^1] 
 
 # Onderwijscasus
 In verband met wervingsactiviteiten wil het hoofd van de afdeling Communicatie weten wat de reistijd is van studenten aan verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten per opleiding. 
@@ -100,10 +100,10 @@ Als de data niet voldoet aan één van deze assumpties kan de test *one -way ANO
 ## Normaliteit
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.  
-2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^2]) met de *Shapiro-Wilk test* [^3].  
+2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^2]) met de *Shapiro-Wilk test*.[^3]  
 3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is.
 
-Als er geen sprake is van normaliteit, gebruik de *Kruskal-Wallis test* [^4]. 
+Als er geen sprake is van normaliteit, gebruik de *Kruskal-Wallis test*.[^4] 
 
 ```{r opmerking 2, include=FALSE, eval=FALSE}
 # 3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data en kijk daarna of het normaal verdeeld is.

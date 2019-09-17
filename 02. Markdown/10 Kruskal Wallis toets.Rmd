@@ -54,7 +54,7 @@ Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Rechtsgeleerdheid"] <-
 # Toepassing
 De *Kruskal Wallis toets* wordt gebruikt om te toetsen of de medianen van meerdere groepen significant verschillen. Een kenmerk van de data is dat deze numeriek en ongepaard is.  
 
-Een belangrijke realisatie bij de *Kruskal Wallis toets* is dat de toets de scores van laag naar hoog ordend en ze een rangnummer geeft. Op deze wijze zijn outliers en de assumptie normaliteit geen probleem meer [^1]. Vandaar dat deze toets in plaats van de de *one way ANOVA* gebruikt wordt wanneer de assumpties van normaliteit en/of van Homogeniteit van Varianties worden geschonden [^2].  
+Een belangrijke realisatie bij de *Kruskal Wallis toets* is dat de toets de scores van laag naar hoog ordend en ze een rangnummer geeft. Op deze wijze zijn outliers en de assumptie normaliteit geen probleem meer.[^1] Vandaar dat deze toets in plaats van de de *one way ANOVA* gebruikt wordt wanneer de assumpties van normaliteit en/of van Homogeniteit van Varianties worden geschonden.[^2]  
 
 # Onderwijscasus
 De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht buigt zich over het vraagstuk van de afstudeersnelheid van de studenten. Hierbij vraagt hij zich af of het type vooropleiding bepalend is voor hoeveel vakken de studenten afronden in het eerste jaar. Hij kijkt naar de vier meest gangbare vooropleidingen die de studenten doorlopen voordat ze met de Master Arbeidsrecht beginnen; de Bachelors Fiscaal recht, Notarieel recht, Rechtsgeleerdheid en een schakelprogramma.  
@@ -67,7 +67,7 @@ H~1~: De vooropleiding is bepalend voor het aantal vakken die de Masterstudenten
 Controleer of de data aan de volgende assumpties voldoen: numerieke data, onafhankelijkheid en het aantal groepen is > 2. 
 
 ## Numerieke data
-Gebruik de *Kruskal Wallis toets* bij (semi-)continue data. Semi-continue data is als de data gehele getallen bevat met veel verschillende waardes[^3]. Een voorbeeld hiervan is de aanwezigheid van studenten tijdens de jaaropening. 
+Gebruik de *Kruskal Wallis toets* bij (semi-)continue data. Semi-continue data is als de data gehele getallen bevat met veel verschillende waardes.[^3] Een voorbeeld hiervan is de aanwezigheid van studenten tijdens de jaaropening. 
 
 ## Onafhankelijkheid 
 Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
@@ -78,7 +78,7 @@ Het aantal groepen is > 2. Bij 2 groepen gebruik de *Mann-Whitney U toets*
 # Post-hoc toets 
 De *Kruskal Wallis Toets* toetst of één of meerdere groepen verschillen. Welke groep verschilt wordt niet gespecificeerd. Als er een verschil zit tussen de groepen kan de *Mann-Whitney U toets* als post-hoc vergelijking gedaan worden, om te bepalen welke groepen significant verschillen. 
 
-Gebruik de *Bonferroni correctie* om Type I fouten te voorkomen. Pas de p-waarde aan door alpha te delen door het aantal uitgevoerde toetsen [^4].
+Gebruik de *Bonferroni correctie* om Type I fouten te voorkomen. Pas de p-waarde aan door alpha te delen door het aantal uitgevoerde toetsen.[^4]
 
 # Uitvoering in R
 Er is data ingeladen met studieresultaten van de Master arbeidsrecht per vooropleiding: Fiscaal recht, Notarieel recht, Rechtsgeleerdheid en een schakelprogramma.

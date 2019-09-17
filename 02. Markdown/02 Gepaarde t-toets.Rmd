@@ -205,7 +205,7 @@ Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeli
 
 
 ### Q-Q plot
-Controleer de data visueel met een Q-Q plot. Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een boxplot te maken met kleine cirkels.
+Controleer de data visueel met een Q-Q plot. Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een Q-Q plot te maken met kleine cirkels.
 <div class ="col2">
 ```{r qqplot voor tutor}
 qqnorm(Tentamencijfer_voor_tutorgesprek , 

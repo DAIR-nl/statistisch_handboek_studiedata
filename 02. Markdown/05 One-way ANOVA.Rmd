@@ -94,7 +94,7 @@ De *one -way ANOVA* gaat ervan uit dat de data normaal verdeeld is. Controleer d
 3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is.
 
 Als er geen sprake is van normaliteit, gebruik de *Kruskal-Wallis test*.[^5]
->>>>>>> d2246f8ecc5b920c70e4094070270ffc192d50ed
+
 
 ## Homogeniteit van Varianties
 Controleer of de spreiding van iedere groep ongeveer hetzelfde is, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Wanneer de test significant is, is de spreiding van de groepen verschillend.[^6]

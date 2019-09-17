@@ -205,7 +205,7 @@ Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeli
 
 
 ### Q-Q plot
-Controleer de data visueel met een Q-Q plot. Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een boxplot te maken met kleine cirkels.
+Controleer de data visueel met een Q-Q plot. Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een Q-Q plot te maken met kleine cirkels.
 <div class ="col2">
 ```{r qqplot voor tutor}
 qqnorm(Tentamencijfer_voor_tutorgesprek , 
@@ -236,7 +236,7 @@ boxplot(Tentamencijfer_na_tutorgesprek,
         ylab = "Tentamencijfer_na_tutorgesprek")
 ```
 </div>
-De boxplotten geven de spreiding van het gemiddelde tentamencijfer per periode weer voor de Lerarenopleiding. De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. De cirkels zijn de uitbijters.  
+De boxplotten geven de spreiding van het gemiddelde tentamencijfer per periode weer voor de lerarenopleiding. De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. De cirkels zijn de uitbijters.  
 
 ***
 
@@ -303,9 +303,9 @@ Eta2
 ```
 
 # Rapportage
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = 6,84, *SD~T0~* = 1,66) en het gemiddelde van T~1~ (*M~T1~* = 7,04, *SD~T1~* = 1,43) is significant, *t* (233) = -9,96, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van -0,24 tot -0,16. Het valt op dat het gemiddelde van T~1~ hoger is dan T~0~. Het effect is minimaal, *d* = 0,09. 
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = 6,84, *SD~T0~* = 1,66) en het gemiddelde van T~1~ (*M~T1~* = 7,04, *SD~T1~* = 1,43) is significant, *t* (233) = -9,96, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van -0,24 tot -0,16. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is minimaal, *d* = 0,09. 
 
-Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor, maar het effect is minimaal.  
+Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor. Het effect is minimaal.  
 
 [^1]: Wikipedia (21 augustus 2019). *Student's t-test*. https://en.wikipedia.org/wiki/Student%27s_t-test
 [^2]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). Tthe importance of the normality assumption in large public health data sets. *Annu Rev Public Health, 23*, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf 

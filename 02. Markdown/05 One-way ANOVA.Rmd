@@ -30,17 +30,8 @@ options(width = 80)
 ## Zodat de TukeyHSD naast elkaar geprint wordt
 ```
 
-```{r opmerking 1, include=FALSE, eval=FALSE}
-
-
-#posthoc Tukey 
-```
-
-
-
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## Het hoofd communicatie wil in verband met wervingsactiviteiten weten wat de reistijd is van studenten aan verschillende opleidingen.
-## 3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data en kijk daarna of het normaal verdeeld is.
 
 ## Doel: tidy data met een kolom reistijd (value) en een kolom opleiding (factor)
 library(dplyr)
@@ -80,48 +71,42 @@ Reistijd_per_opleiding <- Reistijd_per_opleiding %>%
 ```
 
 # Toepassing
-Bij het toetsen of het gemiddelde van drie of meer onafhankelijke groepen aan elkaar gelijk zijn, wordt de *one-way ANOVA* gebruikt [^1]. 
+Gebruik de *one-way ANOVA* bij het toetsen of het gemiddelde van drie of meer onafhankelijke groepen aan elkaar gelijk zijn. 
 
 # Onderwijscasus
-In verband met wervingsactiviteiten wil het hoofd van de afdeling Communicatie weten wat de reistijd is van studenten aan verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten per opleiding. 
+In verband met wervingsactiviteiten wil het hoofd van de afdeling Communicatie weten wat de reistijd is van studenten aan verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten voor de opleidingen: arabische taal en cultuur, filosofie en geschiedenis. 
 
 H~0~: De gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar: µ~0~ = µ~1~ = µ~2~ ... µ~n~  
 
 H~A~: Tenminste voor één opleiding is de gemiddelde reistijd niet gelijk aan de gemiddelde reistijd van studenten voor andere opleidingen. µ~0~ ≠ µ~1~ = µ~2~ ... = µ~n~
 
 # Assumpties
-Controleer of de steekproef aan de volgende assumpties voldoen:  
-1. Normaliteit  
-2. Homogeniteit van varianties  
-3. Onafhankelijkheid   
+Een assumptie is een aanname. De data moet aan een aantal assumpties voldoen voordat de toets uitgevoerd kan worden. 
+Controleer of de steekproef aan de volgende assumpties voldoet: normaliteit, homogeniteit van varianties en onafhankelijkheid.  
 
-Als de data niet voldoet aan één van deze assumpties kan de test *one -way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden. 
+De *one -way ANOVA* is een robuuste test. Dit betekent dat als één groep uit de steekproef niet voldoet aan de assumptie van normaliteit of homogeniteit van varianties kan de *one -way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden [^2].  
 
 ## Normaliteit
-Controleer de assumptie van normaliteit met de volgende stappen:  
+De *one -way ANOVA* gaat ervan uit dat de data normaal verdeeld is. Controleer de assumptie van normaliteit met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.  
-2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^2]) met de *Shapiro-Wilk test* [^3].  
+2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^3]) met de *Shapiro-Wilk test* [^4].  
 3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is.
 
-Als er geen sprake is van normaliteit, gebruik de *Kruskal-Wallis test* [^4]. 
-
-```{r opmerking 2, include=FALSE, eval=FALSE}
-# 3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data en kijk daarna of het normaal verdeeld is.
-```
+Als er geen sprake is van normaliteit, gebruik de *Kruskal-Wallis test* [^5]. 
 
 ## Homogeniteit van Varianties
-Controleer of de spreiding van iedere groep ongeveer hetzelfde is, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Wanneer de test significant is, is de spreiding van de groepen verschillend.[^5]  
+Controleer of de spreiding van iedere groep ongeveer hetzelfde is, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Wanneer de test significant is, is de spreiding van de groepen verschillend[^6].  
 
 ## Onafhankelijkheid
-Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
+Beredeneer of een van de groepen een overlap heeft met één van de andere groepen. Beredeneer of de groepen elkaars deelname kunnen beïnvloeden. Wanneer er een overlap is, dan zijn de groepen afhankelijk en  
 
 # Post-hoc vergelijking 
 De *one-way ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Welke groep anders is wordt niet gespecificeerd. Als er bij de *one-way ANOVA* uitkomt dat er een significant verschil is tussen de groepen kan een post-hoc vergelijking gedaan worden om te bepalen welke groepen significant verschillen.  
 
 Er zijn meerdere post-hoc vergelijkingen: 
 
-* *Tukey* wordt gebruikt als de assumptie van gelijke varianties is voldaan  
-* Dunnet's *C* wordt gebruikt bij ongelijke varianties  
+* Gebruik *Tukey* bij gelijke varianties 
+* Gebruik Dunnet's *C* bij ongelijke varianties  
 
 # Uitvoering in R
 Er is een dataset ingeladen met de reistijden van uitwonende studenten per opleiding is ingeladen genaamd `Reistijd_per_opleiding`. 
@@ -144,7 +129,7 @@ Reistijd_fil <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding
 Reistijd_gsc <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding == "Geschiedenis"]
 ```
 
-Bekijk het gemiddelde en de standaardafwijking met `mean()` en `sd()`.
+BOm meer inzicht te krijgen in de data, inspecteer de data met `mean()`en `sd()`. 
 
 <div class ="col3">
 
@@ -161,9 +146,13 @@ mean(Reistijd_gsc)
 sd(Reistijd_gsc)
 ```
 </div>
+* Gemiddelde reistijd arabische taal en cultuur (standaarddeviatie): 17,45(10,05)  
+* Gemiddelde reistijd filosofie (standaarddeviatie): 33,77(10,96)  
+* Gemiddelde reistijd geschiedenis (standaarddeviatie): 36,53(12,09)  
 
 ## Test assumpties: normaliteit 
 ### Histogram
+Controleer de data visueel met een histogram. 
 ```{r lib ggplot2}
 library(ggplot2)
 ```
@@ -171,20 +160,7 @@ library(ggplot2)
 ggplot(Reistijd_per_opleiding,
   aes(x = Reistijd)) +
   geom_histogram(aes(y = ..density..),
-                 binwidth = 10,
-                 color = "grey30",
-                 fill = "#0089CF") +
-  facet_wrap(~ Opleiding) +
-  geom_density(alpha = .2, adjust = 1) +
-  ylab("Frequentiedichtheid") +
-  labs(title = "Reistijd")
-
-
-## Hoeveel bins willen we?
-
-ggplot(Reistijd_per_opleiding,
-  aes(x = Reistijd)) +
-  geom_histogram(aes(y = ..density..),
+                 binwidth = 5,
                  color = "grey30",
                  fill = "#0089CF") +
   facet_wrap(~ Opleiding) +
@@ -194,8 +170,7 @@ ggplot(Reistijd_per_opleiding,
 ```
 
 ### Q-Q plot
-
-Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een boxplot te maken met kleine cirkels. 
+Controleer de data visueel met een Q-Q plot. Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een boxplot te maken met kleine cirkels. 
 
 <div class ="col3">
 ```{r qqplot atc}
@@ -254,7 +229,8 @@ Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de
 
 
 [^1]: van Geloven, N. (25 mei 2016). *One-way ANOVA*. https://wikistatistiek.amc.nl/index.php/One-way_ANOVA
-[^2]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
-[^3]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
-[^4]: van Geloven, N. (21 maart 2018). *Kruskal Wallis* https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis
-[^5]: Wikipedia (7 september 2019). *Analysis of variance*. https://en.wikipedia.org/wiki/Analysis_of_variance 
+[^2]: Universiteit van Amsterdam (8 juli 2014). *One-way ANOVA*. https://wiki.uva.nl/methodologiewinkel/index.php/One-way_ANOVAA 
+[^3]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
+[^4]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
+[^5]: van Geloven, N. (21 maart 2018). *Kruskal Wallis* https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis
+[^6]: Wikipedia (7 september 2019). *Analysis of variance*. https://en.wikipedia.org/wiki/Analysis_of_variance 

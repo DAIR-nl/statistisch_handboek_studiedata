@@ -155,7 +155,7 @@ Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeli
 
 ### Q-Q plot
 Controleer de data visueel met een Q-Q plot. 
-Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een boxplot te maken met kleine cirkels.
+Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een Q-Q plot te maken met kleine cirkels.
 <div class ="col2">
 ```{r qqplot atc}
 qqnorm(Cijfers_2010, pch = 1)
@@ -195,7 +195,7 @@ lillie.test(Cijfers_2011)
 ```
 </div>
 
-In dit geval is van beide groepen de p-waarde > 0,05; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *ongepaarde t-toets* kan uitgevoerd worden.
+Bij deze casus is van beide groepen de p-waarde > 0,05; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *ongepaarde t-toets* kan uitgevoerd worden.
 
 ### Shapiro-Wilk Test
 De Shapiro-Wilk test is een soortgelijke test als de Kolmogorov-Smirnov test en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.

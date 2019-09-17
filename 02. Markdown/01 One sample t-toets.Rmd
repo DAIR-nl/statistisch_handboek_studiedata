@@ -129,7 +129,7 @@ De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen d
 shapiro.test(Gemiddeld_cijfer_WNS_n30)
 ```
 
-De *Shapiro-Wilk test* is een soort gelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.
+De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.
 
 De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *one sample-t-toets* kan uitgevoerd worden.
 

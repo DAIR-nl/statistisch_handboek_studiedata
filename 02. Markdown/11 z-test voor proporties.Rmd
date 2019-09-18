@@ -41,12 +41,18 @@ Aanmeldingen_tweedekans <- data.frame(Studentnr, Eerder_wo)
 ```
 
 # Toepassing
-Gebruik de z-toets bij het vergelijken van twee proporties. De z-toets kan ook worden gebruikt als 
+Gebruik de z-toets bij het vergelijken van twee proporties waarbij één een gegeven proportie is. 
 
 
 # Onderwijscasus
+De controller van een Universiteit is geïnteresseerd in de instroom van tweedekansstudenten. Zij wil weten of haar Universiteit relatief veel tweedekansstudenten heeft in vergelijking met het landelijke gemiddelde. Een tweedekansstudent is een student die bij het aanmelden voor een studie al eerder op het WO heeft gezeten.
+
+H~0~: 
+
+H~A~:
 
 # Assumpties
+
 
 # Uitvoering in R
 Er is een dataset ingeladen genaamd `Aanmeldingen_tweedekans`. Dit is een dataframe met binaire data over de aanmeldingen van studenten en of zij al eerder op het WO hebben gezeten.
@@ -72,7 +78,6 @@ prop.test(x = sum(Aanmeldingen_tweedekans$Eerder_wo),
           alternative = "greater")
 ```
 
-# Toelichting op de output
 
 
 

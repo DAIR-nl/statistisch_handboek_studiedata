@@ -109,7 +109,7 @@ H~A~: Het gemiddelde tentamencijfer per onderwijsperiode verandert na het tutorg
 
 
 # Assumpties
-Een assumptie is een aanname. De data moet aan een aantal assumpties voldoen voordat de toets uitgevoerd kan worden. 
+Voor een betrouwbaar resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
 
 ## Normaliteit
 De *t-toets* gaat ervan uit dat de data normaal verdeeld is. Bij een *n* > 100 kan ervanuit gegaan worden dat de *t-toets* robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgt.[^2]   

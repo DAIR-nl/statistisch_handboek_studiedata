@@ -78,7 +78,8 @@ H~0~: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taal
 H~A~: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taalwetenschap is veranderd na de invoer van het BSA, µ~0~ ≠ µ~1~
 
 # Assumpties
-Een assumptie is een aanname. De data moet aan een aantal assumpties voldoen voordat de toets uitgevoerd kan worden. Controleer of de steekproef aan de volgende assumpties voldoet: normaliteit en homogeniteit van varianties. 
+Voor een betrouwbaar resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
+Controleer of de steekproef aan de volgende assumpties voldoet: normaliteit en homogeniteit van varianties. 
 
 ## Normaliteit  
 De *t-toets* gaat ervan uit dat de data normaal verdeeld is. Bij een n > 100 kan ervanuit gegaan worden dat de *t-toets* robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgt. [^2]  

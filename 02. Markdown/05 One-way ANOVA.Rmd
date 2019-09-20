@@ -223,7 +223,7 @@ library(car)
 leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
 ```
 *F*(2, 254) = 1,66, p-waarde = 0,19, de groepen zijn niet verschillend in variantie.  
-Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 1) en de tweede cijfer (*n~1~* + *n~2~* - 2 = 254) 
+Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 2) en de tweede cijfer (*n~1~* + *n~2~* - 2 = 254) 
 
 ## One-way ANOVA 
 Gebruik `aov()` voor een ANOVA. Geef het resultat overzichtelijk weer met `summary()`. 
@@ -231,22 +231,42 @@ Gebruik `aov()` voor een ANOVA. Geef het resultat overzichtelijk weer met `summa
 res.aov <- aov(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 summary(res.aov)
 ```
+* *F* (2,254) = 21,58 *p* < 0,01  
+* Vrijheidsgraden: het aantal groepen - 1 = 2; *n~1~* + *n~2~* - 2 = 254 
+* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
+
+## Effectmaat: Cohen's d
+
+## Effectmaat: eta squared
 
 ## Tukey's toets
-Gebruik de `TukeyHSD()` om een Tukey-test te doen om te kijken welke verschillen significant zijn.
+Doe een post hoc test om te toetsen welke verschillen significant zijn. Bij gelijke variantie gebruik Tukey honestly significant difference test, `TukeyHSD()`.
 
 ```{r TukeyHSD}
 TukeyHSD(res.aov)
 ```
+Het verschil tussen filosofie en arabische taal en cultuur: *MD* = 13,69, p < 0,01. 
+Het verschil tussen geschiedenis en arabische taal en cultuur: *MD* = 10,92, p < 0,01. 
+Het verschil tussen geschiedenis en filosofie: *MD* = 2,76, p = 0,26. 
 
 # Rapportage
-Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De onafhankelijke variabele, opleiding, is onderverdeeld in drie niveau's **(Opleiding 1, 2, 3 )** en de afhankelijke variabele is de reistijd van de studenten. The *one way ANOVA* was significant **F(1, 338) = 0,92, p-waarde = 0,034** 
-**effect **
-**posthoc en uitkomsten **
+Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De opleidingen zijn: arabische taal en cultuur (*M~atc~* = 47,45, *SD~atc~* = 10,04), filosofie (*M~fil~* = 33,77, *SD~fil~* = 10,96) en geschiedenis (*M~gsc~* = 36,53, *SD~fil~* = 12,09. The *one way ANOVA* was significant, *F*(2, 254) = 21,58, *p* <0,01. Dat wil zeggen dat er een significant verschil is tussen de gemiddelde reistijden van de drie opleidingen.  
 
+**het effect is **
+
+
+**posthoc en uitkomsten **
+*Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen van elkaar. 
+
+TABELLEN?? M, SD. 
+
+Filosofie en arabische taal en cultuur verschillen significant (*MD* = 13,69, p < 0,01). Geschiedenis en arabische taal en cultuur hebben een significant verschil (*MD* = 10,92, p < 0,01). Tussen geschiedenis en filosofie is geen significant verschil gevonden (*MD* = 2,76, p = 0,26). 
+
+
+Aan de hand van de resultaten kan geconcludeerd worden dat ..... Het effect is minimaal.
 
 [^1]: van Geloven, N. (25 mei 2016). *One-way ANOVA*. https://wikistatistiek.amc.nl/index.php/One-way_ANOVA
-[^2]: Universiteit van Amsterdam (8 juli 2014). *One-way ANOVA*. https://wiki.uva.nl/methodologiewinkel/index.php/One-way_ANOVAA 
+[^2]: Universiteit van Amsterdam (8 juli 2014). *One-way ANOVA*. https://wiki.uva.nl/methodologiewinkel/index.php/One-way_ANOVA 
 [^3]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
 [^4]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
 [^5]: van Geloven, N. (21 maart 2018). *Kruskal Wallis* https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis

@@ -80,7 +80,7 @@ De *Kruskal Wallis Toets* toetst of één of meerdere groepen verschillen. Welke
 Gebruik de *Bonferroni correctie* om Type I fouten te voorkomen. Pas de p-waarde aan door alpha te delen door het aantal uitgevoerde toetsen [^4].
 
 # Uitvoering in R
-Er is data ingeladen met studieresultaten van de master arbeidsrecht per vooropleiding: fiscaal recht, notarieel recht, rechtsgeleerdheid en een schakelprogramma.
+Er is een dataset ingeladen met studieresultaten van de master arbeidsrecht per vooropleiding: fiscaal recht, notarieel recht, rechtsgeleerdheid en een schakelprogramma.
 
 ## De data bekijken
 ```{r de data exploreren, collapse=TRUE}

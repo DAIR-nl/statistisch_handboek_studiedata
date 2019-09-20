@@ -19,12 +19,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-## De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht vraagt zich af of de vooropleiding van zijn studenten te maken heeft met hoe snel zij afstuderen. Zij bekijkt daarom het aantal punten behaald in het eerste jaar naar vooropleiding. Zij vraagt zich af: Welke vooropleidng levert de studenten die het meeste punten halen?
-
 ## H0 en H1 medianen of gemiddelden, ook in toepassing 
 ## is het wel interessant om gemiddelden te tonen? 
-
 ## link naar Mann W-U test 
+## pilot: - Groepsgrootte, onafhankelijkheid, en numerieke data - meer informatie goed of juist teveel?
+
 
 RNGkind(sample.kind = "Rounding")
 set.seed(8)
@@ -52,12 +51,12 @@ Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Rechtsgeleerdheid"] <-
 ```
 
 # Toepassing
-De *Kruskal Wallis toets* wordt gebruikt om te toetsen of de medianen van meerdere groepen significant verschillen. Een kenmerk van de data is dat deze numeriek en ongepaard is.  
+Gebruik de *Kruskal Wallis toets* om te toetsen of de medianen van meerdere groepen significant verschillen. Een kenmerk van de data is dat deze numeriek en ongepaard is.  
 
 Een belangrijke realisatie bij de *Kruskal Wallis toets* is dat de toets de scores van laag naar hoog ordend en ze een rangnummer geeft. Op deze wijze zijn outliers en de assumptie normaliteit geen probleem meer.[^1] Vandaar dat deze toets in plaats van de de *one way ANOVA* gebruikt wordt wanneer de assumpties van normaliteit en/of van Homogeniteit van Varianties worden geschonden.[^2]  
 
 # Onderwijscasus
-De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht buigt zich over het vraagstuk van de afstudeersnelheid van de studenten. Hierbij vraagt hij zich af of het type vooropleiding bepalend is voor hoeveel vakken de studenten afronden in het eerste jaar. Hij kijkt naar de vier meest gangbare vooropleidingen die de studenten doorlopen voordat ze met de Master Arbeidsrecht beginnen; de Bachelors Fiscaal recht, Notarieel recht, Rechtsgeleerdheid en een schakelprogramma.  
+De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht is geïnteresseerd in de afstudeersnelheid van zijn studenten. Hij vraagt zich af of het type vooropleiding bepalend is voor hoeveel vakken de studenten afronden in het eerste jaar. Hij kijkt naar de vier meest gangbare vooropleidingen die de studenten doorlopen voordat ze met de Master Arbeidsrecht beginnen; de bachelors: fiscaal recht, notarieel recht, rechtsgeleerdheid en een schakelprogramma.  
 
 H~0~: De vooropleiding is niet bepalend voor het aantal vakken die de Masterstudenten Arbeidsrecht behalen in het eerste jaar. De gemiddelde rank is per groep ongeveer gelijk aan elkaar. 
 
@@ -116,12 +115,17 @@ group_by(Resultaten_arbeidsrecht, Vooropleiding) %>%
 ```{r kruskal test}
 kruskal.test(Ec_jaar1 ~ Vooropleiding, Resultaten_arbeidsrecht)
 ```
-df: het aantal groepen - 1
-p-waarde < 0,05 , dus de H~0~ wordt verworpen en de H~A~ aangenomen 
-chi-squared: 33,07 
+df: het aantal groepen - 1  
+chi-squared: 33,07  
+p-waarde < 0,05 , dus de H~0~ wordt verworpen en de H~A~ aangenomen  
+
 
 # Post-hoc toets: Mann-Whitney U toets
+<<<<<<< HEAD
 Om te weten welke groepen verschillen is er in `pairwise.wilcox.test()` een correctie beschikbaar voor *multiple testing*.
+=======
+Om te weten welke groepen verschillen is er in `pairwise.wilcox.test()` de *Bonferroni correctie* beschikbaar voor *multiple testing*
+>>>>>>> 30a2a6b53332bf4aa14d873b89c754186ac07fb1
 ``` {r pairwise wilcox test}
 pairwise.wilcox.test(Resultaten_arbeidsrecht$Ec_jaar1, Resultaten_arbeidsrecht$Vooropleiding, p.adjust.method = "bonferroni")
 ```

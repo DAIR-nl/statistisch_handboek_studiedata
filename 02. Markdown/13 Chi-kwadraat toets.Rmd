@@ -31,7 +31,7 @@ colnames(Uitval_functiebeperking_n43) <- c("Wel uitval", "Geen uitval")
 ```
 
 # Toepassing
-De *chi-kwadraat toets* wordt gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde categorische variabelen, door middel van een kruistabel.[^1]
+Gebruik de *chi-kwadraat toets* om te toetsen of er een afhankelijkheid is tussen twee ongepaarde categorische variabelen, door middel van een kruistabel.[^1]
 
 # Onderwijscasus
 De studentendecaan vraagt zich af of de studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel.
@@ -41,6 +41,8 @@ H~0~: De verhouding uitval van het aantal studenten met een functiebeperking na 
 H~A~: De verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel is veranderd.
 
 # Assumpties
+Voor een betrouwbaar resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
+
 1. De variabelen zijn op nominaal niveau gemeten, dit betekent automatisch dat er geen ordening tussen de groepen gemaakt kan worden en dat de groepen onafhankelijk van elkaar zijn.  
 2. De groepsgrootte van de verwachtte waarde is per cel niet kleiner dan 5, bij de geobserveerde waarde is de groepsgrootte niet minder dan 10. Gebruik de *Fisher’s exact toets* wanneer de groepen kleiner zijn.[^2]  
 3. Elke cel van de verwachte waarde is groter dan 0.[^3] 

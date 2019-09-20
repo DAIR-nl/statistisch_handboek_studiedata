@@ -78,10 +78,14 @@ H~0~: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taal
 H~A~: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taalwetenschap is veranderd na de invoer van het BSA, µ~0~ ≠ µ~1~
 
 # Assumpties
-Een assumptie is een aanname. De data moet aan een aantal assumpties voldoen voordat de toets uitgevoerd kan worden. Controleer of de steekproef aan de volgende assumpties voldoet: normaliteit en homogeniteit van varianties. 
+Voor een betrouwbaar resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
+Controleer of de steekproef aan de volgende assumpties voldoet: onafhankelijkheid van groepen, normaliteit en homogeniteit van varianties. 
+
+## Onafhankelijkheid 
+Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
 
 ## Normaliteit  
-De *t-toets* gaat ervan uit dat de data normaal verdeeld is. Bij een n > 100 kan ervanuit gegaan worden dat de *t-toets* robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgt [^2].  
+De *t-toets* gaat ervan uit dat de data normaal verdeeld is. Bij een n > 100 kan ervanuit gegaan worden dat de *t-toets* robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgt.[^2]  
 
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een Q-Q plot of een boxplot. 
@@ -94,14 +98,10 @@ Als er geen sprake is van normaliteit en *n* is niet groter dan 100, gebruik de 
 ## Homogeniteit van varianties 
 De *ongepaarde t-toets* gaat ervan uit dat beide groepen dezelfde spreiding hebben, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Bij een *p* < 0,05 is de spreiding van de groepen verschillend en wordt de assumptie geschonden.[^6] 
 
-
-
 # Effectmaat
 Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer.  
 
-
 Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect.[^7]
-
 
 # Uitvoering in R
 Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap genaamd `Cijfers_gem`. De data bevat cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
@@ -170,12 +170,14 @@ Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen wor
 
 ### Boxplot
 Controleer de data visueel met een boxplot. 
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. De cirkels zijn de uitbijters.  
+
 ```{r boxplot}
 library(graphics)
 boxplot(Cijfers ~ Cohort, Cijfers_gem)
 ```
 
-De boxplotten geven de spreiding van het gemiddelde tentamencijfer per periode weer voor de Lerarenopleiding. De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. De cirkels zijn de uitbijters.  
+De boxplotten geven de spreiding van het gemiddelde tentamencijfer weer voor de BSA en na de BSA. De boxplotten en de staarten lijken symmetrisch, dit kan een teken zijn van normaal verdeelde data. Het cohort van 2011 heeft een aantal uitbijters. 
 
 ***
 

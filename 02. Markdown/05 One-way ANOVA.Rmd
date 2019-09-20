@@ -71,7 +71,7 @@ Reistijd_per_opleiding <- Reistijd_per_opleiding %>%
 ```
 
 # Toepassing
-Gebruik de *one-way ANOVA* bij het toetsen of het gemiddelde van drie of meer onafhankelijke groepen aan elkaar gelijk zijn. [^1] 
+Gebruik de *one-way ANOVA* bij het toetsen of het gemiddelde van drie of meer onafhankelijke groepen aan elkaar gelijk zijn.[^1] 
 
 # Onderwijscasus
 In verband met wervingsactiviteiten wil het hoofd van de afdeling Communicatie weten wat de reistijd is van studenten aan verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten voor de opleidingen: arabische taal en cultuur, filosofie en geschiedenis. 
@@ -81,27 +81,25 @@ H~0~: De gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar
 H~A~: Tenminste voor één opleiding is de gemiddelde reistijd niet gelijk aan de gemiddelde reistijd van studenten voor andere opleidingen. µ~0~ ≠ µ~1~ = µ~2~ ... = µ~n~
 
 # Assumpties
-Een assumptie is een aanname. De data moet aan een aantal assumpties voldoen voordat de toets uitgevoerd kan worden. 
+Voor een betrouwbaar resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
 Controleer of de steekproef aan de volgende assumpties voldoet: normaliteit, homogeniteit van varianties en onafhankelijkheid.  
 
-De *one -way ANOVA* is een robuuste test. Dit betekent dat als één groep uit de steekproef niet voldoet aan de assumptie van normaliteit of homogeniteit van varianties kan de *one -way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden. [^2]   
+De *one-way ANOVA* is een robuuste test. Dit betekent dat als één groep uit de steekproef niet voldoet aan de assumptie van normaliteit of homogeniteit van varianties kan de *one-way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden.[^2] Als er geen sprake is van normaliteit en/of homogeniteit, gebruik de *Kruskal-Wallis test*.[^5] 
 
 ## Normaliteit
-De *one -way ANOVA* gaat ervan uit dat de data normaal verdeeld is. Controleer de assumptie van normaliteit met de volgende stappen:  
-1. Controleer de data visueel met een histogram, een Q-Q plot of een boxplot. 
-2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^3]) met de *Shapiro-Wilk test*.[^4]
+De *one-way ANOVA* gaat ervan uit dat de data normaal verdeeld is. Controleer de assumptie van normaliteit met de volgende stappen:  
+1. Controleer de data visueel met een histogram, een Q-Q plot of een boxplot.  
+2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^3]) met de *Shapiro-Wilk test*.[^4]  
 3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is.
-
-Als er geen sprake is van normaliteit, gebruik de *Kruskal-Wallis test*.[^5]
 
 ## Homogeniteit van Varianties
 Controleer of de spreiding van iedere groep ongeveer hetzelfde is, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Bij een *p* < 0,05 is de spreiding van de groepen verschillend en wordt de assumptie geschonden.[^6]
 
 ## Onafhankelijkheid
-Beredeneer of een van de groepen een overlap heeft met één van de andere groepen. Beredeneer of de groepen elkaars deelname kunnen beïnvloeden. Als er een overlap is, dan zijn de groepen afhankelijk en kan de *one-way ANOVA* niet uitgevoerd worden. 
+Beredeneer of een van de groepen een overlap heeft met één van de andere groepen. Beredeneer of de groepen elkaars deelname kunnen beïnvloeden. Als er een overlap is zijn de groepen afhankelijk en kan de *one-way ANOVA* niet uitgevoerd worden. 
 
 # Post-hoc vergelijking 
-De *one-way ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Welke groep anders is wordt niet gespecificeerd. Als er bij de *one-way ANOVA* uitkomt dat er een significant verschil is tussen de groepen kan een post-hoc vergelijking gedaan worden om te bepalen welke groepen significant verschillen.  
+De *one-way ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Welke groep anders is wordt niet gespecificeerd. Als er bij de *one-way ANOVA* uitkomt dat er een significant verschil is tussen de groepen kan een post-hoc vergelijking gedaan worden om te bepalen welke groepen significant van elkaar verschillen.  
 
 Er zijn meerdere post-hoc vergelijkingen: 
 
@@ -169,8 +167,8 @@ ggplot(Reistijd_per_opleiding,
   ylab("Frequentiedichtheid") +
   labs(title = "Reistijd")
 ```
-Alle drie de histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  
 
+Alle drie de histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  
 
 ### Q-Q plot
 Controleer de data visueel met een Q-Q plot. Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een Q-Q plot te maken met kleine cirkels. Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is.
@@ -193,11 +191,17 @@ Bij de Q-Q plot van de reistijd van studenten geschiedenis liggen de meeste punt
 
 ### Boxplot
 Controleer de data visueel met een boxplot.
+De boxplotten geven de spreiding van het gemiddelde tentamencijfer per periode weer voor de Lerarenopleiding. De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels zijn uitbijters.  
 ```{r boxplot}
 library(graphics)
 boxplot(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 ```
-De boxplotten geven de spreiding van het gemiddelde tentamencijfer per periode weer voor de Lerarenopleiding. De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. De cirkels zijn de uitbijters.  
+
+De boxplotten geven de spreiding van de reistijd weer voor de drie opleidingen.   
+De boxplotten arabische taal en cultuur en geschiedenis zien er symmetrisch uit; de boxen zijn even hoog boven als onder de mediaan. De staarten zijn onder en boven even groot. De boxplot van filosofie is boven de mediaan groter dan onder de mediaan, de data kan wat scheef verdeeld zijn.  
+
+***
+Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef lijkende verdeling, normaal verdeeld is, kan de normaliteit getoetst worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.  
 
 ### Kolmogorov-Smirnov (met Lilliefors correctie) 
 De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen de twee verdelingen. In dit geval toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is een correctie die wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van een normale verdeling.
@@ -211,7 +215,6 @@ lillie.test(Reistijd_gsc)
 ```
 Bij deze casus zijn van alle groepen de p-waarde > 0,05; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *one-way ANOVA* kan uitgevoerd worden.
 
-
 ## Test assumpties: Levene's test
 Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. 
 
@@ -222,7 +225,7 @@ leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
 *F*(2, 254) = 1,66, p-waarde = 0,19, de groepen zijn niet verschillend in variantie.  
 Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 1) en de tweede cijfer (*n~1~* + *n~2~* - 2 = 254) 
 
-## One way ANOVA 
+## One-way ANOVA 
 Gebruik `aov()` voor een ANOVA. Geef het resultat overzichtelijk weer met `summary()`. 
 ```{r ANOVA}
 res.aov <- aov(Reistijd ~ Opleiding, Reistijd_per_opleiding)

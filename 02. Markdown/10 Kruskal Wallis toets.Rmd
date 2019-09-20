@@ -67,31 +67,32 @@ H~1~: De vooropleiding is bepalend voor het aantal vakken die de Masterstudenten
 Controleer of de data aan de volgende assumpties voldoen: numerieke data, onafhankelijkheid en het aantal groepen is > 2. 
 
 ## Numerieke data
-Gebruik de *Kruskal Wallis toets* bij (semi-)continue data. Semi-continue data is als de data gehele getallen bevat met veel verschillende waardes.[^3] Een voorbeeld hiervan is de aanwezigheid van studenten tijdens de jaaropening. 
+Gebruik de *Kruskal Wallis toets* bij (semi-)continue data. Semi-continue data is als de data gehele getallen bevat met veel verschillende waardes[^3]. Een voorbeeld hiervan is de aanwezigheid van studenten tijdens de jaaropening. 
 
 ## Onafhankelijkheid 
 Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
 
-## aantal groepen
+## Aantal groepen
 Het aantal groepen is > 2. Bij 2 groepen gebruik de *Mann-Whitney U toets*
 
 # Post-hoc toets 
 De *Kruskal Wallis Toets* toetst of één of meerdere groepen verschillen. Welke groep verschilt wordt niet gespecificeerd. Als er een verschil zit tussen de groepen kan de *Mann-Whitney U toets* als post-hoc vergelijking gedaan worden, om te bepalen welke groepen significant verschillen. 
 
-Gebruik de *Bonferroni correctie* om Type I fouten te voorkomen. Pas de p-waarde aan door alpha te delen door het aantal uitgevoerde toetsen.[^4]
+Gebruik de *Bonferroni correctie* om Type I fouten te voorkomen. Pas de p-waarde aan door alpha te delen door het aantal uitgevoerde toetsen [^4].
 
 # Uitvoering in R
-Er is data ingeladen met studieresultaten van de Master arbeidsrecht per vooropleiding: Fiscaal recht, Notarieel recht, Rechtsgeleerdheid en een schakelprogramma.
+Er is data ingeladen met studieresultaten van de master arbeidsrecht per vooropleiding: fiscaal recht, notarieel recht, rechtsgeleerdheid en een schakelprogramma.
 
 ## De data bekijken
 ```{r de data exploreren, collapse=TRUE}
 head(Resultaten_arbeidsrecht)
 levels(Resultaten_arbeidsrecht$Vooropleiding)
 ```
-Voor elke student (een rij) is er te zien hoeveel studiepunten er zijn gehaald in het eerste jaar en welke vooropleiding de student afgerond heeft.  
-`mean()` geeft het gemiddelde aantal punten per vooropleiding.
+Voor elke student (één rij) is er te zien hoeveel studiepunten er zijn gehaald in het eerste jaar en welke vooropleiding de student afgerond heeft.  
 
-## in base R
+
+## In base R (mogelijkheid 1)
+`mean()` geeft het gemiddelde aantal punten per vooropleiding.
 ``` {r gemiddeldes per vooropleiding base, collapse=TRUE}
 mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Rechtsgeleerdheid"])
 mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Notarieel recht"])
@@ -99,7 +100,7 @@ mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Fiscaal recht"])
 mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Schakelprogramma"])
 ```
 
-## in package 'dplyr'
+## In package 'dplyr' (mogelijkheid 2)
 ``` {r gemiddeldes per vooropleiding dplyr, warning=FALSE, message=FALSE}
 library(dplyr)
 group_by(Resultaten_arbeidsrecht, Vooropleiding) %>%
@@ -120,7 +121,7 @@ p-waarde < 0,05 , dus de H~0~ wordt verworpen en de H~A~ aangenomen
 chi-squared: 33,07 
 
 # Post-hoc toets: Mann-Whitney U toets
-Om te weten welke groepen verschillen is er in `pairwise.wilcox.test()` een correctie beschikbaar voor *multiple testing*
+Om te weten welke groepen verschillen is er in `pairwise.wilcox.test()` een correctie beschikbaar voor *multiple testing*.
 ``` {r pairwise wilcox test}
 pairwise.wilcox.test(Resultaten_arbeidsrecht$Ec_jaar1, Resultaten_arbeidsrecht$Vooropleiding, p.adjust.method = "bonferroni")
 ```

@@ -84,15 +84,13 @@ H~A~: Tenminste voor één opleiding is de gemiddelde reistijd niet gelijk aan d
 Voor een betrouwbaar resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
 Controleer of de steekproef aan de volgende assumpties voldoet: normaliteit, homogeniteit van varianties en onafhankelijkheid.  
 
-De *one-way ANOVA* is een robuuste test. Dit betekent dat als één groep uit de steekproef niet voldoet aan de assumptie van normaliteit of homogeniteit van varianties kan de *one-way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden.[^2]   
+De *one-way ANOVA* is een robuuste test. Dit betekent dat als één groep uit de steekproef niet voldoet aan de assumptie van normaliteit of homogeniteit van varianties kan de *one-way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden.[^2] Als er geen sprake is van normaliteit en/of homogeniteit, gebruik de *Kruskal-Wallis test*.[^5] 
 
 ## Normaliteit
 De *one-way ANOVA* gaat ervan uit dat de data normaal verdeeld is. Controleer de assumptie van normaliteit met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een Q-Q plot of een boxplot.  
 2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^3]) met de *Shapiro-Wilk test*.[^4]  
 3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is.
-
-Als er geen sprake is van normaliteit, gebruik de *Kruskal-Wallis test*.[^5]
 
 ## Homogeniteit van Varianties
 Controleer of de spreiding van iedere groep ongeveer hetzelfde is, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Bij een *p* < 0,05 is de spreiding van de groepen verschillend en wordt de assumptie geschonden.[^6]

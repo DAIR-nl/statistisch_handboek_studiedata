@@ -79,7 +79,10 @@ H~A~: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taal
 
 # Assumpties
 Voor een betrouwbaar resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
-Controleer of de steekproef aan de volgende assumpties voldoet: normaliteit en homogeniteit van varianties. 
+Controleer of de steekproef aan de volgende assumpties voldoet: onafhankelijkheid van groepen, normaliteit en homogeniteit van varianties. 
+
+## Onafhankelijkheid 
+Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
 
 ## Normaliteit  
 De *t-toets* gaat ervan uit dat de data normaal verdeeld is. Bij een n > 100 kan ervanuit gegaan worden dat de *t-toets* robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgt. [^2]  

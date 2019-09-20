@@ -121,11 +121,8 @@ p-waarde < 0,05 , dus de H~0~ wordt verworpen en de H~A~ aangenomen
 
 
 # Post-hoc toets: Mann-Whitney U toets
-<<<<<<< HEAD
-Om te weten welke groepen verschillen is er in `pairwise.wilcox.test()` een correctie beschikbaar voor *multiple testing*.
-=======
 Om te weten welke groepen verschillen is er in `pairwise.wilcox.test()` de *Bonferroni correctie* beschikbaar voor *multiple testing*
->>>>>>> 30a2a6b53332bf4aa14d873b89c754186ac07fb1
+
 ``` {r pairwise wilcox test}
 pairwise.wilcox.test(Resultaten_arbeidsrecht$Ec_jaar1, Resultaten_arbeidsrecht$Vooropleiding, p.adjust.method = "bonferroni")
 ```

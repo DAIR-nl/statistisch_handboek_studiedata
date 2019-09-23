@@ -175,15 +175,24 @@ Controleer de data visueel met een Q-Q plot. Gebruik `qqnorm()` en `qqline()` me
 
 <div class ="col3">
 ```{r qqplot atc}
-qqnorm(Reistijd_atc, pch = 1)
+qqnorm(Reistijd_atc, pch = 1,
+       main = "",
+       ylab = "Kwantielen in data",
+       xlab = "Theoretische kwantielen")
 qqline(Reistijd_atc)
 ```
 ```{r qqplot fil}
-qqnorm(Reistijd_fil, pch = 1)
+qqnorm(Reistijd_fil, pch = 1,
+       main = "",
+       ylab = "Kwantielen in data",
+       xlab = "Theoretische kwantielen")
 qqline(Reistijd_fil)
 ```
 ```{r qqplot gsc}
-qqnorm(Reistijd_gsc, pch = 1)
+qqnorm(Reistijd_gsc, pch = 1,
+       main = "",
+       ylab = "Kwantielen in data",
+       xlab = "Theoretische kwantielen")
 qqline(Reistijd_gsc)
 ```
 </div>

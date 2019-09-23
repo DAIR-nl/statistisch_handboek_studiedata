@@ -158,11 +158,17 @@ Controleer de data visueel met een Q-Q plot.
 Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een Q-Q plot te maken met kleine cirkels.
 <div class ="col2">
 ```{r qqplot atc}
-qqnorm(Cijfers_2010, pch = 1)
+qqnorm(Cijfers_2010, pch = 1,
+       main = "",
+       ylab = "Kwantielen in data",
+       xlab = "Theoretische kwantielen")
 qqline(Cijfers_2010)
 ```
 ```{r qqplot fil}
-qqnorm(Cijfers_2011, pch = 1)
+qqnorm(Cijfers_2011, pch = 1,
+       main = "",
+       ylab = "Kwantielen in data",
+       xlab = "Theoretische kwantielen")
 qqline(Cijfers_2011)
 ```
 </div>

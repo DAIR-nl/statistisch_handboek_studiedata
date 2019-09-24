@@ -129,7 +129,7 @@ Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5
 Er is een dataset ingeladen met `Tentamencijfer_voor_tutorgesprek` (T~0~) en met `Tentamencijfer_na_tutorgesprek` (T~1~). 
 
 ## Test assumpties: Normaliteit 
-Inspecteer de data met `length()`, mean()`en `sd()` om meer inzicht te krijgen in de data, . 
+Inspecteer de data met `length()`, mean()`en `sd()` om meer inzicht te krijgen in de data. 
 <div class="col2">
 ```{r beschrijvende gegevens na tutor, collapse = TRUE}
 length(Tentamencijfer_voor_tutorgesprek)
@@ -235,7 +235,7 @@ De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen
 ``` {r Boxplot na}
 boxplot(Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgesprek, 
         names = c("Voor tutorgesprek", "Na tutorgesprek"),
-        main = "Boxplot van tentamencijfers", 
+        main = "Boxplot van tentamencijfers lerarenopleiding", 
         ylab = "Tentamencijfer")
 ```
 

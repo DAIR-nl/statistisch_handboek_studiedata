@@ -88,6 +88,6 @@ Het 95% betrouwbaarheidsinterval is groot, tussen de 0,41 en de 8,78.
 Om te toetsen of studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel, is de *chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de conclusie dat de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel niet gelijk is gebleven, *χ^2^* (1) ≈ 4,41, *p* < 0,05.
  
 [^1]: Prabhakaran, S. (2016-2017). *Statistical Tests* http://r-statistics.co/Statistical-Tests-in-R.html
-[^2]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. Sage publications.
+[^2]: Field, A., Miles, J., & Field, Z. (2012). Discovering statistics using R. *Sage publications*.
 [^3]: van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets* https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets
 [^4]: Universiteit van Amsterdam (13 november 2017). *Chi-square test* https://wiki.uva.nl/methodologiewinkel/index.php/Chi-square_test#Assumpties 

@@ -41,17 +41,11 @@ H~0~: De verhouding uitval van het aantal studenten met een functiebeperking na 
 H~A~: De verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel is veranderd.
 
 # Assumpties
-Voor een betrouwbaar resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
-
-## Nominaal
-De variabelen zijn op nominaal niveau gemeten, dit betekent automatisch dat er geen ordening tussen de groepen gemaakt kan worden en dat de groepen onafhankelijk van elkaar zijn.  
-
-## Onafhankelijkheid 
-Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst. 
+Voor een betrouwbaar resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. Groepen zijn onafhankelijk van elkaar en de variabelen zijn op nominaal niveau gemeten. De *chi-kwadraat toets* heeft specifieke regels wat betreft de groepsgrootte per cel. 
 
 ## Groeps- en celgrootte
-De groepsgrootte van de verwachtte waarde is per cel niet kleiner dan 5, bij de geobserveerde waarde is de groepsgrootte niet minder dan 10. Gebruik de *Fisher’s exact toets* wanneer de groepen kleiner zijn.[^2]  
-Elke cel van de verwachte waarde is groter dan 0.[^3] 
+Elke cel van de verwachte waarde is groter dan 0.  
+Als in 20% van de cellen een verwachte waarde van 5 of lager staat, wordt de toets onbetrouwbaar en wordt er geadviseerd om de *chi-kwadraat toets* niet uit te voeren. In de cellen met de geobserveerde waarde is dat 10 of lager.[^2] Gebruik de *Fisher’s exact toets* wanneer de groepen kleiner zijn.[^3] 
 
 # Uitvoering in R
 Er is een dataset ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. De data `Uitval_functiebeperking` is binair: wel of geen uitval. 
@@ -68,11 +62,12 @@ Zet de data in een kruistabel, voordat `chisq.test()` gebruikt wordt.
 chisq.test(Uitval_functiebeperking)
 ```
 
+*χ^2^* (1) ≈ 4,41, *p* < 0,05  
 Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval is *df* = 1. Wanneer het aantal vrijheidsgraden 1 is, wordt de continuïteitscorrectie van Yates toegepast.  
 p-waarde < 0,05 , dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen  
 
 ## Fisher's exact toets
-De *Fisher's exact toets* wordt ook gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde nominale variabelen, door middel van een kruistabel. In tegenstelling tot de *chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage frequenties ingezet worden. De *Fisher's exact toets* is conservatiever dan de *chi-kwadraat toets*.[^2]
+De *Fisher's exact toets* wordt ook gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde nominale variabelen, door middel van een kruistabel. In tegenstelling tot de *chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage frequenties ingezet worden. De *Fisher's exact toets* is conservatiever dan de *chi-kwadraat toets*.[^4]
 
 Er is data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel, alle groepen hebben een laag aantal per cel, variërend van 5 tot 16. Ook hier is de data `Uitval_functiebeperking_n43` binair. 
 
@@ -89,8 +84,9 @@ Het 95% betrouwbaarheidsinterval is groot, tussen de 0,41 en de 8,78.
 # nieuwe hypothese
 # chi en ongeveer teken
 ```
-Om te toetsen of studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel, is de *chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de conclusie dat de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel niet gelijk is gebleven, χ^2^ (1) ≈ 4,41, *p* < 0,01.
+Om te toetsen of studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel, is de *chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de conclusie dat de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel niet gelijk is gebleven, *χ^2^* (1) ≈ 4,41, *p* < 0,05.
  
 [^1]: Prabhakaran, S. (2016-2017). *Statistical Tests* http://r-statistics.co/Statistical-Tests-in-R.html
-[^2]: van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets* https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets
-[^3]: Universiteit van Amsterdam (13 november 2017). *Chi-square test* https://wiki.uva.nl/methodologiewinkel/index.php/Chi-square_test#Assumpties 
+[^2]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. Sage publications.
+[^3]: van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets* https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets
+[^4]: Universiteit van Amsterdam (13 november 2017). *Chi-square test* https://wiki.uva.nl/methodologiewinkel/index.php/Chi-square_test#Assumpties 

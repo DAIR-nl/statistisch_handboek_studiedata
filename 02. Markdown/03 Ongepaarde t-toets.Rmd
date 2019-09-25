@@ -109,7 +109,7 @@ De data is verdeeld in 2 kolommen: het cijfer en het cohort.
 Cijfers_gem[sample(1:340, 10),]
 ```
 
-Selecteer beide groepen om een aantal gegevens te achterhalen. Sla de selectie op in een vector. 
+Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. 
 ```{r data selecteren}
 Cijfers_2010 <- Cijfers_gem[Cijfers_gem$Cohort == 2010,1]
 Cijfers_2011 <- Cijfers_gem[Cijfers_gem$Cohort == 2011,1]
@@ -231,7 +231,7 @@ In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, 
 ## Test assumpties: Levene's test
 Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. 
 
-De `leveneTest()` heeft in R twee argumenten. Het eerste argument is een vector met de data van beide groepen. Het tweede argument is een factor waarin de groepen worden gedefinieerd of een vector die logisch om te zetten is naar een factor.
+De `leveneTest()` heeft in R twee argumenten. Het eerste argument is een vector met de data van beide groepen. Het tweede argument is een factor waarin de groepen worden gedefinieerd of een vector die logischerwijs om te zetten is naar een factor.
 ```{r Levenes test, message=FALSE, warning=FALSE, collapse=TRUE}
 library(car)
 leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)

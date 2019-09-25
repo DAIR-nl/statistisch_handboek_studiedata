@@ -91,7 +91,7 @@ levels(Resultaten_arbeidsrecht$Vooropleiding)
 Voor elke student (één rij) is er te zien hoeveel studiepunten er zijn gehaald in het eerste jaar en welke vooropleiding de student afgerond heeft.  
 
 
-## In base R (mogelijkheid 1)
+## mean in base R (mogelijkheid 1)
 `mean()` geeft het gemiddelde aantal punten per vooropleiding.
 ``` {r gemiddeldes per vooropleiding base, collapse=TRUE}
 mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Rechtsgeleerdheid"])
@@ -100,7 +100,7 @@ mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Fiscaal recht"])
 mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Schakelprogramma"])
 ```
 
-## In package 'dplyr' (mogelijkheid 2)
+## mean in package 'dplyr' (mogelijkheid 2)
 ``` {r gemiddeldes per vooropleiding dplyr, warning=FALSE, message=FALSE}
 library(dplyr)
 group_by(Resultaten_arbeidsrecht, Vooropleiding) %>%

@@ -42,17 +42,7 @@ H~0~: De verhouding uitval van het aantal studenten met een functiebeperking na 
 H~A~: De verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel is veranderd.
 
 # Assumpties
-<<<<<<< HEAD
-Voor een betrouwbaar resultaat moet de data aan een aantal voorwaarden voldoen, voordat de toets uitgevoerd kan worden.
-
-## Nominaal
-De variabelen zijn op nominaal niveau gemeten, dit betekent automatisch dat er geen ordening tussen de groepen gemaakt kan worden en dat de groepen onafhankelijk van elkaar zijn.  
-
-## Onafhankelijkheid 
-Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst. 
-=======
 Voor een betrouwbaar resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. Groepen zijn onafhankelijk van elkaar en de variabelen zijn op nominaal niveau gemeten. De *chi-kwadraat toets* heeft specifieke regels wat betreft de groepsgrootte per cel. 
->>>>>>> 2ff86f39b41e4c2dc73cf850e30469a1284b1735
 
 ## Groeps- en celgrootte
 Elke cel van de verwachte waarde is groter dan 0.  
@@ -87,7 +77,7 @@ fisher.test(Uitval_functiebeperking_n43)
 ```
 
 p-waarde > 0,05 , dus de H~0~ wordt niet verworpen  
-De kans op het uitvallen van studenten met een functiebeperking onder het leenstelsel is 1,8 keer zo groot, als de kans op het uitvallen van studenten met een functiebeperking voor het leenstelsel. Deze associatie blijkt niet significant te zijn: p < 0,51  
+De kans op het uitvallen van studenten met een functiebeperking onder het leenstelsel is 1,8 keer zo groot, als de kans op het uitvallen van studenten met een functiebeperking voor het leenstelsel. Deze associatie blijkt niet significant te zijn: *p* = 0,51  
 Het 95% betrouwbaarheidsinterval is breed, tussen de 0,41 en de 8,78.   
 
 # Rapportage
@@ -95,16 +85,10 @@ Het 95% betrouwbaarheidsinterval is breed, tussen de 0,41 en de 8,78.
 # nieuwe hypothese
 # chi en ongeveer teken
 ```
-<<<<<<< HEAD
-Om te toetsen of studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel, is de *chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de conclusie dat de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel niet gelijk is gebleven, *χ^2^*(1) ≈ 4,41, *p* < 0,01.
- 
-[^1]: Prabhakaran, S. (2016-2017). *Statistical Tests* http://r-statistics.co/Statistical-Tests-in-R.html
-[^2]: Andy field Discovering statistics using R 
-=======
-Om te toetsen of studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel, is de *chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de conclusie dat de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel niet gelijk is gebleven, *χ^2^* (1) ≈ 4,41, *p* < 0,05.
+
+Om te toetsen of studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel, is de *chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de nulhypothese dat de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel gelijk is gebleven, *χ^2^* (1) ≈ 4,41, *p* < 0,05.
  
 [^1]: Prabhakaran, S. (2016-2017). *Statistical Tests* http://r-statistics.co/Statistical-Tests-in-R.html
 [^2]: Field, A., Miles, J., & Field, Z. (2012). Discovering statistics using R. *Sage publications*.
->>>>>>> 2ff86f39b41e4c2dc73cf850e30469a1284b1735
 [^3]: van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets* https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets
 [^4]: Universiteit van Amsterdam (13 november 2017). *Chi-square test* https://wiki.uva.nl/methodologiewinkel/index.php/Chi-square_test#Assumpties 

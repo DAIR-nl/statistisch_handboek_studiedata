@@ -130,9 +130,9 @@ length(Cijfers_2011)
 mean(Cijfers_2011)
 sd(Cijfers_2011)
 ```
-*n* = 160
+*n* = 160   
 Gemiddeld tentamencijfer 2011  
-(standaarddeviatie): 6,46(1,2) 
+(standaarddeviatie): 6,46(1,2)  
 </div>
 
 ## Test assumpties: normaliteit
@@ -250,7 +250,7 @@ t.test(Cijfers_2010, Cijfers_2011, paired = FALSE, var.equal = TRUE)
 * 95%-betrouwbaarheidsinterval; bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. 95%-betrouwbaarheidsinterval: 0,22 tot 0,29
 
 
-## Effectmaat: Cohen's d 
+### Effectmaat: Cohen's d 
 Gebruik `cohen.d()` met `paired = FALSE` om het effect te meten.
 ```{r Cohen s d}
 library(effsize)
@@ -260,7 +260,7 @@ cohen.d(Cijfers_2010, Cijfers_2011, paired = FALSE)
 
 
 # Rapportage
-Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = 6,37, *SD~2010~* = 1,12) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = 6,46, *SD~2011~* = 1,2) is significant, *t* (326,37) = -1,93, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van 0,22 tot 0,29. Het effect is klein, *d* = -0,08. 
+Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = 6,37, *SD~2010~* = 1,12) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = 6,46, *SD~2011~* = 1,2) is significant, *t* (326,37) = -1,93, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van 0,22 tot 0,29. Het effect is minimaal, *d* = -0,08. 
 
 [^1]: van Geloven, N. (25 maart 2016). *T-toets*. https://wikistatistiek.amc.nl/index.php/T-toets#ongepaarde_t-toets
 [^2]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). Tthe importance of the normality assumption in large public health data sets. *Annu Rev Public Health, 23*, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf 
@@ -269,5 +269,3 @@ Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamenc
 [^5]: van Geloven, N. (13 maart 2018). *Mann-Whitney U toets*. https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets
 [^6]: Universiteit van Amsterdam (8 juli 2014). *One-way ANOVA*. https://wiki.uva.nl/methodologiewinkel/index.php/One-way_ANOVA
 [^7]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf 
-
-

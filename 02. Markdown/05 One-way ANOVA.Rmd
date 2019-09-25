@@ -75,7 +75,7 @@ Reistijd_per_opleiding <- Reistijd_per_opleiding %>%
 Gebruik de *one-way ANOVA* bij het toetsen of het gemiddelde van drie of meer onafhankelijke groepen aan elkaar gelijk zijn.[^1] 
 
 # Onderwijscasus
-In verband met wervingsactiviteiten wil het hoofd van de afdeling Communicatie weten wat de reistijd is van studenten aan verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten voor de opleidingen: arabische taal en cultuur, filosofie en geschiedenis. 
+In verband met wervingsactiviteiten wil het hoofd van de afdeling Communicatie weten wat de reistijd is van studenten aan verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. 
 
 H~0~: De gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar: µ~0~ = µ~1~ = µ~2~ ... µ~n~  
 
@@ -149,9 +149,9 @@ mean(Reistijd_gsc)
 sd(Reistijd_gsc)
 ```
 </div>
-* Gemiddelde reistijd arabische taal en cultuur (standaarddeviatie): 17,45(10,05)  
-* Gemiddelde reistijd filosofie (standaarddeviatie): 33,77(10,96)  
-* Gemiddelde reistijd geschiedenis (standaarddeviatie): 36,53(12,09)  
+* Gemiddelde reistijd Arabische Taal en Cultuur (standaarddeviatie): 17,45(10,05)  
+* Gemiddelde reistijd Filosofie (standaarddeviatie): 33,77(10,96)  
+* Gemiddelde reistijd Geschiedenis (standaarddeviatie): 36,53(12,09)  
 
 ## Test assumpties: normaliteit 
 ### Histogram
@@ -206,7 +206,7 @@ qqline(Reistijd_gsc)
 ```
 </div>
 
-Bij de Q-Q plot van de reistijd van studenten geschiedenis liggen de meeste punten op de lijn behalve bij de uiteinden. De cirkels van de Q-Q plot van studenten arabische taal en cultuur en studenten filosofie liggen net naast de getrokken lijn, maar zo minimaal ernaast dat de data vermoedelijk normaal verdeeld is.   
+Bij de Q-Q plot van de reistijd van studenten Geschiedenis liggen de meeste punten op de lijn behalve bij de uiteinden. De cirkels van de Q-Q plot van studenten Arabische Taal en Cultuur en studenten Filosofie liggen net naast de getrokken lijn, maar zo minimaal ernaast dat de data vermoedelijk normaal verdeeld is.   
 
 ### Boxplot
 Controleer de data visueel met een boxplot.
@@ -217,7 +217,7 @@ boxplot(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 ```
 
 De boxplotten geven de spreiding weer van de reistijd voor de drie opleidingen.   
-De boxplotten arabische taal en cultuur en geschiedenis zien er symmetrisch uit; de boxen zijn even hoog boven als onder de mediaan. De staarten zijn onder en boven even groot. De boxplot van filosofie is boven de mediaan groter dan onder de mediaan, de data kan wat scheef verdeeld zijn.  
+De boxplotten Arabische Taal en Cultuur en Geschiedenis zien er symmetrisch uit; de boxen zijn even hoog boven als onder de mediaan. De staarten zijn onder en boven even groot. De boxplot van Filosofie is boven de mediaan groter dan onder de mediaan, de data kan wat scheef verdeeld zijn.  
 
 ***
 Om te controleren of de data normaal verdeeld is, kan de normaliteit getoetst worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
@@ -267,11 +267,11 @@ Gebruik `aov()` om een ANOVA-object (`aov`) te creëren. Geef het resultaat over
 res.aov <- aov(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 summary(res.aov)
 ```
-* *F* (2,254) = 21,58 *p* < 0,01  
+* *F* (2,254) = 21,58, *p* < 0,01  
 * Vrijheidsgraden: het aantal groepen - 1 = 2; *n~1~* + *n~2~* - 2 = 254 
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
 
-## Effectmaat: Cohen's d 
+### Effectmaat: Cohen's d 
 Gebruik `cohen.d()` met `paired = FALSE` om het effect te meten.
 ```{r library effsize}
 library(effsize)
@@ -296,6 +296,11 @@ Gebruik `EtaSq()` op een ANOVA-object om eta-squared te vinden.
 library(DescTools)
 EtaSq(res.aov)
 ```
+*d~~* = -0,08. De sterkte van het effect van de tutor op het cijfer is minimaal. 
+
+Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect.[^7]
+
+
 
 ## Tukey's toets
 Doe een post hoc test om te toetsen welke verschillen significant zijn. Gebruik bij gelijke variantie de Tukey honestly significant difference test. Gebruik `TukeyHSD()` op het ANOVA-object.
@@ -303,12 +308,12 @@ Doe een post hoc test om te toetsen welke verschillen significant zijn. Gebruik 
 ```{r TukeyHSD}
 TukeyHSD(res.aov)
 ```
-Het verschil tussen filosofie en arabische taal en cultuur: *MD* = 13,69, p < 0,01. 
-Het verschil tussen geschiedenis en arabische taal en cultuur: *MD* = 10,92, p < 0,01. 
-Het verschil tussen geschiedenis en filosofie: *MD* = 2,76, p = 0,26. 
+Het verschil tussen Filosofie en Arabische Taal en Cultuur: *MD* = 13,69, p < 0,01. 
+Het verschil tussen Geschiedenis en Arabische Taal en Cultuur: *MD* = 10,92, p < 0,01. 
+Het verschil tussen Geschiedenis en Filosofie: *MD* = 2,76, p = 0,26. 
 
 # Rapportage
-Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De opleidingen zijn: arabische taal en cultuur (*M~atc~* = 47,45, *SD~atc~* = 10,04), filosofie (*M~fil~* = 33,77, *SD~fil~* = 10,96) en geschiedenis (*M~gsc~* = 36,53, *SD~fil~* = 12,09. The *one way ANOVA* was significant, *F*(2, 254) = 21,58, *p* <0,01. Dat wil zeggen dat er een significant verschil is tussen de gemiddelde reistijden van de drie opleidingen.  
+Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De opleidingen zijn: Arabische Taal en Cultuur (*M~atc~* = 47,45, *SD~atc~* = 10,04), Filosofie (*M~fil~* = 33,77, *SD~fil~* = 10,96) en Geschiedenis (*M~gsc~* = 36,53, *SD~fil~* = 12,09. The *one way ANOVA* was significant, *F*(2, 254) = 21,58, *p* <0,01. Dat wil zeggen dat er een significant verschil is tussen de gemiddelde reistijden van de drie opleidingen.  
 
 **het effect is **
 
@@ -318,7 +323,7 @@ Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de
 
 TABELLEN?? M, SD. 
 
-Filosofie en arabische taal en cultuur verschillen significant (*MD* = 13,69, p < 0,01). Geschiedenis en arabische taal en cultuur hebben een significant verschil (*MD* = 10,92, p < 0,01). Tussen geschiedenis en filosofie is geen significant verschil gevonden (*MD* = 2,76, p = 0,26). 
+Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = 13,69, p < 0,01). Geschiedenis en Arabische Taal en Cultuur hebben een significant verschil (*MD* = 10,92, p < 0,01). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = 2,76, p = 0,26). 
 
 
 Aan de hand van de resultaten kan geconcludeerd worden dat ..... Het effect is minimaal.

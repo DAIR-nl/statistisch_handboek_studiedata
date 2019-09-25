@@ -5,7 +5,8 @@ date: "`r format(Sys.time(), '%d-%m-%y')`"
 output: 
   html_document:
     toc: TRUE
-    toc_float: TRUE
+    toc_float:
+      collapsed: FALSE
     number_sections: TRUE
     theme: united
 ---
@@ -35,26 +36,26 @@ set.seed(1)
 mu <- 6.3
 sigma <- 1.2
 Cijfers_2010 <- rnorm(180, mu, sigma)
-Cijfers_2010 <- Cijfers_2010 [Cijfers_2010 <= 10 & Cijfers_2010 >= 1]
-Cijfers_2010 <- sapply (Cijfers_2010, round, 3)
+Cijfers_2010 <- Cijfers_2010[Cijfers_2010 <= 10 & Cijfers_2010 >= 1]
+Cijfers_2010 <- sapply(Cijfers_2010, round, 3)
 
 mu <- 6.3
 sigma <- 1.2
 Cijfers_2010_n30 <- rnorm(30, mu, sigma)
-Cijfers_2010_n30 <- Cijfers_2010_n30 [Cijfers_2010_n30 <= 10 & Cijfers_2010_n30 >= 1]
-Cijfers_2010_n30 <- sapply (Cijfers_2010_n30, round, 3)
+Cijfers_2010_n30 <- Cijfers_2010_n30[Cijfers_2010_n30 <= 10 & Cijfers_2010_n30 >= 1]
+Cijfers_2010_n30 <- sapply(Cijfers_2010_n30, round, 3)
 
-mu <- 6.6
+mu <- 6.45
 sigma <- 1.2
 Cijfers_2011 <- rnorm(160, mu, sigma)
-Cijfers_2011 <- Cijfers_2011 [Cijfers_2011 <= 10 & Cijfers_2011 >= 1]
-Cijfers_2011 <- sapply (Cijfers_2011, round, 3)
+Cijfers_2011 <- Cijfers_2011[Cijfers_2011 <= 10 & Cijfers_2011 >= 1]
+Cijfers_2011 <- sapply(Cijfers_2011, round, 3)
 
-mu <- 6.6
+mu <- 6.45
 sigma <- 1.2
 Cijfers_2011_n30 <- rnorm(30, mu, sigma)
-Cijfers_2011_n30 <- Cijfers_2011_n30 [Cijfers_2011_n30 <= 10 & Cijfers_2011_n30 >= 1]
-Cijfers_2011_n30 <- sapply (Cijfers_2011, round, 3)
+Cijfers_2011_n30 <- Cijfers_2011_n30[Cijfers_2011_n30 <= 10 & Cijfers_2011_n30 >= 1]
+Cijfers_2011_n30 <- sapply(Cijfers_2011, round, 3)
 
 Cijfers <- c(Cijfers_2010, Cijfers_2011)
 Cohort <- c(replicate(180, 2010), replicate(160, 2011))
@@ -81,9 +82,6 @@ H~A~: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taal
 Voor een betrouwbaar resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
 Controleer of de steekproef aan de volgende assumpties voldoet: onafhankelijkheid van groepen, normaliteit en homogeniteit van varianties. 
 
-## Onafhankelijkheid 
-Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
-
 ## Normaliteit  
 De *t-toets* gaat ervan uit dat de data normaal verdeeld is. Bij een n > 100 kan ervanuit gegaan worden dat de *t-toets* robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgt.[^2]  
 
@@ -94,7 +92,6 @@ Controleer de assumptie van normaliteit met de volgende stappen:
 
 Als er geen sprake is van normaliteit en *n* is niet groter dan 100, gebruik de *Mann-Whitney U toets*, ook bekend als de *Wilcoxon rank-sum toets*.[^5]  
 
-
 ## Homogeniteit van varianties 
 De *ongepaarde t-toets* gaat ervan uit dat beide groepen dezelfde spreiding hebben, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Bij een *p* < 0,05 is de spreiding van de groepen verschillend en wordt de assumptie geschonden.[^6] 
 
@@ -104,32 +101,38 @@ Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een
 Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect.[^7]
 
 # Uitvoering in R
-Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap genaamd `Cijfers_gem`. De data bevat cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
+Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap: `Cijfers_gem`. De data bevat cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
 
 ## De data bekijken
 De data is verdeeld in 2 kolommen: het cijfer en het cohort.
 ```{r data bekijken}
 Cijfers_gem[sample(1:340, 10),]
 ```
-Om meer inzicht te krijgen in de data, inspecteer de data met `mean()`en `sd()`. Selecteer beide groepen om het gemiddelde, de standaarddeviatie en het histogram uit te draaien. Sla de selectie op in een vector. 
+
+Selecteer beide groepen om een aantal gegevens te achterhalen. Sla de selectie op in een vector. 
 ```{r data selecteren}
-Cijfers_2010 <- Cijfers_gem[Cijfers_gem$Cohort==2010,1]
-Cijfers_2011 <- Cijfers_gem[Cijfers_gem$Cohort==2011,1]
+Cijfers_2010 <- Cijfers_gem[Cijfers_gem$Cohort == 2010,1]
+Cijfers_2011 <- Cijfers_gem[Cijfers_gem$Cohort == 2011,1]
 ```
 
+Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data.
 <div class="col2">
 ```{r Data beschrijven 1, collapse=TRUE}
+length(Cijfers_2010)
 mean(Cijfers_2010)
 sd(Cijfers_2010)
 ```
+*n* = 180  
 Gemiddeld tentamencijfer 2010  
-(standaarddeviatie): 6,37 (1,12)
+(standaarddeviatie): 6,37 (1,12)  
 ```{r Data beschrijven 2, collapse=TRUE}
+length(Cijfers_2011)
 mean(Cijfers_2011)
 sd(Cijfers_2011)
 ```
+*n* = 160
 Gemiddeld tentamencijfer 2011  
-(standaarddeviatie): 6,61(1,2) 
+(standaarddeviatie): 6,46(1,2) 
 </div>
 
 ## Test assumpties: normaliteit
@@ -143,11 +146,18 @@ library(ggplot2)
 ggplot(Cijfers_gem,
   aes(x = Cijfers)) +
   geom_histogram(aes(y = ..density..),
+                 binwidth = 1,
                  color = "grey30",
                  fill = "#0089CF") +
   facet_wrap(~ Cohort) +
   geom_density(alpha = .2, adjust = 1) +
   ylab("Frequentiedichtheid") +
+  scale_x_continuous(
+    labels = as.character(seq(1, 10)),
+    breaks = seq(1, 10)) +
+  coord_fixed(ylim = c(0, 0.4),
+              xlim = c(1, 10),
+              ratio = 22) +
   labs(title = "Taalwetenschap gemiddelde cijfers jaar 1")
 ```
 
@@ -158,11 +168,17 @@ Controleer de data visueel met een Q-Q plot.
 Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een Q-Q plot te maken met kleine cirkels.
 <div class ="col2">
 ```{r qqplot atc}
-qqnorm(Cijfers_2010, pch = 1)
+qqnorm(Cijfers_2010, pch = 1,
+       main = "Normaal Q-Q plot van tentamencijfers 2011",
+       ylab = "Kwantielen in data",
+       xlab = "Theoretische kwantielen")
 qqline(Cijfers_2010)
 ```
 ```{r qqplot fil}
-qqnorm(Cijfers_2011, pch = 1)
+qqnorm(Cijfers_2011, pch = 1,
+       main = "Normaal Q-Q plot van tentamencijfers 2011",
+       ylab = "Kwantielen in data",
+       xlab = "Theoretische kwantielen")
 qqline(Cijfers_2011)
 ```
 </div>
@@ -228,7 +244,7 @@ Voer een ongepaarde `t.test()` uit met `paired = FALSE` en `var.equal = TRUE`. A
 ```{r statistische toets}
 t.test(Cijfers_2010, Cijfers_2011, paired = FALSE, var.equal = TRUE)
 ```
-* *t* (326.37) = -1.93 *p* < 0,01  
+* *t* (326,37) = -1,93 *p* < 0,01  
 * Vrijheidsgraden: *df* = *n* -1 = 247.  
 * p-waarde < 0,05, dus de H~A~ wordt aangenomen  
 * 95%-betrouwbaarheidsinterval; bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. 95%-betrouwbaarheidsinterval: 0,22 tot 0,29
@@ -240,11 +256,11 @@ Gebruik `cohen.d()` met `paired = FALSE` om het effect te meten.
 library(effsize)
 cohen.d(Cijfers_2010, Cijfers_2011, paired = FALSE)
 ```
-*d* = 0,21. De sterkte van het effect van de tutor op het cijfer is minimaal. 
+*d* = -0,08. De sterkte van het effect van de tutor op het cijfer is minimaal. 
 
 
 # Rapportage
-Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = 6,37, *SD~2010~* = ,11) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = 6,61, *SD~2011~* = 1,2) is significant, *t* (338) = -1,93, *p* < 0,05. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van -0,49 tot 0. Het effect is klein, *d* = 0,21. 
+Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = 6,37, *SD~2010~* = 1,12) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = 6,46, *SD~2011~* = 1,2) is significant, *t* (326,37) = -1,93, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van 0,22 tot 0,29. Het effect is klein, *d* = -0,08. 
 
 [^1]: van Geloven, N. (25 maart 2016). *T-toets*. https://wikistatistiek.amc.nl/index.php/T-toets#ongepaarde_t-toets
 [^2]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). Tthe importance of the normality assumption in large public health data sets. *Annu Rev Public Health, 23*, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf 

@@ -5,7 +5,8 @@ date: "`r format(Sys.time(), '%d-%m-%y')`"
 output: 
   html_document:
     toc: TRUE
-    toc_float:  TRUE
+    toc_float:
+      collapsed: FALSE
     number_sections: TRUE
     theme: united
 ---
@@ -133,14 +134,17 @@ Om meer inzicht te krijgen in de data, inspecteer de data met `mean()`en `sd()`.
 <div class ="col3">
 
 ```{r descriptives atc, collapse=TRUE}
+length(Reistijd_atc)
 mean(Reistijd_atc)
 sd(Reistijd_atc)
 ```
 ```{r descriptives fil, collapse=TRUE}
+length(Reistijd_fil)
 mean(Reistijd_fil)
 sd(Reistijd_fil)
 ```
 ```{r descriptives gsc, collapse=TRUE}
+length(reistijd_gsc)
 mean(Reistijd_gsc)
 sd(Reistijd_gsc)
 ```
@@ -175,18 +179,33 @@ Controleer de data visueel met een Q-Q plot. Gebruik `qqnorm()` en `qqline()` me
 
 <div class ="col3">
 ```{r qqplot atc}
-qqnorm(Reistijd_atc, pch = 1)
+qqnorm(
+ Reistijd_atc, pch = 1,
+ main = "Normaal Q-Q plot van reistijd Arabische Taal en Cultuur",
+ ylab = "Kwantielen in data",
+ xlab = "Theoretische kwantielen")
 qqline(Reistijd_atc)
 ```
 ```{r qqplot fil}
-qqnorm(Reistijd_fil, pch = 1)
+qqnorm(
+ Reistijd_fil, pch = 1,
+ main = "Normaal Q-Q plot van reistijd Filosofie
+ ",
+ ylab = "Kwantielen in data",
+ xlab = "Theoretische kwantielen")
 qqline(Reistijd_fil)
 ```
 ```{r qqplot gsc}
-qqnorm(Reistijd_gsc, pch = 1)
+qqnorm(
+ Reistijd_gsc, pch = 1,
+ main = "Normaal Q-Q plot van reistijd Geschiedenis
+ ",
+ ylab = "Kwantielen in data",
+ xlab = "Theoretische kwantielen")
 qqline(Reistijd_gsc)
 ```
 </div>
+
 Bij de Q-Q plot van de reistijd van studenten geschiedenis liggen de meeste punten op de lijn behalve bij de uiteinden. De cirkels van de Q-Q plot van studenten arabische taal en cultuur en studenten filosofie liggen net naast de getrokken lijn, maar zo minimaal ernaast dat de data vermoedelijk normaal verdeeld is.   
 
 ### Boxplot
@@ -207,12 +226,16 @@ Om te controleren of de data normaal verdeeld is, kan de normaliteit getoetst wo
 De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen de twee verdelingen. In dit geval toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is een correctie die wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van een normale verdeling.
 
 
-```{r lillietest, collapse=TRUE}
+```{r library nortest}
 library("nortest")
+```
+<div class="col3">
+```{r lillietest}
 lillie.test(Reistijd_atc)
 lillie.test(Reistijd_fil)
 lillie.test(Reistijd_gsc)
 ```
+</div>
 Bij deze casus zijn van alle groepen de p-waarde > 0,05; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *one-way ANOVA* kan uitgevoerd worden.
 
 ## Test assumpties: Levene's test
@@ -225,8 +248,21 @@ leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
 *F*(2, 254) = 1,66, p-waarde = 0,19, de groepen zijn niet verschillend in variantie.  
 Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 2) en de tweede cijfer (*n~1~* + *n~2~* - 2 = 254) 
 
+### Shapiro-Wilk Test
+De Shapiro-Wilk test is een soortgelijke test als de Kolmogorov-Smirnov test en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.
+
+<div class="col3">
+``` {r Shapiro-Wilk Test, warning=FALSE}
+shapiro.test(Reistijd_atc)
+shapiro.test(Reistijd_fil)
+shapiro.test(Reistijd_gsc)
+```
+</div>
+
+In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, dus is de verdeling van beide groepen niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *one-way ANOVA* kan uitgevoerd worden.
+
 ## One-way ANOVA 
-Gebruik `aov()` voor een ANOVA. Geef het resultat overzichtelijk weer met `summary()`. 
+Gebruik `aov()` om een ANOVA-object (`aov`) te creëren. Geef het resultaat overzichtelijk weer met `summary()`.
 ```{r ANOVA}
 res.aov <- aov(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 summary(res.aov)
@@ -235,12 +271,34 @@ summary(res.aov)
 * Vrijheidsgraden: het aantal groepen - 1 = 2; *n~1~* + *n~2~* - 2 = 254 
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
 
-## Effectmaat: Cohen's d
+## Effectmaat: Cohen's d 
+Gebruik `cohen.d()` met `paired = FALSE` om het effect te meten.
+```{r library effsize}
+library(effsize)
+```
+<div class="col3">
+```{r Cohen s d}
+cohen.d(Reistijd_atc,
+        Reistijd_fil,
+        paired = FALSE)
+cohen.d(Reistijd_atc,
+        Reistijd_gsc,
+        paired = FALSE)
+cohen.d(Reistijd_fil,
+        Reistijd_gsc,
+        paired = FALSE)
+```
+</div>
 
 ## Effectmaat: eta squared
+Gebruik `EtaSq()` op een ANOVA-object om eta-squared te vinden.
+```{r eta-squared, message = FALSE}
+library(DescTools)
+EtaSq(res.aov)
+```
 
 ## Tukey's toets
-Doe een post hoc test om te toetsen welke verschillen significant zijn. Bij gelijke variantie gebruik Tukey honestly significant difference test, `TukeyHSD()`.
+Doe een post hoc test om te toetsen welke verschillen significant zijn. Gebruik bij gelijke variantie de Tukey honestly significant difference test. Gebruik `TukeyHSD()` op het ANOVA-object.
 
 ```{r TukeyHSD}
 TukeyHSD(res.aov)

@@ -129,9 +129,10 @@ Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5
 Er is een dataset ingeladen met `Tentamencijfer_voor_tutorgesprek` (T~0~) en met `Tentamencijfer_na_tutorgesprek` (T~1~). 
 
 ## Test assumpties: Normaliteit 
-Om meer inzicht te krijgen in de data, inspecteer de data met `mean()`en `sd()`. 
+Inspecteer de data met `length()`, mean()`en `sd()` om meer inzicht te krijgen in de data. 
 <div class="col2">
 ```{r beschrijvende gegevens na tutor, collapse = TRUE}
+length(Tentamencijfer_voor_tutorgesprek)
 mean(
   Tentamencijfer_voor_tutorgesprek)
 sd(Tentamencijfer_voor_tutorgesprek)
@@ -142,6 +143,7 @@ Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): 6,84 (1,66)
 
 
 ```{r Assumptietest, collapse=TRUE}
+length(Tentamencijfer_na_tutorgesprek)
 mean(
   Tentamencijfer_na_tutorgesprek)
 sd(Tentamencijfer_na_tutorgesprek)
@@ -207,14 +209,20 @@ Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeli
 Controleer de data visueel met een Q-Q plot. Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een Q-Q plot te maken met kleine cirkels.
 <div class ="col2">
 ```{r qqplot voor tutor}
-qqnorm(Tentamencijfer_voor_tutorgesprek , 
-       pch = 1)
+qqnorm(Tentamencijfer_voor_tutorgesprek, 
+       pch = 1,
+       main = "Normaal Q-Q plot van tentamencijfers voor tutorgesprek",
+       ylab = "Kwantielen in data",
+       xlab = "Theoretische kwantielen")
 qqline(Tentamencijfer_voor_tutorgesprek)
 ```
 
 ```{r qqplot na tutor}
 qqnorm(Tentamencijfer_na_tutorgesprek, 
-       pch = 1)
+       pch = 1,
+       main = "Normaal Q-Q plot van tentamencijfers na tutorgesprek",
+       ylab = "Kwantielen in data",
+       xlab = "Theoretische kwantielen")
 qqline(Tentamencijfer_na_tutorgesprek)
 ```
 </div>
@@ -224,19 +232,13 @@ Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen wor
 Controleer de data visueel met een boxplot.  
 De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels zijn uitbijters.  
 
-<div class ="col2">
 ``` {r Boxplot na}
-boxplot(Tentamencijfer_voor_tutorgesprek,
-      xlab = "Lerarenopleiding", 
-      ylab = "Tentamencijfer_voor_tutorgesprek")
+boxplot(Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgesprek, 
+        names = c("Voor tutorgesprek", "Na tutorgesprek"),
+        main = "Boxplot van tentamencijfers lerarenopleiding", 
+        ylab = "Tentamencijfer")
 ```
 
-``` {r Boxplot voor}
-boxplot(Tentamencijfer_na_tutorgesprek, 
-        xlab = "Lerarenopleiding", 
-        ylab = "Tentamencijfer_na_tutorgesprek")
-```
-</div>
 De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer per periode voor de lerarenopleiding. De boxplot en de staarten van T~0~ zijn niet helemaal symmetrisch. Dit kan een teken zijn dat de data niet normaal verdeeld is. Het gaat om een kleine afwijking, daarom is de data vermoedelijk normaal verdeeld. Er zijn een aantal uitbijters. Er kan gekeken worden of de uitbijters bepalend zijn voor normaliteit of niet.  
 De boxplot van T~1~ ziet er symmetrisch uit. Er zijn geen uitbijters.    
 

@@ -128,8 +128,8 @@ Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5
 # Uitvoering in R
 Er is een dataset ingeladen met `Tentamencijfer_voor_tutorgesprek` (T~0~) en met `Tentamencijfer_na_tutorgesprek` (T~1~). 
 
-## Test assumpties: Normaliteit 
-Inspecteer de data met `length()`, mean()`en `sd()` om meer inzicht te krijgen in de data. 
+## De data bekijken
+Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data. 
 <div class="col2">
 ```{r beschrijvende gegevens na tutor, collapse = TRUE}
 length(Tentamencijfer_voor_tutorgesprek)
@@ -138,6 +138,7 @@ mean(
 sd(Tentamencijfer_voor_tutorgesprek)
 ```
 
+*n* = 234    
 Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): 6,84 (1,66)
 
 
@@ -149,6 +150,7 @@ mean(
 sd(Tentamencijfer_na_tutorgesprek)
 ```
 
+*n* = 234   
 Gemiddeld tentamencijfer na tutorgesprek (standaardafwijking): 7,04 (1,43)
 
 </div>
@@ -290,7 +292,7 @@ t.test(Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgesprek, paired 
 * 95%-betrouwbaarheidsinterval; bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. 95%-betrouwbaarheidsinterval: -0,24 tot -0,16  
 * Het verschil tussen beide groepen: *MD* = -0,20
 
-## Effectmaat: Cohen's d
+### Effectmaat: Cohen's d
 Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
 ```{r Cohen s d}
 library(effsize)
@@ -318,4 +320,3 @@ Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een 
 [^4]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
 [^5]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
 [^6]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf 
-

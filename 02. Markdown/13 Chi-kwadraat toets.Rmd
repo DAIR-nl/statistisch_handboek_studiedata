@@ -19,6 +19,10 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r opmerking TODO, include=FALSE, eval=FALSE}
+# TODO: Uitleg extra pagina: nominaal, ordinaal etc., afhanjeklijk en onafhankelijk  
+# TODO: Uitleg transformeren data 
+
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 Geen_leenstelsel <- c(375, 496)
 Wel_leenstelsel <- c(369, 394)
@@ -81,10 +85,6 @@ De kans op het uitvallen van studenten met een functiebeperking onder het leenst
 Het 95% betrouwbaarheidsinterval is breed, tussen de 0,41 en de 8,78.   
 
 # Rapportage
-```{r opmerking, include=FALSE, eval=FALSE}
-# nieuwe hypothese
-# chi en ongeveer teken
-```
 
 Om te toetsen of studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel, is de *chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de nulhypothese dat de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel gelijk is gebleven, *χ^2^* (1) ≈ 4,41, *p* < 0,05.
  

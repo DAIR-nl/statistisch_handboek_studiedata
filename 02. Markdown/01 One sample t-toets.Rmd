@@ -1,4 +1,5 @@
 ---
+title: "One-sample t-test"
 output:
   html_document:
     theme: lumen
@@ -11,171 +12,12 @@ output:
   
 ---
 
----
-title: One sample t-toets
-date: "versie 0.5.2, 23-10-2019"
-number-sections: yes
----
 <style>
-<!--html_preserve-->/* Stylesheet Statistisch Handboek */
-
-/* Title */
-h1.title {
-    opacity: 1;
-    text-align: left;
-    color: #158CBA;
-}
-
-/* Casus */
-#casus {
-    display: block;
-    padding: 9.5px;
-    margin: 0 0 10px;
-    font-size: 14px;
-    line-height: 2;
-    color: #000000;
-    background-color: #f5f5f5;
-    border: 1px solid #158CBA;
-    border-radius: 4px;
-}
-
-/* Empty data */
-.empty{
-    display: block;
-    color: #FF0000;
-}
-
-/* Klippy */
-.btn-klippy .octicon {
-    display: inline-block;
-    margin: 2px;
-    padding: 2px;
-    width: 15px !important;
-}
-
-/* Main container */
-.main-container {
-    margin-top: 50px;
-}
-
-/* Toetsmatrix */
-table.toetsmatrix {
-    text-align: center;
-    margin: 5px;
-    padding: 5px;
-}
-
-
-td.header1 {
-    font-weight: bold;
-    color: #FFFFFF;
-    background-color: #158CBA;
-    text-align: center;
-}
-
-td.header2 {
-    font-weight: bold;
-    color: #FFFFFF;
-    background-color: #A6A6A6;
-    text-align: center;
-}
-
-td.header3 {
-    font-weight: bold;
-    background-color: #D9D9D9;
-    text-align: center;
-}
-
-table.toetsmatrix td {
-    border-color: #000000 !important;
-    padding: 10px;
-}
-
-td.innercell{
-    border: 1px solid #000000;
-}
-
-td.innercell a {
-    text-decoration: none;
-}
-
-td.innercell a:hover {
-    text-decoration: underline;
-}
-
-td.published {
-    color: #158cba;
-}
-
-td.unpublished, td.unpublished a {
-    color: #A6A6A6;
-}
-
-td.unpublished a:hover {
-    color: #A6A6A6;
-    text-decoration: none;
-}
-
-/* Footer */
-#footer {
- color: #808080
- background-image: url('images/VPO_logo_studiedata.png');;
- background-repeat: no-repeat;
- background-position: right;
- background-size: 230px auto;
- padding-right: 242px;
-}
-
+`r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet SHHO.css"))`
 </style>
 
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/Users/theo/Dropbox/Bitbucket/sho_skeleton/_site/index.html">Statistisch Handboek Hoger Onderwijs</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="/Users/theo/Dropbox/Bitbucket/sho_skeleton/_site/Toetsmatrix.html">Toetsmatrix</a>
-</li>
-<li>
-  <a href="/Users/theo/Dropbox/Bitbucket/sho_skeleton/_site/Over.html">Over</a>
-</li>
-<li>
-  <a href="/Users/theo/Dropbox/Bitbucket/sho_skeleton/_site/Licentie.html">Licentie</a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/html_preserve-->
-
-<style>
-  .col2 {
-    columns: 2 200px;
-    -webkit-columns: 2 200px;
-    -moz-columns: 2 200px;
-  }
-</style>
-``` {r versiegeschiedenis, include = FALSE, eval = FALSE}
-## versie 0.4     3-9-19
-## versie 0.5.1   16-9-19
-```
-
-```{r opmerking, include=FALSE, eval=FALSE}
-# TODO: een link maken naar Wilcoxon Signed Rank Test
-# TODO: Uitleg transformeren data 
-```
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r header, include = FALSE, echo = TRUE, results='asis'} 
+paste0(here::here(),"/03. Includes/code/Header.R")
 ```
 
 ```{r functiedefinities,include=FALSE, echo=TRUE}
@@ -185,6 +27,11 @@ Round_and_format <- function(x, digits = 2) {
   x <- str_replace(x, "[.]", ",")
   return(x)
 }
+```
+
+```{r opmerking, include=FALSE, eval=FALSE}
+# TODO: een link maken naar Wilcoxon Signed Rank Test
+# TODO: Uitleg transformeren data 
 ```
 
 <!-- ## BLOK: Data-aanmaken.R -->
@@ -215,12 +62,16 @@ Gemiddeld_cijfer_WNS_n30 <- sample(Gemiddeld_cijfer_WNS, 30)
 # Toepassing
 Gebruik de *t-toets* om te toetsen of de gemiddeldes van twee groepen aan elkaar gelijk zijn. Gebruik de *one sample t-toets* om aan de hand van één steekproef het gemiddelde van de totale populatie te vergelijken met een vooraf bekende waarde.[^1] 
 
+
+
 # Onderwijscasus
+<div id = "casus">
 De opleidingsdirecteur van de opleiding Werktuigbouwkunde wil weten of het gemiddelde eindexamencijfer voor de exacte vakken (Wiskunde, Natuurkunde en Scheikunde; WNS) van vwo studenten hoger is dan het landelijk gemiddelde (6,8).[^2] Zo kan zij bepalen of het curriculum van de inleidende vakken genoeg aansluit bij eerstejaars studenten met een vwo vooropleiding.[^3]
 
 H~0~: Het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde is gelijk aan het landelijk gemiddelde: µ = 6,8. 
 
 H~A~: Het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde is anders dan het landelijk gemiddelde: µ ≠ 6,8. 
+</div>
 
 # Assumpties
 Voor een betrouwbaar resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
@@ -347,9 +198,16 @@ De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamen
 
 De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor de exacte vakken van studenten Werktuigbouwkunde met een vwo vooropleiding hoger ligt dan het landelijk gemiddelde.
 
+```{r footer, include = FALSE, echo = TRUE, results='asis'} 
+paste0(here::here(),"/03. Includes/code/Footer.R")
+```
+
 [^1]: van Geloven, N. (25 mei 2016). *T-toets* https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets
 [^2]: Centraal Instituut voor Toetsontwikkeling (2018). *Examenverslag 2018*. https://www.cito.nl/onderwijs/voortgezet-onderwijs/centrale-examens-voortgezet-onderwijs/tools-en-informatie-voor-docenten/examenverslagen/examenverslag-2018
 [^3]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). The importance of the normality assumption in large public health data sets. Annu Rev Public Health, 23, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf
 [^3]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
 [^4]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
 [^5]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html  
+
+
+

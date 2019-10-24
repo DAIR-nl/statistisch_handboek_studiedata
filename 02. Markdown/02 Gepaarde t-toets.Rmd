@@ -1,24 +1,35 @@
 ---
-title: "Gepaarde t-toets"
-author: "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
-date: "`r format(Sys.time(), '%d-%m-%y')`"
-output: 
+title: "Gepaarde t-test"
+output:
   html_document:
-    toc: TRUE
-    toc_float:
+    theme: lumen
+    toc: yes
+    toc_float: 
       collapsed: FALSE 
-    number_sections: TRUE
-    theme: united
-    
+    number_sections: true
+    keep_md: true
+  keywords: [statistisch handboek, studiedata]
+  
 ---
 
 <style>
-  .col2 {
-    columns: 2 200px;
-    -webkit-columns: 2 200px;
-    -moz-columns: 2 200px;
-  }
+`r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet SHHO.css"))`
 </style>
+
+```{r header, include = FALSE, echo = TRUE, results='asis'} 
+paste0(here::here(),"/03. Includes/code/Header.R")
+```
+
+<!-- ## BLOK: Functiedefinities.R -->
+```{r functiedefinities,include=FALSE, echo=TRUE}
+library(stringr)
+Round_and_format <- function(x, digits = 2) {
+  x <- as.character(round(x, digits))
+  x <- str_replace(x, "[.]", ",")
+  return(x)
+}
+```
+<!-- ## /BLOK: Functiedefinities.R -->
 
 ``` {r versiegeschiedenis, include = FALSE, eval = FALSE}
 ## versie 0.1     3-9-19
@@ -30,16 +41,13 @@ output:
 # doorlinken naar de Wilcoxon Signed Rank Test
 # linken naar blz transformeren data 
 # link naar 
-
 ```
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
+<!-- ## BLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 RNGkind(sample.kind = "Rounding")
 set.seed(2)
+library(dplyr)
 
 ## Maak ruwe data aan
 mu <- 7.2
@@ -74,6 +82,19 @@ Tentamencijfer_voor_tutorgesprek <- sort(Tentamencijfer_voor_tutorgesprek)
 Tentamencijfer_voor_tutorgesprek <- Tentamencijfer_voor_tutorgesprek[sample(-283:-1, Verschil_grootte)]
 Tentamencijfer_voor_tutorgesprek <- Tentamencijfer_voor_tutorgesprek[volgorde]
 
+Voor_of_na_tutorgesprek <- c(
+  replicate(length(Tentamencijfer_voor_tutorgesprek), "voor"), 
+  replicate(length(Tentamencijfer_na_tutorgesprek), "na"))
+Studentnr <- c(replicate(2, sample(300000:400000, (length(Voor_of_na_tutorgesprek)/2))))
+Cijfer <- c(Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgesprek)
+
+Tentamencijfers <- data.frame(Studentnr, Cijfer, Voor_of_na_tutorgesprek)
+
+## Stel de volgorde van de factor vast
+Tentamencijfers <- 
+  mutate(Tentamencijfers, 
+         Voor_of_na_tutorgesprek =
+                  factor(Voor_of_na_tutorgesprek, levels = c("voor", "na")))
 
 mu <- 7.2
 sigma <- 1.2
@@ -96,6 +117,7 @@ Tentamencijfer_na_tutorgesprek_n30 <- sapply(Tentamencijfer_na_tutorgesprek_n30,
 Tentamencijfer_na_tutorgesprek_n30 <- sort(Tentamencijfer_na_tutorgesprek_n30)
 Tentamencijfer_na_tutorgesprek_n30 <- Tentamencijfer_na_tutorgesprek_n30[volgorde_n30]
 ```
+<!-- ## /BLOK: Data-aanmaken.R -->
 
 # Toepassing
 Gebruik de *t-toets* om te toetsen of de gemiddeldes van twee groepen aan elkaar gelijk zijn. Gebruik de *gepaarde t-toets* bij een herhaalde meting van dezelfde groep.[^1] 
@@ -129,87 +151,101 @@ Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5
 Er is een dataset ingeladen met `Tentamencijfer_voor_tutorgesprek` (T~0~) en met `Tentamencijfer_na_tutorgesprek` (T~1~). 
 
 ## De data bekijken
+De data is verdeeld in 3 kolommen, het studentnummer, het cijfer en of deze voor of na het tutorgesprek behaald is.
+<!-- ## BLOK: Data-bekijken.R -->
+```{r data bekijken, collapse = TRUE}
+## Eerste 10 observaties
+head(Tentamencijfers)
+
+## Laatste 10 observaties
+tail(Tentamencijfers)
+```
+<!-- ## /BLOK: Data-bekijken.R -->
+
+Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen.
+<!-- ## BLOK: Data-selecteren.R -->
+```{r data selecteren}
+Tentamencijfer_voor_tutorgesprek <-
+  Tentamencijfers[Tentamencijfers$Voor_of_na_tutorgesprek=="voor", 2]
+Tentamencijfer_na_tutorgesprek <- 
+  Tentamencijfers[Tentamencijfers$Voor_of_na_tutorgesprek=="na", 2]
+```
+<!-- ## /BLOK: Data-selecteren.R -->
+
 Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data. 
+
 <div class="col2">
-```{r beschrijvende gegevens na tutor, collapse = TRUE}
+<!-- ## BLOK: Data-beschrijven-t1.R -->
+```{r data beschrijven t1, collapse = TRUE}
+## Aantallen, gemiddelde en standaarddeviatie voor tutorgesprek
 length(Tentamencijfer_voor_tutorgesprek)
 mean(
   Tentamencijfer_voor_tutorgesprek)
 sd(Tentamencijfer_voor_tutorgesprek)
 ```
+<!-- ## /BLOK: Data-beschrijven-t1.R -->
+```{r Var beschrijven t0, include=FALSE, echo=TRUE}
+vMeant0 <- Round_and_format(mean(Tentamencijfer_voor_tutorgesprek))
+vSDt0 <-Round_and_format(sd(Tentamencijfer_voor_tutorgesprek))
+```
+*n* = `r length(Tentamencijfer_voor_tutorgesprek)`   
+Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): `r vMeant0` (`r vSDt0`)
 
-*n* = 234    
-Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): 6,84 (1,66)
-
-
-
-```{r Assumptietest, collapse=TRUE}
+<!-- ## BLOK: Data-beschrijven-t2.R -->
+```{r data bekijken t2, collapse=TRUE}
+## Aantallen, gemiddelde en standaarddeviatie na tutorgesprek
 length(Tentamencijfer_na_tutorgesprek)
 mean(
   Tentamencijfer_na_tutorgesprek)
 sd(Tentamencijfer_na_tutorgesprek)
 ```
-
-*n* = 234   
-Gemiddeld tentamencijfer na tutorgesprek (standaardafwijking): 7,04 (1,43)
-
+<!-- ## /BLOK: Data-beschrijven-t2.R -->
+```{r Var beschrijven t1, include=FALSE, echo=TRUE}
+vMeant1 <- Round_and_format(mean(Tentamencijfer_na_tutorgesprek))
+vSDt1 <- Round_and_format(sd(Tentamencijfer_na_tutorgesprek))
+```
+*n* = `r length(Tentamencijfer_na_tutorgesprek)`   
+Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): `r vMeant1` (`r vSDt1`)
 </div>
 
 ### Histogram
-Controleer de data visueel met een histogram. 
-```{r library ggplot}
+Controleer de data visueel met een histogram.
+
+<!-- ## BLOK: library-ggplot2.R -->
+```{r library ggplot2}
 library(ggplot2)
 ```
+<!-- ## /BLOK: library-ggplot2.R -->
 
-<div class ="col2">
-```{r histogram voor tutorgesprek}
-ggplot(
-  data.frame(
-    Tentamencijfer_voor_tutorgesprek),
-  aes(x = Tentamencijfer_voor_tutorgesprek)) +
+<!-- ## BLOK: Histogram.R -->
+```{r histogram atc}
+ggplot(Tentamencijfers,
+  aes(x = Cijfer)) +
   geom_histogram(aes(y = ..density..),
-                 binwidth = 0.5, 
-                 color = "grey30", 
-                 fill = "#0089CF") + 
+                 binwidth = 1,
+                 color = "grey30",
+                 fill = "#0089CF") +
+  facet_wrap(~ Voor_of_na_tutorgesprek) +
   geom_density(alpha = .2, adjust = 1) +
   ylab("Frequentiedichtheid") +
-  xlab("Tentamencijfer_voor_tutorgesprek") +
   scale_x_continuous(
-    labels = as.character(seq(1, 10, 0.5)),
-    breaks = seq(1, 10, 0.5)) +
-    coord_fixed(ylim = c(0, 0.3),
+    labels = as.character(seq(1, 10)),
+    breaks = seq(1, 10)) +
+  coord_fixed(ylim = c(0, 0.4),
               xlim = c(1, 10),
-              ratio = 18) +
-  labs(title = expression(paste("Tentamencijfers (", T[0], ")")))
+              ratio = 22) +
+  labs(title = "Lerarenopleiding tentamencijfers")
 ```
+<!-- ## /BLOK: Histogram.R -->
 
-```{r histogram na tutorgesprek}
-ggplot(
-  data.frame(
-    Tentamencijfer_na_tutorgesprek),
-  aes(x = Tentamencijfer_na_tutorgesprek)) +
-  geom_histogram(aes(y = ..density..),
-                 binwidth = 0.5, 
-                 color = "grey30", 
-                 fill = "#0089CF") + 
-  geom_density(alpha = .2, adjust = 1) +
-  ylab("Frequentiedichtheid") +
-  xlab("Tentamencijfer_na_tutorgesprek") +
-  scale_x_continuous(
-    labels = as.character(seq(1, 10, 0.5)),
-    breaks = seq(1, 10, 0.5)) +
-  coord_fixed(ylim = c(0, 0.3),
-              xlim = c(1, 10),
-              ratio = 18) +
-  labs(title = expression(paste("Tentamencijfers (", T[1], ")")))
-```
 
-</div>
-Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling. Veel waardes liggen rondom de gemiddeldes. Opvallend is dat het histogram `Tentamencijfer_voor_tutorgesprek` veel waardes in de linkerstaart van de verdeling heeft liggen.  
+Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling. Veel waardes liggen rondom de gemiddeldes. Opvallend is dat het histogram van voor het tutorgesprek veel waardes in de linkerstaart van de verdeling heeft liggen.  
 
 ### Q-Q plot
 Controleer de data visueel met een Q-Q plot. Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een Q-Q plot te maken met kleine cirkels.
+
 <div class ="col2">
+<!-- ## BLOK: QQplot-t1.R -->
 ```{r qqplot voor tutor}
 qqnorm(Tentamencijfer_voor_tutorgesprek, 
        pch = 1,
@@ -218,7 +254,9 @@ qqnorm(Tentamencijfer_voor_tutorgesprek,
        xlab = "Theoretische kwantielen")
 qqline(Tentamencijfer_voor_tutorgesprek)
 ```
+<!-- ## /BLOK: QQplot-t1.R -->
 
+<!-- ## BLOK: QQplot-t2.R -->
 ```{r qqplot na tutor}
 qqnorm(Tentamencijfer_na_tutorgesprek, 
        pch = 1,
@@ -227,20 +265,21 @@ qqnorm(Tentamencijfer_na_tutorgesprek,
        xlab = "Theoretische kwantielen")
 qqline(Tentamencijfer_na_tutorgesprek)
 ```
+<!-- ## /BLOK: QQplot-t2.R -->
 </div>
+
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is. In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. 
 
 ### Boxplot
 Controleer de data visueel met een boxplot.  
 De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels zijn uitbijters.  
 
-``` {r Boxplot na}
-boxplot(Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgesprek, 
-        names = c("Voor tutorgesprek", "Na tutorgesprek"),
-        main = "Boxplot van tentamencijfers lerarenopleiding", 
-        ylab = "Tentamencijfer")
+<!-- ## BLOK: Boxplot.R -->
+``` {r Boxplot}
+boxplot(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers,
+        main = "Boxplot van tentamencijfers lerarenopleiding")
 ```
-
+<!-- ## /BLOK: Boxplot.R -->
 De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer per periode voor de lerarenopleiding. De boxplot en de staarten van T~0~ zijn niet helemaal symmetrisch. Dit kan een teken zijn dat de data niet normaal verdeeld is. Het gaat om een kleine afwijking, daarom is de data vermoedelijk normaal verdeeld. Er zijn een aantal uitbijters. Er kan gekeken worden of de uitbijters bepalend zijn voor normaliteit of niet.  
 De boxplot van T~1~ ziet er symmetrisch uit. Er zijn geen uitbijters.    
 
@@ -251,16 +290,20 @@ Om te controleren of de data normaal verdeeld is, kan de normaliteit getoetst wo
 
 ### Kolmogorov-Smirnov (met Lilliefors correctie)
 De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen de twee verdelingen. In dit geval toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is een correctie op de *Kolmogorov-Smirnov test*, die wordt gebruikt als het gemiddelde van de steekproef niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van een normale verdeling. 
+<!-- ## BLOK: Library-nortest -->
 ```{r library nortest, warning=FALSE}
 library(nortest)
 ```
+<!-- ## /BLOK: Library-nortest -->
 <div class ="col2">
+<!-- ## BLOK: Lilliefors-test -->
 ``` {r Lilliefors Test, warning=FALSE}
 lillie.test(
   Tentamencijfer_voor_tutorgesprek)
 lillie.test(
   Tentamencijfer_na_tutorgesprek)
 ```
+<!-- ## /BLOK: Lilliefors-test -->
 </div>
 
 Bij deze casus is van beide groepen de p-waarde > 0,05; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *gepaarde t-toets* kan uitgevoerd worden. 
@@ -268,49 +311,55 @@ Bij deze casus is van beide groepen de p-waarde > 0,05; er is geen significant v
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.
 <div class ="col2">
+<!-- ## BLOK: Shapiro-Wilk-test -->
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 shapiro.test(
   Tentamencijfer_voor_tutorgesprek_n30)
 shapiro.test(
   Tentamencijfer_na_tutorgesprek_n30)
 ```
+<!-- ## /BLOK: Shapiro-Wilk-test -->
 </div>
 
 In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05. De verdeling van beide groepen is niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan. De *gepaarde t-toets* kan uitgevoerd worden.  
 
-
 ***
+
 ## Gepaarde t-toets
-Gebruik `t.test()` met `paired = TRUE`. 
-```{r statistische toets}
-t.test(Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgesprek, paired = TRUE)
+Gebruik `t.test()` met `paired = TRUE`.
+<!-- ## BLOK: T-test -->
+```{r T-test}
+t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
+```
+<!-- ## BLOK: T-test -->
+```{r T-test als item, echo = FALSE}
+t <- t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
+vT_waarde <- Round_and_format(t$statistic)
+vN <- t$parameter+1
+vDF <- t$parameter
+vConf.int1 <- Round_and_format(t$conf.int[1])
+vConf.int2 <- Round_and_format(t$conf.int[2])
 ```
 
-* *t* (233) = -9,96 *p* < 0,01  
-* Vrijheidsgraden: *df* = *n* -1 = 233
+* Vrijheidsgraden, *df* = *n* -1 = `r vN`-1 = `r vDF`  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
-* 95%-betrouwbaarheidsinterval; bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. 95%-betrouwbaarheidsinterval: -0,24 tot -0,16  
-* Het verschil tussen beide groepen: *MD* = -0,20
+* *t* (`r vN`) = `r vT_waarde`, *p* < 0,01
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r vConf.int1` en `r vConf.int2`.
 
 ### Effectmaat: Cohen's d
 Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
-```{r Cohen s d}
+```{r Cohens d}
 library(effsize)
-cohen.d(Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgesprek, paired = TRUE)
+cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 ```
-*d* = -0,09. De sterkte van het effect van de tutor op het cijfer is minimaal. 
-
-
-```{r eta-squared, include = FALSE, echo = FALSE}
-#ik heb geen optie gevonden die etasq uitrekent zonder anova. Gebruik je deze eigenlijk wel voor t-toets?
-t <- 17.713
-df <- 245
-Eta2 <- (t^2) / (t^2 + 245)
-Eta2
+```{r var Cohens d, echo = FALSE}
+d <- cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
+vD_waarde <- Round_and_format(d$estimate)
 ```
+*d* = `r vD_waarde`. De sterkte van het effect van de tutor op het cijfer is minimaal. 
 
 # Rapportage
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = 6,84, *SD~T0~* = 1,66) en het gemiddelde van T~1~ (*M~T1~* = 7,04, *SD~T1~* = 1,43) is significant, *t* (233) = -9,96, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van -0,24 tot -0,16. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is minimaal, *d* = 0,09. 
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r vMeant0`, *SD~T0~* = `r vSDt0`) en het gemiddelde van T~1~ (*M~T1~* =`r vMeant1`, *SD~T1~* = `r vSDt1`) is significant, *t* (`r vDF`) = `r vT_waarde`, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vConf.int1` tot `r vConf.int2`. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is minimaal, *d* = `r vD_waarde`. 
 
 Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor. Het effect is minimaal.  
 

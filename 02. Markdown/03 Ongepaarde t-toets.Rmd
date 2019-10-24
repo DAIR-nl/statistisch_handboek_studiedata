@@ -1,34 +1,39 @@
 ---
 title: "Ongepaarde t-toets"
 author: "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
-date: "`r format(Sys.time(), '%d-%m-%y')`"
-output: 
+date: "`r format(Sys.time(), '%d-%m-%Y')`"
+output:
   html_document:
-    toc: TRUE
-    toc_float:
-      collapsed: FALSE
-    number_sections: TRUE
-    theme: united
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+    keep_md: true
+  keywords: [statistisch handboek, studiedata]
+  
 ---
 
-
 <style>
-  .col2 {
-    columns: 2 200px;
-    -webkit-columns: 2 200px;
-    -moz-columns: 2 200px;
-  }
+`r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet SHHO.css"))`
 </style>
 
-``` {r versiegeschiedenis, include = FALSE, eval = FALSE}
-## versie 0.1     3-9-19
-## versie 0.2     17-9-19
+```{r header, include = FALSE, echo = TRUE, results='asis'} 
+paste0(here::here(),"/03. Includes/code/Header.R")
 ```
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+<!-- ## BLOK: Functiedefinities.R -->
+```{r functiedefinities,include=FALSE, echo=TRUE}
+library(stringr)
+Round_and_format <- function(x, digits = 2) {
+  x <- as.character(round(x, digits))
+  x <- str_replace(x, "[.]", ",")
+  return(x)
+}
 ```
+<!-- ## /BLOK: Functiedefinities.R -->
 
+<!-- ## BLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 RNGkind(sample.kind = "Rounding")
 set.seed(1)
@@ -61,9 +66,8 @@ Cijfers <- c(Cijfers_2010, Cijfers_2011)
 Cohort <- c(replicate(180, 2010), replicate(160, 2011))
 Cijfers_gem <- data.frame(Cijfers, Cohort)
 
-
 ```
-
+<!-- ## /BLOK: Data-aanmaken.R -->
 ```{r opmerking, include=FALSE, eval=FALSE}
 # linken naar de Mann-Whitney U toets  
 ```
@@ -72,15 +76,16 @@ Cijfers_gem <- data.frame(Cijfers, Cohort)
 Gebruik de *t-toets* om te toetsen of de gemiddeldes van twee groepen aan elkaar gelijk zijn. Gebruik de *ongepaarde t-toets* om de gemiddelden van twee onafhankelijke groepen te vergelijken.[^1]
 
 # Onderwijscasus
+<div id = "casus">
 Vanaf 2011 heeft de opleiding Taalwetenschap een Bindend Studieadvies (BSA) die de selectiviteit van het eerste jaar moet vergroten. Zij vraagt zich af of het gemiddelde cijfer van de opleiding Taalwetenschap op 1 februari, na invoering van het BSA, gestegen is. De data is beschikbaar voor het cohort gestart in 2010 en voor het cohort gestart in 2011.
 
 H~0~: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taalwetenschap is niet veranderd na de invoer van het BSA, µ~0~ = µ~1~  
 
 H~A~: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taalwetenschap is veranderd na de invoer van het BSA, µ~0~ ≠ µ~1~
+</div>
 
 # Assumpties
 Voor een betrouwbaar resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
-Controleer of de steekproef aan de volgende assumpties voldoet: onafhankelijkheid van groepen, normaliteit en homogeniteit van varianties. 
 
 ## Normaliteit  
 De *t-toets* gaat ervan uit dat de data normaal verdeeld is. Bij een n > 100 kan ervanuit gegaan worden dat de *t-toets* robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgt.[^2]  
@@ -93,7 +98,7 @@ Controleer de assumptie van normaliteit met de volgende stappen:
 Als er geen sprake is van normaliteit en *n* is niet groter dan 100, gebruik de *Mann-Whitney U toets*, ook bekend als de *Wilcoxon rank-sum toets*.[^5]  
 
 ## Homogeniteit van varianties 
-De *ongepaarde t-toets* gaat ervan uit dat beide groepen dezelfde spreiding hebben, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Bij een *p* < 0,05 is de spreiding van de groepen verschillend en wordt de assumptie geschonden.[^6] 
+Toets met de *Levene’s Test (for equality of variance)* of de spreiding van iedere groep ongeveer hetzelfde is. Bij een *p* < 0,05 is de spreiding van de groepen significant verschillend.
 
 # Effectmaat
 Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer.  
@@ -105,44 +110,67 @@ Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij 
 
 ## De data bekijken
 De data is verdeeld in 2 kolommen: het cijfer en het cohort.
-```{r data bekijken}
-Cijfers_gem[sample(1:340, 10),]
+<!-- ## BLOK: Data-bekijken.R -->
+```{r data bekijken, collapse=TRUE}
+## Eerste 10 observaties
+head(Cijfers_gem)
+
+## Laatste 10 observaties
+tail(Cijfers_gem)
 ```
+<!-- ## /BLOK: Data-bekijken.R -->
 
 Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. 
+<!-- ## BLOK: Data-selecteren.R -->
 ```{r data selecteren}
 Cijfers_2010 <- Cijfers_gem[Cijfers_gem$Cohort == 2010,1]
 Cijfers_2011 <- Cijfers_gem[Cijfers_gem$Cohort == 2011,1]
 ```
+<!-- ## /BLOK: Data-selecteren.R -->
 
 Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data.
 <div class="col2">
+<!-- ## BLOK: Data-beschrijven-t1.R -->
 ```{r Data beschrijven 1, collapse=TRUE}
+## Aantallen, gemiddelde en standaarddeviatie 2010
 length(Cijfers_2010)
 mean(Cijfers_2010)
 sd(Cijfers_2010)
 ```
-*n* = 180  
+<!-- ## /BLOK: Data-beschrijven-t1.R -->
+```{r Var beschrijven t0, include=FALSE, echo=TRUE}
+vMeant0 <- Round_and_format(mean(Cijfers_2010))
+vSDt0 <-Round_and_format(sd(Cijfers_2010))
+```
+*n* = `r length(Cijfers_2010)`
 Gemiddeld tentamencijfer 2010  
-(standaarddeviatie): 6,37 (1,12)  
+(standaarddeviatie): `r vMeant0` (`r vSDt0`)
+
+<!-- ## BLOK: Data-beschrijven-t2.R -->
 ```{r Data beschrijven 2, collapse=TRUE}
+## Aantallen, gemiddelde en standaarddeviatie 2011
 length(Cijfers_2011)
 mean(Cijfers_2011)
 sd(Cijfers_2011)
 ```
-*n* = 160   
+<!-- ## /BLOK: Data-beschrijven-t2.R -->
+```{r Var beschrijven t1, include=FALSE, echo=TRUE}
+vMeant1 <- Round_and_format(mean(Cijfers_2011))
+vSDt1 <-Round_and_format(sd(Cijfers_2011))
+```
+*n* = `r length(Cijfers_2011)`
 Gemiddeld tentamencijfer 2011  
-(standaarddeviatie): 6,46(1,2)  
+(standaarddeviatie): `r vMeant1` (`r vSDt1`)
 </div>
 
-## Test assumpties: normaliteit
+## Visuele inspectie van normaliteit
+Geef de data visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
 Controleer de data visueel met een histogram. 
-```{r histogram, collapse=TRUE}
+<!-- ## BLOK: Histogram.R -->
+```{r histogram}
 library(ggplot2)
-```
-```{r histogram atc}
 ggplot(Cijfers_gem,
   aes(x = Cijfers)) +
   geom_histogram(aes(y = ..density..),
@@ -160,107 +188,138 @@ ggplot(Cijfers_gem,
               ratio = 22) +
   labs(title = "Taalwetenschap gemiddelde cijfers jaar 1")
 ```
-
+<!-- ## /BLOK: Histogram.R -->
 Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  
 
 ### Q-Q plot
-Controleer de data visueel met een Q-Q plot. 
-Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een Q-Q plot te maken met kleine cirkels.
+Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een Q-Q plot te maken met kleine cirkels. Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is.
 <div class ="col2">
-```{r qqplot atc}
+<!-- ## BLOK: QQplot-t1.R -->
+```{r QQplot-t1}
 qqnorm(Cijfers_2010, pch = 1,
        main = "Normaal Q-Q plot van tentamencijfers 2011",
        ylab = "Kwantielen in data",
        xlab = "Theoretische kwantielen")
 qqline(Cijfers_2010)
 ```
-```{r qqplot fil}
+<!-- ## /BLOK: QQplot-t1.R -->
+<!-- ## BLOK: QQplot-t2.R -->
+```{r QQplot-t2}
 qqnorm(Cijfers_2011, pch = 1,
        main = "Normaal Q-Q plot van tentamencijfers 2011",
        ylab = "Kwantielen in data",
        xlab = "Theoretische kwantielen")
 qqline(Cijfers_2011)
 ```
+<!-- ## /BLOK: QQplot-t2.R -->
 </div>
-Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is. In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. 
+Bij beide groepen liggen de meeste punten op de lijn behalve bij de uiteinden. De punten bij de uiteinden liggen niet ver van de lijn vandaan, waardoor vermoedelijk de data normaal verdeeld is.
 
 ### Boxplot
-Controleer de data visueel met een boxplot. 
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. De cirkels zijn de uitbijters.  
+Controleer de data visueel met een boxplot. De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer per periode voor de Lerarenopleiding. De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren uitbijters. 
 
+<!-- ## BLOK: Boxplot.R -->
 ```{r boxplot}
-library(graphics)
-boxplot(Cijfers ~ Cohort, Cijfers_gem)
+boxplot(Cijfers ~ Cohort, Cijfers_gem,
+        main = "Tentamencijfers Taalwetenschap jaar 1")
 ```
+<!-- ## /BLOK: Boxplot.R -->
 
-De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer voor de BSA en na de BSA. De boxplotten en de staarten lijken symmetrisch, dit kan een teken zijn van normaal verdeelde data. Het cohort van 2011 heeft een aantal uitbijters. 
+De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer voor de BSA en na de BSA. De boxplotten en de staarten lijken symmetrisch, dit kan een teken zijn van normaal verdeelde data. Het cohort van 2011 heeft een aantal uitbijters. Uitbijters kunnen invloed uitoefenen op de uitkomst van toetsen [^10]. Kijk of de uitbijters bepalend zijn voor de uitkomst van een toets en bepaal wat je met een uitbijter doet.
 
-***
-
-Om te controleren of de data normaal verdeeld is, kan de normaliteit getoetst worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
+Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef lijkende verdeling, normaal verdeel is, kan de normaliteit getoets worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov (met Lilliefors correctie)
-De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen de twee verdelingen. In dit geval toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is een correctie die wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van een normale verdeling.
+De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen de twee verdelingen. In deze casus toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde < 0,05 is de verdeling van de data significant verschillend van de normale verdeling.
 
+<!-- ## BLOK: Library-nortest -->
 ```{r library nortest, warning=FALSE}
 library(nortest)
 ```
-
+<!-- ## /BLOK: Library-nortest -->
 <div class="col2">
+<!-- ## BLOK: Lilliefors-test -->
 ``` {r Lilliefors Test, warning=FALSE}
 lillie.test(Cijfers_2010)
 lillie.test(Cijfers_2011)
 ```
+<!-- ## /BLOK: Lilliefors-test -->
 </div>
 
-Bij deze casus is van beide groepen de p-waarde > 0,05; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *ongepaarde t-toets* kan uitgevoerd worden.
+Bij deze casus is van beide groepen de p-waarde > 0,05; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
 
 ### Shapiro-Wilk Test
-De Shapiro-Wilk test is een soortgelijke test als de Kolmogorov-Smirnov test en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.
+De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde < 0,05 is de verdeling van de data significant verschillend van de normale verdeling.
 <div class="col2">
+<!-- ## BLOK: Shapiro-Wilk-test -->
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 shapiro.test(Cijfers_2011_n30)
 shapiro.test(Cijfers_2010_n30)
 ```
+<!-- ## /BLOK: Shapiro-Wilk-test -->
 </div>
 
-In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, dus is de verdeling van beide groepen niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *ongepaarde t-toets* kan uitgevoerd worden.
+In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, dus is de verdeling van beide groepen niet significant verschillend van de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
 
 
 ***
 ## Test assumpties: Levene's test
 Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. 
-
-De `leveneTest()` heeft in R twee argumenten. Het eerste argument is een vector met de data van beide groepen. Het tweede argument is een factor waarin de groepen worden gedefinieerd of een vector die logischerwijs om te zetten is naar een factor.
+<!-- ## BLOK: Levenes-test -->
 ```{r Levenes test, message=FALSE, warning=FALSE, collapse=TRUE}
 library(car)
 leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 ```
-*F*(1, 338) = 0,92, p-waarde = 0,34, de groepen zijn niet verschillend in spreiding.  
-Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 1) en de tweede cijfer (*n~1~* + *n~2~* - 2 = 338)
+<!-- ## /BLOK: Levenes-test -->
+```{r Levenes test als item, echo = FALSE}
+L <- leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
+vF_waarde <- Round_and_format(L$`F value`)
+vF_p <- Round_and_format(L$`Pr(>F)`)
+```
+*F*(1, `r vDF`) = `r vF_waarde`, p-waarde = `r vF_p`, de groepen zijn niet verschillend in spreiding.  
+Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 1) en het tweede cijfer (*n~1~* + *n~2~* - 2 = `r vDF`)
 
 ## Ongepaarde t-toets
 Voer een ongepaarde `t.test()` uit met `paired = FALSE` en `var.equal = TRUE`. Als uit de *Levene's test* komt dat de groepen verschillen in variantie, gebruik `var.equal = FALSE` .
+<!-- ## BLOK: T-test -->
 ```{r statistische toets}
-t.test(Cijfers_2010, Cijfers_2011, paired = FALSE, var.equal = TRUE)
+t.test(Cijfers ~ Cohort, Cijfers_gem, paired = FALSE, var.equal = TRUE)
 ```
-* *t* (326,37) = -1,93 *p* < 0,01  
-* Vrijheidsgraden: *df* = *n* -1 = 247.  
-* p-waarde < 0,05, dus de H~A~ wordt aangenomen  
-* 95%-betrouwbaarheidsinterval; bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. 95%-betrouwbaarheidsinterval: 0,22 tot 0,29
+<!-- ## /BLOK: T-test -->
+```{r T-test als item, echo = FALSE}
+t <- t.test(Cijfers ~ Cohort, Cijfers_gem, paired = FALSE, var.equal = TRUE)
+vT_waarde <- Round_and_format(t$statistic)
+vN <- t$parameter+1
+vDF <- t$parameter
+vConf.int1 <- Round_and_format(t$conf.int[1])
+vConf.int2 <- Round_and_format(t$conf.int[2])
+```
+
+* Vrijheidsgraden, *df* = *n* -1 = `r vN`-1 = `r vDF`  
+* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
+* *t* (`r vN`) = `r vT_waarde`, *p* < 0,01
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r vConf.int1` en `r vConf.int2`.
 
 
 ### Effectmaat: Cohen's d 
 Gebruik `cohen.d()` met `paired = FALSE` om het effect te meten.
+<!-- ## BLOK: Cohens-d-test -->
 ```{r Cohen s d}
 library(effsize)
 cohen.d(Cijfers_2010, Cijfers_2011, paired = FALSE)
 ```
-*d* = -0,08. De sterkte van het effect van de tutor op het cijfer is minimaal. 
+<!-- ## /BLOK: Cohens-d-test -->
+```{r var Cohens d, echo = FALSE}
+d <- cohen.d(Cijfers_2010, Cijfers_2011, paired = FALSE)
+vD_waarde <- Round_and_format(d$estimate)
+```
+*d* = `r vD_waarde`. De sterkte van het effect van de tutor op het cijfer is minimaal. 
 
 
 # Rapportage
-Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = 6,37, *SD~2010~* = 1,12) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = 6,46, *SD~2011~* = 1,2) is significant, *t* (326,37) = -1,93, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van 0,22 tot 0,29. Het effect is minimaal, *d* = -0,08. 
+Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = `r vMeant0`, *SD~2010~* = `r vSDt0`) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* =`r vMeant1`, *SD~2011~* = `r vSDt1`) is significant, *t* (`r vDF`) = `r vT_waarde`, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vConf.int1` tot `r vConf.int2`. Het effect is minimaal, *d* = `r vD_waarde`.
+
+TODO Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor. Het effect is echter minimaal.
 
 [^1]: van Geloven, N. (25 maart 2016). *T-toets*. https://wikistatistiek.amc.nl/index.php/T-toets#ongepaarde_t-toets
 [^2]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). Tthe importance of the normality assumption in large public health data sets. *Annu Rev Public Health, 23*, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf 

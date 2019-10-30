@@ -1,30 +1,37 @@
 ---
 title: "One-way ANOVA"
 author: "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
-date: "`r format(Sys.time(), '%d-%m-%y')`"
-output: 
+date: "`r format(Sys.time(), '%d-%m-%Y')`"
+output:
   html_document:
-    toc: TRUE
-    toc_float:
-      collapsed: FALSE
-    number_sections: TRUE
-    theme: united
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+    keep_md: true
+  keywords: [statistisch handboek, studiedata]
+  
 ---
+
 <style>
-    .col3 {
-    columns: 3 100px;
-    -webkit-columns: 3 100px;
-    -moz-columns: 3 100px;
-  }
+`r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet SHHO.css"))`
 </style>
 
-``` {r versiegeschiedenis, include = FALSE, eval = FALSE}
-## versie 0.1     3-9-19
+```{r header, include = FALSE, echo = TRUE, results='asis'} 
+paste0(here::here(),"/03. Includes/code/Header.R")
 ```
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+<!-- ## BLOK: Functiedefinities.R -->
+```{r functiedefinities,include=FALSE, echo=TRUE}
+library(stringr)
+Round_and_format <- function(x, digits = 2) {
+  x <- as.character(round(x, digits))
+  x <- str_replace(x, "[.]", ",")
+  return(x)
+}
 ```
+<!-- ## /BLOK: Functiedefinities.R -->
 
 ```{r set-options, echo=FALSE, cache=FALSE}
 options(width = 80)
@@ -42,22 +49,22 @@ set.seed(3)
 Studiegrootte <- 29
 reistijd_gem <- 35
 sd_gem <- 12
-reistijd_fil <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
+Reistijd_FIL <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_fil <- replicate(2.1*Studiegrootte, "Filosofie")
 
 Studiegrootte <- 23
 reistijd_gem <- 45
 sd_gem <- 13
-reistijd_atc <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
+Reistijd_ATC <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_atc <- replicate(2.1*Studiegrootte, "Arabische Taal en Cultuur")
 
 Studiegrootte <- 71
 reistijd_gem <- 36
 sd_gem <- 11
-reistijd_gsc <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
+Reistijd_GSC <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
 namenlijst_gsc <- replicate(2.1*Studiegrootte, "Geschiedenis")
 
-Reistijd <- c(reistijd_atc, reistijd_gsc, reistijd_fil)
+Reistijd <- c(Reistijd_ATC, Reistijd_GSC, Reistijd_FIL)
 Opleiding <- c(namenlijst_atc, namenlijst_gsc, namenlijst_fil)
 
 Opleiding <- Opleiding[order(Reistijd)]
@@ -93,69 +100,104 @@ De *one-way ANOVA* gaat ervan uit dat de data normaal verdeeld is. Controleer de
 2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^3]) met de *Shapiro-Wilk test*.[^4]  
 3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is.
 
+De *one-way ANOVA* is een robuuste test. Dit betekent dat als één groep uit de steekproef niet voldoet aan de assumptie van normaliteit of homogeniteit van varianties kan de *one-way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden.[^2] Als er geen sprake is van normaliteit en/of homogeniteit, gebruik de *Kruskal-Wallis test*.[^12]
+
 ## Homogeniteit van Varianties
-Controleer of de spreiding van iedere groep ongeveer hetzelfde is, dit kan getoetst worden met de *Levene's Test (for equality of variance)*. Bij een *p* < 0,05 is de spreiding van de groepen verschillend en wordt de assumptie geschonden.[^6]
+Toets met de *Levene's Test (for equality of variance)* of de spreiding van iedere groep ongeveer hetzelfde is. Bij een *p* < 0,05 is de spreiding van de groepen significant verschillend. [^15]
 
-## Onafhankelijkheid
-Beredeneer of een van de groepen een overlap heeft met één van de andere groepen. Beredeneer of de groepen elkaars deelname kunnen beïnvloeden. Als er een overlap is zijn de groepen afhankelijk en kan de *one-way ANOVA* niet uitgevoerd worden. 
+# Effectmaat
+Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. 
+Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer.  
 
-# Post-hoc vergelijking 
-De *one-way ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Welke groep anders is wordt niet gespecificeerd. Als er bij de *one-way ANOVA* uitkomt dat er een significant verschil is tussen de groepen kan een post-hoc vergelijking gedaan worden om te bepalen welke groepen significant van elkaar verschillen.  
-
-Er zijn meerdere post-hoc vergelijkingen: 
-
-* Gebruik *Tukey* bij gelijke varianties 
-* Gebruik Dunnet's *C* bij ongelijke varianties  
+Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.[^9]  
 
 # Uitvoering in R
 Er is een dataset ingeladen met de reistijden van uitwonende studenten per opleiding is ingeladen genaamd `Reistijd_per_opleiding`. 
 
 ## De data bekijken
-Gebruik `head()` om de data te bekijken.
-```{r de data bekijken}
+Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
+<!-- ## BLOK: Data-bekijken.R -->
+```{r data bekijken, collapse = TRUE}
+## Eerste 5 observaties
 head(Reistijd_per_opleiding)
-```
 
-Gebruik `levels()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
-```{r de data visualiseren}
+## Laatste 5 observaties
+tail(Reistijd_per_opleiding)
+```
+<!-- ## /BLOK: Data-bekijken.R -->
+
+De data bevat data van studenten van verschillende opleidingen. Gebruik `levels()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
+
+```{r groepen bekijken}
+## Opleidingen in de data aanwezig
 levels(Reistijd_per_opleiding$Opleiding)
 ```
 
-Sla voor `mean()`, `sd()`, `boxplot()` en voor `lillie.test()` de verschillende groepen op in een vector.
-
-```{r subset}
-Reistijd_atc <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding == "Arabische Taal en Cultuur"]
-Reistijd_fil <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding == "Filosofie"]
-Reistijd_gsc <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding == "Geschiedenis"]
+Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. 
+<!-- ## BLOK: Data-selecteren.R -->
+```{r data selecteren}
+Reistijd_ATC <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding == "Arabische Taal en Cultuur"]
+Reistijd_FIL <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding == "Filosofie"]
+Reistijd_GSC <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding == "Geschiedenis"]
 ```
+<!-- ## /BLOK: Data-selecteren.R -->
 
 Om meer inzicht te krijgen in de data, inspecteer de data met `mean()`en `sd()`. 
 
 <div class ="col3">
+<!-- ## BLOK: Data-beschrijven-1.R -->
+```{r Data beschrijven 1, collapse=TRUE}
+## Aantallen, gemiddelde en standaarddeviatie ATC
+length(Reistijd_ATC)
+mean(Reistijd_ATC)
+sd(Reistijd_ATC)
+```
+<!-- ## /BLOK: Data-beschrijven-1.R -->
+```{r Var beschrijven 1, include=FALSE, echo=TRUE}
+vMean_ATC <- Round_and_format(mean(Reistijd_ATC))
+vSD_ATC <- Round_and_format(sd(Reistijd_ATC))
+vN_ATC <- Round_and_format(length(Reistijd_ATC))
+```
 
-```{r descriptives atc, collapse=TRUE}
-length(Reistijd_atc)
-mean(Reistijd_atc)
-sd(Reistijd_atc)
+<!-- ## BLOK: Data-beschrijven-2.R -->
+```{r Data beschrijven 2, collapse=TRUE}
+## Aantallen, gemiddelde en standaarddeviatie 2010
+length(Reistijd_FIL)
+mean(Reistijd_FIL)
+sd(Reistijd_FIL)
 ```
-```{r descriptives fil, collapse=TRUE}
-length(Reistijd_fil)
-mean(Reistijd_fil)
-sd(Reistijd_fil)
+<!-- ## /BLOK: Data-beschrijven-2.R -->
+```{r Var beschrijven 2, include=FALSE, echo=TRUE}
+vMean_FIL <- Round_and_format(mean(Reistijd_FIL))
+vSD_FIL <-Round_and_format(sd(Reistijd_FIL))
+vN_FIL <- Round_and_format(length(Reistijd_FIL))
 ```
-```{r descriptives gsc, collapse=TRUE}
-length(reistijd_gsc)
-mean(Reistijd_gsc)
-sd(Reistijd_gsc)
+
+<!-- ## BLOK: Data-beschrijven-3.R -->
+```{r Data beschrijven 3, collapse=TRUE}
+## Aantallen, gemiddelde en standaarddeviatie 2010
+length(Reistijd_GSC)
+mean(Reistijd_GSC)
+sd(Reistijd_GSC)
+```
+<!-- ## /BLOK: Data-beschrijven-3.R -->
+```{r Var beschrijven 3, include=FALSE, echo=TRUE}
+vMean_GSC <- Round_and_format(mean(Reistijd_GSC))
+vSD_GSC <-Round_and_format(sd(Reistijd_GSC))
+vN_GSC <- Round_and_format(length(Reistijd_GSC))
 ```
 </div>
-* Gemiddelde reistijd Arabische Taal en Cultuur (standaarddeviatie): 17,45(10,05)  
-* Gemiddelde reistijd Filosofie (standaarddeviatie): 33,77(10,96)  
-* Gemiddelde reistijd Geschiedenis (standaarddeviatie): 36,53(12,09)  
 
-## Test assumpties: normaliteit 
+* Gemiddelde reistijd Arabische Taal en Cultuur (standaarddeviatie): `r vMean_ATC` (`r vSD_ATC`). n = `r vN_ATC`  
+* Gemiddelde reistijd Filosofie (standaarddeviatie): `r vMean_FIL` (`r vSD_FIL`). n = `r vN_FIL`.
+* Gemiddelde reistijd Geschiedenis (standaarddeviatie): `r vMean_GSC` (`r vSD_GSC`). n = `r vN_GSC   `.
+
+## Visuele inspectie van normaliteit
+Geef de data visueel weer met een histogram, Q-Q plot of boxplot.
+
 ### Histogram
-Controleer de data visueel met een histogram. 
+Controleer de data visueel met een histogram.
+<!-- ## BLOK: Histogram.R -->
 ```{r lib ggplot2}
 library(ggplot2)
 ```
@@ -171,46 +213,54 @@ ggplot(Reistijd_per_opleiding,
   ylab("Frequentiedichtheid") +
   labs(title = "Reistijd")
 ```
+<!-- ## /BLOK: Histogram.R -->
 
 Alle drie de histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  
 
 ### Q-Q plot
-Controleer de data visueel met een Q-Q plot. Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een Q-Q plot te maken met kleine cirkels. Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is.
+Gebruik `qqnorm()` en `qqline()`. Gebruik `pch = 1`om kleine cirkels als datapunten te gebruiken.
 
+Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is.
 <div class ="col3">
+<!-- ## BLOK: QQplot1.R -->
 ```{r qqplot atc}
 qqnorm(
- Reistijd_atc, pch = 1,
+ Reistijd_ATC, pch = 1,
  main = "Normaal Q-Q plot van reistijd Arabische Taal en Cultuur",
  ylab = "Kwantielen in data",
  xlab = "Theoretische kwantielen")
-qqline(Reistijd_atc)
+qqline(Reistijd_ATC)
 ```
+<!-- ## /BLOK: QQplot1.R -->
+<!-- ## BLOK: QQplot2.R -->
 ```{r qqplot fil}
 qqnorm(
- Reistijd_fil, pch = 1,
+ Reistijd_FIL, pch = 1,
  main = "Normaal Q-Q plot van reistijd Filosofie
  ",
  ylab = "Kwantielen in data",
  xlab = "Theoretische kwantielen")
-qqline(Reistijd_fil)
+qqline(Reistijd_FIL)
 ```
+<!-- ## /BLOK: QQplot2.R -->
+<!-- ## BLOK: QQplot3.R -->
 ```{r qqplot gsc}
 qqnorm(
- Reistijd_gsc, pch = 1,
+ Reistijd_GSC, pch = 1,
  main = "Normaal Q-Q plot van reistijd Geschiedenis
  ",
  ylab = "Kwantielen in data",
  xlab = "Theoretische kwantielen")
-qqline(Reistijd_gsc)
+qqline(Reistijd_GSC)
 ```
+<!-- ## BLOK: QQplot3.R -->
 </div>
 
 Bij de Q-Q plot van de reistijd van studenten Geschiedenis liggen de meeste punten op de lijn behalve bij de uiteinden. De cirkels van de Q-Q plot van studenten Arabische Taal en Cultuur en studenten Filosofie liggen net naast de getrokken lijn, maar zo minimaal ernaast dat de data vermoedelijk normaal verdeeld is.   
 
 ### Boxplot
-Controleer de data visueel met een boxplot.
-De boxplotten geven de spreiding van het gemiddelde tentamencijfer per periode weer voor de Lerarenopleiding. De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels zijn uitbijters.  
+Controleer de data visueel met een boxplot. De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer per periode voor de Lerarenopleiding. De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren uitbijters.
+  
 ```{r boxplot}
 library(graphics)
 boxplot(Reistijd ~ Opleiding, Reistijd_per_opleiding)
@@ -219,43 +269,55 @@ boxplot(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 De boxplotten geven de spreiding weer van de reistijd voor de drie opleidingen.   
 De boxplotten Arabische Taal en Cultuur en Geschiedenis zien er symmetrisch uit; de boxen zijn even hoog boven als onder de mediaan. De staarten zijn onder en boven even groot. De boxplot van Filosofie is boven de mediaan groter dan onder de mediaan, de data kan wat scheef verdeeld zijn.  
 
-***
+
+## Toetsen van normaliteit
 Om te controleren of de data normaal verdeeld is, kan de normaliteit getoetst worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov (met Lilliefors correctie) 
-De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen de twee verdelingen. In dit geval toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is een correctie die wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van een normale verdeling.
+De *Kolmogorov-Smirnov test*  toetst het verschil in vorm tussen twee verdelingen. In deze casus toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde < 0,05 is de verdeling van de data significant verschillend van de normale verdeling.
 
 
 ```{r library nortest}
 library("nortest")
 ```
 <div class="col3">
-```{r lillietest}
-lillie.test(Reistijd_atc)
-lillie.test(Reistijd_fil)
-lillie.test(Reistijd_gsc)
+<!-- ## BLOK: Lilliefors-test.R -->
+```{r Kolmogorov-Smirnov Test, warning=FALSE}
+lillie.test(Reistijd_ATC)
+lillie.test(Reistijd_FIL)
+lillie.test(Reistijd_GSC)
 ```
+<!-- ## /BLOK: Lilliefors-test.R -->
 </div>
 Bij deze casus zijn van alle groepen de p-waarde > 0,05; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *one-way ANOVA* kan uitgevoerd worden.
 
-## Test assumpties: Levene's test
+## Homogeniteit van varianties
 Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. 
 
+<!-- ## BLOK: Levenes-test -->
 ```{r LeveneTest, warning = FALSE, message = FALSE}
 library(car)
 leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
 ```
-*F*(2, 254) = 1,66, p-waarde = 0,19, de groepen zijn niet verschillend in variantie.  
-Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 2) en de tweede cijfer (*n~1~* + *n~2~* - 2 = 254) 
+<!-- ## /BLOK: Levenes-test -->
+```{r Levenes test als item, echo = FALSE}
+L <- leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
+vF_waarde <- Round_and_format(L$`F value`)
+vF_p <- Round_and_format(L$`Pr(>F)`)
+vDF <- Round_and_format(L$`Df`)
+```
+*F*(1, `r vDF`) = `r vF_waarde`, p-waarde = `r vF_p`, de groepen zijn niet verschillend in spreiding.  
+Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 1) en het tweede cijfer (*n~1~* + *n~2~* - 2 = `r vDF`)
+
 
 ### Shapiro-Wilk Test
-De Shapiro-Wilk test is een soortgelijke test als de Kolmogorov-Smirnov test en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.
+De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.
 
 <div class="col3">
 ``` {r Shapiro-Wilk Test, warning=FALSE}
-shapiro.test(Reistijd_atc)
-shapiro.test(Reistijd_fil)
-shapiro.test(Reistijd_gsc)
+shapiro.test(Reistijd_ATC)
+shapiro.test(Reistijd_FIL)
+shapiro.test(Reistijd_GSC)
 ```
 </div>
 
@@ -266,6 +328,9 @@ Gebruik `aov()` om een ANOVA-object (`aov`) te creëren. Geef het resultaat over
 ```{r ANOVA}
 res.aov <- aov(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 summary(res.aov)
+```
+```{r ANOVA als item, echo=FALSE}
+
 ```
 * *F* (2,254) = 21,58, *p* < 0,01  
 * Vrijheidsgraden: het aantal groepen - 1 = 2; *n~1~* + *n~2~* - 2 = 254 
@@ -278,14 +343,14 @@ library(effsize)
 ```
 <div class="col3">
 ```{r Cohen s d}
-cohen.d(Reistijd_atc,
-        Reistijd_fil,
+cohen.d(Reistijd_ATC,
+        Reistijd_FIL,
         paired = FALSE)
-cohen.d(Reistijd_atc,
-        Reistijd_gsc,
+cohen.d(Reistijd_ATC,
+        Reistijd_GSC,
         paired = FALSE)
-cohen.d(Reistijd_fil,
-        Reistijd_gsc,
+cohen.d(Reistijd_FIL,
+        Reistijd_GSC,
         paired = FALSE)
 ```
 </div>

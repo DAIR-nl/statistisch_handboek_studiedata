@@ -109,13 +109,13 @@ Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond
 Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap: `Cijfers_gem`. De data bevat cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
 
 ## De data bekijken
-De data is verdeeld in 2 kolommen: het cijfer en het cohort.
+Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 <!-- ## BLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse=TRUE}
-## Eerste 10 observaties
+## Eerste 5 observaties
 head(Cijfers_gem)
 
-## Laatste 10 observaties
+## Laatste 5 observaties
 tail(Cijfers_gem)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
@@ -130,44 +130,43 @@ Cijfers_2011 <- Cijfers_gem[Cijfers_gem$Cohort == 2011,1]
 
 Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data.
 <div class="col2">
-<!-- ## BLOK: Data-beschrijven-t1.R -->
+<!-- ## BLOK: Data-beschrijven-1.R -->
 ```{r Data beschrijven 1, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie 2010
 length(Cijfers_2010)
 mean(Cijfers_2010)
 sd(Cijfers_2010)
 ```
-<!-- ## /BLOK: Data-beschrijven-t1.R -->
+<!-- ## /BLOK: Data-beschrijven-1.R -->
 ```{r Var beschrijven t0, include=FALSE, echo=TRUE}
 vMeant0 <- Round_and_format(mean(Cijfers_2010))
 vSDt0 <-Round_and_format(sd(Cijfers_2010))
 ```
-*n* = `r length(Cijfers_2010)`
-Gemiddeld tentamencijfer 2010  
-(standaarddeviatie): `r vMeant0` (`r vSDt0`)
 
-<!-- ## BLOK: Data-beschrijven-t2.R -->
+
+<!-- ## BLOK: Data-beschrijven-2.R -->
 ```{r Data beschrijven 2, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie 2011
 length(Cijfers_2011)
 mean(Cijfers_2011)
 sd(Cijfers_2011)
 ```
-<!-- ## /BLOK: Data-beschrijven-t2.R -->
+<!-- ## /BLOK: Data-beschrijven-2.R -->
 ```{r Var beschrijven t1, include=FALSE, echo=TRUE}
 vMeant1 <- Round_and_format(mean(Cijfers_2011))
 vSDt1 <-Round_and_format(sd(Cijfers_2011))
 ```
-*n* = `r length(Cijfers_2011)`
-Gemiddeld tentamencijfer 2011  
-(standaarddeviatie): `r vMeant1` (`r vSDt1`)
 </div>
+
+
+* Gemiddeld tentamencijfer 2010 (standaarddeviatie): `r vMeant0` (`r vSDt0`). *n* = `r length(Cijfers_2010)`.
+* Gemiddeld tentamencijfer 2011 (standaarddeviatie): `r vMeant1` (`r vSDt1`). *n* = `r length(Cijfers_2011)`.
+
 
 ## Visuele inspectie van normaliteit
 Geef de data visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
-Controleer de data visueel met een histogram. 
 <!-- ## BLOK: Histogram.R -->
 ```{r histogram}
 library(ggplot2)
@@ -192,7 +191,9 @@ ggplot(Cijfers_gem,
 Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  
 
 ### Q-Q plot
-Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een Q-Q plot te maken met kleine cirkels. Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is.
+Gebruik `qqnorm()` en `qqline()`. Gebruik `pch = 1`om kleine cirkels als datapunten te gebruiken.
+
+Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is.
 <div class ="col2">
 <!-- ## BLOK: QQplot-t1.R -->
 ```{r QQplot-t1}
@@ -275,6 +276,7 @@ leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 L <- leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 vF_waarde <- Round_and_format(L$`F value`)
 vF_p <- Round_and_format(L$`Pr(>F)`)
+vDF <- Round_and_format(L$`Df`)
 ```
 *F*(1, `r vDF`) = `r vF_waarde`, p-waarde = `r vF_p`, de groepen zijn niet verschillend in spreiding.  
 Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 1) en het tweede cijfer (*n~1~* + *n~2~* - 2 = `r vDF`)

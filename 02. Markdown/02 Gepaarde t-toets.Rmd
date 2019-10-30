@@ -151,13 +151,13 @@ Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5
 Er is een dataset ingeladen met `Tentamencijfer_voor_tutorgesprek` (T~0~) en met `Tentamencijfer_na_tutorgesprek` (T~1~). 
 
 ## De data bekijken
-De data is verdeeld in 3 kolommen, het studentnummer, het cijfer en of deze voor of na het tutorgesprek behaald is.
+Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 <!-- ## BLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
-## Eerste 10 observaties
+## Eerste 5 observaties
 head(Tentamencijfers)
 
-## Laatste 10 observaties
+## Laatste 5 observaties
 tail(Tentamencijfers)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
@@ -172,10 +172,8 @@ Tentamencijfer_na_tutorgesprek <-
 ```
 <!-- ## /BLOK: Data-selecteren.R -->
 
-Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data. 
-
 <div class="col2">
-<!-- ## BLOK: Data-beschrijven-t1.R -->
+<!-- ## BLOK: Data-beschrijven-1.R -->
 ```{r data beschrijven t1, collapse = TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie voor tutorgesprek
 length(Tentamencijfer_voor_tutorgesprek)
@@ -183,15 +181,14 @@ mean(
   Tentamencijfer_voor_tutorgesprek)
 sd(Tentamencijfer_voor_tutorgesprek)
 ```
-<!-- ## /BLOK: Data-beschrijven-t1.R -->
+<!-- ## /BLOK: Data-beschrijven-1.R -->
 ```{r Var beschrijven t0, include=FALSE, echo=TRUE}
 vMeant0 <- Round_and_format(mean(Tentamencijfer_voor_tutorgesprek))
 vSDt0 <-Round_and_format(sd(Tentamencijfer_voor_tutorgesprek))
+vNt0 <- Round_and_format(length(Tentamencijfer_voor_tutorgesprek))
 ```
-*n* = `r length(Tentamencijfer_voor_tutorgesprek)`   
-Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): `r vMeant0` (`r vSDt0`)
-
-<!-- ## BLOK: Data-beschrijven-t2.R -->
+  
+<!-- ## BLOK: Data-beschrijven-2.R -->
 ```{r data bekijken t2, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie na tutorgesprek
 length(Tentamencijfer_na_tutorgesprek)
@@ -199,18 +196,21 @@ mean(
   Tentamencijfer_na_tutorgesprek)
 sd(Tentamencijfer_na_tutorgesprek)
 ```
-<!-- ## /BLOK: Data-beschrijven-t2.R -->
+<!-- ## /BLOK: Data-beschrijven-2.R -->
 ```{r Var beschrijven t1, include=FALSE, echo=TRUE}
 vMeant1 <- Round_and_format(mean(Tentamencijfer_na_tutorgesprek))
 vSDt1 <- Round_and_format(sd(Tentamencijfer_na_tutorgesprek))
+vNt1 <- Round_and_format(length(Tentamencijfer_na_tutorgesprek))
 ```
-*n* = `r length(Tentamencijfer_na_tutorgesprek)`   
-Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): `r vMeant1` (`r vSDt1`)
 </div>
 
-### Histogram
-Controleer de data visueel met een histogram.
+* Gemiddeld tentamencijfer na tutorgesprek (standaardafwijking): `r vMeant1` (`r vSDt1`). *n* = `r vNt0`.
+* Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): `r vMeant0` (`r vSDt0`). *n* = `r vNt1`.
 
+## Visuele inspectie van normaliteit
+Geef normaliteit visueel weer met een histogram, boxplot of Q-Q plot. 
+
+### Histogram
 <!-- ## BLOK: library-ggplot2.R -->
 ```{r library ggplot2}
 library(ggplot2)
@@ -242,8 +242,9 @@ ggplot(Tentamencijfers,
 Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling. Veel waardes liggen rondom de gemiddeldes. Opvallend is dat het histogram van voor het tutorgesprek veel waardes in de linkerstaart van de verdeling heeft liggen.  
 
 ### Q-Q plot
-Controleer de data visueel met een Q-Q plot. Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een Q-Q plot te maken met kleine cirkels.
+Gebruik `qqnorm()` en `qqline()`. Gebruik `pch = 1`om kleine cirkels als datapunten te gebruiken.
 
+Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is.
 <div class ="col2">
 <!-- ## BLOK: QQplot-t1.R -->
 ```{r qqplot voor tutor}

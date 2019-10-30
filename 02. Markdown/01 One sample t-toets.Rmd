@@ -87,23 +87,39 @@ Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test*.[^
 # Uitvoering in R
 Er zijn twee datasets `Gemiddeld_cijfer_WNS` en `Gemiddeld_cijfer_WNS_n30` ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde. Het eerste bestand bevat 122 middelbare scholierenstudenten en het tweede bevat 30 studenten.
 
-## Gemiddelde en standaarddeviatie
+## De data bekijken
+Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
+<!-- ## BLOK: Data-bekijken.R -->
+```{r data bekijken, collapse = TRUE}
+## Eerste 5 observaties
+head(Gemiddeld_cijfer_WNS)
+
+## Laatste 5 observaties
+tail(Gemiddeld_cijfer_WNS)
+```
+<!-- ## /BLOK: Data-bekijken.R -->
+
 Inspecteer de data met `length()`, `mean()` en `sd()` om meer inzicht te krijgen in de data.
 
-<!-- ## BLOK: Data-bekijken.R -->
+<!-- ## BLOK: Data-beschrijven.R -->
 ```{r de data bekijken, collapse=TRUE}
 ## Gemiddelde en standaarddeviatie
 mean(Gemiddeld_cijfer_WNS)
 sd(Gemiddeld_cijfer_WNS)
 ```
-<!-- ## /BLOK: Data-bekijken.R -->
+<!-- ## /BLOK: Data-beschrijven.R -->
+```{r Var beschrijven t1, include=FALSE, echo=TRUE}
+vMean <- Round_and_format(mean(Gemiddeld_cijfer_WNS))
+vSD <- Round_and_format(sd(Gemiddeld_cijfer_WNS))
+vN <- Round_and_format(length(Gemiddeld_cijfer_WNS))
+```
+
+* Gemiddeld cijfer WNS (standaardafwijking): `r vMean` (`r vSD`). *n* = `r vN`.
 
 ## Visuele inspectie van normaliteit
-
 Geef normaliteit visueel weer met een histogram, boxplot of Q-Q plot. 
 
 ### Histogram
-
 <!-- ## BLOK: Histogram.R -->
 ```{r histogram, warning=FALSE, message=FALSE}
 ## Histogram met ggplot2 en plotly
@@ -150,7 +166,7 @@ De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte
 Om te controleren of de data normaal verdeeld is, kan de normaliteit getoetst worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov (met Lilliefors correctie) 
-De *Kolmogorov-Smirnov* test toetst het verschil in vorm tussen twee verdelingen. In deze casus toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde < 0,05 is de verdeling van de data significant verschillend van de normale verdeling.
+De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen twee verdelingen. In deze casus toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde < 0,05 is de verdeling van de data significant verschillend van de normale verdeling.
 
 <!-- ## BLOK: Lilliefors-test.R -->
 ```{r Kolmogorov-Smirnov Test, warning=FALSE}

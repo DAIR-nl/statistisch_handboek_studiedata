@@ -145,4 +145,9 @@ td.unpublished a:hover {
     -webkit-columns: 2 200px;
     -moz-columns: 2 200px;
   }
+  .col3 {
+    columns: 3 100px;
+    -webkit-columns: 3 100px;
+    -moz-columns: 3 100px;
+  }
 </style>

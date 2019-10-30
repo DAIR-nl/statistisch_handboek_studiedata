@@ -160,6 +160,11 @@ td.unpublished a:hover {
     -webkit-columns: 2 200px;
     -moz-columns: 2 200px;
   }
+  .col3 {
+    columns: 3 100px;
+    -webkit-columns: 3 100px;
+    -moz-columns: 3 100px;
+  }
 </style><!--/html_preserve-->
 </style>
 
@@ -208,7 +213,7 @@ Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5
 Er is een dataset ingeladen met `Tentamencijfer_voor_tutorgesprek` (T~0~) en met `Tentamencijfer_na_tutorgesprek` (T~1~). 
 
 ## De data bekijken
-De data is verdeeld in 3 kolommen, het studentnummer, het cijfer en of deze voor of na het tutorgesprek behaald is.
+Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 <!-- ## BLOK: Data-bekijken.R -->
 
 ```r
@@ -248,7 +253,7 @@ Tentamencijfer_na_tutorgesprek <-
 Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data. 
 
 <div class="col2">
-<!-- ## BLOK: Data-beschrijven-t1.R -->
+<!-- ## BLOK: Data-beschrijven-1.R -->
 
 ```r
 ## Aantallen, gemiddelde en standaarddeviatie voor tutorgesprek
@@ -260,12 +265,12 @@ mean(
 sd(Tentamencijfer_voor_tutorgesprek)
 ## [1] 1.662847
 ```
-<!-- ## /BLOK: Data-beschrijven-t1.R -->
+<!-- ## /BLOK: Data-beschrijven-1.R -->
 
-*n* = 234   
-Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): 6,84 (1,66)
+  
+ 
 
-<!-- ## BLOK: Data-beschrijven-t2.R -->
+<!-- ## BLOK: Data-beschrijven-2.R -->
 
 ```r
 ## Aantallen, gemiddelde en standaarddeviatie na tutorgesprek
@@ -277,11 +282,14 @@ mean(
 sd(Tentamencijfer_na_tutorgesprek)
 ## [1] 1.431434
 ```
-<!-- ## /BLOK: Data-beschrijven-t2.R -->
+<!-- ## /BLOK: Data-beschrijven-2.R -->
 
-*n* = 234   
-Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): 7,04 (1,43)
 </div>
+
+
+* Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): 7,04 (1,43). *n* = 234.
+* Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): 6,84 (1,66). *n* = 234.
+
 
 ### Histogram
 Controleer de data visueel met een histogram.

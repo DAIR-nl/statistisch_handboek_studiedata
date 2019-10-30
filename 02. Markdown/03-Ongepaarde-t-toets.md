@@ -1,7 +1,7 @@
 ---
 title: "Ongepaarde t-toets"
 author: "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
-date: "24-10-2019"
+date: "30-10-2019"
 output:
   html_document:
     theme: lumen
@@ -162,6 +162,11 @@ td.unpublished a:hover {
     -webkit-columns: 2 200px;
     -moz-columns: 2 200px;
   }
+  .col3 {
+    columns: 3 100px;
+    -webkit-columns: 3 100px;
+    -moz-columns: 3 100px;
+  }
 </style><!--/html_preserve-->
 </style>
 
@@ -213,7 +218,7 @@ Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond
 Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap: `Cijfers_gem`. De data bevat cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
 
 ## De data bekijken
-De data is verdeeld in 2 kolommen: het cijfer en het cohort.
+Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 <!-- ## BLOK: Data-bekijken.R -->
 
 ```r
@@ -250,7 +255,7 @@ Cijfers_2011 <- Cijfers_gem[Cijfers_gem$Cohort == 2011,1]
 
 Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data.
 <div class="col2">
-<!-- ## BLOK: Data-beschrijven-t1.R -->
+<!-- ## BLOK: Data-beschrijven-1.R -->
 
 ```r
 ## Aantallen, gemiddelde en standaarddeviatie 2010
@@ -261,13 +266,11 @@ mean(Cijfers_2010)
 sd(Cijfers_2010)
 ## [1] 1.117662
 ```
-<!-- ## /BLOK: Data-beschrijven-t1.R -->
+<!-- ## /BLOK: Data-beschrijven-1.R -->
 
-*n* = 180
-Gemiddeld tentamencijfer 2010  
-(standaarddeviatie): 6,37 (1,12)
 
-<!-- ## BLOK: Data-beschrijven-t2.R -->
+
+<!-- ## BLOK: Data-beschrijven-2.R -->
 
 ```r
 ## Aantallen, gemiddelde en standaarddeviatie 2011
@@ -278,12 +281,14 @@ mean(Cijfers_2011)
 sd(Cijfers_2011)
 ## [1] 1.199976
 ```
-<!-- ## /BLOK: Data-beschrijven-t2.R -->
+<!-- ## /BLOK: Data-beschrijven-2.R -->
 
-*n* = 160
-Gemiddeld tentamencijfer 2011  
-(standaarddeviatie): 6,46 (1,2)
 </div>
+
+
+* Gemiddeld tentamencijfer 2010 (standaarddeviatie): 6,37 (1,12). *n* = 180.
+* Gemiddeld tentamencijfer 2011 (standaarddeviatie): 6,46 (1,2). *n* = 160.
+
 
 ## Visuele inspectie van normaliteit
 Geef de data visueel weer met een histogram, Q-Q plot of boxplot.
@@ -451,8 +456,13 @@ leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 ##       338
 ```
 <!-- ## /BLOK: Levenes-test -->
-*F*(1, 338) = 0,92, p-waarde = 0,34, de groepen zijn niet verschillend in spreiding.  
-Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 1) en de tweede cijfer (*n~1~* + *n~2~* - 2 = 338)
+
+```
+## Warning in leveneTest.default(Cijfers_gem$Cijfers, Cijfers_gem$Cohort):
+## Cijfers_gem$Cohort coerced to factor.
+```
+*F*(1, 1, 338) = 0,92, NA, p-waarde = 0,34, NA, de groepen zijn niet verschillend in spreiding.  
+Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 1) en het tweede cijfer (*n~1~* + *n~2~* - 2 = 1, 338)
 
 ## Ongepaarde t-toets
 Voer een ongepaarde `t.test()` uit met `paired = FALSE` en `var.equal = TRUE`. Als uit de *Levene's test* komt dat de groepen verschillen in variantie, gebruik `var.equal = FALSE` .

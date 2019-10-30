@@ -304,10 +304,11 @@ leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
 L <- leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
 vF_waarde <- Round_and_format(L$`F value`)
 vF_p <- Round_and_format(L$`Pr(>F)`)
-vDF <- Round_and_format(L$`Df`)
+vDF1 <- Round_and_format(L$`Df`[1])
+vDF2 <- Round_and_format(L$`Df`[2])
 ```
-*F*(1, `r vDF`) = `r vF_waarde`, p-waarde = `r vF_p`, de groepen zijn niet verschillend in spreiding.  
-Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 1) en het tweede cijfer (*n~1~* + *n~2~* - 2 = `r vDF`)
+*F*(`r vDF1`, `r vDF2`) = `r vF_waarde`, p-waarde = `r vF_p`, de groepen zijn niet verschillend in spreiding.  
+Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r vDF1`) en het tweede cijfer (*n~1~* + *n~2~* - 2 = `r vDF2`)
 
 
 ### Shapiro-Wilk Test
@@ -330,9 +331,10 @@ res.aov <- aov(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 summary(res.aov)
 ```
 ```{r ANOVA als item, echo=FALSE}
-
+ANOVA <- summary(res.aov)
+vF_waarde <-Round_and_format(ANOVA$`F value`[1])
 ```
-* *F* (2,254) = 21,58, *p* < 0,01  
+* *F* (`r vDF1`, `r vDF2`) = `21,58`r vF_waarde`, *p* < 0,01  
 * Vrijheidsgraden: het aantal groepen - 1 = 2; *n~1~* + *n~2~* - 2 = 254 
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
 

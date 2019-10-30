@@ -187,9 +187,27 @@ Round_and_format <- function(x, digits = 2) {
 Er is een dataset ingeladen genaamd
 
 ## De data bekijken
-```{r data bekijken}
+Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
+<!-- ## BLOK: Data-bekijken.R -->
+```{r data bekijken, collapse = TRUE}
+## Eerste 10 observaties
+head(Reistijd_per_opleiding)
 
+## Laatste 10 observaties
+tail(Reistijd_per_opleiding)
 ```
+<!-- ## /BLOK: Data-bekijken.R -->
+
+<!-- ## BLOK: Data-beschrijven.R -->
+```{r Data beschrijven 1, collapse=TRUE}
+## Aantallen, gemiddelde en standaarddeviatie 
+length()
+mean()
+sd()
+```
+<!-- ## /BLOK: Data-beschrijven.R -->
+
+* Gemiddelde (standaarddeviatie): `r vMean` (`r vSD`). n = `r vN`.
 
 ## Assumpties testen in R
 

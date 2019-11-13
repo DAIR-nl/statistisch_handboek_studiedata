@@ -315,27 +315,31 @@ Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groep
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.
 
 <div class="col3">
+<!-- ## BLOK: Shapiro-Wilk-test -->
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 shapiro.test(Reistijd_ATC)
 shapiro.test(Reistijd_FIL)
 shapiro.test(Reistijd_GSC)
 ```
+<!-- ## /BLOK: Shapiro-Wilk-test -->
 </div>
 
 In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, dus is de verdeling van beide groepen niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *one-way ANOVA* kan uitgevoerd worden.
 
 ## One-way ANOVA 
 Gebruik `aov()` om een ANOVA-object (`aov`) te creëren. Geef het resultaat overzichtelijk weer met `summary()`.
+<!-- ## BLOK: ANOVA-test -->
 ```{r ANOVA}
 res.aov <- aov(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 summary(res.aov)
 ```
+<!-- ## /BLOK: ANOVA-test -->
 ```{r ANOVA als item, echo=FALSE}
 ANOVA <- summary(res.aov)
-vF_waarde <-Round_and_format(ANOVA$`F value`[1])
+vF_waarde <-Round_and_format(ANOVA[[1]]$`F value`[1])
 ```
-* *F* (`r vDF1`, `r vDF2`) = `21,58`r vF_waarde`, *p* < 0,01  
-* Vrijheidsgraden: het aantal groepen - 1 = 2; *n~1~* + *n~2~* - 2 = 254 
+* *F* (`r vDF1`, `r vDF2`) = `r vF_waarde`, *p* < 0,01  
+* Vrijheidsgraden: het aantal groepen - 1 = `r vDF1`; *n~1~* + *n~2~* - 2 = `r vDF2`
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
 
 ### Effectmaat: Cohen's d 
@@ -363,7 +367,6 @@ Gebruik `EtaSq()` op een ANOVA-object om eta-squared te vinden.
 library(DescTools)
 EtaSq(res.aov)
 ```
-*d~~* = -0,08. De sterkte van het effect van de tutor op het cijfer is minimaal. 
 
 Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect.[^7]
 
@@ -375,7 +378,12 @@ Doe een post hoc test om te toetsen welke verschillen significant zijn. Gebruik 
 ```{r TukeyHSD}
 TukeyHSD(res.aov)
 ```
-Het verschil tussen Filosofie en Arabische Taal en Cultuur: *MD* = 13,69, p < 0,01. 
+
+```{r TukeyHSD als object}
+Tukey <- TukeyHSD(res.aov)
+vFATCRound_and_format(Tukey$Opleiding[1,1])
+```
+Het verschil tussen Filosofie en Arabische Taal en Cultuur: *MD* = Tukey, p < 0,01. 
 Het verschil tussen Geschiedenis en Arabische Taal en Cultuur: *MD* = 10,92, p < 0,01. 
 Het verschil tussen Geschiedenis en Filosofie: *MD* = 2,76, p = 0,26. 
 

@@ -60,13 +60,11 @@ Gemiddeld_cijfer_WNS_n30 <- sample(Gemiddeld_cijfer_WNS, 30)
 <!-- ## /BLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *t-toets* om te toetsen of de gemiddeldes van twee groepen aan elkaar gelijk zijn. Gebruik de *one sample t-toets* om aan de hand van één steekproef het gemiddelde van de totale populatie te vergelijken met een vooraf bekende waarde.[^1] 
-
-
+Gebruik de *t-toets* om te toetsen of de gemiddeldes van twee groepen aan elkaar gelijk zijn. Gebruik de *one sample t-toets* om aan de hand van één steekproef het gemiddelde van de totale populatie te vergelijken met een vooraf bekende gemiddelde of norm.[^1] 
 
 # Onderwijscasus
 <div id = "casus">
-De opleidingsdirecteur van de opleiding Werktuigbouwkunde wil weten of het gemiddelde eindexamencijfer voor de exacte vakken (Wiskunde, Natuurkunde en Scheikunde; WNS) van vwo studenten hoger is dan het landelijk gemiddelde (6,8).[^2] Zo kan zij bepalen of het curriculum van de inleidende vakken genoeg aansluit bij eerstejaars studenten met een vwo vooropleiding.[^3]
+De opleidingsdirecteur van de opleiding Werktuigbouwkunde wil weten of het gemiddelde eindexamencijfer voor de exacte vakken (Wiskunde, Natuurkunde en Scheikunde; WNS) van vwo studenten hoger is dan het landelijk gemiddelde (6,8).[^2] Met deze gegevens probeert zij een inschatting te maken van het niveau van de studenten en kan zij bepalen of het curriculum van de inleidende vakken genoeg aansluit bij eerstejaars studenten met een vwo vooropleiding.
 
 H~0~: Het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde is gelijk aan het landelijk gemiddelde: µ = 6,8. 
 
@@ -74,18 +72,21 @@ H~A~: Het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten di
 </div>
 
 # Assumpties
-Voor een betrouwbaar resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
+Om een valide resultaat te bereiken, moeten voordat de toets kan worden uitgevoerd, de data aan een aantal voorwaarden voldoen. 
 
 ## Normaliteit 
-De t-toets gaat ervan uit dat de data normaal verdeeld is. Controleer deze assumptie met de volgende stappen:  
-1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
-2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^3]) met de *Shapiro-Wilk test*.[^4]  
-3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is.
+De *t-toets* gaat ervan uit dat de data van de steekproef normaal verdeeld zijn. Ga er bij een n > 100 vanuit dat de t-toets robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgen.[^3] 
 
-Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test*.[^5]
+Controleer de assumptie van normaliteit met de volgende stappen:  
+1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
+2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^4]) met de *Shapiro-Wilk test*.[^5]  
+
+Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld zijn.
+
+Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test*.[^6]
 
 # Uitvoering in R
-Er zijn twee datasets `Gemiddeld_cijfer_WNS` en `Gemiddeld_cijfer_WNS_n30` ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde. Het eerste bestand bevat 122 middelbare scholierenstudenten en het tweede bevat 30 studenten.
+Er zijn twee datasets `Gemiddeld_cijfer_WNS` en `Gemiddeld_cijfer_WNS_n30` ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde. Het eerste bestand bevat 122 studenten en het tweede bevat 30 studenten.
 
 ## De data bekijken
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
@@ -99,7 +100,7 @@ tail(Gemiddeld_cijfer_WNS)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
 
-Inspecteer de data met `length()`, `mean()` en `sd()` om meer inzicht te krijgen in de data.
+Krijg meer inzicht in de dataset door het gemiddelde en de spreiding te bekijken, `length()`, `mean()` en `sd()` .  
 
 <!-- ## BLOK: Data-beschrijven.R -->
 ```{r de data bekijken, collapse=TRUE}
@@ -137,36 +138,38 @@ ggplotly(h) %>% config(displayModeBar = F)
 ```
 <!-- ## /BLOK: Histogram.R -->
 
-Het histogram laat een belcurve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
+Het histogram laat een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
 
 ### Q-Q plot
-Gebruik `qqnorm()` en `qqline()`. Gebruik `pch = 1`om kleine cirkels als datapunten te gebruiken.
+Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
 
-Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is.
+Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 <!-- ## BLOK: QQplot.R -->
 ```{r qqplot}
 qqnorm(Gemiddeld_cijfer_WNS, pch = 1)
 qqline(Gemiddeld_cijfer_WNS)
 ```
+
 <!-- ## /BLOK: QQplot.R -->
-In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. 
+In deze casus liggen de meeste punten op de lijn. Bij de uiteinden liggen de punten dichtbij de lijn. 
 
 ### Boxplot
-Controleer de data visueel met een boxplot. De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer per periode voor de Lerarenopleiding. De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren uitbijters.
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren uitbijters.
 
 <!-- ## BLOK: Boxplot.R -->
 ``` {r boxplot}
 ## Boxplot
 boxplot(Gemiddeld_cijfer_WNS, xlab = "Werktuigbouwkunde", ylab = "Gemiddeld_cijfer_WNS")
 ```
+
 <!-- ## /BLOK: Boxplot.R -->
-De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte vakken voor de opleiding Werktuigbouwkunde weer. De box en staarten zien er symmetrisch uit, wat een indicatie van normale verdeling is.  
+De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte vakken weer van de studenten Werktuigbouwkunde. De box en staarten zien er symmetrisch uit, wat een indicatie is van een normale verdeling.  
 
 ## Toetsen van normaliteit
-Om te controleren of de data normaal verdeeld is, kan de normaliteit getoetst worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
+Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Hierbij een toelichting bij twee veelgebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
-### Kolmogorov-Smirnov (met Lilliefors correctie) 
-De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen twee verdelingen. In deze casus toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde < 0,05 is de verdeling van de data significant verschillend van de normale verdeling.
+### Kolmogorov-Smirnov
+De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde < 0,05 is de verdeling van de data significant verschillend van de normale verdeling.
 
 <!-- ## BLOK: Lilliefors-test.R -->
 ```{r Kolmogorov-Smirnov Test, warning=FALSE}
@@ -179,7 +182,9 @@ lillie.test(Gemiddeld_cijfer_WNS)
 De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.  
 
 ### Shapiro-Wilk Test
-De Shapiro-Wilk test is een soortgelijke test als de Kolmogorov-Smirnov test en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde < 0,05 is de verdeling van de data significant verschillend van de normale verdeling.
+De Shapiro-Wilk test is een soortgelijke test als de Kolmogorov-Smirnov test en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p-waarde < 0,05 is de verdeling van de data significant verschillend van de normale verdeling.
+
+De dataset met `Gemiddeld_cijfer_WNS_n30` is ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde, *n* = 30.
 
 <!-- ## BLOK: Shapiro-Wilk-test.R -->
 ``` {r Shapiro-Wilk Test, warning=FALSE}
@@ -192,8 +197,12 @@ De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen d
 
 ***
 
-##  One sample t-toets
+##  Toets
 Gebruik `t.test()`om een t-toets uit te voeren. Geef het gemiddelde waarmee wordt vergeleken en specifieer welke alternatieve hypothese er getoetst wordt. 
+
+De dataset met `Gemiddeld_cijfer_WNS` is ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde, *n* = `r vN`. 
+De *one sample t-toets* is uitgevoerd om de vraag te beantwoorden of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde hoger is dan het landelijk gemiddelde (µ = 6,8). De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren dan het landelijk gemiddelde is er voor gekozen om twee-zijdig te toetsen. 
+
 <!-- ## BLOK: T-test.R -->
 ```{r ttest}
 ## T-test
@@ -203,14 +212,14 @@ t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 ```{r ttest als item, echo = FALSE}
 t <- t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 ```
-* Het gemiddelde van de steekproef is `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`  
 * Vrijheidsgraden, *df* = *n* -1 = `r Round_and_format(t$parameter+1)`-1 = `r t$parameter`  
+* *t* (`r t$parameter`) = `r Round_and_format(t$statistic)`, *p* < 0,0002638
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
-* *t* (`r t$parameter`) = `r Round_and_format(t$statistic)`, *p* < 0,01
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r Round_and_format(t$conf.int[1])` en `r Round_and_format(t$conf.int[2])`.
+* Het gemiddelde van de steekproef is `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`  
 
 # Rapportage
-De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren, anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`, *SD* = `r Round_and_format(sd(Gemiddeld_cijfer_WNS))`) is significant hoger dan het landelijk gemiddelde van 6,8, *t* (`r t$parameter`) = `r Round_and_format(t$statistic)`, *p* < 0,01. 
+De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`, *SD* = `r Round_and_format(sd(Gemiddeld_cijfer_WNS))`) is significant hoger dan het landelijk gemiddelde van 6,8, *t* (`r t$parameter`) = `r Round_and_format(t$statistic)`, *p* < 0,01. 
 
 De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor de exacte vakken van studenten Werktuigbouwkunde met een vwo vooropleiding hoger ligt dan het landelijk gemiddelde.
 
@@ -221,9 +230,9 @@ paste0(here::here(),"/03. Includes/code/Footer.R")
 [^1]: van Geloven, N. (25 mei 2016). *T-toets* https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets
 [^2]: Centraal Instituut voor Toetsontwikkeling (2018). *Examenverslag 2018*. https://www.cito.nl/onderwijs/voortgezet-onderwijs/centrale-examens-voortgezet-onderwijs/tools-en-informatie-voor-docenten/examenverslagen/examenverslag-2018
 [^3]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). The importance of the normality assumption in large public health data sets. Annu Rev Public Health, 23, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf
-[^3]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
-[^4]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
-[^5]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html  
+[^4]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
+[^5]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
+[^6]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html  
 
 
 

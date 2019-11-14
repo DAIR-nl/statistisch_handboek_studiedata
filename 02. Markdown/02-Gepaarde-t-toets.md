@@ -13,158 +13,158 @@ output:
 ---
 
 <style>
-<!--html_preserve--><style>
-<!--html_preserve-->/* Stylesheet Statistisch Handboek */
-
-/* Title */
-h1.title {
-    opacity: 1;
-    text-align: left;
-    color: #158CBA;
-}
-
-/* Casus */
-#casus {
-    display: block;
-    padding: 9.5px;
-    margin: 0 0 10px;
-    font-size: 14px;
-    line-height: 2;
-    color: #000000;
-    background-color: #f5f5f5;
-    border: 1px solid #158CBA;
-    border-radius: 4px;
-}
-
-/* Empty data */
-.empty{
-    display: block;
-    color: #FF0000;
-}
-
-/* Klippy */
-.btn-klippy .octicon {
-    display: inline-block;
-    margin: 2px;
-    padding: 2px;
-    width: 15px !important;
-}
-
-/* Main container */
-.main-container {
-    margin-top: 50px;
-}
-
-/* Toetsmatrix */
-table.toetsmatrix {
-    text-align: center;
-    margin: 5px;
-    padding: 5px;
-}
-
-
-td.header1 {
-    font-weight: bold;
-    color: #FFFFFF;
-    background-color: #158CBA;
-    text-align: center;
-}
-
-td.header2 {
-    font-weight: bold;
-    color: #FFFFFF;
-    background-color: #A6A6A6;
-    text-align: center;
-}
-
-td.header3 {
-    font-weight: bold;
-    background-color: #D9D9D9;
-    text-align: center;
-}
-
-table.toetsmatrix td {
-    border-color: #000000 !important;
-    padding: 10px;
-}
-
-td.innercell{
-    border: 1px solid #000000;
-}
-
-td.innercell a {
-    text-decoration: none;
-}
-
-td.innercell a:hover {
-    text-decoration: underline;
-}
-
-td.published {
-    color: #158cba;
-}
-
-td.unpublished, td.unpublished a {
-    color: #A6A6A6;
-}
-
-td.unpublished a:hover {
-    color: #A6A6A6;
-    text-decoration: none;
-}
-
-/* Footer */
-#footer {
- color: #808080
- background-image: url('images/VPO_logo_studiedata.png');;
- background-repeat: no-repeat;
- background-position: right;
- background-size: 230px auto;
- padding-right: 242px;
-}
-
-</style>
-
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/Users/theo/Dropbox/Bitbucket/sho_skeleton/_site/index.html">Statistisch Handboek Hoger Onderwijs</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="/Users/theo/Dropbox/Bitbucket/sho_skeleton/_site/Toetsmatrix.html">Toetsmatrix</a>
-</li>
-<li>
-  <a href="/Users/theo/Dropbox/Bitbucket/sho_skeleton/_site/Over.html">Over</a>
-</li>
-<li>
-  <a href="/Users/theo/Dropbox/Bitbucket/sho_skeleton/_site/Licentie.html">Licentie</a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/html_preserve-->
-
-<style>
-  .col2 {
-    columns: 2 200px;
-    -webkit-columns: 2 200px;
-    -moz-columns: 2 200px;
-  }
-  .col3 {
-    columns: 3 100px;
-    -webkit-columns: 3 100px;
-    -moz-columns: 3 100px;
-  }
+<!--html_preserve--><style>
+<!--html_preserve-->/* Stylesheet Statistisch Handboek */
+
+/* Title */
+h1.title {
+    opacity: 1;
+    text-align: left;
+    color: #158CBA;
+}
+
+/* Casus */
+#casus {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 14px;
+    line-height: 2;
+    color: #000000;
+    background-color: #f5f5f5;
+    border: 1px solid #158CBA;
+    border-radius: 4px;
+}
+
+/* Empty data */
+.empty{
+    display: block;
+    color: #FF0000;
+}
+
+/* Klippy */
+.btn-klippy .octicon {
+    display: inline-block;
+    margin: 2px;
+    padding: 2px;
+    width: 15px !important;
+}
+
+/* Main container */
+.main-container {
+    margin-top: 50px;
+}
+
+/* Toetsmatrix */
+table.toetsmatrix {
+    text-align: center;
+    margin: 5px;
+    padding: 5px;
+}
+
+
+td.header1 {
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #158CBA;
+    text-align: center;
+}
+
+td.header2 {
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #A6A6A6;
+    text-align: center;
+}
+
+td.header3 {
+    font-weight: bold;
+    background-color: #D9D9D9;
+    text-align: center;
+}
+
+table.toetsmatrix td {
+    border-color: #000000 !important;
+    padding: 10px;
+}
+
+td.innercell{
+    border: 1px solid #000000;
+}
+
+td.innercell a {
+    text-decoration: none;
+}
+
+td.innercell a:hover {
+    text-decoration: underline;
+}
+
+td.published {
+    color: #158cba;
+}
+
+td.unpublished, td.unpublished a {
+    color: #A6A6A6;
+}
+
+td.unpublished a:hover {
+    color: #A6A6A6;
+    text-decoration: none;
+}
+
+/* Footer */
+#footer {
+ color: #808080
+ background-image: url('images/VPO_logo_studiedata.png');;
+ background-repeat: no-repeat;
+ background-position: right;
+ background-size: 230px auto;
+ padding-right: 242px;
+}
+
+</style>
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/Users/theo/Dropbox/Bitbucket/sho_skeleton/_site/index.html">Statistisch Handboek Hoger Onderwijs</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="/Users/theo/Dropbox/Bitbucket/sho_skeleton/_site/Toetsmatrix.html">Toetsmatrix</a>
+</li>
+<li>
+  <a href="/Users/theo/Dropbox/Bitbucket/sho_skeleton/_site/Over.html">Over</a>
+</li>
+<li>
+  <a href="/Users/theo/Dropbox/Bitbucket/sho_skeleton/_site/Licentie.html">Licentie</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/html_preserve-->
+
+<style>
+  .col2 {
+    columns: 2 200px;
+    -webkit-columns: 2 200px;
+    -moz-columns: 2 200px;
+  }
+  .col3 {
+    columns: 3 100px;
+    -webkit-columns: 3 100px;
+    -moz-columns: 3 100px;
+  }
 </style><!--/html_preserve-->
 </style>
 
@@ -217,7 +217,7 @@ Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 <!-- ## BLOK: Data-bekijken.R -->
 
 ```r
-## Eerste 10 observaties
+## Eerste 5 observaties
 head(Tentamencijfers)
 ##   Studentnr Cijfer Voor_of_na_tutorgesprek
 ## 1    347010  4.353                    voor
@@ -227,7 +227,7 @@ head(Tentamencijfers)
 ## 5    323302  4.281                    voor
 ## 6    393319  8.123                    voor
 
-## Laatste 10 observaties
+## Laatste 5 observaties
 tail(Tentamencijfers)
 ##     Studentnr Cijfer Voor_of_na_tutorgesprek
 ## 463    372952  7.080                      na
@@ -250,8 +250,6 @@ Tentamencijfer_na_tutorgesprek <-
 ```
 <!-- ## /BLOK: Data-selecteren.R -->
 
-Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data. 
-
 <div class="col2">
 <!-- ## BLOK: Data-beschrijven-1.R -->
 
@@ -268,8 +266,6 @@ sd(Tentamencijfer_voor_tutorgesprek)
 <!-- ## /BLOK: Data-beschrijven-1.R -->
 
   
- 
-
 <!-- ## BLOK: Data-beschrijven-2.R -->
 
 ```r
@@ -286,14 +282,13 @@ sd(Tentamencijfer_na_tutorgesprek)
 
 </div>
 
-
-* Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): 7,04 (1,43). *n* = 234.
+* Gemiddeld tentamencijfer na tutorgesprek (standaardafwijking): 7,04 (1,43). *n* = 234.
 * Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): 6,84 (1,66). *n* = 234.
 
+## Visuele inspectie van normaliteit
+Geef normaliteit visueel weer met een histogram, boxplot of Q-Q plot. 
 
 ### Histogram
-Controleer de data visueel met een histogram.
-
 <!-- ## BLOK: library-ggplot2.R -->
 
 ```r
@@ -329,8 +324,9 @@ ggplot(Tentamencijfers,
 Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling. Veel waardes liggen rondom de gemiddeldes. Opvallend is dat het histogram van voor het tutorgesprek veel waardes in de linkerstaart van de verdeling heeft liggen.  
 
 ### Q-Q plot
-Controleer de data visueel met een Q-Q plot. Gebruik `qqnorm()` en `qqline()` met `pch = 1` om een Q-Q plot te maken met kleine cirkels.
+Gebruik `qqnorm()` en `qqline()`. Gebruik `pch = 1`om kleine cirkels als datapunten te gebruiken.
 
+Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is.
 <div class ="col2">
 <!-- ## BLOK: QQplot-t1.R -->
 

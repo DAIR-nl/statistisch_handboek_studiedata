@@ -131,7 +131,7 @@ H~A~: Het gemiddelde tentamencijfer per onderwijsperiode verandert na het tutorg
 
 
 # Assumpties
-Voor een betrouwbaar resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
+Om een valide resultaat te bereiken moeten, voordat de toets kan worden uitgevoerd, de data aan een aantal voorwaarden voldoen.
 
 ## Normaliteit
 De *t-toets* gaat ervan uit dat de data normaal verdeeld is. Ga er bij een *n* > 100 vanuit dat de *t-toets* robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgt.[^2]   

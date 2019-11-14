@@ -349,10 +349,12 @@ vConf.int2 <- Round_and_format(t$conf.int[2])
 
 ### Effectmaat: Cohen's d
 Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
+<!-- ## BLOK: Cohens-d-test -->
 ```{r Cohens d}
 library(effsize)
 cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 ```
+<!-- ## /BLOK: Cohens-d-test -->
 ```{r var Cohens d, echo = FALSE}
 d <- cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 vD_waarde <- Round_and_format(d$estimate)

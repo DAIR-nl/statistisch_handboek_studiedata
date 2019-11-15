@@ -1,7 +1,7 @@
 ---
 title: "Ongepaarde t-toets"
 author: "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
-date: "04-11-2019"
+date: "15-11-2019"
 output:
   html_document:
     theme: lumen
@@ -194,20 +194,21 @@ H~A~: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taal
 </div>
 
 # Assumpties
-Voor een betrouwbaar resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
+Om een valide resultaat te bereiken moeten, voordat de toets kan worden uitgevoerd, de data aan een aantal voorwaarden voldoen. 
 
 ## Normaliteit  
-De *t-toets* gaat ervan uit dat de data normaal verdeeld is. Bij een n > 100 kan ervanuit gegaan worden dat de *t-toets* robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgt.[^2]  
+De *t-toets* gaat ervan uit dat de data van de steekproef normaal verdeeld zijn. Ga er bij een n > 100 vanuit dat de t-toets robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgen.[^2] 
 
 Controleer de assumptie van normaliteit met de volgende stappen:  
-1. Controleer de data visueel met een histogram, een Q-Q plot of een boxplot. 
-2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^3]) met de *Shapiro-Wilk test*.[^4]  
-3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is. 
+1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
+2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^3]) met de *Shapiro-Wilk test*.[^4]  
+
+Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld zijn.
 
 Als er geen sprake is van normaliteit en *n* is niet groter dan 100, gebruik de *Mann-Whitney U toets*, ook bekend als de *Wilcoxon rank-sum toets*.[^5]  
 
 ## Homogeniteit van varianties 
-Toets met de *Levene’s Test (for equality of variance)* of de spreiding van iedere groep ongeveer hetzelfde is. Bij een *p* < 0,05 is de spreiding van de groepen significant verschillend.
+Toets met de *Levene’s Test (for equality of variance)* of de spreiding van iedere groep ongeveer hetzelfde is. Bij een *p* < 0,05 is de spreiding van de groepen significant verschillend.[^6]
 
 # Effectmaat
 Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer.  
@@ -313,7 +314,7 @@ ggplot(Cijfers_gem,
   coord_fixed(ylim = c(0, 0.4),
               xlim = c(1, 10),
               ratio = 22) +
-  labs(title = "Taalwetenschap gemiddelde cijfers jaar 1")
+  labs(title = "Taalwetenschap gemiddelde cijfers voor en na de BSA")
 ```
 
 ![](03-Ongepaarde-t-toets_files/figure-html/histogram-1.png)<!-- -->
@@ -321,15 +322,15 @@ ggplot(Cijfers_gem,
 Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  
 
 ### Q-Q plot
-Gebruik `qqnorm()` en `qqline()`. Gebruik `pch = 1`om kleine cirkels als datapunten te gebruiken.
+Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
 
-Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is.
+Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 <div class ="col2">
 <!-- ## BLOK: QQplot-t1.R -->
 
 ```r
 qqnorm(Cijfers_2010, pch = 1,
-       main = "Normaal Q-Q plot van tentamencijfers 2011",
+       main = "Normaal Q-Q plot van tentamencijfers 2010",
        ylab = "Kwantielen in data",
        xlab = "Theoretische kwantielen")
 qqline(Cijfers_2010)
@@ -353,24 +354,24 @@ qqline(Cijfers_2011)
 Bij beide groepen liggen de meeste punten op de lijn behalve bij de uiteinden. De punten bij de uiteinden liggen niet ver van de lijn vandaan, waardoor vermoedelijk de data normaal verdeeld is.
 
 ### Boxplot
-Controleer de data visueel met een boxplot. De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer per periode voor de Lerarenopleiding. De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren uitbijters. 
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren uitbijters[^8]. 
 
 <!-- ## BLOK: Boxplot.R -->
 
 ```r
 boxplot(Cijfers ~ Cohort, Cijfers_gem,
-        main = "Tentamencijfers Taalwetenschap jaar 1")
+        main = "Tentamencijfers Taalwetenschap voor en na de BSA")
 ```
 
 ![](03-Ongepaarde-t-toets_files/figure-html/boxplot-1.png)<!-- -->
 <!-- ## /BLOK: Boxplot.R -->
 
-De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer voor de BSA en na de BSA. De boxplotten en de staarten lijken symmetrisch, dit kan een teken zijn van normaal verdeelde data. Het cohort van 2011 heeft een aantal uitbijters. Uitbijters kunnen invloed uitoefenen op de uitkomst van toetsen [^10]. Kijk of de uitbijters bepalend zijn voor de uitkomst van een toets en bepaal wat je met een uitbijter doet.
+De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer voor de BSA en na de BSA. De boxplotten en de staarten lijken symmetrisch, dit kan een teken zijn van normaal verdeelde data. Het cohort van 2011 heeft een aantal uitbijters. 
 
-Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef lijkende verdeling, normaal verdeel is, kan de normaliteit getoets worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
+Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoets worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
-### Kolmogorov-Smirnov (met Lilliefors correctie)
-De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen de twee verdelingen. In deze casus toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde < 0,05 is de verdeling van de data significant verschillend van de normale verdeling.
+### Kolmogorov-Smirnov
+De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen de twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde < 0,05 is de verdeling van de data significant verschillend van de normale verdeling.
 
 <!-- ## BLOK: Library-nortest -->
 
@@ -407,7 +408,7 @@ lillie.test(Cijfers_2011)
 <!-- ## /BLOK: Lilliefors-test -->
 </div>
 
-Bij deze casus is van beide groepen de p-waarde > 0,05; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
+Bij deze casus is van beide groepen de p-waarde > 0,05; er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
 
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde < 0,05 is de verdeling van de data significant verschillend van de normale verdeling.
@@ -462,10 +463,11 @@ leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 ## Warning in leveneTest.default(Cijfers_gem$Cijfers, Cijfers_gem$Cohort):
 ## Cijfers_gem$Cohort coerced to factor.
 ```
-*F*(1, 1, 338) = 0,92, NA, p-waarde = 0,34, NA, de groepen zijn niet verschillend in spreiding.  
-Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 1) en het tweede cijfer (*n~1~* + *n~2~* - 2 = 1, 338)
+* *F*(1, 338) = 0,92, NA, p-waarde = 0,34, NA 
+* p-waarde < 0,05, dus de groepen zijn niet verschillend in spreiding.  
+* Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 1) en het tweede cijfer (*n~1~* + *n~2~* - 2 = 1, 338)
 
-## Ongepaarde t-toets
+## Toets
 Voer een ongepaarde `t.test()` uit met `paired = FALSE` en `var.equal = TRUE`. Als uit de *Levene's test* komt dat de groepen verschillen in variantie, gebruik `var.equal = FALSE` .
 <!-- ## BLOK: T-test -->
 
@@ -489,11 +491,12 @@ t.test(Cijfers ~ Cohort, Cijfers_gem, paired = FALSE, var.equal = TRUE)
 <!-- ## /BLOK: T-test -->
 
 
+* *t* (338) = -0,74, *p* < 0,01
 * Vrijheidsgraden, *df* = *n* -1 = 339-1 = 338  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
-* *t* (339) = -0,74, *p* < 0,01
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen -0,34 en 0,15.
-
+* Het gemiddelde van de steekproef in 2010: 6,37
+* Het gemiddelde van de steekproef in 2011: 6,46
 
 ### Effectmaat: Cohen's d 
 Gebruik `cohen.d()` met `paired = FALSE` om het effect te meten.
@@ -515,18 +518,22 @@ cohen.d(Cijfers_2010, Cijfers_2011, paired = FALSE)
 ```
 <!-- ## /BLOK: Cohens-d-test -->
 
-*d* = -0,08. De sterkte van het effect van de tutor op het cijfer is minimaal. 
+*d* = -0,08. De sterkte van het effect van de tutor op het cijfer is miniem. 
 
 
 # Rapportage
 Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = 6,37, *SD~2010~* = 1,12) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* =6,46, *SD~2011~* = 1,2) is significant, *t* (338) = -0,74, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van -0,34 tot 0,15. Het effect is minimaal, *d* = -0,08.
 
-TODO Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor. Het effect is echter minimaal.
+Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil is echter zo klein dat er niet echt over een verandering gesproken kan worden. 
 
-[^1]: van Geloven, N. (25 maart 2016). *T-toets*. https://wikistatistiek.amc.nl/index.php/T-toets#ongepaarde_t-toets
+TODO Voetnoot bij [^8] 
+Uitbijters kunnen bepalend zijn op de uitkomst van toetsen. Beijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk dat wanneer uitbijters verwijderd zijn dit altijd melden in een rapport.  
+
+[^1]: Van Geloven, N. (25 mei 2016). *T-toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/T-toets#ongepaarde_t-toets).
 [^2]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). Tthe importance of the normality assumption in large public health data sets. *Annu Rev Public Health, 23*, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf 
-[^3]: van Geloven, N. (25 september 2013). *Wilcoxon signed rank toets*. https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets
-[^4]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
-[^5]: van Geloven, N. (13 maart 2018). *Mann-Whitney U toets*. https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets
-[^6]: Universiteit van Amsterdam (8 juli 2014). *One-way ANOVA*. https://wiki.uva.nl/methodologiewinkel/index.php/One-way_ANOVA
+[^3]: Laerd statistics. (2018). [Testing for Normality using SPSS Statistics](https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php).
+[^4]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).
+[^5]: Van Geloven, N. (13 maart 2018). *Mann-Whitney U toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
+[^6]: Van Geloven, N. (25 mei 2016). *One-way ANOVA* [Wiki Statistiek Academisch Medisch Centrum]( https://wikistatistiek.amc.nl/index.php/One-way_ANOVA).
 [^7]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf 
+[^8]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel] https://wiki.uva.nl/methodologiewinkel/index.php/Outliers

@@ -333,7 +333,7 @@ Gebruik `t.test()` met `paired = TRUE`.
 t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 ```
 <!-- ## BLOK: T-test -->
-```{r T-test als item, echo = FALSE}
+```{r T-test als object, echo = FALSE}
 t <- t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 vT_waarde <- Round_and_format(t$statistic)
 vN <- t$parameter+1

@@ -273,7 +273,7 @@ library(car)
 leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 ```
 <!-- ## /BLOK: Levenes-test -->
-```{r Levenes test als item, echo = FALSE}
+```{r Levenes test als object, echo = FALSE}
 L <- leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 vF_waarde <- Round_and_format(L$`F value`)
 vF_p <- Round_and_format(L$`Pr(>F)`)
@@ -290,7 +290,7 @@ Voer een ongepaarde `t.test()` uit met `paired = FALSE` en `var.equal = TRUE`. A
 t.test(Cijfers ~ Cohort, Cijfers_gem, paired = FALSE, var.equal = TRUE)
 ```
 <!-- ## /BLOK: T-test -->
-```{r T-test als item, echo = FALSE}
+```{r T-test als object, echo = FALSE}
 t <- t.test(Cijfers ~ Cohort, Cijfers_gem, paired = FALSE, var.equal = TRUE)
 vT_waarde <- Round_and_format(t$statistic)
 vN <- t$parameter+1

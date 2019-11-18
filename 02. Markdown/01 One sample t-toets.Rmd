@@ -209,7 +209,7 @@ De *one sample t-toets* is uitgevoerd om de vraag te beantwoorden of het gemidde
 t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 ```
 <!-- ## /BLOK: T-test.R -->
-```{r ttest als item, echo = FALSE}
+```{r ttest als object, echo = FALSE}
 t <- t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 ```
 * Vrijheidsgraden, *df* = *n* -1 = `r Round_and_format(t$parameter+1)`-1 = `r t$parameter`  

@@ -37,13 +37,13 @@ p_2014 <- c(
 Jaarlijks_inkomen <- replicate(2314, 13*(sample(Mogelijkheden, 1, replace=TRUE, p_2014)))
 ```
 
-## 1 Toepassing
+## Toepassing
 
-## 2 Onderwijscasus
+## Onderwijscasus
 
-## 3 Assumpties
+## Assumpties
 
-## 4 Uitvoering in R
+## Uitvoering in R
 Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij genaamd `Jaarlijks_inkomen`. De directeur wil kijken hoe zijn oud-studenten scoren ten opzichte van gemiddelde inkomens in Nederland.
 
 ### De data bekijken

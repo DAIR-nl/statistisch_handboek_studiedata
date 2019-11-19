@@ -145,7 +145,7 @@ Reistijd_GSC <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding
 ```
 <!-- ## /BLOK: Data-selecteren.R -->
 
-Om meer inzicht te krijgen in de data, inspecteer de data met `mean()`en `sd()`. 
+Om meer inzicht te krijgen in de data, inspecteer de data met `M()`en `sd()`. 
 
 <div class ="col3">
 <!-- ## BLOK: Data-beschrijven-1.R -->
@@ -157,7 +157,7 @@ sd(Reistijd_ATC)
 ```
 <!-- ## /BLOK: Data-beschrijven-1.R -->
 ```{r data beschrijven als object 1, include=FALSE, echo=TRUE}
-vMean_ATC <- Round_and_format(mean(Reistijd_ATC))
+vM_ATC <- Round_and_format(mean(Reistijd_ATC))
 vSD_ATC <- Round_and_format(sd(Reistijd_ATC))
 vN_ATC <- Round_and_format(length(Reistijd_ATC))
 ```
@@ -171,7 +171,7 @@ sd(Reistijd_FIL)
 ```
 <!-- ## /BLOK: Data-beschrijven-2.R -->
 ```{r data beschrijven als object 2, include=FALSE, echo=TRUE}
-vMean_FIL <- Round_and_format(mean(Reistijd_FIL))
+vM_FIL <- Round_and_format(mean(Reistijd_FIL))
 vSD_FIL <-Round_and_format(sd(Reistijd_FIL))
 vN_FIL <- Round_and_format(length(Reistijd_FIL))
 ```
@@ -185,15 +185,15 @@ sd(Reistijd_GSC)
 ```
 <!-- ## /BLOK: Data-beschrijven-3.R -->
 ```{r data beschrijven als object 3, include=FALSE, echo=TRUE}
-vMean_GSC <- Round_and_format(mean(Reistijd_GSC))
+vM_GSC <- Round_and_format(mean(Reistijd_GSC))
 vSD_GSC <-Round_and_format(sd(Reistijd_GSC))
 vN_GSC <- Round_and_format(length(Reistijd_GSC))
 ```
 </div>
 
-* Gemiddelde reistijd Arabische Taal en Cultuur (standaarddeviatie): `r vMean_ATC` (`r vSD_ATC`). n = `r vN_ATC`  
-* Gemiddelde reistijd Filosofie (standaarddeviatie): `r vMean_FIL` (`r vSD_FIL`). n = `r vN_FIL`.
-* Gemiddelde reistijd Geschiedenis (standaarddeviatie): `r vMean_GSC` (`r vSD_GSC`). n = `r vN_GSC`.
+* Gemiddelde reistijd Arabische Taal en Cultuur (standaarddeviatie): `r vM_ATC` (`r vSD_ATC`). n = `r vN_ATC`  
+* Gemiddelde reistijd Filosofie (standaarddeviatie): `r vM_FIL` (`r vSD_FIL`). n = `r vN_FIL`.
+* Gemiddelde reistijd Geschiedenis (standaarddeviatie): `r vM_GSC` (`r vSD_GSC`). n = `r vN_GSC`.
 
 ## Visuele inspectie van normaliteit
 Geef de data visueel weer met een histogram, Q-Q plot of boxplot.
@@ -391,25 +391,18 @@ Het verschil tussen Geschiedenis en Arabische Taal en Cultuur: *MD* = `r vATCvsG
 Het verschil tussen Geschiedenis en Filosofie: *MD* = `r vFILvsGSC`, p = 0,26. 
 
 # Rapportage
-Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De opleidingen zijn: Arabische Taal en Cultuur (*M~atc~* = `r vMean_ATC`, *SD~atc~* = `r vSD_ATC`), Filosofie (*M~fil~* = `r vMean_FIL`, *SD~fil~* = `r vSD_FIL`) en Geschiedenis (*M~gsc~* = `r vMean_GSC`, *SD~fil~* = `r vSD_FIL`. The *one way ANOVA* was significant, *F*(`r vDF1`, `r vDF2`) = `r vF_waarde`, *p* < 0,01. Dat wil zeggen dat er een significant verschil is tussen de gemiddelde reistijden van de drie opleidingen.  
+Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De opleidingen zijn: Arabische Taal en Cultuur (*M~atc~* = `r vM_ATC`, *SD~atc~* = `r vSD_ATC`), Filosofie (*M~fil~* = `r vM_FIL`, *SD~fil~* = `r vSD_FIL`) en Geschiedenis (*M~gsc~* = `r vM_GSC`, *SD~fil~* = `r vSD_FIL`. The *one way ANOVA* was significant, *F*(`r vDF1`, `r vDF2`) = `r vF_waarde`, *p* < 0,01. Dat wil zeggen dat er een significant verschil is tussen de gemiddelde reistijden van de drie opleidingen.  
 
 **het effect is **
-```{r beschrijvende tabel, echo=FALSE, results='asis'}
-## Aantallen, gemiddelde en mediaan
 
-beschrijvende_tabel <- matrix(c(vN_ATC, vMean_ATC, vSD_ATC,
-                                vN_FIL, vMean_FIL, vSD_FIL,
-                                vN_GSC, vMean_GSC, vSD_GSC), 
-                              nrow = 3, ncol = 3, byrow = TRUE)
-
-
-papaja::apa_table(beschrijvende_tabel, format="markdown")
-```
-
+| Opleiding     | N          | M          | SD          |
+| ------------- | ---------- | ---------- | ----------- |
+| Arabisch      | `r vN_ATC` | `r vM_ATC` | `r vSD_ATC` |
+| Filosofie     | `r vN_FIL` | `r vM_FIL` | `r vSD_FIL` |
+| Geschiedenis  | `r vN_GSC` | `r vM_GSC` | `r vSD_GSC` |
 
 **posthoc en uitkomsten **
 *Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen van elkaar. 
-
 
 
 Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = `r vATCvsFIL`, p < 0,01). Geschiedenis en Arabische Taal en Cultuur hebben een significant verschil (*MD* = `r vATCvsGSC`, p < 0,01). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = `r vFILvsGSC`, p = 0,26). 

@@ -11,18 +11,31 @@ output:
     theme: united
 ---
 
-``` {r versiegeschiedenis, include = FALSE, eval = FALSE}
-## versie 0.1     3-9-19
+
+<style>
+`r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet SHHO.css"))`
+</style>
+
+```{r header, include = FALSE, echo = TRUE, results='asis'} 
+paste0(here::here(),"/03. Includes/code/Header.R")
 ```
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+<!-- ## BLOK: Functiedefinities.R -->
+```{r functiedefinities,include=FALSE, echo=TRUE}
+library(stringr)
+Round_and_format <- function(x, digits = 2) {
+  x <- as.character(round(x, digits))
+  x <- str_replace(x, "[.]", ",")
+  return(x)
+}
 ```
+<!-- ## /BLOK: Functiedefinities.R -->
 
+<!-- ## BLOK: Data-aanmaken.R -->
 ```{r opmerking TODO, include=FALSE, eval=FALSE}
 # TODO: Uitleg extra pagina: nominaal, ordinaal etc., afhanjeklijk en onafhankelijk  
 # TODO: Uitleg transformeren data 
-
+```
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 Geen_leenstelsel <- c(375, 496)
 Wel_leenstelsel <- c(369, 394)
@@ -34,7 +47,7 @@ Wel_leenstelsel_n43 <- c(5, 16)
 Uitval_functiebeperking_n43 <- t(data.frame(Geen_leenstelsel_n43, Wel_leenstelsel_n43))
 colnames(Uitval_functiebeperking_n43) <- c("Wel uitval", "Geen uitval")
 ```
-
+<!-- ## /BLOK: Data-aanmaken.R -->
 # Toepassing
 Gebruik de *chi-kwadraat toets* om te toetsen of er een afhankelijkheid is tussen twee ongepaarde categorische variabelen, door middel van een kruistabel.[^1]
 
@@ -56,37 +69,60 @@ Als in 20% van de cellen een verwachte waarde van 5 of lager staat, wordt de toe
 Er is een dataset ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. De data `Uitval_functiebeperking` is binair: wel of geen uitval. 
 
 ## De data bekijken
-```{r dataview}
-Uitval_functiebeperking
+<!-- ## BLOK: Data-bekijken.R -->
+```{r data bekijken, collapse = TRUE}
+## Eerste 6 observaties
+head(Uitval_functiebeperking)
+
+## Laatste 6 observaties
+tail(Uitval_functiebeperking)
 ```
+<!-- ## /BLOK: Data-bekijken.R -->
 
 ## Chi-kwadraat toets
-Zet de data in een kruistabel, voordat `chisq.test()` gebruikt wordt. 
-
+Gebruik `chisq.test()` op een kruistabel. 
+<!-- ## BLOK: Chi2-test -->
 ```{r chi2}
 chisq.test(Uitval_functiebeperking)
 ```
+<!-- ## /BLOK: Chi2-test -->
 
-*χ^2^* (1) ≈ 4,41, *p* < 0,05  
-Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval is *df* = 1. Wanneer het aantal vrijheidsgraden 1 is, wordt de continuïteitscorrectie van Yates toegepast.  
+```{r chi2 als object, include=FALSE, echo=TRUE}
+Chi2 <- chisq.test(Uitval_functiebeperking)
+vChi2 <- Round_and_format(Chi2$statistic)
+vP <- Round_and_format(Chi2$p.value)
+vDF <- Chi2$parameter
+```
+
+*χ^2^* (1) ≈ `r vChi2`, *p* = `r vP`  
+Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval is *df* = `r vDF`. Wanneer het aantal vrijheidsgraden 1 is, wordt de continuïteitscorrectie van Yates toegepast.  
 p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen  
 
 ## Fisher's exact toets
 De *Fisher's exact toets* wordt ook gebruikt om te toetsen of er een afhankelijkheid is tussen twee ongepaarde nominale variabelen, door middel van een kruistabel. In tegenstelling tot de *chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage frequenties ingezet worden. De *Fisher's exact toets* is conservatiever dan de *chi-kwadraat toets*.[^4]
 
-Er is data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel, alle groepen hebben een laag aantal per cel, variërend van 5 tot 16. Ook hier is de data `Uitval_functiebeperking_n43` binair. 
+Er is data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel, alle groepen hebben een laag aantal per cel, variërend van 5 tot 16. Ook hier is de data `Uitval_functiebeperking_n43` binair.
 
+<!-- ## BLOK: Fishers-Exact-test -->
 ```{r fishers exact}
 fisher.test(Uitval_functiebeperking_n43)
 ```
+<!-- ## /BLOK: Fishers-Exact-test -->
+
+```{r fishers exact als object, include=FALSE, echo=TRUE}
+fish <- fisher.test(Uitval_functiebeperking_n43)
+vF_p <- Round_and_format(fish$p.value)
+vConf.int1 <- Round_and_format(fish$conf.int[1])
+vConf.int2 <- Round_and_format(fish$conf.int[2])
+```
 
 p-waarde > 0,05 , dus de H~0~ wordt niet verworpen  
-De kans op het uitvallen van studenten met een functiebeperking onder het leenstelsel is 1,8 keer zo groot, als de kans op het uitvallen van studenten met een functiebeperking voor het leenstelsel. Deze associatie blijkt niet significant te zijn: *p* = 0,51  
-Het 95% betrouwbaarheidsinterval is breed, tussen de 0,41 en de 8,78.   
+De kans op het uitvallen van studenten met een functiebeperking onder het leenstelsel is 1,8 keer zo groot, als de kans op het uitvallen van studenten met een functiebeperking voor het leenstelsel. Deze associatie blijkt niet significant te zijn: *p* = `r vF_p`  
+Het 95% betrouwbaarheidsinterval is breed, tussen de `r vConf.int1` en de `r vConf.int2`.   
 
 # Rapportage
 
-Om te toetsen of studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel, is de *chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de nulhypothese dat de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel gelijk is gebleven, *χ^2^* (1) ≈ 4,41, *p* < 0,05.
+Om te toetsen of studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel, is de *chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de nulhypothese dat de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel gelijk is gebleven, *χ^2^* (`r vDF`) ≈ `r vChi2`, *p* < 0,05.
  
 [^1]: Prabhakaran, S. (2016-2017). *Statistical Tests* http://r-statistics.co/Statistical-Tests-in-R.html
 [^2]: Field, A., Miles, J., & Field, Z. (2012). Discovering statistics using R. *Sage publications*.

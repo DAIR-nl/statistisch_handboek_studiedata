@@ -42,13 +42,13 @@ Round_and_format <- function(x, digits = 2) {
 RNGkind(sample.kind = "Rounding")
 set.seed(1)
 
-Decimalen_wiskunde <- rnorm(160, 7.0, 2.6)
+Decimalen_wiskunde <- rnorm(160, 7.1, 2.6)
 Wiskunde_eindcijfer <- round(Decimalen_wiskunde, 1)[Decimalen_wiskunde <= 10 & Decimalen_wiskunde >= 4.5]
 
-Decimalen_scheikunde <- rnorm(160, 6.7, 2.2)
+Decimalen_scheikunde <- rnorm(160, 6.8, 2.2)
 Scheikunde_eindcijfer <- round(Decimalen_scheikunde, 1)[Decimalen_scheikunde <= 10 & Decimalen_scheikunde >= 4.5]
 
-Decimalen_natuurkunde <- rnorm(160, 6.9, 2.4)
+Decimalen_natuurkunde <- rnorm(160, 7.0, 2.4)
 Natuurkunde_eindcijfer <- round(Decimalen_natuurkunde, 1)[Decimalen_natuurkunde <= 10 & Decimalen_natuurkunde >= 4.5]
 
 WNS_eindcijfers <- cbind(Wiskunde_eindcijfer, Scheikunde_eindcijfer, Natuurkunde_eindcijfer)
@@ -86,7 +86,7 @@ Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventuee
 Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test*.[^6]
 
 # Uitvoering in R
-Er zijn twee datasets `Gemiddeld_cijfer_WNS` en `Gemiddeld_cijfer_WNS_n30` ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde. Het eerste bestand bevat 122 studenten en het tweede bevat 30 studenten.
+Er zijn twee datasets `Gemiddeld_cijfer_WNS` en `Gemiddeld_cijfer_WNS_n30` ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde. Het eerste bestand bevat `r length(Gemiddeld_cijfer_WNS)` studenten en het tweede bevat `r length(Gemiddeld_cijfer_WNS_n30)` studenten.
 
 ## De data bekijken
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
@@ -146,7 +146,11 @@ Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als 
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 <!-- ## BLOK: QQplot.R -->
 ```{r qqplot}
-qqnorm(Gemiddeld_cijfer_WNS, pch = 1)
+qqnorm(Gemiddeld_cijfer_WNS, 
+       pch = 1,
+       main = "Normaal Q-Q plot van gemiddelde cijfers WNS",
+       ylab = "Kwantielen in data",
+       xlab = "Theoretische kwantielen")
 qqline(Gemiddeld_cijfer_WNS)
 ```
 

@@ -113,10 +113,10 @@ Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij 
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 <!-- ## BLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse=TRUE}
-## Eerste 5 observaties
+## Eerste 6 observaties
 head(Cijfers_gem)
 
-## Laatste 5 observaties
+## Laatste 6 observaties
 tail(Cijfers_gem)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
@@ -140,8 +140,9 @@ sd(Cijfers_2010)
 ```
 <!-- ## /BLOK: Data-beschrijven-1.R -->
 ```{r Var beschrijven t0, include=FALSE, echo=TRUE}
-vMeant0 <- Round_and_format(mean(Cijfers_2010))
-vSDt0 <-Round_and_format(sd(Cijfers_2010))
+vN_t0 <- Round_and_format(length(Cijfers_2010))
+vMean_t0 <- Round_and_format(mean(Cijfers_2010))
+vSD_t0 <-Round_and_format(sd(Cijfers_2010))
 ```
 
 
@@ -154,14 +155,15 @@ sd(Cijfers_2011)
 ```
 <!-- ## /BLOK: Data-beschrijven-2.R -->
 ```{r Var beschrijven t1, include=FALSE, echo=TRUE}
-vMeant1 <- Round_and_format(mean(Cijfers_2011))
-vSDt1 <-Round_and_format(sd(Cijfers_2011))
+vN_t1 <- Round_and_format(length(Cijfers_2011))
+vMean_t1 <- Round_and_format(mean(Cijfers_2011))
+vSD_t1 <-Round_and_format(sd(Cijfers_2011))
 ```
 </div>
 
 
-* Gemiddeld tentamencijfer 2010 (standaarddeviatie): `r vMeant0` (`r vSDt0`). *n* = `r length(Cijfers_2010)`.
-* Gemiddeld tentamencijfer 2011 (standaarddeviatie): `r vMeant1` (`r vSDt1`). *n* = `r length(Cijfers_2011)`.
+* Gemiddeld tentamencijfer 2010 (standaarddeviatie): `r vMean_t0` (`r vSD_t0`). *n* = `r vN_t0`.
+* Gemiddeld tentamencijfer 2011 (standaarddeviatie): `r vMean_t1` (`r vSD_t1`). *n* = `r vN_t1`.
 
 
 ## Visuele inspectie van normaliteit
@@ -273,15 +275,16 @@ library(car)
 leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 ```
 <!-- ## /BLOK: Levenes-test -->
-```{r Levenes test als object, echo = FALSE}
+```{r Levenes test als object, echo = FALSE, warning=FALSE}
 L <- leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
-vF_waarde <- Round_and_format(L$`F value`)
-vF_p <- Round_and_format(L$`Pr(>F)`)
-vDF <- Round_and_format(L$`Df`)
+vF_waarde <- Round_and_format(L$`F value`[1])
+vF_p <- Round_and_format(L$`Pr(>F)`[2])
+vDF1 <- Round_and_format(L$`Df`[1])
+vDF2 <- Round_and_format(L$`Df`[2])
 ```
-* *F*(`r vDF`) = `r vF_waarde`, p-waarde = `r vF_p` 
+* *F*(`r vDF1`, `r vDF2`) = `r vF_waarde`, p-waarde = `r vF_p` 
 * p-waarde < 0,05, dus de groepen zijn niet verschillend in spreiding.  
-* Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 1) en het tweede cijfer (*n~1~* + *n~2~* - 2 = `r vDF`)
+* Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r vDF1`) en het tweede cijfer (*n~1~* + *n~2~* - 2 = `r vDF2`)
 
 ## Toets
 Voer een ongepaarde `t.test()` uit met `paired = FALSE` en `var.equal = TRUE`. Als uit de *Levene's test* komt dat de groepen verschillen in variantie, gebruik `var.equal = FALSE` .
@@ -297,14 +300,15 @@ vN <- t$parameter+1
 vDF <- t$parameter
 vConf.int1 <- Round_and_format(t$conf.int[1])
 vConf.int2 <- Round_and_format(t$conf.int[2])
+vP <- Round_and_format(t$p.value)
 ```
 
-* *t* (`r vDF`) = `r vT_waarde`, *p* < 0,01
+* *t* (`r vDF`) = `r vT_waarde`, *p* = `r vP.value`
 * Vrijheidsgraden, *df* = *n* -1 = `r vN`-1 = `r vDF`  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r vConf.int1` en `r vConf.int2`.
-* Het gemiddelde van de steekproef in 2010: `r vMeant0`
-* Het gemiddelde van de steekproef in 2011: `r vMeant1`
+* Het gemiddelde van de steekproef in 2010: `r vMean_t0`
+* Het gemiddelde van de steekproef in 2011: `r vMean_t1`
 
 ### Effectmaat: Cohen's d 
 Gebruik `cohen.d()` met `paired = FALSE` om het effect te meten.
@@ -322,9 +326,15 @@ vD_waarde <- Round_and_format(d$estimate)
 
 
 # Rapportage
-Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = `r vMeant0`, *SD~2010~* = `r vSDt0`) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* =`r vMeant1`, *SD~2011~* = `r vSDt1`) is significant, *t* (`r vDF`) = `r vT_waarde`, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vConf.int1` tot `r vConf.int2`. Het effect is minimaal, *d* = `r vD_waarde`.
+Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = `r vMean_t0`, *SD~2010~* = `r vSD_t0`) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* =`r vMean_t1`, *SD~2011~* = `r vSD_t1`) is significant, *t* (`r vDF`) = `r vT_waarde`, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vConf.int1` tot `r vConf.int2`. Het effect is minimaal, *d* = `r vD_waarde`.
 
 Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil is echter zo klein dat er niet echt over een verandering gesproken kan worden. 
+
+| Cohort   | N         | M            | SD         |
+| -------- | --------- | ------------ | ---------- |
+| 2010     | `r vN_t0` | `r vMean_t0` | `r vSD_t0` |
+| 2011     | `r vN_t1` | `r vMean_t1` | `r vSD_t1` |
+
 
 TODO Voetnoot bij [^8] 
 Uitbijters kunnen bepalend zijn op de uitkomst van toetsen. Beijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk dat wanneer uitbijters verwijderd zijn dit altijd melden in een rapport.  

@@ -67,8 +67,7 @@ Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Rechtsgeleerdheid"] <-
 
 # Toepassing
 Gebruik de *Kruskal Wallis toets* om te toetsen of de medianen van meerdere groepen significant verschillen. Een kenmerk van de data is dat deze numeriek en ongepaard is.  
-
-De *Kruskal Wallis* ordent de scores van laag naar hoog en ze geeft de scores een rangnummer. Op deze wijze zijn outliers en de assumptie van normaliteit geen probleem meer.[^1] Gebruikt de *Kruskal Wallis* in plaats van de *one way ANOVA* als de assumpties van normaliteit en/of van Homogeniteit van Varianties worden geschonden.[^2]  
+De *Kruskal Wallis toets* is een alternatief voor de *one way ANOVA*.[^1] De *Kruskal Wallis toets* ordent de scores van laag naar hoog en geeft de scores een rangnummer. Op deze wijze zijn outliers, de assumptie van normaliteit en/of van homogeniteit van varianties geen probleem meer.[^2]  
 
 # Onderwijscasus
 De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht is geïnteresseerd in de afstudeersnelheid van zijn studenten. Hij vraagt zich af of het type vooropleiding bepalend is voor hoeveel vakken de studenten afronden in het eerste jaar. Hij kijkt naar de vier meest gangbare vooropleidingen die de studenten doorlopen voordat ze met de Master Arbeidsrecht beginnen; de bachelors: Fiscaal recht, Notarieel recht, Rechtsgeleerdheid en een Schakelprogramma.  
@@ -78,7 +77,7 @@ H~0~: De vooropleiding is niet bepalend voor het aantal vakken die de Masterstud
 H~1~: De vooropleiding is bepalend voor het aantal vakken die de Masterstudenten Arbeidsrecht behalen in het eerste jaar. De gemiddelde rank is per groep ongeveer gelijk aan elkaar. 
 
 # Assumpties
-Controleer of de data aan de volgende assumpties voldoen: numerieke data, onafhankelijkheid en het aantal groepen is > 2. 
+Controleer of de data aan de volgende assumpties voldoen: numerieke data, onafhankelijkheid en het aantal groepen is > 2.  
 
 ## Numerieke data
 Gebruik de *Kruskal Wallis toets* bij (semi-)continue data. Semi-continue data is als de data gehele getallen bevat met veel verschillende waardes[^3]. Een voorbeeld hiervan is de aanwezigheid van studenten tijdens de jaaropening. 
@@ -175,7 +174,7 @@ vK_Chi2 <- Round_and_format(Ktest$statistic)
 vK_P <- Round_and_format(Ktest$p.value)
 ```
 df: het aantal groepen - 1 = `r vK_DF`
-chi-squared: `r vK_Chi2`
+chi-squared: `r vK_Chi2`  
 p-waarde (`r vK_P`) < 0,05 , dus de H~0~ wordt verworpen en de H~A~ aangenomen  
 
 
@@ -187,9 +186,12 @@ pairwise.wilcox.test(Resultaten_arbeidsrecht$Ec_jaar1, Resultaten_arbeidsrecht$V
 ```
 <!-- ## /BLOK: Mann-Whitney-U-test-->
 # Rapportage
-Om te toetsen of ........... is de *chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de conclusie dat ..................., χ^2^ (df) ≈ `r vK_Chi2` (`r vK_DF`), `r vK_P` < 0,01.
+De *kruskal Wallis toets* is uitgevoerd om te toetsen of een vooropleiding bepalend is voor de  hoeveelheid studiepunten die een student behaalt tijdens het eerste jaar van de master Arbeidsrecht. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen het aantal studiepunten en het type vooropleiding die de student heeft afgerond. χ^2^ (df) ≈ `r vK_Chi2` (`r vK_DF`), `r vK_P` < 0,01.  
+Met een post-hoc toets is het verschil tussen de vooropleidingen getoets. 
 
-[^1]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test* https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test 
-[^2]: van Geloven, N. (21 maart 2018). *Kruskal Wallis* https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis 
+
+
+[^1]: van Geloven, N. (21 maart 2018). *Kruskal Wallis* https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis 
+[^2]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test* https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test 
 [^3]: van Geloven, N. (21 November 2017).*KEUZE TOETS* https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS
 [^4]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test* https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test

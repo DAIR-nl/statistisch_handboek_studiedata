@@ -87,17 +87,7 @@ H~A~: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taal
 # Assumpties
 Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
 
-## Normaliteit  
-De *t-toets* gaat ervan uit dat de data normaal verdeeld zijn. Bij een n > 100 kan ervanuit gegaan worden dat de *t-toets* robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgen.[^2]  
-
-Controleer de assumptie van normaliteit met de volgende stappen:  
-1. Controleer de data visueel met een histogram, een Q-Q plot of een boxplot. 
-2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^3]) met de *Shapiro-Wilk test*.[^4]  
-3. Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld zijn. 
-=======
-Om een valide resultaat te bereiken moeten, voordat de toets kan worden uitgevoerd, de data aan een aantal voorwaarden voldoen. 
-
-## Normaliteit  
+## Normaliteit 
 De *t-toets* gaat ervan uit dat de data van de steekproef normaal verdeeld zijn. Ga er bij een n > 100 vanuit dat de t-toets robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgen.[^2] 
 
 Controleer de assumptie van normaliteit met de volgende stappen:  
@@ -105,7 +95,6 @@ Controleer de assumptie van normaliteit met de volgende stappen:
 2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^3]) met de *Shapiro-Wilk test*.[^4]  
 
 Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld zijn.
->>>>>>> 906bca5400b281f55b985ec4a654386694dd7b40
 
 Als er geen sprake is van normaliteit en *n* is niet groter dan 100, gebruik de *Mann-Whitney U toets*, ook bekend als de *Wilcoxon rank-sum toets*.[^5]  
 
@@ -155,7 +144,6 @@ vMeant0 <- Round_and_format(mean(Cijfers_2010))
 vSDt0 <-Round_and_format(sd(Cijfers_2010))
 ```
 
-
 <!-- ## BLOK: Data-beschrijven-2.R -->
 ```{r Data beschrijven 2, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie 2011
@@ -170,10 +158,8 @@ vSDt1 <-Round_and_format(sd(Cijfers_2011))
 ```
 </div>
 
-
 * Gemiddeld tentamencijfer 2010 (standaarddeviatie): `r vMeant0` (`r vSDt0`). *n* = `r length(Cijfers_2010)`.
 * Gemiddeld tentamencijfer 2011 (standaarddeviatie): `r vMeant1` (`r vSDt1`). *n* = `r length(Cijfers_2011)`.
-
 
 ## Visuele inspectie van normaliteit
 Geef de data visueel weer met een histogram, Q-Q plot of boxplot.
@@ -199,6 +185,7 @@ ggplot(Cijfers_gem,
               ratio = 22) +
   labs(title = "Taalwetenschap gemiddelde cijfers voor en na de BSA")
 ```
+
 <!-- ## /BLOK: Histogram.R -->
 Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  
 

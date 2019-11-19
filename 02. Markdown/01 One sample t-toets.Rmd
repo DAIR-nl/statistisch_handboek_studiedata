@@ -201,11 +201,11 @@ De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen d
 
 ***
 
-##  Toets
+##  One sample t-toets
 Gebruik `t.test()`om een t-toets uit te voeren. Geef het gemiddelde waarmee wordt vergeleken en specifieer welke alternatieve hypothese er getoetst wordt. 
 
 De dataset met `Gemiddeld_cijfer_WNS` is ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde, *n* = `r vN`. 
-De *one sample t-toets* is uitgevoerd om de vraag te beantwoorden of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde hoger is dan het landelijk gemiddelde (µ = 6,8). De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren dan het landelijk gemiddelde is er voor gekozen om twee-zijdig te toetsen. 
+De *one sample t-toets* is uitgevoerd om de vraag te beantwoorden of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde hoger is dan het landelijk gemiddelde (µ = 6,8). De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren dan het landelijk gemiddelde is er voor gekozen om tweezijdig te toetsen. 
 
 <!-- ## BLOK: T-test.R -->
 ```{r ttest}
@@ -223,7 +223,7 @@ t <- t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 * Het gemiddelde van de steekproef is `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`  
 
 # Rapportage
-De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`, *SD* = `r Round_and_format(sd(Gemiddeld_cijfer_WNS))`) is significant hoger dan het landelijk gemiddelde van 6,8, *t* (`r t$parameter`) = `r Round_and_format(t$statistic)`, *p* < 0,01. 
+De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`, *SD* = `r Round_and_format(sd(Gemiddeld_cijfer_WNS))`) is statistisch significant hoger dan het landelijk gemiddelde van 6,8, *t* (`r t$parameter`) = `r Round_and_format(t$statistic)`, *p* < 0,01. 
 
 De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor de exacte vakken van studenten Werktuigbouwkunde met een vwo vooropleiding hoger ligt dan het landelijk gemiddelde.
 
@@ -231,11 +231,11 @@ De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor
 paste0(here::here(),"/03. Includes/code/Footer.R")
 ```
 
-[^1]: van Geloven, N. (25 mei 2016). *T-toets* https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets
+[^1]: van Geloven, N. (25 mei 2016). *T-toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets). 
 [^2]: Centraal Instituut voor Toetsontwikkeling (2018). *Examenverslag 2018*. https://www.cito.nl/onderwijs/voortgezet-onderwijs/centrale-examens-voortgezet-onderwijs/tools-en-informatie-voor-docenten/examenverslagen/examenverslag-2018
 [^3]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). The importance of the normality assumption in large public health data sets. Annu Rev Public Health, 23, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf
-[^4]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
-[^5]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
+[^4]: Laerd statistics (2018). [Testing for Normality using SPSS Statistics](https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php).  
+[^5]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).
 [^6]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html  
 
 

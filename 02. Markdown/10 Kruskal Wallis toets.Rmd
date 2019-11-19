@@ -11,14 +11,27 @@ output:
     theme: united
 ---
 
-``` {r versiegeschiedenis, include = FALSE, eval = FALSE}
-## versie 0.1     3-9-19
+
+<style>
+`r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet SHHO.css"))`
+</style>
+
+```{r header, include = FALSE, echo = TRUE, results='asis'} 
+paste0(here::here(),"/03. Includes/code/Header.R")
 ```
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+<!-- ## BLOK: Functiedefinities.R -->
+```{r functiedefinities,include=FALSE, echo=TRUE}
+library(stringr)
+Round_and_format <- function(x, digits = 2) {
+  x <- as.character(round(x, digits))
+  x <- str_replace(x, "[.]", ",")
+  return(x)
+}
 ```
+<!-- ## /BLOK: Functiedefinities.R -->
 
+<!-- ## BLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## H0 en H1 medianen of gemiddelden, ook in toepassing 
 ## is het wel interessant om gemiddelden te tonen? 
@@ -44,20 +57,21 @@ Ec_jaar1 <- sample(Punten_mogelijkheden, 300, replace = TRUE)
 Studentnr <- sample(3000000:4000000, 300)
 Resultaten_arbeidsrecht <- data.frame(Studentnr, Vooropleiding, Ec_jaar1)
 
-## puntencorrectie om fiscaal en notarieel +6 punten te geven en rechtsgeleerdheid -6 punten
+## puntencorrectie om Fiscaal en Notarieel +6 punten te geven en Rechtsgeleerdheid -6 punten
 Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Fiscaal recht" | Vooropleiding == "Notarieel recht"] <-
   Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Fiscaal recht" | Vooropleiding == "Notarieel recht"] + 6
 Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Rechtsgeleerdheid"] <-
   Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Rechtsgeleerdheid"] - 6
 ```
+<!-- ## /BLOK: Data-aanmaken.R -->
 
 # Toepassing
 Gebruik de *Kruskal Wallis toets* om te toetsen of de medianen van meerdere groepen significant verschillen. Een kenmerk van de data is dat deze numeriek en ongepaard is.  
 
-Een belangrijke realisatie bij de *Kruskal Wallis toets* is dat de toets de scores van laag naar hoog ordend en ze een rangnummer geeft. Op deze wijze zijn outliers en de assumptie normaliteit geen probleem meer.[^1] Vandaar dat deze toets in plaats van de de *one way ANOVA* gebruikt wordt wanneer de assumpties van normaliteit en/of van Homogeniteit van Varianties worden geschonden.[^2]  
+De *Kruskal Wallis* ordent de scores van laag naar hoog en ze geeft de scores een rangnummer. Op deze wijze zijn outliers en de assumptie van normaliteit geen probleem meer.[^1] Gebruikt de *Kruskal Wallis* in plaats van de *one way ANOVA* als de assumpties van normaliteit en/of van Homogeniteit van Varianties worden geschonden.[^2]  
 
 # Onderwijscasus
-De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht is geïnteresseerd in de afstudeersnelheid van zijn studenten. Hij vraagt zich af of het type vooropleiding bepalend is voor hoeveel vakken de studenten afronden in het eerste jaar. Hij kijkt naar de vier meest gangbare vooropleidingen die de studenten doorlopen voordat ze met de Master Arbeidsrecht beginnen; de bachelors: fiscaal recht, notarieel recht, rechtsgeleerdheid en een schakelprogramma.  
+De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht is geïnteresseerd in de afstudeersnelheid van zijn studenten. Hij vraagt zich af of het type vooropleiding bepalend is voor hoeveel vakken de studenten afronden in het eerste jaar. Hij kijkt naar de vier meest gangbare vooropleidingen die de studenten doorlopen voordat ze met de Master Arbeidsrecht beginnen; de bachelors: Fiscaal recht, Notarieel recht, Rechtsgeleerdheid en een Schakelprogramma.  
 
 H~0~: De vooropleiding is niet bepalend voor het aantal vakken die de Masterstudenten Arbeidsrecht behalen in het eerste jaar. De gemiddelde rank is per groep ongeveer gelijk aan elkaar. 
 
@@ -73,35 +87,41 @@ Gebruik de *Kruskal Wallis toets* bij (semi-)continue data. Semi-continue data i
 Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
 
 ## Aantal groepen
-Het aantal groepen is > 2. Bij 2 groepen gebruik de *Mann-Whitney U toets*
+Het aantal groepen is > 2. Gebruik bij 2 groepen de *Mann-Whitney U toets*.
 
 # Post-hoc toets 
 De *Kruskal Wallis Toets* toetst of één of meerdere groepen verschillen. Welke groep verschilt wordt niet gespecificeerd. Als er een verschil zit tussen de groepen kan de *Mann-Whitney U toets* als post-hoc vergelijking gedaan worden, om te bepalen welke groepen significant verschillen. 
 
-Gebruik de *Bonferroni correctie* om Type I fouten te voorkomen. Pas de p-waarde aan door alpha te delen door het aantal uitgevoerde toetsen [^4].
+Gebruik de *Bonferroni correctie* om Type I fouten te voorkomen. Deze toets past de p-waarde aan door de waarde te vermenigvuldigen met het aantal uitgevoerde toetsen [^4].
 
 # Uitvoering in R
-Er is een dataset ingeladen met studieresultaten van de master arbeidsrecht per vooropleiding: fiscaal recht, notarieel recht, rechtsgeleerdheid en een schakelprogramma.
+Er is een dataset ingeladen met studieresultaten van de master arbeidsrecht per vooropleiding: Fiscaal recht, Notarieel recht, Rechtsgeleerdheid en een Schakelprogramma.
 
 ## De data bekijken
-```{r de data exploreren, collapse=TRUE}
+<!-- ## BLOK: Data-bekijken.R -->
+```{r data bekijken, collapse = TRUE}
+## Eerste 5 observaties
 head(Resultaten_arbeidsrecht)
+
+## Laatste 5 observaties
+tail(Resultaten_arbeidsrecht)
+```
+<!-- ## /BLOK: Data-bekijken.R -->
+
+De data bevat data van studenten van verschillende vooropleidingen. Gebruik `levels()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
+
+<!-- ## BLOK: Data-bekijken-2.R -->
+```{r data bekijken 2}
+## Opleidingen in de data aanwezig
 levels(Resultaten_arbeidsrecht$Vooropleiding)
 ```
-Voor elke student (één rij) is er te zien hoeveel studiepunten er zijn gehaald in het eerste jaar en welke vooropleiding de student afgerond heeft.  
+<!-- ## /BLOK: Data-bekijken-2.R -->
 
+Om meer inzicht te krijgen in de data, inspecteer de groepen met `n()`, `mean()` en `median()`. Groepeer hiervoor eerst met `group_by()`.
 
-## mean in base R (mogelijkheid 1)
-`mean()` geeft het gemiddelde aantal punten per vooropleiding.
-``` {r gemiddeldes per vooropleiding base, collapse=TRUE}
-mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Rechtsgeleerdheid"])
-mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Notarieel recht"])
-mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Fiscaal recht"])
-mean(Resultaten_arbeidsrecht$Ec_jaar1 [Vooropleiding=="Schakelprogramma"])
-```
-
-## mean in package 'dplyr' (mogelijkheid 2)
-``` {r gemiddeldes per vooropleiding dplyr, warning=FALSE, message=FALSE}
+<!-- ## BLOK: Data-beschrijven.R -->
+``` {r data beschrijven, warning=FALSE, message=FALSE}
+## Aantallen, gemiddelde en mediaan
 library(dplyr)
 group_by(Resultaten_arbeidsrecht, Vooropleiding) %>%
   summarise(
@@ -110,25 +130,64 @@ group_by(Resultaten_arbeidsrecht, Vooropleiding) %>%
     median = median(Ec_jaar1)
   )
 ```
+<!-- ## /BLOK: Data-beschrijven.R -->
+
+``` {r data beschrijven als object, include=FALSE, echo=TRUE}
+library(dplyr)
+x <- group_by(Resultaten_arbeidsrecht, Vooropleiding) %>%
+  summarise(
+    count = n(),
+    mean = mean(Ec_jaar1),
+    median = median(Ec_jaar1)
+  )
+
+vN_FIS <- Round_and_format(x[1,2])
+vN_NOT <- Round_and_format(x[2,2])
+vN_RCH <- Round_and_format(x[3,2])
+vN_SCH <- Round_and_format(x[4,2])
+
+vMean_FIS <- Round_and_format(x[1,3])
+vMean_NOT <- Round_and_format(x[2,3])
+vMean_RCH <- Round_and_format(x[3,3])
+vMean_SCH <- Round_and_format(x[4,3])
+
+vMed_FIS <- Round_and_format(x[1,4])
+vMed_NOT <- Round_and_format(x[2,4])
+vMed_RCH <- Round_and_format(x[3,4])
+vMed_SCH <- Round_and_format(x[4,4])
+```
+* Gemiddeld behaald aantal punten Fiscaal Recht: `r vMean_FIS`. n = `r vN_FIS`.
+* Gemiddeld behaald aantal punten Notarieel Recht: `r vMean_NOT`. n = `r vN_NOT`.
+* Gemiddeld behaald aantal punten Rechtsgeleerdheid: `r vMean_RCH`. n = `r vN_RCH`.
+* Gemiddeld behaald aantal punten Schakelprogramma: `r vMean_SCH`. n = `r vN_SCH`.
 
 ## Kruskal Wallis toets
-
-```{r kruskal test}
+Gebruik `kruskal.test()`. In het eerste argument gebruik je de afhankelijke variabele en de variabele die de groep definiëert. Het tweede argument is het dataframe. 
+<!-- ## BLOK: Kruskal-Wallis-test -->
+```{r Kruskal Wallis test}
 kruskal.test(Ec_jaar1 ~ Vooropleiding, Resultaten_arbeidsrecht)
 ```
-df: het aantal groepen - 1  
-chi-squared: 33,07  
-p-waarde < 0,05 , dus de H~0~ wordt verworpen en de H~A~ aangenomen  
+<!-- ## /BLOK: Kruskal-Wallis-test -->
+```{r Kruskal Wallis test als object, include= FALSE, echo= TRUE}
+Ktest <- kruskal.test(Ec_jaar1 ~ Vooropleiding, Resultaten_arbeidsrecht)
+vK_DF <- Round_and_format(Ktest$parameter)
+vK_Chi2 <- Round_and_format(Ktest$statistic)
+vK_P <- Round_and_format(Ktest$p.value)
+```
+df: het aantal groepen - 1 = `r vK_DF`
+chi-squared: `r vK_Chi2`
+p-waarde (`r vK_P`) < 0,05 , dus de H~0~ wordt verworpen en de H~A~ aangenomen  
 
 
 # Post-hoc toets: Mann-Whitney U toets
 Om te weten welke groepen verschillen is er in `pairwise.wilcox.test()` de *Bonferroni correctie* beschikbaar voor *multiple testing*
-
+<!-- ## BLOK: Mann-Whitney-U-test-->
 ``` {r pairwise wilcox test}
 pairwise.wilcox.test(Resultaten_arbeidsrecht$Ec_jaar1, Resultaten_arbeidsrecht$Vooropleiding, p.adjust.method = "bonferroni")
 ```
+<!-- ## /BLOK: Mann-Whitney-U-test-->
 # Rapportage
-Om te toetsen of ........... is de *chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de conclusie dat ..................., χ^2^ (3) ≈ 33,07, *p* < 0,01.
+Om te toetsen of ........... is de *chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de conclusie dat ..................., χ^2^ (df) ≈ `r vK_Chi2` (`r vK_DF`), `r vK_P` < 0,01.
 
 [^1]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test* https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test 
 [^2]: van Geloven, N. (21 maart 2018). *Kruskal Wallis* https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis 

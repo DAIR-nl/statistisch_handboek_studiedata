@@ -37,7 +37,6 @@ Round_and_format <- function(x, digits = 2) {
 ## versie 0.3     5-9-19   
 ```
 ```{r opmerking, include=FALSE, eval=FALSE}
-# ipv Cohen's d kan ook eta squared gebruikt worden om effectmaat te berekenen. Wordt vaak wel gedaan bij de ANOVA. 
 # doorlinken naar de Wilcoxon Signed Rank Test
 # linken naar blz transformeren data 
 # link naar 
@@ -131,15 +130,16 @@ H~A~: Het gemiddelde tentamencijfer per onderwijsperiode verandert na het tutorg
 
 
 # Assumpties
-Voor een betrouwbaar resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
+Om een valide resultaat te bereiken moeten, voordat de toets kan worden uitgevoerd, de data aan een aantal voorwaarden voldoen.
 
 ## Normaliteit
-De *t-toets* gaat ervan uit dat de data normaal verdeeld is. Ga er bij een *n* > 100 vanuit dat de *t-toets* robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgt.[^2]   
+De *t-toets* gaat ervan uit dat de data normaal verdeeld zijn. Ga er bij een *n* > 100 vanuit dat de *t-toets* robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgt.[^2]   
 
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een Q-Q plot of een boxplot.
 2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^3]) met de *Shapiro-Wilk test*.[^4]  
-3. Als blijkt dat de data niet normaal verdeeld is, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is. 
+
+Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is. 
 
 Als er geen sprake is van normaliteit en *n* is niet groter dan 100, gebruik de *Wilcoxon Signed Rank Test*.[^5]
 
@@ -242,9 +242,9 @@ ggplot(Tentamencijfers,
 Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling. Veel waardes liggen rondom de gemiddeldes. Opvallend is dat het histogram van voor het tutorgesprek veel waardes in de linkerstaart van de verdeling heeft liggen.  
 
 ### Q-Q plot
-Gebruik `qqnorm()` en `qqline()`. Gebruik `pch = 1`om kleine cirkels als datapunten te gebruiken.
+Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
 
-Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is.
+Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 <div class ="col2">
 <!-- ## BLOK: QQplot-t1.R -->
 ```{r qqplot voor tutor}
@@ -269,7 +269,7 @@ qqline(Tentamencijfer_na_tutorgesprek)
 <!-- ## /BLOK: QQplot-t2.R -->
 </div>
 
-Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is. In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. 
+Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn. In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. 
 
 ### Boxplot
 Controleer de data visueel met een boxplot.  
@@ -280,16 +280,17 @@ De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen
 boxplot(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers,
         main = "Boxplot van tentamencijfers lerarenopleiding")
 ```
+
 <!-- ## /BLOK: Boxplot.R -->
 De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer per periode voor de lerarenopleiding. De boxplot en de staarten van T~0~ zijn niet helemaal symmetrisch. Dit kan een teken zijn dat de data niet normaal verdeeld is. Het gaat om een kleine afwijking, daarom is de data vermoedelijk normaal verdeeld. Er zijn een aantal uitbijters. Er kan gekeken worden of de uitbijters bepalend zijn voor normaliteit of niet.  
 De boxplot van T~1~ ziet er symmetrisch uit. Er zijn geen uitbijters.    
 
 ***
 
-Om te controleren of de data normaal verdeeld is, kan de normaliteit getoetst worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
+Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 
-### Kolmogorov-Smirnov (met Lilliefors correctie)
+### Kolmogorov-Smirnov 
 De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen de twee verdelingen. In dit geval toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is een correctie op de *Kolmogorov-Smirnov test*, die wordt gebruikt als het gemiddelde van de steekproef niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van een normale verdeling. 
 <!-- ## BLOK: Library-nortest -->
 ```{r library nortest, warning=FALSE}
@@ -333,7 +334,7 @@ Gebruik `t.test()` met `paired = TRUE`.
 t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 ```
 <!-- ## BLOK: T-test -->
-```{r T-test als item, echo = FALSE}
+```{r T-test als object, echo = FALSE}
 t <- t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 vT_waarde <- Round_and_format(t$statistic)
 vN <- t$parameter+1
@@ -349,10 +350,12 @@ vConf.int2 <- Round_and_format(t$conf.int[2])
 
 ### Effectmaat: Cohen's d
 Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
+<!-- ## BLOK: Cohens-d-test -->
 ```{r Cohens d}
 library(effsize)
 cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 ```
+<!-- ## /BLOK: Cohens-d-test -->
 ```{r var Cohens d, echo = FALSE}
 d <- cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 vD_waarde <- Round_and_format(d$estimate)

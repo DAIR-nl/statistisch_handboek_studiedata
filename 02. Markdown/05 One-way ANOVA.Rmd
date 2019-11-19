@@ -38,6 +38,7 @@ options(width = 80)
 ## Zodat de TukeyHSD naast elkaar geprint wordt
 ```
 
+<!-- ## BLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## Het hoofd communicatie wil in verband met wervingsactiviteiten weten wat de reistijd is van studenten aan verschillende opleidingen.
 
@@ -77,7 +78,7 @@ colnames(Reistijd_per_opleiding) <- c("Reistijd", "Opleiding")
 Reistijd_per_opleiding <- Reistijd_per_opleiding %>%
   mutate(Reistijd = if_else(Reistijd < 0, Reistijd*-1, Reistijd))
 ```
-
+<!-- ## /BLOK: Data-aanmaken.R -->
 # Toepassing
 Gebruik de *one-way ANOVA* bij het toetsen of het gemiddelde van drie of meer onafhankelijke groepen aan elkaar gelijk zijn.[^1] 
 
@@ -128,10 +129,12 @@ tail(Reistijd_per_opleiding)
 
 De data bevat data van studenten van verschillende opleidingen. Gebruik `levels()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
 
-```{r groepen bekijken}
+<!-- ## BLOK: Data-bekijken2.R -->
+```{r data bekijken 2}
 ## Opleidingen in de data aanwezig
 levels(Reistijd_per_opleiding$Opleiding)
 ```
+<!-- ## /BLOK: Data-bekijken2.R -->
 
 Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. 
 <!-- ## BLOK: Data-selecteren.R -->
@@ -153,7 +156,7 @@ mean(Reistijd_ATC)
 sd(Reistijd_ATC)
 ```
 <!-- ## /BLOK: Data-beschrijven-1.R -->
-```{r Var beschrijven 1, include=FALSE, echo=TRUE}
+```{r data beschrijven als object 1, include=FALSE, echo=TRUE}
 vMean_ATC <- Round_and_format(mean(Reistijd_ATC))
 vSD_ATC <- Round_and_format(sd(Reistijd_ATC))
 vN_ATC <- Round_and_format(length(Reistijd_ATC))
@@ -167,7 +170,7 @@ mean(Reistijd_FIL)
 sd(Reistijd_FIL)
 ```
 <!-- ## /BLOK: Data-beschrijven-2.R -->
-```{r Var beschrijven 2, include=FALSE, echo=TRUE}
+```{r data beschrijven als object 2, include=FALSE, echo=TRUE}
 vMean_FIL <- Round_and_format(mean(Reistijd_FIL))
 vSD_FIL <-Round_and_format(sd(Reistijd_FIL))
 vN_FIL <- Round_and_format(length(Reistijd_FIL))
@@ -181,7 +184,7 @@ mean(Reistijd_GSC)
 sd(Reistijd_GSC)
 ```
 <!-- ## /BLOK: Data-beschrijven-3.R -->
-```{r Var beschrijven 3, include=FALSE, echo=TRUE}
+```{r data beschrijven als object 3, include=FALSE, echo=TRUE}
 vMean_GSC <- Round_and_format(mean(Reistijd_GSC))
 vSD_GSC <-Round_and_format(sd(Reistijd_GSC))
 vN_GSC <- Round_and_format(length(Reistijd_GSC))
@@ -190,7 +193,7 @@ vN_GSC <- Round_and_format(length(Reistijd_GSC))
 
 * Gemiddelde reistijd Arabische Taal en Cultuur (standaarddeviatie): `r vMean_ATC` (`r vSD_ATC`). n = `r vN_ATC`  
 * Gemiddelde reistijd Filosofie (standaarddeviatie): `r vMean_FIL` (`r vSD_FIL`). n = `r vN_FIL`.
-* Gemiddelde reistijd Geschiedenis (standaarddeviatie): `r vMean_GSC` (`r vSD_GSC`). n = `r vN_GSC   `.
+* Gemiddelde reistijd Geschiedenis (standaarddeviatie): `r vMean_GSC` (`r vSD_GSC`). n = `r vN_GSC`.
 
 ## Visuele inspectie van normaliteit
 Geef de data visueel weer met een histogram, Q-Q plot of boxplot.
@@ -236,8 +239,7 @@ qqline(Reistijd_ATC)
 ```{r qqplot fil}
 qqnorm(
  Reistijd_FIL, pch = 1,
- main = "Normaal Q-Q plot van reistijd Filosofie
- ",
+ main = "Normaal Q-Q plot van reistijd Filosofie",
  ylab = "Kwantielen in data",
  xlab = "Theoretische kwantielen")
 qqline(Reistijd_FIL)
@@ -247,8 +249,7 @@ qqline(Reistijd_FIL)
 ```{r qqplot gsc}
 qqnorm(
  Reistijd_GSC, pch = 1,
- main = "Normaal Q-Q plot van reistijd Geschiedenis
- ",
+ main = "Normaal Q-Q plot van reistijd Geschiedenis",
  ylab = "Kwantielen in data",
  xlab = "Theoretische kwantielen")
 qqline(Reistijd_GSC)
@@ -300,7 +301,7 @@ library(car)
 leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
 ```
 <!-- ## /BLOK: Levenes-test -->
-```{r Levenes test als item, echo = FALSE}
+```{r Levenes test als object, echo = FALSE}
 L <- leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
 vF_waarde <- Round_and_format(L$`F value`)
 vF_p <- Round_and_format(L$`Pr(>F)`)
@@ -315,27 +316,31 @@ Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groep
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.
 
 <div class="col3">
+<!-- ## BLOK: Shapiro-Wilk-test -->
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 shapiro.test(Reistijd_ATC)
 shapiro.test(Reistijd_FIL)
 shapiro.test(Reistijd_GSC)
 ```
+<!-- ## /BLOK: Shapiro-Wilk-test -->
 </div>
 
 In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, dus is de verdeling van beide groepen niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *one-way ANOVA* kan uitgevoerd worden.
 
 ## One-way ANOVA 
 Gebruik `aov()` om een ANOVA-object (`aov`) te creëren. Geef het resultaat overzichtelijk weer met `summary()`.
+<!-- ## BLOK: ANOVA-test -->
 ```{r ANOVA}
 res.aov <- aov(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 summary(res.aov)
 ```
-```{r ANOVA als item, echo=FALSE}
+<!-- ## /BLOK: ANOVA-test -->
+```{r ANOVA als object, echo=FALSE}
 ANOVA <- summary(res.aov)
-vF_waarde <-Round_and_format(ANOVA$`F value`[1])
+vF_waarde <- Round_and_format(ANOVA[[1]]$`F value`[1])
 ```
-* *F* (`r vDF1`, `r vDF2`) = `21,58`r vF_waarde`, *p* < 0,01  
-* Vrijheidsgraden: het aantal groepen - 1 = 2; *n~1~* + *n~2~* - 2 = 254 
+* *F* (`r vDF1`, `r vDF2`) = `r vF_waarde`, *p* < 0,01  
+* Vrijheidsgraden: het aantal groepen - 1 = `r vDF1`; *n~1~* + *n~2~* - 2 = `r vDF2`
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
 
 ### Effectmaat: Cohen's d 
@@ -363,7 +368,6 @@ Gebruik `EtaSq()` op een ANOVA-object om eta-squared te vinden.
 library(DescTools)
 EtaSq(res.aov)
 ```
-*d~~* = -0,08. De sterkte van het effect van de tutor op het cijfer is minimaal. 
 
 Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect.[^7]
 
@@ -375,22 +379,40 @@ Doe een post hoc test om te toetsen welke verschillen significant zijn. Gebruik 
 ```{r TukeyHSD}
 TukeyHSD(res.aov)
 ```
-Het verschil tussen Filosofie en Arabische Taal en Cultuur: *MD* = 13,69, p < 0,01. 
-Het verschil tussen Geschiedenis en Arabische Taal en Cultuur: *MD* = 10,92, p < 0,01. 
-Het verschil tussen Geschiedenis en Filosofie: *MD* = 2,76, p = 0,26. 
+
+```{r TukeyHSD als object}
+THSD <- TukeyHSD(res.aov)
+vATCvsFIL <- Round_and_format(THSD$Opleiding[1,1])
+vATCvsGSC <- Round_and_format(THSD$Opleiding[2,1])
+vFILvsGSC <- Round_and_format(THSD$Opleiding[3,1])
+```
+Het verschil tussen Filosofie en Arabische Taal en Cultuur: *MD* = `r vATCvsFIL`, p < 0,01. 
+Het verschil tussen Geschiedenis en Arabische Taal en Cultuur: *MD* = `r vATCvsGSC`, p < 0,01. 
+Het verschil tussen Geschiedenis en Filosofie: *MD* = `r vFILvsGSC`, p = 0,26. 
 
 # Rapportage
-Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De opleidingen zijn: Arabische Taal en Cultuur (*M~atc~* = 47,45, *SD~atc~* = 10,04), Filosofie (*M~fil~* = 33,77, *SD~fil~* = 10,96) en Geschiedenis (*M~gsc~* = 36,53, *SD~fil~* = 12,09. The *one way ANOVA* was significant, *F*(2, 254) = 21,58, *p* <0,01. Dat wil zeggen dat er een significant verschil is tussen de gemiddelde reistijden van de drie opleidingen.  
+Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De opleidingen zijn: Arabische Taal en Cultuur (*M~atc~* = `r vMean_ATC`, *SD~atc~* = `r vSD_ATC`), Filosofie (*M~fil~* = `r vMean_FIL`, *SD~fil~* = `r vSD_FIL`) en Geschiedenis (*M~gsc~* = `r vMean_GSC`, *SD~fil~* = `r vSD_FIL`. The *one way ANOVA* was significant, *F*(`r vDF1`, `r vDF2`) = `r vF_waarde`, *p* < 0,01. Dat wil zeggen dat er een significant verschil is tussen de gemiddelde reistijden van de drie opleidingen.  
 
 **het effect is **
+```{r beschrijvende tabel, echo=FALSE, results='asis'}
+## Aantallen, gemiddelde en mediaan
+
+beschrijvende_tabel <- matrix(c(vN_ATC, vMean_ATC, vSD_ATC,
+                                vN_FIL, vMean_FIL, vSD_FIL,
+                                vN_GSC, vMean_GSC, vSD_GSC), 
+                              nrow = 3, ncol = 3, byrow = TRUE)
+
+
+papaja::apa_table(beschrijvende_tabel, format="markdown")
+```
 
 
 **posthoc en uitkomsten **
 *Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen van elkaar. 
 
-TABELLEN?? M, SD. 
 
-Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = 13,69, p < 0,01). Geschiedenis en Arabische Taal en Cultuur hebben een significant verschil (*MD* = 10,92, p < 0,01). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = 2,76, p = 0,26). 
+
+Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = `r vATCvsFIL`, p < 0,01). Geschiedenis en Arabische Taal en Cultuur hebben een significant verschil (*MD* = `r vATCvsGSC`, p < 0,01). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = `r vFILvsGSC`, p = 0,26). 
 
 
 Aan de hand van de resultaten kan geconcludeerd worden dat ..... Het effect is minimaal.

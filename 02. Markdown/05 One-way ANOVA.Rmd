@@ -83,11 +83,13 @@ Reistijd_per_opleiding <- Reistijd_per_opleiding %>%
 Gebruik de *one-way ANOVA* bij het toetsen of het gemiddelde van drie of meer onafhankelijke groepen aan elkaar gelijk zijn.[^1] 
 
 # Onderwijscasus
+<div id = "casus">
 In verband met wervingsactiviteiten wil het hoofd van de afdeling Communicatie weten wat de reistijd is van studenten aan verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. 
 
 H~0~: De gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar: µ~0~ = µ~1~ = µ~2~ ... µ~n~  
 
 H~A~: Tenminste voor één opleiding is de gemiddelde reistijd niet gelijk aan de gemiddelde reistijd van studenten voor andere opleidingen. µ~0~ ≠ µ~1~ = µ~2~ ... = µ~n~
+</div>
 
 # Assumpties
 Voor een betrouwbaar resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.

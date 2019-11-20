@@ -12,21 +12,23 @@ output:
 ---
 
 <style>
-  .col2 {
-    columns: 2 200px;
-    -webkit-columns: 2 200px;
-    -moz-columns: 2 200px;
-  }
+`r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet SHHO.css"))`
 </style>
 
-``` {r versiegeschiedenis, include = FALSE, eval = FALSE}
-## versie 0.1     3-9-19
+```{r header, include = FALSE, echo = TRUE, results='asis'} 
+paste0(here::here(),"/03. Includes/code/Header.R")
 ```
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+<!-- ## BLOK: Functiedefinities.R -->
+```{r functiedefinities,include=FALSE, echo=TRUE}
+library(stringr)
+Round_and_format <- function(x, digits = 2) {
+  x <- as.character(round(x, digits))
+  x <- str_replace(x, "[.]", ",")
+  return(x)
+}
 ```
-
+<!-- ## /BLOK: Functiedefinities.R -->
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## De controller van een Universiteit is geïnteresseerd in de instroom van tweedekansstudenten. Zij vraagt zich af: Heeft onze Universiteit relatief veel tweedekansstudenten in vergelijking met het landelijke gemiddelde?
@@ -46,11 +48,13 @@ Gebruik de z-toets bij het vergelijken van twee proporties waarbij één een geg
 
 
 # Onderwijscasus
+<div id = "casus">
 De controller van een Universiteit is geïnteresseerd in de instroom van tweedekansstudenten. Zij wil weten of haar Universiteit relatief veel tweedekansstudenten heeft in vergelijking met het landelijke gemiddelde. Een tweedekansstudent is een student die bij het aanmelden voor een studie al eerder op het WO heeft gezeten.
 
 H~0~: 
 
 H~A~:
+</div>
 
 # Assumpties
 

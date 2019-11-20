@@ -2,14 +2,17 @@
 title: "One-sample t-test"
 output:
   html_document:
+    keep_md: yes
+    number_sections: yes
     theme: lumen
     toc: yes
-    toc_float: 
-      collapsed: FALSE 
-    number_sections: true
-    keep_md: true
-  keywords: [statistisch handboek, studiedata]
-  
+    toc_float:
+      collapsed: no
+  keywords:
+  - statistisch handboek
+  - studiedata
+  pdf_document:
+    toc: yes
 ---
 
 <style>
@@ -60,7 +63,7 @@ Gemiddeld_cijfer_WNS_n30 <- sample(Gemiddeld_cijfer_WNS, 30)
 <!-- ## /BLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *t-toets* om te toetsen of de gemiddeldes van twee groepen aan elkaar gelijk zijn. Gebruik de *one sample t-toets* om aan de hand van één steekproef het gemiddelde van de totale populatie te vergelijken met een vooraf bekende gemiddelde of norm.[^1] 
+Gebruik de *one sample t-toets* om aan de hand van één steekproef het gemiddelde van de totale populatie te vergelijken met een vooraf bekende gemiddelde of norm.[^1] 
 
 # Onderwijscasus
 <div id = "casus">
@@ -83,7 +86,7 @@ Controleer de assumptie van normaliteit met de volgende stappen:
 
 Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld zijn.
 
-Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test*.[^6]
+Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test*.[^6][^7]
 
 # Uitvoering in R
 Er zijn twee datasets `Gemiddeld_cijfer_WNS` en `Gemiddeld_cijfer_WNS_n30` ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde. Het eerste bestand bevat `r length(Gemiddeld_cijfer_WNS)` studenten en het tweede bevat `r length(Gemiddeld_cijfer_WNS_n30)` studenten.
@@ -173,7 +176,7 @@ De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte
 Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Hierbij een toelichting bij twee veelgebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov
-De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde < 0,05 is de verdeling van de data significant verschillend van de normale verdeling.
+De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde < 0,05 is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
 <!-- ## BLOK: Lilliefors-test.R -->
 ```{r Kolmogorov-Smirnov Test, warning=FALSE}
@@ -183,7 +186,7 @@ lillie.test(Gemiddeld_cijfer_WNS)
 ```
 <!-- ## /BLOK: Lilliefors-test.R -->
 
-De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.  
+De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.  
 
 ### Shapiro-Wilk Test
 De Shapiro-Wilk test is een soortgelijke test als de Kolmogorov-Smirnov test en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p-waarde < 0,05 is de verdeling van de data significant verschillend van de normale verdeling.
@@ -197,7 +200,7 @@ shapiro.test(Gemiddeld_cijfer_WNS_n30)
 ```
 <!-- ## /BLOK: Shapiro-Wilk-test.R -->
 
-De p-waarde is *p* > 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
+De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
 
 ***
 
@@ -217,8 +220,8 @@ t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 t <- t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 ```
 * Vrijheidsgraden, *df* = *n* -1 = `r Round_and_format(t$parameter+1)`-1 = `r t$parameter`  
-* *t* (`r t$parameter`) = `r Round_and_format(t$statistic)`, *p* < 0,0002638
-* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
+* *t* (`r t$parameter`) = `r Round_and_format(t$statistic)`, *p* = `r t$p.value`
+* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^8]
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r Round_and_format(t$conf.int[1])` en `r Round_and_format(t$conf.int[2])`.
 * Het gemiddelde van de steekproef is `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`  
 
@@ -236,7 +239,9 @@ paste0(here::here(),"/03. Includes/code/Footer.R")
 [^3]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). The importance of the normality assumption in large public health data sets. Annu Rev Public Health, 23, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf
 [^4]: Laerd statistics (2018). [Testing for Normality using SPSS Statistics](https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php).  
 [^5]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).
-[^6]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html  
+[^6]: De *Wilcoxon Signed Rank Test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is nomaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld is heeft de *Wilcoxon Signed Rank Test* minder statistische power, dan wanneer de *one sample t-toets* uitgevoerd zou worden. 
+[^7]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html  
+[^8]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.
 
-
-
+TODO Voetnoot bij [^8] 
+Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Beijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk dat wanneer uitbijters verwijderd zijn dit altijd melden in een rapport. 

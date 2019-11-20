@@ -53,6 +53,10 @@ Jaarlijks_inkomen_t5 <- Jaarlijks_inkomen_t1 + Opslag
 
 ## 1 Toepassing
 
+Notitie bij One-sample t-toets:   
+De *Wilcoxon Signed Rank Test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is nomaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld is heeft de *Wilcoxon Signed Rank Test* minder statistische power, dan wanneer de *one sample t-toets* uitgevoerd zou worden. 
+ 
+ 
 ## 2 Onderwijscasus
 
 ## 3 Assumpties

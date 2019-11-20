@@ -231,6 +231,7 @@ boxplot(Cijfers ~ Cohort, Cijfers_gem,
 
 De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer voor de BSA en na de BSA. De boxplotten en de staarten lijken symmetrisch, dit kan een teken zijn van normaal verdeelde data. Het cohort van 2011 heeft een aantal uitbijters. 
 
+## Toetsen van normaliteit
 Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoets worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov

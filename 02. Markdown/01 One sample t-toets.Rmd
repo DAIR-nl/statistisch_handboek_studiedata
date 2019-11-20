@@ -63,7 +63,7 @@ Gemiddeld_cijfer_WNS_n30 <- sample(Gemiddeld_cijfer_WNS, 30)
 <!-- ## /BLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *one sample t-toets* om aan de hand van één steekproef het gemiddelde van de totale populatie te vergelijken met een vooraf bekende gemiddelde of norm.[^1] 
+Gebruik de *one sample t-toets* om het gemiddelde van de steekproef te vergelijken met een bekend gemiddelde of norm van de totale populatie.[^1] 
 
 # Onderwijscasus
 <div id = "casus">
@@ -108,6 +108,7 @@ Krijg meer inzicht in de dataset door het gemiddelde en de spreiding te bekijken
 <!-- ## BLOK: Data-beschrijven.R -->
 ```{r de data bekijken, collapse=TRUE}
 ## Gemiddelde en standaarddeviatie
+length(Gemiddeld_cijfer_WNS)
 mean(Gemiddeld_cijfer_WNS)
 sd(Gemiddeld_cijfer_WNS)
 ```
@@ -161,7 +162,7 @@ qqline(Gemiddeld_cijfer_WNS)
 In deze casus liggen de meeste punten op de lijn. Bij de uiteinden liggen de punten dichtbij de lijn. 
 
 ### Boxplot
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren uitbijters.
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren uitbijters.[^8]
 
 <!-- ## BLOK: Boxplot.R -->
 ``` {r boxplot}
@@ -218,10 +219,11 @@ t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 <!-- ## /BLOK: T-test.R -->
 ```{r ttest als object, echo = FALSE}
 t <- t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
+vP <- Round_and_format(t$p.value)
 ```
 * Vrijheidsgraden, *df* = *n* -1 = `r Round_and_format(t$parameter+1)`-1 = `r t$parameter`  
-* *t* (`r t$parameter`) = `r Round_and_format(t$statistic)`, *p* = `r t$p.value`
-* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^8]
+* *t* (`r t$parameter`) = `r Round_and_format(t$statistic)`, *p* < 0,01
+* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^9]
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r Round_and_format(t$conf.int[1])` en `r Round_and_format(t$conf.int[2])`.
 * Het gemiddelde van de steekproef is `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`  
 
@@ -241,7 +243,5 @@ paste0(here::here(),"/03. Includes/code/Footer.R")
 [^5]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).
 [^6]: De *Wilcoxon Signed Rank Test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is nomaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld is heeft de *Wilcoxon Signed Rank Test* minder statistische power, dan wanneer de *one sample t-toets* uitgevoerd zou worden. 
 [^7]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html  
-[^8]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.
-
-TODO Voetnoot bij [^8] 
-Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Beijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk dat wanneer uitbijters verwijderd zijn dit altijd melden in een rapport. 
+[^8]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Beijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk dat wanneer uitbijters verwijderd zijn dit altijd melden in een rapport. 
+[^9]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.

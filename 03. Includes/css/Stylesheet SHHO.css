@@ -13,7 +13,7 @@ h1.title {
     display: block;
     padding: 9.5px;
     margin: 0 0 10px;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 2;
     color: #000000;
     background-color: #f5f5f5;
@@ -150,4 +150,10 @@ td.unpublished a:hover {
     -webkit-columns: 3 100px;
     -moz-columns: 3 100px;
   }
+
+</style>
+<style type="text/css">
+body1{ /* Normal  */
+      font-size: 15px;
+}
 </style>

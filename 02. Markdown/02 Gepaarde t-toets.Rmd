@@ -119,7 +119,8 @@ Tentamencijfer_na_tutorgesprek_n30 <- Tentamencijfer_na_tutorgesprek_n30[volgord
 <!-- ## /BLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *t-toets* om te toetsen of de gemiddeldes van twee groepen aan elkaar gelijk zijn. Gebruik de *gepaarde t-toets* bij een herhaalde meting van dezelfde groep.[^1] 
+Gebruik de *gepaarde t-toets* om te toetsen of bij een herhaalde meting de gemiddeldes van een groep aan elkaar gelijk zijn.[^1] 
+
 
 # Onderwijscasus
 <div id ="casus">
@@ -138,15 +139,15 @@ De *t-toets* gaat ervan uit dat de data normaal verdeeld zijn. Ga er bij een *n*
 
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een Q-Q plot of een boxplot.
-2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^3]) met de *Shapiro-Wilk test*.[^4]  
+2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^3] [^4]  
 
 Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is. 
 
-Als er geen sprake is van normaliteit en *n* is niet groter dan 100, gebruik de *Wilcoxon Signed Rank Test*.[^5]
+Als er geen sprake is van normaliteit gebruik de *Wilcoxon Signed Rank Test*.[^5] [^6]
 
 # Effectmaat
 Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer.  
-Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.[^6]  
+Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.[^7]  
 
 # Uitvoering in R
 Er is een dataset ingeladen met `Tentamencijfer_voor_tutorgesprek` (T~0~) en met `Tentamencijfer_na_tutorgesprek` (T~1~). 
@@ -205,8 +206,8 @@ vNt1 <- Round_and_format(length(Tentamencijfer_na_tutorgesprek))
 ```
 </div>
 
-* Gemiddeld tentamencijfer na tutorgesprek (standaardafwijking): `r vMeant1` (`r vSDt1`). *n* = `r vNt0`.
-* Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): `r vMeant0` (`r vSDt0`). *n* = `r vNt1`.
+* Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): `r vMeant0` (`r vSDt0`). *n* = `r vNt0`.
+* Gemiddeld tentamencijfer na tutorgesprek (standaardafwijking): `r vMeant1` (`r vSDt1`). *n* = `r vNt1`.
 
 ## Visuele inspectie van normaliteit
 Geef normaliteit visueel weer met een histogram, boxplot of Q-Q plot. 
@@ -239,12 +240,10 @@ ggplot(Tentamencijfers,
 ```
 <!-- ## /BLOK: Histogram.R -->
 
-
-Beide histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling. Veel waardes liggen rondom de gemiddeldes. Opvallend is dat het histogram van voor het tutorgesprek veel waardes in de linkerstaart van de verdeling heeft liggen.  
+Beide histogrammen laten een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom de gemiddeldes. Opvallend is dat het histogram van voor het tutorgesprek veel waardes in de linkerstaart van de verdeling heeft liggen.  
 
 ### Q-Q plot
-Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
-
+Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.  
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 <div class ="col2">
 <!-- ## BLOK: QQplot-t1.R -->
@@ -270,11 +269,10 @@ qqline(Tentamencijfer_na_tutorgesprek)
 <!-- ## /BLOK: QQplot-t2.R -->
 </div>
 
-Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn. In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. 
+In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. 
 
 ### Boxplot
-Controleer de data visueel met een boxplot.  
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels zijn uitbijters.  
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8]  
 
 <!-- ## BLOK: Boxplot.R -->
 ``` {r Boxplot}
@@ -283,16 +281,14 @@ boxplot(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers,
 ```
 
 <!-- ## /BLOK: Boxplot.R -->
-De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer per periode voor de lerarenopleiding. De boxplot en de staarten van T~0~ zijn niet helemaal symmetrisch. Dit kan een teken zijn dat de data niet normaal verdeeld is. Het gaat om een kleine afwijking, daarom is de data vermoedelijk normaal verdeeld. Er zijn een aantal uitbijters. Er kan gekeken worden of de uitbijters bepalend zijn voor normaliteit of niet.  
-De boxplot van T~1~ ziet er symmetrisch uit. Er zijn geen uitbijters.    
+De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer per periode voor de lerarenopleiding. De boxplot en de staarten van T~0~ zijn niet helemaal symmetrisch. Het gaat om een kleine afwijking, daarom is de data vermoedelijk normaal verdeeld. Er zijn een aantal mogelijke uitbijters. De boxplot van T~1~ ziet er symmetrisch uit. Er zijn geen uitbijters.    
 
-***
-
+## Toetsen van normaliteit
 Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 
 ### Kolmogorov-Smirnov 
-De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen de twee verdelingen. In dit geval toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is een correctie op de *Kolmogorov-Smirnov test*, die wordt gebruikt als het gemiddelde van de steekproef niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van een normale verdeling. 
+De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 <!-- ## BLOK: Library-nortest -->
 ```{r library nortest, warning=FALSE}
 library(nortest)
@@ -309,10 +305,11 @@ lillie.test(
 <!-- ## /BLOK: Lilliefors-test -->
 </div>
 
-Bij deze casus is van beide groepen de p-waarde > 0,05; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *gepaarde t-toets* kan uitgevoerd worden. 
+Van beide groepen is de p > 0,05; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *gepaarde t-toets* kan uitgevoerd worden. 
 
 ### Shapiro-Wilk Test
-De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.
+De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
+
 <div class ="col2">
 <!-- ## BLOK: Shapiro-Wilk-test -->
 ``` {r Shapiro-Wilk Test, warning=FALSE}
@@ -373,4 +370,7 @@ Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een 
 [^3]: van Geloven, N. (25 september2013). *Wilcoxon signed rank toets*.  https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets
 [^4]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php  
 [^5]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit  
-[^6]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf 
+[^6]: De *Wilcoxon Signed Rank Test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld is heeft de *Wilcoxon Signed Rank Test* minder onderscheidend vermogen, dan wanneer de *one sample t-toets* uitgevoerd zou worden.  
+[^7]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf 
+[^8]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
+[^9]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.

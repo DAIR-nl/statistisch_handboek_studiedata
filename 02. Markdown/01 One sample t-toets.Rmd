@@ -19,6 +19,12 @@ output:
 `r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet SHHO.css"))`
 </style>
 
+<style type="text/css">
+body{ /* Normal  */
+      font-size: 16px;
+}
+</style>
+
 ```{r header, include = FALSE, echo = TRUE, results='asis'} 
 paste0(here::here(),"/03. Includes/code/Header.R")
 ```
@@ -34,7 +40,7 @@ Round_and_format <- function(x, digits = 2) {
 
 ```{r opmerking, include=FALSE, eval=FALSE}
 # TODO: een link maken naar Wilcoxon Signed Rank Test
-# TODO: Uitleg transformeren data 
+# TODO: Uitleg transformeren data (Sandjai "veel gebruikte transformatie is de Box Cox") 
 ```
 
 <!-- ## BLOK: Data-aanmaken.R -->
@@ -67,7 +73,7 @@ Gebruik de *one sample t-toets* om het gemiddelde van de steekproef te vergelijk
 
 # Onderwijscasus
 <div id = "casus">
-De opleidingsdirecteur van de opleiding Werktuigbouwkunde wil weten of het gemiddelde eindexamencijfer voor de exacte vakken (Wiskunde, Natuurkunde en Scheikunde; WNS) van vwo studenten hoger is dan het landelijk gemiddelde (6,8).[^2] Met deze gegevens probeert zij een inschatting te maken van het niveau van de studenten en kan zij bepalen of het curriculum van de inleidende vakken genoeg aansluit bij eerstejaars studenten met een vwo vooropleiding.
+De opleidingsdirecteur van de opleiding Werktuigbouwkunde wil weten of het gemiddelde eindexamencijfer voor de exacte vakken (Wiskunde, Natuurkunde en Scheikunde; WNS) van vwo studenten anders is dan het landelijk gemiddelde (6,8).[^2] Met deze gegevens probeert zij een inschatting te maken van het niveau van de studenten en kan zij bepalen of het curriculum van de inleidende vakken genoeg aansluit bij eerstejaars studenten met een vwo vooropleiding.
 
 H~0~: Het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde is gelijk aan het landelijk gemiddelde: µ = 6,8. 
 
@@ -82,7 +88,7 @@ De *t-toets* gaat ervan uit dat de data van de steekproef normaal verdeeld zijn.
 
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
-2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50[^4]) met de *Shapiro-Wilk test*.[^5]  
+2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^4] [^5]  
 
 Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld zijn.
 
@@ -162,7 +168,7 @@ qqline(Gemiddeld_cijfer_WNS)
 In deze casus liggen de meeste punten op de lijn. Bij de uiteinden liggen de punten dichtbij de lijn. 
 
 ### Boxplot
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren uitbijters.[^8]
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8]
 
 <!-- ## BLOK: Boxplot.R -->
 ``` {r boxplot}
@@ -177,7 +183,7 @@ De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte
 Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Hierbij een toelichting bij twee veelgebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov
-De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde < 0,05 is de verdeling van de data statistisch significant verschillend van de normale verdeling.
+De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
 <!-- ## BLOK: Lilliefors-test.R -->
 ```{r Kolmogorov-Smirnov Test, warning=FALSE}
@@ -190,7 +196,7 @@ lillie.test(Gemiddeld_cijfer_WNS)
 De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.  
 
 ### Shapiro-Wilk Test
-De Shapiro-Wilk test is een soortgelijke test als de Kolmogorov-Smirnov test en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p-waarde < 0,05 is de verdeling van de data significant verschillend van de normale verdeling.
+De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
 
 De dataset met `Gemiddeld_cijfer_WNS_n30` is ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde, *n* = 30.
 
@@ -209,7 +215,7 @@ De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevon
 Gebruik `t.test()`om een t-toets uit te voeren. Geef het gemiddelde waarmee wordt vergeleken en specifieer welke alternatieve hypothese er getoetst wordt. 
 
 De dataset met `Gemiddeld_cijfer_WNS` is ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde, *n* = `r vN`. 
-De *one sample t-toets* is uitgevoerd om de vraag te beantwoorden of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde hoger is dan het landelijk gemiddelde (µ = 6,8). De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren dan het landelijk gemiddelde is er voor gekozen om tweezijdig te toetsen. 
+De *one sample t-toets* is uitgevoerd om de vraag te beantwoorden of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde anders is dan het landelijk gemiddelde (µ = 6,8). De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren dan het landelijk gemiddelde is er voor gekozen om tweezijdig te toetsen. 
 
 <!-- ## BLOK: T-test.R -->
 ```{r ttest}
@@ -222,13 +228,13 @@ t <- t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 vP <- Round_and_format(t$p.value)
 ```
 * Vrijheidsgraden, *df* = *n* -1 = `r Round_and_format(t$parameter+1)`-1 = `r t$parameter`  
-* *t* (`r t$parameter`) = `r Round_and_format(t$statistic)`, *p* < 0,01
+* *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* << 0,05
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^9]
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r Round_and_format(t$conf.int[1])` en `r Round_and_format(t$conf.int[2])`.
 * Het gemiddelde van de steekproef is `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`  
 
 # Rapportage
-De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`, *SD* = `r Round_and_format(sd(Gemiddeld_cijfer_WNS))`) is statistisch significant hoger dan het landelijk gemiddelde van 6,8, *t* (`r t$parameter`) = `r Round_and_format(t$statistic)`, *p* < 0,01. 
+De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`, *SD* = `r Round_and_format(sd(Gemiddeld_cijfer_WNS))`) is statistisch significant hoger dan het landelijk gemiddelde van 6,8, *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* << 0,05. 
 
 De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor de exacte vakken van studenten Werktuigbouwkunde met een vwo vooropleiding hoger ligt dan het landelijk gemiddelde.
 
@@ -241,7 +247,7 @@ paste0(here::here(),"/03. Includes/code/Footer.R")
 [^3]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). The importance of the normality assumption in large public health data sets. Annu Rev Public Health, 23, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf
 [^4]: Laerd statistics (2018). [Testing for Normality using SPSS Statistics](https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php).  
 [^5]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).
-[^6]: De *Wilcoxon Signed Rank Test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is nomaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld is heeft de *Wilcoxon Signed Rank Test* minder statistische power, dan wanneer de *one sample t-toets* uitgevoerd zou worden. 
+[^6]: De *Wilcoxon Signed Rank Test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld is heeft de *Wilcoxon Signed Rank Test* minder onderscheidend vermogen, dan wanneer de *one sample t-toets* uitgevoerd zou worden. 
 [^7]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html  
-[^8]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Beijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk dat wanneer uitbijters verwijderd zijn dit altijd melden in een rapport. 
+[^8]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
 [^9]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.

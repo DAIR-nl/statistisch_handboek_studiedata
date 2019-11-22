@@ -20,7 +20,6 @@ output:
 paste0(here::here(),"/03. Includes/code/Header.R")
 ```
 
-<!-- ## BLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -150,7 +149,7 @@ Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een
 Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.[^7]  
 
 # Uitvoering in R
-Er is een dataset ingeladen met `Tentamencijfer_voor_tutorgesprek` (T~0~) en met `Tentamencijfer_na_tutorgesprek` (T~1~). 
+Er is een dataset ingeladen met `Tentamencijfer_voor_tutorgesprek` (T~0~) en met `Tentamencijfer_na_tutorgesprek` (T~1~), *n~T0~* = , *n~T1~* = . 
 
 ## De data bekijken
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
@@ -289,6 +288,7 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst 
 
 ### Kolmogorov-Smirnov 
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
+
 <!-- ## BLOK: Library-nortest -->
 ```{r library nortest, warning=FALSE}
 library(nortest)
@@ -305,10 +305,12 @@ lillie.test(
 <!-- ## /BLOK: Lilliefors-test -->
 </div>
 
-Van beide groepen is de p > 0,05; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *gepaarde t-toets* kan uitgevoerd worden. 
+Van beide groepen is de p > 0,05; er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden. 
 
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
+
+Er is een dataset ingeladen met `Tentamencijfer_voor_tutorgesprek_n30` (T~0~) en met `Tentamencijfer_na_tutorgesprek_n30` (T~1~), *n~T0~* = , *n~T1~* = 
 
 <div class ="col2">
 <!-- ## BLOK: Shapiro-Wilk-test -->
@@ -321,12 +323,17 @@ shapiro.test(
 <!-- ## /BLOK: Shapiro-Wilk-test -->
 </div>
 
-In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05. De verdeling van beide groepen is niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan. De *gepaarde t-toets* kan uitgevoerd worden.  
+Voorbeide groepen is de *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden.  
 
 ***
 
 ## Gepaarde t-toets
-Gebruik `t.test()` met `paired = TRUE`.
+Gebruik `t.test()` met `paired = TRUE` om een *gepaarde t-toets* uit te voeren. 
+
+Er is een dataset ingeladen met `Tentamencijfer_voor_tutorgesprek` (T~0~) en met `Tentamencijfer_na_tutorgesprek` (T~1~), *n~T0~* = `r vNt0`, *n~T1~* = `r vNt1`. 
+
+De *gepaarde t-toets* is uitgevoerd om de vraag te beantwoorden of het gemiddelde tentamencijfer verandert na een tutorgesprek. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren na een gesprek is er voor gekozen om tweezijdig te toetsen. 
+
 <!-- ## BLOK: T-test -->
 ```{r T-test}
 t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
@@ -340,11 +347,11 @@ vDF <- t$parameter
 vConf.int1 <- Round_and_format(t$conf.int[1])
 vConf.int2 <- Round_and_format(t$conf.int[2])
 ```
-
+* *t* ~`r vN`~ = `r vT_waarde`, *p* << 0,05
 * Vrijheidsgraden, *df* = *n* -1 = `r vN`-1 = `r vDF`  
-* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
-* *t* (`r vN`) = `r vT_waarde`, *p* < 0,01
+* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^9]
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r vConf.int1` en `r vConf.int2`.
+* het absolute verschil tussen de twee groepen: 
 
 ### Effectmaat: Cohen's d
 Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
@@ -361,9 +368,9 @@ vD_waarde <- Round_and_format(d$estimate)
 *d* = `r vD_waarde`. De sterkte van het effect van de tutor op het cijfer is minimaal. 
 
 # Rapportage
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r vMeant0`, *SD~T0~* = `r vSDt0`) en het gemiddelde van T~1~ (*M~T1~* =`r vMeant1`, *SD~T1~* = `r vSDt1`) is significant, *t* (`r vDF`) = `r vT_waarde`, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vConf.int1` tot `r vConf.int2`. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is minimaal, *d* = `r vD_waarde`. 
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r vMeant0`, *SD~T0~* = `r vSDt0`) en het gemiddelde van T~1~ (*M~T1~* =`r vMeant1`, *SD~T1~* = `r vSDt1`) is significant, *t* (`r vDF`) = `r vT_waarde`, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vConf.int1` tot `r vConf.int2`. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is echter verwaarloosbaar klein, *d* = `r vD_waarde`. 
 
-Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor. Het effect is minimaal.  
+Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor. Het effect is verwaarloosbaar klein.  
 
 [^1]: Wikipedia (21 augustus 2019). *Student's t-test*. https://en.wikipedia.org/wiki/Student%27s_t-test
 [^2]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). Tthe importance of the normality assumption in large public health data sets. *Annu Rev Public Health, 23*, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf 
@@ -373,4 +380,4 @@ Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een 
 [^6]: De *Wilcoxon Signed Rank Test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld is heeft de *Wilcoxon Signed Rank Test* minder onderscheidend vermogen, dan wanneer de *one sample t-toets* uitgevoerd zou worden.  
 [^7]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf 
 [^8]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
-[^9]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.
+[^9]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Houdt hierbij rekening met type I en type II fouten.

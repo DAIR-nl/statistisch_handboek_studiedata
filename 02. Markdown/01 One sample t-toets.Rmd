@@ -19,12 +19,6 @@ output:
 `r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet SHHO.css"))`
 </style>
 
-<style type="text/css">
-body{ /* Normal  */
-      font-size: 16px;
-}
-</style>
-
 ```{r header, include = FALSE, echo = TRUE, results='asis'} 
 paste0(here::here(),"/03. Includes/code/Header.R")
 ```
@@ -95,7 +89,7 @@ Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventuee
 Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test*.[^6][^7]
 
 # Uitvoering in R
-Er zijn twee datasets `Gemiddeld_cijfer_WNS` en `Gemiddeld_cijfer_WNS_n30` ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde. Het eerste bestand bevat `r length(Gemiddeld_cijfer_WNS)` studenten en het tweede bevat `r length(Gemiddeld_cijfer_WNS_n30)` studenten.
+Er is een dataset ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde: `Gemiddeld_cijfer_WNS` .
 
 ## De data bekijken
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
@@ -198,7 +192,7 @@ De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevon
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
 
-De dataset met `Gemiddeld_cijfer_WNS_n30` is ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde, *n* = 30.
+Er is een steekproef van `Gemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS_n30. De steekproef bevat `r length(Gemiddeld_cijfer_WNS_n30)` studenten.
 
 <!-- ## BLOK: Shapiro-Wilk-test.R -->
 ``` {r Shapiro-Wilk Test, warning=FALSE}

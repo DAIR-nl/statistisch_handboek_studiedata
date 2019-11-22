@@ -50,70 +50,70 @@ library(dplyr)
 ## Maak ruwe data aan
 mu <- 7.2
 sigma <- 1.5
-tentamencijfer_na_tutorgesprek <- rnorm(250, mu, sigma)
+Tentamencijfer_na_tutorgesprek <- rnorm(250, mu, sigma)
 
-tentamencijfer_na_tutorgesprek <- 
-  tentamencijfer_na_tutorgesprek[tentamencijfer_na_tutorgesprek <= 10
-                                 & tentamencijfer_na_tutorgesprek >= 1]
+Tentamencijfer_na_tutorgesprek <- 
+  Tentamencijfer_na_tutorgesprek[Tentamencijfer_na_tutorgesprek <= 10
+                                 & Tentamencijfer_na_tutorgesprek >= 1]
 
 mu <- 6.8
 sigma <- 1.8
-tentamencijfer_voor_tutorgesprek <- rnorm(260, mu, sigma)
+Tentamencijfer_voor_tutorgesprek <- rnorm(260, mu, sigma)
 
-tentamencijfer_voor_tutorgesprek <- 
-  tentamencijfer_voor_tutorgesprek[tentamencijfer_voor_tutorgesprek <= 10
-                                   & tentamencijfer_voor_tutorgesprek >= 1]
+Tentamencijfer_voor_tutorgesprek <- 
+  Tentamencijfer_voor_tutorgesprek[Tentamencijfer_voor_tutorgesprek <= 10
+                                   & Tentamencijfer_voor_tutorgesprek >= 1]
 
 ## Stel volgorde en lengte van steekproef vast
-volgorde <- sample(1:length(tentamencijfer_na_tutorgesprek), length(tentamencijfer_na_tutorgesprek))
+volgorde <- sample(1:length(Tentamencijfer_na_tutorgesprek), length(Tentamencijfer_na_tutorgesprek))
 volgorde_n30 <- sample(1:30, 30)
-Verschil_grootte <- length(tentamencijfer_voor_tutorgesprek) - length(tentamencijfer_na_tutorgesprek)
+Verschil_grootte <- length(Tentamencijfer_voor_tutorgesprek) - length(Tentamencijfer_na_tutorgesprek)
 
 ## Rond evaluatiecijfers af
-tentamencijfer_na_tutorgesprek <- sapply(tentamencijfer_na_tutorgesprek, round, 3)
-tentamencijfer_voor_tutorgesprek <- sapply(tentamencijfer_voor_tutorgesprek, round, 3)
+Tentamencijfer_na_tutorgesprek <- sapply(Tentamencijfer_na_tutorgesprek, round, 3)
+Tentamencijfer_voor_tutorgesprek <- sapply(Tentamencijfer_voor_tutorgesprek, round, 3)
 
 ## Definiëer lengte in steekproef en hussel paren
-tentamencijfer_na_tutorgesprek <- sort(tentamencijfer_na_tutorgesprek)
-tentamencijfer_na_tutorgesprek <- tentamencijfer_na_tutorgesprek[volgorde]
-tentamencijfer_voor_tutorgesprek <- sort(tentamencijfer_voor_tutorgesprek)
-tentamencijfer_voor_tutorgesprek <- tentamencijfer_voor_tutorgesprek[sample(-283:-1, Verschil_grootte)]
-tentamencijfer_voor_tutorgesprek <- tentamencijfer_voor_tutorgesprek[volgorde]
+Tentamencijfer_na_tutorgesprek <- sort(Tentamencijfer_na_tutorgesprek)
+Tentamencijfer_na_tutorgesprek <- Tentamencijfer_na_tutorgesprek[volgorde]
+Tentamencijfer_voor_tutorgesprek <- sort(Tentamencijfer_voor_tutorgesprek)
+Tentamencijfer_voor_tutorgesprek <- Tentamencijfer_voor_tutorgesprek[sample(-283:-1, Verschil_grootte)]
+Tentamencijfer_voor_tutorgesprek <- Tentamencijfer_voor_tutorgesprek[volgorde]
 
 Voor_of_na_tutorgesprek <- c(
-  replicate(length(tentamencijfer_voor_tutorgesprek), "voor"), 
-  replicate(length(tentamencijfer_na_tutorgesprek), "na"))
+  replicate(length(Tentamencijfer_voor_tutorgesprek), "voor"), 
+  replicate(length(Tentamencijfer_na_tutorgesprek), "na"))
 studentnr <- c(replicate(2, sample(300000:400000, (length(Voor_of_na_tutorgesprek)/2))))
-Cijfer <- c(tentamencijfer_voor_tutorgesprek, tentamencijfer_na_tutorgesprek)
+Cijfer <- c(Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgesprek)
 
-tentamencijfers <- data.frame(studentnr, Cijfer, Voor_of_na_tutorgesprek)
+Tentamencijfers <- data.frame(studentnr, Cijfer, Voor_of_na_tutorgesprek)
 
 ## Stel de volgorde van de factor vast
-tentamencijfers <- 
-  mutate(tentamencijfers, 
+Tentamencijfers <- 
+  mutate(Tentamencijfers, 
          Voor_of_na_tutorgesprek =
                   factor(Voor_of_na_tutorgesprek, levels = c("voor", "na")))
 
 mu <- 7.2
 sigma <- 1.2
-tentamencijfer_voor_tutorgesprek_n30 <- rnorm(30, mu, sigma)
+Tentamencijfer_voor_tutorgesprek_n30 <- rnorm(30, mu, sigma)
 
-tentamencijfer_voor_tutorgesprek_n30 <- tentamencijfer_voor_tutorgesprek_n30[tentamencijfer_voor_tutorgesprek_n30 <= 10 
-                                                                 & tentamencijfer_voor_tutorgesprek_n30 >= 1]
-tentamencijfer_voor_tutorgesprek_n30 <- sapply(tentamencijfer_voor_tutorgesprek_n30, round, 3)
-tentamencijfer_voor_tutorgesprek_n30 <- sort(tentamencijfer_voor_tutorgesprek_n30)
-tentamencijfer_voor_tutorgesprek_n30 <- tentamencijfer_voor_tutorgesprek_n30[volgorde_n30]
+Tentamencijfer_voor_tutorgesprek_n30 <- Tentamencijfer_voor_tutorgesprek_n30[Tentamencijfer_voor_tutorgesprek_n30 <= 10 
+                                                                 & Tentamencijfer_voor_tutorgesprek_n30 >= 1]
+Tentamencijfer_voor_tutorgesprek_n30 <- sapply(Tentamencijfer_voor_tutorgesprek_n30, round, 3)
+Tentamencijfer_voor_tutorgesprek_n30 <- sort(Tentamencijfer_voor_tutorgesprek_n30)
+Tentamencijfer_voor_tutorgesprek_n30 <- Tentamencijfer_voor_tutorgesprek_n30[volgorde_n30]
 
 mu <- 7.0
 sigma <- 0.8
-tentamencijfer_na_tutorgesprek_n30 <- rnorm(30, mu, sigma)
+Tentamencijfer_na_tutorgesprek_n30 <- rnorm(30, mu, sigma)
 
-tentamencijfer_na_tutorgesprek_n30 <-
-  tentamencijfer_na_tutorgesprek_n30[tentamencijfer_na_tutorgesprek_n30 <= 10 &
-                                      tentamencijfer_na_tutorgesprek_n30 >= 1]
-tentamencijfer_na_tutorgesprek_n30 <- sapply(tentamencijfer_na_tutorgesprek_n30, round, 3)
-tentamencijfer_na_tutorgesprek_n30 <- sort(tentamencijfer_na_tutorgesprek_n30)
-tentamencijfer_na_tutorgesprek_n30 <- tentamencijfer_na_tutorgesprek_n30[volgorde_n30]
+Tentamencijfer_na_tutorgesprek_n30 <-
+  Tentamencijfer_na_tutorgesprek_n30[Tentamencijfer_na_tutorgesprek_n30 <= 10 &
+                                      Tentamencijfer_na_tutorgesprek_n30 >= 1]
+Tentamencijfer_na_tutorgesprek_n30 <- sapply(Tentamencijfer_na_tutorgesprek_n30, round, 3)
+Tentamencijfer_na_tutorgesprek_n30 <- sort(Tentamencijfer_na_tutorgesprek_n30)
+Tentamencijfer_na_tutorgesprek_n30 <- Tentamencijfer_na_tutorgesprek_n30[volgorde_n30]
 ```
 <!-- ## /BLOK: Data-aanmaken.R -->
 
@@ -149,27 +149,27 @@ Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een
 Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.[^7]  
 
 # Uitvoering in R
-Er is een dataset ingeladen met `tentamencijfer_voor_tutorgesprek` (T~0~) en met `tentamencijfer_na_tutorgesprek` (T~1~), *n~T0~* = , *n~T1~* = . 
+Er is een dataset ingeladen met gemiddelde tentamencijfer voor (T~0~) en na (T~1~) een tutorgesprek: `Tentamencijfers`. 
 
 ## De data bekijken
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 <!-- ## BLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
-## Eerste 5 observaties
-head(tentamencijfers)
+## Eerste 6 observaties
+head(Tentamencijfers)
 
-## Laatste 5 observaties
-tail(tentamencijfers)
+## Laatste 6 observaties
+tail(Tentamencijfers)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
 
 Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen.
 <!-- ## BLOK: Data-selecteren.R -->
 ```{r data selecteren}
-tentamencijfer_voor_tutorgesprek <-
-  tentamencijfers[tentamencijfers$Voor_of_na_tutorgesprek=="voor", 2]
-tentamencijfer_na_tutorgesprek <- 
-  tentamencijfers[tentamencijfers$Voor_of_na_tutorgesprek=="na", 2]
+Tentamencijfer_voor_tutorgesprek <-
+  Tentamencijfers[Tentamencijfers$Voor_of_na_tutorgesprek=="voor", 2]
+Tentamencijfer_na_tutorgesprek <- 
+  Tentamencijfers[Tentamencijfers$Voor_of_na_tutorgesprek=="na", 2]
 ```
 <!-- ## /BLOK: Data-selecteren.R -->
 
@@ -177,31 +177,31 @@ tentamencijfer_na_tutorgesprek <-
 <!-- ## BLOK: Data-beschrijven-1.R -->
 ```{r data beschrijven t1, collapse = TRUE}
 ## aantallen, gemiddelde en standaarddeviatie voor tutorgesprek
-length(tentamencijfer_voor_tutorgesprek)
+length(Tentamencijfer_voor_tutorgesprek)
 mean(
-  tentamencijfer_voor_tutorgesprek)
-sd(tentamencijfer_voor_tutorgesprek)
+  Tentamencijfer_voor_tutorgesprek)
+sd(Tentamencijfer_voor_tutorgesprek)
 ```
 <!-- ## /BLOK: Data-beschrijven-1.R -->
 ```{r Var beschrijven t0, include=FALSE, echo=TRUE}
-vMean_t0 <- Round_and_format(mean(tentamencijfer_voor_tutorgesprek))
-vSD_t0 <-Round_and_format(sd(tentamencijfer_voor_tutorgesprek))
-vN_t0 <- Round_and_format(length(tentamencijfer_voor_tutorgesprek))
+vMean_t0 <- Round_and_format(mean(Tentamencijfer_voor_tutorgesprek))
+vSD_t0 <-Round_and_format(sd(Tentamencijfer_voor_tutorgesprek))
+vN_t0 <- Round_and_format(length(Tentamencijfer_voor_tutorgesprek))
 ```
   
 <!-- ## BLOK: Data-beschrijven-2.R -->
 ```{r data bekijken t2, collapse=TRUE}
 ## aantallen, gemiddelde en standaarddeviatie na tutorgesprek
-length(tentamencijfer_na_tutorgesprek)
+length(Tentamencijfer_na_tutorgesprek)
 mean(
-  tentamencijfer_na_tutorgesprek)
-sd(tentamencijfer_na_tutorgesprek)
+  Tentamencijfer_na_tutorgesprek)
+sd(Tentamencijfer_na_tutorgesprek)
 ```
 <!-- ## /BLOK: Data-beschrijven-2.R -->
 ```{r Var beschrijven t1, include=FALSE, echo=TRUE}
-vMean_t1 <- Round_and_format(mean(tentamencijfer_na_tutorgesprek))
-vSD_t1 <- Round_and_format(sd(tentamencijfer_na_tutorgesprek))
-vN_t1 <- Round_and_format(length(tentamencijfer_na_tutorgesprek))
+vMean_t1 <- Round_and_format(mean(Tentamencijfer_na_tutorgesprek))
+vSD_t1 <- Round_and_format(sd(Tentamencijfer_na_tutorgesprek))
+vN_t1 <- Round_and_format(length(Tentamencijfer_na_tutorgesprek))
 ```
 </div>
 
@@ -220,7 +220,7 @@ library(ggplot2)
 
 <!-- ## BLOK: Histogram.R -->
 ```{r histogram atc}
-ggplot(tentamencijfers,
+ggplot(Tentamencijfers,
   aes(x = Cijfer)) +
   geom_histogram(aes(y = ..density..),
                  binwidth = 1,
@@ -247,23 +247,23 @@ Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen wor
 <div class ="col2">
 <!-- ## BLOK: QQplot-t1.R -->
 ```{r qqplot voor tutor}
-qqnorm(tentamencijfer_voor_tutorgesprek, 
+qqnorm(Tentamencijfer_voor_tutorgesprek, 
        pch = 1,
        main = "Normaal Q-Q plot van tentamencijfers voor tutorgesprek",
        ylab = "kwantielen in data",
        xlab = "Theoretische kwantielen")
-qqline(tentamencijfer_voor_tutorgesprek)
+qqline(Tentamencijfer_voor_tutorgesprek)
 ```
 <!-- ## /BLOK: QQplot-t1.R -->
 
 <!-- ## BLOK: QQplot-t2.R -->
 ```{r qqplot na tutor}
-qqnorm(tentamencijfer_na_tutorgesprek, 
+qqnorm(Tentamencijfer_na_tutorgesprek, 
        pch = 1,
        main = "Normaal Q-Q plot van tentamencijfers na tutorgesprek",
        ylab = "kwantielen in data",
        xlab = "Theoretische kwantielen")
-qqline(tentamencijfer_na_tutorgesprek)
+qqline(Tentamencijfer_na_tutorgesprek)
 ```
 <!-- ## /BLOK: QQplot-t2.R -->
 </div>
@@ -275,7 +275,7 @@ De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen
 
 <!-- ## BLOK: Boxplot.R -->
 ``` {r Boxplot}
-boxplot(Cijfer ~ Voor_of_na_tutorgesprek, tentamencijfers,
+boxplot(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers,
         main = "Boxplot van tentamencijfers lerarenopleiding")
 ```
 
@@ -298,9 +298,9 @@ library(nortest)
 <!-- ## BLOK: Lilliefors-test -->
 ``` {r Lilliefors Test, warning=FALSE}
 lillie.test(
-  tentamencijfer_voor_tutorgesprek)
+  Tentamencijfer_voor_tutorgesprek)
 lillie.test(
-  tentamencijfer_na_tutorgesprek)
+  Tentamencijfer_na_tutorgesprek)
 ```
 <!-- ## /BLOK: Lilliefors-test -->
 </div>
@@ -310,15 +310,15 @@ Van beide groepen is de p > 0,05; er is geen statistisch significant verschil ge
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
 
-Er is een dataset ingeladen met `tentamencijfer_voor_tutorgesprek_n30` (T~0~) en met `tentamencijfer_na_tutorgesprek_n30` (T~1~), *n~T0~* = , *n~T1~* = 
+Er zijn 2 steekproeven van `Tentamencijfers` ingeladen: `Tentamencijfer_voor_tutorgesprek_n30` (T~0~) en `Tentamencijfer_na_tutorgesprek_n30` (T~1~), *n~T0~* = `r length(Tentamencijfer_voor_tutorgesprek_n30)` , *n~T1~* = `r length(Tentamencijfer_na_tutorgesprek_n30)` 
 
 <div class ="col2">
 <!-- ## BLOK: Shapiro-Wilk-test -->
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 shapiro.test(
-  tentamencijfer_voor_tutorgesprek_n30)
+  Tentamencijfer_voor_tutorgesprek_n30)
 shapiro.test(
-  tentamencijfer_na_tutorgesprek_n30)
+  Tentamencijfer_na_tutorgesprek_n30)
 ```
 <!-- ## /BLOK: Shapiro-Wilk-test -->
 </div>
@@ -330,39 +330,40 @@ Voorbeide groepen is de *p* > 0,05, dus er is geen statistisch significant versc
 ## Gepaarde t-toets
 Gebruik `t.test()` met `paired = TRUE` om een *gepaarde t-toets* uit te voeren. 
 
-Er is een dataset ingeladen met `tentamencijfer_voor_tutorgesprek` (T~0~) en met `tentamencijfer_na_tutorgesprek` (T~1~), *n~T0~* = `r vN_t0`, *n~T1~* = `r vN_t1`. 
+Er is een dataset ingeladen met `Tentamencijfer_voor_tutorgesprek` (T~0~) en met `Tentamencijfer_na_tutorgesprek` (T~1~), *n~T0~* = `r vN_t0`, *n~T1~* = `r vN_t1`. 
 
 De *gepaarde t-toets* is uitgevoerd om de vraag te beantwoorden of het gemiddelde tentamencijfer verandert na een tutorgesprek. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren na een gesprek is er voor gekozen om tweezijdig te toetsen. 
 
 <!-- ## BLOK: T-test -->
 ```{r T-test}
-t.test(Cijfer ~ Voor_of_na_tutorgesprek, tentamencijfers, paired = TRUE)
+t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 ```
 <!-- ## BLOK: T-test -->
 ```{r T-test als object, echo = FALSE}
-t <- t.test(Cijfer ~ Voor_of_na_tutorgesprek, tentamencijfers, paired = TRUE)
+t <- t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 vT_waarde <- Round_and_format(t$statistic)
 vN <- t$parameter+1
 vDF <- t$parameter
 vconf.int1 <- Round_and_format(t$conf.int[1])
 vconf.int2 <- Round_and_format(t$conf.int[2])
+vDiffMean <- Round_and_format(t$estimate*-1)
 ```
 * *t* ~`r vN`~ = `r vT_waarde`, *p* << 0,05
 * Vrijheidsgraden, *df* = *n* -1 = `r vN`-1 = `r vDF`  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^9]
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r vconf.int1` en `r vconf.int2`.
-* het absolute verschil tussen de twee groepen: 
+* het absolute verschil tussen de twee groepen: `r vDiffMean` 
 
 ### Effectmaat: Cohen's d
 Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
 <!-- ## BLOK: Cohens-d-test -->
 ```{r Cohens d}
 library(effsize)
-cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, tentamencijfers, paired = TRUE)
+cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 ```
 <!-- ## /BLOK: Cohens-d-test -->
 ```{r var Cohens d, echo = FALSE}
-d <- cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, tentamencijfers, paired = TRUE)
+d <- cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 vD_waarde <- Round_and_format(d$estimate)
 ```
 *d* = `r vD_waarde`. De sterkte van het effect van de tutor op het cijfer is minimaal. 

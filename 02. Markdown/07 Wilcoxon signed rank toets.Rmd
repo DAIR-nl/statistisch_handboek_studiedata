@@ -29,6 +29,7 @@ Round_and_format <- function(x, digits = 2) {
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
 
+<!-- ## BLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 RNGkind(sample.kind = "Rounding")
 set.seed(1)
@@ -52,36 +53,65 @@ Promotie_mogelijkheden <- c(0, 650, 1300, 2600, 6500, -650, -1300, -2600)
 Weging               <- c(800, 400,  200,   100,  10,  200,   100,    50)
 Opslag <- sample(Promotie_mogelijkheden, 307, replace=TRUE, Weging)
 Jaarlijks_inkomen_t5 <- Jaarlijks_inkomen_t1 + Opslag
-```
+Studentnr <- 2*sample(3000000:4000000, length(Jaarlijks_inkomen_t1))
+Inkomen<- c(Jaarlijks_inkomen_t1, Jaarlijks_inkomen_t5)
+Datum <- c(replicate(length(Jaarlijks_inkomen_t1), "t1"), (replicate(length(Jaarlijks_inkomen_t5), "t5")))
 
-## 1 Toepassing
+Alumni_inkomens <- data.frame(Studentnr, Datum, Inkomen)
+
+```
+<!-- ## /BLOK: Data-aanmaken.R -->
+
+## Toepassing
 
 Notitie bij One-sample t-toets:   
 De *Wilcoxon Signed Rank Test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is nomaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld is heeft de *Wilcoxon Signed Rank Test* minder statistische power, dan wanneer de *one sample t-toets* uitgevoerd zou worden. 
  
  
-## 2 Onderwijscasus
+## Onderwijscasus
+<div id ="casus">
 
+</div>
 
-## 3 Assumpties
+## Assumpties
 
-## 4 Uitvoering in R
+## Uitvoering in R
 Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij genaamd `Jaarlijks_inkomen`. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkeld 4 jaar nadat zij afgestudeerd zijn.
 
 ### De data bekijken
 Bekijk de data door het gemiddelde, de standaardafwijking, de mediaan en een histogram op te vragen.
 
+<!-- ## BLOK: Data-bekijken.R -->
+```{r data bekijken, collapse = TRUE}
+## Eerste 6 observaties
+head(Alumni_inkomens)
+
+## Laatste 6 observaties
+tail(Alumni_inkomens)
+```
+<!-- ## /BLOK: Data-bekijken.R -->
+
+<!-- ## BLOK: Data-selecteren.R -->
+```{r data selecteren}
+Jaarlijks_inkomen_t1 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Datum == "t1"]
+Jaarlijks_inkomen_t5 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Datum == "t5"]
+```
+
 <div class="col2">
-```{r, data bekijken, collapse=TRUE}
+<!-- ## BLOK: Data-beschrijven-1.R -->
+```{r, data beschrijven 1, collapse=TRUE}
 mean(Jaarlijks_inkomen_t1)
 sd(Jaarlijks_inkomen_t1)
 median(Jaarlijks_inkomen_t1)
-hist(Jaarlijks_inkomen_t1)
+```
+<!-- ## /BLOK: Data-beschrijven-1.R -->
+<!-- ## BLOK: Data-beschrijven-2.R -->
+``````{r Data beschrijven 2, collapse=TRUE}
 mean(Jaarlijks_inkomen_t5)
 sd(Jaarlijks_inkomen_t5)
 median(Jaarlijks_inkomen_t5)
-hist(Jaarlijks_inkomen_t5)
 ```
+<!-- ## /BLOK: Data-beschrijven-2.R -->
 </div>
 
 ### Normaliteit testen
@@ -102,7 +132,7 @@ Voer een Wilcoxon signed rank toets uit met `paired=TRUE`.
 wilcox.test(Jaarlijks_inkomen_t5, Jaarlijks_inkomen_t1, paired=TRUE, alternative = "greater")
 ```
 
-## Toelichting op de output
+### Toelichting op de output
 
-## 5 Rapportage
+## Rapportage
 

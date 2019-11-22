@@ -325,8 +325,6 @@ shapiro.test(
 
 Voorbeide groepen is de *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden.  
 
-***
-
 ## Gepaarde t-toets
 Gebruik `t.test()` met `paired = TRUE` om een *gepaarde t-toets* uit te voeren. 
 

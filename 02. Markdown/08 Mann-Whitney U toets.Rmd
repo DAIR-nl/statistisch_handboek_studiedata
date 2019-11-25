@@ -29,7 +29,7 @@ Round_and_format <- function(x, digits = 2) {
 }
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
-
+<!-- ## BLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## De directeur van een hogeschool vraagt zich af of wat de invloed is van internationalisering op zijn instelling. Hij gebruikt hiervoor het totaal aantal punten behaald in het tweedejaar zodat uitval een minder grote rol speelt. Hij vraagt zich daarom af: is het behaald aantal EC in het tweede jaar van internationale studenten hoger dan van de Nederlandse studenten?
 
@@ -52,10 +52,11 @@ Resultaten_internationale_studenten <- rbind (
                                   t(replicate(200, sample(Slechte_student_ec, 11, replace = TRUE))))
 Punten_jaar2_inter <- margin.table(Resultaten_internationale_studenten, 1)
 
-
-
+Punten_jaar2 <- data.frame(c(Punten_jaar2_NL, Punten_jaar2_inter), 
+                           c(rep("ja", length(Punten_jaar2_NL)), rep("nee", length(Punten_jaar2_inter))))
+colnames(Punten_jaar2)<-c("Punten_jaar2", "Nederlands")
 ```
-
+<!-- ## /BLOK: Data-aanmaken.R -->
 # Toepassing
 
 # Onderwijscasus
@@ -67,17 +68,23 @@ Er is data ingeladen met het aantal punten studenten in hun tweede jaar halen. `
 
 ## De data bekijken
 Gebruik `head()` in R om de eerste vijf regels te bekijken
+
+<!-- ## BLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
-head(Punten_jaar2_NL)
-head(Punten_jaar2_inter)
+## Eerste 6 observaties
+head(Punten_jaar2)
+## Eerste 6 observaties
+tail(Punten_jaar2)
 ```
+<!-- ## /BLOK: Data-bekijken.R -->
 
 ## De Mann-Whitney U toets in R
 Gebruik `wilcox.test()` met twee argumenten om een Mann-Whitney U toets te doen in R
+<!-- ## BLOK: Mann-Whitney-U-toets.R -->
 ```{r Mann Whitney U toets}
 wilcox.test(Punten_jaar2_NL, Punten_jaar2_inter)
 ```
-
+<!-- ## /BLOK: Mann-Whitney-U-toets.R -->
 # Toelichting op de output
 
 # Rapportage

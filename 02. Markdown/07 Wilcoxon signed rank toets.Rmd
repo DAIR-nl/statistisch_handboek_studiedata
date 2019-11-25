@@ -116,21 +116,28 @@ median(Jaarlijks_inkomen_t5)
 
 ### Normaliteit testen
 Test of de data normaal verdeeld is met een lilliefors-test
+<!-- BLOK: Library-nortest.R -->
 ```{r library nortest, warning=FALSE}
 library(nortest)
 ```
+<!-- /BLOK: Library-nortest.R -->
 <div class="col2">
+<!-- BLOK: Lilliefors-test.R -->
 ```{r normaliteitstest, warning=FALSE}
 lillie.test(Jaarlijks_inkomen_t1)
 lillie.test(Jaarlijks_inkomen_t5)
 ```
+<!-- BLOK: Lilliefors-test.R -->
+
 </div>
 
 ### Wilcoxon signed rank toets
 Voer een Wilcoxon signed rank toets uit met `paired=TRUE`.
+<!-- ## BLOK: Wilcoxon-signed-rank-toets.R -->
 ```{r wilcox test}
 wilcox.test(Jaarlijks_inkomen_t5, Jaarlijks_inkomen_t1, paired=TRUE, alternative = "greater")
 ```
+<!-- ## /BLOK: Wilcoxon-signed-rank-toets.R -->
 
 ### Toelichting op de output
 

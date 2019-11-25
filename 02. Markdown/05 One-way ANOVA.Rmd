@@ -297,12 +297,12 @@ Bij deze casus zijn van alle groepen de p-waarde > 0,05; er is geen significant 
 ## Homogeniteit van varianties
 Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. 
 
-<!-- ## BLOK: Levenes-test -->
+<!-- ## BLOK: Levenes-test.R -->
 ```{r LeveneTest, warning = FALSE, message = FALSE}
 library(car)
 leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
 ```
-<!-- ## /BLOK: Levenes-test -->
+<!-- ## /BLOK: Levenes-test.R -->
 ```{r Levenes test als object, echo = FALSE}
 L <- leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
 vF_waarde <- Round_and_format(L$`F value`)
@@ -318,25 +318,25 @@ Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groep
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde groter is dan 0,05 is de verdeling van de data niet significant verschillend van de normale verdeling.
 
 <div class="col3">
-<!-- ## BLOK: Shapiro-Wilk-test -->
+<!-- ## BLOK: Shapiro-Wilk-test.R -->
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 shapiro.test(Reistijd_ATC)
 shapiro.test(Reistijd_FIL)
 shapiro.test(Reistijd_GSC)
 ```
-<!-- ## /BLOK: Shapiro-Wilk-test -->
+<!-- ## /BLOK: Shapiro-Wilk-test.R -->
 </div>
 
 In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, dus is de verdeling van beide groepen niet significant verschillend van de normale verdeling. Er wordt aan de assumptie van normaliteit voldaan, dus de *one-way ANOVA* kan uitgevoerd worden.
 
 ## One-way ANOVA 
 Gebruik `aov()` om een ANOVA-object (`aov`) te creëren. Geef het resultaat overzichtelijk weer met `summary()`.
-<!-- ## BLOK: ANOVA-test -->
+<!-- ## BLOK: ANOVA-toets.R -->
 ```{r ANOVA}
 res.aov <- aov(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 summary(res.aov)
 ```
-<!-- ## /BLOK: ANOVA-test -->
+<!-- ## /BLOK: ANOVA-toets.R -->
 ```{r ANOVA als object, echo=FALSE}
 ANOVA <- summary(res.aov)
 vF_waarde <- Round_and_format(ANOVA[[1]]$`F value`[1])
@@ -347,10 +347,13 @@ vF_waarde <- Round_and_format(ANOVA[[1]]$`F value`[1])
 
 ### Effectmaat: Cohen's d 
 Gebruik `cohen.d()` met `paired = FALSE` om het effect te meten.
+<!-- ## BLOK: Library-effsize.R -->
 ```{r library effsize}
 library(effsize)
 ```
+<!-- ## /BLOK: Library-effsize.R -->
 <div class="col3">
+<!-- ## BLOK: Cohens-d.R --> 
 ```{r Cohen s d}
 cohen.d(Reistijd_ATC,
         Reistijd_FIL,
@@ -362,26 +365,28 @@ cohen.d(Reistijd_FIL,
         Reistijd_GSC,
         paired = FALSE)
 ```
+<!-- ## /BLOK: Cohens-d.R --> 
 </div>
 
 ## Effectmaat: eta squared
 Gebruik `EtaSq()` op een ANOVA-object om eta-squared te vinden.
+<!-- ## BLOK: Eta-squared.R --> 
 ```{r eta-squared, message = FALSE}
 library(DescTools)
 EtaSq(res.aov)
 ```
-
+<!-- ## /BLOK: Eta-squared.R -->
 Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect.[^7]
 
 
 
 ## Tukey's toets
 Doe een post hoc test om te toetsen welke verschillen significant zijn. Gebruik bij gelijke variantie de Tukey honestly significant difference test. Gebruik `TukeyHSD()` op het ANOVA-object.
-
+<!-- ## BLOK: Tukey-HSD.R -->
 ```{r TukeyHSD}
 TukeyHSD(res.aov)
 ```
-
+<!-- ## /BLOK: Tukey-HSD.R -->
 ```{r TukeyHSD als object}
 THSD <- TukeyHSD(res.aov)
 vATCvsFIL <- Round_and_format(THSD$Opleiding[1,1])

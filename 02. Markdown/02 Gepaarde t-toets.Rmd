@@ -1,5 +1,5 @@
 ---
-title: "Gepaarde t-test"
+title: "Gepaarde t-toets"
 output:
   html_document:
     theme: lumen
@@ -289,20 +289,20 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst 
 ### Kolmogorov-Smirnov 
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
-<!-- ## BLOK: Library-nortest -->
+<!-- ## BLOK: Library-nortest.R -->
 ```{r library nortest, warning=FALSE}
 library(nortest)
 ```
-<!-- ## /BLOK: Library-nortest -->
+<!-- ## /BLOK: Library-nortest.R -->
 <div class ="col2">
-<!-- ## BLOK: Lilliefors-test -->
+<!-- ## BLOK: Lilliefors-test.R -->
 ``` {r Lilliefors Test, warning=FALSE}
 lillie.test(
   Tentamencijfer_voor_tutorgesprek)
 lillie.test(
   Tentamencijfer_na_tutorgesprek)
 ```
-<!-- ## /BLOK: Lilliefors-test -->
+<!-- ## /BLOK: Lilliefors-test.R -->
 </div>
 
 Van beide groepen is de p > 0,05; er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden. 
@@ -313,14 +313,14 @@ De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test*
 Er zijn 2 steekproeven van `Tentamencijfers` ingeladen: `Tentamencijfer_voor_tutorgesprek_n30` (T~0~) en `Tentamencijfer_na_tutorgesprek_n30` (T~1~), *n~T0~* = `r length(Tentamencijfer_voor_tutorgesprek_n30)` , *n~T1~* = `r length(Tentamencijfer_na_tutorgesprek_n30)` 
 
 <div class ="col2">
-<!-- ## BLOK: Shapiro-Wilk-test -->
+<!-- ## BLOK: Shapiro-Wilk-test.R -->
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 shapiro.test(
   Tentamencijfer_voor_tutorgesprek_n30)
 shapiro.test(
   Tentamencijfer_na_tutorgesprek_n30)
 ```
-<!-- ## /BLOK: Shapiro-Wilk-test -->
+<!-- ## /BLOK: Shapiro-Wilk-test.R -->
 </div>
 
 Voorbeide groepen is de *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden.  
@@ -332,11 +332,11 @@ Er is een dataset ingeladen met `Tentamencijfer_voor_tutorgesprek` (T~0~) en met
 
 De *gepaarde t-toets* is uitgevoerd om de vraag te beantwoorden of het gemiddelde tentamencijfer verandert na een tutorgesprek. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren na een gesprek is er voor gekozen om tweezijdig te toetsen. 
 
-<!-- ## BLOK: T-test -->
+<!-- ## BLOK: T-toets -->
 ```{r T-test}
 t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 ```
-<!-- ## BLOK: T-test -->
+<!-- ## BLOK: T-toets -->
 ```{r T-test als object, echo = FALSE}
 t <- t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 vT_waarde <- Round_and_format(t$statistic)
@@ -354,12 +354,12 @@ vDiffMean <- Round_and_format(t$estimate*-1)
 
 ### Effectmaat: Cohen's d
 Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
-<!-- ## BLOK: Cohens-d-test -->
+<!-- ## BLOK: Cohens-d-test.R -->
 ```{r Cohens d}
 library(effsize)
 cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 ```
-<!-- ## /BLOK: Cohens-d-test -->
+<!-- ## /BLOK: Cohens-d-test.R -->
 ```{r var Cohens d, echo = FALSE}
 d <- cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 vD_waarde <- Round_and_format(d$estimate)

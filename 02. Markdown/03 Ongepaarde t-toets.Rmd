@@ -236,18 +236,18 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoets w
 ### Kolmogorov-Smirnov
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
-<!-- ## BLOK: Library-nortest -->
+<!-- ## BLOK: Library-nortest.R -->
 ```{r library nortest, warning=FALSE}
 library(nortest)
 ```
-<!-- ## /BLOK: Library-nortest -->
+<!-- ## /BLOK: Library-nortest.R -->
 <div class="col2">
-<!-- ## BLOK: Lilliefors-test -->
+<!-- ## BLOK: Lilliefors-test.R -->
 ``` {r Lilliefors Test, warning=FALSE}
 lillie.test(Cijfers_2010)
 lillie.test(Cijfers_2011)
 ```
-<!-- ## /BLOK: Lilliefors-test -->
+<!-- ## /BLOK: Lilliefors-test.R -->
 </div>
 
 Bij deze casus is van beide groepen de p-waarde > 0,05; er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
@@ -259,12 +259,12 @@ Er is een kleinere dataset ingeladen met TEST
 
 
 <div class="col2">
-<!-- ## BLOK: Shapiro-Wilk-test -->
+<!-- ## BLOK: Shapiro-Wilk-test.R -->
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 shapiro.test(Cijfers_2011_n30)
 shapiro.test(Cijfers_2010_n30)
 ```
-<!-- ## /BLOK: Shapiro-Wilk-test -->
+<!-- ## /BLOK: Shapiro-Wilk-test.R -->
 </div>
 
 In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, dus is de verdeling van beide groepen niet statistisch significant verschillend van de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
@@ -275,12 +275,12 @@ Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's t
 Er is een kleinere dataset ingeladen met TEST
 
 
-<!-- ## BLOK: Levenes-test -->
+<!-- ## BLOK: Levenes-test.R -->
 ```{r Levenes test, message=FALSE, warning=FALSE, collapse=TRUE}
 library(car)
 leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 ```
-<!-- ## /BLOK: Levenes-test -->
+<!-- ## /BLOK: Levenes-test.R -->
 ```{r Levenes test als object, echo = FALSE, warning=FALSE}
 L <- leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 vF_waarde <- Round_and_format(L$`F value`[1])
@@ -294,11 +294,11 @@ vDF2 <- Round_and_format(L$`Df`[2])
 
 ## Ongepaarde t-toets
 Voer een ongepaarde `t.test()` uit met `paired = FALSE` en `var.equal = TRUE`. Als uit de *Levene's test* komt dat de groepen verschillen in variantie, gebruik `var.equal = FALSE` .
-<!-- ## BLOK: T-test -->
+<!-- ## BLOK: T-test.R -->
 ```{r statistische toets}
 t.test(Cijfers ~ Cohort, Cijfers_gem, paired = FALSE, var.equal = TRUE)
 ```
-<!-- ## /BLOK: T-test -->
+<!-- ## /BLOK: T-test.R -->
 ```{r T-test als object, echo = FALSE}
 t <- t.test(Cijfers ~ Cohort, Cijfers_gem, paired = FALSE, var.equal = TRUE)
 vT_waarde <- Round_and_format(t$statistic)
@@ -318,12 +318,12 @@ vP <- Round_and_format(t$p.value)
 
 ### Effectmaat: Cohen's d 
 Gebruik `cohen.d()` met `paired = FALSE` om het effect te meten.
-<!-- ## BLOK: Cohens-d-test -->
+<!-- ## BLOK: Cohens-d-test.R -->
 ```{r Cohen s d}
 library(effsize)
 cohen.d(Cijfers_2010, Cijfers_2011, paired = FALSE)
 ```
-<!-- ## /BLOK: Cohens-d-test -->
+<!-- ## /BLOK: Cohens-d-test.R -->
 ```{r var Cohens d, echo = FALSE}
 d <- cohen.d(Cijfers_2010, Cijfers_2011, paired = FALSE)
 vD_waarde <- Round_and_format(d$estimate)

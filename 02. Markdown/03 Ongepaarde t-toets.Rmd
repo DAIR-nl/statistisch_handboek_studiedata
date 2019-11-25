@@ -190,7 +190,7 @@ ggplot(Cijfers_gem,
 ```
 
 <!-- ## /BLOK: Histogram.R -->
-Beide histogrammen laten een belcurve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom het gemiddelde.  
+Beide histogrammen laten een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom het gemiddelde.  
 
 ### Q-Q plot
 Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
@@ -219,7 +219,7 @@ qqline(Cijfers_2011)
 Bij beide groepen liggen de meeste punten op de lijn behalve bij de uiteinden.
 
 ### Boxplot
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters[^9]. 
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9] 
 
 <!-- ## BLOK: Boxplot.R -->
 ```{r boxplot}
@@ -228,7 +228,7 @@ boxplot(Cijfers ~ Cohort, Cijfers_gem,
 ```
 <!-- ## /BLOK: Boxplot.R -->
 
-De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer voor de BSA en na de BSA. De boxplotten en de staarten lijken symmetrisch, dit kan een teken zijn van normaal verdeelde data. Het cohort van 2011 heeft een aantal mogelijke uitbijters. 
+De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer voor de BSA en na de BSA. De boxplotten en de staarten lijken symmetrisch, dit kan een teken zijn van normaal verdeelde data. Het cohort van 2011 heeft een aantal mogelijke uitbijters.[^10] 
 
 ## Toetsen van normaliteit
 Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoets worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
@@ -255,25 +255,18 @@ Bij deze casus is van beide groepen de p-waarde > 0,05; er is geen statistisch s
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde < 0,05 is de verdeling van de data statistisch significant verschillend van de normale verdeling.  
 
-Er is een kleinere dataset ingeladen met TEST
-
-
 <div class="col2">
 <!-- ## BLOK: Shapiro-Wilk-test.R -->
 ``` {r Shapiro-Wilk Test, warning=FALSE}
-shapiro.test(Cijfers_2011_n30)
 shapiro.test(Cijfers_2010_n30)
+shapiro.test(Cijfers_2011_n30)
 ```
 <!-- ## /BLOK: Shapiro-Wilk-test.R -->
 </div>
-
-In dit voorbeeld, met een kleine *n*, hebben beide groepen een p-waarde > 0,05, dus is de verdeling van beide groepen niet statistisch significant verschillend van de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
+De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
 
 ## Test assumpties: Levene's test
 Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. 
-
-Er is een kleinere dataset ingeladen met TEST
-
 
 <!-- ## BLOK: Levenes-test.R -->
 ```{r Levenes test, message=FALSE, warning=FALSE, collapse=TRUE}
@@ -288,12 +281,15 @@ vF_p <- Round_and_format(L$`Pr(>F)`[1])
 vDF1 <- Round_and_format(L$`Df`[1])
 vDF2 <- Round_and_format(L$`Df`[2])
 ```
-* *F*~`r vDF1`, `r vDF2`~ = `r vF_waarde`, p-waarde = `r vF_p` 
-* p-waarde > 0,05, dus de groepen zijn niet verschillend in spreiding.  
-* Vrijheidsgraden bestaat nu uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r vDF1`) en het tweede cijfer (*n~2010~* + *n~2011~* - 2 = `r vDF2`)
+* *F*~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, p-waarde = `r vF_p` 
+* p-waarde > 0,05, dus de groepen zijn niet significant verschillend in spreiding.  
+* Vrijheidsgraden bestaat uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r vDF1`) en het tweede cijfer (*n~2010~* + *n~2011~* - 2 = `r vDF2`)
 
 ## Ongepaarde t-toets
 Voer een ongepaarde `t.test()` uit met `paired = FALSE` en `var.equal = TRUE`. Als uit de *Levene's test* komt dat de groepen verschillen in variantie, gebruik `var.equal = FALSE` .
+
+De *ongepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het gemiddelde tentamencijfer van de opleiding Taalwetenschap na invoering van het BSA veranderd is.
+
 <!-- ## BLOK: T-test.R -->
 ```{r statistische toets}
 t.test(Cijfers ~ Cohort, Cijfers_gem, paired = FALSE, var.equal = TRUE)
@@ -309,14 +305,16 @@ vConf.int2 <- Round_and_format(t$conf.int[2])
 vP <- Round_and_format(t$p.value)
 ```
 
-* *t* (`r vDF`) = `r vT_waarde`, *p* = `r vP`
+* *t* ~`r vDF`~ = `r vT_waarde`, *p* = `r vP`
 * Vrijheidsgraden, *df* = *n* -1 = `r vN`-1 = `r vDF`  
-* p-waarde > 0,05, dus de H~0~ wordt niet verworpen 
+* p-waarde > 0,05, dus de H~0~ wordt niet verworpen [^11]
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r vConf.int1` en `r vConf.int2`.
 * Het gemiddelde van de steekproef in 2010: `r vMean_t0`
 * Het gemiddelde van de steekproef in 2011: `r vMean_t1`
 
 ### Effectmaat: Cohen's d 
+Wanneer p < 0,05 wordt de effectmaat berekend om te bepalen of de gevonden p-waarde betekenisvol is. In dit voorbeeld is de p > 0,05, dus is een effectmaat irrelevant. Hieronder laten we zien wat de stappen zijn bij een p < 0,05.  
+
 Gebruik `cohen.d()` met `paired = FALSE` om het effect te meten.
 <!-- ## BLOK: Cohens-d-test.R -->
 ```{r Cohen s d}
@@ -328,29 +326,25 @@ cohen.d(Cijfers_2010, Cijfers_2011, paired = FALSE)
 d <- cohen.d(Cijfers_2010, Cijfers_2011, paired = FALSE)
 vD_waarde <- Round_and_format(d$estimate)
 ```
-*d* = `r vD_waarde`. De sterkte van het effect van de tutor op het cijfer is miniem. 
+*d* = `r vD_waarde`. De sterkte van het effect van de tutor op het cijfer is verwaarloosbaar. 
 
 
 # Rapportage
-Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = `r vMean_t0`, *SD~2010~* = `r vSD_t0`) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = `r vMean_t1`, *SD~2011~* = `r vSD_t1`) is statistisch significant, *t* (`r vDF`) = `r vT_waarde`, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vConf.int1` tot `r vConf.int2`. Het effect is minimaal, *d* = `r vD_waarde`.
+Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = `r vMean_t0`, *SD~2010~* = `r vSD_t0`) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = `r vMean_t1`, *SD~2011~* = `r vSD_t1`) is statistisch niet significant, *t* ~`r vDF`~ = `r vT_waarde`, *p* > 0,05, zie tabel hieronder. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vConf.int1` tot `r vConf.int2`. Het effect is minimaal, *d* = `r vD_waarde`.
 
-Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil is echter zo klein dat er niet echt over een verandering gesproken kan worden. 
+Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentamencijfer niet is veranderd na de invoer van het BSA. 
 
 | Cohort   | N         | M            | SD         |
 | -------- | --------- | ------------ | ---------- |
 | 2010     | `r vN_t0` | `r vMean_t0` | `r vSD_t0` |
 | 2011     | `r vN_t1` | `r vMean_t1` | `r vSD_t1` |
 
-
-TODO Voetnoot bij [^8] 
-Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Beijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk dat wanneer uitbijters verwijderd zijn dit altijd melden in een rapport.  
-
 [^1]: Van Geloven, N. (25 mei 2016). *T-toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/T-toets#ongepaarde_t-toets).
 [^2]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). Tthe importance of the normality assumption in large public health data sets. *Annu Rev Public Health, 23*, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf 
 [^3]: Laerd statistics. (2018). [Testing for Normality using SPSS Statistics](https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php).
 [^4]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).
 [^5]: Van Geloven, N. (13 maart 2018). *Mann-Whitney U toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
-[^6]: De *Wilcoxon Signed Rank Test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld is heeft de *Wilcoxon Signed Rank Test* minder onderscheidend vermogen, dan wanneer de *one sample t-toets* uitgevoerd zou worden. 
+[^6]: De *Mann-Whitney U toets* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld is heeft de *Wilcoxon Signed Rank Test* minder onderscheidend vermogen, dan wanneer de *one sample t-toets* uitgevoerd zou worden. 
 [^7]: Van Geloven, N. (25 mei 2016). *One-way ANOVA* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/One-way_ANOVA).
 [^8]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf 
 [^9]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).

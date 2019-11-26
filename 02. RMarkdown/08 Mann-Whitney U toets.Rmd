@@ -51,10 +51,12 @@ Resultaten_internationale_studenten <- rbind (
                                   t(replicate(100, sample(Matige_student_ec, 11, replace = TRUE))),
                                   t(replicate(200, sample(Slechte_student_ec, 11, replace = TRUE))))
 Punten_jaar2_inter <- margin.table(Resultaten_internationale_studenten, 1)
+Studentnr <- sample(3000000:4000000, length(c(Punten_jaar2_NL, Punten_jaar2_inter)))
 
-Punten_jaar2 <- data.frame(c(Punten_jaar2_NL, Punten_jaar2_inter), 
+Punten_jaar2 <- data.frame(Studentnr, c(Punten_jaar2_NL, Punten_jaar2_inter), 
                            c(rep("ja", length(Punten_jaar2_NL)), rep("nee", length(Punten_jaar2_inter))))
-colnames(Punten_jaar2)<-c("Punten_jaar2", "Nederlands")
+colnames(Punten_jaar2)<-c("Studentnr", "EC_jaar2", "Nederlands")
+Punten_jaar2 <- Punten_jaar2[order(Studentnr),]
 ```
 <!-- ## /BLOK: Data-aanmaken.R -->
 # Toepassing
@@ -82,7 +84,9 @@ tail(Punten_jaar2)
 Gebruik `wilcox.test()` met twee argumenten om een Mann-Whitney U toets te doen in R
 <!-- ## BLOK: Mann-Whitney-U-toets.R -->
 ```{r Mann Whitney U toets}
-wilcox.test(Punten_jaar2_NL, Punten_jaar2_inter)
+Nederlands <- Punten_jaar2$Nederlands == "ja"
+wilcox.test(Punten_jaar2$EC_jaar2[Nederlands], 
+            Punten_jaar2$EC_jaar2[!Nederlands])
 ```
 <!-- ## /BLOK: Mann-Whitney-U-toets.R -->
 # Toelichting op de output

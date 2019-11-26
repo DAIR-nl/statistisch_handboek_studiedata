@@ -1,16 +1,16 @@
 ---
 title: "Chi-kwadraat toets en Fisher's exact toets"
-author: "© 2019, SURF Versnellingsagenda Statistisch Handboek Hoger Onderwijs"
-date: "`r format(Sys.time(), '%d-%m-%y')`"
-output: 
+author: "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
+date: "`r format(Sys.time(), '%d-%m-%Y')`"
+output:
   html_document:
-    toc: TRUE
-    toc_float:
-      collapsed: FALSE
-    number_sections: TRUE
-    theme: united
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+  keywords: [statistisch handboek, studiedata]
 ---
-
 
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet SHHO.css"))`
@@ -82,11 +82,11 @@ tail(Uitval_functiebeperking)
 
 ## Chi-kwadraat toets
 Gebruik `chisq.test()` op een kruistabel. 
-<!-- ## BLOK: Chi2-test -->
+<!-- ## BLOK: Chi2-toets -->
 ```{r chi2}
 chisq.test(Uitval_functiebeperking)
 ```
-<!-- ## /BLOK: Chi2-test -->
+<!-- ## /BLOK: Chi2-toets-->
 
 ```{r chi2 als object, include=FALSE, echo=TRUE}
 Chi2 <- chisq.test(Uitval_functiebeperking)
@@ -102,11 +102,11 @@ vDF <- Chi2$parameter
 ## Fisher's exact toets
 Er zijn data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel, alle groepen hebben een laag aantal per cel, variërend van 5 tot 16. Ook hier zijn de data `Uitval_functiebeperking_n43` binair. 
 
-<!-- ## BLOK: Fishers-Exact-test -->
+<!-- ## BLOK: Fishers-Exact-toets -->
 ```{r fishers exact}
 fisher.test(Uitval_functiebeperking_n43)
 ```
-<!-- ## /BLOK: Fishers-Exact-test -->
+<!-- ## /BLOK: Fishers-Exact-toets -->
 
 ```{r fishers exact als object, include=FALSE, echo=TRUE}
 fish <- fisher.test(Uitval_functiebeperking_n43)

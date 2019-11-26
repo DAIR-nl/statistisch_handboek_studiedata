@@ -1,14 +1,15 @@
 ---
 title: "09 z-toets voor proporties"
-author: "© 2019, SURF Versnellingsagenda Statistisch Handboek Hoger Onderwijs"
-date: "`r format(Sys.time(), '%d-%m-%y')`"
-output: 
+author: "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
+date: "`r format(Sys.time(), '%d-%m-%Y')`"
+output:
   html_document:
-    toc: TRUE
-    toc_float:
-      collapsed: FALSE
-    number_sections: TRUE
-    theme: united
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+  keywords: [statistisch handboek, studiedata]
 ---
 
 <style>
@@ -30,6 +31,7 @@ Round_and_format <- function(x, digits = 2) {
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
 
+<!-- ## BLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## De controller van een Universiteit is geïnteresseerd in de instroom van tweedekansstudenten. Zij vraagt zich af: Heeft onze Universiteit relatief veel tweedekansstudenten in vergelijking met het landelijke gemiddelde?
 RNGkind(sample.kind = "Rounding")
@@ -37,12 +39,13 @@ set.seed (7)
 aantal_studenten <- 28348
 Studentnr <- sample(5000000:6000000, aantal_studenten)
 
-Eerder_wo <- round (rnorm(aantal_studenten, 0.4, 0.1))
+Eerder_WO <- round (rnorm(aantal_studenten, 0.4, 0.1))
+Eerder_WO [Eerder_WO == 1] <- "ja"
+Eerder_WO [Eerder_WO == 0] <- "nee"
 
-
-Aanmeldingen_tweedekans <- data.frame(Studentnr, Eerder_wo)
+Aanmeldingen_tweedekans <- data.frame(Studentnr, Eerder_WO)
 ```
-
+<!-- ## /BLOK: Data-aanmaken.R -->
 # Toepassing
 Gebruik de z-toets bij het vergelijken van twee proporties waarbij één een gegeven proportie is. 
 
@@ -63,10 +66,15 @@ H~A~:
 Er is een dataset ingeladen genaamd `Aanmeldingen_tweedekans`. Dit is een dataframe met binaire data over de aanmeldingen van studenten en of zij al eerder op het WO hebben gezeten.
 
 ## De data bekijken
+
+<!-- ## BLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse=TRUE}
+## Eerste 6 observaties
 head(Aanmeldingen_tweedekans)
-mean(Aanmeldingen_tweedekans$Eerder_wo)
+## Laatste 6 observaties
+tail(Aanmeldingen_tweedekans)
 ```
+<!-- ## /BLOK: Data-bekijken.R -->
 
 ## Assumpties testen in R
 @IvdS z-test heeft geen assumpties denk ik?
@@ -75,13 +83,18 @@ mean(Aanmeldingen_tweedekans$Eerder_wo)
 ```
 
 ## Statistische toets in R
+Maak de variabele numeriek om een z-test voor proporties te doen.
+<!-- ## BLOK: Z-toets.R-->
+```{r z-test}
+Aanmeldingen_tweedekans$Eerder_WO_num [Eerder_WO == "ja"] <- 1
+Aanmeldingen_tweedekans$Eerder_WO_num [Eerder_WO == "nee"] <- 0
 
-```{r}
-prop.test(x = sum(Aanmeldingen_tweedekans$Eerder_wo), 
-          n = length(Aanmeldingen_tweedekans$Eerder_wo), 
+prop.test(x = sum(Aanmeldingen_tweedekans$Eerder_WO_num), 
+          n = length(Aanmeldingen_tweedekans$Eerder_WO_num), 
           p = 0.15,
           alternative = "greater")
 ```
+<!-- ## /BLOK: Z-toets.R-->
 
 
 

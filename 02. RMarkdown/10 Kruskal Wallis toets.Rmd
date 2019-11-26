@@ -100,10 +100,10 @@ Er is een dataset ingeladen met studieresultaten van de master arbeidsrecht per 
 ## De data bekijken
 <!-- ## BLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
-## Eerste 5 observaties
+## Eerste 6 observaties
 head(Resultaten_arbeidsrecht)
 
-## Laatste 5 observaties
+## Laatste 6 observaties
 tail(Resultaten_arbeidsrecht)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->

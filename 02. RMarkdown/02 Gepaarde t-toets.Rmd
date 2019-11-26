@@ -1,5 +1,7 @@
 ---
 title: "Gepaarde t-toets"
+author: "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
+date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
     theme: lumen
@@ -7,9 +9,7 @@ output:
     toc_float: 
       collapsed: FALSE 
     number_sections: true
-    keep_md: true
   keywords: [statistisch handboek, studiedata]
-  
 ---
 
 <style>

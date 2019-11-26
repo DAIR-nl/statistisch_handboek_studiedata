@@ -1,18 +1,15 @@
 ---
 title: "One-sample t-toets"
+author: "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
+date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
-    keep_md: yes
-    number_sections: yes
     theme: lumen
     toc: yes
-    toc_float:
-      collapsed: no
-  keywords:
-  - statistisch handboek
-  - studiedata
-  pdf_document:
-    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+  keywords: [statistisch handboek, studiedata]
 ---
 
 <style>

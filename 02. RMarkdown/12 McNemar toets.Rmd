@@ -1,14 +1,15 @@
 ---
 title: "12 McNemar toets"
 author: "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
-date: "`r format(Sys.time(), '%d-%m-%y')`"
-output: 
+date: "`r format(Sys.time(), '%d-%m-%Y')`"
+output:
   html_document:
-    toc: TRUE
-    toc_float:
-      collapsed: FALSE
-    number_sections: TRUE
-    theme: united
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+  keywords: [statistisch handboek, studiedata]
 ---
 
 <style>
@@ -30,17 +31,44 @@ Round_and_format <- function(x, digits = 2) {
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
 
+<!-- ## BLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## De decaan van een Hogeschool merkt dat weinig studenten met een functiebeperking een beroep doen op de Financiële Ondersteuning Studenten (FOS).
-## Ze besluit daarom al deze studenten een e-mail te sturen over de FOS.
+## Ze besluit daarom in December al deze studenten een e-mail te sturen over de FOS.
 ## Een half jaar later maakt ze de balans op: doen studenten met een functiebeperking vaker een beroep op de FOS na een ingreep van de studentendecaan?
 
-Beroep_FOS_functiebeperking <- 
-  matrix(c(1294, 81, 94, 1374),
-         nrow = 2,
-         dimnames = list("Voor mail" = c("Wel FOS",  "Geen FOS"),
-                         "Na mail"   = c("Wel FOS",  "Geen FOS")))
+## Stel RNG seed vast
+RNGkind(sample.kind = "Rounding")
+set.seed (1)
+
+## Vooraf
+Wel_vooraf <- replicate(1388, "ja")
+Niet_vooraf <- replicate(1455, "nee")
+Vooraf <- c(Wel_vooraf, Niet_vooraf)
+
+## Achteraf
+Wel_achteraf <- replicate(1475, "ja")
+Niet_achteraf <- replicate(1368, "nee")
+Achteraf <- c(Wel_achteraf, Niet_achteraf)
+
+## Datum
+Datum_vooraf <- replicate(length(Vooraf), "December")
+Datum_achteraf <- replicate(length(Achteraf), "Juni")
+
+## Hussel met behoudt logische paren
+Studentnr <- sample(4000000:5000000, length(Vooraf))
+Vooraf <- Vooraf[order(Studentnr)]
+Achteraf <- Achteraf[order(Studentnr)]
+
+## Data.frame
+FOS_studenten <- data.frame(c(Studentnr, Studentnr),
+                            c(Vooraf, Achteraf),
+                            c(Datum_vooraf, Datum_achteraf))
+colnames(FOS_studenten)<-c("Studentnr", "FOS?", "Datum")
+
+FOS_studenten <- FOS_studenten[order(FOS_studenten$Studentnr),]
 ```
+<!-- ## /BLOK: Data-aanmaken.R -->
 
 # Toepassing
 
@@ -52,9 +80,27 @@ Beroep_FOS_functiebeperking <-
 Er is een dataset ingeladen genaamd `Beroep_FOS_functiebeperking`. Dit is een kruistabel die de aantallen studenten die een beroep doen op de FOS vergelijkt voor en na de mail van de decaan. 
 
 ## De data bekijken
-```{r data bekijken}
-Beroep_FOS_functiebeperking
+
+<!-- ## BLOK: Data-bekijken.R -->
+```{r data bekijken, collapse=TRUE}
+## Eerste 6 observaties
+head(FOS_studenten)
+
+## Laatste 6 observaties
+tail(FOS_studenten)
 ```
+<!-- ## /BLOK: Data-bekijken.R -->
+
+<!-- ## BLOK: Data-beschrijven.R -->
+```{r data aanmaken}
+### Definieer groepen
+December <- FOS_studenten$`FOS?`[FOS_studenten$Datum == "December"]
+Juni <- FOS_studenten$`FOS?`[FOS_studenten$Datum == "Juni"]
+
+## Maak een kruistabel
+FOS_studenten_kruistabel <- table(December, Juni)
+```
+<!-- ## /BLOK: Data-beschrijven.R -->
 
 ## Assumpties testen in R
 
@@ -63,10 +109,12 @@ Beroep_FOS_functiebeperking
 ```
 
 ## Statistische toets in R
-
+Gebruik `mcnemar.test()` op een kruistabel.
+<!-- ## BLOK: McNemar-toets.R -->
 ```{r}
-mcnemar.test(Beroep_FOS_functiebeperking)
+mcnemar.test(FOS_studenten_kruistabel)
 ```
+<!-- ## /BLOK: McNemar-toets.R -->
 
 # Toelichting op de output
 

@@ -9,9 +9,7 @@ output:
     toc_float: 
       collapsed: FALSE 
     number_sections: true
-    keep_md: true
   keywords: [statistisch handboek, studiedata]
-  
 ---
 
 <style>

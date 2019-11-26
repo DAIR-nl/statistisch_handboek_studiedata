@@ -1,14 +1,15 @@
 ---
 title: "15 Chi-kwadraat & Fisher-Freeman-Halton exact toets"
-author: "© 2019, SURF Versnellingsagenda Statistisch Handboek Hoger Onderwijs"
-date: "`r format(Sys.time(), '%d-%m-%y')`"
-output: 
+author: "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
+date: "`r format(Sys.time(), '%d-%m-%Y')`"
+output:
   html_document:
-    toc: TRUE
-    toc_float:
-      collapsed: FALSE
-    number_sections: TRUE
-    theme: united
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+  keywords: [statistisch handboek, studiedata]
 ---
 
 <style>
@@ -30,6 +31,7 @@ Round_and_format <- function(x, digits = 2) {
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
 
+<!-- ## BLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## De opleidingsdirecteur van de Bachelor Anthropologie vraagt zich af wat de invloed is van de instroom van internationale studenten. Krijgen studenten uit bepaalde landen vaker een positief BSA dan studenten uit andere landen?
 
@@ -49,6 +51,7 @@ Bsa_kt_n10 <- data.frame(Pos_bsa_n10, Neg_bsa_n10)
 Bsa_kt_n10 <- t(Bsa_kt_n10)
 colnames (Bsa_kt_n10) <- Landen_instroom
 ```
+<!-- ## /BLOK: Data-aanmaken.R -->
 
 # Toepassing
 
@@ -60,24 +63,30 @@ colnames (Bsa_kt_n10) <- Landen_instroom
 Er is een dataset (`Bsa_kt`) ingeladen over het BSA per instroomland van de faculteit Sociale Wetenschappen.
 
 ## De data bekijken
-```{r, collapse=TRUE}
-Bsa_kt
+Print de kruistabel of geef deze grafisch weer met `barplot()`.
+<!-- ## BLOK: Data-bekijken.R -->
+```{r data bekijken, collapse=TRUE}
+print(Bsa_kt)
 barplot(Bsa_kt, beside = TRUE, legend.text = TRUE)
 ```
-
+<!-- ## /BLOK: Data-bekijken.R -->
 
 ## Chi-kwadraat toets
 Om `chisq.test()` in R te gebruiken moet de data in een kruistabel staan.
+<!-- ## BLOK: Chi2-toets-->
 ```{r collapse=TRUE}
 chisq.test(Bsa_kt)
 ```
+<!-- ## /BLOK: Chi2-toets-->
 
 ## Fisher-Freeman-Halton exact toets
 Gebruik `simulate.p.value = TRUE` bij `fisher.test()` om de p-waardes via een Monte Carlo simulatie te laten uitrekenen. Dit is nodig voor tabellen die groter zijn dan 2 bij 2.
+<!-- ## BLOK: Fisher-Freeman-Halton-exact-toets-->
 ``` {r fisher toets}
 fisher.test(Bsa_kt_n10, simulate.p.value = TRUE)
 fisher.test(Bsa_kt, simulate.p.value = TRUE)
 ```
+<!-- ## /BLOK: Fisher-Freeman-Halton-exact-toets-->
 
 # Toelichting op de output
 

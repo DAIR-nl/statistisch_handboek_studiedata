@@ -66,12 +66,12 @@ Alumni_inkomens <- data.frame(Studentnr, Datum, Inkomen)
 
 ## Toepassing
 
-Notitie bij One-sample t-toets:   
-De *Wilcoxon Signed Rank Test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is nomaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld is heeft de *Wilcoxon Signed Rank Test* minder statistische power, dan wanneer de *one sample t-toets* uitgevoerd zou worden. 
- 
+Gebruik de *Wilcoxon signed rank toets* om te toetsen of bij een herhaalde meting de waardes van een groep aan elkaar gelijk zijn. Een voordeel van deze test is dat het voor alle type data gebruikt kan worden.[^1]   
+De *Wilcoxon Signed Rank Test* wordt vaak als alternatief gezien voor de *gepaarde t-toets*. De *Wilcoxon Signed Rank Test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld is heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen, dan wanneer de *one sample t-toets* uitgevoerd zou worden.
  
 ## Onderwijscasus
 <div id ="casus">
+De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkeld 4 jaar nadat zij afgestudeerd zijn.
 
 </div>
 
@@ -144,4 +144,7 @@ wilcox.test(Jaarlijks_inkomen_t5, Jaarlijks_inkomen_t1, paired=TRUE, alternative
 ### Toelichting op de output
 
 ## Rapportage
+
+[^1]: van Geloven, N. (25 september2013). *Wilcoxon signed rank toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets).
+
 

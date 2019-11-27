@@ -96,7 +96,7 @@ vDF <- Chi2$parameter
 ```
 
 * *χ^2^* ~1~ ≈ `r vChi2`, *p* = `r vP`  
-* Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r vDF`. De continuïteitscorrectie van Yates wordt automatisch toegepast wanneer het aantal vrijheidsgraden 1 is.   
+* Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r vDF`. De continuïteitscorrectie van Yates wordt automatisch toegepast wanneer het aantal vrijheidsgraden 1 is. [^4]   
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen.  
 
 ## Fisher's exact toets
@@ -121,10 +121,10 @@ vConf.int2 <- Round_and_format(fish$conf.int[2])
 
 # Rapportage
 
-Om te toetsen of studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel, is de *Chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de nulhypothese dat de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel gelijk is gebleven, *χ^2^* (`r vDF`) ≈ `r vChi2`, *p* < 0,05.
+Om te toetsen of studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel, is de *Chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de nulhypothese dat de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel gelijk is gebleven, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* < 0,05.
  
 [^1]: Prabhakaran, S. (2016-2017). *Statistical Tests* http://r-statistics.co/Statistical-Tests-in-R.html
 [^2]: Van Geloven, N., & Holman, R., (6 mei 2016). *Fisher's exact toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Fisher's_exact_toets).
 [^3]: Universiteit van Amsterdam (13 november 2017). *Chi-square test* https://wiki.uva.nl/methodologiewinkel/index.php/Chi-square_test#Assumpties 
-[^4]: Field, A., Miles, J., & Field, Z. (2012). Discovering statistics using R. *Sage publications*.
+[^4]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^5]: van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets).

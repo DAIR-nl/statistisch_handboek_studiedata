@@ -53,11 +53,11 @@ colnames(Uitval_functiebeperking_n43) <- c("Wel uitval", "Geen uitval")
 Gebruik de *Chi-kwadraat toets* of de *Fisher's exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde categorische variabelen, door middel van een kruistabel.[^1] In tegenstelling tot de *Chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage frequenties ingezet worden.[^2] De *Fisher's exact toets* is conservatiever dan de *Chi-kwadraat toets*.[^3]
 
 # Onderwijscasus
-De studentendecaan vraagt zich af of de studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel.
+De studentendecaan vraagt zich af of er gevolgen zijn van het invoeren van het leenstelsel voor studenten met een functiebeperking. 
 
-H~0~: De verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel is gelijk gebleven.
+H~0~: De verhouding uitval van het aantal studenten met een functiebeperking en zonder een functiebeperking is na de invoering van het leenstelsel gelijk gebleven.
 
-H~A~: De verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel is veranderd.
+H~A~: De verhouding uitval van het aantal studenten met een functiebeperking en zonder een functiebeperking is na de invoering van het leenstelsel veranderd.
 
 # Assumpties
 Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal niveau gemeten en daarmee onafhankelijk van elkaar. De *Chi-kwadraat toets* heeft specifieke regels wat betreft de groepsgrootte per cel. 
@@ -115,16 +115,16 @@ vConf.int1 <- Round_and_format(fish$conf.int[1])
 vConf.int2 <- Round_and_format(fish$conf.int[2])
 ```
 
-* p-waarde > 0,05 , dus de H~0~ wordt niet verworpen  
-* De kans op het uitvallen van studenten met een functiebeperking onder het leenstelsel is 1,8 keer zo groot, als de kans op het uitvallen van studenten met een functiebeperking voor het leenstelsel. Deze associatie blijkt niet significant te zijn: *p* = `r vF_p`  
-* Het 95% betrouwbaarheidsinterval: het interval is van `r vConf.int1` en de `r vConf.int2`.   
+* p-waarde > 0,05 , dus de H~0~ wordt niet verworpen[^6]  
+* De kans op het uitvallen van studenten met een functiebeperking onder het leenstelsel is 1,8 keer zo groot als de kans op het uitvallen van studenten met een functiebeperking voor het leenstelsel. Deze associatie blijkt niet significant te zijn: *p* = `r vF_p`  
+* Het 95% betrouwbaarheidsinterval: `r vConf.int1` en de `r vConf.int2`.   
 
 # Rapportage
-
-Om te toetsen of studenten met een functiebeperking vaker uitvallen sinds de invoering van het leenstelsel, is de *Chi-kwadraat toets* uitgevoerd. De resultaten ondersteunen de nulhypothese dat de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel gelijk is gebleven, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* < 0,05.
+De *Chi-kwadraat toets* is uitgevoerd om te toetsen of studenten met een functiebeperking vaker uitvallen dan de studenten zonder functiebeperking, sinds de invoering van het leenstelsel. De resultaten ondersteunen de nulhypothese dat de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel gelijk is gebleven, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* < 0,05.
  
-[^1]: Prabhakaran, S. (2016-2017). *Statistical Tests* http://r-statistics.co/Statistical-Tests-in-R.html
-[^2]: Van Geloven, N., & Holman, R., (6 mei 2016). *Fisher's exact toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Fisher's_exact_toets).
-[^3]: Universiteit van Amsterdam (13 november 2017). *Chi-square test* https://wiki.uva.nl/methodologiewinkel/index.php/Chi-square_test#Assumpties 
+[^1]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html.
+[^2]: Van Geloven, N., & Holman, R., (6 mei 2016). *Fisher's exact toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Fisher's_exact_toets).
+[^3]: Universiteit van Amsterdam (13 november 2017). *Chi-square test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Chi-square_test#Assumpties). 
 [^4]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
-[^5]: van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets).
+[^5]: van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets).
+[^6]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.

@@ -147,6 +147,7 @@ Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als 
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 <!-- ## BLOK: QQplot.R -->
 ```{r qqplot}
+## Q-Q plot
 qqnorm(Gemiddeld_cijfer_WNS, 
        pch = 1,
        main = "Normaal Q-Q plot van gemiddelde cijfers WNS",
@@ -154,8 +155,8 @@ qqnorm(Gemiddeld_cijfer_WNS,
        xlab = "Theoretische kwantielen")
 qqline(Gemiddeld_cijfer_WNS)
 ```
-
 <!-- ## /BLOK: QQplot.R -->
+
 In deze casus liggen de meeste punten op de lijn. Bij de uiteinden liggen de punten dichtbij de lijn. 
 
 ### Boxplot
@@ -166,8 +167,8 @@ De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen
 ## Boxplot
 boxplot(Gemiddeld_cijfer_WNS, xlab = "Werktuigbouwkunde", ylab = "Gemiddeld_cijfer_WNS")
 ```
-
 <!-- ## /BLOK: Boxplot.R -->
+
 De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte vakken weer van de studenten Werktuigbouwkunde. De box en staarten zien er symmetrisch uit, wat een indicatie is van een normale verdeling.[^9]  
 
 ## Toetsen van normaliteit
@@ -193,7 +194,7 @@ Er is een steekproef van `Gemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS
 
 <!-- ## BLOK: Shapiro-Wilk-test.R -->
 ``` {r Shapiro-Wilk Test, warning=FALSE}
-#Shapiro-Wilk test
+## Shapiro-Wilk test
 shapiro.test(Gemiddeld_cijfer_WNS_n30)
 ```
 <!-- ## /BLOK: Shapiro-Wilk-test.R -->

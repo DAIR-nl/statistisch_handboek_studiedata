@@ -8,9 +8,8 @@ output:
     toc_float:
       collapsed: FALSE
     number_sections: TRUE
-    theme: united
+    theme: lumen
 ---
-
 
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet SHHO.css"))`
@@ -145,6 +144,18 @@ vMed_SCH <- Round_and_format(x[4,3])
 * Mediaan Rechtsgeleerdheid: `r vMed_RCH`. n = `r vN_RCH`.
 * Mediaan Schakelprogramma: `r vMed_SCH`. n = `r vN_SCH`.
 
+### Boxplot
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8]  
+
+<!-- ## BLOK: Boxplot.R -->
+``` {r Boxplot}
+boxplot(Ec_jaar1 ~ Vooropleiding, Resultaten_arbeidsrecht,
+        main = "Gemiddeld aantal EC per vooropleiding van de Master Arbeidsrecht")
+```
+<!-- ## /BLOK: Boxplot.R -->
+
+De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer per periode voor de lerarenopleiding. *interpretatie* 
+
 ## Kruskal Wallis toets
 Gebruik `kruskal.test()`. In het eerste argument gebruik je de afhankelijke variabele en de variabele die de groep definiëert. Het tweede argument is het dataframe. 
 <!-- ## BLOK: Kruskal-Wallis-test -->
@@ -170,6 +181,7 @@ Pas de *Bonferroni correctie* toe, om te corrigeren voor dat er meerdere toetsen
 ``` {r pairwise wilcox test}
 pairwise.wilcox.test(Resultaten_arbeidsrecht$Ec_jaar1, Resultaten_arbeidsrecht$Vooropleiding, p.adjust.method = "bonferroni")
 ```
+<!-- ## /BLOK: Mann-Whitney-U-test-->
 
 * Met een mediaan van `r vMed_RCH` scoren de studenten met Rechtsgeleerdheid als vooropleiding statistisch significant lager dan de elk van de drie andere vooropleidingen.
 * Tussen de groepen met vooropleiding Schakelprogramma (mediaan = `r vMed_SCH`) en Notarieel recht (mediaan = `r vMed_NOT`) is een statistisch significant verschil gevonden.  
@@ -177,7 +189,6 @@ pairwise.wilcox.test(Resultaten_arbeidsrecht$Ec_jaar1, Resultaten_arbeidsrecht$V
 * Er is geen statistisch significant verschil gevonden tussen Fiscaal recht (mediaan = `r vMed_FIS`) en Notarieel recht (mediaan = `r vMed_NOT`).
 * Er is ook geen statistisch significant verschil gevonden tussen Fiscaal recht (mediaan = `r vMed_FIS`) en Schakelprogramma (mediaan = `r vMed_SCH`).
 
-<!-- ## /BLOK: Mann-Whitney-U-test-->
 # Rapportage
 De *Kruskal Wallis toets* is uitgevoerd om te toetsen of een vooropleiding bepalend is voor de hoeveelheid studiepunten die een student behaalt tijdens het eerste jaar van de master Arbeidsrecht. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen het aantal studiepunten en het type vooropleiding die de student heeft afgerond. *H*~`r vK_DF`~ ≈ `r vK_Chi2` < 0,05.  
 Met een post-hoc toets is het verschil tussen de vooropleidingen getoetst. Er is een statistisch significant verschil gevonden tussen Rechtsgeleerdheid en de drie andere vooropleidingen. En er is ook een statistisch significant verschil gevonden tussen Schakelprogramma en Notarieel recht. 

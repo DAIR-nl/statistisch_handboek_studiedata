@@ -53,11 +53,13 @@ colnames(Uitval_functiebeperking_n43) <- c("Wel uitval", "Geen uitval")
 Gebruik de *Chi-kwadraat toets* of de *Fisher's exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde categorische variabelen, door middel van een kruistabel.[^1] In tegenstelling tot de *Chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage frequenties ingezet worden.[^2] De *Fisher's exact toets* is conservatiever dan de *Chi-kwadraat toets*.[^3]
 
 # Onderwijscasus
+<div id = "casus">
 De studentendecaan vraagt zich af of er gevolgen zijn van het invoeren van het leenstelsel voor studenten met een functiebeperking. 
 
 H~0~: De verhouding uitval van het aantal studenten met een functiebeperking en zonder een functiebeperking is na de invoering van het leenstelsel gelijk gebleven.
 
 H~A~: De verhouding uitval van het aantal studenten met een functiebeperking en zonder een functiebeperking is na de invoering van het leenstelsel veranderd.
+</div>
 
 # Assumpties
 Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal niveau gemeten en daarmee onafhankelijk van elkaar. De *Chi-kwadraat toets* heeft specifieke regels wat betreft de groepsgrootte per cel. 

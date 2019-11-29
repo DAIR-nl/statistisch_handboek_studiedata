@@ -269,11 +269,12 @@ De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen
 
 <!-- ## BLOK: Boxplot.R -->
 ``` {r Boxplot}
+## Boxplot
 boxplot(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers,
         main = "Boxplot van tentamencijfers lerarenopleiding")
 ```
-
 <!-- ## /BLOK: Boxplot.R -->
+
 De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer per periode voor de lerarenopleiding. De boxplot en de staarten van T~0~ zijn niet helemaal symmetrisch. Het gaat om een kleine afwijking, daarom is de data vermoedelijk normaal verdeeld. Er zijn een aantal mogelijke uitbijters. De boxplot van T~1~ ziet er symmetrisch uit. Er zijn geen uitbijters.[^9]    
 
 ## Toetsen van normaliteit
@@ -340,7 +341,7 @@ vconf.int1 <- Round_and_format(t$conf.int[1])
 vconf.int2 <- Round_and_format(t$conf.int[2])
 vDiffMean <- Round_and_format(t$estimate*-1)
 ```
-* *t* ~`r vN`~ = `r vT_waarde`, *p* << 0,05
+* *t* ~`r vDF`~ = `r vT_waarde`, *p* << 0,05
 * Vrijheidsgraden, *df* = *n* -1 = `r vN`-1 = `r vDF`  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^10]
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r vconf.int1` en `r vconf.int2`.
@@ -361,23 +362,16 @@ vD_waarde <- Round_and_format(d$estimate)
 *d* = `r vD_waarde`. De sterkte van het effect van de tutor op het cijfer is minimaal. 
 
 # Rapportage
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r vMean_t0`, *SD~T0~* = `r vSD_t0`) en het gemiddelde van T~1~ (*M~T1~* =`r vMean_t1`, *SD~T1~* = `r vSD_t1`) is significant, *t* (`r vDF`) = `r vT_waarde`, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vconf.int1` tot `r vconf.int2`. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is echter verwaarloosbaar klein, *d* = `r vD_waarde`. 
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r vMean_t0`, *SD~T0~* = `r vSD_t0`) en het gemiddelde van T~1~ (*M~T1~* =`r vMean_t1`, *SD~T1~* = `r vSD_t1`) is significant, *t* ~`r vDF`~ = `r vT_waarde`, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vconf.int1` tot `r vconf.int2`. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is echter verwaarloosbaar klein, *d* = `r vD_waarde`. 
 
 
 | Meting     | N         | M            | SD         |
 | --------   | --------- | ------------ | ---------- |
 | T~0~       | `r vN_t0` | `r vMean_t0` | `r vSD_t0` |
 | T~1~       | `r vN_t1` | `r vMean_t1` | `r vSD_t1` |
-```{r test 1407}
-library(papaja)
-x <- matrix(c(vN_t0, vMean_t0, vSD_t0, vN_t1, vMean_t1, vSD_t1), ncol=3)
-colnames(x)<- c("N", "M", "SD")
-rownames(x)<- c("t0", "t1")
 
-apa_table(x, caption = "test1432")
-```
 
-`r papaja::apa_table(x, caption = "test 1439")`
+
 Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor. Het effect is verwaarloosbaar klein.  
 
 [^1]: Wikipedia (21 augustus 2019). *student's t-test*. https://en.wikipedia.org/wiki/student%27s_t-test

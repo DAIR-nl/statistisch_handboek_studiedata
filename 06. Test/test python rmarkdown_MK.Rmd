@@ -20,6 +20,8 @@ Nu kan je python chunks aanmaken met {python} in de chunkbeschrijving
 Je kan packages importeren.
 ```{python test pandas}
 import pandas
+a = 1
+print(a)
 ```
 
 # Test 2

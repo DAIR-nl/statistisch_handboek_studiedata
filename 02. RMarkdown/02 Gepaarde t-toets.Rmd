@@ -30,15 +30,9 @@ Round_and_format <- function(x, digits = 2) {
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
 
-``` {r versiegeschiedenis, include = FALSE, eval = FALSE}
-## versie 0.1     3-9-19
-## versie 0.2     4-9-19
-## versie 0.3     5-9-19   
-```
 ```{r opmerking, include=FALSE, eval=FALSE}
 # doorlinken naar de Wilcoxon Signed Rank Test
 # linken naar blz transformeren data 
-# link naar 
 ```
 
 <!-- ## BLOK: Data-aanmaken.R -->
@@ -374,8 +368,16 @@ Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencij
 | --------   | --------- | ------------ | ---------- |
 | T~0~       | `r vN_t0` | `r vMean_t0` | `r vSD_t0` |
 | T~1~       | `r vN_t1` | `r vMean_t1` | `r vSD_t1` |
+```{r test 1407}
+library(papaja)
+x <- matrix(c(vN_t0, vMean_t0, vSD_t0, vN_t1, vMean_t1, vSD_t1), ncol=3)
+colnames(x)<- c("N", "M", "SD")
+rownames(x)<- c("t0", "t1")
 
+apa_table(x, caption = "test1432")
+```
 
+`r papaja::apa_table(x, caption = "test 1439")`
 Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor. Het effect is verwaarloosbaar klein.  
 
 [^1]: Wikipedia (21 augustus 2019). *student's t-test*. https://en.wikipedia.org/wiki/student%27s_t-test

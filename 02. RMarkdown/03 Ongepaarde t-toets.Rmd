@@ -100,9 +100,7 @@ Als er geen sprake is van normaliteit gebruik de *Mann-Whitney U toets*, ook bek
 Toets met de *Levene’s Test (for equality of variance)* of de spreiding van iedere groep globaal hetzelfde is. Bij een *p* < 0,05 is de spreiding van de groepen statistisch significant verschillend.[^7]
 
 # Effectmaat
-Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer.  
-
-Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect.[^8]
+Bereken de effectmaat om te bepalen of de gevonden p-waarde van een t-toets betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer. Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect.[^8]
 
 # Uitvoering in R
 Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap: `Cijfers_gem`. De data bevatten cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
@@ -157,7 +155,6 @@ vMean_t1 <- Round_and_format(mean(Cijfers_2011))
 vSD_t1 <-Round_and_format(sd(Cijfers_2011))
 ```
 </div>
-
 
 * Gemiddeld tentamencijfer 2010 (standaarddeviatie): `r vMean_t0` (`r vSD_t0`). *n* = `r vN_t0`.
 * Gemiddeld tentamencijfer 2011 (standaarddeviatie): `r vMean_t1` (`r vSD_t1`). *n* = `r vN_t1`.
@@ -281,7 +278,7 @@ vDF2 <- Round_and_format(L$`Df`[2])
 ```
 * *F*~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, p-waarde = `r vF_p` 
 * p-waarde > 0,05, dus de groepen zijn niet significant verschillend in spreiding.  
-* Vrijheidsgraden bestaat uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r vDF1`) en het tweede cijfer (*n~2010~* + *n~2011~* - 2 = `r vDF2`)
+* Vrijheidsgraden bestaan uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r vDF1`) en het tweede cijfer (*n~2010~* + *n~2011~* - 2 = `r vDF2`)
 
 ## Ongepaarde t-toets
 Voer een ongepaarde `t.test()` uit met `paired = FALSE` en `var.equal = TRUE`. Als uit de *Levene's test* komt dat de groepen verschillen in variantie, gebruik `var.equal = FALSE` .

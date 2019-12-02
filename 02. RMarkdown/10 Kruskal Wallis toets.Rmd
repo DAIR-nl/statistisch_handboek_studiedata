@@ -72,15 +72,15 @@ De *Kruskal Wallis toets* kan een alternatief zijn voor de *one way ANOVA*.[^1] 
 <div id="casus">
 De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht is geïnteresseerd in de afstudeersnelheid van zijn studenten. Hij vraagt zich af of het type vooropleiding bepalend is voor hoeveel vakken de studenten afronden in het eerste jaar. Hij kijkt naar de vier meest gangbare vooropleidingen die de studenten doorlopen voordat ze met de Master Arbeidsrecht beginnen; de bachelors: Fiscaal recht, Notarieel recht, Rechtsgeleerdheid en een schakelprogramma.  
 
-H~0~: De vooropleiding is niet bepalend voor het aantal vakken die de Masterstudenten Arbeidsrecht behalen in het eerste jaar. De gemiddelde rank is per groep ongeveer gelijk aan elkaar. 
+H~0~: De vooropleiding is niet bepalend voor het aantal vakken die de Masterstudenten Arbeidsrecht behalen in het eerste jaar.  
 
-H~1~: De vooropleiding is bepalend voor het aantal vakken die de Masterstudenten Arbeidsrecht behalen in het eerste jaar. De gemiddelde rank is per groep ongeveer gelijk aan elkaar. 
+H~1~: De vooropleiding is bepalend voor het aantal vakken die de Masterstudenten Arbeidsrecht behalen in het eerste jaar.
 </div>
 # Assumpties
 Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De data zijn (semi-)continue [^3], de groepen zijn onafhankelijk van elkaar [^4] en het aantal groepen > 2. Gebruik bij 2 groepen de *Mann-Whitney U toets*.
 
 # Post-hoc toets 
-De *Kruskal Wallis Toets* toetst of één of meerdere groepen verschillen. Welke groep verschilt wordt niet gespecificeerd. Als er een verschil zit tussen de groepen kan de *Mann-Whitney U toets* als post-hoc vergelijking gedaan worden, om te bepalen welke groepen significant verschillen. 
+De *Kruskal Wallis Toets* toetst of één of meerdere groepen verschillen. Welke groep verschilt wordt niet gespecificeerd. Om te bepalen wélke groepen significant verschillen gebruik de *Mann-Whitney U toets* als post-hoc toets. 
 
 Gebruik de *Bonferroni correctie* om Type I fouten te voorkomen. Deze toets past de p-waarde aan door de waarde te vermenigvuldigen met het aantal uitgevoerde toetsen [^5].
 
@@ -98,7 +98,7 @@ tail(Resultaten_arbeidsrecht)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
 
-De data bevat data van studenten van verschillende vooropleidingen. Gebruik `levels()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
+De dataset bevat data van studenten van verschillende vooropleidingen. Gebruik `levels()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
 
 <!-- ## BLOK: Data-bekijken-2.R -->
 ```{r data bekijken 2}
@@ -139,10 +139,10 @@ vMed_NOT <- Round_and_format(x[2,3])
 vMed_RCH <- Round_and_format(x[3,3])
 vMed_SCH <- Round_and_format(x[4,3])
 ```
-* Mediaan Fiscaal Recht: `r vMed_FIS`. n = `r vN_FIS`.
-* Mediaan Notarieel Recht: `r vMed_NOT`. n = `r vN_NOT`.
-* Mediaan Rechtsgeleerdheid: `r vMed_RCH`. n = `r vN_RCH`.
-* Mediaan schakelprogramma: `r vMed_SCH`. n = `r vN_SCH`.
+* Mediaan Fiscaal Recht: `r vMed_FIS`. *n* = `r vN_FIS`.
+* Mediaan Notarieel Recht: `r vMed_NOT`. *n* = `r vN_NOT`.
+* Mediaan Rechtsgeleerdheid: `r vMed_RCH`. *n* = `r vN_RCH`.
+* Mediaan schakelprogramma: `r vMed_SCH`. *n* = `r vN_SCH`.
 
 ### Boxplot
 De box geeft de middelste 50% van het aantal studiepunten weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8]  
@@ -183,7 +183,7 @@ pairwise.wilcox.test(Resultaten_arbeidsrecht$Ec_jaar1, Resultaten_arbeidsrecht$V
 ```
 <!-- ## /BLOK: Mann-Whitney-U-test-->
 
-* Met een mediaan van `r vMed_RCH` scoren de studenten met Rechtsgeleerdheid als vooropleiding statistisch significant lager dan de elk van de drie andere vooropleidingen.
+* De studenten met Rechtsgeleerdheid als vooropleiding (mediaan = `r vMed_RCH`) scoren statistisch significant lager dan de elk van de drie andere vooropleidingen.
 * Tussen de groepen met vooropleiding schakelprogramma (mediaan = `r vMed_SCH`) en Notarieel recht (mediaan = `r vMed_NOT`) is een statistisch significant verschil gevonden.  
 
 * Er is geen statistisch significant verschil gevonden tussen Fiscaal recht (mediaan = `r vMed_FIS`) en Notarieel recht (mediaan = `r vMed_NOT`).

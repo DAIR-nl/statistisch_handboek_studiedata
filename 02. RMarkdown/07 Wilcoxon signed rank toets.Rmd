@@ -64,30 +64,28 @@ Alumni_inkomens <- data.frame(Studentnr, Datum, Inkomen)
 ```
 <!-- ## /BLOK: Data-aanmaken.R -->
 
-## Toepassing
+# Toepassing
 
 Gebruik de *Wilcoxon signed rank toets* om te toetsen of bij een herhaalde meting de waardes van een groep aan elkaar gelijk zijn. Een voordeel van deze test is dat het voor alle type data gebruikt kan worden.[^1]   
-De *Wilcoxon Signed Rank Test* wordt vaak als alternatief gezien voor de *gepaarde t-toets*. De *Wilcoxon Signed Rank Test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld zijn  heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen, dan wanneer de *gepaarde t-toets* uitgevoerd zou worden.
+
  
-## Onderwijscasus
+# Onderwijscasus
 <div id ="casus">
 De directeur van de Academie Mens & Maatschappij wil bekijken hoe het inkomen van zijn alumni zich ontwikkeld nadat zij zijn afgestudeerd. Hij bekijkt de inkomens van de alumni 1 jaar na afstuderen en vergelijkt het met de inkomen 5 jaar na afstuderen. 
 
-H~0~: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd niet veranderd.    
-
-H~1~: De vooropleiding is bepalend voor het aantal vakken die de Masterstudenten Arbeidsrecht behalen in het eerste jaar. De gemiddelde rank is per groep ongeveer gelijk aan elkaar. 
+H~0~: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd niet veranderd.  
+H~1~: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd veranderd. 
 
 </div>
 
-## Assumpties
+# Assumpties
+De data zijn nomimaal, ordinaal of numeriek gemeten. De *Wilcoxon Signed Rank Test* wordt vaak als alternatief gezien voor de *gepaarde t-toets*. De *Wilcoxon Signed Rank Test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data normaal verdeeld zijn heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen, dan wanneer de *gepaarde t-toets* uitgevoerd zou worden.
 
-
-
-## Uitvoering in R
+# Uitvoering in R
 Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij genaamd `Jaarlijks_inkomen`. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkeld 4 jaar nadat zij afgestudeerd zijn.
 
-### De data bekijken
-Bekijk de data door het gemiddelde, de standaardafwijking, de mediaan en een histogram op te vragen.
+## De data bekijken
+Bekijk de data door de mediaan en een boxplot op te vragen.
 
 <!-- ## BLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}

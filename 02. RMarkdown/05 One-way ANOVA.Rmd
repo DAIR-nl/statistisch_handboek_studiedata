@@ -106,13 +106,19 @@ Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventuee
 Toets met de *Levene's Test (for equality of variance)* of de spreiding van iedere groep ongeveer hetzelfde is. Bij een *p* < 0,05 is de spreiding van de groepen significant verschillend.[^6]
 
 # Effectmaat
-Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Hier worden twee effectmaten besproken die veel voorkomen: Cohen's *f* en eta squared.   
+Bereken de effectmaat om te bepalen of de gevonden p-waarde van een ANOVA betekenisvol is. Hier worden twee effectmaten besproken die veel voorkomen: Cohen's *f* en eta squared.   
 
 ## Cohen's f
 Cohen's *f* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer. Een indicatie om *f* te interpreteren is: rond 0,10 is een klein effect, rond 0,25 is een gemiddeld effect en rond 0,40 is een groot effect.[^7]
 
 ## Eta squared
 Eta squared (*η^2^*) berekent de proportie van de variantie in de afhankelijke variabele wat verklaard wordt door de onafhankelijke variabele. In dit geval berekent het de proportie van de variantie in de lengte van de reistijd wat verklaard kan worden door de opleiding. Een indicatie om *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^8]
+
+# Post-hoc toetsen
+De one-way ANOVA toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Welke groep anders is wordt niet gespecificeerd. Als er bij de *one-way ANOVA* uitkomt dat er een significant verschil is tussen de groepen kan een post-hoc vergelijking gedaan worden om te bepalen welke groepen significant verschillen.
+Er zijn meerdere post-hoc vergelijkingen:  
+* Tukey wordt gebruikt als de assumptie van gelijke varianties is voldaan [^9]
+* Dunnet’s C wordt gebruikt bij ongelijke varianties
 
 # Uitvoering in R
 Er is een dataset ingeladen met de reistijden van uitwonende studenten per opleiding is ingeladen genaamd `Reistijd_per_opleiding`. 
@@ -194,9 +200,9 @@ vN_GSC <- Round_and_format(length(Reistijd_GSC))
 ```
 </div>
 
-* Gemiddelde reistijd Arabische Taal en Cultuur (standaarddeviatie): `r vM_ATC` (`r vSD_ATC`). n = `r vN_ATC`  
-* Gemiddelde reistijd Filosofie (standaarddeviatie): `r vM_FIL` (`r vSD_FIL`). n = `r vN_FIL`.
-* Gemiddelde reistijd Geschiedenis (standaarddeviatie): `r vM_GSC` (`r vSD_GSC`). n = `r vN_GSC`.
+* Gemiddelde reistijd Arabische Taal en Cultuur (standaarddeviatie): `r vM_ATC` (`r vSD_ATC`). *n* = `r vN_ATC`  
+* Gemiddelde reistijd Filosofie (standaarddeviatie): `r vM_FIL` (`r vSD_FIL`). *n* = `r vN_FIL`.
+* Gemiddelde reistijd Geschiedenis (standaarddeviatie): `r vM_GSC` (`r vSD_GSC`). *n* = `r vN_GSC`.
 
 ## Visuele inspectie van normaliteit
 Geef de data visueel weer met een histogram, Q-Q plot of boxplot.
@@ -220,7 +226,7 @@ ggplot(Reistijd_per_opleiding,
 ```
 <!-- ## /BLOK: Histogram.R -->
 
-Alle drie de histogrammen laten een belcurve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  
+De opleidingen Geschiedenis en Arabische taal en Cultuur laten een Bell Curve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  Filosofie heeft een lagere frequentie bij een reistijd van 40 minuten, dit kan duiden op niet normaal verdeelde data. 
 
 ### Q-Q plot
 Gebruik `qqnorm()` en `qqline()`. Gebruik `pch = 1`om kleine cirkels als datapunten te gebruiken.
@@ -259,10 +265,10 @@ qqline(Reistijd_GSC)
 <!-- ## BLOK: QQplot3.R -->
 </div>
 
-Bij de Q-Q plot van de reistijd van studenten Geschiedenis liggen de meeste punten op de lijn behalve bij de uiteinden. De cirkels van de Q-Q plot van studenten Arabische Taal en Cultuur en studenten Filosofie liggen net naast de lijn, maar zo minimaal ernaast dat de data vermoedelijk normaal verdeeld is.   
+Bij de Q-Q plot van de reistijd van studenten Geschiedenis liggen de meeste punten op de lijn behalve bij de uiteinden. De cirkels van de Q-Q plot van studenten Arabische Taal en Cultuur en studenten Filosofie liggen net naast de lijn. De discrepantie is minimaal, vermoedelijk zijn de data normaal verdeeld.
 
 ### Boxplot
-De box geeft de middelste 50% van de reistijd weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9]
+De box geeft de middelste 50% van de reistijd weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^10]
 
 <!-- ## BLOK: Boxplot.R -->
 ```{r boxplot}
@@ -271,7 +277,7 @@ boxplot(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 ```
 <!-- ## /BLOK: Boxplot.R -->
 
-De boxplotten geven de spreiding weer van de gemiddelde reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. De boxplotten Arabische Taal en Cultuur en Geschiedenis zien er symmetrisch uit; de boxen zijn even hoog boven als onder de mediaan. De staarten zijn onder en boven even groot. De boxplot van Filosofie is boven de mediaan groter dan onder de mediaan, de data kan wat scheef verdeeld zijn.  
+De boxplotten geven de spreiding weer van de gemiddelde reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. De boxplotten Arabische Taal en Cultuur en Geschiedenis zien er symmetrisch uit; de boxen zijn even hoog boven als onder de mediaan. De staarten zijn onder en boven even groot. De boxplot van Filosofie is boven de mediaan groter dan onder de mediaan, de data kan wat scheef verdeeld zijn. De mediaan Arabische Taal en Cultuur ligt hoger dan de twee andere opleidingen. 
 
 ## Toetsen van normaliteit
 Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Hierbij een toelichting bij twee veelgebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
@@ -294,7 +300,7 @@ lillie.test(Reistijd_GSC)
 ```
 <!-- ## /BLOK: Lilliefors-test.R -->
 </div>
-De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one-way ANOVA* kan uitgevoerd worden.
+De p-waarde is *p* > 0,05, er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one-way ANOVA* kan uitgevoerd worden.
 
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
@@ -310,7 +316,7 @@ shapiro.test(Reistijd_GSC)
 </div>
 De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one-way ANOVA* kan uitgevoerd worden.
 
-## Homogeniteit van varianties
+## Toetsen van Homogeniteit van varianties
 Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. 
 
 <!-- ## BLOK: Levenes-test.R -->
@@ -326,9 +332,10 @@ vF_p <- Round_and_format(L$`Pr(>F)`[1])
 vDF1 <- Round_and_format(L$`Df`[1])
 vDF2 <- Round_and_format(L$`Df`[2])
 ```
-* *F*~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, p-waarde = `r vF_p`, de groepen zijn niet verschillend in spreiding.  
-* Vrijheidsgraden bestaat uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r vDF1`) en het tweede cijfer (*n~1~* + *n~2~* - 2 = `r vDF2`).
-* De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden in variantie.
+* *F*~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, p-waarde = `r vF_p`, 
+* De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de groepen in spreiding.   
+* Vrijheidsgraden bestaan uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r vDF1`) en het tweede cijfer (*n~1~* + *n~2~* - 2 = `r vDF2`).  
+* De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden in variantie.  
 
 
 ## One-way ANOVA 
@@ -349,7 +356,7 @@ vF_waarde <- Round_and_format(ANOVA[[1]]$`F value`[1])
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen
 * Vrijheidsgraden: het aantal groepen - 1 = `r vDF1`; *n~1~* + *n~2~* - 2 = `r vDF2`
 
-### Effectmaat: Cohen's ind 
+### Effectmaat: Cohen's *f*
 Gebruik `cohens_f()` om het effect te meten.
 
 <!-- ## BLOK: Cohens-f.R --> 
@@ -358,7 +365,8 @@ library(sjstats)
 cohens_f(res.aov)
 ```
 <!-- ## /BLOK: Cohens-f.R --> 
-Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect.[^7]
+*f* = . 
+De sterkte van het effect van type opleiding op de reistijd is groot. 
 
 ### Effectmaat: eta squared
 Gebruik `EtaSq()` op een ANOVA-object om het effect te meten.
@@ -368,9 +376,13 @@ library(DescTools)
 EtaSq(res.aov)
 ```
 <!-- ## /BLOK: Eta-squared.R -->
+*η^2^* =  
+De sterkte van het effect van de type opleiding op de reistijd is groot. 
 
-## Tukey's toets
-Doe een post hoc toets om te toetsen welke verschillen significant zijn. Gebruik bij gelijke variantie de Tukey honestly significant difference test. Gebruik `TukeyHSD()` op het ANOVA-object.
+## Post-hoc toets: Tukey's toets
+Om te bepalen welke van de type opleidingen in reistijd verschillen wordt een post-hoc toets gedaan. Gebruik bij groepen met gelijke variantie de Tukey honestly significant difference test.
+Gebruik `TukeyHSD()` op het ANOVA-object.
+
 <!-- ## BLOK: Tukey-HSD.R -->
 ```{r TukeyHSD}
 TukeyHSD(res.aov)
@@ -387,9 +399,7 @@ Het verschil tussen Geschiedenis en Arabische Taal en Cultuur: *MD* = `r vATCvsG
 Het verschil tussen Geschiedenis en Filosofie: *MD* = `r vFILvsGSC`, p = 0,26. 
 
 # Rapportage
-Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De opleidingen zijn: Arabische Taal en Cultuur (*M~atc~* = `r vM_ATC`, *SD~atc~* = `r vSD_ATC`), Filosofie (*M~fil~* = `r vM_FIL`, *SD~fil~* = `r vSD_FIL`) en Geschiedenis (*M~gsc~* = `r vM_GSC`, *SD~fil~* = `r vSD_FIL`. The *one way ANOVA* was significant, *F*(`r vDF1`, `r vDF2`) = `r vF_waarde`, *p* < 0,01. Dat wil zeggen dat er een significant verschil is tussen de gemiddelde reistijden van de drie opleidingen.  
-
-**het effect is **
+Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De opleidingen zijn: Arabische Taal en Cultuur (*M~atc~* = `r vM_ATC`, *SD~atc~* = `r vSD_ATC`), Filosofie (*M~fil~* = `r vM_FIL`, *SD~fil~* = `r vSD_FIL`) en Geschiedenis (*M~gsc~* = `r vM_GSC`, *SD~fil~* = `r vSD_FIL`, zie ook tabel. De gemiddelde reistijd van de groepen verschillen significant van elkaar, *F*(`r vDF1`, `r vDF2`) = `r vF_waarde`, *p* < 0,05. De sterkte van het effect van de type opleiding op de reistijd is groot. 
 
 | Opleiding     | N          | M          | SD          |
 | ------------- | ---------- | ---------- | ----------- |
@@ -397,12 +407,9 @@ Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de
 | Filosofie     | `r vN_FIL` | `r vM_FIL` | `r vSD_FIL` |
 | Geschiedenis  | `r vN_GSC` | `r vM_GSC` | `r vSD_GSC` |
 
-**posthoc en uitkomsten **
-*Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen van elkaar. 
+*Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen. Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = `r vATCvsFIL`, p < 0,01). Tussen Geschiedenis en Arabische Taal en Cultuur is een significant verschil (*MD* = `r vATCvsGSC`, p < 0,01). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = `r vFILvsGSC`, p = 0,26). 
 
-Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = `r vATCvsFIL`, p < 0,01). Geschiedenis en Arabische Taal en Cultuur hebben een significant verschil (*MD* = `r vATCvsGSC`, p < 0,01). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = `r vFILvsGSC`, p = 0,26). 
-
-Aan de hand van de resultaten kan geconcludeerd worden dat ..... Het effect is minimaal.
+Aan de hand van de resultaten kan geconcludeerd worden dat de studenten van Arabische Taal en Cultuur significant langer moeten reizen dan de andere twee opleidingen. Het effect is groot. Tussen de Filosofie en Geschiedenis is geen significant verschil gevonden. 
 
 [^1]: van Geloven, N. (25 mei 2016). *One-way ANOVA*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/One-way_ANOVA).
 [^2]: Universiteit van Amsterdam (8 juli 2014). *One-way ANOVA*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/One-way_ANOVA).
@@ -412,4 +419,5 @@ Aan de hand van de resultaten kan geconcludeerd worden dat ..... Het effect is m
 [^6]: Wikipedia (7 september 2019). *Analysis of variance*. https://en.wikipedia.org/wiki/Analysis_of_variance 
 [^7]: Watson, P. (30 oktober 2019). *Rules of thumb on magnitudes of effect sizes*. [MRC Cognition and Brain Sciences Unit Wiki](http://imaging.mrc-cbu.cam.ac.uk/statswiki/FAQ/effectSize).
 [^8]: Eta-squared. (2019 May 14). Retrieved from: https://en.wikiversity.org/wiki/Eta-squared
-[^9]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
+[^9]: Universiteit van Amsterdam (26 augustus 2014). *MANOVA*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/MANOVA).
+[^10]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).

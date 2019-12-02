@@ -303,8 +303,8 @@ leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
 <!-- ## /BLOK: Levenes-test.R -->
 ```{r Levenes test als object, echo = FALSE}
 L <- leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
-vF_waarde <- Round_and_format(L$`F value`)
-vF_p <- Round_and_format(L$`Pr(>F)`)
+vF_waarde <- Round_and_format(L$`F value`[1])
+vF_p <- Round_and_format(L$`Pr(>F)`[1])
 vDF1 <- Round_and_format(L$`Df`[1])
 vDF2 <- Round_and_format(L$`Df`[2])
 ```

@@ -55,16 +55,15 @@ Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test*.[^
 Er is een dataset ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde: `Gemiddeld_cijfer_WNS` .
 
 ## De data bekijken
-Klik het tabblad Data View aan om de data te bekijken. Klik het tabblad Variable View aan om de eigenschappen van alle variabelen te bekijken. Beide ingeladen datasets in dit voorbeeld bevatten slechts 1 variabele: Gemiddeld_cijfer_WNS of Gemiddeld_cijfer_WNS_n30. We kunnen onder andere zien dat de variabele in dit geval numeriek is, geen missende waarden bevat en dat deze op schaalniveau is gemeten. Wanneer bepaalde eigenschappen niet blijken te kloppen kunt u deze handmatig aanpassen.
+Klik het tabblad Data View aan om de data te bekijken. Klik het tabblad Variable View aan om de eigenschappen van alle variabelen te bekijken en eventueel aan te passen.
 
-<!-- ## /BLOK: Data-bekijken.SPSS -->
-![ ](VariableView.jpg)
+Krijg meer inzicht in de dataset door het gemiddelde en de spreiding te bekijken.
 
-Krijg meer inzicht in de dataset door het gemiddelde en de spreiding te bekijken: `Analyze` > `Descriptive Statistics` > `Descriptives`.  Vink bij options het gemiddelde (`Mean`) en de standaard deviatie (`Std. deviation`) aan en klik op `Continue`.
+Klik op `Analyze` > `Descriptive Statistics` > `Descriptives`.  Vink bij options het gemiddelde (`Mean`) en de standaard deviatie (`Std. deviation`) aan en klik op `Continue`.
 
 <!-- ## BLOK: Data-beschrijven.SPSS -->
 ```{r de data bekijken, eval=FALSE}
-## Gemiddelde en standaarddeviatie
+* Gemiddelde en standaarddeviatie.
 DESCRIPTIVES VARIABLES=Gemiddeld_cijfer_WNS
   /STATISTICS=MEAN STDDEV.
 ```
@@ -78,11 +77,11 @@ DESCRIPTIVES VARIABLES=Gemiddeld_cijfer_WNS
 Geef normaliteit visueel weer met een histogram, boxplot of Q-Q plot. 
 
 ### Histogram
-Om een figuur te maken in SPSS klik je op `Graphs` > `Legacy Dialogs` en vervolgens op het gewenste figuur, in dit geval dus `Histogram...`.
-Selecteer de gewenste variabele en plaats deze in het vakje `Variable`. Klik vervolgens op `OK` om meteen naar de output te gaan. Klik op `Paste` om de code in je Syntax te zetten
+Klik op `Graphs` > `Legacy Dialogs` en vervolgens op het gewenste figuur, in dit geval `Histogram...`. Selecteer de gewenste variabele en plaats deze in het vakje `Variable`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten. Voor een density curve ga naar de `chart editor` (dubbelklik op het figuur). Klik op `Elements` > `Hide Distribution Curve`.
 
 <!-- ## BLOK: Histogram.SPSS -->
 ```{r histogram, eval=FALSE}
+* Histogram.
 GRAPH
   /HISTOGRAM=Gemiddeld_cijfer_WNS.
 ```
@@ -92,11 +91,12 @@ GRAPH
 Het histogram laat een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
 
 ### Q-Q plot
-Klik voor de Q-Q plot op `Analyze` > `Desctiptive Statistics` > `Q-Q Plots...`. Selecteer de gewenste variabele(n) en plaats deze in het vakje `Variables`. Klik vervolgens op `OK` om meteen naar de output te gaan. Klik op `Paste` om de code in je Syntax
+Klik op `Analyze` > `Desctiptive Statistics` > `Q-Q Plots...`. Selecteer de gewenste variabele(n) en plaats deze in het vakje `Variables`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
 
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 <!-- ## BLOK: QQplot.R -->
 ```{r qqplot, eval=FALSE}
+* QQ-Plot.
 PPLOT
   /VARIABLES=Gemiddeld_cijfer_WNS
   /NOLOG
@@ -115,11 +115,12 @@ In deze casus liggen de meeste punten op de lijn. Bij de uiteinden liggen de pun
 
 ### Boxplot
 De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8] 
-Klik op `Graphs` > `Legacy Dialogs` > `Boxplot...`. Kies vervolgens voor een simpele variant en aangezien we in dit voorbeeld naar 1 variabele kijken en niet naar groepen, kies je voor `Summaries of separate variables`. Klik dan op `Define`.  Selecteer de gewenste variabele(n) en plaats deze in het vakje `Boxes Represent`. Klik vervolgens op `OK` om meteen naar de output te gaan. Klik op `Paste` om de code in je Syntax te zetten.
+
+Klik op `Graphs` > `Legacy Dialogs` > `Boxplot...`. Kies vervolgens voor een `simpele variant`. Kies voor `Summaries of separate variables` en klik op `Define`.  Selecteer de gewenste variabele(n) en plaats deze in het vakje `Boxes Represent`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
 
 <!-- ## BLOK: Boxplot.R -->
 ``` {r boxplot, eval=FALSE}
-## Boxplot
+* Boxplot.
 EXAMINE VARIABLES=Gemiddeld_cijfer_WNS 
   /COMPARE VARIABLE
   /PLOT=BOXPLOT
@@ -131,8 +132,6 @@ EXAMINE VARIABLES=Gemiddeld_cijfer_WNS
 <!-- ## /BLOK: Boxplot.R -->
 ![ ](Boxplot.jpg)
 
-02. SPSSMarkdown/Afbeeldingen/OneSampleTTest/QQplot.jpg
-
 De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte vakken weer van de studenten Werktuigbouwkunde. De box en staarten zien er symmetrisch uit, wat een indicatie is van een normale verdeling.[^9]  
 
 ## Toetsen van normaliteit
@@ -140,11 +139,12 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst 
 
 ### Kolmogorov-Smirnov
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
-Klik op `Analyze` > `Nonparametric Tests` > `Legacy Dialogs` > `1-Sample K-S...`. Selecteer de gewenste variabele(n) en plaats deze in het vakje `Test Variable List`. Vink bij `Test Distribution` het vakje voor `Normal` aan, omdat we willen testen of de steekproef normaal verdeeld is. Klik vervolgens op `OK` om meteen naar de output te gaan. Klik op `Paste` om de code in je Syntax te zetten.
+
+Klik op `Analyze` > `Nonparametric Tests` > `Legacy Dialogs` > `1-Sample K-S...`. Selecteer de gewenste variabele(n) en plaats deze in het vakje `Test Variable List`. Vink bij `Test Distribution` het vakje voor `Normal` aan. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
 
 <!-- ## BLOK: Lilliefors-test.R -->
 ```{r Kolmogorov-Smirnov Test, eval=FALSE}
-## Kolmogorov-Smirnov test
+* Kolmogorov-Smirnov test.
 NPAR TESTS
   /K-S(NORMAL)=Gemiddeld_cijfer_WNS
   /MISSING ANALYSIS.
@@ -153,18 +153,20 @@ NPAR TESTS
 <!-- ## /BLOK: Kolmogorov-Smirnov-test.R -->
 ![ ](Output_KS.jpg)
 
-De p-waarde is *p* > 0,05 (`Asymp. Sig. (2-tailed)`), dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.  
+Kijk voor het  verschil naar `Asymp. Sig. (2-tailed)`. 
+
+De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.  
 
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
 
 Er is een steekproef van `Gemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS_n30. De steekproef bevat *n* = 30 studenten.
 
-Klik op `Analyze` > `Descriptive Statistics` > `Explore...`. Selecteer de gewenste variabele(n) en plaats deze in het vakje `Test Variable List`. Vink bij `Test Distribution` het vakje voor `Plots` aan. Klik vervolgens op `OK` om meteen naar de output te gaan. Klik op `Paste` om de code in je Syntax te zetten. 
+Klik op `Analyze` > `Descriptive Statistics` > `Explore...`. Selecteer de gewenste variabele(n) en plaats deze in het vakje `Test Variable List`. Vink bij `Test Distribution` het vakje voor `Plots` aan. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in je Syntax te zetten. 
 
 <!-- ## BLOK: Shapiro-Wilk-test.R -->
 ``` {r Shapiro-Wilk Test, eval=FALSE}
-#Shapiro-Wilk test
+* Shapiro-Wilk test.
 EXAMINE VARIABLES=Gemiddeld_cijfer_WNS_n30
   /PLOT NPPLOT
   /STATISTICS NONE
@@ -186,11 +188,11 @@ Gebruik `t.test()`om een t-toets uit te voeren. Geef het gemiddelde waarmee word
 De dataset met `Gemiddeld_cijfer_WNS` is ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde, *n* = 124. 
 De *one sample t-toets* is uitgevoerd om de vraag te beantwoorden of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde anders is dan het landelijk gemiddelde (µ = 6,8). De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren dan het landelijk gemiddelde is er voor gekozen om tweezijdig te toetsen. 
 
-Klik op `Analyze` > `Compare Means` > `One-Sample T Test...`. Selecteer de gewenste variabele(n) en plaats deze in het vakje `Test Variable(s)`. Vul bij `Test Value` het gemiddelde in waarmee je de data wil vergelijken, in dit geval 6,8. (Let op: gebruik een komma en geen punt). Klik vervolgens op `OK` om meteen naar de output te gaan. Klik op `Paste` om de code in je Syntax te zetten.
+Klik op `Analyze` > `Compare Means` > `One-Sample T Test...`. Selecteer de gewenste variabele(n), plaats deze in het vakje `Test Variable(s)`. Vul bij `Test Value` het te vergelijkbare gemiddelde in, in dit geval 6,8. *(Let op: gebruik een komma en geen punt)*. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
 
 <!-- ## BLOK: T-test.R -->
 ```{r ttest, eval=FALSE}
-## T-test
+* T-test.
 T-TEST
   /TESTVAL=6.8
   /MISSING=ANALYSIS

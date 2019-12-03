@@ -135,18 +135,89 @@ Tentamencijfer_na_tutorgesprek_n30 <- sapply(Tentamencijfer_na_tutorgesprek_n30,
 Tentamencijfer_na_tutorgesprek_n30 <- sort(Tentamencijfer_na_tutorgesprek_n30)
 Tentamencijfer_na_tutorgesprek_n30 <- Tentamencijfer_na_tutorgesprek_n30[volgorde_n30]
 
-## Maak van in te lezen data een dataframe
-Tentamencijfer_voor_tutorgesprek_n30 <- as.data.frame(Tentamencijfer_voor_tutorgesprek_n30)
-Tentamencijfer_na_tutorgesprek_n30 <- as.data.frame(Tentamencijfer_na_tutorgesprek_n30)
-
 ## Sla dataframes op als .sav
-write_sav(Tentamencijfer_na_tutorgesprek_n30, 
-          "02. SPSSMarkdown/Data/Tentamencijfer_na_tutorgesprek_n30.sav")
-write_sav(Tentamencijfer_voor_tutorgesprek_n30, 
-          "02. SPSSMarkdown/Data/Tentamencijfer_voor_tutorgesprek_n30.sav")
 write_sav(Tentamencijfers, 
           "02. SPSSMarkdown/Data/Tentamencijfers.sav")
 
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## TOETS 3: ONGEPAARDE T-TOETS
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+## Maak dummydata aan
+RNGkind(sample.kind = "Rounding")
+set.seed(1)
+
+mu <- 6.3
+sigma <- 1.2
+Cijfers_2010 <- rnorm(180, mu, sigma)
+Cijfers_2010 <- Cijfers_2010[Cijfers_2010 <= 10 & Cijfers_2010 >= 1]
+Cijfers_2010 <- sapply(Cijfers_2010, round, 3)
+
+mu <- 6.3
+sigma <- 1.2
+Cijfers_2010_n30 <- rnorm(30, mu, sigma)
+Cijfers_2010_n30 <- Cijfers_2010_n30[Cijfers_2010_n30 <= 10 & Cijfers_2010_n30 >= 1]
+Cijfers_2010_n30 <- sapply(Cijfers_2010_n30, round, 3)
+
+mu <- 6.45
+sigma <- 1.2
+Cijfers_2011 <- rnorm(160, mu, sigma)
+Cijfers_2011 <- Cijfers_2011[Cijfers_2011 <= 10 & Cijfers_2011 >= 1]
+Cijfers_2011 <- sapply(Cijfers_2011, round, 3)
+
+mu <- 6.45
+sigma <- 1.2
+Cijfers_2011_n30 <- rnorm(30, mu, sigma)
+Cijfers_2011_n30 <- Cijfers_2011_n30[Cijfers_2011_n30 <= 10 & Cijfers_2011_n30 >= 1]
+Cijfers_2011_n30 <- sapply(Cijfers_2011, round, 3)
+
+Cijfers <- c(Cijfers_2010, Cijfers_2011)
+Cohort <- c(replicate(180, 2010), replicate(160, 2011))
+Cijfers_gem <- data.frame(Cijfers, Cohort)
+
+## Sla dataframes op als .sav
+write_sav(Cijfers_gem, 
+          "02. SPSSMarkdown/Data/Cijfers_gem.sav")
+
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## TOETS 5: ONE WAY ANOVA
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+## Maak dummydata aan
+RNGkind(sample.kind = "Rounding")
+set.seed(1)
+
+mu <- 6.3
+sigma <- 1.2
+Cijfers_2010 <- rnorm(180, mu, sigma)
+Cijfers_2010 <- Cijfers_2010[Cijfers_2010 <= 10 & Cijfers_2010 >= 1]
+Cijfers_2010 <- sapply(Cijfers_2010, round, 3)
+
+mu <- 6.3
+sigma <- 1.2
+Cijfers_2010_n30 <- rnorm(30, mu, sigma)
+Cijfers_2010_n30 <- Cijfers_2010_n30[Cijfers_2010_n30 <= 10 & Cijfers_2010_n30 >= 1]
+Cijfers_2010_n30 <- sapply(Cijfers_2010_n30, round, 3)
+
+mu <- 6.45
+sigma <- 1.2
+Cijfers_2011 <- rnorm(160, mu, sigma)
+Cijfers_2011 <- Cijfers_2011[Cijfers_2011 <= 10 & Cijfers_2011 >= 1]
+Cijfers_2011 <- sapply(Cijfers_2011, round, 3)
+
+mu <- 6.45
+sigma <- 1.2
+Cijfers_2011_n30 <- rnorm(30, mu, sigma)
+Cijfers_2011_n30 <- Cijfers_2011_n30[Cijfers_2011_n30 <= 10 & Cijfers_2011_n30 >= 1]
+Cijfers_2011_n30 <- sapply(Cijfers_2011, round, 3)
+
+Cijfers <- c(Cijfers_2010, Cijfers_2011)
+Cohort <- c(replicate(180, 2010), replicate(160, 2011))
+Cijfers_gem <- data.frame(Cijfers, Cohort)
+
+## Sla dataframes op als .sav
+write_sav(Cijfers_gem, 
+          "02. SPSSMarkdown/Data/Cijfers_gem.sav")
 
 
 

@@ -81,8 +81,7 @@ tail(Uitval_functiebeperking)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
 
-
-## Chi-kwadraat toets
+# Chi-kwadraat toets
 Gebruik `chisq.test()` op een kruistabel. 
 <!-- ## BLOK: Chi2-toets -->
 ```{r chi2}
@@ -101,7 +100,7 @@ vDF <- Chi2$parameter
 * Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r vDF`. De continuïteitscorrectie van Yates wordt automatisch toegepast wanneer het aantal vrijheidsgraden 1 is. [^4]   
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen.  
 
-## Fisher's exact toets
+# Fisher's exact toets
 Er zijn data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel, alle groepen hebben een laag aantal per cel, variërend van 5 tot 16. Ook hier zijn de data `Uitval_functiebeperking_n43` binair. 
 
 <!-- ## BLOK: Fishers-Exact-toets -->

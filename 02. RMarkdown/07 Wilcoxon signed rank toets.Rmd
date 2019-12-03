@@ -65,7 +65,6 @@ Alumni_inkomens <- data.frame(Studentnr, Datum, Inkomen)
 <!-- ## /BLOK: Data-aanmaken.R -->
 
 # Toepassing
-
 Gebruik de *Wilcoxon signed rank toets* om te toetsen of bij een herhaalde meting de waardes van een groep aan elkaar gelijk zijn. Een voordeel van deze test is dat het voor alle type data gebruikt kan worden.[^1]   
 
  

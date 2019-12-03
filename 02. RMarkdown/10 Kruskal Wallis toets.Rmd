@@ -156,7 +156,7 @@ boxplot(Ec_jaar1 ~ Vooropleiding, Resultaten_arbeidsrecht,
 
 Bij de *Kruskal Wallis toets* wordt getoetst of de medianen van meerdere groepen significant verschillen, daarom is het in dit geval ook relevant om te kijken naar het verschil tussen de medianen van de groepen. De mediaan van rechtsgeleerdheid heeft duidelijk minder studiepunten dan Fiscaal recht en Notarieel recht. Het schakelprogramma ligt er tussen in.
 
-## Kruskal Wallis toets
+# Kruskal Wallis toets
 Gebruik `kruskal.test()`. In het eerste argument gebruik je de afhankelijke variabele en de variabele die de groep definiëert. Het tweede argument is het dataframe. 
 <!-- ## BLOK: Kruskal-Wallis-test -->
 ```{r Kruskal Wallis test}

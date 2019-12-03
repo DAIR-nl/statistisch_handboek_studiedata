@@ -61,8 +61,10 @@ Punten_jaar2 <- Punten_jaar2[order(Studentnr),]
 ```
 <!-- ## /BLOK: Data-aanmaken.R -->
 # Toepassing
+Gebruik de *Mann-Whitney U toets* om te toetsen of twee onafhankelijke groepen aan elkaar gelijk zijn. Deze toets wordt ook Mann–Whitney–Wilcoxon, Wilcoxon rank-sum toets, of Wilcoxon–Mann–Whitney toets genoemd.[^1]
 
 # Onderwijscasus
+De directeur van een hogeschool vraagt zich af wat de invloed is van internationalisering op zijn instelling. Hij gebruikt hiervoor het totaal aantal punten behaald in het tweedejaar zodat uitval een minder grote rol speelt. Hij vraagt zich daarom af: is het behaald aantal EC in het tweede jaar van internationale studenten hoger dan van de Nederlandse studenten?
 
 # Assumpties
 
@@ -93,4 +95,5 @@ wilcox.test(Punten_jaar2$EC_jaar2[Nederlands],
 # Toelichting op de output
 
 # Rapportage
+[^1]: Van Geloven, N. (13 maart 2018). *Mann-Whitney U toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
 

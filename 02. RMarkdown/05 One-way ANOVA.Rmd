@@ -304,16 +304,31 @@ De p-waarde is *p* > 0,05, er is geen statistisch significant verschil gevonden 
 
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
-<div class="col3">
 
-<!-- ## BLOK: Shapiro-Wilk-test.R -->
-``` {r Shapiro-Wilk Test, warning=FALSE}
-shapiro.test(Reistijd_ATC)
-shapiro.test(Reistijd_FIL)
+<div class="col-container"> 
+  <div class="col">
+  <!-- ## BLOK: Shapiro-Wilk-test-3.R -->
+``` {r Shapiro-Wilk Test-3, warning=FALSE}
 shapiro.test(Reistijd_GSC)
 ```
-<!-- ## /BLOK: Shapiro-Wilk-test.R -->
+<!-- ## /BLOK: Shapiro-Wilk-test-3.R -->
+  </div>
+  <div class= "col">
+<!-- ## BLOK: Shapiro-Wilk-test-2.R -->
+``` {r Shapiro-Wilk Test-2, warning=FALSE}
+shapiro.test(Reistijd_FIL)
+```
+<!-- ## BLOK: Shapiro-Wilk-test-2.R -->
+  </div>
+  <div class= "col"> 
+<!-- ## BLOK: Shapiro-Wilk-test-1.R -->
+``` {r Shapiro-Wilk Test-1, warning=FALSE}
+shapiro.test(Reistijd_ATC)
+```
+<!-- ## BLOK: Shapiro-Wilk-test-1.R -->
+  </div>
 </div>
+
 De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one-way ANOVA* kan uitgevoerd worden.
 
 ## Toetsen van Homogeniteit van varianties

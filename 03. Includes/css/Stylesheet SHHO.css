@@ -152,6 +152,30 @@ td.unpublished a:hover {
   }
 
 </style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+.col-container {
+  display: table;
+  width: 100%;
+  margin: 0px;
+}
+.col {
+  display: table-cell;
+  padding: 4px;
+}
+
+@media only screen and (max-width: 600px) {
+  .col { 
+    display: block;
+    width: 100%;
+  }
+}
+</style>
+
+
 <style type="text/css">
 body{ /* Normal  */
       font-size: 15px;

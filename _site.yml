@@ -1,0 +1,9 @@
+name: "Statistisch Handboek Studiedata"
+output_dir: _site
+output:
+  html_document:
+    theme: lumen
+    highlight: textmate
+    include:
+      after_body: 03. Includes/html/footer.html
+exclude: ["01. Toetsen", "02. Markdown", "02. PyMarkdown", "02. SPSSMarkdown", "03. Includes", "04. Rapportages", "05. Hulpmiddelen", "06. Test", "10. Python Notebooks","99. Functies en Libraries", "XX. Test", "*.R", "*.csv"]

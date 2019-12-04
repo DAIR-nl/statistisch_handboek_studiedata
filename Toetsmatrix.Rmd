@@ -1,0 +1,56 @@
+---
+title: "Toetsmatrix"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE) 
+```
+
+<!-- CSS -->
+<style>
+`r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet_SHHO.css"))`
+</style>
+
+<!-- Header -->
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/03. Includes/code/Header.R"))}
+```
+
+# Toetskeuzes
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt magna ut interdum maximus. Proin vestibulum leo in tellus rutrum pulvinar vitae interdum justo. Ut eu enim pretium, faucibus erat at, tristique dui. Mauris sodales nec risus at consectetur. Quisque gravida justo ac dui accumsan, quis mollis lacus pretium. Curabitur pulvinar pharetra enim ut pharetra. Maecenas sed lacinia erat. Etiam id interdum tortor, a malesuada erat. Etiam fringilla tellus quis arcu posuere fringilla. In diam lorem, cursus id metus quis, gravida aliquam sem.
+
+```{r, echo = FALSE}
+htmltools::includeHTML(paste0(here::here(),"/03. Includes/html/toetsmatrix.html"))
+```
+
+# Toelichting op de mogelijke keuzes
+
+**Type data**
+
+* Numeriek (continu):
+* Categorisch (discreet):
+* Normaal verdeeld:
+* Niet normaal verdeeld:
+* Binair:
+* Nominaal/ordinaal:
+
+**Soort vergelijking**
+
+* 1 groep - met referentie:
+* 2 groepen - gepaard:
+* 2 groepen - ongepaard:
+* &gt; 2 groepen - gepaard:
+* &gt; 2 groepen - ongepaard:
+
+Curabitur at porttitor massa, non iaculis libero. Etiam posuere finibus nunc, sed aliquam ante rutrum non. In hac habitasse platea dictumst. Morbi nec consectetur eros. Vivamus dolor purus, vulputate vel nisl nec, eleifend vehicula elit. Suspendisse potenti. Etiam suscipit, nibh id volutpat ultrices, nibh dolor egestas nunc, id sollicitudin nisl nunc at est. Nulla facilisi. Vivamus elementum euismod odio, sed bibendum tellus euismod ut. Nunc ex arcu, mollis et eleifend quis, finibus at lectus. Nunc blandit, quam id tempus vehicula, sem augue posuere tellus, ac ultricies erat erat vel augue. Donec ut nulla sagittis, porttitor mauris eu, laoreet erat. Vestibulum efficitur lacinia augue auctor blandit. Fusce venenatis ipsum id tellus malesuada, vel ultricies tellus molestie. Vestibulum facilisis ante ultricies ligula malesuada rhoncus.
+
+***
+
+

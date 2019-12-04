@@ -1,0 +1,58 @@
+---
+title: "Over"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE) 
+```
+
+<!-- CSS -->
+<style>
+`r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet_SHHO.css"))`
+</style>
+
+<!-- Header -->
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/03. Includes/code/Header.R"))}
+```
+
+# Het doel van dit handboek
+Het handboek is een gemeenschappelijk groeidocument voor het uitvoeren van statistische toetsen aan de hand van concrete cases uit het hoger onderwijs met bijbehorende code. De basis voor het handboek is een keuzemodel van het [AMC](https://wikistatistiek.amc.nl/index.php/), waarbij de 20 afzonderlijke keuzes c.q. tegels aan de hand van bestaande analyses/rapporten of nieuwe analyseopdrachten uitgewerkt worden. 
+
+Achter iedere ‘tegel’ bevindt zich een uitleg van de regels om een toets te kiezen, een voorbeeld casus uit het onderwijs, de keuze voor het package en bijbehorende R-code, een uitleg van de interpretatie van de resultaten, en een uitwerking van de manier waarop de resultaten beschreven worden in een rapport (in [APA format](https://apastyle.apa.org/)). 
+
+# Totstandkoming
+Dit handboek is tot stand gekomen dankzij de volgende personen:
+
+**Auteurs**
+
+* Irene van der Staaij, VU, projectleider
+* Megiel Kerkhoven, VU, programmeur
+* Theo Bakker, VU, eindredactie
+
+**Review**
+
+* Martijn Meeter, VU, wetenschappelijke review
+* Sandjai Bhulai, VU, wetenschappelijke review
+* Daniël Drittij, VU, review op toepasbaarheid
+* Jelger van Zaane, VU, review op toepasbaarheid
+* Nanny Kempers, VU, review op toepasbaarheid
+
+**Met dank aan**
+
+* Nan van Geloven, AMC/UMC Leiden, voor de ter beschikking stelling van het materiaal van de [AMC wiki](https://wikistatistiek.amc.nl/index.php/).
+* ...
+
+# Financiering
+Het handboek is gefinancierd door het Versnellingsplan.
+
+# Contact
+Neem voor vragen of suggesties contact op met Theo Bakker, <t.c.bakker@vu.nl>.
+
+***

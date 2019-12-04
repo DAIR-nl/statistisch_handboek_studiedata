@@ -18,7 +18,7 @@ output:
 ---
 
 <style>
-`r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet SHHO.css"))`
+`r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
 ```{r header, include = FALSE, echo = TRUE, results='asis'} 

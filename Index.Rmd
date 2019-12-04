@@ -1,0 +1,27 @@
+---
+title: "Home"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE) 
+```
+
+<!-- CSS -->
+<style>
+`r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet_SHHO.css"))`
+</style>
+
+<!-- Header -->
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines("03. Includes/code/Header.R")}
+```
+
+Hier komt de inleidende tekst
+
+***

@@ -1,0 +1,50 @@
+---
+title: "Licentie"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: false
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE) 
+```
+
+<!-- CSS -->
+<style>
+`r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet_SHHO.css"))`
+</style>
+
+<!-- Header -->
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/03. Includes/code/Header.R"))}
+```
+
+# Voorwaarden voor gebruik van dit handboek
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons-Licentie" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />Dit werk valt onder een <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Naamsvermelding-NietCommercieel-GelijkDelen 4.0 Internationaal-licentie</a>. Dit is de vereenvoudigde (human-readable) versie van de volledige [licentie](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.nl) en geen vervanging van de volledige licentie. 
+
+**Je bent vrij om:**
+
+* **Het werk te delen** — te kopiëren, te verspreiden en door te geven via elk medium of bestandsformaat
+* **Het werk te bewerken** — te remixen, te veranderen en afgeleide werken te maken
+* De licentiegever kan deze toestemming niet intrekken zolang aan de licentievoorwaarden voldaan wordt.
+
+**Onder de volgende voorwaarden:**
+
+* **Naamsvermelding** — De gebruiker dient de maker van het werk te [vermelden](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.nl), een link naar de licentie te plaatsen en [aan te geven of het werk veranderd is](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.nl). Je mag dat op redelijke wijze doen, maar niet zodanig dat de indruk gewekt wordt dat de licentiegever instemt met je werk of je gebruik van het werk.
+* **NietCommercieel** — Je mag het werk niet gebruiken voor [commerciële doeleinden](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.nl).
+* **GelijkDelen** — Als je het werk hebt geremixt, veranderd, of op het werk hebt voortgebouwd, moet je het veranderde materiaal verspreiden onder [dezelfde licentie](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.nl) als het originele werk.
+* **Geen aanvullende restricties** — Je mag geen juridische voorwaarden of [technologische voorzieningen](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.nl) toepassen die anderen er juridisch in beperken om iets te doen wat de licentie toestaat.
+
+**Let op:**
+
+Voor elementen van het materiaal die zich in het publieke domein bevinden, en voor vormen van gebruik die worden toegestaan via een [uitzondering of beperking](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.nl) in de Auteurswet, hoef je je niet aan de voorwaarden van de licentie te houden.
+
+Er worden geen garanties afgegeven. Het is mogelijk dat de licentie je niet alle gebruiksvrijheden geeft die nodig zijn voor het beoogde gebruik. Bijvoorbeeld, andere rechten zoals [publiciteits-, privacy- en morele rechten](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.nl) kunnen het gebruik van een werk beperken.
+
+**De volledige versie van de licentie op deze publicatie is van toepassing. Zie** https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.nl
+
+***

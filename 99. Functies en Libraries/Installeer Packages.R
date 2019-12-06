@@ -50,8 +50,7 @@ Gebruikte_packages <- c(
     "rlist",
     "stringi",
     "stringr",
-    "tidyverse",
-    "stringr"
+    "tidyverse"
 )
 
 ## TB: Niet meer inladen

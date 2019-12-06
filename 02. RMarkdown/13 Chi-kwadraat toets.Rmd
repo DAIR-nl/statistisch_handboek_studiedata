@@ -50,24 +50,36 @@ colnames(Uitval_functiebeperking_n43) <- c("Wel uitval", "Geen uitval")
 <!-- ## /BLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *Chi-kwadraat toets* of de *Fisher's exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde categorische variabelen, door middel van een kruistabel.[^1] In tegenstelling tot de *Chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage frequenties ingezet worden.[^2] De *Fisher's exact toets* is conservatiever dan de *Chi-kwadraat toets*.[^3]
+Gebruik de *Chi-kwadraat toets* of de *Fisher's exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde binaire variabelen.[^1] In tegenstelling tot de *Chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage frequenties ingezet worden.[^2] De *Fisher's exact toets* is conservatiever dan de *Chi-kwadraat toets*.[^3]   
 
 # Onderwijscasus
 <div id = "casus">
-De studentendecaan vraagt zich af of er gevolgen zijn van het invoeren van het leenstelsel voor studenten met een functiebeperking. 
+De studentendecaan vraagt zich af of studenten met een functiebeperking door het invoeren van het leenstelsel meer of minder uitvallen dan voor de invoer.
 
-H~0~: De verhouding uitval van het aantal studenten met een functiebeperking en zonder een functiebeperking is na de invoering van het leenstelsel gelijk gebleven.
+H~0~: Onder de studenten met een functiebeperking is de verhouding wel of geen uitval na de invoering van het leenstelsel gelijk gebleven.
 
-H~A~: De verhouding uitval van het aantal studenten met een functiebeperking en zonder een functiebeperking is na de invoering van het leenstelsel veranderd.
+H~A~: Onder de studenten met een functiebeperking is de verhouding wel of geen uitval na de invoering van het leenstelsel veranderd.
 </div>
 
 # Assumpties
 Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal niveau gemeten en daarmee onafhankelijk van elkaar. De *Chi-kwadraat toets* heeft specifieke regels wat betreft de groepsgrootte per cel. 
 
 ## Groeps- en celgrootte
-Elke cel van de verwachte waarde > 0. De verwachte waarde is de voorspelde waarde gebaseerd op de nulhypothese. Als in 20% van de cellen een verwachte waarde van 5 of lager staat, wordt de toets onbetrouwbaar. In de cellen met de geobserveerde waarde is dat 10 of lager.[^4] Gebruik de *Fisher’s exact toets* wanneer de aantallen in de cellen lager zijn.[^5] 
+Beide testen maken gebruik van een kruistabel; er zijn twee condities met vier mogelijke opties, zie tabel hieronder.  
 
-# Uitvoering in R
+|                      | Wel uitval   | Geen uitval |
+| -------------------- | -------------| ------------| 
+| **Geen leenstelsel** | groep 1      | groep 2     | 
+| **Wel leenstelsel**  | groep 3      | groep 4     | 
+
+Elke cel van het tabel bevat de geobserveerde waarde per groep. Er wordt een verwachte waarde berekend, deze waarde is de voorspelde waarde gebaseerd op de nulhypothese.
+
+* Elke cel van de verwachte waarde > 0. 
+* Als in 20% van de cellen een verwachte waarde van 5 of lager staat, wordt de toets onbetrouwbaar. 
+* In de cellen met de geobserveerde waarde is dat 10 of lager.[^4] 
+* Gebruik de *Fisher’s exact toets* wanneer de aantallen in de cellen lager zijn.[^5] 
+
+# Uitvoering 
 Er is een dataset ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. De data `Uitval_functiebeperking` zijn binair: wel of geen uitval. 
 
 ## De data bekijken
@@ -81,8 +93,9 @@ tail(Uitval_functiebeperking)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
 
-# Chi-kwadraat toets
-Gebruik `chisq.test()` op een kruistabel. 
+## Chi-kwadraat toets
+De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel gelijk is gebleven.  
+Gebruik `chisq.test()` op een kruistabel.  
 <!-- ## BLOK: Chi2-toets -->
 ```{r chi2}
 chisq.test(Uitval_functiebeperking)
@@ -97,11 +110,12 @@ vDF <- Chi2$parameter
 ```
 
 * *χ^2^* ~1~ ≈ `r vChi2`, *p* = `r vP`  
-* Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r vDF`. De continuïteitscorrectie van Yates wordt automatisch toegepast wanneer het aantal vrijheidsgraden 1 is. [^4]   
-* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen.  
+* Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r vDF`. De continuïteitscorrectie van Yates wordt automatisch toegepast wanneer het aantal vrijheidsgraden 1 is.[^4]   
+* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen.[^6]  
 
-# Fisher's exact toets
-Er zijn data ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel, alle groepen hebben een laag aantal per cel, variërend van 5 tot 16. Ook hier zijn de data `Uitval_functiebeperking_n43` binair. 
+## Fisher's exact toets
+De *Fisher's exact toets* wordt uitgevoerd om de vraag te beantwoorden of de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel gelijk is gebleven.   
+Er is een dataset ingeladen `Uitval_functiebeperking_n43`, alle groepen hebben een laag aantal per cel, variërend van 5 tot 16.
 
 <!-- ## BLOK: Fishers-Exact-toets -->
 ```{r fishers exact}
@@ -116,12 +130,12 @@ vConf.int1 <- Round_and_format(fish$conf.int[1])
 vConf.int2 <- Round_and_format(fish$conf.int[2])
 ```
 
-* p-waarde > 0,05 , dus de H~0~ wordt niet verworpen[^6]  
+* p-waarde > 0,05 , dus de H~0~ wordt niet verworpen.[^6]  
 * De kans op het uitvallen van studenten met een functiebeperking onder het leenstelsel is 1,8 keer zo groot als de kans op het uitvallen van studenten met een functiebeperking voor het leenstelsel. Deze associatie blijkt niet significant te zijn: *p* = `r vF_p`  
 * Het 95% betrouwbaarheidsinterval: `r vConf.int1` en de `r vConf.int2`.   
 
 # Rapportage
-De *Chi-kwadraat toets* is uitgevoerd om te toetsen of studenten met een functiebeperking vaker uitvallen dan de studenten zonder functiebeperking, sinds de invoering van het leenstelsel. De resultaten ondersteunen de nulhypothese dat de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel gelijk is gebleven, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* < 0,05.
+De *Chi-kwadraat toets* is uitgevoerd om te toetsen of studenten met een functiebeperking meer of minder uitvallen sinds de invoering van het leenstelsel. De resultaten ondersteunen de alternatieve hypothese; de verhouding uitval van het aantal studenten met een functiebeperking is na de invoering van het leenstelsel veranderd, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* < 0,05.
  
 [^1]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html.
 [^2]: Van Geloven, N., & Holman, R., (6 mei 2016). *Fisher's exact toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Fisher's_exact_toets).

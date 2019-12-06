@@ -120,7 +120,7 @@ Er zijn meerdere post-hoc vergelijkingen:
 * Tukey wordt gebruikt als de assumptie van gelijke varianties is voldaan [^9]
 * Dunnet’s C wordt gebruikt bij ongelijke varianties
 
-# Uitvoering in R
+# Uitvoering
 Er is een dataset ingeladen met de reistijden van uitwonende studenten per opleiding is ingeladen genaamd `Reistijd_per_opleiding`. 
 
 ## De data bekijken

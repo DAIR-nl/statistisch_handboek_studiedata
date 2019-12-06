@@ -102,7 +102,7 @@ Toets met de *Levene’s Test (for equality of variance)* of de spreiding van ie
 # Effectmaat
 Bereken de effectmaat om te bepalen of de gevonden p-waarde van een t-toets betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer. Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect.[^8]
 
-# Uitvoering in R
+# Uitvoering
 Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap: `Cijfers_gem`. De data bevatten cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
 
 ## De data bekijken

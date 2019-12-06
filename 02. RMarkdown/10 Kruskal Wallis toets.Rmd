@@ -84,7 +84,7 @@ De *Kruskal Wallis Toets* toetst of één of meerdere groepen verschillen. Welke
 
 Gebruik de *Bonferroni correctie* om Type I fouten te voorkomen. Deze toets past de p-waarde aan door de waarde te vermenigvuldigen met het aantal uitgevoerde toetsen [^5].
 
-# Uitvoering in R
+# Uitvoering
 Er is een dataset ingeladen met studieresultaten van de master arbeidsrecht per vooropleiding: Fiscaal recht, Notarieel recht, Rechtsgeleerdheid en een schakelprogramma.
 
 ## De data bekijken
@@ -156,7 +156,7 @@ boxplot(Ec_jaar1 ~ Vooropleiding, Resultaten_arbeidsrecht,
 
 Bij de *Kruskal Wallis toets* wordt getoetst of de medianen van meerdere groepen significant verschillen, daarom is het in dit geval ook relevant om te kijken naar het verschil tussen de medianen van de groepen. De mediaan van rechtsgeleerdheid heeft duidelijk minder studiepunten dan Fiscaal recht en Notarieel recht. Het schakelprogramma ligt er tussen in.
 
-# Kruskal Wallis toets
+## Kruskal Wallis toets
 Gebruik `kruskal.test()`. In het eerste argument gebruik je de afhankelijke variabele en de variabele die de groep definiëert. Het tweede argument is het dataframe. 
 <!-- ## BLOK: Kruskal-Wallis-test -->
 ```{r Kruskal Wallis test}
@@ -173,7 +173,7 @@ vK_P <- Round_and_format(Ktest$p.value)
 * *H*, R noemt het chi-squared omdat het een chi-kwadraat verdeling is: `r vK_Chi2`   
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen[^6]
 
-# Post-hoc toets: Mann-Whitney U toets
+## Post-hoc toets: Mann-Whitney U toets
 Om te weten welke groepen verschillen wordt de *Mann-Whitney U toets* uitgevoerd, ook wel *Wilcoxon rank-sum* genoemd.[^7] Gebruik hierbij de `pairwise.wilcox.test()`. 
 Pas de *Bonferroni correctie* toe, om te corrigeren voor dat er meerdere toetsen worden uitgevoerd, p.adjust.method = "bonferroni"    
 

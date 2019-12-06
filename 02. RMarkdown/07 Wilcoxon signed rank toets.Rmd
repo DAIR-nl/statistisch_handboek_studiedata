@@ -80,7 +80,7 @@ H~1~: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier
 # Assumpties
 De data zijn nomimaal, ordinaal of numeriek gemeten. De *Wilcoxon Signed Rank Test* wordt vaak als alternatief gezien voor de *gepaarde t-toets*. De *Wilcoxon Signed Rank Test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data normaal verdeeld zijn heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen, dan wanneer de *gepaarde t-toets* uitgevoerd zou worden.
 
-# Uitvoering in R
+# Uitvoering
 Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij genaamd `Jaarlijks_inkomen`. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkeld 4 jaar nadat zij afgestudeerd zijn.
 
 ## De data bekijken
@@ -136,17 +136,21 @@ lillie.test(Jaarlijks_inkomen_t5)
 
 </div>
 
-### Wilcoxon signed rank toets
+## Wilcoxon signed rank toets
 Voer een Wilcoxon signed rank toets uit met `paired=TRUE`.
+
+De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd is veranderd.
+
+
 <!-- ## BLOK: Wilcoxon-signed-rank-toets.R -->
 ```{r wilcox test}
 wilcox.test(Jaarlijks_inkomen_t5, Jaarlijks_inkomen_t1, paired=TRUE, alternative = "greater")
 ```
 <!-- ## /BLOK: Wilcoxon-signed-rank-toets.R -->
+*
+*
 
-### Toelichting op de output
-
-## Rapportage
+# Rapportage
 
 [^1]: van Geloven, N. (25 september2013). *Wilcoxon signed rank toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets).
 

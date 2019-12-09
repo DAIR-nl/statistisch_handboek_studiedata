@@ -48,14 +48,10 @@ Gemiddeld_cijfer_WNS <- apply(WNS_eindcijfers, 1, mean)
 
 Gemiddeld_cijfer_WNS_n30 <- sample(Gemiddeld_cijfer_WNS, 30)
 
-## Maak van in te lezen data een dataframe
-Gemiddeld_cijfer_WNS <- as.data.frame(Gemiddeld_cijfer_WNS)
-Gemiddeld_cijfer_WNS_n30 <- as.data.frame(Gemiddeld_cijfer_WNS_n30)
-
 ## Sla dataframes op als .sav
-write_sav(Gemiddeld_cijfer_WNS, 
+write_sav(as.data.frame(Gemiddeld_cijfer_WNS), 
           "02. SPSSMarkdown/Data/Gemiddeld_cijfer_WNS.sav")
-write_sav(Gemiddeld_cijfer_WNS_n30, 
+write_sav(as.data.frame(Gemiddeld_cijfer_WNS_n30), 
           "02. SPSSMarkdown/Data/Gemiddeld_cijfer_WNS_n30.sav")
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -220,6 +216,58 @@ write_sav(Cijfers_gem,
           "02. SPSSMarkdown/Data/Cijfers_gem.sav")
 
 
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## TOETS 10: KRUSKAL-WALLIS TOETS
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+## Maak dummydata aan
+RNGkind(sample.kind = "Rounding")
+set.seed(8)
+# 3
+## 300 waarnemingen voor Vooropleiding
+Seed <- sample(c(1, 2, 3, 4), 300, replace = TRUE)
+Vooropleiding <-  ifelse(Seed == 1, "Rechtsgeleerdheid", 
+                         ifelse(Seed == 2, "Notarieel recht",
+                                ifelse(Seed == 3, "Fiscaal recht",
+                                       ifelse(Seed == 4, "Schakelprogramma",
+                                              NA))))
+
+## 300 waarnemingen voor puntenaantallen, random gesampled uit een lijst mogelijkheden
+Punten_mogelijkheden <- c(6, 12, 18, 24, 30, 36, 36, 42, 42, 42, 48, 48, 48, 48, 54, 54, 54, 60, 60, 60, 60, 60, 60)
+Ec_jaar1 <- sample(Punten_mogelijkheden, 300, replace = TRUE)
+
+Studentnr <- sample(3000000:4000000, 300)
+Resultaten_arbeidsrecht <- data.frame(Studentnr, Vooropleiding, Ec_jaar1)
+
+## puntencorrectie om Fiscaal en Notarieel +6 punten te geven en Rechtsgeleerdheid -6 punten
+Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Fiscaal recht" | Vooropleiding == "Notarieel recht"] <-
+  Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Fiscaal recht" | Vooropleiding == "Notarieel recht"] + 6
+Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Rechtsgeleerdheid"] <-
+  Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Rechtsgeleerdheid"] - 6
+
+## Sla dataframes op als .sav
+write_sav(Resultaten_arbeidsrecht, 
+          "02. SPSSMarkdown/Data/Resultaten_arbeidsrecht.sav")
 
 
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## TOETS 13: CHI-KWADRAAT TOETS
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+## Maak dummydata aan
+Geen_leenstelsel <- c(375, 496)
+Wel_leenstelsel <- c(369, 394)
+Uitval_functiebeperking <- t(data.frame(Geen_leenstelsel, Wel_leenstelsel))
+colnames(Uitval_functiebeperking) <- c("Wel_uitval", "Geen_uitval")
+
+Geen_leenstelsel_n43 <- c(8, 14)
+Wel_leenstelsel_n43 <- c(5, 16)
+Uitval_functiebeperking_n43 <- t(data.frame(Geen_leenstelsel_n43, Wel_leenstelsel_n43))
+colnames(Uitval_functiebeperking_n43) <- c("Wel_uitval", "Geen_uitval")
+
+## Sla dataframes op als .sav
+write_sav(as.data.frame(Uitval_functiebeperking), 
+          "02. SPSSMarkdown/Data/Uitval_functiebeperking.sav")
+write_sav(as.data.frame(Uitval_functiebeperking_n43), 
+          "02. SPSSMarkdown/Data/Uitval_functiebeperking_n43.sav")
 

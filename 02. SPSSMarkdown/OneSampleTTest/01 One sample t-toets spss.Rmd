@@ -59,7 +59,7 @@ Klik het tabblad Data View aan om de data te bekijken. Klik het tabblad Variable
 
 Krijg meer inzicht in de dataset door het gemiddelde en de spreiding te bekijken.
 
-Klik op `Analyze` > `Descriptive Statistics` > `Descriptives`.  Vink bij options het gemiddelde (`Mean`) en de standaard deviatie (`Std. deviation`) aan en klik op `Continue`.
+Klik op `Analyze` > `Descriptive Statistics` > `Descriptives`.  Vink bij options het gemiddelde (`Mean`) en de standaard deviatie (`Std. deviation`) aan en klik op `Continue`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
 
 <!-- ## BLOK: Data-beschrijven.SPSS -->
 ```{r de data bekijken, eval=FALSE}
@@ -116,7 +116,7 @@ In deze casus liggen de meeste punten op de lijn. Bij de uiteinden liggen de pun
 ### Boxplot
 De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8] 
 
-Klik op `Graphs` > `Legacy Dialogs` > `Boxplot...`. Kies vervolgens voor een `simpele variant`. Kies voor `Summaries of separate variables` en klik op `Define`.  Selecteer de gewenste variabele(n) en plaats deze in het vakje `Boxes Represent`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
+Klik op `Graphs` > `Legacy Dialogs` > `Boxplot...`. Kies vervolgens voor `Simple`. Kies voor `Summaries of separate variables` en klik op `Define`.  Selecteer de gewenste variabele(n) en plaats deze in het vakje `Boxes Represent`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
 
 <!-- ## BLOK: Boxplot.R -->
 ``` {r boxplot, eval=FALSE}
@@ -162,7 +162,7 @@ De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test*
 
 Er is een steekproef van `Gemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS_n30. De steekproef bevat *n* = 30 studenten.
 
-Klik op `Analyze` > `Descriptive Statistics` > `Explore...`. Selecteer de gewenste variabele(n) en plaats deze in het vakje `Test Variable List`. Vink bij `Test Distribution` het vakje voor `Plots` aan. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in je Syntax te zetten. 
+Klik op `Analyze` > `Descriptive Statistics` > `Explore...`. Selecteer de gewenste variabele(n) en plaats deze in het vakje `Test Variable List`. Vink bij `Test Distribution` het vakje voor `Plots` aan. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten. 
 
 <!-- ## BLOK: Shapiro-Wilk-test.R -->
 ``` {r Shapiro-Wilk Test, eval=FALSE}

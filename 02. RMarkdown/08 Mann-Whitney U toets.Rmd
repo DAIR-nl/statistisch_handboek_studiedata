@@ -33,6 +33,7 @@ Round_and_format <- function(x, digits = 2) {
 <!-- ## BLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## De directeur van een hogeschool vraagt zich af of wat de invloed is van internationalisering op zijn instelling. Hij gebruikt hiervoor het totaal aantal punten behaald in het tweedejaar zodat uitval een minder grote rol speelt. Hij vraagt zich daarom af: is het behaald aantal EC in het tweede jaar van internationale studenten hoger dan van de Nederlandse studenten?
+##Median?
 
 RNGkind(sample.kind = "Rounding")
 set.seed(0)
@@ -61,14 +62,14 @@ Punten_jaar2 <- Punten_jaar2[order(Studentnr),]
 ```
 <!-- ## /BLOK: Data-aanmaken.R -->
 # Toepassing
-Gebruik de *Mann-Whitney U toets* om te toetsen of twee onafhankelijke [^4]groepen aan elkaar gelijk zijn. Deze toets wordt ook Mann–Whitney–Wilcoxon, Wilcoxon rank-sum toets, of Wilcoxon–Mann–Whitney toets genoemd.[^1]
+Gebruik de *Mann-Whitney U toets* om te toetsen of twee onafhankelijke groepen[^1] aan elkaar gelijk zijn. Deze toets wordt ook *Mann–Whitney–Wilcoxon*, *Wilcoxon rank-sum toets*, of *Wilcoxon–Mann–Whitney toets* genoemd.[^2]
 
 # Onderwijscasus
 De directeur van een hogeschool vraagt zich af wat de invloed is van internationalisering op zijn instelling. Om uitval een minder grote rol te laten spelen gebruikt hij hiervoor het totaal aantal punten behaald in het tweedejaar. Hij vraagt af: ‘Is het behaald aantal EC in het tweede jaar van internationale studenten anders is dan van de Nederlandse studenten?’ 
 
-H~0~: Het behaalde aantal EC in het tweede jaar is hetzelfde van internationale studenten als van de Nederlandse studenten. 
+H~0~: Het behaalde aantal EC in het tweede jaar is hetzelfde van internationale studenten als van Nederlandse studenten. 
 
-H~1~: Het behaalde aantal EC in het tweede jaar is anders van internationale studenten als van de Nederlandse studenten.
+H~1~: Het behaalde aantal EC in het tweede jaar is anders van internationale studenten als van Nederlandse studenten.
 
 # Assumpties
 De data zijn nomimaal, ordinaal of numeriek gemeten. De *Mann-Whitney U toets* wordt vaak als alternatief gezien voor de *ongepaarde t-toets*. De *Mann-Whitney U toets* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data normaal verdeeld zijn heeft de *Mann-Whitney U toets* minder onderscheidend vermogen, dan wanneer de *ongepaarde t-toets* uitgevoerd zou worden.
@@ -88,6 +89,9 @@ tail(Punten_jaar2)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
 
+TEST MEDIAAN
+
+
 ## Mann-Whitney U toets
 Gebruik `wilcox.test()` met twee argumenten om een Mann-Whitney U toets te doen in R
 <!-- ## BLOK: Mann-Whitney-U-toets.R -->
@@ -98,15 +102,14 @@ wilcox.test(Punten_jaar2$EC_jaar2[Nederlands],
 ```
 <!-- ## /BLOK: Mann-Whitney-U-toets.R -->
 * *W* = TEST, *p* = TEST
-* p-waarde > 0,05, dus de H~0~ wordt niet verworpen [^11]
+* p-waarde > 0,05, dus de H~0~ wordt niet verworpen [^3]
 
 ### Effectmaat 
-
+Wanneer p < 0,05 wordt de effectmaat berekend om te bepalen of de gevonden p-waarde betekenisvol is. In dit voorbeeld is de p > 0,05, dus is een effectmaat irrelevant. Hieronder laten we zien wat de stappen zouden zijn bij een p < 0,05.
 
 # Rapportage
+De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal EC in het tweede jaar is hetzelfde van internationale studenten als van Nederlandse studenten. Uit de resultaten kan afgelezen worden dat er geen statistisch significant verschil is tussen het aantal studiepunten van internationale studenten als van Nederlandse studenten. *W* = TEST << 0,05.  
 
-
-[^1]: Van Geloven, N. (13 maart 2018). *Mann-Whitney U toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
-[^3]: Semi-continue data wil zeggen dat de data gehele getallen bevat met veel verschillende waardes. Een voorbeeld hiervan is de aanwezigheid van studenten tijdens de jaaropening. Van Geloven, N. (21 November 2017).*KEUZE TOETS*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS).
-[^4]: Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
-[^11]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.
+[^1]: Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
+[^2]: Van Geloven, N. (13 maart 2018). *Mann-Whitney U toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
+[^3]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.

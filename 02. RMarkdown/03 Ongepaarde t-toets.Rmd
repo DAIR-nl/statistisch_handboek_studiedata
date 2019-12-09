@@ -308,7 +308,7 @@ vP <- Round_and_format(t$p.value)
 * Het gemiddelde van de steekproef in 2011: `r vMean_t1`
 
 ### Effectmaat: Cohen's d 
-Wanneer p < 0,05 wordt de effectmaat berekend om te bepalen of de gevonden p-waarde betekenisvol is. In dit voorbeeld is de p > 0,05, dus is een effectmaat irrelevant. Hieronder laten we zien wat de stappen zijn bij een p < 0,05.  
+Wanneer p < 0,05 wordt de effectmaat berekend om te bepalen of de gevonden p-waarde betekenisvol is. In dit voorbeeld is de p > 0,05, dus is een effectmaat irrelevant. Hieronder laten we zien wat de stappen zouden zijn bij een p < 0,05.  
 
 Gebruik `cohen.d()` met `paired = FALSE` om het effect te meten.
 <!-- ## BLOK: Cohens-d-test.R -->

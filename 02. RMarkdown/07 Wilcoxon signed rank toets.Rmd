@@ -67,7 +67,6 @@ Alumni_inkomens <- data.frame(Studentnr, Datum, Inkomen)
 # Toepassing
 Gebruik de *Wilcoxon signed rank toets* om te toetsen of bij een herhaalde meting de waardes van een groep aan elkaar gelijk zijn. Een voordeel van deze test is dat het voor alle type data gebruikt kan worden.[^1]   
 
- 
 # Onderwijscasus
 <div id ="casus">
 De directeur van de Academie Mens & Maatschappij wil bekijken hoe het inkomen van zijn alumni zich ontwikkeld nadat zij zijn afgestudeerd. Hij bekijkt de inkomens van de alumni 1 jaar na afstuderen en vergelijkt het met de inkomen 5 jaar na afstuderen. 
@@ -76,7 +75,11 @@ H~0~: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier
 H~1~: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd veranderd. 
 
 </div>
+# Onderwijscasus idee 2: 
+Beoordelen studenten opleiding X positiever nadat ze met hun tutor hebben gesproken?
+<div id ="casus2">
 
+</div>
 # Assumpties
 De data zijn nomimaal, ordinaal of numeriek gemeten. De *Wilcoxon Signed Rank Test* wordt vaak als alternatief gezien voor de *gepaarde t-toets*. De *Wilcoxon Signed Rank Test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data normaal verdeeld zijn heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen, dan wanneer de *gepaarde t-toets* uitgevoerd zou worden.
 
@@ -119,28 +122,26 @@ median(Jaarlijks_inkomen_t5)
 <!-- ## /BLOK: Data-beschrijven-2.R -->
 </div>
 
-### Normaliteit testen
-Test of de data normaal verdeeld is met een lilliefors-test
-<!-- BLOK: Library-nortest.R -->
-```{r library nortest, warning=FALSE}
-library(nortest)
-```
-<!-- /BLOK: Library-nortest.R -->
-<div class="col2">
-<!-- BLOK: Lilliefors-test.R -->
-```{r normaliteitstest, warning=FALSE}
-lillie.test(Jaarlijks_inkomen_t1)
-lillie.test(Jaarlijks_inkomen_t5)
-```
-<!-- BLOK: Lilliefors-test.R -->
-
-</div>
+#### Normaliteit testen
+#Test of de data normaal verdeeld is met een lilliefors-test
+#<!-- BLOK: Library-nortest.R -->
+#```{r library nortest, warning=FALSE}
+# library(nortest)
+#```
+#<!-- /BLOK: Library-nortest.R -->
+#<div class="col2">
+#<!-- BLOK: Lilliefors-test.R -->
+#```{r normaliteitstest, warning=FALSE}
+#lillie.test(Jaarlijks_inkomen_t1)
+#lillie.test(Jaarlijks_inkomen_t5)
+#```
+#<!-- BLOK: Lilliefors-test.R -->
+#</div>
 
 ## Wilcoxon signed rank toets
 Voer een Wilcoxon signed rank toets uit met `paired=TRUE`.
 
 De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd is veranderd.
-
 
 <!-- ## BLOK: Wilcoxon-signed-rank-toets.R -->
 ```{r wilcox test}

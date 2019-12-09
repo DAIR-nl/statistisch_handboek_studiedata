@@ -190,7 +190,7 @@ pairwise.wilcox.test(Resultaten_arbeidsrecht$Ec_jaar1, Resultaten_arbeidsrecht$V
 * Er is ook geen statistisch significant verschil gevonden tussen Fiscaal recht (mediaan = `r vMed_FIS`) en schakelprogramma (mediaan = `r vMed_SCH`).
 
 # Rapportage
-De *Kruskal Wallis toets* is uitgevoerd om te toetsen of een vooropleiding bepalend is voor de hoeveelheid studiepunten die een student behaalt tijdens het eerste jaar van de master Arbeidsrecht. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen het aantal studiepunten en het type vooropleiding die de student heeft afgerond. *H*~`r vK_DF`~ ≈ `r vK_Chi2` < 0,05.  
+De *Kruskal Wallis toets* is uitgevoerd om te toetsen of een vooropleiding bepalend is voor de hoeveelheid studiepunten die een student behaalt tijdens het eerste jaar van de master Arbeidsrecht. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen het aantal studiepunten en het type vooropleiding die de student heeft afgerond. *H*~`r vK_DF`~ ≈ `r vK_Chi2` << 0,05.  
 Met een post-hoc toets is het verschil tussen de vooropleidingen getoetst. Er is een statistisch significant verschil gevonden tussen Rechtsgeleerdheid en de drie andere vooropleidingen. En er is ook een statistisch significant verschil gevonden tussen schakelprogramma en Notarieel recht. 
 
 TABEL mediaan per groep 

@@ -33,7 +33,8 @@ Round_and_format <- function(x, digits = 2) {
 <!-- ## BLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## De directeur van een hogeschool vraagt zich af of wat de invloed is van internationalisering op zijn instelling. Hij gebruikt hiervoor het totaal aantal punten behaald in het tweedejaar zodat uitval een minder grote rol speelt. Hij vraagt zich daarom af: is het behaald aantal EC in het tweede jaar van internationale studenten hoger dan van de Nederlandse studenten?
-##Median?
+## Effectmaat niet gerapporteerd, ik zie geen overeenstemming van effectmaten bij de MW U 
+
 
 RNGkind(sample.kind = "Rounding")
 set.seed(0)
@@ -103,9 +104,6 @@ wilcox.test(Punten_jaar2$EC_jaar2[Nederlands],
 <!-- ## /BLOK: Mann-Whitney-U-toets.R -->
 * *W* = TEST, *p* = TEST
 * p-waarde > 0,05, dus de H~0~ wordt niet verworpen [^3]
-
-### Effectmaat 
-Wanneer p < 0,05 wordt de effectmaat berekend om te bepalen of de gevonden p-waarde betekenisvol is. In dit voorbeeld is de p > 0,05, dus is een effectmaat irrelevant. Hieronder laten we zien wat de stappen zouden zijn bij een p < 0,05.
 
 # Rapportage
 De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal EC in het tweede jaar is hetzelfde van internationale studenten als van Nederlandse studenten. Uit de resultaten kan afgelezen worden dat er geen statistisch significant verschil is tussen het aantal studiepunten van internationale studenten als van Nederlandse studenten. *W* = TEST << 0,05.  

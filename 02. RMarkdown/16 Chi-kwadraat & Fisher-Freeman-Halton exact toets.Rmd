@@ -54,10 +54,14 @@ colnames (Bsa_kt_n10) <- Landen_instroom
 <!-- ## /BLOK: Data-aanmaken.R -->
 
 # Toepassing
+Gebruikt de *Fisher-Freeman-Halton exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde variabelen, waarin één of beide variabelen meer dan twee categorieën hebben; m x n tabel. De *Fisher-Freeman-Halton exact toets* is een uitbreiding van de *Fisher's exact toets* die gebruikt wordt om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde binaire variabelen; 2x2 tabel.[^1]
 
 # Onderwijscasus
+De opleidingsdirecteur van de Bachelor Anthropologie vraagt zich af wat de invloed is van de instroom van internationale studenten. Krijgen studenten uit bepaalde landen vaker een positief BSA dan studenten uit andere landen? Internationale studenten zijn ‘studenten met een buitenlandse vooropleiding of een opleiding van een Europese school’. 
 
-# Assumpties
+H~0~: De verhouding wel of geen positief BSA is onder de studenten van de Bachelor Anthropologie hetzelfde voor studenten uit elk land.  
+
+H~A~: De verhouding wel of geen positief BSA is onder de studenten van de Bachelor Anthropologie anders voor een groep voor studenten uit elk land.  
 
 # Uitvoering in R
 Er is een dataset (`Bsa_kt`) ingeladen over het BSA per instroomland van de faculteit Sociale Wetenschappen.
@@ -87,7 +91,10 @@ fisher.test(Bsa_kt_n10, simulate.p.value = TRUE)
 fisher.test(Bsa_kt, simulate.p.value = TRUE)
 ```
 <!-- ## /BLOK: Fisher-Freeman-Halton-exact-toets-->
-
-# Toelichting op de output
+* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^10]
+*
 
 # Rapportage
+
+[^1]: Van Geloven, N. & Holman, R. (6 mei 2016). *Fisher's exact toets* Co-Auteur	dr. R. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Fisher%27s_exact_toets).
+[^10]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.

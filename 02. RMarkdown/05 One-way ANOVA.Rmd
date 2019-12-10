@@ -145,7 +145,7 @@ levels(Reistijd_per_opleiding$Opleiding)
 ```
 <!-- ## /BLOK: Data-bekijken2.R -->
 
-Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. 
+Selecteer de drie groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. 
 <!-- ## BLOK: Data-selecteren.R -->
 ```{r data selecteren}
 Reistijd_ATC <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding == "Arabische Taal en Cultuur"]
@@ -156,8 +156,8 @@ Reistijd_GSC <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding
 
 Om meer inzicht te krijgen in de data, inspecteer de data met `M()`en `sd()`. 
 
-<div class ="col3">
-
+<div class ="col-container">
+  <div class = "col">
 <!-- ## BLOK: Data-beschrijven-1.R -->
 ```{r Data beschrijven 1, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie ATC
@@ -166,12 +166,8 @@ mean(Reistijd_ATC)
 sd(Reistijd_ATC)
 ```
 <!-- ## /BLOK: Data-beschrijven-1.R -->
-```{r data beschrijven als object 1, include=FALSE, echo=TRUE}
-vM_ATC <- Round_and_format(mean(Reistijd_ATC))
-vSD_ATC <- Round_and_format(sd(Reistijd_ATC))
-vN_ATC <- Round_and_format(length(Reistijd_ATC))
-```
-
+  </div>
+  <div class ="col">
 <!-- ## BLOK: Data-beschrijven-2.R -->
 ```{r Data beschrijven 2, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie 2010
@@ -180,11 +176,8 @@ mean(Reistijd_FIL)
 sd(Reistijd_FIL)
 ```
 <!-- ## /BLOK: Data-beschrijven-2.R -->
-```{r data beschrijven als object 2, include=FALSE, echo=TRUE}
-vM_FIL <- Round_and_format(mean(Reistijd_FIL))
-vSD_FIL <-Round_and_format(sd(Reistijd_FIL))
-vN_FIL <- Round_and_format(length(Reistijd_FIL))
-```
+  </div>
+  <div class ="col">
 <!-- ## BLOK: Data-beschrijven-3.R -->
 ```{r Data beschrijven 3, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie 2010
@@ -193,6 +186,18 @@ mean(Reistijd_GSC)
 sd(Reistijd_GSC)
 ```
 <!-- ## /BLOK: Data-beschrijven-3.R -->
+  </div>
+</div>
+```{r data beschrijven als object 1, include=FALSE, echo=TRUE}
+vM_ATC <- Round_and_format(mean(Reistijd_ATC))
+vSD_ATC <- Round_and_format(sd(Reistijd_ATC))
+vN_ATC <- Round_and_format(length(Reistijd_ATC))
+```
+```{r data beschrijven als object 2, include=FALSE, echo=TRUE}
+vM_FIL <- Round_and_format(mean(Reistijd_FIL))
+vSD_FIL <-Round_and_format(sd(Reistijd_FIL))
+vN_FIL <- Round_and_format(length(Reistijd_FIL))
+```
 ```{r data beschrijven als object 3, include=FALSE, echo=TRUE}
 vM_GSC <- Round_and_format(mean(Reistijd_GSC))
 vSD_GSC <-Round_and_format(sd(Reistijd_GSC))
@@ -232,7 +237,8 @@ De opleidingen Geschiedenis en Arabische taal en Cultuur laten een Bell Curve zi
 Gebruik `qqnorm()` en `qqline()`. Gebruik `pch = 1`om kleine cirkels als datapunten te gebruiken.
 
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is.
-<div class ="col3">
+<div class = "col-container">
+  <div class="col">
 <!-- ## BLOK: QQplot1.R -->
 ```{r qqplot atc}
 qqnorm(
@@ -243,6 +249,8 @@ qqnorm(
 qqline(Reistijd_ATC)
 ```
 <!-- ## /BLOK: QQplot1.R -->
+  <div class = "col">
+  </div>
 <!-- ## BLOK: QQplot2.R -->
 ```{r qqplot fil}
 qqnorm(
@@ -253,6 +261,8 @@ qqnorm(
 qqline(Reistijd_FIL)
 ```
 <!-- ## /BLOK: QQplot2.R -->
+  <div class = "col">
+  </div>
 <!-- ## BLOK: QQplot3.R -->
 ```{r qqplot gsc}
 qqnorm(
@@ -263,6 +273,7 @@ qqnorm(
 qqline(Reistijd_GSC)
 ```
 <!-- ## BLOK: QQplot3.R -->
+  </div>
 </div>
 
 Bij de Q-Q plot van de reistijd van studenten Geschiedenis liggen de meeste punten op de lijn behalve bij de uiteinden. De cirkels van de Q-Q plot van studenten Arabische Taal en Cultuur en studenten Filosofie liggen net naast de lijn. De discrepantie is minimaal, vermoedelijk zijn de data normaal verdeeld.
@@ -291,15 +302,30 @@ library("nortest")
 ```
 <!-- ## /BLOK: Library-nortest.R -->
 
-<div class="col3">
-<!-- ## BLOK: Lilliefors-test.R -->
-```{r Kolmogorov-Smirnov Test, warning=FALSE}
+<div class="col-container"> 
+  <div class="col">
+<!-- ## BLOK: Lilliefors-test-1.R -->
+```{r Lilliefors Test-1, warning=FALSE}
 lillie.test(Reistijd_ATC)
+```
+<!-- ## BLOK: Lilliefors-test-1.R -->
+  </div>
+  <div class = "col">
+<!-- ## BLOK: Lilliefors-test-2.R -->
+```{r Lilliefors Test-2, warning=FALSE}
 lillie.test(Reistijd_FIL)
+```
+<!-- ## BLOK: Lilliefors-test-2.R -->
+  </div>
+  <div class = "col">
+<!-- ## BLOK: Lilliefors-test-3.R -->
+```{r Lilliefors Test-3, warning=FALSE}
 lillie.test(Reistijd_GSC)
 ```
-<!-- ## /BLOK: Lilliefors-test.R -->
+<!-- ## /BLOK: Lilliefors-test-3.R -->
+  </div>
 </div>
+
 De p-waarde is *p* > 0,05, er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one-way ANOVA* kan uitgevoerd worden.
 
 ### Shapiro-Wilk Test
@@ -307,7 +333,7 @@ De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test*
 
 <div class="col-container"> 
   <div class="col">
-  <!-- ## BLOK: Shapiro-Wilk-test-3.R -->
+<!-- ## BLOK: Shapiro-Wilk-test-3.R -->
 ``` {r Shapiro-Wilk Test-3, warning=FALSE}
 shapiro.test(Reistijd_GSC)
 ```

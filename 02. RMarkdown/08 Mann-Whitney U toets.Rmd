@@ -90,7 +90,7 @@ tail(Punten_jaar2)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
 
-TEST MEDIAAN
+TEST MEDIAAN Q1 en Q3 
 
 
 ## Mann-Whitney U toets

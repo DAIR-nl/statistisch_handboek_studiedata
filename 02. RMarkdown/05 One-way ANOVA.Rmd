@@ -203,7 +203,7 @@ vM_GSC <- Round_and_format(mean(Reistijd_GSC))
 vSD_GSC <-Round_and_format(sd(Reistijd_GSC))
 vN_GSC <- Round_and_format(length(Reistijd_GSC))
 ```
-</div>
+
 
 * Gemiddelde reistijd Arabische Taal en Cultuur (standaarddeviatie): `r vM_ATC` (`r vSD_ATC`). *n* = `r vN_ATC`  
 * Gemiddelde reistijd Filosofie (standaarddeviatie): `r vM_FIL` (`r vSD_FIL`). *n* = `r vN_FIL`.

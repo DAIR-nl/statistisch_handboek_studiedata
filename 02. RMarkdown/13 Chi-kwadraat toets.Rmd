@@ -86,16 +86,12 @@ Er is een dataset ingeladen over de uitval van studenten met een functiebeperkin
 <!-- ## BLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
 ## Eerste 6 observaties
-head(Uitval_functiebeperking)
-
-## Laatste 6 observaties
-tail(Uitval_functiebeperking)
+print(Uitval_functiebeperking)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
 
 ## Chi-kwadraat toets
-De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel gelijk is gebleven.  
-Gebruik `chisq.test()` op een kruistabel.  
+De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel gelijk is gebleven. Gebruik `chisq.test()` op een kruistabel.  
 <!-- ## BLOK: Chi2-toets -->
 ```{r chi2}
 chisq.test(Uitval_functiebeperking)
@@ -114,8 +110,16 @@ vDF <- Chi2$parameter
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen.[^6]  
 
 ## Fisher's exact toets
-De *Fisher's exact toets* wordt uitgevoerd om de vraag te beantwoorden of de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel gelijk is gebleven.   
-Er is een dataset ingeladen `Uitval_functiebeperking_n43`, alle groepen hebben een laag aantal per cel, variërend van 5 tot 16.
+De *Fisher's exact toets* wordt uitgevoerd om de vraag te beantwoorden of de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel gelijk is gebleven. 
+
+Er is een steekproef van `Uitval_functiebeperking` ingeladen genaamd `Uitval_functiebeperking_n43`.
+<!-- ## BLOK: data-bekijken-n43 -->
+```{r data bekijken n43}
+print(Uitval_functiebeperking_n43)
+```
+<!-- ## /BLOK: data-bekijken-n43 -->
+
+Alle groepen hebben een laag aantal per cel, variërend van 5 tot 16. De *Fisher's exact toets* kan uitgevoerd worden.
 
 <!-- ## BLOK: Fishers-Exact-toets -->
 ```{r fishers exact}

@@ -187,7 +187,7 @@ vK_P <- Round_and_format(Ktest$p.value)
 
 ## Post-hoc toets: Mann-Whitney U toets
 Om te weten welke groepen verschillen wordt de *Mann-Whitney U toets* uitgevoerd, ook wel *Wilcoxon rank-sum* genoemd.[^7] Gebruik hierbij de `pairwise.wilcox.test()`. 
-Pas de *Bonferroni correctie* toe, om te corrigeren voor dat er meerdere toetsen worden uitgevoerd, p.adjust.method = "bonferroni"    
+Pas de *Bonferroni correctie* toe, om te corrigeren voor dat er meerdere toetsen worden uitgevoerd, `p.adjust.method` = "bonferroni"    
 
 <!-- ## BLOK: Mann-Whitney-U-test-->
 ``` {r pairwise wilcox test}

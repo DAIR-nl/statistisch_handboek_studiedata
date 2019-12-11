@@ -65,7 +65,8 @@ Resultaten_arbeidsrecht$EC_Jaar1[Vooropleiding == "Rechtsgeleerdheid"] <-
 <!-- ## /BLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *Kruskal Wallis toets* om te toetsen of de medianen van meerdere groepen significant verschillen. Een kenmerk van de data is dat deze numeriek en ongepaard is.  
+Gebruik de *Kruskal Wallis toets* om te toetsen of de medianen van één of meerdere groepen significant van elkaar verschillen. Een kenmerk van de data is dat deze numeriek en ongepaard is.  
+
 De *Kruskal Wallis toets* kan een alternatief zijn voor de *one way ANOVA*.[^1] De *Kruskal Wallis toets* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Kruskal Wallis toets* minder onderscheidend vermogen, dan wanneer de *one way ANOVA* uitgevoerd zou worden.[^2]  
 
 # Onderwijscasus
@@ -157,7 +158,7 @@ vQ3_PM <- Round_and_format(x[3,5])
 * Mediaan pre-master: `r vMed_PM`. *n* = `r vN_PM`.
 
 ### Boxplot
-De box geeft de middelste 50% van het aantal studiepunten weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8]  
+De box geeft de middelste 50% van het aantal studiepunten weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters. 
 
 <!-- ## BLOK: Boxplot.R -->
 ``` {r Boxplot}
@@ -202,8 +203,9 @@ pairwise.wilcox.test(Resultaten_arbeidsrecht$EC_Jaar1, Resultaten_arbeidsrecht$V
 * Er is ook geen statistisch significant verschil gevonden tussen Fiscaal Recht (mediaan = `r vMed_FIS`) en de pre-master (mediaan = `r vMed_PM`).
 
 # Rapportage
-De *Kruskal Wallis toets* is uitgevoerd om te toetsen of een vooropleiding bepalend is voor de hoeveelheid studiepunten die een student behaalt tijdens het eerste jaar van de master Arbeidsrecht. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen het aantal studiepunten en het type vooropleiding die de student heeft afgerond. *H*~`r vK_DF`~ ≈ `r vK_Chi2` << 0,05.  
-Met een post-hoc toets is het verschil tussen de vooropleidingen getoetst. Er is een statistisch significant verschil gevonden tussen Rechtsgeleerdheid en de drie andere vooropleidingen. En er is ook een statistisch significant verschil gevonden tussen de pre-master en Notarieel Recht. 
+De *Kruskal Wallis toets* is uitgevoerd om te toetsen of een vooropleiding bepalend is voor de hoeveelheid studiepunten die een student behaalt tijdens het eerste jaar van de master Arbeidsrecht. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen het aantal studiepunten en het type vooropleiding die de student heeft afgerond. *H*~`r vK_DF`~ ≈ `r vK_Chi2` << 0,05.   
+
+Zie tabel voor aantal studenten per opleiding, eerste kwantiel, mediaan en derde kwantiel.   
 
 | Opleiding     | N          | Q1         | M           | Q3          |
 | ------------- | ---------- | ---------- | ----------- | ----------- |
@@ -211,6 +213,8 @@ Met een post-hoc toets is het verschil tussen de vooropleidingen getoetst. Er is
 | Notarieel Recht     | `r vN_NOT` | `r vQ1_NOT` | `r vMed_NOT` | `r vQ3_NOT` |
 | Rechtsgeleerdheid  | `r vN_RCH` | `r vQ1_RCH` | `r vMed_RCH` | `r vQ3_RCH` |
 | Pre-master          | `r vN_PM`| `r vQ1_PM` | `r vMed_PM` | `r vQ3_PM` |
+
+Met een post-hoc toets is het verschil tussen de vooropleidingen getoetst. Er is een statistisch significant verschil gevonden tussen Rechtsgeleerdheid en de drie andere vooropleidingen. En er is ook een statistisch significant verschil gevonden tussen de pre-master en Notarieel Recht. 
 
 De resultaten ondersteunen de conclusie dat de vooropleiding bepalend is voor de hoeveelheid studiepunten die een student behaalt tijdens het eerste jaar van de master Arbeidsrecht. De studenten met Rechtsgeleerdheid als vooropleiding behalen statistisch significant minder studiepunten dan de elk van de drie andere vooropleidingen. Studenten met de vooropleiding Fiscaal Recht (mediaan = `r vMed_FIS`) en Notarieel Recht (mediaan = `r vMed_NOT`) behalen de meeste studiepunten.
 

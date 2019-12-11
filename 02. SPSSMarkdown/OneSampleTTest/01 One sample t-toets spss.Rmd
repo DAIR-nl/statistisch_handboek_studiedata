@@ -23,34 +23,6 @@ paste0(here::here(),"/03. Includes/code/Header.R")
 ```{r opmerking, include=FALSE, eval=FALSE}
 
 ```
-
-
-# Toepassing
-Gebruik de *one sample t-toets* om het gemiddelde van de steekproef te vergelijken met een bekend gemiddelde of norm van de totale populatie.[^1] 
-
-# Onderwijscasus
-<div id = "casus">
-De opleidingsdirecteur van de opleiding Werktuigbouwkunde wil weten of het gemiddelde eindexamencijfer voor de exacte vakken (Wiskunde, Natuurkunde en Scheikunde; WNS) van vwo studenten anders is dan het landelijk gemiddelde (6,8).[^2] Met deze gegevens probeert zij een inschatting te maken van het niveau van de studenten en kan zij bepalen of het curriculum van de inleidende vakken genoeg aansluit bij eerstejaars studenten met een vwo vooropleiding.
-
-H~0~: Het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde is gelijk aan het landelijk gemiddelde: µ = 6,8. 
-
-H~A~: Het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde is anders dan het landelijk gemiddelde: µ ≠ 6,8. 
-</div>
-
-# Assumpties
-Om een valide resultaat te bereiken moeten, voordat de toets kan worden uitgevoerd, de data aan een aantal voorwaarden voldoen. 
-
-## Normaliteit 
-De *t-toets* gaat ervan uit dat de data van de steekproef normaal verdeeld zijn. Ga er bij een n > 100 vanuit dat de t-toets robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgen.[^3] 
-
-Controleer de assumptie van normaliteit met de volgende stappen:  
-1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
-2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^4] [^5]  
-
-Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld zijn.
-
-Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test*.[^6][^7]
-
 # Uitvoering in SPSS
 Er is een dataset ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde: `Gemiddeld_cijfer_WNS` .
 

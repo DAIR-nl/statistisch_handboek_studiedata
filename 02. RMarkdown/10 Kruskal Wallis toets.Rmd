@@ -67,26 +67,26 @@ Resultaten_Arbeidsrecht$EC_Jaar1[Vooropleiding == "Rechtsgeleerdheid"] <-
 # Toepassing
 Gebruik de *Kruskal Wallis toets* om te toetsen of de medianen van de groepen significant van elkaar verschillen. Een kenmerk van de data is dat deze numeriek en ongepaard is.  
 
-De *Kruskal Wallis toets* kan een alternatief zijn voor de *one way ANOVA*.[^1] De *Kruskal Wallis toets* is verdelingsvrij, hierdoor is normaliteit geen assumptie voor de toets. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rangschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Kruskal Wallis toets* minder onderscheidend vermogen, dan wanneer de *one way ANOVA* uitgevoerd zou worden.[^2]  
+De *Kruskal Wallis toets* kan een alternatief zijn voor de *one way ANOVA*.[^1] De *Kruskal Wallis toets* is verdelingsvrij hierdoor is normaliteit geen assumptie voor de toets. Uitbijters hebben minder invloed op het eindresultaat. Ondanks deze voordelen wordt er toch minder vaak voor deze test gekozen. Als de data wel normaal verdeeld zijn, heeft de *Kruskal Wallis toets* minder onderscheidend vermogen dan wanneer de *one way ANOVA* uitgevoerd zou worden.[^2]  
 
 # Onderwijscasus
 <div id="casus">
-De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht is geïnteresseerd in de afstudeersnelheid van zijn studenten. Hij vraagt zich af of het type vooropleiding bepalend is voor hoeveel vakken de studenten afronden in het eerste jaar. Hij kijkt naar de vier meest gangbare vooropleidingen die de studenten doorlopen voordat ze met de Master Arbeidsrecht beginnen; de bachelors: Fiscaal Recht, Notarieel Recht, Rechtsgeleerdheid en de pre-master.  
+De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht is geïnteresseerd in de afstudeersnelheid van zijn studenten. Hij vraagt zich af of het type vooropleiding bepalend is voor hoeveel vakken de studenten afronden in het eerste jaar. Hij kijkt naar de vier meest gangbare vooropleidingen die de studenten doorlopen voordat ze met de Master Arbeidsrecht beginnen, de bachelors Fiscaal Recht, Notarieel Recht, Rechtsgeleerdheid en de pre-master.  
 
-H~0~: De vooropleiding is niet bepalend voor het aantal vakken die de Masterstudenten Arbeidsrecht behalen in het eerste jaar.  
+H~0~: De vooropleiding is niet bepalend voor het aantal vakken dat de Masterstudenten Arbeidsrecht behalen in het eerste jaar.  
 
-H~1~: De vooropleiding is bepalend voor het aantal vakken die de Masterstudenten Arbeidsrecht behalen in het eerste jaar.
+H~1~: De vooropleiding is bepalend voor het aantal vakken dat de Masterstudenten Arbeidsrecht behalen in het eerste jaar.
 </div>
 # Assumpties
-Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De data zijn (semi-)continue [^3], de groepen zijn onafhankelijk van elkaar [^4] en het aantal groepen > 2. Gebruik bij 2 groepen de *Mann-Whitney U toets*.
+Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De data zijn (semi-)continue,[^3] de groepen zijn onafhankelijk van elkaar[^4] en het aantal groepen > 2. Gebruik bij 2 groepen de *Mann-Whitney U toets*.
 
 # Post-hoc toets 
-De *Kruskal Wallis Toets* toetst of één of meerdere groepen verschillen. Welke groep verschilt wordt niet gespecificeerd. Om te bepalen wélke groepen significant verschillen gebruik de *Mann-Whitney U toets* als post-hoc toets. 
+De *Kruskal Wallis Toets* toetst of één of meerdere groepen verschillen. Welke groep verschilt van de andere groepen wordt niet gespecificeerd. Om te bepalen wélke groepen significant verschillen gebruik de *Mann-Whitney U toets* als post-hoc toets. 
 
-Gebruik de *Bonferroni correctie* om Type I fouten te voorkomen. Deze toets past de p-waarde aan door de waarde te vermenigvuldigen met het aantal uitgevoerde toetsen [^5].
+Gebruik de *Bonferroni correctie* om Type I fouten te voorkomen. Deze toets past de p-waarde aan door de waarde te vermenigvuldigen met het aantal uitgevoerde toetsen.[^5]
 
 # Uitvoering
-Er is een dataset ingeladen met studieresultaten van de master arbeidsrecht per vooropleiding: Fiscaal Recht, Notarieel Recht, Rechtsgeleerdheid en de pre-master.
+Er is een dataset ingeladen met studieresultaten van de master Arbeidsrecht per vooropleiding: Fiscaal Recht, Notarieel Recht, Rechtsgeleerdheid en de pre-master.
 
 ## De data bekijken
 <!-- ## BLOK: Data-bekijken.R -->
@@ -167,7 +167,7 @@ boxplot(EC_Jaar1 ~ Vooropleiding, Resultaten_Arbeidsrecht,
 ```
 <!-- ## /BLOK: Boxplot.R -->
 
-Bij de *Kruskal Wallis toets* wordt getoetst of de medianen van meerdere groepen significant verschillen, daarom is het in dit geval ook relevant om te kijken naar het verschil tussen de medianen van de groepen. De mediaan van rechtsgeleerdheid heeft duidelijk minder studiepunten dan Fiscaal Recht en Notarieel Recht. De pre-master ligt er tussen in.
+Bij de *Kruskal Wallis toets* wordt getoetst of de medianen van meerdere groepen significant verschillen, daarom is het in dit geval ook relevant om te kijken naar het verschil tussen de medianen van de groepen. De mediaan van Rechtsgeleerdheid heeft duidelijk minder studiepunten dan Fiscaal Recht en Notarieel Recht. De pre-master ligt er tussen in.
 
 ## Kruskal Wallis toets
 Gebruik `kruskal.test()`. In het eerste argument gebruik je de afhankelijke variabele en de variabele die de groep definiëert. Het tweede argument is het dataframe. 
@@ -183,12 +183,13 @@ vK_Chi2 <- Round_and_format(Ktest$statistic)
 vK_P <- Round_and_format(Ktest$p.value)
 ```
 * *df*: het aantal groepen - 1 = `r vK_DF`  
-* *H*, R noemt het chi-squared omdat het een chi-kwadraat verdeling is: `r vK_Chi2`   
+* *H* volgt bij benadering de verdeling van chi-kwadraat: `r vK_Chi2`   
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen[^6]
 
 ## Post-hoc toets: Mann-Whitney U toets
 Om te weten welke groepen verschillen wordt de *Mann-Whitney U toets* uitgevoerd, ook wel *Wilcoxon rank-sum* genoemd.[^7] Gebruik hierbij de `pairwise.wilcox.test()`. 
-Pas de *Bonferroni correctie* toe, om te corrigeren voor dat er meerdere toetsen worden uitgevoerd met `p.adjust.method = "bonferroni"`    
+
+Pas de *Bonferroni correctie* toe met `p.adjust.method = "bonferroni"`.    
 
 <!-- ## BLOK: Mann-Whitney-U-test-->
 ``` {r pairwise wilcox test}
@@ -196,16 +197,15 @@ pairwise.wilcox.test(Resultaten_Arbeidsrecht$EC_Jaar1, Resultaten_Arbeidsrecht$V
 ```
 <!-- ## /BLOK: Mann-Whitney-U-test-->
 
-* De studenten met Rechtsgeleerdheid als vooropleiding (mediaan = `r vMed_RCH`) scoren statistisch significant lager dan de elk van de drie andere vooropleidingen.
-* Tussen de groepen met vooropleiding pre-master (mediaan = `r vMed_PM`) en Notarieel Recht (mediaan = `r vMed_NOT`) is een statistisch significant verschil gevonden.  
-
-* Er is geen statistisch significant verschil gevonden tussen Fiscaal Recht (mediaan = `r vMed_FIS`) en Notarieel Recht (mediaan = `r vMed_NOT`).
-* Er is ook geen statistisch significant verschil gevonden tussen Fiscaal Recht (mediaan = `r vMed_FIS`) en de pre-master (mediaan = `r vMed_PM`).
+* De studenten met Rechtsgeleerdheid als vooropleiding (mediaan = `r vMed_RCH`) scoren statistisch significant lager dan de drie andere vooropleidingen.  
+* Er is een statistisch significant verschil gevonden tussen de medianen van de pre-master (mediaan = `r vMed_PM`) en Notarieel Recht (mediaan = `r vMed_NOT`).   
+* Er is geen statistisch significant verschil gevonden tussen de medianen van Fiscaal Recht (mediaan = `r vMed_FIS`) en Notarieel Recht (mediaan = `r vMed_NOT`).
+* Er is ook geen statistisch significant verschil gevonden tussen de medianen van Fiscaal Recht (mediaan = `r vMed_FIS`) en de pre-master (mediaan = `r vMed_PM`).
 
 # Rapportage
-De *Kruskal Wallis toets* is uitgevoerd om te toetsen of een vooropleiding bepalend is voor de hoeveelheid studiepunten die een student behaalt tijdens het eerste jaar van de master Arbeidsrecht. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen het aantal studiepunten en het type vooropleiding die de student heeft afgerond. *H*~`r vK_DF`~ ≈ `r vK_Chi2` << 0,05.   
+De *Kruskal Wallis toets* is uitgevoerd om te toetsen of een vooropleiding bepalend is voor de hoeveelheid studiepunten die een student behaalt tijdens het eerste jaar van de master Arbeidsrecht. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen het aantal studiepunten en het type vooropleiding dat de student heeft afgerond. *H*~`r vK_DF`~ ≈ `r vK_Chi2` << 0,05.   
 
-Zie tabel voor aantal studenten per opleiding, eerste kwantiel, mediaan en derde kwantiel.   
+Zie tabel voor aantallen studenten per opleiding, eerste kwantiel, mediaan en derde kwantiel.   
 
 | Opleiding     | N          | Q1         | M           | Q3          |
 | ------------- | ---------- | ---------- | ----------- | ----------- |
@@ -214,9 +214,9 @@ Zie tabel voor aantal studenten per opleiding, eerste kwantiel, mediaan en derde
 | Rechtsgeleerdheid  | `r vN_RCH` | `r vQ1_RCH` | `r vMed_RCH` | `r vQ3_RCH` |
 | Pre-master          | `r vN_PM`| `r vQ1_PM` | `r vMed_PM` | `r vQ3_PM` |
 
-Met een post-hoc toets is het verschil tussen de vooropleidingen getoetst. Er is een statistisch significant verschil gevonden tussen Rechtsgeleerdheid en de drie andere vooropleidingen. En er is ook een statistisch significant verschil gevonden tussen de pre-master en Notarieel Recht. 
+Met een post-hoc toets is het verschil tussen de vooropleidingen getoetst. De studenten met Rechtsgeleerdheid als vooropleiding hebben afgerond (mediaan = `r vMed_RCH`) behalen statistisch significant minder punten dan de drie andere vooropleidingen. Er is een statistisch significant verschil gevonden tussen de behaalde studiepunten van studenten met de vooropleiding Notarieel Recht en de pre-master. 
 
-De resultaten ondersteunen de conclusie dat de vooropleiding bepalend is voor de hoeveelheid studiepunten die een student behaalt tijdens het eerste jaar van de master Arbeidsrecht. De studenten met Rechtsgeleerdheid als vooropleiding behalen statistisch significant minder studiepunten dan de elk van de drie andere vooropleidingen. Studenten met de vooropleiding Fiscaal Recht (mediaan = `r vMed_FIS`) en Notarieel Recht (mediaan = `r vMed_NOT`) behalen de meeste studiepunten.
+De resultaten ondersteunen de conclusie dat de vooropleiding bepalend is voor de hoeveelheid studiepunten die een student behaalt tijdens het eerste jaar van de master Arbeidsrecht. De studenten met Rechtsgeleerdheid als vooropleiding behalen statistisch significant minder studiepunten dan de drie andere vooropleidingen. Studenten met de vooropleiding Fiscaal Recht (mediaan = `r vMed_FIS`) en Notarieel Recht (mediaan = `r vMed_NOT`) behalen de meeste studiepunten.
 
 [^1]: van Geloven, N. (21 maart 2018). *Kruskal Wallis*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis). 
 [^2]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test). 

@@ -20,6 +20,7 @@ output:
 paste0(here::here(),"/03. Includes/code/Header.R")
 ```
 
+<!-- ## BLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -203,17 +204,14 @@ vN_t1 <- Round_and_format(length(Tentamencijfer_na_tutorgesprek))
 * Gemiddeld tentamencijfer na tutorgesprek (standaardafwijking): `r vMean_t1` (`r vSD_t1`). *n* = `r vN_t1`.
 
 ## Visuele inspectie van normaliteit
-Geef normaliteit visueel weer met een histogram, boxplot of Q-Q plot. 
+Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
-<!-- ## BLOK: library-ggplot2.R -->
-```{r library ggplot2}
-library(ggplot2)
-```
-<!-- ## /BLOK: library-ggplot2.R -->
-
 <!-- ## BLOK: Histogram.R -->
-```{r histogram atc}
+```{r histogram}
+## Histogram met ggplot2
+library(ggplot2)
+
 ggplot(Tentamencijfers,
   aes(x = Cijfer)) +
   geom_histogram(aes(y = ..density..),
@@ -222,7 +220,7 @@ ggplot(Tentamencijfers,
                  fill = "#0089CF") +
   facet_wrap(~ Voor_of_na_tutorgesprek) +
   geom_density(alpha = .2, adjust = 1) +
-  ylab("FrequeNtiedichtheid") +
+  ylab("Frequentiedichtheid") +
   scale_x_continuous(
     labels = as.character(seq(1, 10)),
     breaks = seq(1, 10)) +
@@ -230,17 +228,21 @@ ggplot(Tentamencijfers,
               xlim = c(1, 10),
               ratio = 22) +
   labs(title = "Lerarenopleiding tentamencijfers")
+
 ```
 <!-- ## /BLOK: Histogram.R -->
 
 Beide histogrammen laten een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom de gemiddeldes. Opvallend is dat het histogram van voor het tutorgesprek veel waardes in de linkerstaart van de verdeling heeft liggen.  
 
 ### Q-Q plot
-Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.  
+Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
+
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
-<div class ="col2">
-<!-- ## BLOK: QQplot-t1.R -->
-```{r qqplot voor tutor}
+
+<div class = "col-container">
+  <div class="col">
+<!-- ## BLOK: QQplot-1.R -->
+```{r qqplot-1}
 qqnorm(Tentamencijfer_voor_tutorgesprek, 
        pch = 1,
        main = "Normaal Q-Q plot van tentamencijfers voor tutorgesprek",
@@ -248,10 +250,11 @@ qqnorm(Tentamencijfer_voor_tutorgesprek,
        xlab = "Theoretische kwantielen")
 qqline(Tentamencijfer_voor_tutorgesprek)
 ```
-<!-- ## /BLOK: QQplot-t1.R -->
-
-<!-- ## BLOK: QQplot-t2.R -->
-```{r qqplot na tutor}
+<!-- ## /BLOK: QQplot-1.R -->
+  </div>
+  <div class = "col">
+<!-- ## BLOK: QQplot-2.R -->
+```{r qqplot-2}
 qqnorm(Tentamencijfer_na_tutorgesprek, 
        pch = 1,
        main = "Normaal Q-Q plot van tentamencijfers na tutorgesprek",
@@ -259,7 +262,8 @@ qqnorm(Tentamencijfer_na_tutorgesprek,
        xlab = "Theoretische kwantielen")
 qqline(Tentamencijfer_na_tutorgesprek)
 ```
-<!-- ## /BLOK: QQplot-t2.R -->
+<!-- ## /BLOK: QQplot-2.R -->
+  </div>
 </div>
 
 In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. 
@@ -289,15 +293,21 @@ De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standa
 library(nortest)
 ```
 <!-- ## /BLOK: Library-nortest.R -->
-<div class ="col2">
-<!-- ## BLOK: Lilliefors-test.R -->
-``` {r Lilliefors Test, warning=FALSE}
-lillie.test(
-  Tentamencijfer_voor_tutorgesprek)
-lillie.test(
-  Tentamencijfer_na_tutorgesprek)
+<div class="col-container">
+ <div class = "col">
+<!-- ## BLOK: Lilliefors-test-1.R -->
+``` {r Lilliefors Test-1, warning=FALSE}
+lillie.test(Tentamencijfer_voor_tutorgesprek)
 ```
-<!-- ## /BLOK: Lilliefors-test.R -->
+<!-- ## /BLOK: Lilliefors-test-1.R -->
+  </div>
+  <div= "col">
+<!-- ## BLOK: Lilliefors-test-2.R -->
+``` {r Lilliefors Test-2, warning=FALSE}
+lillie.test(Tentamencijfer_na_tutorgesprek)
+```
+<!-- ## /BLOK: Lilliefors-test-2.R -->
+  </div>
 </div>
 
 Van beide groepen is de p > 0,05; er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden. 
@@ -318,18 +328,18 @@ shapiro.test(
 <!-- ## /BLOK: Shapiro-Wilk-test.R -->
 </div>
 
-Voorbeide groepen is de *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden.  
+Voor beide groepen is de *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden.  
 
 ## Gepaarde t-toets
-Gebruik `t.test()` met `paired = TRUE` om een *gepaarde t-toets* uit te voeren. 
-
-Er is een dataset ingeladen met `Tentamencijfer_voor_tutorgesprek` (T~0~) en met `Tentamencijfer_na_tutorgesprek` (T~1~), *n~T0~* = `r vN_t0`, *n~T1~* = `r vN_t1`. 
+Gebruik `t.test()` met `paired = TRUE` om een *gepaarde t-toets* uit te voeren. Gebruik hier weer het hele dataframe `Tentamencijfers`. 
 
 De *gepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het gemiddelde tentamencijfer verandert na een tutorgesprek. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren na een gesprek is er voor gekozen om tweezijdig te toetsen. 
 
 <!-- ## BLOK: T-toets -->
 ```{r T-test}
-t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
+t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, 
+       paired = TRUE,
+       alternative = "two.sided")
 ```
 <!-- ## BLOK: T-toets -->
 ```{r T-test als object, echo = FALSE}

@@ -57,11 +57,14 @@ colnames (Bsa_kt_n10) <- Landen_instroom
 Gebruikt de *Fisher-Freeman-Halton exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde variabelen, waarin één of beide variabelen meer dan twee categorieën hebben; m x n tabel. De *Fisher-Freeman-Halton exact toets* is een uitbreiding van de *Fisher's exact toets* die gebruikt wordt om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde binaire variabelen; 2x2 tabel.[^1]
 
 # Onderwijscasus
-De opleidingsdirecteur van de Bachelor Anthropologie vraagt zich af wat de invloed is van de instroom van internationale studenten. Krijgen studenten uit bepaalde landen vaker een positief BSA dan studenten uit andere landen? Internationale studenten zijn ‘studenten met een buitenlandse vooropleiding of een opleiding van een Europese school’. 
+De opleidingsdirecteur van de Bachelor Anthropologie vraagt zich af wat de invloed is van de instroom van internationale studenten op het behalen van een positief BSA. Krijgen studenten uit bepaalde landen vaker een positief BSA dan studenten uit andere landen? Internationale studenten zijn 'studenten met een buitenlandse vooropleiding of een opleiding van een Europese school’. 
 
-H~0~: De verhouding wel of geen positief BSA is onder de studenten van de Bachelor Anthropologie hetzelfde voor studenten uit elk land.  
+H~0~: De verhouding wel/geen positief BSA is onder de studenten van de Bachelor Anthropologie hetzelfde voor studenten uit elk land.  
 
-H~A~: De verhouding wel of geen positief BSA is onder de studenten van de Bachelor Anthropologie anders voor een groep voor studenten uit elk land.  
+H~A~: De verhouding wel/geen positief BSA is onder de studenten van de Bachelor Anthropologie anders voor een groep voor studenten uit één of meerdere landen.  
+
+# Assumpties
+Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal niveau gemeten en daarmee onafhankelijk van elkaar. 
 
 # Uitvoering in R
 Er is een dataset (`Bsa_kt`) ingeladen over het BSA per instroomland van de faculteit Sociale Wetenschappen.
@@ -74,14 +77,6 @@ print(Bsa_kt)
 barplot(Bsa_kt, beside = TRUE, legend.text = TRUE)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
-
-## Chi-kwadraat toets
-Om `chisq.test()` in R te gebruiken moet de data in een kruistabel staan.
-<!-- ## BLOK: Chi2-toets-->
-```{r collapse=TRUE}
-chisq.test(Bsa_kt)
-```
-<!-- ## /BLOK: Chi2-toets-->
 
 ## Fisher-Freeman-Halton exact toets
 Gebruik `simulate.p.value = TRUE` bij `fisher.test()` om de p-waardes via een Monte Carlo simulatie te laten uitrekenen. Dit is nodig voor tabellen die groter zijn dan 2 bij 2.
@@ -98,3 +93,13 @@ fisher.test(Bsa_kt, simulate.p.value = TRUE)
 
 [^1]: Van Geloven, N. & Holman, R. (6 mei 2016). *Fisher's exact toets* Co-Auteur	dr. R. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Fisher%27s_exact_toets).
 [^10]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.
+
+
+
+## Chi-kwadraat toets
+Om `chisq.test()` in R te gebruiken moet de data in een kruistabel staan.
+<!-- ## BLOK: Chi2-toets-->
+```{r collapse=TRUE}
+chisq.test(Bsa_kt)
+```
+<!-- ## /BLOK: Chi2-toets-->

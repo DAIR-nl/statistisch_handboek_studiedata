@@ -65,9 +65,9 @@ Resultaten_arbeidsrecht$EC_Jaar1[Vooropleiding == "Rechtsgeleerdheid"] <-
 <!-- ## /BLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *Kruskal Wallis toets* om te toetsen of de medianen van één of meerdere groepen significant van elkaar verschillen. Een kenmerk van de data is dat deze numeriek en ongepaard is.  
+Gebruik de *Kruskal Wallis toets* om te toetsen of de medianen van de groepen significant van elkaar verschillen. Een kenmerk van de data is dat deze numeriek en ongepaard is.  
 
-De *Kruskal Wallis toets* kan een alternatief zijn voor de *one way ANOVA*.[^1] De *Kruskal Wallis toets* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Kruskal Wallis toets* minder onderscheidend vermogen, dan wanneer de *one way ANOVA* uitgevoerd zou worden.[^2]  
+De *Kruskal Wallis toets* kan een alternatief zijn voor de *one way ANOVA*.[^1] De *Kruskal Wallis toets* is verdelingsvrij, hierdoor is normaliteit geen assumptie voor de toets. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rangschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Kruskal Wallis toets* minder onderscheidend vermogen, dan wanneer de *one way ANOVA* uitgevoerd zou worden.[^2]  
 
 # Onderwijscasus
 <div id="casus">

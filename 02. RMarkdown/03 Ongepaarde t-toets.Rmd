@@ -160,12 +160,14 @@ vSD_t1 <-Round_and_format(sd(Cijfers_2011))
 * Gemiddeld tentamencijfer 2011 (standaarddeviatie): `r vMean_t1` (`r vSD_t1`). *n* = `r vN_t1`.
 
 ## Visuele inspectie van normaliteit
-Geef de data visueel weer met een histogram, Q-Q plot of boxplot.
+Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
 <!-- ## BLOK: Histogram.R -->
 ```{r histogram}
+## Histogram met ggplot2
 library(ggplot2)
+
 ggplot(Cijfers_gem,
   aes(x = Cijfers)) +
   geom_histogram(aes(y = ..density..),
@@ -183,15 +185,16 @@ ggplot(Cijfers_gem,
               ratio = 22) +
   labs(title = "Taalwetenschap gemiddelde cijfers voor en na de BSA")
 ```
-
 <!-- ## /BLOK: Histogram.R -->
+
 Beide histogrammen laten een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom het gemiddelde.  
 
 ### Q-Q plot
 Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
 
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
-<div class ="col2">
+<div class ="col-container">
+  <div class = "col"> 
 <!-- ## BLOK: QQplot-t1.R -->
 ```{r QQplot-t1}
 qqnorm(Cijfers_2010, pch = 1,
@@ -201,6 +204,8 @@ qqnorm(Cijfers_2010, pch = 1,
 qqline(Cijfers_2010)
 ```
 <!-- ## /BLOK: QQplot-t1.R -->
+  </div>
+  <div class = "col">
 <!-- ## BLOK: QQplot-t2.R -->
 ```{r QQplot-t2}
 qqnorm(Cijfers_2011, pch = 1,
@@ -210,6 +215,7 @@ qqnorm(Cijfers_2011, pch = 1,
 qqline(Cijfers_2011)
 ```
 <!-- ## /BLOK: QQplot-t2.R -->
+  </div>
 </div>
 Bij beide groepen liggen de meeste punten op de lijn behalve bij de uiteinden.
 
@@ -236,32 +242,51 @@ De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standa
 library(nortest)
 ```
 <!-- ## /BLOK: Library-nortest.R -->
-<div class="col2">
-<!-- ## BLOK: Lilliefors-test.R -->
-``` {r Lilliefors Test, warning=FALSE}
+<div class="col-container">
+ <div class = "col">
+<!-- ## BLOK: Lilliefors-test-1.R -->
+``` {r Lilliefors Test-1, warning=FALSE}
 lillie.test(Cijfers_2010)
+```
+<!-- ## /BLOK: Lilliefors-test-1.R -->
+  </div>
+  <div= "col">
+<!-- ## BLOK: Lilliefors-test-2.R -->
+``` {r Lilliefors Test-2, warning=FALSE}
 lillie.test(Cijfers_2011)
 ```
-<!-- ## /BLOK: Lilliefors-test.R -->
+<!-- ## /BLOK: Lilliefors-test-2.R -->
+  </div>
 </div>
 
 Bij deze casus is van beide groepen de p-waarde > 0,05; er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
 
 ### Shapiro-Wilk Test
-De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde < 0,05 is de verdeling van de data statistisch significant verschillend van de normale verdeling.  
+De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven.  Als de p-waarde < 0,05 is de verdeling van de data statistisch significant verschillend van de normale verdeling. 
 
-<div class="col2">
-<!-- ## BLOK: Shapiro-Wilk-test.R -->
-``` {r Shapiro-Wilk Test, warning=FALSE}
+Er zijn 2 steekproeven van `Cijfers_gem` ingeladen: `Cijfers_2010_n30` en `Cijfers_2011_n30`. Beide steekproeven bevatten `r length(Cijfers_2010_n30)` studenten
+<div class = "col-container">
+  <div class="col">
+<!-- ## BLOK: Shapiro-Wilk-test-1.R -->
+``` {r Shapiro-Wilk Test-1, warning=FALSE}
 shapiro.test(Cijfers_2010_n30)
 shapiro.test(Cijfers_2011_n30)
 ```
-<!-- ## /BLOK: Shapiro-Wilk-test.R -->
+<!-- ## /BLOK: Shapiro-Wilk-test-1.R -->
+  </div>
+  <div class="col">
+<!-- ## BLOK: Shapiro-Wilk-test-2.R -->
+``` {r Shapiro-Wilk Test-2, warning=FALSE}
+shapiro.test(Cijfers_2010_n30)
+shapiro.test(Cijfers_2011_n30)
+```
+<!-- ## /BLOK: Shapiro-Wilk-test-2.R -->
+  </div>
 </div>
 De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
 
 ## Test assumpties: Levene's test
-Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. 
+Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. Gebruik hier weer het hele dataframe `Cijfers_gem`.
 
 <!-- ## BLOK: Levenes-test.R -->
 ```{r Levenes test, message=FALSE, warning=FALSE, collapse=TRUE}
@@ -283,11 +308,14 @@ vDF2 <- Round_and_format(L$`Df`[2])
 ## Ongepaarde t-toets
 Voer een ongepaarde `t.test()` uit met `paired = FALSE` en `var.equal = TRUE`. Als uit de *Levene's test* komt dat de groepen verschillen in variantie, gebruik `var.equal = FALSE` .
 
-De *ongepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het gemiddelde tentamencijfer van de opleiding Taalwetenschap na invoering van het BSA veranderd is.
+De *ongepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het het gemiddelde tentamencijfer van de opleiding Taalwetenschap na invoering van het BSA veranderd is. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren na de invoering is er voor gekozen om tweezijdig te toetsen. 
 
 <!-- ## BLOK: T-test.R -->
 ```{r statistische toets}
-t.test(Cijfers ~ Cohort, Cijfers_gem, paired = FALSE, var.equal = TRUE)
+t.test(Cijfers ~ Cohort, Cijfers_gem, 
+       paired = FALSE,
+       alternative = "two.sided",
+       var.equal = TRUE)
 ```
 <!-- ## /BLOK: T-test.R -->
 ```{r T-test als object, echo = FALSE}
@@ -308,7 +336,7 @@ vP <- Round_and_format(t$p.value)
 * Het gemiddelde van de steekproef in 2011: `r vMean_t1`
 
 ### Effectmaat: Cohen's d 
-Wanneer p < 0,05 wordt de effectmaat berekend om te bepalen of de gevonden p-waarde betekenisvol is. In dit voorbeeld is de p > 0,05, dus is een effectmaat irrelevant. Hieronder laten we zien wat de stappen zouden zijn bij een p < 0,05.  
+Wanneer p < 0,05 wordt de effectmaat berekend om te bepalen of de gevonden p-waarde betekenisvol is. In dit voorbeeld is de p > 0,05, dus is een effectmaat irrelevant. Hieronder laten we zien wat de stappen zouden zijn bij een p < 0,05.
 
 Gebruik `cohen.d()` met `paired = FALSE` om het effect te meten.
 <!-- ## BLOK: Cohens-d-test.R -->

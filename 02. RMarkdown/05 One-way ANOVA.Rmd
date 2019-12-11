@@ -210,11 +210,12 @@ vN_GSC <- Round_and_format(length(Reistijd_GSC))
 * Gemiddelde reistijd Geschiedenis (standaarddeviatie): `r vM_GSC` (`r vSD_GSC`). *n* = `r vN_GSC`.
 
 ## Visuele inspectie van normaliteit
-Geef de data visueel weer met een histogram, Q-Q plot of boxplot.
+Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
 <!-- ## BLOK: Histogram.R -->
 ```{r lib ggplot2}
+## Histogram met ggplot2
 library(ggplot2)
 ```
 ```{r histogram atc}
@@ -234,9 +235,9 @@ ggplot(Reistijd_per_opleiding,
 De opleidingen Geschiedenis en Arabische taal en Cultuur laten een Bell Curve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  Filosofie heeft een lagere frequentie bij een reistijd van 40 minuten, dit kan duiden op niet normaal verdeelde data. 
 
 ### Q-Q plot
-Gebruik `qqnorm()` en `qqline()`. Gebruik `pch = 1`om kleine cirkels als datapunten te gebruiken.
+Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
 
-Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is.
+Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 <div class = "col-container">
   <div class="col">
 <!-- ## BLOK: QQplot1.R -->
@@ -249,8 +250,8 @@ qqnorm(
 qqline(Reistijd_ATC)
 ```
 <!-- ## /BLOK: QQplot1.R -->
-  <div class = "col">
   </div>
+  <div class = "col">
 <!-- ## BLOK: QQplot2.R -->
 ```{r qqplot fil}
 qqnorm(
@@ -261,8 +262,8 @@ qqnorm(
 qqline(Reistijd_FIL)
 ```
 <!-- ## /BLOK: QQplot2.R -->
-  <div class = "col">
   </div>
+  <div class = "col">
 <!-- ## BLOK: QQplot3.R -->
 ```{r qqplot gsc}
 qqnorm(
@@ -406,11 +407,15 @@ library(sjstats)
 cohens_f(res.aov)
 ```
 <!-- ## /BLOK: Cohens-f.R --> 
-*f* = . 
+```{r Cohen s F als object, include=FALSE}
+f<-cohens_f(res.aov)
+vCohens_f <- f$cohens.f
+```
+*f* = `r vCohens_f`. 
 De sterkte van het effect van type opleiding op de reistijd is groot. 
 
 ### Effectmaat: eta squared
-Gebruik `EtaSq()` op een ANOVA-object om het effect te meten.
+Gebruik `EtaSq()` op een `aov` om het effect te meten.
 <!-- ## BLOK: Eta-squared.R --> 
 ```{r eta-squared, message = FALSE}
 library(DescTools)

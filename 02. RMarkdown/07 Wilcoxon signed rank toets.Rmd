@@ -37,30 +37,40 @@ RNGkind(sample.kind = "Rounding")
 set.seed(1)
 Mogelijkheden <- c(1616:7000)
 
-p_t1 <- c(
-  rep(0.4,  385),     #1616-2000
-  rep(0.55, 400),     #2000-2400
-  rep(0.7,  400),     #2401-2800
-  rep(0.8,  400),     #2801-3200
-  rep(0.65, 400),     #3201-3600
-  rep(0.45, 400),     #3601-4000
-  rep(0.2,  1000),    #4001-5000
-  rep(0.1,  1000),    #5001-6000
-  rep(0.01, 1000)     #6001-7000
+
+## Maak inkomens t1 aan
+Alumni_inkomens_t1 <- c(
+  replicate(0, 38),
+  sample(500:1800, 80),
+  sample(1635:2000, 20),
+  sample(2000:2200, 70),
+  sample(2200:2600, 120),
+  sample(2600:3600, 40),
+  sample(3600:5000, 10),
+  sample(5000:15000, 3)
 )
-Jaarlijks_inkomen_t1 <- replicate(307, 13*(sample(Mogelijkheden, 1, replace=TRUE, p_t1)))
+Alumni_inkomens_t1 <- unlist(Alumni_inkomens_t1)
+Alumni_inkomens_t1 <- sort(Alumni_inkomens_t1)
 
+## Maak inkomens t5 op basis van opslag over t1
+Promotie_mogelijkheden <- c(0, 100, 200, 400, 1000, -50, -100, -200)
+#Weging               <- c(400, 400,  200,   100,  10,  200,   100,    50)
+Opslag <- sample(Promotie_mogelijkheden, length(Alumni_inkomens_t1), replace = TRUE)
+Alumni_inkomens_t5 <- Alumni_inkomens_t1 + Opslag
 
-Promotie_mogelijkheden <- c(0, 650, 1300, 2600, 6500, -650, -1300, -2600)
-Weging               <- c(800, 400,  200,   100,  10,  200,   100,    50)
-Opslag <- sample(Promotie_mogelijkheden, 307, replace=TRUE, Weging)
-Jaarlijks_inkomen_t5 <- Jaarlijks_inkomen_t1 + Opslag
-Studentnr <- 2*sample(3000000:4000000, length(Jaarlijks_inkomen_t1))
-Inkomen<- c(Jaarlijks_inkomen_t1, Jaarlijks_inkomen_t5)
-Datum <- c(replicate(length(Jaarlijks_inkomen_t1), "t1"), (replicate(length(Jaarlijks_inkomen_t5), "t5")))
+## Stel volgorde vast en hussel paargewijs
+volgorde <- sample(1:length(Alumni_inkomens_t1), length(Alumni_inkomens_t1))
+Alumni_inkomens_t1 <- Alumni_inkomens_t1[volgorde]
+Alumni_inkomens_t5 <- Alumni_inkomens_t5[volgorde]
 
+## link studentnummer aan vastgestelde volgorde en maak dataframe
+Studentnr <- 2*sample(3000000:4000000, length(Alumni_inkomens_t1))
+Inkomen<- c(Alumni_inkomens_t1, Alumni_inkomens_t5)
+Datum <- c(replicate(length(Alumni_inkomens_t1), "t1"), (replicate(length(Alumni_inkomens_t5), "t5")))
 Alumni_inkomens <- data.frame(Studentnr, Datum, Inkomen)
 
+## Sorteer op inkomen voor presentatie dataset
+Alumni_inkomens <- Alumni_inkomens[order(Alumni_inkomens$Inkomen, decreasing = TRUE),]
 ```
 <!-- ## /BLOK: Data-aanmaken.R -->
 
@@ -69,7 +79,7 @@ Gebruik de *Wilcoxon signed rank toets* om te toetsen of bij een herhaalde metin
 
 # Onderwijscasus
 <div id ="casus">
-De directeur van de Academie Mens & Maatschappij wil bekijken hoe het inkomen van zijn alumni zich ontwikkeld nadat zij zijn afgestudeerd. Hij bekijkt de inkomens van de alumni 1 jaar na afstuderen en vergelijkt het met de inkomen 5 jaar na afstuderen. 
+De directeur van de Academie Mens & Maatschappij wil bekijken hoe het inkomen van zijn alumni zich ontwikkeld nadat zij zijn afgestudeerd. Hij bekijkt de maandelijke inkomens van de alumni 1 jaar na afstuderen en vergelijkt het met de inkomen 5 jaar na afstuderen. 
 
 H~0~: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd niet veranderd.  
 H~1~: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd veranderd. 
@@ -84,7 +94,7 @@ Beoordelen studenten opleiding X positiever nadat ze met hun tutor hebben gespro
 De data zijn nomimaal, ordinaal of numeriek gemeten. De *Wilcoxon Signed Rank Test* wordt vaak als alternatief gezien voor de *gepaarde t-toets*. De *Wilcoxon Signed Rank Test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data normaal verdeeld zijn heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen, dan wanneer de *gepaarde t-toets* uitgevoerd zou worden.
 
 # Uitvoering
-Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij genaamd `Jaarlijks_inkomen`. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkeld 4 jaar nadat zij afgestudeerd zijn.
+Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij genaamd `Maandelijks_inkomen`. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkeld 4 jaar nadat zij afgestudeerd zijn.
 
 ## De data bekijken
 Bekijk de data door de mediaan en een boxplot op te vragen.
@@ -101,42 +111,62 @@ tail(Alumni_inkomens)
 
 <!-- ## BLOK: Data-selecteren.R -->
 ```{r data selecteren}
-Jaarlijks_inkomen_t1 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Datum == "t1"]
-Jaarlijks_inkomen_t5 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Datum == "t5"]
+Alumni_inkomens_t1 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Datum == "t1"]
+Alumni_inkomens_t5 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Datum == "t5"]
 ```
 
-<div class="col2">
+<div class="col-container">
+  <div class="col">
 <!-- ## BLOK: Data-beschrijven-1.R -->
 ```{r, data beschrijven 1, collapse=TRUE}
-mean(Jaarlijks_inkomen_t1)
-sd(Jaarlijks_inkomen_t1)
-median(Jaarlijks_inkomen_t1)
+length(Alumni_inkomens_t1)
+mean(Alumni_inkomens_t1)
+median(Alumni_inkomens_t1)
 ```
 <!-- ## /BLOK: Data-beschrijven-1.R -->
+  </div>
+  <div class="col">
 <!-- ## BLOK: Data-beschrijven-2.R -->
 ``````{r Data beschrijven 2, collapse=TRUE}
-mean(Jaarlijks_inkomen_t5)
-sd(Jaarlijks_inkomen_t5)
-median(Jaarlijks_inkomen_t5)
+length(Alumni_inkomens_t5)
+mean(Alumni_inkomens_t5)
+median(Alumni_inkomens_t5)
 ```
 <!-- ## /BLOK: Data-beschrijven-2.R -->
+  </div>
 </div>
 
-#### Normaliteit testen
-#Test of de data normaal verdeeld is met een lilliefors-test
-#<!-- BLOK: Library-nortest.R -->
-#```{r library nortest, warning=FALSE}
-# library(nortest)
-#```
-#<!-- /BLOK: Library-nortest.R -->
-#<div class="col2">
-#<!-- BLOK: Lilliefors-test.R -->
-#```{r normaliteitstest, warning=FALSE}
-#lillie.test(Jaarlijks_inkomen_t1)
-#lillie.test(Jaarlijks_inkomen_t5)
-#```
-#<!-- BLOK: Lilliefors-test.R -->
-#</div>
+### Histogram
+<!-- ## BLOK: Histogram.R -->
+```{r histogram}
+## Histogram met ggplot2
+library(ggplot2)
+
+ggplot(Alumni_inkomens,
+  aes(x = Inkomen)) +
+  geom_histogram(binwidth = 500,
+                 color = "grey30",
+                 fill = "#0089CF") +
+  facet_wrap(~ Datum) +
+  geom_density(alpha = .2, adjust = 1) +
+  ylab("Frequentiedichtheid") +
+  scale_x_continuous(
+    labels = as.character(seq(0, 15000, 1000)),
+    breaks = seq(0, 15000, 1000)) + 
+  theme(axis.text.x = element_text(angle = 45)) +
+  labs(title = "Taalwetenschap gemiddelde cijfers voor en na de BSA")
+```
+<!-- ## /BLOK: Histogram.R -->
+
+### Boxplot
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^2] 
+
+<!-- ## BLOK: Boxplot.R -->
+```{r boxplot}
+boxplot(Inkomen ~ Datum, Alumni_inkomens,
+        main = "Maandelijkse inkomens alumni Mens & Maatschappij")
+```
+<!-- ## /BLOK: Boxplot.R -->
 
 ## Wilcoxon signed rank toets
 Voer een Wilcoxon signed rank toets uit met `paired=TRUE`.
@@ -145,14 +175,13 @@ De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de 
 
 <!-- ## BLOK: Wilcoxon-signed-rank-toets.R -->
 ```{r wilcox test}
-wilcox.test(Jaarlijks_inkomen_t5, Jaarlijks_inkomen_t1, paired=TRUE, alternative = "greater")
+wilcox.test(Alumni_inkomens_t5, Alumni_inkomens_t1, paired=TRUE, alternative = "greater")
 ```
 <!-- ## /BLOK: Wilcoxon-signed-rank-toets.R -->
-*
-*
+
 
 # Rapportage
 
 [^1]: van Geloven, N. (25 september2013). *Wilcoxon signed rank toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets).
-
+[^2]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 

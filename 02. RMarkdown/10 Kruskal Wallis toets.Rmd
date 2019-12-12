@@ -115,7 +115,7 @@ Om meer inzicht te krijgen in de data, inspecteer de groepen met `n()`, `median(
 library(dplyr)
 group_by(Resultaten_Arbeidsrecht, Vooropleiding) %>%
   summarise(
-    N = n(),
+    N = length(EC_Jaar1),
     Q1 = quantile(EC_Jaar1)[2], ##de eerste waarde is het minimum, Q1 is dus op plaats 2
     Mediaan = median(EC_Jaar1),
     Q3 = quantile(EC_Jaar1)[4]

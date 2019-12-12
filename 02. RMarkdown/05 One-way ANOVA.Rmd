@@ -154,40 +154,22 @@ Reistijd_GSC <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding
 ```
 <!-- ## /BLOK: Data-selecteren.R -->
 
-Om meer inzicht te krijgen in de data, inspecteer de data met `M()`en `sd()`. 
+Om meer inzicht te krijgen in de data, inspecteer de data met `length()`, `mean()`en `sd()`. 
 
-<div class ="col-container">
-  <div class = "col">
+
 <!-- ## BLOK: Data-beschrijven-1.R -->
-```{r Data beschrijven 1, collapse=TRUE}
-## Aantallen, gemiddelde en standaarddeviatie ATC
-length(Reistijd_ATC)
-mean(Reistijd_ATC)
-sd(Reistijd_ATC)
+```{r Data beschrijven 1}
+## Aantallen, gemiddelde en standaarddeviatie
+library(dplyr)
+group_by(Reistijd_per_opleiding, Opleiding) %>%
+  summarise(
+    N = length(Reistijd),
+    Gemiddelde = mean(Reistijd),
+    Standaardafwijking = sd(Reistijd)
+  )
 ```
 <!-- ## /BLOK: Data-beschrijven-1.R -->
-  </div>
-  <div class ="col">
-<!-- ## BLOK: Data-beschrijven-2.R -->
-```{r Data beschrijven 2, collapse=TRUE}
-## Aantallen, gemiddelde en standaarddeviatie 2010
-length(Reistijd_FIL)
-mean(Reistijd_FIL)
-sd(Reistijd_FIL)
-```
-<!-- ## /BLOK: Data-beschrijven-2.R -->
-  </div>
-  <div class ="col">
-<!-- ## BLOK: Data-beschrijven-3.R -->
-```{r Data beschrijven 3, collapse=TRUE}
-## Aantallen, gemiddelde en standaarddeviatie 2010
-length(Reistijd_GSC)
-mean(Reistijd_GSC)
-sd(Reistijd_GSC)
-```
-<!-- ## /BLOK: Data-beschrijven-3.R -->
-  </div>
-</div>
+
 ```{r data beschrijven als object 1, include=FALSE, echo=TRUE}
 vM_ATC <- Round_and_format(mean(Reistijd_ATC))
 vSD_ATC <- Round_and_format(sd(Reistijd_ATC))
@@ -204,7 +186,6 @@ vSD_GSC <-Round_and_format(sd(Reistijd_GSC))
 vN_GSC <- Round_and_format(length(Reistijd_GSC))
 ```
 
-
 * Gemiddelde reistijd Arabische Taal en Cultuur (standaarddeviatie): `r vM_ATC` (`r vSD_ATC`). *n* = `r vN_ATC`  
 * Gemiddelde reistijd Filosofie (standaarddeviatie): `r vM_FIL` (`r vSD_FIL`). *n* = `r vN_FIL`.
 * Gemiddelde reistijd Geschiedenis (standaarddeviatie): `r vM_GSC` (`r vSD_GSC`). *n* = `r vN_GSC`.
@@ -214,11 +195,10 @@ Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
 <!-- ## BLOK: Histogram.R -->
-```{r lib ggplot2}
-## Histogram met ggplot2
+```{r histogram}
+## Histogram met ggplot
 library(ggplot2)
-```
-```{r histogram atc}
+
 ggplot(Reistijd_per_opleiding,
   aes(x = Reistijd)) +
   geom_histogram(aes(y = ..density..),
@@ -409,7 +389,7 @@ cohens_f(res.aov)
 <!-- ## /BLOK: Cohens-f.R --> 
 ```{r Cohen s F als object, include=FALSE}
 f<-cohens_f(res.aov)
-vCohens_f <- f$cohens.f
+vCohens_f <- Round_and_format(f$cohens.f)
 ```
 *f* = `r vCohens_f`. 
 De sterkte van het effect van type opleiding op de reistijd is groot. 
@@ -422,12 +402,15 @@ library(DescTools)
 EtaSq(res.aov)
 ```
 <!-- ## /BLOK: Eta-squared.R -->
-*η^2^* =  
+```{r eta-squared als object, include = FALSE}
+Esq <- Round_and_format(EtaSq(res.aov)[1])
+```
+*η^2^* = `r Esq`
 De sterkte van het effect van de type opleiding op de reistijd is groot. 
 
 ## Post-hoc toets: Tukey's toets
 Om te bepalen welke van de type opleidingen in reistijd verschillen wordt een post-hoc toets gedaan. Gebruik bij groepen met gelijke variantie de Tukey honestly significant difference test.
-Gebruik `TukeyHSD()` op het ANOVA-object.
+Gebruik `TukeyHSD()` op het ANOVA-object (`aov`).
 
 <!-- ## BLOK: Tukey-HSD.R -->
 ```{r TukeyHSD}

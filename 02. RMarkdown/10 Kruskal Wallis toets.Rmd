@@ -108,7 +108,7 @@ levels(Resultaten_Arbeidsrecht$Vooropleiding)
 ```
 <!-- ## /BLOK: Data-bekijken-2.R -->
 
-Om meer inzicht te krijgen in de data, inspecteer de groepen met `n()`, `median()` en `quantile()`. Groepeer hiervoor eerst met `group_by()`.
+Om meer inzicht te krijgen in de data, inspecteer de groepen met `length()`, `median()` en `quantile()`. Groepeer hiervoor eerst met `group_by()`.
 
 ``` {r data beschrijven, warning=FALSE, message=FALSE}
 ## Aantallen en mediaan

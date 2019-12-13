@@ -1,0 +1,39 @@
+---
+title: "Python runnable in RMarkdown"
+author: "Megiel"
+date: "`r format(Sys.time(), '%d-%m-%Y')`"
+output:
+  html_document:
+    theme: lumen
+  keywords: [statistisch handboek, studiedata]
+---
+
+# Setup
+Je gebruikt het package `reticulate`. Vervolgens gebruik je `use_python(filepath van python)`.
+```{r setup}
+library(reticulate)
+use_python("C:/Users/mkn502/AppData/Local/Programs/Python/Python37")
+```
+Nu kan je python chunks aanmaken met {python} in de chunkbeschrijving
+
+# Test 1
+Je kan packages importeren.
+```{python test pandas}
+import pandas
+a = 1
+print(a)
+```
+
+# Test 2
+De code chunks zijn interoperabiel zijn en worden in 1 python sessie gerund.
+```{python test aanmaken functie}
+def print_test_function(text):
+  print (text)
+
+text = "test 1353"
+```
+
+```{python test interoperabiliteit}
+print_test_function(text)
+```
+

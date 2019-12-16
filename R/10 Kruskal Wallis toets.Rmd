@@ -35,8 +35,6 @@ Round_and_format <- function(x, digits = 2) {
 ## H0 en H1 medianen of gemiddelden, ook in toepassing 
 ## is het wel interessant om gemiddelden te tonen? 
 ## link naar Mann W-U test 
-## Vraag Sandjai en Martijn: Hoe kan het dat Fiscaal Recht en de pre-master niet significant verschillen, terwijl Notarieel Recht en de pre-master wel verschillen.  
-
 
 RNGkind(sample.kind = "Rounding")
 set.seed(8)
@@ -65,25 +63,25 @@ Resultaten_Arbeidsrecht$EC_Jaar1[Vooropleiding == "Rechtsgeleerdheid"] <-
 <!-- ## /BLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *Kruskal Wallis toets* om te toetsen of de medianen van de groepen significant van elkaar verschillen. Een kenmerk van de data is dat deze numeriek en ongepaard is.  
+Gebruik de *Kruskal Wallis toets* om te toetsen of de medianen van de groepen significant van elkaar verschillen.[^1] Een kenmerk van de data is dat deze numeriek en ongepaard is.  
 
-De *Kruskal Wallis toets* kan een alternatief zijn voor de *one way ANOVA*.[^1] De *Kruskal Wallis toets* is verdelingsvrij hierdoor is normaliteit geen assumptie voor de toets. Uitbijters hebben minder invloed op het eindresultaat. Ondanks deze voordelen wordt er toch minder vaak voor deze test gekozen. Als de data wel normaal verdeeld zijn, heeft de *Kruskal Wallis toets* minder onderscheidend vermogen dan wanneer de *one way ANOVA* uitgevoerd zou worden.[^2]  
+De *Kruskal Wallis toets* kan een alternatief zijn voor de *one way ANOVA*.[^2] De *Kruskal Wallis toets* is verdelingsvrij hierdoor is normaliteit geen assumptie voor de toets. Uitbijters hebben minder invloed op het eindresultaat. Ondanks deze voordelen wordt er toch minder vaak voor deze test gekozen. Als de data wel normaal verdeeld zijn, heeft de *Kruskal Wallis toets* minder onderscheidend vermogen dan wanneer de *one way ANOVA* uitgevoerd zou worden.[^3]  
 
 # Onderwijscasus
 <div id="casus">
-De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht is geïnteresseerd in de afstudeersnelheid van zijn studenten. Hij vraagt zich af of het type vooropleiding bepalend is voor hoeveel vakken de studenten afronden in het eerste jaar. Hij kijkt naar de vier meest gangbare vooropleidingen die de studenten doorlopen voordat ze met de Master Arbeidsrecht beginnen, de bachelors Fiscaal Recht, Notarieel Recht, Rechtsgeleerdheid en de pre-master.  
+De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht is geïnteresseerd in de afstudeersnelheid van zijn studenten. Hij vraagt zich af of het type vooropleiding bepalend is voor hoeveel studiepunten de studenten afronden in het eerste jaar. Hij kijkt naar de vier meest gangbare vooropleidingen die de studenten doorlopen voordat ze met de Master Arbeidsrecht beginnen, de bachelors Fiscaal Recht, Notarieel Recht, Rechtsgeleerdheid en de pre-master.  
 
-H~0~: De vooropleiding is niet bepalend voor het aantal vakken dat de Masterstudenten Arbeidsrecht behalen in het eerste jaar.  
+H~0~: De vooropleiding is niet bepalend voor het aantal studiepunten dat de Masterstudenten Arbeidsrecht behalen in het eerste jaar.  
 
-H~1~: De vooropleiding is bepalend voor het aantal vakken dat de Masterstudenten Arbeidsrecht behalen in het eerste jaar.
+H~1~: De vooropleiding is bepalend voor het aantal studiepunten dat de Masterstudenten Arbeidsrecht behalen in het eerste jaar.
 </div>
 # Assumpties
-Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De data zijn (semi-)continue,[^3] de groepen zijn onafhankelijk van elkaar[^4] en het aantal groepen > 2. Gebruik bij 2 groepen de *Mann-Whitney U toets*.
+Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De data zijn (semi-)continue,[^4] de groepen zijn onafhankelijk van elkaar[^5] en het aantal groepen > 2. Gebruik bij 2 groepen de *Mann-Whitney U toets*.
 
 # Post-hoc toets 
 De *Kruskal Wallis Toets* toetst of één of meerdere groepen verschillen. Welke groep verschilt van de andere groepen wordt niet gespecificeerd. Om te bepalen wélke groepen significant verschillen gebruik de *Mann-Whitney U toets* als post-hoc toets. 
 
-Gebruik de *Bonferroni correctie* om Type I fouten te voorkomen. Deze toets past de p-waarde aan door de waarde te vermenigvuldigen met het aantal uitgevoerde toetsen.[^5]
+Gebruik de *Bonferroni correctie* om Type I fouten te voorkomen. Deze toets past de p-waarde aan door de waarde te vermenigvuldigen met het aantal uitgevoerde toetsen.[^6]
 
 # Uitvoering
 Er is een dataset ingeladen met studieresultaten van de master Arbeidsrecht per vooropleiding: Fiscaal Recht, Notarieel Recht, Rechtsgeleerdheid en de pre-master.
@@ -163,7 +161,7 @@ De box geeft de middelste 50% van het aantal studiepunten weer. De zwarte lijn b
 <!-- ## BLOK: Boxplot.R -->
 ``` {r Boxplot}
 boxplot(EC_Jaar1 ~ Vooropleiding, Resultaten_Arbeidsrecht,
-        main = "Gemiddeld aantal EC per vooropleiding van de Master Arbeidsrecht")
+        main = "Aantal EC per vooropleiding van de Master Arbeidsrecht")
 ```
 <!-- ## /BLOK: Boxplot.R -->
 
@@ -183,11 +181,12 @@ vK_Chi2 <- Round_and_format(Ktest$statistic)
 vK_P <- Round_and_format(Ktest$p.value)
 ```
 * *df*: het aantal groepen - 1 = `r vK_DF`  
-* *H* volgt bij benadering de verdeling van chi-kwadraat: `r vK_Chi2`   
-* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen[^6]
+* *H*~3~ = `r vK_Chi2`, p << 0,05  
+* *H* volgt bij benadering de chi-kwadraat verdeling, vandaar dat dit in de output uitgedrukt wordt in chi-kwadraat    
+* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen[^7]
 
 ## Post-hoc toets: Mann-Whitney U toets
-Om te weten welke groepen verschillen wordt de *Mann-Whitney U toets* uitgevoerd, ook wel *Wilcoxon rank-sum* genoemd.[^7] Gebruik hierbij de `pairwise.wilcox.test()`. 
+Gebruik de *Mann-Whitney U toets* als post-hoc toets om te bepalen wélke groepen significant verschillen. De *Mann-Whitney U toets* wordt ook wel de *Wilcoxon rank-sum toets* genoemd.[^8] Gebruik hierbij de `pairwise.wilcox.test()`. 
 
 Pas de *Bonferroni correctie* toe met `p.adjust.method = "bonferroni"`.    
 
@@ -214,14 +213,15 @@ Zie tabel voor aantallen studenten per opleiding, eerste kwantiel, mediaan en de
 | Rechtsgeleerdheid  | `r vN_RCH` | `r vQ1_RCH` | `r vMed_RCH` | `r vQ3_RCH` |
 | Pre-master          | `r vN_PM`| `r vQ1_PM` | `r vMed_PM` | `r vQ3_PM` |
 
-Met een post-hoc toets is het verschil tussen de vooropleidingen getoetst. De studenten met Rechtsgeleerdheid als vooropleiding hebben afgerond (mediaan = `r vMed_RCH`) behalen statistisch significant minder punten dan de drie andere vooropleidingen. Er is een statistisch significant verschil gevonden tussen de behaalde studiepunten van studenten met de vooropleiding Notarieel Recht en de pre-master. 
+Met een post-hoc toets is het verschil tussen de vooropleidingen getoetst. De studenten met Rechtsgeleerdheid als vooropleiding (mediaan = `r vMed_RCH`) behalen statistisch significant minder punten bij de Master Arbeidsrecht, dan de studenten met de vooropleiding Fiscaal Recht of Noratieel Recht of met de pre-master. Er is een statistisch significant verschil gevonden tussen de behaalde studiepunten van studenten met de vooropleiding Notarieel Recht en de pre-master. 
 
-De resultaten ondersteunen de conclusie dat de vooropleiding bepalend is voor de hoeveelheid studiepunten die een student behaalt tijdens het eerste jaar van de master Arbeidsrecht. De studenten met Rechtsgeleerdheid als vooropleiding behalen statistisch significant minder studiepunten dan de drie andere vooropleidingen. Studenten met de vooropleiding Fiscaal Recht (mediaan = `r vMed_FIS`) en Notarieel Recht (mediaan = `r vMed_NOT`) behalen de meeste studiepunten.
+Kortom, de resultaten ondersteunen de conclusie dat de vooropleiding bepalend is voor de hoeveelheid studiepunten die een student behaalt tijdens het eerste jaar van de master Arbeidsrecht. De studenten met Rechtsgeleerdheid als vooropleiding behalen statistisch significant minder studiepunten dan de drie andere vooropleidingen. Studenten met de vooropleiding Fiscaal Recht (mediaan = `r vMed_FIS`) en Notarieel Recht (mediaan = `r vMed_NOT`) behalen de meeste studiepunten.
 
-[^1]: van Geloven, N. (21 maart 2018). *Kruskal Wallis*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis). 
-[^2]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test). 
-[^3]: Semi-continue data wil zeggen dat de data gehele getallen bevat met veel verschillende waardes. Een voorbeeld hiervan is de aanwezigheid van studenten tijdens de jaaropening. Van Geloven, N. (21 November 2017). *KEUZE TOETS*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS).
-[^4]: Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
-[^5]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test).
-[^6]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.
-[^7]: van Geloven, N. (13 maart 2018).  *Mann-Whitney U toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
+[^1]: Bij normaal verdeelde data wordt het gemiddelde gebruikt om het midden van de data aan te geven. Daarentegen kan het gemiddelde sterk beïnvloed worden door extreme data zoals uitbijters. Daarom wordt bij niet normaal verdeelde data de mediaan gebruikt om het midden van de data aan te geven. 
+[^2]: van Geloven, N. (21 maart 2018). *Kruskal Wallis*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis). 
+[^3]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test). 
+[^4]: Semi-continue: de data zijn discreet met zoveel optiemogelijkheden dat de data geanalyseerd kan worden alsof ze continu zijn. Van Geloven, N. (21 November 2017). *KEUZE TOETS*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS).
+[^5]: Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
+[^6]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test).
+[^7]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.
+[^8]: van Geloven, N. (13 maart 2018).  *Mann-Whitney U toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).

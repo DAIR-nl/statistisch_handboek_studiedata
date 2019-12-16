@@ -242,15 +242,16 @@ De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standa
 library(nortest)
 ```
 <!-- ## /BLOK: Library-nortest.R -->
+
 <div class="col-container">
- <div class = "col">
+  <div class = "col">
 <!-- ## BLOK: Lilliefors-test-1.R -->
 ``` {r Lilliefors Test-1, warning=FALSE}
 lillie.test(Cijfers_2010)
 ```
 <!-- ## /BLOK: Lilliefors-test-1.R -->
   </div>
-  <div= "col">
+  <div class = "col">
 <!-- ## BLOK: Lilliefors-test-2.R -->
 ``` {r Lilliefors Test-2, warning=FALSE}
 lillie.test(Cijfers_2011)

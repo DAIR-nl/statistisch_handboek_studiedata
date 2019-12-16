@@ -294,14 +294,14 @@ library(nortest)
 ```
 <!-- ## /BLOK: Library-nortest.R -->
 <div class="col-container">
- <div class = "col">
+  <div class = "col">
 <!-- ## BLOK: Lilliefors-test-1.R -->
 ``` {r Lilliefors Test-1, warning=FALSE}
 lillie.test(Tentamencijfer_voor_tutorgesprek)
 ```
 <!-- ## /BLOK: Lilliefors-test-1.R -->
   </div>
-  <div= "col">
+  <div class = "col">
 <!-- ## BLOK: Lilliefors-test-2.R -->
 ``` {r Lilliefors Test-2, warning=FALSE}
 lillie.test(Tentamencijfer_na_tutorgesprek)
@@ -317,15 +317,23 @@ De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test*
 
 Er zijn 2 steekproeven van `Tentamencijfers` ingeladen: `Tentamencijfer_voor_tutorgesprek_n30` (T~0~) en `Tentamencijfer_na_tutorgesprek_n30` (T~1~), *n~T0~* = `r length(Tentamencijfer_voor_tutorgesprek_n30)` , *n~T1~* = `r length(Tentamencijfer_na_tutorgesprek_n30)` 
 
-<div class ="col2">
-<!-- ## BLOK: Shapiro-Wilk-test.R -->
-``` {r Shapiro-Wilk Test, warning=FALSE}
+<div class ="col-container">
+  <div class ="col">
+<!-- ## BLOK: Shapiro-Wilk-test-1.R -->
+``` {r Shapiro-Wilk Test-1, warning=FALSE}
 shapiro.test(
   Tentamencijfer_voor_tutorgesprek_n30)
+```
+<!-- ## /BLOK: Shapiro-Wilk-test-1.R -->
+  </div>
+  <div class ="col">
+<!-- ## BLOK: Shapiro-Wilk-test-2.R -->
+``` {r Shapiro-Wilk Test-2, warning=FALSE}
 shapiro.test(
   Tentamencijfer_na_tutorgesprek_n30)
 ```
-<!-- ## /BLOK: Shapiro-Wilk-test.R -->
+<!-- ## /BLOK: Shapiro-Wilk-test-2.R -->
+  </div>
 </div>
 
 Voor beide groepen is de *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden.  
@@ -365,7 +373,7 @@ library(effsize)
 cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 ```
 <!-- ## /BLOK: Cohens-d-test.R -->
-```{r var Cohens d, echo = FALSE}
+```{r var Cohens d, include = FALSE}
 d <- cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 vD_waarde <- Round_and_format(d$estimate)
 ```

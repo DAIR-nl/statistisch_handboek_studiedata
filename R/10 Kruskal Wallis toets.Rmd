@@ -217,7 +217,8 @@ Met een post-hoc toets is het verschil tussen de vooropleidingen getoetst. De st
 
 Kortom, de resultaten ondersteunen de conclusie dat de vooropleiding bepalend is voor de hoeveelheid studiepunten die een student behaalt tijdens het eerste jaar van de master Arbeidsrecht. De studenten met Rechtsgeleerdheid als vooropleiding behalen statistisch significant minder studiepunten dan de drie andere vooropleidingen. Studenten met de vooropleiding Fiscaal Recht (mediaan = `r vMed_FIS`) en Notarieel Recht (mediaan = `r vMed_NOT`) behalen de meeste studiepunten.
 
-[^1]: Bij normaal verdeelde data wordt het gemiddelde gebruikt om het midden van de data aan te geven. Daarentegen kan het gemiddelde sterk beïnvloed worden door extreme data zoals uitbijters. Daarom wordt bij niet normaal verdeelde data de mediaan gebruikt om het midden van de data aan te geven. 
+[^1]: Bij normaal verdeelde data wordt het gemiddelde gebruikt om het midden van de data aan te geven. Daarentegen kan het gemiddelde sterk beïnvloed worden door extreme data zoals uitbijters. Daarom wordt bij niet normaal verdeelde data de mediaan vaak gebruikt om het midden van de data aan te geven. 
+
 [^2]: van Geloven, N. (21 maart 2018). *Kruskal Wallis*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis). 
 [^3]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test). 
 [^4]: Semi-continue: de data zijn discreet met zoveel optiemogelijkheden dat de data geanalyseerd kan worden alsof ze continu zijn. Van Geloven, N. (21 November 2017). *KEUZE TOETS*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS).

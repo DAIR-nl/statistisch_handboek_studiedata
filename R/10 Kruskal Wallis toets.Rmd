@@ -102,7 +102,7 @@ De dataset bevat data van studenten van verschillende vooropleidingen. Gebruik `
 <!-- ## BLOK: Data-bekijken-2.R -->
 ```{r data bekijken 2}
 ## Opleidingen in de data aanwezig
-levels(Resultaten_Arbeidsrecht$Vooropleiding)
+unique(Resultaten_Arbeidsrecht$Vooropleiding)
 ```
 <!-- ## /BLOK: Data-bekijken-2.R -->
 
@@ -161,7 +161,8 @@ De box geeft de middelste 50% van het aantal studiepunten weer. De zwarte lijn b
 <!-- ## BLOK: Boxplot.R -->
 ``` {r Boxplot}
 boxplot(EC_Jaar1 ~ Vooropleiding, Resultaten_Arbeidsrecht,
-        main = "Aantal EC per vooropleiding van de Master Arbeidsrecht")
+        main = "Aantal EC per vooropleiding van de Master Arbeidsrecht",
+        ylab = "Aantal EC in jaar 1")
 ```
 <!-- ## /BLOK: Boxplot.R -->
 

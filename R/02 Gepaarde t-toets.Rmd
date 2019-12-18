@@ -289,7 +289,7 @@ boxplot(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers,
 De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer per periode voor de lerarenopleiding. De boxplot en de staarten van T~0~ zijn niet helemaal symmetrisch. Het gaat om een kleine afwijking, daarom is de data vermoedelijk normaal verdeeld. Er zijn een aantal mogelijke uitbijters.[^9] De boxplot van T~1~ ziet er symmetrisch uit. Er zijn geen uitbijters.    
 
 ## Toetsen van normaliteit
-Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Hierbij een toelichting bij twee veel gebruikte toetsen: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
+Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 
 ### Kolmogorov-Smirnov 

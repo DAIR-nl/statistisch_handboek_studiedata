@@ -13,26 +13,11 @@ output:
 ---
 
 <style>
-`r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet_SHHO.css"))`
+`r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
 ```{r header, include = FALSE, echo = TRUE, results='asis'} 
-paste0(here::here(),"/03. Includes/code/Header.R")
-```
-
-```{r functiedefinities,include=FALSE, echo=TRUE}
-library(stringr)
-Round_and_format <- function(x, digits = 2) {
-  x <- as.character(round(x, digits))
-  x <- str_replace(x, "[.]", ",")
-  return(x)
-}
-```
-<!-- ## /BLOK: Functiedefinities.R -->
-
-```{r opmerking, include=FALSE, eval=FALSE}
-# doorlinken naar de Wilcoxon Signed Rank Test
-# linken naar blz transformeren data 
+paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 
 # Toepassing
@@ -77,7 +62,7 @@ Krijg meer inzicht in de dataset door het gemiddelde en de spreiding te bekijken
 Klik op `Analyze` > `Descriptive Statistics` > `Descriptives`. Selecteer de gewenste variabele en plaats deze in het vakje `Variable`. Vink bij options het gemiddelde (`Mean`) en de standaard deviatie (`Std. deviation`) aan en klik op `Continue`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
 
 <!-- ## BLOK: Data-beschrijven.SPSS -->
-```{r de data bekijken, eval=FALSE}
+```{r data bekijken, eval=FALSE}
 * Gemiddelde en standaarddeviatie.
 DESCRIPTIVES VARIABLES=Cijfer
   /STATISTICS=MEAN STDDEV.
@@ -88,9 +73,9 @@ DESCRIPTIVES VARIABLES=Cijfer
 
 * Gemiddeld Cijfer (standaardafwijking): 6,94 (1,55). *n* = 468.
 
-Selecteer beide groepen en sla deze op in een variabele om deze makkelijker aan te kunnen roepen. Klik op `Transform` > `Compute variable...`. Vul bij `Target Variable:` de nieuwe naam in (in dit geval Tentamencijfer_voor_tutorgesprek of Tentamentcijfer_na_tutorgesprek) en de waarde van deze nieuwe variabele bij .. Om een conditie aan de variabele toe te voegen klik op `if` en seleceteer `Include if case satisfies condition:`. Vul vervolgens de gewenste conditie in (in dit geval: Voor_of_na_tutorgesprek = 1 of = 2). Klik op `OK` om de variabele toe te voegen aan de dataset. 
+Selecteer beide groepen en sla deze op in een variabele om deze makkelijker aan te kunnen roepen. Klik op `Transform` > `Compute variable...`. Vul bij `Target Variable:` de nieuwe naam in (in dit geval *Tentamencijfer_voor_tutorgesprek* of *Tentamentcijfer_na_tutorgesprek*) en de waarde van deze nieuwe variabele bij .. Om een conditie aan de variabele toe te voegen klik op `if` en seleceteer `Include if case satisfies condition:`. Vul vervolgens de gewenste conditie in (in dit geval: *Voor_of_na_tutorgesprek* = 1 of = 2). Klik op `OK` om de variabele toe te voegen aan de dataset. 
 <!-- ## BLOK: Data-selecteren.SPSS -->
-```{r de data bekijken, eval=FALSE}
+```{r nieuwe variabelen, eval=FALSE}
 * Nieuwe variabele aanmaken.
 IF  (Voor_of_na_tutorgesprek = 1) Tentamencijfer_voor_tutorgesprek=Cijfer.
 EXECUTE.
@@ -120,7 +105,7 @@ GRAPH
   /HISTOGRAM=Tentamencijfer_voor_tutorgesprek.
 ```
 <!-- ## /BLOK: Histogram.SPSS -->
-![ ](Histogram1.jpg) ![ ](Histogram2.jpg)
+![ ](Histogram1.jpg){width=60%} ![ ](Histogram2.jpg){width=60%}
 
 Beide histogrammen laten een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom de gemiddeldes. Opvallend is dat het histogram van voor het tutorgesprek veel waardes in de linkerstaart van de verdeling heeft liggen.  
 
@@ -143,20 +128,26 @@ PPLOT
 
 
 <!-- ## /BLOK: QQplot.R -->
-![ ](QQplot1.jpg) ![ ](QQplot2.jpg)
+![ ](QQplot1.jpg){width=48%} ![ ](QQplot2.jpg){width=48%}
 
 In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. 
 
 ### Boxplot
 De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8]  
 
+Klik op `Graphs` > `Legacy Dialogs` > `Boxplot...`. Kies vervolgens voor `Simple`. Kies voor `Summaries of for groups of cases` en klik op `Define`.  Selecteer de gewenste variabele(n), plaats de afhankelijke variabelen in het vakje `Variable` en de variabelen waarop gegroepeerd moet worden in het vakje `Category Axis`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
+
 <!-- ## BLOK: Boxplot.R -->
-``` {r Boxplot}
-## Boxplot
-boxplot(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers,
-        main = "Boxplot van tentamencijfers lerarenopleiding")
+``` {r boxplot, eval=FALSE}
+* Boxplot.
+EXAMINE VARIABLES=Cijfer BY Voor_of_na_tutorgesprek
+  /PLOT=BOXPLOT
+  /STATISTICS=NONE
+  /NOTOTAL.
 ```
+
 <!-- ## /BLOK: Boxplot.R -->
+![ ](Boxplot.jpg)
 
 De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer per periode voor de lerarenopleiding. De boxplot en de staarten van T~0~ zijn niet helemaal symmetrisch. Het gaat om een kleine afwijking, daarom is de data vermoedelijk normaal verdeeld. Er zijn een aantal mogelijke uitbijters. De boxplot van T~1~ ziet er symmetrisch uit. Er zijn geen uitbijters.[^9]    
 
@@ -167,91 +158,81 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst 
 ### Kolmogorov-Smirnov 
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
-<!-- ## BLOK: Library-nortest.R -->
-```{r library nortest, warning=FALSE}
-library(nortest)
-```
-<!-- ## /BLOK: Library-nortest.R -->
-<div class ="col2">
+
+Klik op `Analyze` > `Nonparametric Tests` > `Legacy Dialogs` > `1-Sample K-S...`. Selecteer de gewenste variabele(n) en plaats deze in het vakje `Test Variable List`. Vink bij `Test Distribution` het vakje voor `Normal` aan. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
+
 <!-- ## BLOK: Lilliefors-test.R -->
-``` {r Lilliefors Test, warning=FALSE}
-lillie.test(
-  Tentamencijfer_voor_tutorgesprek)
-lillie.test(
-  Tentamencijfer_na_tutorgesprek)
+```{r Kolmogorov-Smirnov Test, eval=FALSE}
+* Kolmogorov-Smirnov test.
+NPAR TESTS
+  /K-S(NORMAL)=Tentamencijfer_voor_tutorgesprek Tentamencijfer_na_tutorgesprek
+  /MISSING ANALYSIS.
 ```
-<!-- ## /BLOK: Lilliefors-test.R -->
-</div>
+
+<!-- ## /BLOK: Kolmogorov-Smirnov-test.R -->
+![ ](Output_KS.jpg)
+
+Kijk voor het  verschil naar `Asymp. Sig. (2-tailed)`.
 
 Van beide groepen is de p > 0,05; er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden. 
 
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
 
-Er zijn 2 steekproeven van `Tentamencijfers` ingeladen: `Tentamencijfer_voor_tutorgesprek_n30` (T~0~) en `Tentamencijfer_na_tutorgesprek_n30` (T~1~), *n~T0~* = `r length(Tentamencijfer_voor_tutorgesprek_n30)` , *n~T1~* = `r length(Tentamencijfer_na_tutorgesprek_n30)` 
+Er zijn 2 steekproeven van `Tentamencijfers` ingeladen: `Tentamencijfer_voor_tutorgesprek_n30` (T~0~) en `Tentamencijfer_na_tutorgesprek_n30` (T~1~), *n~T0~* = 30, *n~T1~* = 30 
 
-<div class ="col2">
+Klik op `Analyze` > `Descriptive Statistics` > `Explore...`. Selecteer de gewenste variabele(n) en plaats deze in het vakje `Test Variable List`. Vink bij `Plots` het vakje voor `Normality plots with tests` aan en klik op `Continue`. Vink bij `Display` het vakje voor `Plots` aan. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten. 
+
 <!-- ## BLOK: Shapiro-Wilk-test.R -->
-``` {r Shapiro-Wilk Test, warning=FALSE}
-shapiro.test(
-  Tentamencijfer_voor_tutorgesprek_n30)
-shapiro.test(
-  Tentamencijfer_na_tutorgesprek_n30)
+``` {r Shapiro-Wilk Test, eval=FALSE}
+* Shapiro-Wilk test.
+EXAMINE VARIABLES=Tentamencijfer_voor_tutorgesprek_n30
+  /PLOT NPPLOT
+  /STATISTICS NONE
+  /CINTERVAL 95
+  /MISSING LISTWISE
+  /NOTOTAL.
 ```
+
 <!-- ## /BLOK: Shapiro-Wilk-test.R -->
-</div>
+![ ](Output_SW1.jpg) ![ ](Output_SW2.jpg) 
 
 Voorbeide groepen is de *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden.  
 
 ## Gepaarde t-toets
-Gebruik `t.test()` met `paired = TRUE` om een *gepaarde t-toets* uit te voeren. 
-
-Er is een dataset ingeladen met `Tentamencijfer_voor_tutorgesprek` (T~0~) en met `Tentamencijfer_na_tutorgesprek` (T~1~), *n~T0~* = `r vN_t0`, *n~T1~* = `r vN_t1`. 
+Gebruik hier weer het hele dataframe `Tentamencijfers`. 
 
 De *gepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het gemiddelde tentamencijfer verandert na een tutorgesprek. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren na een gesprek is er voor gekozen om tweezijdig te toetsen. 
 
-<!-- ## BLOK: T-toets -->
-```{r T-test}
-t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
+Klik op `Analyze` > `Compare Means` > `Paired-Samples T Test...`. Plaats een groep in `Variable1` en de andere groep in `Variable2`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
+
+<!-- ## BLOK: T-test.R -->
+```{r ttest, eval=FALSE}
+* T-test.
+T-TEST PAIRS=Tentamencijfer_voor_tutorgesprek WITH Tentamencijfer_na_tutorgesprek (PAIRED)
+  /CRITERIA=CI(.9500)
+  /MISSING=ANALYSIS.
 ```
-<!-- ## BLOK: T-toets -->
-```{r T-test als object, echo = FALSE}
-t <- t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
-vT_waarde <- Round_and_format(t$statistic)
-vN <- t$parameter+1
-vDF <- t$parameter
-vconf.int1 <- Round_and_format(t$conf.int[1])
-vconf.int2 <- Round_and_format(t$conf.int[2])
-vDiffMean <- Round_and_format(t$estimate*-1)
-```
-* *t* ~`r vDF`~ = `r vT_waarde`, *p* << 0,05
-* Vrijheidsgraden, *df* = *n* -1 = `r vN`-1 = `r vDF`  
+* *t* ~`233`~ = `-9.96`, *p* << 0,05
+* Vrijheidsgraden, *df* = *n* -1 = `234`-1 = `233`  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^10]
-* 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r vconf.int1` en `r vconf.int2`.
-* het absolute verschil tussen de twee groepen: `r vDiffMean` 
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `-0.24` en `-0.16`.
+* het absolute verschil tussen de twee groepen: `0.20` 
 
 ### Effectmaat: Cohen's d
 Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
-<!-- ## BLOK: Cohens-d-test.R -->
-```{r Cohens d}
-library(effsize)
-cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
-```
-<!-- ## /BLOK: Cohens-d-test.R -->
-```{r var Cohens d, echo = FALSE}
-d <- cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
-vD_waarde <- Round_and_format(d$estimate)
-```
-*d* = `r vD_waarde`. De sterkte van het effect van de tutor op het cijfer is minimaal. 
+
+!! Hier is in SPSS geen makkelijke manier voor, het makkelijke is gebruik te maken van de formule dus weet niet of dat er in moet komen... 
+
 
 # Rapportage
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r vMean_t0`, *SD~T0~* = `r vSD_t0`) en het gemiddelde van T~1~ (*M~T1~* =`r vMean_t1`, *SD~T1~* = `r vSD_t1`) is significant, *t* ~`r vDF`~ = `r vT_waarde`, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vconf.int1` tot `r vconf.int2`. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is echter verwaarloosbaar klein, *d* = `r vD_waarde`. 
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `6.83`, *SD~T0~* = `1.66`) en het gemiddelde van T~1~ (*M~T1~* =`7.04`, *SD~T1~* = `1.43`) is significant, *t* ~`233`~ = `-9.96`, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `-.24` tot `-.16`. 
 
 
 | Meting     | N         | M            | SD         |
 | --------   | --------- | ------------ | ---------- |
-| T~0~       | `r vN_t0` | `r vMean_t0` | `r vSD_t0` |
-| T~1~       | `r vN_t1` | `r vMean_t1` | `r vSD_t1` |
+| T~0~       | `234`     | `6.83`       | `1.66`     |
+| T~1~       | `234`     | `7.04`       | `1.43`     |
 
 Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor. Het effect is verwaarloosbaar klein.  
 
@@ -265,3 +246,5 @@ Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een 
 [^8]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 [^9]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
 [^10]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Houdt hierbij rekening met type I en type II fouten.
+
+

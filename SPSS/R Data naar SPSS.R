@@ -50,9 +50,9 @@ Gemiddeld_cijfer_WNS_n30 <- sample(Gemiddeld_cijfer_WNS, 30)
 
 ## Sla dataframes op als .sav
 write_sav(as.data.frame(Gemiddeld_cijfer_WNS), 
-          "02. SPSSMarkdown/Data/Gemiddeld_cijfer_WNS.sav")
+          "SPSS/Data/Gemiddeld_cijfer_WNS.sav")
 write_sav(as.data.frame(Gemiddeld_cijfer_WNS_n30), 
-          "02. SPSSMarkdown/Data/Gemiddeld_cijfer_WNS_n30.sav")
+          "SPSS/Data/Gemiddeld_cijfer_WNS_n30.sav")
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## TOETS 2: GEPAARDE T-TOETS
@@ -63,7 +63,7 @@ RNGkind(sample.kind = "Rounding")
 set.seed(2)
 library(dplyr)
 
-## Maak ruwe data aan
+## Maak ruwe data aan op meerdere decimalen
 mu <- 7.2
 sigma <- 1.5
 Tentamencijfer_na_tutorgesprek <- rnorm(250, mu, sigma)
@@ -78,38 +78,45 @@ Tentamencijfer_voor_tutorgesprek <- rnorm(260, mu, sigma)
 
 Tentamencijfer_voor_tutorgesprek <- 
   Tentamencijfer_voor_tutorgesprek[Tentamencijfer_voor_tutorgesprek <= 10
-                                   & Tentamencijfer_voor_tutorgesprek >= 1]
+                                   & Tentamencijfer_voor_tutorgesprek >= 1]  ##dit maakt de steekproef met hogere mu langer (n) dan de (n van) steekproef met lage mu
+
+## Rond evaluatiecijfers af op 3 decimalen
+Tentamencijfer_na_tutorgesprek <- sapply(Tentamencijfer_na_tutorgesprek, round, 3)
+Tentamencijfer_voor_tutorgesprek <- sapply(Tentamencijfer_voor_tutorgesprek, round, 3)
 
 ## Stel volgorde en lengte van steekproef vast
 volgorde <- sample(1:length(Tentamencijfer_na_tutorgesprek), length(Tentamencijfer_na_tutorgesprek))
 volgorde_n30 <- sample(1:30, 30)
 Verschil_grootte <- length(Tentamencijfer_voor_tutorgesprek) - length(Tentamencijfer_na_tutorgesprek)
 
-## Rond evaluatiecijfers af
-Tentamencijfer_na_tutorgesprek <- sapply(Tentamencijfer_na_tutorgesprek, round, 3)
-Tentamencijfer_voor_tutorgesprek <- sapply(Tentamencijfer_voor_tutorgesprek, round, 3)
-
-## Definiëer lengte in steekproef en hussel paren
+## Definieer steekproeven in lengte en volgorde met gehusselde paren
 Tentamencijfer_na_tutorgesprek <- sort(Tentamencijfer_na_tutorgesprek)
 Tentamencijfer_na_tutorgesprek <- Tentamencijfer_na_tutorgesprek[volgorde]
 Tentamencijfer_voor_tutorgesprek <- sort(Tentamencijfer_voor_tutorgesprek)
-Tentamencijfer_voor_tutorgesprek <- Tentamencijfer_voor_tutorgesprek[sample(-283:-1, Verschil_grootte)]
-Tentamencijfer_voor_tutorgesprek <- Tentamencijfer_voor_tutorgesprek[volgorde]
+Tentamencijfer_voor_tutorgesprek <- 
+  Tentamencijfer_voor_tutorgesprek[sample(-283:-1, Verschil_grootte)] ##verwijder aantal verschil n op random index
+Tentamencijfer_voor_tutorgesprek <- Tentamencijfer_voor_tutorgesprek[volgorde] 
 
+## Definieer groeperingsvecto en studentnr
 Voor_of_na_tutorgesprek <- c(
   replicate(length(Tentamencijfer_voor_tutorgesprek), "voor"), 
   replicate(length(Tentamencijfer_na_tutorgesprek), "na"))
-studentnr <- c(replicate(2, sample(300000:400000, (length(Voor_of_na_tutorgesprek)/2))))
+studentnr <-sample(300000:400000, (length(Tentamencijfer_voor_tutorgesprek)))
+studentnr <- c(studentnr, studentnr)
+
+## Voeg cijfers samen en in data.frame
 Cijfer <- c(Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgesprek)
-
 Tentamencijfers <- data.frame(studentnr, Cijfer, Voor_of_na_tutorgesprek)
+Tentamencijfers <- Tentamencijfers[order(Tentamencijfers$studentnr),]
 
-## Stel de volgorde van de factor vast
+## verander de de vector in een factor
 Tentamencijfers <- 
   mutate(Tentamencijfers, 
          Voor_of_na_tutorgesprek =
            factor(Voor_of_na_tutorgesprek, levels = c("voor", "na")))
 
+
+## maak korte (n=30) datasets
 mu <- 7.2
 sigma <- 1.2
 Tentamencijfer_voor_tutorgesprek_n30 <- rnorm(30, mu, sigma)
@@ -133,7 +140,11 @@ Tentamencijfer_na_tutorgesprek_n30 <- Tentamencijfer_na_tutorgesprek_n30[volgord
 
 ## Sla dataframes op als .sav
 write_sav(Tentamencijfers, 
-          "02. SPSSMarkdown/Data/Tentamencijfers.sav")
+          "SPSS/Data/Tentamencijfers.sav")
+write_sav(as.data.frame(Tentamencijfer_voor_tutorgesprek_n30), 
+          "SPSS/Data/Tentamencijfer_voor_tutorgesprek_n30.sav")
+write_sav(as.data.frame(Tentamencijfer_na_tutorgesprek_n30), 
+          "SPSS/Data/Tentamencijfer_na_tutorgesprek_n30.sav")
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## TOETS 3: ONGEPAARDE T-TOETS
@@ -173,7 +184,11 @@ Cijfers_gem <- data.frame(Cijfers, Cohort)
 
 ## Sla dataframes op als .sav
 write_sav(Cijfers_gem, 
-          "02. SPSSMarkdown/Data/Cijfers_gem.sav")
+          "SPSS/Data/Cijfers_gem.sav")
+write_sav(as.data.frame(Cijfers_2010_n30), 
+          "SPSS/Data/Cijfers_2010_n30.sav")
+write_sav(as.data.frame(Cijfers_2011_n30), 
+          "SPSS/Data/Cijfers_2011_n30.sav")
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## TOETS 5: ONE WAY ANOVA
@@ -213,7 +228,7 @@ Cijfers_gem <- data.frame(Cijfers, Cohort)
 
 ## Sla dataframes op als .sav
 write_sav(Cijfers_gem, 
-          "02. SPSSMarkdown/Data/Cijfers_gem.sav")
+          "SPSS/Data/Cijfers_gem.sav")
 
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -247,7 +262,7 @@ Resultaten_arbeidsrecht$Ec_jaar1[Vooropleiding == "Rechtsgeleerdheid"] <-
 
 ## Sla dataframes op als .sav
 write_sav(Resultaten_arbeidsrecht, 
-          "02. SPSSMarkdown/Data/Resultaten_arbeidsrecht.sav")
+          "SPSS/Data/Resultaten_arbeidsrecht.sav")
 
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -267,7 +282,7 @@ colnames(Uitval_functiebeperking_n43) <- c("Wel_uitval", "Geen_uitval")
 
 ## Sla dataframes op als .sav
 write_sav(as.data.frame(Uitval_functiebeperking), 
-          "02. SPSSMarkdown/Data/Uitval_functiebeperking.sav")
+          "SPSS/Data/Uitval_functiebeperking.sav")
 write_sav(as.data.frame(Uitval_functiebeperking_n43), 
-          "02. SPSSMarkdown/Data/Uitval_functiebeperking_n43.sav")
+          "SPSS/Data/Uitval_functiebeperking_n43.sav")
 

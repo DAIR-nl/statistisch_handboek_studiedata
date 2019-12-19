@@ -50,22 +50,22 @@ colnames(Uitval_functiebeperking_n43) <- c("Wel uitval", "Geen uitval")
 <!-- ## /BLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *Chi-kwadraat toets* of de *Fisher's exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde binaire variabelen.[^1] In tegenstelling tot de *Chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage frequenties ingezet worden.[^2] De *Fisher's exact toets* is conservatiever dan de *Chi-kwadraat toets*.[^3]   
+Gebruik de *Chi-kwadraat toets* of de *Fisher's exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde binaire variabelen.[^1][^2] In tegenstelling tot de *Chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage aantallen ingezet worden.[^3] De *Fisher's exact toets* is conservatiever dan de *Chi-kwadraat toets*. Dat wil zeggen dat de *Fisher's exact toets* terughoudender is in het benoemen of iets significant is, dan de *Chi-kwadraat toets*.[^4]   
 
 # Onderwijscasus
 <div id = "casus">
 De studentendecaan vraagt zich af of studenten met een functiebeperking door het invoeren van het leenstelsel meer of minder uitvallen dan voor de invoer.
 
-H~0~: Onder de studenten met een functiebeperking is de verhouding wel of geen uitval na de invoering van het leenstelsel gelijk gebleven.
+H~0~: Onder de studenten met een functiebeperking is het percentage uitval na de invoering van het leenstelsel gelijk gebleven.
 
-H~A~: Onder de studenten met een functiebeperking is de verhouding wel of geen uitval na de invoering van het leenstelsel veranderd.
+H~A~: Onder de studenten met een functiebeperking is het percentage uitval na de invoering van het leenstelsel veranderd.
 </div>
 
 # Assumpties
-Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal[^4] niveau gemeten en daarmee onafhankelijk van elkaar. De *Chi-kwadraat toets* heeft specifieke regels wat betreft de groepsgrootte per cel. 
+Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal niveau gemeten[^5] en daarmee onafhankelijk van elkaar. De *Chi-kwadraat toets* heeft specifieke regels wat betreft de groepsgrootte per cel. 
 
 ## Groeps- en celgrootte
-Beide testen maken gebruik van een kruistabel; er zijn twee condities met vier mogelijke opties, zie tabel hieronder.  
+Beide testen maken gebruik van een kruistabel; er zijn twee condities met vier mogelijke opties: zie tabel hieronder.  
 
 |                      | Wel uitval   | Geen uitval |
 | -------------------- | -------------| ------------| 
@@ -76,8 +76,8 @@ Elke cel van het tabel bevat de geobserveerde waarde per groep. Er wordt een ver
 
 * Elke cel van de verwachte waarde > 0. 
 * Als in 20% van de cellen een verwachte waarde van 5 of lager staat, wordt de toets onbetrouwbaar. 
-* In de cellen met de geobserveerde waarde is dat 10 of lager.[^4] 
-* Gebruik de *Fisher’s exact toets* wanneer de aantallen in de cellen lager zijn.[^5] 
+* In de cellen met de geobserveerde waarde is dat 10 of lager.[^6] 
+* Gebruik de *Fisher’s exact toets* wanneer de aantallen in de cellen lager zijn.[^7] 
 
 # Uitvoering 
 Er is een dataset ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. De data `Uitval_functiebeperking` zijn binair: wel of geen uitval. 
@@ -141,10 +141,13 @@ vConf.int2 <- Round_and_format(fish$conf.int[2])
 # Rapportage
 De *Chi-kwadraat toets* is uitgevoerd om te toetsen of studenten met een functiebeperking meer of minder uitvallen sinds de invoering van het leenstelsel. De resultaten ondersteunen de alternatieve hypothese; de verhouding uitval van het aantal studenten met een functiebeperking is na de invoering van het leenstelsel veranderd, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* < 0,05.
  
-[^1]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html.
-[^2]: Van Geloven, N., & Holman, R., (6 mei 2016). *Fisher's exact toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Fisher's_exact_toets).
-[^3]: Universiteit van Amsterdam (13 november 2017). *Chi-square test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Chi-square_test#Assumpties). 
-[^4]: De variabelen zijn op nominaal niveau gemeten, dit betekent automatisch dat er geen ordening tussen de groepen gemaakt kan worden en dat de groepen onafhankelijk van elkaar zijn. Een voorbeeld hiervan zijn de antwoordenmogelijkheden ‘ja’ of ‘nee’. 
-[^5]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
-[^6]: van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets).
+[^1]: Binaire variabelen: twee elkaar uitsluitende waarden, zoals ja of nee, 0 of 1, aan of uit. 
+[^2]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html.
+[^3]: Van Geloven, N., & Holman, R., (6 mei 2016). *Fisher's exact toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Fisher's_exact_toets).
+[^4]: Universiteit van Amsterdam (13 november 2017). *Chi-square test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Chi-square_test#Assumpties). 
+[^5]: Nominaal: een variabele die niet afhankelijk van elkaar zijn en op inhoudelijke basis geordend kan worden. Voorbeelden hiervan zijn geslacht of achternamen. Een binaire variabel is een voorbeeld van een nominale variabel. Binaire variabelen hebben twee mogelijkheden, ja of nee, terwijl nominale variabelen meerdere mogelijkheden hebben. 
+[^6]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
+[^7]: van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets).
+
+
 [^7]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.

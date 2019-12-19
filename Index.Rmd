@@ -22,6 +22,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines("01. Includes/code/Header.R")}
 ```
 
-Hier komt de inleidende tekst
+Met dit handboek wordt een gemeenschappelijk standaard gecreëerd voor het toetsen van onderwijsdata, daarbij de validiteit en betrouwbaarheid van beleidsadviezen te verhogen.   
+Het Statistisch Handboek Hoger Onderwijs is gemaakt door VU Analytics onder de vlag van SURF Versnellingsplan Onderwijsinnovatie met ICT.
 
+De basis voor het handboek is een keuzemodel, waarbij de 19 meest voorkomende toetsen afzonderlijk uitgewerkt zijn. Bij elke toets zit een omschrijving waarvoor een toets gebruikt kan worden, een casus vanuit de onderwijsdata, assumpties behorende bij de toetsen, uitvoering in R, SPSS en Python en hoe het gerapporteerd kan worden in beleidsadviezen. 
 ***

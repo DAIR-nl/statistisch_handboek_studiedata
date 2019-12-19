@@ -220,10 +220,29 @@ T-TEST PAIRS=Tentamencijfer_voor_tutorgesprek WITH Tentamencijfer_na_tutorgespre
 * het absolute verschil tussen de twee groepen: 0.20 
 
 ### Effectmaat: Cohen's d
-Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
+Manier 1
 
-!! Hier is in SPSS geen makkelijke manier voor, het makkelijke is gebruik te maken van de formule dus weet niet of dat er in moet komen... 
+Gebruik de gegevens van de `Group Statistics` tabel van de T-Test om de Cohen's D via de volgende formules te berekenen:
 
+<!-- ## /BLOK: Cohen's D.spss -->
+![ ](CohensD_Formule1.jpg) ![ ](CohensD_Formule2.jpg)
+
+M1 = gemiddelde groep 1 (`Mean`)
+
+M2 = gemiddelde groep 2 (`Mean`)
+
+N1 = grootte groep 1 (`N`)
+
+N2 = grootte groep 2 (`N`)
+
+S~1~^2^ = standaard deviatie groep 1 (`Std. Error Mean`)
+
+S~2~^2^ = standaard deviatie groep 2 (`Std. Error Mean`)
+
+
+Manier 2
+
+Gebruik de gegevens van de `Group Statistics` tabel van de T-Test om de Cohen's D [hier](http://web.cs.dal.ca/~anwar/ds/Excel4.xlsx) te berekenen via excel.
 
 # Rapportage
 Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = 6.83, *SD~T0~* = 1.66) en het gemiddelde van T~1~ (*M~T1~* = 7.04, *SD~T1~* = 1.43) is significant, *t* ~233~ = -9.96, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van -.24 tot -.16. 

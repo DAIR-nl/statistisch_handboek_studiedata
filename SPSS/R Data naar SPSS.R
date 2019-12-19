@@ -195,41 +195,43 @@ write_sav(as.data.frame(Cijfers_2011_n30),
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
 ## Maak dummydata aan
+library(dplyr)
 RNGkind(sample.kind = "Rounding")
-set.seed(1)
+set.seed(3)
 
-mu <- 6.3
-sigma <- 1.2
-Cijfers_2010 <- rnorm(180, mu, sigma)
-Cijfers_2010 <- Cijfers_2010[Cijfers_2010 <= 10 & Cijfers_2010 >= 1]
-Cijfers_2010 <- sapply(Cijfers_2010, round, 3)
+Studiegrootte <- 29
+reistijd_gem <- 35
+sd_gem <- 12
+Reistijd_FIL <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
+namenlijst_fil <- replicate(2.1*Studiegrootte, "Filosofie")
 
-mu <- 6.3
-sigma <- 1.2
-Cijfers_2010_n30 <- rnorm(30, mu, sigma)
-Cijfers_2010_n30 <- Cijfers_2010_n30[Cijfers_2010_n30 <= 10 & Cijfers_2010_n30 >= 1]
-Cijfers_2010_n30 <- sapply(Cijfers_2010_n30, round, 3)
+Studiegrootte <- 23
+reistijd_gem <- 45
+sd_gem <- 13
+Reistijd_ATC <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
+namenlijst_atc <- replicate(2.1*Studiegrootte, "Arabische Taal en Cultuur")
 
-mu <- 6.45
-sigma <- 1.2
-Cijfers_2011 <- rnorm(160, mu, sigma)
-Cijfers_2011 <- Cijfers_2011[Cijfers_2011 <= 10 & Cijfers_2011 >= 1]
-Cijfers_2011 <- sapply(Cijfers_2011, round, 3)
+Studiegrootte <- 71
+reistijd_gem <- 36
+sd_gem <- 11
+Reistijd_GSC <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
+namenlijst_gsc <- replicate(2.1*Studiegrootte, "Geschiedenis")
 
-mu <- 6.45
-sigma <- 1.2
-Cijfers_2011_n30 <- rnorm(30, mu, sigma)
-Cijfers_2011_n30 <- Cijfers_2011_n30[Cijfers_2011_n30 <= 10 & Cijfers_2011_n30 >= 1]
-Cijfers_2011_n30 <- sapply(Cijfers_2011, round, 3)
+Reistijd <- c(Reistijd_ATC, Reistijd_GSC, Reistijd_FIL)
+Opleiding <- c(namenlijst_atc, namenlijst_gsc, namenlijst_fil)
 
-Cijfers <- c(Cijfers_2010, Cijfers_2011)
-Cohort <- c(replicate(180, 2010), replicate(160, 2011))
-Cijfers_gem <- data.frame(Cijfers, Cohort)
+Opleiding <- Opleiding[order(Reistijd)]
+Reistijd <- sort(Reistijd)
 
-## Sla dataframes op als .sav
-write_sav(Cijfers_gem, 
-          "SPSS/Data/Cijfers_gem.sav")
+Reistijd_per_opleiding <- data.frame(Reistijd, Opleiding)
+colnames(Reistijd_per_opleiding) <- c("Reistijd", "Opleiding")
 
+
+Reistijd_per_opleiding <- Reistijd_per_opleiding %>%
+  mutate(Reistijd = if_else(Reistijd < 0, Reistijd*-1, Reistijd))
+
+write_sav(Reistijd_per_opleiding, 
+          "SPSS/Data/Reistijd_per_opleiding.sav")
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## TOETS 10: KRUSKAL-WALLIS TOETS

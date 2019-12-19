@@ -13,11 +13,11 @@ output:
 ---
 
 <style>
-`r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet_SHHO.css"))`
+`r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
 ```{r header, include = FALSE, echo = TRUE, results='asis'} 
-paste0(here::here(),"/03. Includes/code/Header.R")
+paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 
 ```{r opmerking, include=FALSE, eval=FALSE}

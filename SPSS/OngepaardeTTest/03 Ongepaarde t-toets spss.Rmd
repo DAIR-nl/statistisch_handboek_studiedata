@@ -75,7 +75,7 @@ DESCRIPTIVES VARIABLES=Cijfers
 
 * Gemiddeld tentamencijfer (standaarddeviatie): 6.41 (1.16). *n* = 340.
 
-Selecteer beide groepen en sla deze op in een variabele om deze makkelijker aan te kunnen roepen. Klik op `Transform` > `Compute variable...`. Vul bij `Target Variable:` de nieuwe naam in (in dit geval *Cijfers_2010 of Cijfers_2011*) en de waarde van deze nieuwe variabele bij `Numeric Experssion` (in dit geval *Cijfers*). Om een conditie aan de variabele toe te voegen klik op `if` en seleceteer `Include if case satisfies condition:`. Vul vervolgens de gewenste conditie in (in dit geval: *Cohort* = 2010 of = 2011). Klik op `OK` om de variabele toe te voegen aan de dataset. 
+Selecteer beide groepen en sla deze op in een variabele om deze makkelijker aan te kunnen roepen. Klik op `Transform` > `Compute variable...`. Vul bij `Target Variable:` de nieuwe naam in (in dit geval *Cijfers_2010* of *Cijfers_2011*) en de waarde van deze nieuwe variabele bij `Numeric Experssion` (in dit geval *Cijfers*). Om een conditie aan de variabele toe te voegen klik op `if` en seleceteer `Include if case satisfies condition:`. Vul vervolgens de gewenste conditie in (in dit geval: *Cohort* = 2010 of = 2011). Klik op `OK` om de variabele toe te voegen aan de dataset. 
 <!-- ## BLOK: Data-selecteren.SPSS -->
 ```{r nieuwe variabelen, eval=FALSE}
 * Nieuwe variabele aanmaken.
@@ -232,6 +232,8 @@ Kijk voor de Levene's test onder `Levene's Test for Equality of Variances`
 ### Effectmaat: Cohen's d 
 Wanneer p < 0,05 wordt de effectmaat berekend om te bepalen of de gevonden p-waarde betekenisvol is. In dit voorbeeld is de p > 0,05, dus is een effectmaat irrelevant. Hieronder laten we zien wat de stappen zouden zijn bij een p < 0,05.
 
+Manier 1
+
 Maak een gestandaardiseerde variant van de afhankelijke variabele. Klik op `Analyze` > `Descriptives Statistics` > `Descriptives...`. Plaats de afhankelijke variabele in het vakje `Variable(s):` en vink het vakje `Save standardized values as variables` aan. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
 
 Voer vervolgens opnieuw de gepaarde t-test uit zoals hierboven beschreven, selecteer de gestandaardiseerde afhankelijke variabele (gekenmerkt door `Zscore`). De Cohen's D staat onder `Mean Difference` onder `t-test for Equality of Means`, ga hierbij uit van `Equal variances assumed`.
@@ -253,10 +255,30 @@ T-TEST GROUPS=Cohort(2010 2011)
 <!-- ## /BLOK: Cohen's D.spss -->
 ![ ](Output_CohensD.jpg)
 
+Manier 2
+
+Gebruik de gegevens van de `Group Statistics` tabel van de T-Test om de Cohen's D via de volgende formules te berekenen:
+
+<!-- ## /BLOK: Cohen's D.spss -->
+![ ](CohensD_Formule1.jpg) ![ ](CohensD_Formule2.jpg)
+
+M1 = gemiddelde groep 1 (`Mean`)
+
+M2 = gemiddelde groep 2 (`Mean`)
+
+N1 = grootte groep 1 (`N`)
+
+N2 = grootte groep 2 (`N`)
+
+S~1~^2^ = standaard deviatie groep 1 (`Std. Error Mean`)
+
+S~2~^2^ = standaard deviatie groep 2 (`Std. Error Mean`)
+
+Manier 3
+
+Gebruik de gegevens van de `Group Statistics` tabel van de T-Test om de Cohen's D [hier](http://web.cs.dal.ca/~anwar/ds/Excel4.xlsx) te berekenen via excel.
 
 *d* = 0.08. De sterkte van het effect van de tutor op het cijfer is verwaarloosbaar. 
-
-!! Hier is in SPSS geen makkelijkere manier voor, het is dit of gebruik maken van de formule voor Cohen's D 
 
 
 # Rapportage

@@ -13,11 +13,11 @@ output:
 ---
 
 <style>
-`r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet_SHHO.css"))`
+`r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
 ```{r header, include = FALSE, echo = TRUE, results='asis'} 
-paste0(here::here(),"/03. Includes/code/Header.R")
+paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 
 ```{r opmerking, include=FALSE, eval=FALSE}
@@ -184,7 +184,7 @@ De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamen
 De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor de exacte vakken van studenten Werktuigbouwkunde met een vwo vooropleiding hoger ligt dan het landelijk gemiddelde.
 
 ```{r footer, include = FALSE, echo = TRUE, results='asis'} 
-paste0(here::here(),"/03. Includes/code/Footer.R")
+paste0(here::here(),"/01. Includes/code/Footer.R")
 ```
 
 [^1]: van Geloven, N. (25 mei 2016). *T-toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets). 

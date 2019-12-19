@@ -5,5 +5,5 @@ output:
     theme: lumen
     highlight: textmate
     include:
-      after_body: 03. Includes/html/footer.html
-exclude: ["01. Toetsen", "02. PyMarkdown", "02. SPSSMarkdown", "03. Includes", "04. Rapportages", "05. Hulpmiddelen", "06. Test", "10. Python Notebooks","99. Functies en Libraries", "XX. Test", "*.R", "*.csv"]
+      after_body: 01. Includes/html/footer.html
+exclude: ["01. Includes", "02. Rapportages", "03. Test", "99. Functies en Libraries", "Handboek", "Python", "SPSS", "*.R", "*.csv"]

@@ -79,7 +79,7 @@ Substitute_var <- function(placeholder, list_args) {
 
 ## Functie om de Header van de pagina's te maken
 Get_Header <- function() {
-    source(file = "03. Includes/code/Header.R")
+    source(file = "01. Includes/code/Header.R")
 }
 
 ## Functies om strings te trimmen

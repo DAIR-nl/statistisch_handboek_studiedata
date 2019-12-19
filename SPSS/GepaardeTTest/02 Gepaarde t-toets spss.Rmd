@@ -213,11 +213,11 @@ T-TEST PAIRS=Tentamencijfer_voor_tutorgesprek WITH Tentamencijfer_na_tutorgespre
   /CRITERIA=CI(.9500)
   /MISSING=ANALYSIS.
 ```
-* *t* ~`233`~ = `-9.96`, *p* << 0,05
-* Vrijheidsgraden, *df* = *n* -1 = `234`-1 = `233`  
+* *t* ~233~ = -9.96, *p* << 0,05
+* Vrijheidsgraden, *df* = *n* -1 = 234-1 = 233  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^10]
-* 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `-0.24` en `-0.16`.
-* het absolute verschil tussen de twee groepen: `0.20` 
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen -0.24 en -0.16.
+* het absolute verschil tussen de twee groepen: 0.20 
 
 ### Effectmaat: Cohen's d
 Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
@@ -226,13 +226,13 @@ Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
 
 
 # Rapportage
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `6.83`, *SD~T0~* = `1.66`) en het gemiddelde van T~1~ (*M~T1~* =`7.04`, *SD~T1~* = `1.43`) is significant, *t* ~`233`~ = `-9.96`, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `-.24` tot `-.16`. 
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = 6.83, *SD~T0~* = 1.66) en het gemiddelde van T~1~ (*M~T1~* = 7.04, *SD~T1~* = 1.43) is significant, *t* ~233~ = -9.96, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van -.24 tot -.16. 
 
 
 | Meting     | N         | M            | SD         |
 | --------   | --------- | ------------ | ---------- |
-| T~0~       | `234`     | `6.83`       | `1.66`     |
-| T~1~       | `234`     | `7.04`       | `1.43`     |
+| T~0~       | 234       | 6.83         | 1.66       |
+| T~1~       | 234       | 7.04         | 1.43       |
 
 Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor. Het effect is verwaarloosbaar klein.  
 

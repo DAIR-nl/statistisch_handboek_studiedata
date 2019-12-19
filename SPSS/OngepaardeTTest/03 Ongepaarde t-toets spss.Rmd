@@ -73,7 +73,7 @@ DESCRIPTIVES VARIABLES=Cijfers
 ![ ](Output_MeanSD1.jpg)
 
 
-* Gemiddeld tentamencijfer (standaarddeviatie): `6.41` (`1.16`). *n* = `340`.
+* Gemiddeld tentamencijfer (standaarddeviatie): 6.41 (1.16). *n* = 340.
 
 Selecteer beide groepen en sla deze op in een variabele om deze makkelijker aan te kunnen roepen. Klik op `Transform` > `Compute variable...`. Vul bij `Target Variable:` de nieuwe naam in (in dit geval *Cijfers_2010 of Cijfers_2011*) en de waarde van deze nieuwe variabele bij `Numeric Experssion` (in dit geval *Cijfers*). Om een conditie aan de variabele toe te voegen klik op `if` en seleceteer `Include if case satisfies condition:`. Vul vervolgens de gewenste conditie in (in dit geval: *Cohort* = 2010 of = 2011). Klik op `OK` om de variabele toe te voegen aan de dataset. 
 <!-- ## BLOK: Data-selecteren.SPSS -->
@@ -88,8 +88,8 @@ Volg vervolgens bovenstaande stappen om van de nieuwe variabele(n) het gemiddeld
 <!-- ## /BLOK: Meer data-bekijken.SPSS -->
 ![ ](Output_MeanSD2.jpg)
 
-* Gemiddeld tentamencijfer 2010 (standaarddeviatie): `6.37` (`1.12`). *n* = `180`.
-* Gemiddeld tentamencijfer 2011 (standaarddeviatie): `6.46` (`1.20`). *n* = `180`.
+* Gemiddeld tentamencijfer 2010 (standaarddeviatie): 6.37 (1.12). *n* = 180.
+* Gemiddeld tentamencijfer 2011 (standaarddeviatie): 6.46 (1.20). *n* = 180.
 
 ## Visuele inspectie van normaliteit
 Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
@@ -178,7 +178,7 @@ Bij deze casus is van beide groepen de p-waarde > 0,05; er is geen statistisch s
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven.  Als de p-waarde < 0,05 is de verdeling van de data statistisch significant verschillend van de normale verdeling. 
 
-Er zijn 2 steekproeven van `Cijfers_gem` ingeladen: `Cijfers_2010_n30` en `Cijfers_2011_n30`. Beide steekproeven bevatten `30` studenten.
+Er zijn 2 steekproeven van `Cijfers_gem` ingeladen: `Cijfers_2010_n30` en `Cijfers_2011_n30`. Beide steekproeven bevatten 30 studenten.
 
 Klik op `Analyze` > `Descriptive Statistics` > `Explore...`. Selecteer de gewenste variabele(n) en plaats deze in het vakje `Dependent List`. Vink bij `Plots` het vakje voor `Normality plots with tests` aan en klik op `Continue`. Vink bij `Display` het vakje voor `Plots` aan. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten. 
 
@@ -215,17 +215,17 @@ T-TEST GROUPS=Cohort(2010 2011)
   /CRITERIA=CI(.95).
 ```
 
-* *t* ~`338`~ = `-0.74`, *p* = `0.459`
-* Vrijheidsgraden, *df* = *n* -1 = `338`-1 = `337`  
+* *t* ~338~ = -0.74, *p* = 0.459
+* Vrijheidsgraden, *df* = *n* -1 = 338-1 = 337
 * p-waarde > 0,05, dus de H~0~ wordt niet verworpen [^11]
-* 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `-0.34` en `0.15`.
-* Het gemiddelde van de steekproef in 2010: `6.37`
-* Het gemiddelde van de steekproef in 2011: `6.46`
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen -0.34 en 0.15.
+* Het gemiddelde van de steekproef in 2010: 6.37
+* Het gemiddelde van de steekproef in 2011: 6.46
 
 Kijk voor de Levene's test onder `Levene's Test for Equality of Variances`
-* *F*~`1`~~,~~`338`~ = `0.80`, p-waarde = `0.372` 
+* *F*~1~~,~~338~ = 0.80, p-waarde = 0.372 
 * p-waarde > 0,05, dus de groepen zijn niet significant verschillend in spreiding.  
-* Vrijheidsgraden bestaan uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `2`) en het tweede cijfer (*180* + *160* - 2 = `338`)
+* Vrijheidsgraden bestaan uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = 2) en het tweede cijfer (*180* + *160* - 2 = 338)
 
 ![ ](Output_ttest.jpg)
 
@@ -237,7 +237,7 @@ Maak een gestandaardiseerde variant van de afhankelijke variabele. Klik op `Anal
 Voer vervolgens opnieuw de gepaarde t-test uit zoals hierboven beschreven, selecteer de gestandaardiseerde afhankelijke variabele (gekenmerkt door `Zscore`). De Cohen's D staat onder `Mean Difference` onder `t-test for Equality of Means`, ga hierbij uit van `Equal variances assumed`.
 
 <!-- ## BLOK: Cohen's D.spss -->
-``` {r Shapiro-Wilk Test, eval=FALSE}
+``` {r Cohens D, eval=FALSE}
 * Standaardiseer de variabele.
 DESCRIPTIVES VARIABLES=Cijfers
   /SAVE
@@ -254,20 +254,20 @@ T-TEST GROUPS=Cohort(2010 2011)
 ![ ](Output_CohensD.jpg)
 
 
-*d* = `.08`. De sterkte van het effect van de tutor op het cijfer is verwaarloosbaar. 
+*d* = 0.08. De sterkte van het effect van de tutor op het cijfer is verwaarloosbaar. 
 
 !! Hier is in SPSS geen makkelijkere manier voor, het is dit of gebruik maken van de formule voor Cohen's D 
 
 
 # Rapportage
-Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = `6.37`, *SD~2010~* = `1.12`) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = `6.46`, *SD~2011~* = `1.20`) is statistisch niet significant, *t* ~`338`~ = `-.74`, *p* > 0,05, zie tabel hieronder. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `-.34` tot `.15`. Het effect is minimaal, *d* = `.08`.
+Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = 6.37, *SD~2010~* = 1.12) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = 6.46, *SD~2011~* = 1.20) is statistisch niet significant, *t* ~338~ = -.74, *p* > 0,05, zie tabel hieronder. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van -.34 tot .15. Het effect is minimaal, *d* = .08.
 
 Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentamencijfer niet is veranderd na de invoer van het BSA. 
 
 | Cohort   | N         | M            | SD         |
 | -------- | --------- | ------------ | ---------- |
-| 2010     | `180`     | `6.37`       | `1.12`     |
-| 2011     | `160`     | `6.46`       | `1.20`     |
+| 2010     | 180       | 6.37         | 1.12       |
+| 2011     | 160       | 6.46         | 1.20       |
 
 [^1]: Van Geloven, N. (25 mei 2016). *T-toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/T-toets#ongepaarde_t-toets).
 [^2]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). Tthe importance of the normality assumption in large public health data sets. *Annu Rev Public Health, 23*, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf 

@@ -15,11 +15,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <!-- CSS -->
 <style>
-`r htmltools::includeHTML(paste0(here::here(),"/03. Includes/css/Stylesheet_SHHO.css"))`
+`r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
 <!-- Header -->
-```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/03. Includes/code/Header.R"))}
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))}
 ```
 
 # Voorwaarden voor gebruik van dit handboek

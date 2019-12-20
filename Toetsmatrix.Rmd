@@ -23,8 +23,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Toetskeuzes
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt magna ut interdum maximus. Proin vestibulum leo in tellus rutrum pulvinar vitae interdum justo. Ut eu enim pretium, faucibus erat at, tristique dui. Mauris sodales nec risus at consectetur. Quisque gravida justo ac dui accumsan, quis mollis lacus pretium. Curabitur pulvinar pharetra enim ut pharetra. Maecenas sed lacinia erat. Etiam id interdum tortor, a malesuada erat. Etiam fringilla tellus quis arcu posuere fringilla. In diam lorem, cursus id metus quis, gravida aliquam sem.
+Welke toets gebruikt wordt ligt in eerste instantie aan de welke type data is verzameld. Is de data continu (numeriek) of discreet(categorisch)? Tussen welke groepen wordt de vergelijking gemaakt en hoeveel groepen zijn er? Onder de matrix staat een uitgebreide omschrijving van de typen data en de soorten vergelijking. 
+  
 
 ```{r, echo = FALSE}
 htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/toetsmatrix.html"))
@@ -34,12 +34,22 @@ htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/toetsmatrix.html"
 
 **Type data**
 
-* Numeriek (continu):
-* Categorisch (discreet):
-* Normaal verdeeld:
-* Niet normaal verdeeld:
-* Binair:
+Numeriek (continu):  
+* *continu*: Een continue waarde kan iedere waarde aannemen tussen twee meetpunten. De meest bekende continue variabelen zijn lengte en lichaamsgewicht. https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS
+* *Semi-continue data*: de data zijn discreet (een voorbeeld van discrete getallen zijn gehele getallen zijn) met zoveel optiemogelijkheden dat de data geanalyseerd kan worden alsof ze continu zijn. Van Geloven, N. (21 November 2017). *KEUZE TOETS*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS).
+
+Wanneer de data continu is, is de data ook normaal verdeeld? 
+ De normale verdeling is de gestandaardiseerde weergave van een verwachting wat een populatie zou scoren op een bepaalde eigenschap met veel datapunten rondom het gemiddelde en weinig datapunten in de staarten. Het ziet er uit als een klokvorm, zie afbeelding **AFBEELDING**. In het midden lig de verwachtingswaarde *µ* De spreiding van de data wordt weergegeven met de standaardafwijking *σ*.   https://en.wikipedia.org/wiki/Normal_distribution
+Bij numerieke data wordt er getoetst of de data normaal verdeeld zijn. Als de data niet-normaal verdeeld zijn, wordt er voor een andere toets gekozen, dan wanneer de data wel normaal verdeeld zijn. 
+
+
+Categorisch (discreet):
 * Nominaal/ordinaal:
+*nominaal*: Groepen zijn onafhankelijk van elkaar en er kan geen ordening tussen deze groepen gemaakt worden. Voorbeelden  hiervan zijn de antwoordenmogelijkheden ‘ja’ of ‘nee’ en 'man' of 'vrouw', namen. 
+* Een *binaire* variabel is een voorbeeld van een nominale variabel. Een binaire variabele bestaat uit twee elkaar uitsluitende waarden, zoals ja of nee, 0 of 1, aan of uit. Nominale variabelen kunnen echter ook meerdere mogelijkheden hebben. 
+*ordinaal*: Er kan een ordening gemaakt worden tussen de groepen. Een voorbeeld hiervan zijn de antwoordenmogelijkheden 'onvoldoende', 'voldoende', 'goed'.  
+
+
 
 **Soort vergelijking**
 
@@ -49,7 +59,18 @@ htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/toetsmatrix.html"
 * &gt; 2 groepen - gepaard:
 * &gt; 2 groepen - ongepaard:
 
-Curabitur at porttitor massa, non iaculis libero. Etiam posuere finibus nunc, sed aliquam ante rutrum non. In hac habitasse platea dictumst. Morbi nec consectetur eros. Vivamus dolor purus, vulputate vel nisl nec, eleifend vehicula elit. Suspendisse potenti. Etiam suscipit, nibh id volutpat ultrices, nibh dolor egestas nunc, id sollicitudin nisl nunc at est. Nulla facilisi. Vivamus elementum euismod odio, sed bibendum tellus euismod ut. Nunc ex arcu, mollis et eleifend quis, finibus at lectus. Nunc blandit, quam id tempus vehicula, sem augue posuere tellus, ac ultricies erat erat vel augue. Donec ut nulla sagittis, porttitor mauris eu, laoreet erat. Vestibulum efficitur lacinia augue auctor blandit. Fusce venenatis ipsum id tellus malesuada, vel ultricies tellus molestie. Vestibulum facilisis ante ultricies ligula malesuada rhoncus.
+*met referentie*:
+*gepaard*: Een onderdeel is gekoppeld aan elkaar, zoals bij een herhaalde meting. Bijvoorbeeld een studie waarbij studenten voor een cursus en na een cursus getest worden op algemene kennis. Door de verschillen de voor en na meting te vergelijken kunnen conclusies worden getrokken over het effect van de cursus op de algemene kennis van de studenten. 
+*ongepaard*: De groepen zijn onafhankelijk van elkaar. Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
+
+Numeriek (continu):
+
+
+
+
+Categorisch (discreet):
+
+nominaal: een variabele die niet afhankelijk van elkaar zijn en op inhoudelijke basis geordend kan worden. Voorbeelden hiervan zijn geslacht of achternamen. Een binaire variabel is een voorbeeld van een nominale variabel. Binaire variabelen hebben twee mogelijkheden, ja of nee, terwijl nominale variabelen meerdere mogelijkheden hebben. 
 
 ***
 

@@ -64,20 +64,23 @@ H~A~: Onder de studenten met een functiebeperking is het percentage uitval na de
 # Assumpties
 Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal niveau gemeten[^5] en daarmee onafhankelijk van elkaar. De *Chi-kwadraat toets* heeft specifieke regels wat betreft de groepsgrootte per cel. 
 
-## Groeps- en celgrootte
-Beide testen maken gebruik van een kruistabel; er zijn twee condities met vier mogelijke opties: zie tabel hieronder.  
+## Celgrootte
+Beide testen maken gebruik van een kruistabel; er zijn twee condities met vier mogelijke opties: zie tabel hieronder. Elke cel bevat de geobserveerde waarde per groep. 
+ 
 
 |                      | Wel uitval   | Geen uitval |
 | -------------------- | -------------| ------------| 
-| **Geen leenstelsel** | groep 1      | groep 2     | 
-| **Wel leenstelsel**  | groep 3      | groep 4     | 
+| **Geen leenstelsel** | groep A      | groep B     | 
+| **Wel leenstelsel**  | groep C      | groep D     | 
 
-Elke cel van het tabel bevat de geobserveerde waarde per groep. Er wordt een verwachte waarde berekend, deze waarde is de voorspelde waarde gebaseerd op de nulhypothese.
+De *chi-kwadraat toets* berekent een verwachte waarde en vergelijkt deze met de geobserveerde waarde. 
+Stel dat er bekend is dat voor het leenstelsel er gemiddeld zo ongeveer 15% van de studenten uitvallen. En stel dat we zo'n 100 studenten hebben voor het leenstelsel en ook 100 met wel een leenstelsel. Dan zou de verwachte waarde in groep A 15 zijn, en 85 in groep B. Aangezien de nulhypothese geen verandering in percentage verwacht, zit in groep groep C 85 studenten en in groep D 15 studenten.   
 
-* Elke cel van de verwachte waarde > 0. 
-* Als in 20% van de cellen een verwachte waarde van 5 of lager staat, wordt de toets onbetrouwbaar. 
-* In de cellen met de geobserveerde waarde is dat 10 of lager.[^6] 
-* Gebruik de *Fisher’s exact toets* wanneer de aantallen in de cellen lager zijn.[^7] 
+De *chi-kwadraat toets* wordt onbetrouwbaar wanneer er niet wordt voldaan aan de volgende aantallen:  
+* Elke cel van de verwachte waarde moet > 0.  
+* Als in 20% van de cellen een verwachte waarde van 5 of lager staat, wordt de toets onbetrouwbaar.  
+* In de cellen met de geobserveerde waarde is dat 10 of lager.[^6]  
+Gebruik de *Fisher’s exact toets* wanneer de aantallen in de cellen lager zijn.[^7]  
 
 # Uitvoering 
 Er is een dataset ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. De data `Uitval_functiebeperking` zijn binair: wel of geen uitval. 
@@ -91,7 +94,7 @@ print(Uitval_functiebeperking)
 <!-- ## /BLOK: Data-bekijken.R -->
 
 ## Chi-kwadraat toets
-De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel gelijk is gebleven. Gebruik `chisq.test()` op een kruistabel.  
+De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel gelijk is gebleven.Gebruik `chisq.test()` op een kruistabel.  
 <!-- ## BLOK: Chi2-toets -->
 ```{r chi2}
 chisq.test(Uitval_functiebeperking)
@@ -110,7 +113,7 @@ vDF <- Chi2$parameter
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen.[^6]  
 
 ## Fisher's exact toets
-De *Fisher's exact toets* wordt uitgevoerd om de vraag te beantwoorden of de verhouding uitval van het aantal studenten met een functiebeperking na de invoering van het leenstelsel gelijk is gebleven. 
+De *Fisher's exact toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel gelijk is gebleven. Bij lage aantallen is de 
 
 Er is een steekproef van `Uitval_functiebeperking` ingeladen genaamd `Uitval_functiebeperking_n43`.
 <!-- ## BLOK: data-bekijken-n43 -->

@@ -25,6 +25,13 @@
 ## 01 MAAK HTML ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+## Controleer of Substitute_var bestaat; zo niet, sluit dan het voorbereidingen
+## script in.
+if (!exists("Substitute_var")) {
+  ## Installeer packages en functies
+  source("99. Functies en Libraries/00. Voorbereidingen.R")
+}    
+
 ## Plaats  variabelen in een lijst: de root van de site
 lVars <- list(
   sRoot = paste0(here::here(),"/_site")

@@ -1,8 +1,13 @@
 .Rproj.user/
 .Rhistory
 *.pdf
-*.html
-*.png
+*proporties.html
+*toets.html
+*ANOVA.html
+*template.html
+*exact.html
+*cohen.d--.html
+*continu.html
 *.md
 *.Rdata
 XX. Hulpmiddelen/functie bekijk_voortgang.R

@@ -270,7 +270,6 @@ Er zijn 2 steekproeven van `Cijfers_gem` ingeladen: `Cijfers_2010_n30` en `Cijfe
   <div class="col">
 <!-- ## BLOK: Shapiro-Wilk-test-1.R -->
 ``` {r Shapiro-Wilk Test-1, warning=FALSE}
-shapiro.test(Cijfers_2010_n30)
 shapiro.test(Cijfers_2011_n30)
 ```
 <!-- ## /BLOK: Shapiro-Wilk-test-1.R -->
@@ -279,7 +278,6 @@ shapiro.test(Cijfers_2011_n30)
 <!-- ## BLOK: Shapiro-Wilk-test-2.R -->
 ``` {r Shapiro-Wilk Test-2, warning=FALSE}
 shapiro.test(Cijfers_2010_n30)
-shapiro.test(Cijfers_2011_n30)
 ```
 <!-- ## /BLOK: Shapiro-Wilk-test-2.R -->
   </div>

@@ -119,7 +119,7 @@ vDF <- Chi2$parameter
 
 * *χ^2^* ~1~ ≈ `r vChi2`, *p* ≈ `r vP`  
 * Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r vDF`. De continuïteitscorrectie van Yates wordt automatisch toegepast wanneer het aantal vrijheidsgraden 1 is.[^6]   
-* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen.[^6]  
+* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen.[^8]  
 
 ## Fisher's exact toets
 De *Fisher's exact toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel gelijk is gebleven. Bij lage aantallen is de 
@@ -131,7 +131,7 @@ print(Uitval_functiebeperking_n43)
 ```
 <!-- ## /BLOK: data-bekijken-n43 -->
 
-Alle groepen hebben een laag aantal per cel, variërend van 5 tot 16. De *Fisher's exact toets* kan uitgevoerd worden.
+Alle groepen hebben een laag aantal per cel, variërend van 5 tot 16. Voer de *Fisher's exact toets* uit.
 
 <!-- ## BLOK: Fishers-Exact-toets -->
 ```{r fishers exact}
@@ -146,7 +146,7 @@ vConf.int1 <- Round_and_format(fish$conf.int[1])
 vConf.int2 <- Round_and_format(fish$conf.int[2])
 ```
 
-* p-waarde > 0,05 , dus de H~0~ wordt niet verworpen.[^7]  
+* p-waarde > 0,05, dus de H~0~ wordt niet verworpen.[^8]  
 * De kans op het uitvallen van studenten met een functiebeperking onder het leenstelsel is 1,8 keer zo groot als de kans op het uitvallen van studenten met een functiebeperking voor het leenstelsel. Deze associatie blijkt niet significant te zijn: *p* = `r vF_p`  
 * Het 95% betrouwbaarheidsinterval: `r vConf.int1` en de `r vConf.int2`.   
 
@@ -160,6 +160,4 @@ De *Chi-kwadraat toets* is uitgevoerd om te toetsen of studenten met een functie
 [^5]: Nominaal: een variabele die niet afhankelijk van elkaar zijn en op inhoudelijke basis geordend kan worden. Voorbeelden hiervan zijn geslacht of achternamen. Een binaire variabel is een voorbeeld van een nominale variabel. Binaire variabelen hebben twee mogelijkheden, ja of nee, terwijl nominale variabelen meerdere mogelijkheden hebben. 
 [^6]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^7]: van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets).
-
-
-[^7]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.
+[^8]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.

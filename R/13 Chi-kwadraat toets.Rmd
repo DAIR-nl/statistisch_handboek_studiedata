@@ -50,7 +50,7 @@ colnames(Uitval_functiebeperking_n43) <- c("Wel uitval", "Geen uitval")
 <!-- ## /BLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *Chi-kwadraat toets* of de *Fisher's exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde binaire variabelen.[^1][^2] In tegenstelling tot de *Chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage aantallen ingezet worden.[^3] De *Fisher's exact toets* is conservatiever dan de *Chi-kwadraat toets*. Dat wil zeggen dat de *Fisher's exact toets* terughoudender is in het benoemen of iets significant is, dan de *Chi-kwadraat toets*.[^4]   
+Gebruik de *Chi-kwadraat toets* of de *Fisher's exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde binaire variabelen.[^1][^2] In tegenstelling tot de *Chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage aantallen ingezet worden.[^3] De *Fisher's exact toets* is terughoudender in het benoemen of er een significant verschil is in percentage tussen beide groepen, dan de *Chi-kwadraat toets*.[^4]   
 
 # Onderwijscasus
 <div id = "casus">
@@ -65,16 +65,25 @@ H~A~: Onder de studenten met een functiebeperking is het percentage uitval na de
 Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal niveau gemeten[^5] en daarmee onafhankelijk van elkaar. De *Chi-kwadraat toets* heeft specifieke regels wat betreft de groepsgrootte per cel. 
 
 ## Celgrootte
-Beide testen maken gebruik van een kruistabel; er zijn twee condities met vier mogelijke opties: zie tabel hieronder. Elke cel bevat de geobserveerde waarde per groep. 
- 
+Beide testen maken gebruik van een kruistabel; er zijn twee condities met in totaal vier mogelijke opties, zie tabel 1. voor een voorbeeld aan de hand van de casus. De *chi-kwadraat toets* berekent een verwachte waarde en vergelijkt deze met de geobserveerde waarde. Hieronder een uitleg met berekeningen van de verwachte waarde.  
 
-|                      | Wel uitval   | Geen uitval |
+|                      | uitval   | geen uitval | totaal | 
+| -------------------- | ---------| ------------| -------------| 
+| **geen leenstelsel** | 375      | 496         | **871**   |
+| **wel leenstelsel**  | 369      | 394         | **763**      |
+|**totaal**            |**744**   | **890**     | **1634** |
+*Tabel 1. Geobserveerde waarde casus uitval met of zonder leenstelsel*
+
+|                      | uitval | geen uitval |
 | -------------------- | -------------| ------------| 
-| **Geen leenstelsel** | groep A      | groep B     | 
-| **Wel leenstelsel**  | groep C      | groep D     | 
-
-De *chi-kwadraat toets* berekent een verwachte waarde en vergelijkt deze met de geobserveerde waarde. 
-Stel dat er bekend is dat voor het leenstelsel er gemiddeld zo ongeveer 15% van de studenten uitvallen. En stel dat we zo'n 100 studenten hebben voor het leenstelsel en ook 100 met wel een leenstelsel. Dan zou de verwachte waarde in groep A 15 zijn, en 85 in groep B. Aangezien de nulhypothese geen verandering in percentage verwacht, zit in groep groep C 85 studenten en in groep D 15 studenten.   
+| **Geen leenstelsel** | 397      | 474     |
+| **Wel leenstelsel**  | 347      | 416     |
+*Tabel 2. Verwachte waarde casus uitval met of zonder leenstelsel*
+  
+ Berekening van de verwachte waarde van de groep uitgevallen studenten zonder leenstelsel.  
+* totaal aantal studenten zonder leenstelsel: 871   
+* totaal aantal studenten die uitgevallen zijn: 744  
+* verwachte aantal uitgevallen studenten zonder leenstelsel: 871*744/1634 ≈ 397, zie tabel 2.   
 
 De *chi-kwadraat toets* wordt onbetrouwbaar wanneer er niet wordt voldaan aan de volgende aantallen:  
 * Elke cel van de verwachte waarde moet > 0.  
@@ -108,7 +117,7 @@ vP <- Round_and_format(Chi2$p.value)
 vDF <- Chi2$parameter
 ```
 
-* *χ^2^* ~1~ ≈ `r vChi2`, *p* = `r vP`  
+* *χ^2^* ~1~ ≈ `r vChi2`, *p* ≈ `r vP`  
 * Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r vDF`. De continuïteitscorrectie van Yates wordt automatisch toegepast wanneer het aantal vrijheidsgraden 1 is.[^6]   
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen.[^6]  
 

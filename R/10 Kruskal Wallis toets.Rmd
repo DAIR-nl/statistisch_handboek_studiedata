@@ -97,7 +97,7 @@ tail(Resultaten_Arbeidsrecht)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
 
-De dataset bevat data van studenten van verschillende vooropleidingen. Gebruik `levels()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
+De dataset bevat data van studenten van verschillende vooropleidingen. Gebruik `unique()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
 
 <!-- ## BLOK: Data-bekijken-2.R -->
 ```{r data bekijken 2}

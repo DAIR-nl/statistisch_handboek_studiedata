@@ -136,12 +136,12 @@ tail(Reistijd_per_opleiding)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
 
-De data bevat data van studenten van verschillende opleidingen. Gebruik `levels()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
+De data bevat data van studenten van verschillende opleidingen. Gebruik `unique()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
 
 <!-- ## BLOK: Data-bekijken2.R -->
 ```{r data bekijken 2}
 ## Opleidingen in de data aanwezig
-levels(Reistijd_per_opleiding$Opleiding)
+unique(Reistijd_per_opleiding$Opleiding)
 ```
 <!-- ## /BLOK: Data-bekijken2.R -->
 

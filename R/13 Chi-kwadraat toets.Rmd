@@ -158,5 +158,5 @@ De *Chi-kwadraat toets* is uitgevoerd om te toetsen of studenten met een functie
 [^4]: Universiteit van Amsterdam (13 november 2017). *Chi-square test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Chi-square_test#Assumpties). 
 [^5]: Nominaal: een variabele die niet afhankelijk van elkaar zijn en op inhoudelijke basis geordend kan worden. Voorbeelden hiervan zijn geslacht of achternamen. Een binaire variabel is een voorbeeld van een nominale variabel. Binaire variabelen hebben twee mogelijkheden, ja of nee, terwijl nominale variabelen meerdere mogelijkheden hebben. 
 [^6]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
-[^7]: van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets).
-[^8]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, hou hierbij rekening met type I en type II fouten.
+[^7]: Van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets).
+[^8]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houdt hierbij rekening met type I en type II fouten.

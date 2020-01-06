@@ -166,6 +166,7 @@ boxplot(EC_Jaar1 ~ Vooropleiding, Resultaten_Arbeidsrecht,
         ylab = "Aantal EC in jaar 1")
 ```
 <!-- ## /BLOK: Boxplot.R -->
+
 De mediaan van Rechtsgeleerdheid heeft duidelijk minder studiepunten dan Fiscaal Recht en Notarieel Recht. De pre-master ligt er tussen in.[^8]
 
 ## Kruskal Wallis toets

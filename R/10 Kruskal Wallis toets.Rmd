@@ -87,6 +87,7 @@ Gebruik de *Bonferroni correctie* om Type I fouten te voorkomen. Deze toets past
 Er is een dataset ingeladen met studieresultaten van de master Arbeidsrecht per vooropleiding: Fiscaal Recht, Notarieel Recht, Rechtsgeleerdheid en de pre-master.
 
 ## De data bekijken
+Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 <!-- ## BLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
 ## Eerste 6 observaties
@@ -97,7 +98,7 @@ tail(Resultaten_Arbeidsrecht)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
 
-De dataset bevat data van studenten van verschillende vooropleidingen. Gebruik `unique()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
+De dataset bevat data van studenten van verschillende vooropleidingen. Gebruik `unique()` om te onderzoeken welke verschillende opleidingen er in de data aanwezig zijn. 
 
 <!-- ## BLOK: Data-bekijken-2.R -->
 ```{r data bekijken 2}
@@ -187,7 +188,7 @@ vK_P <- Round_and_format(Ktest$p.value)
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen[^8]
 
 ## Post-hoc toets: Mann-Whitney U toets
-Gebruik de *Mann-Whitney U toets* als post-hoc toets om te bepalen wélke groepen significant verschillen. De *Mann-Whitney U toets* wordt ook wel de *Wilcoxon rank-sum toets* genoemd.[^9] Gebruik hierbij de `pairwise.wilcox.test()`. 
+Gebruik de *Mann-Whitney U toets* als post-hoc toets om te bepalen wélke groepen significant verschillen. De *Mann-Whitney U toets* wordt ook wel de *Wilcoxon rank-sum toets* genoemd.[^9] Gebruik de functie `pairwise.wilcox.test()`. 
 
 Pas de *Bonferroni correctie* toe met `p.adjust.method = "bonferroni"`.    
 

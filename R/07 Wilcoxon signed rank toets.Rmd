@@ -76,7 +76,6 @@ Alumni_inkomens <- Alumni_inkomens[order(Alumni_inkomens$Inkomen, decreasing = T
 
 # Toepassing
 Gebruik de *Wilcoxon signed rank toets* om te toetsen of bij een herhaalde meting de waardes van een groep aan elkaar gelijk zijn. Een voordeel van deze test is dat het voor alle type data gebruikt kan worden.[^1]   
-
 # Onderwijscasus
 <div id ="casus">
 De directeur van de Academie Mens & Maatschappij wil bekijken hoe het inkomen van zijn alumni zich ontwikkeld nadat zij zijn afgestudeerd. Hij bekijkt de maandelijke inkomens van de alumni 1 jaar na afstuderen en vergelijkt het met de inkomen 5 jaar na afstuderen. 

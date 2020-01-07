@@ -39,7 +39,6 @@ Round_and_format_0decimals <- function(x, digits = 0) {
 
 <!-- ## BLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-## De directeur van een hogeschool vraagt zich af of wat de invloed is van internationalisering op zijn instelling. Hij gebruikt hiervoor het totaal aantal punten behaald in het tweedejaar zodat uitval een minder grote rol speelt. Hij vraagt zich daarom af: is het behaald aantal EC in het tweede jaar van internationale studenten hoger dan van de Nederlandse studenten?
 ## Effectmaat niet gerapporteerd, ik zie geen overeenstemming van effectmaten bij de MW U 
 
 RNGkind(sample.kind = "Rounding")
@@ -69,7 +68,11 @@ Punten_jaar2 <- Punten_jaar2[order(Studentnr),]
 ```
 <!-- ## /BLOK: Data-aanmaken.R -->
 # Toepassing
-Gebruik de *Mann-Whitney U toets* om te toetsen of twee onafhankelijke groepen[^1] aan elkaar gelijk zijn. Deze toets wordt ook *Mann–Whitney–Wilcoxon*, *Wilcoxon rank-sum toets*, of *Wilcoxon–Mann–Whitney toets* genoemd.[^2]
+Gebruik de *Mann-Whitney U toets* om te toetsen of twee groepen significant van elkaar verschillen. 
+
+Deze toets wordt ook *Mann–Whitney–Wilcoxon*, *Wilcoxon rank-sum toets*, of *Wilcoxon–Mann–Whitney toets* genoemd.[^1] 
+
+De *Mann-Whitney U toets* kan een alternatief zijn voor de *ongepaarde t-toets*. De *Mann-Whitney U toets* is verdelingsvrij, hierdoor is normaliteit geen assumptie voor de toets. Bij *Mann-Whitney U toets* hebben uitbijters minder invloed op het eindresultaat, dan bij de *ongepaarde t-toets*. Ondanks deze voordelen wordt er toch minder vaak vaak voor deze toets gekozen. Als de data wel normaal verdeeld zijn, heeft de *Mann-Whitney U toets* minder onderscheidend vermogen, dan de *ongepaarde t-toets*.[^2]
 
 # Onderwijscasus
 <div id ="casus">
@@ -81,13 +84,15 @@ H~1~: Het behaalde aantal EC in het tweede jaar is anders van internationale stu
 </div>
 
 # Assumpties
-De data zijn nomimaal, ordinaal of numeriek gemeten. De *Mann-Whitney U toets* wordt vaak als alternatief gezien voor de *ongepaarde t-toets*. De *Mann-Whitney U toets* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data normaal verdeeld zijn heeft de *Mann-Whitney U toets* minder onderscheidend vermogen, dan wanneer de *ongepaarde t-toets* uitgevoerd zou worden.
+ Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden: De data zijn nomimaal, ordinaal of numeriek. De groepen zijn onafhankelijk van elkaar [^3] en het aantal groepen is 2. Gebruik bij > 2 groepen de *Kruskal Wallis toets*.
+
+
 
 # Uitvoering 
 Er is data ingeladen met het aantal punten studenten in hun tweede jaar halen. `Punten_jaar2_NL` bevat Nederlandse studenten, `Punten_jaar2_inter` bevat internationale studenten. 
 
 ## De data bekijken
-Gebruik `head()` in R om de eerste vijf regels te bekijken
+Gebruik `head()` om de eerste vijf regels te bekijken
 
 <!-- ## BLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
@@ -97,7 +102,7 @@ head(Punten_jaar2)
 tail(Punten_jaar2)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
-Bekijk de grootte, mediaan en kantielen van de data met `length()` en `quantile()`. 
+Bekijk de grootte, mediaan en kwantielen van de data met `length()` en `quantile()`. 
 <!-- ## BLOK: Data-selecteren.R -->
 ```{r data selecteren}
 Nederlands <- Punten_jaar2$Nederlands == "ja"
@@ -146,9 +151,12 @@ vMed_Inter <- Round_and_format(x[2,4])
 vQ3_NL <- Round_and_format(x[1,5])
 vQ3_Inter <- Round_and_format(x[2,5])
 ```
+* Mediaan Nederlandse studenten: `r vMed_NL`. *n* = `r vN_NL`.
+* Mediaan internationale studenten: `r vMed_Inter`. *n* = `r vN_Inter`.
+
 
 ## Mann-Whitney U toets
-Gebruik `wilcox.test()` met twee argumenten om een Mann-Whitney U toets te doen in R
+Gebruik `wilcox.test()` met twee argumenten om een Mann-Whitney U toets te doen in R.
 <!-- ## BLOK: Mann-Whitney-U-toets.R -->
 ```{r Mann Whitney U toets}
 wilcox.test(Punten_jaar2$EC_Jaar2[Nederlands], 
@@ -163,11 +171,13 @@ vW_W <- Round_and_format_0decimals(wcx$statistic)
 vW_P <- Round_and_format(wcx$p.value)
 ```
 * *W* = `r vW_W`, *p* = `r vW_P`
-* p-waarde > 0,05, dus de H~0~ wordt niet verworpen [^3]
+* p-waarde > 0,05, dus de H~0~ wordt niet verworpen [^4]
 
 # Rapportage
-De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal EC in het tweede jaar is hetzelfde van internationale studenten als van Nederlandse studenten. Uit de resultaten kan afgelezen worden dat er geen statistisch significant verschil is tussen het aantal studiepunten van internationale studenten als van Nederlandse studenten. *W* = TEST, p-waarde << 0,05. 
+De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal EC in het tweede jaar is hetzelfde van internationale studenten als van Nederlandse studenten. Uit de resultaten kan afgelezen worden dat er geen statistisch significant verschil is tussen het aantal studiepunten van internationale studenten als van Nederlandse studenten. *W* = TEST, p-waarde < 0,05. 
 
-[^1]: Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
-[^2]: Van Geloven, N. (13 maart 2018). *Mann-Whitney U toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
-[^3]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, hou hierbij rekening met type I en type II fouten.
+ 
+[^1]: Van Geloven, N. (13 maart 2018). *Mann-Whitney U toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
+[^2]: Onderscheidend vermogen: wordt in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  
+[^3]: Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
+[^4]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, hou hierbij rekening met type I en type II fouten.

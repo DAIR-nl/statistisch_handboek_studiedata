@@ -2,11 +2,6 @@
 title: "01 One sample t-toets py"
 output:
   html_document:
-    df_print: paged
----
-title: "One-sample t-toets"
-output:
-  html_document:
     keep_md: yes
     number_sections: yes
     theme: lumen

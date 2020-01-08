@@ -379,7 +379,7 @@ vF_waarde <- Round_and_format(ANOVA[[1]]$`F value`[1])
 * Vrijheidsgraden: het aantal groepen - 1 = `r vDF1`; *n~1~* + *n~2~* - 2 = `r vDF2`.
 
 ### Effectmaat: Cohen's *f*
-Gebruik `cohens_f()` om het effect te meten.
+Gebruik `cohens_f()` op een object met `class = aov` om het effect te meten.
 
 <!-- ## BLOK: Cohens-f.R --> 
 ```{r Cohen s F, warning=FALSE, message=FALSE}
@@ -395,7 +395,7 @@ vCohens_f <- Round_and_format(f$cohens.f)
 De sterkte van het effect van type opleiding op de reistijd is groot. 
 
 ### Effectmaat: Eta squared
-Gebruik `EtaSq()` op een `aov` om het effect te meten.
+Gebruik `EtaSq()` op een een object met `class = aov` om het effect te meten.
 <!-- ## BLOK: Eta-squared.R --> 
 ```{r eta-squared, message = FALSE}
 library(DescTools)
@@ -410,7 +410,7 @@ De sterkte van het effect van de type opleiding op de reistijd is groot.
 
 ## Post-hoc toets: Tukey's toets
 Om te bepalen welke van de type opleidingen in reistijd verschillen wordt een post-hoc toets gedaan. Gebruik bij groepen met gelijke variantie de Tukey Honestly Significant Difference Test.
-Gebruik `TukeyHSD()` op het ANOVA-object (`aov`).
+Gebruik `TukeyHSD()` op het ANOVA-object.
 
 <!-- ## BLOK: Tukey-HSD.R -->
 ```{r TukeyHSD}

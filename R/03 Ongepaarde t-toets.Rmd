@@ -90,11 +90,11 @@ De *t-toets* gaat ervan uit dat de data van de steekproef normaal verdeeld zijn.
 
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
-2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^3] [^4]  
+2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^3]<sup>, </sup>[^4]  
 
 Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld zijn.
 
-Als er geen sprake is van normaliteit gebruik de *Mann-Whitney U toets*, ook bekend als de *Wilcoxon rank-sum toets*.[^5] [^6]  
+Als er geen sprake is van normaliteit gebruik de *Mann-Whitney U toets*, ook bekend als de *Wilcoxon rank-sum toets*.[^5]<sup>, </sup>[^6]  
 
 ## Homogeniteit van varianties 
 Toets met de *Levene’s Test (for equality of variance)* of de spreiding van iedere groep globaal hetzelfde is. Bij een *p* < 0,05 is de spreiding van de groepen statistisch significant verschillend.[^7]

@@ -140,11 +140,11 @@ De *t-toets* gaat ervan uit dat de data normaal verdeeld zijn. Ga er bij een *n*
 
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. controleer de data visueel met een histogram, een Q-Q plot of een boxplot.
-2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^3] [^4]  
+2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^3]<sup>, </sup>[^4]  
 
 Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is. 
 
-Als er geen sprake is van normaliteit gebruik de *Wilcoxon Signed Rank Test*.[^5] [^6]
+Als er geen sprake is van normaliteit gebruik de *Wilcoxon Signed Rank Test*.[^5]<sup>, </sup>[^6]
 
 # Effectmaat
 Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer.  

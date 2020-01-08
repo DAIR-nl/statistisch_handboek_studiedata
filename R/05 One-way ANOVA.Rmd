@@ -93,12 +93,12 @@ H~A~: Tenminste voor één opleiding is de gemiddelde reistijd niet gelijk aan d
 # Assumpties
 Om een valide toetsresultaat te bereiken moeten de data aan een aantal voorwaarden voldoen. Controleer of de steekproef aan de volgende assumpties voldoet: normaliteit, homogeniteit van varianties en onafhankelijkheid.  
 
-De *one-way ANOVA* is een robuuste test; als één groep uit de steekproef niet voldoet aan de assumptie van normaliteit of homogeniteit van varianties dan kan de *one-way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden.[^2] Hierdoor kan het wel zijn dat de toets minder onderscheidend vermogen heeft, dan wanneer de assumpties niet geschonden worden.[^3] [^4] De *Kruskal-Wallis test* wordt gezien als een alternatief voor de *one-way ANOVA* als er geen sprake is van normaliteit en/of homogeniteit.[^5] [^6]
+De *one-way ANOVA* is een robuuste test; als één groep uit de steekproef niet voldoet aan de assumptie van normaliteit of homogeniteit van varianties dan kan de *one-way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden.[^2] Hierdoor kan het wel zijn dat de toets minder onderscheidend vermogen heeft, dan wanneer de assumpties niet geschonden worden.[^3]<sup>, </sup>[^4] De *Kruskal-Wallis test* wordt gezien als een alternatief voor de *one-way ANOVA* als er geen sprake is van normaliteit en/of homogeniteit.[^5]<sup>, </sup>[^6]
 
 ## Normaliteit
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
-2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^7] [^8]  
+2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^7]<sup>, </sup>[^8]  
 
 Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld zijn.
 
@@ -261,7 +261,7 @@ qqline(Reistijd_GSC)
 Bij de Q-Q plot van de reistijd van studenten Geschiedenis liggen de meeste punten op de lijn behalve bij de uiteinden. De cirkels van de Q-Q plot van studenten Arabische Taal en Cultuur en studenten Filosofie liggen net naast de lijn. De discrepantie is minimaal, vermoedelijk zijn de data normaal verdeeld.
 
 ### Boxplot
-De box geeft de middelste 50% van de reistijd weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^14] [^15]
+De box geeft de middelste 50% van de reistijd weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^14]<sup>, </sup>[^15]
 
 <!-- ## BLOK: Boxplot.R -->
 ```{r boxplot}

@@ -68,9 +68,9 @@ Punten_jaar2 <- Punten_jaar2[order(Studentnr),]
 ```
 <!-- ## /BLOK: Data-aanmaken.R -->
 # Toepassing
-Gebruik de *Mann-Whitney U toets* om te toetsen of twee groepen significant van elkaar verschillen. 
+Gebruik de *Mann-Whitney U toets* om te toetsen of twee onafhankelijke groepen significant van elkaar verschillen. 
 
-Deze toets wordt ook *Mann–Whitney–Wilcoxon*, *Wilcoxon rank-sum toets*, of *Wilcoxon–Mann–Whitney toets* genoemd.[^1] 
+Deze toets wordt ook *Mann–Whitney–Wilcoxon*, *Wilcoxon rank-sum toets*, of *Wilcoxon–Mann–Whitney toets* genoemd.[^1] Niet te verwarren met de *Wilcoxon Signed Rank Test* die toets of twee afhankelijke groepen significant van elkaar verschillen. 
 
 De *Mann-Whitney U toets* kan een alternatief zijn voor de *ongepaarde t-toets*. De *Mann-Whitney U toets* is verdelingsvrij, hierdoor is normaliteit geen assumptie voor de toets. Bij *Mann-Whitney U toets* hebben uitbijters minder invloed op het eindresultaat, dan bij de *ongepaarde t-toets*. Ondanks deze voordelen wordt er toch minder vaak vaak voor deze toets gekozen. Als de data wel normaal verdeeld zijn, heeft de *Mann-Whitney U toets* minder onderscheidend vermogen, dan de *ongepaarde t-toets*.[^2]
 
@@ -78,22 +78,19 @@ De *Mann-Whitney U toets* kan een alternatief zijn voor de *ongepaarde t-toets*.
 <div id ="casus">
 De directeur van een hogeschool vraagt zich af wat de invloed is van internationalisering op zijn instelling. Om uitval een minder grote rol te laten spelen gebruikt hij hiervoor het totaal aantal punten behaald in het tweedejaar. Hij vraagt af: ‘Is het behaald aantal EC in het tweede jaar van internationale studenten anders is dan van de Nederlandse studenten?’ 
 
-H~0~: Het behaalde aantal EC in het tweede jaar is hetzelfde van internationale studenten als van Nederlandse studenten. 
+H~0~: Het behaalde aantal EC in het tweede jaar van internationale studenten is hetzelfde als van Nederlandse studenten. 
 
-H~1~: Het behaalde aantal EC in het tweede jaar is anders van internationale studenten als van Nederlandse studenten.
+H~1~: Het behaalde aantal EC in het tweede jaar van internationale studenten is anders als van Nederlandse studenten.
 </div>
 
 # Assumpties
  Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden: De data zijn nomimaal, ordinaal of numeriek. De groepen zijn onafhankelijk van elkaar [^3] en het aantal groepen is 2. Gebruik bij > 2 groepen de *Kruskal Wallis toets*.
 
-
-
 # Uitvoering 
-Er is data ingeladen met het aantal punten studenten in hun tweede jaar halen. `Punten_jaar2_NL` bevat Nederlandse studenten, `Punten_jaar2_inter` bevat internationale studenten. 
+Er is data ingeladen met het aantal punten dat studenten in hun tweede jaar halen. `Punten_jaar2_NL` bevat Nederlandse studenten, `Punten_jaar2_inter` bevat internationale studenten. 
 
 ## De data bekijken
-Gebruik `head()` om de eerste vijf regels te bekijken
-
+Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 <!-- ## BLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
 ## Eerste 6 observaties
@@ -102,7 +99,7 @@ head(Punten_jaar2)
 tail(Punten_jaar2)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
-Bekijk de grootte, mediaan en kwantielen van de data met `length()` en `quantile()`. 
+Bekijk de grootte, de mediaan en de kwantielen van de data met `length()` en `quantile()`. 
 <!-- ## BLOK: Data-selecteren.R -->
 ```{r data selecteren}
 Nederlands <- Punten_jaar2$Nederlands == "ja"
@@ -171,13 +168,13 @@ vW_W <- Round_and_format_0decimals(wcx$statistic)
 vW_P <- Round_and_format(wcx$p.value)
 ```
 * *W* = `r vW_W`, *p* = `r vW_P`
-* p-waarde > 0,05, dus de H~0~ wordt niet verworpen [^4]
+* p-waarde > 0,05, dus de H~0~ wordt niet verworpen.[^4]
 
 # Rapportage
-De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal EC in het tweede jaar is hetzelfde van internationale studenten als van Nederlandse studenten. Uit de resultaten kan afgelezen worden dat er geen statistisch significant verschil is tussen het aantal studiepunten van internationale studenten als van Nederlandse studenten. *W* = `r vW_W`, p-waarde < 0,05. 
+De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal EC in het tweede jaar hetzelfde is van internationale studenten als van Nederlandse studenten. Uit de resultaten kan afgelezen worden dat er geen statistisch significant verschil is tussen het aantal studiepunten van internationale studenten als van Nederlandse studenten. *W* = `r vW_W`, p-waarde < 0,05. 
 
  
 [^1]: Van Geloven, N. (13 maart 2018). *Mann-Whitney U toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
-[^2]: Onderscheidend vermogen: wordt in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  
+[^2]: Onderscheidend vermogen (Engels: power) is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  
 [^3]: Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
-[^4]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, hou hierbij rekening met type I en type II fouten.
+[^4]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houd hierbij rekening met type I en type II fouten.

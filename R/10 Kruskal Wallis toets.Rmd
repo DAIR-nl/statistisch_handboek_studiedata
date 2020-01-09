@@ -65,7 +65,7 @@ Resultaten_Arbeidsrecht$EC_Jaar1[Vooropleiding == "Rechtsgeleerdheid"] <-
 # Toepassing
 Gebruik de *Kruskal Wallis toets* om te toetsen of de groepen significant van elkaar verschillen.[^1] Een kenmerk van de data is dat deze numeriek en ongepaard is.  
 
-De *Kruskal Wallis toets* kan een alternatief zijn voor de *one-way ANOVA*.[^2] De *Kruskal Wallis toets* is verdelingsvrij, hierdoor is normaliteit geen assumptie voor de toets. Bij de *Kruskal Wallis toets* hebben uitbijters hebben minder invloed op het eindresultaat, dan bij de *one-way ANOVA*. Ondanks deze voordelen wordt er toch minder vaak voor deze test gekozen. Als de data wel normaal verdeeld zijn, heeft de *Kruskal Wallis toets* minder onderscheidend vermogen dan de *one way ANOVA*. [^3]<sup>, </sup>[^4]   
+De *Kruskal Wallis toets* kan een alternatief zijn voor de *one-way ANOVA*.[^2] De *Kruskal Wallis toets* is verdelingsvrij, hierdoor is normaliteit geen assumptie voor de toets. Bij de *Kruskal Wallis toets* hebben uitbijters hebben minder invloed op het eindresultaat, dan bij de *one-way ANOVA*. Ondanks deze voordelen wordt er toch minder vaak voor deze test gekozen. Als de data wel normaal verdeeld zijn, heeft de *Kruskal Wallis toets* minder onderscheidend vermogen dan de *one way ANOVA*.[^3]<sup>, </sup>[^4]   
 
 # Onderwijscasus
 <div id="casus">

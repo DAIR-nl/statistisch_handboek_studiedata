@@ -1,7 +1,7 @@
 ---
 title: "One-sample t-toets"
-author: "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
-date: "`r format(Sys.time(), '%d-%m-%Y')`"
+author: "© `r format(Sys.time(), '%Y')`, SURF Versnellingsplan - Statistisch Handboek Hoger Onderwijs"
+date: "Laatst gewijzigd op `r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
     theme: lumen

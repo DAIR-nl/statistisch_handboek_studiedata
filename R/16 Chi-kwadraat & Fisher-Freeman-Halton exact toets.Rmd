@@ -1,6 +1,6 @@
 ---
 title: "15 Chi-kwadraat & Fisher-Freeman-Halton exact toets"
-author: "© 2019, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
+author: "© `r format(Sys.time(), '%Y')`, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
 date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:

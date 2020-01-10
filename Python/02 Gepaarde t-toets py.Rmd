@@ -163,10 +163,12 @@ import pandas as pd
 dfTentamencijfers = pd.DataFrame(r.Tentamencijfers)
 ```
 
-```{python data bekijken, collapse = TRUE}
+```{python data bekijken-1, collapse = TRUE}
 ## Eerste 6 observaties
 print(dfTentamencijfers.head(6))
+```
 
+```{python data bekijken-2, collapse = TRUE}
 ## Laatste 6 observaties
 print(dfTentamencijfers.head(6))
 ```
@@ -180,13 +182,16 @@ Tentamencijfer_voor_tutorgesprek = dfTentamencijfers[dfTentamencijfers['Voor_of_
 Tentamencijfer_na_tutorgesprek = dfTentamencijfers[dfTentamencijfers['Voor_of_na_tutorgesprek'] == "na"]['Cijfer']
 ```
 
-<div class="col2">
 <!-- ## BLOK: Data-beschrijven-1.py -->
-```{python data beschrijven t1, collapse = TRUE}
-## aantallen, gemiddelde en standaarddeviatie voor tutorgesprek
+```{python}
 # Om het gemiddelde en de standaard deviatie te berekenen, hebben we de library 'numpy' nodig
 import numpy as np
+```
 
+<div class = "col-container">
+  <div class = "col">
+```{python data beschrijven t1, collapse = TRUE}
+## aantallen, gemiddelde en standaarddeviatie voor tutorgesprek
 print(len(Tentamencijfer_voor_tutorgesprek))
 print(np.mean(Tentamencijfer_voor_tutorgesprek))
 print(np.sqrt(np.var(Tentamencijfer_voor_tutorgesprek)))
@@ -197,8 +202,9 @@ vMean_t0 <- Round_and_format(mean(Tentamencijfer_voor_tutorgesprek))
 vSD_t0 <-Round_and_format(sd(Tentamencijfer_voor_tutorgesprek))
 vN_t0 <- Round_and_format(length(Tentamencijfer_voor_tutorgesprek))
 ```
-  
+  </div>
 <!-- ## BLOK: Data-beschrijven-2.py -->
+ <div class = "col">
 ```{python data bekijken t2, collapse=TRUE}
 ## aantallen, gemiddelde en standaarddeviatie na tutorgesprek
 print(len(Tentamencijfer_na_tutorgesprek))
@@ -211,6 +217,7 @@ vMean_t1 <- Round_and_format(mean(Tentamencijfer_na_tutorgesprek))
 vSD_t1 <- Round_and_format(sd(Tentamencijfer_na_tutorgesprek))
 vN_t1 <- Round_and_format(length(Tentamencijfer_na_tutorgesprek))
 ```
+  </div>
 </div>
 
 * Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): `r vMean_t0` (`r vSD_t0`). *n* = `r vN_t0`.
@@ -225,15 +232,15 @@ Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
 ## Histogram met matplotlib
 import matplotlib.pyplot as plt
 fig = plt.figure()
-fig.add_subplot(1, 2, 1)
-plt.title("voor")
-plt.hist(Tentamencijfer_voor_tutorgesprek, density = True, edgecolor = "black", bins = 9)
+sub1 = fig.add_subplot(1, 2, 1)
+title1 = plt.title("voor")
+hist1 = plt.hist(Tentamencijfer_voor_tutorgesprek, density = True, edgecolor = "black", bins = 9)
 
-fig.add_subplot(1, 2, 2)
-plt.title("na")
-plt.hist(Tentamencijfer_na_tutorgesprek, density = True, edgecolor = "black", bins = 9)
+sub2 = fig.add_subplot(1, 2, 2)
+title2 = plt.title("na")
+hist2 = plt.hist(Tentamencijfer_na_tutorgesprek, density = True, edgecolor = "black", bins = 9)
 
-fig.suptitle('Lerarenopleiding tentamencijfers')
+main = fig.suptitle('Lerarenopleiding tentamencijfers')
 plt.show()
 ```
 <!-- ## /BLOK: Histogram.R -->
@@ -243,15 +250,19 @@ Beide histogrammen laten een Bell Curve zien vergelijkbaar met een normale verde
 ### Q-Q plot
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 
+<!-- ## BLOK: QQplot-inladen.py -->
+```{python}
+import scipy.stats as stats
+```
+
 <div class = "col-container">
   <div class="col">
 <!-- ## BLOK: QQplot-1.py -->
 ```{python qqplot}
-import scipy.stats as stats
-stats.probplot(Tentamencijfer_voor_tutorgesprek, dist="norm", plot=plt)
-plt.title("Normaal Q-Q plot van tentamencijfers voor tutorgesprek")
-plt.xlabel("Theoretische kwantielen")
-plt.ylabel("Kwantielen in data")
+qq = stats.probplot(Tentamencijfer_voor_tutorgesprek, dist="norm", plot=plt)
+title = plt.title("Normaal Q-Q plot van tentamencijfers voor tutorgesprek")
+xlab = plt.xlabel("Theoretische kwantielen")
+ylab = plt.ylabel("Kwantielen in data")
 plt.show()
 ```
 <!-- ## /BLOK: QQplot-1.R -->
@@ -259,10 +270,10 @@ plt.show()
   <div class = "col">
 <!-- ## BLOK: QQplot-2.py -->
 ```{python qqplot-2}
-stats.probplot(Tentamencijfer_na_tutorgesprek, dist="norm", plot=plt)
-plt.title("Normaal Q-Q plot van tentamencijfers na tutorgesprek")
-plt.xlabel("Theoretische kwantielen")
-plt.ylabel("Kwantielen in data")
+qq = stats.probplot(Tentamencijfer_na_tutorgesprek, dist="norm", plot=plt)
+title = plt.title("Normaal Q-Q plot van tentamencijfers na tutorgesprek")
+xlab = plt.xlabel("Theoretische kwantielen")
+ylab = plt.ylabel("Kwantielen in data")
 plt.show()
 ```
 <!-- ## /BLOK: QQplot-2.R -->
@@ -278,8 +289,8 @@ De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen
 ``` {python Boxplot}
 ## Boxplot
 fig, ax = plt.subplots()
-ax.boxplot([Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgesprek], labels = ["Voor", "Na"])
-plt.title("Boxplot van tentamencijfers lerarenopleiding")
+box = ax.boxplot([Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgesprek], labels = ["Voor", "Na"])
+title = plt.title("Boxplot van tentamencijfers lerarenopleiding")
 plt.show()
 ```
 <!-- ## /BLOK: Boxplot.R -->
@@ -293,11 +304,14 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst 
 ### Kolmogorov-Smirnov 
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
+```{python}
+import statsmodels.stats.api
+```
+
 <div class="col-container">
   <div class = "col">
 <!-- ## BLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
-import statsmodels.stats.api
 print(statsmodels.stats.api.lilliefors(Tentamencijfer_voor_tutorgesprek))
 ```
 <!-- ## /BLOK: Lilliefors-test-1.R -->

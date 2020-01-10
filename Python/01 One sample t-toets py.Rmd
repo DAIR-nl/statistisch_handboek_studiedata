@@ -105,6 +105,9 @@ dfGemiddeld_cijfer_WNS = pd.DataFrame(r.Gemiddeld_cijfer_WNS)
 ```{python, include=TRUE}
 # Eerste 6 observaties
 print(dfGemiddeld_cijfer_WNS.head(6))
+```
+
+```{python, include=TRUE}
 # Laatste 6 observaties
 print(dfGemiddeld_cijfer_WNS.tail(6))
 ```
@@ -139,10 +142,10 @@ Geef normaliteit visueel weer met een histogram, boxplot of Q-Q plot.
 ```{python histogram, include=TRUE}
 ## Histogram met matplotlib
 import matplotlib.pyplot as plt
-plt.hist(r.Gemiddeld_cijfer_WNS, density = True, edgecolor = "black", bins = 9)
-plt.title("Eindcijfers Wiskunde, Natuurkunde en Scheikunde")
-plt.xlabel("Gemiddeld_Cijfer_WNS")
-plt.ylabel("Frequentiedichtheid")
+hist = plt.hist(r.Gemiddeld_cijfer_WNS, density = True, edgecolor = "black", bins = 9)
+title = plt.title("Eindcijfers Wiskunde, Natuurkunde en Scheikunde")
+xlab = plt.xlabel("Gemiddeld_Cijfer_WNS")
+ylab = plt.ylabel("Frequentiedichtheid")
 plt.show()
 ```
 <!-- ## /BLOK: Histogram.R -->
@@ -154,10 +157,10 @@ Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen wor
 <!-- ## BLOK: QQplot.py -->
 ```{python qqplot}
 import scipy.stats as stats
-stats.probplot(r.Gemiddeld_cijfer_WNS, dist="norm", plot=plt)
-plt.title("Normaal Q-Q plot van gemiddelde cijfers WNS")
-plt.xlabel("Theoretische kwantielen")
-plt.ylabel("Kwantielen in data")
+qq = stats.probplot(r.Gemiddeld_cijfer_WNS, dist="norm", plot=plt)
+title = plt.title("Normaal Q-Q plot van gemiddelde cijfers WNS")
+xlab = plt.xlabel("Theoretische kwantielen")
+ylab = plt.ylabel("Kwantielen in data")
 plt.show()
 ```
 
@@ -170,9 +173,9 @@ De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen
 <!-- ## BLOK: Boxplot.py -->
 ``` {python boxplot}
 ## Boxplot
-plt.boxplot(r.Gemiddeld_cijfer_WNS)
-plt.xlabel("Werktuigbouwkunde")
-plt.ylabel("Gemiddeld_cijfer_WNS")
+box = plt.boxplot(r.Gemiddeld_cijfer_WNS)
+x = plt.xlabel("Werktuigbouwkunde")
+y = plt.ylabel("Gemiddeld_cijfer_WNS")
 plt.show()
 ```
 

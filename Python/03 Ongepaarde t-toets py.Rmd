@@ -115,32 +115,37 @@ import pandas as pd
 dfCijfers_gem = pd.DataFrame(r.Cijfers_gem)
 ```
 
-```{python data bekijken, collapse = TRUE}
+```{python data bekijken-1, collapse = TRUE}
 ## Eerste 6 observaties
 print(dfCijfers_gem.head(6))
+```
 
+```{python data bekijken-2, collapse = TRUE}
 ## Laatste 6 observaties
-print(dfCijfers_gem.head(6))
+print(dfCijfers_gem.tail(6))
 ```
 
 <!-- ## /BLOK: Data-bekijken.R -->
 
 Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. 
-<!-- ## BLOK: Data-selecteren.R -->
+<!-- ## BLOK: Data-selecteren.py -->
 ```{python data selecteren}
 Cijfers_2010 = dfCijfers_gem[dfCijfers_gem['Cohort'] == 2010]['Cijfers']
 Cijfers_2011 = dfCijfers_gem[dfCijfers_gem['Cohort'] == 2011]['Cijfers']
 ```
 <!-- ## /BLOK: Data-selecteren.R -->
+Inspecteer de data met `len()`, `np.mean()` en `np.sqrt(np.var())`, door deze aan te roepen uit de library `numpy`.
 
-Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data.
+<!-- ## BLOK: Data-beschrijven-inladen.py -->
+```{python}
+# Om het gemiddelde en de standaard deviatie te berekenen, hebben we de library 'numpy' nodig
+import numpy as np
+```
+
 <div class="col2">
 <!-- ## BLOK: Data-beschrijven-1.py -->
 ```{python Data beschrijven 1, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie 2010
-# Om het gemiddelde en de standaard deviatie te berekenen, hebben we de library 'numpy' nodig
-import numpy as np
-
 print(len(Cijfers_2010))
 print(np.mean(Cijfers_2010))
 print(np.sqrt(np.var(Cijfers_2010)))
@@ -179,15 +184,15 @@ Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
 ## Histogram met matplotlib
 import matplotlib.pyplot as plt
 fig = plt.figure()
-fig.add_subplot(1, 2, 1)
-plt.title("2010")
-plt.hist(Cijfers_2010, density = True, edgecolor = "black", bins = 9)
+sub1 = fig.add_subplot(1, 2, 1)
+title1 = plt.title("2010")
+hist1 = plt.hist(Cijfers_2010, density = True, edgecolor = "black", bins = 9)
 
-fig.add_subplot(1, 2, 2)
-plt.title("2011")
-plt.hist(Cijfers_2011, density = True, edgecolor = "black", bins = 9)
+sub2 = fig.add_subplot(1, 2, 2)
+title2 = plt.title("2011")
+hist2 = plt.hist(Cijfers_2011, density = True, edgecolor = "black", bins = 9)
 
-fig.suptitle('Taalwetenschap gemiddelde cijfers voor en na de BSA')
+main = fig.suptitle('Taalwetenschap gemiddelde cijfers voor en na de BSA')
 plt.show()
 ```
 <!-- ## /BLOK: Histogram.R -->
@@ -201,10 +206,10 @@ Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen wor
 <!-- ## BLOK: QQplot-t1.py -->
 ```{python QQplot-t1}
 import scipy.stats as stats
-stats.probplot(Cijfers_2010, dist="norm", plot=plt)
-plt.title("Normaal Q-Q plot van tentamencijfers 2010")
-plt.xlabel("Theoretische kwantielen")
-plt.ylabel("Kwantielen in data")
+qq = stats.probplot(Cijfers_2010, dist="norm", plot=plt)
+title = plt.title("Normaal Q-Q plot van tentamencijfers 2010")
+xlab = plt.xlabel("Theoretische kwantielen")
+ylab = plt.ylabel("Kwantielen in data")
 plt.show()
 ```
 <!-- ## /BLOK: QQplot-t1.R -->
@@ -213,10 +218,10 @@ plt.show()
 <!-- ## BLOK: QQplot-t2.py -->
 ```{python QQplot-t2}
 import scipy.stats as stats
-stats.probplot(Cijfers_2011, dist="norm", plot=plt)
-plt.title("Normaal Q-Q plot van tentamencijfers 2011")
-plt.xlabel("Theoretische kwantielen")
-plt.ylabel("Kwantielen in data")
+qq = stats.probplot(Cijfers_2011, dist="norm", plot=plt)
+title = plt.title("Normaal Q-Q plot van tentamencijfers 2011")
+xlab = plt.xlabel("Theoretische kwantielen")
+ylab = plt.ylabel("Kwantielen in data")
 plt.show()
 ```
 <!-- ## /BLOK: QQplot-t2.R -->
@@ -230,8 +235,8 @@ De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen
 <!-- ## BLOK: Boxplot.py -->
 ```{python boxplot}
 fig, ax = plt.subplots()
-ax.boxplot([Cijfers_2010, Cijfers_2011], labels = ["2010", "2011"])
-plt.title("Tentamencijfers Taalwetenschap voor en na de BSA")
+box = ax.boxplot([Cijfers_2010, Cijfers_2011], labels = ["2010", "2011"])
+title = plt.title("Tentamencijfers Taalwetenschap voor en na de BSA")
 plt.show()
 ```
 <!-- ## /BLOK: Boxplot.R -->
@@ -244,12 +249,16 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoets w
 ### Kolmogorov-Smirnov
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
+<!-- ## /BLOK: Library-nortest inladen.py -->
+```{python}
+import statsmodels.stats.api
+```
+
 <!-- ## /BLOK: Library-nortest.R -->
 <div class="col-container">
   <div class = "col">
 <!-- ## BLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
-import statsmodels.stats.api
 print(statsmodels.stats.api.lilliefors(Cijfers_2010))
 ```
 

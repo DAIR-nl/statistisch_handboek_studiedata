@@ -31,6 +31,10 @@ Round_and_format <- function(x, digits = 2) {
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
 
+```{r opmerking, include=FALSE, eval=FALSE}
+# Onderwijscasus idee 2: Beoordelen studenten opleiding X positiever nadat ze met hun tutor hebben gesproken?
+```
+
 <!-- ## BLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 RNGkind(sample.kind = "Rounding")
@@ -85,13 +89,11 @@ H~0~: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier
 H~1~: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd veranderd. 
 
 </div>
-# Onderwijscasus idee 2: 
-Beoordelen studenten opleiding X positiever nadat ze met hun tutor hebben gesproken?
-<div id ="casus2">
 
-</div>
 # Assumpties
-De data zijn nomimaal, ordinaal of numeriek gemeten. De *Wilcoxon Signed Rank Test* wordt vaak als alternatief gezien voor de *gepaarde t-toets*. De *Wilcoxon Signed Rank Test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data normaal verdeeld zijn heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen, dan wanneer de *gepaarde t-toets* uitgevoerd zou worden.
+De data zijn nomimaal, ordinaal of numeriek gemeten. De *Wilcoxon Signed Rank Test* kan een alternatief zijn voor de *gepaarde t-toets*. 
+
+De *Wilcoxon Signed Rank Test* is verdelingsvrij, hierdoor is normaliteit geen assumptie voor de toets. Bij de *Wilcoxon Signed Rank Test* hebben uitbijters hebben minder invloed op het eindresultaat, dan bij de *gepaarde t-toets*. Ondanks deze voordelen wordt er toch minder vaak voor deze test gekozen. Als de data wel normaal verdeeld zijn, heeft de *Wilcoxon Signed Rank Test* minder onderscheidend vermogen dan de *gepaarde t-toets*.[^2]<sup>, </sup>[^3]   
 
 # Uitvoering
 Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij genaamd `Maandelijks_inkomen`. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkeld 4 jaar nadat zij afgestudeerd zijn.
@@ -135,6 +137,8 @@ median(Alumni_inkomens_t5)
 <!-- ## /BLOK: Data-beschrijven-2.R -->
   </div>
 </div>
+* Mediaan inkomens op T~1~: , *n~T1~* = 
+* Mediaan inkomens op T~5~: , *n~T5~* = 
 
 ### Histogram
 <!-- ## BLOK: Histogram.R -->
@@ -154,12 +158,15 @@ ggplot(Alumni_inkomens,
     labels = as.character(seq(0, 15000, 1000)),
     breaks = seq(0, 15000, 1000)) + 
   theme(axis.text.x = element_text(angle = 45)) +
-  labs(title = "Taalwetenschap gemiddelde cijfers voor en na de BSA")
+  labs(title = "Maandelijkse inkomens alumni Mens & Maatschappij")
 ```
 <!-- ## /BLOK: Histogram.R -->
+Een aantal alumni verdienen op T~1~ en T~5~ ver boven modaal, ook is te zien dat de data 
+
+
 
 ### Boxplot
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^2] 
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^4] 
 
 <!-- ## BLOK: Boxplot.R -->
 ```{r boxplot}
@@ -182,6 +189,7 @@ wilcox.test(Alumni_inkomens_t5, Alumni_inkomens_t1, paired=TRUE, alternative = "
 
 # Rapportage
 
-[^1]: van Geloven, N. (25 september2013). *Wilcoxon signed rank toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets).
-[^2]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
-
+[^1]: Van Geloven, N. (25 september2013). *Wilcoxon signed rank toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets).
+[^2]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test). 
+[^3]: Onderscheidend vermogen: wordt in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  
+[^4]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).

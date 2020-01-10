@@ -28,6 +28,8 @@ Round_and_format <- function(x, digits = 2) {
   x <- str_replace(x, "[.]", ",")
   return(x)
 }
+library(reticulate)
+knitr::knit_engines$set(python = reticulate::eng_python)
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
 
@@ -154,35 +156,40 @@ Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5
 Er is een dataset ingeladen met gemiddelde tentamencijfer voor (T~0~) en na (T~1~) een tutorgesprek: `Tentamencijfers`. 
 
 ## De data bekijken
-Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
-<!-- ## BLOK: Data-bekijken.R -->
-```{r data bekijken, collapse = TRUE}
+Gebruik `<dataframe>.head()` en `<dataframe>.tail()` om de structuur van de data te bekijken.
+<!-- ## BLOK: Data-bekijken.py -->
+```{python, include=FALSE}
+import pandas as pd
+dfTentamencijfers = pd.DataFrame(r.Tentamencijfers)
+```
+
+```{python data bekijken, collapse = TRUE}
 ## Eerste 6 observaties
-head(Tentamencijfers)
+print(dfTentamencijfers.head(6))
 
 ## Laatste 6 observaties
-tail(Tentamencijfers)
+print(dfTentamencijfers.head(6))
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
 
 Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen.
-<!-- ## BLOK: Data-selecteren.R -->
-```{r data selecteren}
-Tentamencijfer_voor_tutorgesprek <-
-  Tentamencijfers[Tentamencijfers$Voor_of_na_tutorgesprek=="voor", 2]
-Tentamencijfer_na_tutorgesprek <- 
-  Tentamencijfers[Tentamencijfers$Voor_of_na_tutorgesprek=="na", 2]
+<!-- ## BLOK: Data-selecteren.py -->
+```{python data selecteren}
+Tentamencijfer_voor_tutorgesprek = dfTentamencijfers[dfTentamencijfers['Voor_of_na_tutorgesprek'] == "voor"]['Cijfer']
+
+Tentamencijfer_na_tutorgesprek = dfTentamencijfers[dfTentamencijfers['Voor_of_na_tutorgesprek'] == "na"]['Cijfer']
 ```
-<!-- ## /BLOK: Data-selecteren.R -->
 
 <div class="col2">
-<!-- ## BLOK: Data-beschrijven-1.R -->
-```{r data beschrijven t1, collapse = TRUE}
+<!-- ## BLOK: Data-beschrijven-1.py -->
+```{python data beschrijven t1, collapse = TRUE}
 ## aantallen, gemiddelde en standaarddeviatie voor tutorgesprek
-length(Tentamencijfer_voor_tutorgesprek)
-mean(
-  Tentamencijfer_voor_tutorgesprek)
-sd(Tentamencijfer_voor_tutorgesprek)
+# Om het gemiddelde en de standaard deviatie te berekenen, hebben we de library 'numpy' nodig
+import numpy as np
+
+print(len(Tentamencijfer_voor_tutorgesprek))
+print(np.mean(Tentamencijfer_voor_tutorgesprek))
+print(np.sqrt(np.var(Tentamencijfer_voor_tutorgesprek)))
 ```
 <!-- ## /BLOK: Data-beschrijven-1.R -->
 ```{r Var beschrijven t0, include=FALSE, echo=TRUE}
@@ -191,13 +198,12 @@ vSD_t0 <-Round_and_format(sd(Tentamencijfer_voor_tutorgesprek))
 vN_t0 <- Round_and_format(length(Tentamencijfer_voor_tutorgesprek))
 ```
   
-<!-- ## BLOK: Data-beschrijven-2.R -->
-```{r data bekijken t2, collapse=TRUE}
+<!-- ## BLOK: Data-beschrijven-2.py -->
+```{python data bekijken t2, collapse=TRUE}
 ## aantallen, gemiddelde en standaarddeviatie na tutorgesprek
-length(Tentamencijfer_na_tutorgesprek)
-mean(
-  Tentamencijfer_na_tutorgesprek)
-sd(Tentamencijfer_na_tutorgesprek)
+print(len(Tentamencijfer_na_tutorgesprek))
+print(np.mean(Tentamencijfer_na_tutorgesprek))
+print(np.sqrt(np.var(Tentamencijfer_na_tutorgesprek)))
 ```
 <!-- ## /BLOK: Data-beschrijven-2.R -->
 ```{r Var beschrijven t1, include=FALSE, echo=TRUE}
@@ -214,60 +220,50 @@ vN_t1 <- Round_and_format(length(Tentamencijfer_na_tutorgesprek))
 Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
-<!-- ## BLOK: Histogram.R -->
-```{r histogram}
-## Histogram met ggplot2
-library(ggplot2)
+<!-- ## BLOK: Histogram.py -->
+```{python histogram}
+## Histogram met matplotlib
+import matplotlib.pyplot as plt
+fig = plt.figure()
+fig.add_subplot(1, 2, 1)
+plt.title("voor")
+plt.hist(Tentamencijfer_voor_tutorgesprek, density = True, edgecolor = "black", bins = 9)
 
-ggplot(Tentamencijfers,
-  aes(x = Cijfer)) +
-  geom_histogram(aes(y = ..density..),
-                 binwidth = 1,
-                 color = "grey30",
-                 fill = "#0089CF") +
-  facet_wrap(~ Voor_of_na_tutorgesprek) +
-  geom_density(alpha = .2, adjust = 1) +
-  ylab("Frequentiedichtheid") +
-  scale_x_continuous(
-    labels = as.character(seq(1, 10)),
-    breaks = seq(1, 10)) +
-  coord_fixed(ylim = c(0, 0.4),
-              xlim = c(1, 10),
-              ratio = 22) +
-  labs(title = "Lerarenopleiding tentamencijfers")
+fig.add_subplot(1, 2, 2)
+plt.title("na")
+plt.hist(Tentamencijfer_na_tutorgesprek, density = True, edgecolor = "black", bins = 9)
 
+fig.suptitle('Lerarenopleiding tentamencijfers')
+plt.show()
 ```
 <!-- ## /BLOK: Histogram.R -->
 
 Beide histogrammen laten een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom de gemiddeldes. Opvallend is dat het histogram van voor het tutorgesprek veel waardes in de linkerstaart van de verdeling heeft liggen.  
 
 ### Q-Q plot
-Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
-
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 
 <div class = "col-container">
   <div class="col">
-<!-- ## BLOK: QQplot-1.R -->
-```{r qqplot-1}
-qqnorm(Tentamencijfer_voor_tutorgesprek, 
-       pch = 1,
-       main = "Normaal Q-Q plot van tentamencijfers voor tutorgesprek",
-       ylab = "kwantielen in data",
-       xlab = "Theoretische kwantielen")
-qqline(Tentamencijfer_voor_tutorgesprek)
+<!-- ## BLOK: QQplot-1.py -->
+```{python qqplot}
+import scipy.stats as stats
+stats.probplot(Tentamencijfer_voor_tutorgesprek, dist="norm", plot=plt)
+plt.title("Normaal Q-Q plot van tentamencijfers voor tutorgesprek")
+plt.xlabel("Theoretische kwantielen")
+plt.ylabel("Kwantielen in data")
+plt.show()
 ```
 <!-- ## /BLOK: QQplot-1.R -->
   </div>
   <div class = "col">
-<!-- ## BLOK: QQplot-2.R -->
-```{r qqplot-2}
-qqnorm(Tentamencijfer_na_tutorgesprek, 
-       pch = 1,
-       main = "Normaal Q-Q plot van tentamencijfers na tutorgesprek",
-       ylab = "kwantielen in data",
-       xlab = "Theoretische kwantielen")
-qqline(Tentamencijfer_na_tutorgesprek)
+<!-- ## BLOK: QQplot-2.py -->
+```{python qqplot-2}
+stats.probplot(Tentamencijfer_na_tutorgesprek, dist="norm", plot=plt)
+plt.title("Normaal Q-Q plot van tentamencijfers na tutorgesprek")
+plt.xlabel("Theoretische kwantielen")
+plt.ylabel("Kwantielen in data")
+plt.show()
 ```
 <!-- ## /BLOK: QQplot-2.R -->
   </div>
@@ -278,11 +274,13 @@ In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden.
 ### Boxplot
 De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8]  
 
-<!-- ## BLOK: Boxplot.R -->
-``` {r Boxplot}
+<!-- ## BLOK: Boxplot.py -->
+``` {python Boxplot}
 ## Boxplot
-boxplot(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers,
-        main = "Boxplot van tentamencijfers lerarenopleiding")
+fig, ax = plt.subplots()
+ax.boxplot([Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgesprek], labels = ["Voor", "Na"])
+plt.title("Boxplot van tentamencijfers lerarenopleiding")
+plt.show()
 ```
 <!-- ## /BLOK: Boxplot.R -->
 
@@ -295,23 +293,19 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst 
 ### Kolmogorov-Smirnov 
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
-<!-- ## BLOK: Library-nortest.R -->
-```{r library nortest, warning=FALSE}
-library(nortest)
-```
-<!-- ## /BLOK: Library-nortest.R -->
 <div class="col-container">
   <div class = "col">
-<!-- ## BLOK: Lilliefors-test-1.R -->
-``` {r Lilliefors Test-1, warning=FALSE}
-lillie.test(Tentamencijfer_voor_tutorgesprek)
+<!-- ## BLOK: Lilliefors-test-1.py -->
+``` {python Lilliefors Test-1, warning=FALSE}
+import statsmodels.stats.api
+print(statsmodels.stats.api.lilliefors(Tentamencijfer_voor_tutorgesprek))
 ```
 <!-- ## /BLOK: Lilliefors-test-1.R -->
   </div>
   <div class = "col">
-<!-- ## BLOK: Lilliefors-test-2.R -->
-``` {r Lilliefors Test-2, warning=FALSE}
-lillie.test(Tentamencijfer_na_tutorgesprek)
+<!-- ## BLOK: Lilliefors-test-2.py -->
+``` {python Lilliefors Test-2, warning=FALSE}
+print(statsmodels.stats.api.lilliefors(Tentamencijfer_na_tutorgesprek))
 ```
 <!-- ## /BLOK: Lilliefors-test-2.R -->
   </div>
@@ -326,18 +320,16 @@ Er zijn 2 steekproeven van `Tentamencijfers` ingeladen: `Tentamencijfer_voor_tut
 
 <div class ="col-container">
   <div class ="col">
-<!-- ## BLOK: Shapiro-Wilk-test-1.R -->
-``` {r Shapiro-Wilk Test-1, warning=FALSE}
-shapiro.test(
-  Tentamencijfer_voor_tutorgesprek_n30)
+<!-- ## BLOK: Shapiro-Wilk-test-1.py -->
+``` {python Shapiro-Wilk Test-1, warning=FALSE}
+print(stats.shapiro(r.Tentamencijfer_voor_tutorgesprek_n30))
 ```
 <!-- ## /BLOK: Shapiro-Wilk-test-1.R -->
   </div>
   <div class ="col">
-<!-- ## BLOK: Shapiro-Wilk-test-2.R -->
-``` {r Shapiro-Wilk Test-2, warning=FALSE}
-shapiro.test(
-  Tentamencijfer_na_tutorgesprek_n30)
+<!-- ## BLOK: Shapiro-Wilk-test-2.py -->
+``` {python Shapiro-Wilk Test-2, warning=FALSE}
+print(stats.shapiro(r.Tentamencijfer_na_tutorgesprek_n30))
 ```
 <!-- ## /BLOK: Shapiro-Wilk-test-2.R -->
   </div>
@@ -346,16 +338,13 @@ shapiro.test(
 Voor beide groepen is de *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden.  
 
 ## Gepaarde t-toets
-Gebruik `t.test()` met `paired = TRUE` om een *gepaarde t-toets* uit te voeren. Gebruik hier weer het hele dataframe `Tentamencijfers`. 
-
 De *gepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het gemiddelde tentamencijfer verandert na een tutorgesprek. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren na een gesprek is er voor gekozen om tweezijdig te toetsen. 
 
 <!-- ## BLOK: T-toets -->
-```{r T-test}
-t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, 
-       paired = TRUE,
-       alternative = "two.sided")
+```{python T-test}
+print(stats.ttest_rel(Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgesprek))
 ```
+
 <!-- ## BLOK: T-toets -->
 ```{r T-test als object, echo = FALSE}
 t <- t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)

@@ -1,7 +1,5 @@
 ---
 title: "01 One sample t-toets py"
----
-title: "One-sample t-toets"
 output:
   html_document:
     keep_md: yes
@@ -33,6 +31,8 @@ Round_and_format <- function(x, digits = 2) {
   x <- str_replace(x, "[.]", ",")
   return(x)
 }
+library(reticulate)
+knitr::knit_engines$set(python = reticulate::eng_python)
 ```
 
 ```{r opmerking, include=FALSE, eval=FALSE}
@@ -96,8 +96,13 @@ Er is een dataset ingeladen met de gemiddelde eindexamencijfers van WNS van eers
 
 ## De data bekijken
 Gebruik `<dataframe>.head()` en `<dataframe>.tail()` om de structuur van de data te bekijken.
-<!-- ## BLOK: Data-bekijken.R -->
-```{python, eval = FALSE, include=TRUE}
+<!-- ## BLOK: Data-bekijken.py -->
+```{python, include=FALSE}
+import pandas as pd
+dfGemiddeld_cijfer_WNS = pd.DataFrame(r.Gemiddeld_cijfer_WNS)
+```
+
+```{python, include=TRUE}
 # Eerste 6 observaties
 print(dfGemiddeld_cijfer_WNS.head(6))
 # Laatste 6 observaties
@@ -107,12 +112,15 @@ print(dfGemiddeld_cijfer_WNS.tail(6))
 
 Krijg meer inzicht in de dataset door het gemiddelde en de spreiding te bekijken, `len()`, `np.mean()` en `np.sqrt(np.var())`, door deze aan te roepen uit de library `numpy`.
 
-<!-- ## BLOK: Data-beschrijven.R -->
+<!-- ## BLOK: Data-beschrijven.py -->
 ```{python de data bekijken, collapse=TRUE}
+# Numpy Library importeren
+import numpy as np
+
 ## Gemiddelde en standaarddeviatie
-print(len(Gemiddeld_cijfer_WNS))
-print(np.mean(Gemiddeld_cijfer_WNS))
-print(np.sqrt(np.var(Gemiddeld_cijfer_WNS)))
+print(len(r.Gemiddeld_cijfer_WNS))
+print(np.mean(r.Gemiddeld_cijfer_WNS))
+print(np.sqrt(np.var(r.Gemiddeld_cijfer_WNS)))
 ```
 <!-- ## /BLOK: Data-beschrijven.R -->
 ```{r Var beschrijven t1, include=FALSE, echo=TRUE}
@@ -127,10 +135,11 @@ vN <- Round_and_format(length(Gemiddeld_cijfer_WNS))
 Geef normaliteit visueel weer met een histogram, boxplot of Q-Q plot. 
 
 ### Histogram
-<!-- ## BLOK: Histogram.R -->
-```{python histogram, warning=FALSE, message=FALSE}
+<!-- ## BLOK: Histogram.py -->
+```{python histogram, include=TRUE}
 ## Histogram met matplotlib
-plt.hist(Gemiddeld_cijfer_WNS, density = True, edgecolor = "black", bins = 9)
+import matplotlib.pyplot as plt
+plt.hist(r.Gemiddeld_cijfer_WNS, density = True, edgecolor = "black", bins = 9)
 plt.title("Eindcijfers Wiskunde, Natuurkunde en Scheikunde")
 plt.xlabel("Gemiddeld_Cijfer_WNS")
 plt.ylabel("Frequentiedichtheid")
@@ -142,10 +151,10 @@ Het histogram laat een Bell Curve zien vergelijkbaar met een normale verdeling: 
 
 ### Q-Q plot
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
-<!-- ## BLOK: QQplot.R -->
+<!-- ## BLOK: QQplot.py -->
 ```{python qqplot}
 import scipy.stats as stats
-stats.probplot(Gemiddeld_cijfer_WNS, dist="norm", plot=plt)
+stats.probplot(r.Gemiddeld_cijfer_WNS, dist="norm", plot=plt)
 plt.title("Normaal Q-Q plot van gemiddelde cijfers WNS")
 plt.xlabel("Theoretische kwantielen")
 plt.ylabel("Kwantielen in data")
@@ -158,12 +167,13 @@ In deze casus liggen de meeste punten op de lijn. Bij de uiteinden liggen de pun
 ### Boxplot
 De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8]
 
-<!-- ## BLOK: Boxplot.R -->
+<!-- ## BLOK: Boxplot.py -->
 ``` {python boxplot}
 ## Boxplot
-plt.boxplot(Gemiddeld_cijfer_WNS)
+plt.boxplot(r.Gemiddeld_cijfer_WNS)
 plt.xlabel("Werktuigbouwkunde")
 plt.ylabel("Gemiddeld_cijfer_WNS")
+plt.show()
 ```
 
 <!-- ## /BLOK: Boxplot.R -->
@@ -175,11 +185,11 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst 
 ### Kolmogorov-Smirnov
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
-<!-- ## BLOK: Lilliefors-test.R -->
+<!-- ## BLOK: Lilliefors-test.py -->
 ```{python Kolmogorov-Smirnov Test, warning=FALSE}
 ## Kolmogorov-Smirnov test
 import statsmodels.stats.api
-print(statsmodels.stats.api.lilliefors(Gemiddeld_cijfer_WNS))
+print(statsmodels.stats.api.lilliefors(r.Gemiddeld_cijfer_WNS))
 ```
 <!-- ## /BLOK: Lilliefors-test.R -->
 
@@ -190,10 +200,10 @@ De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test*
 
 Er is een steekproef van `Gemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS_n30. De steekproef bevat `r length(Gemiddeld_cijfer_WNS_n30)` studenten.
 
-<!-- ## BLOK: Shapiro-Wilk-test.R -->
+<!-- ## BLOK: Shapiro-Wilk-test.py -->
 ``` {python Shapiro-Wilk Test, warning=FALSE}
 #Shapiro-Wilk test
-print(stats.shapiro(Gemiddeld_cijfer_WNS_n30))
+print(stats.shapiro(r.Gemiddeld_cijfer_WNS_n30))
 ```
 <!-- ## /BLOK: Shapiro-Wilk-test.R -->
 
@@ -207,10 +217,10 @@ Gebruik `stats.ttest()`om een t-toets uit te voeren. Geef het gemiddelde waarmee
 De dataset met `Gemiddeld_cijfer_WNS` is ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde, *n* = `r vN`. 
 De *one sample t-toets* is uitgevoerd om de vraag te beantwoorden of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde anders is dan het landelijk gemiddelde (µ = 6,8). De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren dan het landelijk gemiddelde is er voor gekozen om tweezijdig te toetsen. 
 
-<!-- ## BLOK: T-test.R -->
+<!-- ## BLOK: T-test.py -->
 ```{python ttest}
 ## T-test
-print(stats.ttest_1samp(Gemiddeld_cijfer_WNS, popmean = 6.8))
+print(stats.ttest_1samp(r.Gemiddeld_cijfer_WNS, popmean = 6.8))
 ```
 <!-- ## /BLOK: T-test.R -->
 ```{r ttest als object, echo = FALSE}

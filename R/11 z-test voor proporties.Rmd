@@ -36,14 +36,14 @@ Round_and_format <- function(x, digits = 2) {
 ## De controller van een Universiteit is geïnteresseerd in de instroom van tweedekansstudenten. Zij vraagt zich af: Heeft onze Universiteit relatief veel tweedekansstudenten in vergelijking met het landelijke gemiddelde?
 RNGkind(sample.kind = "Rounding")
 set.seed (7)
-aantal_studenten <- 28348
+aantal_studenten <- 7348
 Studentnr <- sample(5000000:6000000, aantal_studenten)
 
-Eerder_WO <- round (rnorm(aantal_studenten, 0.4, 0.1))
-Eerder_WO [Eerder_WO == 1] <- "ja"
-Eerder_WO [Eerder_WO == 0] <- "nee"
+hbo_achtergrond <- round(rnorm(aantal_studenten, 0.4, 0.1))
+hbo_achtergrond [hbo_achtergrond == 1] <- "ja"
+hbo_achtergrond [hbo_achtergrond == 0] <- "nee"
 
-Aanmeldingen_tweedekans <- data.frame(Studentnr, Eerder_WO)
+Instroom_2018_totaal <- data.frame(Studentnr, hbo_achtergrond)
 ```
 <!-- ## /BLOK: Data-aanmaken.R -->
 # Toepassing
@@ -52,7 +52,7 @@ Gebruik de z-toets bij het vergelijken van twee proporties waarbij één een geg
 
 # Onderwijscasus
 <div id = "casus">
-De controller van een Universiteit is geïnteresseerd in de instroom van tweedekansstudenten. Zij wil weten of haar Universiteit relatief veel tweedekansstudenten heeft in vergelijking met het landelijke gemiddelde. Een tweedekansstudent is een student die bij het aanmelden voor een studie al eerder op het WO heeft gezeten.
+De controller van een Universiteit is geïnteresseerd in de instroom van studenten met een hbo achtergrond. Zij wil weten of haar Universiteit relatief veel studenten met een achtergrond in het hbo heeft in vergelijking met het landelijke gemiddelde. Zij vindt op de website van de VSNU dat studenten met een hbo achtergrond in het hbo 11,13% uitmaken van de totale instroom voor Bachelors en Masters in het wetenschappelijk onderwijs (wo) in 2018.[^1] Ze wil weten of er op haar instelling naar verhouiding meer hbo studenten zijn dan het landelijk gemiddelde. 
 
 H~0~: 
 
@@ -63,39 +63,33 @@ H~A~:
 
 
 # Uitvoering in R
-Er is een dataset ingeladen genaamd `Aanmeldingen_tweedekans`. Dit is een dataframe met binaire data over de aanmeldingen van studenten en of zij al eerder op het WO hebben gezeten.
+Er is een dataset ingeladen genaamd `Instroom_2018_totaal`. Dit is een dataframe met binaire data over de aanmeldingen van studenten en of zij al eerder op het wo hebben gezeten.
 
 ## De data bekijken
 
 <!-- ## BLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse=TRUE}
 ## Eerste 6 observaties
-head(Aanmeldingen_tweedekans)
+head(Instroom_2018_totaal)
 ## Laatste 6 observaties
-tail(Aanmeldingen_tweedekans)
+tail(Instroom_2018_totaal)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
 
-## Assumpties testen in R
-@IvdS z-test heeft geen assumpties denk ik?
-```{r assumptietest}
-
-```
 
 ## Statistische toets in R
-Maak de variabele numeriek om een z-test voor proporties te doen.
+Maak de variabele numeriek om een z-test voor proporties te doen. Gebruik `prop.test()` om een z-test voor proporties uit te voeren. Gebruik  `x =` voor de hoeveelheid studenten met een hbo achtergrond, `n =` voor de totale instroom van de universiteit, `p =` voor de referentieproportie en `alternative =` voor het soort toets (eenzijdig of tweezijdig).
 <!-- ## BLOK: Z-toets.R-->
 ```{r z-test}
-Aanmeldingen_tweedekans$Eerder_WO_num [Eerder_WO == "ja"] <- 1
-Aanmeldingen_tweedekans$Eerder_WO_num [Eerder_WO == "nee"] <- 0
+Instroom_2018_totaal$hbo_achtergrond_num [hbo_achtergrond == "ja"] <- 1
+Instroom_2018_totaal$hbo_achtergrond_num [hbo_achtergrond == "nee"] <- 0
 
-prop.test(x = sum(Aanmeldingen_tweedekans$Eerder_WO_num), 
-          n = length(Aanmeldingen_tweedekans$Eerder_WO_num), 
-          p = 0.15,
+prop.test(x = sum(Instroom_2018_totaal$hbo_achtergrond_num), 
+          n = length(Instroom_2018_totaal$hbo_achtergrond_num), 
+          p = 0.1113,
           alternative = "greater")
 ```
 <!-- ## /BLOK: Z-toets.R-->
 
-
-
+[^1]: Het percentage is een berekening op basis van cijfers van de Vereniging van Universiteiten (VSNU). In 2018 zijn er 102.147 studenten ingestroomd in Universitaire Bachelors en Masters. In dat zelfde jaar stroomden bij de universiteiten 11.374 studenten met een hbo achtergrond in. Deze studenten maken dus 11.13% uit van de totale instroom.  Deze cijfers zijn respectievelijk te vinden in de volgende website en publicatie: Vereniging van Universiteiten (2019). *Downloadbare tabellen Studenten*. Opgehaald van de website van de VSNU: https://www.vsnu.nl/nl_NL/f_c_studenten_downloads.html. Vereniging van Universiteiten (2019). *Factsheet - Nederlandse Universiteiten Zijn Toegankelijk*. Opgehaald van de website van de VSNU: https://www.vsnu.nl/files/documenten/Nederlands%20universiteiten%20zijn%20toegankelijk%20-%20tbv%20AO%20Toegankelijkheid%20en%20Kansengelijkheid%20in%20het%20hoger%20onderwijs%20d.d.%2020-2-2019.pdf
 

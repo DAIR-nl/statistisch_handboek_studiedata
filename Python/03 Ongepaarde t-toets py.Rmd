@@ -28,6 +28,8 @@ Round_and_format <- function(x, digits = 2) {
   x <- str_replace(x, "[.]", ",")
   return(x)
 }
+library(reticulate)
+knitr::knit_engines$set(python = reticulate::eng_python)
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
 
@@ -106,33 +108,42 @@ Bereken de effectmaat om te bepalen of de gevonden p-waarde van een t-toets bete
 Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap: `Cijfers_gem`. De data bevatten cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
 
 ## De data bekijken
-Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
-<!-- ## BLOK: Data-bekijken.R -->
-```{r data bekijken, collapse=TRUE}
+Gebruik `<dataframe>.head()` en `<dataframe>.tail()` om de structuur van de data te bekijken.
+<!-- ## BLOK: Data-bekijken.py -->
+```{python, include=FALSE}
+import pandas as pd
+dfCijfers_gem = pd.DataFrame(r.Cijfers_gem)
+```
+
+```{python data bekijken, collapse = TRUE}
 ## Eerste 6 observaties
-head(Cijfers_gem)
+print(dfCijfers_gem.head(6))
 
 ## Laatste 6 observaties
-tail(Cijfers_gem)
+print(dfCijfers_gem.head(6))
 ```
+
 <!-- ## /BLOK: Data-bekijken.R -->
 
 Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. 
 <!-- ## BLOK: Data-selecteren.R -->
-```{r data selecteren}
-Cijfers_2010 <- Cijfers_gem[Cijfers_gem$Cohort == 2010,1]
-Cijfers_2011 <- Cijfers_gem[Cijfers_gem$Cohort == 2011,1]
+```{python data selecteren}
+Cijfers_2010 = dfCijfers_gem[dfCijfers_gem['Cohort'] == 2010]['Cijfers']
+Cijfers_2011 = dfCijfers_gem[dfCijfers_gem['Cohort'] == 2011]['Cijfers']
 ```
 <!-- ## /BLOK: Data-selecteren.R -->
 
 Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data.
 <div class="col2">
-<!-- ## BLOK: Data-beschrijven-1.R -->
-```{r Data beschrijven 1, collapse=TRUE}
+<!-- ## BLOK: Data-beschrijven-1.py -->
+```{python Data beschrijven 1, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie 2010
-length(Cijfers_2010)
-mean(Cijfers_2010)
-sd(Cijfers_2010)
+# Om het gemiddelde en de standaard deviatie te berekenen, hebben we de library 'numpy' nodig
+import numpy as np
+
+print(len(Cijfers_2010))
+print(np.mean(Cijfers_2010))
+print(np.sqrt(np.var(Cijfers_2010)))
 ```
 <!-- ## /BLOK: Data-beschrijven-1.R -->
 ```{r Var beschrijven t0, include=FALSE, echo=TRUE}
@@ -141,12 +152,12 @@ vMean_t0 <- Round_and_format(mean(Cijfers_2010))
 vSD_t0 <-Round_and_format(sd(Cijfers_2010))
 ```
 
-<!-- ## BLOK: Data-beschrijven-2.R -->
-```{r Data beschrijven 2, collapse=TRUE}
+<!-- ## BLOK: Data-beschrijven-2.py -->
+```{python Data beschrijven 2, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie 2011
-length(Cijfers_2011)
-mean(Cijfers_2011)
-sd(Cijfers_2011)
+print(len(Cijfers_2011))
+print(np.mean(Cijfers_2011))
+print(np.sqrt(np.var(Cijfers_2011)))
 ```
 <!-- ## /BLOK: Data-beschrijven-2.R -->
 ```{r Var beschrijven t1, include=FALSE, echo=TRUE}
@@ -163,56 +174,50 @@ vSD_t1 <-Round_and_format(sd(Cijfers_2011))
 Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
-<!-- ## BLOK: Histogram.R -->
-```{r histogram}
-## Histogram met ggplot2
-library(ggplot2)
+<!-- ## BLOK: Histogram.py -->
+```{python histogram}
+## Histogram met matplotlib
+import matplotlib.pyplot as plt
+fig = plt.figure()
+fig.add_subplot(1, 2, 1)
+plt.title("2010")
+plt.hist(Cijfers_2010, density = True, edgecolor = "black", bins = 9)
 
-ggplot(Cijfers_gem,
-  aes(x = Cijfers)) +
-  geom_histogram(aes(y = ..density..),
-                 binwidth = 1,
-                 color = "grey30",
-                 fill = "#0089CF") +
-  facet_wrap(~ Cohort) +
-  geom_density(alpha = .2, adjust = 1) +
-  ylab("Frequentiedichtheid") +
-  scale_x_continuous(
-    labels = as.character(seq(1, 10)),
-    breaks = seq(1, 10)) +
-  coord_fixed(ylim = c(0, 0.4),
-              xlim = c(1, 10),
-              ratio = 22) +
-  labs(title = "Taalwetenschap gemiddelde cijfers voor en na de BSA")
+fig.add_subplot(1, 2, 2)
+plt.title("2011")
+plt.hist(Cijfers_2011, density = True, edgecolor = "black", bins = 9)
+
+fig.suptitle('Taalwetenschap gemiddelde cijfers voor en na de BSA')
+plt.show()
 ```
 <!-- ## /BLOK: Histogram.R -->
 
 Beide histogrammen laten een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom het gemiddelde.  
 
 ### Q-Q plot
-Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
-
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 <div class ="col-container">
   <div class = "col"> 
-<!-- ## BLOK: QQplot-t1.R -->
-```{r QQplot-t1}
-qqnorm(Cijfers_2010, pch = 1,
-       main = "Normaal Q-Q plot van tentamencijfers 2010",
-       ylab = "Kwantielen in data",
-       xlab = "Theoretische kwantielen")
-qqline(Cijfers_2010)
+<!-- ## BLOK: QQplot-t1.py -->
+```{python QQplot-t1}
+import scipy.stats as stats
+stats.probplot(Cijfers_2010, dist="norm", plot=plt)
+plt.title("Normaal Q-Q plot van tentamencijfers 2010")
+plt.xlabel("Theoretische kwantielen")
+plt.ylabel("Kwantielen in data")
+plt.show()
 ```
 <!-- ## /BLOK: QQplot-t1.R -->
   </div>
   <div class = "col">
-<!-- ## BLOK: QQplot-t2.R -->
-```{r QQplot-t2}
-qqnorm(Cijfers_2011, pch = 1,
-       main = "Normaal Q-Q plot van tentamencijfers 2011",
-       ylab = "Kwantielen in data",
-       xlab = "Theoretische kwantielen")
-qqline(Cijfers_2011)
+<!-- ## BLOK: QQplot-t2.py -->
+```{python QQplot-t2}
+import scipy.stats as stats
+stats.probplot(Cijfers_2011, dist="norm", plot=plt)
+plt.title("Normaal Q-Q plot van tentamencijfers 2011")
+plt.xlabel("Theoretische kwantielen")
+plt.ylabel("Kwantielen in data")
+plt.show()
 ```
 <!-- ## /BLOK: QQplot-t2.R -->
   </div>
@@ -222,10 +227,12 @@ Bij beide groepen liggen de meeste punten op de lijn behalve bij de uiteinden.
 ### Boxplot
 De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9] 
 
-<!-- ## BLOK: Boxplot.R -->
-```{r boxplot}
-boxplot(Cijfers ~ Cohort, Cijfers_gem,
-        main = "Tentamencijfers Taalwetenschap voor en na de BSA")
+<!-- ## BLOK: Boxplot.py -->
+```{python boxplot}
+fig, ax = plt.subplots()
+ax.boxplot([Cijfers_2010, Cijfers_2011], labels = ["2010", "2011"])
+plt.title("Tentamencijfers Taalwetenschap voor en na de BSA")
+plt.show()
 ```
 <!-- ## /BLOK: Boxplot.R -->
 
@@ -237,24 +244,21 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoets w
 ### Kolmogorov-Smirnov
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
-<!-- ## BLOK: Library-nortest.R -->
-```{r library nortest, warning=FALSE}
-library(nortest)
-```
 <!-- ## /BLOK: Library-nortest.R -->
-
 <div class="col-container">
   <div class = "col">
-<!-- ## BLOK: Lilliefors-test-1.R -->
-``` {r Lilliefors Test-1, warning=FALSE}
-lillie.test(Cijfers_2010)
+<!-- ## BLOK: Lilliefors-test-1.py -->
+``` {python Lilliefors Test-1, warning=FALSE}
+import statsmodels.stats.api
+print(statsmodels.stats.api.lilliefors(Cijfers_2010))
 ```
+
 <!-- ## /BLOK: Lilliefors-test-1.R -->
   </div>
   <div class = "col">
-<!-- ## BLOK: Lilliefors-test-2.R -->
-``` {r Lilliefors Test-2, warning=FALSE}
-lillie.test(Cijfers_2011)
+<!-- ## BLOK: Lilliefors-test-2.py -->
+``` {python Lilliefors Test-2, warning=FALSE}
+print(statsmodels.stats.api.lilliefors(Cijfers_2011))
 ```
 <!-- ## /BLOK: Lilliefors-test-2.R -->
   </div>
@@ -268,16 +272,16 @@ De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test*
 Er zijn 2 steekproeven van `Cijfers_gem` ingeladen: `Cijfers_2010_n30` en `Cijfers_2011_n30`. Beide steekproeven bevatten `r length(Cijfers_2010_n30)` studenten
 <div class = "col-container">
   <div class="col">
-<!-- ## BLOK: Shapiro-Wilk-test-1.R -->
-``` {r Shapiro-Wilk Test-1, warning=FALSE}
-shapiro.test(Cijfers_2011_n30)
+<!-- ## BLOK: Shapiro-Wilk-test-1.py -->
+``` {python Shapiro-Wilk Test-1, warning=FALSE}
+print(stats.shapiro(r.Cijfers_2011_n30))
 ```
 <!-- ## /BLOK: Shapiro-Wilk-test-1.R -->
   </div>
   <div class="col">
-<!-- ## BLOK: Shapiro-Wilk-test-2.R -->
-``` {r Shapiro-Wilk Test-2, warning=FALSE}
-shapiro.test(Cijfers_2010_n30)
+<!-- ## BLOK: Shapiro-Wilk-test-2.py -->
+``` {python Shapiro-Wilk Test-2, warning=FALSE}
+print(stats.shapiro(r.Cijfers_2010_n30))
 ```
 <!-- ## /BLOK: Shapiro-Wilk-test-2.R -->
   </div>
@@ -287,13 +291,14 @@ De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevon
 ## Test assumpties: Levene's test
 Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. Gebruik hier weer het hele dataframe `Cijfers_gem`.
 
-<!-- ## BLOK: Levenes-test.R -->
-```{r Levenes test, message=FALSE, warning=FALSE, collapse=TRUE}
-library(car)
-leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
+<!-- ## BLOK: Levenes-test.py -->
+```{python Levenes test, message=FALSE, warning=FALSE, collapse=TRUE}
+print(stats.levene(dfCijfers_gem["Cijfers"], dfCijfers_gem["Cohort"]))
 ```
+
 <!-- ## /BLOK: Levenes-test.R -->
 ```{r Levenes test als object, echo = FALSE, warning=FALSE}
+library(car)
 L <- leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 vF_waarde <- Round_and_format(L$`F value`[1])
 vF_p <- Round_and_format(L$`Pr(>F)`[1])
@@ -309,12 +314,9 @@ Voer een ongepaarde `t.test()` uit met `paired = FALSE` en `var.equal = TRUE`. A
 
 De *ongepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het het gemiddelde tentamencijfer van de opleiding Taalwetenschap na invoering van het BSA veranderd is. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren na de invoering is er voor gekozen om tweezijdig te toetsen. 
 
-<!-- ## BLOK: T-test.R -->
-```{r statistische toets}
-t.test(Cijfers ~ Cohort, Cijfers_gem, 
-       paired = FALSE,
-       alternative = "two.sided",
-       var.equal = TRUE)
+<!-- ## BLOK: T-test.py -->
+```{python statistische toets}
+print(stats.ttest_ind(dfCijfers_gem["Cijfers"], dfCijfers_gem["Cohort"]))
 ```
 <!-- ## /BLOK: T-test.R -->
 ```{r T-test als object, echo = FALSE}

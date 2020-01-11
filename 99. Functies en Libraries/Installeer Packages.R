@@ -1,8 +1,8 @@
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## Installeer Packages.R
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-### R code voor Student Analytics Vrije Universiteit Amsterdam
-## Copyright 2019 VU
+### R code voor het Statistisch Handboek van het Versnellingsplan
+## Copyright 2020 VU
 ## Web Page: http://www.vu.nl
 ## Contact: Theo Bakker (t.c.bakker@vu.nl)
 ## Project: Versnellingsplan - Statistisch Handboek Studiedata

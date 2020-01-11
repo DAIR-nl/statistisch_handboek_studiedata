@@ -1,7 +1,7 @@
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## R Data naar SPSS.R
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## R code voor Student Analytics Vrije Universiteit Amsterdam
+## R code voor het Statistisch Handboek van het Versnellingsplan
 ## Copyright `r format(Sys.time(), "%Y")` VU
 ## Web Page: http://www.vu.nl
 ## Contact: Theo Bakker (t.c.bakker@vu.nl)

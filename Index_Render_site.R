@@ -1,7 +1,7 @@
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## Index_Render_site.R ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## R code voor Student Analytics Vrije Universiteit Amsterdam
+## R code voor het Statistisch Handboek van het Versnellingsplan
 ## Copyright 2019 VU
 ## Web Page: http://www.vu.nl
 ## Contact: Theo Bakker (t.c.bakker@vu.nl)

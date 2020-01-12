@@ -27,7 +27,7 @@ Welke toets gebruikt wordt ligt in eerste instantie aan de welke type data is ve
   
 
 ```{r, echo = FALSE}
-htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/toetsmatrix.html"))
+htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/R/toetsmatrix.html"))
 ```
 
 # Toelichting op de mogelijke keuzes

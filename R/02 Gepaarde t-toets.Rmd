@@ -350,17 +350,17 @@ Gebruik `t.test()` met `paired = TRUE` om een *gepaarde t-toets* uit te voeren. 
 
 De *gepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het gemiddelde tentamencijfer verandert na een tutorgesprek. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren na een gesprek is er voor gekozen om tweezijdig te toetsen. 
 
-<!-- ## BLOK: T-toets -->
+<!-- ## BLOK: T-toets.R -->
 ```{r T-test}
 t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, 
        paired = TRUE,
        alternative = "two.sided")
 ```
-<!-- ## BLOK: T-toets -->
+<!-- ## /BLOK: T-toets.R -->
 ```{r T-test als object, echo = FALSE}
 t <- t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 vT_waarde <- Round_and_format(t$statistic)
-vN <- t$parameter+1
+vN <- t$parameter + 1
 vDF <- t$parameter
 vconf.int1 <- Round_and_format(t$conf.int[1])
 vconf.int2 <- Round_and_format(t$conf.int[2])

@@ -28,8 +28,6 @@ Round_and_format <- function(x, digits = 2) {
   x <- str_replace(x, "[.]", ",")
   return(x)
 }
-library(reticulate)
-knitr::knit_engines$set(python = reticulate::eng_python)
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
 
@@ -156,7 +154,7 @@ Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5
 Er is een dataset ingeladen met gemiddelde tentamencijfer voor (T~0~) en na (T~1~) een tutorgesprek: `Tentamencijfers`. 
 
 ## De data bekijken
-Gebruik `<dataframe>.head()` en `<dataframe>.tail()` om de structuur van de data te bekijken.
+Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 <!-- ## BLOK: Data-bekijken.py -->
 ```{python, include=FALSE}
 import pandas as pd
@@ -183,6 +181,7 @@ Tentamencijfer_na_tutorgesprek = dfTentamencijfers[dfTentamencijfers['Voor_of_na
 ```
 <!-- ## /BLOK: Data-selecteren.py -->
 
+<div class="col2">
 <!-- ## BLOK: Data-beschrijven-1.py -->
 ```{python}
 # Om het gemiddelde en de standaard deviatie te berekenen, hebben we de library 'numpy' nodig
@@ -200,10 +199,10 @@ print(np.sqrt(np.var(Tentamencijfer_voor_tutorgesprek)))
 <!-- ## /BLOK: Data-beschrijven-1.py -->
 ```{r Var beschrijven t0, include=FALSE, echo=TRUE}
 vMean_t0 <- Round_and_format(mean(Tentamencijfer_voor_tutorgesprek))
-vSD_t0 <- Round_and_format(sd(Tentamencijfer_voor_tutorgesprek))
+vSD_t0 <-Round_and_format(sd(Tentamencijfer_voor_tutorgesprek))
 vN_t0 <- Round_and_format(length(Tentamencijfer_voor_tutorgesprek))
 ```
-  </div>
+  
 <!-- ## BLOK: Data-beschrijven-2.py -->
  <div class = "col">
 ```{python data bekijken t2, collapse=TRUE}
@@ -218,7 +217,6 @@ vMean_t1 <- Round_and_format(mean(Tentamencijfer_na_tutorgesprek))
 vSD_t1 <- Round_and_format(sd(Tentamencijfer_na_tutorgesprek))
 vN_t1 <- Round_and_format(length(Tentamencijfer_na_tutorgesprek))
 ```
-  </div>
 </div>
 
 * Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): `r vMean_t0` (`r vSD_t0`). *n* = `r vN_t0`.
@@ -249,13 +247,9 @@ plt.show()
 Beide histogrammen laten een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom de gemiddeldes. Opvallend is dat het histogram van voor het tutorgesprek veel waardes in de linkerstaart van de verdeling heeft liggen.  
 
 ### Q-Q plot
-Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
+Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
 
-<!-- ## BLOK: QQplot-inladen.py -->
-```{python}
-import scipy.stats as stats
-```
-<!-- ## /BLOK: QQplot-inladen.py -->
+Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 
 <div class = "col-container">
   <div class="col">
@@ -306,10 +300,11 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst 
 ### Kolmogorov-Smirnov 
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
-```{python}
-import statsmodels.stats.api
+<!-- ## BLOK: Library-nortest.R -->
+```{r library nortest, warning=FALSE}
+library(nortest)
 ```
-
+<!-- ## /BLOK: Library-nortest.R -->
 <div class="col-container">
   <div class = "col">
 <!-- ## BLOK: Lilliefors-test-1.py -->
@@ -354,6 +349,8 @@ print(stats.shapiro(r.Tentamencijfer_na_tutorgesprek_n30))
 Voor beide groepen is de *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden.  
 
 ## Gepaarde t-toets
+Gebruik `t.test()` met `paired = TRUE` om een *gepaarde t-toets* uit te voeren. Gebruik hier weer het hele dataframe `Tentamencijfers`. 
+
 De *gepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het gemiddelde tentamencijfer verandert na een tutorgesprek. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren na een gesprek is er voor gekozen om tweezijdig te toetsen. 
 
 <!-- ## BLOK: T-toets.py -->

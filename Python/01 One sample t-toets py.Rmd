@@ -111,7 +111,7 @@ print(dfGemiddeld_cijfer_WNS.head(6))
 # Laatste 6 observaties
 print(dfGemiddeld_cijfer_WNS.tail(6))
 ```
-<!-- ## /BLOK: Data-bekijken.R -->
+<!-- ## /BLOK: Data-bekijken.py -->
 
 Krijg meer inzicht in de dataset door het gemiddelde en de spreiding te bekijken, `len()`, `np.mean()` en `np.sqrt(np.var())`, door deze aan te roepen uit de library `numpy`.
 
@@ -125,7 +125,7 @@ print(len(r.Gemiddeld_cijfer_WNS))
 print(np.mean(r.Gemiddeld_cijfer_WNS))
 print(np.sqrt(np.var(r.Gemiddeld_cijfer_WNS)))
 ```
-<!-- ## /BLOK: Data-beschrijven.R -->
+<!-- ## /BLOK: Data-beschrijven.py -->
 ```{r Var beschrijven t1, include=FALSE, echo=TRUE}
 vMean <- Round_and_format(mean(Gemiddeld_cijfer_WNS))
 vSD <- Round_and_format(sd(Gemiddeld_cijfer_WNS))
@@ -148,7 +148,7 @@ xlab = plt.xlabel("Gemiddeld_Cijfer_WNS")
 ylab = plt.ylabel("Frequentiedichtheid")
 plt.show()
 ```
-<!-- ## /BLOK: Histogram.R -->
+<!-- ## /BLOK: Histogram.py -->
 
 Het histogram laat een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
 
@@ -163,8 +163,7 @@ xlab = plt.xlabel("Theoretische kwantielen")
 ylab = plt.ylabel("Kwantielen in data")
 plt.show()
 ```
-
-<!-- ## /BLOK: QQplot.R -->
+<!-- ## /BLOK: QQplot.py -->
 In deze casus liggen de meeste punten op de lijn. Bij de uiteinden liggen de punten dichtbij de lijn. 
 
 ### Boxplot
@@ -178,8 +177,8 @@ x = plt.xlabel("Werktuigbouwkunde")
 y = plt.ylabel("Gemiddeld_cijfer_WNS")
 plt.show()
 ```
+<!-- ## /BLOK: Boxplot.py -->
 
-<!-- ## /BLOK: Boxplot.R -->
 De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte vakken weer van de studenten Werktuigbouwkunde. De box en staarten zien er symmetrisch uit, wat een indicatie is van een normale verdeling.  
 
 ## Toetsen van normaliteit
@@ -194,7 +193,7 @@ De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standa
 import statsmodels.stats.api
 print(statsmodels.stats.api.lilliefors(r.Gemiddeld_cijfer_WNS))
 ```
-<!-- ## /BLOK: Lilliefors-test.R -->
+<!-- ## /BLOK: Lilliefors-test.py -->
 
 De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.  
 
@@ -208,7 +207,7 @@ Er is een steekproef van `Gemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS
 #Shapiro-Wilk test
 print(stats.shapiro(r.Gemiddeld_cijfer_WNS_n30))
 ```
-<!-- ## /BLOK: Shapiro-Wilk-test.R -->
+<!-- ## /BLOK: Shapiro-Wilk-test.py -->
 
 De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
 
@@ -225,7 +224,7 @@ De *one sample t-toets* is uitgevoerd om de vraag te beantwoorden of het gemidde
 ## T-test
 print(stats.ttest_1samp(r.Gemiddeld_cijfer_WNS, popmean = 6.8))
 ```
-<!-- ## /BLOK: T-test.R -->
+<!-- ## /BLOK: T-test.py -->
 ```{r ttest als object, echo = FALSE}
 t <- t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 vP <- Round_and_format(t$p.value)

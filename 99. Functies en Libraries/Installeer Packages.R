@@ -69,7 +69,7 @@ if (length(Nieuwe_packages) > 0) {
 
 
 # Laad de packages in de library
-lapply(Gebruikte_packages, library, character.only = TRUE)
+lapply(Gebruikte_packages, library, character.only = TRUE, quietly = TRUE)
 
 # Ruim op
 rm(Gebruikte_packages,

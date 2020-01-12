@@ -29,7 +29,7 @@
 ## script in.
 if (!exists("Substitute_var")) {
   ## Installeer packages en functies
-  source("99. Functies en Libraries/00. Voorbereidingen.R")
+  source("99. Functies en Libraries/00. Voorbereidingen.R", echo = FALSE)
 }    
 
 ## Plaats  variabelen in een lijst: de root van de site

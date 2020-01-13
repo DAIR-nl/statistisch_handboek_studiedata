@@ -73,7 +73,7 @@ De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht is geïnte
 
 H~0~: De vooropleiding is niet bepalend voor het aantal studiepunten dat de Masterstudenten Arbeidsrecht behalen in het eerste jaar.  
 
-H~1~: De vooropleiding is bepalend voor het aantal studiepunten dat de Masterstudenten Arbeidsrecht behalen in het eerste jaar.
+H~A~: De vooropleiding is bepalend voor het aantal studiepunten dat de Masterstudenten Arbeidsrecht behalen in het eerste jaar.
 </div>
 # Assumpties
 Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden: De data zijn (semi-)continu,[^5] de groepen zijn onafhankelijk van elkaar [^6] en het aantal groepen > 2. Gebruik bij 2 groepen de *Mann-Whitney U toets*.
@@ -208,12 +208,13 @@ De *Kruskal Wallis toets* is uitgevoerd om te toetsen of een vooropleiding bepal
 
 Zie tabel voor aantallen studenten per opleiding, eerste kwantiel, mediaan en derde kwantiel.   
 
-| Opleiding     | N          | Q1         | M           | Q3          |
+| Vooropleiding     | N          | Q1         | M           | Q3          |
 | ------------- | ---------- | ---------- | ----------- | ----------- |
 | Fiscaal Recht      | `r vN_FIS` | `r vQ1_FIS` | `r vMed_FIS` | `r vQ3_FIS` |
 | Notarieel Recht     | `r vN_NOT` | `r vQ1_NOT` | `r vMed_NOT` | `r vQ3_NOT` |
 | Rechtsgeleerdheid  | `r vN_RCH` | `r vQ1_RCH` | `r vMed_RCH` | `r vQ3_RCH` |
 | Pre-master          | `r vN_PM`| `r vQ1_PM` | `r vMed_PM` | `r vQ3_PM` |
+*Tabel 1. Groepsgrootte, 1e kwantiel, mediaan en 3e kwantiel per vooropleiding*
 
 Met een post-hoc toets is het verschil tussen de vooropleidingen getoetst. De studenten met Rechtsgeleerdheid als vooropleiding behalen statistisch significant minder punten bij de Master Arbeidsrecht, dan de studenten met een andere vooropleiding. Er is een statistisch significant verschil gevonden tussen de behaalde studiepunten van studenten met de vooropleiding Notarieel Recht en de pre-master, waarbij de studenten van de pre-master minder punten behaalden dan de studenten van Notarieel Recht.  
 

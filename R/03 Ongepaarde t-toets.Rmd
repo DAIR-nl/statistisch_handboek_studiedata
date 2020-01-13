@@ -360,6 +360,8 @@ Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentam
 | -------- | --------- | ------------ | ---------- |
 | 2010     | `r vN_t0` | `r vMean_t0` | `r vSD_t0` |
 | 2011     | `r vN_t1` | `r vMean_t1` | `r vSD_t1` |
+*Tabel 1. Groepsgrootte, gemiddeld tentamencijfer en standaarddeviatie per cohort*
+
 
 [^1]: Van Geloven, N. (25 mei 2016). *T-toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/T-toets#ongepaarde_t-toets).
 [^2]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). Tthe importance of the normality assumption in large public health data sets. *Annu Rev Public Health, 23*, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf 

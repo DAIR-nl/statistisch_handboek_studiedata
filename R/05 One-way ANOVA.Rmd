@@ -435,6 +435,7 @@ Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de
 | Arabisch      | `r vN_ATC` | `r vM_ATC` | `r vSD_ATC` |
 | Filosofie     | `r vN_FIL` | `r vM_FIL` | `r vSD_FIL` |
 | Geschiedenis  | `r vN_GSC` | `r vM_GSC` | `r vSD_GSC` |
+*Tabel 1. Groepsgrootte, gemiddelde reistijd en standaarddeviatie per opleiding*
 
 *Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen. Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = `r vATCvsFIL`, p < 0,01). Tussen Geschiedenis en Arabische Taal en Cultuur is een significant verschil (*MD* = `r vATCvsGSC`, p < 0,01). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = `r vFILvsGSC`, p = 0,26). 
 

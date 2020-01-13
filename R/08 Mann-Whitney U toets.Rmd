@@ -80,7 +80,7 @@ De directeur van een hogeschool vraagt zich af wat de invloed is van internation
 
 H~0~: Het behaalde aantal EC in het tweede jaar van internationale studenten is hetzelfde als van Nederlandse studenten. 
 
-H~1~: Het behaalde aantal EC in het tweede jaar van internationale studenten is anders als van Nederlandse studenten.
+H~A~: Het behaalde aantal EC in het tweede jaar van internationale studenten is anders als van Nederlandse studenten.
 </div>
 
 # Assumpties

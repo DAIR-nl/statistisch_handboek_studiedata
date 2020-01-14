@@ -255,6 +255,7 @@ Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen wor
   <div class="col">
 <!-- ## BLOK: QQplot-1.py -->
 ```{python qqplot}
+import scipy.stats as stats
 qq = stats.probplot(Tentamencijfer_voor_tutorgesprek, dist="norm", plot=plt)
 title = plt.title("Normaal Q-Q plot van tentamencijfers voor tutorgesprek")
 xlab = plt.xlabel("Theoretische kwantielen")
@@ -309,6 +310,7 @@ library(nortest)
   <div class = "col">
 <!-- ## BLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
+import statsmodels.stats.api
 print(statsmodels.stats.api.lilliefors(Tentamencijfer_voor_tutorgesprek))
 ```
 <!-- ## /BLOK: Lilliefors-test-1.py -->

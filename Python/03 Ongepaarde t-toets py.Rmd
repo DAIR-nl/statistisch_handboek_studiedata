@@ -301,9 +301,10 @@ De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevon
 Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. Gebruik hier weer het hele dataframe `Cijfers_gem`.
 
 <!-- ## BLOK: Levenes-test.py -->
-```{python Levenes test, message=FALSE, warning=FALSE, collapse=TRUE}
-print(stats.levene(dfCijfers_gem["Cijfers"], dfCijfers_gem["Cohort"]))
+```{python Levenes test}
+print(stats.levene(Cijfers_2010, Cijfers_2011))
 ```
+<!-- ## BLOK: Levenes-test.py -->
 
 <!-- ## /BLOK: Levenes-test.R -->
 ```{r Levenes test als object, echo = FALSE, warning=FALSE}
@@ -325,7 +326,7 @@ De *ongepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het het 
 
 <!-- ## BLOK: T-test.py -->
 ```{python statistische toets}
-print(stats.ttest_ind(dfCijfers_gem["Cijfers"], dfCijfers_gem["Cohort"]))
+print(stats.ttest_ind(Cijfers_2010, Cijfers_2011))
 ```
 <!-- ## /BLOK: T-test.R -->
 ```{r T-test als object, echo = FALSE}

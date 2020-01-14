@@ -85,9 +85,9 @@ Gebruik de *one-way ANOVA* bij het toetsen of het gemiddelde van drie of meer on
 <div id = "casus">
 In verband met wervingsactiviteiten wil het hoofd van de afdeling Communicatie weten wat de reistijd is van studenten aan verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. 
 
-H~0~: De gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar: µ~1~ = µ~2~ = µ~3~   
+*H~0~*: De gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar: µ~1~ = µ~2~ = µ~3~   
 
-H~A~: Tenminste voor één opleiding is de gemiddelde reistijd niet gelijk aan de gemiddelde reistijd van studenten voor andere opleidingen, bijvoorbeeld: µ~1~ ≠ µ~2~ = µ~3~ 
+*H~A~*: Tenminste voor één opleiding is de gemiddelde reistijd niet gelijk aan de gemiddelde reistijd van studenten voor andere opleidingen, bijvoorbeeld: µ~1~ ≠ µ~2~ = µ~3~ 
 </div>
 
 # Assumpties

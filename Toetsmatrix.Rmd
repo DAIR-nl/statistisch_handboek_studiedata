@@ -70,7 +70,7 @@ Numeriek (continu):
 
 Categorisch (discreet):
 
-nominaal: een variabele die niet afhankelijk van elkaar zijn en op inhoudelijke basis geordend kan worden. Voorbeelden hiervan zijn geslacht of achternamen. Een binaire variabel is een voorbeeld van een nominale variabel. Binaire variabelen hebben twee mogelijkheden, ja of nee, terwijl nominale variabelen meerdere mogelijkheden hebben. 
+Nominaal: variabelen die niet afhankelijk van elkaar zijn en niet op inhoudelijke basis geordend kunnen worden.Voorbeelden hiervan zijn geslacht of achternamen. Een binaire variabele is een voorbeeld van een nominale variabele. Binaire variabelen hebben twee mogelijkheden, ja of nee, terwijl nominale variabelen meerdere mogelijkheden hebben. 
 
 ***
 

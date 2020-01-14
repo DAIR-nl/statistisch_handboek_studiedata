@@ -395,6 +395,7 @@ Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencij
 | --------   | --------- | ------------ | ---------- |
 | T~0~       | `r vN_t0` | `r vMean_t0` | `r vSD_t0` |
 | T~1~       | `r vN_t1` | `r vMean_t1` | `r vSD_t1` |
+*Tabel 1. Groepsgrootte, gemiddeld tentamencijfer en standaarddeviatie per meetmoment*
 
 Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor. Het effect is minimaal.  
 

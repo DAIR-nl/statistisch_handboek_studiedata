@@ -72,19 +72,19 @@ Gebruik de *Mann-Whitney U toets* om te toetsen of twee onafhankelijke groepen s
 
 Deze toets wordt ook *Mann–Whitney–Wilcoxon*, *Wilcoxon rank-sum toets*, of *Wilcoxon–Mann–Whitney toets* genoemd.[^1] Niet te verwarren met de *Wilcoxon Signed Rank Test* die toets of twee afhankelijke groepen significant van elkaar verschillen. 
 
-De *Mann-Whitney U toets* kan een alternatief zijn voor de *ongepaarde t-toets*. De *Mann-Whitney U toets* is verdelingsvrij, hierdoor is normaliteit geen assumptie voor de toets. Bij *Mann-Whitney U toets* hebben uitbijters minder invloed op het eindresultaat, dan bij de *ongepaarde t-toets*. Ondanks deze voordelen wordt er toch minder vaak vaak voor deze toets gekozen. Als de data wel normaal verdeeld zijn, heeft de *Mann-Whitney U toets* minder onderscheidend vermogen, dan de *ongepaarde t-toets*.[^2]
+De *Mann-Whitney U toets* kan een alternatief zijn voor de *ongepaarde t-toets*. De *Mann-Whitney U toets* stelt minder eisen aan de data en hoeft onder andere niet te voldoen aan de assumptie normaliteit. Bij de *Mann-Whitney U toets* hebben uitbijters hebben minder invloed op het eindresultaat dan bij de *ongepaarde t-toets*. Daarentegen, als de data wel normaal verdeeld zijn, heeft de *Mann-Whitney U toets* minder onderscheidend vermogen dan de *ongepaarde t-toets*.[^2] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Mann-Whitney U toets* test gekozen wordt. 
 
 # Onderwijscasus
 <div id ="casus">
 De directeur van een hogeschool vraagt zich af wat de invloed is van internationalisering op zijn instelling. Om uitval een minder grote rol te laten spelen gebruikt hij hiervoor het totaal aantal punten behaald in het tweedejaar. Hij vraagt af: ‘Is het behaald aantal EC in het tweede jaar van internationale studenten anders is dan van de Nederlandse studenten?’ 
 
-H~0~: Het behaalde aantal EC in het tweede jaar van internationale studenten is hetzelfde als van Nederlandse studenten. 
+*H~0~*: Het behaalde aantal EC in het tweede jaar van internationale studenten is hetzelfde als van Nederlandse studenten. 
 
-H~A~: Het behaalde aantal EC in het tweede jaar van internationale studenten is anders als van Nederlandse studenten.
+*H~A~*: Het behaalde aantal EC in het tweede jaar van internationale studenten is anders als van Nederlandse studenten.
 </div>
 
 # Assumpties
- Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden: De data zijn nomimaal, ordinaal of numeriek. De groepen zijn onafhankelijk van elkaar [^3] en het aantal groepen is 2. Gebruik bij > 2 groepen de *Kruskal Wallis toets*.
+ Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden: de data zijn nomimaal, ordinaal of numeriek. De groepen zijn onafhankelijk van elkaar [^3] en het aantal groepen is 2. Gebruik bij > 2 groepen de *Kruskal Wallis toets*.
 
 # Uitvoering 
 Er is data ingeladen met het aantal punten dat studenten in hun tweede jaar halen. `Punten_jaar2_NL` bevat Nederlandse studenten, `Punten_jaar2_inter` bevat internationale studenten. 

@@ -85,15 +85,15 @@ Gebruik de *Wilcoxon signed rank toets* om te toetsen of bij een herhaalde metin
 <div id ="casus">
 De directeur van de Academie Mens & Maatschappij wil bekijken hoe het inkomen van zijn alumni zich ontwikkeld nadat zij zijn afgestudeerd. Hij bekijkt de maandelijke inkomens van de alumni 1 jaar na afstuderen en vergelijkt het met de inkomen 5 jaar na afstuderen. 
 
-H~0~: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd niet veranderd.  
-H~A~: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd veranderd. 
+*H~0~*: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd niet veranderd.  
+*H~A~*: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd veranderd. 
 
 </div>
 
 # Assumpties
 De data zijn nomimaal, ordinaal of numeriek gemeten. De *Wilcoxon Signed Rank Test* kan een alternatief zijn voor de *gepaarde t-toets*. 
 
-De *Wilcoxon Signed Rank Test* is verdelingsvrij, hierdoor is normaliteit geen assumptie voor de toets. Bij de *Wilcoxon Signed Rank Test* hebben uitbijters hebben minder invloed op het eindresultaat, dan bij de *gepaarde t-toets*. Ondanks deze voordelen wordt er toch minder vaak voor deze test gekozen. Als de data wel normaal verdeeld zijn, heeft de *Wilcoxon Signed Rank Test* minder onderscheidend vermogen dan de *gepaarde t-toets*.[^2]<sup>, </sup>[^3]   
+De *Wilcoxon Signed Rank Test* telt geen eisen aan de data en hoeft onder andere niet te voldoen aan de assumptie normaliteit. Bij de *Wilcoxon Signed Rank Test* hebben uitbijters hebben minder invloed op het eindresultaat, dan bij de *gepaarde t-toets*. Daarentegen, als de data wel normaal verdeeld zijn, heeft de *Wilcoxon Signed Rank Test* minder onderscheidend vermogen dan de *gepaarde t-toets*.[^2]<sup>, </sup>[^3] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Wilcoxon Signed Rank Test* test gekozen wordt. 
 
 # Uitvoering
 Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij genaamd `Maandelijks_inkomen`. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkeld 5 jaar nadat zij afgestudeerd zijn. Meetmoment T~1~ is 1 jaar na afstuderen, meetmoment T2 is 5 jaar na afstuderen. 

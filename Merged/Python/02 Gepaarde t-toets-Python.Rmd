@@ -127,9 +127,9 @@ Gebruik de *gepaarde t-toets* om te toetsen of bij een herhaalde meting de gemid
 <div id ="casus">
 Ter voorbereiding op een visitatie vraagt de opleidingsdirecteur van de lerarenopleiding zich af of het gemiddelde tentamencijfer veranderd na een tutorgesprek. Ze bekijkt het gemiddelde tentamencijfer van de onderwijsperiode voor het tutorgesprek (T~0~) en het gemiddelde cijfer van de onderwijsperiode na het tutorgesprek (T~1~). 
 
-H~0~: Het gemiddelde tentamencijfer per onderwijsperiode verandert niet na het tutorgesprek, µ~T0~ = µ~T1~  
+*H~0~*: Het gemiddelde tentamencijfer per onderwijsperiode verandert niet na het tutorgesprek, µ~T0~ = µ~T1~  
 
-H~A~: Het gemiddelde tentamencijfer per onderwijsperiode verandert na het tutorgesprek, µ~T0~ ≠ µ~T1~ 
+*H~A~*: Het gemiddelde tentamencijfer per onderwijsperiode verandert na het tutorgesprek, µ~T0~ ≠ µ~T1~ 
 </div>
 
 # Assumpties
@@ -255,7 +255,6 @@ Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen wor
   <div class="col">
 <!-- ## BLOK: QQplot-1.py -->
 ```{python qqplot}
-import scipy.stats as stats
 qq = stats.probplot(Tentamencijfer_voor_tutorgesprek, dist="norm", plot=plt)
 title = plt.title("Normaal Q-Q plot van tentamencijfers voor tutorgesprek")
 xlab = plt.xlabel("Theoretische kwantielen")
@@ -310,7 +309,6 @@ library(nortest)
   <div class = "col">
 <!-- ## BLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
-import statsmodels.stats.api
 print(statsmodels.stats.api.lilliefors(Tentamencijfer_voor_tutorgesprek))
 ```
 <!-- ## /BLOK: Lilliefors-test-1.py -->

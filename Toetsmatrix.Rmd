@@ -36,7 +36,7 @@ htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/R/toetsmatrix.htm
 
 Numeriek (continu):  
 * *continu*: Een continue waarde kan iedere waarde aannemen tussen twee meetpunten. De meest bekende continue variabelen zijn lengte en lichaamsgewicht. https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS
-* *Semi-continue data*: de data zijn discreet (een voorbeeld van discrete getallen zijn gehele getallen zijn) met zoveel optiemogelijkheden dat de data geanalyseerd kan worden alsof ze continu zijn. Van Geloven, N. (21 November 2017). *KEUZE TOETS*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS).
+* *Semi-continue data*: de data zijn discreet, bijvoorbeeld gehele getallen, met zoveel mogelijkheden dat de data geanalyseerd kunnen worden alsof ze continu zijn. Van Geloven, N. (21 November 2017). *KEUZE TOETS*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS).
 
 Wanneer de data continu is, is de data ook normaal verdeeld? 
  De normale verdeling is de gestandaardiseerde weergave van een verwachting wat een populatie zou scoren op een bepaalde eigenschap met veel datapunten rondom het gemiddelde en weinig datapunten in de staarten. Het ziet er uit als een klokvorm, zie afbeelding **AFBEELDING**. In het midden lig de verwachtingswaarde *µ* De spreiding van de data wordt weergegeven met de standaardafwijking *σ*.   https://en.wikipedia.org/wiki/Normal_distribution

@@ -20,7 +20,7 @@ output:
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 
-<!-- ## BLOK: Functiedefinities.R -->
+<!-- ## OPENBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -31,7 +31,7 @@ Round_and_format <- function(x, digits = 2) {
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
 
-<!-- ## BLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## De controller van een Universiteit is geïnteresseerd in de instroom van tweedekansstudenten. Zij vraagt zich af: Heeft onze Universiteit relatief veel tweedekansstudenten in vergelijking met het landelijke gemiddelde?
 RNGkind(sample.kind = "Rounding")
@@ -67,7 +67,7 @@ Er is een dataset ingeladen genaamd `Instroom_2018_totaal`. Dit is een dataframe
 
 ## De data bekijken
 
-<!-- ## BLOK: Data-bekijken.R -->
+<!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse=TRUE}
 ## Eerste 6 observaties
 head(Instroom_2018_totaal)
@@ -79,7 +79,7 @@ tail(Instroom_2018_totaal)
 
 ## Statistische toets in R
 Maak de variabele numeriek om een z-test voor proporties te doen. Gebruik `prop.test()` om een z-test voor proporties uit te voeren. Gebruik  `x =` voor de hoeveelheid studenten met een hbo achtergrond, `n =` voor de totale instroom van de universiteit, `p =` voor de referentieproportie en `alternative =` voor het soort toets (eenzijdig of tweezijdig).
-<!-- ## BLOK: Z-toets.R-->
+<!-- ## OPENBLOK: Z-toets.R-->
 ```{r z-test}
 Instroom_2018_totaal$hbo_achtergrond_num [hbo_achtergrond == "ja"] <- 1
 Instroom_2018_totaal$hbo_achtergrond_num [hbo_achtergrond == "nee"] <- 0

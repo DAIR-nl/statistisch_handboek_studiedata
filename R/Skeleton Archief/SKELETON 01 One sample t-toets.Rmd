@@ -165,7 +165,7 @@ td.unpublished a:hover {
 <!-- Klippy: kopieer code -->
 
 <!-- 0. Dummydata -->
-<!-- ## BLOK: Toets-dummydata.R -->
+<!-- ## OPENBLOK: Toets-dummydata.R -->
 
 <!-- ## /BLOK: Toets-dummydata.R -->
 <!-- ![Caption](images/zone-logo.png) -->
@@ -221,7 +221,7 @@ Er zijn twee datasets `Gemiddeld_cijfer_WNS` en `Gemiddeld_cijfer_WNS_n30` ingel
 ## Gemiddelde en standaarddeviatie 
 Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data.
 
-<!-- ## BLOK: Toets-datainspectie.R -->
+<!-- ## OPENBLOK: Toets-datainspectie.R -->
 
 ```r
 ## Gemiddelde en standaarddeviatie
@@ -238,7 +238,7 @@ Geef de data visueel weer met een histogram, Q-Q plot of boxplot.
 
 [//Histogram]: # Histogram
 ### Histogram
-<!-- ## BLOK: Toets-histogram.R -->
+<!-- ## OPENBLOK: Toets-histogram.R -->
 
 ```r
 ## Histogram met ggplot2 en plotly
@@ -266,7 +266,7 @@ ggplotly(h) %>% config(displayModeBar = F)
 Gebruik `qqnorm()` en `qqline()` met `pch = 1` om gevulde datapunten  Q-Q plot te maken met kleine cirkels. 
 
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is. 
-<!-- ## BLOK: Toets-qqplot.R -->
+<!-- ## OPENBLOK: Toets-qqplot.R -->
 
 ```r
 ## Q-Q plot
@@ -282,7 +282,7 @@ qqline(Gemiddeld_cijfer_WNS)
 [//Boxplot]: # Boxplot
 ### Boxplot
 Controleer de data visueel met een boxplot. De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer per periode voor de Lerarenopleiding. De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren uitbijters.
-<!-- ## BLOK: Toets-boxplot.R -->
+<!-- ## OPENBLOK: Toets-boxplot.R -->
 
 ```r
 ## Boxplot
@@ -302,7 +302,7 @@ Om te controleren of de data, ondanks eventuele afwijkende punten of een scheef 
 [//Kolmogorov-Smirnov test]: # Kolmogorov-Smirnov test
 ### Kolmogorov-Smirnov test
 De *Kolmogorov-Smirnov test* toetst het verschil in vorm tussen twee verdelingen. In deze casus toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p-waarde < 0,05 is de verdeling van de data significant verschillend van de normale verdeling.
-<!-- ## BLOK: Toets-kolmogorovsmirnov.R -->
+<!-- ## OPENBLOK: Toets-kolmogorovsmirnov.R -->
 
 ```r
 ## Kolmogorov-Smirnov test
@@ -325,7 +325,7 @@ lillie.test(Gemiddeld_cijfer_WNS)
 ### Shapiro-Wilk test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde < 0,05 is de verdeling van de data significant verschillend van de normale verdeling.
 
-<!-- ## BLOK: Toets-shapirowilk.R -->
+<!-- ## OPENBLOK: Toets-shapirowilk.R -->
 
 ```r
 ## Shapiro Wilk test
@@ -348,7 +348,7 @@ shapiro.test(Gemiddeld_cijfer_WNS_n30)
 
 [//Levenes Test Inleiding]: # Levenes Test Inleiding
 
-<!-- ## BLOK: Toets-levenestest.R -->
+<!-- ## OPENBLOK: Toets-levenestest.R -->
 
 <!-- ## /BLOK: Toets-levenestest.R -->
 
@@ -359,7 +359,7 @@ shapiro.test(Gemiddeld_cijfer_WNS_n30)
 Gebruik `t.test()`om een t-toets uit te voeren. Geef het gemiddelde waarmee wordt vergeleken en specifieer welke alternatieve hypothese er getoetst wordt. 
 
 [//Toets Interpretatie output]: # Interpretatie output
-<!-- ## BLOK: Toets-test.R -->
+<!-- ## OPENBLOK: Toets-test.R -->
 
 ```r
 ## T-test
@@ -381,7 +381,7 @@ t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 ```
 <!-- ## /BLOK: Toets-test.R -->
 
-<!-- ## BLOK: Toets-testinterpretatie.R -->
+<!-- ## OPENBLOK: Toets-testinterpretatie.R -->
 **Interpretatie output** 
 
 * Het gemiddelde van de steekproef is 7,08.  
@@ -395,7 +395,7 @@ t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 [//Cohens d]: # Cohens d
 
 
-<!-- ## BLOK: Toets-cohensd.R -->
+<!-- ## OPENBLOK: Toets-cohensd.R -->
 
 <!-- ## /BLOK: Toets-cohensd.R -->
 
@@ -403,7 +403,7 @@ t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 [//Rapportage]: # Rapportage
 # Rapportage
 De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren, anders is dan het landelijk gemiddelde. 
-<!-- ## BLOK: Toets-rapportage.R -->
+<!-- ## OPENBLOK: Toets-rapportage.R -->
 Het gemiddelde van de steekproef (*M* = 7,08, *SD* = 0,08) is significant hoger dan het landelijk gemiddelde van 6,8, *t* (121) = 3,76, *p* < 0,01.
 <!-- ## /BLOK: Toets-rapportage.R -->
 

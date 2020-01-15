@@ -20,7 +20,7 @@ output:
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 
-<!-- ## BLOK: Functiedefinities.R -->
+<!-- ## OPENBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -36,7 +36,7 @@ Round_and_format <- function(x, digits = 2) {
 # TODO: Uitleg transformeren data (Sandjai "veel gebruikte transformatie is de Box Cox") 
 ```
 
-<!-- ## BLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## Laad packages in
 
@@ -92,7 +92,7 @@ Er is een dataset ingeladen met de gemiddelde eindexamencijfers van WNS van eers
 
 ## De data bekijken
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
-<!-- ## BLOK: Data-bekijken.py -->
+<!-- ## OPENBLOK: Data-bekijken.py -->
 ```{python, include=FALSE}
 import pandas as pd
 dfGemiddeld_cijfer_WNS = pd.DataFrame(r.Gemiddeld_cijfer_WNS)
@@ -111,7 +111,7 @@ print(dfGemiddeld_cijfer_WNS.tail(6))
 
 Krijg meer inzicht in de dataset door het gemiddelde en de spreiding te bekijken, `length()`, `mean()` en `sd()` .  
 
-<!-- ## BLOK: Data-beschrijven.py -->
+<!-- ## OPENBLOK: Data-beschrijven.py -->
 ```{python de data bekijken, collapse=TRUE}
 # Numpy Library importeren
 import numpy as np
@@ -134,7 +134,7 @@ vN <- Round_and_format(length(Gemiddeld_cijfer_WNS))
 Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
-<!-- ## BLOK: Histogram.py -->
+<!-- ## OPENBLOK: Histogram.py -->
 ```{python histogram, include=TRUE}
 ## Histogram met matplotlib
 import matplotlib.pyplot as plt
@@ -152,7 +152,7 @@ Het histogram laat een Bell Curve zien vergelijkbaar met een normale verdeling: 
 Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
 
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
-<!-- ## BLOK: QQplot.py -->
+<!-- ## OPENBLOK: QQplot.py -->
 ```{python qqplot}
 import scipy.stats as stats
 qq = stats.probplot(r.Gemiddeld_cijfer_WNS, dist="norm", plot=plt)
@@ -168,7 +168,7 @@ In deze casus liggen de meeste punten op de lijn. Bij de uiteinden liggen de pun
 ### Boxplot
 De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8]
 
-<!-- ## BLOK: Boxplot.py -->
+<!-- ## OPENBLOK: Boxplot.py -->
 ``` {python boxplot}
 ## Boxplot
 box = plt.boxplot(r.Gemiddeld_cijfer_WNS)
@@ -186,7 +186,7 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst 
 ### Kolmogorov-Smirnov
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
-<!-- ## BLOK: Lilliefors-test.py -->
+<!-- ## OPENBLOK: Lilliefors-test.py -->
 ```{python Kolmogorov-Smirnov Test, warning=FALSE}
 ## Kolmogorov-Smirnov test
 import statsmodels.stats.api
@@ -201,7 +201,7 @@ De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test*
 
 Er is een steekproef van `Gemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS_n30`. De steekproef bevat `r length(Gemiddeld_cijfer_WNS_n30)` studenten.
 
-<!-- ## BLOK: Shapiro-Wilk-test.py -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test.py -->
 ``` {python Shapiro-Wilk Test, warning=FALSE}
 #Shapiro-Wilk test
 print(stats.shapiro(r.Gemiddeld_cijfer_WNS_n30))
@@ -213,7 +213,7 @@ De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevon
 ##  One sample t-toets
 Gebruik `t.test()`om een t-toets uit te voeren. Gebruik het argument `mu = 6.8` om het gemiddelde te specificeren waarmee wordt vergeleken en specifieer welke alternatieve hypothese er getoetst wordt. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren dan het landelijk gemiddelde is er voor gekozen om tweezijdig te toetsen. Gebruik hiervoor `alternative = "two.sided"`. Gebruik wederom de hele dataset `Gemiddeld_cijfer_WNS` met *n* = `r vN`. 
 
-<!-- ## BLOK: T-test.py -->
+<!-- ## OPENBLOK: T-test.py -->
 ```{python ttest}
 ## T-test
 print(stats.ttest_1samp(r.Gemiddeld_cijfer_WNS, popmean = 6.8))

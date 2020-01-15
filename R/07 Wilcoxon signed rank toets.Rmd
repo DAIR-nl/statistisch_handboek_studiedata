@@ -20,7 +20,7 @@ output:
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 
-<!-- ## BLOK: Functiedefinities.R -->
+<!-- ## OPENBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -35,7 +35,7 @@ Round_and_format <- function(x, digits = 2) {
 # Onderwijscasus idee 2: Beoordelen studenten opleiding X positiever nadat ze met hun tutor hebben gesproken?
 ```
 
-<!-- ## BLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 RNGkind(sample.kind = "Rounding")
 set.seed(1)
@@ -101,7 +101,7 @@ Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Me
 ## De data bekijken
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 
-<!-- ## BLOK: Data-bekijken.R -->
+<!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
 ## Eerste 6 observaties
 head(Alumni_inkomens)
@@ -111,7 +111,7 @@ tail(Alumni_inkomens)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
 
-<!-- ## BLOK: Data-selecteren.R -->
+<!-- ## OPENBLOK: Data-selecteren.R -->
 Bekijk de grootte, de mediaan en de kwantielen van de data met `length()` en `quantile()`. 
 ```{r data selecteren}
 Alumni_inkomens_t1 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Datum == "t1"]
@@ -120,7 +120,7 @@ Alumni_inkomens_t5 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Datum == "t5"]
 
 <div class="col-container">
   <div class="col">
-<!-- ## BLOK: Data-beschrijven-1.R -->
+<!-- ## OPENBLOK: Data-beschrijven-1.R -->
 ```{r, data beschrijven 1, collapse=TRUE}
 length(Alumni_inkomens_t1)
 mean(Alumni_inkomens_t1)
@@ -129,7 +129,7 @@ median(Alumni_inkomens_t1)
 <!-- ## /BLOK: Data-beschrijven-1.R -->
   </div>
   <div class="col">
-<!-- ## BLOK: Data-beschrijven-2.R -->
+<!-- ## OPENBLOK: Data-beschrijven-2.R -->
 ``````{r Data beschrijven 2, collapse=TRUE}
 length(Alumni_inkomens_t5)
 mean(Alumni_inkomens_t5)
@@ -142,7 +142,7 @@ median(Alumni_inkomens_t5)
 * Mediaan inkomens op T~2~: , *n~T5~* = 
 
 ### Histogram
-<!-- ## BLOK: Histogram.R -->
+<!-- ## OPENBLOK: Histogram.R -->
 Geef de data visueel weer met een histogram of boxplot.
 ```{r histogram}
 ## Histogram met ggplot2
@@ -169,7 +169,7 @@ Op beide tijdstippen is te zien dat de meeste alumni tussen de 0 en 4.000 euro p
 ### Boxplot
 De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^4] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen.  
 
-<!-- ## BLOK: Boxplot.R -->
+<!-- ## OPENBLOK: Boxplot.R -->
 ```{r boxplot}
 boxplot(Inkomen ~ Datum, Alumni_inkomens,
         main = "Maandelijkse inkomens alumni Mens & Maatschappij")
@@ -182,7 +182,7 @@ In de data zitten er extremere inkomens, deze uitbijters zijn niet van invloed o
 ## Wilcoxon signed rank toets
 Voer een Wilcoxon signed rank toets uit met `paired=TRUE`.
 
-<!-- ## BLOK: Wilcoxon-signed-rank-toets.R -->
+<!-- ## OPENBLOK: Wilcoxon-signed-rank-toets.R -->
 ```{r wilcox test}
 wilcox.test(Alumni_inkomens_t5, Alumni_inkomens_t1, paired=TRUE, alternative = "greater")
 ```

@@ -20,7 +20,7 @@ output:
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 
-<!-- ## BLOK: Functiedefinities.R -->
+<!-- ## OPENBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -36,7 +36,7 @@ Round_and_format <- function(x, digits = 2) {
 # linken naar blz transformeren data 
 ```
 
-<!-- ## BLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 RNGkind(sample.kind = "Rounding")
 set.seed(2)
@@ -155,7 +155,7 @@ Er is een dataset ingeladen met gemiddelde tentamencijfer voor (T~0~) en na (T~1
 
 ## De data bekijken
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
-<!-- ## BLOK: Data-bekijken.py -->
+<!-- ## OPENBLOK: Data-bekijken.py -->
 ```{python, include=FALSE}
 import pandas as pd
 dfTentamencijfers = pd.DataFrame(r.Tentamencijfers)
@@ -173,7 +173,7 @@ print(dfTentamencijfers.head(6))
 <!-- ## /BLOK: Data-bekijken.py -->
 
 Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen.
-<!-- ## BLOK: Data-selecteren.py -->
+<!-- ## OPENBLOK: Data-selecteren.py -->
 ```{python data selecteren}
 Tentamencijfer_voor_tutorgesprek = dfTentamencijfers[dfTentamencijfers['Voor_of_na_tutorgesprek'] == "voor"]['Cijfer']
 
@@ -182,7 +182,7 @@ Tentamencijfer_na_tutorgesprek = dfTentamencijfers[dfTentamencijfers['Voor_of_na
 <!-- ## /BLOK: Data-selecteren.py -->
 
 <div class="col2">
-<!-- ## BLOK: Data-beschrijven-1.py -->
+<!-- ## OPENBLOK: Data-beschrijven-1.py -->
 ```{python}
 # Om het gemiddelde en de standaard deviatie te berekenen, hebben we de library 'numpy' nodig
 import numpy as np
@@ -203,7 +203,7 @@ vSD_t0 <-Round_and_format(sd(Tentamencijfer_voor_tutorgesprek))
 vN_t0 <- Round_and_format(length(Tentamencijfer_voor_tutorgesprek))
 ```
   
-<!-- ## BLOK: Data-beschrijven-2.py -->
+<!-- ## OPENBLOK: Data-beschrijven-2.py -->
  <div class = "col">
 ```{python data bekijken t2, collapse=TRUE}
 ## aantallen, gemiddelde en standaarddeviatie na tutorgesprek
@@ -226,7 +226,7 @@ vN_t1 <- Round_and_format(length(Tentamencijfer_na_tutorgesprek))
 Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
-<!-- ## BLOK: Histogram.py -->
+<!-- ## OPENBLOK: Histogram.py -->
 ```{python histogram}
 ## Histogram met matplotlib
 import matplotlib.pyplot as plt
@@ -253,7 +253,7 @@ Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen wor
 
 <div class = "col-container">
   <div class="col">
-<!-- ## BLOK: QQplot-1.py -->
+<!-- ## OPENBLOK: QQplot-1.py -->
 ```{python qqplot}
 qq = stats.probplot(Tentamencijfer_voor_tutorgesprek, dist="norm", plot=plt)
 title = plt.title("Normaal Q-Q plot van tentamencijfers voor tutorgesprek")
@@ -264,7 +264,7 @@ plt.show()
 <!-- ## /BLOK: QQplot-1.py -->
   </div>
   <div class = "col">
-<!-- ## BLOK: QQplot-2.py -->
+<!-- ## OPENBLOK: QQplot-2.py -->
 ```{python qqplot-2}
 qq = stats.probplot(Tentamencijfer_na_tutorgesprek, dist="norm", plot=plt)
 title = plt.title("Normaal Q-Q plot van tentamencijfers na tutorgesprek")
@@ -281,7 +281,7 @@ In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden.
 ### Boxplot
 De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8]  
 
-<!-- ## BLOK: Boxplot.py -->
+<!-- ## OPENBLOK: Boxplot.py -->
 ``` {python Boxplot}
 ## Boxplot
 fig, ax = plt.subplots()
@@ -300,21 +300,21 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst 
 ### Kolmogorov-Smirnov 
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
-<!-- ## BLOK: Library-nortest.R -->
+<!-- ## OPENBLOK: Library-nortest.R -->
 ```{r library nortest, warning=FALSE}
 library(nortest)
 ```
 <!-- ## /BLOK: Library-nortest.R -->
 <div class="col-container">
   <div class = "col">
-<!-- ## BLOK: Lilliefors-test-1.py -->
+<!-- ## OPENBLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
 print(statsmodels.stats.api.lilliefors(Tentamencijfer_voor_tutorgesprek))
 ```
 <!-- ## /BLOK: Lilliefors-test-1.py -->
   </div>
   <div class = "col">
-<!-- ## BLOK: Lilliefors-test-2.py -->
+<!-- ## OPENBLOK: Lilliefors-test-2.py -->
 ``` {python Lilliefors Test-2, warning=FALSE}
 print(statsmodels.stats.api.lilliefors(Tentamencijfer_na_tutorgesprek))
 ```
@@ -331,14 +331,14 @@ Er zijn 2 steekproeven van `Tentamencijfers` ingeladen: `Tentamencijfer_voor_tut
 
 <div class ="col-container">
   <div class ="col">
-<!-- ## BLOK: Shapiro-Wilk-test-1.py -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
 ``` {python Shapiro-Wilk Test-1, warning=FALSE}
 print(stats.shapiro(r.Tentamencijfer_voor_tutorgesprek_n30))
 ```
 <!-- ## /BLOK: Shapiro-Wilk-test-1.py -->
   </div>
   <div class ="col">
-<!-- ## BLOK: Shapiro-Wilk-test-2.py -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
 ``` {python Shapiro-Wilk Test-2, warning=FALSE}
 print(stats.shapiro(r.Tentamencijfer_na_tutorgesprek_n30))
 ```
@@ -353,7 +353,7 @@ Gebruik `t.test()` met `paired = TRUE` om een *gepaarde t-toets* uit te voeren. 
 
 De *gepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het gemiddelde tentamencijfer verandert na een tutorgesprek. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren na een gesprek is er voor gekozen om tweezijdig te toetsen. 
 
-<!-- ## BLOK: T-toets.py -->
+<!-- ## OPENBLOK: T-toets.py -->
 ```{python T-test}
 print(stats.ttest_rel(Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgesprek))
 ```
@@ -375,7 +375,7 @@ vDiffMean <- Round_and_format(t$estimate*-1)
 
 ### Effectmaat: Cohen's d
 Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
-<!-- ## BLOK: Cohens-d-test.R -->
+<!-- ## OPENBLOK: Cohens-d-test.R -->
 ```{r Cohens d}
 library(effsize)
 cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)

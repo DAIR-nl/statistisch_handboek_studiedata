@@ -20,7 +20,7 @@ output:
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 
-<!-- ## BLOK: Functiedefinities.R -->
+<!-- ## OPENBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -37,7 +37,7 @@ Round_and_format_0decimals <- function(x, digits = 0) {
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
 
-<!-- ## BLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## Effectmaat niet gerapporteerd, ik zie geen overeenstemming van effectmaten bij de MW U 
 
@@ -91,7 +91,7 @@ Er is data ingeladen met het aantal punten dat studenten in hun tweede jaar hale
 
 ## De data bekijken
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
-<!-- ## BLOK: Data-bekijken.R -->
+<!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
 ## Eerste 6 observaties
 head(Punten_jaar2)
@@ -100,7 +100,7 @@ tail(Punten_jaar2)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
 Bekijk de grootte, de mediaan en de kwantielen van de data met `length()` en `quantile()`. 
-<!-- ## BLOK: Data-selecteren.R -->
+<!-- ## OPENBLOK: Data-selecteren.R -->
 ```{r data selecteren}
 Nederlands <- Punten_jaar2$Nederlands == "ja"
 ```
@@ -108,7 +108,7 @@ Nederlands <- Punten_jaar2$Nederlands == "ja"
 
 <div class="col-container">
   <div class="col">
-<!-- ## BLOK: Data-beschrijven-1.R -->
+<!-- ## OPENBLOK: Data-beschrijven-1.R -->
 ```{r, data beschrijven 1, collapse=TRUE}
 length(Punten_jaar2$EC_Jaar2[Nederlands])
 quantile(Punten_jaar2$EC_Jaar2[Nederlands])
@@ -116,7 +116,7 @@ quantile(Punten_jaar2$EC_Jaar2[Nederlands])
 <!-- ## /BLOK: Data-beschrijven-1.R -->
   </div>
   <div class="col">
-<!-- ## BLOK: Data-beschrijven-2.R -->
+<!-- ## OPENBLOK: Data-beschrijven-2.R -->
 ``````{r Data beschrijven 2, collapse=TRUE}
 length(Punten_jaar2$EC_Jaar2[!Nederlands])
 quantile(Punten_jaar2$EC_Jaar2[!Nederlands])
@@ -154,7 +154,7 @@ vQ3_Inter <- Round_and_format(x[2,5])
 
 ## Mann-Whitney U toets
 Gebruik `wilcox.test()` met twee argumenten om een Mann-Whitney U toets te doen in R.
-<!-- ## BLOK: Mann-Whitney-U-toets.R -->
+<!-- ## OPENBLOK: Mann-Whitney-U-toets.R -->
 ```{r Mann Whitney U toets}
 wilcox.test(Punten_jaar2$EC_Jaar2[Nederlands], 
             Punten_jaar2$EC_Jaar2[!Nederlands])

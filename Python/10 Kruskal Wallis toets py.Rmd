@@ -19,7 +19,7 @@ output:
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 
-<!-- ## BLOK: Functiedefinities.R -->
+<!-- ## OPENBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -32,7 +32,7 @@ knitr::knit_engines$set(python = reticulate::eng_python)
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
 
-<!-- ## BLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## H0 en H1 medianen of gemiddelden, ook in toepassing 
 ## is het wel interessant om gemiddelden te tonen? 
@@ -91,7 +91,7 @@ Er is een dataset ingeladen met studieresultaten van de master Arbeidsrecht per 
 ## De data bekijken
 Gebruik `<dataframe>.head()` en `<dataframe>.tail()` om de structuur van de data te bekijken.
 
-<!-- ## BLOK: Data-bekijken.py -->
+<!-- ## OPENBLOK: Data-bekijken.py -->
 ```{python, include=FALSE}
 import pandas as pd
 dfResultaten_Arbeidsrecht = pd.DataFrame(r.Resultaten_Arbeidsrecht)
@@ -110,7 +110,7 @@ print(dfResultaten_Arbeidsrecht.tail(6))
 
 De dataset bevat data van studenten van verschillende vooropleidingen. Gebruik `<data.frame>.<kolomnaam>.unique()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
 
-<!-- ## BLOK: Data-bekijken-2.py -->
+<!-- ## OPENBLOK: Data-bekijken-2.py -->
 ```{python data bekijken 2}
 ## Opleidingen in de data aanwezig
 print(dfResultaten_Arbeidsrecht.Vooropleiding.unique())
@@ -166,7 +166,7 @@ vQ3_PM <- Round_and_format(x[3,5])
 ### Boxplot
 De box geeft de middelste 50% van het aantal studiepunten weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters. 
 
-<!-- ## BLOK: Boxplot.py -->
+<!-- ## OPENBLOK: Boxplot.py -->
 ```{python}
 import matplotlib.pyplot as plt
 box = dfResultaten_Arbeidsrecht.boxplot(column='EC_Jaar1', by='Vooropleiding')
@@ -187,7 +187,7 @@ EC_PRE = dfResultaten_Arbeidsrecht[dfResultaten_Arbeidsrecht['Vooropleiding'] ==
 EC_REC = dfResultaten_Arbeidsrecht[dfResultaten_Arbeidsrecht['Vooropleiding'] == "Rechtsgeleerdheid"]["EC_Jaar1"]
 ```
 
-<!-- ## BLOK: Kruskal-Wallis-test -->
+<!-- ## OPENBLOK: Kruskal-Wallis-test -->
 ```{python}
 import scipy.stats as stats
 print(stats.kruskal(EC_FSC, EC_NTR, EC_PRE, EC_REC))
@@ -209,7 +209,7 @@ Gebruik de *Mann-Whitney U toets* als post-hoc toets om te bepalen wélke groepe
 
 Pas de *Bonferroni correctie* toe met `p.adjust.method = "bonferroni"`.    
 
-<!-- ## BLOK: Mann-Whitney-U-test-->
+<!-- ## OPENBLOK: Mann-Whitney-U-test-->
 ``` {r pairwise wilcox test}
 pairwise.wilcox.test(Resultaten_Arbeidsrecht$EC_Jaar1, Resultaten_Arbeidsrecht$Vooropleiding, p.adjust.method = "bonferroni")
 ```

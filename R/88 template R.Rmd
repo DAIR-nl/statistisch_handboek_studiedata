@@ -167,7 +167,7 @@ Round_and_format <- function(x, digits = 2) {
 }
 ```
 
-<!-- ## BLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 
 ```
@@ -184,7 +184,7 @@ Er is een dataset ingeladen genaamd
 
 ## De data bekijken
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
-<!-- ## BLOK: Data-bekijken.R -->
+<!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
 ## Eerste 10 observaties
 head(Reistijd_per_opleiding)
@@ -194,7 +194,7 @@ tail(Reistijd_per_opleiding)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
 
-<!-- ## BLOK: Data-beschrijven.R -->
+<!-- ## OPENBLOK: Data-beschrijven.R -->
 ```{r Data beschrijven 1, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie 
 length()

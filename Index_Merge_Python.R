@@ -82,7 +82,7 @@ for (toets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
       
       ## Verwijder regels met /BLOK en verwijder begin + einde string (<--! -->)
       lCodeblokken <- lCodeblokken[!str_detect(lCodeblokken, pattern = "## /BLOK")] %>% 
-        str_replace("<!-- ## BLOK: ", "") %>% 
+        str_replace("<!-- ## OPENBLOK: ", "") %>% 
         str_replace(".R -->", "")
       
       ## Loop nu over de codeblokken

@@ -20,7 +20,7 @@ output:
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 
-<!-- ## BLOK: Functiedefinities.R -->
+<!-- ## OPENBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -30,7 +30,7 @@ Round_and_format <- function(x, digits = 2) {
 }
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
-<!-- ## BLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 RNGkind(sample.kind = "Rounding")
 set.seed(1)
@@ -64,7 +64,7 @@ Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Me
 ### De data bekijken
 Bekijk de data door het gemiddelde, de standaardafwijking, de mediaan en een histogram op te vragen.
 
-<!-- ## BLOK: Data-bekijken.R -->
+<!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
 ## Eerste 6 observaties
 #head(Reistijd_per_opleiding)
@@ -73,7 +73,7 @@ Bekijk de data door het gemiddelde, de standaardafwijking, de mediaan en een his
 #tail(Reistijd_per_opleiding)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
-<!-- ## BLOK: Data-beschrijven.R -->
+<!-- ## OPENBLOK: Data-beschrijven.R -->
 ```{r data beschrijven, collapse=TRUE}
 mean(Jaarlijks_inkomen)
 sd(Jaarlijks_inkomen)
@@ -84,7 +84,7 @@ hist(Jaarlijks_inkomen)
 
 ### Normaliteit testen
 Test of de data normaal verdeeld is met een lilliefors-test
-<!-- ## BLOK: Library-nortest.R -->
+<!-- ## OPENBLOK: Library-nortest.R -->
 ```{r normaliteit, warning=FALSE}
 library (nortest)
 lillie.test(Jaarlijks_inkomen)
@@ -94,7 +94,7 @@ De data is niet normaal verdeeld. Gebruik bij normaal verdeelde data een *One-sa
 
 ### Tekentoets 
 Voer een tweezijdige tekentoets uit met het aantal alumni dat meer dan modaal (€36.000[^1]) verdient en het totaal aantal alumni in de dataset. 
-<!-- ## BLOK: Tekentoets.R -->
+<!-- ## OPENBLOK: Tekentoets.R -->
 ```{r Tekentoets}
 boven_modaal <- length(Jaarlijks_inkomen[Jaarlijks_inkomen > 36000])
 totaal_alumni <- length(Jaarlijks_inkomen)

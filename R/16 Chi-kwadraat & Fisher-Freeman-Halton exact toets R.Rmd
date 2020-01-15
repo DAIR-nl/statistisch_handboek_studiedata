@@ -20,7 +20,7 @@ output:
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 
-<!-- ## BLOK: Functiedefinities.R -->
+<!-- ## OPENBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -31,7 +31,7 @@ Round_and_format <- function(x, digits = 2) {
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
 
-<!-- ## BLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## De opleidingsdirecteur van de Bachelor Anthropologie vraagt zich af wat de invloed is van de instroom van internationale studenten. Krijgen studenten uit bepaalde landen vaker een positief BSA dan studenten uit andere landen?
 
@@ -71,7 +71,7 @@ Er is een dataset (`Bsa_kt`) ingeladen over het BSA per instroomland van de facu
 
 ## De data bekijken
 Print de kruistabel of geef deze grafisch weer met `barplot()`.
-<!-- ## BLOK: Data-bekijken.R -->
+<!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse=TRUE}
 print(Bsa_kt)
 barplot(Bsa_kt, beside = TRUE, legend.text = TRUE)
@@ -80,7 +80,7 @@ barplot(Bsa_kt, beside = TRUE, legend.text = TRUE)
 
 ## Fisher-Freeman-Halton exact toets
 Gebruik `simulate.p.value = TRUE` bij `fisher.test()` om de p-waardes via een Monte Carlo simulatie te laten uitrekenen. Dit is nodig voor tabellen die groter zijn dan 2 bij 2.
-<!-- ## BLOK: Fisher-Freeman-Halton-exact-toets-->
+<!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets-->
 ``` {r fisher toets}
 fisher.test(Bsa_kt_n10, simulate.p.value = TRUE)
 fisher.test(Bsa_kt, simulate.p.value = TRUE)
@@ -98,7 +98,7 @@ fisher.test(Bsa_kt, simulate.p.value = TRUE)
 
 ## Chi-kwadraat toets
 Om `chisq.test()` in R te gebruiken moet de data in een kruistabel staan.
-<!-- ## BLOK: Chi2-toets-->
+<!-- ## OPENBLOK: Chi2-toets-->
 ```{r collapse=TRUE}
 chisq.test(Bsa_kt)
 ```

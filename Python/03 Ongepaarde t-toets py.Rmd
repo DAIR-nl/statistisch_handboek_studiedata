@@ -21,7 +21,7 @@ output:
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 
-<!-- ## BLOK: Functiedefinities.R -->
+<!-- ## OPENBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -34,7 +34,7 @@ knitr::knit_engines$set(python = reticulate::eng_python)
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
 
-<!-- ## BLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 RNGkind(sample.kind = "Rounding")
 set.seed(1)
@@ -110,7 +110,7 @@ Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij 
 
 ## De data bekijken
 Gebruik `<dataframe>.head()` en `<dataframe>.tail()` om de structuur van de data te bekijken.
-<!-- ## BLOK: Data-bekijken.py -->
+<!-- ## OPENBLOK: Data-bekijken.py -->
 ```{python, include=FALSE}
 import pandas as pd
 dfCijfers_gem = pd.DataFrame(r.Cijfers_gem)
@@ -128,7 +128,7 @@ print(dfCijfers_gem.tail(6))
 <!-- ## /BLOK: Data-bekijken.py -->
 
 Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. 
-<!-- ## BLOK: Data-selecteren.py -->
+<!-- ## OPENBLOK: Data-selecteren.py -->
 ```{python data selecteren}
 Cijfers_2010 = dfCijfers_gem[dfCijfers_gem['Cohort'] == 2010]['Cijfers']
 Cijfers_2011 = dfCijfers_gem[dfCijfers_gem['Cohort'] == 2011]['Cijfers']
@@ -137,15 +137,15 @@ Cijfers_2011 = dfCijfers_gem[dfCijfers_gem['Cohort'] == 2011]['Cijfers']
 
 Inspecteer de data met `len()`, `np.mean()` en `np.sqrt(np.var())`, door deze aan te roepen uit de library `numpy`.
 
-<!-- ## BLOK: Data-beschrijven-inladen.py -->
+<!-- ## OPENBLOK: Data-beschrijven-inladen.py -->
 ```{python}
 # Om het gemiddelde en de standaard deviatie te berekenen, hebben we de library 'numpy' nodig
 import numpy as np
 ```
-<!-- ## BLOK: Data-beschrijven-inladen.py -->
+<!-- ## OPENBLOK: Data-beschrijven-inladen.py -->
 
 <div class="col2">
-<!-- ## BLOK: Data-beschrijven-1.py -->
+<!-- ## OPENBLOK: Data-beschrijven-1.py -->
 ```{python Data beschrijven 1, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie 2010
 print(len(Cijfers_2010))
@@ -160,7 +160,7 @@ vMean_t0 <- Round_and_format(mean(Cijfers_2010))
 vSD_t0 <-Round_and_format(sd(Cijfers_2010))
 ```
 
-<!-- ## BLOK: Data-beschrijven-2.py -->
+<!-- ## OPENBLOK: Data-beschrijven-2.py -->
 ```{python Data beschrijven 2, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie 2011
 print(len(Cijfers_2011))
@@ -183,7 +183,7 @@ vSD_t1 <-Round_and_format(sd(Cijfers_2011))
 Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
-<!-- ## BLOK: Histogram.py -->
+<!-- ## OPENBLOK: Histogram.py -->
 ```{python histogram}
 ## Histogram met matplotlib
 import matplotlib.pyplot as plt
@@ -207,7 +207,7 @@ Beide histogrammen laten een Bell Curve zien vergelijkbaar met een normale verde
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 <div class ="col-container">
   <div class = "col"> 
-<!-- ## BLOK: QQplot-t1.py -->
+<!-- ## OPENBLOK: QQplot-t1.py -->
 ```{python QQplot-t1}
 import scipy.stats as stats
 qq = stats.probplot(Cijfers_2010, dist="norm", plot=plt)
@@ -219,7 +219,7 @@ plt.show()
 <!-- ## /BLOK: QQplot-t1.R -->
   </div>
   <div class = "col">
-<!-- ## BLOK: QQplot-t2.py -->
+<!-- ## OPENBLOK: QQplot-t2.py -->
 ```{python QQplot-t2}
 import scipy.stats as stats
 qq = stats.probplot(Cijfers_2011, dist="norm", plot=plt)
@@ -236,7 +236,7 @@ Bij beide groepen liggen de meeste punten op de lijn behalve bij de uiteinden.
 ### Boxplot
 De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9] 
 
-<!-- ## BLOK: Boxplot.py -->
+<!-- ## OPENBLOK: Boxplot.py -->
 ```{python boxplot}
 fig, ax = plt.subplots()
 box = ax.boxplot([Cijfers_2010, Cijfers_2011], labels = ["2010", "2011"])
@@ -261,14 +261,14 @@ import statsmodels.stats.api
 
 <div class="col-container">
   <div class = "col">
-<!-- ## BLOK: Lilliefors-test-1.py -->
+<!-- ## OPENBLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
 print(statsmodels.stats.api.lilliefors(Cijfers_2010))
 ```
 <!-- ## /BLOK: Lilliefors-test-1.py -->
   </div>
   <div class = "col">
-<!-- ## BLOK: Lilliefors-test-2.py -->
+<!-- ## OPENBLOK: Lilliefors-test-2.py -->
 ``` {python Lilliefors Test-2, warning=FALSE}
 print(statsmodels.stats.api.lilliefors(Cijfers_2011))
 ```
@@ -284,14 +284,14 @@ De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test*
 Er zijn 2 steekproeven van `Cijfers_gem` ingeladen: `Cijfers_2010_n30` en `Cijfers_2011_n30`. Beide steekproeven bevatten `r length(Cijfers_2010_n30)` studenten
 <div class = "col-container">
   <div class="col">
-<!-- ## BLOK: Shapiro-Wilk-test-1.py -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
 ``` {python Shapiro-Wilk Test-1, warning=FALSE}
 print(stats.shapiro(r.Cijfers_2011_n30))
 ```
 <!-- ## /BLOK: Shapiro-Wilk-test-1.py -->
   </div>
   <div class="col">
-<!-- ## BLOK: Shapiro-Wilk-test-2.py -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
 ``` {python Shapiro-Wilk Test-2, warning=FALSE}
 print(stats.shapiro(r.Cijfers_2010_n30))
 ```
@@ -303,11 +303,11 @@ De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevon
 ## Test assumpties: Levene's test
 Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. Gebruik hier weer het hele dataframe `Cijfers_gem`.
 
-<!-- ## BLOK: Levenes-test.py -->
+<!-- ## OPENBLOK: Levenes-test.py -->
 ```{python Levenes test}
 print(stats.levene(Cijfers_2010, Cijfers_2011))
 ```
-<!-- ## BLOK: Levenes-test.py -->
+<!-- ## OPENBLOK: Levenes-test.py -->
 
 <!-- ## /BLOK: Levenes-test.R -->
 ```{r Levenes test als object, echo = FALSE, warning=FALSE}
@@ -328,7 +328,7 @@ Voer een ongepaarde `t.test()` uit met `paired = FALSE` en `var.equal = TRUE`. A
 
 De *ongepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het het gemiddelde tentamencijfer van de opleiding Taalwetenschap na invoering van het BSA veranderd is. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren na de invoering is er voor gekozen om tweezijdig te toetsen. 
 
-<!-- ## BLOK: T-test.py -->
+<!-- ## OPENBLOK: T-test.py -->
 ```{python statistische toets}
 print(stats.ttest_ind(Cijfers_2010, Cijfers_2011))
 ```
@@ -356,7 +356,7 @@ Wanneer p < 0,05 wordt de effectmaat berekend om te bepalen of de gevonden p-waa
 
 Gebruik `cohen.d()` met `paired = FALSE` om het effect te meten.
 
-<!-- ## BLOK: Cohens-d-test.py -->
+<!-- ## OPENBLOK: Cohens-d-test.py -->
 ```{python}
 def cohend(x, y):
   # import numpy
@@ -381,7 +381,7 @@ def cohend(x, y):
 ```{python}
 print(cohend(Cijfers_2010, Cijfers_2011))
 ```
-<!-- ## BLOK: Cohens-d-test.py -->
+<!-- ## OPENBLOK: Cohens-d-test.py -->
 
 ```{r var Cohens d, echo = FALSE}
 d <- cohen.d(Cijfers_2010, Cijfers_2011, paired = FALSE)

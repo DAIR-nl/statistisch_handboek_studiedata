@@ -20,7 +20,7 @@ output:
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 
-<!-- ## BLOK: Functiedefinities.R -->
+<!-- ## OPENBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -31,7 +31,7 @@ Round_and_format <- function(x, digits = 2) {
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
 
-<!-- ## BLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## De decaan van een Hogeschool merkt dat weinig studenten met een functiebeperking een beroep doen op de Financiële Ondersteuning Studenten (FOS).
 ## Ze besluit daarom in December al deze studenten een e-mail te sturen over de FOS.
@@ -81,7 +81,7 @@ Er is een dataset ingeladen genaamd `Beroep_FOS_functiebeperking`. Dit is een kr
 
 ## De data bekijken
 
-<!-- ## BLOK: Data-bekijken.R -->
+<!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse=TRUE}
 ## Eerste 6 observaties
 head(FOS_studenten)
@@ -91,7 +91,7 @@ tail(FOS_studenten)
 ```
 <!-- ## /BLOK: Data-bekijken.R -->
 
-<!-- ## BLOK: Data-beschrijven.R -->
+<!-- ## OPENBLOK: Data-beschrijven.R -->
 ```{r data aanmaken}
 ### Definieer groepen
 December <- FOS_studenten$`FOS?`[FOS_studenten$Datum == "December"]
@@ -110,7 +110,7 @@ FOS_studenten_kruistabel <- table(December, Juni)
 
 ## Statistische toets in R
 Gebruik `mcnemar.test()` op een kruistabel.
-<!-- ## BLOK: McNemar-toets.R -->
+<!-- ## OPENBLOK: McNemar-toets.R -->
 ```{r}
 mcnemar.test(FOS_studenten_kruistabel)
 ```

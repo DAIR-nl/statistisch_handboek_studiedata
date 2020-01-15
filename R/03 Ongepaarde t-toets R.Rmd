@@ -20,7 +20,7 @@ output:
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 
-<!-- ## BLOK: Functiedefinities.R -->
+<!-- ## OPENBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -31,7 +31,7 @@ Round_and_format <- function(x, digits = 2) {
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
 
-<!-- ## BLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 RNGkind(sample.kind = "Rounding")
 set.seed(1)
@@ -107,7 +107,7 @@ Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij 
 
 ## De data bekijken
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
-<!-- ## BLOK: Data-bekijken.R -->
+<!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse=TRUE}
 ## Eerste 6 observaties
 head(Cijfers_gem)
@@ -118,7 +118,7 @@ tail(Cijfers_gem)
 <!-- ## /BLOK: Data-bekijken.R -->
 
 Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. 
-<!-- ## BLOK: Data-selecteren.R -->
+<!-- ## OPENBLOK: Data-selecteren.R -->
 ```{r data selecteren}
 Cijfers_2010 <- Cijfers_gem[Cijfers_gem$Cohort == 2010,1]
 Cijfers_2011 <- Cijfers_gem[Cijfers_gem$Cohort == 2011,1]
@@ -127,7 +127,7 @@ Cijfers_2011 <- Cijfers_gem[Cijfers_gem$Cohort == 2011,1]
 
 Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data.
 <div class="col2">
-<!-- ## BLOK: Data-beschrijven-1.R -->
+<!-- ## OPENBLOK: Data-beschrijven-1.R -->
 ```{r Data beschrijven 1, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie 2010
 length(Cijfers_2010)
@@ -141,7 +141,7 @@ vMean_t0 <- Round_and_format(mean(Cijfers_2010))
 vSD_t0 <-Round_and_format(sd(Cijfers_2010))
 ```
 
-<!-- ## BLOK: Data-beschrijven-2.R -->
+<!-- ## OPENBLOK: Data-beschrijven-2.R -->
 ```{r Data beschrijven 2, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie 2011
 length(Cijfers_2011)
@@ -163,7 +163,7 @@ vSD_t1 <-Round_and_format(sd(Cijfers_2011))
 Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
-<!-- ## BLOK: Histogram.R -->
+<!-- ## OPENBLOK: Histogram.R -->
 ```{r histogram}
 ## Histogram met ggplot2
 library(ggplot2)
@@ -195,7 +195,7 @@ Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als 
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 <div class ="col-container">
   <div class = "col"> 
-<!-- ## BLOK: QQplot-t1.R -->
+<!-- ## OPENBLOK: QQplot-t1.R -->
 ```{r QQplot-t1}
 qqnorm(Cijfers_2010, pch = 1,
        main = "Normaal Q-Q plot van tentamencijfers 2010",
@@ -206,7 +206,7 @@ qqline(Cijfers_2010)
 <!-- ## /BLOK: QQplot-t1.R -->
   </div>
   <div class = "col">
-<!-- ## BLOK: QQplot-t2.R -->
+<!-- ## OPENBLOK: QQplot-t2.R -->
 ```{r QQplot-t2}
 qqnorm(Cijfers_2011, pch = 1,
        main = "Normaal Q-Q plot van tentamencijfers 2011",
@@ -222,7 +222,7 @@ Bij beide groepen liggen de meeste punten op de lijn behalve bij de uiteinden.
 ### Boxplot
 De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
 
-<!-- ## BLOK: Boxplot.R -->
+<!-- ## OPENBLOK: Boxplot.R -->
 ```{r boxplot}
 boxplot(Cijfers ~ Cohort, Cijfers_gem,
         main = "Tentamencijfers Taalwetenschap voor en na de BSA")
@@ -237,7 +237,7 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoets w
 ### Kolmogorov-Smirnov
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
-<!-- ## BLOK: Library-nortest.R -->
+<!-- ## OPENBLOK: Library-nortest.R -->
 ```{r library nortest, warning=FALSE}
 library(nortest)
 ```
@@ -245,14 +245,14 @@ library(nortest)
 
 <div class="col-container">
   <div class = "col">
-<!-- ## BLOK: Lilliefors-test-1.R -->
+<!-- ## OPENBLOK: Lilliefors-test-1.R -->
 ``` {r Lilliefors Test-1, warning=FALSE}
 lillie.test(Cijfers_2010)
 ```
 <!-- ## /BLOK: Lilliefors-test-1.R -->
   </div>
   <div class = "col">
-<!-- ## BLOK: Lilliefors-test-2.R -->
+<!-- ## OPENBLOK: Lilliefors-test-2.R -->
 ``` {r Lilliefors Test-2, warning=FALSE}
 lillie.test(Cijfers_2011)
 ```
@@ -268,14 +268,14 @@ De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test*
 Er zijn 2 steekproeven van `Cijfers_gem` ingeladen: `Cijfers_2010_n30` en `Cijfers_2011_n30`. Beide steekproeven bevatten `r length(Cijfers_2010_n30)` studenten
 <div class = "col-container">
   <div class="col">
-<!-- ## BLOK: Shapiro-Wilk-test-1.R -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test-1.R -->
 ``` {r Shapiro-Wilk Test-1, warning=FALSE}
 shapiro.test(Cijfers_2011_n30)
 ```
 <!-- ## /BLOK: Shapiro-Wilk-test-1.R -->
   </div>
   <div class="col">
-<!-- ## BLOK: Shapiro-Wilk-test-2.R -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test-2.R -->
 ``` {r Shapiro-Wilk Test-2, warning=FALSE}
 shapiro.test(Cijfers_2010_n30)
 ```
@@ -287,7 +287,7 @@ De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevon
 ## Test assumpties: Levene's test
 Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. Gebruik hier weer het hele dataframe `Cijfers_gem`.
 
-<!-- ## BLOK: Levenes-test.R -->
+<!-- ## OPENBLOK: Levenes-test.R -->
 ```{r Levenes test, message=FALSE, warning=FALSE, collapse=TRUE}
 library(car)
 leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
@@ -309,7 +309,7 @@ Voer een ongepaarde `t.test()` uit met `paired = FALSE` en `var.equal = TRUE`. A
 
 De *ongepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het het gemiddelde tentamencijfer van de opleiding Taalwetenschap na invoering van het BSA veranderd is. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren na de invoering is er voor gekozen om tweezijdig te toetsen. 
 
-<!-- ## BLOK: T-test.R -->
+<!-- ## OPENBLOK: T-test.R -->
 ```{r statistische toets}
 t.test(Cijfers ~ Cohort, Cijfers_gem, 
        paired = FALSE,
@@ -338,7 +338,7 @@ vP <- Round_and_format(t$p.value)
 Wanneer p < 0,05 wordt de effectmaat berekend om te bepalen of de gevonden p-waarde betekenisvol is. In dit voorbeeld is de p > 0,05, dus is een effectmaat irrelevant. Hieronder laten we zien wat de stappen zouden zijn bij een p < 0,05.
 
 Gebruik `cohen.d()` met `paired = FALSE` om het effect te meten.
-<!-- ## BLOK: Cohens-d-test.R -->
+<!-- ## OPENBLOK: Cohens-d-test.R -->
 ```{r Cohen s d}
 library(effsize)
 cohen.d(Cijfers_2010, Cijfers_2011, paired = FALSE)

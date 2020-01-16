@@ -20,7 +20,7 @@ output:
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 
-<!-- ## BLOK: Functiedefinities.R -->
+<!-- ## OPENBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -36,7 +36,7 @@ options(width = 80)
 ## Zodat de TukeyHSD naast elkaar geprint wordt
 ```
 
-<!-- ## BLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## Het hoofd communicatie wil in verband met wervingsactiviteiten weten wat de reistijd is van studenten aan verschillende opleidingen.
 
@@ -127,7 +127,7 @@ Er is een dataset ingeladen met de reistijden van uitwonende studenten per oplei
 ## De data bekijken
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 
-<!-- ## BLOK: Data-bekijken.R -->
+<!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
 ## Eerste 5 observaties
 head(Reistijd_per_opleiding)
@@ -139,7 +139,7 @@ tail(Reistijd_per_opleiding)
 
 De dataset bevat gegevens van studenten van verschillende opleidingen. Gebruik `unique()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
 
-<!-- ## BLOK: Data-bekijken2.R -->
+<!-- ## OPENBLOK: Data-bekijken2.R -->
 ```{r data bekijken 2}
 ## Opleidingen in de data aanwezig
 unique(Reistijd_per_opleiding$Opleiding)
@@ -147,7 +147,7 @@ unique(Reistijd_per_opleiding$Opleiding)
 <!-- ## /BLOK: Data-bekijken2.R -->
 
 Selecteer de drie groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. 
-<!-- ## BLOK: Data-selecteren.R -->
+<!-- ## OPENBLOK: Data-selecteren.R -->
 ```{r data selecteren}
 Reistijd_ATC <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding == "Arabische Taal en Cultuur"]
 Reistijd_FIL <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding == "Filosofie"]
@@ -158,7 +158,7 @@ Reistijd_GSC <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding
 Om meer inzicht te krijgen in de data, inspecteer de data met `length()`, `mean()`en `sd()`. 
 
 
-<!-- ## BLOK: Data-beschrijven-1.R -->
+<!-- ## OPENBLOK: Data-beschrijven-1.R -->
 ```{r Data beschrijven 1}
 ## Aantallen, gemiddelde en standaarddeviatie
 library(dplyr)
@@ -195,7 +195,7 @@ vN_GSC <- Round_and_format(length(Reistijd_GSC))
 Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
-<!-- ## BLOK: Histogram.R -->
+<!-- ## OPENBLOK: Histogram.R -->
 ```{r histogram}
 ## Histogram met ggplot
 library(ggplot2)
@@ -221,7 +221,7 @@ Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als 
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 <div class = "col-container">
   <div class="col">
-<!-- ## BLOK: QQplot1.R -->
+<!-- ## OPENBLOK: QQplot1.R -->
 ```{r qqplot atc}
 qqnorm(
  Reistijd_ATC, pch = 1,
@@ -233,7 +233,7 @@ qqline(Reistijd_ATC)
 <!-- ## /BLOK: QQplot1.R -->
   </div>
   <div class = "col">
-<!-- ## BLOK: QQplot2.R -->
+<!-- ## OPENBLOK: QQplot2.R -->
 ```{r qqplot fil}
 qqnorm(
  Reistijd_FIL, pch = 1,
@@ -245,7 +245,7 @@ qqline(Reistijd_FIL)
 <!-- ## /BLOK: QQplot2.R -->
   </div>
   <div class = "col">
-<!-- ## BLOK: QQplot3.R -->
+<!-- ## OPENBLOK: QQplot3.R -->
 ```{r qqplot gsc}
 qqnorm(
  Reistijd_GSC, pch = 1,
@@ -254,16 +254,16 @@ qqnorm(
  xlab = "Theoretische kwantielen")
 qqline(Reistijd_GSC)
 ```
-<!-- ## BLOK: QQplot3.R -->
+<!-- ## OPENBLOK: QQplot3.R -->
   </div>
 </div>
 
 Bij de Q-Q plot van de reistijd van studenten Geschiedenis liggen de meeste punten op de lijn behalve bij de uiteinden. De cirkels van de Q-Q plot van studenten Arabische Taal en Cultuur en studenten Filosofie liggen net naast de lijn. De discrepantie is minimaal, vermoedelijk zijn de data normaal verdeeld.
 
 ### Boxplot
-De box geeft de middelste 50% van de reistijd weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^14]<sup>, </sup>[^15]
+De box geeft de middelste 50% van de reistijd weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^14]<sup>, </sup>[^15] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
 
-<!-- ## BLOK: Boxplot.R -->
+<!-- ## OPENBLOK: Boxplot.R -->
 ```{r boxplot}
 library(graphics)
 boxplot(Reistijd ~ Opleiding, Reistijd_per_opleiding)
@@ -278,7 +278,7 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst 
 ### Kolmogorov-Smirnov
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
-<!-- ## BLOK: Library-nortest.R -->
+<!-- ## OPENBLOK: Library-nortest.R -->
 ```{r library nortest}
 library("nortest")
 ```
@@ -286,21 +286,21 @@ library("nortest")
 
 <div class="col-container"> 
   <div class="col">
-<!-- ## BLOK: Lilliefors-test-1.R -->
+<!-- ## OPENBLOK: Lilliefors-test-1.R -->
 ```{r Lilliefors Test-1, warning=FALSE}
 lillie.test(Reistijd_ATC)
 ```
-<!-- ## BLOK: Lilliefors-test-1.R -->
+<!-- ## OPENBLOK: Lilliefors-test-1.R -->
   </div>
   <div class = "col">
-<!-- ## BLOK: Lilliefors-test-2.R -->
+<!-- ## OPENBLOK: Lilliefors-test-2.R -->
 ```{r Lilliefors Test-2, warning=FALSE}
 lillie.test(Reistijd_FIL)
 ```
-<!-- ## BLOK: Lilliefors-test-2.R -->
+<!-- ## OPENBLOK: Lilliefors-test-2.R -->
   </div>
   <div class = "col">
-<!-- ## BLOK: Lilliefors-test-3.R -->
+<!-- ## OPENBLOK: Lilliefors-test-3.R -->
 ```{r Lilliefors Test-3, warning=FALSE}
 lillie.test(Reistijd_GSC)
 ```
@@ -315,25 +315,25 @@ De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test*
 
 <div class="col-container"> 
   <div class="col">
-<!-- ## BLOK: Shapiro-Wilk-test-3.R -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test-3.R -->
 ``` {r Shapiro-Wilk Test-3, warning=FALSE}
 shapiro.test(Reistijd_GSC)
 ```
 <!-- ## /BLOK: Shapiro-Wilk-test-3.R -->
   </div>
   <div class= "col">
-<!-- ## BLOK: Shapiro-Wilk-test-2.R -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test-2.R -->
 ``` {r Shapiro-Wilk Test-2, warning=FALSE}
 shapiro.test(Reistijd_FIL)
 ```
-<!-- ## BLOK: Shapiro-Wilk-test-2.R -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test-2.R -->
   </div>
   <div class= "col"> 
-<!-- ## BLOK: Shapiro-Wilk-test-1.R -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test-1.R -->
 ``` {r Shapiro-Wilk Test-1, warning=FALSE}
 shapiro.test(Reistijd_ATC)
 ```
-<!-- ## BLOK: Shapiro-Wilk-test-1.R -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test-1.R -->
   </div>
 </div>
 
@@ -342,7 +342,7 @@ De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevon
 ## Toetsen van Homogeniteit van varianties
 Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. 
 
-<!-- ## BLOK: Levenes-test.R -->
+<!-- ## OPENBLOK: Levenes-test.R -->
 ```{r LeveneTest, warning = FALSE, message = FALSE}
 library(car)
 leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
@@ -364,7 +364,7 @@ vDF2 <- Round_and_format(L$`Df`[2])
 De *one-way ANOVA* is uitgevoerd om de vraag te beantwoorden of de gemiddelde reistijd van de studenten per opleiding  
 
 Gebruik `aov()` om een ANOVA-object (`aov`) te creëren. Geef het resultaat overzichtelijk weer met `summary()`.
-<!-- ## BLOK: ANOVA-toets.R -->
+<!-- ## OPENBLOK: ANOVA-toets.R -->
 ```{r ANOVA}
 res.aov <- aov(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 summary(res.aov)
@@ -381,7 +381,7 @@ vF_waarde <- Round_and_format(ANOVA[[1]]$`F value`[1])
 ### Effectmaat: Cohen's *f*
 Gebruik `cohens_f()` op een object met `class = aov` om het effect te meten.
 
-<!-- ## BLOK: Cohens-f.R --> 
+<!-- ## OPENBLOK: Cohens-f.R --> 
 ```{r Cohen s F, warning=FALSE, message=FALSE}
 library(sjstats)
 cohens_f(res.aov)
@@ -396,7 +396,7 @@ De sterkte van het effect van type opleiding op de reistijd is groot.
 
 ### Effectmaat: Eta squared
 Gebruik `EtaSq()` op een een object met `class = aov` om het effect te meten.
-<!-- ## BLOK: Eta-squared.R --> 
+<!-- ## OPENBLOK: Eta-squared.R --> 
 ```{r eta-squared, message = FALSE}
 library(DescTools)
 EtaSq(res.aov)
@@ -412,7 +412,7 @@ De sterkte van het effect van de type opleiding op de reistijd is groot.
 Om te bepalen welke van de type opleidingen in reistijd verschillen wordt een post-hoc toets gedaan. Gebruik bij groepen met gelijke variantie de Tukey Honestly Significant Difference Test.
 Gebruik `TukeyHSD()` op het ANOVA-object.
 
-<!-- ## BLOK: Tukey-HSD.R -->
+<!-- ## OPENBLOK: Tukey-HSD.R -->
 ```{r TukeyHSD}
 TukeyHSD(res.aov)
 ```
@@ -456,4 +456,4 @@ Aan de hand van de resultaten kan geconcludeerd worden dat de studenten van Arab
 [^13]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf. 
 [^14]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 [^15]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
-[^16]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, hou hierbij rekening met type I en type II fouten.
+[^16]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houd hierbij rekening met type I en type II fouten.

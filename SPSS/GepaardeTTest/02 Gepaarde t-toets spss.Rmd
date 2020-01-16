@@ -61,7 +61,7 @@ Krijg meer inzicht in de dataset door het gemiddelde en de spreiding te bekijken
 
 Klik op `Analyze` > `Descriptive Statistics` > `Descriptives`. Selecteer de gewenste variabele en plaats deze in het vakje `Variable`. Vink bij options het gemiddelde (`Mean`) en de standaard deviatie (`Std. deviation`) aan en klik op `Continue`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
 
-<!-- ## BLOK: Data-beschrijven.SPSS -->
+<!-- ## OPENBLOK: Data-beschrijven.SPSS -->
 ```{r data bekijken, eval=FALSE}
 * Gemiddelde en standaarddeviatie.
 DESCRIPTIVES VARIABLES=Cijfer
@@ -74,7 +74,7 @@ DESCRIPTIVES VARIABLES=Cijfer
 * Gemiddeld Cijfer (standaardafwijking): 6,94 (1,55). *n* = 468.
 
 Selecteer beide groepen en sla deze op in een variabele om deze makkelijker aan te kunnen roepen. Klik op `Transform` > `Compute variable...`. Vul bij `Target Variable:` de nieuwe naam in (in dit geval *Tentamencijfer_voor_tutorgesprek* of *Tentamentcijfer_na_tutorgesprek*) en de waarde van deze nieuwe variabele bij .. Om een conditie aan de variabele toe te voegen klik op `if` en seleceteer `Include if case satisfies condition:`. Vul vervolgens de gewenste conditie in (in dit geval: *Voor_of_na_tutorgesprek* = 1 of = 2). Klik op `OK` om de variabele toe te voegen aan de dataset. 
-<!-- ## BLOK: Data-selecteren.SPSS -->
+<!-- ## OPENBLOK: Data-selecteren.SPSS -->
 ```{r nieuwe variabelen, eval=FALSE}
 * Nieuwe variabele aanmaken.
 IF  (Voor_of_na_tutorgesprek = 1) Tentamencijfer_voor_tutorgesprek=Cijfer.
@@ -98,7 +98,7 @@ Geef normaliteit visueel weer met een histogram, boxplot of Q-Q plot.
 ### Histogram
 Klik op `Graphs` > `Legacy Dialogs` en vervolgens op het gewenste figuur, in dit geval `Histogram...`. Selecteer de gewenste variabele en plaats deze in het vakje `Variable`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten. Voor een density curve ga naar de `chart editor` (dubbelklik op het figuur). Klik op `Elements` > `Hide Distribution Curve`.
 
-<!-- ## BLOK: Histogram.SPSS -->
+<!-- ## OPENBLOK: Histogram.SPSS -->
 ```{r histogram, eval=FALSE}
 * Histogram.
 GRAPH
@@ -113,7 +113,7 @@ Beide histogrammen laten een Bell Curve zien vergelijkbaar met een normale verde
 Klik op `Analyze` > `Desctiptive Statistics` > `Q-Q Plots...`. Selecteer de gewenste variabele(n) en plaats deze in het vakje `Variables`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
 
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
-<!-- ## BLOK: QQplot.R -->
+<!-- ## OPENBLOK: QQplot.R -->
 ```{r qqplot, eval=FALSE}
 * QQ-Plot.
 PPLOT
@@ -137,7 +137,7 @@ De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen
 
 Klik op `Graphs` > `Legacy Dialogs` > `Boxplot...`. Kies vervolgens voor `Simple`. Kies voor `Summaries of for groups of cases` en klik op `Define`.  Selecteer de gewenste variabele(n), plaats de afhankelijke variabelen in het vakje `Variable` en de variabelen waarop gegroepeerd moet worden in het vakje `Category Axis`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
 
-<!-- ## BLOK: Boxplot.R -->
+<!-- ## OPENBLOK: Boxplot.R -->
 ``` {r boxplot, eval=FALSE}
 * Boxplot.
 EXAMINE VARIABLES=Cijfer BY Voor_of_na_tutorgesprek
@@ -161,7 +161,7 @@ De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standa
 
 Klik op `Analyze` > `Nonparametric Tests` > `Legacy Dialogs` > `1-Sample K-S...`. Selecteer de gewenste variabele(n) en plaats deze in het vakje `Test Variable List`. Vink bij `Test Distribution` het vakje voor `Normal` aan. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
 
-<!-- ## BLOK: Lilliefors-test.R -->
+<!-- ## OPENBLOK: Lilliefors-test.R -->
 ```{r Kolmogorov-Smirnov Test, eval=FALSE}
 * Kolmogorov-Smirnov test.
 NPAR TESTS
@@ -183,7 +183,7 @@ Er zijn 2 steekproeven van `Tentamencijfers` ingeladen: `Tentamencijfer_voor_tut
 
 Klik op `Analyze` > `Descriptive Statistics` > `Explore...`. Selecteer de gewenste variabele(n) en plaats deze in het vakje `Test Variable List`. Vink bij `Plots` het vakje voor `Normality plots with tests` aan en klik op `Continue`. Vink bij `Display` het vakje voor `Plots` aan. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten. 
 
-<!-- ## BLOK: Shapiro-Wilk-test.R -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test.R -->
 ``` {r Shapiro-Wilk Test, eval=FALSE}
 * Shapiro-Wilk test.
 EXAMINE VARIABLES=Tentamencijfer_voor_tutorgesprek_n30
@@ -206,7 +206,7 @@ De *gepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het gemidd
 
 Klik op `Analyze` > `Compare Means` > `Paired-Samples T Test...`. Plaats een groep in `Variable1` en de andere groep in `Variable2`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
 
-<!-- ## BLOK: T-test.R -->
+<!-- ## OPENBLOK: T-test.R -->
 ```{r ttest, eval=FALSE}
 * T-test.
 T-TEST PAIRS=Tentamencijfer_voor_tutorgesprek WITH Tentamencijfer_na_tutorgesprek (PAIRED)

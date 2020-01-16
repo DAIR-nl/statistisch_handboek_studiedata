@@ -20,7 +20,7 @@ output:
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 
-<!-- ## BLOK: Functiedefinities.R -->
+<!-- ## OPENBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -31,7 +31,7 @@ Round_and_format <- function(x, digits = 2) {
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
 
-<!-- ## BLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## Beoordelen studenten een opleiding anders net na het afstuderen en 5 jaar na dato? Studenten worden gevraagd antwoord te geven op de vraag: 
 ## Hoe goed heeft deze studie je voorbereid op de arbeidsmarkt (erg goed, goed, neutraal, slecht, erg slecht)
@@ -88,7 +88,7 @@ Er is een dataset ingeladen genaamd `Eval_curriculum`. Deze bevat curriculum eva
 
 ## De data bekijken
 Bekijk de data met `head()`.
-<!-- ## BLOK: Data-bekijken.R -->
+<!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken}
 ## Eerste 6 observaties
 head(Eval_curriculum)
@@ -98,7 +98,7 @@ tail(Eval_curriculum)
 <!-- ## /BLOK: Data-bekijken.R -->
 
 De data is gesorteerd op jaar. Gebruik `order()` op studentnummer om de studenten op de goede volgorde te zetten.
-<!-- ## BLOK: Transformeer-data -->
+<!-- ## OPENBLOK: Transformeer-data -->
 ```{r data sorteren}
 Eval_curriculum <- Eval_curriculum[order(Eval_curriculum$Studentnr),]
 ```
@@ -117,16 +117,16 @@ Eval_curriculum <- Eval_curriculum[order(Eval_curriculum$Studentnr),]
 
 ## McNemar toets
 Om `mcnemar.test()` te gebruiken moet de data eerst worden omgezet in een kruistabel.
-<!-- ## BLOK: Maak-kruistabel.R -->
+<!-- ## OPENBLOK: Maak-kruistabel.R -->
 ```{r kruistabel alfabetisch}
 Eval_curriculum_kt <- table(Eval_curriculum$Waardering[Eval_curriculum$Jaar==2014],
                             Eval_curriculum$Waardering[Eval_curriculum$Jaar==2019])
 print(Eval_curriculum_kt)
 ```
-<!-- ## BLOK: /Maak-kruistabel.R -->
+<!-- ## OPENBLOK: /Maak-kruistabel.R -->
 
 De koppen staan nu nog op alfabetische volgorde. Verander deze volgorde zodat de categorieën verlopen zoals de ordinale variabele.
-<!-- ## BLOK: Transformeer-kruistabel.R -->
+<!-- ## OPENBLOK: Transformeer-kruistabel.R -->
 ```{r kruistabel ordinaal}
 Eval_curriculum_kt <- Eval_curriculum_kt[c(1, 3, 4, 5, 2), c(1, 3, 4, 5, 2)]
 print(Eval_curriculum_kt)
@@ -135,7 +135,7 @@ print(Eval_curriculum_kt)
 
 
 Voer verolgens de test uit met `mcnemar.test()`.
-<!-- ## BLOK: McNemar-toets.R -->
+<!-- ## OPENBLOK: McNemar-toets.R -->
 ```{r McNemar }
 mcnemar.test(Eval_curriculum_kt)
 ```
@@ -143,7 +143,7 @@ mcnemar.test(Eval_curriculum_kt)
 
 ## Wilcoxon Signed Rank toets
 Om de wilcoxon Signed Rank toets te doen moet de ordinale data worden getransformeerd naar numerieke data. Hiervoor gebruiken we de rang van de categorieën (5 voor erg goed, 1 voor erg slecht)
-<!-- ## BLOK: Wilcoxon-Signed-Rank-toets.R -->
+<!-- ## OPENBLOK: Wilcoxon-Signed-Rank-toets.R -->
 ```{r Wilcoxon Signed Rank voorbereiden}
 Eval_curriculum$Waardering_num[Eval_curriculum$Waardering == "erg goed"] <- 5
 Eval_curriculum$Waardering_num[Eval_curriculum$Waardering == "goed"] <- 4

@@ -20,7 +20,7 @@ output:
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 
-<!-- ## BLOK: Functiedefinities.R -->
+<!-- ## OPENBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -36,7 +36,7 @@ Round_and_format <- function(x, digits = 2) {
 # linken naar blz transformeren data 
 ```
 
-<!-- ## BLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 RNGkind(sample.kind = "Rounding")
 set.seed(2)
@@ -155,7 +155,7 @@ Er is een dataset ingeladen met gemiddelde tentamencijfer voor (T~0~) en na (T~1
 
 ## De data bekijken
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
-<!-- ## BLOK: Data-bekijken.R -->
+<!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
 ## Eerste 6 observaties
 head(Tentamencijfers)
@@ -166,7 +166,7 @@ tail(Tentamencijfers)
 <!-- ## /BLOK: Data-bekijken.R -->
 
 Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen.
-<!-- ## BLOK: Data-selecteren.R -->
+<!-- ## OPENBLOK: Data-selecteren.R -->
 ```{r data selecteren}
 Tentamencijfer_voor_tutorgesprek <-
   Tentamencijfers[Tentamencijfers$Voor_of_na_tutorgesprek=="voor", 2]
@@ -176,7 +176,7 @@ Tentamencijfer_na_tutorgesprek <-
 <!-- ## /BLOK: Data-selecteren.R -->
 
 <div class="col2">
-<!-- ## BLOK: Data-beschrijven-1.R -->
+<!-- ## OPENBLOK: Data-beschrijven-1.R -->
 ```{r data beschrijven t1, collapse = TRUE}
 ## aantallen, gemiddelde en standaarddeviatie voor tutorgesprek
 length(Tentamencijfer_voor_tutorgesprek)
@@ -191,7 +191,7 @@ vSD_t0 <-Round_and_format(sd(Tentamencijfer_voor_tutorgesprek))
 vN_t0 <- Round_and_format(length(Tentamencijfer_voor_tutorgesprek))
 ```
   
-<!-- ## BLOK: Data-beschrijven-2.R -->
+<!-- ## OPENBLOK: Data-beschrijven-2.R -->
 ```{r data bekijken t2, collapse=TRUE}
 ## aantallen, gemiddelde en standaarddeviatie na tutorgesprek
 length(Tentamencijfer_na_tutorgesprek)
@@ -214,7 +214,7 @@ vN_t1 <- Round_and_format(length(Tentamencijfer_na_tutorgesprek))
 Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
-<!-- ## BLOK: Histogram.R -->
+<!-- ## OPENBLOK: Histogram.R -->
 ```{r histogram}
 ## Histogram met ggplot2
 library(ggplot2)
@@ -248,7 +248,7 @@ Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen wor
 
 <div class = "col-container">
   <div class="col">
-<!-- ## BLOK: QQplot-1.R -->
+<!-- ## OPENBLOK: QQplot-1.R -->
 ```{r qqplot-1}
 qqnorm(Tentamencijfer_voor_tutorgesprek, 
        pch = 1,
@@ -260,7 +260,7 @@ qqline(Tentamencijfer_voor_tutorgesprek)
 <!-- ## /BLOK: QQplot-1.R -->
   </div>
   <div class = "col">
-<!-- ## BLOK: QQplot-2.R -->
+<!-- ## OPENBLOK: QQplot-2.R -->
 ```{r qqplot-2}
 qqnorm(Tentamencijfer_na_tutorgesprek, 
        pch = 1,
@@ -276,9 +276,9 @@ qqline(Tentamencijfer_na_tutorgesprek)
 In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. 
 
 ### Boxplot
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8]  
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen.   
 
-<!-- ## BLOK: Boxplot.R -->
+<!-- ## OPENBLOK: Boxplot.R -->
 ``` {r Boxplot}
 ## Boxplot
 boxplot(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers,
@@ -295,21 +295,21 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst 
 ### Kolmogorov-Smirnov 
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
-<!-- ## BLOK: Library-nortest.R -->
+<!-- ## OPENBLOK: Library-nortest.R -->
 ```{r library nortest, warning=FALSE}
 library(nortest)
 ```
 <!-- ## /BLOK: Library-nortest.R -->
 <div class="col-container">
   <div class = "col">
-<!-- ## BLOK: Lilliefors-test-1.R -->
+<!-- ## OPENBLOK: Lilliefors-test-1.R -->
 ``` {r Lilliefors Test-1, warning=FALSE}
 lillie.test(Tentamencijfer_voor_tutorgesprek)
 ```
 <!-- ## /BLOK: Lilliefors-test-1.R -->
   </div>
   <div class = "col">
-<!-- ## BLOK: Lilliefors-test-2.R -->
+<!-- ## OPENBLOK: Lilliefors-test-2.R -->
 ``` {r Lilliefors Test-2, warning=FALSE}
 lillie.test(Tentamencijfer_na_tutorgesprek)
 ```
@@ -326,7 +326,7 @@ Er zijn 2 steekproeven van `Tentamencijfers` ingeladen: `Tentamencijfer_voor_tut
 
 <div class ="col-container">
   <div class ="col">
-<!-- ## BLOK: Shapiro-Wilk-test-1.R -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test-1.R -->
 ``` {r Shapiro-Wilk Test-1, warning=FALSE}
 shapiro.test(
   Tentamencijfer_voor_tutorgesprek_n30)
@@ -334,7 +334,7 @@ shapiro.test(
 <!-- ## /BLOK: Shapiro-Wilk-test-1.R -->
   </div>
   <div class ="col">
-<!-- ## BLOK: Shapiro-Wilk-test-2.R -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test-2.R -->
 ``` {r Shapiro-Wilk Test-2, warning=FALSE}
 shapiro.test(
   Tentamencijfer_na_tutorgesprek_n30)
@@ -350,7 +350,7 @@ Gebruik `t.test()` met `paired = TRUE` om een *gepaarde t-toets* uit te voeren. 
 
 De *gepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het gemiddelde tentamencijfer verandert na een tutorgesprek. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren na een gesprek is er voor gekozen om tweezijdig te toetsen. 
 
-<!-- ## BLOK: T-toets.R -->
+<!-- ## OPENBLOK: T-toets.R -->
 ```{r T-test}
 t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, 
        paired = TRUE,
@@ -374,7 +374,7 @@ vDiffMean <- Round_and_format(t$estimate*-1)
 
 ### Effectmaat: Cohen's d
 Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
-<!-- ## BLOK: Cohens-d-test.R -->
+<!-- ## OPENBLOK: Cohens-d-test.R -->
 ```{r Cohens d}
 library(effsize)
 cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
@@ -407,4 +407,4 @@ Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een 
 [^7]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf 
 [^8]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 [^9]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
-[^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, hou hierbij rekening met type I en type II fouten.
+[^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houd hierbij rekening met type I en type II fouten.

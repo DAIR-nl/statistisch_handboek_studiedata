@@ -33,7 +33,7 @@ Krijg meer inzicht in de dataset door het gemiddelde en de spreiding te bekijken
 
 Klik op `Analyze` > `Descriptive Statistics` > `Descriptives`.  Vink bij options het gemiddelde (`Mean`) en de standaard deviatie (`Std. deviation`) aan en klik op `Continue`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
 
-<!-- ## BLOK: Data-beschrijven.SPSS -->
+<!-- ## OPENBLOK: Data-beschrijven.SPSS -->
 ```{r de data bekijken, eval=FALSE}
 * Gemiddelde en standaarddeviatie.
 DESCRIPTIVES VARIABLES=Gemiddeld_cijfer_WNS
@@ -51,7 +51,7 @@ Geef normaliteit visueel weer met een histogram, boxplot of Q-Q plot.
 ### Histogram
 Klik op `Graphs` > `Legacy Dialogs` en vervolgens op het gewenste figuur, in dit geval `Histogram...`. Selecteer de gewenste variabele en plaats deze in het vakje `Variable`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten. Voor een density curve ga naar de `chart editor` (dubbelklik op het figuur). Klik op `Elements` > `Hide Distribution Curve`.
 
-<!-- ## BLOK: Histogram.SPSS -->
+<!-- ## OPENBLOK: Histogram.SPSS -->
 ```{r histogram, eval=FALSE}
 * Histogram.
 GRAPH
@@ -66,7 +66,7 @@ Het histogram laat een Bell Curve zien vergelijkbaar met een normale verdeling: 
 Klik op `Analyze` > `Desctiptive Statistics` > `Q-Q Plots...`. Selecteer de gewenste variabele(n) en plaats deze in het vakje `Variables`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
 
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
-<!-- ## BLOK: QQplot.R -->
+<!-- ## OPENBLOK: QQplot.R -->
 ```{r qqplot, eval=FALSE}
 * QQ-Plot.
 PPLOT
@@ -90,7 +90,7 @@ De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen
 
 Klik op `Graphs` > `Legacy Dialogs` > `Boxplot...`. Kies vervolgens voor `Simple`. Kies voor `Summaries of separate variables` en klik op `Define`.  Selecteer de gewenste variabele(n) en plaats deze in het vakje `Boxes Represent`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
 
-<!-- ## BLOK: Boxplot.R -->
+<!-- ## OPENBLOK: Boxplot.R -->
 ``` {r boxplot, eval=FALSE}
 * Boxplot.
 EXAMINE VARIABLES=Gemiddeld_cijfer_WNS 
@@ -114,7 +114,7 @@ De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standa
 
 Klik op `Analyze` > `Nonparametric Tests` > `Legacy Dialogs` > `1-Sample K-S...`. Selecteer de gewenste variabele(n) en plaats deze in het vakje `Test Variable List`. Vink bij `Test Distribution` het vakje voor `Normal` aan. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
 
-<!-- ## BLOK: Lilliefors-test.R -->
+<!-- ## OPENBLOK: Lilliefors-test.R -->
 ```{r Kolmogorov-Smirnov Test, eval=FALSE}
 * Kolmogorov-Smirnov test.
 NPAR TESTS
@@ -136,7 +136,7 @@ Er is een steekproef van `Gemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS
 
 Klik op `Analyze` > `Descriptive Statistics` > `Explore...`. Selecteer de gewenste variabele(n) en plaats deze in het vakje `Test Variable List`. Vink bij `Plots` het vakje voor `Normality plots with tests` aan en klik op `Continue`. Vink bij `Display` het vakje voor `Plots` aan. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten. 
 
-<!-- ## BLOK: Shapiro-Wilk-test.R -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test.R -->
 ``` {r Shapiro-Wilk Test, eval=FALSE}
 * Shapiro-Wilk test.
 EXAMINE VARIABLES=Gemiddeld_cijfer_WNS_n30
@@ -160,7 +160,7 @@ De *one sample t-toets* is uitgevoerd om de vraag te beantwoorden of het gemidde
 
 Klik op `Analyze` > `Compare Means` > `One-Sample T Test...`. Selecteer de gewenste variabele(n), plaats deze in het vakje `Test Variable(s)`. Vul bij `Test Value` het te vergelijkbare gemiddelde in, in dit geval 6,8. *(Let op: gebruik een komma en geen punt)*. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
 
-<!-- ## BLOK: T-test.R -->
+<!-- ## OPENBLOK: T-test.R -->
 ```{r ttest, eval=FALSE}
 * T-test.
 T-TEST

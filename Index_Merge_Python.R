@@ -37,7 +37,7 @@ dfToetsen <- tribble(
     ~Toets, ~InGebruik,
     "01 One sample t-toets",                "1", 
     "02 Gepaarde t-toets",                  "1", 
-    "03 Ongepaarde t-toets",                "0", 
+    "03 Ongepaarde t-toets",                "1", 
     "04 Linear mixed model",                "0", 
     "05 One-way ANOVA",                     "0", 
     "06 Tekentoets",                        "0", 
@@ -82,7 +82,7 @@ for (toets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
       
       ## Verwijder regels met /BLOK en verwijder begin + einde string (<--! -->)
       lCodeblokken <- lCodeblokken[!str_detect(lCodeblokken, pattern = "## /BLOK")] %>% 
-        str_replace("<!-- ## BLOK: ", "") %>% 
+        str_replace("<!-- ## OPENBLOK: ", "") %>% 
         str_replace(".R -->", "")
       
       ## Loop nu over de codeblokken

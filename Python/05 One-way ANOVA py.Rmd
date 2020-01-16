@@ -20,7 +20,7 @@ output:
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 
-<!-- ## BLOK: Functiedefinities.R -->
+<!-- ## OPENBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -38,7 +38,7 @@ options(width = 80)
 ## Zodat de TukeyHSD naast elkaar geprint wordt
 ```
 
-<!-- ## BLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## Het hoofd communicatie wil in verband met wervingsactiviteiten weten wat de reistijd is van studenten aan verschillende opleidingen.
 
@@ -129,7 +129,7 @@ Er is een dataset ingeladen met de reistijden van uitwonende studenten per oplei
 ## De data bekijken
 Gebruik `<dataframe>.head()` en `<dataframe>.tail()` om de structuur van de data te bekijken.
 
-<!-- ## BLOK: Data-bekijken.py -->
+<!-- ## OPENBLOK: Data-bekijken.py -->
 ```{python, include=FALSE}
 import pandas as pd
 dfReistijd_per_opleiding = pd.DataFrame(r.Reistijd_per_opleiding)
@@ -148,32 +148,33 @@ print(dfReistijd_per_opleiding.tail(5))
 
 De dataset bevat gegevens van studenten van verschillende opleidingen. Gebruik `<data.frame>.<kolomnaam>.unique()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
 
-<!-- ## BLOK: Data-bekijken2.R -->
+<!-- ## OPENBLOK: Data-bekijken2.py -->
 ```{python data bekijken 2}
 ## Opleidingen in de data aanwezig
 print(dfReistijd_per_opleiding.Opleiding.unique())
 ```
-<!-- ## /BLOK: Data-bekijken2.R -->
+<!-- ## /BLOK: Data-bekijken2.py -->
 
 Selecteer de drie groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. 
-<!-- ## BLOK: Data-selecteren.py -->
+
+<!-- ## OPENBLOK: Data-selecteren.py -->
 ```{python data selecteren}
 Reistijd_ATC = dfReistijd_per_opleiding[dfReistijd_per_opleiding['Opleiding'] == "Arabische Taal en Cultuur"]['Reistijd']
 Reistijd_FIL = dfReistijd_per_opleiding[dfReistijd_per_opleiding['Opleiding'] == "Filosofie"]['Reistijd']
 Reistijd_GSC = dfReistijd_per_opleiding[dfReistijd_per_opleiding['Opleiding'] == "Geschiedenis"]['Reistijd']
 ```
-<!-- ## /BLOK: Data-selecteren.R -->
+<!-- ## /BLOK: Data-selecteren.py -->
 
 Om meer inzicht te krijgen in de data, inspecteer de data met `len()`, `np.mean()` en `np.sqrt(np.var())`, door deze aan te roepen uit de library `numpy`.
 
-<!-- ## BLOK: Data-beschrijven-inladen.py -->
+<!-- ## OPENBLOK: Data-beschrijven-inladen.py -->
 ```{python}
 # Om het gemiddelde en de standaard deviatie te berekenen, hebben we de library 'numpy' nodig
 import numpy as np
 ```
 
 <div class="col2">
-<!-- ## BLOK: Data-beschrijven-1.py -->
+<!-- ## OPENBLOK: Data-beschrijven-1.py -->
 ```{python Data beschrijven 1, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie voor Arabische Taal en Cultuur
 print(len(Reistijd_ATC))
@@ -194,7 +195,7 @@ print(len(Reistijd_GSC))
 print(np.mean(Reistijd_GSC))
 print(np.sqrt(np.var(Reistijd_GSC)))
 ```
-<!-- ## /BLOK: Data-beschrijven-1.R -->
+<!-- ## /BLOK: Data-beschrijven-1.py -->
 
 ```{r data beschrijven als object 1, include=FALSE, echo=TRUE}
 vM_ATC <- Round_and_format(mean(Reistijd_ATC))
@@ -220,7 +221,7 @@ vN_GSC <- Round_and_format(length(Reistijd_GSC))
 Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
-<!-- ## BLOK: Histogram.py -->
+<!-- ## OPENBLOK: Histogram.py -->
 ```{python histogram}
 ## Histogram met matplotlib
 import matplotlib.pyplot as plt
@@ -240,7 +241,7 @@ hist3 = plt.hist(Reistijd_GSC, density = True, edgecolor = "black", bins = 12)
 main = fig.suptitle('Reistijd')
 plt.show()
 ```
-<!-- ## /BLOK: Histogram.R -->
+<!-- ## /BLOK: Histogram.py -->
 
 De opleidingen Geschiedenis en Arabische taal en Cultuur laten een Bell Curve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Filosofie heeft een lagere frequentie bij een reistijd van 40 minuten, dit kan duiden op niet normaal verdeelde data. 
 
@@ -248,7 +249,7 @@ De opleidingen Geschiedenis en Arabische taal en Cultuur laten een Bell Curve zi
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 <div class = "col-container">
   <div class="col">
-<!-- ## BLOK: QQplot1.py -->
+<!-- ## OPENBLOK: QQplot1.py -->
 ```{python QQplot-t1}
 import scipy.stats as stats
 qq = stats.probplot(Reistijd_ATC, dist="norm", plot=plt)
@@ -260,7 +261,7 @@ plt.show()
 <!-- ## /BLOK: QQplot1.py -->
   </div>
   <div class = "col">
-<!-- ## BLOK: QQplot2.py -->
+<!-- ## OPENBLOK: QQplot2.py -->
 ```{python QQplot-t1}
 import scipy.stats as stats
 qq = stats.probplot(Reistijd_FIL, dist="norm", plot=plt)
@@ -272,7 +273,7 @@ plt.show()
 <!-- ## /BLOK: QQplot2.py -->
   </div>
   <div class = "col">
-<!-- ## BLOK: QQplot3.py -->
+<!-- ## OPENBLOK: QQplot3.py -->
 ```{python QQplot-t1}
 import scipy.stats as stats
 qq = stats.probplot(Reistijd_GSC, dist="norm", plot=plt)
@@ -281,7 +282,7 @@ xlab = plt.xlabel("Theoretische kwantielen")
 ylab = plt.ylabel("Kwantielen in data")
 plt.show()
 ```
-<!-- ## BLOK: QQplot3.py -->
+<!-- ## OPENBLOK: QQplot3.py -->
   </div>
 </div>
 
@@ -290,7 +291,7 @@ Bij de Q-Q plot van de reistijd van studenten Geschiedenis liggen de meeste punt
 ### Boxplot
 De box geeft de middelste 50% van de reistijd weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^14]<sup>, </sup>[^15]
 
-<!-- ## BLOK: Boxplot.py -->
+<!-- ## OPENBLOK: Boxplot.py -->
 ```{python boxplot}
 fig, ax = plt.subplots()
 box = ax.boxplot([Reistijd_ATC, Reistijd_FIL, Reistijd_GSC], labels = ["Arabische Taal en Cultuur", "Filosofie", "Geschiedenis"])
@@ -311,28 +312,29 @@ De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standa
 ```{python}
 import statsmodels.stats.api
 ```
+<!-- ## /BLOK: Library-nortest inladen.py -->
 
 <div class="col-container"> 
   <div class="col">
-<!-- ## BLOK: Lilliefors-test-1.R -->
+<!-- ## OPENBLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
 print(statsmodels.stats.api.lilliefors(Reistijd_ATC))
 ```
-<!-- ## BLOK: Lilliefors-test-1.R -->
+<!-- ## OPENBLOK: Lilliefors-test-1.py -->
   </div>
   <div class = "col">
-<!-- ## BLOK: Lilliefors-test-2.R -->
+<!-- ## OPENBLOK: Lilliefors-test-2.py -->
 ``` {python Lilliefors Test-2, warning=FALSE}
 print(statsmodels.stats.api.lilliefors(Reistijd_FIL))
 ```
-<!-- ## BLOK: Lilliefors-test-2.R -->
+<!-- ## OPENBLOK: Lilliefors-test-2.py -->
   </div>
   <div class = "col">
-<!-- ## BLOK: Lilliefors-test-3.R -->
+<!-- ## OPENBLOK: Lilliefors-test-3.py -->
 ``` {python Lilliefors Test-3, warning=FALSE}
 print(statsmodels.stats.api.lilliefors(Reistijd_GSC))
 ```
-<!-- ## /BLOK: Lilliefors-test-3.R -->
+<!-- ## /BLOK: Lilliefors-test-3.py -->
   </div>
 </div>
 
@@ -343,25 +345,25 @@ De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test*
 
 <div class="col-container"> 
   <div class="col">
-<!-- ## BLOK: Shapiro-Wilk-test-3.py -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test-3.py -->
 ``` {python Shapiro-Wilk Test-1, warning=FALSE}
 print(stats.shapiro(Reistijd_GSC))
 ```
 <!-- ## /BLOK: Shapiro-Wilk-test-3.py -->
   </div>
   <div class= "col">
-<!-- ## BLOK: Shapiro-Wilk-test-2.py -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
 ``` {python Shapiro-Wilk Test-1, warning=FALSE}
 print(stats.shapiro(Reistijd_FIL))
 ```
-<!-- ## BLOK: Shapiro-Wilk-test-2.py -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
   </div>
   <div class= "col"> 
-<!-- ## BLOK: Shapiro-Wilk-test-1.py -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
 ``` {python Shapiro-Wilk Test-1, warning=FALSE}
 print(stats.shapiro(Reistijd_ATC))
 ```
-<!-- ## BLOK: Shapiro-Wilk-test-1.py -->
+<!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
   </div>
 </div>
 
@@ -370,12 +372,12 @@ De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevon
 ## Toetsen van Homogeniteit van varianties
 Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. 
 
-<!-- ## BLOK: Levenes-test.R -->
+<!-- ## OPENBLOK: Levenes-test.py -->
 ```{python Levenes test}
 print(stats.levene(dfReistijd_per_opleiding['Reistijd'], dfReistijd_per_opleiding['Opleiding']))
 ```
+<!-- ## /BLOK: Levenes-test.py -->
 
-<!-- ## /BLOK: Levenes-test.R -->
 ```{r Levenes test als object, echo = FALSE}
 library(car)
 library(carData)
@@ -393,11 +395,13 @@ vDF2 <- Round_and_format(L$`Df`[2])
 ## One-way ANOVA 
 De *one-way ANOVA* is uitgevoerd om de vraag te beantwoorden of de gemiddelde reistijd van de studenten per opleiding  
 Gebruik `stats.f_oneway()` om een ANOVA-test uit te voeren.
-<!-- ## BLOK: ANOVA-toets.R -->
+
+<!-- ## OPENBLOK: ANOVA-toets.py -->
 ```{python ANOVA}
 print(stats.f_oneway(dfReistijd_per_opleiding['Reistijd'], dfReistijd_per_opleiding['Opleiding']))
 ```
-<!-- ## /BLOK: ANOVA-toets.R -->
+<!-- ## /BLOK: ANOVA-toets.py -->
+
 ```{r ANOVA als object, echo=FALSE}
 ANOVA <- summary(res.aov)
 vF_waarde <- Round_and_format(ANOVA[[1]]$`F value`[1])
@@ -409,11 +413,33 @@ vF_waarde <- Round_and_format(ANOVA[[1]]$`F value`[1])
 ### Effectmaat: Cohen's *f*
 Gebruik `cohens_f()` op een object met `class = aov` om het effect te meten.
 
-<!-- ## BLOK: Cohens-f.R --> 
-```{r Cohen s F, warning=FALSE, message=FALSE}
-library(sjstats)
-cohens_f(res.aov)
+<!-- ## OPENBLOK: Cohens-f.py -->
+```{python}
+def cohenf(x, y):
+  # import numpy
+  import numpy as np
+	
+	# calculate the size of samples
+  n1, n2 = len(x), len(y)
+	
+	# calculate the variance of the samples
+  v1, v2 = np.var(x, ddof=1), np.var(y, ddof=1)
+	
+	# calculate the pooled standard deviation
+  s = np.sqrt(((n1 - 1) * v1 + (n2 - 1) * v2) / (n1 + n2 - 2))
+	
+	# calculate the means of the samples
+  m1, m2 = np.mean(x), np.mean(y)
+	
+	# calculate the effect size
+  return (m1 - m2) / s
 ```
+
+```{python}
+print(cohenf(...))
+```
+<!-- ## OPENBLOK: Cohens-f.py --> 
+
 <!-- ## /BLOK: Cohens-f.R --> 
 ```{r Cohen s F als object, include=FALSE}
 f<-cohens_f(res.aov)
@@ -424,7 +450,7 @@ De sterkte van het effect van type opleiding op de reistijd is groot.
 
 ### Effectmaat: Eta squared
 Gebruik `EtaSq()` op een een object met `class = aov` om het effect te meten.
-<!-- ## BLOK: Eta-squared.R --> 
+<!-- ## OPENBLOK: Eta-squared.R --> 
 ```{r eta-squared, message = FALSE}
 library(DescTools)
 EtaSq(res.aov)
@@ -440,7 +466,7 @@ De sterkte van het effect van de type opleiding op de reistijd is groot.
 Om te bepalen welke van de type opleidingen in reistijd verschillen wordt een post-hoc toets gedaan. Gebruik bij groepen met gelijke variantie de Tukey Honestly Significant Difference Test.
 Gebruik `TukeyHSD()` op het ANOVA-object.
 
-<!-- ## BLOK: Tukey-HSD.R -->
+<!-- ## OPENBLOK: Tukey-HSD.R -->
 ```{r TukeyHSD}
 TukeyHSD(res.aov)
 ```

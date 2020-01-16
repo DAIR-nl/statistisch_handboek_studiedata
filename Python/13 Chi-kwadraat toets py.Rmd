@@ -20,7 +20,7 @@ output:
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 
-<!-- ## BLOK: Functiedefinities.R -->
+<!-- ## OPENBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -33,7 +33,7 @@ knitr::knit_engines$set(python = reticulate::eng_python)
 ```
 <!-- ## /BLOK: Functiedefinities.R -->
 
-<!-- ## BLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r opmerking TODO, include=FALSE, eval=FALSE}
 # TODO: Uitleg extra pagina: nominaal, ordinaal etc., afhanjeklijk en onafhankelijk  
 # TODO: Uitleg transformeren data 
@@ -97,7 +97,7 @@ Gebruik de *Fisher’s exact toets* wanneer de aantallen lager zijn.[^7]
 Er is een dataset ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. De data `Uitval_functiebeperking` zijn binair: wel of geen uitval. 
 
 ## De data bekijken
-<!-- ## BLOK: Data-bekijken.py -->
+<!-- ## OPENBLOK: Data-bekijken.py -->
 ```{python, include=FALSE}
 import pandas as pd
 dfUitval_functiebeperking = pd.DataFrame(r.Uitval_functiebeperking)
@@ -111,7 +111,7 @@ print(dfUitval_functiebeperking.head(6))
 
 ## Chi-kwadraat toets
 De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel gelijk is gebleven. Gebruik `stats.chisquare()` op een kruistabel.  
-<!-- ## BLOK: Chi2-toets -->
+<!-- ## OPENBLOK: Chi2-toets -->
 ```{python}
 import scipy.stats as stats
 print(stats.chisquare(dfUitval_functiebeperking, ddof=1))
@@ -139,7 +139,7 @@ De *Chi-kwadraat toets* is uitgevoerd om te toetsen of studenten met een functie
 ## Fisher's exact toets
 De *Fisher's exact toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel gelijk is gebleven. Deze toets is ook betrouwbaar bij een laag aantal in een cel, hierbij een voorbeeld met lage aantallen.  Er is een steekproef van `Uitval_functiebeperking` ingeladen genaamd `Uitval_functiebeperking_n43`. 
 .
-<!-- ## BLOK: data-bekijken-n43 -->
+<!-- ## OPENBLOK: data-bekijken-n43 -->
 ```{python data bekijken n43}
 print(r.Uitval_functiebeperking_n43)
 ```
@@ -147,7 +147,7 @@ print(r.Uitval_functiebeperking_n43)
 
 De groepen hebben een laag aantal geobserveerde waarden, variërend van 5 tot 16. Voer de *Fisher's exact toets* uit.
 
-<!-- ## BLOK: Fishers-Exact-toets -->
+<!-- ## OPENBLOK: Fishers-Exact-toets -->
 ```{python}
 print(stats.fisher_exact(r.Uitval_functiebeperking_n43))
 ```

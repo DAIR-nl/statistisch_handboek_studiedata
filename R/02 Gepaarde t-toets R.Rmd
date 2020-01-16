@@ -16,11 +16,13 @@ output:
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
+<!-- ## CLOSEDBLOK: Header.R -->
 ```{r header, include = FALSE, echo = TRUE, results='asis'} 
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
+<!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## OPENBLOK: Functiedefinities.R -->
+<!-- ## CLOSEDBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -29,7 +31,7 @@ Round_and_format <- function(x, digits = 2) {
   return(x)
 }
 ```
-<!-- ## /OPENBLOK: Functiedefinities.R -->
+<!-- ## /CLOSEDBLOK: Functiedefinities.R -->
 
 ```{r opmerking, include=FALSE, eval=FALSE}
 # doorlinken naar de Wilcoxon Signed Rank Test
@@ -151,10 +153,14 @@ Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een
 Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.[^7]  
 
 # Uitvoering
+<!-- ## TEKSTBLOK: Dataset-inladen.R-->
 Er is een dataset ingeladen met gemiddelde tentamencijfer voor (T~0~) en na (T~1~) een tutorgesprek: `Tentamencijfers`. 
+<!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
+<!-- ## TEKSTBLOK: Data-bekijken.R -->
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
+<!-- ## /TEKSTBLOK: Data-bekijken.R -->
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
 ## Eerste 6 observaties
@@ -174,8 +180,8 @@ Tentamencijfer_na_tutorgesprek <-
   Tentamencijfers[Tentamencijfers$Voor_of_na_tutorgesprek=="na", 2]
 ```
 <!-- ## /OPENBLOK: Data-selecteren.R -->
-
-<div class="col2">
+<div class = "col-container">
+  <div class ="col">
 <!-- ## OPENBLOK: Data-beschrijven-1.R -->
 ```{r data beschrijven t1, collapse = TRUE}
 ## aantallen, gemiddelde en standaarddeviatie voor tutorgesprek
@@ -185,12 +191,8 @@ mean(
 sd(Tentamencijfer_voor_tutorgesprek)
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-1.R -->
-```{r Var beschrijven t0, include=FALSE, echo=TRUE}
-vMean_t0 <- Round_and_format(mean(Tentamencijfer_voor_tutorgesprek))
-vSD_t0 <-Round_and_format(sd(Tentamencijfer_voor_tutorgesprek))
-vN_t0 <- Round_and_format(length(Tentamencijfer_voor_tutorgesprek))
-```
-  
+  </div>
+  <div class = "col">
 <!-- ## OPENBLOK: Data-beschrijven-2.R -->
 ```{r data bekijken t2, collapse=TRUE}
 ## aantallen, gemiddelde en standaarddeviatie na tutorgesprek
@@ -200,15 +202,22 @@ mean(
 sd(Tentamencijfer_na_tutorgesprek)
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-2.R -->
-```{r Var beschrijven t1, include=FALSE, echo=TRUE}
+  </div>
+</div>
+<!-- ## CLOSEDBLOK: Data-beschrijven.R -->
+```{r Var beschrijven, include=FALSE, echo=TRUE}
+vMean_t0 <- Round_and_format(mean(Tentamencijfer_voor_tutorgesprek))
+vSD_t0 <-Round_and_format(sd(Tentamencijfer_voor_tutorgesprek))
+vN_t0 <- Round_and_format(length(Tentamencijfer_voor_tutorgesprek))
 vMean_t1 <- Round_and_format(mean(Tentamencijfer_na_tutorgesprek))
 vSD_t1 <- Round_and_format(sd(Tentamencijfer_na_tutorgesprek))
 vN_t1 <- Round_and_format(length(Tentamencijfer_na_tutorgesprek))
 ```
-</div>
-
+<!-- ## /CLOSEDBLOK: Data-beschrijven.R -->
+<!-- ## TEKSTBLOK: Data-beschrijven.R -->
 * Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): `r vMean_t0` (`r vSD_t0`). *n* = `r vN_t0`.
 * Gemiddeld tentamencijfer na tutorgesprek (standaardafwijking): `r vMean_t1` (`r vSD_t1`). *n* = `r vN_t1`.
+<!-- ## /TEKSTBLOK: Data-beschrijven.R -->
 
 ## Visuele inspectie van normaliteit
 Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
@@ -242,7 +251,9 @@ ggplot(Tentamencijfers,
 Beide histogrammen laten een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom de gemiddeldes. Opvallend is dat het histogram van voor het tutorgesprek veel waardes in de linkerstaart van de verdeling heeft liggen.  
 
 ### Q-Q plot
+<!-- ## TEKSTBLOK: QQplot.R-->
 Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
+<!-- ## /TEKSTBLOK: QQplot.R-->
 
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 
@@ -321,9 +332,9 @@ Van beide groepen is de p > 0,05; er is geen statistisch significant verschil ge
 
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
-
+<!-- ## TEKSTBLOK: Shapiro-Wilk-test.R -->
 Er zijn 2 steekproeven van `Tentamencijfers` ingeladen: `Tentamencijfer_voor_tutorgesprek_n30` (T~0~) en `Tentamencijfer_na_tutorgesprek_n30` (T~1~), *n~T0~* = `r length(Tentamencijfer_voor_tutorgesprek_n30)` , *n~T1~* = `r length(Tentamencijfer_na_tutorgesprek_n30)` 
-
+<!-- ## /TEKSTBLOK: Shapiro-Wilk-test.R -->
 <div class ="col-container">
   <div class ="col">
 <!-- ## OPENBLOK: Shapiro-Wilk-test-1.R -->
@@ -346,8 +357,9 @@ shapiro.test(
 Voor beide groepen is de *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden.  
 
 ## Gepaarde t-toets
+<!-- ## TEKSTBLOK: T-test.R -->
 Gebruik `t.test()` met `paired = TRUE` om een *gepaarde t-toets* uit te voeren. Gebruik hier weer het hele dataframe `Tentamencijfers`. 
-
+<!-- ## /TEKSTBLOK: T-test.R -->
 De *gepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het gemiddelde tentamencijfer verandert na een tutorgesprek. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren na een gesprek is er voor gekozen om tweezijdig te toetsen. 
 
 <!-- ## OPENBLOK: T-toets.R -->
@@ -357,6 +369,7 @@ t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers,
        alternative = "two.sided")
 ```
 <!-- ## /OPENBLOK: T-toets.R -->
+<!-- ## CLOSEDBLOK: T-test.R -->
 ```{r T-test als object, echo = FALSE}
 t <- t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 vT_waarde <- Round_and_format(t$statistic)
@@ -366,11 +379,15 @@ vconf.int1 <- Round_and_format(t$conf.int[1])
 vconf.int2 <- Round_and_format(t$conf.int[2])
 vDiffMean <- Round_and_format(t$estimate*-1)
 ```
+<!-- ## /CLOSEDBLOK: T-test.R -->
+<!-- ## TEKSTBLOK: T-test2.R -->
 * *t*~`r vDF`~ = `r vT_waarde`, *p* << 0,05
 * Vrijheidsgraden, *df* = *n* -1 = `r vN`-1 = `r vDF`  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^10]
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r vconf.int1` en `r vconf.int2`.
 * het absolute verschil tussen de twee groepen: `r vDiffMean` 
+<!-- ## /TEKSTBLOK: T-test2.R -->
+
 
 ### Effectmaat: Cohen's d
 Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
@@ -384,9 +401,12 @@ cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 d <- cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 vD_waarde <- Round_and_format(d$estimate)
 ```
+<!-- ## TEKSTBLOK: Cohens-d-test.R -->
 *d* = `r vD_waarde`. De sterkte van het effect van de tutor op het cijfer is minimaal. 
+<!-- ## /TEKSTBLOK: Cohens-d-test.R -->
 
 # Rapportage
+<!-- ## TEKSTBLOK: Rapportage.R -->
 Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r vMean_t0`, *SD~T0~* = `r vSD_t0`) en het gemiddelde van T~1~ (*M~T1~* =`r vMean_t1`, *SD~T1~* = `r vSD_t1`) is significant, *t* ~`r vDF`~ = `r vT_waarde`, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vconf.int1` tot `r vconf.int2`. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is echter verwaarloosbaar klein, *d* = `r vD_waarde`. 
 
 
@@ -394,9 +414,16 @@ Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencij
 | --------   | --------- | ------------ | ---------- |
 | T~0~       | `r vN_t0` | `r vMean_t0` | `r vSD_t0` |
 | T~1~       | `r vN_t1` | `r vMean_t1` | `r vSD_t1` |
+<!-- ## /TEKSTBLOK: Rapportage.R -->
 *Tabel 1. Groepsgrootte, gemiddeld tentamencijfer en standaarddeviatie per meetmoment*
 
 Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor. Het effect is minimaal.  
+
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = FALSE, echo = TRUE, results='asis'} 
+paste0(here::here(),"/01. Includes/code/Footer.R")
+```
+<!-- ## /CLOSEDBLOK: Footer.R -->
 
 [^1]: Wikipedia (21 augustus 2019). *student's t-test*. [Wikipedia](https://en.wikipedia.org/wiki/student%27s_t-test).
 [^2]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). Tthe importance of the normality assumption in large public health data sets. *Annu Rev Public Health, 23*, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf 

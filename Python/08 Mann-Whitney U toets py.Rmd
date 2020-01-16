@@ -16,15 +16,11 @@ output:
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
-<!-- ## CLOSEDBLOK: Header.R -->
 ```{r header, include = FALSE, echo = TRUE, results='asis'} 
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
-<!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## CLOSEDBLOK: Functiedefinities.
-
-R -->
+<!-- ## OPENBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -38,8 +34,10 @@ Round_and_format_0decimals <- function(x, digits = 0) {
   x <- str_replace(x, "[.]", ",")
   return(x)
 }
+library(reticulate)
+knitr::knit_engines$set(python = reticulate::eng_python)
 ```
-<!-- ## /CLOSEDBLOK: Functiedefinities.R -->
+<!-- ## /BLOK: Functiedefinities.R -->
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
@@ -70,7 +68,7 @@ Punten_jaar2 <- data.frame(Studentnr, c(Punten_jaar2_NL, Punten_jaar2_inter),
 colnames(Punten_jaar2)<-c("Studentnr", "EC_Jaar2", "Nederlands")
 Punten_jaar2 <- Punten_jaar2[order(Studentnr),]
 ```
-<!-- ## /OPENBLOK: Data-aanmaken.R -->
+<!-- ## /BLOK: Data-aanmaken.R -->
 # Toepassing
 Gebruik de *Mann-Whitney U toets* om te toetsen of twee onafhankelijke groepen significant van elkaar verschillen. 
 
@@ -94,40 +92,50 @@ De directeur van een hogeschool vraagt zich af wat de invloed is van internation
 Er is data ingeladen met het aantal punten dat studenten in het tweede jaar halen. `Punten_jaar2_NL` bevat Nederlandse studenten, `Punten_jaar2_inter` bevat internationale studenten. 
 
 ## De data bekijken
-<!-- ## TEKSTBLOK: Data-bekijken.R -->
-Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
-<!-- ## /TEKSTBLOK: Data-bekijken.R -->
-<!-- ## OPENBLOK: Data-bekijken.R -->
-```{r data bekijken, collapse = TRUE}
-## Eerste 6 observaties
-head(Punten_jaar2)
-## Eerste 6 observaties
-tail(Punten_jaar2)
+Gebruik `<dataframe>.head()` en `<dataframe>.tail()` om de structuur van de data te bekijken.
+
+<!-- ## OPENBLOK: Data-bekijken.R=py -->
+```{python, include=FALSE}
+import pandas as pd
+dfPunten_jaar2 = pd.DataFrame(r.Punten_jaar2)
 ```
-<!-- ## /OPENBLOK: Data-bekijken.R -->
-Bekijk de grootte, de mediaan en de kwantielen van de data met `length()` en `quantile()`. 
-<!-- ## OPENBLOK: Data-selecteren.R -->
-```{r data selecteren}
-Nederlands <- Punten_jaar2$Nederlands == "ja"
+
+```{python data bekijken, collapse = TRUE}
+## Eerste 6 observaties
+print(dfPunten_jaar2.head(6))
 ```
-<!-- ## /OPENBLOK: Data-selecteren.R -->
+
+```{python data bekijken, collapse = TRUE}
+## Laatste 6 observaties
+print(dfPunten_jaar2.tail(6))
+```
+<!-- ## /BLOK: Data-bekijken.py -->
+
+Bekijk de grootte, de mediaan en de kwantielen van de data met `size()` en `quantile()`.
+
+<!-- ## OPENBLOK: Data-selecteren.py -->
+```{python data selecteren}
+Nederlands = dfPunten_jaar2[dfPunten_jaar2["Nederlands"] == "ja"]["EC_Jaar2"]
+Niet_Nederlands = dfPunten_jaar2[dfPunten_jaar2["Nederlands"] != "ja"]["EC_Jaar2"]
+```
+<!-- ## /BLOK: Data-selecteren.py -->
 
 <div class="col-container">
   <div class="col">
-<!-- ## OPENBLOK: Data-beschrijven-1.R -->
-```{r, data beschrijven 1, collapse=TRUE}
-length(Punten_jaar2$EC_Jaar2[Nederlands])
-quantile(Punten_jaar2$EC_Jaar2[Nederlands])
+<!-- ## OPENBLOK: Data-beschrijven-1.py -->
+```{python, data beschrijven 1, collapse=TRUE}
+print(len(Nederlands))
+print(np.quantile(Nederlands, [0, 0.25, 0.5, 0.75, 1]))
 ```
-<!-- ## /OPENBLOK: Data-beschrijven-1.R -->
+<!-- ## /BLOK: Data-beschrijven-1.py -->
   </div>
   <div class="col">
-<!-- ## OPENBLOK: Data-beschrijven-2.R -->
-``````{r Data beschrijven 2, collapse=TRUE}
-length(Punten_jaar2$EC_Jaar2[!Nederlands])
-quantile(Punten_jaar2$EC_Jaar2[!Nederlands])
+<!-- ## OPENBLOK: Data-beschrijven-2.py -->
+```{python, data beschrijven 1, collapse=TRUE}
+print(len(Niet_Nederlands))
+print(np.quantile(Niet_Nederlands, [0, 0.25, 0.5, 0.75, 1]))
 ```
-<!-- ## /OPENBLOK: Data-beschrijven-2.R -->
+<!-- ## /BLOK: Data-beschrijven-2.py -->
   </div>
 </div>
 ``` {r data beschrijven als object, include=FALSE, echo=TRUE}
@@ -159,13 +167,12 @@ vQ3_Inter <- Round_and_format(x[2,5])
 
 
 ## Mann-Whitney U toets
-Gebruik `wilcox.test()` met twee argumenten om een Mann-Whitney U toets te doen in R.
-<!-- ## OPENBLOK: Mann-Whitney-U-toets.R -->
-```{r Mann Whitney U toets}
-wilcox.test(Punten_jaar2$EC_Jaar2[Nederlands], 
-            Punten_jaar2$EC_Jaar2[!Nederlands])
+Gebruik `stats.mannwhitneyu()` met twee argumenten om een Mann-Whitney U toets te doen in Python.
+<!-- ## OPENBLOK: Mann-Whitney-U-toets.py -->
+```{python}
+print(stats.mannwhitneyu(Nederlands, Niet_Nederlands, alternative = "two-sided"))
 ```
-<!-- ## /OPENBLOK: Mann-Whitney-U-toets.R -->
+<!-- ## /BLOK: Mann-Whitney-U-toets.py -->
 
 ```{r Mann Whitney U toets als object, include = FALSE}
 wcx <- wilcox.test(Punten_jaar2$EC_Jaar2[Nederlands],

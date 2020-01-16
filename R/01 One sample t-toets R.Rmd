@@ -16,11 +16,13 @@ output:
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
+<!-- ## CLOSEDBLOK: Header.R -->
 ```{r header, include = FALSE, echo = TRUE, results='asis'} 
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
+<!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## OPENBLOK: Functiedefinities.R -->
+<!-- ## CLOSEDBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -29,7 +31,7 @@ Round_and_format <- function(x, digits = 2) {
   return(x)
 }
 ```
-<!-- ## /OPENBLOK: Functiedefinities.R -->
+<!-- ## /CLOSEDBLOK: Functiedefinities.R -->
 
 ```{r opmerking, include=FALSE, eval=FALSE}
 # TODO: een link maken naar Wilcoxon Signed Rank Test
@@ -88,10 +90,14 @@ Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventuee
 Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test*.[^6][^7]
 
 # Uitvoering
+<!-- ## TEKSTBLOK: Dataset-inladen.R-->
 Er is een dataset ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde: `Gemiddeld_cijfer_WNS` .
+<!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
+<!-- ## TEKSTBLOK: Data-bekijken.R -->
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
+<!-- ## /TEKSTBLOK: Data-bekijken.R -->
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
 ## Eerste 5 observaties
@@ -101,9 +107,9 @@ head(Gemiddeld_cijfer_WNS)
 tail(Gemiddeld_cijfer_WNS)
 ```
 <!-- ## /OPENBLOK: Data-bekijken.R -->
-
-Krijg meer inzicht in de dataset door het gemiddelde en de spreiding te bekijken, `length()`, `mean()` en `sd()` .  
-
+<!-- ## TEKSTBLOK: Data-beschrijven.R-->
+Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data.
+<!-- ## /TEKSTBLOK: Data-beschrijven.R-->
 <!-- ## OPENBLOK: Data-beschrijven.R -->
 ```{r de data bekijken, collapse=TRUE}
 ## Gemiddelde en standaarddeviatie
@@ -112,13 +118,17 @@ mean(Gemiddeld_cijfer_WNS)
 sd(Gemiddeld_cijfer_WNS)
 ```
 <!-- ## /OPENBLOK: Data-beschrijven.R -->
+<!-- ## CLOSEDBLOK: Data-beschrijven.R -->
 ```{r Var beschrijven t1, include=FALSE, echo=TRUE}
 vMean <- Round_and_format(mean(Gemiddeld_cijfer_WNS))
 vSD <- Round_and_format(sd(Gemiddeld_cijfer_WNS))
 vN <- Round_and_format(length(Gemiddeld_cijfer_WNS))
 ```
-
+<!-- ## /CLOSEDBLOK: Data-beschrijven.R -->
+<!-- ## TEKSTBLOK: Data-beschrijven2.R-->
 * Gemiddeld cijfer WNS (standaardafwijking): `r vMean` (`r vSD`). *n* = `r vN`.
+<!-- ## /TEKSTBLOK: Data-beschrijven2.R-->
+
 
 ## Visuele inspectie van normaliteit
 Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
@@ -134,7 +144,7 @@ ggplot(data.frame(Gemiddeld_cijfer_WNS),
   geom_histogram(aes(y = ..density..),
                  binwidth = 0.5, 
                  color = "white", 
-                 fill = "#158CBA", ) +
+                 fill = "#158CBA") +
   geom_density(alpha = .2, adjust = 1) +
   ylab("Frequentiedichtheid") +
   xlab("Gemiddeld_cijfer_WNS") +
@@ -149,7 +159,9 @@ ggplot(data.frame(Gemiddeld_cijfer_WNS),
 Het histogram laat een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
 
 ### Q-Q plot
+<!-- ## TEKSTBLOK: QQplot.R-->
 Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
+<!-- ## /TEKSTBLOK: QQplot.R-->
 
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 <!-- ## OPENBLOK: QQplot.R -->
@@ -196,9 +208,9 @@ De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevon
 
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
-
+<!-- ## TEKSTBLOK: Shapiro-Wilk-test.R -->
 Er is een steekproef van `Gemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS_n30`. De steekproef bevat `r length(Gemiddeld_cijfer_WNS_n30)` studenten.
-
+<!-- ## /TEKSTBLOK: Shapiro-Wilk-test.R -->
 <!-- ## OPENBLOK: Shapiro-Wilk-test.R -->
 ``` {r Shapiro-Wilk Test, warning=FALSE}
 ## Shapiro-Wilk test
@@ -209,32 +221,40 @@ shapiro.test(Gemiddeld_cijfer_WNS_n30)
 De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
 
 ##  One sample t-toets
+<!-- ## TEKSTBLOK: T-test.R -->
 Gebruik `t.test()`om een t-toets uit te voeren. Gebruik het argument `mu = 6.8` om het gemiddelde te specificeren waarmee wordt vergeleken en specifieer welke alternatieve hypothese er getoetst wordt. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren dan het landelijk gemiddelde is er voor gekozen om tweezijdig te toetsen. Gebruik hiervoor `alternative = "two.sided"`. Gebruik wederom de hele dataset `Gemiddeld_cijfer_WNS` met *n* = `r vN`. 
-
+<!-- ## /TEKSTBLOK: T-test.R -->
 <!-- ## OPENBLOK: T-test.R -->
 ```{r ttest}
 ## T-test
 t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 ```
 <!-- ## /OPENBLOK: T-test.R -->
+<!-- ## CLOSEDBLOK: T-test.R -->
 ```{r ttest als object, echo = FALSE}
 t <- t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 vP <- Round_and_format(t$p.value)
 ```
+<!-- ## /CLOSEDBLOK: T-test.R -->
+<!-- ## TEKSTBLOK: T-test2.R -->
 * Vrijheidsgraden, *df* = *n* -1 = `r Round_and_format(t$parameter+1)`-1 = `r t$parameter`  
 * *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* << 0,05
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^10]
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r Round_and_format(t$conf.int[1])` en `r Round_and_format(t$conf.int[2])`.
-* Het gemiddelde van de steekproef is `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`  
+* Het gemiddelde van de steekproef is `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`
+<!-- ## /TEKSTBLOK: T-test2.R -->
 
 # Rapportage
+<!-- ## TEKSTBLOK: Rapportage.R -->
 De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`, *SD* = `r Round_and_format(sd(Gemiddeld_cijfer_WNS))`) is statistisch significant hoger dan het landelijk gemiddelde van 6,8, *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* << 0,05. 
-
+<!-- ## /TEKSTBLOK: Rapportage.R -->
 De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor de exacte vakken van studenten Werktuigbouwkunde met een vwo vooropleiding hoger ligt dan het landelijk gemiddelde.
 
+<!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = FALSE, echo = TRUE, results='asis'} 
 paste0(here::here(),"/01. Includes/code/Footer.R")
 ```
+<!-- ## /CLOSEDBLOK: Footer.R -->
 
 [^1]: Van Geloven, N. (25 mei 2016). *T-toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/T-toets#one_sample_t-toets). 
 [^2]: Centraal Instituut voor Toetsontwikkeling (2018). *Examenverslag 2018*. https://www.cito.nl/onderwijs/voortgezet-onderwijs/centrale-examens-voortgezet-onderwijs/tools-en-informatie-voor-docenten/examenverslagen/examenverslag-2018

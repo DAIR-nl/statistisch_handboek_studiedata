@@ -30,7 +30,7 @@ Round_and_format <- function(x, digits = 2) {
 library(reticulate)
 knitr::knit_engines$set(python = reticulate::eng_python)
 ```
-<!-- ## /OPENBLOK: Functiedefinities.R -->
+<!-- ## /BLOK: Functiedefinities.R -->
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
@@ -62,7 +62,7 @@ Resultaten_Arbeidsrecht$EC_Jaar1[Vooropleiding == "Fiscaal Recht" | Vooropleidin
 Resultaten_Arbeidsrecht$EC_Jaar1[Vooropleiding == "Rechtsgeleerdheid"] <-
   Resultaten_Arbeidsrecht$EC_Jaar1[Vooropleiding == "Rechtsgeleerdheid"] - 6
 ```
-<!-- ## /OPENBLOK: Data-aanmaken.R -->
+<!-- ## /BLOK: Data-aanmaken.R -->
 
 # Toepassing
 Gebruik de *Kruskal Wallis toets* om te toetsen of de groepen significant van elkaar verschillen.[^1] Een kenmerk van de data is dat deze numeriek en ongepaard is.  
@@ -106,7 +106,7 @@ print(dfResultaten_Arbeidsrecht.head(6))
 ## Laatste 6 observaties
 print(dfResultaten_Arbeidsrecht.tail(6))
 ```
-<!-- ## /OPENBLOK: Data-bekijken.py -->
+<!-- ## /BLOK: Data-bekijken.py -->
 
 De dataset bevat data van studenten van verschillende vooropleidingen. Gebruik `<data.frame>.<kolomnaam>.unique()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
 
@@ -115,7 +115,7 @@ De dataset bevat data van studenten van verschillende vooropleidingen. Gebruik `
 ## Opleidingen in de data aanwezig
 print(dfResultaten_Arbeidsrecht.Vooropleiding.unique())
 ```
-<!-- ## /OPENBLOK: Data-bekijken-2.py -->
+<!-- ## /BLOK: Data-bekijken-2.py -->
 
 Om meer inzicht te krijgen in de data, inspecteer de groepen met `size()` en `quantile()`. Groepeer hiervoor eerst met `<dataframe>.groupby([<column>])`.
 
@@ -127,7 +127,7 @@ print(dfResultaten_Arbeidsrecht.groupby(['Vooropleiding']).size())
 print(dfResultaten_Arbeidsrecht.groupby(['Vooropleiding']).quantile([0.25, 0.5, 0.75]))
 ```
 
-<!-- ## /OPENBLOK: Data-beschrijven.py -->
+<!-- ## /BLOK: Data-beschrijven.py -->
 
 ``` {r data beschrijven als object, include=FALSE, echo=TRUE}
 x <- group_by(Resultaten_Arbeidsrecht, Vooropleiding) %>%
@@ -173,7 +173,7 @@ box = dfResultaten_Arbeidsrecht.boxplot(column='EC_Jaar1', by='Vooropleiding')
 title = plt.title("Aantal EC per vooropleiding van de Master Arbeidsrecht")
 plt.show()
 ```
-<!-- ## /OPENBLOK: Boxplot.py -->
+<!-- ## /BLOK: Boxplot.py -->
 
 De mediaan van Rechtsgeleerdheid heeft duidelijk minder studiepunten dan Fiscaal Recht en Notarieel Recht. De pre-master ligt er tussen in.[^8]
 
@@ -187,12 +187,13 @@ EC_PRE = dfResultaten_Arbeidsrecht[dfResultaten_Arbeidsrecht['Vooropleiding'] ==
 EC_REC = dfResultaten_Arbeidsrecht[dfResultaten_Arbeidsrecht['Vooropleiding'] == "Rechtsgeleerdheid"]["EC_Jaar1"]
 ```
 
-<!-- ## OPENBLOK: Kruskal-Wallis-test -->
+<!-- ## OPENBLOK: Kruskal-Wallis-test.py -->
 ```{python}
 import scipy.stats as stats
 print(stats.kruskal(EC_FSC, EC_NTR, EC_PRE, EC_REC))
 ```
-<!-- ## /OPENBLOK: Kruskal-Wallis-test -->
+<!-- ## /BLOK: Kruskal-Wallis-test.py -->
+
 ```{r Kruskal Wallis test als object, include= FALSE, echo= TRUE}
 Ktest <- kruskal.test(EC_Jaar1 ~ Vooropleiding, Resultaten_Arbeidsrecht)
 vK_DF <- Round_and_format(Ktest$parameter)
@@ -209,11 +210,16 @@ Gebruik de *Mann-Whitney U toets* als post-hoc toets om te bepalen wélke groepe
 
 Pas de *Bonferroni correctie* toe met `p.adjust.method = "bonferroni"`.    
 
-<!-- ## OPENBLOK: Mann-Whitney-U-test-->
-``` {r pairwise wilcox test}
-pairwise.wilcox.test(Resultaten_Arbeidsrecht$EC_Jaar1, Resultaten_Arbeidsrecht$Vooropleiding, p.adjust.method = "bonferroni")
+<!-- ## OPENBLOK: Mann-Whitney-U-test.py-->
+```{python}
+import pingouin as pg
 ```
-<!-- ## /OPENBLOK: Mann-Whitney-U-test-->
+
+```{python}
+# Correctie kan gedaan worden door p-value x aantal Hypotheses te doen (= 6)
+pg.mwu(EC_PRE, EC_NTR)
+```
+<!-- ## /BLOK: Mann-Whitney-U-test.py-->
 
 * De studenten met Rechtsgeleerdheid als vooropleiding (mediaan = `r vMed_RCH`) scoren statistisch significant lager dan de drie andere vooropleidingen.  
 * Er is een statistisch significant verschil gevonden tussen de pre-master (mediaan = `r vMed_PM`) en Notarieel Recht (mediaan = `r vMed_NOT`).   

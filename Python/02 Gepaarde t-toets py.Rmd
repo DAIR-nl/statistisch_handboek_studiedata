@@ -31,7 +31,7 @@ Round_and_format <- function(x, digits = 2) {
 library(reticulate)
 knitr::knit_engines$set(python = reticulate::eng_python)
 ```
-<!-- ## /OPENBLOK: Functiedefinities.R -->
+<!-- ## /BLOK: Functiedefinities.R -->
 
 ```{r opmerking, include=FALSE, eval=FALSE}
 # doorlinken naar de Wilcoxon Signed Rank Test
@@ -119,7 +119,7 @@ Tentamencijfer_na_tutorgesprek_n30 <- sapply(Tentamencijfer_na_tutorgesprek_n30,
 Tentamencijfer_na_tutorgesprek_n30 <- sort(Tentamencijfer_na_tutorgesprek_n30)
 Tentamencijfer_na_tutorgesprek_n30 <- Tentamencijfer_na_tutorgesprek_n30[volgorde_n30]
 ```
-<!-- ## /OPENBLOK: Data-aanmaken.R -->
+<!-- ## /BLOK: Data-aanmaken.R -->
 
 # Toepassing
 Gebruik de *gepaarde t-toets* om te toetsen of bij een herhaalde meting de gemiddelden van een groep aan elkaar gelijk zijn.[^1] 
@@ -172,7 +172,7 @@ print(dfTentamencijfers.head(6))
 ## Laatste 6 observaties
 print(dfTentamencijfers.head(6))
 ```
-<!-- ## /OPENBLOK: Data-bekijken.py -->
+<!-- ## /BLOK: Data-bekijken.py -->
 
 Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen.
 <!-- ## OPENBLOK: Data-selecteren.py -->
@@ -181,7 +181,7 @@ Tentamencijfer_voor_tutorgesprek = dfTentamencijfers[dfTentamencijfers['Voor_of_
 
 Tentamencijfer_na_tutorgesprek = dfTentamencijfers[dfTentamencijfers['Voor_of_na_tutorgesprek'] == "na"]['Cijfer']
 ```
-<!-- ## /OPENBLOK: Data-selecteren.py -->
+<!-- ## /BLOK: Data-selecteren.py -->
 
 <!-- ## OPENBLOK: Data-beschrijven-1.py -->
 ```{python}
@@ -197,7 +197,7 @@ print(len(Tentamencijfer_voor_tutorgesprek))
 print(np.mean(Tentamencijfer_voor_tutorgesprek))
 print(np.sqrt(np.var(Tentamencijfer_voor_tutorgesprek)))
 ```
-<!-- ## /OPENBLOK: Data-beschrijven-1.py -->
+<!-- ## /BLOK: Data-beschrijven-1.py -->
 ```{r Var beschrijven t0, include=FALSE, echo=TRUE}
 vMean_t0 <- Round_and_format(mean(Tentamencijfer_voor_tutorgesprek))
 vSD_t0 <- Round_and_format(sd(Tentamencijfer_voor_tutorgesprek))
@@ -212,7 +212,7 @@ print(len(Tentamencijfer_na_tutorgesprek))
 print(np.mean(Tentamencijfer_na_tutorgesprek))
 print(np.sqrt(np.var(Tentamencijfer_na_tutorgesprek)))
 ```
-<!-- ## /OPENBLOK: Data-beschrijven-2.py -->
+<!-- ## /BLOK: Data-beschrijven-2.py -->
 ```{r Var beschrijven t1, include=FALSE, echo=TRUE}
 vMean_t1 <- Round_and_format(mean(Tentamencijfer_na_tutorgesprek))
 vSD_t1 <- Round_and_format(sd(Tentamencijfer_na_tutorgesprek))
@@ -244,7 +244,7 @@ hist2 = plt.hist(Tentamencijfer_na_tutorgesprek, density = True, edgecolor = "bl
 main = fig.suptitle('Lerarenopleiding tentamencijfers')
 plt.show()
 ```
-<!-- ## /OPENBLOK: Histogram.py -->
+<!-- ## /BLOK: Histogram.py -->
 
 Beide histogrammen laten een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom de gemiddeldes. Opvallend is dat het histogram van voor het tutorgesprek veel waardes in de linkerstaart van de verdeling heeft liggen.  
 
@@ -255,7 +255,7 @@ Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen wor
 ```{python}
 import scipy.stats as stats
 ```
-<!-- ## /OPENBLOK: QQplot-inladen.py -->
+<!-- ## /BLOK: QQplot-inladen.py -->
 
 <div class = "col-container">
   <div class="col">
@@ -267,7 +267,7 @@ xlab = plt.xlabel("Theoretische kwantielen")
 ylab = plt.ylabel("Kwantielen in data")
 plt.show()
 ```
-<!-- ## /OPENBLOK: QQplot-1.py -->
+<!-- ## /BLOK: QQplot-1.py -->
   </div>
   <div class = "col">
 <!-- ## OPENBLOK: QQplot-2.py -->
@@ -278,7 +278,7 @@ xlab = plt.xlabel("Theoretische kwantielen")
 ylab = plt.ylabel("Kwantielen in data")
 plt.show()
 ```
-<!-- ## /OPENBLOK: QQplot-2.py -->
+<!-- ## /BLOK: QQplot-2.py -->
   </div>
 </div>
 
@@ -295,7 +295,7 @@ box = ax.boxplot([Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgespr
 title = plt.title("Boxplot van tentamencijfers lerarenopleiding")
 plt.show()
 ```
-<!-- ## /OPENBLOK: Boxplot.py -->
+<!-- ## /BLOK: Boxplot.py -->
 
 De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer per periode voor de lerarenopleiding. De boxplot en de staarten van T~0~ zijn niet helemaal symmetrisch. Het gaat om een kleine afwijking, daarom is de data vermoedelijk normaal verdeeld. Er zijn een aantal mogelijke uitbijters.[^9] De boxplot van T~1~ ziet er symmetrisch uit. Er zijn geen uitbijters.    
 
@@ -316,14 +316,14 @@ import statsmodels.stats.api
 ``` {python Lilliefors Test-1, warning=FALSE}
 print(statsmodels.stats.api.lilliefors(Tentamencijfer_voor_tutorgesprek))
 ```
-<!-- ## /OPENBLOK: Lilliefors-test-1.py -->
+<!-- ## /BLOK: Lilliefors-test-1.py -->
   </div>
   <div class = "col">
 <!-- ## OPENBLOK: Lilliefors-test-2.py -->
 ``` {python Lilliefors Test-2, warning=FALSE}
 print(statsmodels.stats.api.lilliefors(Tentamencijfer_na_tutorgesprek))
 ```
-<!-- ## /OPENBLOK: Lilliefors-test-2.py -->
+<!-- ## /BLOK: Lilliefors-test-2.py -->
   </div>
 </div>
 
@@ -340,14 +340,14 @@ Er zijn 2 steekproeven van `Tentamencijfers` ingeladen: `Tentamencijfer_voor_tut
 ``` {python Shapiro-Wilk Test-1, warning=FALSE}
 print(stats.shapiro(r.Tentamencijfer_voor_tutorgesprek_n30))
 ```
-<!-- ## /OPENBLOK: Shapiro-Wilk-test-1.py -->
+<!-- ## /BLOK: Shapiro-Wilk-test-1.py -->
   </div>
   <div class ="col">
 <!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
 ``` {python Shapiro-Wilk Test-2, warning=FALSE}
 print(stats.shapiro(r.Tentamencijfer_na_tutorgesprek_n30))
 ```
-<!-- ## /OPENBLOK: Shapiro-Wilk-test-2.py -->
+<!-- ## /BLOK: Shapiro-Wilk-test-2.py -->
   </div>
 </div>
 
@@ -360,7 +360,8 @@ De *gepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het gemidd
 ```{python T-test}
 print(stats.ttest_rel(Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgesprek))
 ```
-<!-- ## /OPENBLOK: T-toets.py -->
+<!-- ## /BLOK: T-toets.py -->
+
 ```{r T-test als object, echo = FALSE}
 t <- t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 vT_waarde <- Round_and_format(t$statistic)
@@ -378,12 +379,40 @@ vDiffMean <- Round_and_format(t$estimate*-1)
 
 ### Effectmaat: Cohen's d
 Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
+
+<!-- ## OPENBLOK: Cohens-d-test.py -->
+```{python}
+def cohend(x, y):
+  # import numpy
+  import numpy as np
+	
+	# calculate the size of samples
+  n1, n2 = len(x), len(y)
+	
+	# calculate the variance of the samples
+  v1, v2 = np.var(x, ddof=1), np.var(y, ddof=1)
+	
+	# calculate the pooled standard deviation
+  s = np.sqrt(((n1 - 1) * v1 + (n2 - 1) * v2) / (n1 + n2 - 2))
+	
+	# calculate the means of the samples
+  m1, m2 = np.mean(x), np.mean(y)
+	
+	# calculate the effect size
+  return (m1 - m2) / s
+```
+
+```{python}
+print(cohend(Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgesprek))
+```
+<!-- ## OPENBLOK: Cohens-d-test.py -->
+
 <!-- ## OPENBLOK: Cohens-d-test.R -->
 ```{r Cohens d}
 library(effsize)
 cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 ```
-<!-- ## /OPENBLOK: Cohens-d-test.R -->
+<!-- ## /BLOK: Cohens-d-test.R -->
 ```{r var Cohens d, include = FALSE}
 d <- cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 vD_waarde <- Round_and_format(d$estimate)

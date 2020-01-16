@@ -16,9 +16,11 @@ output:
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
+<!-- ## CLOSEDBLOK: Header.R -->
 ```{r header, include = FALSE, echo = TRUE, results='asis'} 
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
+<!-- ## /CLOSEDBLOK: Header.R -->
 
 # Toepassing
 Gebruik de *one-way ANOVA* bij het toetsen of het gemiddelde van drie of meer onafhankelijke groepen aan elkaar gelijk zijn.[^1] 

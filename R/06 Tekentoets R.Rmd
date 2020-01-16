@@ -16,11 +16,13 @@ output:
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
+<!-- ## CLOSEDBLOK: Header.R -->
 ```{r header, include = FALSE, echo = TRUE, results='asis'} 
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
+<!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## OPENBLOK: Functiedefinities.R -->
+<!-- ## CLOSEDBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -29,7 +31,7 @@ Round_and_format <- function(x, digits = 2) {
   return(x)
 }
 ```
-<!-- ## /OPENBLOK: Functiedefinities.R -->
+<!-- ## /CLOSEDBLOK: Functiedefinities.R -->
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 RNGkind(sample.kind = "Rounding")

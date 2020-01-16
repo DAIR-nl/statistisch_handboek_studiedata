@@ -31,7 +31,7 @@ Round_and_format <- function(x, digits = 2) {
 library(reticulate)
 knitr::knit_engines$set(python = reticulate::eng_python)
 ```
-<!-- ## /OPENBLOK: Functiedefinities.R -->
+<!-- ## /BLOK: Functiedefinities.R -->
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r opmerking TODO, include=FALSE, eval=FALSE}
@@ -49,7 +49,7 @@ Wel_leenstelsel_n43 <- c(5, 16)
 Uitval_functiebeperking_n43 <- t(data.frame(Geen_leenstelsel_n43, Wel_leenstelsel_n43))
 colnames(Uitval_functiebeperking_n43) <- c("Wel uitval", "Geen uitval")
 ```
-<!-- ## /OPENBLOK: Data-aanmaken.R -->
+<!-- ## /BLOK: Data-aanmaken.R -->
 
 # Toepassing
 Gebruik de *Chi-kwadraat toets* of de *Fisher's exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde binaire variabelen.[^1]<sup>, </sup>[^2] In tegenstelling tot de *Chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage aantallen gebruikt worden.[^3] De *Fisher's exact toets* is terughoudender in het benoemen of er een significant verschil is in percentage tussen beide groepen, dan de *Chi-kwadraat toets*.[^4]   
@@ -101,26 +101,24 @@ Er is een dataset ingeladen over de uitval van studenten met een functiebeperkin
 ```{python, include=FALSE}
 import pandas as pd
 dfUitval_functiebeperking = pd.DataFrame(r.Uitval_functiebeperking)
+Uitval_functiebeperking_n43 = r.Uitval_functiebeperking_n43
 ```
 
 ```{python data bekijken-1, collapse = TRUE}
 ## Eerste 6 observaties
 print(dfUitval_functiebeperking.head(6))
 ```
-<!-- ## /OPENBLOK: Data-bekijken.py -->
+<!-- ## /BLOK: Data-bekijken.py -->
 
 ## Chi-kwadraat toets
-De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel gelijk is gebleven. Gebruik `stats.chisquare()` op een kruistabel.  
-<!-- ## OPENBLOK: Chi2-toets -->
+De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel gelijk is gebleven. Gebruik `stats.chi2_contingency()` op een kruistabel.  
+<!-- ## OPENBLOK: Chi2-toets.py -->
 ```{python}
 import scipy.stats as stats
-print(stats.chisquare(dfUitval_functiebeperking, ddof=1))
+tstat, df, pval, tab = stats.chi2_contingency(dfUitval_functiebeperking, correction=True)
+print(tstat, df, pval)
 ```
-
-```{r chi2}
-chisq.test(Uitval_functiebeperking)
-```
-<!-- ## /OPENBLOK: Chi2-toets-->
+<!-- ## /BLOK: Chi2-toets.py -->
 
 ```{r chi2 als object, include=FALSE, echo=TRUE}
 Chi2 <- chisq.test(Uitval_functiebeperking)
@@ -139,20 +137,19 @@ De *Chi-kwadraat toets* is uitgevoerd om te toetsen of studenten met een functie
 ## Fisher's exact toets
 De *Fisher's exact toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel gelijk is gebleven. Deze toets is ook betrouwbaar bij een laag aantal in een cel, hierbij een voorbeeld met lage aantallen.  Er is een steekproef van `Uitval_functiebeperking` ingeladen genaamd `Uitval_functiebeperking_n43`. 
 .
-<!-- ## OPENBLOK: data-bekijken-n43 -->
+<!-- ## OPENBLOK: data-bekijken-n43.py -->
 ```{python data bekijken n43}
-print(r.Uitval_functiebeperking_n43)
+print(Uitval_functiebeperking_n43)
 ```
-<!-- ## /OPENBLOK: data-bekijken-n43 -->
+<!-- ## /BLOK: data-bekijken-n43.py -->
 
 De groepen hebben een laag aantal geobserveerde waarden, variërend van 5 tot 16. Voer de *Fisher's exact toets* uit.
 
-<!-- ## OPENBLOK: Fishers-Exact-toets -->
+<!-- ## OPENBLOK: Fishers-Exact-toets.py -->
 ```{python}
-print(stats.fisher_exact(r.Uitval_functiebeperking_n43))
+print(stats.fisher_exact(Uitval_functiebeperking_n43))
 ```
-
-<!-- ## /OPENBLOK: Fishers-Exact-toets -->
+<!-- ## /BLOK: Fishers-Exact-toets.py -->
 
 ```{r fishers exact als object, include=FALSE, echo=TRUE}
 fish <- fisher.test(Uitval_functiebeperking_n43)

@@ -16,11 +16,13 @@ output:
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
+<!-- ## CLOSEDBLOK: Header.R -->
 ```{r header, include = FALSE, echo = TRUE, results='asis'} 
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
+<!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## OPENBLOK: Functiedefinities.R -->
+<!-- ## CLOSEDBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -29,7 +31,7 @@ Round_and_format <- function(x, digits = 2) {
   return(x)
 }
 ```
-<!-- ## /OPENBLOK: Functiedefinities.R -->
+<!-- ## /CLOSEDBLOK: Functiedefinities.R -->
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
@@ -103,10 +105,14 @@ Toets met de *Levene’s Test (for equality of variance)* of de spreiding van ie
 Bereken de effectmaat om te bepalen of de gevonden p-waarde van een t-toets betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer. Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect.[^8]
 
 # Uitvoering
+<!-- ## TEKSTBLOK: Dataset-inladen.R-->
 Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap: `Cijfers_gem`. De data bevatten cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
+<!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
+<!-- ## TEKSTBLOK: Data-bekijken.R -->
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
+<!-- ## /TEKSTBLOK: Data-bekijken.R -->
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse=TRUE}
 ## Eerste 6 observaties
@@ -125,8 +131,11 @@ Cijfers_2011 <- Cijfers_gem[Cijfers_gem$Cohort == 2011,1]
 ```
 <!-- ## /OPENBLOK: Data-selecteren.R -->
 
+<!-- ## TEKSTBLOK: Data-beschrijven.R-->
 Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data.
-<div class="col2">
+<!-- ## /TEKSTBLOK: Data-beschrijven.R-->
+<div class="col-container">
+  <div class="col">
 <!-- ## OPENBLOK: Data-beschrijven-1.R -->
 ```{r Data beschrijven 1, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie 2010
@@ -135,12 +144,8 @@ mean(Cijfers_2010)
 sd(Cijfers_2010)
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-1.R -->
-```{r Var beschrijven t0, include=FALSE, echo=TRUE}
-vN_t0 <- Round_and_format(length(Cijfers_2010))
-vMean_t0 <- Round_and_format(mean(Cijfers_2010))
-vSD_t0 <-Round_and_format(sd(Cijfers_2010))
-```
-
+  </div>
+  <div class ="col">
 <!-- ## OPENBLOK: Data-beschrijven-2.R -->
 ```{r Data beschrijven 2, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie 2011
@@ -149,15 +154,22 @@ mean(Cijfers_2011)
 sd(Cijfers_2011)
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-2.R -->
+  </div>
+</div>
+<!-- ## CLOSEDBLOK: Data-beschrijven.R -->
 ```{r Var beschrijven t1, include=FALSE, echo=TRUE}
+vN_t0 <- Round_and_format(length(Cijfers_2010))
+vMean_t0 <- Round_and_format(mean(Cijfers_2010))
+vSD_t0 <-Round_and_format(sd(Cijfers_2010))
 vN_t1 <- Round_and_format(length(Cijfers_2011))
 vMean_t1 <- Round_and_format(mean(Cijfers_2011))
 vSD_t1 <-Round_and_format(sd(Cijfers_2011))
 ```
-</div>
-
+<!-- ## /CLOSEDBLOK: Data-beschrijven.R -->
+<!-- ## TEKSTBLOK: Data-beschrijven.R-->
 * Gemiddeld tentamencijfer 2010 (standaarddeviatie): `r vMean_t0` (`r vSD_t0`). *n* = `r vN_t0`.
 * Gemiddeld tentamencijfer 2011 (standaarddeviatie): `r vMean_t1` (`r vSD_t1`). *n* = `r vN_t1`.
+<!-- ## /TEKSTBLOK: Data-beschrijven.R-->
 
 ## Visuele inspectie van normaliteit
 Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
@@ -190,7 +202,9 @@ ggplot(Cijfers_gem,
 Beide histogrammen laten een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom het gemiddelde.  
 
 ### Q-Q plot
+<!-- ## TEKSTBLOK: QQplot.R-->
 Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
+<!-- ## /TEKSTBLOK: QQplot.R-->
 
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 <div class ="col-container">
@@ -264,8 +278,9 @@ Bij deze casus is van beide groepen de p-waarde > 0,05; er is geen statistisch s
 
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven.  Als de p-waarde < 0,05 is de verdeling van de data statistisch significant verschillend van de normale verdeling. 
-
-Er zijn 2 steekproeven van `Cijfers_gem` ingeladen: `Cijfers_2010_n30` en `Cijfers_2011_n30`. Beide steekproeven bevatten `r length(Cijfers_2010_n30)` studenten
+<!-- ## TEKSTBLOK: Shapiro-Wilk-test -->
+Er zijn 2 steekproeven van `Cijfers_gem` ingeladen: `Cijfers_2010_n30` en `Cijfers_2011_n30`. Beide steekproeven bevatten `r length(Cijfers_2010_n30)` studenten.
+<!-- ## /TEKSTBLOK: Shapiro-Wilk-test -->
 <div class = "col-container">
   <div class="col">
 <!-- ## OPENBLOK: Shapiro-Wilk-test-1.R -->
@@ -285,8 +300,9 @@ shapiro.test(Cijfers_2010_n30)
 De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
 
 ## Test assumpties: Levene's test
+<!-- ## TEKSTBLOK: Levenes-test -->
 Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. Gebruik hier weer het hele dataframe `Cijfers_gem`.
-
+<!-- ## /TEKSTBLOK: Levenes-test -->
 <!-- ## OPENBLOK: Levenes-test.R -->
 ```{r Levenes test, message=FALSE, warning=FALSE, collapse=TRUE}
 library(car)
@@ -300,13 +316,16 @@ vF_p <- Round_and_format(L$`Pr(>F)`[1])
 vDF1 <- Round_and_format(L$`Df`[1])
 vDF2 <- Round_and_format(L$`Df`[2])
 ```
+<!-- ## TEKSTBLOK: Levenes-test2 -->
 * *F*~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, p-waarde = `r vF_p` 
 * p-waarde > 0,05, dus de groepen zijn niet significant verschillend in spreiding.  
 * Vrijheidsgraden bestaan uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r vDF1`) en het tweede cijfer (*n~2010~* + *n~2011~* - 2 = `r vDF2`)
+<!-- ## /TEKSTBLOK: Levenes-test2 -->
 
 ## Ongepaarde t-toets
+<!-- ## TEKSTBLOK: T-test -->
 Voer een ongepaarde `t.test()` uit met `paired = FALSE` en `var.equal = TRUE`. Als uit de *Levene's test* komt dat de groepen verschillen in variantie, gebruik `var.equal = FALSE` .
-
+<!-- ## /TEKSTBLOK: T-test -->
 De *ongepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het het gemiddelde tentamencijfer van de opleiding Taalwetenschap na invoering van het BSA veranderd is. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren na de invoering is er voor gekozen om tweezijdig te toetsen. 
 
 <!-- ## OPENBLOK: T-test.R -->
@@ -317,6 +336,7 @@ t.test(Cijfers ~ Cohort, Cijfers_gem,
        var.equal = TRUE)
 ```
 <!-- ## /OPENBLOK: T-test.R -->
+<!-- ## CLOSEDBLOK: T-test.R -->
 ```{r T-test als object, echo = FALSE}
 t <- t.test(Cijfers ~ Cohort, Cijfers_gem, paired = FALSE, var.equal = TRUE)
 vT_waarde <- Round_and_format(t$statistic)
@@ -326,13 +346,15 @@ vConf.int1 <- Round_and_format(t$conf.int[1])
 vConf.int2 <- Round_and_format(t$conf.int[2])
 vP <- Round_and_format(t$p.value)
 ```
-
+<!-- ## /CLOSEDBLOK: T-test.R -->
+<!-- ## TEKSTBLOK: T-test2 -->
 * *t* ~`r vDF`~ = `r vT_waarde`, *p* = `r vP`
 * Vrijheidsgraden, *df* = *n* -1 = `r vN`-1 = `r vDF`  
 * p-waarde > 0,05, dus de H~0~ wordt niet verworpen [^11]
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r vConf.int1` en `r vConf.int2`.
 * Het gemiddelde van de steekproef in 2010: `r vMean_t0`
 * Het gemiddelde van de steekproef in 2011: `r vMean_t1`
+<!-- ## /TEKSTBLOK: T-test2 -->
 
 ### Effectmaat: Cohen's d 
 Wanneer p < 0,05 wordt de effectmaat berekend om te bepalen of de gevonden p-waarde betekenisvol is. In dit voorbeeld is de p > 0,05, dus is een effectmaat irrelevant. Hieronder laten we zien wat de stappen zouden zijn bij een p < 0,05.
@@ -344,22 +366,27 @@ library(effsize)
 cohen.d(Cijfers_2010, Cijfers_2011, paired = FALSE)
 ```
 <!-- ## /OPENBLOK: Cohens-d-test.R -->
+<!-- ## CLOSEDBLOK: Cohens-d-test.R -->
 ```{r var Cohens d, echo = FALSE}
 d <- cohen.d(Cijfers_2010, Cijfers_2011, paired = FALSE)
 vD_waarde <- Round_and_format(d$estimate)
 ```
+<!-- ## /CLOSEDBLOK: Cohens-d-test.R -->
+<!-- ## TEKSTBLOK: Cohens-d-test.R -->
 *d* = `r vD_waarde`. De sterkte van het effect van de tutor op het cijfer is verwaarloosbaar. 
+<!-- ## /TEKSTBLOK: Cohens-d-test.R -->
 
 
 # Rapportage
+<!-- ## TEKSTBLOK: Rapportage.R -->
 Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = `r vMean_t0`, *SD~2010~* = `r vSD_t0`) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = `r vMean_t1`, *SD~2011~* = `r vSD_t1`) is statistisch niet significant, *t* ~`r vDF`~ = `r vT_waarde`, *p* > 0,05, zie tabel hieronder. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vConf.int1` tot `r vConf.int2`. Het effect is minimaal, *d* = `r vD_waarde`.
 
 Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentamencijfer niet is veranderd na de invoer van het BSA. 
-
 | Cohort   | N         | M            | SD         |
 | -------- | --------- | ------------ | ---------- |
 | 2010     | `r vN_t0` | `r vMean_t0` | `r vSD_t0` |
 | 2011     | `r vN_t1` | `r vMean_t1` | `r vSD_t1` |
+<!-- ## /sTEKSTBLOK: Rapportage.R -->
 *Tabel 1. Groepsgrootte, gemiddeld tentamencijfer en standaarddeviatie per cohort*
 
 

@@ -183,7 +183,9 @@ Round_and_format <- function(x, digits = 2) {
 Er is een dataset ingeladen genaamd
 
 ## De data bekijken
+<!-- ## TEKSTBLOK: Data-bekijken.R -->
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
+<!-- ## /TEKSTBLOK: Data-bekijken.R -->
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
 ## Eerste 10 observaties

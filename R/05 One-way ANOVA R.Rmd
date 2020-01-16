@@ -16,11 +16,13 @@ output:
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
+<!-- ## CLOSEDBLOK: Header.R -->
 ```{r header, include = FALSE, echo = TRUE, results='asis'} 
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
+<!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## OPENBLOK: Functiedefinities.R -->
+<!-- ## CLOSEDBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -29,7 +31,7 @@ Round_and_format <- function(x, digits = 2) {
   return(x)
 }
 ```
-<!-- ## /OPENBLOK: Functiedefinities.R -->
+<!-- ## /CLOSEDBLOK: Functiedefinities.R -->
 
 ```{r set-options, echo=FALSE, cache=FALSE}
 options(width = 80)
@@ -122,10 +124,14 @@ Er zijn meerdere post-hoc toetsen. Welke toets gekozen wordt hangt onder andere 
 * Gebruik Games-Howell bij ongelijke spreiding.[^13]  
 
 # Uitvoering
+<!-- ## TEKSTBLOK: Dataset-inladen.R-->
 Er is een dataset ingeladen met de reistijden van uitwonende studenten per opleiding ingeladen genaamd `Reistijd_per_opleiding`. 
+<!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
+<!-- ## TEKSTBLOK: Data-bekijken.R -->
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
+<!-- ## /TEKSTBLOK: Data-bekijken.R -->
 
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
@@ -136,9 +142,9 @@ head(Reistijd_per_opleiding)
 tail(Reistijd_per_opleiding)
 ```
 <!-- ## /OPENBLOK: Data-bekijken.R -->
-
+<!-- ## TEKSTBLOK: Data-bekijken2.R-->
 De dataset bevat gegevens van studenten van verschillende opleidingen. Gebruik `unique()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
-
+<!-- ## /TEKSTBLOK: Data-bekijken2.R-->
 <!-- ## OPENBLOK: Data-bekijken2.R -->
 ```{r data bekijken 2}
 ## Opleidingen in de data aanwezig
@@ -155,8 +161,9 @@ Reistijd_GSC <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding
 ```
 <!-- ## /OPENBLOK: Data-selecteren.R -->
 
-Om meer inzicht te krijgen in de data, inspecteer de data met `length()`, `mean()`en `sd()`. 
-
+<!-- ## TEKSTBLOK: Data-beschrijven.R-->
+Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data.
+<!-- ## /TEKSTBLOK: Data-beschrijven.R-->
 
 <!-- ## OPENBLOK: Data-beschrijven-1.R -->
 ```{r Data beschrijven 1}
@@ -216,7 +223,9 @@ ggplot(Reistijd_per_opleiding,
 De opleidingen Geschiedenis en Arabische taal en Cultuur laten een Bell Curve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Filosofie heeft een lagere frequentie bij een reistijd van 40 minuten, dit kan duiden op niet normaal verdeelde data. 
 
 ### Q-Q plot
+<!-- ## TEKSTBLOK: QQplot.R-->
 Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
+<!-- ## /TEKSTBLOK: QQplot.R-->
 
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 <div class = "col-container">

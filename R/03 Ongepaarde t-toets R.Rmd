@@ -29,7 +29,7 @@ Round_and_format <- function(x, digits = 2) {
   return(x)
 }
 ```
-<!-- ## /BLOK: Functiedefinities.R -->
+<!-- ## /OPENBLOK: Functiedefinities.R -->
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
@@ -65,7 +65,7 @@ Cohort <- c(replicate(180, 2010), replicate(160, 2011))
 Cijfers_gem <- data.frame(Cijfers, Cohort)
 
 ```
-<!-- ## /BLOK: Data-aanmaken.R -->
+<!-- ## /OPENBLOK: Data-aanmaken.R -->
 ```{r opmerking, include=FALSE, eval=FALSE}
 # linken naar de Mann-Whitney U toets  
 ```
@@ -115,7 +115,7 @@ head(Cijfers_gem)
 ## Laatste 6 observaties
 tail(Cijfers_gem)
 ```
-<!-- ## /BLOK: Data-bekijken.R -->
+<!-- ## /OPENBLOK: Data-bekijken.R -->
 
 Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. 
 <!-- ## OPENBLOK: Data-selecteren.R -->
@@ -123,7 +123,7 @@ Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te 
 Cijfers_2010 <- Cijfers_gem[Cijfers_gem$Cohort == 2010,1]
 Cijfers_2011 <- Cijfers_gem[Cijfers_gem$Cohort == 2011,1]
 ```
-<!-- ## /BLOK: Data-selecteren.R -->
+<!-- ## /OPENBLOK: Data-selecteren.R -->
 
 Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data.
 <div class="col2">
@@ -134,7 +134,7 @@ length(Cijfers_2010)
 mean(Cijfers_2010)
 sd(Cijfers_2010)
 ```
-<!-- ## /BLOK: Data-beschrijven-1.R -->
+<!-- ## /OPENBLOK: Data-beschrijven-1.R -->
 ```{r Var beschrijven t0, include=FALSE, echo=TRUE}
 vN_t0 <- Round_and_format(length(Cijfers_2010))
 vMean_t0 <- Round_and_format(mean(Cijfers_2010))
@@ -148,7 +148,7 @@ length(Cijfers_2011)
 mean(Cijfers_2011)
 sd(Cijfers_2011)
 ```
-<!-- ## /BLOK: Data-beschrijven-2.R -->
+<!-- ## /OPENBLOK: Data-beschrijven-2.R -->
 ```{r Var beschrijven t1, include=FALSE, echo=TRUE}
 vN_t1 <- Round_and_format(length(Cijfers_2011))
 vMean_t1 <- Round_and_format(mean(Cijfers_2011))
@@ -185,7 +185,7 @@ ggplot(Cijfers_gem,
               ratio = 22) +
   labs(title = "Taalwetenschap gemiddelde cijfers voor en na de BSA")
 ```
-<!-- ## /BLOK: Histogram.R -->
+<!-- ## /OPENBLOK: Histogram.R -->
 
 Beide histogrammen laten een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom het gemiddelde.  
 
@@ -203,7 +203,7 @@ qqnorm(Cijfers_2010, pch = 1,
        xlab = "Theoretische kwantielen")
 qqline(Cijfers_2010)
 ```
-<!-- ## /BLOK: QQplot-t1.R -->
+<!-- ## /OPENBLOK: QQplot-t1.R -->
   </div>
   <div class = "col">
 <!-- ## OPENBLOK: QQplot-t2.R -->
@@ -214,7 +214,7 @@ qqnorm(Cijfers_2011, pch = 1,
        xlab = "Theoretische kwantielen")
 qqline(Cijfers_2011)
 ```
-<!-- ## /BLOK: QQplot-t2.R -->
+<!-- ## /OPENBLOK: QQplot-t2.R -->
   </div>
 </div>
 Bij beide groepen liggen de meeste punten op de lijn behalve bij de uiteinden.
@@ -227,7 +227,7 @@ De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen
 boxplot(Cijfers ~ Cohort, Cijfers_gem,
         main = "Tentamencijfers Taalwetenschap voor en na de BSA")
 ```
-<!-- ## /BLOK: Boxplot.R -->
+<!-- ## /OPENBLOK: Boxplot.R -->
 
 De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer voor de BSA en na de BSA. De boxplotten en de staarten lijken symmetrisch, dit kan een teken zijn van normaal verdeelde data. Het cohort van 2011 heeft een aantal mogelijke uitbijters.[^10] 
 
@@ -241,7 +241,7 @@ De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standa
 ```{r library nortest, warning=FALSE}
 library(nortest)
 ```
-<!-- ## /BLOK: Library-nortest.R -->
+<!-- ## /OPENBLOK: Library-nortest.R -->
 
 <div class="col-container">
   <div class = "col">
@@ -249,14 +249,14 @@ library(nortest)
 ``` {r Lilliefors Test-1, warning=FALSE}
 lillie.test(Cijfers_2010)
 ```
-<!-- ## /BLOK: Lilliefors-test-1.R -->
+<!-- ## /OPENBLOK: Lilliefors-test-1.R -->
   </div>
   <div class = "col">
 <!-- ## OPENBLOK: Lilliefors-test-2.R -->
 ``` {r Lilliefors Test-2, warning=FALSE}
 lillie.test(Cijfers_2011)
 ```
-<!-- ## /BLOK: Lilliefors-test-2.R -->
+<!-- ## /OPENBLOK: Lilliefors-test-2.R -->
   </div>
 </div>
 
@@ -272,14 +272,14 @@ Er zijn 2 steekproeven van `Cijfers_gem` ingeladen: `Cijfers_2010_n30` en `Cijfe
 ``` {r Shapiro-Wilk Test-1, warning=FALSE}
 shapiro.test(Cijfers_2011_n30)
 ```
-<!-- ## /BLOK: Shapiro-Wilk-test-1.R -->
+<!-- ## /OPENBLOK: Shapiro-Wilk-test-1.R -->
   </div>
   <div class="col">
 <!-- ## OPENBLOK: Shapiro-Wilk-test-2.R -->
 ``` {r Shapiro-Wilk Test-2, warning=FALSE}
 shapiro.test(Cijfers_2010_n30)
 ```
-<!-- ## /BLOK: Shapiro-Wilk-test-2.R -->
+<!-- ## /OPENBLOK: Shapiro-Wilk-test-2.R -->
   </div>
 </div>
 De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
@@ -292,7 +292,7 @@ Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's t
 library(car)
 leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 ```
-<!-- ## /BLOK: Levenes-test.R -->
+<!-- ## /OPENBLOK: Levenes-test.R -->
 ```{r Levenes test als object, echo = FALSE, warning=FALSE}
 L <- leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 vF_waarde <- Round_and_format(L$`F value`[1])
@@ -316,7 +316,7 @@ t.test(Cijfers ~ Cohort, Cijfers_gem,
        alternative = "two.sided",
        var.equal = TRUE)
 ```
-<!-- ## /BLOK: T-test.R -->
+<!-- ## /OPENBLOK: T-test.R -->
 ```{r T-test als object, echo = FALSE}
 t <- t.test(Cijfers ~ Cohort, Cijfers_gem, paired = FALSE, var.equal = TRUE)
 vT_waarde <- Round_and_format(t$statistic)
@@ -343,7 +343,7 @@ Gebruik `cohen.d()` met `paired = FALSE` om het effect te meten.
 library(effsize)
 cohen.d(Cijfers_2010, Cijfers_2011, paired = FALSE)
 ```
-<!-- ## /BLOK: Cohens-d-test.R -->
+<!-- ## /OPENBLOK: Cohens-d-test.R -->
 ```{r var Cohens d, echo = FALSE}
 d <- cohen.d(Cijfers_2010, Cijfers_2011, paired = FALSE)
 vD_waarde <- Round_and_format(d$estimate)

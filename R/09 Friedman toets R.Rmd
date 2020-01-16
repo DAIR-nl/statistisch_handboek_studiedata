@@ -29,7 +29,7 @@ Round_and_format <- function(x, digits = 2) {
   return(x)
 }
 ```
-<!-- ## /BLOK: Functiedefinities.R -->
+<!-- ## /OPENBLOK: Functiedefinities.R -->
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 

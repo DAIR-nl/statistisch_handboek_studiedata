@@ -29,7 +29,7 @@ Round_and_format <- function(x, digits = 2) {
   return(x)
 }
 ```
-<!-- ## /BLOK: Functiedefinities.R -->
+<!-- ## /OPENBLOK: Functiedefinities.R -->
 
 ```{r set-options, echo=FALSE, cache=FALSE}
 options(width = 80)
@@ -76,7 +76,7 @@ colnames(Reistijd_per_opleiding) <- c("Reistijd", "Opleiding")
 Reistijd_per_opleiding <- Reistijd_per_opleiding %>%
   mutate(Reistijd = if_else(Reistijd < 0, Reistijd*-1, Reistijd))
 ```
-<!-- ## /BLOK: Data-aanmaken.R -->
+<!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
 Gebruik de *one-way ANOVA* bij het toetsen of het gemiddelde van drie of meer onafhankelijke groepen aan elkaar gelijk zijn.[^1] 
@@ -135,7 +135,7 @@ head(Reistijd_per_opleiding)
 ## Laatste 5 observaties
 tail(Reistijd_per_opleiding)
 ```
-<!-- ## /BLOK: Data-bekijken.R -->
+<!-- ## /OPENBLOK: Data-bekijken.R -->
 
 De dataset bevat gegevens van studenten van verschillende opleidingen. Gebruik `unique()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
 
@@ -144,7 +144,7 @@ De dataset bevat gegevens van studenten van verschillende opleidingen. Gebruik `
 ## Opleidingen in de data aanwezig
 unique(Reistijd_per_opleiding$Opleiding)
 ```
-<!-- ## /BLOK: Data-bekijken2.R -->
+<!-- ## /OPENBLOK: Data-bekijken2.R -->
 
 Selecteer de drie groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. 
 <!-- ## OPENBLOK: Data-selecteren.R -->
@@ -153,7 +153,7 @@ Reistijd_ATC <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding
 Reistijd_FIL <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding == "Filosofie"]
 Reistijd_GSC <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding == "Geschiedenis"]
 ```
-<!-- ## /BLOK: Data-selecteren.R -->
+<!-- ## /OPENBLOK: Data-selecteren.R -->
 
 Om meer inzicht te krijgen in de data, inspecteer de data met `length()`, `mean()`en `sd()`. 
 
@@ -169,7 +169,7 @@ group_by(Reistijd_per_opleiding, Opleiding) %>%
     Standaardafwijking = sd(Reistijd)
   )
 ```
-<!-- ## /BLOK: Data-beschrijven-1.R -->
+<!-- ## /OPENBLOK: Data-beschrijven-1.R -->
 
 ```{r data beschrijven als object 1, include=FALSE, echo=TRUE}
 vM_ATC <- Round_and_format(mean(Reistijd_ATC))
@@ -211,7 +211,7 @@ ggplot(Reistijd_per_opleiding,
   ylab("Frequentiedichtheid") +
   labs(title = "Reistijd")
 ```
-<!-- ## /BLOK: Histogram.R -->
+<!-- ## /OPENBLOK: Histogram.R -->
 
 De opleidingen Geschiedenis en Arabische taal en Cultuur laten een Bell Curve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Filosofie heeft een lagere frequentie bij een reistijd van 40 minuten, dit kan duiden op niet normaal verdeelde data. 
 
@@ -230,7 +230,7 @@ qqnorm(
  xlab = "Theoretische kwantielen")
 qqline(Reistijd_ATC)
 ```
-<!-- ## /BLOK: QQplot1.R -->
+<!-- ## /OPENBLOK: QQplot1.R -->
   </div>
   <div class = "col">
 <!-- ## OPENBLOK: QQplot2.R -->
@@ -242,7 +242,7 @@ qqnorm(
  xlab = "Theoretische kwantielen")
 qqline(Reistijd_FIL)
 ```
-<!-- ## /BLOK: QQplot2.R -->
+<!-- ## /OPENBLOK: QQplot2.R -->
   </div>
   <div class = "col">
 <!-- ## OPENBLOK: QQplot3.R -->
@@ -268,7 +268,7 @@ De box geeft de middelste 50% van de reistijd weer. De zwarte lijn binnen de box
 library(graphics)
 boxplot(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 ```
-<!-- ## /BLOK: Boxplot.R -->
+<!-- ## /OPENBLOK: Boxplot.R -->
 
 De boxplotten geven de spreiding weer van de gemiddelde reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. De boxplotten Arabische Taal en Cultuur en Geschiedenis zien er symmetrisch uit; de boxen zijn even hoog boven als onder de mediaan. De staarten zijn onder en boven even groot. De boxplot van Filosofie is boven de mediaan groter dan onder de mediaan, de data kan wat scheef verdeeld zijn. De mediaan Arabische Taal en Cultuur ligt hoger dan de twee andere opleidingen. Toets met de ANOVA of dit een significant verschil is. 
 
@@ -282,7 +282,7 @@ De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standa
 ```{r library nortest}
 library("nortest")
 ```
-<!-- ## /BLOK: Library-nortest.R -->
+<!-- ## /OPENBLOK: Library-nortest.R -->
 
 <div class="col-container"> 
   <div class="col">
@@ -304,7 +304,7 @@ lillie.test(Reistijd_FIL)
 ```{r Lilliefors Test-3, warning=FALSE}
 lillie.test(Reistijd_GSC)
 ```
-<!-- ## /BLOK: Lilliefors-test-3.R -->
+<!-- ## /OPENBLOK: Lilliefors-test-3.R -->
   </div>
 </div>
 
@@ -319,7 +319,7 @@ De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test*
 ``` {r Shapiro-Wilk Test-3, warning=FALSE}
 shapiro.test(Reistijd_GSC)
 ```
-<!-- ## /BLOK: Shapiro-Wilk-test-3.R -->
+<!-- ## /OPENBLOK: Shapiro-Wilk-test-3.R -->
   </div>
   <div class= "col">
 <!-- ## OPENBLOK: Shapiro-Wilk-test-2.R -->
@@ -347,7 +347,7 @@ Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's t
 library(car)
 leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
 ```
-<!-- ## /BLOK: Levenes-test.R -->
+<!-- ## /OPENBLOK: Levenes-test.R -->
 ```{r Levenes test als object, echo = FALSE}
 L <- leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
 vF_waarde <- Round_and_format(L$`F value`[1])
@@ -369,7 +369,7 @@ Gebruik `aov()` om een ANOVA-object (`aov`) te creëren. Geef het resultaat over
 res.aov <- aov(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 summary(res.aov)
 ```
-<!-- ## /BLOK: ANOVA-toets.R -->
+<!-- ## /OPENBLOK: ANOVA-toets.R -->
 ```{r ANOVA als object, echo=FALSE}
 ANOVA <- summary(res.aov)
 vF_waarde <- Round_and_format(ANOVA[[1]]$`F value`[1])
@@ -386,7 +386,7 @@ Gebruik `cohens_f()` op een object met `class = aov` om het effect te meten.
 library(sjstats)
 cohens_f(res.aov)
 ```
-<!-- ## /BLOK: Cohens-f.R --> 
+<!-- ## /OPENBLOK: Cohens-f.R --> 
 ```{r Cohen s F als object, include=FALSE}
 f<-cohens_f(res.aov)
 vCohens_f <- Round_and_format(f$cohens.f)
@@ -401,7 +401,7 @@ Gebruik `EtaSq()` op een een object met `class = aov` om het effect te meten.
 library(DescTools)
 EtaSq(res.aov)
 ```
-<!-- ## /BLOK: Eta-squared.R -->
+<!-- ## /OPENBLOK: Eta-squared.R -->
 ```{r eta-squared als object, include = FALSE}
 Esq <- Round_and_format(EtaSq(res.aov)[1])
 ```
@@ -416,7 +416,7 @@ Gebruik `TukeyHSD()` op het ANOVA-object.
 ```{r TukeyHSD}
 TukeyHSD(res.aov)
 ```
-<!-- ## /BLOK: Tukey-HSD.R -->
+<!-- ## /OPENBLOK: Tukey-HSD.R -->
 ```{r TukeyHSD als object}
 THSD <- TukeyHSD(res.aov)
 vATCvsFIL <- Round_and_format(THSD$Opleiding[1,1])

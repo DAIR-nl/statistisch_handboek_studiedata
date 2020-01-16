@@ -171,7 +171,7 @@ Round_and_format <- function(x, digits = 2) {
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 
 ```
-<!-- ## /BLOK: Data-aanmaken.R -->
+<!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
 
@@ -192,7 +192,7 @@ head(Reistijd_per_opleiding)
 ## Laatste 10 observaties
 tail(Reistijd_per_opleiding)
 ```
-<!-- ## /BLOK: Data-bekijken.R -->
+<!-- ## /OPENBLOK: Data-bekijken.R -->
 
 <!-- ## OPENBLOK: Data-beschrijven.R -->
 ```{r Data beschrijven 1, collapse=TRUE}
@@ -201,7 +201,7 @@ length()
 mean()
 sd()
 ```
-<!-- ## /BLOK: Data-beschrijven.R -->
+<!-- ## /OPENBLOK: Data-beschrijven.R -->
 
 * Gemiddelde (standaarddeviatie): `r vMean` (`r vSD`). n = `r vN`.
 

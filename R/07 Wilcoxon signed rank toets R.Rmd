@@ -29,7 +29,7 @@ Round_and_format <- function(x, digits = 2) {
   return(x)
 }
 ```
-<!-- ## /BLOK: Functiedefinities.R -->
+<!-- ## /OPENBLOK: Functiedefinities.R -->
 
 ```{r opmerking, include=FALSE, eval=FALSE}
 # Onderwijscasus idee 2: Beoordelen studenten opleiding X positiever nadat ze met hun tutor hebben gesproken?
@@ -76,7 +76,7 @@ Alumni_inkomens <- data.frame(Studentnr, Datum, Inkomen)
 ## Sorteer op inkomen voor presentatie dataset
 Alumni_inkomens <- Alumni_inkomens[order(Alumni_inkomens$Inkomen, decreasing = TRUE),]
 ```
-<!-- ## /BLOK: Data-aanmaken.R -->
+<!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
 Gebruik de *Wilcoxon signed rank toets* om te toetsen of bij een herhaalde meting de waardes van een groep aan elkaar gelijk zijn. Een voordeel van deze test is dat het voor alle type data gebruikt kan worden.[^1]   
@@ -109,7 +109,7 @@ head(Alumni_inkomens)
 ## Laatste 6 observaties
 tail(Alumni_inkomens)
 ```
-<!-- ## /BLOK: Data-bekijken.R -->
+<!-- ## /OPENBLOK: Data-bekijken.R -->
 
 <!-- ## OPENBLOK: Data-selecteren.R -->
 Bekijk de grootte, de mediaan en de kwantielen van de data met `length()` en `quantile()`. 
@@ -126,7 +126,7 @@ length(Alumni_inkomens_t1)
 mean(Alumni_inkomens_t1)
 median(Alumni_inkomens_t1)
 ```
-<!-- ## /BLOK: Data-beschrijven-1.R -->
+<!-- ## /OPENBLOK: Data-beschrijven-1.R -->
   </div>
   <div class="col">
 <!-- ## OPENBLOK: Data-beschrijven-2.R -->
@@ -135,7 +135,7 @@ length(Alumni_inkomens_t5)
 mean(Alumni_inkomens_t5)
 median(Alumni_inkomens_t5)
 ```
-<!-- ## /BLOK: Data-beschrijven-2.R -->
+<!-- ## /OPENBLOK: Data-beschrijven-2.R -->
   </div>
 </div>
 * Mediaan inkomens op T~1~: , *n~T1~* = 
@@ -162,7 +162,7 @@ ggplot(Alumni_inkomens,
   theme(axis.text.x = element_text(angle = 45)) +
   labs(title = "Maandelijkse inkomens alumni Mens & Maatschappij")
 ```
-<!-- ## /BLOK: Histogram.R -->
+<!-- ## /OPENBLOK: Histogram.R -->
 
 Op beide tijdstippen is te zien dat de meeste alumni tussen de 0 en 4.000 euro per maand verdienen en een paar alumni verdienen ver boven modaal. 
 
@@ -174,7 +174,7 @@ De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen
 boxplot(Inkomen ~ Datum, Alumni_inkomens,
         main = "Maandelijkse inkomens alumni Mens & Maatschappij")
 ```
-<!-- ## /BLOK: Boxplot.R -->
+<!-- ## /OPENBLOK: Boxplot.R -->
 
 De boxplotten laten zien dat er op beide meetmomenten veel inkomens rondom de 2000 euro liggen. De mediaan is van T~2~ is iets hoger, maar of er een verschil is tussen beide groepen is op het oog niet te zien. Toets met de *Wilcoxon signed rang toets* of er een significant verschil is.  
 In de data zitten er extremere inkomens, deze uitbijters zijn niet van invloed op de uitkomst van de *Wilcoxon signed rang toets*. 
@@ -186,7 +186,7 @@ Voer een Wilcoxon signed rank toets uit met `paired=TRUE`.
 ```{r wilcox test}
 wilcox.test(Alumni_inkomens_t5, Alumni_inkomens_t1, paired=TRUE, alternative = "greater")
 ```
-<!-- ## /BLOK: Wilcoxon-signed-rank-toets.R -->
+<!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets.R -->
 * *V* = TEST, p < 0,05  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen[^5]
 

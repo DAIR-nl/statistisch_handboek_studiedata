@@ -29,7 +29,7 @@ Round_and_format <- function(x, digits = 2) {
   return(x)
 }
 ```
-<!-- ## /BLOK: Functiedefinities.R -->
+<!-- ## /OPENBLOK: Functiedefinities.R -->
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
@@ -75,7 +75,7 @@ Eval_curriculum <- data.frame(c(st_nr, st_nr),
 colnames(Eval_curriculum) <- c("Studentnr", "Jaar", "Waardering")
 
 ```
-<!-- ## /BLOK: Data-aanmaken.R -->
+<!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
 
@@ -95,14 +95,14 @@ head(Eval_curriculum)
 ## Laatste 6 observaties
 tail(Eval_curriculum)
 ```
-<!-- ## /BLOK: Data-bekijken.R -->
+<!-- ## /OPENBLOK: Data-bekijken.R -->
 
 De data is gesorteerd op jaar. Gebruik `order()` op studentnummer om de studenten op de goede volgorde te zetten.
 <!-- ## OPENBLOK: Transformeer-data -->
 ```{r data sorteren}
 Eval_curriculum <- Eval_curriculum[order(Eval_curriculum$Studentnr),]
 ```
-<!-- ## /BLOK: Transformeer-data -->
+<!-- ## /OPENBLOK: Transformeer-data -->
 
 
 
@@ -131,7 +131,7 @@ De koppen staan nu nog op alfabetische volgorde. Verander deze volgorde zodat de
 Eval_curriculum_kt <- Eval_curriculum_kt[c(1, 3, 4, 5, 2), c(1, 3, 4, 5, 2)]
 print(Eval_curriculum_kt)
 ```
-<!-- ## /BLOK: Transformeer-kruistabel.R -->
+<!-- ## /OPENBLOK: Transformeer-kruistabel.R -->
 
 
 Voer verolgens de test uit met `mcnemar.test()`.
@@ -139,7 +139,7 @@ Voer verolgens de test uit met `mcnemar.test()`.
 ```{r McNemar }
 mcnemar.test(Eval_curriculum_kt)
 ```
-<!-- ## /BLOK: McNemar-toets.R -->
+<!-- ## /OPENBLOK: McNemar-toets.R -->
 
 ## Wilcoxon Signed Rank toets
 Om de wilcoxon Signed Rank toets te doen moet de ordinale data worden getransformeerd naar numerieke data. Hiervoor gebruiken we de rang van de categorieën (5 voor erg goed, 1 voor erg slecht)
@@ -155,7 +155,7 @@ wilcox.test(Eval_curriculum$Waardering_num[Eval_curriculum$Jaar == 2014],
             Eval_curriculum$Waardering_num[Eval_curriculum$Jaar == 2019],
             paired = TRUE)
 ```
-<!-- ## /BLOK: Wilcoxon-Signed-Rank-toets.R -->
+<!-- ## /OPENBLOK: Wilcoxon-Signed-Rank-toets.R -->
 
 
 

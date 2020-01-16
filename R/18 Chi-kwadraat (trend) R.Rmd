@@ -29,7 +29,7 @@ Round_and_format <- function(x, digits = 2) {
   return(x)
 }
 ```
-<!-- ## /BLOK: Functiedefinities.R -->
+<!-- ## /OPENBLOK: Functiedefinities.R -->
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## De opleidingsdirecteur van de opleiding Geneeskunde wil weten welke groep eerstejaars het snelste afstudeert. Hij vergelijkt hierbij drie groepen (of twee): studenten die vanaf Biomedische Wetenschappen instromen, studenten die een tussenjaar hebben gehad en studenten die direct vanaf het vwo komen. De snelheid van afstuderen is geoperationaliseerd door vier categorieën: nominaal, nomaal + 1, nominaal + 2 en nominaal + meer dan 2

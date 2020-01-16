@@ -35,7 +35,7 @@ Round_and_format_0decimals <- function(x, digits = 0) {
   return(x)
 }
 ```
-<!-- ## /BLOK: Functiedefinities.R -->
+<!-- ## /OPENBLOK: Functiedefinities.R -->
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
@@ -66,7 +66,7 @@ Punten_jaar2 <- data.frame(Studentnr, c(Punten_jaar2_NL, Punten_jaar2_inter),
 colnames(Punten_jaar2)<-c("Studentnr", "EC_Jaar2", "Nederlands")
 Punten_jaar2 <- Punten_jaar2[order(Studentnr),]
 ```
-<!-- ## /BLOK: Data-aanmaken.R -->
+<!-- ## /OPENBLOK: Data-aanmaken.R -->
 # Toepassing
 Gebruik de *Mann-Whitney U toets* om te toetsen of twee onafhankelijke groepen significant van elkaar verschillen. 
 
@@ -98,13 +98,13 @@ head(Punten_jaar2)
 ## Eerste 6 observaties
 tail(Punten_jaar2)
 ```
-<!-- ## /BLOK: Data-bekijken.R -->
+<!-- ## /OPENBLOK: Data-bekijken.R -->
 Bekijk de grootte, de mediaan en de kwantielen van de data met `length()` en `quantile()`. 
 <!-- ## OPENBLOK: Data-selecteren.R -->
 ```{r data selecteren}
 Nederlands <- Punten_jaar2$Nederlands == "ja"
 ```
-<!-- ## /BLOK: Data-selecteren.R -->
+<!-- ## /OPENBLOK: Data-selecteren.R -->
 
 <div class="col-container">
   <div class="col">
@@ -113,7 +113,7 @@ Nederlands <- Punten_jaar2$Nederlands == "ja"
 length(Punten_jaar2$EC_Jaar2[Nederlands])
 quantile(Punten_jaar2$EC_Jaar2[Nederlands])
 ```
-<!-- ## /BLOK: Data-beschrijven-1.R -->
+<!-- ## /OPENBLOK: Data-beschrijven-1.R -->
   </div>
   <div class="col">
 <!-- ## OPENBLOK: Data-beschrijven-2.R -->
@@ -121,7 +121,7 @@ quantile(Punten_jaar2$EC_Jaar2[Nederlands])
 length(Punten_jaar2$EC_Jaar2[!Nederlands])
 quantile(Punten_jaar2$EC_Jaar2[!Nederlands])
 ```
-<!-- ## /BLOK: Data-beschrijven-2.R -->
+<!-- ## /OPENBLOK: Data-beschrijven-2.R -->
   </div>
 </div>
 ``` {r data beschrijven als object, include=FALSE, echo=TRUE}
@@ -159,7 +159,7 @@ Gebruik `wilcox.test()` met twee argumenten om een Mann-Whitney U toets te doen 
 wilcox.test(Punten_jaar2$EC_Jaar2[Nederlands], 
             Punten_jaar2$EC_Jaar2[!Nederlands])
 ```
-<!-- ## /BLOK: Mann-Whitney-U-toets.R -->
+<!-- ## /OPENBLOK: Mann-Whitney-U-toets.R -->
 
 ```{r Mann Whitney U toets als object, include = FALSE}
 wcx <- wilcox.test(Punten_jaar2$EC_Jaar2[Nederlands],

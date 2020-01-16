@@ -79,7 +79,7 @@ DESCRIPTIVES VARIABLES=Reistijd
   /STATISTICS=MEAN STDDEV.
 ```
 
-<!-- ## /BLOK: Data-bekijken.SPSS -->
+<!-- ## /OPENBLOK: Data-bekijken.SPSS -->
 ![ ](Output_MeanSD1.jpg)
 
 
@@ -95,7 +95,7 @@ EXECUTE.
 
 Volg vervolgens bovenstaande stappen om van de nieuwe variabele(n) het gemiddelde te bekijken.
 
-<!-- ## /BLOK: Meer data-bekijken.SPSS -->
+<!-- ## /OPENBLOK: Meer data-bekijken.SPSS -->
 ![ ](Output_MeanSD2.jpg)
 
 * Gemiddelde reistijd Arabische Taal en Cultuur (standaarddeviatie): 47,45 (10,05). *n* = 48.  
@@ -115,7 +115,7 @@ Klik op `Graphs` > `Legacy Dialogs` en vervolgens op het gewenste figuur, in dit
 GRAPH
   /HISTOGRAM=Reistijd_ATC.
 ```
-<!-- ## /BLOK: Histogram.SPSS -->
+<!-- ## /OPENBLOK: Histogram.SPSS -->
 ![ ](Histogram1.jpg){width=60%} ![ ](Histogram2.jpg){width=60%} ![ ](Histogram3.jpg){width=60%}
 
 De opleidingen Geschiedenis en Arabische taal en Cultuur laten een Bell Curve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  Filosofie heeft een lagere frequentie bij een reistijd van 40 minuten, dit kan duiden op niet normaal verdeelde data. 
@@ -138,7 +138,7 @@ PPLOT
 ```
 
 
-<!-- ## /BLOK: QQplot.R -->
+<!-- ## /OPENBLOK: QQplot.R -->
 ![ ](QQplot1.jpg){width=40%} ![ ](QQplot2.jpg){width=40%} ![ ](QQplot3.jpg){width=40%}
 
 Bij de Q-Q plot van de reistijd van studenten Geschiedenis liggen de meeste punten op de lijn behalve bij de uiteinden. De cirkels van de Q-Q plot van studenten Arabische Taal en Cultuur en studenten Filosofie liggen net naast de lijn. De discrepantie is minimaal, vermoedelijk zijn de data normaal verdeeld.
@@ -157,7 +157,7 @@ EXAMINE VARIABLES=Reistijd BY Opleiding
   /NOTOTAL.
 ```
 
-<!-- ## /BLOK: Boxplot.R -->
+<!-- ## /OPENBLOK: Boxplot.R -->
 ![ ](Boxplot.jpg)
 
 De boxplotten geven de spreiding weer van de gemiddelde reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. De boxplotten Arabische Taal en Cultuur en Geschiedenis zien er symmetrisch uit; de boxen zijn even hoog boven als onder de mediaan. De staarten zijn onder en boven even groot. De boxplot van Filosofie is boven de mediaan groter dan onder de mediaan, de data kan wat scheef verdeeld zijn. De mediaan Arabische Taal en Cultuur ligt hoger dan de twee andere opleidingen. 
@@ -178,7 +178,7 @@ NPAR TESTS
   /MISSING ANALYSIS.
 ```
 
-<!-- ## /BLOK: Kolmogorov-Smirnov-test.R -->
+<!-- ## /OPENBLOK: Kolmogorov-Smirnov-test.R -->
 ![ ](Output_KS.jpg)
 
 Kijk voor het  verschil naar `Asymp. Sig. (2-tailed)`.
@@ -194,7 +194,7 @@ De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test*
 ``` {r Shapiro-Wilk Test-3, warning=FALSE}
 shapiro.test(Reistijd_GSC)
 ```
-<!-- ## /BLOK: Shapiro-Wilk-test-3.R -->
+<!-- ## /OPENBLOK: Shapiro-Wilk-test-3.R -->
   </div>
   <div class= "col">
 <!-- ## OPENBLOK: Shapiro-Wilk-test-2.R -->
@@ -222,7 +222,7 @@ Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's t
 library(car)
 leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
 ```
-<!-- ## /BLOK: Levenes-test.R -->
+<!-- ## /OPENBLOK: Levenes-test.R -->
 ```{r Levenes test als object, echo = FALSE}
 L <- leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
 vF_waarde <- Round_and_format(L$`F value`[1])
@@ -245,7 +245,7 @@ Gebruik `aov()` om een ANOVA-object (`aov`) te creëren. Geef het resultaat over
 res.aov <- aov(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 summary(res.aov)
 ```
-<!-- ## /BLOK: ANOVA-toets.R -->
+<!-- ## /OPENBLOK: ANOVA-toets.R -->
 ```{r ANOVA als object, echo=FALSE}
 ANOVA <- summary(res.aov)
 vF_waarde <- Round_and_format(ANOVA[[1]]$`F value`[1])
@@ -262,7 +262,7 @@ Gebruik `cohens_f()` om het effect te meten.
 library(sjstats)
 cohens_f(res.aov)
 ```
-<!-- ## /BLOK: Cohens-f.R --> 
+<!-- ## /OPENBLOK: Cohens-f.R --> 
 ```{r Cohen s F als object, include=FALSE}
 f<-cohens_f(res.aov)
 vCohens_f <- Round_and_format(f$cohens.f)
@@ -277,7 +277,7 @@ Gebruik `EtaSq()` op een `aov` om het effect te meten.
 library(DescTools)
 EtaSq(res.aov)
 ```
-<!-- ## /BLOK: Eta-squared.R -->
+<!-- ## /OPENBLOK: Eta-squared.R -->
 ```{r eta-squared als object, include = FALSE}
 Esq <- Round_and_format(EtaSq(res.aov)[1])
 ```
@@ -292,7 +292,7 @@ Gebruik `TukeyHSD()` op het ANOVA-object (`aov`).
 ```{r TukeyHSD}
 TukeyHSD(res.aov)
 ```
-<!-- ## /BLOK: Tukey-HSD.R -->
+<!-- ## /OPENBLOK: Tukey-HSD.R -->
 ```{r TukeyHSD als object}
 THSD <- TukeyHSD(res.aov)
 vATCvsFIL <- Round_and_format(THSD$Opleiding[1,1])

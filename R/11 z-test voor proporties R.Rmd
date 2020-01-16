@@ -29,7 +29,7 @@ Round_and_format <- function(x, digits = 2) {
   return(x)
 }
 ```
-<!-- ## /BLOK: Functiedefinities.R -->
+<!-- ## /OPENBLOK: Functiedefinities.R -->
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
@@ -45,7 +45,7 @@ hbo_achtergrond [hbo_achtergrond == 0] <- "nee"
 
 Instroom_2018_totaal <- data.frame(Studentnr, hbo_achtergrond)
 ```
-<!-- ## /BLOK: Data-aanmaken.R -->
+<!-- ## /OPENBLOK: Data-aanmaken.R -->
 # Toepassing
 Gebruik de z-toets bij het vergelijken van twee proporties waarbij één een gegeven proportie is. 
 
@@ -74,7 +74,7 @@ head(Instroom_2018_totaal)
 ## Laatste 6 observaties
 tail(Instroom_2018_totaal)
 ```
-<!-- ## /BLOK: Data-bekijken.R -->
+<!-- ## /OPENBLOK: Data-bekijken.R -->
 
 
 ## Statistische toets in R
@@ -89,7 +89,7 @@ prop.test(x = sum(Instroom_2018_totaal$hbo_achtergrond_num),
           p = 0.1113,
           alternative = "greater")
 ```
-<!-- ## /BLOK: Z-toets.R-->
+<!-- ## /OPENBLOK: Z-toets.R-->
 
 [^1]: Het percentage is een berekening op basis van cijfers van de Vereniging van Universiteiten (VSNU). In 2018 zijn er 102.147 studenten ingestroomd in Universitaire Bachelors en Masters. In dat zelfde jaar stroomden bij de universiteiten 11.374 studenten met een hbo achtergrond in. Deze studenten maken dus 11.13% uit van de totale instroom.  Deze cijfers zijn respectievelijk te vinden in de volgende website en publicatie: Vereniging van Universiteiten (2019). *Downloadbare tabellen Studenten*. Opgehaald van de website van de VSNU: https://www.vsnu.nl/nl_NL/f_c_studenten_downloads.html. Vereniging van Universiteiten (2019). *Factsheet - Nederlandse Universiteiten Zijn Toegankelijk*. Opgehaald van de website van de VSNU: https://www.vsnu.nl/files/documenten/Nederlands%20universiteiten%20zijn%20toegankelijk%20-%20tbv%20AO%20Toegankelijkheid%20en%20Kansengelijkheid%20in%20het%20hoger%20onderwijs%20d.d.%2020-2-2019.pdf
 

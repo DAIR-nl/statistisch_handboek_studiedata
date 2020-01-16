@@ -29,7 +29,7 @@ Round_and_format <- function(x, digits = 2) {
   return(x)
 }
 ```
-<!-- ## /BLOK: Functiedefinities.R -->
+<!-- ## /OPENBLOK: Functiedefinities.R -->
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 RNGkind(sample.kind = "Rounding")
@@ -48,7 +48,7 @@ p_2014 <- c(
        )
 Jaarlijks_inkomen <- replicate(2314, 13*(sample(Mogelijkheden, 1, replace=TRUE, p_2014)))
 ```
-<!-- ## /BLOK: Data-aanmaken.R -->
+<!-- ## /OPENBLOK: Data-aanmaken.R -->
 ## Toepassing
 
 ## Onderwijscasus
@@ -72,7 +72,7 @@ Bekijk de data door het gemiddelde, de standaardafwijking, de mediaan en een his
 ## Laatste 6 observaties
 #tail(Reistijd_per_opleiding)
 ```
-<!-- ## /BLOK: Data-bekijken.R -->
+<!-- ## /OPENBLOK: Data-bekijken.R -->
 <!-- ## OPENBLOK: Data-beschrijven.R -->
 ```{r data beschrijven, collapse=TRUE}
 mean(Jaarlijks_inkomen)
@@ -80,7 +80,7 @@ sd(Jaarlijks_inkomen)
 median(Jaarlijks_inkomen)
 hist(Jaarlijks_inkomen)
 ```
-<!-- ## /BLOK: Data-beschrijven.R -->
+<!-- ## /OPENBLOK: Data-beschrijven.R -->
 
 ### Normaliteit testen
 Test of de data normaal verdeeld is met een lilliefors-test
@@ -89,7 +89,7 @@ Test of de data normaal verdeeld is met een lilliefors-test
 library (nortest)
 lillie.test(Jaarlijks_inkomen)
 ```
-<!-- ## /BLOK: Library-nortest.R -->
+<!-- ## /OPENBLOK: Library-nortest.R -->
 De data is niet normaal verdeeld. Gebruik bij normaal verdeelde data een *One-sample t-toets*.
 
 ### Tekentoets 
@@ -101,7 +101,7 @@ totaal_alumni <- length(Jaarlijks_inkomen)
 
 binom.test(boven_modaal, totaal_alumni, alternative = "two.sided")
 ```
-<!-- ## /BLOK: Tekentoets.R -->
+<!-- ## /OPENBLOK: Tekentoets.R -->
 
 ## Toelichting op de output
 

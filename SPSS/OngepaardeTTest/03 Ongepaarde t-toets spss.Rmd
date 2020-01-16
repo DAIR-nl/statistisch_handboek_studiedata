@@ -69,7 +69,7 @@ DESCRIPTIVES VARIABLES=Cijfers
   /STATISTICS=MEAN STDDEV.
 ```
 
-<!-- ## /BLOK: Data-bekijken.SPSS -->
+<!-- ## /OPENBLOK: Data-bekijken.SPSS -->
 ![ ](Output_MeanSD1.jpg)
 
 
@@ -85,7 +85,7 @@ EXECUTE.
 
 Volg vervolgens bovenstaande stappen om van de nieuwe variabele(n) het gemiddelde te bekijken.
 
-<!-- ## /BLOK: Meer data-bekijken.SPSS -->
+<!-- ## /OPENBLOK: Meer data-bekijken.SPSS -->
 ![ ](Output_MeanSD2.jpg)
 
 * Gemiddeld tentamencijfer 2010 (standaarddeviatie): 6.37 (1.12). *n* = 180.
@@ -104,7 +104,7 @@ Klik op `Graphs` > `Legacy Dialogs` en vervolgens op het gewenste figuur, in dit
 GRAPH
   /HISTOGRAM=Cijfers_2010.
 ```
-<!-- ## /BLOK: Histogram.SPSS -->
+<!-- ## /OPENBLOK: Histogram.SPSS -->
 ![ ](Histogram1.jpg){width=60%} ![ ](Histogram2.jpg){width=60%}
 
 
@@ -128,7 +128,7 @@ PPLOT
 ```
 
 
-<!-- ## /BLOK: QQplot.R -->
+<!-- ## /OPENBLOK: QQplot.R -->
 ![ ](QQplot1.jpg){width=48%} ![ ](QQplot2.jpg){width=48%}
 
 Bij beide groepen liggen de meeste punten op de lijn behalve bij de uiteinden.
@@ -147,7 +147,7 @@ EXAMINE VARIABLES=Cijfers BY Cohort
   /NOTOTAL.
 ```
 
-<!-- ## /BLOK: Boxplot.R -->
+<!-- ## /OPENBLOK: Boxplot.R -->
 ![ ](Boxplot.jpg)
 
 De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer voor de BSA en na de BSA. De boxplotten en de staarten lijken symmetrisch, dit kan een teken zijn van normaal verdeelde data. Het cohort van 2011 heeft een aantal mogelijke uitbijters.[^10] 
@@ -168,7 +168,7 @@ NPAR TESTS
   /MISSING ANALYSIS.
 ```
 
-<!-- ## /BLOK: Kolmogorov-Smirnov-test.R -->
+<!-- ## /OPENBLOK: Kolmogorov-Smirnov-test.R -->
 ![ ](Output_KS.jpg)
 
 Kijk voor het  verschil naar `Asymp. Sig. (2-tailed)`.
@@ -193,7 +193,7 @@ EXAMINE VARIABLES=Cijfers_2010_n30
   /NOTOTAL.
 ```
 
-<!-- ## /BLOK: Shapiro-Wilk-test.R -->
+<!-- ## /OPENBLOK: Shapiro-Wilk-test.R -->
 ![ ](Output_SW1.jpg) ![ ](Output_SW2.jpg) 
 
 De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
@@ -252,14 +252,14 @@ T-TEST GROUPS=Cohort(2010 2011)
   /CRITERIA=CI(.95).
 ```
 
-<!-- ## /BLOK: Cohen's D.spss -->
+<!-- ## /OPENBLOK: Cohen's D.spss -->
 ![ ](Output_CohensD.jpg)
 
 Manier 2
 
 Gebruik de gegevens van de `Group Statistics` tabel van de T-Test om de Cohen's D via de volgende formules te berekenen:
 
-<!-- ## /BLOK: Cohen's D.spss -->
+<!-- ## /OPENBLOK: Cohen's D.spss -->
 ![ ](CohensD_Formule1.jpg) ![ ](CohensD_Formule2.jpg)
 
 M1 = gemiddelde groep 1 (`Mean`)

@@ -29,7 +29,7 @@ Round_and_format <- function(x, digits = 2) {
   return(x)
 }
 ```
-<!-- ## /BLOK: Functiedefinities.R -->
+<!-- ## /OPENBLOK: Functiedefinities.R -->
 
 ```{r opmerking, include=FALSE, eval=FALSE}
 # doorlinken naar de Wilcoxon Signed Rank Test
@@ -117,7 +117,7 @@ Tentamencijfer_na_tutorgesprek_n30 <- sapply(Tentamencijfer_na_tutorgesprek_n30,
 Tentamencijfer_na_tutorgesprek_n30 <- sort(Tentamencijfer_na_tutorgesprek_n30)
 Tentamencijfer_na_tutorgesprek_n30 <- Tentamencijfer_na_tutorgesprek_n30[volgorde_n30]
 ```
-<!-- ## /BLOK: Data-aanmaken.R -->
+<!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
 Gebruik de *gepaarde t-toets* om te toetsen of bij een herhaalde meting de gemiddelden van een groep aan elkaar gelijk zijn.[^1] 
@@ -163,7 +163,7 @@ head(Tentamencijfers)
 ## Laatste 6 observaties
 tail(Tentamencijfers)
 ```
-<!-- ## /BLOK: Data-bekijken.R -->
+<!-- ## /OPENBLOK: Data-bekijken.R -->
 
 Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen.
 <!-- ## OPENBLOK: Data-selecteren.R -->
@@ -173,7 +173,7 @@ Tentamencijfer_voor_tutorgesprek <-
 Tentamencijfer_na_tutorgesprek <- 
   Tentamencijfers[Tentamencijfers$Voor_of_na_tutorgesprek=="na", 2]
 ```
-<!-- ## /BLOK: Data-selecteren.R -->
+<!-- ## /OPENBLOK: Data-selecteren.R -->
 
 <div class="col2">
 <!-- ## OPENBLOK: Data-beschrijven-1.R -->
@@ -184,7 +184,7 @@ mean(
   Tentamencijfer_voor_tutorgesprek)
 sd(Tentamencijfer_voor_tutorgesprek)
 ```
-<!-- ## /BLOK: Data-beschrijven-1.R -->
+<!-- ## /OPENBLOK: Data-beschrijven-1.R -->
 ```{r Var beschrijven t0, include=FALSE, echo=TRUE}
 vMean_t0 <- Round_and_format(mean(Tentamencijfer_voor_tutorgesprek))
 vSD_t0 <-Round_and_format(sd(Tentamencijfer_voor_tutorgesprek))
@@ -199,7 +199,7 @@ mean(
   Tentamencijfer_na_tutorgesprek)
 sd(Tentamencijfer_na_tutorgesprek)
 ```
-<!-- ## /BLOK: Data-beschrijven-2.R -->
+<!-- ## /OPENBLOK: Data-beschrijven-2.R -->
 ```{r Var beschrijven t1, include=FALSE, echo=TRUE}
 vMean_t1 <- Round_and_format(mean(Tentamencijfer_na_tutorgesprek))
 vSD_t1 <- Round_and_format(sd(Tentamencijfer_na_tutorgesprek))
@@ -237,7 +237,7 @@ ggplot(Tentamencijfers,
   labs(title = "Lerarenopleiding tentamencijfers")
 
 ```
-<!-- ## /BLOK: Histogram.R -->
+<!-- ## /OPENBLOK: Histogram.R -->
 
 Beide histogrammen laten een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom de gemiddeldes. Opvallend is dat het histogram van voor het tutorgesprek veel waardes in de linkerstaart van de verdeling heeft liggen.  
 
@@ -257,7 +257,7 @@ qqnorm(Tentamencijfer_voor_tutorgesprek,
        xlab = "Theoretische kwantielen")
 qqline(Tentamencijfer_voor_tutorgesprek)
 ```
-<!-- ## /BLOK: QQplot-1.R -->
+<!-- ## /OPENBLOK: QQplot-1.R -->
   </div>
   <div class = "col">
 <!-- ## OPENBLOK: QQplot-2.R -->
@@ -269,7 +269,7 @@ qqnorm(Tentamencijfer_na_tutorgesprek,
        xlab = "Theoretische kwantielen")
 qqline(Tentamencijfer_na_tutorgesprek)
 ```
-<!-- ## /BLOK: QQplot-2.R -->
+<!-- ## /OPENBLOK: QQplot-2.R -->
   </div>
 </div>
 
@@ -284,7 +284,7 @@ De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen
 boxplot(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers,
         main = "Boxplot van tentamencijfers lerarenopleiding")
 ```
-<!-- ## /BLOK: Boxplot.R -->
+<!-- ## /OPENBLOK: Boxplot.R -->
 
 De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer per periode voor de lerarenopleiding. De boxplot en de staarten van T~0~ zijn niet helemaal symmetrisch. Het gaat om een kleine afwijking, daarom is de data vermoedelijk normaal verdeeld. Er zijn een aantal mogelijke uitbijters.[^9] De boxplot van T~1~ ziet er symmetrisch uit. Er zijn geen uitbijters.    
 
@@ -299,21 +299,21 @@ De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standa
 ```{r library nortest, warning=FALSE}
 library(nortest)
 ```
-<!-- ## /BLOK: Library-nortest.R -->
+<!-- ## /OPENBLOK: Library-nortest.R -->
 <div class="col-container">
   <div class = "col">
 <!-- ## OPENBLOK: Lilliefors-test-1.R -->
 ``` {r Lilliefors Test-1, warning=FALSE}
 lillie.test(Tentamencijfer_voor_tutorgesprek)
 ```
-<!-- ## /BLOK: Lilliefors-test-1.R -->
+<!-- ## /OPENBLOK: Lilliefors-test-1.R -->
   </div>
   <div class = "col">
 <!-- ## OPENBLOK: Lilliefors-test-2.R -->
 ``` {r Lilliefors Test-2, warning=FALSE}
 lillie.test(Tentamencijfer_na_tutorgesprek)
 ```
-<!-- ## /BLOK: Lilliefors-test-2.R -->
+<!-- ## /OPENBLOK: Lilliefors-test-2.R -->
   </div>
 </div>
 
@@ -331,7 +331,7 @@ Er zijn 2 steekproeven van `Tentamencijfers` ingeladen: `Tentamencijfer_voor_tut
 shapiro.test(
   Tentamencijfer_voor_tutorgesprek_n30)
 ```
-<!-- ## /BLOK: Shapiro-Wilk-test-1.R -->
+<!-- ## /OPENBLOK: Shapiro-Wilk-test-1.R -->
   </div>
   <div class ="col">
 <!-- ## OPENBLOK: Shapiro-Wilk-test-2.R -->
@@ -339,7 +339,7 @@ shapiro.test(
 shapiro.test(
   Tentamencijfer_na_tutorgesprek_n30)
 ```
-<!-- ## /BLOK: Shapiro-Wilk-test-2.R -->
+<!-- ## /OPENBLOK: Shapiro-Wilk-test-2.R -->
   </div>
 </div>
 
@@ -356,7 +356,7 @@ t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers,
        paired = TRUE,
        alternative = "two.sided")
 ```
-<!-- ## /BLOK: T-toets.R -->
+<!-- ## /OPENBLOK: T-toets.R -->
 ```{r T-test als object, echo = FALSE}
 t <- t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 vT_waarde <- Round_and_format(t$statistic)
@@ -379,7 +379,7 @@ Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
 library(effsize)
 cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 ```
-<!-- ## /BLOK: Cohens-d-test.R -->
+<!-- ## /OPENBLOK: Cohens-d-test.R -->
 ```{r var Cohens d, include = FALSE}
 d <- cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
 vD_waarde <- Round_and_format(d$estimate)

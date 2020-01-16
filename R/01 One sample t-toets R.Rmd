@@ -29,7 +29,7 @@ Round_and_format <- function(x, digits = 2) {
   return(x)
 }
 ```
-<!-- ## /BLOK: Functiedefinities.R -->
+<!-- ## /OPENBLOK: Functiedefinities.R -->
 
 ```{r opmerking, include=FALSE, eval=FALSE}
 # TODO: een link maken naar Wilcoxon Signed Rank Test
@@ -59,7 +59,7 @@ Gemiddeld_cijfer_WNS <- apply(WNS_eindcijfers, 1, mean)
 
 Gemiddeld_cijfer_WNS_n30 <- sample(Gemiddeld_cijfer_WNS, 30)
 ```
-<!-- ## /BLOK: Data-aanmaken.R -->
+<!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
 Gebruik de *one sample t-toets* om het gemiddelde van de steekproef te vergelijken met een bekend gemiddelde of norm van de totale populatie.[^1] 
@@ -100,7 +100,7 @@ head(Gemiddeld_cijfer_WNS)
 ## Laatste 5 observaties
 tail(Gemiddeld_cijfer_WNS)
 ```
-<!-- ## /BLOK: Data-bekijken.R -->
+<!-- ## /OPENBLOK: Data-bekijken.R -->
 
 Krijg meer inzicht in de dataset door het gemiddelde en de spreiding te bekijken, `length()`, `mean()` en `sd()` .  
 
@@ -111,7 +111,7 @@ length(Gemiddeld_cijfer_WNS)
 mean(Gemiddeld_cijfer_WNS)
 sd(Gemiddeld_cijfer_WNS)
 ```
-<!-- ## /BLOK: Data-beschrijven.R -->
+<!-- ## /OPENBLOK: Data-beschrijven.R -->
 ```{r Var beschrijven t1, include=FALSE, echo=TRUE}
 vMean <- Round_and_format(mean(Gemiddeld_cijfer_WNS))
 vSD <- Round_and_format(sd(Gemiddeld_cijfer_WNS))
@@ -144,7 +144,7 @@ ggplot(data.frame(Gemiddeld_cijfer_WNS),
        subtitle = "Eerstejaarsstudenten Werktuigbouwkunde")
 
 ```
-<!-- ## /BLOK: Histogram.R -->
+<!-- ## /OPENBLOK: Histogram.R -->
 
 Het histogram laat een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
 
@@ -162,7 +162,7 @@ qqnorm(Gemiddeld_cijfer_WNS,
        xlab = "Theoretische kwantielen")
 qqline(Gemiddeld_cijfer_WNS)
 ```
-<!-- ## /BLOK: QQplot.R -->
+<!-- ## /OPENBLOK: QQplot.R -->
 
 In deze casus liggen de meeste punten op de lijn. Bij de uiteinden liggen de punten dichtbij de lijn. 
 
@@ -174,7 +174,7 @@ De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen
 ## Boxplot
 boxplot(Gemiddeld_cijfer_WNS, xlab = "Werktuigbouwkunde", ylab = "Gemiddeld_cijfer_WNS")
 ```
-<!-- ## /BLOK: Boxplot.R -->
+<!-- ## /OPENBLOK: Boxplot.R -->
 
 De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte vakken weer van de studenten Werktuigbouwkunde. De box en staarten zien er symmetrisch uit, wat een indicatie is van een normale verdeling.[^9]  
 
@@ -190,7 +190,7 @@ De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standa
 library(nortest)
 lillie.test(Gemiddeld_cijfer_WNS)
 ```
-<!-- ## /BLOK: Lilliefors-test.R -->
+<!-- ## /OPENBLOK: Lilliefors-test.R -->
 
 De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.  
 
@@ -204,7 +204,7 @@ Er is een steekproef van `Gemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS
 ## Shapiro-Wilk test
 shapiro.test(Gemiddeld_cijfer_WNS_n30)
 ```
-<!-- ## /BLOK: Shapiro-Wilk-test.R -->
+<!-- ## /OPENBLOK: Shapiro-Wilk-test.R -->
 
 De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
 
@@ -216,7 +216,7 @@ Gebruik `t.test()`om een t-toets uit te voeren. Gebruik het argument `mu = 6.8` 
 ## T-test
 t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 ```
-<!-- ## /BLOK: T-test.R -->
+<!-- ## /OPENBLOK: T-test.R -->
 ```{r ttest als object, echo = FALSE}
 t <- t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 vP <- Round_and_format(t$p.value)

@@ -40,7 +40,7 @@ DESCRIPTIVES VARIABLES=Gemiddeld_cijfer_WNS
   /STATISTICS=MEAN STDDEV.
 ```
 
-<!-- ## /BLOK: Data-bekijken.SPSS -->
+<!-- ## /OPENBLOK: Data-bekijken.SPSS -->
 ![ ](Output_MeanSD.jpg)
 
 * Gemiddeld cijfer WNS (standaardafwijking): 7,13 (0,79). *n* = 124.
@@ -57,7 +57,7 @@ Klik op `Graphs` > `Legacy Dialogs` en vervolgens op het gewenste figuur, in dit
 GRAPH
   /HISTOGRAM=Gemiddeld_cijfer_WNS.
 ```
-<!-- ## /BLOK: Histogram.SPSS -->
+<!-- ## /OPENBLOK: Histogram.SPSS -->
 ![ ](Histogram.jpg)
 
 Het histogram laat een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
@@ -80,7 +80,7 @@ PPLOT
 ```
 
 
-<!-- ## /BLOK: QQplot.R -->
+<!-- ## /OPENBLOK: QQplot.R -->
 ![ ](QQplot.jpg)
 
 In deze casus liggen de meeste punten op de lijn. Bij de uiteinden liggen de punten dichtbij de lijn. 
@@ -101,7 +101,7 @@ EXAMINE VARIABLES=Gemiddeld_cijfer_WNS
   /MISSING=LISTWISE.
 ```
 
-<!-- ## /BLOK: Boxplot.R -->
+<!-- ## /OPENBLOK: Boxplot.R -->
 ![ ](Boxplot.jpg)
 
 De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte vakken weer van de studenten Werktuigbouwkunde. De box en staarten zien er symmetrisch uit, wat een indicatie is van een normale verdeling.[^9]  
@@ -122,7 +122,7 @@ NPAR TESTS
   /MISSING ANALYSIS.
 ```
 
-<!-- ## /BLOK: Kolmogorov-Smirnov-test.R -->
+<!-- ## /OPENBLOK: Kolmogorov-Smirnov-test.R -->
 ![ ](Output_KS.jpg)
 
 Kijk voor het  verschil naar `Asymp. Sig. (2-tailed)`. 
@@ -147,7 +147,7 @@ EXAMINE VARIABLES=Gemiddeld_cijfer_WNS_n30
   /NOTOTAL.
 ```
 
-<!-- ## /BLOK: Shapiro-Wilk-test.R -->
+<!-- ## /OPENBLOK: Shapiro-Wilk-test.R -->
 ![ ](Output_SW.jpg)
 
 De p-waarde is *p* > 0,05 (`Sig.`), dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.

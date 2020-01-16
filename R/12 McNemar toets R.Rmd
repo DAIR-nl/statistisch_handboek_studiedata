@@ -29,7 +29,7 @@ Round_and_format <- function(x, digits = 2) {
   return(x)
 }
 ```
-<!-- ## /BLOK: Functiedefinities.R -->
+<!-- ## /OPENBLOK: Functiedefinities.R -->
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
@@ -68,7 +68,7 @@ colnames(FOS_studenten)<-c("Studentnr", "FOS?", "Datum")
 
 FOS_studenten <- FOS_studenten[order(FOS_studenten$Studentnr),]
 ```
-<!-- ## /BLOK: Data-aanmaken.R -->
+<!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
 
@@ -89,7 +89,7 @@ head(FOS_studenten)
 ## Laatste 6 observaties
 tail(FOS_studenten)
 ```
-<!-- ## /BLOK: Data-bekijken.R -->
+<!-- ## /OPENBLOK: Data-bekijken.R -->
 
 <!-- ## OPENBLOK: Data-beschrijven.R -->
 ```{r data aanmaken}
@@ -100,7 +100,7 @@ Juni <- FOS_studenten$`FOS?`[FOS_studenten$Datum == "Juni"]
 ## Maak een kruistabel
 FOS_studenten_kruistabel <- table(December, Juni)
 ```
-<!-- ## /BLOK: Data-beschrijven.R -->
+<!-- ## /OPENBLOK: Data-beschrijven.R -->
 
 ## Assumpties testen in R
 
@@ -114,7 +114,7 @@ Gebruik `mcnemar.test()` op een kruistabel.
 ```{r}
 mcnemar.test(FOS_studenten_kruistabel)
 ```
-<!-- ## /BLOK: McNemar-toets.R -->
+<!-- ## /OPENBLOK: McNemar-toets.R -->
 
 # Toelichting op de output
 

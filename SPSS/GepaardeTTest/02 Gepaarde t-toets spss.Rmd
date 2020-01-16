@@ -68,7 +68,7 @@ DESCRIPTIVES VARIABLES=Cijfer
   /STATISTICS=MEAN STDDEV.
 ```
 
-<!-- ## /BLOK: Data-bekijken.SPSS -->
+<!-- ## /OPENBLOK: Data-bekijken.SPSS -->
 ![ ](Output_MeanSD.jpg)
 
 * Gemiddeld Cijfer (standaardafwijking): 6,94 (1,55). *n* = 468.
@@ -83,7 +83,7 @@ EXECUTE.
 
 Volg vervolgens bovenstaande stappen om van de nieuwe variabele(n) het gemiddelde te bekijken.
 
-<!-- ## /BLOK: Data-bekijken.SPSS -->
+<!-- ## /OPENBLOK: Data-bekijken.SPSS -->
 ![ ](Output_MeanSD2.jpg)
 
 
@@ -104,7 +104,7 @@ Klik op `Graphs` > `Legacy Dialogs` en vervolgens op het gewenste figuur, in dit
 GRAPH
   /HISTOGRAM=Tentamencijfer_voor_tutorgesprek.
 ```
-<!-- ## /BLOK: Histogram.SPSS -->
+<!-- ## /OPENBLOK: Histogram.SPSS -->
 ![ ](Histogram1.jpg){width=60%} ![ ](Histogram2.jpg){width=60%}
 
 Beide histogrammen laten een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom de gemiddeldes. Opvallend is dat het histogram van voor het tutorgesprek veel waardes in de linkerstaart van de verdeling heeft liggen.  
@@ -127,7 +127,7 @@ PPLOT
 ```
 
 
-<!-- ## /BLOK: QQplot.R -->
+<!-- ## /OPENBLOK: QQplot.R -->
 ![ ](QQplot1.jpg){width=48%} ![ ](QQplot2.jpg){width=48%}
 
 In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. 
@@ -146,7 +146,7 @@ EXAMINE VARIABLES=Cijfer BY Voor_of_na_tutorgesprek
   /NOTOTAL.
 ```
 
-<!-- ## /BLOK: Boxplot.R -->
+<!-- ## /OPENBLOK: Boxplot.R -->
 ![ ](Boxplot.jpg)
 
 De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer per periode voor de lerarenopleiding. De boxplot en de staarten van T~0~ zijn niet helemaal symmetrisch. Het gaat om een kleine afwijking, daarom is de data vermoedelijk normaal verdeeld. Er zijn een aantal mogelijke uitbijters. De boxplot van T~1~ ziet er symmetrisch uit. Er zijn geen uitbijters.[^9]    
@@ -169,7 +169,7 @@ NPAR TESTS
   /MISSING ANALYSIS.
 ```
 
-<!-- ## /BLOK: Kolmogorov-Smirnov-test.R -->
+<!-- ## /OPENBLOK: Kolmogorov-Smirnov-test.R -->
 ![ ](Output_KS.jpg)
 
 Kijk voor het  verschil naar `Asymp. Sig. (2-tailed)`.
@@ -194,7 +194,7 @@ EXAMINE VARIABLES=Tentamencijfer_voor_tutorgesprek_n30
   /NOTOTAL.
 ```
 
-<!-- ## /BLOK: Shapiro-Wilk-test.R -->
+<!-- ## /OPENBLOK: Shapiro-Wilk-test.R -->
 ![ ](Output_SW1.jpg) ![ ](Output_SW2.jpg) 
 
 Voorbeide groepen is de *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden.  
@@ -224,7 +224,7 @@ Manier 1
 
 Gebruik de gegevens van de `Group Statistics` tabel van de T-Test om de Cohen's D via de volgende formules te berekenen:
 
-<!-- ## /BLOK: Cohen's D.spss -->
+<!-- ## /OPENBLOK: Cohen's D.spss -->
 ![ ](CohensD_Formule1.jpg) ![ ](CohensD_Formule2.jpg)
 
 M1 = gemiddelde groep 1 (`Mean`)

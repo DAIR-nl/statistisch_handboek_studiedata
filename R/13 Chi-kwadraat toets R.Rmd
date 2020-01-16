@@ -29,7 +29,7 @@ Round_and_format <- function(x, digits = 2) {
   return(x)
 }
 ```
-<!-- ## /BLOK: Functiedefinities.R -->
+<!-- ## /OPENBLOK: Functiedefinities.R -->
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r opmerking TODO, include=FALSE, eval=FALSE}
@@ -47,7 +47,7 @@ Wel_leenstelsel_n43 <- c(5, 16)
 Uitval_functiebeperking_n43 <- t(data.frame(Geen_leenstelsel_n43, Wel_leenstelsel_n43))
 colnames(Uitval_functiebeperking_n43) <- c("Wel uitval", "Geen uitval")
 ```
-<!-- ## /BLOK: Data-aanmaken.R -->
+<!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
 Gebruik de *Chi-kwadraat toets* of de *Fisher's exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde, binaire variabelen.[^1]<sup>, </sup>[^2] In tegenstelling tot de *Chi-kwadraat toets* kan de *Fisher's exact toets* ook bij lage aantallen gebruikt worden.[^3] De *Fisher's exact toets* is terughoudender in het benoemen of er een significant verschil is in percentage tussen beide groepen dan de *Chi-kwadraat toets*.[^4]   
@@ -100,7 +100,7 @@ Er is een dataset ingeladen over de uitval van studenten met een functiebeperkin
 ## Eerste 6 observaties
 print(Uitval_functiebeperking)
 ```
-<!-- ## /BLOK: Data-bekijken.R -->
+<!-- ## /OPENBLOK: Data-bekijken.R -->
 
 ## Chi-kwadraat toets
 De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel gelijk is gebleven. Gebruik `chisq.test()` op een kruistabel.  
@@ -108,7 +108,7 @@ De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of het perc
 ```{r chi2}
 chisq.test(Uitval_functiebeperking)
 ```
-<!-- ## /BLOK: Chi2-toets-->
+<!-- ## /OPENBLOK: Chi2-toets-->
 
 ```{r chi2 als object, include=FALSE, echo=TRUE}
 Chi2 <- chisq.test(Uitval_functiebeperking)
@@ -129,7 +129,7 @@ De *Fisher's exact toets* wordt uitgevoerd om de vraag te beantwoorden of het pe
 ```{r data bekijken n43}
 print(Uitval_functiebeperking_n43)
 ```
-<!-- ## /BLOK: data-bekijken-n43 -->
+<!-- ## /OPENBLOK: data-bekijken-n43 -->
 
 De groepen hebben een laag aantal geobserveerde waarden variërend van 5 tot 16. Voer de *Fisher's exact toets* uit.
 
@@ -137,7 +137,7 @@ De groepen hebben een laag aantal geobserveerde waarden variërend van 5 tot 16.
 ```{r fishers exact}
 fisher.test(Uitval_functiebeperking_n43)
 ```
-<!-- ## /BLOK: Fishers-Exact-toets -->
+<!-- ## /OPENBLOK: Fishers-Exact-toets -->
 
 ```{r fishers exact als object, include=FALSE, echo=TRUE}
 fish <- fisher.test(Uitval_functiebeperking_n43)

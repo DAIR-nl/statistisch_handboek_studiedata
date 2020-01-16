@@ -29,7 +29,7 @@ Round_and_format <- function(x, digits = 2) {
   return(x)
 }
 ```
-<!-- ## /BLOK: Functiedefinities.R -->
+<!-- ## /OPENBLOK: Functiedefinities.R -->
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
@@ -51,7 +51,7 @@ Bsa_kt_n10 <- data.frame(Pos_bsa_n10, Neg_bsa_n10)
 Bsa_kt_n10 <- t(Bsa_kt_n10)
 colnames (Bsa_kt_n10) <- Landen_instroom
 ```
-<!-- ## /BLOK: Data-aanmaken.R -->
+<!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
 Gebruikt de *Fisher-Freeman-Halton exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde variabelen, waarin één of beide variabelen meer dan twee categorieën hebben; m x n tabel. De *Fisher-Freeman-Halton exact toets* is een uitbreiding van de *Fisher's exact toets* die gebruikt wordt om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde binaire variabelen; 2x2 tabel.[^1]
@@ -76,7 +76,7 @@ Print de kruistabel of geef deze grafisch weer met `barplot()`.
 print(Bsa_kt)
 barplot(Bsa_kt, beside = TRUE, legend.text = TRUE)
 ```
-<!-- ## /BLOK: Data-bekijken.R -->
+<!-- ## /OPENBLOK: Data-bekijken.R -->
 
 ## Fisher-Freeman-Halton exact toets
 Gebruik `simulate.p.value = TRUE` bij `fisher.test()` om de p-waardes via een Monte Carlo simulatie te laten uitrekenen. Dit is nodig voor tabellen die groter zijn dan 2 bij 2.
@@ -85,7 +85,7 @@ Gebruik `simulate.p.value = TRUE` bij `fisher.test()` om de p-waardes via een Mo
 fisher.test(Bsa_kt_n10, simulate.p.value = TRUE)
 fisher.test(Bsa_kt, simulate.p.value = TRUE)
 ```
-<!-- ## /BLOK: Fisher-Freeman-Halton-exact-toets-->
+<!-- ## /OPENBLOK: Fisher-Freeman-Halton-exact-toets-->
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^10]
 *
 
@@ -102,4 +102,4 @@ Om `chisq.test()` in R te gebruiken moet de data in een kruistabel staan.
 ```{r collapse=TRUE}
 chisq.test(Bsa_kt)
 ```
-<!-- ## /BLOK: Chi2-toets-->
+<!-- ## /OPENBLOK: Chi2-toets-->

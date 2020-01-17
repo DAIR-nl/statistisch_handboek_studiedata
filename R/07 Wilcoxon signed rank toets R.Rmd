@@ -44,8 +44,8 @@ set.seed(1)
 Mogelijkheden <- c(1616:7000)
 
 
-## Maak inkomens t1 aan
-Alumni_inkomens_t1 <- c(
+## Maak inkomens T1 aan
+Alumni_inkomens_T1 <- c(
   replicate(0, 38),
   sample(500:1800, 80),
   sample(1635:2000, 20),
@@ -55,24 +55,24 @@ Alumni_inkomens_t1 <- c(
   sample(3600:5000, 10),
   sample(5000:15000, 3)
 )
-Alumni_inkomens_t1 <- unlist(Alumni_inkomens_t1)
-Alumni_inkomens_t1 <- sort(Alumni_inkomens_t1)
+Alumni_inkomens_T1 <- unlist(Alumni_inkomens_T1)
+Alumni_inkomens_T1 <- sort(Alumni_inkomens_T1)
 
-## Maak inkomens t2 op basis van opslag over t1
+## Maak inkomens T2 op basis van opslag over T1
 Promotie_mogelijkheden <- c(0, 100, 200, 400, 1000, -50, -100, -200)
 #Weging               <- c(400, 400,  200,   100,  10,  200,   100,    50)
-Opslag <- sample(Promotie_mogelijkheden, length(Alumni_inkomens_t1), replace = TRUE)
-Alumni_inkomens_t2 <- Alumni_inkomens_t1 + Opslag
+Opslag <- sample(Promotie_mogelijkheden, length(Alumni_inkomens_T1), replace = TRUE)
+Alumni_inkomens_T2 <- Alumni_inkomens_T1 + Opslag
 
 ## Stel volgorde vast en hussel paargewijs
-volgorde <- sample(1:length(Alumni_inkomens_t1), length(Alumni_inkomens_t1))
-Alumni_inkomens_t1 <- Alumni_inkomens_t1[volgorde]
-Alumni_inkomens_t2 <- Alumni_inkomens_t2[volgorde]
+volgorde <- sample(1:length(Alumni_inkomens_T1), length(Alumni_inkomens_T1))
+Alumni_inkomens_T1 <- Alumni_inkomens_T1[volgorde]
+Alumni_inkomens_T2 <- Alumni_inkomens_T2[volgorde]
 
 ## link studentnummer aan vastgestelde volgorde en maak dataframe
-Studentnr <- 2*sample(3000000:4000000, length(Alumni_inkomens_t1))
-Inkomen<- c(Alumni_inkomens_t1, Alumni_inkomens_t2)
-Datum <- c(replicate(length(Alumni_inkomens_t1), "t1"), (replicate(length(Alumni_inkomens_t2), "t2")))
+Studentnr <- 2*sample(3000000:4000000, length(Alumni_inkomens_T1))
+Inkomen<- c(Alumni_inkomens_T1, Alumni_inkomens_T2)
+Datum <- c(replicate(length(Alumni_inkomens_T1), "T1"), (replicate(length(Alumni_inkomens_T2), "T2")))
 Alumni_inkomens <- data.frame(Studentnr, Datum, Inkomen)
 
 ## Sorteer op inkomen voor presentatie dataset
@@ -122,8 +122,8 @@ Bekijk de grootte, de mediaan en de kwantielen van de data met `length()` en `qu
 <!-- ## /TEKSTBLOK: Data-beschrijven.R-->
 <!-- ## OPENBLOK: Data-selecteren.R-->
 ```{r data selecteren}
-Alumni_inkomens_t1 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Datum == "t1"]
-Alumni_inkomens_t2 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Datum == "t2"]
+Alumni_inkomens_T1 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Datum == "T1"]
+Alumni_inkomens_T2 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Datum == "T2"]
 ```
 <!-- ## /CLOSEDBLOK: Data-selecteren.R-->
 
@@ -131,33 +131,33 @@ Alumni_inkomens_t2 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Datum == "t2"]
   <div class="col">
 <!-- ## OPENBLOK: Data-beschrijven-1.R -->
 ```{r, data beschrijven 1, collapse=TRUE}
-length(Alumni_inkomens_t1)
-mean(Alumni_inkomens_t1)
-median(Alumni_inkomens_t1)
+length(Alumni_inkomens_T1)
+median(Alumni_inkomens_T1)
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-1.R -->
   </div>
   <div class="col">
 <!-- ## OPENBLOK: Data-beschrijven-2.R -->
 ```{r Data beschrijven 2, collapse=TRUE}
-length(Alumni_inkomens_t2)
-mean(Alumni_inkomens_t2)
-median(Alumni_inkomens_t2)
+length(Alumni_inkomens_T2)
+median(Alumni_inkomens_T2)
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-2.R -->
   </div>
 </div>
 <!-- ## CLOSEDBLOK: Data-beschrijven-2.R -->
 ```{r data beschrijven als object, include=FALSE, echo=TRUE}
-vMed_t1 <- median(Alumni_inkomens_t1)
-vMed_t2 <- median(Alumni_inkomens_t2)
+vMed_T1 <- median(Alumni_inkomens_T1)
+vN_T1 <- length(Alumni_inkomens_T1)
+vMed_T2 <- median(Alumni_inkomens_T2)
+vN_T2 <- length(Alumni_inkomens_T2)
 ```
-<!-- ## CLOSEDBLOK: Data-beschrijven-2.R -->
+<!-- ## /CLOSEDBLOK: Data-beschrijven-2.R -->
 <!-- ## TEKSTBLOK: Data-beschrijven.R-->
-* Mediaan inkomens op T~1~: , *n~T1~* = `r vMed_t1`
-* Mediaan inkomens op T~2~: , *n~t2~* = `r vMed_t2`
+* Mediaan inkomens op T~1~: `r vMed_T1`, *n~T1~* = `r vN_T1`
+* Mediaan inkomens op T~2~: `r vMed_T2`, *n~T2~* = `r vN_T2`
 
-<!-- ## TEKSTBLOK: Data-beschrijven.R-->
+<!-- ## /TEKSTBLOK: Data-beschrijven.R-->
 
 ### Histogram
 Geef de data visueel weer met een histogram of boxplot.
@@ -203,23 +203,24 @@ Voer een Wilcoxon signed rank toets uit met `paired=TRUE`.
 <!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
 <!-- ## OPENBLOK: Wilcoxon-signed-rank-toets.R -->
 ```{r wilcox test}
-wilcox.test(Alumni_inkomens_t2, Alumni_inkomens_t1, paired=TRUE, alternative = "greater")
+wilcox.test(Alumni_inkomens_T2, Alumni_inkomens_T1, paired=TRUE, alternative = "greater")
 ```
 <!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets.R -->
 <!-- ## CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
-```{r wilcox test}
-wilcox.test(Alumni_inkomens_t2, Alumni_inkomens_t1, paired=TRUE, alternative = "greater")
+```{r wilcox test, include=FALSE, echo=TRUE}
+wilcox <- wilcox.test(Alumni_inkomens_T2, Alumni_inkomens_T1, paired=TRUE, alternative = "greater")
+vVstatistic <- wilcox$statistic
 ```
 <!-- ## /CLOSEDLOK: Wilcoxon-signed-rank-toets.R -->
 <!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
-* *V* = TEST, p < 0,05  
+* *V* = `r vVs, p < 0,05  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen[^5]
 
 <!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd is veranderd. De mediaan van de inkomens van 1 jaar na afstuderen: `r vMed_t1` De mediaan van de inkomens van 5 jaar na afstuderen: `r vMed_t2`, *V* = TEST, p-waarde < 0,05. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen de inkomens van de alumni van de Academie Mens & Maatschappij in vier jaar tijd is veranderd. 
+De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd is veranderd. De mediaan van de inkomens van 1 jaar na afstuderen: `r vMed_T1` De mediaan van de inkomens van 5 jaar na afstuderen: `r vMed_T2`, *V* = TEST, p-waarde < 0,05. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen de inkomens van de alumni van de Academie Mens & Maatschappij in vier jaar tijd is veranderd. 
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 
 [^1]: Van Geloven, N. (25 september2013). *Wilcoxon signed rank toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets).

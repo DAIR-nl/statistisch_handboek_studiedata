@@ -69,11 +69,12 @@ Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voor
 ## Groepsgrootte
 Beide testen maken gebruik van een kruistabel; zie tabel 1 voor de geoberveerde waarden van de casus. De *Chi-kwadraat toets* wordt onbetrouwbaar als er een geobserveerde waarde van 10 of lager is.[^6]  
 
+
 |                      | uitval   | geen uitval | totaal | 
 | -------------------- | ---------| ------------| -------------| 
-| **geen leenstelsel** | 375      | 496         | **871**   |
-| **wel leenstelsel**  | 369      | 394         | **763**      |
-|**totaal**            |**744**   | **890**     | **1634** |
+| **geen leenstelsel** |`r Uitval_functiebeperking[1,1]`   | `r Uitval_functiebeperking[1,2]`          | **`r sum(Uitval_functiebeperking[1,1:2])`**|
+| **wel leenstelsel**  |`r Uitval_functiebeperking[2,1]`   | `r Uitval_functiebeperking[2,2]`         | **`r sum(Uitval_functiebeperking[2,1:2])`**|
+|**totaal**            |**`r sum(Uitval_functiebeperking[1:2,1])`**   | **`r sum(Uitval_functiebeperking[1:2,2])`**     | **`r sum(Uitval_functiebeperking)`** |
 *Tabel 1. Geobserveerde waarden casus uitval met of zonder leenstelsel*
 
 Op basis van geobserveerde waarden kunnen de verwachte waarden berekend worden. In deze casus kan de verwachte waarde van de groep uitgevallen studenten zonder leenstelsel berekend worden door het aantal studenten zonder leenstelsel te vermenigvuldigen met het aantal studenten dat is uitgevallen en de uitkomst te delen door het totaal aantal studenten:

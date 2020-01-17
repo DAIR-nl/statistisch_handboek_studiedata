@@ -10,6 +10,7 @@
 *continu.html
 *.md
 *.Rdata
+*R.html
 XX. Hulpmiddelen/functie bekijk_voortgang.R
 _site
 *1.png

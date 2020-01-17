@@ -69,10 +69,14 @@ H~A~: De verhouding wel/geen positief BSA is onder de studenten van de Bachelor 
 Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal niveau gemeten en daarmee onafhankelijk van elkaar. 
 
 # Uitvoering in R
+<!-- ## TEKSTBLOK: Dataset-inladen.R-->
 Er is een dataset (`Bsa_kt`) ingeladen over het BSA per instroomland van de faculteit Sociale Wetenschappen.
+<!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
+<!-- ## TEKSTBLOK: Data-bekijken.R -->
 Print de kruistabel of geef deze grafisch weer met `barplot()`.
+<!-- ## /TEKSTBLOK: Data-bekijken.R -->
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse=TRUE}
 print(Bsa_kt)
@@ -80,8 +84,20 @@ barplot(Bsa_kt, beside = TRUE, legend.text = TRUE)
 ```
 <!-- ## /OPENBLOK: Data-bekijken.R -->
 
+## Chi-kwadraat toets
+<!-- ## TEKSTBLOK: Chi2-toets.R -->
+Om `chisq.test()` in R te gebruiken moet de data in een kruistabel staan.
+<!-- ## /TEKSTBLOK: Chi2-toets.R -->
+<!-- ## OPENBLOK: Chi2-toets-->
+```{r collapse=TRUE}
+chisq.test(Bsa_kt)
+```
+<!-- ## /OPENBLOK: Chi2-toets-->
+
 ## Fisher-Freeman-Halton exact toets
+<!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets-->
 Gebruik `simulate.p.value = TRUE` bij `fisher.test()` om de p-waardes via een Monte Carlo simulatie te laten uitrekenen. Dit is nodig voor tabellen die groter zijn dan 2 bij 2.
+<!-- ## /TEKSTBLOK: Fisher-Freeman-Halton-exact-toets-->
 <!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets-->
 ``` {r fisher toets}
 fisher.test(Bsa_kt_n10, simulate.p.value = TRUE)
@@ -89,19 +105,12 @@ fisher.test(Bsa_kt, simulate.p.value = TRUE)
 ```
 <!-- ## /OPENBLOK: Fisher-Freeman-Halton-exact-toets-->
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^10]
-*
+
 
 # Rapportage
+<!-- ## TEKSTBLOK: Rapportage.R -->
+
+<!-- ## /TEKSTBLOK: Rapportage.R -->
 
 [^1]: Van Geloven, N. & Holman, R. (6 mei 2016). *Fisher's exact toets* Co-Auteur	dr. R. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Fisher%27s_exact_toets).
 [^10]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.
-
-
-
-## Chi-kwadraat toets
-Om `chisq.test()` in R te gebruiken moet de data in een kruistabel staan.
-<!-- ## OPENBLOK: Chi2-toets-->
-```{r collapse=TRUE}
-chisq.test(Bsa_kt)
-```
-<!-- ## /OPENBLOK: Chi2-toets-->

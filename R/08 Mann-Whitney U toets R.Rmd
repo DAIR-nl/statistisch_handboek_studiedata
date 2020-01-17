@@ -22,9 +22,7 @@ paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## CLOSEDBLOK: Functiedefinities.
-
-R -->
+<!-- ## CLOSEDBLOK: Functiedefinities.R -->
 ```{r functiedefinities,include=FALSE, echo=TRUE}
 library(stringr)
 Round_and_format <- function(x, digits = 2) {
@@ -91,7 +89,9 @@ De directeur van een hogeschool vraagt zich af wat de invloed is van internation
  Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden: de data zijn nomimaal, ordinaal of numeriek. De groepen zijn onafhankelijk van elkaar [^3] en het aantal groepen is 2. Gebruik bij > 2 groepen de *Kruskal Wallis toets*.
 
 # Uitvoering 
+<!-- ## TEKSTBLOK: Dataset-inladen.R-->
 Er is data ingeladen met het aantal punten dat studenten in het tweede jaar halen. `Punten_jaar2_NL` bevat Nederlandse studenten, `Punten_jaar2_inter` bevat internationale studenten. 
+<!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken.R -->
@@ -105,7 +105,9 @@ head(Punten_jaar2)
 tail(Punten_jaar2)
 ```
 <!-- ## /OPENBLOK: Data-bekijken.R -->
-Bekijk de grootte, de mediaan en de kwantielen van de data met `length()` en `quantile()`. 
+<!-- ## TEKSTBLOK: Data-beschrijven.R -->
+Bekijk de grootte, de mediaan en de kwantielen van de data met `length()` en `quantile()`.
+<!-- ## /TEKSTBLOK: Data-beschrijven.R -->
 <!-- ## OPENBLOK: Data-selecteren.R -->
 ```{r data selecteren}
 Nederlands <- Punten_jaar2$Nederlands == "ja"
@@ -130,6 +132,7 @@ quantile(Punten_jaar2$EC_Jaar2[!Nederlands])
 <!-- ## /OPENBLOK: Data-beschrijven-2.R -->
   </div>
 </div>
+<!-- ## CLOSEDBLOK: Data-beschrijven.R -->
 ``` {r data beschrijven als object, include=FALSE, echo=TRUE}
 ## Onderstaand zijn de dynamische variabelen te vinden
 library(dplyr)
@@ -154,9 +157,12 @@ vMed_Inter <- Round_and_format(x[2,4])
 vQ3_NL <- Round_and_format(x[1,5])
 vQ3_Inter <- Round_and_format(x[2,5])
 ```
+<!-- ## /CLOSEDBLOK: Data-beschrijven.R -->
+<!-- ## TEKSTBLOK: Data-beschrijven2.R -->
 * Mediaan Nederlandse studenten: `r vMed_NL`. *n* = `r vN_NL`.
 * Mediaan internationale studenten: `r vMed_Inter`. *n* = `r vN_Inter`.
 
+<!-- ## /TEKSTBLOK: Data-beschrijven2.R -->
 
 ## Mann-Whitney U toets
 Gebruik `wilcox.test()` met twee argumenten om een Mann-Whitney U toets te doen in R.
@@ -166,19 +172,25 @@ wilcox.test(Punten_jaar2$EC_Jaar2[Nederlands],
             Punten_jaar2$EC_Jaar2[!Nederlands])
 ```
 <!-- ## /OPENBLOK: Mann-Whitney-U-toets.R -->
-
+<!-- ## CLOSEDBLOK: Mann-Whitney-U-toets.R -->
 ```{r Mann Whitney U toets als object, include = FALSE}
 wcx <- wilcox.test(Punten_jaar2$EC_Jaar2[Nederlands],
                    Punten_jaar2$EC_Jaar2[!Nederlands])
 vW_W <- Round_and_format_0decimals(wcx$statistic)
 vW_P <- Round_and_format(wcx$p.value)
 ```
+<!-- ## /CLOSEDBLOK: Mann-Whitney-U-toets.R -->
+<!-- ## TEKSTBLOK: Mann-Whitney-U-toets.R -->
 * *W* = `r vW_W`, *p* = `r vW_P`
 * p-waarde > 0,05, dus de H~0~ wordt niet verworpen.[^4]
 
-# Rapportage
-De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal EC in het tweede jaar hetzelfde is van internationale studenten als van Nederlandse studenten. Uit de resultaten kan afgelezen worden dat er geen statistisch significant verschil is tussen het aantal studiepunten van internationale studenten als van Nederlandse studenten. *W* = `r vW_W`, p-waarde < 0,05. 
+<!-- ## /TEKSTBLOK: Mann-Whitney-U-toets.R -->
 
+
+# Rapportage
+<!-- ## /TEKSTBLOK: Rapportage.R -->
+De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal EC in het tweede jaar hetzelfde is van internationale studenten als van Nederlandse studenten. Uit de resultaten kan afgelezen worden dat er geen statistisch significant verschil is tussen het aantal studiepunten van internationale studenten als van Nederlandse studenten. *W* = `r vW_W`, p-waarde < 0,05. 
+<!-- ## /TEKSTBLOK: Rapportage.R -->
  
 [^1]: Van Geloven, N. (13 maart 2018). *Mann-Whitney U toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
 [^2]: Onderscheidend vermogen: wordt in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  

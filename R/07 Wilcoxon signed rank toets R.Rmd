@@ -58,21 +58,21 @@ Alumni_inkomens_t1 <- c(
 Alumni_inkomens_t1 <- unlist(Alumni_inkomens_t1)
 Alumni_inkomens_t1 <- sort(Alumni_inkomens_t1)
 
-## Maak inkomens t5 op basis van opslag over t1
+## Maak inkomens t2 op basis van opslag over t1
 Promotie_mogelijkheden <- c(0, 100, 200, 400, 1000, -50, -100, -200)
 #Weging               <- c(400, 400,  200,   100,  10,  200,   100,    50)
 Opslag <- sample(Promotie_mogelijkheden, length(Alumni_inkomens_t1), replace = TRUE)
-Alumni_inkomens_t5 <- Alumni_inkomens_t1 + Opslag
+Alumni_inkomens_t2 <- Alumni_inkomens_t1 + Opslag
 
 ## Stel volgorde vast en hussel paargewijs
 volgorde <- sample(1:length(Alumni_inkomens_t1), length(Alumni_inkomens_t1))
 Alumni_inkomens_t1 <- Alumni_inkomens_t1[volgorde]
-Alumni_inkomens_t5 <- Alumni_inkomens_t5[volgorde]
+Alumni_inkomens_t2 <- Alumni_inkomens_t2[volgorde]
 
 ## link studentnummer aan vastgestelde volgorde en maak dataframe
 Studentnr <- 2*sample(3000000:4000000, length(Alumni_inkomens_t1))
-Inkomen<- c(Alumni_inkomens_t1, Alumni_inkomens_t5)
-Datum <- c(replicate(length(Alumni_inkomens_t1), "t1"), (replicate(length(Alumni_inkomens_t5), "t5")))
+Inkomen<- c(Alumni_inkomens_t1, Alumni_inkomens_t2)
+Datum <- c(replicate(length(Alumni_inkomens_t1), "t1"), (replicate(length(Alumni_inkomens_t2), "t2")))
 Alumni_inkomens <- data.frame(Studentnr, Datum, Inkomen)
 
 ## Sorteer op inkomen voor presentatie dataset
@@ -88,8 +88,7 @@ Gebruik de *Wilcoxon signed rank toets* om te toetsen of bij een herhaalde metin
 De directeur van de Academie Mens & Maatschappij wil bekijken hoe het inkomen van zijn alumni zich ontwikkeld nadat zij zijn afgestudeerd. Hij bekijkt de maandelijke inkomens van de alumni 1 jaar na afstuderen en vergelijkt het met de inkomen 5 jaar na afstuderen. 
 
 *H~0~*: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd niet veranderd.  
-*H~A~*: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd veranderd. 
-
+*H~A~*: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd veranderd.
 </div>
 
 # Assumpties
@@ -98,7 +97,9 @@ De data zijn nomimaal, ordinaal of numeriek gemeten. De *Wilcoxon Signed Rank Te
 De *Wilcoxon Signed Rank Test* telt geen eisen aan de data en hoeft onder andere niet te voldoen aan de assumptie normaliteit. Bij de *Wilcoxon Signed Rank Test* hebben uitbijters hebben minder invloed op het eindresultaat, dan bij de *gepaarde t-toets*. Daarentegen, als de data wel normaal verdeeld zijn, heeft de *Wilcoxon Signed Rank Test* minder onderscheidend vermogen dan de *gepaarde t-toets*.[^2]<sup>, </sup>[^3] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Wilcoxon Signed Rank Test* test gekozen wordt. 
 
 # Uitvoering
-Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij genaamd `Maandelijks_inkomen`. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkeld 5 jaar nadat zij afgestudeerd zijn. Meetmoment T~1~ is 1 jaar na afstuderen, meetmoment T2 is 5 jaar na afstuderen. 
+<!-- ## TEKSTBLOK: Dataset-inladen.R-->
+Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij genaamd `Maandelijks_inkomen`. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkeld 5 jaar nadat zij afgestudeerd zijn. Meetmoment T~1~ is 1 jaar na afstuderen, meetmoment T~2~ is 5 jaar na afstuderen. 
+<!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken.R -->
@@ -116,11 +117,15 @@ tail(Alumni_inkomens)
 <!-- ## /OPENBLOK: Data-bekijken.R -->
 
 <!-- ## OPENBLOK: Data-selecteren.R -->
+<!-- ## TEKSTBLOK: Data-beschrijven.R-->
 Bekijk de grootte, de mediaan en de kwantielen van de data met `length()` en `quantile()`. 
+<!-- ## /TEKSTBLOK: Data-beschrijven.R-->
+<!-- ## OPENBLOK: Data-selecteren.R-->
 ```{r data selecteren}
 Alumni_inkomens_t1 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Datum == "t1"]
-Alumni_inkomens_t5 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Datum == "t5"]
+Alumni_inkomens_t2 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Datum == "t2"]
 ```
+<!-- ## /CLOSEDBLOK: Data-selecteren.R-->
 
 <div class="col-container">
   <div class="col">
@@ -134,20 +139,29 @@ median(Alumni_inkomens_t1)
   </div>
   <div class="col">
 <!-- ## OPENBLOK: Data-beschrijven-2.R -->
-``````{r Data beschrijven 2, collapse=TRUE}
-length(Alumni_inkomens_t5)
-mean(Alumni_inkomens_t5)
-median(Alumni_inkomens_t5)
+```{r Data beschrijven 2, collapse=TRUE}
+length(Alumni_inkomens_t2)
+mean(Alumni_inkomens_t2)
+median(Alumni_inkomens_t2)
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-2.R -->
   </div>
 </div>
-* Mediaan inkomens op T~1~: , *n~T1~* = 
-* Mediaan inkomens op T~2~: , *n~T5~* = 
+<!-- ## CLOSEDBLOK: Data-beschrijven-2.R -->
+```{r data beschrijven als object, include=FALSE, echo=TRUE}
+vMed_t1 <- median(Alumni_inkomens_t1)
+vMed_t2 <- median(Alumni_inkomens_t2)
+```
+<!-- ## CLOSEDBLOK: Data-beschrijven-2.R -->
+<!-- ## TEKSTBLOK: Data-beschrijven.R-->
+* Mediaan inkomens op T~1~: , *n~T1~* = `r vMed_t1`
+* Mediaan inkomens op T~2~: , *n~t2~* = `r vMed_t2`
+
+<!-- ## TEKSTBLOK: Data-beschrijven.R-->
 
 ### Histogram
-<!-- ## OPENBLOK: Histogram.R -->
 Geef de data visueel weer met een histogram of boxplot.
+<!-- ## OPENBLOK: Histogram.R -->
 ```{r histogram}
 ## Histogram met ggplot2
 library(ggplot2)
@@ -184,18 +198,29 @@ De boxplotten laten zien dat er op beide meetmomenten veel inkomens rondom de 20
 In de data zitten er extremere inkomens, deze uitbijters zijn niet van invloed op de uitkomst van de *Wilcoxon signed rang toets*. 
 
 ## Wilcoxon signed rank toets
+<!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
 Voer een Wilcoxon signed rank toets uit met `paired=TRUE`.
-
+<!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
 <!-- ## OPENBLOK: Wilcoxon-signed-rank-toets.R -->
 ```{r wilcox test}
-wilcox.test(Alumni_inkomens_t5, Alumni_inkomens_t1, paired=TRUE, alternative = "greater")
+wilcox.test(Alumni_inkomens_t2, Alumni_inkomens_t1, paired=TRUE, alternative = "greater")
 ```
 <!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets.R -->
+<!-- ## CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
+```{r wilcox test}
+wilcox.test(Alumni_inkomens_t2, Alumni_inkomens_t1, paired=TRUE, alternative = "greater")
+```
+<!-- ## /CLOSEDLOK: Wilcoxon-signed-rank-toets.R -->
+<!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
 * *V* = TEST, p < 0,05  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen[^5]
 
+<!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
+
 # Rapportage
-De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd is veranderd. De mediaan van de inkomens van 1 jaar na afstuderen: TEST. De mediaan van de inkomens van 5 jaar na afstuderen: TEST, *V* = TEST, p-waarde < 0,05. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen de inkomens van de alumni van de Academie Mens & Maatschappij in vier jaar tijd is veranderd. 
+<!-- ## TEKSTBLOK: Rapportage.R -->
+De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd is veranderd. De mediaan van de inkomens van 1 jaar na afstuderen: `r vMed_t1` De mediaan van de inkomens van 5 jaar na afstuderen: `r vMed_t2`, *V* = TEST, p-waarde < 0,05. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen de inkomens van de alumni van de Academie Mens & Maatschappij in vier jaar tijd is veranderd. 
+<!-- ## /TEKSTBLOK: Rapportage.R -->
 
 [^1]: Van Geloven, N. (25 september2013). *Wilcoxon signed rank toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets).
 [^2]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test). 

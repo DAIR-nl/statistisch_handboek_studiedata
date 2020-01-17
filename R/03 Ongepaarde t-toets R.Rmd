@@ -169,6 +169,7 @@ vSD_t1 <-Round_and_format(sd(Cijfers_2011))
 <!-- ## TEKSTBLOK: Data-beschrijven.R-->
 * Gemiddeld tentamencijfer 2010 (standaarddeviatie): `r vMean_t0` (`r vSD_t0`). *n* = `r vN_t0`.
 * Gemiddeld tentamencijfer 2011 (standaarddeviatie): `r vMean_t1` (`r vSD_t1`). *n* = `r vN_t1`.
+
 <!-- ## /TEKSTBLOK: Data-beschrijven.R-->
 
 ## Visuele inspectie van normaliteit
@@ -320,6 +321,7 @@ vDF2 <- Round_and_format(L$`Df`[2])
 * *F*~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, p-waarde = `r vF_p` 
 * p-waarde > 0,05, dus de groepen zijn niet significant verschillend in spreiding.  
 * Vrijheidsgraden bestaan uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r vDF1`) en het tweede cijfer (*n~2010~* + *n~2011~* - 2 = `r vDF2`)
+
 <!-- ## /TEKSTBLOK: Levenes-test2 -->
 
 ## Ongepaarde t-toets
@@ -354,6 +356,7 @@ vP <- Round_and_format(t$p.value)
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r vConf.int1` en `r vConf.int2`.
 * Het gemiddelde van de steekproef in 2010: `r vMean_t0`
 * Het gemiddelde van de steekproef in 2011: `r vMean_t1`
+
 <!-- ## /TEKSTBLOK: T-test2 -->
 
 ### Effectmaat: Cohen's d 
@@ -386,7 +389,7 @@ Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentam
 | -------- | --------- | ------------ | ---------- |
 | 2010     | `r vN_t0` | `r vMean_t0` | `r vSD_t0` |
 | 2011     | `r vN_t1` | `r vMean_t1` | `r vSD_t1` |
-<!-- ## /sTEKSTBLOK: Rapportage.R -->
+<!-- ## /TEKSTBLOK: Rapportage.R -->
 *Tabel 1. Groepsgrootte, gemiddeld tentamencijfer en standaarddeviatie per cohort*
 
 

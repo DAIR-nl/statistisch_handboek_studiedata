@@ -122,7 +122,7 @@ Tentamencijfer_na_tutorgesprek_n30 <- Tentamencijfer_na_tutorgesprek_n30[volgord
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *gepaarde t-toets* om te toetsen of bij een herhaalde meting de gemiddelden van een groep aan elkaar gelijk zijn.[^1] 
+Gebruik de *gepaarde t-toets* om te toetsen of bij een herhaalde meting de gemiddelden van een groep van elkaar verschillen.[^1] 
 
 
 # Onderwijscasus
@@ -425,8 +425,8 @@ paste0(here::here(),"/01. Includes/code/Footer.R")
 ```
 <!-- ## /CLOSEDBLOK: Footer.R -->
 
-[^1]: Wikipedia (21 augustus 2019). *student's t-test*. [Wikipedia](https://en.wikipedia.org/wiki/student%27s_t-test).
-[^2]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). Tthe importance of the normality assumption in large public health data sets. *Annu Rev Public Health, 23*, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf 
+[^1]: Wikipedia (21 augustus 2019). *Student's t-test*. [Wikipedia](https://en.wikipedia.org/wiki/student%27s_t-test).
+[^2]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). The importance of the normality assumption in large public health data sets. *Annu Rev Public Health, 23*, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf 
 [^3]: Van Geloven, N. (25 september2013). *Wilcoxon signed rank toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets).
 [^4]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. [Testing for Normality using SPSS Statistics](https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php).  
 [^5]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).  

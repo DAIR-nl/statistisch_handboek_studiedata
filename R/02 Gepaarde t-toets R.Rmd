@@ -127,7 +127,7 @@ Gebruik de *gepaarde t-toets* om te toetsen of bij een herhaalde meting de gemid
 
 # Onderwijscasus
 <div id ="casus">
-Ter voorbereiding op een visitatie vraagt de opleidingsdirecteur van de lerarenopleiding zich af of het gemiddelde tentamencijfer veranderd na een tutorgesprek. Ze bekijkt het gemiddelde tentamencijfer van de onderwijsperiode voor het tutorgesprek (T~0~) en het gemiddelde cijfer van de onderwijsperiode na het tutorgesprek (T~1~). 
+Ter voorbereiding op een visitatie vraagt de opleidingsdirecteur van de lerarenopleiding zich af of het gemiddelde tentamencijfer verandert na een tutorgesprek. Ze bekijkt het gemiddelde tentamencijfer van de onderwijsperiode voor het tutorgesprek (T~0~) en het gemiddelde cijfer van de onderwijsperiode na het tutorgesprek (T~1~). 
 
 *H~0~*: Het gemiddelde tentamencijfer per onderwijsperiode verandert niet na het tutorgesprek, µ~T0~ = µ~T1~  
 

@@ -18,7 +18,7 @@ output:
 
 <!-- ## CLOSEDBLOK: Header.R -->
 ```{r header, include = FALSE, echo = TRUE, results='asis'} 
-paste0(here::here(),"/01. Includes/code/Header.R")
+source(paste0(here::here(),"/01. Includes/code/Header.R"))
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 

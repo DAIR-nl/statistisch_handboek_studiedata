@@ -42,82 +42,44 @@ Round_and_format <- function(x, digits = 2) {
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 RNGkind(sample.kind = "Rounding")
 set.seed(2)
-library(dplyr)
 
-## Maak ruwe data aan op meerdere decimalen
-mu <- 7.2
-sigma <- 1.5
-Tentamencijfer_na_tutorgesprek <- rnorm(250, mu, sigma)
+## stel parameters data vast
+MUt0 <- 29
+MUt1 <- 29.2
+SD <- 9
 
-Tentamencijfer_na_tutorgesprek <- 
-  Tentamencijfer_na_tutorgesprek[Tentamencijfer_na_tutorgesprek <= 10
-                                 & Tentamencijfer_na_tutorgesprek >= 1]
+## maak uren studeren aan op basis van een normale verdeling
+Uren_studeren_t0 <- rnorm(134, MUt0, SD)
+Uren_studeren_t1 <- rnorm(134, MUt1, SD)
 
-mu <- 6.8
-sigma <- 1.8
-Tentamencijfer_voor_tutorgesprek <- rnorm(260, mu, sigma)
+## Rond uren studeren af naar 1 decimaal
+Uren_studeren_t0 <- sapply(Uren_studeren_t0, round, 1)
+Uren_studeren_t1 <- sapply(Uren_studeren_t1, round, 1)
 
-Tentamencijfer_voor_tutorgesprek <- 
-  Tentamencijfer_voor_tutorgesprek[Tentamencijfer_voor_tutorgesprek <= 10
-                                   & Tentamencijfer_voor_tutorgesprek >= 1]  ##dit maakt de steekproef met hogere mu langer (n) dan de (n van) steekproef met lage mu
+## stel volgorde vast en rangschik op grootte, voeg daarna samen
+volgorde <- order(Uren_studeren_t0)
+Uren_studeren_t0 <- sort(Uren_studeren_t0)
+Uren_studeren_t1 <- sort(Uren_studeren_t1)
+Uren_studeren_t0 <- Uren_studeren_t0[volgorde]
+Uren_studeren_t1 <- Uren_studeren_t1[volgorde]
+Uren_studeren <- c(Uren_studeren_t0, Uren_studeren_t1)
 
-## Rond evaluatiecijfers af op 3 decimalen
-Tentamencijfer_na_tutorgesprek <- sapply(Tentamencijfer_na_tutorgesprek, round, 3)
-Tentamencijfer_voor_tutorgesprek <- sapply(Tentamencijfer_voor_tutorgesprek, round, 3)
+## Maak studentnummer aan en verdubbel
+Studentnr <-sample(300000:400000, (length(Uren_studeren_t0)))
+Studentnr <- c(Studentnr, Studentnr)
 
-## Stel volgorde en lengte van steekproef vast
-volgorde <- sample(1:length(Tentamencijfer_na_tutorgesprek), length(Tentamencijfer_na_tutorgesprek))
-volgorde_n30 <- sample(1:30, 30)
-Verschil_grootte <- length(Tentamencijfer_voor_tutorgesprek) - length(Tentamencijfer_na_tutorgesprek)
+## Maak meetmoment aan en voeg samen als factor
+Meetmoment_t0 <- replicate(length(Uren_studeren_t0), "T0")
+Meetmoment_t1 <- replicate(length(Uren_studeren_t1), "T1")
+Meetmoment <- as.factor(c(Meetmoment_t0, Meetmoment_t1))
 
-## Definieer steekproeven in lengte en volgorde met gehusselde paren
-Tentamencijfer_na_tutorgesprek <- sort(Tentamencijfer_na_tutorgesprek)
-Tentamencijfer_na_tutorgesprek <- Tentamencijfer_na_tutorgesprek[volgorde]
-Tentamencijfer_voor_tutorgesprek <- sort(Tentamencijfer_voor_tutorgesprek)
-Tentamencijfer_voor_tutorgesprek <- 
-  Tentamencijfer_voor_tutorgesprek[sample(-283:-1, Verschil_grootte)] ##verwijder aantal verschil n op random index
-Tentamencijfer_voor_tutorgesprek <- Tentamencijfer_voor_tutorgesprek[volgorde] 
+## Voeg samen in data.frame
+Studielogboek <- data.frame(Studentnr, Uren_studeren, Meetmoment)
 
-## Definieer groeperingsvecto en studentnr
-Voor_of_na_tutorgesprek <- c(
-  replicate(length(Tentamencijfer_voor_tutorgesprek), "voor"), 
-  replicate(length(Tentamencijfer_na_tutorgesprek), "na"))
-studentnr <-sample(300000:400000, (length(Tentamencijfer_voor_tutorgesprek)))
-studentnr <- c(studentnr, studentnr)
+## MAAK N30 SAMPLE
+Uren_studeren_T0_n30 <- sample(Uren_studeren_t0, 30)
+Uren_studeren_T1_n30 <- sample(Uren_studeren_t1, 30)
 
-## Voeg cijfers samen en in data.frame
-Cijfer <- c(Tentamencijfer_voor_tutorgesprek, Tentamencijfer_na_tutorgesprek)
-Tentamencijfers <- data.frame(studentnr, Cijfer, Voor_of_na_tutorgesprek)
-Tentamencijfers <- Tentamencijfers[order(Tentamencijfers$studentnr),]
-
-## verander de de vector in een factor
-Tentamencijfers <- 
-  mutate(Tentamencijfers, 
-         Voor_of_na_tutorgesprek =
-                  factor(Voor_of_na_tutorgesprek, levels = c("voor", "na")))
-
-
-## maak korte (n=30) datasets
-mu <- 7.2
-sigma <- 1.2
-Tentamencijfer_voor_tutorgesprek_n30 <- rnorm(30, mu, sigma)
-
-Tentamencijfer_voor_tutorgesprek_n30 <- Tentamencijfer_voor_tutorgesprek_n30[Tentamencijfer_voor_tutorgesprek_n30 <= 10 
-                                                                 & Tentamencijfer_voor_tutorgesprek_n30 >= 1]
-Tentamencijfer_voor_tutorgesprek_n30 <- sapply(Tentamencijfer_voor_tutorgesprek_n30, round, 3)
-Tentamencijfer_voor_tutorgesprek_n30 <- sort(Tentamencijfer_voor_tutorgesprek_n30)
-Tentamencijfer_voor_tutorgesprek_n30 <- Tentamencijfer_voor_tutorgesprek_n30[volgorde_n30]
-
-mu <- 7.0
-sigma <- 0.8
-Tentamencijfer_na_tutorgesprek_n30 <- rnorm(30, mu, sigma)
-
-Tentamencijfer_na_tutorgesprek_n30 <-
-  Tentamencijfer_na_tutorgesprek_n30[Tentamencijfer_na_tutorgesprek_n30 <= 10 &
-                                      Tentamencijfer_na_tutorgesprek_n30 >= 1]
-Tentamencijfer_na_tutorgesprek_n30 <- sapply(Tentamencijfer_na_tutorgesprek_n30, round, 3)
-Tentamencijfer_na_tutorgesprek_n30 <- sort(Tentamencijfer_na_tutorgesprek_n30)
-Tentamencijfer_na_tutorgesprek_n30 <- Tentamencijfer_na_tutorgesprek_n30[volgorde_n30]
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
@@ -127,11 +89,11 @@ Gebruik de *gepaarde t-toets* om te toetsen of bij een herhaalde meting de gemid
 
 # Onderwijscasus
 <div id ="casus">
-Ter voorbereiding op een visitatie vraagt de opleidingsdirecteur van de lerarenopleiding zich af of het gemiddelde tentamencijfer verandert na een tutorgesprek. Ze bekijkt het gemiddelde tentamencijfer van de onderwijsperiode voor het tutorgesprek (T~0~) en het gemiddelde cijfer van de onderwijsperiode na het tutorgesprek (T~1~). 
+Voor het verminderen van de studielast van studenten aan een Universiteit biedt deze Universiteit cursussen plannen aan. De cursussen zijn bedoeld om studenten beter inzicht te geven in de gevolgen van de planning van hun studielast. De cursus wordt tussen twee onderwijsperiodes in gegeven. Voor en na de cursus moeten de studenten gedurende een onderwijsperiode een logboek bijhouden over hun studiegedrag. 
 
-*H~0~*: Het gemiddelde tentamencijfer per onderwijsperiode verandert niet na het tutorgesprek, µ~T0~ = µ~T1~  
+*H~0~*: Het gemiddeld aantal uren studeren per onderwijsperiode verandert niet na de cursus, µ~T0~ = µ~T1~  
 
-*H~A~*: Het gemiddelde tentamencijfer per onderwijsperiode verandert na het tutorgesprek, µ~T0~ ≠ µ~T1~ 
+*H~A~*: Het gemiddeld aantal uren studeren per onderwijsperiode verandert na de cursus, µ~T0~ ≠ µ~T1~ 
 </div>
 
 # Assumpties
@@ -154,7 +116,7 @@ Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is een dataset ingeladen met gemiddelde tentamencijfer voor (T~0~) en na (T~1~) een tutorgesprek: `Tentamencijfers`. 
+Er is een dataset ingeladen met het gemiddeld aantal uren studeren voor (T~0~) en na (T~1~) de cursus. De gemiddeldes per onderwijsperiode zijn afgerond op 1 decimaal in de dataset `Studielogboek`. 
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
@@ -164,59 +126,56 @@ Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
 ## Eerste 6 observaties
-head(Tentamencijfers)
+head(Studielogboek)
 
 ## Laatste 6 observaties
-tail(Tentamencijfers)
+tail(Studielogboek)
 ```
 <!-- ## /OPENBLOK: Data-bekijken.R -->
 
 Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen.
 <!-- ## OPENBLOK: Data-selecteren.R -->
 ```{r data selecteren}
-Tentamencijfer_voor_tutorgesprek <-
-  Tentamencijfers[Tentamencijfers$Voor_of_na_tutorgesprek=="voor", 2]
-Tentamencijfer_na_tutorgesprek <- 
-  Tentamencijfers[Tentamencijfers$Voor_of_na_tutorgesprek=="na", 2]
+Uren_studeren_T0 <-Studielogboek[Studielogboek$Meetmoment=="T0", 2]
+Uren_studeren_T1 <- Studielogboek[Studielogboek$Meetmoment=="T1", 2]
 ```
 <!-- ## /OPENBLOK: Data-selecteren.R -->
 <div class = "col-container">
   <div class ="col">
 <!-- ## OPENBLOK: Data-beschrijven-1.R -->
 ```{r data beschrijven t1, collapse = TRUE}
-## aantallen, gemiddelde en standaarddeviatie voor tutorgesprek
-length(Tentamencijfer_voor_tutorgesprek)
-mean(
-  Tentamencijfer_voor_tutorgesprek)
-sd(Tentamencijfer_voor_tutorgesprek)
+## aantallen, gemiddelde en standaarddeviatie voor cursus
+length(Uren_studeren_T0)
+mean(Uren_studeren_T0)
+sd(Uren_studeren_T0)
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-1.R -->
   </div>
   <div class = "col">
 <!-- ## OPENBLOK: Data-beschrijven-2.R -->
 ```{r data bekijken t2, collapse=TRUE}
-## aantallen, gemiddelde en standaarddeviatie na tutorgesprek
-length(Tentamencijfer_na_tutorgesprek)
-mean(
-  Tentamencijfer_na_tutorgesprek)
-sd(Tentamencijfer_na_tutorgesprek)
+## aantallen, gemiddelde en standaarddeviatie na cursus
+length(Uren_studeren_T1)
+mean(Uren_studeren_T1)
+sd(Uren_studeren_T1)
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-2.R -->
   </div>
 </div>
 <!-- ## CLOSEDBLOK: Data-beschrijven.R -->
 ```{r Var beschrijven, include=FALSE, echo=TRUE}
-vMean_t0 <- Round_and_format(mean(Tentamencijfer_voor_tutorgesprek))
-vSD_t0 <-Round_and_format(sd(Tentamencijfer_voor_tutorgesprek))
-vN_t0 <- Round_and_format(length(Tentamencijfer_voor_tutorgesprek))
-vMean_t1 <- Round_and_format(mean(Tentamencijfer_na_tutorgesprek))
-vSD_t1 <- Round_and_format(sd(Tentamencijfer_na_tutorgesprek))
-vN_t1 <- Round_and_format(length(Tentamencijfer_na_tutorgesprek))
+vMean_t0 <- Round_and_format(mean(Uren_studeren_T0))
+vSD_t0 <-Round_and_format(sd(Uren_studeren_T0))
+vN_t0 <- Round_and_format(length(Uren_studeren_T0))
+vMean_t1 <- Round_and_format(mean(Uren_studeren_T1))
+vSD_t1 <- Round_and_format(sd(Uren_studeren_T1))
+vN_t1 <- Round_and_format(length(Uren_studeren_T1))
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven.R -->
 <!-- ## TEKSTBLOK: Data-beschrijven.R -->
-* Gemiddeld tentamencijfer voor tutorgesprek (standaardafwijking): `r vMean_t0` (`r vSD_t0`). *n* = `r vN_t0`.
-* Gemiddeld tentamencijfer na tutorgesprek (standaardafwijking): `r vMean_t1` (`r vSD_t1`). *n* = `r vN_t1`.
+* Gemiddeld uren studeren T0 (standaardafwijking): `r vMean_t0` (`r vSD_t0`). *n* = `r vN_t0`.
+* Gemiddeld uren studeren T1 (standaardafwijking): `r vMean_t1` (`r vSD_t1`). *n* = `r vN_t1`.
+
 <!-- ## /TEKSTBLOK: Data-beschrijven.R -->
 
 ## Visuele inspectie van normaliteit
@@ -228,23 +187,22 @@ Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
 ## Histogram met ggplot2
 library(ggplot2)
 
-ggplot(Tentamencijfers,
-  aes(x = Cijfer)) +
+ggplot(Studielogboek,
+  aes(x = Uren_studeren)) +
   geom_histogram(aes(y = ..density..),
-                 binwidth = 1,
+                 binwidth = 4,
                  color = "grey30",
                  fill = "#0089CF") +
-  facet_wrap(~ Voor_of_na_tutorgesprek) +
+  facet_wrap(~ Meetmoment) +
   geom_density(alpha = .2, adjust = 1) +
   ylab("Frequentiedichtheid") +
   scale_x_continuous(
-    labels = as.character(seq(1, 10)),
-    breaks = seq(1, 10)) +
-  coord_fixed(ylim = c(0, 0.4),
-              xlim = c(1, 10),
-              ratio = 22) +
-  labs(title = "Lerarenopleiding tentamencijfers")
-
+    labels = as.character(seq(0, 60, 4)),
+    breaks = seq(0, 60, 4)) +
+  coord_fixed(ylim = c(0, 0.05),
+              xlim = c(0, 60),
+              ratio = 1000) +
+  labs(title = "Gemiddeld uren studeren voor en na cursus")
 ```
 <!-- ## /OPENBLOK: Histogram.R -->
 
@@ -261,24 +219,24 @@ Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen wor
   <div class="col">
 <!-- ## OPENBLOK: QQplot-1.R -->
 ```{r qqplot-1}
-qqnorm(Tentamencijfer_voor_tutorgesprek, 
+qqnorm(Uren_studeren_T0, 
        pch = 1,
-       main = "Normaal Q-Q plot van tentamencijfers voor tutorgesprek",
+       main = "Normaal Q-Q plot studielogboek voor cursus",
        ylab = "kwantielen in data",
        xlab = "Theoretische kwantielen")
-qqline(Tentamencijfer_voor_tutorgesprek)
+qqline(Uren_studeren_T0)
 ```
 <!-- ## /OPENBLOK: QQplot-1.R -->
   </div>
   <div class = "col">
 <!-- ## OPENBLOK: QQplot-2.R -->
 ```{r qqplot-2}
-qqnorm(Tentamencijfer_na_tutorgesprek, 
+qqnorm(Uren_studeren_T1, 
        pch = 1,
-       main = "Normaal Q-Q plot van tentamencijfers na tutorgesprek",
+       main = "Normaal Q-Q plot studielogboek na cursus",
        ylab = "kwantielen in data",
        xlab = "Theoretische kwantielen")
-qqline(Tentamencijfer_na_tutorgesprek)
+qqline(Uren_studeren_T1)
 ```
 <!-- ## /OPENBLOK: QQplot-2.R -->
   </div>
@@ -287,17 +245,17 @@ qqline(Tentamencijfer_na_tutorgesprek)
 In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. 
 
 ### Boxplot
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen.   
+De box geeft de middelste 50% van het studielogboek weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen.   
 
 <!-- ## OPENBLOK: Boxplot.R -->
 ``` {r Boxplot}
 ## Boxplot
-boxplot(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers,
-        main = "Boxplot van tentamencijfers lerarenopleiding")
+boxplot(Uren_studeren ~ Meetmoment, Studielogboek,
+        main = "Boxplot van studielogboek")
 ```
 <!-- ## /OPENBLOK: Boxplot.R -->
 
-De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer per periode voor de lerarenopleiding. De boxplot en de staarten van T~0~ zijn niet helemaal symmetrisch. Het gaat om een kleine afwijking, daarom is de data vermoedelijk normaal verdeeld. Er zijn een aantal mogelijke uitbijters.[^9] De boxplot van T~1~ ziet er symmetrisch uit. Er zijn geen uitbijters.    
+De boxplotten geven de spreiding weer van het gemiddelde aantal uur studeren per periode voor deelnemers aan de cursus. De boxplot en de staarten van T~0~ zijn niet helemaal symmetrisch. Het gaat om een kleine afwijking, daarom is de data vermoedelijk normaal verdeeld. Er zijn een aantal mogelijke uitbijters.[^9] De boxplot van T~1~ ziet er symmetrisch uit. Er zijn geen uitbijters.    
 
 ## Toetsen van normaliteit
 Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
@@ -315,14 +273,14 @@ library(nortest)
   <div class = "col">
 <!-- ## OPENBLOK: Lilliefors-test-1.R -->
 ``` {r Lilliefors Test-1, warning=FALSE}
-lillie.test(Tentamencijfer_voor_tutorgesprek)
+lillie.test(Uren_studeren_T0)
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-1.R -->
   </div>
   <div class = "col">
 <!-- ## OPENBLOK: Lilliefors-test-2.R -->
 ``` {r Lilliefors Test-2, warning=FALSE}
-lillie.test(Tentamencijfer_na_tutorgesprek)
+lillie.test(Uren_studeren_T1)
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-2.R -->
   </div>
@@ -333,22 +291,20 @@ Van beide groepen is de p > 0,05; er is geen statistisch significant verschil ge
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test.R -->
-Er zijn 2 steekproeven van `Tentamencijfers` ingeladen: `Tentamencijfer_voor_tutorgesprek_n30` (T~0~) en `Tentamencijfer_na_tutorgesprek_n30` (T~1~), *n~T0~* = `r length(Tentamencijfer_voor_tutorgesprek_n30)` , *n~T1~* = `r length(Tentamencijfer_na_tutorgesprek_n30)` 
+Er zijn 2 steekproeven van `Studielogboek` ingeladen: `Uren_studeren_T0_n30` (T~0~) en `Uren_studeren_T1_n30` (T~1~), *n~T0~* = `r length(Uren_studeren_T0_n30)` , *n~T1~* = `r length(Uren_studeren_T1_n30)` 
 <!-- ## /TEKSTBLOK: Shapiro-Wilk-test.R -->
 <div class ="col-container">
   <div class ="col">
 <!-- ## OPENBLOK: Shapiro-Wilk-test-1.R -->
 ``` {r Shapiro-Wilk Test-1, warning=FALSE}
-shapiro.test(
-  Tentamencijfer_voor_tutorgesprek_n30)
+shapiro.test(Uren_studeren_T0_n30)
 ```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-1.R -->
   </div>
   <div class ="col">
 <!-- ## OPENBLOK: Shapiro-Wilk-test-2.R -->
 ``` {r Shapiro-Wilk Test-2, warning=FALSE}
-shapiro.test(
-  Tentamencijfer_na_tutorgesprek_n30)
+shapiro.test(Uren_studeren_T1_n30)
 ```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-2.R -->
   </div>
@@ -358,20 +314,20 @@ Voor beide groepen is de *p* > 0,05, dus er is geen statistisch significant vers
 
 ## Gepaarde t-toets
 <!-- ## TEKSTBLOK: T-test.R -->
-Gebruik `t.test()` met `paired = TRUE` om een *gepaarde t-toets* uit te voeren. Gebruik hier weer het hele dataframe `Tentamencijfers`. 
+Gebruik `t.test()` met `paired = TRUE` om een *gepaarde t-toets* uit te voeren. Gebruik hier weer het hele dataframe `Studielogboek`. 
 <!-- ## /TEKSTBLOK: T-test.R -->
-De *gepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het gemiddelde tentamencijfer verandert na een tutorgesprek. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren na een gesprek is er voor gekozen om tweezijdig te toetsen. 
+De *gepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het gemiddeld aantal uren studeren verandert na deelname aan de cursus. De verwachting is dat de studenten meer gaan studeren, maar omdat het relevant is om te weten of de studenten ook minder gaan studeren na de cursus is er voor gekozen om tweezijdig te toetsen. 
 
 <!-- ## OPENBLOK: T-toets.R -->
 ```{r T-test}
-t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, 
+t.test(Uren_studeren ~ Meetmoment, Studielogboek, 
        paired = TRUE,
        alternative = "two.sided")
 ```
 <!-- ## /OPENBLOK: T-toets.R -->
 <!-- ## CLOSEDBLOK: T-test.R -->
 ```{r T-test als object, echo = FALSE}
-t <- t.test(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
+t <- t.test(Uren_studeren ~ Meetmoment, Studielogboek, paired = TRUE)
 vT_waarde <- Round_and_format(t$statistic)
 vN <- t$parameter + 1
 vDF <- t$parameter
@@ -394,11 +350,11 @@ Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
 <!-- ## OPENBLOK: Cohens-d-test.R -->
 ```{r Cohens d}
 library(effsize)
-cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
+cohen.d(Uren_studeren ~ Meetmoment, Studielogboek, paired = TRUE)
 ```
 <!-- ## /OPENBLOK: Cohens-d-test.R -->
 ```{r var Cohens d, include = FALSE}
-d <- cohen.d(Cijfer ~ Voor_of_na_tutorgesprek, Tentamencijfers, paired = TRUE)
+d <- cohen.d(Uren_studeren ~ Meetmoment, Studielogboek, paired = TRUE)
 vD_waarde <- Round_and_format(d$estimate)
 ```
 <!-- ## TEKSTBLOK: Cohens-d-test.R -->
@@ -407,7 +363,7 @@ vD_waarde <- Round_and_format(d$estimate)
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer van de studenten gelijk is gebleven na een gesprek met hun tutor. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r vMean_t0`, *SD~T0~* = `r vSD_t0`) en het gemiddelde van T~1~ (*M~T1~* =`r vMean_t1`, *SD~T1~* = `r vSD_t1`) is significant, *t* ~`r vDF`~ = `r vT_waarde`, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vconf.int1` tot `r vconf.int2`. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is echter verwaarloosbaar klein, *d* = `r vD_waarde`. 
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddeld aantal uur studeren van de studenten gelijk is gebleven na deelname aan de cursus. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r vMean_t0`, *SD~T0~* = `r vSD_t0`) en het gemiddelde van T~1~ (*M~T1~* =`r vMean_t1`, *SD~T1~* = `r vSD_t1`) is significant, *t* ~`r vDF`~ = `r vT_waarde`, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vconf.int1` tot `r vconf.int2`. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is echter verwaarloosbaar klein, *d* = `r vD_waarde`. 
 
 
 | Meting     | N         | M            | SD         |
@@ -417,7 +373,7 @@ Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencij
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 *Tabel 1. Groepsgrootte, gemiddeld tentamencijfer en standaarddeviatie per meetmoment*
 
-Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor. Het effect is minimaal.  
+Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na deelname aan de cursus, meer tijd besteden aan hun studie dan daarvoor. Het effect is minimaal.  
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = FALSE, echo = TRUE, results='asis'} 

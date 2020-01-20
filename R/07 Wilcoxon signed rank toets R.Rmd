@@ -17,7 +17,7 @@ output:
 </style>
 
 <!-- ## CLOSEDBLOK: Header.R -->
-```{r header, include = FALSE, echo = TRUE, results='asis'} 
+```{r header, include = T, echo = TRUE, results='asis'} 
 paste0(here::here(),"/01. Includes/code/Header.R")
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
@@ -39,44 +39,7 @@ Round_and_format <- function(x, digits = 2) {
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-RNGkind(sample.kind = "Rounding")
-set.seed(1)
-Mogelijkheden <- c(1616:7000)
-
-
-## Maak inkomens T1 aan
-Alumni_inkomens_T1 <- c(
-  replicate(0, 38),
-  sample(500:1800, 80),
-  sample(1635:2000, 20),
-  sample(2000:2200, 70),
-  sample(2200:2600, 120),
-  sample(2600:3600, 40),
-  sample(3600:5000, 10),
-  sample(5000:15000, 3)
-)
-Alumni_inkomens_T1 <- unlist(Alumni_inkomens_T1)
-Alumni_inkomens_T1 <- sort(Alumni_inkomens_T1)
-
-## Maak inkomens T2 op basis van opslag over T1
-Promotie_mogelijkheden <- c(0, 100, 200, 400, 1000, -50, -100, -200)
-#Weging               <- c(400, 400,  200,   100,  10,  200,   100,    50)
-Opslag <- sample(Promotie_mogelijkheden, length(Alumni_inkomens_T1), replace = TRUE)
-Alumni_inkomens_T2 <- Alumni_inkomens_T1 + Opslag
-
-## Stel volgorde vast en hussel paargewijs
-volgorde <- sample(1:length(Alumni_inkomens_T1), length(Alumni_inkomens_T1))
-Alumni_inkomens_T1 <- Alumni_inkomens_T1[volgorde]
-Alumni_inkomens_T2 <- Alumni_inkomens_T2[volgorde]
-
-## link studentnummer aan vastgestelde volgorde en maak dataframe
-Studentnr <- 2*sample(3000000:4000000, length(Alumni_inkomens_T1))
-Inkomen<- c(Alumni_inkomens_T1, Alumni_inkomens_T2)
-Datum <- c(replicate(length(Alumni_inkomens_T1), "T1"), (replicate(length(Alumni_inkomens_T2), "T2")))
-Alumni_inkomens <- data.frame(Studentnr, Datum, Inkomen)
-
-## Sorteer op inkomen voor presentatie dataset
-Alumni_inkomens <- Alumni_inkomens[order(Alumni_inkomens$Inkomen, decreasing = TRUE),]
+source(paste0(here::here(),"/01. Includes/data/07.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
@@ -122,8 +85,8 @@ Bekijk de grootte, de mediaan en de kwantielen van de data met `length()` en `qu
 <!-- ## /TEKSTBLOK: Data-beschrijven.R-->
 <!-- ## OPENBLOK: Data-selecteren.R-->
 ```{r data selecteren}
-Alumni_inkomens_T1 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Datum == "T1"]
-Alumni_inkomens_T2 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Datum == "T2"]
+Alumni_inkomens_T1 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Meetmoment == "T1"]
+Alumni_inkomens_T2 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Meetmoment == "T2"]
 ```
 <!-- ## /CLOSEDBLOK: Data-selecteren.R-->
 
@@ -171,7 +134,7 @@ ggplot(Alumni_inkomens,
   geom_histogram(binwidth = 500,
                  color = "grey30",
                  fill = "#0089CF") +
-  facet_wrap(~ Datum) +
+  facet_wrap(~ Meetmoment) +
   geom_density(alpha = .2, adjust = 1) +
   ylab("Frequentiedichtheid") +
   scale_x_continuous(
@@ -189,7 +152,7 @@ De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen
 
 <!-- ## OPENBLOK: Boxplot.R -->
 ```{r boxplot}
-boxplot(Inkomen ~ Datum, Alumni_inkomens,
+boxplot(Inkomen ~ Meetmoment, Alumni_inkomens,
         main = "Maandelijkse inkomens alumni Mens & Maatschappij")
 ```
 <!-- ## /OPENBLOK: Boxplot.R -->
@@ -203,17 +166,17 @@ Voer een Wilcoxon signed rank toets uit met `paired=TRUE`.
 <!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
 <!-- ## OPENBLOK: Wilcoxon-signed-rank-toets.R -->
 ```{r wilcox test}
-wilcox.test(Alumni_inkomens_T2, Alumni_inkomens_T1, paired=TRUE, alternative = "greater")
+wilcox.test(Alumni_inkomens_T2, Alumni_inkomens_T1, paired = TRUE, alternative = "greater")
 ```
 <!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets.R -->
 <!-- ## CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
-```{r wilcox test, include=FALSE, echo=TRUE}
+```{r wilcox test als object, include=FALSE, echo=TRUE}
 wilcox <- wilcox.test(Alumni_inkomens_T2, Alumni_inkomens_T1, paired=TRUE, alternative = "greater")
 vVstatistic <- wilcox$statistic
 ```
 <!-- ## /CLOSEDLOK: Wilcoxon-signed-rank-toets.R -->
 <!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
-* *V* = `r vVs, p < 0,05  
+* *V* = `r vVstatistic`, p < 0,05  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen[^5]
 
 <!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->

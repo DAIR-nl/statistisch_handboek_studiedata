@@ -27,8 +27,13 @@
 
 ## Plaats  variabelen in een lijst: de root van de site
 lVars <- list(
-  var_VersieR = "sVersieR", #sVersieR
-  var_Copyright = "sCopyright" #sCopyright
+  var_VersieR = paste(R.Version()$major, R.Version()$minor, sep = "."),
+  var_Copyright = 
+    paste(
+        "&copy;",
+        format(Sys.time(), '%Y') ,
+        "SURF Versnellingsplan - Statistisch Handboek Studiedata"
+    )
 )
 
 ## Plaats deze nu in een footer; gebruik htmltools::htmlPreserve om

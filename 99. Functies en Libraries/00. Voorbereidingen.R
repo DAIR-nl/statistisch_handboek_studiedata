@@ -34,39 +34,6 @@
 source(paste0(here::here(),"/99. Functies en Libraries/Installeer Packages.R"))
 
 ## xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-## Functies om een rapport te genereren
-Generate_report <- function(template_name,
-                            output_file,
-                            param_list,
-                            see_now = FALSE) {
-    if (!file.exists("00. Skeletons/Skeleton_SH.Rmd")) {
-        Copy_skeleton(template_name)
-    }
-    output_file <- file.path(here::here(), output_file)
-    rmarkdown::render(input = "00. Skeletons/Skeleton_SH.Rmd",
-                      output_file = output_file,
-                      params = param_list)
-    if (see_now)
-        browseURL(output_file)
-}
-
-Template_path <-
-    function(template_name)
-        file.path(
-            .libPaths(),
-            "reportsAsFunctions",
-            "rmarkdown",
-            "templates",
-            template_name,
-            "skeleton",
-            "00. Skeletons/Skeleton_SH.Rmd"
-        )
-
-Copy_skeleton <- function(template_name) {
-    p <- Template_path(template_name)
-    invisible(file.copy(p, here::here()))
-}
-
 ## Functie om af te ronden en te formatteren
 Round_and_format <- function(x, digits = 2) {
   x <- as.character(round(x, digits))
@@ -77,11 +44,6 @@ Round_and_format <- function(x, digits = 2) {
 ## Functie om variabelen in een string te plaatsen
 Substitute_var <- function(placeholder, list_args) {
   gsubfn(x = placeholder, env = list_args)
-}
-
-## Functie om de Header van de pagina's te maken
-Get_Header <- function() {
-    source(file = "01. Includes/code/Header.R")
 }
 
 ## Functies om strings te trimmen

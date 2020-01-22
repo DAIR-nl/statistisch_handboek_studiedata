@@ -1,6 +1,5 @@
 ---
 title: "One-sample t-toets"
-author: "© `r format(Sys.time(), '%Y')`, SURF Versnellingsplan - Statistisch Handboek Hoger Onderwijs"
 date: "Laatst gewijzigd op `r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
@@ -11,13 +10,19 @@ output:
     number_sections: true
   keywords: [statistisch handboek, studiedata]
 ---
-
+```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
+library(here)
+if (!exists("Substitute_var")) {
+  ## Installeer packages en functies
+  source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
+}
+```
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
 <!-- ## CLOSEDBLOK: Header.R -->
-```{r header, include = FALSE, echo = TRUE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 

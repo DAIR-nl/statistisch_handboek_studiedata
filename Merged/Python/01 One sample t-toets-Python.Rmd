@@ -1,6 +1,6 @@
 ---
 title: "One-sample t-toets"
-author: "© `r format(Sys.time(), '%Y')`, SURF Versnellingsplan - Statistisch Handboek Hoger Onderwijs"
+author: "© `r format(Sys.time(), '%Y')`, SURF Versnellingsplan - Statistisch Handboek Studiedata"
 date: "Laatst gewijzigd op `r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:

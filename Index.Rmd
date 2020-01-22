@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines("01. Includes/code/Header.R")}
 ```
 
-Het Statistisch Handboek Hoger Onderwijs is gemaakt door VU Analytics als onderdeel van SURF Versnellingsplan Onderwijsinnovatie met ICT. Met dit handboek wordt een gemeenschappelijk standaard gecreëerd voor het toetsen van onderwijsdata, daarbij de validiteit en betrouwbaarheid van beleidsadviezen te waarborgen.   
+Het Statistisch Handboek Studiedata is gemaakt door VU Analytics als onderdeel van SURF Versnellingsplan Onderwijsinnovatie met ICT. Met dit handboek wordt een gemeenschappelijk standaard gecreëerd voor het toetsen van onderwijsdata, daarbij de validiteit en betrouwbaarheid van beleidsadviezen te waarborgen.   
 
 De basis voor het handboek is een keuzemodel, waarbij de 19 meest voorkomende toetsen afzonderlijk uitgewerkt zijn. Bij elke toets zit:  
 * een omschrijving waarvoor een toets gebruikt kan worden  

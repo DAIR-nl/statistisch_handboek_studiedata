@@ -27,10 +27,10 @@
 
 ## Controleer of Substitute_var bestaat; zo niet, sluit dan het voorbereidingen
 ## script in.
-if (!exists("Substitute_var")) {
-  ## Installeer packages en functies
-  source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
-}    
+# if (!exists("Substitute_var")) {
+#   ## Installeer packages en functies
+#   source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
+# }
 
 ## Plaats  variabelen in een lijst: de root van de site
 lVars <- list(
@@ -48,7 +48,7 @@ thisHeader <- Substitute_var(htmltools::htmlPreserve('
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="`sRoot`/index.html">Statistisch Handboek Hoger Onderwijs</a>
+      <a class="navbar-brand" href="`sRoot`/index.html">Statistisch Handboek Studiedata</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">

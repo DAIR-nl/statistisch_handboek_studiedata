@@ -31,7 +31,7 @@
 
 ## xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ## Lees packages in
-source("99. Functies en Libraries/Installeer Packages.R")
+source(paste0(here::here(),"/99. Functies en Libraries/Installeer Packages.R"))
 
 ## xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ## Functies om een rapport te genereren

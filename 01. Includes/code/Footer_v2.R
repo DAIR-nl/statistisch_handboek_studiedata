@@ -25,20 +25,12 @@
 ## 01 MAAK HTML ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-## Plaats  variabelen in een lijst: de root van de site
-lVars <- list(
-  var_VersieR = "sVersieR", #sVersieR
-  var_Copyright = "sCopyright" #sCopyright
-)
-
-## Plaats deze nu in een footer; gebruik htmltools::htmlPreserve om
-## HTML te behouden. Nodig om in markdown HTML te tonen.
-thisFooter <- Substitute_var(htmltools::htmlPreserve('
+thisFooter <- htmltools::htmlPreserve('
 <div id = "footer">
 Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. De code is uitgevoerd met R versie `var_VersieR`.
 <br/><br/>
 `var_Copyright`
-</div>'), lVars)
+</div>')
 
 ## Toon het resultaat
 writeLines(thisFooter)

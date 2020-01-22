@@ -1,0 +1,30 @@
+---
+title: "Gepaarde t-toets test"
+author: "© `r format(Sys.time(), '%Y')`, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
+date: "`r format(Sys.time(), '%d-%m-%Y')`"
+output:
+  html_document: 
+    number_sections: yes
+    theme: lumen
+    toc: yes
+    toc_float:
+      collapsed: no
+  keywords: [statistisch handboek, studiedata]
+---
+<!-- ## CLOSEDBLOK: Header.R -->
+```{r header, include = FALSE, echo = TRUE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Header.R -->
+
+<style>
+`r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
+</style>
+
+
+noten; hierna de footer
+
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
+```
+
+<!-- ## /CLOSEDBLOK: Footer.R -->

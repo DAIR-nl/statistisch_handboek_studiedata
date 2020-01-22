@@ -17,8 +17,7 @@ output:
 </style>
 
 <!-- ## CLOSEDBLOK: Header.R -->
-```{r header, include = FALSE, echo = TRUE, results='asis'} 
-source(paste0(here::here(),"/01. Includes/code/Header.R"))
+```{r header, include = FALSE, echo = TRUE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
@@ -232,8 +231,7 @@ De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamen
 De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor de exacte vakken van studenten Werktuigbouwkunde met een vwo vooropleiding hoger ligt dan het landelijk gemiddelde.
 
 <!-- ## CLOSEDBLOK: Footer.R -->
-```{r footer, include = FALSE, echo = TRUE, results='asis'}
-paste0(here::here(),"/01. Includes/code/Footer.R")
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
 ```
 <!-- ## /CLOSEDBLOK: Footer.R -->
 

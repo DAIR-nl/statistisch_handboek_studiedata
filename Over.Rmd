@@ -35,8 +35,10 @@ Dit handboek is tot stand gekomen dankzij de volgende personen:
 * Irene van der Staaij, VU, projectleider
 * Megiel Kerkhoven, VU, programmeur
 * Theo Bakker, VU, eindredactie
+* Jet Doeswijk, student-assistent 
+* Faaris Akbar, student-assistent 
 
-**Review**
+**Interne review**
 
 * Martijn Meeter, VU, wetenschappelijke review
 * Sandjai Bhulai, VU, wetenschappelijke review
@@ -44,10 +46,16 @@ Dit handboek is tot stand gekomen dankzij de volgende personen:
 * Jelger van Zaane, VU, review op toepasbaarheid
 * Nanny Kempers, VU, review op toepasbaarheid
 
+**Externe review**
+
+* Aswin van Oijen, Tilburg University
+* Bram Enning, Hogeschool Leiden
+* Martine Baars, Erasmus School of Social and Behavioural Sciences
+* Tsjerk Wassenaar, Hanzehogeschool Groningen
+
 **Met dank aan**
 
 * Nan van Geloven, AMC/UMC Leiden, voor de ter beschikking stelling van het materiaal van de [AMC wiki](https://wikistatistiek.amc.nl/index.php/).
-* ...
 
 # Financiering
 Het handboek is gefinancierd door het Versnellingsplan.

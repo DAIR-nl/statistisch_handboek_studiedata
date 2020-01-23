@@ -1,0 +1,31 @@
+---
+title: "Begrippenlijst"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE) 
+```
+
+<!-- CSS -->
+<style>
+`r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
+</style>
+
+<!-- Header -->
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))}
+```
+# De belangrijkste begrippen uitgelegd
+
+Wanneer de data continu is, is de data ook normaal verdeeld? 
+De normale verdeling is de gestandaardiseerde weergave van een verwachting wat een populatie zou scoren op een bepaalde eigenschap met veel datapunten rondom het gemiddelde en weinig datapunten in de staarten. Het ziet er uit als een klokvorm, zie afbeelding **AFBEELDING**. In het midden lig de verwachtingswaarde *µ*. De spreiding van de data wordt weergegeven met de standaardafwijking *σ*.[^1] 
+Bij numerieke data wordt er getoetst of de data normaal verdeeld zijn. Als de data niet-normaal verdeeld zijn, kan er voor een andere toets gekozen worden, dan wanneer de data wel normaal verdeeld zijn. 
+
+
+[^1]: https://en.wikipedia.org/wiki/Normal_distribution

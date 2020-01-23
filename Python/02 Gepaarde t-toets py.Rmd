@@ -11,26 +11,31 @@ output:
   keywords: [statistisch handboek, studiedata]
 ---
 
+<!-- ## CLOSEDBLOK: Functies.R -->
+```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
+library(here)
+if (!exists("Substitute_var")) {
+  ## Installeer packages en functies
+  source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
+}
+```
+<!-- ## /CLOSEDBLOK: Functies.R -->
+
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
-```{r header, include = FALSE, echo = TRUE, results='asis'} 
-paste0(here::here(),"/01. Includes/code/Header.R")
+<!-- ## CLOSEDBLOK: Header.R -->
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
+<!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## OPENBLOK: Functiedefinities.R -->
-```{r functiedefinities,include=FALSE, echo=TRUE}
-library(stringr)
-Round_and_format <- function(x, digits = 2) {
-  x <- as.character(round(x, digits))
-  x <- str_replace(x, "[.]", ",")
-  return(x)
-}
+<!-- ## CLOSEDBLOK: Reticulate.R -->
+```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}
 library(reticulate)
 knitr::knit_engines$set(python = reticulate::eng_python)
 ```
-<!-- ## /BLOK: Functiedefinities.R -->
+<!-- ## /CLOSEDBLOK: Reticulate.R -->
 
 ```{r opmerking, include=FALSE, eval=FALSE}
 # doorlinken naar de Wilcoxon Signed Rank Test
@@ -429,10 +434,6 @@ Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencij
 
 Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor. Het effect is minimaal.  
 
-<!-- ## CLOSEDBLOK: Footer.R -->
-```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
-```
-<!-- ## /CLOSEDBLOK: Footer.R -->
 
 [^1]: Wikipedia (21 augustus 2019). *student's t-test*. [Wikipedia](https://en.wikipedia.org/wiki/student%27s_t-test).
 [^2]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). Tthe importance of the normality assumption in large public health data sets. *Annu Rev Public Health, 23*, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf 

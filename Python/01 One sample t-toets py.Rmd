@@ -15,25 +15,31 @@ output:
     toc: yes
 ---
 
+<!-- ## CLOSEDBLOK: Functies.R -->
+```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
+library(here)
+if (!exists("Substitute_var")) {
+  ## Installeer packages en functies
+  source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
+}
+```
+<!-- ## /CLOSEDBLOK: Functies.R -->
+
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
-```{r header, include = FALSE, echo = TRUE, results='asis'} 
-paste0(here::here(),"/01. Includes/code/Header.R")
+<!-- ## CLOSEDBLOK: Header.R -->
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
+<!-- ## /CLOSEDBLOK: Header.R -->
 
-```{r functiedefinities,include=FALSE, echo=TRUE}
-library(stringr)
-library(knitr)
-Round_and_format <- function(x, digits = 2) {
-  x <- as.character(round(x, digits))
-  x <- str_replace(x, "[.]", ",")
-  return(x)
-}
+<!-- ## CLOSEDBLOK: Reticulate.R -->
+```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}
 library(reticulate)
 knitr::knit_engines$set(python = reticulate::eng_python)
 ```
+<!-- ## /CLOSEDBLOK: Reticulate.R -->
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE, results='hide'}

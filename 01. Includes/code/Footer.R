@@ -32,7 +32,8 @@ lVars <- list(
     paste(
         "&copy;",
         format(Sys.time(), '%Y') ,
-        "SURF Versnellingsplan - Statistisch Handboek Studiedata"
+        "SURF Versnellingsplan - Statistisch Handboek Studiedata.",
+        "Deze pagina is voor het laatst gewijzigd op:", format(Sys.time(), '%d-%m-%Y')
     )
 )
 

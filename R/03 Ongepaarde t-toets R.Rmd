@@ -11,26 +11,25 @@ output:
   keywords: [statistisch handboek, studiedata]
 ---
 
+<!-- ## CLOSEDBLOK: Functies.R -->
+```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
+library(here)
+if (!exists("Substitute_var")) {
+  ## Installeer packages en functies
+  source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
+}
+```
+<!-- ## /CLOSEDBLOK: Functies.R -->
+
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
 <!-- ## CLOSEDBLOK: Header.R -->
-```{r header, include = FALSE, echo = TRUE, results='asis'} 
-paste0(here::here(),"/01. Includes/code/Header.R")
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## CLOSEDBLOK: Functiedefinities.R -->
-```{r functiedefinities,include=FALSE, echo=TRUE}
-library(stringr)
-Round_and_format <- function(x, digits = 2) {
-  x <- as.character(round(x, digits))
-  x <- str_replace(x, "[.]", ",")
-  return(x)
-}
-```
-<!-- ## /CLOSEDBLOK: Functiedefinities.R -->
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
@@ -362,6 +361,10 @@ Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentam
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 *Tabel 1. Groepsgrootte, gemiddeld tentamencijfer en standaarddeviatie per cohort*
 
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
+```
+<!-- ## /CLOSEDBLOK: Footer.R -->
 
 [^1]: Van Geloven, N. (25 mei 2016). *T-toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/T-toets#ongepaarde_t-toets).
 [^2]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). The importance of the normality assumption in large public health data sets. *Annu Rev Public Health, 23*, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf 

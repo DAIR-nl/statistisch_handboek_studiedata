@@ -1,7 +1,5 @@
 ---
 title: "Kruskal Wallis toets"
-author: "© `r format(Sys.time(), '%Y')`, SURF Versnellingsagenda Statistisch Handboek Hoger Onderwijs"
-date: "`r format(Sys.time(), '%d-%m-%y')`"
 output: 
   html_document:
     toc: TRUE
@@ -10,27 +8,24 @@ output:
     number_sections: TRUE
     theme: lumen
 ---
+<!-- ## CLOSEDBLOK: Functies.R -->
+```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
+library(here)
+if (!exists("Substitute_var")) {
+  ## Installeer packages en functies
+  source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
+}
+```
+<!-- ## /CLOSEDBLOK: Functies.R -->
 
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
 <!-- ## CLOSEDBLOK: Header.R -->
-```{r header, include = FALSE, echo = TRUE, results='asis'} 
-paste0(here::here(),"/01. Includes/code/Header.R")
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
-
-<!-- ## CLOSEDBLOK: Functiedefinities.R -->
-```{r functiedefinities,include=FALSE, echo=TRUE}
-library(stringr)
-Round_and_format <- function(x, digits = 2) {
-  x <- as.character(round(x, digits))
-  x <- str_replace(x, "[.]", ",")
-  return(x)
-}
-```
-<!-- ## /CLOSEDBLOK: Functiedefinities.R -->
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
@@ -215,6 +210,11 @@ Met een post-hoc toets is het verschil tussen de vooropleidingen getoetst. De st
 Kortom, de resultaten ondersteunen de conclusie dat er een verschil is tussen de vooropleidingen die de studenten hebben afgerond en de hoeveelheid studiepunten die een student behaalt tijdens het eerste jaar van de master Arbeidsrecht. De studenten met Rechtsgeleerdheid als vooropleiding behalen statistisch significant minder studiepunten dan de drie andere vooropleidingen. 
 Studenten met de vooropleiding Fiscaal Recht (mediaan = `r vMed_FIS`) en Notarieel Recht (mediaan = `r vMed_NOT`) behalen naar verhouding de meeste studiepunten.
 <!-- ## /TEKSTBLOK: Rapportage.R -->
+
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
+```
+<!-- ## /CLOSEDBLOK: Footer.R -->
 
 [^1]: De toets rangschikt de datapunten van laag naar hoog en geeft elke datapunt een rangnummer. Vervolgens wordt per groep het gemiddelde berekend van de rangnummers. Dit gemiddelde wordt met elkaar vergeleken. Voor meer informatie lees: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^2]: Van Geloven, N. (21 maart 2018). *Kruskal Wallis*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis). 

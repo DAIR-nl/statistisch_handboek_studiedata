@@ -10,37 +10,28 @@ output:
     number_sections: true
   keywords: [statistisch handboek, studiedata]
 ---
+<!-- ## CLOSEDBLOK: Functies.R -->
+```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
+library(here)
+if (!exists("Substitute_var")) {
+  ## Installeer packages en functies
+  source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
+}
+```
+<!-- ## /CLOSEDBLOK: Functies.R -->
 
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
 <!-- ## CLOSEDBLOK: Header.R -->
-```{r header, include = FALSE, echo = TRUE, results='asis'} 
-paste0(here::here(),"/01. Includes/code/Header.R")
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## CLOSEDBLOK: Functiedefinities.R -->
-```{r functiedefinities,include=FALSE, echo=TRUE}
-library(stringr)
-Round_and_format <- function(x, digits = 2) {
-  x <- as.character(round(x, digits))
-  x <- str_replace(x, "[.]", ",")
-  return(x)
-}
-
-Round_and_format_0decimals <- function(x, digits = 0) {
-  x <- as.character(round(x, digits))
-  x <- str_replace(x, "[.]", ",")
-  return(x)
-}
-```
-<!-- ## /CLOSEDBLOK: Functiedefinities.R -->
-
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-source(paste0(here::here(),"/01. Includes/data/07.R"))
+source(paste0(here::here(),"/01. Includes/data/08.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 # Toepassing
@@ -165,6 +156,11 @@ vW_P <- Round_and_format(wcx$p.value)
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal EC in het tweede jaar hetzelfde is van internationale studenten als van Nederlandse studenten. Uit de resultaten kan afgelezen worden dat er geen statistisch significant verschil is tussen het aantal studiepunten van internationale studenten als van Nederlandse studenten. *W* = `r vW_W`, p-waarde < 0,05. 
 <!-- ## /TEKSTBLOK: Rapportage.R -->
+
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
+```
+<!-- ## /CLOSEDBLOK: Footer.R -->
  
 [^1]: Van Geloven, N. (13 maart 2018). *Mann-Whitney U toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
 [^2]: Onderscheidend vermogen: wordt in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  

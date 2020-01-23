@@ -10,6 +10,7 @@ output:
     number_sections: true
   keywords: [statistisch handboek, studiedata]
 ---
+<!-- ## CLOSEDBLOK: Functies.R -->
 ```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
 library(here)
 if (!exists("Substitute_var")) {
@@ -17,6 +18,8 @@ if (!exists("Substitute_var")) {
   source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
 }
 ```
+<!-- ## /CLOSEDBLOK: Functies.R -->
+
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>

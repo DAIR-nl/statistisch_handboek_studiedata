@@ -11,26 +11,25 @@ output:
   keywords: [statistisch handboek, studiedata]
 ---
 
+<!-- ## CLOSEDBLOK: Functies.R -->
+```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
+library(here)
+if (!exists("Substitute_var")) {
+  ## Installeer packages en functies
+  source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
+}
+```
+<!-- ## /CLOSEDBLOK: Functies.R -->
+
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
 <!-- ## CLOSEDBLOK: Header.R -->
-```{r header, include = FALSE, echo = TRUE, results='asis'} 
-paste0(here::here(),"/01. Includes/code/Header.R")
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## CLOSEDBLOK: Functiedefinities.R -->
-```{r functiedefinities,include=FALSE, echo=TRUE}
-library(stringr)
-Round_and_format <- function(x, digits = 2) {
-  x <- as.character(round(x, digits))
-  x <- str_replace(x, "[.]", ",")
-  return(x)
-}
-```
-<!-- ## /CLOSEDBLOK: Functiedefinities.R -->
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r opmerking TODO, include=FALSE, eval=FALSE}
@@ -164,6 +163,11 @@ De *Chi-kwadraat toets* is uitgevoerd om te toetsen of studenten met een functie
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 ## Fisher's exact toets
 De *Fisher's exact toets* is uitgevoerd om te toetsen of studenten met een functiebeperking meer of minder uitvallen sinds de invoering van het leenstelsel. De resultaten ondersteunen de nulhypothese: het percentage uitval van het aantal studenten met een functiebeperking is na de invoering van het leenstelsel gelijk gebleven, *p* > 0,05. 
+
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
+```
+<!-- ## /CLOSEDBLOK: Footer.R -->
 
 [^1]: Binaire variabelen: twee elkaar uitsluitende waarden, zoals ja of nee, 0 of 1, aan of uit. 
 [^2]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html.

@@ -12,26 +12,25 @@ output:
   keywords: [statistisch handboek, studiedata]
 ---
 
+<!-- ## CLOSEDBLOK: Functies.R -->
+```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
+library(here)
+if (!exists("Substitute_var")) {
+  ## Installeer packages en functies
+  source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
+}
+```
+<!-- ## /CLOSEDBLOK: Functies.R -->
+
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
 <!-- ## CLOSEDBLOK: Header.R -->
-```{r header, include = FALSE, echo = TRUE, results='asis'} 
-paste0(here::here(),"/01. Includes/code/Header.R")
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## CLOSEDBLOK: Functiedefinities.R -->
-```{r functiedefinities,include=FALSE, echo=TRUE}
-library(stringr)
-Round_and_format <- function(x, digits = 2) {
-  x <- as.character(round(x, digits))
-  x <- str_replace(x, "[.]", ",")
-  return(x)
-}
-```
-<!-- ## /CLOSEDBLOK: Functiedefinities.R -->
 
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 ## De opleidingsdirecteur van de opleiding Geneeskunde wil weten welke groep eerstejaars het snelste afstudeert. Hij vergelijkt hierbij drie groepen (of twee): studenten die vanaf Biomedische Wetenschappen instromen, studenten die een tussenjaar hebben gehad en studenten die direct vanaf het vwo komen. De snelheid van afstuderen is geoperationaliseerd door vier categorieën: nominaal, nomaal + 1, nominaal + 2 en nominaal + meer dan 2
@@ -98,6 +97,11 @@ chi
 # Toelichting op de output
 
 # Rapportage
+
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
+```
+<!-- ## /CLOSEDBLOK: Footer.R -->
 
 [^1]: Agresti, A. (1996) An introduction to categorical data analysis. New York: Wiley.
 [^2]: https://www.uvm.edu/~dhowell/StatPages/More_Stuff/OrdinalChisq/OrdinalChiSq.html

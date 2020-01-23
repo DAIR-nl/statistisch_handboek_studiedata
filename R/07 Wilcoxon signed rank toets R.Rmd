@@ -182,8 +182,13 @@ vVstatistic <- wilcox$statistic
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd is veranderd. De mediaan van de inkomens van 1 jaar na afstuderen: `r vMed_T1` De mediaan van de inkomens van 5 jaar na afstuderen: `r vMed_T2`, *V* = TEST, p-waarde < 0,05. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen de inkomens van de alumni van de Academie Mens & Maatschappij in vier jaar tijd is veranderd. 
+De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd is veranderd. De mediaan van de inkomens van 1 jaar na afstuderen: `r vMed_T1` De mediaan van de inkomens van 5 jaar na afstuderen: `r vMed_T2`, *V* = TEST, p-waarde < 0,05. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen de inkomens van de alumni van de Academie Mens & Maatschappij in vier jaar tijd is veranderd.
 <!-- ## /TEKSTBLOK: Rapportage.R -->
+
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
+```
+<!-- ## /CLOSEDBLOK: Footer.R -->
 
 [^1]: Van Geloven, N. (25 september2013). *Wilcoxon signed rank toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets).
 [^2]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test). 

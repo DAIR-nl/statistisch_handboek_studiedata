@@ -429,6 +429,11 @@ Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencij
 
 Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na een gesprek met de tutor, de opleiding beter beoordelen dan daarvoor. Het effect is minimaal.  
 
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
+```
+<!-- ## /CLOSEDBLOK: Footer.R -->
+
 [^1]: Wikipedia (21 augustus 2019). *student's t-test*. [Wikipedia](https://en.wikipedia.org/wiki/student%27s_t-test).
 [^2]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). Tthe importance of the normality assumption in large public health data sets. *Annu Rev Public Health, 23*, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf 
 [^3]: Van Geloven, N. (25 september2013). *Wilcoxon signed rank toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets).

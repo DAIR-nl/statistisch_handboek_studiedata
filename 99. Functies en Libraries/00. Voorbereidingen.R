@@ -41,6 +41,13 @@ Round_and_format <- function(x, digits = 2) {
   return(x)
 }
 
+Round_and_format_0decimals <- function(x, digits = 0) {
+  x <- as.character(round(x, digits))
+  x <- str_replace(x, "[.]", ",")
+  return(x)
+}
+
+
 ## Functie om variabelen in een string te plaatsen
 Substitute_var <- function(placeholder, list_args) {
   gsubfn(x = placeholder, env = list_args)

@@ -1,6 +1,5 @@
 ---
 title: "07 Wilcoxon signed rank toets"
-author: "© `r format(Sys.time(), '%Y')`, SURF Versnellingsagenda - Statistisch Handboek Studiedata"
 date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:

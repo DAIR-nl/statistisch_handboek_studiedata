@@ -1,6 +1,5 @@
 ---
 title: "09 z-toets voor proporties"
-date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
     theme: lumen
@@ -69,8 +68,8 @@ tail(Instroom_2018_totaal)
 Maak de variabele numeriek om een z-test voor proporties te doen. Gebruik `prop.test()` om een z-test voor proporties uit te voeren. Gebruik  `x =` voor de hoeveelheid studenten met een hbo achtergrond, `n =` voor de totale instroom van de universiteit, `p =` voor de referentieproportie en `alternative =` voor het soort toets (eenzijdig of tweezijdig).
 <!-- ## OPENBLOK: Z-toets.R-->
 ```{r z-test}
-Instroom_2018_totaal$hbo_achtergrond_num [hbo_achtergrond == "ja"] <- 1
-Instroom_2018_totaal$hbo_achtergrond_num [hbo_achtergrond == "nee"] <- 0
+Instroom_2018_totaal$hbo_achtergrond_num[hbo_achtergrond == "ja"] <- 1
+Instroom_2018_totaal$hbo_achtergrond_num[hbo_achtergrond == "nee"] <- 0
 
 prop.test(x = sum(Instroom_2018_totaal$hbo_achtergrond_num), 
           n = length(Instroom_2018_totaal$hbo_achtergrond_num), 

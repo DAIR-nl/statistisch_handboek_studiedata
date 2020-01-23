@@ -1,8 +1,6 @@
 ---
 title: "Kruskal Wallis toets"
-author: "© `r format(Sys.time(), '%Y')`, SURF Versnellingsagenda Statistisch Handboek Studiedata"
-date: "`r format(Sys.time(), '%d-%m-%y')`"
-output: 
+output:
   html_document:
     toc: TRUE
     toc_float:

@@ -1,7 +1,6 @@
 ---
 title: '17: McNemar toets / Wilcoxon signed rank toets'
 author: "© `r format(Sys.time(), '%Y')`, SURF Versnellingsagenda - Statistisch Handboek Hoger Onderwijs"
-date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
     theme: lumen

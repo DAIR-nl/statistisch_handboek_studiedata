@@ -1,6 +1,5 @@
 ---
 title: "Chi-kwadraat toets en Fisher's exact toets"
-date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
     theme: lumen

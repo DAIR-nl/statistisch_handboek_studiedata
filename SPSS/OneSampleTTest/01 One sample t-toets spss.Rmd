@@ -1,6 +1,5 @@
 ---
 title: "One-sample t-toets spss"
-date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
     theme: lumen

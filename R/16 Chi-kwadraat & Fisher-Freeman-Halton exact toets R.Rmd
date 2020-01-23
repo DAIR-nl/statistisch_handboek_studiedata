@@ -1,6 +1,5 @@
 ---
 title: "15 Chi-kwadraat & Fisher-Freeman-Halton exact toets"
-date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   html_document:
     theme: lumen

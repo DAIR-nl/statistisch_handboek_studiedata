@@ -49,7 +49,7 @@ Gebruik de *gepaarde t-toets* om te toetsen of bij een herhaalde meting de gemid
 
 # Onderwijscasus
 <div id ="casus">
-Voor het verminderen van de studielast van studenten aan een Universiteit biedt deze Universiteit cursussen plannen aan. De cursussen zijn bedoeld om studenten beter inzicht te geven in de gevolgen van de planning van hun studielast. De cursus wordt tussen twee onderwijsperiodes in gegeven. Voor en na de cursus moeten de studenten gedurende een onderwijsperiode een logboek bijhouden over hun studiegedrag. 
+Voor het verminderen van de studielast van studenten aan een Universiteit biedt deze Universiteit cursussen plannen aan. De cursussen zijn bedoeld om studenten beter inzicht te geven in de gevolgen van de planning van hun studielast. De cursus wordt tussen twee onderwijsperiodes in gegeven. Voor en na de cursus moeten de studenten gedurende een onderwijsperiode een logboek bijhouden over hun studiegedrag. Gaan de studenten gemiddeld meer studeren of juist minder?
 
 *H~0~*: Het gemiddeld aantal uren studeren per onderwijsperiode verandert niet na de cursus, µ~T0~ = µ~T1~  
 
@@ -133,8 +133,8 @@ vN_t1 <- Round_and_format(length(Uren_studeren_T1))
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven.R -->
 <!-- ## TEKSTBLOK: Data-beschrijven.R -->
-* Gemiddeld uren studeren T0 (standaardafwijking): `r vMean_t0` (`r vSD_t0`). *n* = `r vN_t0`.
-* Gemiddeld uren studeren T1 (standaardafwijking): `r vMean_t1` (`r vSD_t1`). *n* = `r vN_t1`.
+* Gemiddeld uren studeren T~0~ (standaardafwijking): `r vMean_t0` (`r vSD_t0`). *n* = `r vN_t0`.
+* Gemiddeld uren studeren T~1~ (standaardafwijking): `r vMean_t1` (`r vSD_t1`). *n* = `r vN_t1`.
 
 <!-- ## /TEKSTBLOK: Data-beschrijven.R -->
 
@@ -276,7 +276,7 @@ Voor beide groepen is de *p* > 0,05, dus er is geen statistisch significant vers
 <!-- ## TEKSTBLOK: T-test.R -->
 Gebruik `t.test()` met `paired = TRUE` om een *gepaarde t-toets* uit te voeren. Gebruik hier weer het hele dataframe `Studielogboek`. 
 <!-- ## /TEKSTBLOK: T-test.R -->
-De *gepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het gemiddeld aantal uren studeren verandert na deelname aan de cursus. De verwachting is dat de studenten meer gaan studeren, maar omdat het relevant is om te weten of de studenten ook minder gaan studeren na de cursus is er voor gekozen om tweezijdig te toetsen. 
+De *gepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het gemiddeld aantal uren studeren verandert na deelname aan de cursus. De verwachting is dat de studenten gemiddeld meer gaan studeren, maar omdat het relevant is om te weten of de studenten meer of minder gaan studeren na de cursus is er voor gekozen om tweezijdig te toetsen. 
 
 <!-- ## OPENBLOK: T-toets.R -->
 ```{r T-test}

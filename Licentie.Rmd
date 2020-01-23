@@ -9,18 +9,24 @@ output:
     number_sections: false
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE) 
+<!-- ## CLOSEDBLOK: Functies.R -->
+```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
+library(here)
+if (!exists("Substitute_var")) {
+  ## Installeer packages en functies
+  source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
+}
 ```
+<!-- ## /CLOSEDBLOK: Functies.R -->
 
-<!-- CSS -->
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
-<!-- Header -->
-```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))}
+<!-- ## CLOSEDBLOK: Header.R -->
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
+<!-- ## /CLOSEDBLOK: Header.R -->
 
 # Voorwaarden voor gebruik van dit handboek
 

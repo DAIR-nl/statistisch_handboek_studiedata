@@ -38,7 +38,7 @@ htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/R/toetsmatrix.htm
 *Toetsmatrix 1. schematische overzicht van verschillende toetsen per type data en per vergelijking. Deze pagina is nog in ontwikkeling, en wordt met de tijd aangevuld en verbeterd.*
 
 # Toelichting op de mogelijke keuzes
-## Toettsmatrix  
+## Toetsmatrix
 De toetsmatrix toont per type data en vergelijking welke toetsen gebruikt kunnen worden in die situatie. Iedere optie wordt voorzien van een relevante casus uit het Hoger onderwijs, een uitleg van de regels om een toets te kiezen, de uitwerking van de toets in R, SPSS en Python, een interpretatie van de resultaten, en een rapport die de resultaten beschrijven.   
    
 

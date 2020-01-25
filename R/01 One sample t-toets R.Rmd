@@ -28,8 +28,6 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
-
-
 ```{r opmerking, include=FALSE, eval=FALSE}
 # TODO: een link maken naar Wilcoxon Signed Rank Test
 # TODO: Uitleg transformeren data (Sandjai "veel gebruikte transformatie is de Box Cox") 

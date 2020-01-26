@@ -39,6 +39,10 @@ h1.title {
     margin-top: 50px;
 }
 
+/* Overrule default css */
+.col-container .col {
+  padding: 3px;
+}
 /* Toetsmatrix */
 table.toetsmatrix {
     text-align: center;

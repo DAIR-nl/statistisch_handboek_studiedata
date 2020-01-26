@@ -33,13 +33,14 @@ lVars <- list(
         "&copy;",
         format(Sys.time(), '%Y') ,
         "SURF Versnellingsplan - Statistisch Handboek Studiedata.",
-        "Deze pagina is voor het laatst gewijzigd op:", format(Sys.time(), '%d-%m-%Y')
+        "Laatst gewijzigd op:", format(Sys.time(), '%d-%m-%Y')
     )
 )
 
 ## Plaats deze nu in een footer; gebruik htmltools::htmlPreserve om
 ## HTML te behouden. Nodig om in markdown HTML te tonen.
 thisFooter <- Substitute_var(htmltools::htmlPreserve('
+<div id = "footerborder"><hr/></div>
 <div id = "footer">
 Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. De code is uitgevoerd met R versie `var_VersieR`.
 <br/><br/>

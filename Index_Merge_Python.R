@@ -19,6 +19,7 @@
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## Geschiedenis:
 ## 11-01-2020: TB: Aanmaak bestand
+## 25-01-2020: TB: Aanvulling voor verschillende codeblokken
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -28,6 +29,9 @@
 ## Installeer packages en functies
 source("99. Functies en Libraries/00. Voorbereidingen.R")
 
+## Debug
+bDebug <- F
+
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 01 BEPAAL DE TOETSEN DIE GEMERGED MOETEN WORDEN ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -35,8 +39,8 @@ source("99. Functies en Libraries/00. Voorbereidingen.R")
 ## Bepaal de lijst van toetsen; wijzig 0 in 1 om in gebruik te nemen
 dfToetsen <- tribble(
     ~Toets, ~InGebruik,
-    "01 One sample t-toets",                "1", 
-    "02 Gepaarde t-toets",                  "1", 
+    "01 One sample t-toets",                "0", 
+    "02 Gepaarde t-toets",                  "0", 
     "03 Ongepaarde t-toets",                "1", 
     "04 Linear mixed model",                "0", 
     "05 One-way ANOVA",                     "0", 
@@ -60,13 +64,16 @@ dfToetsen <- tribble(
 ## 02 LEES R MARKDOWN EN PYTHON ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+## Verwerk codeblokken met OPENBLOK, TEKSTBLOK
+sRegEx <- "## [/]{0,1}[A-Z]{4,5}BLOK: "
+
 ## Loop over de toetsen die in gebruik zijn
 for (toets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
     sToets <- toets
     
     ## Bepaal de R Markdown en Pyton Markdown
-    thisRmd_R      <- paste0("R/", paste0(toets, ".Rmd"))
-    thisRmd_Python <- paste0("Python/", paste0(toets, " py.Rmd"))
+    thisRmd_R      <- paste0("R/", paste0(toets, " R.Rmd"))
+    thisRmd_Python <- paste0("04. Python chunks/", paste0(toets, " py.Rmd"))
     
     ## Als beide bestanden bestaan, ga dan verder
     if (file.exists(thisRmd_R) & file.exists(thisRmd_Python)) {
@@ -76,36 +83,40 @@ for (toets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
       thisRmd_Python_file <- readLines(con = thisRmd_Python, warn = F)
       
       ## Bepaal de regelnummers en maak een lijst van codeblokken
-      lRegelnummers <- grep(paste0("## [/]{0,1}BLOK:"), 
+      lRegelnummers <- grep(paste0(sRegEx), 
                             readLines(con = thisRmd_R, warn = F))
       lCodeblokken <- thisRmd_R_file[lRegelnummers]
       
       ## Verwijder regels met /BLOK en verwijder begin + einde string (<--! -->)
-      lCodeblokken <- lCodeblokken[!str_detect(lCodeblokken, pattern = "## /BLOK")] %>% 
-        str_replace("<!-- ## OPENBLOK: ", "") %>% 
-        str_replace(".R -->", "")
+      lCodeblokken <- lCodeblokken[!str_detect(lCodeblokken, pattern = "## /")] %>% 
+        str_replace("<!-- ## ", "") %>% 
+        str_replace(".R[ ]{0,1}-->", "") 
       
       ## Loop nu over de codeblokken
       for (l in lCodeblokken) {
         
         ## Bepaal de regelnummers in de Python versie en toon deze (voor debug)
-        lRegelnummers_Python <- grep(paste0("## [/]{0,1}BLOK: ",l,".py"),
+        lRegelnummers_Python <- grep(paste0(l,".py"),
                                      thisRmd_Python_file)
-        print(lRegelnummers_Python)
-        
         ## Lees het bestand nu in en knip de betreffende code eruit, bewaar deze
         ## en geef een melding
         if (length(lRegelnummers_Python) == 2) {
+            
+            if (bDebug == T) {
+              print(paste(l, ": ", lRegelnummers_Python))
+            }
             thisCode      <- thisRmd_Python_file[lRegelnummers_Python[1]:lRegelnummers_Python[2]]
 
             ## Bewaar de code (tijdelijk)
-            write(thisCode, file = paste0("Merged/Python/", toets,"-", l, ".py"))
+            write(thisCode, file = paste0("Python/", toets,"-", l, ".py"))
             
             ## Melding
-            print(paste("Python code verwerkt voor", toets, "en", l))
+            if (bDebug == T) {
+              print(paste0("Python code verwerkt voor ", toets, " en ", l, ".py"))
+            }
             
         } else {
-            print(paste("Geen Python code gevonden voor", toets, "en", l))
+            print(paste0("GEEN Python code gevonden voor ", toets, " en ", l, ".py"))
         }
       }
       
@@ -113,7 +124,7 @@ for (toets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
       thisRmd_file <- thisRmd_R_file
       
       ## Verwijder het gemergede Python bestand als het bestaat
-      sPythonFile_Merged <- paste0("Merged/Python/", toets, "-Python.Rmd")
+      sPythonFile_Merged <- paste0("Python/", toets, "-Python.Rmd")
       if (file.exists(sPythonFile_Merged)) {
         unlink(sPythonFile_Merged)
       }
@@ -128,11 +139,13 @@ for (toets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
           thisRmd_file <- readLines(sPythonFile_Merged)
         }
         
-        lRegelnummers_R <- grep(paste0("## [/]{0,1}BLOK: ",l,".R"), thisRmd_file)
-        print(lRegelnummers_R)
+        lRegelnummers_R <- grep(paste0(l,".R"), thisRmd_file)
+        if (bDebug == T) {
+          print(paste(l, ": ", lRegelnummers_R))
+        }
         
         ## Lees het bestand in en knip de betreffende code eruit
-        sPythonFile_Code <- paste0("Merged/Python/", toets,"-", l, ".py")
+        sPythonFile_Code <- paste0("Python/", toets,"-", l, ".py")
         if (length(lRegelnummers_R) == 2 & file.exists(sPythonFile_Code)) {
             thisPythonCode    <- readLines(sPythonFile_Code)
             
@@ -150,18 +163,20 @@ for (toets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
                 sep = "\n")
             
             ## Geef een melding
-            print(paste(l, "verwerkt"))
+            if (bDebug == T) {
+              print(paste(l, "verwerkt"))
+            }
             unlink(sPythonFile_Code)
             
         } else {
             ## Als er geen code is gevonden, geef dan een melding
-            print(paste("Geen code gevonden voor", toets, "en", l))
+            print(paste0("GEEN Python code verwerkt voor ", toets, " en ", l,".py"))
         }
       }
       
     } else {
       ## Als er geen bestanden zijn gevonden, geef dan een melding 
-      print(paste("Geen bestanden aanwezig voor ", sToets))
+      print(paste("GEEN bestanden aanwezig voor", sToets))
     }
 
 }

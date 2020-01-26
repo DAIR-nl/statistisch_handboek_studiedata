@@ -119,11 +119,11 @@ Eval_curriculum <- Eval_curriculum[order(Eval_curriculum$Studentnr),]
 Om `mcnemar.test()` te gebruiken moet de data eerst worden omgezet in een kruistabel.
 <!-- ## OPENBLOK: Maak-kruistabel.R -->
 ```{r kruistabel alfabetisch}
-Eval_curriculum_kt <- table(Eval_curriculum$Waardering[Eval_curriculum$Jaar==2014],
-                            Eval_curriculum$Waardering[Eval_curriculum$Jaar==2019])
+Eval_curriculum_kt <- table(Eval_curriculum$Waardering[Eval_curriculum$Jaar == 2014],
+                            Eval_curriculum$Waardering[Eval_curriculum$Jaar == 2019])
 print(Eval_curriculum_kt)
 ```
-<!-- ## OPENBLOK: /Maak-kruistabel.R -->
+<!-- ## /OPENBLOK: Maak-kruistabel.R -->
 
 De koppen staan nu nog op alfabetische volgorde. Verander deze volgorde zodat de categorieën verlopen zoals de ordinale variabele.
 <!-- ## OPENBLOK: Transformeer-kruistabel.R -->

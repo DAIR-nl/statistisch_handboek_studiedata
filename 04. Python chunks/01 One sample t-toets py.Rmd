@@ -119,9 +119,9 @@ plt.show()
 ```
 <!-- ## /OPENBLOK: Histogram.py -->
 
-<!-- ## TEKSTBLOK: QQplot.R-->
+<!-- ## TEKSTBLOK: QQplot.py-->
 Importeer `scipy.stats` om een Q-Q plot te maken en statistische testen uit te voeren. Voor een Q-Q plot kan de functie `scipy.stats.probplot()` worden gebruikt.
-<!-- ## /TEKSTBLOK: QQplot.R-->
+<!-- ## /TEKSTBLOK: QQplot.py-->
 
 <!-- ## OPENBLOK: QQplot.py -->
 ```{python}

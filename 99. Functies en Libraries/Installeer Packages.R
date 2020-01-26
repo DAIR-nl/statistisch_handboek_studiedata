@@ -45,6 +45,7 @@ Gebruikte_packages <- c(
     #"klippy",
     "nortest",
     "plotly",
+    "purrr",
     "rapport",
     "readxl",
     "rlist",

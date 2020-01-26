@@ -370,7 +370,7 @@ cohens_f(res.aov)
 <!-- ## /OPENBLOK: Cohens-f.R -->
 <!-- ## CLOSEDBLOK: Cohens-f.R -->
 ```{r Cohen s F als object, include=FALSE}
-f<-cohens_f(res.aov)
+f <- cohens_f(res.aov)
 vCohens_f <- Round_and_format(f$cohens.f)
 ```
 <!-- ## /CLOSEDBLOK: Cohens-f.R -->

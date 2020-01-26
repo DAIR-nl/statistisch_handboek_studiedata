@@ -13,7 +13,7 @@
 ## Datasets: Geen
 ##
 ## Opmerkingen:
-## 1) Geen.
+## 1) Op basis van https://serialmentor.com/blog/2016/6/13/reading-and-combining-many-tidy-data-files-in-R
 ## 2) ___
 ##
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

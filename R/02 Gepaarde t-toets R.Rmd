@@ -47,7 +47,7 @@ Gebruik de *gepaarde t-toets* om te toetsen of bij een herhaalde meting de gemid
 
 # Onderwijscasus
 <div id ="casus">
-Voor het verminderen van de studielast van studenten aan een Universiteit biedt deze Universiteit cursussen plannen aan. De cursussen zijn bedoeld om studenten beter inzicht te geven in de gevolgen van de planning van hun studielast. De cursus wordt tussen twee onderwijsperiodes in gegeven. Voor en na de cursus moeten de studenten gedurende een onderwijsperiode een logboek bijhouden over hun studiegedrag. Gaan de studenten gemiddeld meer studeren of juist minder?
+Voor het verminderen van de studielast van studenten aan een universiteit biedt deze universiteit cursussen plannen aan. De cursussen zijn bedoeld om studenten beter inzicht te geven in de gevolgen van de planning van hun studielast. De cursus wordt tussen twee onderwijsperiodes in gegeven. Voor en na de cursus moeten de studenten gedurende een onderwijsperiode een logboek bijhouden over hun studiegedrag. Gaan de studenten gemiddeld meer studeren of juist minder?
 
 *H~0~*: Het gemiddeld aantal uren studeren per onderwijsperiode verandert niet na de cursus, µ~T0~ = µ~T1~  
 
@@ -68,9 +68,7 @@ Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventuee
 
 Als er geen sprake is van normaliteit gebruik de *Wilcoxon Signed Rank Test*.[^5]<sup>, </sup>[^6]
 
-# Effectmaat
-Bereken de effectmaat om te bepalen of de gevonden p-waarde betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer.  
-Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.[^7]  
+
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
@@ -302,8 +300,10 @@ vDiffMean <- Round_and_format(t$estimate*-1)
 * het absolute verschil tussen de twee groepen: `r vDiffMean` 
 <!-- ## /TEKSTBLOK: T-test2.R -->
 
-
 ### Effectmaat: Cohen's d
+De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. Bereken de effectmaat om te bepalen of het gevonden verschil betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele, de cursus plannen, op een afhankelijke variabele, het aantal uur studeren, weer.  
+Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.[^7]  
+
 Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
 <!-- ## OPENBLOK: Cohens-d-test.R -->
 ```{r Cohens d}

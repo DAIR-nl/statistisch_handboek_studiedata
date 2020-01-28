@@ -103,10 +103,6 @@ N = np.size(Gemiddeld_cijfer_WNS)
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven.py -->
 
-<!-- ## TEKSTBLOK: Data-beschrijven2.R-->
-* Gemiddeld cijfer WNS (standaardafwijking): `r Round_and_format(py$mean)` (`r Round_and_format(py$sd)`), *n* = `r py$N`.
-<!-- ## /TEKSTBLOK: Data-beschrijven2.R-->
-
 <!-- ## OPENBLOK: Histogram.py -->
 ```{python histogram, include=TRUE}
 ## Histogram met matplotlib
@@ -137,9 +133,6 @@ plt.show()
 ```
 <!-- ## /OPENBLOK: QQplot.py -->
 
-### Boxplot
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8]
-
 <!-- ## OPENBLOK: Boxplot.py -->
 ``` {python boxplot}
 ## Boxplot
@@ -149,6 +142,10 @@ y = plt.ylabel("Gemiddeld_cijfer_WNS")
 plt.show()
 ```
 <!-- ## /OPENBLOK: Boxplot.py -->
+
+<!-- ## TEKSTBLOK: Lilliefors-test1.R -->
+De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`.
+<!-- ## /TEKSTBLOK: Lilliefors-test1.R -->
 
 <!-- ## OPENBLOK: Lilliefors-test.py -->
 ```{python Kolmogorov-Smirnov Test, warning=FALSE}
@@ -185,15 +182,17 @@ De *one sample t-toets* is uitgevoerd om de vraag te beantwoorden of het gemidde
 print(stats.ttest_1samp(Gemiddeld_cijfer_WNS, popmean = 6.8))
 ```
 <!-- ## /OPENBLOK: T-test.py -->
-```{r ttest als object, echo = FALSE}
-t <- t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
-vP <- Round_and_format(t$p.value)
+```{python ttest als object, echo = FALSE}
+stat, pval = stats.ttest_1samp(Gemiddeld_cijfer_WNS, popmean = 6.8)
+par = N - 1
 ```
-* Vrijheidsgraden, *df* = *n* -1 = `r Round_and_format(t$parameter+1)`-1 = `r t$parameter`  
-* *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* << 0,05
+
+<!-- ## TEKSTBLOK: T-test2.R -->
+* Vrijheidsgraden, *df* = *n* -1 = `r Round_and_format(py$N)`-1 = `r py$par`  
+* *t* ~`r py$par`~ = `r Round_and_format(py$stat)`, *p* << 0,05
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^9]
-* 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r Round_and_format(t$conf.int[1])` en `r Round_and_format(t$conf.int[2])`.
-* Het gemiddelde van de steekproef is `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`  
+* Het gemiddelde van de steekproef is `r Round_and_format(py$mean)`  
+<!-- ## /TEKSTBLOK: T-test2.R -->
 
 <!-- ## TEKSTBLOK: Rapportage.py -->
 De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = `r Round_and_format(py$mean)`, *SD* = `r Round_and_format(py$sd)`) is statistisch significant hoger dan het landelijk gemiddelde van 6,8, *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* << 0,05.

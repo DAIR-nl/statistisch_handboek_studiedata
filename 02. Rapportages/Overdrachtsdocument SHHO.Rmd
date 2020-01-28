@@ -1,5 +1,5 @@
 ---
-title: "Overdrachtsdocument SHHO"
+title: "Overdrachtsdocument code SHHO"
 output:
   html_document:
     theme: lumen
@@ -23,8 +23,6 @@ if (!exists("Substitute_var")) {
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
-
-
 # Inleiding
 
 Dit is het overdrachtsdocument voor de RMarkdown code waarin het Statistisch Handboek Hoger Onderwijsdata is geschreven. Het document is bedoeld om de code van het project voor andere mensen inzichtelijk maken. Het is een soort bijbel (of Thora) om de code te kunnen begrijpen en waar nodig aan te kunnen passen.
@@ -34,26 +32,44 @@ Dit is het overdrachtsdocument voor de RMarkdown code waarin het Statistisch Han
 Het project bevat een aantal soorten documenten. De meesten hiervan zijn in .Rmd geschreven. Dat betekent niet dat het allemaal over R code gaat. Er zijn ook 2 mappen met .Rmd bestanden die over Python code of SPSS syntax gaan. Deze staan in de desbetreffende map. Er zijn daarnaast nog een aantal mappen. Het spreekt redelijk voor zich maar hier voor de volledigheid toch een overzicht: 
 
 | Map    | Uitleg |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------ | 
-| 01. Includes    | Bevat een aantal bestanden die vanuit de .Rmd pagina's worden ingeladen |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
+| 01. Includes    | Bevat een aantal bestanden die vanuit de .Rmd pagina's worden ingeladen. Bevat ook het mapje `data` dat wordt gebruikt om data te genereren die in de pagina's gebruikt worden |
 | 02. Rapportages | Interne rapportages om een aantal mechanismes in toetsen uit te vinden. Alleen voor intern gebruik. |
 | 03. Test        | Bevat bestanden van tests die we gedraaid hebben | 
+| 04. Python chunks | Bevat bestanden met python chunks die in de R Rmd files worden gefietst door Index_Merge_Python |
 | 99. Functies en Libraries | Bevat .R scripts die zelfgeprogrammeerde formatteer functies aanmaakt en die benodigde libraries inlaadt | 
-| _site
+| _site | Bevat bestanden die nodig zijn om de site te maken|
+| Python/SPSS/R | Bevat alleen maar .rmd files (of resulterende .html pagina's) die rechtstreeks knitten als .html pagina's die 1-op-1 op de site terecht komen|
 
+# Blokken
+Er zijn vier soorten tekst in de Rmd files te vinden. De eerste is tekst die als tekst terecht moet komen in de webpagina. Deze tekst is door Irene van der Staaij geschreven. Het gaat hier bijvoorbeeld om de theoretische teksten die uitleggen wat een toets doet. Er zijn daarnaast 3 soorten tekst waarin code voorkomt. Deze zijn omsloten door een blokdefinitie zodat we vanuit de pagina's voor R de stukken code uit python of spss kunnen fietsen. De volgende drie soorten tekst met code komen voor:
 
-# Tekst
-```{r tekst uitleg}
-# Header niveau 1
-## Header niveau 2
-### Header niveau 3
+1. Codeblokken die een gebruiker van de website moet kunnen importeren (alle zichtbare code  + data aanmaken). Deze worden aangeroepen met `<!-- ## OPENBLOK: naamchunk.taal -->` en afgesloten met `<!-- ## /OPENBLOK: naamchunk.taal -->`.
+2. Codeblokken die we gebruiken die een gebruiker van de website niet moet kunnen importeren (om in verbatim variabelen aan te maken bijvoorbeeld). Deze zijn dus afgesloten voor de gebruiker.  Deze worden aangeroepen met `<!-- ## CLOSEDBLOK: naamchunk.taal -->` en afgesloten met `<!-- ## /CLOSEDBLOK: naamchunk.taal -->`.
+3. Tekst met verwijzingen naar code inclusief tekst die in verbatim code gebruikt om waardes aan te roepen (tekst met R of python code). Deze worden aangeroepen met `<!-- ## TEKSTBLOK: naamchunk.taal -->` en afgesloten met `<!-- ## /TEKSTBLOK: naamchunk.taal -->`.
+
+# Kolommen
+Kolommen worden aangeroepen door de sectie die een kolom moet bevatten te starten met `<div class = "col-container">`. Vervolgens start je elke kolom met `<div class="col">` en sluit je deze af met `</div>`. De hele sectie moet vervolgens ook weer afgesloten worden met `</div>`.
+
+# Onderwijscasus
+Het gedeelte waarin de onderwijscasus wordt omschreven moet in .html in een blauw kader komen. Je roept deze aan met `<div id ="casus">` en sluit af met `</div>`.
+
+# Inladen benodigde libraries, functies en stylesheets
+Aan het begin van elke pagina worden de benodigde libraries, functies en stylesheets geïmporteerd. De functies en libraries worden ingeladen met:
+```{r functiesvoorbeeld, results='hide'}
+library(here)
+if (!exists("Substitute_var")) {
+  ## Installeer packages en functies
+  source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
+}
 ```
-# Header niveau 1
-## Header niveau 2
-### Header niveau 3
 
-
-
+Het stylesheet wordt aangeroepen met de verborgen code:
+```{r stylesheetvoorbeeld, eval=FALSE}
+<style>
+`r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
+</style>
+```
 
 
 

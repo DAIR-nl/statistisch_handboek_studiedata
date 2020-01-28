@@ -84,7 +84,7 @@ Bekijk de grootte, de mediaan en de kwantielen van de data met `length()` en `qu
 Alumni_inkomens_T1 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Meetmoment == "T1"]
 Alumni_inkomens_T2 <- Alumni_inkomens$Inkomen[Alumni_inkomens$Meetmoment == "T2"]
 ```
-<!-- ## /CLOSEDBLOK: Data-selecteren.R-->
+<!-- ## /OPENBLOK: Data-selecteren.R-->
 
 <div class="col-container">
   <div class="col">
@@ -170,7 +170,7 @@ wilcox.test(Alumni_inkomens_T2, Alumni_inkomens_T1, paired = TRUE, alternative =
 wilcox <- wilcox.test(Alumni_inkomens_T2, Alumni_inkomens_T1, paired=TRUE, alternative = "greater")
 vVstatistic <- wilcox$statistic
 ```
-<!-- ## /CLOSEDLOK: Wilcoxon-signed-rank-toets.R -->
+<!-- ## /CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
 <!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
 * *V* = `r vVstatistic`, p < 0,05  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen[^5]

@@ -107,7 +107,7 @@ N = np.size(Gemiddeld_cijfer_WNS)
 ```{python histogram, include=TRUE}
 ## Histogram met matplotlib
 import matplotlib.pyplot as plt
-hist = plt.hist(r.Gemiddeld_cijfer_WNS, density = True, edgecolor = "black", bins = 9)
+hist = plt.hist(dfGemiddeld_cijfer_WNS, density = True, edgecolor = "black", bins = 9)
 title = plt.title("Gemiddelde Eindcijfers Wiskunde, Natuurkunde en Scheikunde")
 xlab = plt.xlabel("Gemiddeld_Cijfer_WNS")
 ylab = plt.ylabel("Frequentiedichtheid")
@@ -125,7 +125,7 @@ import scipy.stats as stats
 ```
 
 ```{python qqplot}
-qq = stats.probplot(r.Gemiddeld_cijfer_WNS, dist="norm", plot=plt)
+qq = stats.probplot(dfGemiddeld_cijfer_WNS, dist="norm", plot=plt)
 title = plt.title("Normaal Q-Q plot van gemiddelde cijfers WNS")
 xlab = plt.xlabel("Theoretische kwantielen")
 ylab = plt.ylabel("Kwantielen in data")
@@ -136,7 +136,7 @@ plt.show()
 <!-- ## OPENBLOK: Boxplot.py -->
 ``` {python boxplot}
 ## Boxplot
-box = plt.boxplot(Gemiddeld_cijfer_WNS)
+box = plt.boxplot(dfGemiddeld_cijfer_WNS)
 x = plt.xlabel("Werktuigbouwkunde")
 y = plt.ylabel("Gemiddeld_cijfer_WNS")
 plt.show()
@@ -151,7 +151,7 @@ De standaard interpretatie van een statitische toets in Python is als volgt: `(<
 ```{python Kolmogorov-Smirnov Test, warning=FALSE}
 ## Kolmogorov-Smirnov test
 import statsmodels.stats.api
-print(statsmodels.stats.api.lilliefors(Gemiddeld_cijfer_WNS))
+print(statsmodels.stats.api.lilliefors(dfGemiddeld_cijfer_WNS))
 ```
 <!-- ## /OPENBLOK: Lilliefors-test.py -->
 
@@ -179,11 +179,11 @@ De *one sample t-toets* is uitgevoerd om de vraag te beantwoorden of het gemidde
 <!-- ## OPENBLOK: T-test.py -->
 ```{python ttest}
 ## T-test
-print(stats.ttest_1samp(Gemiddeld_cijfer_WNS, popmean = 6.8))
+print(stats.ttest_1samp(dfGemiddeld_cijfer_WNS, popmean = 6.8))
 ```
 <!-- ## /OPENBLOK: T-test.py -->
 ```{python ttest als object, echo = FALSE}
-stat, pval = stats.ttest_1samp(Gemiddeld_cijfer_WNS, popmean = 6.8)
+stat, pval = stats.ttest_1samp(dfGemiddeld_cijfer_WNS, popmean = 6.8)
 par = N - 1
 ```
 

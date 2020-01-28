@@ -66,7 +66,7 @@ dfToetsen <- tribble(
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## Verwerk codeblokken met OPENBLOK, TEKSTBLOK
-sRegEx <- "## [/]{0,1}[A-Z]{4,5}BLOK: "
+sRegEx <- "## [/]{0,1}[A-Z]{4,6}BLOK: "
 
 ## Loop over de toetsen die in gebruik zijn
 for (toets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {

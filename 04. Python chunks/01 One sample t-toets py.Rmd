@@ -25,10 +25,6 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Functies.R -->
 
-<style>
-`r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
-</style>
-
 <!-- ## CLOSEDBLOK: Header.R -->
 ```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
@@ -63,6 +59,7 @@ import pandas as pd
 
 ```{python, include=FALSE}
 dfGemiddeld_cijfer_WNS = pd.DataFrame(r.Gemiddeld_cijfer_WNS)
+Gemiddeld_cijfer_WNS = r.Gemiddeld_cijfer_WNS
 ```
 
 ```{python, include=TRUE}
@@ -77,7 +74,7 @@ print(dfGemiddeld_cijfer_WNS.tail(6))
 <!-- ## /OPENBLOK: Data-bekijken.py -->
 
 <!-- ## TEKSTBLOK: Data-beschrijven.py-->
-Krijg meer inzicht in de dataset door het gemiddelde en de spreiding te bekijken, `np.size()`, `np.mean()` en `np.sqrt(np.var())`, door deze functies aan te roepen uit de library `numpy`.
+We gaan door met de variabele `Gemiddeld_cijfer_WNS`. Krijg meer inzicht in de dataset door het gemiddelde en de spreiding te bekijken, `np.size()`, `np.mean()` en `np.sqrt(np.var(<variabele>, ddof = 1))`, door deze functies aan te roepen uit de library `numpy`.
 <!-- ## /TEKSTBLOK: Data-beschrijven.py-->
 
 <!-- ## OPENBLOK: Data-beschrijven.py -->
@@ -88,15 +85,14 @@ import numpy as np
 
 ```{python de data bekijken, collapse=TRUE}
 ## Gemiddelde en standaarddeviatie
-print(np.size(dfGemiddeld_cijfer_WNS))
-print(np.mean(dfGemiddeld_cijfer_WNS))
-print(np.sqrt(np.var(dfGemiddeld_cijfer_WNS, ddof = 1)))
+print(np.size(Gemiddeld_cijfer_WNS))
+print(np.mean(Gemiddeld_cijfer_WNS))
+print(np.sqrt(np.var(Gemiddeld_cijfer_WNS, ddof = 1)))
 ```
 <!-- ## /OPENBLOK: Data-beschrijven.py -->
 
 <!-- ## CLOSEDBLOK: Data-beschrijven.py -->
 ```{python, include=FALSE}
-Gemiddeld_cijfer_WNS = r.Gemiddeld_cijfer_WNS
 mean = np.mean(Gemiddeld_cijfer_WNS)
 sd = np.sqrt(np.var(Gemiddeld_cijfer_WNS, ddof = 1))
 N = np.size(Gemiddeld_cijfer_WNS)
@@ -107,7 +103,7 @@ N = np.size(Gemiddeld_cijfer_WNS)
 ```{python histogram, include=TRUE}
 ## Histogram met matplotlib
 import matplotlib.pyplot as plt
-hist = plt.hist(dfGemiddeld_cijfer_WNS, density = True, edgecolor = "black", bins = 9)
+hist = plt.hist(Gemiddeld_cijfer_WNS, density = True, edgecolor = "black", bins = 9)
 title = plt.title("Gemiddelde Eindcijfers Wiskunde, Natuurkunde en Scheikunde")
 xlab = plt.xlabel("Gemiddeld_Cijfer_WNS")
 ylab = plt.ylabel("Frequentiedichtheid")
@@ -125,7 +121,7 @@ import scipy.stats as stats
 ```
 
 ```{python qqplot}
-qq = stats.probplot(dfGemiddeld_cijfer_WNS, dist="norm", plot=plt)
+qq = stats.probplot(Gemiddeld_cijfer_WNS, dist="norm", plot=plt)
 title = plt.title("Normaal Q-Q plot van gemiddelde cijfers WNS")
 xlab = plt.xlabel("Theoretische kwantielen")
 ylab = plt.ylabel("Kwantielen in data")
@@ -136,7 +132,7 @@ plt.show()
 <!-- ## OPENBLOK: Boxplot.py -->
 ``` {python boxplot}
 ## Boxplot
-box = plt.boxplot(dfGemiddeld_cijfer_WNS)
+box = plt.boxplot(Gemiddeld_cijfer_WNS)
 x = plt.xlabel("Werktuigbouwkunde")
 y = plt.ylabel("Gemiddeld_cijfer_WNS")
 plt.show()
@@ -151,7 +147,7 @@ De standaard interpretatie van een statitische toets in Python is als volgt: `(<
 ```{python Kolmogorov-Smirnov Test, warning=FALSE}
 ## Kolmogorov-Smirnov test
 import statsmodels.stats.api
-print(statsmodels.stats.api.lilliefors(dfGemiddeld_cijfer_WNS))
+print(statsmodels.stats.api.lilliefors(Gemiddeld_cijfer_WNS))
 ```
 <!-- ## /OPENBLOK: Lilliefors-test.py -->
 
@@ -160,8 +156,7 @@ print(statsmodels.stats.api.lilliefors(dfGemiddeld_cijfer_WNS))
 Gemiddeld_cijfer_WNS_n30 = r.Gemiddeld_cijfer_WNS_n30
 N30 = len(Gemiddeld_cijfer_WNS_n30)
 ```
-
-Er is een steekproef van `dfGemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS_n30. De steekproef bevat `r py$N30` studenten.
+Er is een steekproef van `Gemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS_n30`. De steekproef bevat `r py$N30` studenten.
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test.py -->
 
 <!-- ## OPENBLOK: Shapiro-Wilk-test.py -->
@@ -174,16 +169,16 @@ print(stats.shapiro(Gemiddeld_cijfer_WNS_n30))
 <!-- ## TEKSTBLOK: T-test.py -->
 Gebruik `scipy.stats.ttest_1samp()` om een t-toets uit te voeren. Geef het gemiddelde waarmee wordt vergeleken. De standaard in Python is dat er tweezijdig wordt getoetst. De dataframe met `dfGemiddeld_cijfer_WNS` is ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde, *n* = `r py$N`. 
 De *one sample t-toets* is uitgevoerd om de vraag te beantwoorden of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde anders is dan het landelijk gemiddelde (µ = 6,8). De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren dan het landelijk gemiddelde is er voor gekozen om tweezijdig te toetsen.
-<!-- ## TEKSTBLOK: T-test.py -->
+<!-- ## /TEKSTBLOK: T-test.py -->
 
 <!-- ## OPENBLOK: T-test.py -->
 ```{python ttest}
 ## T-test
-print(stats.ttest_1samp(dfGemiddeld_cijfer_WNS, popmean = 6.8))
+print(stats.ttest_1samp(Gemiddeld_cijfer_WNS, popmean = 6.8))
 ```
 <!-- ## /OPENBLOK: T-test.py -->
 ```{python ttest als object, echo = FALSE}
-stat, pval = stats.ttest_1samp(dfGemiddeld_cijfer_WNS, popmean = 6.8)
+stat, pval = stats.ttest_1samp(Gemiddeld_cijfer_WNS, popmean = 6.8)
 par = N - 1
 ```
 

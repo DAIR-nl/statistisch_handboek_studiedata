@@ -15,7 +15,7 @@ output:
     toc: yes
 ---
 
-<!-- ## CLOSEDBLOK: Functies.R -->
+<!-- ## CLOSEDBLOK: Functies.R --> 
 ```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
 library(here)
 if (!exists("Substitute_var")) {
@@ -41,19 +41,19 @@ knitr::knit_engines$set(python = reticulate::eng_python)
 ```
 <!-- ## /CLOSEDBLOK: Reticulate.R -->
 
-<!-- ## OPENBLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.py -->
 ```{r aanmaken data, include=FALSE, echo=TRUE, results='hide'}
 source(paste0(here::here(),"/01. Includes/data/01.R"))
 ```
-<!-- ## /OPENBLOK: Data-aanmaken.R -->
+<!-- ## /OPENBLOK: Data-aanmaken.py -->
 
-<!-- ## TEKSTBLOK: Dataset-inladen.py-->
+<!-- ## TEKSTBLOK: Dataset-inladen.py -->
 Er is een dataframe ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde: `dfGemiddeld_cijfer_WNS`.
-<!-- ## /TEKSTBLOK: Dataset-inladen.py-->
+<!-- ## /TEKSTBLOK: Dataset-inladen.py -->
 
 <!-- ## TEKSTBLOK: Data-bekijken.py -->
 Gebruik `<dataframe>.head()` en `<dataframe>.tail()` uit de library `pandas` om de structuur van de data te bekijken.
-<!-- ## TEKSTBLOK: Data-bekijken.py -->
+<!-- ## /TEKSTBLOK: Data-bekijken.py -->
 
 <!-- ## OPENBLOK: Data-bekijken.py -->
 ```{python}

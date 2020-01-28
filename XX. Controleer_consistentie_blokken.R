@@ -35,6 +35,8 @@ source("99. Functies en Libraries/00. Voorbereidingen.R")
 ## Verwerk codeblokken 
 sRegEx <- "## [/]{0,1}[A-Z]{4,6}BLOK"
 
+#Bestandsnaam <- "04. Python chunks/01 One sample t-toets-TEST py.Rmd"
+
 ## Functie om Blokken te vinden die geen paar zijn
 Bepaal_code_wezen <- function(Bestandsnaam) {
   
@@ -50,8 +52,9 @@ Bepaal_code_wezen <- function(Bestandsnaam) {
   dfFile <- dfFile %>%
     filter(grepl(sRegEx, Tekst)) %>%
     mutate(Toets = Bestandsnaam) %>%
-    mutate(Tekst = str_remove(Tekst, "<!-- ## [/]{0,1}"),
+    mutate(Tekst = str_remove(Tekst, "<!-- ##[ ]{0,1}[/]{0,1}"),
            Tekst = str_remove(Tekst, "[ ]{0,1}-->")) %>%
+    mutate(Tekst = trim(Tekst)) %>%
     group_by(Tekst) %>%
     mutate(Dubbel = n() > 1) %>%
     filter(Dubbel == F) %>%

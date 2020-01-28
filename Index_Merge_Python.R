@@ -39,9 +39,9 @@ bDebug <- F
 ## Bepaal de lijst van toetsen; wijzig 0 in 1 om in gebruik te nemen
 dfToetsen <- tribble(
     ~Toets, ~InGebruik,
-    "01 One sample t-toets",                "0", 
+    "01 One sample t-toets",                "1", 
     "02 Gepaarde t-toets",                  "0", 
-    "03 Ongepaarde t-toets",                "1", 
+    "03 Ongepaarde t-toets",                "0", 
     "04 Linear mixed model",                "0", 
     "05 One-way ANOVA",                     "0", 
     "06 Tekentoets",                        "0", 
@@ -88,9 +88,11 @@ for (toets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
       lCodeblokken <- thisRmd_R_file[lRegelnummers]
       
       ## Verwijder regels met /BLOK en verwijder begin + einde string (<--! -->)
+      ## en trim
       lCodeblokken <- lCodeblokken[!str_detect(lCodeblokken, pattern = "## /")] %>% 
         str_replace("<!-- ## ", "") %>% 
-        str_replace(".R[ ]{0,1}-->", "") 
+        str_replace(".R[ ]{0,1}-->", "") %>%
+        trim()
       
       ## Loop nu over de codeblokken
       for (l in lCodeblokken) {
@@ -163,10 +165,17 @@ for (toets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
                 sep = "\n")
             
             ## Geef een melding
-            if (bDebug == T) {
-              print(paste(l, "verwerkt"))
-            }
             unlink(sPythonFile_Code)
+            
+            print(paste0("Verwerkt: ",l))
+            
+            if (i == length(lCodeblokken) ) {
+              if (file.exists(sPythonFile_Merged)) {
+                print(paste0("Aangemaakt: ", sPythonFile_Merged))
+              } else {
+              print(paste0("ERROR: ", sPythonFile_Merged, " niet aangemaakt"))
+              } 
+            }
             
         } else {
             ## Als er geen code is gevonden, geef dan een melding

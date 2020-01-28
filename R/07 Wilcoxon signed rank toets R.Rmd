@@ -1,5 +1,5 @@
 ---
-title: "07 Wilcoxon signed rank toets"
+title: "Wilcoxon signed rank toets"
 output:
   html_document:
     theme: lumen
@@ -168,7 +168,7 @@ wilcox.test(Alumni_inkomens_T2, Alumni_inkomens_T1, paired = TRUE, alternative =
 <!-- ## CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
 ```{r wilcox test als object, include=FALSE, echo=TRUE}
 wilcox <- wilcox.test(Alumni_inkomens_T2, Alumni_inkomens_T1, paired=TRUE, alternative = "greater")
-vVstatistic <- wilcox$statistic
+vVstatistic <- Round_and_format(wilcox$statistic)
 ```
 <!-- ## /CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
 <!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
@@ -179,7 +179,7 @@ vVstatistic <- wilcox$statistic
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd is veranderd. De mediaan van de inkomens van 1 jaar na afstuderen: `r vMed_T1` De mediaan van de inkomens van 5 jaar na afstuderen: `r vMed_T2`, *V* = TEST, p-waarde < 0,05. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen de inkomens van de alumni van de Academie Mens & Maatschappij in vier jaar tijd is veranderd.
+De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd is veranderd. De mediaan van de inkomens van 1 jaar na afstuderen: `r vMed_T1`. De mediaan van de inkomens van 5 jaar na afstuderen: `r vMed_T2`. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen de inkomens van de alumni van de Academie Mens & Maatschappij bij T~0~ en T~1~, *V* = `r vVstatistic`, p-waarde < 0,05.
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->

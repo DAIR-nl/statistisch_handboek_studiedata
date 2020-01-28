@@ -40,7 +40,7 @@ source(paste0(here::here(),"/01. Includes/data/07.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *Wilcoxon signed rank toets* om te toetsen of bij een herhaalde meting de waardes van een groep aan elkaar gelijk zijn. Een voordeel van deze test is dat het voor alle type data gebruikt kan worden.[^1]   
+Gebruik de *Wilcoxon signed rank toets* om te toetsen of bij een herhaalde meting de waardes van een groep van elkaar verschillen.[^1]   
 
 # Onderwijscasus
 <div id ="casus">
@@ -51,9 +51,9 @@ De directeur van de Academie Mens & Maatschappij wil bekijken hoe het inkomen va
 </div>
 
 # Assumpties
-De data zijn nomimaal, ordinaal of numeriek gemeten. De *Wilcoxon Signed Rank Test* kan een alternatief zijn voor de *gepaarde t-toets*. 
+De data zijn (semi)continu.[^2] De *Wilcoxon Signed Rank Test* kan een alternatief zijn voor de *gepaarde t-toets*. 
 
-De *Wilcoxon Signed Rank Test* telt geen eisen aan de data en hoeft onder andere niet te voldoen aan de assumptie normaliteit. Bij de *Wilcoxon Signed Rank Test* hebben uitbijters hebben minder invloed op het eindresultaat, dan bij de *gepaarde t-toets*. Daarentegen, als de data wel normaal verdeeld zijn, heeft de *Wilcoxon Signed Rank Test* minder onderscheidend vermogen dan de *gepaarde t-toets*.[^2]<sup>, </sup>[^3] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Wilcoxon Signed Rank Test* test gekozen wordt. 
+Er zijn een aantal voordelen van de *Wilcoxon Signed Rank Test*, bijvoorbeeld, de data hoeven niet aan de assumptie van normaliteit te voldoen. Bij de *Wilcoxon Signed Rank Test* hebben uitbijters hebben minder invloed op het eindresultaat, dan bij de *gepaarde t-toets*. Daarentegen, als de data wel normaal verdeeld zijn, heeft de *Wilcoxon Signed Rank Test* minder onderscheidend vermogen dan de *gepaarde t-toets*.[^3]<sup>, </sup>[^4] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Wilcoxon Signed Rank Test* test gekozen wordt. 
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
@@ -144,7 +144,7 @@ ggplot(Alumni_inkomens,
 Op beide tijdstippen is te zien dat de meeste alumni tussen de 0 en 4.000 euro per maand verdienen en een paar alumni verdienen ver boven modaal. 
 
 ### Boxplot
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^4] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen.  
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^5] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen.  
 
 <!-- ## OPENBLOK: Boxplot.R -->
 ```{r boxplot}
@@ -153,7 +153,7 @@ boxplot(Inkomen ~ Meetmoment, Alumni_inkomens,
 ```
 <!-- ## /OPENBLOK: Boxplot.R -->
 
-De boxplotten laten zien dat er op beide meetmomenten veel inkomens rondom de 2000 euro liggen. De mediaan is van T~2~ is iets hoger, maar of er een verschil is tussen beide groepen is op het oog niet te zien. Toets met de *Wilcoxon signed rang toets* of er een significant verschil is.  
+De boxplotten laten zien dat er op beide meetmomenten veel inkomens rondom de 2000 euro liggen. De mediaan is van T~2~ is iets hoger dan van T~1~, maar of er een significant verschil is tussen beide groepen is op het oog niet te zien. Toets met de *Wilcoxon signed rang toets* of er een significant verschil is.  
 In de data zitten er extremere inkomens, deze uitbijters zijn niet van invloed op de uitkomst van de *Wilcoxon signed rang toets*. 
 
 ## Wilcoxon signed rank toets
@@ -173,7 +173,7 @@ vVstatistic <- Round_and_format(wilcox$statistic)
 <!-- ## /CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
 <!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
 * *V* = `r vVstatistic`, p < 0,05  
-* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen[^5]
+* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen[^6]
 
 <!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
 
@@ -188,7 +188,8 @@ De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de 
 <!-- ## /CLOSEDBLOK: Footer.R -->
 
 [^1]: Van Geloven, N. (25 september2013). *Wilcoxon signed rank toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets).
-[^2]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test). 
-[^3]: Onderscheidend vermogen: wordt in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  
-[^4]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
-[^5]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houd hierbij rekening met type I en type II fouten.
+[^2]: *Semi-continue data*: de data zijn discreet, bijvoorbeeld gehele getallen, met zoveel mogelijkheden dat de data geanalyseerd kunnen worden alsof ze continu zijn.  
+[^3]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test). 
+[^4]: Onderscheidend vermogen: wordt in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  
+[^5]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
+[^6]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houd hierbij rekening met type I en type II fouten.

@@ -53,12 +53,12 @@ De toetsmatrix toont per type data en vergelijking welke toetsen gebruikt kunnen
 * *ordinaal*: Er kan een ordening gemaakt worden tussen de groepen. Een voorbeeld hiervan zijn de antwoordenmogelijkheden 'onvoldoende', 'voldoende' of 'goed'.  
 
 ## Soort vergelijking
-Voor welke toets gekozen 
-* 1 groep - met referentie:
-* 2 groepen - gepaard:
-* 2 groepen - ongepaard:
-* &gt; 2 groepen - gepaard:
-* &gt; 2 groepen - ongepaard:
+Voor welke toets gekozen  
+* 1 groep - met referentie:  
+* 2 groepen - gepaard:  
+* 2 groepen - ongepaard:  
+* &gt; 2 groepen - gepaard:  
+* &gt; 2 groepen - ongepaard:  
 
 * *Vergelijking van één groep met een referentie*: Een bekende gemiddelde of norm van de totale populatie, zoals de gemiddelde levensverwachting, wordt vergeleken met een specifieke groep, zoals de gemiddelde levensverwachting van Amsterdammers.    
 * *Vergelijking van gepaarde groepen*: Een onderdeel is gekoppeld aan elkaar, zoals bij een herhaalde meting. Bijvoorbeeld een studie waarbij studenten vòòr een cursus en nà een cursus getest worden op algemene kennis. Door de verschillen tussen de voor- en nameting te vergelijken kunnen conclusies worden getrokken over het effect van de cursus op de algemene kennis van de studenten. 

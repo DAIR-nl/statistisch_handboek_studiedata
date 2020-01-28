@@ -143,9 +143,9 @@ plt.show()
 ```
 <!-- ## /OPENBLOK: Boxplot.py -->
 
-<!-- ## TEKSTBLOK: Lilliefors-test1.R -->
+<!-- ## TEKSTBLOK: Lilliefors-test1.py -->
 De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`.
-<!-- ## /TEKSTBLOK: Lilliefors-test1.R -->
+<!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
 
 <!-- ## OPENBLOK: Lilliefors-test.py -->
 ```{python Kolmogorov-Smirnov Test, warning=FALSE}

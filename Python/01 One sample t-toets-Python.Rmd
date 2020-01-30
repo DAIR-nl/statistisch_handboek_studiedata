@@ -118,16 +118,13 @@ print(np.mean(Gemiddeld_cijfer_WNS))
 print(np.sqrt(np.var(Gemiddeld_cijfer_WNS, ddof = 1)))
 ```
 <!-- ## /OPENBLOK: Data-beschrijven.py -->
-<!-- ## CLOSEDBLOK: Data-beschrijven.py -->
-```{python, include=FALSE}
-mean = np.mean(Gemiddeld_cijfer_WNS)
-sd = np.sqrt(np.var(Gemiddeld_cijfer_WNS, ddof = 1))
-N = np.size(Gemiddeld_cijfer_WNS)
+<!-- ## CLOSEDBLOK: Data-beschrijven.R -->
+```{r Var beschrijven t1, include=FALSE, echo=TRUE}
+vMean <- Round_and_format(mean(Gemiddeld_cijfer_WNS))
+vSD <- Round_and_format(sd(Gemiddeld_cijfer_WNS))
+vN <- Round_and_format(length(Gemiddeld_cijfer_WNS))
 ```
-<!-- ## /CLOSEDBLOK: Data-beschrijven.py -->
-<!-- ## TEKSTBLOK: Data-beschrijven2.R-->
-* Gemiddeld cijfer WNS (standaardafwijking): `r vMean` (`r vSD`). *n* = `r vN`.
-<!-- ## /TEKSTBLOK: Data-beschrijven2.R-->
+<!-- ## /CLOSEDBLOK: Data-beschrijven.R -->
 
 
 ## Visuele inspectie van normaliteit
@@ -203,9 +200,6 @@ print(statsmodels.stats.api.lilliefors(Gemiddeld_cijfer_WNS))
 ```
 <!-- ## /OPENBLOK: Lilliefors-test.py -->
 
-<!-- ## TEKSTBLOK: Lilliefors-test2.R -->
-De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
-<!-- ## /TEKSTBLOK: Lilliefors-test2.R -->
 
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
@@ -214,7 +208,6 @@ De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test*
 Gemiddeld_cijfer_WNS_n30 = r.Gemiddeld_cijfer_WNS_n30
 N30 = len(Gemiddeld_cijfer_WNS_n30)
 ```
-Er is een steekproef van `Gemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS_n30`. De steekproef bevat `r py$N30` studenten.
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test.py -->
 <!-- ## OPENBLOK: Shapiro-Wilk-test.py -->
 ``` {python Shapiro-Wilk Test, warning=FALSE}

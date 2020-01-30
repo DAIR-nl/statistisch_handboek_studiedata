@@ -69,12 +69,11 @@ dfToetsen <- tribble(
 sRegEx <- "## [/]{0,1}[A-Z]{4,6}BLOK: "
 
 ## Loop over de toetsen die in gebruik zijn
-for (toets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
-    sToets <- toets
-    
+for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
+
     ## Bepaal de R Markdown en Pyton Markdown
-    thisRmd_R      <- paste0("R/", paste0(toets, " R.Rmd"))
-    thisRmd_Python <- paste0("04. Python chunks/", paste0(toets, " py.Rmd"))
+    thisRmd_R      <- paste0("R/", paste0(sToets, " R.Rmd"))
+    thisRmd_Python <- paste0("04. Python chunks/", paste0(sToets, " py.Rmd"))
     
     ## Als beide bestanden bestaan, ga dan verder
     if (file.exists(thisRmd_R) & file.exists(thisRmd_Python)) {
@@ -118,11 +117,11 @@ for (toets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
             
             ## Melding
             if (bDebug == T) {
-              print(paste0("Python code verwerkt voor ", toets, " en ", l, ".py"))
+              print(paste0("Python code verwerkt voor ", sToets, " en ", l, ".py"))
             }
             
         } else {
-            print(paste0("GEEN Python code gevonden voor ", toets, " en ", l, ".py"))
+            print(paste0("GEEN Python code gevonden voor ", sToets, " en ", l, ".py"))
         }
       }
       
@@ -130,9 +129,10 @@ for (toets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
       thisRmd_file <- thisRmd_R_file
       
       ## Verwijder het gemergede Python bestand als het bestaat
-      sPythonFile_Merged <- paste0("Python/", toets, "-Python.Rmd")
+      sPythonFile_Merged <- paste0("Python/", sToets, "-Python.Rmd")
       if (file.exists(sPythonFile_Merged)) {
         unlink(sPythonFile_Merged)
+        print(paste0("VERWIJDERD OM OPNIEUW OP TE BOUWEN: ", sPythonFile_Merged))
       }
         
       ## Loop over de .py bestanden en vervang de .R code blokken met de .py code blokken
@@ -141,6 +141,7 @@ for (toets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
       i <- 0
       for (l in lCodeblokken) {
         i <- i + 1
+        
         if (i > 1 & file.exists(sPythonFile_Merged)) {
           thisRmd_file <- readLines(sPythonFile_Merged)
         }
@@ -150,9 +151,9 @@ for (toets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
           print(paste(l, ": ", lRegelnummers_R))
         }
         
-        ## Lees het bestand in en knip de betreffende code eruit
-        # if (length(lRegelnummers_R) == 2 & file.exists(sPythonFile_Code)) {
-        if (length(lRegelnummers_R) == 2) {
+        ## Lees het bestand in en knip de betreffende code eruit,
+        ## maar alleen als er een gevuld element is in lPythonCode[[l]]
+        if (length(lRegelnummers_R) == 2 && !is.null(lPythonCode[[l]])) {
             thisPythonCode <- lPythonCode[[l]]
             
             ## Bepaal de start en eindregel
@@ -181,7 +182,7 @@ for (toets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
             
         } else {
             ## Als er geen code is gevonden, geef dan een melding
-            print(paste0("GEEN Python code verwerkt voor ", toets, " en ", l,".py"))
+            print(paste0("GEEN Python code verwerkt voor ", sToets, " en ", l,".py"))
         }
       }
       

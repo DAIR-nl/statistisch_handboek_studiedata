@@ -19,6 +19,13 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Functies.R -->
 
+<!-- ## CLOSEDBLOK: Reticulate.R -->
+```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}
+library(reticulate)
+knitr::knit_engines$set(python = reticulate::eng_python)
+```
+<!-- ## /CLOSEDBLOK: Reticulate.R -->
+
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>

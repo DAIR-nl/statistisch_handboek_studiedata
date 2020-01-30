@@ -1,0 +1,28 @@
+---
+title: "Test"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+  keywords: [statistisch handboek, studiedata]
+---
+    
+```{r}
+library(reticulate)
+use_virtualenv('r-reticulate')
+py_available(TRUE)
+```
+
+```{python}
+a=7
+print(a)
+```
+
+```{r}
+py$a
+```
+
+De steekproef bevat `r py$a` studenten.

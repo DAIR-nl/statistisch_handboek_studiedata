@@ -36,102 +36,24 @@ knitr::knit_engines$set(python = reticulate::eng_python)
 ```
 <!-- ## /CLOSEDBLOK: Reticulate.R -->
 
-
 ```{r set-options, echo=FALSE, cache=FALSE}
 options(width = 80)
 ## Zodat de TukeyHSD naast elkaar geprint wordt
 ```
 
-<!-- ## OPENBLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.py -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-## Het hoofd communicatie wil in verband met wervingsactiviteiten weten wat de reistijd is van studenten aan verschillende opleidingen.
-
-## Doel: tidy data met een kolom reistijd (value) en een kolom opleiding (factor)
-library(dplyr)
-RNGkind(sample.kind = "Rounding")
-set.seed(3)
-
-Studiegrootte <- 29
-reistijd_gem <- 35
-sd_gem <- 12
-Reistijd_FIL <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
-namenlijst_fil <- replicate(2.1*Studiegrootte, "Filosofie")
-
-Studiegrootte <- 23
-reistijd_gem <- 45
-sd_gem <- 13
-Reistijd_ATC <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
-namenlijst_atc <- replicate(2.1*Studiegrootte, "Arabische Taal en Cultuur")
-
-Studiegrootte <- 71
-reistijd_gem <- 36
-sd_gem <- 11
-Reistijd_GSC <- round(rnorm(2.1*Studiegrootte, reistijd_gem, sd_gem), 2)
-namenlijst_gsc <- replicate(2.1*Studiegrootte, "Geschiedenis")
-
-Reistijd <- c(Reistijd_ATC, Reistijd_GSC, Reistijd_FIL)
-Opleiding <- c(namenlijst_atc, namenlijst_gsc, namenlijst_fil)
-
-Opleiding <- Opleiding[order(Reistijd)]
-Reistijd <- sort(Reistijd)
-
-Reistijd_per_opleiding <- data.frame(Reistijd, Opleiding)
-colnames(Reistijd_per_opleiding) <- c("Reistijd", "Opleiding")
-
-
-Reistijd_per_opleiding <- Reistijd_per_opleiding %>%
-  mutate(Reistijd = if_else(Reistijd < 0, Reistijd*-1, Reistijd))
+source(paste0(here::here(),"/01. Includes/data/05.R"))
 ```
-<!-- ## /BLOK: Data-aanmaken.R -->
+<!-- ## /OPENBLOK: Data-aanmaken.py -->
 
-# Toepassing
-Gebruik de *one-way ANOVA* bij het toetsen of het gemiddelde van drie of meer onafhankelijke groepen aan elkaar gelijk zijn.[^1] 
+<!-- ## TEKSTBLOK: Dataset-inladen.py -->
+Er is een dataframe ingeladen met de reistijden van uitwonende studenten per opleiding ingeladen genaamd `dfReistijd_per_opleiding`. 
+<!-- ## /TEKSTBLOK: Dataset-inladen.py -->
 
-# Onderwijscasus
-<div id = "casus">
-In verband met wervingsactiviteiten wil het hoofd van de afdeling Communicatie weten wat de reistijd is van studenten aan verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. 
-
-H~0~: De gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar: µ~1~ = µ~2~ = µ~3~   
-
-H~A~: Tenminste voor één opleiding is de gemiddelde reistijd niet gelijk aan de gemiddelde reistijd van studenten voor andere opleidingen, bijvoorbeeld: µ~1~ ≠ µ~2~ = µ~3~ 
-</div>
-
-# Assumpties
-Om een valide toetsresultaat te bereiken moeten de data aan een aantal voorwaarden voldoen. Controleer of de steekproef aan de volgende assumpties voldoet: normaliteit, homogeniteit van varianties en onafhankelijkheid.  
-
-De *one-way ANOVA* is een robuuste test; als één groep uit de steekproef niet voldoet aan de assumptie van normaliteit of homogeniteit van varianties dan kan de *one-way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden.[^2] Hierdoor kan het wel zijn dat de toets minder onderscheidend vermogen heeft, dan wanneer de assumpties niet geschonden worden.[^3]<sup>, </sup>[^4] De *Kruskal-Wallis test* wordt gezien als een alternatief voor de *one-way ANOVA* als er geen sprake is van normaliteit en/of homogeniteit.[^5]<sup>, </sup>[^6]
-
-## Normaliteit
-Controleer de assumptie van normaliteit met de volgende stappen:  
-1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
-2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^7]<sup>, </sup>[^8]  
-
-Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld zijn.
-
-## Homogeniteit van Varianties
-Toets met de *Levene's Test (for equality of variance)* of de spreiding van iedere groep ongeveer hetzelfde is. Bij een *p* < 0,05 is de spreiding van de groepen significant verschillend.[^9]
-
-# Effectmaat
-Bereken de effectmaat om te bepalen of de gevonden p-waarde van een ANOVA betekenisvol is. Hier worden twee effectmaten besproken die veel voorkomen: Cohen's *f* en eta squared.   
-
-## Cohen's f
-Cohen's *f* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer. Een indicatie om *f* te interpreteren is: rond 0,10 is een klein effect, rond 0,25 is een gemiddeld effect en rond 0,40 is een groot effect.[^10]
-
-## Eta squared
-Eta squared (*η^2^*) berekent de proportie van de variantie in de afhankelijke variabele wat verklaard wordt door de onafhankelijke variabele. In dit geval berekent het de proportie van de variantie in de lengte van de reistijd wat verklaard kan worden door de opleiding. Een indicatie om *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^11]
-
-# Post-hoc toetsen
-De one-way ANOVA toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Er wordt een post-hoc toets uitgevoerd om te bepalen welke groepen significant verschillen.
-
-Er zijn meerdere post-hoc toetsen. Welke toets gekozen wordt hangt onder andere af of de spreiding van de groepen ongeveer hetzelfde zijn (zie Levene's Test):   
-* Gebruik Tukey bij gelijke spreiding.[^12]  
-* Gebruik Games-Howell bij ongelijke spreiding.[^13]  
-
-# Uitvoering
-Er is een dataset ingeladen met de reistijden van uitwonende studenten per opleiding ingeladen genaamd `Reistijd_per_opleiding`. 
-
-## De data bekijken
+<!-- ## TEKSTBLOK: Data-bekijken.py -->
 Gebruik `<dataframe>.head()` en `<dataframe>.tail()` om de structuur van de data te bekijken.
+<!-- ## /TEKSTBLOK: Data-bekijken.py -->
 
 <!-- ## OPENBLOK: Data-bekijken.py -->
 ```{python, include=FALSE}
@@ -148,18 +70,18 @@ print(dfReistijd_per_opleiding.head(5))
 ## Laatste 5 observaties
 print(dfReistijd_per_opleiding.tail(5))
 ```
-<!-- ## /BLOK: Data-bekijken.py -->
+<!-- ## /OPENBLOK: Data-bekijken.py -->
 
+<!-- ## TEKSTBLOK: Data-bekijken2.py -->
 De dataset bevat gegevens van studenten van verschillende opleidingen. Gebruik `<data.frame>.<kolomnaam>.unique()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
+<!-- ## /TEKSTBLOK: Data-bekijken2.py -->
 
 <!-- ## OPENBLOK: Data-bekijken2.py -->
 ```{python data bekijken 2}
 ## Opleidingen in de data aanwezig
 print(dfReistijd_per_opleiding.Opleiding.unique())
 ```
-<!-- ## /BLOK: Data-bekijken2.py -->
-
-Selecteer de drie groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. 
+<!-- ## /OPENBLOK: Data-bekijken2.py -->
 
 <!-- ## OPENBLOK: Data-selecteren.py -->
 ```{python data selecteren}
@@ -167,17 +89,19 @@ Reistijd_ATC = dfReistijd_per_opleiding[dfReistijd_per_opleiding['Opleiding'] ==
 Reistijd_FIL = dfReistijd_per_opleiding[dfReistijd_per_opleiding['Opleiding'] == "Filosofie"]['Reistijd']
 Reistijd_GSC = dfReistijd_per_opleiding[dfReistijd_per_opleiding['Opleiding'] == "Geschiedenis"]['Reistijd']
 ```
-<!-- ## /BLOK: Data-selecteren.py -->
+<!-- ## /OPENBLOK: Data-selecteren.py -->
 
+<!-- ## TEKSTBLOK: Data-beschrijven.py -->
 Om meer inzicht te krijgen in de data, inspecteer de data met `len()`, `np.mean()` en `np.sqrt(np.var())`, door deze aan te roepen uit de library `numpy`.
+<!-- ## /TEKSTBLOK: Data-beschrijven.py -->
 
 <!-- ## OPENBLOK: Data-beschrijven-inladen.py -->
 ```{python}
 # Om het gemiddelde en de standaard deviatie te berekenen, hebben we de library 'numpy' nodig
 import numpy as np
 ```
+<!-- ## /OPENBLOK: Data-beschrijven-inladen.py -->
 
-<div class="col2">
 <!-- ## OPENBLOK: Data-beschrijven-1.py -->
 ```{python Data beschrijven 1, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie voor Arabische Taal en Cultuur
@@ -199,32 +123,30 @@ print(len(Reistijd_GSC))
 print(np.mean(Reistijd_GSC))
 print(np.sqrt(np.var(Reistijd_GSC)))
 ```
-<!-- ## /BLOK: Data-beschrijven-1.py -->
+<!-- ## /OPENBLOK: Data-beschrijven-1.py -->
 
-```{r data beschrijven als object 1, include=FALSE, echo=TRUE}
+<!-- ## CLOSEDBLOK: Data-beschrijven.R -->
+```{r data beschrijven als object, include=FALSE, echo=TRUE}
 vM_ATC <- Round_and_format(mean(Reistijd_ATC))
 vSD_ATC <- Round_and_format(sd(Reistijd_ATC))
 vN_ATC <- Round_and_format(length(Reistijd_ATC))
-```
-```{r data beschrijven als object 2, include=FALSE, echo=TRUE}
+
 vM_FIL <- Round_and_format(mean(Reistijd_FIL))
 vSD_FIL <-Round_and_format(sd(Reistijd_FIL))
 vN_FIL <- Round_and_format(length(Reistijd_FIL))
-```
-```{r data beschrijven als object 3, include=FALSE, echo=TRUE}
+
 vM_GSC <- Round_and_format(mean(Reistijd_GSC))
 vSD_GSC <-Round_and_format(sd(Reistijd_GSC))
 vN_GSC <- Round_and_format(length(Reistijd_GSC))
 ```
+<!-- ## /CLOSEDBLOK: Data-beschrijven.R -->
 
+<!-- ## TEKSTBLOK: Data-beschrijven.R-->
 * Gemiddelde reistijd Arabische Taal en Cultuur (standaarddeviatie): `r vM_ATC` (`r vSD_ATC`). *n* = `r vN_ATC`  
 * Gemiddelde reistijd Filosofie (standaarddeviatie): `r vM_FIL` (`r vSD_FIL`). *n* = `r vN_FIL`.
 * Gemiddelde reistijd Geschiedenis (standaarddeviatie): `r vM_GSC` (`r vSD_GSC`). *n* = `r vN_GSC`.
+<!-- ## /TEKSTBLOK: Data-beschrijven.R-->
 
-## Visuele inspectie van normaliteit
-Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
-
-### Histogram
 <!-- ## OPENBLOK: Histogram.py -->
 ```{python histogram}
 ## Histogram met matplotlib
@@ -245,14 +167,12 @@ hist3 = plt.hist(Reistijd_GSC, density = True, edgecolor = "black", bins = 12)
 main = fig.suptitle('Reistijd')
 plt.show()
 ```
-<!-- ## /BLOK: Histogram.py -->
+<!-- ## /OPENBLOK: Histogram.py -->
 
-De opleidingen Geschiedenis en Arabische taal en Cultuur laten een Bell Curve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Filosofie heeft een lagere frequentie bij een reistijd van 40 minuten, dit kan duiden op niet normaal verdeelde data. 
+<!-- ## TEKSTBLOK: QQplot.py -->
+Importeer `scipy.stats` om een Q-Q plot te maken en statistische testen uit te voeren. Voor een Q-Q plot kan de functie `scipy.stats.probplot()` worden gebruikt.
+<!-- ## TEKSTBLOK: QQplot.py -->
 
-### Q-Q plot
-Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
-<div class = "col-container">
-  <div class="col">
 <!-- ## OPENBLOK: QQplot1.py -->
 ```{python QQplot-t1}
 import scipy.stats as stats
@@ -262,9 +182,8 @@ xlab = plt.xlabel("Theoretische kwantielen")
 ylab = plt.ylabel("Kwantielen in data")
 plt.show()
 ```
-<!-- ## /BLOK: QQplot1.py -->
-  </div>
-  <div class = "col">
+<!-- ## /OPENBLOK: QQplot1.py -->
+
 <!-- ## OPENBLOK: QQplot2.py -->
 ```{python QQplot-t1}
 import scipy.stats as stats
@@ -274,9 +193,8 @@ xlab = plt.xlabel("Theoretische kwantielen")
 ylab = plt.ylabel("Kwantielen in data")
 plt.show()
 ```
-<!-- ## /BLOK: QQplot2.py -->
-  </div>
-  <div class = "col">
+<!-- ## /OPENBLOK: QQplot2.py -->
+
 <!-- ## OPENBLOK: QQplot3.py -->
 ```{python QQplot-t1}
 import scipy.stats as stats
@@ -287,13 +205,6 @@ ylab = plt.ylabel("Kwantielen in data")
 plt.show()
 ```
 <!-- ## OPENBLOK: QQplot3.py -->
-  </div>
-</div>
-
-Bij de Q-Q plot van de reistijd van studenten Geschiedenis liggen de meeste punten op de lijn behalve bij de uiteinden. De cirkels van de Q-Q plot van studenten Arabische Taal en Cultuur en studenten Filosofie liggen net naast de lijn. De discrepantie is minimaal, vermoedelijk zijn de data normaal verdeeld.
-
-### Boxplot
-De box geeft de middelste 50% van de reistijd weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^14]<sup>, </sup>[^15]
 
 <!-- ## OPENBLOK: Boxplot.py -->
 ```{python boxplot}
@@ -302,107 +213,67 @@ box = ax.boxplot([Reistijd_ATC, Reistijd_FIL, Reistijd_GSC], labels = ["Arabisch
 title = plt.title("Reistijd")
 plt.show()
 ```
-<!-- ## /BLOK: Boxplot.py -->
+<!-- ## /OPENBLOK: Boxplot.py -->
 
-De boxplotten geven de spreiding weer van de gemiddelde reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. De boxplotten Arabische Taal en Cultuur en Geschiedenis zien er symmetrisch uit; de boxen zijn even hoog boven als onder de mediaan. De staarten zijn onder en boven even groot. De boxplot van Filosofie is boven de mediaan groter dan onder de mediaan, de data kan wat scheef verdeeld zijn. De mediaan Arabische Taal en Cultuur ligt hoger dan de twee andere opleidingen. Toets met de ANOVA of dit een significant verschil is. 
+<!-- ## TEKSTBLOK: Lilliefors-test1.py -->
+De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`.
+<!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
 
-## Toetsen van normaliteit
-Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
-
-### Kolmogorov-Smirnov
-De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
-
-<!-- ## /BLOK: Library-nortest inladen.py -->
+<!-- ## /OPENBLOK: Library-nortest inladen.py -->
 ```{python}
 import statsmodels.stats.api
 ```
-<!-- ## /BLOK: Library-nortest inladen.py -->
+<!-- ## /OPENBLOK: Library-nortest inladen.py -->
 
-<div class="col-container"> 
-  <div class="col">
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
 print(statsmodels.stats.api.lilliefors(Reistijd_ATC))
 ```
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
-  </div>
-  <div class = "col">
+
 <!-- ## OPENBLOK: Lilliefors-test-2.py -->
 ``` {python Lilliefors Test-2, warning=FALSE}
 print(statsmodels.stats.api.lilliefors(Reistijd_FIL))
 ```
 <!-- ## OPENBLOK: Lilliefors-test-2.py -->
-  </div>
-  <div class = "col">
+
 <!-- ## OPENBLOK: Lilliefors-test-3.py -->
 ``` {python Lilliefors Test-3, warning=FALSE}
 print(statsmodels.stats.api.lilliefors(Reistijd_GSC))
 ```
-<!-- ## /BLOK: Lilliefors-test-3.py -->
-  </div>
-</div>
+<!-- ## /OPENBLOK: Lilliefors-test-3.py -->
 
-De p-waarde is *p* > 0,05, er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. [^16] De *one-way ANOVA* kan uitgevoerd worden.
-
-### Shapiro-Wilk Test
-De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
-
-<div class="col-container"> 
-  <div class="col">
 <!-- ## OPENBLOK: Shapiro-Wilk-test-3.py -->
 ``` {python Shapiro-Wilk Test-1, warning=FALSE}
 import scipy.stats as stats
 print(stats.shapiro(Reistijd_GSC))
 ```
-<!-- ## /BLOK: Shapiro-Wilk-test-3.py -->
-  </div>
-  <div class= "col">
+<!-- ## /OPENBLOK: Shapiro-Wilk-test-3.py -->
+
 <!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
 ``` {python Shapiro-Wilk Test-1, warning=FALSE}
 import scipy.stats as stats
 print(stats.shapiro(Reistijd_FIL))
 ```
 <!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
-  </div>
-  <div class= "col"> 
+
 <!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
 ``` {python Shapiro-Wilk Test-1, warning=FALSE}
 import scipy.stats as stats
 print(stats.shapiro(Reistijd_ATC))
 ```
 <!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
-  </div>
-</div>
-
-De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one-way ANOVA* kan uitgevoerd worden.
-
-## Toetsen van Homogeniteit van varianties
-Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden. 
 
 <!-- ## OPENBLOK: Levenes-test.py -->
 ```{python Levenes test}
 import scipy.stats as stats
 print(stats.levene(Reistijd_ATC, Reistijd_FIL, Reistijd_GSC))
 ```
-<!-- ## /BLOK: Levenes-test.py -->
+<!-- ## /OPENBLOK: Levenes-test.py -->
 
-```{r Levenes test als object, echo = FALSE}
-library(car)
-library(carData)
-L <- leveneTest(Reistijd_per_opleiding$Reistijd, Reistijd_per_opleiding$Opleiding)
-vF_waarde <- Round_and_format(L$`F value`[1])
-vF_p <- Round_and_format(L$`Pr(>F)`[1])
-vDF1 <- Round_and_format(L$`Df`[1])
-vDF2 <- Round_and_format(L$`Df`[2])
-```
-* *F*~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, p-waarde = `r vF_p`, 
-* De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de groepen in spreiding.
-* Vrijheidsgraden bestaan uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r vDF1`) en het tweede cijfer (*n~1~* + *n~2~* - 2 = `r vDF2`).  
-
-
-## One-way ANOVA 
-De *one-way ANOVA* is uitgevoerd om de vraag te beantwoorden of de gemiddelde reistijd van de studenten per opleiding  
+<!-- ## TEKSTBLOK: ANOVA-toets.R -->
 Gebruik `pingouin.anova` om een ANOVA-test uit te voeren.
+<!-- ## /TEKSTBLOK: ANOVA-toets.R -->  
 
 <!-- ## OPENBLOK: ANOVA-toets.py -->
 ```{python}
@@ -414,30 +285,7 @@ import pingouin as pg
 aov = pg.anova(data=dfReistijd_per_opleiding, dv='Reistijd', between='Opleiding', detailed=True)
 print(aov)
 ```
-<!-- ## /BLOK: ANOVA-toets.py -->
-
-```{r ANOVA als object, echo=FALSE}
-ANOVA <- summary(res.aov)
-vF_waarde <- Round_and_format(ANOVA[[1]]$`F value`[1])
-```
-* *F* ~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, *p* < 0,05.
-* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen.[^16] 
-* Vrijheidsgraden: het aantal groepen - 1 = `r vDF1`; *n~1~* + *n~2~* - 2 = `r vDF2`.
-
-### Effectmaat: Cohen's *f*
-Gebruik `cohens_f()` op een object met `class = aov` om het effect te meten.
-
-<!-- ## OPENBLOK: Cohens-f.py -->
-NO CODE
-<!-- ## /OPENBLOK: Cohens-f.py --> 
-
-<!-- ## /BLOK: Cohens-f.R --> 
-```{r Cohen s F als object, include=FALSE}
-f<-cohens_f(res.aov)
-vCohens_f <- Round_and_format(f$cohens.f)
-```
-*f* = `r vCohens_f`. 
-De sterkte van het effect van type opleiding op de reistijd is groot. 
+<!-- ## /OPENBLOK: ANOVA-toets.py -->
 
 ### Effectmaat: Eta squared
 De Eta Squared is al berekend in de ANOVA tabel.
@@ -445,66 +293,14 @@ De Eta Squared is al berekend in de ANOVA tabel.
 ```{python}
 print("Eta Squared:", aov["np2"])
 ```
-<!-- ## /BLOK: Eta-squared.py -->
+<!-- ## /OPENBLOK: Eta-squared.py -->
 
-<!-- ## OPENBLOK: Eta-squared.R --> 
-```{r eta-squared, message = FALSE, include = FALSE}
-library(DescTools)
-```
-<!-- ## /BLOK: Eta-squared.R -->
-
-```{r eta-squared als object, include = FALSE}
-Esq <- Round_and_format(EtaSq(res.aov)[1])
-```
-*η^2^* = `r Esq`
-De sterkte van het effect van de type opleiding op de reistijd is groot. 
-
-## Post-hoc toets: Tukey's toets
-Om te bepalen welke van de type opleidingen in reistijd verschillen wordt een post-hoc toets gedaan. Gebruik bij groepen met gelijke variantie de Tukey Honestly Significant Difference Test.
+<!-- ## TEKSTBLOK: Tukey-HSD.R -->
 Gebruik `pingouin.pairwise_tukey` op het ANOVA-object.
+<!-- ## /TEKSTBLOK: Tukey-HSD.R -->
 
 <!-- ## OPENBLOK: Tukey-HSD.py -->
 ```{python}
 print(pg.pairwise_tukey(data = dfReistijd_per_opleiding, dv = "Reistijd", between = "Opleiding", effsize = "cohen"))
 ```
-<!-- ## /BLOK: Tukey-HSD.py -->
-
-```{r TukeyHSD als object}
-THSD <- TukeyHSD(res.aov)
-vATCvsFIL <- Round_and_format(THSD$Opleiding[1,1])
-vATCvsGSC <- Round_and_format(THSD$Opleiding[2,1])
-vFILvsGSC <- Round_and_format(THSD$Opleiding[3,1])
-```
-Het verschil tussen Filosofie en Arabische Taal en Cultuur: *MD* = `r vATCvsFIL`, p < 0,01.  
-Het verschil tussen Geschiedenis en Arabische Taal en Cultuur: *MD* = `r vATCvsGSC`, p < 0,01.  
-Het verschil tussen Geschiedenis en Filosofie: *MD* = `r vFILvsGSC`, p = 0,26.  
-
-# Rapportage
-Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De opleidingen zijn: Arabische Taal en Cultuur (*M~atc~* = `r vM_ATC`, *SD~atc~* = `r vSD_ATC`), Filosofie (*M~fil~* = `r vM_FIL`, *SD~fil~* = `r vSD_FIL`) en Geschiedenis (*M~gsc~* = `r vM_GSC`, *SD~fil~* = `r vSD_FIL`, zie ook tabel. De gemiddelde reistijd van de groepen verschillen significant van elkaar, *F*(`r vDF1`, `r vDF2`) = `r vF_waarde`, *p* < 0,05. De sterkte van het effect van de type opleiding op de reistijd is groot. 
-
-| Opleiding     | N          | M          | SD          |
-| ------------- | ---------- | ---------- | ----------- |
-| Arabisch      | `r vN_ATC` | `r vM_ATC` | `r vSD_ATC` |
-| Filosofie     | `r vN_FIL` | `r vM_FIL` | `r vSD_FIL` |
-| Geschiedenis  | `r vN_GSC` | `r vM_GSC` | `r vSD_GSC` |
-
-*Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen. Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = `r vATCvsFIL`, p < 0,01). Tussen Geschiedenis en Arabische Taal en Cultuur is een significant verschil (*MD* = `r vATCvsGSC`, p < 0,01). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = `r vFILvsGSC`, p = 0,26). 
-
-Aan de hand van de resultaten kan geconcludeerd worden dat de studenten van Arabische Taal en Cultuur significant langer moeten reizen dan de andere twee opleidingen. Het effect is groot. Tussen de Filosofie en Geschiedenis is geen significant verschil gevonden. 
-
-[^1]: Van Geloven, N. (25 mei 2016). *One-way ANOVA*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/One-way_ANOVA).
-[^2]: Universiteit van Amsterdam (8 juli 2014). *One-way ANOVA*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/One-way_ANOVA).
-[^3]: Onderscheidend vermogen: wordt in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  
-[^4]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
-[^5]: Van Geloven, N. (21 maart 2018). *Kruskal Wallis*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis).
-[^6]: De *Kruskal-Wallis test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, omdat bij het maken van een rankschikking de dataset informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Kruskal-Wallis test* minder onderscheidend vermogen, dan wanneer de *one-way ANOVA* uitgevoerd zou worden.
-[^7]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php. 
-[^8]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).  
-[^9]: Wikipedia (7 september 2019). *Analysis of variance*. https://en.wikipedia.org/wiki/Analysis_of_variance. 
-[^10]: Watson, P. (30 oktober 2019). *Rules of thumb on magnitudes of effect sizes*. [MRC Cognition and Brain Sciences Unit Wiki](http://imaging.mrc-cbu.cam.ac.uk/statswiki/FAQ/effectSize).
-[^11]: Eta-squared. (2019 May 14). Retrieved from: https://en.wikiversity.org/wiki/Eta-squared.
-[^12]: Universiteit van Amsterdam (26 augustus 2014). *MANOVA*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/MANOVA).
-[^13]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf. 
-[^14]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
-[^15]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
-[^16]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, hou hierbij rekening met type I en type II fouten.
+<!-- ## /OPENBLOK: Tukey-HSD.py -->

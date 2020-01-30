@@ -29,6 +29,9 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
+<!-- ## CLOSEDBLOK: Reticulate.R -->
+
+<!-- ## /CLOSEDBLOK: Reticulate.R -->
 
 ```{r opmerking, include=FALSE, eval=FALSE}
 # doorlinken naar de Wilcoxon Signed Rank Test
@@ -315,10 +318,14 @@ library(effsize)
 cohen.d(Uren_studeren ~ Meetmoment, Studielogboek, paired = TRUE)
 ```
 <!-- ## /OPENBLOK: Cohens-d-test.R -->
+
+<!-- ## CLOSEDBLOK: Cohens-d-test.R -->
 ```{r var Cohens d, include = FALSE}
 d <- cohen.d(Uren_studeren ~ Meetmoment, Studielogboek, paired = TRUE)
 vD_waarde <- Round_and_format(d$estimate)
 ```
+<!-- ## CLOSEDBLOK: Cohens-d-test.R -->
+
 <!-- ## TEKSTBLOK: Cohens-d-test.R -->
 *d* = `r vD_waarde`. De sterkte van het effect van de tutor op het cijfer is minimaal. 
 <!-- ## /TEKSTBLOK: Cohens-d-test.R -->

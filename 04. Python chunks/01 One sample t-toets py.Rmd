@@ -1,5 +1,5 @@
 ---
-title: "01 One sample t-toets py"
+title: "01 One sample t-toets Python"
 output:
   html_document:
     keep_md: yes
@@ -30,12 +30,12 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## CLOSEDBLOK: Reticulate.R -->
+<!-- ## CLOSEDBLOK: Reticulate.py -->
 ```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}
 library(reticulate)
 knitr::knit_engines$set(python = reticulate::eng_python)
 ```
-<!-- ## /CLOSEDBLOK: Reticulate.R -->
+<!-- ## /CLOSEDBLOK: Reticulate.py -->
 
 <!-- ## OPENBLOK: Data-aanmaken.py -->
 ```{r aanmaken data, include=FALSE, echo=TRUE, results='hide'}
@@ -98,6 +98,10 @@ sd = np.sqrt(np.var(Gemiddeld_cijfer_WNS, ddof = 1))
 N = np.size(Gemiddeld_cijfer_WNS)
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven.py -->
+
+<!-- ## TEKSTBLOK: Data-beschrijven2.py -->
+* Gemiddeld cijfer WNS (standaardafwijking): `r Round_and_format(py$mean)` (`r Round_and_format(py$sd)`). *n* = `r py$N`.
+<!-- ## /TEKSTBLOK: Data-beschrijven2.py -->
 
 <!-- ## OPENBLOK: Histogram.py -->
 ```{python histogram, include=TRUE}
@@ -177,22 +181,21 @@ De *one sample t-toets* is uitgevoerd om de vraag te beantwoorden of het gemidde
 print(stats.ttest_1samp(Gemiddeld_cijfer_WNS, popmean = 6.8))
 ```
 <!-- ## /OPENBLOK: T-test.py -->
+
+<!-- ## CLOSEDBLOK: T-test.py -->
 ```{python ttest als object, echo = FALSE}
 stat, pval = stats.ttest_1samp(Gemiddeld_cijfer_WNS, popmean = 6.8)
 par = N - 1
 ```
+<!-- ## /CLOSEDBLOK: T-test.py -->
 
-<!-- ## TEKSTBLOK: T-test2.R -->
+<!-- ## TEKSTBLOK: T-test2.py -->
 * Vrijheidsgraden, *df* = *n* -1 = `r Round_and_format(py$N)`-1 = `r py$par`  
 * *t* ~`r py$par`~ = `r Round_and_format(py$stat)`, *p* << 0,05
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^9]
 * Het gemiddelde van de steekproef is `r Round_and_format(py$mean)`  
-<!-- ## /TEKSTBLOK: T-test2.R -->
+<!-- ## /TEKSTBLOK: T-test2.py -->
 
 <!-- ## TEKSTBLOK: Rapportage.py -->
-De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = `r Round_and_format(py$mean)`, *SD* = `r Round_and_format(py$sd)`) is statistisch significant hoger dan het landelijk gemiddelde van 6,8, *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* << 0,05.
+De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = `r Round_and_format(py$mean)`, *SD* = `r Round_and_format(py$sd)`) is statistisch significant hoger dan het landelijk gemiddelde van 6,8, *t* ~`r py$par`~ = `r Round_and_format(py$stat)`, *p* << 0,05.
 <!-- ## /TEKSTBLOK: Rapportage.py -->
-
-```{r footer, include = FALSE, echo = TRUE, results='asis'} 
-paste0(here::here(),"/01. Includes/code/Footer.R")
-```

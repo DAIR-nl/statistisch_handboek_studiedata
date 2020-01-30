@@ -29,12 +29,12 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## CLOSEDBLOK: Reticulate.R -->
+<!-- ## CLOSEDBLOK: Reticulate.py -->
 ```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}
 library(reticulate)
 knitr::knit_engines$set(python = reticulate::eng_python)
 ```
-<!-- ## /CLOSEDBLOK: Reticulate.R -->
+<!-- ## /CLOSEDBLOK: Reticulate.py -->
 
 ```{r opmerking, include=FALSE, eval=FALSE}
 # doorlinken naar de Wilcoxon Signed Rank Test
@@ -83,23 +83,31 @@ Uren_studeren_T1 = dfStudielogboek[dfStudielogboek['Meetmoment'] == "T1"]['Uren_
 import numpy as np
 ```
 
-<div class = "col-container">
-  <div class = "col">
 ```{python data beschrijven t1, collapse = TRUE}
 ## aantallen, gemiddelde en standaarddeviatie voor tutorgesprek
 print(len(Uren_studeren_T0))
 print(np.mean(Uren_studeren_T0))
-print(np.sqrt(np.var(Uren_studeren_T0)))
+print(np.sqrt(np.var(Uren_studeren_T0, ddof = 1)))
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-1.py -->
-```{r Var beschrijven t0, include=FALSE, echo=TRUE}
-vMean_t0 <- Round_and_format(mean(Uren_studeren_T0))
-vSD_t0 <- Round_and_format(sd(Uren_studeren_T0))
-vN_t0 <- Round_and_format(length(Uren_studeren_T0))
+
+<!-- ## CLOSEDBLOK: Data-beschrijven.py -->
+```{python Var beschrijven, include=FALSE, echo=TRUE}
+vMean_t0 = np.mean(Uren_studeren_T0)
+vSD_t0 = np.sqrt(np.var(Uren_studeren_T0, ddof = 1))
+vN_t0 = np.size(Uren_studeren_T0)
+vMean_t1 = np.mean(Uren_studeren_T1)
+vSD_t1 = np.sqrt(np.var(Uren_studeren_T1, ddof = 1))
+vN_t1 = np.size(Uren_studeren_T1)
 ```
-  </div>
+<!-- ## /CLOSEDBLOK: Data-beschrijven.py -->
+
+<!-- ## TEKSTBLOK: Data-beschrijven.py -->
+* Gemiddeld uren studeren T~0~ (standaardafwijking): `r Round_and_format(py$vMean_t0)` (`r Round_and_format(py$vSD_t0)`). *n* = `r py$vN_t0`.
+* Gemiddeld uren studeren T~1~ (standaardafwijking): `r Round_and_format(py$vMean_t1)` (`r Round_and_format(py$vSD_t1)`). *n* = `r py$vN_t1`.
+<!-- ## /TEKSTBLOK: Data-beschrijven.py -->
+
 <!-- ## OPENBLOK: Data-beschrijven-2.py -->
- <div class = "col">
 ```{python data bekijken t2, collapse=TRUE}
 ## aantallen, gemiddelde en standaarddeviatie na tutorgesprek
 print(len(Uren_studeren_T1))
@@ -136,8 +144,6 @@ import scipy.stats as stats
 ```
 <!-- ## /OPENBLOK: QQplot-inladen.py -->
 
-<div class = "col-container">
-  <div class="col">
 <!-- ## OPENBLOK: QQplot-1.py -->
 ```{python qqplot}
 qq = stats.probplot(Uren_studeren_T0, dist="norm", plot=plt)
@@ -147,8 +153,7 @@ ylab = plt.ylabel("Kwantielen in data")
 plt.show()
 ```
 <!-- ## /OPENBLOK: QQplot-1.py -->
-  </div>
-  <div class = "col">
+
 <!-- ## OPENBLOK: QQplot-2.py -->
 ```{python qqplot-2}
 qq = stats.probplot(Uren_studeren_T1, dist="norm", plot=plt)
@@ -158,8 +163,6 @@ ylab = plt.ylabel("Kwantielen in data")
 plt.show()
 ```
 <!-- ## /OPENBLOK: QQplot-2.py -->
-  </div>
-</div>
 
 <!-- ## OPENBLOK: Boxplot.py -->
 ``` {python Boxplot}
@@ -181,22 +184,17 @@ import statsmodels.stats.api
 ```
 <!-- ## OPENBLOK: Library-nortest.py -->
 
-<div class="col-container">
-  <div class = "col">
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
 print(statsmodels.stats.api.lilliefors(Uren_studeren_T0))
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-1.py -->
-  </div>
-  <div class = "col">
+
 <!-- ## OPENBLOK: Lilliefors-test-2.py -->
 ``` {python Lilliefors Test-2, warning=FALSE}
 print(statsmodels.stats.api.lilliefors(Uren_studeren_T1))
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-2.py -->
-  </div>
-</div>
 
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test.py -->
 ```{python}
@@ -206,25 +204,21 @@ N1 = len(Uren_studeren_T0_n30)
 N2 = len(Uren_studeren_T1_n30)
 ```
 
-Er zijn 2 steekproeven van `Studielogboek` ingeladen: `Uren_studeren_T0_n30` (T~0~) en `Uren_studeren_T1_n30` (T~1~), *n~T0~* = `r py$N1` , *n~T1~* = `r py$N2` 
-<!-- ## /TEKSTBLOK: Shapiro-Wilk-test.py -->
+<!-- ## TEKSTBLOK: Shapiro-Wilk-test.R -->
+Er zijn 2 steekproeven van `Studielogboek` ingeladen: `Uren_studeren_T0_n30` (T~0~) en `Uren_studeren_T1_n30` (T~1~), *n~T0~* = `r py$N1` , *n~T1~* = `r py$N2
+<!-- ## /TEKSTBLOK: Shapiro-Wilk-test.R -->
 
-<div class ="col-container">
-  <div class ="col">
 <!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
 ``` {python Shapiro-Wilk Test-1, warning=FALSE}
-print(stats.shapiro(r.Uren_studeren_T0_n30))
+print(stats.shapiro(Uren_studeren_T0_n30))
 ```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-1.py -->
-  </div>
-  <div class ="col">
+
 <!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
 ``` {python Shapiro-Wilk Test-2, warning=FALSE}
-print(stats.shapiro(r.Uren_studeren_T1_n30))
+print(stats.shapiro(Uren_studeren_T1_n30))
 ```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-2.py -->
-  </div>
-</div>
 
 <!-- ## TEKSTBLOK: T-test.py -->
 Gebruik `stats.ttest_rel()` om een *gepaarde t-toets* uit te voeren. Gebruik hier weer de twee variabelen `Uren_studeren_T0` en `Uren_studeren_T1`.
@@ -236,12 +230,15 @@ print(stats.ttest_rel(Uren_studeren_T0, Uren_studeren_T1))
 ```
 <!-- ## /OPENBLOK: T-toets.py -->
 
-<!-- ## TEKSTBLOK: T-test2.R -->
+<!-- ## CLOSEDBLOK: T-test.py -->
 ```{python T-test als object, echo = FALSE}
 stat, pval = stats.ttest_rel(Uren_studeren_T0, Uren_studeren_T1)
 df = N1 - 1
 diffmean = np.mean(np.abs(Uren_studeren_T0 - Uren_studeren_T1))
 ```
+<!-- ## /CLOSEDBLOK: T-test.py -->
+
+<!-- ## TEKSTBLOK: T-test2.R -->
 * *t*~`r py$df`~ = `r Round_and_format(py$stat)`, *p* << 0,05
 * Vrijheidsgraden, *df* = *n* -1 = `r py$N1`-1 = `r py$df`  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^10]
@@ -275,9 +272,12 @@ print(cohen.d(Uren_studeren_T0, Uren_studeren_T1))
 ```
 <!-- ## OPENBLOK: Cohens-d-test.py -->
 
-<!-- ## TEKSTBLOK: Cohens-d-test.py -->
+<!-- ## CLOSEDBLOK: Cohens-d-test.py -->
 ```{python}
 d = cohen.d(Uren_studeren_T0, Uren_studeren_T1)
 ```
+<!-- ## /CLOSEDBLOK: Cohens-d-test.py -->
+
+<!-- ## TEKSTBLOK: Cohens-d-test.py -->
 *d* = `r Round_and_format(py$d)`. De sterkte van het effect van de tutor op het cijfer is minimaal. 
 <!-- ## /TEKSTBLOK: Cohens-d-test.py -->

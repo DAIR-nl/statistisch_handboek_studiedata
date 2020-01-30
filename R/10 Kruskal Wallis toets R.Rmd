@@ -85,7 +85,10 @@ unique(Resultaten_Arbeidsrecht$Vooropleiding)
 ```
 <!-- ## /OPENBLOK: Data-bekijken-2.R -->
 
+<!-- ## TEKSTBLOK: Data-bekijken.R-->
 Om meer inzicht te krijgen in de data, inspecteer de groepen met `length()`, `median()` en `quantile()`. Groepeer hiervoor eerst met `group_by()`.
+<!-- ## /TEKSTBLOK: Data-bekijken.R-->
+
 <!-- ## OPENBLOK: Data-beschrijven.R -->
 ``` {r data beschrijven, warning=FALSE, message=FALSE}
 ## Groepsgrootes, mediaan en kwantielen
@@ -152,14 +155,16 @@ boxplot(EC_Jaar1 ~ Vooropleiding, Resultaten_Arbeidsrecht,
 De mediaan van studenten met een vooropleiding Rechtsgeleerdheid heeft duidelijk minder studiepunten dan studenten met een vooropleiding Fiscaal Recht en Notarieel Recht. De studenten met de Premaster als vooropleiding ligt er tussen in.[^9]
 
 ## Kruskal Wallis toets
-<!-- ## TEKSTBLOK: Kruskal-Wallis-test -->
+<!-- ## TEKSTBLOK: Kruskal-Wallis-test.R -->
 Gebruik `kruskal.test()`. In het eerste argument gebruik je de afhankelijke variabele en de variabele die de groep definiëert. Het tweede argument is het dataframe. 
-<!-- ## /TEKSTBLOK: Kruskal-Wallis-test -->
-<!-- ## OPENBLOK: Kruskal-Wallis-test -->
+<!-- ## /TEKSTBLOK: Kruskal-Wallis-test.R -->
+
+<!-- ## OPENBLOK: Kruskal-Wallis-test.R -->
 ```{r Kruskal Wallis test}
 kruskal.test(EC_Jaar1 ~ Vooropleiding, Resultaten_Arbeidsrecht)
 ```
-<!-- ## /OPENBLOK: Kruskal-Wallis-test -->
+<!-- ## /OPENBLOK: Kruskal-Wallis-test.R -->
+
 <!-- ## CLOSEDBLOK: Kruskal-Wallis-test -->
 ```{r Kruskal Wallis test als object, include= FALSE, echo= TRUE}
 Ktest <- kruskal.test(EC_Jaar1 ~ Vooropleiding, Resultaten_Arbeidsrecht)

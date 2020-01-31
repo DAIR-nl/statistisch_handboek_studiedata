@@ -42,7 +42,7 @@ lVars <- list(
 thisFooter <- Substitute_var(htmltools::htmlPreserve('
 <div id = "footerborder"><hr/></div>
 <div id = "footer">
-Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. De code is uitgevoerd met R versie `var_VersieR`.
+Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. De code is uitgevoerd met R versie `var_VersieR`; Python code is uitgevoerd in Python 3.7.
 <br/><br/>
 `var_Copyright`
 </div>'), lVars)

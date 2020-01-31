@@ -10,11 +10,14 @@ output:
   keywords: [statistisch handboek, studiedata]
 ---
     
-```{r}
+
+
+<!-- ## CLOSEDBLOK: Reticulate.R -->
+```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}
 library(reticulate)
-use_virtualenv('r-reticulate')
-py_available(TRUE)
+knitr::knit_engines$set(python = reticulate::eng_python)
 ```
+<!-- ## /CLOSEDBLOK: Reticulate.R -->
 
 ```{python}
 a=7

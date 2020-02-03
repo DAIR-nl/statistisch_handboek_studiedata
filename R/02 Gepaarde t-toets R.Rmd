@@ -65,7 +65,7 @@ De *t-toets* gaat ervan uit dat de data normaal verdeeld zijn. Ga er bij een *n*
 
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. controleer de data visueel met een histogram, een Q-Q plot of een boxplot.
-2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^3]<sup>, </sup>[^4]  
+2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^3]<sup>, </sup>[^4]  
 
 Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is. 
 
@@ -214,7 +214,7 @@ boxplot(Uren_studeren ~ Meetmoment, Studielogboek,
 ```
 <!-- ## /OPENBLOK: Boxplot.R -->
 
-De boxplotten geven de spreiding weer van het gemiddelde aantal uur studeren per periode voor deelnemers aan de cursus. De boxplot en de staarten van T~0~ zijn niet helemaal symmetrisch, maar beide uiteinden zijn ongeveer even lang en de mediaan ligt ongeveer in het midden, daarom is de data vermoedelijk normaal verdeeld. De boxplot van T~1~ ziet er symmetrisch uit. Er zijn een aantal mogelijke uitbijters.[^9]     
+De boxplotten geven de spreiding weer van het gemiddelde aantal uur studeren per periode voor deelnemers aan de cursus. De boxplot en de staarten van T~0~ zijn niet helemaal symmetrisch, maar beide uiteinden zijn ongeveer even lang en de mediaan ligt ongeveer in het midden, daarom zijn de data vermoedelijk normaal verdeeld. De boxplot van T~1~ ziet er symmetrisch uit. Er zijn een aantal mogelijke uitbijters.[^9]     
 
 ## Toetsen van normaliteit
 Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
@@ -277,7 +277,7 @@ Voor beide groepen is de *p* > 0,05, dus er is geen statistisch significant vers
 
 ## Gepaarde t-toets
 <!-- ## TEKSTBLOK: T-test.R -->
-Gebruik `t.test()` met `paired = TRUE` om een *gepaarde t-toets* uit te voeren. Gebruik hier weer het hele dataframe `Studielogboek`. 
+Gebruik `t.test()`. Om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn gebruik het argument `paired = TRUE` om een *gepaarde t-toets* uit te voeren. Gebruik hier weer het hele dataframe `Studielogboek`. 
 <!-- ## /TEKSTBLOK: T-test.R -->
 De *gepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het gemiddeld aantal uren studeren verandert na deelname aan de cursus. De verwachting is dat de studenten gemiddeld meer gaan studeren, maar omdat het relevant is om te weten of de studenten meer of minder gaan studeren na de cursus is er voor gekozen om tweezijdig te toetsen. 
 
@@ -332,7 +332,7 @@ vD_waarde <- Round_and_format(d$estimate)
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddeld aantal uur studeren van de studenten is veranderd na deelname aan de cursus. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r vMean_t0`, *SD~T0~* = `r vSD_t0`) en het gemiddelde van T~1~ (*M~T1~* =`r vMean_t1`, *SD~T1~* = `r vSD_t1`) is significant, *t* ~`r vDF`~ = `r vT_waarde`, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vconf.int1` tot `r vconf.int2`. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is echter verwaarloosbaar klein, *d* = `r vD_waarde`. 
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddeld aantal uur studeren van de studenten is veranderd na deelname aan de cursus. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r vMean_t0`, *SD~T0~* = `r vSD_t0`) en het gemiddelde van T~1~ (*M~T1~* =`r vMean_t1`, *SD~T1~* = `r vSD_t1`) is significant, *t* ~`r vDF`~ = `r vT_waarde`, *p* < 0,01. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vconf.int1` tot `r vconf.int2`. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is echter minimaal klein, *d* = `r vD_waarde`. 
 
 
 | Meting     | N         | M            | SD         |

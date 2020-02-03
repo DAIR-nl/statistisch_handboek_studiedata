@@ -70,10 +70,10 @@ Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventuee
 Toets met de *Levene's Test (for equality of variance)* of de spreiding van iedere groep ongeveer hetzelfde is. Bij een *p* < 0,05 is de spreiding van de groepen significant verschillend.[^9]
 
 # Effectmaat
-Bereken de effectmaat om te bepalen of de gevonden p-waarde van een ANOVA betekenisvol is. Hier worden twee effectmaten besproken die veel voorkomen: Cohen's *f* en eta squared.   
+De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. Bereken de effectmaat om te bepalen of het gevonden verschil betekenisvol is. Hier worden twee effectmaten besproken die veel voorkomen: Cohen's *f* en eta squared.   
 
 ## Cohen's f
-Cohen's *f* geeft de sterkte van het effect van een onafhankelijke variabele op een afhankelijke variabele weer. Een indicatie om *f* te interpreteren is: rond 0,10 is een klein effect, rond 0,25 is een gemiddeld effect en rond 0,40 is een groot effect.[^10]
+Cohen's *f* geeft de sterkte van het effect van een onafhankelijke variabele,de opleiding, op een afhankelijke variabele, de reistijd, weer. Een indicatie om *f* te interpreteren is: rond 0,10 is een klein effect, rond 0,25 is een gemiddeld effect en rond 0,40 is een groot effect.[^10]
 
 ## Eta squared
 Eta squared (*η^2^*) berekent de proportie van de variantie in de afhankelijke variabele wat verklaard wordt door de onafhankelijke variabele. In dit geval berekent het de proportie van de variantie in de lengte van de reistijd wat verklaard kan worden door de opleiding. Een indicatie om *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^11]

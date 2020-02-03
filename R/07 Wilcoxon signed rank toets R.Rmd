@@ -44,20 +44,20 @@ Gebruik de *Wilcoxon signed rank toets* om te toetsen of bij een herhaalde metin
 
 # Onderwijscasus
 <div id ="casus">
-De directeur van de Academie Mens & Maatschappij wil bekijken hoe het inkomen van zijn alumni zich ontwikkeld nadat zij zijn afgestudeerd. Hij bekijkt de maandelijke inkomens van de alumni 1 jaar na afstuderen en vergelijkt het met de inkomen 5 jaar na afstuderen. 
+De directeur van de Academie Mens & Maatschappij wil bekijken hoe het inkomen van zijn alumni zich ontwikkeld nadat zij zijn afgestudeerd. Hij verwacht dat er na vijf jaar een groei te zien is in de inkomens. Hij bekijkt de maandelijke inkomens van de alumni 1 jaar na afstuderen en vergelijkt het met de inkomen 5 jaar na afstuderen. 
 
-*H~0~*: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd niet veranderd.  
+*H~0~*: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd verminderd of gelijk gebleven.  
 *H~A~*: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd gestegen. 
 </div>
 
 # Assumpties
 De data zijn (semi)continu.[^2] De *Wilcoxon Signed Rank Test* kan een alternatief zijn voor de *gepaarde t-toets*. 
 
-Er zijn een aantal voordelen van de *Wilcoxon Signed Rank Test*, bijvoorbeeld, de data hoeven niet aan de assumptie van normaliteit te voldoen. Bij de *Wilcoxon Signed Rank Test* hebben uitbijters hebben minder invloed op het eindresultaat, dan bij de *gepaarde t-toets*. Daarentegen, als de data wel normaal verdeeld zijn, heeft de *Wilcoxon Signed Rank Test* minder onderscheidend vermogen dan de *gepaarde t-toets*.[^3]<sup>, </sup>[^4] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Wilcoxon Signed Rank Test* test gekozen wordt. 
+Er zijn een aantal voordelen van de *Wilcoxon Signed Rank Test*, bijvoorbeeld, de data hoeven niet aan de assumptie van normaliteit te voldoen. Daarentegen, als de data wel normaal verdeeld zijn, heeft de *Wilcoxon Signed Rank Test* minder onderscheidend vermogen dan de *gepaarde t-toets*.[^3]<sup>, </sup>[^4] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Wilcoxon Signed Rank Test* test gekozen wordt. 
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij genaamd `Maandelijks_inkomen`. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkeld 5 jaar nadat zij afgestudeerd zijn. Meetmoment T~1~ is 1 jaar na afstuderen, meetmoment T~2~ is 5 jaar na afstuderen. 
+Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij genaamd `Maandelijks_inkomen`. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkeld 4 jaar nadat zij afgestudeerd zijn. Meetmoment T~1~ is 1 jaar na afstuderen, meetmoment T~2~ is 5 jaar na afstuderen. 
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
@@ -113,9 +113,9 @@ vN_T2 <- length(Alumni_inkomens_T2)
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven-2.R -->
 <!-- ## TEKSTBLOK: Data-beschrijven.R-->
-* Mediaan inkomens op T~1~: `r vMed_T1`, *n~T1~* = `r vN_T1`
-* Mediaan inkomens op T~2~: `r vMed_T2`, *n~T2~* = `r vN_T2`
-
+* Mediaan inkomens op T~1~: `r vMed_T1` 
+* Mediaan inkomens op T~2~: `r vMed_T2` 
+* Aangezien de gegevens gepaard zijn, zijn de groepsgrootes op beide meetmomenten gelijk: *n~T1~* = `r vN_T1` en *n~T2~* = `r vN_T2`
 <!-- ## /TEKSTBLOK: Data-beschrijven.R-->
 
 ### Histogram
@@ -144,7 +144,7 @@ ggplot(Alumni_inkomens,
 Op beide tijdstippen is te zien dat de meeste alumni tussen de 0 en 4.000 euro per maand verdienen en een paar alumni verdienen ver boven modaal. 
 
 ### Boxplot
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters, echter uitbijters zijn niet direct van invloed op de uitkomst van de *Wilcoxon signed rang toets*.[^5]<sup>,[^6]<sup> Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen.  
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters, echter uitbijters zijn niet direct van invloed op de uitkomst van de *Wilcoxon signed rang toets*.[^5] Hoe meer de boxen overlappen, hoe waarschijnlijker dat er geen significant verschil is tussen de groepen.  
 
 <!-- ## OPENBLOK: Boxplot.R -->
 ```{r boxplot}
@@ -157,8 +157,9 @@ De boxplotten laten zien dat er op beide meetmomenten veel inkomens rondom de 20
 
 ## Wilcoxon signed rank toets
 <!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
-Voer een Wilcoxon signed rank toets uit met `paired=TRUE`.
+Voer een *Wilcoxon signed rank toets* uit. Om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn gebruik het argument `paired = TRUE`. De *Wilcoxon signed rank toets* wordt uitgevoerd om de vraag te beantwoorden of de inkomens van alumni in vier jaar significant gestegen zijn. Er wordt eenzijdig getoetst omdat er een duidelijke verwachting is, gebruik het argument `alternative = "greater"`. 
 <!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
+
 <!-- ## OPENBLOK: Wilcoxon-signed-rank-toets.R -->
 ```{r wilcox test}
 wilcox.test(Alumni_inkomens_T2, Alumni_inkomens_T1, paired = TRUE, alternative = "greater")
@@ -178,7 +179,7 @@ vVstatistic <- Round_and_format(wilcox$statistic)
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd is veranderd. De mediaan van de inkomens van 1 jaar na afstuderen: `r vMed_T1`. De mediaan van de inkomens van 5 jaar na afstuderen: `r vMed_T2`. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen de inkomens van de alumni van de Academie Mens & Maatschappij bij T~0~ en T~1~, *V* = `r vVstatistic`, p-waarde < 0,05.
+De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de inkomens van de alumni van de Academie Mens & Maatschappij in vier jaar tijd is gestegen. De mediaan van de inkomens van 1 jaar na afstuderen is `r vMed_T1` per maand. De mediaan van de inkomens van 5 jaar na afstuderen is `r vMed_T2` per maand. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen de inkomens van de alumni van de Academie Mens & Maatschappij bij T~0~ en T~1~, *V* = `r vVstatistic`, *p* < 0,05.
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->

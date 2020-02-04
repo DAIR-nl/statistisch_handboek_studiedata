@@ -1,0 +1,38 @@
+---
+title: "Verantwoording"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+---
+<!-- ## CLOSEDBLOK: Functies.R -->
+```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
+library(here)
+if (!exists("Substitute_var")) {
+  ## Installeer packages en functies
+  source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
+}
+```
+<!-- ## /CLOSEDBLOK: Functies.R -->
+
+<style>
+`r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
+</style>
+
+<!-- ## CLOSEDBLOK: Header.R -->
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Header.R -->
+
+Het doel van het handboek is om collega's met enige kennis van de statistiek van een stappenplan voorzien, zodat ze gemakkelijk statistische toetsen kunnen uitvoeren op hun data en er een rapport bij kunnen schrijven. Er is voor gekozen om de stappen zo bondig mogelijk te beschrijven en waar nodig de extra informatie in de voetnoten te zetten of te verwijzen naar andere sites. De pagina's kunnen daarom informatie bevatten die niet volledig zijn. Om site zo bondig en toch informatief mogelijk te maken hebben we gekozen voor een directieve aanspreektaal.  
+
+De site is nog volop in ontwikkeling en wordt met de tijd aangevuld en verbeterd. 
+
+De pagina's zijn geschreven als onderdeel van SURF Versnellingsagenda. Alle pagina's zijn gereviewd door wetenschappers en externe partijen, zie pagina *Over*. Desondanks kunnen de pagina's informatie bevatten die niet correct zijn. U kunt de kwaliteit van de pagina helpen hoog te houden door tips over onvolledigheden of onjuistheden te geven door het formulier in te vullen.  
+
+We hebben casussen verzameld die relevant kunnen zijn in het Hoger Onderwijs. Alle informatie bij de casussen zoals opleidingen zijn fictief en de data is gesimuleerd.   
+
+De uitkomsten van de toetsen kunnen marginaal verschillend zijn in R, SPSS en/of Python.   

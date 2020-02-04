@@ -64,7 +64,7 @@ Om een valide resultaat te bereiken moeten, voordat de toets kan worden uitgevoe
 De *t-toets* gaat ervan uit dat de data normaal verdeeld zijn. Ga er bij een *n* > 100 vanuit dat de *t-toets* robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgt.[^2]   
 
 Controleer de assumptie van normaliteit met de volgende stappen:  
-1. controleer de data visueel met een histogram, een Q-Q plot of een boxplot.
+1. controleer de data visueel met een histogram, een Q-Q plot of een boxplot.  
 2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^3]<sup>, </sup>[^4]  
 
 Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is. 

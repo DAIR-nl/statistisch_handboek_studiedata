@@ -29,8 +29,9 @@ if (!exists("Substitute_var")) {
 <!-- ## /CLOSEDBLOK: Header.R -->
 
 # Toetskeuze
-De eerste stap van data analyse begint bij een vraag. Een opleidingsdirecteur wil graag weten wat de effecten zijn van een bepaalde beslissing. Zodra er een vraagstuk ligt, kan er gekeken worden naar de data. Wat is er nodig om de vraag te beantwoorden? Bekijk daarna welke type data verzameld is. Wat ook van belang is hoeveel groepen met elkaar vergeleken worden en welke vergelijking gemaakt wordt. Onder de toetsmatrix staat een uitgebreide omschrijving van de typen data en de soorten vergelijking. 
+De eerste stap van data analyse begint bij een vraag. Een opleidingsdirecteur wil graag weten wat de verschillen zijn tussen bepaalde groepen of het effect van een bepaalde cursus of wervingsactie. Zodra er een vraagstuk ligt, kan er gekeken worden naar de data. Wat is er nodig om de vraag te beantwoorden? Bekijk welk type data verzameld is. Wat ook van belang is hoeveel groepen met elkaar vergeleken worden en welke vergelijking gemaakt wordt. Onder de toetsmatrix staat een uitgebreide omschrijving van de typen data en de soorten vergelijkingen. 
 
+De toetsmatrix toont per type data en vergelijking welke toetsen gebruikt kunnen worden in die situatie. Iedere optie wordt voorzien van een relevante casus uit het Hoger onderwijs, een uitleg van de regels om een toets te kiezen, de uitwerking van de toets in R, SPSS en Python, een interpretatie van de resultaten, en een rapport die de resultaten beschrijven.   
 
 ```{r, echo = FALSE}
 htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/R/toetsmatrix.html"))
@@ -38,33 +39,27 @@ htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/R/toetsmatrix.htm
 *Toetsmatrix 1. schematische overzicht van verschillende toetsen per type data en per vergelijking. Deze pagina is nog in ontwikkeling, en wordt met de tijd aangevuld en verbeterd.*
 
 # Toelichting op de mogelijke keuzes
-## Toetsmatrix
-De toetsmatrix toont per type data en vergelijking welke toetsen gebruikt kunnen worden in die situatie. Iedere optie wordt voorzien van een relevante casus uit het Hoger onderwijs, een uitleg van de regels om een toets te kiezen, de uitwerking van de toets in R, SPSS en Python, een interpretatie van de resultaten, en een rapport die de resultaten beschrijven.   
-   
 
 ## Type data  
-### Numeriek:  
+### Numeriek  
 * *continu*: Een continue waarde kan iedere waarde aannemen tussen twee meetpunten. De meest bekende continue variabelen zijn lengte en lichaamsgewicht.[^1]  
 * *Semi-continue data*: de data zijn discreet, bijvoorbeeld gehele getallen, met zoveel mogelijkheden dat de data geanalyseerd kunnen worden alsof ze continu zijn.[^2]  
 
-### Categorisch:
+### Categorisch   
 * *nominaal*: Groepen die onafhankelijk van elkaar zijn en ook niet geordend kunnen worden op basis van de inhoud. Voorbeelden hiervan zijn de antwoordenmogelijkheden ‘ja’ of ‘nee’ en 'man' of 'vrouw' of eigennamen.  
 * Een *binaire* variabele is een voorbeeld van een nominale variabele. Een binaire variabele bestaat uit twee waarden due elkaar uitsluiten, zoals ja of nee, 0 of 1, aan of uit. *Nominale variabelen* kunnen echter ook meerdere mogelijkheden hebben.  
 * *ordinaal*: Er kan een ordening gemaakt worden tussen de groepen. Een voorbeeld hiervan zijn de antwoordenmogelijkheden 'onvoldoende', 'voldoende' of 'goed'.  
 
-## Soort vergelijking
-Voor welke toets gekozen  
-* 1 groep - met referentie:  
-* 2 groepen - gepaard:  
-* 2 groepen - ongepaard:  
-* &gt; 2 groepen - gepaard:  
-* &gt; 2 groepen - ongepaard:  
+### Normaal verdeeld 
+Een assumptie voor bepaalde toetsen of de data normaal verdeeld zijn. Dit kan ingeschat worden door naar een histogram, QQ-plot of boxplot te kijken en het kan worden getoetst door nomaliteitstoetsen. Bij een *n* > 100 kan er vanuit gegaan worden dat de data zich normaal gedraagd.[^3] 
 
+## Soort vergelijking
 * *Vergelijking van één groep met een referentie*: Een bekende gemiddelde of norm van de totale populatie, zoals de gemiddelde levensverwachting, wordt vergeleken met een specifieke groep, zoals de gemiddelde levensverwachting van Amsterdammers.    
-* *Vergelijking van gepaarde groepen*: Een onderdeel is gekoppeld aan elkaar, zoals bij een herhaalde meting. Bijvoorbeeld een studie waarbij studenten vòòr een cursus en nà een cursus getest worden op algemene kennis. Door de verschillen tussen de voor- en nameting te vergelijken kunnen conclusies worden getrokken over het effect van de cursus op de algemene kennis van de studenten. 
+* *gepaard*: Bij een herhaalde meting worden beide metingen met elkaar vergeleken. Bijvoorbeeld een studie waarbij studenten vòòr een cursus en nà een cursus getest worden op algemene kennis. De score van de algemene kennis van een student voor de cursus wordt gepaard met de score van de algemene kennis van dezelfde student na de cursus. Door de verschillen tussen de voor- en nameting te vergelijken kunnen conclusies worden getrokken over het effect van de cursus op de algemene kennis van de studenten. 
 * *ongepaard*: De groepen zijn onafhankelijk van elkaar. Elke groep heeft geen overlap de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
 
 
 
 [^1]: https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS
 [^2]: Van Geloven, N. (21 November 2017). *KEUZE TOETS*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS).
+[^3]: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit

@@ -27,12 +27,21 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
-Het doel van het handboek is om collega's met enige kennis van de statistiek van een stappenplan voorzien, zodat ze gemakkelijk statistische toetsen kunnen uitvoeren op hun data en er een rapport bij kunnen schrijven. Er is voor gekozen om de stappen zo bondig mogelijk te beschrijven en waar nodig de extra informatie in de voetnoten te zetten of te verwijzen naar andere sites. De pagina's kunnen daarom informatie bevatten die niet volledig zijn. Om site zo bondig en toch informatief mogelijk te maken hebben we gekozen voor een directieve aanspreektaal.  
+Het Statisch Handboek Studiedata is een initiatief van de zone Veilig en Betrouwbaar Benutten van Studiedata SURF Versnellingsagenda. 
 
-De site is nog volop in ontwikkeling en wordt met de tijd aangevuld en verbeterd. 
+Het doel van het Statisch Handboek Studiedata is om collega's in het hoger onderwijs met enige kennis van de statistiek van een stappenplan voorzien:
 
-De pagina's zijn geschreven als onderdeel van SURF Versnellingsagenda. Alle pagina's zijn gereviewd door wetenschappers en externe partijen, zie pagina *Over*. Desondanks kunnen de pagina's informatie bevatten die niet correct zijn. U kunt de kwaliteit van de pagina helpen hoog te houden door tips over onvolledigheden of onjuistheden te geven door het formulier in te vullen.  
+* hoe ze eenvoudig statistische toetsen kunnen kiezen bij een vraagstuk, 
+* weten aan welke voorwaarden hun data moet voldoen, 
+* deze toetsen kunnen uitvoeren op hun data 
+* en er tot slot een rapport bij kunnen schrijven. 
 
-We hebben casussen verzameld die relevant kunnen zijn in het Hoger Onderwijs. Alle informatie bij de casussen zoals opleidingen zijn fictief en de data is gesimuleerd.   
+We hebben ervoor gekozen om de stappen zo bondig mogelijk te beschrijven en waar nodig de extra informatie in de voetnoten te zetten of te verwijzen naar andere sites. 
 
-De uitkomsten van de toetsen kunnen marginaal verschillend zijn in R, SPSS en/of Python.   
+We hebben casussen verzameld die relevant kunnen zijn in het Hoger Onderwijs. Alle informatie bij de casussen is fictief en de data is gesimuleerd. De uitkomsten van de toetsen kunnen marginaal verschillen tussen de verschillende programmeertalen: R, SPSS of Python. 
+
+Alle toetsen zijn gereviewd door wetenschappers, beleidsmedewekers en data specialisten uit het hoger onderwijs (zie *Over*). Desondanks kan het voorkomen dat u informatie aantreft die niet correct of onduidelijk is. Help ons de kwaliteit van de pagina te verbeteren door tips over onvolledigheden of onjuistheden door te geven via het feedbackformulier in te vullen. We zullen feedback zo snel mogelijk verwerken.
+
+Het handboek is nog volop in ontwikkeling en zullen we gedurende 2020 aanvullen met nieuwe toetsvormen. 
+
+  

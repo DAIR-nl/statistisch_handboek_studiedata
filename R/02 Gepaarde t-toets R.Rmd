@@ -216,7 +216,7 @@ De boxplotten geven de spreiding weer van het gemiddelde aantal uur studeren per
 
 Op basis van de grafieken lijken er geen grote afwijkingen van de normaalverdeling voor de studieuren in beide groepen te zijn. Maar normaliteit kan ook getest worden met statistische toetsen.
 
-```{r opmerking, include=FALSE, eval=FALSE}
+```{r opmerking2, include=FALSE, eval=FALSE}
 # Irene, is dit goed
 ```
 
@@ -225,7 +225,7 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst 
 
 
 ### Kolmogorov-Smirnov 
-De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
+De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
 <!-- ## TEKSTBLOK: Lilliefors-test1.py -->
 

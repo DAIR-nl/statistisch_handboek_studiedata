@@ -224,8 +224,8 @@ vP <- Round_and_format(t$p.value)
 <!-- ## /CLOSEDBLOK: T-test.R -->
 <!-- ## TEKSTBLOK: T-test2.R -->
 * Vrijheidsgraden, *df* = *n* -1 = `r Round_and_format(t$parameter+1)`-1 = `r t$parameter`  
-* *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* << 0,05
-* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^10]
+* *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* < 0,05
+* p-waarde < 0,05, dus de H~0~ wordt verworpen [^10]
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r Round_and_format(t$conf.int[1])` en `r Round_and_format(t$conf.int[2])`.
 * Het gemiddelde van de steekproef is `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`
 <!-- ## /TEKSTBLOK: T-test2.R -->

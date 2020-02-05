@@ -304,9 +304,9 @@ vDiffMean <- Round_and_format(t$estimate*-1)
 ```
 <!-- ## /CLOSEDBLOK: T-test.R -->
 <!-- ## TEKSTBLOK: T-test2.R -->
-* *t*~`r vDF`~ = `r vT_waarde`, *p* << 0,05
+* *t*~`r vDF`~ = `r vT_waarde`, *p* < 0,05
 * Vrijheidsgraden, *df* = *n* -1 = `r vN`-1 = `r vDF`  
-* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^10]
+* p-waarde < 0,05, dus de H~0~ wordt verworpen [^10]
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r vconf.int1` en `r vconf.int2`.
 * het absolute verschil tussen de twee groepen: `r vDiffMean` 
 <!-- ## /TEKSTBLOK: T-test2.R -->

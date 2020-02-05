@@ -93,10 +93,35 @@ Het gemiddelde jaarinkomen van de alumni is `r vMean` met een standaardafwijking
 
 De tekentoets is een alternatief voor de one-sample t-toets wanneer de data geen normale verdeling volgt. Hoewel het visueel inspecteren en testen van normaliteit niet vereist is, is het nuttig om de verdeling van de data te visualizeren en te vergelijken met de normaalverdeling.
 
+### Histogram
 Geef de verdeling weer in een histogram.
 
+```{r histogram, warning=FALSE, message=FALSE}
+## Histogram met ggplot2
+library(ggplot2)
 
-Test of de data normaal verdeeld is met een lilliefors-test
+ggplot(data.frame(Jaarlijks_inkomen), 
+       aes(x = Jaarlijks_inkomen)) +
+  geom_histogram(aes(y = ..density..),
+                 binwidth = 10000, 
+                 color = "white", 
+                 fill = "#158CBA") +
+  geom_density(alpha = .2, adjust = 1) +
+  ylab("Frequentiedichtheid") +
+  xlab("Jaarlijks_inkomen") +
+scale_x_continuous(labels = as.character(seq(20000, 100000, 20000)), 
+                   breaks = seq(20000, 100000, 20000)) +
+labs(title = "Jaarinkomen alumni Mens & Maatschappij", 
+     subtitle = "")
+
+```
+
+De histogram laat zien dat de verdeling een langere staart aan de rechterkant heeft en daarom enigzin afwijkt van de (symmetrische) normaalverdeling.
+
+### Kolmogorov-Smirnov test
+
+De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde en standaardafwijking niet van tevoren bekend of bepaald zijn. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
+
 <!-- ## OPENBLOK: Library-nortest.R -->
 ```{r normaliteit, warning=FALSE}
 library (nortest)

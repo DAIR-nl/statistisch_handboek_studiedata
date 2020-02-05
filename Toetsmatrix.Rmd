@@ -1,12 +1,16 @@
 ---
 title: "Toetsmatrix"
 output:
+  word_document:
+    toc: yes
+  pdf_document:
+    toc: yes
   html_document:
+    number_sections: yes
     theme: lumen
     toc: yes
-    toc_float: 
-      collapsed: FALSE 
-    number_sections: true
+    toc_float:
+      collapsed: no
 ---
 
 <!-- ## CLOSEDBLOK: Functies.R -->

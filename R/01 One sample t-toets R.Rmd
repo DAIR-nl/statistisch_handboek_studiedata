@@ -42,7 +42,6 @@ if (!exists("Substitute_var")) {
 source(paste0(here::here(),"/01. Includes/data/01.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
-
 # Toepassing
 Gebruik de *one sample t-toets* om het gemiddelde van de steekproef te vergelijken met een bekend gemiddelde of norm van de totale populatie.[^1] 
 

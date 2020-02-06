@@ -59,6 +59,9 @@ thisHeader <- Substitute_var(htmltools::htmlPreserve('
   <a href="`sRoot`/Over.html">Over</a>
 </li>
 <li>
+  <a href="`sRoot`/Verantwoording.html">Verantwoording</a>
+</li>
+<li>
   <a href="`sRoot`/Licentie.html">Licentie</a>
 </li>
       </ul>

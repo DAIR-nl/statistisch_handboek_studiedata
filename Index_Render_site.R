@@ -40,7 +40,7 @@ rmarkdown::clean_site(preview = FALSE,
 
 # Maak de nieuwe website
 rmarkdown::render_site(
-  output_format = "all",
+  output_format = "html_document",
   envir = parent.frame(),
   quiet = FALSE,
   encoding = "UTF-8"
@@ -49,6 +49,10 @@ rmarkdown::render_site(
 # Bekijk de nieuwe website
 output_file <- file.path(here::here(), "_site/index.html")
 browseURL(output_file)
+
+## TODO: Mapje met logo creeren
+## TODO: Rmd bestanden niet genereren
+## TODO: Rendering van subfolders
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 02 RUIM OP ####

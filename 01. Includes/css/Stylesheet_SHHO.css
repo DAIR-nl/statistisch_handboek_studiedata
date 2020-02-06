@@ -26,6 +26,11 @@ h1.title {
     color: #FF0000;
 }
 
+/* Status */
+.concept {
+  color: #148cba;
+}
+
 /* Klippy */
 .btn-klippy .octicon {
     display: inline-block;

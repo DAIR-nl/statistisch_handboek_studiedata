@@ -61,15 +61,13 @@ Voor het verminderen van de studielast van studenten aan een universiteit biedt 
 Om een valide resultaat te bereiken moeten, voordat de toets kan worden uitgevoerd, de data aan een aantal voorwaarden voldoen.
 
 ## Normaliteit
-De *t-toets* gaat ervan uit dat de data normaal verdeeld zijn. Ga er bij een *n* > 100 vanuit dat de *t-toets* robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgt.[^2]   
+De *t-toets* gaat ervan uit dat de data normaal verdeeld zijn voor elke groep. Ga er bij een *n* > 100 vanuit dat de *t-toets* robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgt.[^2]   
 
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. controleer de data visueel met een histogram, een Q-Q plot of een boxplot.  
 2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^3]<sup>, </sup>[^4]  
 
-Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is. 
-
-Als er geen sprake is van normaliteit gebruik de *Wilcoxon Signed Rank Test*.[^5]<sup>, </sup>[^6]
+Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is of gebruik de *Wilcoxon Signed Rank Test*.[^5]<sup>, </sup>[^6]
 
 
 
@@ -201,7 +199,7 @@ qqline(Uren_studeren_T1)
   </div>
 </div>
 
-In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. Doordat er een beperkt aantal uren in een week zitten en daarmee een limiet is aan het aantal studieuren, vallen de hoogste datapunten niet meer perfect op de lijn van de normaalverdeling. Vergelijkbaar liggen de laagste datapunten ook niet meer perfect op de lijn omdat alle studenten minimaal 8 uur studeren. 
+In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. Dit zou kunnen liggen aan de onder- en bovengrens van het aantal studieuren. Doordat er een beperkt aantal uren in een week zitten en daarmee een limiet is aan het aantal studieuren, vallen de hoogste datapunten niet meer perfect op de lijn van de normaalverdeling. Vergelijkbaar liggen de laagste datapunten ook niet meer perfect op de lijn omdat alle studenten minimaal 8 uur studeren. 
 
 ### Boxplot
 De box geeft de middelste 50% van het studielogboek weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen.   
@@ -214,14 +212,20 @@ boxplot(Uren_studeren ~ Meetmoment, Studielogboek,
 ```
 <!-- ## /OPENBLOK: Boxplot.R -->
 
-De boxplotten geven de spreiding weer van het gemiddelde aantal uur studeren per periode voor deelnemers aan de cursus. De boxplot en de staarten van T~0~ zijn niet helemaal symmetrisch, maar beide uiteinden zijn ongeveer even lang en de mediaan ligt ongeveer in het midden, daarom zijn de data vermoedelijk normaal verdeeld. De boxplot van T~1~ ziet er symmetrisch uit. Er zijn een aantal mogelijke uitbijters.[^9]     
+De boxplotten geven de spreiding weer van het gemiddelde aantal uur studeren per periode voor deelnemers aan de cursus. De boxplot en de staarten van T~0~ zijn niet helemaal symmetrisch, maar beide uiteinden zijn ongeveer even lang en de mediaan ligt ongeveer in het midden, daarom zijn de data vermoedelijk normaal verdeeld. De boxplot van T~1~ ziet er symmetrisch uit. Er zijn een aantal mogelijke uitbijters.[^9]
+
+Op basis van de grafieken lijken er geen grote afwijkingen van de normaalverdeling voor de studieuren in beide groepen te zijn. Maar normaliteit kan ook getest worden met statistische toetsen.
+
+```{r opmerking2, include=FALSE, eval=FALSE}
+# Irene, is dit goed
+```
 
 ## Toetsen van normaliteit
 Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 
 ### Kolmogorov-Smirnov 
-De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
+De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
 <!-- ## TEKSTBLOK: Lilliefors-test1.py -->
 
@@ -300,9 +304,9 @@ vDiffMean <- Round_and_format(t$estimate*-1)
 ```
 <!-- ## /CLOSEDBLOK: T-test.R -->
 <!-- ## TEKSTBLOK: T-test2.R -->
-* *t*~`r vDF`~ = `r vT_waarde`, *p* << 0,05
+* *t*~`r vDF`~ = `r vT_waarde`, *p* < 0,05
 * Vrijheidsgraden, *df* = *n* -1 = `r vN`-1 = `r vDF`  
-* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^10]
+* p-waarde < 0,05, dus de H~0~ wordt verworpen [^10]
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r vconf.int1` en `r vconf.int2`.
 * het absolute verschil tussen de twee groepen: `r vDiffMean` 
 <!-- ## /TEKSTBLOK: T-test2.R -->

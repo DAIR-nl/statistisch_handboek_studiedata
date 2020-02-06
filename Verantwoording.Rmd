@@ -27,7 +27,7 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
-Het Statisch Handboek Studiedata is een initiatief van de zone Veilig en Betrouwbaar Benutten van Studiedata SURF Versnellingsagenda. 
+Het Statisch Handboek Studiedata is een initiatief van de zone Veilig en Betrouwbaar Benutten van Studiedata van het Versnellingsplan. 
 
 Het doel van het Statisch Handboek Studiedata is om collega's in het hoger onderwijs met enige kennis van de statistiek van een stappenplan voorzien:
 

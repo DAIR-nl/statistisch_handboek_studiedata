@@ -5,7 +5,7 @@
 ## Copyright `r format(Sys.time(), "%Y")` VU
 ## Web Page: http://www.vu.nl
 ## Contact: Theo Bakker (t.c.bakker@vu.nl)
-## Project: Versnellingsagenda - Statistisch Handboek HO
+## Project: Versnellingsplan - Statistisch Handboek HO
 ##
 ## Doel: Voor het statistisch handboek moet de aangemaakte dummy data omgezet worden naar een .sav
 ## bestand

@@ -34,7 +34,8 @@
 
 ## Plaats  variabelen in een lijst: de root van de site
 lVars <- list(
-  sRoot = paste0(here::here(),"/_site")
+  #sRoot = paste0(here::here(),"/_site")
+  sRoot = paste0(".")
 )
 
 ## Plaats deze nu in een header; gebruik htmltools::htmlPreserve om

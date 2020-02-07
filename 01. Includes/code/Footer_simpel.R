@@ -1,12 +1,12 @@
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## Footer.R ####
+## Footer_simpel.R ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## R code voor het Statistisch Handboek van het Versnellingsplan
 ## Copyright 2020 VU
 ## Web Page: http://www.vu.nl
 ## Contact: Theo Bakker (t.c.bakker@vu.nl)
 ##
-## Doel: De footer voor de website
+## Doel: De footer voor de website voor de basispagina's
 ##
 ## Afhankelijkheden: htmltools package
 ##
@@ -18,7 +18,7 @@
 ##
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## Geschiedenis:
-## 29-09-2019: TB: Aanmaak bestand
+## 08-02-2020: TB: Aanmaak bestand
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -27,14 +27,11 @@
 
 ## Plaats  variabelen in een lijst: de root van de site
 lVars <- list(
-  var_VersieR = paste(R.Version()$major, R.Version()$minor, sep = "."),
-  var_VersiePython = "3.7",
   var_Copyright = 
     paste(
         "&copy;",
         format(Sys.time(), '%Y') ,
-        "Versnellingsplan - Statistisch Handboek Studiedata.",
-        "Laatst gewijzigd op:", format(Sys.time(), '%d-%m-%Y')
+        "Versnellingsplan - Statistisch Handboek Studiedata."
     )
 )
 
@@ -42,8 +39,8 @@ lVars <- list(
 ## HTML te behouden. Nodig om in markdown HTML te tonen.
 thisFooter <- Substitute_var(htmltools::htmlPreserve('
 <div id = "footerborder"><hr/></div>
-<div id = "footer">
-Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie `var_VersieR`; Python code is uitgevoerd in Python `var_VersiePython`.
+<div id = "footer_simpel">
+Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. 
 <br/><br/>
 `var_Copyright`
 </div>'), lVars)

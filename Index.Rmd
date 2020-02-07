@@ -38,3 +38,7 @@ De basis voor het handboek is een Toetsmatrix, waarbij de meest voorkomende toet
 * uitvoering in R en Python   
 * rapportage van de output   
 
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer_simpel.R"))}
+```
+<!-- ## /CLOSEDBLOK: Footer.R -->

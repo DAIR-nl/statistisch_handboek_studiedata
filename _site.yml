@@ -1,9 +1,9 @@
 name: "Statistisch Handboek Studiedata"
 output_dir: _site
+navbar:
+  title: "My Website"
 output:
   html_document:
     theme: lumen
     highlight: textmate
-    include:
-      after_body: 01. Includes/html/footer.html
-exclude: ["01. Includes", "02. Rapportages", "03. Test", "04. Python chunks", "99. Functies en Libraries", "Handboek", "Python", "SPSS", "*.R", "*.csv"]
+exclude: ["01. Includes", "02. Rapportages", "03. Test", "04. Python chunks", "99. Functies en Libraries", "R", "Python", "SPSS", "*.R", "*.csv"]

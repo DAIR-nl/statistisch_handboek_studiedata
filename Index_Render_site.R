@@ -20,6 +20,7 @@
 ## Geschiedenis:
 ## 21-09-2019: TB: Aanmaak bestand
 ## 04-12-2019: TB: Toevoeging aan statistisch_handboek_ho files
+## 06-02-2020: TB: Aanpassing zodat subfolder meegenomen worden
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -28,6 +29,36 @@
 
 ## Installeer packages en functies
 source("99. Functies en Libraries/00. Voorbereidingen.R")
+
+library("rmarkdown")
+
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## 01 BEPAAL WELKE TOETSEN GEMAAKT MOETEN WORDEN ####
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Bepaal de lijst van toetsen; wijzig 0 in 1 om in gebruik te nemen
+dfToetsen <- tribble(
+    ~Toets,                                 ~InGebruik_R, ~InGebruik_Python,
+    "01 One sample t-toets",                "1",          "0", 
+    "02 Gepaarde t-toets",                  "1",          "0", 
+    "03 Ongepaarde t-toets",                "0",          "0", 
+    "04 Linear mixed model",                "0",          "0", 
+    "05 One-way ANOVA",                     "0",          "0", 
+    "06 Tekentoets",                        "0",          "0", 
+    "07 Wilcoxon signed rank toets",        "0",          "0", 
+    "08 Mann-Whitney U toets",              "0",          "0", 
+    "09 Friedman toets",                    "0",          "0", 
+    "10 Kruskal Wallis",                    "0",          "0", 
+    "11 z-test voor proporties",            "0",          "0", 
+    "12 McNemar toets",                     "0",          "0", 
+    "13 Chi2 toets",                        "0",          "0", 
+    "14 Fisher’s exact toets",              "0",          "0", 
+    "15 Cochran’s Q toets",                 "0",          "0", 
+    "16 Fisher-Freeman-Halton exact toets", "0",          "0", 
+    "17 Chi2 toets (trend)",                "0",          "0", 
+    "18 GLMM",                              "0",          "0", 
+    "19 GEE",                               "0",          "0" 
+)
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 01 MAAK WEBSITE ####
@@ -46,15 +77,58 @@ rmarkdown::render_site(
   encoding = "UTF-8"
 )
 
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## 02.1 MAAK R FOLDER ####
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Als R niet bestaat, maak deze dan aan
+ifelse(!dir.exists("_site/R"), dir.create("_site/R"), FALSE)
+
+## Loop over de toetsen die in gebruik zijn en genereer die pagina's
+for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_R == 1]) {
+    render(paste0("R/",sToets," R.Rmd"), 
+           output_file = paste0('_site/R/', gsub(" ", "-", sToets), '-R.html'))    
+}
+
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## 02.2 MAAK PYTHON FOLDER ####
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Als R niet bestaat, maak deze dan aan
+ifelse(!dir.exists("_site/Python"), dir.create("_site/Python"), FALSE)
+
+## Loop over de toetsen die in gebruik zijn en genereer die pagina's
+for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_Python == 1]) {
+    render(paste0("R/",sToets,"-Python.Rmd"), 
+           output_file = paste0('_site/Python/', gsub(" ", "-", sToets), '-Python.html'))    
+}
+
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## 02.3 MAAK IMAGE FOLDER ####
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Als images folder niet bestaat, maak deze dan aan
+ifelse(!dir.exists("_site/images"), dir.create("_site/images"), FALSE)
+
+current_folder <- "01. Includes/images/"
+new_folder     <- "_site/images"
+list_of_files  <- list.files(current_folder) 
+
+## Kopieer het logo naar deze folder
+file.copy(file.path(current_folder,list_of_files), new_folder, 
+          overwrite = TRUE, 
+          recursive = FALSE,
+          copy.mode = TRUE)
+
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## 03 CONTROLEER DE UITKOMST ####
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 # Bekijk de nieuwe website
 output_file <- file.path(here::here(), "_site/index.html")
 browseURL(output_file)
 
-## TODO: Mapje met logo creeren
-## TODO: Rmd bestanden niet genereren
-## TODO: Rendering van subfolders
-
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## 02 RUIM OP ####
+## 04 RUIM OP ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 rm(list = ls())

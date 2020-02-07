@@ -44,4 +44,7 @@ Alle toetsen zijn gereviewd door wetenschappers, beleidsmedewekers en data speci
 
 Het handboek is nog volop in ontwikkeling en zullen we gedurende 2020 aanvullen met nieuwe toetsvormen. 
 
-  
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer_simpel.R"))}
+```
+<!-- ## /CLOSEDBLOK: Footer.R -->

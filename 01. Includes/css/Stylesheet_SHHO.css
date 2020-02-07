@@ -109,7 +109,16 @@ td.unpublished a:hover {
 /* Footer */
 #footer {
  color: #808080;
- background-image: url('../01. Includes/images/VPO_logo_studiedata.png');
+ background-image: url('../images/VPO_logo_studiedata.png');
+ background-repeat: no-repeat;
+ background-position: right;
+ background-size: 230px auto;
+ padding-right: 242px;
+}
+
+#footer_simpel  {
+ color: #808080;
+ background-image: url('images/VPO_logo_studiedata.png');
  background-repeat: no-repeat;
  background-position: right;
  background-size: 230px auto;
@@ -151,4 +160,8 @@ td.unpublished a:hover {
 }
 body{ /* Normal  */
       font-size: 15px;
+}
+
+#TOC {
+    margin: 0px 0px 20px 0px !important;
 }

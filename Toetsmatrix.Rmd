@@ -65,3 +65,8 @@ Bepaalde toetsen bevatten de assumptie dat data normaal verdeeld zijn. Dit kan i
 [^1]: https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS
 [^2]: Van Geloven, N. (21 November 2017). *KEUZE TOETS*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS).
 [^3]: https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit
+
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer_simpel.R"))}
+```
+<!-- ## /CLOSEDBLOK: Footer.R -->

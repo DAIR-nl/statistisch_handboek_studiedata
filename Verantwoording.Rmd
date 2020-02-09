@@ -29,6 +29,7 @@ if (!exists("Substitute_var")) {
 
 Het Statisch Handboek Studiedata is een initiatief van de zone Veilig en Betrouwbaar Benutten van Studiedata van het Versnellingsplan. 
 
+# Doel
 Het doel van het Statisch Handboek Studiedata is om collega's in het hoger onderwijs met enige kennis van de statistiek van een stappenplan te voorzien:
 
 * hoe ze eenvoudig statistische toetsen kunnen kiezen bij een vraagstuk, 
@@ -36,13 +37,16 @@ Het doel van het Statisch Handboek Studiedata is om collega's in het hoger onder
 * deze toetsen kunnen uitvoeren op hun data 
 * en er tot slot een rapport bij kunnen schrijven. 
 
-We hebben ervoor gekozen om de stappen zo bondig mogelijk te beschrijven en waar nodig de extra informatie in de voetnoten te zetten of te verwijzen naar andere sites. 
+We hebben ervoor gekozen om de stappen zo bondig mogelijk te beschrijven en waar nodig achtergrondinformatie in de voetnoten te zetten of te verwijzen naar andere sites. 
 
+# Casussen
 We hebben casussen verzameld die relevant kunnen zijn in het Hoger Onderwijs. Alle informatie bij de casussen is fictief en de data is gesimuleerd. De uitkomsten van de toetsen kunnen marginaal verschillen tussen de verschillende programmeertalen: R, SPSS of Python. 
 
+# Reviewproces
 Alle toetsen zijn gereviewd door wetenschappers, beleidsmedewekers en data specialisten uit het hoger onderwijs (zie *Over*). Desondanks kan het voorkomen dat u informatie aantreft die niet correct of onduidelijk is. Help ons de kwaliteit van de pagina te verbeteren door tips over onvolledigheden of onjuistheden door te geven via het feedbackformulier in te vullen. We zullen feedback zo snel mogelijk verwerken.
 
-Het handboek is nog volop in ontwikkeling en zullen we gedurende 2020 aanvullen met nieuwe toetsvormen. 
+# Ontwikkeling
+Het handboek is nog volop in ontwikkeling en zal gedurende 2020 aangevuld worden met nieuwe toetsvormen. 
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer_simpel.R"))}

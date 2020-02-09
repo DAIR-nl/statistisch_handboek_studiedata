@@ -28,20 +28,20 @@ if (!exists("Substitute_var")) {
 <!-- ## /CLOSEDBLOK: Header.R -->
 
 # Het doel van dit handboek
-Het handboek is een gemeenschappelijk groeidocument voor het uitvoeren van statistische toetsen aan de hand van concrete cases uit het hoger onderwijs met bijbehorende code. De basis voor het handboek is een keuzemodel van het [AMC](https://wikistatistiek.amc.nl/index.php/), waarbij de 20 afzonderlijke keuzes c.q. tegels aan de hand van bestaande analyses/rapporten of nieuwe analyseopdrachten uitgewerkt worden. 
+Het handboek is een gemeenschappelijk groeidocument voor het uitvoeren van statistische toetsen aan de hand van concrete cases uit het hoger onderwijs met bijbehorende code. De basis voor het handboek is een keuzemodel van het [AMC](https://wikistatistiek.amc.nl/index.php/), waarbij de 20 keuzes c.q. tegels aan de hand van zowel bestaande analyses en rapporten als nieuwe analyseopdrachten uitgewerkt worden. 
 
-Achter iedere ‘tegel’ bevindt zich een uitleg van de regels om een toets te kiezen, een voorbeeld casus uit het onderwijs, de keuze voor het package en bijbehorende R-code, een uitleg van de interpretatie van de resultaten, en een uitwerking van de manier waarop de resultaten beschreven worden in een rapport (in [APA format](https://apastyle.apa.org/)). 
+Achter iedere ‘tegel’ bevindt zich een uitleg van de regels om een toets te kiezen, een voorbeeld casus uit het onderwijs, bijbehorende code, een uitleg van de interpretatie van de resultaten, en een uitwerking van de manier waarop de resultaten beschreven worden in een rapport (in [APA format](https://apastyle.apa.org/)). 
 
 # Totstandkoming
-Dit handboek is tot stand gekomen dankzij de volgende personen:
 
 **Auteurs**
 
-* Irene van der Staaij, VU, projectleider
-* Megiel Kerkhoven, VU, programmeur
+* Irene van der Staaij, VU, hoofdredactie
+* Elian Griffioen, VU, redactie
 * Theo Bakker, VU, eindredactie
-* Jet Doeswijk, student-assistent 
-* Faaris Akbar, student-assistent 
+* Megiel Kerkhoven, VU, programmeur
+* Jet Doeswijk, VU, student-assistent 
+* Faaris Akbar, VU, student-assistent 
 
 **Interne review**
 
@@ -55,10 +55,10 @@ Dit handboek is tot stand gekomen dankzij de volgende personen:
 
 * Aswin van Oijen, Tilburg University
 * Bram Enning, Hogeschool Leiden
-* Martine Baars, Erasmus School of Social and Behavioural Sciences
+* Martine Baars, Erasmus Universiteit, School of Social and Behavioural Sciences
 * Tsjerk Wassenaar, Hanzehogeschool Groningen
 
-**Met dank aan**
+**Bijzondere dank aan**
 
 * Nan van Geloven, AMC/UMC Leiden, voor de ter beschikking stelling van het materiaal van de [AMC wiki](https://wikistatistiek.amc.nl/index.php/).
 

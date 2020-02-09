@@ -19,23 +19,26 @@
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## Geschiedenis:
 ## 22-09-2019: TB: Aanmaak bestand
+## 08-02-2020: TB: Verbetering verwijzing naar Root
+
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 01 MAAK HTML ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-## Controleer of Substitute_var bestaat; zo niet, sluit dan het voorbereidingen
-## script in.
-# if (!exists("Substitute_var")) {
-#   ## Installeer packages en functies
-#   source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
-# }
+## Plaats  variabelen in een lijst: de root van de site; als de modus gelijk is aan Root,
+## verwijs dan nergens naar, verwijs anders naar de bovenliggende directory
+if (!exists("sModus")) {
+  sModus <- "Root"
+}
+sRoot <- case_when(
+  sModus %in% c("R","Python") ~ "../",
+  TRUE ~ ""
+) 
 
-## Plaats  variabelen in een lijst: de root van de site
 lVars <- list(
-  #sRoot = paste0(here::here(),"/_site")
-  sRoot = paste0(".")
+  sRoot = sRoot
 )
 
 ## Plaats deze nu in een header; gebruik htmltools::htmlPreserve om
@@ -49,21 +52,21 @@ thisHeader <- Substitute_var(htmltools::htmlPreserve('
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="`sRoot`/index.html">Statistisch Handboek Studiedata</a>
+      <a class="navbar-brand" href="`sRoot`Index.html">Statistisch Handboek Studiedata</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="`sRoot`/Toetsmatrix.html">Toetsmatrix</a>
+  <a href="`sRoot`Toetsmatrix.html">Toetsmatrix</a>
 </li>
 <li>
-  <a href="`sRoot`/Over.html">Over</a>
+  <a href="`sRoot`Over.html">Over</a>
 </li>
 <li>
-  <a href="`sRoot`/Verantwoording.html">Verantwoording</a>
+  <a href="`sRoot`Verantwoording.html">Verantwoording</a>
 </li>
 <li>
-  <a href="`sRoot`/Licentie.html">Licentie</a>
+  <a href="`sRoot`Licentie.html">Licentie</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">

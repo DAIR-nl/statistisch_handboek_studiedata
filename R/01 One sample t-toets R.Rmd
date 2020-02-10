@@ -231,7 +231,7 @@ vP <- Round_and_format(t$p.value)
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`, *SD* = `r Round_and_format(sd(Gemiddeld_cijfer_WNS))`) is statistisch significant hoger dan het landelijk gemiddelde van 6,8, *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* << 0,05. 
+De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`, *SD* = `r Round_and_format(sd(Gemiddeld_cijfer_WNS))`) is statistisch significant hoger dan het landelijk gemiddelde van 6,8, *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* < 0,05. 
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor de exacte vakken van studenten Werktuigbouwkunde met een vwo vooropleiding hoger ligt dan het landelijk gemiddelde.
 

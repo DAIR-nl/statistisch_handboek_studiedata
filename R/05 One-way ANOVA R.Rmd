@@ -48,7 +48,7 @@ source(paste0(here::here(),"/01. Includes/data/05.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *one-way ANOVA* bij het toetsen of het gemiddelde van drie of meer onafhankelijke groepen aan elkaar gelijk zijn.[^1] 
+Gebruik de *one-way ANOVA* bij het toetsen of het gemiddelde van drie of meer onafhankelijke groepen verschillen.[^1] 
 
 # Onderwijscasus
 <div id = "casus">
@@ -342,7 +342,7 @@ vDF2 <- Round_and_format(L$`Df`[2])
 <!-- ## TEKSTBLOK: Levenes-test.R -->
 * *F*~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, p-waarde = `r vF_p`, 
 * De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de groepen in spreiding.
-* Vrijheidsgraden bestaan uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r vDF1`) en het tweede cijfer (*n~1~* + *n~2~* - 2 = `r vDF2`).  
+* Vrijheidsgraden bestaan uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r vDF1`) en het tweede cijfer (*n~1~* + *n~2~*+*n~3~* - 3 = `r vDF2`).  
 
 <!-- ## TEKSTBLOK: Levenes-test.R -->
 
@@ -363,8 +363,8 @@ vF_waarde <- Round_and_format(ANOVA[[1]]$`F value`[1])
 ```
 <!-- ## TEKSTBLOK: ANOVA-toets1.R -->
 * *F* ~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, *p* < 0,05.
-* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen.[^16] 
-* Vrijheidsgraden: het aantal groepen - 1 = `r vDF1`; *n~1~* + *n~2~* - 2 = `r vDF2`.
+* p-waarde < 0,05, dus de H~0~ wordt verworpen.[^16] 
+* Vrijheidsgraden: het aantal groepen - 1 = `r vDF1`; *n~1~* + *n~2~* + *n~3~*- 3 = `r vDF2`.
 
 <!-- ## /TEKSTBLOK: ANOVA-toets1.R -->
 

@@ -53,10 +53,10 @@ De studentendecaan vraagt zich af of studenten met een functiebeperking sinds he
 </div>
 
 # Assumpties
-Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal niveau gemeten[^5] en daarmee onafhankelijk van elkaar. 
+Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal of ordinaal niveau gemeten[^5] en daarmee onafhankelijk van elkaar. 
 
 ## Groepsgrootte
-Beide testen maken gebruik van een kruistabel; zie tabel 1 voor de geoberveerde waarden van de casus. De *Chi-kwadraat toets* wordt onbetrouwbaar als er een geobserveerde waarde van 10 of lager is.[^6]  
+Beide testen maken gebruik van een kruistabel; zie tabel 1 voor de geoberveerde waarden van de casus.De *Chi-kwadraat toets* wordt onbetrouwbaar als er een geobserveerde waarde van 10 of lager is.[^6]  
 
 
 |                      | uitval   | geen uitval | totaal | 
@@ -79,9 +79,7 @@ Op basis van geobserveerde waarden kunnen de verwachte waarden berekend worden. 
 | **wel leenstelsel**  | 347      | 416     |
 *Tabel 2. Verwachte waarden casus uitval met of zonder leenstelsel*
 
-Naast onbetrouwbaarheid bij geobserveerde waarden lager dan 10, wordt de *chi-kwadraat toets* ook onbetrouwbaar als één van de verwachte waarden 0 is. Verder wordt de toets onbetrouwbaar als in 20% van de verwachte waarde ≤ 5 is. 
-
-Gebruik de *Fisher’s exact toets* wanneer de aantallen lager zijn.[^7]  
+Naast onbetrouwbaarheid bij geobserveerde waarden lager dan 10, wordt de *chi-kwadraat toets* ook onbetrouwbaar als één van de verwachte waarden lager dan 5 is. Gebruik in die gevallen de *Fisher’s exact toets*.[^7]  
 
 # De data bekijken
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->

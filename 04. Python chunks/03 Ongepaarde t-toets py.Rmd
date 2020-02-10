@@ -177,11 +177,11 @@ plt.show()
 De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`. Verder wordt er als standaard ook tweezijdig getoetst.
 <!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
 
-<!-- ## /OPENBLOK: Library-nortest inladen.py -->
+<!-- ## OPENBLOK: Library-nortest.py -->
 ```{python}
 import statsmodels.stats.api
 ```
-<!-- ## /OPENBLOK: Library-nortest inladen.py -->
+<!-- ## OPENBLOK: Library-nortest.py -->
 
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
@@ -226,7 +226,7 @@ print(stats.levene(Cijfers_2010, Cijfers_2011))
 ```
 <!-- ## /OPENBLOK: Levenes-test.py -->
 
-<!-- ## /CLOSEDBLOK: Levenes-test.py -->
+<!-- ## CLOSEDBLOK: Levenes-test.py -->
 ```{python Levenes test als object, echo = FALSE, warning=FALSE}
 stat, pval = stats.levene(Cijfers_2010, Cijfers_2011)
 DF1 = 1
@@ -234,15 +234,15 @@ DF2 = len(Cijfers_2010) + len(Cijfers_2011) - 2
 ```
 <!-- ## /CLOSEDBLOK: Levenes-test.py -->
 
-<!-- ## TEKSTBLOK: Levenes-test2 -->
+<!-- ## TEKSTBLOK: Levenes-test2.py -->
 * *F*~`r py$DF1`~~,~~`r py$DF2`~ = `r Round_and_format(py$stat)`, p-waarde = `r Round_and_format(py$pval)` 
 * p-waarde > 0,05, dus de groepen zijn niet significant verschillend in spreiding.  
 * Vrijheidsgraden bestaan uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r py$DF1`) en het tweede cijfer (*n~2010~* + *n~2011~* - 2 = `r py$DF2`)
-<!-- ## /TEKSTBLOK: Levenes-test2 -->
+<!-- ## /TEKSTBLOK: Levenes-test2.py -->
 
-<!-- ## TEKSTBLOK: T-test -->
+<!-- ## TEKSTBLOK: T-test.py -->
 Voer een ongepaarde t-toets uit met de functie `stats.ttest_ind()` .
-<!-- ## /TEKSTBLOK: T-test -->
+<!-- ## /TEKSTBLOK: T-test.py -->
 
 <!-- ## OPENBLOK: T-test.py -->
 ```{python statistische toets}
@@ -250,7 +250,7 @@ print(stats.ttest_ind(Cijfers_2010, Cijfers_2011))
 ```
 <!-- ## /OPENBLOK: T-test.py -->
 
-<!-- ## CLOSEDBLOK: T-test.R -->
+<!-- ## CLOSEDBLOK: T-test.py -->
 ```{python T-test als object, echo = FALSE}
 stat, pval = stats.ttest_ind(Cijfers_2010, Cijfers_2011)
 n = len(Cijfers_2010)
@@ -258,15 +258,19 @@ df = len(Cijfers_2010) - 1
 mean1 = np.mean(Cijfers_2010)
 mean2 = np.mean(Cijfers_2011)
 ```
-<!-- ## /CLOSEDBLOK: T-test.R -->
+<!-- ## /CLOSEDBLOK: T-test.py -->
 
-<!-- ## TEKSTBLOK: T-test2 -->
+<!-- ## TEKSTBLOK: T-test2.py -->
 * *t* ~`r py$df`~ = `r Round_and_format(py$stat)`, *p* = `r Round_and_format(py$pval)`
 * Vrijheidsgraden, *df* = *n* -1 = `r py$n`-1 = `r py$df`  
 * p-waarde > 0,05, dus de H~0~ wordt niet verworpen [^11]
 * Het gemiddelde van de steekproef in 2010: `r Round_and_format(py$mean1)`
 * Het gemiddelde van de steekproef in 2011: `r Round_and_format(py$mean2)`
-<!-- ## /TEKSTBLOK: T-test2 -->
+<!-- ## /TEKSTBLOK: T-test2.py -->
+
+<!-- ## TEKSTBLOK: Cohen-d.py -->
+Om Cohen's D te kunnen berekenen, moet de onderstaande functie `cohen_d()` worden overgenomen, omdat deze niet een Python eigen functie is.[^13]
+<!-- ## /TEKSTBLOK: Cohen-d.py -->
 
 <!-- ## OPENBLOK: Cohens-d-test.py -->
 ```{python}
@@ -306,7 +310,7 @@ d = cohen_d(Cijfers_2010, Cijfers_2011)
 <!-- ## /TEKSTBLOK: Cohens-d-test.py -->
 
 <!-- ## TEKSTBLOK: Rapportage.py -->
-Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = `r Round_and_format(py$vMean_t0)`, *SD~2010~* = `r Round_and_format(py$vSD_t0)`) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = `r Round_and_format(py$vMean_t1)`, *SD~2011~* = `r Round_and_format(py$vSD_t1)`) is statistisch niet significant, *t* ~`r py$df`~ = `r Round_andformat(py$stat)`, *p* > 0,05, zie tabel hieronder. Het effect is minimaal, *d* = `r Round_and_format(py$d)`.
+Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = `r Round_and_format(py$vMean_t0)`, *SD~2010~* = `r Round_and_format(py$vSD_t0)`) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = `r Round_and_format(py$vMean_t1)`, *SD~2011~* = `r Round_and_format(py$vSD_t1)`) is statistisch niet significant, *t* ~`r py$df`~ = `r Round_and_format(py$stat)`, *p* > 0,05, zie tabel hieronder. Het effect is minimaal, *d* = `r Round_and_format(py$d)`.
 
 Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentamencijfer niet is veranderd na de invoer van het BSA. 
 
@@ -315,3 +319,7 @@ Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentam
 | 2010     | `r py$vN_t0` | `r Round_and_format(py$vMean_t0)` | `r Round_and_format(py$vSD_t0)` |
 | 2011     | `r py$vN_t1` | `r Round_and_format(py$vMean_t1)` | `r Round_and_format(py$vSD_t1)` |
 <!-- ## /TEKSTBLOK: Rapportage.py -->
+
+<!-- ## TEKSTBLOK: Extra-Bron.py -->
+[^13]: De geschreven Python functie voor Cohen's D is verkregen vanuit de volgende pagina op [Stackoverflow](https://stackoverflow.com/questions/21532471/how-to-calculate-cohens-d-in-python)
+<!-- ## /TEKSTBLOK: Extra-Bron.py -->

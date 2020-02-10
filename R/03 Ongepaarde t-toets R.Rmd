@@ -229,9 +229,9 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoets w
 ### Kolmogorov-Smirnov
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde niet 0 is en de standaardafwijking niet 1 is. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
-<!-- ## TEKSTBLOK: Lilliefors-test1.py -->
+<!-- ## TEKSTBLOK: Lilliefors-test1.R -->
 
-<!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
+<!-- ## /TEKSTBLOK: Lilliefors-test1.R -->
 
 <!-- ## OPENBLOK: Library-nortest.R -->
 ```{r library nortest, warning=FALSE}
@@ -291,6 +291,8 @@ library(car)
 leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 ```
 <!-- ## /OPENBLOK: Levenes-test.R -->
+
+<!-- ## CLOSEDBLOK: Levenes-test.R -->
 ```{r Levenes test als object, echo = FALSE, warning=FALSE}
 L <- leveneTest(Cijfers_gem$Cijfers, Cijfers_gem$Cohort)
 vF_waarde <- Round_and_format(L$`F value`[1])
@@ -298,17 +300,19 @@ vF_p <- Round_and_format(L$`Pr(>F)`[1])
 vDF1 <- Round_and_format(L$`Df`[1])
 vDF2 <- Round_and_format(L$`Df`[2])
 ```
-<!-- ## TEKSTBLOK: Levenes-test2 -->
+<!-- ## CLOSEDBLOK: Levenes-test.R -->
+
+<!-- ## TEKSTBLOK: Levenes-test2.R -->
 * *F*~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, p-waarde = `r vF_p` 
 * p-waarde > 0,05, dus de groepen zijn niet significant verschillend in variantie.  
 * Vrijheidsgraden bestaan uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r vDF1`) en het tweede cijfer (*n~2010~* + *n~2011~* - 2 = `r vDF2`)
 
-<!-- ## /TEKSTBLOK: Levenes-test2 -->
+<!-- ## /TEKSTBLOK: Levenes-test2.R -->
 
 ## Ongepaarde t-toets
-<!-- ## TEKSTBLOK: T-test -->
+<!-- ## TEKSTBLOK: T-test.R -->
 Voer een ongepaarde `t.test()` uit met `paired = FALSE` en `var.equal = TRUE`. Als uit de *Levene's test* komt dat de groepen verschillen in variantie, gebruik `var.equal = FALSE` .
-<!-- ## /TEKSTBLOK: T-test -->
+<!-- ## /TEKSTBLOK: T-test.R -->
 De *ongepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het het gemiddelde tentamencijfer van de opleiding Taalwetenschap na invoering van het BSA veranderd is. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren na de invoering is er voor gekozen om tweezijdig te toetsen. 
 
 <!-- ## OPENBLOK: T-test.R -->
@@ -330,7 +334,8 @@ vConf.int2 <- Round_and_format(t$conf.int[2])
 vP <- Round_and_format(t$p.value)
 ```
 <!-- ## /CLOSEDBLOK: T-test.R -->
-<!-- ## TEKSTBLOK: T-test2 -->
+
+<!-- ## TEKSTBLOK: T-test2.R -->
 * *t* ~`r vDF`~ = `r vT_waarde`, *p* = `r vP`
 * Vrijheidsgraden, *df* = *n* -1 = `r vN`-1 = `r vDF`  
 * p-waarde > 0,05, dus de H~0~ wordt niet verworpen [^12]
@@ -338,12 +343,15 @@ vP <- Round_and_format(t$p.value)
 * Het gemiddelde van de steekproef in 2010: `r vMean_t0`
 * Het gemiddelde van de steekproef in 2011: `r vMean_t1`
 
-<!-- ## /TEKSTBLOK: T-test2 -->
+<!-- ## /TEKSTBLOK: T-test2.R -->
 
 ### Effectmaat: Cohen's d 
 Wanneer p < 0,05 wordt de effectmaat berekend om te bepalen of de gevonden p-waarde betekenisvol is. In dit voorbeeld is de p > 0,05, dus is een effectmaat irrelevant. Hieronder laten we zien wat de stappen zouden zijn bij een p < 0,05.
 
+<!-- ## TEKSTBLOK: Cohen-d.R -->
 Gebruik `cohen.d()` met `paired = FALSE` om het effect te meten.
+<!-- ## /TEKSTBLOK: Cohen-d.R -->
+
 <!-- ## OPENBLOK: Cohens-d-test.R -->
 ```{r Cohen s d}
 library(effsize)
@@ -392,4 +400,7 @@ Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentam
 [^11]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
 [^12]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houd hierbij rekening met type I en type II fouten.
 
+<!-- ## TEKSTBLOK: Extra-Bron.R -->
+
+<!-- ## /TEKSTBLOK: Extra-Bron.R -->
 

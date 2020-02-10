@@ -29,6 +29,10 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
+<!-- ## CLOSEDBLOK: Reticulate.R -->
+
+<!-- ## /CLOSEDBLOK: Reticulate.R -->
+
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
@@ -101,6 +105,11 @@ Cijfers_2011 <- Cijfers_gem[Cijfers_gem$Cohort == 2011,1]
 <!-- ## TEKSTBLOK: Data-beschrijven.R-->
 Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data.
 <!-- ## /TEKSTBLOK: Data-beschrijven.R-->
+
+<!-- ## OPENBLOK: Data-beschrijven-inladen.R -->
+
+<!-- ## OPENBLOK: Data-beschrijven-inladen.R -->
+
 <div class="col-container">
   <div class="col">
 <!-- ## OPENBLOK: Data-beschrijven-1.R -->
@@ -123,7 +132,7 @@ sd(Cijfers_2011)
 <!-- ## /OPENBLOK: Data-beschrijven-2.R -->
   </div>
 </div>
-<!-- ## CLOSEDBLOK: Data-beschrijven.R -->
+<!-- ## CLOSEDBLOK: Data-beschrijven-3.R -->
 ```{r Var beschrijven t1, include=FALSE, echo=TRUE}
 vN_t0 <- Round_and_format(length(Cijfers_2010))
 vMean_t0 <- Round_and_format(mean(Cijfers_2010))
@@ -132,12 +141,13 @@ vN_t1 <- Round_and_format(length(Cijfers_2011))
 vMean_t1 <- Round_and_format(mean(Cijfers_2011))
 vSD_t1 <-Round_and_format(sd(Cijfers_2011))
 ```
-<!-- ## /CLOSEDBLOK: Data-beschrijven.R -->
-<!-- ## TEKSTBLOK: Data-beschrijven.R-->
+<!-- ## /CLOSEDBLOK: Data-beschrijven-3.R -->
+
+<!-- ## TEKSTBLOK: Data-beschrijven-4.R -->
 * Gemiddeld tentamencijfer 2010 (standaarddeviatie): `r vMean_t0` (`r vSD_t0`). *n* = `r vN_t0`.
 * Gemiddeld tentamencijfer 2011 (standaarddeviatie): `r vMean_t1` (`r vSD_t1`). *n* = `r vN_t1`.
 
-<!-- ## /TEKSTBLOK: Data-beschrijven.R-->
+<!-- ## /TEKSTBLOK: Data-beschrijven-4.R -->
 
 ## Visuele inspectie van normaliteit
 Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.

@@ -30,12 +30,12 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## CLOSEDBLOK: Reticulate.R -->
+<!-- ## CLOSEDBLOK: Reticulate.py -->
 ```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}
 library(reticulate)
 knitr::knit_engines$set(python = reticulate::eng_python)
 ```
-<!-- ## /CLOSEDBLOK: Reticulate.R -->
+<!-- ## /CLOSEDBLOK: Reticulate.py -->
 
 <!-- ## OPENBLOK: Data-aanmaken.py -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
@@ -76,7 +76,7 @@ Cijfers_2011 = dfCijfers_gem[dfCijfers_gem['Cohort'] == 2011]['Cijfers']
 <!-- ## /OPENBLOK: Data-selecteren.py -->
 
 <!-- ## TEKSTBLOK: Data-beschrijven.py -->
-Inspecteer de data met `len()`, `np.mean()` en `np.sqrt(np.var())`, door deze aan te roepen uit de library `numpy`.
+Inspecteer de data met `np.size()`, `np.mean()` en `np.sqrt(np.var())`, door deze aan te roepen uit de library `numpy`.
 <!-- ## /TEKSTBLOK: Data-beschrijven.py -->
 
 <!-- ## OPENBLOK: Data-beschrijven-inladen.py -->
@@ -86,11 +86,10 @@ import numpy as np
 ```
 <!-- ## OPENBLOK: Data-beschrijven-inladen.py -->
 
-<div class="col2">
 <!-- ## OPENBLOK: Data-beschrijven-1.py -->
 ```{python Data beschrijven 1, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie 2010
-print(len(Cijfers_2010))
+print(np.size(Cijfers_2010))
 print(np.mean(Cijfers_2010))
 print(np.sqrt(np.var(Cijfers_2010)))
 ```
@@ -99,28 +98,27 @@ print(np.sqrt(np.var(Cijfers_2010)))
 <!-- ## OPENBLOK: Data-beschrijven-2.py -->
 ```{python Data beschrijven 2, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie 2011
-print(len(Cijfers_2011))
+print(np.size(Cijfers_2011))
 print(np.mean(Cijfers_2011))
 print(np.sqrt(np.var(Cijfers_2011)))
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-2.py -->
 
-<!-- ## CLOSEDBLOK: Data-beschrijven.R -->
-```{r Var beschrijven t1, include=FALSE, echo=TRUE}
-vN_t0 = len(Cijfers_2010)
+<!-- ## CLOSEDBLOK: Data-beschrijven-3.py -->
+```{python Var beschrijven t1, include=FALSE, echo=TRUE}
+vN_t0 = np.size(Cijfers_2010)
 vMean_t0 = np.mean(Cijfers_2010)
 vSD_t0 = np.sqrt(np.var(Cijfers_2010))
-vN_t1 = len(Cijfers_2011)
+vN_t1 = np.size(Cijfers_2011)
 vMean_t1 = np.mean(Cijfers_2011)
 vSD_t1 = np.sqrt(np.var(Cijfers_2011))
 ```
-<!-- ## /CLOSEDBLOK: Data-beschrijven.R -->
-</div>
+<!-- ## /CLOSEDBLOK: Data-beschrijven-3.py -->
 
-<!-- ## TEKSTBLOK: Data-beschrijven.py -->
-* Gemiddeld tentamencijfer 2010 (standaarddeviatie): `r py$vMean_t0` (`r py$vSD_t0`). *n* = `r py$vN_t0`.
-* Gemiddeld tentamencijfer 2011 (standaarddeviatie): `r py$vMean_t1` (`r py$vSD_t1`). *n* = `r py$vN_t1`.
-<!-- ## TEKSTBLOK: Data-beschrijven.py -->
+<!-- ## TEKSTBLOK: Data-beschrijven-4.py -->
+* Gemiddeld tentamencijfer 2010 (standaarddeviatie): `r Round_and_format(py$vMean_t0)` (`r Round_and_format(py$vSD_t0)`). *n* = `r py$vN_t0`.
+* Gemiddeld tentamencijfer 2011 (standaarddeviatie): `r Round_and_format(py$vMean_t1)` (`r Round_and_format(py$vSD_t1)`). *n* = `r py$vN_t1`.
+<!-- ## /TEKSTBLOK: Data-beschrijven-4.py -->
 
 <!-- ## OPENBLOK: Histogram.py -->
 ```{python histogram}
@@ -144,8 +142,6 @@ plt.show()
 Importeer `scipy.stats` om een Q-Q plot te maken en statistische testen uit te voeren. Voor een Q-Q plot kan de functie `scipy.stats.probplot()` worden gebruikt.
 <!-- ## TEKSTBLOK: QQplot.py -->
 
-<div class ="col-container">
-  <div class = "col"> 
 <!-- ## OPENBLOK: QQplot-t1.py -->
 ```{python QQplot-t1}
 import scipy.stats as stats
@@ -156,8 +152,7 @@ ylab = plt.ylabel("Kwantielen in data")
 plt.show()
 ```
 <!-- ## /OPENBLOK: QQplot-t1.py -->
-  </div>
-  <div class = "col">
+
 <!-- ## OPENBLOK: QQplot-t2.py -->
 ```{python QQplot-t2}
 import scipy.stats as stats
@@ -168,8 +163,6 @@ ylab = plt.ylabel("Kwantielen in data")
 plt.show()
 ```
 <!-- ## /OPENBLOK: QQplot-t2.py -->
-  </div>
-</div>
 
 <!-- ## OPENBLOK: Boxplot.py -->
 ```{python boxplot}
@@ -181,7 +174,7 @@ plt.show()
 <!-- ## /OPENBLOK: Boxplot.py -->
 
 <!-- ## TEKSTBLOK: Lilliefors-test1.py -->
-De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`.
+De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`. Verder wordt er als standaard ook tweezijdig getoetst.
 <!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
 
 <!-- ## /OPENBLOK: Library-nortest inladen.py -->
@@ -190,25 +183,20 @@ import statsmodels.stats.api
 ```
 <!-- ## /OPENBLOK: Library-nortest inladen.py -->
 
-<div class="col-container">
-  <div class = "col">
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
 print(statsmodels.stats.api.lilliefors(Cijfers_2010))
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-1.py -->
-  </div>
-  <div class = "col">
+
 <!-- ## OPENBLOK: Lilliefors-test-2.py -->
 ``` {python Lilliefors Test-2, warning=FALSE}
 print(statsmodels.stats.api.lilliefors(Cijfers_2011))
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-2.py -->
-  </div>
-</div>
 
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test -->
-```{python}
+```{python, include=FALSE}
 Cijfers_2010_n30 = r.Cijfers_2010_n30
 Cijfers_2011_n30 = r.Cijfers_2011_n30
 n = len(Cijfers_2010_n30)
@@ -216,22 +204,17 @@ n = len(Cijfers_2010_n30)
 Er zijn 2 steekproeven van `Cijfers_gem` ingeladen: `Cijfers_2010_n30` en `Cijfers_2011_n30`. Beide steekproeven bevatten `r py$n` studenten
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test -->
 
-<div class = "col-container">
-  <div class="col">
 <!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
 ``` {python Shapiro-Wilk Test-1, warning=FALSE}
 print(stats.shapiro(r.Cijfers_2011_n30))
 ```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-1.py -->
-  </div>
-  <div class="col">
+
 <!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
 ``` {python Shapiro-Wilk Test-2, warning=FALSE}
 print(stats.shapiro(r.Cijfers_2010_n30))
 ```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-2.py -->
-  </div>
-</div>
 
 <!-- ## TEKSTBLOK: Levenes-test -->
 Test met de Levene's test de homogeniteit van varianties. Gebruik hier de variabelen `Cijfers_2010` en `Cijfers_2011`.
@@ -241,18 +224,18 @@ Test met de Levene's test de homogeniteit van varianties. Gebruik hier de variab
 ```{python Levenes test}
 print(stats.levene(Cijfers_2010, Cijfers_2011))
 ```
-<!-- ## OPENBLOK: Levenes-test.py -->
-
 <!-- ## /OPENBLOK: Levenes-test.py -->
+
+<!-- ## /CLOSEDBLOK: Levenes-test.py -->
 ```{python Levenes test als object, echo = FALSE, warning=FALSE}
 stat, pval = stats.levene(Cijfers_2010, Cijfers_2011)
 DF1 = 1
 DF2 = len(Cijfers_2010) + len(Cijfers_2011) - 2
 ```
-<!-- ## /OPENBLOK: Levenes-test.py -->
+<!-- ## /CLOSEDBLOK: Levenes-test.py -->
 
 <!-- ## TEKSTBLOK: Levenes-test2 -->
-* *F*~`r py$DF1`~~,~~`r py$DF2`~ = `r py$stat`, p-waarde = `r py$pval` 
+* *F*~`r py$DF1`~~,~~`r py$DF2`~ = `r Round_and_format(py$stat)`, p-waarde = `r Round_and_format(py$pval)` 
 * p-waarde > 0,05, dus de groepen zijn niet significant verschillend in spreiding.  
 * Vrijheidsgraden bestaan uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r py$DF1`) en het tweede cijfer (*n~2010~* + *n~2011~* - 2 = `r py$DF2`)
 <!-- ## /TEKSTBLOK: Levenes-test2 -->
@@ -278,7 +261,7 @@ mean2 = np.mean(Cijfers_2011)
 <!-- ## /CLOSEDBLOK: T-test.R -->
 
 <!-- ## TEKSTBLOK: T-test2 -->
-* *t* ~`r py$df`~ = `r py$stat`, *p* = `r py$pval`
+* *t* ~`r py$df`~ = `r Round_and_format(py$stat)`, *p* = `r Round_and_format(py$pval)`
 * Vrijheidsgraden, *df* = *n* -1 = `r py$n`-1 = `r py$df`  
 * p-waarde > 0,05, dus de H~0~ wordt niet verworpen [^11]
 * Het gemiddelde van de steekproef in 2010: `r Round_and_format(py$mean1)`
@@ -287,7 +270,7 @@ mean2 = np.mean(Cijfers_2011)
 
 <!-- ## OPENBLOK: Cohens-d-test.py -->
 ```{python}
-def cohen.d(x, y):
+def cohen_d(x, y):
   # import numpy
   import numpy as np
 	
@@ -308,16 +291,27 @@ def cohen.d(x, y):
 ```
 
 ```{python}
-print(cohen.d(Cijfers_2010, Cijfers_2011))
+print(cohen_d(Cijfers_2010, Cijfers_2011))
 ```
 <!-- ## /OPENBLOK: Cohens-d-test.py -->
 
 <!-- ## CLOSEDBLOK: Cohens-d-test.py -->
 ```{python var Cohens d, echo = FALSE}
-d = cohen.d(Cijfers_2010, Cijfers_2011)
+d = cohen_d(Cijfers_2010, Cijfers_2011)
 ```
 <!-- ## /CLOSEDBLOK: Cohens-d-test.py -->
 
 <!-- ## TEKSTBLOK: Cohens-d-test.py -->
 *d* = `r Round_and_format(py$d)`. De sterkte van het effect van de tutor op het cijfer is verwaarloosbaar. 
 <!-- ## /TEKSTBLOK: Cohens-d-test.py -->
+
+<!-- ## TEKSTBLOK: Rapportage.py -->
+Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = `r Round_and_format(py$vMean_t0)`, *SD~2010~* = `r Round_and_format(py$vSD_t0)`) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = `r Round_and_format(py$vMean_t1)`, *SD~2011~* = `r Round_and_format(py$vSD_t1)`) is statistisch niet significant, *t* ~`r py$df`~ = `r Round_andformat(py$stat)`, *p* > 0,05, zie tabel hieronder. Het effect is minimaal, *d* = `r Round_and_format(py$d)`.
+
+Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentamencijfer niet is veranderd na de invoer van het BSA. 
+
+| Cohort   | N         | M            | SD         |
+| -------- | --------- | ------------ | ---------- |
+| 2010     | `r py$vN_t0` | `r Round_and_format(py$vMean_t0)` | `r Round_and_format(py$vSD_t0)` |
+| 2011     | `r py$vN_t1` | `r Round_and_format(py$vMean_t1)` | `r Round_and_format(py$vSD_t1)` |
+<!-- ## /TEKSTBLOK: Rapportage.py -->

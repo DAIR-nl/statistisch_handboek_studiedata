@@ -36,23 +36,20 @@ knitr::knit_engines$set(python = reticulate::eng_python)
 ```
 <!-- ## /CLOSEDBLOK: Reticulate.py -->
 
-```{r opmerking, include=FALSE, eval=FALSE}
-# doorlinken naar de Wilcoxon Signed Rank Test
-# linken naar blz transformeren data 
-```
-
 <!-- ## OPENBLOK: Data-aanmaken.py -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 source(paste0(here::here(),"/01. Includes/data/02.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.py -->
 
-<!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is een dataset ingeladen met het gemiddeld aantal uren studeren voor (T~0~) en na (T~1~) de cursus. De gemiddeldes per onderwijsperiode zijn afgerond op 1 decimaal in de dataset `Studielogboek`. 
-<!-- ## /TEKSTBLOK: Dataset-inladen.R-->
+<!-- ## TEKSTBLOK: Dataset-inladen.py -->
+Er is een dataset ingeladen met het gemiddeld aantal uren studeren voor (T~0~) en na (T~1~) de cursus. De gemiddeldes per onderwijsperiode zijn afgerond op 1 decimaal in de dataframe `dfStudielogboek`. 
+<!-- ## /TEKSTBLOK: Dataset-inladen.py -->
 
-## De data bekijken
+<!-- ## TEKSTBLOK: Data-bekijken.py -->
 Gebruik `<dataframe>.head()` en `<dataframe>.tail()` om de structuur van de data te bekijken.
+<!-- ## /TEKSTBLOK: Data-bekijken.py -->
+
 <!-- ## OPENBLOK: Data-bekijken.py -->
 ```{python, include=FALSE}
 import pandas as pd
@@ -77,12 +74,14 @@ Uren_studeren_T1 = dfStudielogboek[dfStudielogboek['Meetmoment'] == "T1"]['Uren_
 ```
 <!-- ## /OPENBLOK: Data-selecteren.py -->
 
-<!-- ## OPENBLOK: Data-beschrijven-1.py -->
+<!-- ## OPENBLOK: numpy-inladen.py -->
 ```{python}
 # Om het gemiddelde en de standaard deviatie te berekenen, hebben we de library 'numpy' nodig
 import numpy as np
 ```
+<!-- ## OPENBLOK: numpy-inladen.py -->
 
+<!-- ## OPENBLOK: Data-beschrijven-1.py -->
 ```{python data beschrijven t1, collapse = TRUE}
 ## aantallen, gemiddelde en standaarddeviatie voor tutorgesprek
 print(len(Uren_studeren_T0))
@@ -112,7 +111,7 @@ vN_t1 = np.size(Uren_studeren_T1)
 ## aantallen, gemiddelde en standaarddeviatie na tutorgesprek
 print(len(Uren_studeren_T1))
 print(np.mean(Uren_studeren_T1))
-print(np.sqrt(np.var(Uren_studeren_T1)))
+print(np.sqrt(np.var(Uren_studeren_T1, ddof = 1)))
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-2.py -->
 
@@ -122,12 +121,18 @@ print(np.sqrt(np.var(Uren_studeren_T1)))
 import matplotlib.pyplot as plt
 fig = plt.figure()
 sub1 = fig.add_subplot(1, 2, 1)
-title1 = plt.title("voor")
+title1 = plt.title("T0")
+xlab = plt.xlabel("Uren Studeren")
+ylab = plt.ylabel("Frequentiedichtheid")
 hist1 = plt.hist(Uren_studeren_T0, density = True, edgecolor = "black", bins = 9)
+yax1 = sub1.set_ylim([0, 0.05])
 
 sub2 = fig.add_subplot(1, 2, 2)
-title2 = plt.title("na")
+title2 = plt.title("T1")
+xlab = plt.xlabel("Uren Studeren")
+ylab = plt.ylabel("Frequentiedichtheid")
 hist2 = plt.hist(Uren_studeren_T1, density = True, edgecolor = "black", bins = 9)
+yax2 = sub2.set_ylim([0, 0.05])
 
 main = fig.suptitle('Gemiddeld uren studeren voor en na cursus')
 plt.show()
@@ -136,7 +141,7 @@ plt.show()
 
 <!-- ## TEKSTBLOK: QQplot.py -->
 Importeer `scipy.stats` om een Q-Q plot te maken en statistische testen uit te voeren. Voor een Q-Q plot kan de functie `scipy.stats.probplot()` worden gebruikt.
-<!-- ## TEKSTBLOK: QQplot.py -->
+<!-- ## /TEKSTBLOK: QQplot.py -->
 
 <!-- ## OPENBLOK: QQplot-inladen.py -->
 ```{python}
@@ -168,21 +173,21 @@ plt.show()
 ``` {python Boxplot}
 ## Boxplot
 fig, ax = plt.subplots()
-box = ax.boxplot([Uren_studeren_T0, Uren_studeren_T1], labels = ["Voor", "Na"])
+box = ax.boxplot([Uren_studeren_T0, Uren_studeren_T1], labels = ["T0", "T1"])
 title = plt.title("Boxplot van studielogboek")
 plt.show()
 ```
 <!-- ## /OPENBLOK: Boxplot.py -->
 
 <!-- ## TEKSTBLOK: Lilliefors-test1.py -->
-De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`.
+De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`. Verder wordt er als standaard ook tweezijdig getoetst.
 <!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
 
 <!-- ## OPENBLOK: Library-nortest.py -->
 ```{python}
 import statsmodels.stats.api
 ```
-<!-- ## OPENBLOK: Library-nortest.py -->
+<!-- ## /OPENBLOK: Library-nortest.py -->
 
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
@@ -196,17 +201,18 @@ print(statsmodels.stats.api.lilliefors(Uren_studeren_T1))
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-2.py -->
 
-<!-- ## TEKSTBLOK: Shapiro-Wilk-test.py -->
-```{python}
+<!-- ## CLOSEDBLOK: data inladen-2.py -->
+```{python, include=FALSE}
 Uren_studeren_T0_n30 = r.Uren_studeren_T0_n30
 Uren_studeren_T1_n30 = r.Uren_studeren_T1_n30
 N1 = len(Uren_studeren_T0_n30)
 N2 = len(Uren_studeren_T1_n30)
 ```
+<!-- ## /CLOSEDBLOK: data inladen-2.py -->
 
-<!-- ## TEKSTBLOK: Shapiro-Wilk-test.R -->
-Er zijn 2 steekproeven van `Studielogboek` ingeladen: `Uren_studeren_T0_n30` (T~0~) en `Uren_studeren_T1_n30` (T~1~), *n~T0~* = `r py$N1` , *n~T1~* = `r py$N2
-<!-- ## /TEKSTBLOK: Shapiro-Wilk-test.R -->
+<!-- ## TEKSTBLOK: Shapiro-Wilk-test.py -->
+Er zijn 2 steekproeven van `Studielogboek` ingeladen: `Uren_studeren_T0_n30` (T~0~) en `Uren_studeren_T1_n30` (T~1~), *n~T0~* = `r py$N1` , *n~T1~* = `r py$N2`.
+<!-- ## /TEKSTBLOK: Shapiro-Wilk-test.py -->
 
 <!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
 ``` {python Shapiro-Wilk Test-1, warning=FALSE}
@@ -234,20 +240,24 @@ print(stats.ttest_rel(Uren_studeren_T0, Uren_studeren_T1))
 ```{python T-test als object, echo = FALSE}
 stat, pval = stats.ttest_rel(Uren_studeren_T0, Uren_studeren_T1)
 df = N1 - 1
-diffmean = np.mean(np.abs(Uren_studeren_T0 - Uren_studeren_T1))
+diffmean = np.mean(np.abs(np.array(Uren_studeren_T1) - np.array(Uren_studeren_T0)))
 ```
 <!-- ## /CLOSEDBLOK: T-test.py -->
 
-<!-- ## TEKSTBLOK: T-test2.R -->
-* *t*~`r py$df`~ = `r Round_and_format(py$stat)`, *p* << 0,05
+<!-- ## TEKSTBLOK: T-test2.py -->
+* *t*~`r py$df`~ = `r Round_and_format(py$stat)`, *p* < 0,05
 * Vrijheidsgraden, *df* = *n* -1 = `r py$N1`-1 = `r py$df`  
-* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^10]
+* p-waarde < 0,05, dus de H~0~ wordt verworpen [^10]
 * het absolute verschil tussen de twee groepen: `r Round_and_format(py$diffmean)` 
-<!-- ## TEKSTBLOK: T-test2.R -->
+<!-- ## TEKSTBLOK: T-test2.py -->
+
+<!-- ## TEKSTBLOK: Cohen-d.py -->
+Om Cohen's D te kunnen berekenen, moet de onderstaande functie `cohen_d()` worden overgenomen, omdat deze niet een Python eigen functie is.[^11]
+<!-- ## /TEKSTBLOK: Cohen-d.py  -->
 
 <!-- ## OPENBLOK: Cohens-d-test.py -->
 ```{python}
-def cohen.d(x, y):
+def cohen_d(x, y):
   # import numpy
   import numpy as np
 	
@@ -268,16 +278,30 @@ def cohen.d(x, y):
 ```
 
 ```{python}
-print(cohen.d(Uren_studeren_T0, Uren_studeren_T1))
+print(cohen_d(Uren_studeren_T0, Uren_studeren_T1))
 ```
 <!-- ## OPENBLOK: Cohens-d-test.py -->
 
 <!-- ## CLOSEDBLOK: Cohens-d-test.py -->
 ```{python}
-d = cohen.d(Uren_studeren_T0, Uren_studeren_T1)
+d = cohen_d(Uren_studeren_T0, Uren_studeren_T1)
 ```
 <!-- ## /CLOSEDBLOK: Cohens-d-test.py -->
 
 <!-- ## TEKSTBLOK: Cohens-d-test.py -->
 *d* = `r Round_and_format(py$d)`. De sterkte van het effect van de tutor op het cijfer is minimaal. 
 <!-- ## /TEKSTBLOK: Cohens-d-test.py -->
+
+<!-- ## TEKSTBLOK: Rapportage.py -->
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddeld aantal uur studeren van de studenten is veranderd na deelname aan de cursus. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r Round_and_format(py$vMean_t0)`, *SD~T0~* = `r Round_and_format(py$vSD_t0)`) en het gemiddelde van T~1~ (*M~T1~* =`r Round_and_format(py$vMean_t1)`, *SD~T1~* = `r Round_and_format(py$vSD_t1)`) is significant, *t* ~`r py$df`~ = `r Round_and_format(py$stat)`, *p* < 0,01. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is echter minimaal klein, *d* = `r Round_and_format(py$d)`. 
+
+
+| Meting     | N         | M            | SD         |
+| --------   | --------- | ------------ | ---------- |
+| T~0~       | `r py$vN_t0` | `r Round_and_format(py$vMean_t0)` | `r Round_and_format(py$vSD_t0)` |
+| T~1~       | `r py$vN_t1` | `r Round_and_format(py$vMean_t1)` | `r Round_and_format(py$vSD_t1)` |
+<!-- ## /TEKSTBLOK: Rapportage.py -->
+
+<!-- ## TEKSTBLOK: Extra-Bron.py -->
+[^11]: De geschreven Python functie voor Cohen's D is verkregen vanuit de volgende pagina op [Stackoverflow](https://stackoverflow.com/questions/21532471/how-to-calculate-cohens-d-in-python)
+<!-- ## /TEKSTBLOK: Extra-Bron.py -->

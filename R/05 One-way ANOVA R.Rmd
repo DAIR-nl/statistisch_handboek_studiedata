@@ -29,6 +29,10 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
+<!-- ## CLOSEDBLOK: Reticulate.R -->
+
+<!-- ## /CLOSEDBLOK: Reticulate.R -->
+
 <!-- ## CLOSEDBLOK: Status.R -->
 ```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
 ```
@@ -128,9 +132,13 @@ Reistijd_GSC <- Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Opleiding
 ```
 <!-- ## /OPENBLOK: Data-selecteren.R -->
 
-<!-- ## TEKSTBLOK: Data-beschrijven.R-->
+<!-- ## TEKSTBLOK: Data-beschrijven.R -->
 Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data.
-<!-- ## /TEKSTBLOK: Data-beschrijven.R-->
+<!-- ## /TEKSTBLOK: Data-beschrijven.R -->
+
+<!-- ## OPENBLOK: Data-beschrijven-inladen.R -->
+
+<!-- ## /OPENBLOK: Data-beschrijven-inladen.R -->
 
 <!-- ## OPENBLOK: Data-beschrijven-1.R -->
 ```{r Data beschrijven 1}
@@ -159,12 +167,13 @@ vSD_GSC <-Round_and_format(sd(Reistijd_GSC))
 vN_GSC <- Round_and_format(length(Reistijd_GSC))
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven.R -->
-<!-- ## TEKSTBLOK: Data-beschrijven.R-->
+
+<!-- ## TEKSTBLOK: Datatekst-beschrijven.R -->
 * Gemiddelde reistijd Arabische Taal en Cultuur (standaarddeviatie): `r vM_ATC` (`r vSD_ATC`). *n* = `r vN_ATC`  
 * Gemiddelde reistijd Filosofie (standaarddeviatie): `r vM_FIL` (`r vSD_FIL`). *n* = `r vN_FIL`.
 * Gemiddelde reistijd Geschiedenis (standaarddeviatie): `r vM_GSC` (`r vSD_GSC`). *n* = `r vN_GSC`.
 
-<!-- ## /TEKSTBLOK: Data-beschrijven.R-->
+<!-- ## /TEKSTBLOK: Datatekst-beschrijven.R -->
 
 
 ## Visuele inspectie van normaliteit
@@ -357,10 +366,14 @@ res.aov <- aov(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 summary(res.aov)
 ```
 <!-- ## /OPENBLOK: ANOVA-toets.R -->
+
+<!-- ## CLOSEDBLOK: ANOVA-toets.R -->
 ```{r ANOVA als object, echo=FALSE}
 ANOVA <- summary(res.aov)
 vF_waarde <- Round_and_format(ANOVA[[1]]$`F value`[1])
 ```
+<!-- ## /CLOSEDBLOK: ANOVA-toets.R -->
+
 <!-- ## TEKSTBLOK: ANOVA-toets1.R -->
 * *F* ~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, *p* < 0,05.
 * p-waarde < 0,05, dus de H~0~ wordt verworpen.[^16] 

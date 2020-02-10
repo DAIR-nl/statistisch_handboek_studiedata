@@ -29,12 +29,12 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## CLOSEDBLOK: Reticulate.R -->
+<!-- ## CLOSEDBLOK: Reticulate.py -->
 ```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}
 library(reticulate)
 knitr::knit_engines$set(python = reticulate::eng_python)
 ```
-<!-- ## /CLOSEDBLOK: Reticulate.R -->
+<!-- ## /CLOSEDBLOK: Reticulate.py -->
 
 <!-- ## OPENBLOK: Data-aanmaken.py -->
 ```{r opmerking TODO, include=FALSE, eval=FALSE}
@@ -46,9 +46,9 @@ source(paste0(here::here(),"/01. Includes/data/13.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.py -->
 
-<!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is een dataset ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. De data `dfUitval_functiebeperking` zijn binair: wel of geen uitval. 
-<!-- ## /TEKSTBLOK: Dataset-inladen.R-->
+<!-- ## TEKSTBLOK: Dataset-inladen.py -->
+Er is een kruistabel `dfUitval_functiebeperking` ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. Zowel de variabele voor uitval (wel of geen uitval) als voor functiebeperking (wel of geen functiebeperking) zijn binair. Deze tabel is gebaseerd op een dataset waarin uitval en functiebeperking voor studenten wordt bijgehouden.
+<!-- ## /TEKSTBLOK: Dataset-inladen.py -->
 
 <!-- ## OPENBLOK: Data-bekijken.py -->
 ```{python, include=FALSE}
@@ -64,7 +64,7 @@ print(dfUitval_functiebeperking.head(6))
 <!-- ## /BLOK: Data-bekijken.py -->
 
 <!-- ## TEKSTBLOK: Chi2-toets.py -->
-De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel gelijk is gebleven. Gebruik `stats.chi2_contingency()` op een kruistabel.  
+De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel gelijk is gebleven. Gebruik `stats.chi2_contingency()` op een kruistabel. Er wordt vervolgens het volgende weergegeven: `<teststatistiek>, <vrijheidsgraad>, <p-waarde>`.
 <!-- ## /TEKSTBLOK: Chi2-toets.py -->
 
 <!-- ## OPENBLOK: Chi2-toets.py -->
@@ -74,6 +74,22 @@ tstat, df, pval, tab = stats.chi2_contingency(dfUitval_functiebeperking, correct
 print(tstat, df, pval)
 ```
 <!-- ## /BLOK: Chi2-toets.py -->
+
+<!-- ## CLOSEDBLOK: Chi2-toets.py -->
+
+<!-- ## /CLOSEDBLOK: Chi2-toets.py -->
+
+<!-- ## TEKSTBLOK: Chi2-toets.py -->
+* *χ^2^* ~1~ ≈ `r Round_and_format(py$tstat)`, *p* ≈ `r Round_and_format(py$pval)`  
+* Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r py$df`. De continuïteitscorrectie van Yates wordt automatisch toegepast wanneer het aantal vrijheidsgraden 1 is.[^6]   
+* p-waarde < 0,05, dus de H~0~ wordt verworpen.[^8]  
+
+<!-- ## /TEKSTBLOK: Chi2-toets.py -->
+
+<!-- ## TEKSTBLOK: Rapportage.py -->
+De *Chi-kwadraat toets* is uitgevoerd om te toetsen of studenten met een functiebeperking meer of minder uitvallen sinds de invoering van het leenstelsel. De resultaten ondersteunen de alternatieve hypothese: het percentage uitval van het aantal studenten met een functiebeperking is na de invoering van het leenstelsel veranderd, *χ^2^* ~`r py$df`~ ≈ `r py$`, *p* < 0,05.
+
+<!-- ## /TEKSTBLOK: Rapportage.py -->
 
 <!-- ## OPENBLOK: data-bekijken-n43.py -->
 ```{python data bekijken n43}

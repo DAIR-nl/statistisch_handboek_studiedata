@@ -1,0 +1,30 @@
+---
+title: HTML Dependencies
+output: html_document
+---
+
+This example explains how HTML dependencies work in **htmltools**. Sometimes an HTML fragment may have additional dependencies to work correctly, such as JavaScript and/or CSS files. In R Markdown documents, you have to let **rmarkdown** know these dependencies, so they can be added to the HTML header when the document is rendered through Pandoc.
+
+Another thing that you need to pay attention is you have to "protect" your HTML output so that Pandoc does not touch it, e.g. when you have four leading spaces, Pandoc may think this line is supposed to be a `<pre>` block whereas you only meant to indent the line for cosmetic purposes. In this case, the function `htmltools::htmlPreserve()` will be _automatically_ applied to your HTML content in R Markdown if the content is generated from `htmltools::tags` or wrapped in `htmltools::HTML()`.
+
+Now we use a random CSS file in the **knitr** package to illustrate how dependencies work. The goal here is to generate a `<div>` with a class `error`, of which the style has been defined in the CSS file.
+
+```{r}
+htmlFun = function(content) {
+  x = htmltools::tags$div(content, class = 'error')
+  # you could also do this if you don't care about escaping HTML entities in 'content':
+  # x = htmltools::HTML(paste('<div class="error">', content, '</div>'))
+  d = htmltools::htmlDependency(
+    'knitr-css', '1.2.3', src = system.file('misc', package = 'knitr'),
+    stylesheet = 'knitr.css'
+  )
+  x = htmltools::attachDependencies(x, d)
+  x
+}
+```
+
+Now you should see `Hello World` in red:
+
+```{r}
+htmlFun('Hello World!')
+```

@@ -28,14 +28,15 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
-Het Statistisch Handboek Studiedata is gemaakt door VU Analytics als onderdeel van het Versnellingsplan Onderwijsinnovatie met ICT. Met dit handboek wordt een gemeenschappelijk standaard gecreëerd voor het toetsen van studiedata, daarbij de validiteit en betrouwbaarheid van beleidsadviezen te waarborgen. Deze site is bedoeld als handboek en is niet een vervanger voor een statistiek cursus. 
+# Statistisch Handboek Studiedata
+Het Statistisch Handboek Studiedata is gemaakt als onderdeel van het Versnellingsplan Onderwijsinnovatie met ICT. Het handboek dienst als een gemeenschappelijk standaard voor het toetsen van analyses op studiedata in het hoger onderwijs om de validiteit en betrouwbaarheid van beleidsadviezen te waarborgen. Het handboek is geen vervanger van een cursus statistiek. 
 
-De basis voor het handboek is een Toetsmatrix, waarbij de meest voorkomende toetsen afzonderlijk uitgewerkt zijn. Bij elke toets zit:  
+De basis voor het handboek is een Toetsmatrix, waarin de meest voorkomende toetsen afzonderlijk uitgewerkt zijn. Elke toets bevat:  
 
 * een omschrijving waarvoor een toets gebruikt kan worden  
-* een casus vanuit de onderwijsdata  
+* een casus uit het onderwijs
 * assumpties behorende bij de toetsen  
-* uitvoering in R en Python   
+* code voor uitvoering in R en Python   
 * rapportage van de output   
 
 <!-- ## CLOSEDBLOK: Footer.R -->

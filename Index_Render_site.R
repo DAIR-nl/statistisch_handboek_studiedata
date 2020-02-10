@@ -64,6 +64,9 @@ dfToetsen <- tribble(
 ## 01 MAAK WEBSITE ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+## Bepaal de modus
+sModus <- "Root"
+
 ## Verwijder de site root
 rmarkdown::clean_site(preview = FALSE,
                       quiet = FALSE,
@@ -86,6 +89,7 @@ ifelse(!dir.exists("_site/R"), dir.create("_site/R"), FALSE)
 
 ## Loop over de toetsen die in gebruik zijn en genereer die pagina's
 for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_R == 1]) {
+    sModus <- "R"
     render(paste0("R/",sToets," R.Rmd"), 
            output_file = paste0('_site/R/', gsub(" ", "-", sToets), '-R.html'))    
 }
@@ -99,6 +103,7 @@ ifelse(!dir.exists("_site/Python"), dir.create("_site/Python"), FALSE)
 
 ## Loop over de toetsen die in gebruik zijn en genereer die pagina's
 for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_Python == 1]) {
+    sModus <- "Python"
     render(paste0("R/",sToets,"-Python.Rmd"), 
            output_file = paste0('_site/Python/', gsub(" ", "-", sToets), '-Python.html'))    
 }

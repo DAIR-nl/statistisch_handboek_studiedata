@@ -127,10 +127,13 @@ import matplotlib.pyplot as plt
 fig = plt.figure()
 sub1 = fig.add_subplot(1, 2, 1)
 title1 = plt.title("2010")
+xlab = plt.xlabel("Cijfers")
+ylab = plt.ylabel("Frequentiedichtheid")
 hist1 = plt.hist(Cijfers_2010, density = True, edgecolor = "black", bins = 9)
 
 sub2 = fig.add_subplot(1, 2, 2)
 title2 = plt.title("2011")
+xlab = plt.xlabel("Cijfers")
 hist2 = plt.hist(Cijfers_2011, density = True, edgecolor = "black", bins = 9)
 
 main = fig.suptitle('Taalwetenschap gemiddelde cijfers voor en na de BSA')
@@ -174,7 +177,7 @@ plt.show()
 <!-- ## /OPENBLOK: Boxplot.py -->
 
 <!-- ## TEKSTBLOK: Lilliefors-test1.py -->
-De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`. Verder wordt er als standaard ook tweezijdig getoetst.
+De standaard interpretatie van een statitische toets in Python is: `(<teststatistiek>, <p-waarde>)`. Verder toetst Python standaard tweezijdig.
 <!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
 
 <!-- ## OPENBLOK: Library-nortest.py -->
@@ -205,14 +208,22 @@ Er zijn 2 steekproeven van `Cijfers_gem` ingeladen: `Cijfers_2010_n30` en `Cijfe
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test -->
 
 <!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
+```{python, include=FALSE}
+Cijfers_2011_n30 = r.Cijfers_2011_n30
+```
+
 ``` {python Shapiro-Wilk Test-1, warning=FALSE}
-print(stats.shapiro(r.Cijfers_2011_n30))
+print(stats.shapiro(Cijfers_2011_n30))
 ```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-1.py -->
 
 <!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
+```{python, include=FALSE}
+Cijfers_2010_n30 = r.Cijfers_2010_n30
+```
+
 ``` {python Shapiro-Wilk Test-2, warning=FALSE}
-print(stats.shapiro(r.Cijfers_2010_n30))
+print(stats.shapiro(Cijfers_2010_n30))
 ```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-2.py -->
 
@@ -310,7 +321,7 @@ d = cohen_d(Cijfers_2010, Cijfers_2011)
 <!-- ## /TEKSTBLOK: Cohens-d-test.py -->
 
 <!-- ## TEKSTBLOK: Rapportage.py -->
-Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = `r Round_and_format(py$vMean_t0)`, *SD~2010~* = `r Round_and_format(py$vSD_t0)`) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = `r Round_and_format(py$vMean_t1)`, *SD~2011~* = `r Round_and_format(py$vSD_t1)`) is statistisch niet significant, *t* ~`r py$df`~ = `r Round_and_format(py$stat)`, *p* > 0,05, zie tabel hieronder. Het effect is minimaal, *d* = `r Round_and_format(py$d)`.
+Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = `r Round_and_format(py$vMean_t0)`, *SD~2010~* = `r Round_and_format(py$vSD_t0)`) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = `r Round_and_format(py$vMean_t1)`, *SD~2011~* = `r Round_and_format(py$vSD_t1)`) is statistisch niet significant, *t* ~`r py$df`~ = `r Round_and_format(py$stat)`, *p* > 0,05, zie tabel hieronder.
 
 Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentamencijfer niet is veranderd na de invoer van het BSA. 
 

@@ -83,7 +83,7 @@ Naast onbetrouwbaarheid bij geobserveerde waarden lager dan 10, wordt de *chi-kw
 
 # De data bekijken
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is een dataset ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. De data `Uitval_functiebeperking` zijn binair: wel of geen uitval. 
+Er is een kruistabel ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. Zowel de variabele voor uitval (wel of geen uitval) als voor functiebeperking (wel of geen functiebeperking) zijn binair. Deze tabel is gebaseerd op een dataset waarin uitval en functiebeperking voor studenten wordt bijgehouden. 
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
@@ -113,7 +113,7 @@ vDF <- Chi2$parameter
 <!-- ## TEKSTBLOK: Chi2-toets.R-->
 * *χ^2^* ~1~ ≈ `r vChi2`, *p* ≈ `r vP`  
 * Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r vDF`. De continuïteitscorrectie van Yates wordt automatisch toegepast wanneer het aantal vrijheidsgraden 1 is.[^6]   
-* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen.[^8]  
+* p-waarde < 0,05, dus de H~0~ wordt verworpen.[^8]  
 
 <!-- ## /TEKSTBLOK: Chi2-toets.R-->
 

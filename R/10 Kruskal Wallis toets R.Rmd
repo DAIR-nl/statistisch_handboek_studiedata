@@ -156,7 +156,7 @@ De mediaan van studenten met een vooropleiding Rechtsgeleerdheid heeft duidelijk
 
 ## Kruskal Wallis toets
 <!-- ## TEKSTBLOK: Kruskal-Wallis-test.R -->
-Gebruik `kruskal.test()`. In het eerste argument gebruik je de afhankelijke variabele en de variabele die de groep definiëert. Het tweede argument is het dataframe. 
+Gebruik `kruskal.test()`. In het eerste argument gebruik je de afhankelijke variabele `EC_Jaar1` en de variabele die de groep definiëert `Vooropleiding`. Het tweede argument is het dataframe. 
 <!-- ## /TEKSTBLOK: Kruskal-Wallis-test.R -->
 
 <!-- ## OPENBLOK: Kruskal-Wallis-test.R -->
@@ -176,17 +176,15 @@ vK_P <- Round_and_format(Ktest$p.value)
 <!-- ## TEKSTBLOK: Kruskal-Wallis-test -->
 * *df*: het aantal groepen - 1 = `r vK_DF`  
 * *H*~3~ = `r vK_Chi2`, p < 0,05  
-* *H* volgt bij benadering de chi-kwadraat verdeling. Onder deze hypothese is *H* chi-kwadraat, vandaar dat dit in de output uitgedrukt wordt in chi-kwadraat    
-* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen[^10]
+* De test-statistiek *H* volgt bij benadering de chi-kwadraat verdeling. Onder deze hypothese is *H* chi-kwadraat, vandaar dat dit in de output uitgedrukt wordt in chi-kwadraat    
+* p-waarde < 0,05, dus de H~0~ wordt verworpen[^10]
 
 <!-- ## /TEKSTBLOK: Kruskal-Wallis-test -->
 
 
 ## Post-hoc toets: Mann-Whitney U toets
 <!-- ## TEKSTBLOK: Mann-Whitney-U-test-->
-Gebruik de *Mann-Whitney U toets* als post-hoc toets om te bepalen wélke groepen significant verschillen. De *Mann-Whitney U toets* wordt ook wel de *Wilcoxon rank-sum toets* genoemd.[^11] Gebruik de functie `pairwise.wilcox.test()`. 
-
-Pas de *Bonferroni correctie* toe met `p.adjust.method = "bonferroni"`.    
+Gebruik de *Mann-Whitney U toets* als post-hoc toets om te bepalen wélke groepen significant verschillen. De *Mann-Whitney U toets* wordt ook wel de *Wilcoxon rank-sum toets* genoemd.[^11] Gebruik de functie `pairwise.wilcox.test()` met als eerste argument de afhankelijke variabele `Resultaten_Arbeidsrecht$EC_Jaar1` en als tweed argument de definitie van de groepen `Resultaten_Arbeidsrecht$Vooropleiding`. Pas de *Bonferroni correctie* toe met `p.adjust.method = "bonferroni"`.    
 <!-- ## /TEKSTBLOK: Mann-Whitney-U-test-->
 <!-- ## OPENBLOK: Mann-Whitney-U-test-->
 ``` {r pairwise wilcox test}
@@ -196,7 +194,7 @@ pairwise.wilcox.test(Resultaten_Arbeidsrecht$EC_Jaar1, Resultaten_Arbeidsrecht$V
 * Er is geen statistisch significant verschil gevonden tussen Fiscaal Recht en Notarieel Recht.
 * Er is ook geen statistisch significant verschil gevonden tussen Fiscaal Recht en de Premaster.
 * Er is een statistisch significant verschil gevonden tussen de Premaster en Notarieel Recht.   
-* De studenten met Rechtsgeleerdheid als vooropleiding scoren statistisch significant lager dan de studenten met één van de drie andere vooropleidingen.  
+* Er zijn statistisch significante verschillen gevonden tussen Rechtsgeleerdheid en alledrie de andere vooroploeidingen.
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
@@ -210,7 +208,7 @@ De *Kruskal Wallis toets* is uitgevoerd om te toetsen of significante verschille
 | Premaster          | `r vN_PM`| `r vQ1_PM` | `r vMed_PM` | `r vQ3_PM` |
 *Tabel 1. Groepsgrootte, 1e kwantiel, mediaan en 3e kwantiel per vooropleiding*
 
-Met een post-hoc toets is het verschil tussen de vooropleidingen getoetst. De studenten met Rechtsgeleerdheid als vooropleiding behalen statistisch significant minder punten bij de Master Arbeidsrecht, dan de studenten met een andere vooropleiding, *p* < 0,05. Er is een statistisch significant verschil gevonden tussen de behaalde studiepunten van studenten met de vooropleiding Notarieel Recht en de Premaster, *p* < 0,05, waarbij de studenten van de Premaster minder punten behaalden dan de studenten van Notarieel Recht. De *Bonferroni correctie* is gebruikt om de Type I fout te voorkomen die gepaard gaat met het veelvuldig toetsen.  
+Met een post-hoc toets is het verschil tussen de vooropleidingen getoetst. De studenten met Rechtsgeleerdheid als vooropleiding behalen statistisch significant minder punten bij de Master Arbeidsrecht, dan de studenten met een andere vooropleiding. Er is een statistisch significant verschil gevonden tussen de behaalde studiepunten van studenten met de vooropleiding Notarieel Recht en de Premaster, waarbij de studenten van de Premaster minder punten behaalden dan de studenten van Notarieel Recht. Er zijn geen statistisch significante verschillen gevonden tussen de vooropleidingen Fiscaal Recht en Notarieel Recht, en Fiscaal Recht en Premaster. De *Bonferroni correctie* is gebruikt om de Type I fout te voorkomen die gepaard gaat met het veelvuldig toetsen.  
 
 Kortom, de resultaten ondersteunen de conclusie dat er een verschil is tussen de vooropleidingen die de studenten hebben afgerond en de hoeveelheid studiepunten die een student behaalt tijdens het eerste jaar van de master Arbeidsrecht. De studenten met Rechtsgeleerdheid als vooropleiding behalen statistisch significant minder studiepunten dan de drie andere vooropleidingen. 
 Studenten met de vooropleiding Fiscaal Recht (mediaan = `r vMed_FIS`) en Notarieel Recht (mediaan = `r vMed_NOT`) behalen naar verhouding de meeste studiepunten.

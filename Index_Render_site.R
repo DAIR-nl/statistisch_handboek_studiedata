@@ -41,9 +41,9 @@ dfToetsen <- tribble(
     ~Toets,                                 ~InGebruik_R, ~InGebruik_Python,
     "01 One sample t-toets",                "1",          "0", 
     "02 Gepaarde t-toets",                  "1",          "0", 
-    "03 Ongepaarde t-toets",                "0",          "0", 
+    "03 Ongepaarde t-toets",                "1",          "0", 
     "04 Linear mixed model",                "0",          "0", 
-    "05 One-way ANOVA",                     "0",          "0", 
+    "05 One-way ANOVA",                     "1",          "0", 
     "06 Tekentoets",                        "0",          "0", 
     "07 Wilcoxon signed rank toets",        "0",          "0", 
     "08 Mann-Whitney U toets",              "0",          "0", 
@@ -132,3 +132,4 @@ browseURL(output_file)
 ## 04 RUIM OP ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 rm(list = ls())
+

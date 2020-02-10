@@ -272,7 +272,7 @@ De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test*
 <!-- ## /CLOSEDBLOK: data inladen-2.R -->
 
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test.R -->
-Er zijn 2 steekproeven van `Studielogboek` ingeladen: `Uren_studeren_T0_n30` (T~0~) en `Uren_studeren_T1_n30` (T~1~), *n~T0~* = `r length(Uren_studeren_T0_n30)` , *n~T1~* = `r length(Uren_studeren_T1_n30)` 
+Er zijn 2 subsets van `Studielogboek` ingeladen: `Uren_studeren_T0_n30` (T~0~) en `Uren_studeren_T1_n30` (T~1~), *n~T0~* = `r length(Uren_studeren_T0_n30)` , *n~T1~* = `r length(Uren_studeren_T1_n30)` 
 <!-- ## /TEKSTBLOK: Shapiro-Wilk-test.R -->
 <div class ="col-container">
   <div class ="col">

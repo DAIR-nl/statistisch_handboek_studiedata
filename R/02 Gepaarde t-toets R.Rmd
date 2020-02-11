@@ -102,6 +102,11 @@ Uren_studeren_T0 <-Studielogboek[Studielogboek$Meetmoment=="T0", 2]
 Uren_studeren_T1 <- Studielogboek[Studielogboek$Meetmoment=="T1", 2]
 ```
 <!-- ## /OPENBLOK: Data-selecteren.R -->
+
+<!-- ## OPENBLOK: numpy-inladen.R -->
+
+<!-- ## /OPENBLOK: numpy-inladen.R -->
+
 <div class = "col-container">
   <div class ="col">
 <!-- ## OPENBLOK: Data-beschrijven-1.R -->
@@ -175,6 +180,10 @@ Beide histogrammen hebben wat weg van een Bell Curve en zouden normaal verdeeld 
 Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
 <!-- ## /TEKSTBLOK: QQplot.R-->
 
+<!-- ## OPENBLOK: QQplot-inladen.R -->
+
+<!-- ## /OPENBLOK: QQplot-inladen.R -->
+
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 
 <div class = "col-container">
@@ -232,9 +241,9 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst 
 ### Kolmogorov-Smirnov 
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
-<!-- ## TEKSTBLOK: Lilliefors-test1.py -->
+<!-- ## TEKSTBLOK: Lilliefors-test1.R -->
 
-<!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
+<!-- ## /TEKSTBLOK: Lilliefors-test1.R -->
 
 <!-- ## OPENBLOK: Library-nortest.R -->
 ```{r library nortest, warning=FALSE}
@@ -262,8 +271,13 @@ Van beide groepen is de p > 0,05; er is geen statistisch significant verschil ge
 
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
+
+<!-- ## CLOSEDBLOK: data inladen-2.R -->
+
+<!-- ## /CLOSEDBLOK: data inladen-2.R -->
+
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test.R -->
-Er zijn 2 steekproeven van `Studielogboek` ingeladen: `Uren_studeren_T0_n30` (T~0~) en `Uren_studeren_T1_n30` (T~1~), *n~T0~* = `r length(Uren_studeren_T0_n30)` , *n~T1~* = `r length(Uren_studeren_T1_n30)` 
+Er zijn 2 subsets van `Studielogboek` ingeladen: `Uren_studeren_T0_n30` (T~0~) en `Uren_studeren_T1_n30` (T~1~), *n~T0~* = `r length(Uren_studeren_T0_n30)` , *n~T1~* = `r length(Uren_studeren_T1_n30)` 
 <!-- ## /TEKSTBLOK: Shapiro-Wilk-test.R -->
 <div class ="col-container">
   <div class ="col">
@@ -288,7 +302,7 @@ Voor beide groepen is de *p* > 0,05, dus er is geen statistisch significant vers
 <!-- ## TEKSTBLOK: T-test.R -->
 Gebruik `t.test()`. Om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn gebruik het argument `paired = TRUE` om een *gepaarde t-toets* uit te voeren. Gebruik hier weer het hele dataframe `Studielogboek`. 
 <!-- ## /TEKSTBLOK: T-test.R -->
-De *gepaarde t-toets* wordt uitgevoerd om de vraag te beantwoorden of het gemiddeld aantal uren studeren verandert na deelname aan de cursus. De verwachting is dat de studenten gemiddeld meer gaan studeren, maar omdat het relevant is om te weten of de studenten meer of minder gaan studeren na de cursus is er voor gekozen om tweezijdig te toetsen. 
+De verwachting is dat de studenten gemiddeld meer gaan studeren, maar omdat het relevant is om te weten of de studenten meer of minder gaan studeren na de cursus is er voor gekozen om tweezijdig te toetsen. 
 
 <!-- ## OPENBLOK: T-toets.R -->
 ```{r T-test}
@@ -320,7 +334,10 @@ vDiffMean <- Round_and_format(t$estimate*-1)
 De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. Bereken de effectmaat om te bepalen of het gevonden verschil betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele, de cursus plannen, op een afhankelijke variabele, het aantal uur studeren, weer.  
 Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.[^7]  
 
+<!-- ## TEKSTBLOK: Cohen-d.R -->
 Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
+<!-- ## /TEKSTBLOK: Cohen-d.R  -->
+
 <!-- ## OPENBLOK: Cohens-d-test.R -->
 ```{r Cohens d}
 library(effsize)
@@ -368,3 +385,7 @@ Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na deel
 [^8]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 [^9]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
 [^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houd hierbij rekening met type I en type II fouten.
+
+<!-- ## TEKSTBLOK: Extra-Bron.R -->
+
+<!-- ## /TEKSTBLOK: Extra-Bron.R -->

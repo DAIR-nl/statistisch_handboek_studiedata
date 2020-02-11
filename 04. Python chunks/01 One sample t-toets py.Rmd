@@ -74,7 +74,7 @@ print(dfGemiddeld_cijfer_WNS.tail(6))
 <!-- ## /OPENBLOK: Data-bekijken.py -->
 
 <!-- ## TEKSTBLOK: Data-beschrijven.py-->
-We gaan door met de variabele `Gemiddeld_cijfer_WNS`. Krijg meer inzicht in de dataset door het gemiddelde en de spreiding te bekijken, `np.size()`, `np.mean()` en `np.sqrt(np.var(<variabele>, ddof = 1))`, door deze functies aan te roepen uit de library `numpy`.
+Gebruik de variabele `Gemiddeld_cijfer_WNS`. Krijg meer inzicht in de dataset door de groepsgrootte, het gemiddelde en de spreiding te bekijken, `np.size()`, `np.mean()` en `np.sqrt(np.var(<variabele>, ddof = 1))`, door deze functies aan te roepen uit de library `numpy`.
 <!-- ## /TEKSTBLOK: Data-beschrijven.py-->
 
 <!-- ## OPENBLOK: Data-beschrijven.py -->
@@ -136,7 +136,7 @@ plt.show()
 <!-- ## OPENBLOK: Boxplot.py -->
 ``` {python boxplot}
 ## Boxplot
-box = plt.boxplot(Gemiddeld_cijfer_WNS)
+box = plt.boxplot(Gemiddeld_cijfer_WNS, labels = [""])
 x = plt.xlabel("Werktuigbouwkunde")
 y = plt.ylabel("Gemiddeld_cijfer_WNS")
 plt.show()
@@ -171,8 +171,8 @@ print(stats.shapiro(Gemiddeld_cijfer_WNS_n30))
 <!-- ## /OPENBLOK: Shapiro-Wilk-test.py -->
 
 <!-- ## TEKSTBLOK: T-test.py -->
-Gebruik `scipy.stats.ttest_1samp()` om een t-toets uit te voeren. Geef het gemiddelde waarmee wordt vergeleken. De standaard in Python is dat er tweezijdig wordt getoetst. De dataframe met `dfGemiddeld_cijfer_WNS` is ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde, *n* = `r py$N`. 
-De *one sample t-toets* is uitgevoerd om de vraag te beantwoorden of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde anders is dan het landelijk gemiddelde (µ = 6,8). De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren dan het landelijk gemiddelde is er voor gekozen om tweezijdig te toetsen.
+Gebruik `scipy.stats.ttest_1samp()` om een t-toets uit te voeren. Geef het gemiddelde waarmee wordt vergeleken, in dit geval `r Round_and_format(py$mean)`. De standaard in Python is dat er tweezijdig wordt getoetst. De dataframe met `dfGemiddeld_cijfer_WNS` is ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde, *n* = `r py$N`. 
+De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren dan het landelijk gemiddelde is er voor gekozen om tweezijdig te toetsen.
 <!-- ## /TEKSTBLOK: T-test.py -->
 
 <!-- ## OPENBLOK: T-test.py -->
@@ -191,11 +191,11 @@ par = N - 1
 
 <!-- ## TEKSTBLOK: T-test2.py -->
 * Vrijheidsgraden, *df* = *n* -1 = `r Round_and_format(py$N)`-1 = `r py$par`  
-* *t* ~`r py$par`~ = `r Round_and_format(py$stat)`, *p* << 0,05
-* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^9]
+* *t* ~`r py$par`~ = `r Round_and_format(py$stat)`, *p* < 0,05
+* p-waarde < 0,05, dus de H~0~ wordt verworpen[^9]
 * Het gemiddelde van de steekproef is `r Round_and_format(py$mean)`  
 <!-- ## /TEKSTBLOK: T-test2.py -->
 
 <!-- ## TEKSTBLOK: Rapportage.py -->
-De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = `r Round_and_format(py$mean)`, *SD* = `r Round_and_format(py$sd)`) is statistisch significant hoger dan het landelijk gemiddelde van 6,8, *t* ~`r py$par`~ = `r Round_and_format(py$stat)`, *p* << 0,05.
+De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = `r Round_and_format(py$mean)`, *SD* = `r Round_and_format(py$sd)`) is statistisch significant hoger dan het landelijk gemiddelde van 6,8, *t* ~`r py$par`~ = `r Round_and_format(py$stat)`, *p* < 0,05.
 <!-- ## /TEKSTBLOK: Rapportage.py -->

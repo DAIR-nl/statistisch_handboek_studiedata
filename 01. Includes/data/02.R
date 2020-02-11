@@ -34,6 +34,6 @@ Meetmoment <- as.factor(c(Meetmoment_t0, Meetmoment_t1))
 ## Voeg samen in data.frame
 Studielogboek <- data.frame(Studentnr, Uren_studeren, Meetmoment)
 
-## MAAK N30 SAMPLE
+## MAAK N30 SAMPLE, let op klopt niet helemaal
 Uren_studeren_T0_n30 <- sample(Uren_studeren_t0, 30)
 Uren_studeren_T1_n30 <- sample(Uren_studeren_t1, 30)

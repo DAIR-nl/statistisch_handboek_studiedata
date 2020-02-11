@@ -256,7 +256,7 @@ lillie.test(Cijfers_2011)
 Bij deze casus is van beide groepen de p-waarde > 0,05; er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
 
 ### Shapiro-Wilk Test
-De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven.  Als de p-waarde < 0,05 is de verdeling van de data statistisch significant verschillend van de normale verdeling. 
+De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven.  Als de p-waarde < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling. 
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test -->
 Er zijn 2 subsets van `Cijfers_gem` ingeladen: `Cijfers_2010_n30` en `Cijfers_2011_n30`. Beide subsets bevatten `r length(Cijfers_2010_n30)` studenten.
 <!-- ## /TEKSTBLOK: Shapiro-Wilk-test -->
@@ -336,14 +336,14 @@ vP <- Round_and_format(t$p.value)
 * *t* ~`r vDF`~ = `r vT_waarde`, *p* = `r vP`
 * Vrijheidsgraden, *df* = *n* -1 = `r vN`-1 = `r vDF`  
 * p-waarde > 0,05, dus de H~0~ wordt niet verworpen [^12]
-* 95%-betrouwbaarheidsinterval: met 95% zekerheid ligt het daadwerkelijke verschil tussen de hoogte van de cijfers voor en na de BSA  cursus, µ~verschil~ = µ~T2011~ - µ~T2010~, in dit interval. In deze casus is het interval tussen `r vConf.int1` en `r vConf.int2`. In dit interval zit 0, hieraan is te zien dat er met 95% zekerheid geen significant verschil is tussen µ~T1~ en µ~T0~.
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95 % van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het verschil tussen de hoogte van de cijfers voor en na de BSA  cursus, µ~verschil~ = µ~T2011~ - µ~T2010~. In deze casus is het interval tussen `r vConf.int1` en `r vConf.int2`. Aangezien 0 in dit interval zit, is er geen significant verschil tussen beide gemiddeldes in 2010 en 2011.
 * Het gemiddelde van de steekproef in 2010: `r vMean_t0`
 * Het gemiddelde van de steekproef in 2011: `r vMean_t1`
 
 <!-- ## /TEKSTBLOK: T-test2.R -->
 
 ### Effectmaat: Cohen's d 
-De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. Bereken de effectmaat om te bepalen of de gevonden p-waarde van een t-toets betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft een gestandaardiseerd verschil weer: het verschil in gemiddelden tussen twee groepen gecorrigeerd voor de gecombineerde standaardafwijking van de twee groepen weer. Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect.[^9]
+De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. Bereken de effectmaat om te bepalen of de gevonden p-waarde van een t-toets betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft een gestandaardiseerd verschil weer: het verschil in gemiddelden tussen twee groepen gecorrigeerd voor de gecombineerde standaardafwijking van de twee groepen. Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect.[^9]
 
 In dit voorbeeld is de p > 0,05, dus is een effectmaat uitrekenen onnodig. Hieronder laten we zien wat de stappen zouden zijn bij een p < 0,05.
 
@@ -370,7 +370,7 @@ vD_waarde <- Round_and_format(d$estimate)
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = `r vMean_t0`, *SD~2010~* = `r vSD_t0`) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = `r vMean_t1`, *SD~2011~* = `r vSD_t1`) is statistisch niet significant, *t* ~`r vDF`~ = `r vT_waarde`, *p* > 0,05, zie tabel hieronder. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vConf.int1` tot `r vConf.int2`.
+Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = `r vMean_t0`, *SD~2010~* = `r vSD_t0`) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = `r vMean_t1`, *SD~2011~* = `r vSD_t1`) is statistisch niet significant, *t* ~`r vDF`~ = `r vT_waarde`, *p* > 0,05. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vConf.int1` tot `r vConf.int2`.
 
 Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentamencijfer niet is veranderd na de invoer van het BSA. 
 

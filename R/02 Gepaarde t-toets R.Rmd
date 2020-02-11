@@ -66,7 +66,7 @@ Voor het verminderen van de studielast van studenten aan een universiteit biedt 
 Om een valide resultaat te bereiken moeten, voordat de toets kan worden uitgevoerd, de data aan een aantal voorwaarden voldoen.
 
 ## Normaliteit
-De *t-toets* gaat ervan uit dat de data normaal verdeeld zijn voor elke groep. Ga er bij een *n* > 100 vanuit dat de *t-toets* robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgt.[^2]   
+De *t-toets* gaat ervan uit dat de verschillen tussen de gepaarde observaties normaal verdeeld zijn. Ga er bij een *n* > 100 vanuit dat de *t-toets* robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgt.[^2]   
 
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. controleer de data visueel met een histogram, een Q-Q plot of een boxplot.  
@@ -95,11 +95,12 @@ tail(Studielogboek)
 ```
 <!-- ## /OPENBLOK: Data-bekijken.R -->
 
-Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen.
+Selecteer beide groepen, sla deze op in een vector en bereken het verschil in de afhankelijke variabelen voor alle observaties.
 <!-- ## OPENBLOK: Data-selecteren.R -->
 ```{r data selecteren}
 Uren_studeren_T0 <-Studielogboek[Studielogboek$Meetmoment=="T0", 2]
 Uren_studeren_T1 <- Studielogboek[Studielogboek$Meetmoment=="T1", 2]
+Uren_studeren_verschil <- Uren_studeren_T1 - Uren_studeren_T0
 ```
 <!-- ## /OPENBLOK: Data-selecteren.R -->
 
@@ -154,22 +155,26 @@ Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
 ## Histogram met ggplot2
 library(ggplot2)
 
-ggplot(Studielogboek,
-  aes(x = Uren_studeren)) +
+Uren_studeren_verschil_dataframe <- as.data.frame(Uren_studeren_verschil)
+
+ggplot(Uren_studeren_verschil_dataframe,
+  aes(x = Uren_studeren_verschil)) +
   geom_histogram(aes(y = ..density..),
-                 binwidth = 4,
+                 binwidth = 1,
                  color = "grey30",
                  fill = "#0089CF") +
-  facet_wrap(~ Meetmoment) +
+  #facet_wrap(~ Meetmoment) +
   geom_density(alpha = .2, adjust = 1) +
   ylab("Frequentiedichtheid") +
   scale_x_continuous(
-    labels = as.character(seq(0, 60, 4)),
-    breaks = seq(0, 60, 4)) +
-  coord_fixed(ylim = c(0, 0.05),
-              xlim = c(0, 60),
-              ratio = 1000) +
-  labs(title = "Gemiddeld uren studeren voor en na cursus")
+    labels = as.character(seq(-12, 12, 4)),
+    breaks = seq(-12, 12, 4)) + 
+     labs(title = "Gemiddeld uren studeren voor en na cursus")
+#+
+  #coord_fixed(ylim = c(0, 0.5),
+  #            xlim = c(-10, 10),
+  #            ratio = 10) 
+  
 ```
 <!-- ## /OPENBLOK: Histogram.R -->
 
@@ -186,32 +191,17 @@ Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als 
 
 Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
 
-<div class = "col-container">
-  <div class="col">
 <!-- ## OPENBLOK: QQplot-1.R -->
 ```{r qqplot-1}
-qqnorm(Uren_studeren_T0, 
+qqnorm(Uren_studeren_verschil, 
        pch = 1,
-       main = "Normaal Q-Q plot studielogboek voor cursus",
+       main = "Normaal Q-Q plot studielogboek verschilscores",
        ylab = "kwantielen in data",
        xlab = "Theoretische kwantielen")
-qqline(Uren_studeren_T0)
+qqline(Uren_studeren_verschil)
 ```
 <!-- ## /OPENBLOK: QQplot-1.R -->
-  </div>
-  <div class = "col">
-<!-- ## OPENBLOK: QQplot-2.R -->
-```{r qqplot-2}
-qqnorm(Uren_studeren_T1, 
-       pch = 1,
-       main = "Normaal Q-Q plot studielogboek na cursus",
-       ylab = "kwantielen in data",
-       xlab = "Theoretische kwantielen")
-qqline(Uren_studeren_T1)
-```
-<!-- ## /OPENBLOK: QQplot-2.R -->
-  </div>
-</div>
+
 
 In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. Dit zou kunnen liggen aan de onder- en bovengrens van het aantal studieuren. Doordat er een beperkt aantal uren in een week zitten en daarmee een limiet is aan het aantal studieuren, vallen de hoogste datapunten niet meer perfect op de lijn van de normaalverdeling. Vergelijkbaar liggen de laagste datapunten ook niet meer perfect op de lijn omdat alle studenten minimaal 8 uur studeren. 
 
@@ -221,7 +211,7 @@ De box geeft de middelste 50% van het studielogboek weer. De zwarte lijn binnen 
 <!-- ## OPENBLOK: Boxplot.R -->
 ``` {r Boxplot}
 ## Boxplot
-boxplot(Uren_studeren ~ Meetmoment, Studielogboek,
+boxplot(Uren_studeren_verschil,
         main = "Boxplot van studielogboek")
 ```
 <!-- ## /OPENBLOK: Boxplot.R -->
@@ -254,14 +244,14 @@ library(nortest)
   <div class = "col">
 <!-- ## OPENBLOK: Lilliefors-test-1.R -->
 ``` {r Lilliefors Test-1, warning=FALSE}
-lillie.test(Uren_studeren_T0)
+lillie.test(Uren_studeren_verschil)
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-1.R -->
   </div>
   <div class = "col">
 <!-- ## OPENBLOK: Lilliefors-test-2.R -->
 ``` {r Lilliefors Test-2, warning=FALSE}
-lillie.test(Uren_studeren_T1)
+lillie.test(Uren_studeren_verschil)
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-2.R -->
   </div>
@@ -300,7 +290,7 @@ Voor beide groepen is de *p* > 0,05, dus er is geen statistisch significant vers
 
 ## Gepaarde t-toets
 <!-- ## TEKSTBLOK: T-test.R -->
-Gebruik `t.test()`. Om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn gebruik het argument `paired = TRUE` om een *gepaarde t-toets* uit te voeren. Gebruik hier weer het hele dataframe `Studielogboek`. 
+Gebruik `t.test()`. Om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn, gebruik het argument `paired = TRUE` om een *gepaarde t-toets* uit te voeren. Gebruik hier weer het hele dataframe `Studielogboek`. Het eerste argument bestaat uit de afhankelijke variabele `Uren_studeren` en de groepvariabele `Meetmoment`. 
 <!-- ## /TEKSTBLOK: T-test.R -->
 De verwachting is dat de studenten gemiddeld meer gaan studeren, maar omdat het relevant is om te weten of de studenten meer of minder gaan studeren na de cursus is er voor gekozen om tweezijdig te toetsen. 
 
@@ -326,12 +316,12 @@ vDiffMean <- Round_and_format(t$estimate*-1)
 * *t*~`r vDF`~ = `r vT_waarde`, *p* < 0,05
 * Vrijheidsgraden, *df* = *n* -1 = `r vN`-1 = `r vDF`  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen [^10]
-* 95%-betrouwbaarheidsinterval: met 95% zekerheid ligt het daadwerkelijke verschil tussen het aantal studieuren voor en na de cursus,  µ~verschil~ = µ~T1~ - µ~T0~, in dit interval. In deze casus is het interval tussen `r vconf.int1` en `r vconf.int2`. In dit interval zit geen 0, hieraan is te zien dat er met 95% zekerheid een significant verschil is tussen µ~T1~ en µ~T0~.
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95 % van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het verschil tussen het aantal studieuren voor en na de cursus,  µ~verschil~ = µ~T1~ - µ~T0~. In deze casus is het interval tussen `r vconf.int1` en `r vconf.int2`. Aangezien 0 niet in dit interval zit, is er een significant verschil is tussen µ~T1~ en µ~T0~.
 * het absolute verschil tussen de twee groepen: `r vDiffMean`.
 <!-- ## /TEKSTBLOK: T-test2.R -->
 
 ### Effectmaat: Cohen's d
-De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. Bereken de effectmaat om te bepalen of het gevonden verschil betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft de sterkte van het effect van een onafhankelijke variabele, de cursus plannen, op een afhankelijke variabele, het aantal uur studeren, weer.  
+De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. Bereken de effectmaat om te bepalen of het gevonden verschil betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft een gestandaardiseerd verschil weer: het verschil in gemiddelden tussen twee groepen gecorrigeerd voor de gecombineerde standaardafwijking van de twee groepen.  
 Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.[^7]  
 
 <!-- ## TEKSTBLOK: Cohen-d.R -->

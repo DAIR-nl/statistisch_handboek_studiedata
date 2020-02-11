@@ -212,7 +212,7 @@ De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevon
 
 ##  One sample t-toets
 <!-- ## TEKSTBLOK: T-test.R -->
-Gebruik `t.test()`om een t-toets uit te voeren. Gebruik het argument `mu = 6.8` om het gemiddelde te specificeren waarmee wordt vergeleken en specifieer welke alternatieve hypothese er getoetst wordt. De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren dan het landelijk gemiddelde is er voor gekozen om tweezijdig te toetsen. Gebruik hiervoor `alternative = "two.sided"`. Gebruik wederom de hele dataset `Gemiddeld_cijfer_WNS` met *n* = `r vN`. 
+Gebruik `t.test()`om een t-toets uit te voeren. Gebruik het argument `mu = 6.8` om het gemiddelde te specificeren waarmee wordt vergeleken en specifieer welke alternatieve hypothese er getoetst wordt. De verwachting is dat de studenten hoger scoren, maar omdat het relevant is om te weten of de studenten ook lager scoren dan het landelijk gemiddelde, is er voor gekozen om tweezijdig te toetsen. Gebruik hiervoor `alternative = "two.sided"`. Gebruik de hele dataset `Gemiddeld_cijfer_WNS` met *n* = `r vN`. 
 <!-- ## /TEKSTBLOK: T-test.R -->
 <!-- ## OPENBLOK: T-test.R -->
 ```{r ttest}
@@ -230,13 +230,13 @@ vP <- Round_and_format(t$p.value)
 * Vrijheidsgraden, *df* = *n* -1 = `r Round_and_format(t$parameter+1)`-1 = `r t$parameter`  
 * *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* < 0,05
 * p-waarde < 0,05, dus de H~0~ wordt verworpen [^10]
-* 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de µ in het interval vallen. In deze casus is het interval tussen `r Round_and_format(t$conf.int[1])` en `r Round_and_format(t$conf.int[2])`.
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95 % van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het gemiddeld eindexamencijfer exacte vakken minus 6.8. In deze casus is het interval tussen `r Round_and_format(t$conf.int[1])` en `r Round_and_format(t$conf.int[2])`. Aangezien 6.8 niet in dit interval zit, verschilt het gemiddelde significant van 6.8.
 * Het gemiddelde van de steekproef is `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`
 <!-- ## /TEKSTBLOK: T-test2.R -->
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`, *SD* = `r Round_and_format(sd(Gemiddeld_cijfer_WNS))`) is statistisch significant hoger dan het landelijk gemiddelde van 6,8, *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* < 0,05. 
+De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`, *SD* = `r Round_and_format(sd(Gemiddeld_cijfer_WNS))`) is significant verschillend van het landelijk gemiddelde van 6,8, *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* < 0,05. 
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor de exacte vakken van studenten Werktuigbouwkunde met een vwo vooropleiding hoger ligt dan het landelijk gemiddelde.
 

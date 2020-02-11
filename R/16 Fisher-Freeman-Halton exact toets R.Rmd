@@ -41,7 +41,7 @@ source(paste0(here::here(),"/01. Includes/data/16.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruikt de *Fisher-Freeman-Halton exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde variabelen, waarin één of beide variabelen meer dan twee categorieën hebben. De *Fisher-Freeman-Halton exact toets* is een uitbreiding van de *Fisher's exact toets* die gebruikt wordt om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde binaire variabelen, oftewel een 2x2 tabel.[^1]
+Gebruikt de *Chi-kwadraat toets*[^1] of de *Fisher-Freeman-Halton exact toets*[^2] om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde variabelen, waarin één of beide variabelen meer dan twee categorieën hebben. De *Fisher-Freeman-Halton exact toets* is een uitbreiding van de *Fisher's exact toets* die gebruikt wordt om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde binaire variabelen, oftewel een 2x2 tabel. Deze toets is een alternatief wanneer er kleine aantallen observaties zijn. [^2]<sup>,<sup>[^3]
 
 # Onderwijscasus
 <div id = "casus">
@@ -53,15 +53,43 @@ H~A~: De verhouding wel/geen positief BSA is onder de studenten van de Bachelor 
 </div>
 
 # Assumpties
-Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal niveau gemeten en daarmee onafhankelijk van elkaar. 
+Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal of ordinaal [^4] niveau gemeten en daarmee onafhankelijk van elkaar. 
 
-# Uitvoering in R
-<!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is een kruistabel (`Bsa_kt`) ingeladen over het BSA per instroomland van de faculteit Sociale Wetenschappen.
-<!-- ## /TEKSTBLOK: Dataset-inladen.R-->
+## Groepsgrootte
+Beide testen maken gebruik van een kruistabel; zie tabel 1 voor de geoberveerde waarden van de casus. 
 
-## De data bekijken
+<!-- ## TEKSTBLOK: Groepsgrootte1.R -->
+
+|                      | NL   | GE | IT | UK | BE | ES | US |   |
+| ------------- | ---------| ------------| -------------| ---------|---------|---------|---------| ------------- |
+| **Positief BSA** |`r Bsa_kt[1,1]` | `r Bsa_kt[1,2]`  | `r Bsa_kt[1,3]`  | `r Bsa_kt[1,4]`  | `r Bsa_kt[1,5]`  | `r Bsa_kt[1,6]`  | `r Bsa_kt[1,7]`  | **`r sum(Bsa_kt[1,1:7])`**|
+| **Negatief BSA**  |`r Bsa_kt[2,1]`   | `r Bsa_kt[2,2]` | `r Bsa_kt[2,3]` | `r Bsa_kt[2,4]` | `r Bsa_kt[2,5]` | `r Bsa_kt[2,6]` | `r Bsa_kt[2,7]` | **`r sum(Bsa_kt[2,1:7])`**|
+|**Totaal** |**`r sum(Bsa_kt[1:2,1])`**   | **`r sum(Bsa_kt[1:2,2])`** | **`r sum(Bsa_kt[1:2,3])`**   | **`r sum(Bsa_kt[1:2,4])`**   | **`r sum(Bsa_kt[1:2,5])`**   | **`r sum(Bsa_kt[1:2,6])`**   | **`r sum(Bsa_kt[1:2,7])`**   | **`r sum(Bsa_kt)`** |
+*Tabel 1. Geobserveerde waarden casus BSA en instroomland*
+<!-- ## TEKSTBLOK: Groepsgrootte1.R -->
+
+Op basis van geobserveerde waarden kunnen de verwachte waarden berekend worden. In deze casus kan de verwachte waarde van de studenten uit Nederland met positief BSA berekend worden door het aantal studenten met positief BSA te vermenigvuldigen met het aantal studenten uit Nederland en de uitkomst te delen door het totaal aantal studenten:
+
+<!-- ## TEKSTBLOK: Groepsgrootte2.R -->
+* aantal studenten positief BSA: `r sum(Bsa_kt[1,1:7])`   
+* aantal studenten uit Nederland: `r sum(Bsa_kt[1:2,1])`  
+* totaal aantal studenten: `r sum(Bsa_kt)` 
+* verwacht aantal studenten uit Nederland met positief BSA: `r sum(Bsa_kt[1,1:7])`*`r sum(Bsa_kt[1:2,1])`/`r sum(Bsa_kt)` ≈ `r round(sum(Bsa_kt[1,1:7])*sum(Bsa_kt[1:2,1])/sum(Bsa_kt)) `. Deze en overige waarden zijn berekend in tabel 2. 
+
+|                      | NL   | GE | IT | UK | BE | ES | US |   |
+| ------------- | ---------| ------------| -------------| ---------|---------|---------|---------| ------------- |
+| **Positief BSA** |`r round(sum(Bsa_kt[1,1:7])*sum(Bsa_kt[1:2,1])/sum(Bsa_kt)) ` | `r round(sum(Bsa_kt[1,1:7])*sum(Bsa_kt[1:2,2])/sum(Bsa_kt)) `  | `r round(sum(Bsa_kt[1,1:7])*sum(Bsa_kt[1:2,3])/sum(Bsa_kt)) `  | `r round(sum(Bsa_kt[1,1:7])*sum(Bsa_kt[1:2,4])/sum(Bsa_kt)) `  | `r round(sum(Bsa_kt[1,1:7])*sum(Bsa_kt[1:2,5])/sum(Bsa_kt)) `  | `r round(sum(Bsa_kt[1,1:7])*sum(Bsa_kt[1:2,6])/sum(Bsa_kt)) `  | `r round(sum(Bsa_kt[1,1:7])*sum(Bsa_kt[1:2,7])/sum(Bsa_kt)) `  | **`r sum(Bsa_kt[1,1:7])`**|
+| **Negatief BSA**  |`r round(sum(Bsa_kt[2,1:7])*sum(Bsa_kt[1:2,1])/sum(Bsa_kt)) `   | `r round(sum(Bsa_kt[2,1:7])*sum(Bsa_kt[1:2,2])/sum(Bsa_kt)) ` | `r round(sum(Bsa_kt[2,1:7])*sum(Bsa_kt[1:2,3])/sum(Bsa_kt)) ` | `r round(sum(Bsa_kt[2,1:7])*sum(Bsa_kt[1:2,4])/sum(Bsa_kt)) ` | `r round(sum(Bsa_kt[2,1:7])*sum(Bsa_kt[1:2,5])/sum(Bsa_kt)) ` | `r round(sum(Bsa_kt[2,1:7])*sum(Bsa_kt[1:2,6])/sum(Bsa_kt)) ` | `r round(sum(Bsa_kt[2,1:7])*sum(Bsa_kt[1:2,7])/sum(Bsa_kt)) ` | **`r sum(Bsa_kt[2,1:7])`**|
+|**Totaal** |**`r sum(Bsa_kt[1:2,1])`**   | **`r sum(Bsa_kt[1:2,2])`** | **`r sum(Bsa_kt[1:2,3])`**   | **`r sum(Bsa_kt[1:2,4])`**   | **`r sum(Bsa_kt[1:2,5])`**   | **`r sum(Bsa_kt[1:2,6])`**   | **`r sum(Bsa_kt[1:2,7])`**   | **`r sum(Bsa_kt)`** |
+*Tabel 2. Verwachte waarden casus BSA en instroomland*
+<!-- ## TEKSTBLOK: Groepsgrootte2.R -->
+
+De *Chi-kwadraat toets* wordt onbetrouwbaar als er in meer dan 20 % van de gevallen een verwachte waarde van 5 of lager is.[^5]. Gebruik in die gevallen de *Fisher-Freeman-Halton exact toets*.  
+
+
+# De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken.R -->
+Er is een kruistabel ingeladen over de het BSA advies voor bachelorstudenten antropologie met verschillende instroomlanden. Zowel de variabele voor BSA advies in binair (positief of negatief), maar de variabele voor instroomland bestaat uit zeven niveaus. Deze tabel is gebaseerd op een dataset waarin BSA advies en instroomland voor studenten wordt bijgehouden. 
 Print de kruistabel of geef deze grafisch weer met `barplot()`. 
 <!-- ## /TEKSTBLOK: Data-bekijken.R -->
 <!-- ## OPENBLOK: Data-bekijken.R -->
@@ -71,31 +99,65 @@ barplot(Bsa_kt, beside = TRUE, legend.text = TRUE)
 ```
 <!-- ## /OPENBLOK: Data-bekijken.R -->
 
-## Chi-kwadraat toets
+# Chi-kwadraat toets
+## Uitvoering
 <!-- ## TEKSTBLOK: Chi2-toets.R -->
-Om `chisq.test()` in R te gebruiken moet de data in een kruistabel staan.
+De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met positief BSA gelijk is voor de verschillende instroomlanden. Gebruik `chisq.test()` op de kruistabel `Bsa_kt`.  
 <!-- ## /TEKSTBLOK: Chi2-toets.R -->
 <!-- ## OPENBLOK: Chi2-toets-->
 ```{r collapse=TRUE}
 chisq.test(Bsa_kt)
 ```
 <!-- ## /OPENBLOK: Chi2-toets-->
+<!-- ## CLOSEDBLOK: Chi2-toets.R-->
+```{r chi2 als object, include=FALSE, echo=TRUE}
+Chi2 <- chisq.test(Bsa_kt)
+vChi2 <- Round_and_format(Chi2$statistic)
+vP <- Round_and_format(Chi2$p.value)
+vDF <- Chi2$parameter
+```
+<!-- ## /CLOSEDBLOK: Chi2-toets.R-->
 
-## Fisher-Freeman-Halton exact toets
+<!-- ## TEKSTBLOK: Chi2-toets.R-->
+* *χ^2^* ~6~ ≈ `r vChi2`, *p* ≈ `r vP`  
+* Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r vDF`. 
+* p-waarde < 0,05, dus de H~0~ wordt verworpen.[^6]  
+
+<!-- ## /TEKSTBLOK: Chi2-toets.R-->
+
+## Rapportage
+
+<!-- ## TEKSTBLOK: RapportageChi2.R -->
+De *Chi-kwadraat toets* is uitgevoerd om te onderzoeken of het percentage studenten met positief BSA verschilt per instroomland. De resultaten illustreren dat de nulthypothese verworpen kan worden, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* < 0,05. Er zijn dus verschillen zijn tussen de instroomlanden.
+<!-- ## TEKSTBLOK: RapportageChi2.R -->
+
+
+# Fisher-Freeman-Halton exact toets
+## Uitvoering
+<!-- ## TEKSTBLOK: UitvoeringFFH.R -->
+De *Fisher-Freeman-Halton exact toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met positief BSA verschilt per instroomland. Deze toets is ook betrouwbaar wanneer er in meer dan 20 % van de cellen een verwachte waarde van 5 of lager is. Er is een steekproef van `Bsa_kt` ingeladen genaamd `Bsa_kt_n10` met daarin een lager aantal observaties per cel.
+<!-- ## TEKSTBLOK: UitvoeringFFH.R -->
+
+<!-- ## OPENBLOK: data-bekijken-n10 -->
+```{r data bekijken n10}
+print(Bsa_kt_n10)
+```
+<!-- ## /OPENBLOK: data-bekijken-n10 -->
+
 <!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets-->
-Gebruik `simulate.p.value = TRUE` bij `fisher.test()` om de p-waardes via een Monte Carlo simulatie te laten uitrekenen. Dit is nodig voor tabellen die groter zijn dan 2 bij 2.
+Gebruik `simulate.p.value = TRUE` bij `fisher.test()` om de p-waardes via een Monte Carlo simulatie te laten uitrekenen. Dit is handig voor tabellen die groter zijn dan 2 bij 2.
 <!-- ## /TEKSTBLOK: Fisher-Freeman-Halton-exact-toets-->
 <!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets-->
 ``` {r fisher toets}
 fisher.test(Bsa_kt_n10, simulate.p.value = TRUE)
-fisher.test(Bsa_kt, simulate.p.value = TRUE)
 ```
 <!-- ## /OPENBLOK: Fisher-Freeman-Halton-exact-toets-->
-* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen [^10]
+* p-waarde > 0,05, dus de H~0~ kan niet worden verworpen [^6]
 
 
-# Rapportage
+## Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
+De *Fisher-Freeman-Halton exact toets* is uitgevoerd om te toetsen of het percentage studenten met positief BSA verschilt per instroomland. De resultaten ondersteunen de nulhypothese: het percentage studenten met een positief BSA verschilt niet per instroomland, *p* > 0,05. 
 
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 
@@ -104,5 +166,10 @@ fisher.test(Bsa_kt, simulate.p.value = TRUE)
 ```
 <!-- ## /CLOSEDBLOK: Footer.R -->
 
-[^1]: Van Geloven, N. & Holman, R. (6 mei 2016). *Fisher's exact toets* Co-Auteur	dr. R. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Fisher%27s_exact_toets).
-[^10]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.
+
+[^1]: Van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets).
+[^2]: Van Geloven, N. & Holman, R. (6 mei 2016). *Fisher's exact toets* Co-Auteur	dr. R. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Fisher%27s_exact_toets).
+[^3]: Agresti, A. (2003). *Categorical data analysis*. Vol. 482, John Wiley & Sons.
+[^4]: Nominaal: variabelen die niet afhankelijk van elkaar zijn en niet op inhoudelijke basis geordend kunnen worden. Voorbeelden hiervan zijn geslacht of achternamen. Een binaire variabele is een voorbeeld van een nominale variabele. Binaire variabelen hebben twee mogelijkheden, ja of nee, terwijl nominale variabelen meerdere mogelijkheden kunnen hebben. 
+[^5]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
+[^6]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.

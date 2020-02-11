@@ -161,22 +161,17 @@ ggplot(Uren_studeren_verschil_dataframe,
                  binwidth = 1,
                  color = "grey30",
                  fill = "#0089CF") +
-  #facet_wrap(~ Meetmoment) +
   geom_density(alpha = .2, adjust = 1) +
   ylab("Frequentiedichtheid") +
   scale_x_continuous(
-    labels = as.character(seq(-12, 12, 4)),
-    breaks = seq(-12, 12, 4)) + 
+    labels = as.character(seq(-12, 16, 4)),
+    breaks = seq(-12, 16, 4)) + 
      labs(title = "Gemiddeld uren studeren voor en na cursus")
-#+
-  #coord_fixed(ylim = c(0, 0.5),
-  #            xlim = c(-10, 10),
-  #            ratio = 10) 
-  
 ```
 <!-- ## /OPENBLOK: Histogram.R -->
 
-Beide histogrammen hebben wat weg van een Bell Curve en zouden normaal verdeeld kunnen zijn: veel waardes liggen rondom de gemiddeldes. 
+De histogram lijkt niet geheel symmetrisch, maar toont geen grote afwijkingen van een normaalverdeling.
+
 
 ### Q-Q plot
 <!-- ## TEKSTBLOK: QQplot.R-->
@@ -200,10 +195,11 @@ qqline(Uren_studeren_verschil)
 ```
 <!-- ## /OPENBLOK: QQplot-1.R -->
 
-In deze casus liggen de meeste punten op de lijn behalve bij de uiteinden. Dit zou kunnen liggen aan de onder- en bovengrens van het aantal studieuren. Doordat er een beperkt aantal uren in een week zitten en er daarmee een limiet is aan het aantal studieuren, vallen de hoogste datapunten niet meer perfect op de lijn van de normaalverdeling. Vergelijkbaar liggen de laagste datapunten ook niet meer perfect op de lijn omdat alle studenten minimaal 8 uur studeren. 
+In deze casus liggen de meeste datapunten op of vlakbij de lijn. Hoewel er bij de uiteinden wat afwijkingen zijn, duidt deze grafiek op een normaalverdeling.
+
 
 ### Boxplot
-De box geeft de middelste 50% van het studielogboek weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen.   
+De box geeft de middelste 50% van het studielogboek weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8]<sup>, </sup>[^9]
 
 <!-- ## OPENBLOK: Boxplot.R -->
 ``` {r Boxplot}
@@ -213,7 +209,7 @@ boxplot(Uren_studeren_verschil,
 ```
 <!-- ## /OPENBLOK: Boxplot.R -->
 
-De boxplotten geven de spreiding weer van het gemiddelde aantal uur studeren per periode voor deelnemers aan de cursus. De boxplot en de staarten van T~0~ zijn niet helemaal symmetrisch, maar beide uiteinden zijn ongeveer even lang en de mediaan ligt ongeveer in het midden, daarom zijn de data vermoedelijk normaal verdeeld. De boxplot van T~1~ ziet er symmetrisch uit. Er zijn een aantal mogelijke uitbijters.[^9]
+De boxplotten geven de spreiding weer van het gemiddelde aantal uur studeren per periode voor deelnemers aan de cursus. De boxplot is niet helemaal symmetrisch, maar beide uiteinden zijn ongeveer even lang en de mediaan ligt ongeveer in het midden. Ddaarom zijn de data vermoedelijk normaal verdeeld.
 
 Op basis van de grafieken lijken er geen grote afwijkingen van de normaalverdeling voor de studieuren in beide groepen te zijn, maar normaliteit kan ook getest worden met statistische toetsen.
 
@@ -236,24 +232,13 @@ De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standa
 library(nortest)
 ```
 <!-- ## /OPENBLOK: Library-nortest.R -->
-<div class="col-container">
-  <div class = "col">
 <!-- ## OPENBLOK: Lilliefors-test-1.R -->
 ``` {r Lilliefors Test-1, warning=FALSE}
 lillie.test(Uren_studeren_verschil)
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-1.R -->
-  </div>
-  <div class = "col">
-<!-- ## OPENBLOK: Lilliefors-test-2.R -->
-``` {r Lilliefors Test-2, warning=FALSE}
-lillie.test(Uren_studeren_verschil)
-```
-<!-- ## /OPENBLOK: Lilliefors-test-2.R -->
-  </div>
-</div>
 
-Van beide groepen is de p > 0,05; er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden. 
+De test heeft een p-waarde groter dan 0.05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden. 
 
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
@@ -263,26 +248,16 @@ De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test*
 <!-- ## /CLOSEDBLOK: data inladen-2.R -->
 
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test.R -->
-Er zijn 2 subsets van `Studielogboek` ingeladen: `Uren_studeren_T0_n30` (T~0~) en `Uren_studeren_T1_n30` (T~1~), *n~T0~* = `r length(Uren_studeren_T0_n30)` , *n~T1~* = `r length(Uren_studeren_T1_n30)` 
+Er is een subset van de verschillen tussen het aantal studieuren op T~0~ en T~1~ ingeladen, `Uren_studeren_verschil_n30` met daarin `r length(Uren_studeren_verschil_n30)` observaties.
+
 <!-- ## /TEKSTBLOK: Shapiro-Wilk-test.R -->
-<div class ="col-container">
-  <div class ="col">
 <!-- ## OPENBLOK: Shapiro-Wilk-test-1.R -->
 ``` {r Shapiro-Wilk Test-1, warning=FALSE}
-shapiro.test(Uren_studeren_T0_n30)
+shapiro.test(Uren_studeren_verschil_n30)
 ```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-1.R -->
-  </div>
-  <div class ="col">
-<!-- ## OPENBLOK: Shapiro-Wilk-test-2.R -->
-``` {r Shapiro-Wilk Test-2, warning=FALSE}
-shapiro.test(Uren_studeren_T1_n30)
-```
-<!-- ## /OPENBLOK: Shapiro-Wilk-test-2.R -->
-  </div>
-</div>
 
-Voor beide groepen is de *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden.  
+Voor deze subset is de *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden.  
 
 ## Gepaarde t-toets
 <!-- ## TEKSTBLOK: T-test.R -->
@@ -369,8 +344,8 @@ Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na deel
 [^6]: De *Wilcoxon signed rank toets* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen dan wanneer de *one sample t-toets* uitgevoerd zou worden.  
 [^7]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf 
 [^8]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
-[^9]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
-[^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
+[^9]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport.
+[^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houd hierbij rekening met type I en type II fouten.
 
 <!-- ## TEKSTBLOK: Extra-Bron.R -->
 

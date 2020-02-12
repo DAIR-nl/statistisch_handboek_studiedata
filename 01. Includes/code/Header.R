@@ -68,6 +68,9 @@ thisHeader <- Substitute_var(htmltools::htmlPreserve('
 <li>
   <a href="`sRoot`Licentie.html">Licentie</a>
 </li>
+<li>
+  <a href="https://docs.google.com/forms/d/1UQcCVTNLpVAg7vSffJCPkBCklsfMlGB0QxyxLDgqosI/edit">Feedback</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
 

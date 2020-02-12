@@ -107,7 +107,7 @@ ifelse(!dir.exists("_site/Python"), dir.create("_site/Python"), FALSE)
 for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_Python == 1]) {
     sModus <- "Python"
     bStatus <- dfToetsen$Review_Python[dfToetsen$Toets == sToets]
-    render(paste0("R/",sToets,"-Python.Rmd"), 
+    render(paste0("Python/",sToets,"-Python.Rmd"), 
            output_file = paste0('_site/Python/', gsub(" ", "-", sToets), '-Python.html'))    
 }
 

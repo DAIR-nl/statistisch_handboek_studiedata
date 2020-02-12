@@ -66,7 +66,9 @@ Achter iedere ‘tegel’ bevindt zich een uitleg van de regels om een toets te 
 Het handboek is gefinancierd door het Versnellingsplan.
 
 # Contact
-Neem voor vragen of suggesties contact op met Theo Bakker, <t.c.bakker@vu.nl>.
+Vul voor vragen of suggesties het [feedbackformulier](https://docs.google.com/forms/d/1UQcCVTNLpVAg7vSffJCPkBCklsfMlGB0QxyxLDgqosI/edit) in.
 
-
-***
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer_simpel.R"))}
+```
+<!-- ## /CLOSEDBLOK: Footer.R -->

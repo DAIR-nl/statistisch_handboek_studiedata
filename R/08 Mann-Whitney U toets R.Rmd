@@ -33,6 +33,10 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Status.R -->
 
+<!-- ## CLOSEDBLOK: Reticulate.R -->
+
+<!-- ## /CLOSEDBLOK: Reticulate.R -->
+
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 source(paste0(here::here(),"/01. Includes/data/08.R"))
@@ -83,6 +87,10 @@ Nederlands <- Punten_jaar2$Nederlands == "ja"
 ```
 <!-- ## /OPENBLOK: Data-selecteren.R -->
 
+<!-- ## OPENBLOK: Numpy-inladen.R -->
+
+<!-- ## /OPENBLOK: Numpy-inladen.R -->
+
 <div class="col-container">
   <div class="col">
 <!-- ## OPENBLOK: Data-beschrijven-1.R -->
@@ -101,7 +109,7 @@ quantile(Punten_jaar2$EC_Jaar2[!Nederlands])
 <!-- ## /OPENBLOK: Data-beschrijven-2.R -->
   </div>
 </div>
-<!-- ## CLOSEDBLOK: Data-beschrijven.R -->
+<!-- ## CLOSEDBLOK: Data-beschrijven-3.R -->
 ``` {r data beschrijven als object, include=FALSE, echo=TRUE}
 ## Onderstaand zijn de dynamische variabelen te vinden
 library(dplyr)
@@ -126,7 +134,8 @@ vMed_Inter <- Round_and_format(x[2,4])
 vQ3_NL <- Round_and_format(x[1,5])
 vQ3_Inter <- Round_and_format(x[2,5])
 ```
-<!-- ## /CLOSEDBLOK: Data-beschrijven.R -->
+<!-- ## /CLOSEDBLOK: Data-beschrijven-3.R -->
+
 <!-- ## TEKSTBLOK: Data-beschrijven2.R -->
 * Mediaan Nederlandse studenten: `r vMed_NL`. *n* = `r vN_NL`.
 * Mediaan internationale studenten: `r vMed_Inter`. *n* = `r vN_Inter`.
@@ -134,33 +143,33 @@ vQ3_Inter <- Round_and_format(x[2,5])
 <!-- ## /TEKSTBLOK: Data-beschrijven2.R -->
 
 ## Mann-Whitney U toets
-<!-- ## TEKSTBLOK: Mann-Whitney-U-toets.R -->
+<!-- ## TEKSTBLOK: Mann-Whitney-U-toets-1.R -->
 Gebruik `wilcox.test()` om een Mann-Whitney U toets te doen in `R`. Het eerste argument bevat het aantal studiepunten van Nederlandse studenten `Punten_jaar2$EC_Jaar2[Nederlands]`, het tweede argument het aantal studiepunten van internationale studenten `Punten_jaar2$EC_Jaar2[!Nederlands]`.
-<!-- ## /TEKSTBLOK: Mann-Whitney-U-toets.R -->
+<!-- ## /TEKSTBLOK: Mann-Whitney-U-toets-1.R -->
 
-<!-- ## OPENBLOK: Mann-Whitney-U-toets.R -->
+<!-- ## OPENBLOK: Mann-Whitney-U-toets-2.R -->
 ```{r Mann Whitney U toets}
 wilcox.test(Punten_jaar2$EC_Jaar2[Nederlands], 
             Punten_jaar2$EC_Jaar2[!Nederlands])
 ```
-<!-- ## /OPENBLOK: Mann-Whitney-U-toets.R -->
-<!-- ## CLOSEDBLOK: Mann-Whitney-U-toets.R -->
+<!-- ## /OPENBLOK: Mann-Whitney-U-toets-2.R -->
+<!-- ## CLOSEDBLOK: Mann-Whitney-U-toets-3.R -->
 ```{r Mann Whitney U toets als object, include = FALSE}
 wcx <- wilcox.test(Punten_jaar2$EC_Jaar2[Nederlands],
                    Punten_jaar2$EC_Jaar2[!Nederlands])
 vW_W <- Round_and_format_0decimals(wcx$statistic)
 vW_P <- Round_and_format(wcx$p.value)
 ```
-<!-- ## /CLOSEDBLOK: Mann-Whitney-U-toets.R -->
-<!-- ## TEKSTBLOK: Mann-Whitney-U-toets.R -->
+<!-- ## /CLOSEDBLOK: Mann-Whitney-U-toets-3.R -->
+<!-- ## TEKSTBLOK: Mann-Whitney-U-toets-4.R -->
 * *W* = `r vW_W`, *p* = `r vW_P`
 * p-waarde > 0,05, dus de H~0~ wordt niet verworpen.[^4]
 
-<!-- ## /TEKSTBLOK: Mann-Whitney-U-toets.R -->
+<!-- ## /TEKSTBLOK: Mann-Whitney-U-toets-4.R -->
 
 
 # Rapportage
-<!-- ## /TEKSTBLOK: Rapportage.R -->
+<!-- ## TEKSTBLOK: Rapportage.R -->
 De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal EC in het tweede jaar hetzelfde is van internationale studenten als van Nederlandse studenten. Uit de resultaten kan afgelezen worden dat er geen statistisch significant verschil is tussen het aantal studiepunten van internationale studenten als van Nederlandse studenten. *W* = `r vW_W`, p-waarde > 0,05. 
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 

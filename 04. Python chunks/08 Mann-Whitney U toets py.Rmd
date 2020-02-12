@@ -9,39 +9,42 @@ output:
     number_sections: true
   keywords: [statistisch handboek, studiedata]
 ---
+<!-- ## CLOSEDBLOK: Functies.py -->
+```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
+library(here)
+if (!exists("Substitute_var")) {
+  ## Installeer packages en functies
+  source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
+}
+```
+<!-- ## /CLOSEDBLOK: Functies.py -->
 
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
-```{r header, include = FALSE, echo = TRUE, results='asis'} 
-paste0(here::here(),"/01. Includes/code/Header.R")
+<!-- ## CLOSEDBLOK: Header.py -->
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
+<!-- ## /CLOSEDBLOK: Header.py -->
 
-<!-- ## OPENBLOK: Functiedefinities.R -->
-```{r functiedefinities,include=FALSE, echo=TRUE}
-library(stringr)
-Round_and_format <- function(x, digits = 2) {
-  x <- as.character(round(x, digits))
-  x <- str_replace(x, "[.]", ",")
-  return(x)
-}
+<!-- ## CLOSEDBLOK: Status.py -->
+```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Status.py -->
 
-Round_and_format_0decimals <- function(x, digits = 0) {
-  x <- as.character(round(x, digits))
-  x <- str_replace(x, "[.]", ",")
-  return(x)
-}
+<!-- ## CLOSEDBLOK: Reticulate.py -->
+```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}
 library(reticulate)
 knitr::knit_engines$set(python = reticulate::eng_python)
 ```
-<!-- ## /OPENBLOK: Functiedefinities.R -->
+<!-- ## /CLOSEDBLOK: Reticulate.py -->
 
-<!-- ## OPENBLOK: Data-aanmaken.R -->
+<!-- ## OPENBLOK: Data-aanmaken.py -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 source(paste0(here::here(),"/01. Includes/data/08.R"))
 ```
-<!-- ## /OPENBLOK: Data-aanmaken.R -->
+<!-- ## /OPENBLOK: Data-aanmaken.py -->
 
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->
 Er is data ingeladen met het aantal punten dat studenten in het tweede jaar halen. `dfPunten_jaar2_NL` bevat Nederlandse studenten, `dfPunten_jaar2_inter` bevat internationale studenten. 
@@ -57,12 +60,12 @@ import pandas as pd
 dfPunten_jaar2 = pd.DataFrame(r.Punten_jaar2)
 ```
 
-```{python data bekijken, collapse = TRUE}
+```{python, collapse = TRUE}
 ## Eerste 6 observaties
 print(dfPunten_jaar2.head(6))
 ```
 
-```{python data bekijken, collapse = TRUE}
+```{python, collapse = TRUE}
 ## Laatste 6 observaties
 print(dfPunten_jaar2.tail(6))
 ```
@@ -79,34 +82,79 @@ Niet_Nederlands = dfPunten_jaar2[dfPunten_jaar2["Nederlands"] != "ja"]["EC_Jaar2
 ```
 <!-- ## /OPENBLOK: Data-selecteren.py -->
 
-<!-- ## OPENBLOK: Data-beschrijven-1.py -->
+<!-- ## OPENBLOK: Numpy-inladen.py -->
 ```{python}
 import numpy as np
 ```
+<!-- ## /OPENBLOK: Numpy-inladen.py -->
 
-```{python, data beschrijven 1, collapse=TRUE}
-print(np.(Nederlands))
+<!-- ## OPENBLOK: Data-beschrijven-1.py -->
+```{python, collapse=TRUE}
+print(np.size(Nederlands))
 print(np.quantile(Nederlands, [0, 0.25, 0.5, 0.75, 1]))
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-1.py -->
 
 <!-- ## OPENBLOK: Data-beschrijven-2.py -->
-```{python, data beschrijven 1, collapse=TRUE}
-print(len(Niet_Nederlands))
+```{python, collapse=TRUE}
+print(np.size(Niet_Nederlands))
 print(np.quantile(Niet_Nederlands, [0, 0.25, 0.5, 0.75, 1]))
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-2.py -->
 
-<!-- ## TEKSTBLOK: Mann-Whitney-U-toets.R -->
-Gebruik `stats.mannwhitneyu()` met twee argumenten om een Mann-Whitney U toets te doen in Python. De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`.
-<!-- ## /TEKSTBLOK: Mann-Whitney-U-toets.R -->
+<!-- ## CLOSEDBLOK: Data-beschrijven-3.py -->
+``` {python data beschrijven als object, include=FALSE, echo=TRUE}
+## Onderstaand zijn de dynamische variabelen te vinden
+q_NL = np.quantile(Nederlands, [0, 0.25, 0.5, 0.75, 1])
+q_Inter = np.quantile(Niet_Nederlands, [0, 0.25, 0.5, 0.75, 1])
 
-<!-- ## OPENBLOK: Mann-Whitney-U-toets.py -->
+vN_NL = len(Nederlands)
+vN_Inter = len(Niet_Nederlands)
+
+vQ1_NL = q_NL[1]
+vQ1_Inter = q_Inter[1]
+
+vQ2_NL = q_NL[2]
+vQ2_Inter = q_Inter[2]
+
+vQ3_NL = q_NL[3]
+vQ3_Inter = q_Inter[3]
+```
+<!-- ## /CLOSEDBLOK: Data-beschrijven-3.py -->
+
+<!-- ## TEKSTBLOK: Data-beschrijven2.py -->
+* Mediaan Nederlandse studenten: `r Round_and_format(py$vQ2_NL)`. *n* = `r py$vN_NL`.
+* Mediaan internationale studenten: `r Round_and_format(py$vQ2_Inter)`. *n* = `r py$vN_Inter`.
+
+<!-- ## /TEKSTBLOK: Data-beschrijven2.py -->
+
+<!-- ## TEKSTBLOK: Mann-Whitney-U-toets-1.py -->
+Gebruik `pg.mwu()` met twee argumenten om een Mann-Whitney U toets te doen in Python. De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`. Verder toetst Python standaard tweezijdig.
+<!-- ## /TEKSTBLOK: Mann-Whitney-U-toets-1.py -->
+
+<!-- ## OPENBLOK: Mann-Whitney-U-toets-2.py -->
 ```{python}
-import scipy.stats as stats
+import pingouin as pg
 ```
 
 ```{python}
-print(stats.mannwhitneyu(Nederlands, Niet_Nederlands, alternative = "two-sided"))
+print(pg.mwu(Nederlands, Niet_Nederlands))
 ```
-<!-- ## /OPENBLOK: Mann-Whitney-U-toets.py -->
+<!-- ## /OPENBLOK: Mann-Whitney-U-toets-2.py -->
+
+<!-- ## CLOSEDBLOK: Mann-Whitney-U-toets-3.py -->
+```{python Mann Whitney U toets als object, include = FALSE}
+stat = pg.mwu(Nederlands, Niet_Nederlands)['U-val']
+pval = pg.mwu(Nederlands, Niet_Nederlands)['p-val']
+```
+<!-- ## /CLOSEDBLOK: Mann-Whitney-U-toets-3.py -->
+
+<!-- ## TEKSTBLOK: Mann-Whitney-U-toets-4.py -->
+* *W* = `r Round_and_format(py$stat)`, *p* = `r Round_and_format(py$pval)`
+* p-waarde > 0,05, dus de H~0~ wordt niet verworpen.[^4]
+
+<!-- ## /TEKSTBLOK: Mann-Whitney-U-toets-4.py -->
+
+<!-- ## TEKSTBLOK: Rapportage.py -->
+De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal EC in het tweede jaar hetzelfde is van internationale studenten als van Nederlandse studenten. Uit de resultaten kan afgelezen worden dat er geen statistisch significant verschil is tussen het aantal studiepunten van internationale studenten als van Nederlandse studenten. *W* = `r Round_and_format(py$stat)`, p-waarde > 0,05. 
+<!-- ## /TEKSTBLOK: Rapportage.py -->

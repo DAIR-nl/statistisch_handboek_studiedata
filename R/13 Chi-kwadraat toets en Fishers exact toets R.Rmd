@@ -91,11 +91,10 @@ Naast onbetrouwbaarheid bij geobserveerde waarden lager dan 10, wordt de *chi-kw
 
 # De data bekijken
 <!-- ## TEKSTBLOK: Dataset-inladen.R -->
-Er is een kruistabel ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. Zowel de variabele voor uitval (wel of geen uitval) als voor functiebeperking (wel of geen functiebeperking) zijn binair. Deze tabel is gebaseerd op een dataset waarin uitval en functiebeperking voor studenten wordt bijgehouden. 
+Er is een kruistabel `Uitval_functiebeperking` ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. Zowel de variabele voor uitval (wel of geen uitval) als voor functiebeperking (wel of geen functiebeperking) zijn binair. Deze tabel is gebaseerd op een dataset waarin uitval en functiebeperking voor studenten wordt bijgehouden. 
 <!-- ## /TEKSTBLOK: Dataset-inladen.R -->
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
-## Eerste 6 observaties
 print(Uitval_functiebeperking)
 ```
 <!-- ## /OPENBLOK: Data-bekijken.R -->
@@ -103,7 +102,7 @@ print(Uitval_functiebeperking)
 # Chi-kwadraat toets
 ## Uitvoering
 <!-- ## TEKSTBLOK: Chi2-toets-1.R -->
-De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel gelijk is gebleven. Gebruik `chisq.test()` op een kruistabel.  
+De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel veranderd is. Gebruik `chisq.test()` op een kruistabel.  
 <!-- ## /TEKSTBLOK: Chi2-toets-1.R -->
 
 <!-- ## OPENBLOK: Chi2-toets-2.R -->

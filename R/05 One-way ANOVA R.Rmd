@@ -189,11 +189,10 @@ ggplot(Reistijd_per_opleiding,
   facet_wrap(~ Opleiding) +
   geom_density(alpha = .2, adjust = 1) +
   ylab("Frequentiedichtheid") +
-  labs(title = "Reistijd")
+  labs(title = "Reistijd per opleiding")
 ```
 <!-- ## /OPENBLOK: Histogram.R -->
-
-De opleidingen Geschiedenis en Arabische taal en Cultuur laten een Bell Curve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Filosofie heeft een lagere frequentie bij een reistijd van 40 minuten, wat kan duiden op niet normaal verdeelde data. 
+De opleidingen Geschiedenis en Arabische taal en Cultuur zijn niet geheel symetrisch, maar tonen geen grote afwijkingen van een normale verdeling. Filosofie heeft een lagere frequentie bij een reistijd van 40 minuten, wat kan duiden op niet normaal verdeelde data. 
 
 ### Q-Q plot
 <!-- ## TEKSTBLOK: QQplot.R-->
@@ -382,7 +381,11 @@ vF_waarde <- Round_and_format(ANOVA[[1]]$`F value`[1])
 
 
 ### Effectmaat: Eta squared
+
+<!-- ## TEKSTBLOK: Eta-squared-tekst.R -->
 Gebruik `EtaSq()` op een een object met `class = aov` om het effect te meten.
+<!-- ## /TEKSTBLOK: Eta-squared-tekst.R -->
+
 <!-- ## OPENBLOK: Eta-squared.R --> 
 ```{r eta-squared, message = FALSE, warning=FALSE}
 library(DescTools)

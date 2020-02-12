@@ -38,7 +38,6 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Status.R -->
 
-
 ```{r set-options, echo=FALSE, cache=FALSE}
 options(width = 80)
 ## Zodat de TukeyHSD naast elkaar geprint wordt
@@ -150,17 +149,17 @@ group_by(Reistijd_per_opleiding, Opleiding) %>%
 <!-- ## /OPENBLOK: Data-beschrijven-1.R -->
 <!-- ## CLOSEDBLOK: Data-beschrijven.R -->
 ```{r data beschrijven als object, include=FALSE, echo=TRUE}
-vM_ATC <- Round_and_format(mean(Reistijd_ATC))
+vM_ATC  <- Round_and_format(mean(Reistijd_ATC))
 vSD_ATC <- Round_and_format(sd(Reistijd_ATC))
-vN_ATC <- Round_and_format(length(Reistijd_ATC))
+vN_ATC  <- Round_and_format(length(Reistijd_ATC))
 
-vM_FIL <- Round_and_format(mean(Reistijd_FIL))
+vM_FIL  <- Round_and_format(mean(Reistijd_FIL))
 vSD_FIL <- Round_and_format(sd(Reistijd_FIL))
-vN_FIL <- Round_and_format(length(Reistijd_FIL))
+vN_FIL  <- Round_and_format(length(Reistijd_FIL))
 
-vM_GSC <- Round_and_format(mean(Reistijd_GSC))
+vM_GSC  <- Round_and_format(mean(Reistijd_GSC))
 vSD_GSC <- Round_and_format(sd(Reistijd_GSC))
-vN_GSC <- Round_and_format(length(Reistijd_GSC))
+vN_GSC  <- Round_and_format(length(Reistijd_GSC))
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven.R -->
 
@@ -223,7 +222,6 @@ qqnorm(
  xlab = "Theoretische kwantielen")
 
 qqline(Reistijd_FIL)
-
 ```
 <!-- ## /OPENBLOK: QQplot2.R -->
   </div>
@@ -237,7 +235,6 @@ qqnorm(
  xlab = "Theoretische kwantielen")
 
 qqline(Reistijd_GSC)
-
 ```
 <!-- ## OPENBLOK: QQplot3.R -->
   </div>
@@ -374,7 +371,7 @@ vF_waarde <- Round_and_format(ANOVA[[1]]$`F value`[1])
 
 <!-- ## TEKSTBLOK: ANOVA-toets1.R -->
 * *F* ~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, *p* < 0,05.
-* p-waarde < 0,05, dus de H~0~ wordt verworpen.[^16] 
+* De p-waarde < 0,05, dus de H~0~ wordt verworpen.[^16] 
 * Vrijheidsgraden: het aantal groepen - 1 = `r vDF1`; *n~1~* + *n~2~* + *n~3~*- 3 = `r vDF2`.
 
 <!-- ## /TEKSTBLOK: ANOVA-toets1.R -->
@@ -431,7 +428,6 @@ Het verschil tussen Geschiedenis en Filosofie: *MD* = `r vFILvsGSC`, p = 0,26.
 <!-- ## TEKSTBLOK: Rapportage.R -->
 Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De opleidingen zijn: Arabische Taal en Cultuur (*M~atc~* = `r vM_ATC`, *SD~atc~* = `r vSD_ATC`), Filosofie (*M~fil~* = `r vM_FIL`, *SD~fil~* = `r vSD_FIL`) en Geschiedenis (*M~gsc~* = `r vM_GSC`, *SD~fil~* = `r vSD_FIL`); zie ook tabel. De gemiddelde reistijd van de groepen verschillen significant van elkaar, *F*(`r vDF1`, `r vDF2`) = `r vF_waarde`, *p* < 0,05, *η^2^* = `r Esq`. De sterkte van het effect van de type opleiding op de reistijd is groot.
 
-
 | Opleiding     | N          | M          | SD          |
 | ------------- | ---------- | ---------- | ----------- |
 | Arabisch      | `r vN_ATC` | `r vM_ATC` | `r vSD_ATC` |
@@ -453,7 +449,7 @@ Aan de hand van de resultaten kan geconcludeerd worden dat de studenten van Arab
 
 [^1]: Van Geloven, N. (25 mei 2016). *One-way ANOVA*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/One-way_ANOVA).
 [^2]: Universiteit van Amsterdam (8 juli 2014). *One-way ANOVA*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/One-way_ANOVA).
-[^3]: Onderscheidend vermogen: wordt in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  
+[^3]: Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  
 [^4]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^5]: Van Geloven, N. (21 maart 2018). *Kruskal Wallis*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis).
 [^6]: De *Kruskal-Wallis test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, omdat bij het maken van een rankschikking de dataset informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Kruskal-Wallis test* minder onderscheidend vermogen dan wanneer de *one-way ANOVA* uitgevoerd zou worden.

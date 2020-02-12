@@ -40,7 +40,7 @@ if (!exists("Substitute_var")) {
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r opmerking TODO, include=FALSE, eval=FALSE}
-# TODO: Uitleg extra pagina: nominaal, ordinaal etc., afhanjeklijk en onafhankelijk  
+# TODO: Uitleg extra pagina: nominaal, ordinaal etc., afhankelijk en onafhankelijk  
 # TODO: Uitleg transformeren data 
 ```
 ```{r aanmaken data, include=FALSE, echo=TRUE}
@@ -53,7 +53,7 @@ Gebruik de *Chi-kwadraat toets* of de *Fisher's exact toets* om te toetsen of er
 
 # Onderwijscasus
 <div id = "casus">
-De studentendecaan vraagt zich af of studenten met een functiebeperking sinds het invoeren van het leenstelsel meer of minder uitvallen.
+De studentendecaan van een hogeschool vraagt zich af of studenten met een functiebeperking sinds het invoeren van het leenstelsel meer of minder uitvallen.
 
 *H~0~*: Onder de studenten met een functiebeperking is het percentage uitval na de invoering van het leenstelsel gelijk gebleven.
 
@@ -165,7 +165,7 @@ vConf.int2 <- Round_and_format(fish$conf.int[2])
 <!-- ## TEKSTBLOK: Fishers-Exact-toets.R -->
 * *p* = `r vF_p`; p-waarde > 0,05, dus de H~0~ wordt niet verworpen.[^8]  
 * 95% betrouwbaarheidsinterval is tussen `r vConf.int1` en `r vConf.int2`.  
-* De odds ratio is 1,8. Dat wil zeggen dat de kans op uitval van studenten met een functiebeperking met leenstelsel 1,8 keer zo groot is als de kans op uitval van studenten met een functiebeperking zonder het leenstelsel. Deze relatie is niet significant, daarom wordt het in het rapport ook niet benoemd.  
+* De odds ratio is 1,8. Dat wil zeggen dat de kans op uitval van studenten met een functiebeperking met leenstelsel 1,8 keer zo groot is als de kans op uitval van studenten met een functiebeperking zonder het leenstelsel. Deze relatie is niet significant en daarom wordt het in het rapport ook niet benoemd.  
 
 <!-- ## /TEKSTBLOK: Fishers-Exact-toets.R -->
 

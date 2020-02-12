@@ -52,10 +52,9 @@ source(paste0(here::here(),"/01. Includes/data/02.R"))
 # Toepassing
 Gebruik de *gepaarde t-toets* om te toetsen of bij een herhaalde meting de gemiddelden van een groep van elkaar verschillen.[^1] 
 
-
 # Onderwijscasus
 <div id ="casus">
-Voor het verminderen van de studielast van studenten aan een universiteit biedt deze universiteit een cursus 'Plannen' aan. De cursus is bedoeld om studenten beter inzicht te geven in de gevolgen van de planning van hun studielast. De cursus wordt tussen twee onderwijsperiodes in gegeven. Voor en na de cursus moeten de studenten gedurende een onderwijsperiode een logboek bijhouden over hun studiegedrag. Gaan de studenten gemiddeld meer studeren of juist minder?
+Voor het verminderen van de studielast van studenten biedt het Centrum voor Studentbegeleiding van een universiteit een cursus 'Plannen' aan. De cursus is bedoeld om studenten beter inzicht te geven in de gevolgen van de planning van hun studielast. De cursus wordt tussen twee onderwijsperiodes in gegeven. Voor en na de cursus moeten de studenten gedurende een onderwijsperiode een logboek bijhouden over hun studiegedrag. De cursuscoördinator vraagt zich af: ‘Gaan de studenten die deelnemen aan de cursus gemiddeld meer studeren of juist minder?’
 
 *H~0~*: Het gemiddeld aantal uren studeren per onderwijsperiode verandert niet na de cursus, µ~T0~ = µ~T1~  
 
@@ -72,7 +71,7 @@ Controleer de assumptie van normaliteit met de volgende stappen:
 1. Controleer de data visueel met een histogram, een Q-Q plot of een boxplot.  
 2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^3]<sup>, </sup>[^4]  
 
-Als blijkt dat de data niet normaal verdeeld zijn, transformeer de data eventueel en bepaal daarna of deze wel normaal verdeeld is of gebruik de *Wilcoxon Signed Rank Test*.[^5]<sup>, </sup>[^6]
+Als blijkt dat de data niet normaal verdeeld zijn, transformeer dan de data eventueel en bepaal daarna of deze wel normaal verdeeld is of gebruik de *Wilcoxon Signed Rank Test*.[^5]<sup>, </sup>[^6]
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
@@ -173,7 +172,6 @@ ggplot(Uren_studeren_verschil_dataframe,
 
 De histogram lijkt niet geheel symmetrisch, maar toont geen grote afwijkingen van een normaalverdeling.
 
-
 ### Q-Q plot
 <!-- ## TEKSTBLOK: QQplot.R-->
 Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
@@ -197,7 +195,6 @@ qqline(Uren_studeren_verschil)
 <!-- ## /OPENBLOK: QQplot-1.R -->
 
 In deze casus liggen de meeste datapunten op of vlakbij de lijn. Hoewel er bij de uiteinden wat afwijkingen zijn, duidt deze grafiek op een normaalverdeling.
-
 
 ### Boxplot
 De box geeft de middelste 50% van het studielogboek weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8]<sup>, </sup>[^9]
@@ -240,7 +237,7 @@ lillie.test(Uren_studeren_verschil)
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-1.R -->
 
-De test heeft een p-waarde groter dan 0.05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden. 
+De test heeft een p-waarde groter dan 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden. 
 
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
@@ -290,7 +287,7 @@ vDiffMean <- Round_and_format(t$estimate*-1)
 * Vrijheidsgraden, *df* = *n* -1 = `r vN`-1 = `r vDF`  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen [^10]
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95% van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het verschil tussen het aantal studieuren voor en na de cursus,  µ~verschil~ = µ~T1~ - µ~T0~. In deze casus is het interval tussen `r vconf.int1` en `r vconf.int2`. Aangezien 0 niet in dit interval zit, is er een significant verschil tussen µ~T1~ en µ~T0~.
-* het absolute gemiddelde verschil tussen de twee groepen: `r vDiffMean`.
+* Het absolute gemiddelde verschil tussen de twee groepen: `r vDiffMean`.
 <!-- ## /TEKSTBLOK: T-test2.R -->
 
 ### Effectmaat: Cohen's d
@@ -322,7 +319,7 @@ vD_waarde <- Round_and_format(d$estimate)
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
 Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddeld aantal uur studeren van de studenten is veranderd na deelname aan de cursus 'Plannen'. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r vMean_t0`, *SD~T0~* = `r vSD_t0`) en het gemiddelde van T~1~ (*M~T1~* =`r vMean_t1`, *SD~T1~* = `r vSD_t1`) is significant, *t* ~`r vDF`~ = `r vT_waarde`, *p* < 0,01. Gemiddeld studeren de studenten `r vDiffMean` uur meer na deelname aan de cursus. 
- Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vconf.int1` tot `r vconf.int2`. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is groot, *d* = `r vD_waarde`. 
+Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vconf.int1` tot `r vconf.int2`. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is groot, *d* = `r vD_waarde`. 
 
 
 | Meting     | N         | M            | SD         |

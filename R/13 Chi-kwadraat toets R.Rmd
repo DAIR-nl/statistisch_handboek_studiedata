@@ -29,6 +29,10 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
+<!-- ## CLOSEDBLOK: Status.R -->
+```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Status.R -->
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r opmerking TODO, include=FALSE, eval=FALSE}
@@ -53,10 +57,10 @@ De studentendecaan vraagt zich af of studenten met een functiebeperking sinds he
 </div>
 
 # Assumpties
-Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal niveau gemeten[^5] en daarmee onafhankelijk van elkaar. 
+Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal of ordinaal niveau gemeten[^5] en daarmee onafhankelijk van elkaar. 
 
 ## Groepsgrootte
-Beide testen maken gebruik van een kruistabel; zie tabel 1 voor de geoberveerde waarden van de casus. De *Chi-kwadraat toets* wordt onbetrouwbaar als er een geobserveerde waarde van 10 of lager is.[^6]  
+Beide testen maken gebruik van een kruistabel; zie tabel 1 voor de geoberveerde waarden van de casus.De *Chi-kwadraat toets* wordt onbetrouwbaar als er een geobserveerde waarde van 10 of lager is.[^6]  
 
 
 |                      | uitval   | geen uitval | totaal | 
@@ -79,13 +83,11 @@ Op basis van geobserveerde waarden kunnen de verwachte waarden berekend worden. 
 | **wel leenstelsel**  | 347      | 416     |
 *Tabel 2. Verwachte waarden casus uitval met of zonder leenstelsel*
 
-Naast onbetrouwbaarheid bij geobserveerde waarden lager dan 10, wordt de *chi-kwadraat toets* ook onbetrouwbaar als één van de verwachte waarden 0 is. Verder wordt de toets onbetrouwbaar als in 20% van de verwachte waarde ≤ 5 is. 
-
-Gebruik de *Fisher’s exact toets* wanneer de aantallen lager zijn.[^7]  
+Naast onbetrouwbaarheid bij geobserveerde waarden lager dan 10, wordt de *chi-kwadraat toets* ook onbetrouwbaar als één van de verwachte waarden lager dan 5 is. Gebruik in die gevallen de *Fisher’s exact toets*.[^7]  
 
 # De data bekijken
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is een dataset ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. De data `Uitval_functiebeperking` zijn binair: wel of geen uitval. 
+Er is een kruistabel ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. Zowel de variabele voor uitval (wel of geen uitval) als voor functiebeperking (wel of geen functiebeperking) zijn binair. Deze tabel is gebaseerd op een dataset waarin uitval en functiebeperking voor studenten wordt bijgehouden. 
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
@@ -115,7 +117,7 @@ vDF <- Chi2$parameter
 <!-- ## TEKSTBLOK: Chi2-toets.R-->
 * *χ^2^* ~1~ ≈ `r vChi2`, *p* ≈ `r vP`  
 * Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r vDF`. De continuïteitscorrectie van Yates wordt automatisch toegepast wanneer het aantal vrijheidsgraden 1 is.[^6]   
-* p-waarde < 0,05, dus de H~0~ wordt verworpen en de H~A~ wordt aangenomen.[^8]  
+* p-waarde < 0,05, dus de H~0~ wordt verworpen.[^8]  
 
 <!-- ## /TEKSTBLOK: Chi2-toets.R-->
 
@@ -128,7 +130,7 @@ De *Chi-kwadraat toets* is uitgevoerd om te toetsen of studenten met een functie
 
 # Fisher's exact toets
 ## Uitvoering 
-<!-- ## TEKSTBLOK: Data-inladen-n43-->
+<!-- ## TEKSTBLOK: Data-inladen-n43.R -->
 De *Fisher's exact toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel gelijk is gebleven. Deze toets is ook betrouwbaar bij een lage waarde; hierbij een voorbeeld met lage aantallen. Er is een steekproef van `Uitval_functiebeperking` ingeladen genaamd `Uitval_functiebeperking_n43`. 
 <!-- ## /TEKSTBLOK: Data-inladen-n43-->
 

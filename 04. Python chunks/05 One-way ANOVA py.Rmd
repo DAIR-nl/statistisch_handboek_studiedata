@@ -29,17 +29,12 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## CLOSEDBLOK: Reticulate.R -->
+<!-- ## CLOSEDBLOK: Reticulate.py -->
 ```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}
 library(reticulate)
 knitr::knit_engines$set(python = reticulate::eng_python)
 ```
-<!-- ## /CLOSEDBLOK: Reticulate.R -->
-
-```{r set-options, echo=FALSE, cache=FALSE}
-options(width = 80)
-## Zodat de TukeyHSD naast elkaar geprint wordt
-```
+<!-- ## /CLOSEDBLOK: Reticulate.py -->
 
 <!-- ## OPENBLOK: Data-aanmaken.py -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
@@ -125,27 +120,28 @@ print(np.sqrt(np.var(Reistijd_GSC)))
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-1.py -->
 
-<!-- ## CLOSEDBLOK: Data-beschrijven.R -->
-```{r data beschrijven als object, include=FALSE, echo=TRUE}
-vM_ATC <- Round_and_format(mean(Reistijd_ATC))
-vSD_ATC <- Round_and_format(sd(Reistijd_ATC))
-vN_ATC <- Round_and_format(length(Reistijd_ATC))
+<!-- ## CLOSEDBLOK: Data-beschrijven.py -->
+```{python data beschrijven als object, include=FALSE, echo=TRUE}
+vM_ATC = np.mean(Reistijd_ATC)
+vSD_ATC = np.sqrt(np.var(Reistijd_ATC, ddof=1))
+vN_ATC = np.size(Reistijd_ATC)
 
-vM_FIL <- Round_and_format(mean(Reistijd_FIL))
-vSD_FIL <-Round_and_format(sd(Reistijd_FIL))
-vN_FIL <- Round_and_format(length(Reistijd_FIL))
+vM_FIL = np.mean(Reistijd_FIL)
+vSD_FIL = np.sqrt(np.var(Reistijd_FIL, ddof=1))
+vN_FIL = np.size(Reistijd_FIL)
 
-vM_GSC <- Round_and_format(mean(Reistijd_GSC))
-vSD_GSC <-Round_and_format(sd(Reistijd_GSC))
-vN_GSC <- Round_and_format(length(Reistijd_GSC))
+vM_GSC = np.mean(Reistijd_GSC)
+vSD_GSC = np.sqrt(np.var(Reistijd_GSC, ddof=1))
+vN_GSC = np.size(Reistijd_GSC)
 ```
-<!-- ## /CLOSEDBLOK: Data-beschrijven.R -->
+<!-- ## /CLOSEDBLOK: Data-beschrijven.py -->
 
-<!-- ## TEKSTBLOK: Data-beschrijven.R-->
-* Gemiddelde reistijd Arabische Taal en Cultuur (standaarddeviatie): `r vM_ATC` (`r vSD_ATC`). *n* = `r vN_ATC`  
-* Gemiddelde reistijd Filosofie (standaarddeviatie): `r vM_FIL` (`r vSD_FIL`). *n* = `r vN_FIL`.
-* Gemiddelde reistijd Geschiedenis (standaarddeviatie): `r vM_GSC` (`r vSD_GSC`). *n* = `r vN_GSC`.
-<!-- ## /TEKSTBLOK: Data-beschrijven.R-->
+<!-- ## TEKSTBLOK: Datatekst-beschrijven.py -->
+* Gemiddelde reistijd Arabische Taal en Cultuur (standaarddeviatie): `r Round_and_format(py$vM_ATC)` (`r Round_and_format(py$vSD_ATC)`). *n* = `r py$vN_ATC`  
+* Gemiddelde reistijd Filosofie (standaarddeviatie): `r Round_and_format(py$vM_FIL)` (`r Round_and_format(py$vSD_FIL)`). *n* = `r py$vN_FIL`.
+* Gemiddelde reistijd Geschiedenis (standaarddeviatie): `r Round_and_format(py$vM_GSC)` (`r Round_and_format(py$vSD_GSC)`). *n* = `r py$vN_GSC`.
+
+<!-- ## /TEKSTBLOK: Datatekst-beschrijven.py -->
 
 <!-- ## OPENBLOK: Histogram.py -->
 ```{python histogram}
@@ -185,7 +181,7 @@ plt.show()
 <!-- ## /OPENBLOK: QQplot1.py -->
 
 <!-- ## OPENBLOK: QQplot2.py -->
-```{python QQplot-t1}
+```{python QQplot-t2}
 import scipy.stats as stats
 qq = stats.probplot(Reistijd_FIL, dist="norm", plot=plt)
 title = plt.title("Filosofie")
@@ -196,7 +192,7 @@ plt.show()
 <!-- ## /OPENBLOK: QQplot2.py -->
 
 <!-- ## OPENBLOK: QQplot3.py -->
-```{python QQplot-t1}
+```{python QQplot-t3}
 import scipy.stats as stats
 qq = stats.probplot(Reistijd_GSC, dist="norm", plot=plt)
 title = plt.title("Geschiedenis")
@@ -216,14 +212,14 @@ plt.show()
 <!-- ## /OPENBLOK: Boxplot.py -->
 
 <!-- ## TEKSTBLOK: Lilliefors-test1.py -->
-De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`.
+De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`. Verder wordt er als standaard ook tweezijdig getoetst.
 <!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
 
-<!-- ## /OPENBLOK: Library-nortest inladen.py -->
+<!-- ## OPENBLOK: Library-nortest.py -->
 ```{python}
 import statsmodels.stats.api
 ```
-<!-- ## /OPENBLOK: Library-nortest inladen.py -->
+<!-- ## /OPENBLOK: Library-nortest.py -->
 
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
@@ -251,14 +247,14 @@ print(stats.shapiro(Reistijd_GSC))
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-3.py -->
 
 <!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
-``` {python Shapiro-Wilk Test-1, warning=FALSE}
+``` {python Shapiro-Wilk Test-2, warning=FALSE}
 import scipy.stats as stats
 print(stats.shapiro(Reistijd_FIL))
 ```
 <!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
 
 <!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
-``` {python Shapiro-Wilk Test-1, warning=FALSE}
+``` {python Shapiro-Wilk Test-3, warning=FALSE}
 import scipy.stats as stats
 print(stats.shapiro(Reistijd_ATC))
 ```
@@ -270,6 +266,20 @@ import scipy.stats as stats
 print(stats.levene(Reistijd_ATC, Reistijd_FIL, Reistijd_GSC))
 ```
 <!-- ## /OPENBLOK: Levenes-test.py -->
+
+<!-- ## CLOSEDBLOK: Levenes-test.py -->
+```{python Levenes test als object, echo = FALSE}
+stat, pval = stats.levene(Reistijd_ATC, Reistijd_FIL, Reistijd_GSC)
+vDF1 = 2
+vDF2 = len(Reistijd_ATC) + len(Reistijd_FIL) + len(Reistijd_GSC) - 3
+```
+<!-- ## /CLOSEDBLOK: Levenes-test.py -->
+
+<!-- ## TEKSTBLOK: Levenes-test.py -->
+* *F*~`r py$vDF1`~~,~~`r py$vDF2`~ = `r Round_and_format(py$stat)`, p-waarde = `r Round_and_format(py$pval)`, 
+* De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de groepen in spreiding.
+*  Vrijheidsgraden bestaan uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r py$vDF1`) en het tweede cijfer (*n~1~* + *n~2~*+*n~3~* - 3 = `r py$vDF2`).  
+<!-- ## TEKSTBLOK: Levenes-test.py -->
 
 <!-- ## TEKSTBLOK: ANOVA-toets.R -->
 Gebruik `pingouin.anova` om een ANOVA-test uit te voeren.
@@ -287,8 +297,33 @@ print(aov)
 ```
 <!-- ## /OPENBLOK: ANOVA-toets.py -->
 
-### Effectmaat: Eta squared
-De Eta Squared is al berekend in de ANOVA tabel.
+<!-- ## CLOSEDBLOK: ANOVA-toets.py -->
+```{python ANOVA als object, echo=FALSE}
+vDF1 = aov['DF'][0]
+vDF2 = aov['DF'][1]
+vF_waarde = aov['F'][0]
+```
+<!-- ## /CLOSEDBLOK: ANOVA-toets.py -->
+
+<!-- ## TEKSTBLOK: ANOVA-toets1.py -->
+* *F* ~`r py$vDF1`~~,~~`r py$vDF2`~ = `r Round_and_format(py$stat)`, *p* < 0,05.
+* p-waarde < 0,05, dus de H~0~ wordt verworpen.[^16] 
+* Vrijheidsgraden: het aantal groepen - 1 = `r py$vDF1`; *n~1~* + *n~2~* + *n~3~*- 3 = `r py$vDF2`.
+
+<!-- ## /TEKSTBLOK: ANOVA-toets1.py -->
+
+<!-- ## OPENBLOK: Cohens-f.py --> 
+
+<!-- ## /OPENBLOK: Cohens-f.py -->
+
+<!-- ## CLOSEDBLOK: Cohens-f.py -->
+
+<!-- ## /CLOSEDBLOK: Cohens-f.py -->
+
+<!-- ## /TEKSTBLOK: Cohens-f.py -->
+
+<!-- ## /TEKSTBLOK: Cohens-f.py -->
+
 <!-- ## OPENBLOK: Eta-squared.py --> 
 ```{python}
 print("Eta Squared:", aov["np2"])
@@ -304,3 +339,35 @@ Gebruik `pingouin.pairwise_tukey` op het ANOVA-object.
 print(pg.pairwise_tukey(data = dfReistijd_per_opleiding, dv = "Reistijd", between = "Opleiding", effsize = "cohen"))
 ```
 <!-- ## /OPENBLOK: Tukey-HSD.py -->
+
+<!-- ## CLOSEDBLOK: Tukey-HSD.py -->
+```{python TukeyHSD als object}
+THSD = pg.pairwise_tukey(data = dfReistijd_per_opleiding, dv = "Reistijd", between = "Opleiding", effsize = "cohen")
+vATCvsFIL = THSD['T'][0]
+vATCvsGSC = THSD['T'][1]
+vFILvsGSC = THSD['T'][2]
+```
+<!-- ## /CLOSEDBLOK: Tukey-HSD.py -->
+
+<!-- ## TEKSTBLOK: Tukey-HSD1.py -->
+Het verschil tussen Filosofie en Arabische Taal en Cultuur: *MD* = `r Round_and_format(py$vATCvsFIL)`, p < 0,01.  
+Het verschil tussen Geschiedenis en Arabische Taal en Cultuur: *MD* = `r Round_and_format(py$vATCvsGSC)`, p < 0,01.  
+Het verschil tussen Geschiedenis en Filosofie: *MD* = `r Round_and_format(py$vFILvsGSC)`, p = 0,26.  
+<!-- ## /TEKSTBLOK: Tukey-HSD1.py -->
+
+<!-- ## TEKSTBLOK: Rapportage.py -->
+Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De opleidingen zijn: Arabische Taal en Cultuur (*M~atc~* = `r Round_and_format(py$vM_ATC)`, *SD~atc~* = `r Round_and_format(py$vSD_ATC)`), Filosofie (*M~fil~* = `r Round_and_format(py$vM_FIL)`, *SD~fil~* = `r Round_and_format(py$vSD_FIL)`) en Geschiedenis (*M~gsc~* = `r Round_and_format(py$vM_GSC)`, *SD~fil~* = `r Round_and_format(py$vSD_FIL)`, zie ook tabel. De gemiddelde reistijd van de groepen verschillen significant van elkaar, *F*(`r py$vDF1`, `r py$vDF2`) = `r Round_and_format(py$vF_waarde)`, *p* < 0,05. De sterkte van het effect van de type opleiding op de reistijd is groot.
+
+
+| Opleiding     | N          | M          | SD          |
+| ------------- | ---------- | ---------- | ----------- |
+| Arabisch      | `r Round_and_format(py$vN_ATC)` | `r Round_and_format(py$vM_ATC)` | `r Round_and_format(py$vSD_ATC)` |
+| Filosofie     | `r Round_and_format(py$vN_FIL)` | `r Round_and_format(py$vM_FIL)` | `r Round_and_format(py$vSD_FIL)` |
+| Geschiedenis  | `r Round_and_format(py$vN_GSC)` | `r Round_and_format(py$vM_GSC)` | `r Round_and_format(py$vSD_GSC)` |
+<!-- ## /TEKSTBLOK: Rapportage.py -->
+
+<!-- ## TEKSTBLOK: Rapportage-tukey.py -->
+*Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen. Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = `r Round_and_format(py$vATCvsFIL)`, p < 0,01). Tussen Geschiedenis en Arabische Taal en Cultuur is een significant verschil (*MD* = `r Round_and_format(py$vATCvsGSC)`, p < 0,01). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = `r Round_and_format(py$vFILvsGSC)`, p = 0,26). 
+<!-- ## /TEKSTBLOK: Rapportage-tukey.py -->
+
+

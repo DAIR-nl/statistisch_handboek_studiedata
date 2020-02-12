@@ -29,6 +29,11 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
+<!-- ## CLOSEDBLOK: Status.R -->
+```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Status.R -->
+
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 source(paste0(here::here(),"/01. Includes/data/06.R"))
@@ -56,8 +61,9 @@ Er zijn geen assumpties vereist voor deze test.
 Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de Academie Mens & Maatschappij genaamd `Jaarlijks_inkomen`. De directeur wil kijken hoe zijn oud-studenten scoren ten opzichte van gemiddelde inkomens in Nederland.
 
 ## De data bekijken
-
-Gebruik head() en tail() om de structuur van de data te bekijken.
+<!-- ## TEKSTBLOK: Data-bekijken.R -->
+Gebruik `head()` en `tail()` om de data te bekijken.
+<!-- ## /TEKSTBLOK: Data-bekijken.R -->
 
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
@@ -69,8 +75,9 @@ tail(Jaarlijks_inkomen)
 ```
 <!-- ## /OPENBLOK: Data-bekijken.R -->
 
+<!-- ## TEKSTBLOK: Data-beschrijven.R -->
 Bekijk de data door het gemiddelde, de standaardafwijking, de mediaan en een histogram op te vragen.
-
+<!-- ## /TEKSTBLOK: Data-beschrijven.R -->
 
 <!-- ## OPENBLOK: Data-beschrijven.R -->
 ```{r data beschrijven, collapse=TRUE}
@@ -79,34 +86,67 @@ sd(Jaarlijks_inkomen)
 median(Jaarlijks_inkomen)
 ```
 <!-- ## /OPENBLOK: Data-beschrijven.R -->
-
+<!-- ## CLOSEDBLOK: Data-beschrijven2.R -->
 ```{r Var beschrijven, include=FALSE, echo=TRUE}
 vMean <- Round_and_format(mean(Jaarlijks_inkomen))
 vSD <- Round_and_format(sd(Jaarlijks_inkomen))
 vN <- Round_and_format(length(Jaarlijks_inkomen))
 vMed <- Round_and_format(median(Jaarlijks_inkomen))
 ```
+<!-- ## /CLOSEDBLOK: Data-beschrijven2.R -->
 
+<!-- ## TEKSTBLOK: Datatekst-beschrijven2.R -->
 Het gemiddelde jaarinkomen van de alumni is `r vMean` met een standaardafwijking van `r vSD` (*n* = `r vN`). De mediaan van het inkomen is `r vMed`.
+<!-- ## /TEKSTBLOK: Datatekst-beschrijven2.R -->
 
 ## Normaliteit visualizeren en testen
 
 De tekentoets is een alternatief voor de one-sample t-toets wanneer de data geen normale verdeling volgt. Hoewel het visueel inspecteren en testen van normaliteit niet vereist is, is het nuttig om de verdeling van de data te visualizeren en te vergelijken met de normaalverdeling.
 
+### Histogram
 Geef de verdeling weer in een histogram.
+<!-- ## OPENBLOK: Histogram.R -->
+```{r histogram, warning=FALSE, message=FALSE}
+## Histogram met ggplot2
+library(ggplot2)
 
+ggplot(data.frame(Jaarlijks_inkomen), 
+       aes(x = Jaarlijks_inkomen)) +
+  geom_histogram(aes(y = ..density..),
+                 binwidth = 10000, 
+                 color = "white", 
+                 fill = "#158CBA") +
+  geom_density(alpha = .2, adjust = 1) +
+  ylab("Frequentiedichtheid") +
+  xlab("Jaarlijks_inkomen") +
+scale_x_continuous(labels = as.character(seq(20000, 100000, 20000)), 
+                   breaks = seq(20000, 100000, 20000)) +
+labs(title = "Jaarinkomen alumni Mens & Maatschappij", 
+     subtitle = "")
 
-Test of de data normaal verdeeld is met een lilliefors-test
+```
+<!-- ## /OPENBLOK: Histogram.R -->
+
+De histogram laat zien dat de verdeling een langere staart aan de rechterkant heeft en daarom enigzin afwijkt van de (symmetrische) normaalverdeling.
+
+## Toetsen van normaliteit
+Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
+
+### Kolmogorov-Smirnov test
+
+De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde en standaardafwijking niet van tevoren bekend of bepaald zijn. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
+
 <!-- ## OPENBLOK: Library-nortest.R -->
 ```{r normaliteit, warning=FALSE}
 library (nortest)
 lillie.test(Jaarlijks_inkomen)
 ```
 <!-- ## /OPENBLOK: Library-nortest.R -->
-De data is niet normaal verdeeld. Gebruik bij normaal verdeelde data een *One-sample t-toets*.
+De p-waarde van de Kolmogorov-Smirnov test is kleiner dan 0.05, dusde data is niet normaal verdeeld. Naast deze test, kan de Shapiro-Wilk test ook gebruikt worden om normaliteit te testen. Gebruik bij normaal verdeelde data een *One-sample t-toets*.
 
-### Tekentoets 
-Voer een tweezijdige tekentoets uit met het aantal alumni dat meer dan modaal (€36.000[^1]) verdient en het totaal aantal alumni in de dataset. 
+# Tekentoets 
+Voer een tweezijdige tekentoets uit met het aantal alumni dat meer dan modaal (€36.000[^2]) verdient en het totaal aantal alumni in de dataset. Dit wordt gedaan met de `binom.test` functie [^3] met de volgende argumenten: `boven_modaal` als het aantal alumni dat een hoger jaarinkomen heeft dan het modale inkomen van €36.000, `totaal_alumni` als het totale aantal alumni (gelijk aan de steekproefgrootte) en `alternative="two.sided"` omdat we een tweezijdige alternatieve hypothese testen.
+
 <!-- ## OPENBLOK: Tekentoets.R -->
 ```{r Tekentoets}
 boven_modaal <- length(Jaarlijks_inkomen[Jaarlijks_inkomen > 36000])
@@ -116,13 +156,41 @@ binom.test(boven_modaal, totaal_alumni, alternative = "two.sided")
 ```
 <!-- ## /OPENBLOK: Tekentoets.R -->
 
-## Toelichting op de output
+<!-- ## CLOSEDBLOK: Tekentoets.R -->
+```{r T-test als object, echo = FALSE}
+boven_modaal <- length(Jaarlijks_inkomen[Jaarlijks_inkomen > 36000])
+totaal_alumni <- length(Jaarlijks_inkomen)
 
-## 5 Rapportage
+b <- binom.test(boven_modaal, totaal_alumni, alternative = "two.sided")
+
+vD_waarde <- Round_and_format(b$statistic)
+vN <- b$parameter
+vDF <- b$parameter
+vconf.int1 <- Round_and_format(b$conf.int[1])
+vconf.int2 <- Round_and_format(b$conf.int[2])
+vProp <- Round_and_format(b$estimate)
+```
+<!-- ## /CLOSEDBLOK: Tekentoets.R -->
+
+<!-- ## TEKSTBLOK: Tekentoets.R -->
+* `r boven_modaal` van de `r totaal_alumni` alumni verdienen boven_modaal, dit is een proportie van `r vProp`
+* p-waarde < 0,05, dus de H~0~ wordt verworpen [^4]
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de proportie in het interval vallen. In deze casus is het interval tussen `r vconf.int1` en `r vconf.int2`.
+
+<!-- ## /TEKSTBLOK: Tekentoets.R -->
+
+
+# Rapportage
+
+De *tekentoets* is uitgevoerd om te toetsen of het mediane inkomen van alumni van de Academie Mens & Maatschappij veschilt van het modale inkomen in Nederland van €36.000. `r boven_modaal` van de `r totaal_alumni` alumni verdienen meer dan het modale inkomen met een bijbehorende p-waarde die kleiner is dan 0.05. Deze resultaten duiden op een significant verschil tussen de inkomens van alumni van de Academie Mens & Maatschappij en de gemiddelde nederlander waarbij de inkomens van de alumni hoger lijken te liggen.
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
 ```
 <!-- ## /CLOSEDBLOK: Footer.R -->
 
-[^1]: Bruto modaal inkomen 2019, Centraal Planbureau
+
+[^1]: Van Geloven, N. (25 mei 2016). *Tekentoets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Tekentoets). 
+[^2]: Bruto modaal inkomen 2019, Centraal Planbureau. 
+[^3]: Wikipedia (5 februari 2020). *Sign test*. [https://en.wikipedia.org/wiki/Sign_test](https://en.wikipedia.org/wiki/Sign_test). 
+[^4]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houd hierbij rekening met type I en type II fouten. 

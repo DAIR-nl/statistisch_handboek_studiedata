@@ -1,5 +1,5 @@
 ---
-title: "15 Chi-kwadraat & Fisher-Freeman-Halton exact toets"
+title: "16 Chi-kwadraat & Fisher-Freeman-Halton exact toets"
 output:
   html_document:
     theme: lumen
@@ -29,6 +29,10 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
+<!-- ## CLOSEDBLOK: Status.R -->
+```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Status.R -->
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
@@ -37,26 +41,26 @@ source(paste0(here::here(),"/01. Includes/data/16.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruikt de *Fisher-Freeman-Halton exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde variabelen, waarin één of beide variabelen meer dan twee categorieën hebben; m x n tabel. De *Fisher-Freeman-Halton exact toets* is een uitbreiding van de *Fisher's exact toets* die gebruikt wordt om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde binaire variabelen; 2x2 tabel.[^1]
+Gebruikt de *Fisher-Freeman-Halton exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde variabelen, waarin één of beide variabelen meer dan twee categorieën hebben. De *Fisher-Freeman-Halton exact toets* is een uitbreiding van de *Fisher's exact toets* die gebruikt wordt om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde binaire variabelen, oftewel een 2x2 tabel.[^1]
 
 # Onderwijscasus
-De opleidingsdirecteur van de Bachelor Anthropologie vraagt zich af wat de invloed is van de instroom van internationale studenten op het behalen van een positief BSA. Krijgen studenten uit bepaalde landen vaker een positief BSA dan studenten uit andere landen? Internationale studenten zijn 'studenten met een buitenlandse vooropleiding of een opleiding van een Europese school’. 
+De opleidingsdirecteur van de Bachelor Antropologie vraagt zich af wat de invloed is van de instroom van internationale studenten op het behalen van een positief BSA. Krijgen studenten uit bepaalde landen vaker een positief BSA dan studenten uit andere landen? Internationale studenten zijn 'studenten met een buitenlandse vooropleiding of een opleiding van een Europese school’. 
 
-H~0~: De verhouding wel/geen positief BSA is onder de studenten van de Bachelor Anthropologie hetzelfde voor studenten uit elk land.  
+H~0~: De verhouding wel/geen positief BSA is onder de studenten van de Bachelor Antropologie hetzelfde voor studenten uit elk land.  
 
-H~A~: De verhouding wel/geen positief BSA is onder de studenten van de Bachelor Anthropologie anders voor een groep voor studenten uit één of meerdere landen.  
+H~A~: De verhouding wel/geen positief BSA is onder de studenten van de Bachelor Antropologie anders voor een groep voor studenten uit één of meerdere landen.  
 
 # Assumpties
 Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal niveau gemeten en daarmee onafhankelijk van elkaar. 
 
 # Uitvoering in R
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is een dataset (`Bsa_kt`) ingeladen over het BSA per instroomland van de faculteit Sociale Wetenschappen.
+Er is een kruistabel (`Bsa_kt`) ingeladen over het BSA per instroomland van de faculteit Sociale Wetenschappen.
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken.R -->
-Print de kruistabel of geef deze grafisch weer met `barplot()`.
+Print de kruistabel of geef deze grafisch weer met `barplot()`. 
 <!-- ## /TEKSTBLOK: Data-bekijken.R -->
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse=TRUE}

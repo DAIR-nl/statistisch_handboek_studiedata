@@ -42,7 +42,7 @@ bDebug <- F
 dfToetsen <- tribble(
     ~Toets, ~InGebruik,
     "01 One sample t-toets",                "0", 
-    "02 Gepaarde t-toets",                  "1", 
+    "02 Gepaarde t-toets",                  "0", 
     "03 Ongepaarde t-toets",                "0", 
     "04 Linear mixed model",                "0", 
     "05 One-way ANOVA",                     "0", 
@@ -53,7 +53,7 @@ dfToetsen <- tribble(
     "10 Kruskal Wallis",                    "0", 
     "11 z-test voor proporties",            "0", 
     "12 McNemar toets",                     "0", 
-    "13 Chi2 toets",                        "0", 
+    "13 Chi-kwadraat toets en Fishers exact toets",                        "1", 
     "14 Fisher’s exact toets",              "0", 
     "15 Cochran’s Q toets",                 "0", 
     "16 Fisher-Freeman-Halton exact toets", "0", 

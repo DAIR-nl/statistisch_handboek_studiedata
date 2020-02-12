@@ -61,44 +61,64 @@ Uitval_functiebeperking_n43 = r.Uitval_functiebeperking_n43
 ## Eerste 6 observaties
 print(dfUitval_functiebeperking.head(6))
 ```
-<!-- ## /BLOK: Data-bekijken.py -->
+<!-- ## /OPENBLOK: Data-bekijken.py -->
 
-<!-- ## TEKSTBLOK: Chi2-toets.py -->
+<!-- ## TEKSTBLOK: Chi2-toets-1.py -->
 De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel gelijk is gebleven. Gebruik `stats.chi2_contingency()` op een kruistabel. Er wordt vervolgens het volgende weergegeven: `<teststatistiek>, <vrijheidsgraad>, <p-waarde>`.
-<!-- ## /TEKSTBLOK: Chi2-toets.py -->
+<!-- ## /TEKSTBLOK: Chi2-toets-1.py -->
 
-<!-- ## OPENBLOK: Chi2-toets.py -->
+<!-- ## OPENBLOK: Chi2-toets-2.py -->
 ```{python}
 import scipy.stats as stats
 tstat, df, pval, tab = stats.chi2_contingency(dfUitval_functiebeperking, correction=True)
 print(tstat, df, pval)
 ```
-<!-- ## /BLOK: Chi2-toets.py -->
+<!-- ## /OPENBLOK: Chi2-toets-2.py -->
 
-<!-- ## CLOSEDBLOK: Chi2-toets.py -->
+<!-- ## CLOSEDBLOK: Chi2-toets-3.py -->
 
-<!-- ## /CLOSEDBLOK: Chi2-toets.py -->
+<!-- ## /CLOSEDBLOK: Chi2-toets-3.py -->
 
-<!-- ## TEKSTBLOK: Chi2-toets.py -->
+<!-- ## TEKSTBLOK: Chi2-toets-4.py -->
 * *χ^2^* ~1~ ≈ `r Round_and_format(py$tstat)`, *p* ≈ `r Round_and_format(py$pval)`  
 * Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r py$df`. De continuïteitscorrectie van Yates wordt automatisch toegepast wanneer het aantal vrijheidsgraden 1 is.[^6]   
 * p-waarde < 0,05, dus de H~0~ wordt verworpen.[^8]  
 
-<!-- ## /TEKSTBLOK: Chi2-toets.py -->
+<!-- ## /TEKSTBLOK: Chi2-toets-4.py -->
 
 <!-- ## TEKSTBLOK: Rapportage.py -->
-De *Chi-kwadraat toets* is uitgevoerd om te toetsen of studenten met een functiebeperking meer of minder uitvallen sinds de invoering van het leenstelsel. De resultaten ondersteunen de alternatieve hypothese: het percentage uitval van het aantal studenten met een functiebeperking is na de invoering van het leenstelsel veranderd, *χ^2^* ~`r py$df`~ ≈ `r py$`, *p* < 0,05.
+De *Chi-kwadraat toets* is uitgevoerd om te toetsen of studenten met een functiebeperking meer of minder uitvallen sinds de invoering van het leenstelsel. De resultaten ondersteunen de alternatieve hypothese: het percentage uitval van het aantal studenten met een functiebeperking is na de invoering van het leenstelsel veranderd, *χ^2^* ~`r py$df`~ ≈ `r py$pval`, *p* < 0,05.
 
 <!-- ## /TEKSTBLOK: Rapportage.py -->
+
+#######################################################################################################
+####################################### FISHER EXACT TOETS ############################################
+#######################################################################################################
+
+<!-- ## TEKSTBLOK: Data-inladen-n43.R -->
+De *Fisher's exact toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel gelijk is gebleven. Deze toets is ook betrouwbaar bij een lage waarde; hierbij een voorbeeld met lage aantallen. Er is een steekproef van `Uitval_functiebeperking` ingeladen genaamd `Uitval_functiebeperking_n43`. 
+<!-- ## /TEKSTBLOK: Data-inladen-n43-->
 
 <!-- ## OPENBLOK: data-bekijken-n43.py -->
 ```{python data bekijken n43}
 print(Uitval_functiebeperking_n43)
 ```
-<!-- ## /BLOK: data-bekijken-n43.py -->
+<!-- ## /OPENBLOK: data-bekijken-n43.py -->
 
 <!-- ## OPENBLOK: Fishers-Exact-toets.py -->
 ```{python}
 print(stats.fisher_exact(Uitval_functiebeperking_n43))
 ```
-<!-- ## /BLOK: Fishers-Exact-toets.py -->
+<!-- ## /OPENBLOK: Fishers-Exact-toets.py -->
+
+<!-- ## CLOSEDBLOK: Fishers-Exact-toets.py -->
+```{python fishers exact als object, include=FALSE, echo=TRUE}
+stat, pval = stats.fisher_exact(Uitval_functiebeperking_n43)
+```
+<!-- ## /CLOSEDBLOK: Fishers-Exact-toets.py -->
+
+<!-- ## TEKSTBLOK: Fishers-Exact-toets.py -->
+* *p* = `r Round_and_format(py$pval)`; p-waarde > 0,05, dus de H~0~ wordt niet verworpen.[^8]  
+* De odds ratio is 1,8. Dat wil zeggen dat de kans op uitval van studenten met een functiebeperking met leenstelsel 1,8 keer zo groot is als de kans op uitval van studenten met een functiebeperking zonder het leenstelsel. Deze relatie is niet significant, daarom wordt het in het rapport ook niet benoemd.  
+
+<!-- ## /TEKSTBLOK: Fishers-Exact-toets.py -->

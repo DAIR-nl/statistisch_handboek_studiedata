@@ -144,8 +144,8 @@ vQ3_PM <- Round_and_format(x[3,5])
 <!-- ## TEKSTBLOK: Data-beschrijven.R-->
 * Mediaan Fiscaal Recht: `r vMed_FIS`. *n* = `r vN_FIS`.
 * Mediaan Notarieel Recht: `r vMed_NOT`. *n* = `r vN_NOT`.
-* Mediaan Rechtsgeleerdheid: `r vMed_RCH`. *n* = `r vN_RCH`.
 * Mediaan Premaster: `r vMed_PM`. *n* = `r vN_PM`.
+* Mediaan Rechtsgeleerdheid: `r vMed_RCH`. *n* = `r vN_RCH`.
 
 <!-- ## /TEKSTBLOK: Data-beschrijven.R-->
 

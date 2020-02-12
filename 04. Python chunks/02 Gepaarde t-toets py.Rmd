@@ -164,7 +164,7 @@ plt.show()
 <!-- ## /OPENBLOK: Boxplot.py -->
 
 <!-- ## TEKSTBLOK: Lilliefors-test1.py -->
-De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`. Verder wordt er als standaard ook tweezijdig getoetst.
+De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`. Verder wordt er standaard tweezijdig getoetst.
 <!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
 
 <!-- ## OPENBLOK: Library-nortest.py -->
@@ -175,7 +175,7 @@ import statsmodels.stats.api
 
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
-print(statsmodels.stats.api.lilliefors(Uren_studeren_verschil))
+print(statsmodels.stats.api.lilliefors(Uren_studeren_verschil, pvalmethod="approx"))
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-1.py -->
 
@@ -204,25 +204,30 @@ Gebruik `stats.ttest_rel()` om een *gepaarde t-toets* uit te voeren. Gebruik hie
 ```{python T-test}
 print(stats.ttest_rel(Uren_studeren_T0, Uren_studeren_T1))
 ```
+```{python}
+# Absoluut gemiddeld verschil berekenen
+absoluut_verschil = np.mean(np.abs(np.array(Uren_studeren_T1) - np.array(Uren_studeren_T0)))
+print(absoluut_verschil)
+```
 <!-- ## /OPENBLOK: T-toets.py -->
 
 <!-- ## CLOSEDBLOK: T-test.py -->
 ```{python T-test als object, echo = FALSE}
 stat, pval = stats.ttest_rel(Uren_studeren_T0, Uren_studeren_T1)
-df = N - 1
-diffmean = np.mean(np.abs(np.array(Uren_studeren_T1) - np.array(Uren_studeren_T0)))
+N_tot = len(Uren_studeren_verschil)
+df = N_tot - 1
 ```
 <!-- ## /CLOSEDBLOK: T-test.py -->
 
 <!-- ## TEKSTBLOK: T-test2.py -->
 * *t*~`r py$df`~ = `r Round_and_format(py$stat)`, *p* < 0,05
-* Vrijheidsgraden, *df* = *n* -1 = `r py$N`-1 = `r py$df`  
+* Vrijheidsgraden, *df* = *n* -1 = `r py$N_tot`-1 = `r py$df`  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen [^10]
-* het absolute verschil tussen de twee groepen: `r Round_and_format(py$diffmean)` 
+* het absolute verschil tussen de twee groepen: `r Round_and_format(py$absoluut_verschil)` 
 <!-- ## TEKSTBLOK: T-test2.py -->
 
 <!-- ## TEKSTBLOK: Cohen-d.py -->
-Om Cohen's D te kunnen berekenen, moet de onderstaande functie `cohen_d()` worden overgenomen, omdat deze niet een Python eigen functie is.[^11]
+Er is geen Python eigenfunctie voor Cohen's D, neem daarom onderstaande functie `cohen_d()` over.[^11]
 <!-- ## /TEKSTBLOK: Cohen-d.py  -->
 
 <!-- ## OPENBLOK: Cohens-d-test.py -->
@@ -263,8 +268,8 @@ d = cohen_d(Uren_studeren_T0, Uren_studeren_T1)
 <!-- ## /TEKSTBLOK: Cohens-d-test.py -->
 
 <!-- ## TEKSTBLOK: Rapportage.py -->
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddeld aantal uur studeren van de studenten is veranderd na deelname aan de cursus. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r Round_and_format(py$vMean_t0)`, *SD~T0~* = `r Round_and_format(py$vSD_t0)`) en het gemiddelde van T~1~ (*M~T1~* =`r Round_and_format(py$vMean_t1)`, *SD~T1~* = `r Round_and_format(py$vSD_t1)`) is significant, *t* ~`r py$df`~ = `r Round_and_format(py$stat)`, *p* < 0,01. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is echter minimaal klein, *d* = `r Round_and_format(py$d)`. 
-
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddeld aantal uur studeren van de studenten is veranderd na deelname aan de cursus 'Plannen'. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r Round_and_format(py$vMean_t0)`, *SD~T0~* = `r Round_and_format(py$vSD_t0)`) en het gemiddelde van T~1~ (*M~T1~* =`r Round_and_format(py$vMean_t1)`, *SD~T1~* = `r Round_and_format(py$vSD_t1)`) is significant, *t* ~`r py$df`~ = `r Round_and_format(py$stat)`, *p* < 0,01. Gemiddeld studeren de studenten `r Round_and_format(py$absoluut_verschil)` uur meer na deelname aan de cursus. 
+Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is groot, *d* = `r Round_and_format(py$d)`. 
 
 | Meting     | N         | M            | SD         |
 | --------   | --------- | ------------ | ---------- |

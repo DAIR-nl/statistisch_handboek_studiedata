@@ -129,7 +129,7 @@ vQ3_Inter = q_Inter[3]
 <!-- ## /TEKSTBLOK: Data-beschrijven2.py -->
 
 <!-- ## TEKSTBLOK: Mann-Whitney-U-toets-1.py -->
-Gebruik `pg.mwu()` met twee argumenten om een Mann-Whitney U toets te doen in Python. De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`. Verder toetst Python standaard tweezijdig.
+Gebruik `pg.mwu()` met twee argumenten om een Mann-Whitney U toets te doen in Python. De standaard interpretatie van een statitische toets in Python is als: `(<teststatistiek>, <p-waarde>)`. Verder toetst Python standaard tweezijdig.
 <!-- ## /TEKSTBLOK: Mann-Whitney-U-toets-1.py -->
 
 <!-- ## OPENBLOK: Mann-Whitney-U-toets-2.py -->

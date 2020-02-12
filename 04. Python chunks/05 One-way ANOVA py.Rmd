@@ -325,6 +325,10 @@ print("Eta Squared:", Esq)
 ```
 <!-- ## /OPENBLOK: Eta-squared.py -->
 
+<!-- ## TEKSTBLOK: Eta-squared-tekst.py -->
+
+<!-- ## /TEKSTBLOK: Eta-squared-tekst.py -->
+
 <!-- ## CLOSEDBLOK: Eta-squared.py -->
 
 <!-- ## /CLOSEDBLOK: Eta-squared.py -->

@@ -56,9 +56,9 @@ De directeur van de Academie Mens & Maatschappij wil bekijken hoe het inkomen va
 </div>
 
 # Assumpties
-De data zijn (semi)continu.[^2] De *Wilcoxon Signed Rank Test* kan een alternatief zijn voor de *gepaarde t-toets*. 
+De data zijn (semi)continu.[^2] De *Wilcoxon Signed Rank Toets* kan een alternatief zijn voor de *gepaarde t-toets*. 
 
-Er zijn een aantal voordelen van de *Wilcoxon Signed Rank Test*, bijvoorbeeld, de data hoeven niet aan de assumptie van normaliteit te voldoen. Daarentegen, als de data wel normaal verdeeld zijn, heeft de *Wilcoxon Signed Rank Test* minder onderscheidend vermogen dan de *gepaarde t-toets*.[^3]<sup>, </sup>[^4] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Wilcoxon Signed Rank Test* test gekozen wordt. 
+Er zijn een aantal voordelen van de *Wilcoxon Signed Rank Toets*, bijvoorbeeld, de data hoeven niet aan de assumptie van normaliteit te voldoen. Daarentegen, als de data wel normaal verdeeld zijn, heeft de *Wilcoxon Signed Rank Toets* minder onderscheidend vermogen dan de *gepaarde t-toets*.[^3]<sup>, </sup>[^4] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Wilcoxon Signed Rank Toets* test gekozen wordt. 
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->

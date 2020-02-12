@@ -47,30 +47,29 @@ source(paste0(here::here(),"/01. Includes/data/13.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.py -->
 
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->
-Er is een kruistabel `dfUitval_functiebeperking` ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. Zowel de variabele voor uitval (wel of geen uitval) als voor functiebeperking (wel of geen functiebeperking) zijn binair. Deze tabel is gebaseerd op een dataset waarin uitval en functiebeperking voor studenten wordt bijgehouden.
+Er is een kruistabel `Uitval_functiebeperking` ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. Zowel de variabele voor uitval (wel of geen uitval) als voor functiebeperking (wel of geen functiebeperking) zijn binair. Deze tabel is gebaseerd op een dataset waarin uitval en functiebeperking voor studenten wordt bijgehouden.
 <!-- ## /TEKSTBLOK: Dataset-inladen.py -->
 
 <!-- ## OPENBLOK: Data-bekijken.py -->
 ```{python, include=FALSE}
 import pandas as pd
-dfUitval_functiebeperking = pd.DataFrame(r.Uitval_functiebeperking)
+Uitval_functiebeperking = r.Uitval_functiebeperking
 Uitval_functiebeperking_n43 = r.Uitval_functiebeperking_n43
 ```
 
 ```{python data bekijken-1, collapse = TRUE}
-## Eerste 6 observaties
-print(dfUitval_functiebeperking.head(6))
+print(Uitval_functiebeperking)
 ```
 <!-- ## /OPENBLOK: Data-bekijken.py -->
 
 <!-- ## TEKSTBLOK: Chi2-toets-1.py -->
-De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel gelijk is gebleven. Gebruik `stats.chi2_contingency()` op een kruistabel. Er wordt vervolgens het volgende weergegeven: `<teststatistiek>, <vrijheidsgraad>, <p-waarde>`.
+De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel veranderd is. Gebruik `stats.chi2_contingency()` op een kruistabel. De interpretatie van de statitische toets in Python is: `<teststatistiek>, <p-waarde>, <vrijheidsgraad>`.
 <!-- ## /TEKSTBLOK: Chi2-toets-1.py -->
 
 <!-- ## OPENBLOK: Chi2-toets-2.py -->
 ```{python}
 import scipy.stats as stats
-tstat, df, pval, tab = stats.chi2_contingency(dfUitval_functiebeperking, correction=True)
+tstat, pval, df, tab = stats.chi2_contingency(Uitval_functiebeperking, correction=True)
 print(tstat, df, pval)
 ```
 <!-- ## /OPENBLOK: Chi2-toets-2.py -->

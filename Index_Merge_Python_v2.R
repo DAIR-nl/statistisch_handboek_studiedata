@@ -50,7 +50,7 @@ dfToetsen <- tribble(
     "07 Wilcoxon signed rank toets",        "0", 
     "08 Mann-Whitney U toets",              "0", 
     "09 Friedman toets",                    "0", 
-    "10 Kruskal Wallis",                    "0", 
+    "10 Kruskal Wallis toets",                    "0", 
     "11 z-test voor proporties",            "0", 
     "12 McNemar toets",                     "0", 
     "13 Chi-kwadraat toets en Fishers exact toets",                        "1", 

@@ -193,4 +193,4 @@ De *tekentoets* is uitgevoerd om te toetsen of het mediane inkomen van alumni va
 [^1]: Van Geloven, N. (25 mei 2016). *Tekentoets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Tekentoets). 
 [^2]: Bruto modaal inkomen 2019, Centraal Planbureau. 
 [^3]: Wikipedia (5 februari 2020). *Sign test*. [https://en.wikipedia.org/wiki/Sign_test](https://en.wikipedia.org/wiki/Sign_test). 
-[^4]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houd hierbij rekening met type I en type II fouten. 
+[^4]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten. 

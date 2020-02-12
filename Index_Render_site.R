@@ -21,6 +21,7 @@
 ## 21-09-2019: TB: Aanmaak bestand
 ## 04-12-2019: TB: Toevoeging aan statistisch_handboek_ho files
 ## 06-02-2020: TB: Aanpassing zodat subfolder meegenomen worden
+## 12-02-2020: TB: Controle consistentie namen + Review kolommen
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -38,26 +39,26 @@ library("rmarkdown")
 
 ## Bepaal de lijst van toetsen; wijzig 0 in 1 om in gebruik te nemen
 dfToetsen <- tribble(
-    ~Toets,                                 ~InGebruik_R, ~InGebruik_Python,
-    "01 One sample t-toets",                "1",          "0", 
-    "02 Gepaarde t-toets",                  "1",          "0", 
-    "03 Ongepaarde t-toets",                "1",          "0", 
-    "04 Linear mixed model",                "0",          "0", 
-    "05 One-way ANOVA",                     "1",          "0", 
-    "06 Tekentoets",                        "0",          "0", 
-    "07 Wilcoxon signed rank toets",        "0",          "0", 
-    "08 Mann-Whitney U toets",              "0",          "0", 
-    "09 Friedman toets",                    "0",          "0", 
-    "10 Kruskal Wallis",                    "0",          "0", 
-    "11 z-test voor proporties",            "0",          "0", 
-    "12 McNemar toets",                     "0",          "0", 
-    "13 Chi2 toets",                        "0",          "0", 
-    "14 Fisher’s exact toets",              "0",          "0", 
-    "15 Cochran’s Q toets",                 "0",          "0", 
-    "16 Fisher-Freeman-Halton exact toets", "0",          "0", 
-    "17 Chi2 toets (trend)",                "0",          "0", 
-    "18 GLMM",                              "0",          "0", 
-    "19 GEE",                               "0",          "0" 
+    ~Toets,                                            ~InGebruik_R, ~Review_R, ~InGebruik_Python, ~Review_Python,
+    "01 One sample t-toets",                           "1",          "1",       "0",               "1",       
+    "02 Gepaarde t-toets",                             "1",          "0",       "0",               "0",       
+    "03 Ongepaarde t-toets",                           "1",          "0",       "0",               "0",       
+    "04 Linear mixed model",                           "0",          "0",       "0",               "0",       
+    "05 One-way ANOVA",                                "1",          "0",       "0",               "0",       
+    "06 Tekentoets",                                   "1",          "0",       "0",               "0",       
+    "07 Wilcoxon signed rank toets",                   "1",          "0",       "0",               "0",       
+    "08 Mann-Whitney U toets",                         "1",          "0",       "0",               "0",       
+    "09 Friedman toets",                               "0",          "0",       "0",               "0",       
+    "10 Kruskal Wallis toets",                         "1",          "0",       "0",               "0",       
+    "11 z-test voor proporties",                       "0",          "0",       "0",               "0",       
+    "12 McNemar toets",                                "0",          "0",       "0",               "0",       
+    "13 Chi-kwadraat toets en Fishers exact toets",    "1",          "0",       "0",               "0",       
+    "14 NIET IN GEBRUIK; NIET VERWIJDEREN",            "0",          "0",       "0",               "0",       
+    "15 Cochrans Q toets",                             "0",          "0",       "0",               "0",       
+    "16 Fisher-Freeman-Halton exact toets",            "1",          "0",       "0",               "0",       
+    "17 McNemar toets en Wilcoxon signed rank toets",  "0",          "0",       "0",               "0",      
+    "18 Chi-kwadraat toets trend",                     "0",          "0",       "0",               "0",       
+    "19 GLMM GLEE",                                    "0",          "0",       "0",               "0",       
 )
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -89,7 +90,8 @@ ifelse(!dir.exists("_site/R"), dir.create("_site/R"), FALSE)
 
 ## Loop over de toetsen die in gebruik zijn en genereer die pagina's
 for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_R == 1]) {
-    sModus <- "R"
+    sModus  <- "R"
+    bStatus <- dfToetsen$Review_R[dfToetsen$Toets == sToets]
     render(paste0("R/",sToets," R.Rmd"), 
            output_file = paste0('_site/R/', gsub(" ", "-", sToets), '-R.html'))    
 }
@@ -104,6 +106,7 @@ ifelse(!dir.exists("_site/Python"), dir.create("_site/Python"), FALSE)
 ## Loop over de toetsen die in gebruik zijn en genereer die pagina's
 for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_Python == 1]) {
     sModus <- "Python"
+    bStatus <- dfToetsen$Review_Python[dfToetsen$Toets == sToets]
     render(paste0("R/",sToets,"-Python.Rmd"), 
            output_file = paste0('_site/Python/', gsub(" ", "-", sToets), '-Python.html'))    
 }

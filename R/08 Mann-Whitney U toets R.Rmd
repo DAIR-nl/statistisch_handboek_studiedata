@@ -172,4 +172,4 @@ De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal EC 
 [^1]: Van Geloven, N. (13 maart 2018). *Mann-Whitney U toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
 [^2]: Onderscheidend vermogen: wordt in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  
 [^3]: Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
-[^4]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houd hierbij rekening met type I en type II fouten.
+[^4]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

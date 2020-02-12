@@ -113,7 +113,6 @@ vN <- Round_and_format(length(Gemiddeld_cijfer_WNS))
 * Gemiddeld cijfer WNS (standaardafwijking): `r vMean` (`r vSD`). *n* = `r vN`.
 <!-- ## /TEKSTBLOK: Data-beschrijven2.R-->
 
-
 ## Visuele inspectie van normaliteit
 Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
 
@@ -163,7 +162,7 @@ qqline(Gemiddeld_cijfer_WNS)
 In deze casus liggen de meeste punten op de lijn. Bij de uiteinden liggen de punten dichtbij de lijn. 
 
 ### Boxplot
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
 
 <!-- ## OPENBLOK: Boxplot.R -->
 ``` {r boxplot}
@@ -212,7 +211,7 @@ De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevon
 
 ##  One sample t-toets
 <!-- ## TEKSTBLOK: T-test.R -->
-Gebruik `t.test()`om een t-toets uit te voeren. Gebruik het argument `mu = 6.8` om het gemiddelde te specificeren waarmee wordt vergeleken en specifieer welke alternatieve hypothese er getoetst wordt. De verwachting is dat de studenten hoger scoren, maar omdat het relevant is om te weten of de studenten ook lager scoren dan het landelijk gemiddelde, is er voor gekozen om tweezijdig te toetsen. Gebruik hiervoor `alternative = "two.sided"`. Gebruik de hele dataset `Gemiddeld_cijfer_WNS` met *n* = `r vN`. 
+Gebruik `t.test()` om een t-toets uit te voeren. Gebruik het argument `mu = 6.8` om het gemiddelde te specificeren waarmee wordt vergeleken en specifieer welke alternatieve hypothese er getoetst wordt. De verwachting is dat de studenten hoger scoren, maar omdat het relevant is om te weten of de studenten ook lager scoren dan het landelijk gemiddelde, is er voor gekozen om tweezijdig te toetsen. Gebruik hiervoor `alternative = "two.sided"`. Gebruik de hele dataset `Gemiddeld_cijfer_WNS` met *n* = `r vN`. 
 <!-- ## /TEKSTBLOK: T-test.R -->
 <!-- ## OPENBLOK: T-test.R -->
 ```{r ttest}
@@ -230,7 +229,7 @@ vP <- Round_and_format(t$p.value)
 * Vrijheidsgraden, *df* = *n* -1 = `r Round_and_format(t$parameter+1)`-1 = `r t$parameter`  
 * *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* < 0,05
 * p-waarde < 0,05, dus de H~0~ wordt verworpen [^10]
-* 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95 % van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het gemiddeld eindexamencijfer exacte vakken minus 6.8. In deze casus is het interval tussen `r Round_and_format(t$conf.int[1])` en `r Round_and_format(t$conf.int[2])`. Aangezien 6.8 niet in dit interval zit, verschilt het gemiddelde significant van 6.8.
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95% van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het gemiddeld eindexamencijfer exacte vakken minus 6.8. In deze casus is het interval tussen `r Round_and_format(t$conf.int[1])` en `r Round_and_format(t$conf.int[2])`. Aangezien 6.8 niet in dit interval zit, verschilt het gemiddelde significant van 6.8.
 * Het gemiddelde van de steekproef is `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`
 <!-- ## /TEKSTBLOK: T-test2.R -->
 
@@ -250,8 +249,8 @@ De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor
 [^3]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). The importance of the normality assumption in large public health data sets. Annu Rev Public Health, 23, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf
 [^4]: Laerd statistics (2018). [Testing for Normality using SPSS Statistics](https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php).  
 [^5]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).
-[^6]: De *Wilcoxon signed rank toets* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, dit komt doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen, dan wanneer de *one sample t-toets* uitgevoerd zou worden. 
+[^6]: De *Wilcoxon signed rank toets* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen dan wanneer de *one sample t-toets* uitgevoerd zou worden. 
 [^7]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html  
 [^8]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 [^9]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
-[^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houd hierbij rekening met type I en type II fouten.
+[^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

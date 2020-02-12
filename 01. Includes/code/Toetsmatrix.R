@@ -19,6 +19,7 @@
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## Geschiedenis:
 ## 22-09-2019: TB: Aanmaak bestand
+## 12-02-2020: TB: Correctie van cellen
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -90,11 +91,65 @@ Maak_url <- function(published, sModus, sToets_dashed) {
 
 Corrigeer_toetsnaam <- function(sToetsnaam) {
   case_when(
-      sToetsnaam == "Chi2 toets" ~ "Chi-kwadraat toets",
+      sToetsnaam == "Fishers exact toets" ~ "Fisher's exact toets",
+      sToetsnaam == "Cochrans Q toets" ~ "Cochran's Q toets",
       sToetsnaam == "Fisher-Freeman-Halton exact toets" ~ "Fisher-Freeman- Halton exact toets",
-      sToetsnaam == "Chi2 toets (trend)" ~ "Chi-kwadraat toets (trend)",
+      sToetsnaam == "Chi-kwadraat toets trend" ~ "Chi-kwadraat toets (trend)",
       TRUE ~ sToetsnaam
     )
+}
+
+## Functie om een toetscel te maken (enkelvoudig)
+maak_html_toetscel <- function(published, sToets, sModus) {
+  # Verwijder voorloopcijfers van de naam
+  # Vervang de spaties door dashes
+  sToets_naam    <- Corrigeer_toetsnaam(Verwijder_voorloop_cijfers(sToets))
+  sToets_dashed  <- Vervang_spaties_door_dashes(sToets)
+  sToets_url     <- Maak_url(published, sModus, sToets_dashed)
+  ## Als de toets gepubliceerd is, gebruik dan published + a,
+  ## anders unpublished en geen a.
+  if (published) {
+    htmltools::withTags(td(class = "innercell published",
+      a(href = sToets_url,
+        title = sToets_naam,
+        sToets_naam)
+    ))
+  } else {
+    htmltools::withTags(td(class = "innercell unpublished",
+      sToets_naam
+    ))
+  }
+}
+
+## Functie om een toetscel te maken (gecombineerd)
+maak_html_toetscel_combi <- function(published_1, sToets_1, 
+                                     published_2, sToets_2,
+                                     sModus) {
+  # Verwijder voorloopcijfers van de namen
+  # Vervang de spaties door dashes
+  sToets_naam_1    <- Corrigeer_toetsnaam(Verwijder_voorloop_cijfers(sToets_1))
+  sToets_dashed_1  <- Vervang_spaties_door_dashes(sToets_1)
+  sToets_url_1     <- Maak_url(published_1, sModus, sToets_dashed_1)
+  sToets_naam_2    <- Corrigeer_toetsnaam(Verwijder_voorloop_cijfers(sToets_2))
+  sToets_dashed_2  <- Vervang_spaties_door_dashes(sToets_2)
+  sToets_url_2     <- Maak_url(published_2, sModus, sToets_dashed_2)
+  ## Als de toets gepubliceerd is, gebruik dan published + a,
+  ## anders unpublished en geen a.
+  if (published_1) {
+    htmltools::withTags(td(class = "innercell published",
+      a(href = sToets_url_1,
+        title = sToets_naam_1,
+        sToets_naam_1),
+      "/",
+      a(href = sToets_url_2,
+        title = sToets_naam_2,
+        sToets_naam_2),
+    ))
+  } else {
+    htmltools::withTags(td(class = "innercell unpublished",
+      paste(sToets_naam_1, "/", sToets_naam_2)
+    ))
+  }
 }
 
 ## Functies om de toetsmatrix in HTML per regel op te bouwen
@@ -164,10 +219,8 @@ maak_html_r3 <- function() {
                    dfToetsen[12,]$Toets, 
                    sModus = "R"),
       ## Combinatie: Chi-kwadraat toets / Fisher's exact toets
-      maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[13,]$InGebruik_R)),  
-                   dfToetsen[13,]$Toets, 
-                   as.logical(as.numeric(dfToetsen[14,]$InGebruik_R)),  
-                   dfToetsen[14,]$Toets,
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[13,]$InGebruik_R)),  
+                   dfToetsen[13,]$Toets,
                    sModus = "R"),
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[15,]$InGebruik_R)),  
                    dfToetsen[15,]$Toets, 
@@ -190,83 +243,30 @@ maak_html_r4 <- function() {
       ## Toets 16 tm 19
       maak_html_toetscel(F,  
                    "...", 
-                   sModus = "R"),
-      ## TODO: <a href="" title="">McNemar toets</a>/<br/><a href="" title="">Wilcoxon signed rank toets</a>
-      maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[12,]$InGebruik_R)),  
+                    sModus = "R"),
+      ## McNemar / Wilcoxon
+      maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[12,]$InGebruik_R)),
                    dfToetsen[12,]$Toets,
-                   as.logical(as.numeric(dfToetsen[7,]$InGebruik_R)),  
+                   as.logical(as.numeric(dfToetsen[7,]$InGebruik_R)),
                    dfToetsen[7,]$Toets,
                    sModus = "R"),
-      ## TODO: Chi-kwadraat toets</a> (trend) = 
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[17,]$InGebruik_R)),  
-                   dfToetsen[17,]$Toets, 
+      ## Chi-kwadraat toets (trend)
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[18,]$InGebruik_R)),
+                   dfToetsen[18,]$Toets,
                    sModus = "R"),
-      ## TODO: GLM/GEE
-      maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[18,]$InGebruik_R)),  
-                   dfToetsen[18,]$Toets, 
-                   as.logical(as.numeric(dfToetsen[19,]$InGebruik_R)),  
+      ## GLM/GEE
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[19,]$InGebruik_R)),
                    dfToetsen[19,]$Toets,
                    sModus = "R"),
-      ## TODO: Chi-kwadraat toets</a> (trend)
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[17,]$InGebruik_R)),  
-                   dfToetsen[17,]$Toets, 
+      ## Chi-kwadraat toets (trend)
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[18,]$InGebruik_R)),
+                   dfToetsen[18,]$Toets,
                    sModus = "R")
     )
   )
 }
 
-## Functie om een toetscel te maken (enkelvoudig)
-maak_html_toetscel <- function(published, sToets, sModus) {
-  # Verwijder voorloopcijfers van de naam
-  # Vervang de spaties door dashes
-  sToets_naam    <- Corrigeer_toetsnaam(Verwijder_voorloop_cijfers(sToets))
-  sToets_dashed  <- Vervang_spaties_door_dashes(sToets)
-  sToets_url     <- Maak_url(published, sModus, sToets_dashed)
-  ## Als de toets gepubliceerd is, gebruik dan published + a,
-  ## anders unpublished en geen a.
-  if (published) {
-    htmltools::withTags(td(class = "innercell published",
-      a(href = sToets_url,
-        title = sToets_naam,
-        sToets_naam)
-    ))
-  } else {
-    htmltools::withTags(td(class = "innercell unpublished",
-      sToets_naam
-    ))
-  }
-}
 
-## Functie om een toetscel te maken (gecombineerd)
-maak_html_toetscel_combi <- function(published_1, sToets_1, 
-                                     published_2, sToets_2,
-                                     sModus) {
-  # Verwijder voorloopcijfers van de namen
-  # Vervang de spaties door dashes
-  sToets_naam_1    <- Corrigeer_toetsnaam(Verwijder_voorloop_cijfers(sToets_1))
-  sToets_dashed_1  <- Vervang_spaties_door_dashes(sToets_1)
-  sToets_url_1     <- Maak_url(published_1, sModus, sToets_dashed_1)
-  sToets_naam_2    <- Corrigeer_toetsnaam(Verwijder_voorloop_cijfers(sToets_2))
-  sToets_dashed_2  <- Vervang_spaties_door_dashes(sToets_2)
-  sToets_url_2     <- Maak_url(published_2, sModus, sToets_dashed_2)
-  ## Als de toets gepubliceerd is, gebruik dan published + a,
-  ## anders unpublished en geen a.
-  if (published_1) {
-    htmltools::withTags(td(class = "innercell published",
-      a(href = sToets_url_1,
-        title = sToets_naam_1,
-        sToets_naam_1),
-      "/",
-      a(href = sToets_url_2,
-        title = sToets_naam_2,
-        sToets_naam_2),
-    ))
-  } else {
-    htmltools::withTags(td(class = "innercell unpublished",
-      paste(sToets_naam_1, "/", sToets_naam_2)
-    ))
-  }
-}
 
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -56,7 +56,7 @@ Gebruik de *one-way ANOVA* bij het toetsen of het gemiddelde van drie of meer on
 
 # Onderwijscasus
 <div id = "casus">
-In verband met wervingsactiviteiten wil het hoofd van de afdeling Communicatie weten wat de reistijd is van studenten aan verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. 
+In verband met wervingsactiviteiten wil het hoofd van de afdeling Communicatie weten wat de reistijd is van studenten van verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. 
 
 *H~0~*: De gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar: µ~1~ = µ~2~ = µ~3~   
 
@@ -65,8 +65,7 @@ In verband met wervingsactiviteiten wil het hoofd van de afdeling Communicatie w
 
 # Assumpties
 Om een valide toetsresultaat te bereiken moeten de data aan een aantal voorwaarden voldoen. Controleer of de steekproef aan de volgende assumpties voldoet: normaliteit, homogeniteit van varianties en onafhankelijkheid.  
-
-De *one-way ANOVA* is een robuuste test; als één groep uit de steekproef niet voldoet aan de assumptie van normaliteit of homogeniteit van varianties dan kan de *one-way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden.[^2] Hierdoor kan het wel zijn dat de toets minder onderscheidend vermogen heeft, dan wanneer de assumpties niet geschonden worden.[^3]<sup>, </sup>[^4] De *Kruskal-Wallis test* wordt gezien als een alternatief voor de *one-way ANOVA* als er geen sprake is van normaliteit en/of homogeniteit.[^5]<sup>, </sup>[^6]
+De *one-way ANOVA* is een robuuste test: als één groep uit de steekproef niet voldoet aan de assumptie van normaliteit of homogeniteit van varianties dan kan de *one-way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden.[^2] Hierdoor kan het wel zijn dat de toets minder onderscheidend vermogen heeft, dan wanneer de assumpties niet geschonden worden.[^3]<sup>, </sup>[^4] De *Kruskal-Wallis test* wordt gezien als een alternatief voor de *one-way ANOVA* als er geen sprake is van normaliteit en/of homogeniteit.[^5]<sup>, </sup>[^6]
 
 ## Normaliteit
 Controleer de assumptie van normaliteit met de volgende stappen:  
@@ -82,7 +81,7 @@ Toets met de *Levene's Test (for equality of variance)* of de spreiding van iede
 De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. Bereken de effectmaat om te bepalen of het gevonden verschil betekenisvol is. Hier worden twee effectmaten besproken die veel voorkomen: Cohen's *f* en eta squared.   
 
 ## Cohen's f
-Cohen's *f* geeft de sterkte van het effect van een onafhankelijke variabele,de opleiding, op een afhankelijke variabele, de reistijd, weer. Een indicatie om *f* te interpreteren is: rond 0,10 is een klein effect, rond 0,25 is een gemiddeld effect en rond 0,40 is een groot effect.[^10]
+Cohen's *f* geeft de sterkte van het effect van een onafhankelijke variabele, de opleiding, op een afhankelijke variabele, de reistijd, weer. Een indicatie om *f* te interpreteren is: rond 0,10 is een klein effect, rond 0,25 is een gemiddeld effect en rond 0,40 is een groot effect.[^10]
 
 ## Eta squared
 Eta squared (*η^2^*) berekent de proportie van de variantie in de afhankelijke variabele wat verklaard wordt door de onafhankelijke variabele. In dit geval berekent het de proportie van de variantie in de lengte van de reistijd wat verklaard kan worden door de opleiding. Een indicatie om *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^11]
@@ -159,11 +158,11 @@ vSD_ATC <- Round_and_format(sd(Reistijd_ATC))
 vN_ATC <- Round_and_format(length(Reistijd_ATC))
 
 vM_FIL <- Round_and_format(mean(Reistijd_FIL))
-vSD_FIL <-Round_and_format(sd(Reistijd_FIL))
+vSD_FIL <- Round_and_format(sd(Reistijd_FIL))
 vN_FIL <- Round_and_format(length(Reistijd_FIL))
 
 vM_GSC <- Round_and_format(mean(Reistijd_GSC))
-vSD_GSC <-Round_and_format(sd(Reistijd_GSC))
+vSD_GSC <- Round_and_format(sd(Reistijd_GSC))
 vN_GSC <- Round_and_format(length(Reistijd_GSC))
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven.R -->
@@ -174,7 +173,6 @@ vN_GSC <- Round_and_format(length(Reistijd_GSC))
 * Gemiddelde reistijd Geschiedenis (standaarddeviatie): `r vM_GSC` (`r vSD_GSC`). *n* = `r vN_GSC`.
 
 <!-- ## /TEKSTBLOK: Datatekst-beschrijven.R -->
-
 
 ## Visuele inspectie van normaliteit
 Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
@@ -198,7 +196,7 @@ ggplot(Reistijd_per_opleiding,
 ```
 <!-- ## /OPENBLOK: Histogram.R -->
 
-De opleidingen Geschiedenis en Arabische taal en Cultuur laten een Bell Curve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Filosofie heeft een lagere frequentie bij een reistijd van 40 minuten, dit kan duiden op niet normaal verdeelde data. 
+De opleidingen Geschiedenis en Arabische taal en Cultuur laten een Bell Curve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde. Filosofie heeft een lagere frequentie bij een reistijd van 40 minuten, wat kan duiden op niet normaal verdeelde data. 
 
 ### Q-Q plot
 <!-- ## TEKSTBLOK: QQplot.R-->
@@ -245,10 +243,10 @@ qqline(Reistijd_GSC)
   </div>
 </div>
 
-Bij de Q-Q plot van de reistijd van studenten Geschiedenis liggen de meeste punten op de lijn behalve bij de uiteinden. De cirkels van de Q-Q plot van studenten Arabische Taal en Cultuur en studenten Filosofie liggen net naast de lijn. De discrepantie is minimaal, vermoedelijk zijn de data normaal verdeeld.
+Bij de Q-Q plot van de reistijd van studenten Geschiedenis liggen de meeste punten op de lijn behalve bij de uiteinden. De cirkels van de Q-Q plot van studenten Arabische Taal en Cultuur en studenten Filosofie liggen net naast de lijn. De discrepantie is minimaal; vermoedelijk zijn de data normaal verdeeld.
 
 ### Boxplot
-De box geeft de middelste 50% van de reistijd weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^14]<sup>, </sup>[^15] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
+De box geeft de middelste 50% van de reistijd weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^14]<sup>, </sup>[^15] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
 
 <!-- ## OPENBLOK: Boxplot.R -->
 ```{r boxplot}
@@ -299,7 +297,7 @@ lillie.test(Reistijd_GSC)
   </div>
 </div>
 
-De p-waarde is *p* > 0,05, er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. [^16] De *one-way ANOVA* kan uitgevoerd worden.
+De p-waarde is *p* > 0,05; er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. [^16] De *one-way ANOVA* kan uitgevoerd worden.
 
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
@@ -351,7 +349,7 @@ vDF2 <- Round_and_format(L$`Df`[2])
 <!-- ## TEKSTBLOK: Levenes-test.R -->
 * *F*~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, p-waarde = `r vF_p`, 
 * De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de groepen in spreiding.
-* Vrijheidsgraden bestaan uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r vDF1`) en het tweede cijfer (*n~1~* + *n~2~*+*n~3~* - 3 = `r vDF2`).  
+* Vrijheidsgraden bestaan uit twee cijfers: het eerste cijfer (het aantal groepen - 1 = `r vDF1`) en het tweede cijfer (*n~1~* + *n~2~*+*n~3~* - 3 = `r vDF2`).  
 
 <!-- ## TEKSTBLOK: Levenes-test.R -->
 
@@ -420,7 +418,7 @@ Esq <- Round_and_format(EtaSq(res.aov)[1])
 De sterkte van het effect van de type opleiding op de reistijd is groot. 
 
 ## Post-hoc toets: Tukey's toets
-Om te bepalen welke van de type opleidingen in reistijd verschillen wordt een post-hoc toets gedaan. Gebruik bij groepen met gelijke variantie de Tukey Honestly Significant Difference Test.
+Voer om te bepalen welke van de type opleidingen in reistijd verschillen een post-hoc toets uit. Gebruik bij groepen met gelijke variantie de Tukey Honestly Significant Difference Test.
 <!-- ## TEKSTBLOK: Tukey-HSD.R -->
 Gebruik `TukeyHSD()` op het ANOVA-object.
 <!-- ## /TEKSTBLOK: Tukey-HSD.R -->
@@ -446,7 +444,7 @@ Het verschil tussen Geschiedenis en Filosofie: *MD* = `r vFILvsGSC`, p = 0,26.
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De opleidingen zijn: Arabische Taal en Cultuur (*M~atc~* = `r vM_ATC`, *SD~atc~* = `r vSD_ATC`), Filosofie (*M~fil~* = `r vM_FIL`, *SD~fil~* = `r vSD_FIL`) en Geschiedenis (*M~gsc~* = `r vM_GSC`, *SD~fil~* = `r vSD_FIL`, zie ook tabel. De gemiddelde reistijd van de groepen verschillen significant van elkaar, *F*(`r vDF1`, `r vDF2`) = `r vF_waarde`, *p* < 0,05. De sterkte van het effect van de type opleiding op de reistijd is groot.
+Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De opleidingen zijn: Arabische Taal en Cultuur (*M~atc~* = `r vM_ATC`, *SD~atc~* = `r vSD_ATC`), Filosofie (*M~fil~* = `r vM_FIL`, *SD~fil~* = `r vSD_FIL`) en Geschiedenis (*M~gsc~* = `r vM_GSC`, *SD~fil~* = `r vSD_FIL`; zie ook tabel. De gemiddelde reistijd van de groepen verschillen significant van elkaar, *F*(`r vDF1`, `r vDF2`) = `r vF_waarde`, *p* < 0,05. De sterkte van het effect van de type opleiding op de reistijd is groot.
 
 
 | Opleiding     | N          | M          | SD          |
@@ -472,7 +470,7 @@ Aan de hand van de resultaten kan geconcludeerd worden dat de studenten van Arab
 [^3]: Onderscheidend vermogen: wordt in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  
 [^4]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^5]: Van Geloven, N. (21 maart 2018). *Kruskal Wallis*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis).
-[^6]: De *Kruskal-Wallis test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, omdat bij het maken van een rankschikking de dataset informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Kruskal-Wallis test* minder onderscheidend vermogen, dan wanneer de *one-way ANOVA* uitgevoerd zou worden.
+[^6]: De *Kruskal-Wallis test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, omdat bij het maken van een rankschikking de dataset informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Kruskal-Wallis test* minder onderscheidend vermogen dan wanneer de *one-way ANOVA* uitgevoerd zou worden.
 [^7]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php. 
 [^8]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).  
 [^9]: Wikipedia (7 september 2019). *Analysis of variance*. https://en.wikipedia.org/wiki/Analysis_of_variance. 
@@ -482,4 +480,4 @@ Aan de hand van de resultaten kan geconcludeerd worden dat de studenten van Arab
 [^13]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf. 
 [^14]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 [^15]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
-[^16]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houd hierbij rekening met type I en type II fouten.
+[^16]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

@@ -1,5 +1,5 @@
 ---
-title: "09 z-toets voor proporties"
+title: "z-test voor proporties"
 output:
   html_document:
     theme: lumen

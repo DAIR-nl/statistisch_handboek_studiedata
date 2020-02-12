@@ -147,7 +147,7 @@ vQ3_PM <- Round_and_format(x[3,5])
 <!-- ## /TEKSTBLOK: Data-beschrijven.R-->
 
 ### Boxplot
-De box geeft de middelste 50% van het aantal studiepunten weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters. Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
+De box geeft de middelste 50% van het aantal studiepunten weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters. Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
 
 <!-- ## OPENBLOK: Boxplot.R -->
 ``` {r Boxplot}
@@ -233,6 +233,6 @@ Studenten met de vooropleiding Fiscaal Recht (mediaan = `r vMed_FIS`) en Notarie
 [^7]: Type I fout: Ten onrechte H~0~ verwerpen en H~A~ aannemen.
 [^8]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test).
 [^9]: Bij niet normaal verdeelde data wordt de mediaan berekend in plaats van een gemiddelde om het midden van de data aan te geven. 
-[^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met Type I en Type II fouten. 
+[^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met Type I en Type II fouten. 
 [^11]: Van Geloven, N. (13 maart 2018).  *Mann-Whitney U toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
 

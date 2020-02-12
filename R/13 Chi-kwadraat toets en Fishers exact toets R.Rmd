@@ -178,4 +178,4 @@ De *Fisher's exact toets* is uitgevoerd om te toetsen of studenten met een funct
 [^5]: Nominaal: variabelen die niet afhankelijk van elkaar zijn en niet op inhoudelijke basis geordend kunnen worden. Voorbeelden hiervan zijn geslacht of achternamen. Een binaire variabele is een voorbeeld van een nominale variabele. Binaire variabelen hebben twee mogelijkheden, ja of nee, terwijl nominale variabelen meerdere mogelijkheden kunnen hebben. 
 [^6]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^7]: Van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets).
-[^8]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houd hierbij rekening met type I en type II fouten.
+[^8]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

@@ -248,7 +248,7 @@ DF2 = len(Cijfers_2010) + len(Cijfers_2011) - 2
 <!-- ## TEKSTBLOK: Levenes-test2.py -->
 * *F*~`r py$DF1`~~,~~`r py$DF2`~ = `r Round_and_format(py$stat)`, p-waarde = `r Round_and_format(py$pval)` 
 * p-waarde > 0,05, dus de groepen zijn niet significant verschillend in spreiding.  
-* Vrijheidsgraden bestaan uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r py$DF1`) en het tweede cijfer (*n~2010~* + *n~2011~* - 2 = `r py$DF2`)
+* Vrijheidsgraden bestaan uit twee cijfers: het eerste cijfer (het aantal groepen - 1 = `r py$DF1`) en het tweede cijfer (*n~2010~* + *n~2011~* - 2 = `r py$DF2`)
 <!-- ## /TEKSTBLOK: Levenes-test2.py -->
 
 <!-- ## TEKSTBLOK: T-test.py -->

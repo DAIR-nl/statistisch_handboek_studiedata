@@ -118,7 +118,7 @@ GRAPH
 <!-- ## /OPENBLOK: Histogram.SPSS -->
 ![ ](Histogram1.jpg){width=60%} ![ ](Histogram2.jpg){width=60%} ![ ](Histogram3.jpg){width=60%}
 
-De opleidingen Geschiedenis en Arabische taal en Cultuur laten een Bell Curve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  Filosofie heeft een lagere frequentie bij een reistijd van 40 minuten, dit kan duiden op niet normaal verdeelde data. 
+De opleidingen Geschiedenis en Arabische taal en Cultuur laten een Bell Curve zien vergelijkbaar aan een normale verdeling, veel waardes liggen rondom het gemiddelde.  Filosofie heeft een lagere frequentie bij een reistijd van 40 minuten, wat kan duiden op niet normaal verdeelde data. 
 
 ### Q-Q plot
 Klik op `Analyze` > `Desctiptive Statistics` > `Q-Q Plots...`. Selecteer de gewenste variabele(n) en plaats deze in het vakje `Variables`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
@@ -144,7 +144,7 @@ PPLOT
 Bij de Q-Q plot van de reistijd van studenten Geschiedenis liggen de meeste punten op de lijn behalve bij de uiteinden. De cirkels van de Q-Q plot van studenten Arabische Taal en Cultuur en studenten Filosofie liggen net naast de lijn. De discrepantie is minimaal, vermoedelijk zijn de data normaal verdeeld.
 
 ### Boxplot
-De box geeft de middelste 50% van de reistijd weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^10]
+De box geeft de middelste 50% van de reistijd weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^10]
 
 Klik op `Graphs` > `Legacy Dialogs` > `Boxplot...`. Kies vervolgens voor `Simple`. Kies voor `Summaries of for groups of cases` en klik op `Define`.  Selecteer de gewenste variabele(n), plaats de afhankelijke variabelen in het vakje `Variable` en de variabelen waarop gegroepeerd moet worden in het vakje `Category Axis`. Klik op `OK` om meteen naar de output te gaan of klik op `Paste` om de code in de Syntax te zetten.
 
@@ -183,7 +183,7 @@ NPAR TESTS
 
 Kijk voor het  verschil naar `Asymp. Sig. (2-tailed)`.
 
-De p-waarde is *p* > 0,05, er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one-way ANOVA* kan uitgevoerd worden.
+De p-waarde is *p* > 0,05; er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one-way ANOVA* kan uitgevoerd worden.
 
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
@@ -232,7 +232,7 @@ vDF2 <- Round_and_format(L$`Df`[2])
 ```
 * *F*~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, p-waarde = `r vF_p`, 
 * De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de groepen in spreiding.   
-* Vrijheidsgraden bestaan uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r vDF1`) en het tweede cijfer (*n~1~* + *n~2~* - 2 = `r vDF2`).  
+* Vrijheidsgraden bestaan uit twee cijfers: het eerste cijfer (het aantal groepen - 1 = `r vDF1`) en het tweede cijfer (*n~1~* + *n~2~* - 2 = `r vDF2`).  
 * De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden in variantie.  
 
 

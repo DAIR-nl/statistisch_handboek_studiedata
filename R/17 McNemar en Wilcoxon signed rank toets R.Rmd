@@ -1,5 +1,5 @@
 ---
-title: '17: McNemar toets / Wilcoxon signed rank toets'
+title: 'McNemar toets / Wilcoxon signed rank toets'
 author: "© `r format(Sys.time(), '%Y')`, Versnellingsplan - Statistisch Handboek Hoger Onderwijs"
 output:
   html_document:
@@ -120,9 +120,6 @@ wilcox.test(Eval_curriculum$Waardering_num[Eval_curriculum$Jaar == 2014],
             paired = TRUE)
 ```
 <!-- ## /OPENBLOK: Wilcoxon-Signed-Rank-toets.R -->
-
-
-
 
 # Toelichting op de output
 

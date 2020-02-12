@@ -6,7 +6,8 @@
 ## Web Page: http://www.vu.nl
 ## Contact: Theo Bakker (t.c.bakker@vu.nl)
 ##
-## Doel: De stauts van een pagina
+## Doel: De stauts van een pagina; als de review van een pagina nog niet is afgerond,
+## toon dan onderstaande regel.
 ##
 ## Afhankelijkheden: htmltools package
 ##
@@ -19,28 +20,25 @@
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## Geschiedenis:
 ## 06-02-2020: TB: Aanmaak bestand
+## 12-02-2020: TB: Aanmaak voorwaardelijkheid
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 01 MAAK HTML ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-## Controleer of Substitute_var bestaat; zo niet, sluit dan het voorbereidingen
-## script in.
-# if (!exists("Substitute_var")) {
-#   ## Installeer packages en functies
-#   source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
-# }
-
-## Plaats  variabelen in een lijst: de root van de site
-lVars <- list(
-  sRoot = paste0(here::here(),"/_site")
-)
+## Controleer of bStatus bestaat; zo niet, maak deze dan aan met default 0
+if (!exists("bStatus")) {
+  bStatus <- 0
+}
 
 ## Plaats deze nu in een header; gebruik htmltools::htmlPreserve om
 ## HTML te behouden. Nodig om in markdown HTML te tonen.
-thisStatus <- Substitute_var(htmltools::htmlPreserve('
-   <div class="concept">NB Het peer review proces voor deze toets is nog niet afgerond; daarom is deze pagina nog in concept.</div>'), lVars)
-
+if (bStatus == 0) {
+thisStatus <- htmltools::htmlPreserve('
+   <div class="concept">NB Het peer review proces voor deze toets is nog niet afgerond; daarom is deze pagina nog in concept.</div>')
+} 
 ## Toon het resultaat
+if (bStatus == 0) {
 writeLines(thisStatus)
+}

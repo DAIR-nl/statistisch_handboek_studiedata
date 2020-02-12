@@ -1,5 +1,5 @@
 ---
-title: '18 Chi-kwadraat (trend)'
+title: 'Chi-kwadraat (trend)'
 output:
   html_document:
     theme: lumen

@@ -149,7 +149,7 @@ ggplot(Alumni_inkomens,
 Op beide tijdstippen is te zien dat de meeste alumni tussen de 0 en 4.000 euro per maand verdienen en een paar alumni verdienen ver boven modaal. 
 
 ### Boxplot
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters, echter uitbijters zijn niet direct van invloed op de uitkomst van de *Wilcoxon signed rang toets*.[^5] Hoe meer de boxen overlappen, hoe waarschijnlijker dat er geen significant verschil is tussen de groepen.  
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters, echter uitbijters zijn niet direct van invloed op de uitkomst van de *Wilcoxon signed rang toets*.[^5] Hoe meer de boxen overlappen, hoe waarschijnlijker dat er geen significant verschil is tussen de groepen.  
 
 <!-- ## OPENBLOK: Boxplot.R -->
 ```{r boxplot}
@@ -197,4 +197,4 @@ De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de 
 [^3]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test). 
 [^4]: Onderscheidend vermogen: wordt in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  
 [^5]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
-[^6]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% en c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houd hierbij rekening met type I en type II fouten.
+[^6]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

@@ -34,6 +34,10 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Status.R -->
 
+<!-- ## CLOSEDBLOK: Reticulate.R -->
+
+<!-- ## /CLOSEDBLOK: Reticulate.R -->
+
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 source(paste0(here::here(),"/01. Includes/data/03.R"))

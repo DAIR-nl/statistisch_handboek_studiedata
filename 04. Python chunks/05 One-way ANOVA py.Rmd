@@ -162,7 +162,7 @@ sub3 = fig.add_subplot(1, 3, 3)
 title3 = plt.title("Geschiedenis")
 hist3 = plt.hist(Reistijd_GSC, density = True, edgecolor = "black", bins = 12)
 
-main = fig.suptitle('Reistijd')
+main = fig.suptitle('Reistijd per opleiding')
 plt.show()
 ```
 <!-- ## /OPENBLOK: Histogram.py -->
@@ -208,13 +208,14 @@ plt.show()
 ```{python boxplot}
 fig, ax = plt.subplots()
 box = ax.boxplot([Reistijd_ATC, Reistijd_FIL, Reistijd_GSC], labels = ["Arabische Taal en Cultuur", "Filosofie", "Geschiedenis"])
-title = plt.title("Reistijd")
+title = plt.title("Reistijd per opleiding")
+ylab = plt.ylabel("Reistijd in minuten")
 plt.show()
 ```
 <!-- ## /OPENBLOK: Boxplot.py -->
 
 <!-- ## TEKSTBLOK: Lilliefors-test1.py -->
-De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`. Verder wordt er als standaard ook tweezijdig getoetst.
+De standaard interpretatie van een statitische toets in Python is: `(<teststatistiek>, <p-waarde>)`. Verder toetst Python standaard tweezijdig.
 <!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
 
 <!-- ## OPENBLOK: Library-nortest.py -->
@@ -283,9 +284,9 @@ vDF2 = len(Reistijd_ATC) + len(Reistijd_FIL) + len(Reistijd_GSC) - 3
 *  Vrijheidsgraden bestaan uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r py$vDF1`) en het tweede cijfer (*n~1~* + *n~2~*+*n~3~* - 3 = `r py$vDF2`).  
 <!-- ## TEKSTBLOK: Levenes-test.py -->
 
-<!-- ## TEKSTBLOK: ANOVA-toets.R -->
-Gebruik `pingouin.anova` om een ANOVA-test uit te voeren.
-<!-- ## /TEKSTBLOK: ANOVA-toets.R -->  
+<!-- ## TEKSTBLOK: ANOVA-toets.py -->
+Gebruik `pingouin.anova()` om een ANOVA-test uit te voeren.
+<!-- ## /TEKSTBLOK: ANOVA-toets.py -->  
 
 <!-- ## OPENBLOK: ANOVA-toets.py -->
 ```{python}
@@ -345,9 +346,9 @@ print(pg.pairwise_tukey(data = dfReistijd_per_opleiding, dv = "Reistijd", betwee
 <!-- ## CLOSEDBLOK: Tukey-HSD.py -->
 ```{python TukeyHSD als object}
 THSD = pg.pairwise_tukey(data = dfReistijd_per_opleiding, dv = "Reistijd", between = "Opleiding", effsize = "cohen")
-vATCvsFIL = THSD['T'][0]
-vATCvsGSC = THSD['T'][1]
-vFILvsGSC = THSD['T'][2]
+vATCvsFIL = THSD['diff'][0]
+vATCvsGSC = THSD['diff'][1]
+vFILvsGSC = THSD['diff'][2]
 ```
 <!-- ## /CLOSEDBLOK: Tukey-HSD.py -->
 

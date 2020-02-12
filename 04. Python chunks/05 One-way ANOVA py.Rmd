@@ -150,10 +150,12 @@ import matplotlib.pyplot as plt
 fig = plt.figure(figsize = (15, 10))
 sub1 = fig.add_subplot(1, 3, 1)
 title1 = plt.title("Arabische Taal en Cultuur")
+ylab = plt.ylabel("Frequentiedichtheid")
 hist1 = plt.hist(Reistijd_ATC, density = True, edgecolor = "black", bins = 10)
 
 sub2 = fig.add_subplot(1, 3, 2)
 title2 = plt.title("Filosofie")
+xlab = plt.xlabel("Reistijd")
 hist2 = plt.hist(Reistijd_FIL, density = True, edgecolor = "black", bins = 10)
 
 sub3 = fig.add_subplot(1, 3, 3)
@@ -223,19 +225,19 @@ import statsmodels.stats.api
 
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
-print(statsmodels.stats.api.lilliefors(Reistijd_ATC))
+print(statsmodels.stats.api.lilliefors(Reistijd_ATC, pvalmethod="approx"))
 ```
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
 
 <!-- ## OPENBLOK: Lilliefors-test-2.py -->
 ``` {python Lilliefors Test-2, warning=FALSE}
-print(statsmodels.stats.api.lilliefors(Reistijd_FIL))
+print(statsmodels.stats.api.lilliefors(Reistijd_FIL, pvalmethod="approx"))
 ```
 <!-- ## OPENBLOK: Lilliefors-test-2.py -->
 
 <!-- ## OPENBLOK: Lilliefors-test-3.py -->
 ``` {python Lilliefors Test-3, warning=FALSE}
-print(statsmodels.stats.api.lilliefors(Reistijd_GSC))
+print(statsmodels.stats.api.lilliefors(Reistijd_GSC, pvalmethod="approx"))
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-3.py -->
 
@@ -312,27 +314,27 @@ vF_waarde = aov['F'][0]
 
 <!-- ## /TEKSTBLOK: ANOVA-toets1.py -->
 
-<!-- ## OPENBLOK: Cohens-f.py --> 
-
-<!-- ## /OPENBLOK: Cohens-f.py -->
-
-<!-- ## CLOSEDBLOK: Cohens-f.py -->
-
-<!-- ## /CLOSEDBLOK: Cohens-f.py -->
-
-<!-- ## /TEKSTBLOK: Cohens-f.py -->
-
-<!-- ## /TEKSTBLOK: Cohens-f.py -->
-
 <!-- ## OPENBLOK: Eta-squared.py --> 
+```{python, include=FALSE}
+Esq = float(aov["np2"][0])
+```
+
 ```{python}
-print("Eta Squared:", aov["np2"])
+print("Eta Squared:", Esq)
 ```
 <!-- ## /OPENBLOK: Eta-squared.py -->
 
-<!-- ## TEKSTBLOK: Tukey-HSD.R -->
+<!-- ## CLOSEDBLOK: Eta-squared.py -->
+
+<!-- ## /CLOSEDBLOK: Eta-squared.py -->
+
+<!-- ## TEKSTBLOK: Eta-squared.py -->
+*η^2^* = `r Round_and_format(py$Esq)`
+<!-- ## /TEKSTBLOK: Eta-squared.py -->
+
+<!-- ## TEKSTBLOK: Tukey-HSD.py -->
 Gebruik `pingouin.pairwise_tukey` op het ANOVA-object.
-<!-- ## /TEKSTBLOK: Tukey-HSD.R -->
+<!-- ## /TEKSTBLOK: Tukey-HSD.py -->
 
 <!-- ## OPENBLOK: Tukey-HSD.py -->
 ```{python}
@@ -369,5 +371,3 @@ Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de
 <!-- ## TEKSTBLOK: Rapportage-tukey.py -->
 *Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen. Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = `r Round_and_format(py$vATCvsFIL)`, p < 0,01). Tussen Geschiedenis en Arabische Taal en Cultuur is een significant verschil (*MD* = `r Round_and_format(py$vATCvsGSC)`, p < 0,01). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = `r Round_and_format(py$vFILvsGSC)`, p = 0,26). 
 <!-- ## /TEKSTBLOK: Rapportage-tukey.py -->
-
-

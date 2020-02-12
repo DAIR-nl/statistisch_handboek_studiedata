@@ -107,21 +107,21 @@ vQ1_RCH = np.quantile(EC_REC, 0.25)
 
 vMed_FIS = np.quantile(EC_FSC, 0.5)
 vMed_NOT = np.quantile(EC_NTR, 0.5)
-vMed_RCH = np.quantile(EC_PRE, 0.5)
-vMed_PM = np.quantile(EC_REC, 0.5)
+vMed_RCH = np.quantile(EC_REC, 0.5)
+vMed_PM = np.quantile(EC_PRE, 0.5)
 
 vQ3_FIS = np.quantile(EC_FSC, 0.75)
 vQ3_NOT = np.quantile(EC_NTR, 0.75)
-vQ3_RCH = np.quantile(EC_PRE, 0.75)
-vQ3_PM = np.quantile(EC_REC, 0.75)
+vQ3_RCH = np.quantile(EC_REC, 0.75)
+vQ3_PM = np.quantile(EC_PRE, 0.75)
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven.py -->
 
 <!-- ## TEKSTBLOK: Data-beschrijven.py -->
 * Mediaan Fiscaal Recht: `r Round_and_format(py$vMed_FIS)`. *n* = `r py$vN_FIS`.
 * Mediaan Notarieel Recht: `r Round_and_format(py$vMed_NOT)`. *n* = `r py$vN_NOT`.
-* Mediaan Rechtsgeleerdheid: `r Round_and_format(py$vMed_RCH)`. *n* = `r py$vN_RCH`.
 * Mediaan Premaster: `r Round_and_format(py$vMed_PM)`. *n* = `r py$vN_PM`.
+* Mediaan Rechtsgeleerdheid: `r Round_and_format(py$vMed_RCH)`. *n* = `r py$vN_RCH`.
 
 <!-- ## /TEKSTBLOK: Data-beschrijven.py -->
 
@@ -129,17 +129,21 @@ vQ3_PM = np.quantile(EC_REC, 0.75)
 ```{python}
 import matplotlib.pyplot as plt
 box = dfResultaten_Arbeidsrecht.boxplot(column='EC_Jaar1', by='Vooropleiding')
+no_suptitle = plt.suptitle("")
 title = plt.title("Aantal EC per vooropleiding van de Master Arbeidsrecht")
+ylab = plt.ylabel("Aantal EC in jaar 1")
+no_grid = plt.grid(b = False)
 plt.show()
 ```
 <!-- ## /OPENBLOK: Boxplot.py -->
 
-<!-- ## TEKSTBLOK: Kruskal-Wallis-test-1.R -->
-Gebruik `stats.kruskal()` om de Kruskal-Wallis test uit te voeren. Eerst moet de data worden gesplitst per opleiding. De standaard interpretatie van een statitische toets in Python is: `(<teststatistiek>, <p-waarde>)`. Verder toetst Python standaard tweezijdig.
-<!-- ## /TEKSTBLOK: Kruskal-Wallis-test-1.R -->
+<!-- ## TEKSTBLOK: Kruskal-Wallis-test-1.py -->
+Gebruik `stats.kruskal()` om de Kruskal-Wallis toets uit te voeren. Eerst moet de data worden gesplitst per opleiding. De standaard interpretatie van een statitische toets in Python is: `(<teststatistiek>, <p-waarde>)`. Verder toetst Python standaard tweezijdig.
+<!-- ## /TEKSTBLOK: Kruskal-Wallis-test-1.py -->
 
 <!-- ## OPENBLOK: Kruskal-Wallis-test-2.py -->
 ```{python}
+# We splitsen de dataset per opleiding
 EC_FSC = dfResultaten_Arbeidsrecht[dfResultaten_Arbeidsrecht['Vooropleiding'] == "Fiscaal Recht"]["EC_Jaar1"]
 EC_NTR = dfResultaten_Arbeidsrecht[dfResultaten_Arbeidsrecht['Vooropleiding'] == "Notarieel Recht"]["EC_Jaar1"]
 EC_PRE = dfResultaten_Arbeidsrecht[dfResultaten_Arbeidsrecht['Vooropleiding'] == "Premaster"]["EC_Jaar1"]

@@ -53,7 +53,6 @@ Er worden geen garanties afgegeven. Het is mogelijk dat de licentie je niet alle
 
 **De volledige versie van de licentie op deze publicatie is van toepassing. Zie** https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.nl
 
-***
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer_simpel.R"))}
 ```

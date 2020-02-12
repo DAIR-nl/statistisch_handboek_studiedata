@@ -34,6 +34,10 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Status.R -->
 
+<!-- ## CLOSEDBLOK: Reticulate.R -->
+
+<!-- ## /CLOSEDBLOK: Reticulate.R -->
+
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r opmerking TODO, include=FALSE, eval=FALSE}
 # TODO: Uitleg extra pagina: nominaal, ordinaal etc., afhanjeklijk en onafhankelijk  
@@ -86,9 +90,9 @@ Op basis van geobserveerde waarden kunnen de verwachte waarden berekend worden. 
 Naast onbetrouwbaarheid bij geobserveerde waarden lager dan 10, wordt de *chi-kwadraat toets* ook onbetrouwbaar als één van de verwachte waarden lager dan 5 is. Gebruik in die gevallen de *Fisher’s exact toets*.[^7]  
 
 # De data bekijken
-<!-- ## TEKSTBLOK: Dataset-inladen.R-->
+<!-- ## TEKSTBLOK: Dataset-inladen.R -->
 Er is een kruistabel ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. Zowel de variabele voor uitval (wel of geen uitval) als voor functiebeperking (wel of geen functiebeperking) zijn binair. Deze tabel is gebaseerd op een dataset waarin uitval en functiebeperking voor studenten wordt bijgehouden. 
-<!-- ## /TEKSTBLOK: Dataset-inladen.R-->
+<!-- ## /TEKSTBLOK: Dataset-inladen.R -->
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
 ## Eerste 6 observaties
@@ -98,28 +102,31 @@ print(Uitval_functiebeperking)
 
 # Chi-kwadraat toets
 ## Uitvoering
-<!-- ## TEKSTBLOK: Chi2-toets.R-->
+<!-- ## TEKSTBLOK: Chi2-toets-1.R -->
 De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel gelijk is gebleven. Gebruik `chisq.test()` op een kruistabel.  
-<!-- ## /TEKSTBLOK: Chi2-toets.R-->
-<!-- ## OPENBLOK: Chi2-toets -->
+<!-- ## /TEKSTBLOK: Chi2-toets-1.R -->
+
+<!-- ## OPENBLOK: Chi2-toets-2.R -->
 ```{r chi2}
 chisq.test(Uitval_functiebeperking)
 ```
-<!-- ## /OPENBLOK: Chi2-toets-->
-<!-- ## CLOSEDBLOK: Chi2-toets.R-->
+<!-- ## /OPENBLOK: Chi2-toets-2.R -->
+
+<!-- ## CLOSEDBLOK: Chi2-toets-3.R -->
 ```{r chi2 als object, include=FALSE, echo=TRUE}
 Chi2 <- chisq.test(Uitval_functiebeperking)
 vChi2 <- Round_and_format(Chi2$statistic)
 vP <- Round_and_format(Chi2$p.value)
 vDF <- Chi2$parameter
 ```
-<!-- ## /CLOSEDBLOK: Chi2-toets.R-->
-<!-- ## TEKSTBLOK: Chi2-toets.R-->
+<!-- ## /CLOSEDBLOK: Chi2-toets-3.R -->
+
+<!-- ## TEKSTBLOK: Chi2-toets-4.R-->
 * *χ^2^* ~1~ ≈ `r vChi2`, *p* ≈ `r vP`  
 * Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r vDF`. De continuïteitscorrectie van Yates wordt automatisch toegepast wanneer het aantal vrijheidsgraden 1 is.[^6]   
 * p-waarde < 0,05, dus de H~0~ wordt verworpen.[^8]  
 
-<!-- ## /TEKSTBLOK: Chi2-toets.R-->
+<!-- ## /TEKSTBLOK: Chi2-toets-4.R-->
 
 ## Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
@@ -132,36 +139,36 @@ De *Chi-kwadraat toets* is uitgevoerd om te toetsen of studenten met een functie
 ## Uitvoering 
 <!-- ## TEKSTBLOK: Data-inladen-n43.R -->
 De *Fisher's exact toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met een functiebeperking dat is uitgevallen voor en na de invoering van het leenstelsel gelijk is gebleven. Deze toets is ook betrouwbaar bij een lage waarde; hierbij een voorbeeld met lage aantallen. Er is een steekproef van `Uitval_functiebeperking` ingeladen genaamd `Uitval_functiebeperking_n43`. 
-<!-- ## /TEKSTBLOK: Data-inladen-n43-->
+<!-- ## /TEKSTBLOK: Data-inladen-n43.R -->
 
-<!-- ## OPENBLOK: data-bekijken-n43 -->
+<!-- ## OPENBLOK: data-bekijken-n43.R -->
 ```{r data bekijken n43}
 print(Uitval_functiebeperking_n43)
 ```
-<!-- ## /OPENBLOK: data-bekijken-n43 -->
+<!-- ## /OPENBLOK: data-bekijken-n43.R -->
 
 De groepen hebben een laag aantal geobserveerde waarden variërend van 5 tot 16. Voer de *Fisher's exact toets* uit.
 
-<!-- ## OPENBLOK: Fishers-Exact-toets -->
+<!-- ## OPENBLOK: Fishers-Exact-toets.R -->
 ```{r fishers exact}
 fisher.test(Uitval_functiebeperking_n43)
 ```
-<!-- ## /OPENBLOK: Fishers-Exact-toets -->
+<!-- ## /OPENBLOK: Fishers-Exact-toets.R -->
 
-<!-- ## CLOSEDBLOK: Fishers-Exact-toets -->
+<!-- ## CLOSEDBLOK: Fishers-Exact-toets.R -->
 ```{r fishers exact als object, include=FALSE, echo=TRUE}
 fish <- fisher.test(Uitval_functiebeperking_n43)
 vF_p <- Round_and_format(fish$p.value)
 vConf.int1 <- Round_and_format(fish$conf.int[1])
 vConf.int2 <- Round_and_format(fish$conf.int[2])
 ```
-<!-- ## /CLOSEDBLOK: Fishers-Exact-toets -->
-<!-- ## TEKSTBLOK: Fishers-Exact-toets -->
+<!-- ## /CLOSEDBLOK: Fishers-Exact-toets.R -->
+<!-- ## TEKSTBLOK: Fishers-Exact-toets.R -->
 * *p* = `r vF_p`; p-waarde > 0,05, dus de H~0~ wordt niet verworpen.[^8]  
 * 95% betrouwbaarheidsinterval is tussen `r vConf.int1` en `r vConf.int2`.  
 * De odds ratio is 1,8. Dat wil zeggen dat de kans op uitval van studenten met een functiebeperking met leenstelsel 1,8 keer zo groot is als de kans op uitval van studenten met een functiebeperking zonder het leenstelsel. Deze relatie is niet significant, daarom wordt het in het rapport ook niet benoemd.  
 
-<!-- ## /TEKSTBLOK: Fishers-Exact-toets -->
+<!-- ## /TEKSTBLOK: Fishers-Exact-toets.R -->
 
 ## Rapportage 
 De *Fisher's exact toets* is uitgevoerd om te toetsen of studenten met een functiebeperking meer of minder uitvallen sinds de invoering van het leenstelsel. De resultaten ondersteunen de nulhypothese: het percentage uitval van het aantal studenten met een functiebeperking is na de invoering van het leenstelsel gelijk gebleven, *p* > 0,05. 

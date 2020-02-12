@@ -162,11 +162,12 @@ ggplot(Uren_studeren_verschil_dataframe,
                  color = "grey30",
                  fill = "#0089CF") +
   geom_density(alpha = .2, adjust = 1) +
+  xlab("Verschilscores uren studeren") +
   ylab("Frequentiedichtheid") +
   scale_x_continuous(
     labels = as.character(seq(-12, 16, 4)),
     breaks = seq(-12, 16, 4)) + 
-     labs(title = "Gemiddeld uren studeren voor en na cursus")
+     labs(title = "Verschilscores uren studeren voor en na cursus")
 ```
 <!-- ## /OPENBLOK: Histogram.R -->
 
@@ -188,7 +189,7 @@ Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen wor
 ```{r qqplot-1}
 qqnorm(Uren_studeren_verschil, 
        pch = 1,
-       main = "Normaal Q-Q plot studielogboek verschilscores",
+       main = "Normaal Q-Q plot verschilscores uren studeren voor en na cursus",
        ylab = "kwantielen in data",
        xlab = "Theoretische kwantielen")
 qqline(Uren_studeren_verschil)
@@ -205,7 +206,7 @@ De box geeft de middelste 50% van het studielogboek weer. De zwarte lijn binnen 
 ``` {r Boxplot}
 ## Boxplot
 boxplot(Uren_studeren_verschil,
-        main = "Boxplot van studielogboek")
+        main = "Boxplot van verschilscore uren studeren voor en na cursus")
 ```
 <!-- ## /OPENBLOK: Boxplot.R -->
 
@@ -232,6 +233,7 @@ De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standa
 library(nortest)
 ```
 <!-- ## /OPENBLOK: Library-nortest.R -->
+
 <!-- ## OPENBLOK: Lilliefors-test-1.R -->
 ``` {r Lilliefors Test-1, warning=FALSE}
 lillie.test(Uren_studeren_verschil)

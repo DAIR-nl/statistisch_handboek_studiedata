@@ -71,6 +71,7 @@ print(dfStudielogboek.tail(6))
 ```{python data selecteren}
 Uren_studeren_T0 = dfStudielogboek[dfStudielogboek['Meetmoment'] == "T0"]['Uren_studeren']
 Uren_studeren_T1 = dfStudielogboek[dfStudielogboek['Meetmoment'] == "T1"]['Uren_studeren']
+Uren_studeren_verschil = Uren_studeren_T1 - Uren_studeren_T0
 ```
 <!-- ## /OPENBLOK: Data-selecteren.py -->
 
@@ -78,6 +79,10 @@ Uren_studeren_T1 = dfStudielogboek[dfStudielogboek['Meetmoment'] == "T1"]['Uren_
 ```{python}
 # Om het gemiddelde en de standaard deviatie te berekenen, hebben we de library 'numpy' nodig
 import numpy as np
+```
+
+```{python, include = FALSE}
+Uren_studeren_verschil = np.array(Uren_studeren_T1) - np.array(Uren_studeren_T0)
 ```
 <!-- ## OPENBLOK: numpy-inladen.py -->
 
@@ -119,22 +124,11 @@ print(np.sqrt(np.var(Uren_studeren_T1, ddof = 1)))
 ```{python histogram}
 ## Histogram met matplotlib
 import matplotlib.pyplot as plt
-fig = plt.figure()
-sub1 = fig.add_subplot(1, 2, 1)
-title1 = plt.title("T0")
-xlab = plt.xlabel("Uren Studeren")
+hist = plt.hist(Uren_studeren_verschil, density = True, edgecolor = "black", bins = 12)
+title = plt.title("Verschilscores uren studeren voor en na cursus")
+xlab = plt.xlabel("Verschilscores uren studeren")
 ylab = plt.ylabel("Frequentiedichtheid")
-hist1 = plt.hist(Uren_studeren_T0, density = True, edgecolor = "black", bins = 9)
-yax1 = sub1.set_ylim([0, 0.05])
-
-sub2 = fig.add_subplot(1, 2, 2)
-title2 = plt.title("T1")
-xlab = plt.xlabel("Uren Studeren")
-ylab = plt.ylabel("Frequentiedichtheid")
-hist2 = plt.hist(Uren_studeren_T1, density = True, edgecolor = "black", bins = 9)
-yax2 = sub2.set_ylim([0, 0.05])
-
-main = fig.suptitle('Gemiddeld uren studeren voor en na cursus')
+yax = plt.ylim([0, 0.175])
 plt.show()
 ```
 <!-- ## /OPENBLOK: Histogram.py -->
@@ -151,30 +145,20 @@ import scipy.stats as stats
 
 <!-- ## OPENBLOK: QQplot-1.py -->
 ```{python qqplot}
-qq = stats.probplot(Uren_studeren_T0, dist="norm", plot=plt)
-title = plt.title("Normaal Q-Q plot studielogboek voor cursus")
+qq = stats.probplot(Uren_studeren_verschil, dist="norm", plot=plt)
+title = plt.title("Normaal Q-Q plot verschilscores uren studeren voor en na cursus")
 xlab = plt.xlabel("Theoretische kwantielen")
 ylab = plt.ylabel("Kwantielen in data")
 plt.show()
 ```
 <!-- ## /OPENBLOK: QQplot-1.py -->
 
-<!-- ## OPENBLOK: QQplot-2.py -->
-```{python qqplot-2}
-qq = stats.probplot(Uren_studeren_T1, dist="norm", plot=plt)
-title = plt.title("Normaal Q-Q plot studielogboek na cursus")
-xlab = plt.xlabel("Theoretische kwantielen")
-ylab = plt.ylabel("Kwantielen in data")
-plt.show()
-```
-<!-- ## /OPENBLOK: QQplot-2.py -->
-
 <!-- ## OPENBLOK: Boxplot.py -->
 ``` {python Boxplot}
 ## Boxplot
 fig, ax = plt.subplots()
-box = ax.boxplot([Uren_studeren_T0, Uren_studeren_T1], labels = ["T0", "T1"])
-title = plt.title("Boxplot van studielogboek")
+box = ax.boxplot([Uren_studeren_verschil], labels = [""])
+title = plt.title("Boxplot van verschilscores uren studeren voor en na cursus")
 plt.show()
 ```
 <!-- ## /OPENBLOK: Boxplot.py -->
@@ -191,40 +175,26 @@ import statsmodels.stats.api
 
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
-print(statsmodels.stats.api.lilliefors(Uren_studeren_T0))
+print(statsmodels.stats.api.lilliefors(Uren_studeren_verschil))
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-1.py -->
 
-<!-- ## OPENBLOK: Lilliefors-test-2.py -->
-``` {python Lilliefors Test-2, warning=FALSE}
-print(statsmodels.stats.api.lilliefors(Uren_studeren_T1))
-```
-<!-- ## /OPENBLOK: Lilliefors-test-2.py -->
-
 <!-- ## CLOSEDBLOK: data inladen-2.py -->
 ```{python, include=FALSE}
-Uren_studeren_T0_n30 = r.Uren_studeren_T0_n30
-Uren_studeren_T1_n30 = r.Uren_studeren_T1_n30
-N1 = len(Uren_studeren_T0_n30)
-N2 = len(Uren_studeren_T1_n30)
+Uren_studeren_verschil_n30 = r.Uren_studeren_verschil_n30
+N = len(Uren_studeren_verschil_n30)
 ```
 <!-- ## /CLOSEDBLOK: data inladen-2.py -->
 
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test.py -->
-Er zijn 2 steekproeven van `Studielogboek` ingeladen: `Uren_studeren_T0_n30` (T~0~) en `Uren_studeren_T1_n30` (T~1~), *n~T0~* = `r py$N1` , *n~T1~* = `r py$N2`.
+Er is een subset van de verschillen tussen het aantal studieuren op T~0~ en T~1~ ingeladen, `Uren_studeren_verschil_n30` met daarin `r py$N` observaties.
 <!-- ## /TEKSTBLOK: Shapiro-Wilk-test.py -->
 
 <!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
-``` {python Shapiro-Wilk Test-1, warning=FALSE}
-print(stats.shapiro(Uren_studeren_T0_n30))
+``` {python Shapiro-Wilk Test-1}
+print(stats.shapiro(Uren_studeren_verschil_n30))
 ```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-1.py -->
-
-<!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
-``` {python Shapiro-Wilk Test-2, warning=FALSE}
-print(stats.shapiro(Uren_studeren_T1_n30))
-```
-<!-- ## /OPENBLOK: Shapiro-Wilk-test-2.py -->
 
 <!-- ## TEKSTBLOK: T-test.py -->
 Gebruik `stats.ttest_rel()` om een *gepaarde t-toets* uit te voeren. Gebruik hier weer de twee variabelen `Uren_studeren_T0` en `Uren_studeren_T1`.
@@ -239,14 +209,14 @@ print(stats.ttest_rel(Uren_studeren_T0, Uren_studeren_T1))
 <!-- ## CLOSEDBLOK: T-test.py -->
 ```{python T-test als object, echo = FALSE}
 stat, pval = stats.ttest_rel(Uren_studeren_T0, Uren_studeren_T1)
-df = N1 - 1
+df = N - 1
 diffmean = np.mean(np.abs(np.array(Uren_studeren_T1) - np.array(Uren_studeren_T0)))
 ```
 <!-- ## /CLOSEDBLOK: T-test.py -->
 
 <!-- ## TEKSTBLOK: T-test2.py -->
 * *t*~`r py$df`~ = `r Round_and_format(py$stat)`, *p* < 0,05
-* Vrijheidsgraden, *df* = *n* -1 = `r py$N1`-1 = `r py$df`  
+* Vrijheidsgraden, *df* = *n* -1 = `r py$N`-1 = `r py$df`  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen [^10]
 * het absolute verschil tussen de twee groepen: `r Round_and_format(py$diffmean)` 
 <!-- ## TEKSTBLOK: T-test2.py -->

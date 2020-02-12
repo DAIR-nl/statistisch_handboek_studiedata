@@ -39,17 +39,16 @@ source(paste0(here::here(),"/01. Includes/data/10.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *Kruskal Wallis toets* om te toetsen of 2 of meer groepen significant van elkaar verschillen.[^1] Een kenmerk van de data is dat deze numeriek en ongepaard is.  
-
-De *Kruskal Wallis toets* kan een alternatief zijn voor de *one-way ANOVA*.[^2] De *Kruskal Wallis toets* stelt minder eisen aan de data en hoeft onder andere niet te voldoen aan de assumptie normaliteit. Bij de *Kruskal Wallis toets* hebben uitbijters hebben minder invloed op het eindresultaat dan bij de *one-way ANOVA*. Daarentegen, als de data wel normaal verdeeld zijn, heeft de *Kruskal Wallis toets* minder onderscheidend vermogen dan de *one way ANOVA*.[^3]<sup>, </sup>[^4] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Kruskal Wallis toets* test gekozen wordt. 
+Gebruik de *Kruskal Wallis toets* om te toetsen of 2 of meer groepen significant van elkaar verschillen.[^1] De *Kruskal Wallis toets* kan een alternatief zijn voor de *one-way ANOVA*.[^2] De *Kruskal Wallis toets* stelt minder eisen aan de data en hoeft onder andere niet te voldoen aan de assumptie normaliteit. Bij de *Kruskal Wallis toets* hebben uitbijters minder invloed op het eindresultaat dan bij de *one-way ANOVA*. Daarentegen, als de data wel normaal verdeeld zijn, heeft de *Kruskal Wallis toets* minder onderscheidend vermogen dan de *one way ANOVA*.[^3]<sup>, </sup>[^4] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Kruskal Wallis toets* test gekozen wordt. 
 
 # Onderwijscasus
 <div id="casus">
 De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht is geïnteresseerd in de afstudeersnelheid van zijn studenten. Hij vraagt zich af of er een verschil zit in het type vooropleiding die de studenten hebben gehaald en de hoeveel studiepunten die de studenten behalen in het eerste jaar. Hij kijkt naar de vier meest gangbare vooropleidingen die de studenten doorlopen voordat ze met de Master Arbeidsrecht beginnen: de Bachelors Fiscaal Recht, Notarieel Recht en Rechtsgeleerdheid en de Premaster.  
 
-*H~0~*: Er is geen significant verschil tussen de studenten van de Master Arbeidsrecht met als vooropleiding Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster en het aantal studiepunten dat de studenten in het eerste jaar behalen.
+*H~0~*: De verdeling van het aantal behaalde studiepunten in het eerste jaar van de maste Arbeidsrecht is gelijk voor studenten met als vooropleiding Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster.
 
-*H~A~*: Er is een significant verschil tussen de studenten van de Master Arbeidsrecht met als vooropleiding Bachelor Fiscaal Recht en/of Notarieel Recht en/of Rechtsgeleerdheid en/of de Premaster en/of het aantal studiepunten dat de studenten in het eerste jaar behalen.
+*H~A~*: De verdeling van het aantal behaalde studiepunten in het eerste jaar van de maste Arbeidsrecht is niet gelijk voor studenten met als vooropleiding Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster.
+
 </div>
 
 # Assumpties
@@ -189,7 +188,7 @@ vK_P <- Round_and_format(Ktest$p.value)
 
 ## Post-hoc toets: Mann-Whitney U toets
 <!-- ## TEKSTBLOK: Mann-Whitney-U-test-->
-Gebruik de *Mann-Whitney U toets* als post-hoc toets om te bepalen wélke groepen significant verschillen. De *Mann-Whitney U toets* wordt ook wel de *Wilcoxon rank-sum toets* genoemd.[^11] Gebruik de functie `pairwise.wilcox.test()` met als eerste argument de afhankelijke variabele `Resultaten_Arbeidsrecht$EC_Jaar1` en als tweed argument de definitie van de groepen `Resultaten_Arbeidsrecht$Vooropleiding`. Pas de *Bonferroni correctie* toe met `p.adjust.method = "bonferroni"`.    
+Gebruik de *Mann-Whitney U toets* als post-hoc toets om te bepalen wélke groepen significant verschillen. De *Mann-Whitney U toets* wordt ook wel de *Wilcoxon rank-sum toets* genoemd.[^11] Gebruik de functie `pairwise.wilcox.test()` met als eerste argument de afhankelijke variabele `Resultaten_Arbeidsrecht$EC_Jaar1` en als tweede argument de definitie van de groepen `Resultaten_Arbeidsrecht$Vooropleiding`. Pas de *Bonferroni correctie* toe met `p.adjust.method = "bonferroni"`.    
 <!-- ## /TEKSTBLOK: Mann-Whitney-U-test-->
 <!-- ## OPENBLOK: Mann-Whitney-U-test-->
 ``` {r pairwise wilcox test}
@@ -230,7 +229,7 @@ Studenten met de vooropleiding Fiscaal Recht (mediaan = `r vMed_FIS`) en Notarie
 [^4]: Onderscheidend vermogen: wordt in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  
 [^5]: Semi-continue data: de data zijn discreet, bijvoorbeeld gehele getallen, met zoveel mogelijkheden dat de data geanalyseerd kunnen worden alsof ze continu zijn. Van Geloven, N. (21 November 2017). *KEUZE TOETS*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS).
 [^6]: Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
-[^7]: Type I fout: Ten onrechte H~0~ verwerpen en H~A~ aannemen.
+[^7]: Type I fout: Ten onrechte H~0~ verwerpen.
 [^8]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test).
 [^9]: Bij niet normaal verdeelde data wordt de mediaan berekend in plaats van een gemiddelde om het midden van de data aan te geven. 
 [^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met Type I en Type II fouten. 

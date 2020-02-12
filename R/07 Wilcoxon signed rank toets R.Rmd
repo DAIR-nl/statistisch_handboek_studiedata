@@ -51,8 +51,8 @@ Gebruik de *Wilcoxon signed rank toets* om te toetsen of bij een herhaalde metin
 <div id ="casus">
 De directeur van de Academie Mens & Maatschappij wil bekijken hoe het inkomen van zijn alumni zich ontwikkeld nadat zij zijn afgestudeerd. Hij verwacht dat er na vijf jaar een groei te zien is in de inkomens. Hij bekijkt de maandelijke inkomens van de alumni 1 jaar na afstuderen en vergelijkt het met de inkomen 5 jaar na afstuderen. 
 
-*H~0~*: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd verminderd of gelijk gebleven.  
-*H~A~*: De inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd gestegen. 
+*H~0~*: De verdeling van inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd verminderd of gelijk gebleven.  
+*H~A~*: De verdeling van inkomens van de alumni van de Academie Mens & Maatschappij zijn in vier jaar tijd gestegen. 
 </div>
 
 # Assumpties

@@ -14,7 +14,7 @@ output:
 
 ```{r echo = FALSE}
 
-title_var <- paste("Toetsmatrix ", sModus)
+title_var <- paste("Toetsmatrix (", sModus, ")")
 ```
 
 ---

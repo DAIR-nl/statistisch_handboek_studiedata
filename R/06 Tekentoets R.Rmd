@@ -44,7 +44,7 @@ Gebruik de *tekentoets* om de mediaan van een steekproef te vergelijken met een 
 
 # Onderwijscasus
 <div id ="casus">
-De opleidingsdirecteur van de school voor Journalistiek is benieuwd wat alumni verdienen ten opzichte van de gemiddelde nederlander. Daarom wil zij de jaarinkomens van oud-studenten vergelijken met het modale inkomen van €36.000[^2] . Op deze manier vergaart zij meer informatie over het succes op de arbeidsmarkt na de opleiding Journalistiek.
+De opleidingsdirecteur van de school voor Journalistiek is benieuwd wat alumni verdienen ten opzichte van de gemiddelde nederlander. Daarom wil zij de jaarinkomens van oud-studenten vergelijken met het modale inkomen van €36.000.[^2] Op deze manier vergaart zij meer informatie over het succes op de arbeidsmarkt na de opleiding Journalistiek.
 
 *H~0~*: De mediaan van het jaarinkomen van alumni Journalistiek is gelijk aan €36.000, het modale jaarinkomen in Nederland.
 
@@ -144,7 +144,7 @@ lillie.test(Jaarlijks_inkomen)
 De p-waarde van de Kolmogorov-Smirnov test is kleiner dan 0,05, dus de data zijn niet normaal verdeeld. Naast deze test, kan de Shapiro-Wilk test ook gebruikt worden om normaliteit te testen. Gebruik bij normaal verdeelde data de *One-sample t-toets*.
 
 # Tekentoets 
-Voer een tweezijdige *tekentoets* uit om te bepalen of het mediane jaarinkomen van de alumni Journalistiek hoger ligt dan het modale inkomen van €36.000[^2]. Gebruik de `binom.test` functie [^4] met de volgende argumenten: het aantal alumni dat een hoger jaarinkomen heeft dan het modale inkomen van €36.000 `boven_modaal`, het totale aantal alumni `totaal_alumni` (gelijk aan de steekproefgrootte) en `alternative="two.sided"` om een tweezijdige alternatieve hypothese te testen.
+Voer een tweezijdige *tekentoets* uit om te bepalen of het mediane jaarinkomen van de alumni Journalistiek hoger ligt dan het modale inkomen van €36.000. Gebruik de `binom.test` functie [^4] met de volgende argumenten: het aantal alumni dat een hoger jaarinkomen heeft dan het modale inkomen van €36.000 `boven_modaal`, het totale aantal alumni `totaal_alumni` (gelijk aan de steekproefgrootte) en `alternative="two.sided"` om een tweezijdige alternatieve hypothese te testen.
 
 <!-- ## OPENBLOK: Tekentoets.R -->
 ```{r Tekentoets}

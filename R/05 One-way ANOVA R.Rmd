@@ -80,7 +80,7 @@ Toets met de *Levene's Test (for equality of variance)* of de spreiding van iede
 De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. Bereken de effectmaat om te bepalen of het gevonden verschil betekenisvol is. Hier wordt een effectmaat besproken die veel voorkomt: eta squared.   
 
 ## Eta squared
-Eta squared (*η^2^*) berekent de proportie van de variantie in de afhankelijke variabele wat verklaard wordt door de onafhankelijke variabele. In dit geval berekent het de proportie van de variantie in de lengte van de reistijd wat verklaard kan worden door de opleiding. Een indicatie om *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^11]
+Eta squared (*η^2^*) berekent de proportie van de variantie in de afhankelijke variabele wat verklaard wordt door de onafhankelijke variabele. In dit geval berekent het de proportie van de variantie in de lengte van de reistijd wat verklaard kan worden door de opleiding. Een indicatie om *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^10]<sup>,</sup>[^11]
 
 # Post-hoc toetsen
 De one-way ANOVA toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Er wordt een post-hoc toets uitgevoerd om te bepalen welke groepen significant verschillen.

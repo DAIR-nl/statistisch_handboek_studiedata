@@ -152,6 +152,7 @@ Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
 ## Histogram met ggplot2
 library(ggplot2)
 
+# Zet de variable om in een dataframe zodat het met ggplot gevisualizeerd kan worden
 Uren_studeren_verschil_dataframe <- as.data.frame(Uren_studeren_verschil)
 
 ggplot(Uren_studeren_verschil_dataframe,

@@ -63,7 +63,7 @@ htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/R/toetsmatrix_foo
 __Numeriek__
 
 * *Continu*: Een continue waarde kan iedere waarde aannemen tussen twee meetpunten. De meest bekende continue variabelen zijn lengte en lichaamsgewicht.[^1]  
-* *Semi-continue data*: de data zijn discreet, bijvoorbeeld gehele getallen, met zoveel mogelijkheden dat de data geanalyseerd kunnen worden alsof ze continu zijn. Voorbeelden zijn ...[^2]  
+* *Semi-continue data*: de data zijn discreet, bijvoorbeeld gehele getallen, met zoveel mogelijkheden dat de data geanalyseerd kunnen worden alsof ze continu zijn. Voorbeelden zijn het aantal studenten dat een tentamen maakt en het aantal broden dat een bakker per dag verkoopt.[^2]  
 
 __Categorisch__
 

@@ -224,7 +224,7 @@ plt.show()
 Bij beide groepen liggen de meeste punten op de lijn behalve bij de uiteinden, dit zou kunnen liggen aan de onder- en bovengrens van het cijfersysteem. Er zit een limiet aan de hoogte van het cijfer, namelijk een 10, en daarom vallen mogelijk de hoogste datapunten niet meer perfect op de lijn van de normaalverdeling. Vergelijkbaar liggen de laagste datapunten ook niet meer perfect op de lijn omdat de studenten al enige kennis van het vak hebben. Studenten bij de groep van 2010 halen niet minder dan een 4 halen; studenten bij de groep van 2011 halen niet minder dan een 3.  
 
 ### Boxplot
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^10] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
 
 <!-- ## OPENBLOK: Boxplot.py -->
 ```{python boxplot}
@@ -235,7 +235,7 @@ plt.show()
 ```
 <!-- ## /OPENBLOK: Boxplot.py -->
 
-De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer voor de BSA en na de BSA. De boxplotten en de staarten lijken symmetrisch, wat een teken kan zijn van normaal verdeelde data. Het cohort van 2011 heeft een aantal mogelijke uitbijters.[^11] 
+De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer voor de BSA en na de BSA. De boxplotten en de staarten lijken symmetrisch, wat een teken kan zijn van normaal verdeelde data. Het cohort van 2011 heeft een aantal mogelijke uitbijters.[^10] 
 
 ## Toetsen van normaliteit
 Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
@@ -357,7 +357,7 @@ mean2 = np.mean(Cijfers_2011)
 <!-- ## /TEKSTBLOK: T-test2.py -->
 
 ### Effectmaat: Cohen's d 
-De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. Bereken de effectmaat om te bepalen of de gevonden p-waarde van een t-toets betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft een gestandaardiseerd verschil weer: het verschil in gemiddelden tussen twee groepen gecorrigeerd voor de gecombineerde standaardafwijking van de twee groepen. Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect.[^9]
+De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. Bereken de effectmaat om te bepalen of de gevonden p-waarde van een t-toets betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft een gestandaardiseerd verschil weer: het verschil in gemiddelden tussen twee groepen gecorrigeerd voor de gecombineerde standaardafwijking van de twee groepen. Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect.[^12]
 
 In dit voorbeeld is de p > 0,05, dus is een effectmaat uitrekenen onnodig. Pas de volgende stappen toe bij een p < 0,05.
 
@@ -426,11 +426,10 @@ Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentam
 [^6]: Van Geloven, N. (13 maart 2018). *Mann-Whitney U toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
 [^7]: De *Mann-Whitney U toets* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Mann-Whitney U toets* minder onderscheidend vermogen dan wanneer de *ongepaarde t-toets* uitgevoerd zou worden. 
 [^8]: Van Geloven, N. (25 mei 2016). *One-way ANOVA* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/One-way_ANOVA).
-[^9]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf.
-[^10]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
-[^11]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
-[^12]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
-
+[^9]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
+[^10]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
+[^11]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
+[^12]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf.
 <!-- ## TEKSTBLOK: Extra-Bron.py -->
 [^13]: De geschreven Python functie voor Cohen's D is verkregen vanuit de volgende pagina op [Stackoverflow](https://stackoverflow.com/questions/21532471/how-to-calculate-cohens-d-in-python)
 <!-- ## /TEKSTBLOK: Extra-Bron.py -->

@@ -56,7 +56,7 @@ Gebruik de *Chi-kwadraat toets* of de *Fisher's exact toets* om te toetsen of er
 
 # Onderwijscasus
 <div id = "casus">
-De studentendecaan vraagt zich af of studenten met een functiebeperking sinds het invoeren van het leenstelsel meer of minder uitvallen.
+De studentendecaan van een hogeschool vraagt zich af of studenten met een functiebeperking sinds het invoeren van het leenstelsel meer of minder uitvallen.
 
 *H~0~*: Onder de studenten met een functiebeperking is het percentage uitval na de invoering van het leenstelsel gelijk gebleven.
 

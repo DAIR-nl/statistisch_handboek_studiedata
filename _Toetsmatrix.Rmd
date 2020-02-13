@@ -14,7 +14,7 @@ output:
 
 ```{r echo = FALSE}
 
-title_var <- paste("Toetsmatrix (", sModus, ")")
+title_var <- paste0("Toetsmatrix (", sModus, ")")
 ```
 
 ---
@@ -55,7 +55,7 @@ htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/R/toetsmatrix_hea
 ```{r, echo = FALSE}
 htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/R/toetsmatrix_footer.html"))
 ```
-*Toetsmatrix 1. schematische overzicht van verschillende toetsen per type data en per vergelijking. Deze pagina is nog in ontwikkeling, en wordt met de tijd aangevuld en verbeterd.*
+*Toetsmatrix 1. Schematische overzicht van verschillende toetsen per type data en per vergelijking. Deze pagina is nog in ontwikkeling, en wordt met de tijd aangevuld en verbeterd.*
 
 # Toelichting op de mogelijke keuzes
 

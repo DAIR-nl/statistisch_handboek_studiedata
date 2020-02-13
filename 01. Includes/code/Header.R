@@ -57,10 +57,10 @@ thisHeader <- Substitute_var(htmltools::htmlPreserve('
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-start">
         <li>
-  <a href="`sRoot`R/Toetsmatrix.html">Toetsmatrix R</a>
+  <a href="`sRoot`R/Toetsmatrix.html">Toetsmatrix (R)</a>
 </li>
 <li>
-  <a href="`sRoot`Python/Toetsmatrix.html">Toetsmatrix Python</a>
+  <a href="`sRoot`Python/Toetsmatrix.html">Toetsmatrix (Python)</a>
 </li>
 <li>
   <a href="`sRoot`Over.html">Over</a>

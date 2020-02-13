@@ -50,11 +50,11 @@ Gebruik de *Kruskal Wallis toets* om te toetsen of 2 of meer groepen significant
 
 # Onderwijscasus
 <div id="casus">
-De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht is geïnteresseerd in de afstudeersnelheid van zijn studenten. Hij vraagt zich af of er een verschil zit in het type vooropleiding die de studenten hebben gehaald en de hoeveel studiepunten die de studenten behalen in het eerste jaar. Hij kijkt naar de vier meest gangbare vooropleidingen die de studenten doorlopen voordat ze met de Master Arbeidsrecht beginnen: de Bachelors Fiscaal Recht, Notarieel Recht en Rechtsgeleerdheid en de Premaster.  
+De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht is geïnteresseerd in de afstudeersnelheid van zijn studenten. Zij vraagt zich af of er een verschil zit in het type vooropleiding die de studenten hebben gehaald en de hoeveel studiepunten die de studenten behalen in het eerste jaar. Zij kijkt naar de vier meest gangbare vooropleidingen die de studenten doorlopen voordat ze met de Master Arbeidsrecht beginnen: de Bachelors Fiscaal Recht, Notarieel Recht en Rechtsgeleerdheid en de Premaster.  
 
-*H~0~*: De verdeling van het aantal behaalde studiepunten in het eerste jaar van de maste Arbeidsrecht is gelijk voor studenten met als vooropleiding Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster.
+*H~0~*: De verdeling van het aantal behaalde studiepunten in het eerste jaar van de master Arbeidsrecht is gelijk voor studenten met als vooropleiding Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster.
 
-*H~A~*: De verdeling van het aantal behaalde studiepunten in het eerste jaar van de maste Arbeidsrecht is niet gelijk voor studenten met als vooropleiding Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster.
+*H~A~*: De verdeling van het aantal behaalde studiepunten in het eerste jaar van de master Arbeidsrecht is niet gelijk voor studenten met als vooropleiding Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster.
 
 </div>
 
@@ -104,7 +104,7 @@ print(dfResultaten_Arbeidsrecht.Vooropleiding.unique())
 <!-- ## /OPENBLOK: Data-bekijken-2.py -->
 
 <!-- ## TEKSTBLOK: Data-bekijken.R-->
-Om meer inzicht te krijgen in de data, inspecteer de groepen met `length()`, `median()` en `quantile()`. Groepeer hiervoor eerst met `group_by()`.
+Inspecteer om meer inzicht te krijgen in de data de groepen met `length()`, `median()` en `quantile()`. Groepeer hiervoor eerst met `group_by()`.
 <!-- ## /TEKSTBLOK: Data-bekijken.R-->
 
 <!-- ## OPENBLOK: Data-beschrijven.py -->
@@ -168,7 +168,7 @@ plt.show()
 ```
 <!-- ## /OPENBLOK: Boxplot.py -->
 
-De mediaan van studenten met een vooropleiding Rechtsgeleerdheid heeft duidelijk minder studiepunten dan studenten met een vooropleiding Fiscaal Recht en Notarieel Recht. De studenten met de Premaster als vooropleiding ligt er tussen in.[^9]
+De mediaan van studenten met een vooropleiding Rechtsgeleerdheid heeft duidelijk minder studiepunten dan studenten met een vooropleiding Fiscaal Recht en Notarieel Recht. De mediaan van de studenten met de Premaster als vooropleiding ligt er tussen in.[^9]
 
 ## Kruskal Wallis toets
 <!-- ## TEKSTBLOK: Kruskal-Wallis-test-1.py -->
@@ -222,7 +222,7 @@ pg.mwu(EC_PRE, EC_NTR)
 * Er is geen statistisch significant verschil gevonden tussen Fiscaal Recht en Notarieel Recht.
 * Er is ook geen statistisch significant verschil gevonden tussen Fiscaal Recht en de Premaster.
 * Er is een statistisch significant verschil gevonden tussen de Premaster en Notarieel Recht.   
-* Er zijn statistisch significante verschillen gevonden tussen Rechtsgeleerdheid en alledrie de andere vooroploeidingen.
+* Er zijn statistisch significante verschillen gevonden tussen Rechtsgeleerdheid en de overige vooropleidingen.
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.py -->

@@ -54,7 +54,7 @@ De *Mann-Whitney U toets* kan een alternatief zijn voor de *ongepaarde t-toets*.
 
 # Onderwijscasus
 <div id ="casus">
-De directeur van een hogeschool vraagt zich af wat de invloed is van internationalisering op zijn instelling. Om uitval een minder grote rol te laten spelen, gebruikt hij hiervoor het totaal aantal punten behaald in het tweedejaar. Hij vraagt af: ‘Is het behaald aantal EC in het tweede jaar van internationale studenten anders is dan van de Nederlandse studenten?’ 
+De directeur van een hogeschool vraagt zich af wat de invloed is van internationalisering op zijn instelling. Om uitval een minder grote rol te laten spelen, gebruikt hij hiervoor het totaal aantal punten behaald in het tweedejaar. Hij vraagt af: ‘Is het behaald aantal EC in het tweede jaar van internationale studenten anders is dan dat van de Nederlandse studenten?’ 
 
 *H~0~*: De verdeling van het behaalde aantal EC in het tweede jaar van internationale studenten is hetzelfde als de verdeling van Nederlandse studenten. 
 
@@ -62,7 +62,7 @@ De directeur van een hogeschool vraagt zich af wat de invloed is van internation
 </div>
 
 # Assumpties
- Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden: de data zijn nomimaal, ordinaal of numeriek. De groepen zijn onafhankelijk van elkaar [^3] en het aantal groepen is 2. Gebruik bij meer dan 2 groepen de *Kruskal Wallis toets*.
+Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden: de data zijn nomimaal, ordinaal of numeriek. De groepen zijn onafhankelijk van elkaar [^3] en het aantal groepen is 2. Gebruik bij meer dan 2 groepen de *Kruskal Wallis toets*.
 
 # Uitvoering 
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->
@@ -187,6 +187,6 @@ De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal EC 
 <!-- ## /CLOSEDBLOK: Footer.R -->
  
 [^1]: Van Geloven, N. (13 maart 2018). *Mann-Whitney U toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
-[^2]: Onderscheidend vermogen: wordt in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  
+[^2]: Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  
 [^3]: Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
 [^4]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

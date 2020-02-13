@@ -36,7 +36,7 @@ if (!exists("bStatus")) {
 ## HTML te behouden. Nodig om in markdown HTML te tonen.
 if (bStatus == 0) {
 thisStatus <- htmltools::htmlPreserve('
-   <div class="concept">NB Het peer review proces voor deze toets is nog niet afgerond; daarom is deze pagina nog in concept.</div>')
+   <div class="concept">Disclaimer: Het peer review proces voor deze toets is nog niet afgerond; daarom is deze pagina nog in concept.</div>')
 } 
 ## Toon het resultaat
 if (bStatus == 0) {

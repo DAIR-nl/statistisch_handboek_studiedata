@@ -30,10 +30,11 @@ lVars <- list(
   var_VersieR = paste(R.Version()$major, R.Version()$minor, sep = "."),
   var_VersiePython = "3.7",
   var_Copyright = 
-    paste(
-        "&copy;",
+    paste0(
+        "&copy; ",
         format(Sys.time(), '%Y') ,
-        "Versnellingsplan - Statistisch Handboek Studiedata.",
+        " <a href=\"http:www.versnellingsplan.nl\" target=\"_blank\">Versnellingsplan</a> - Statistisch Handboek Studiedata - ",
+        "<a href=\"",sRoot,"Licentie.html\">Licentie</a> ",
         "Laatst gewijzigd op:", format(Sys.time(), '%d-%m-%Y')
     )
 )

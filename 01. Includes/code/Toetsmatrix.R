@@ -20,55 +20,24 @@
 ## Geschiedenis:
 ## 22-09-2019: TB: Aanmaak bestand
 ## 12-02-2020: TB: Correctie van cellen
+## 13-02-2020: TB: Afhankelijk gemaakt van de sModus (wissel tussen R of Python)
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## 00 DOEL ####
+## 00 VOORBEREIDINGEN ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-## De regels die we opbouwen moeten er als volgt uit komen te zien:
-## Regel 1
-# <tr>
-#     <td rowspan="4" class="header1 innercell">Type data</td>
-#     <td rowspan="2" class="header2 innercell">numeriek<br/>(continu)</td>
-#     <td class="header3 innercell">normaal<br/>verdeeld</td>
-#     <td class="innercell published"><a href="R/01-One-sample-t-toets-R.html" title="">One sample t-toets</a></td>
-#     <td class="innercell published"><a href="R/02-Gepaarde-t-toets-R.html" title="">Gepaarde t-toets</a></td>
-#     <td class="innercell published"><a href="R/03-Ongepaarde-t-toets-R.html" title="">Ongepaarde t-toets</a></td>
-#     <td class="innercell unpublished"><a href="" title="">Linear mixed models</a></td>
-#     <td class="innercell published"><a href="R/05-One-way-ANOVA-R.html" title="">One-way ANOVA</a></td>
-# </tr>
+## Bepaal de default modus
+if (!exists("sModus")) {
+  sModus <- "R"
+}
 
-## Regel 2
-# <tr>
-#     <td class="header3 innercell">niet normaal<br/>verdeeld</td>
-#     <td class="innercell unpublished"><a href="" title="">Tekentoets</a></td>
-#     <td class="innercell published"><a href="R/07-Wilcoxon-signed-rank-toets-R.html" title="">Wilcoxon signed rank toets</a></td>
-#     <td class="innercell published"><a href="R/08-Mann-Whitney-U-toets-R.html" title="">Mann-Whitney U toets</a></td>
-#     <td class="innercell unpublished"><a href="" title="">Friedman toets</a></td>
-#     <td class="innercell published"><a href="R/10-Kruskal-Wallis-toets-R.html" title="">Kruskal Wallis toets</a></td>
-# </tr>
-
-## Regel 3
-# <tr>
-#     <td rowspan="2" class="header2 innercell"> categorisch<br/>(discreet)</td>
-#     <td class="header3 innercell">binair</td>
-#     <td class="innercell unpublished"><a href="" title="">z-test voor proporties</a></td>
-#     <td class="innercell unpublished"><a href="" title="">McNemar toets</a></td>
-#     <td class="innercell published"><a href="R/13-Chi-kwadraat-toets-R.html" title="">Chi-kwadraat toets / Fisher's exact toets</a></td>
-#     <td class="innercell unpublished"><a href="" title="">Cochran's Q toets</a></td>
-#     <td class="innercell unpublished"><a href="" title="">Chi-kwadraat toets</a>/<br/><a href="" title="">Fisher-Freeman-<br/>Halton exact toets</a></td>
-# </tr>
-
-## Regel 4
-# <tr>
-#     <td class="header3 innercell">nominaal /<br/>ordinaal</td>
-#     <td class="innercell unpublished">...</td>
-#     <td class="innercell unpublished"><a href="" title="">McNemar toets</a>/<br/><a href="" title="">Wilcoxon signed rank toets</a></td>
-#     <td class="innercell unpublished"><a href="" title="">Chi-kwadraat toets</a> (trend)</td>
-#     <td class="innercell unpublished"><a href="" title="">GLMM/GEE</a></td>
-#     <td class="innercell unpublished"><a href="" title="">Chi-kwadraat toets</a> (trend)</td>
-# </tr>
+if (exists("dfToetsen")) {
+  varname <- paste0("InGebruik_",sModus)
+  dfToetsen <- dfToetsen %>%
+      mutate(InGebruik = !!as.name(varname))
+}
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 01 FUNCTIES ####
@@ -85,7 +54,7 @@ Vervang_spaties_door_dashes <- function(sToets) {
 
 Maak_url <- function(published, sModus, sToets_dashed) {
   if_else(published,
-          paste0(sModus, "/", sToets_dashed, "-", sModus, ".html"),
+          paste0(sToets_dashed, "-", sModus, ".html"),
           "")
 }
 
@@ -161,21 +130,21 @@ maak_html_r1 <- function() {
       td(rowspan = 2, class = "header2 innercell", "numeriek",tags$br(),"(continu)"),
       td(class = "header3 innercell", "normaal",tags$br(),"verdeeld"),
       ## Toets 01 tm 05
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[1,]$InGebruik_R)),  
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[1,]$InGebruik)),  
                    dfToetsen[1,]$Toets, 
-                   sModus = "R"),
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[2,]$InGebruik_R)),  
+                   sModus = sModus),
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[2,]$InGebruik)),  
                    dfToetsen[2,]$Toets, 
-                   sModus = "R"),
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[3,]$InGebruik_R)),  
+                   sModus = sModus),
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[3,]$InGebruik)),  
                    dfToetsen[3,]$Toets, 
-                   sModus = "R"),
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[4,]$InGebruik_R)),  
+                   sModus = sModus),
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[4,]$InGebruik)),  
                    dfToetsen[4,]$Toets, 
-                   sModus = "R"),
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[5,]$InGebruik_R)),  
+                   sModus = sModus),
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[5,]$InGebruik)),  
                    dfToetsen[5,]$Toets, 
-                   sModus = "R")
+                   sModus = sModus)
     )
   )
 }
@@ -186,21 +155,21 @@ maak_html_r2 <- function() {
     tr(
       td(class = "header3 innercell", "niet normaal",tags$br(),"verdeeld"),
       ## Toets 06 tm 10
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[6,]$InGebruik_R)),  
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[6,]$InGebruik)),  
                    dfToetsen[6,]$Toets, 
-                   sModus = "R"),
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[7,]$InGebruik_R)),  
+                   sModus = sModus),
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[7,]$InGebruik)),  
                    dfToetsen[7,]$Toets, 
-                   sModus = "R"),
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[8,]$InGebruik_R)),  
+                   sModus = sModus),
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[8,]$InGebruik)),  
                    dfToetsen[8,]$Toets, 
-                   sModus = "R"),
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[9,]$InGebruik_R)),  
+                   sModus = sModus),
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[9,]$InGebruik)),  
                    dfToetsen[9,]$Toets, 
-                   sModus = "R"),
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[10,]$InGebruik_R)),  
+                   sModus = sModus),
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[10,]$InGebruik)),  
                    dfToetsen[10,]$Toets, 
-                   sModus = "R")
+                   sModus = sModus)
     )
   )
 }
@@ -212,25 +181,25 @@ maak_html_r3 <- function() {
       td(rowspan = 2, class = "header2 innercell", "categorisch",tags$br(),"(discreet)"),
       td(class = "header3 innercell", "binair"),
       ## Toets 11 tm 15
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[11,]$InGebruik_R)),  
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[11,]$InGebruik)),  
                    dfToetsen[11,]$Toets, 
-                   sModus = "R"),
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[12,]$InGebruik_R)),  
+                   sModus = sModus),
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[12,]$InGebruik)),  
                    dfToetsen[12,]$Toets, 
-                   sModus = "R"),
+                   sModus = sModus),
       ## Combinatie: Chi-kwadraat toets / Fisher's exact toets
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[13,]$InGebruik_R)),  
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[13,]$InGebruik)),  
                    dfToetsen[13,]$Toets,
-                   sModus = "R"),
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[15,]$InGebruik_R)),  
+                   sModus = sModus),
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[15,]$InGebruik)),  
                    dfToetsen[15,]$Toets, 
-                   sModus = "R"),
+                   sModus = sModus),
       ## Combinatie: Chi-kwadraat toets / Fisher-Freeman-Halton exact toets
-      maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[13,]$InGebruik_R)),  
+      maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[13,]$InGebruik)),  
                    dfToetsen[13,]$Toets, 
-                   as.logical(as.numeric(dfToetsen[16,]$InGebruik_R)),  
+                   as.logical(as.numeric(dfToetsen[16,]$InGebruik)),  
                    dfToetsen[16,]$Toets, 
-                   sModus = "R")
+                   sModus = sModus)
     )
   )
 }
@@ -243,34 +212,31 @@ maak_html_r4 <- function() {
       ## Toets 16 tm 19
       maak_html_toetscel(F,  
                    "...", 
-                    sModus = "R"),
+                    sModus = sModus),
       ## McNemar / Wilcoxon
-      maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[12,]$InGebruik_R)),
+      maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[12,]$InGebruik)),
                    dfToetsen[12,]$Toets,
-                   as.logical(as.numeric(dfToetsen[7,]$InGebruik_R)),
+                   as.logical(as.numeric(dfToetsen[7,]$InGebruik)),
                    dfToetsen[7,]$Toets,
-                   sModus = "R"),
+                   sModus = sModus),
       ## Chi-kwadraat toets (trend)
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[18,]$InGebruik_R)),
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[18,]$InGebruik)),
                    dfToetsen[18,]$Toets,
-                   sModus = "R"),
+                   sModus = sModus),
       ## GLM/GEE
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[19,]$InGebruik_R)),
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[19,]$InGebruik)),
                    dfToetsen[19,]$Toets,
-                   sModus = "R"),
+                   sModus = sModus),
       ## Chi-kwadraat toets (trend)
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[18,]$InGebruik_R)),
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[18,]$InGebruik)),
                    dfToetsen[18,]$Toets,
-                   sModus = "R")
+                   sModus = sModus)
     )
   )
 }
 
-
-
-
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## 03 BOUW HTML ####
+## 03.1 BOUW HTML ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## Bouw nu de 4 rijen op
@@ -279,3 +245,50 @@ maak_html_r2()
 maak_html_r3()
 maak_html_r4()
 
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## 3.2 DOEL ####
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## De regels die we opbouwen moeten er als volgt uit komen te zien:
+## Regel 1
+# <tr>
+#     <td rowspan="4" class="header1 innercell">Type data</td>
+#     <td rowspan="2" class="header2 innercell">numeriek<br/>(continu)</td>
+#     <td class="header3 innercell">normaal<br/>verdeeld</td>
+#     <td class="innercell published"><a href="R/01-One-sample-t-toets-R.html" title="">One sample t-toets</a></td>
+#     <td class="innercell published"><a href="R/02-Gepaarde-t-toets-R.html" title="">Gepaarde t-toets</a></td>
+#     <td class="innercell published"><a href="R/03-Ongepaarde-t-toets-R.html" title="">Ongepaarde t-toets</a></td>
+#     <td class="innercell unpublished"><a href="" title="">Linear mixed models</a></td>
+#     <td class="innercell published"><a href="R/05-One-way-ANOVA-R.html" title="">One-way ANOVA</a></td>
+# </tr>
+
+## Regel 2
+# <tr>
+#     <td class="header3 innercell">niet normaal<br/>verdeeld</td>
+#     <td class="innercell unpublished"><a href="" title="">Tekentoets</a></td>
+#     <td class="innercell published"><a href="R/07-Wilcoxon-signed-rank-toets-R.html" title="">Wilcoxon signed rank toets</a></td>
+#     <td class="innercell published"><a href="R/08-Mann-Whitney-U-toets-R.html" title="">Mann-Whitney U toets</a></td>
+#     <td class="innercell unpublished"><a href="" title="">Friedman toets</a></td>
+#     <td class="innercell published"><a href="R/10-Kruskal-Wallis-toets-R.html" title="">Kruskal Wallis toets</a></td>
+# </tr>
+
+## Regel 3
+# <tr>
+#     <td rowspan="2" class="header2 innercell"> categorisch<br/>(discreet)</td>
+#     <td class="header3 innercell">binair</td>
+#     <td class="innercell unpublished"><a href="" title="">z-test voor proporties</a></td>
+#     <td class="innercell unpublished"><a href="" title="">McNemar toets</a></td>
+#     <td class="innercell published"><a href="R/13-Chi-kwadraat-toets-R.html" title="">Chi-kwadraat toets / Fisher's exact toets</a></td>
+#     <td class="innercell unpublished"><a href="" title="">Cochran's Q toets</a></td>
+#     <td class="innercell unpublished"><a href="" title="">Chi-kwadraat toets</a>/<br/><a href="" title="">Fisher-Freeman-<br/>Halton exact toets</a></td>
+# </tr>
+
+## Regel 4
+# <tr>
+#     <td class="header3 innercell">nominaal /<br/>ordinaal</td>
+#     <td class="innercell unpublished">...</td>
+#     <td class="innercell unpublished"><a href="" title="">McNemar toets</a>/<br/><a href="" title="">Wilcoxon signed rank toets</a></td>
+#     <td class="innercell unpublished"><a href="" title="">Chi-kwadraat toets</a> (trend)</td>
+#     <td class="innercell unpublished"><a href="" title="">GLMM/GEE</a></td>
+#     <td class="innercell unpublished"><a href="" title="">Chi-kwadraat toets</a> (trend)</td>
+# </tr>

@@ -1,5 +1,4 @@
 ---
-title: "Toetsmatrix"
 output:
   word_document:
     toc: yes
@@ -11,6 +10,15 @@ output:
     toc: yes
     toc_float:
       collapsed: no
+---
+
+```{r echo = FALSE}
+
+title_var <- paste("Toetsmatrix ", sModus)
+```
+
+---
+title: `r title_var`
 ---
 
 <!-- ## CLOSEDBLOK: Functies.R -->

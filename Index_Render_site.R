@@ -62,11 +62,14 @@ dfToetsen <- tribble(
 )
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## 01 MAAK WEBSITE ####
+## 01.1 MAAK WEBSITE ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-## Bepaal de modus
+## Bepaal de modus; deze bepaalt de opbouw van de paden
 sModus <- "Root"
+
+## lProgrammeertalen
+lProgrammeertalen <- c("R","Python")
 
 ## Verwijder de site root
 rmarkdown::clean_site(preview = FALSE,
@@ -82,11 +85,23 @@ rmarkdown::render_site(
 )
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## 02.1 MAAK R FOLDER ####
+## 01.2 MAAK DE TOETSMATRIX ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-## Als R niet bestaat, maak deze dan aan
-ifelse(!dir.exists("_site/R"), dir.create("_site/R"), FALSE)
+## We maken 2x de toetsmatrix: 1x voor R en 1x voor Python.
+## Als de R of Pyhton folder niet bestaan, maak deze dan aan
+## en maak vervolgens de bijbehorende toetsmatrix op basis van de modus
+
+for (p in lProgrammeertalen) {
+  ifelse(!dir.exists(paste0("_site/", p)), dir.create(paste0("_site/", p)), FALSE)
+  sModus  <- p
+  render("_Toetsmatrix.Rmd",
+         output_file = paste0('_site/', p, '/Toetsmatrix.html'))
+}
+
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## 02.1 MAAK R BESTANDEN ####
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## Loop over de toetsen die in gebruik zijn en genereer die pagina's
 for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_R == 1]) {
@@ -97,11 +112,8 @@ for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_R == 1]) {
 }
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## 02.2 MAAK PYTHON FOLDER ####
+## 02.2 MAAK PYTHON BESTANDEN ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-## Als R niet bestaat, maak deze dan aan
-ifelse(!dir.exists("_site/Python"), dir.create("_site/Python"), FALSE)
 
 ## Loop over de toetsen die in gebruik zijn en genereer die pagina's
 for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_Python == 1]) {

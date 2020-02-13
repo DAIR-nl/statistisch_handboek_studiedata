@@ -173,7 +173,7 @@ vProp <- Round_and_format(b$estimate)
 
 <!-- ## TEKSTBLOK: Tekentoets.R -->
 * `r boven_modaal` van de `r totaal_alumni` alumni verdienen boven_modaal, dit is een proportie van `r vProp`
-* p-waarde < 0,05, dus de H~0~ wordt verworpen [^4]
+* p-waarde < 0,05, dus de H~0~ wordt verworpen [^5]
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de proportie in het interval vallen. In deze casus is het interval tussen `r vconf.int1` en `r vconf.int2`.
 
 <!-- ## /TEKSTBLOK: Tekentoets.R -->

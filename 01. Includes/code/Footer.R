@@ -33,7 +33,7 @@ lVars <- list(
     paste0(
         "&copy; ",
         format(Sys.time(), '%Y') ,
-        " <a href=\"http:www.versnellingsplan.nl\" target=\"_blank\">Versnellingsplan</a> - Statistisch Handboek Studiedata - ",
+        " <a href=\"http://www.versnellingsplan.nl\" target=\"_blank\">Versnellingsplan</a> - Statistisch Handboek Studiedata - ",
         "<a href=\"",sRoot,"Licentie.html\">Licentie</a> ",
         "Laatst gewijzigd op:", format(Sys.time(), '%d-%m-%Y')
     )

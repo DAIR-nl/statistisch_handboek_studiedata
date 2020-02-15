@@ -60,7 +60,7 @@ Achter iedere ‘tegel’ bevindt zich een uitleg van de regels om een toets te 
 
 **Bijzondere dank aan**
 
-* Nan van Geloven, AMC/UMC Leiden, voor de ter beschikking stelling van het materiaal van de [AMC wiki](https://wikistatistiek.amc.nl/index.php/).
+* Nan van Geloven en Rebecca Holman, AMC/UMC Leiden, voor de ter beschikking stelling van het materiaal van de [AMC wiki](https://wikistatistiek.amc.nl/index.php/).
 
 # Financiering
 Het handboek is gefinancierd door het Versnellingsplan.

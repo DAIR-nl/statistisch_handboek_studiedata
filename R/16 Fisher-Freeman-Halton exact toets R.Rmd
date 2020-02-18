@@ -41,7 +41,7 @@ source(paste0(here::here(),"/01. Includes/data/16.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruikt de *Chi-kwadraat toets*[^1] of de *Fisher-Freeman-Halton exact toets*[^2] om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde variabelen, waarin één of beide variabelen meer dan twee categorieën hebben. De *Fisher-Freeman-Halton exact toets* is een uitbreiding van de *Fisher's exact toets* die gebruikt wordt om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde binaire variabelen, oftewel een 2x2 tabel. Deze toets is een alternatief voor de *Chi-kwadraat toets* wanneer er kleine aantallen observaties zijn. [^2]<sup>,<sup>[^3]
+Gebruik de *Chi-kwadraat toets*[^1] of de *Fisher-Freeman-Halton exact toets*[^2] om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde variabelen, waarin één of beide variabelen meer dan twee categorieën hebben. De *Fisher-Freeman-Halton exact toets* is een uitbreiding van de *Fisher's exact toets* die gebruikt wordt om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde binaire variabelen, oftewel een 2x2 tabel. Deze toets is een alternatief voor de *Chi-kwadraat toets* wanneer er kleine aantallen observaties zijn. [^2]<sup>,<sup>[^3]
 
 # Onderwijscasus
 <div id = "casus">
@@ -201,7 +201,7 @@ fisher.multcomp(Bsa_kt_n10,p.method="bonferroni")
 ```
 <!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets post-hoc2 -->
 
-Geen van de post-hoc toetsen is significant, wat logisch aangezien de *Fisher-Freeman-Halton exact toets* niet significant was. De resultaten laten de significantie zien van de *Fisher's exact toets* voor elk mogelijke combinatie van 2x2 tabellen. De eerste waarde is bijvoorbeeld de p-waarde van deze toets voor de kruistabel bestaande uit de aantallen positief en negatief BSA voor Nederland en Duitsland (NL:GE).
+Geen van de post-hoc toetsen is significant, wat logisch is aangezien de *Fisher-Freeman-Halton exact toets* niet significant was. De resultaten laten de significantie zien van de *Fisher's exact toets* voor elk mogelijke combinatie van 2x2 tabellen. De eerste waarde is bijvoorbeeld de p-waarde van deze toets voor de kruistabel bestaande uit de aantallen positief en negatief BSA voor Nederland en Duitsland (NL:GE).
 
 
 ## Rapportage
@@ -219,6 +219,6 @@ De *Fisher-Freeman-Halton exact toets* is uitgevoerd om te toetsen of het percen
 [^1]: Van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets).
 [^2]: Van Geloven, N. & Holman, R. (6 mei 2016). *Fisher's exact toets* Co-Auteur	dr. R. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Fisher%27s_exact_toets).
 [^3]: Agresti, A. (2003). *Categorical data analysis*. Vol. 482, John Wiley & Sons.
-[^4]: Nominaal: variabelen die niet afhankelijk van elkaar zijn en niet op inhoudelijke basis geordend kunnen worden. Voorbeelden hiervan zijn geslacht of achternamen. Een binaire variabele is een voorbeeld van een nominale variabele. Binaire variabelen hebben twee mogelijkheden, ja of nee, terwijl nominale variabelen meerdere mogelijkheden kunnen hebben. 
+[^4]: Nominaal: variabelen die niet afhankelijk van elkaar zijn en niet op inhoudelijke basis geordend kunnen worden; voorbeelden hiervan zijn geslacht of achternamen. Een binaire variabele is een voorbeeld van een nominale variabele. Binaire variabelen hebben twee mogelijkheden, ja of nee, terwijl nominale variabelen meerdere mogelijkheden kunnen hebben. 
 [^5]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
-[^6]: In dit voorbeeld wordt eruit gegaan van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.
+[^6]: Dit voorbeeld gaat uit van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.

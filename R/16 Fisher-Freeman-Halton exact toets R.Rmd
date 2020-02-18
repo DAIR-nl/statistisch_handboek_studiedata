@@ -41,7 +41,7 @@ source(paste0(here::here(),"/01. Includes/data/16.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruikt de *Chi-kwadraat toets*[^1] of de *Fisher-Freeman-Halton exact toets*[^2] om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde variabelen, waarin één of beide variabelen meer dan twee categorieën hebben. De *Fisher-Freeman-Halton exact toets* is een uitbreiding van de *Fisher's exact toets* die gebruikt wordt om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde binaire variabelen, oftewel een 2x2 tabel. Deze toets is een alternatief wanneer er kleine aantallen observaties zijn. [^2]<sup>,<sup>[^3]
+Gebruikt de *Chi-kwadraat toets*[^1] of de *Fisher-Freeman-Halton exact toets*[^2] om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde variabelen, waarin één of beide variabelen meer dan twee categorieën hebben. De *Fisher-Freeman-Halton exact toets* is een uitbreiding van de *Fisher's exact toets* die gebruikt wordt om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde binaire variabelen, oftewel een 2x2 tabel. Deze toets is een alternatief voor de *Chi-kwadraat toets* wanneer er kleine aantallen observaties zijn. [^2]<sup>,<sup>[^3]
 
 # Onderwijscasus
 <div id = "casus">
@@ -84,12 +84,20 @@ Op basis van geobserveerde waarden kunnen de verwachte waarden berekend worden. 
 *Tabel 2. Verwachte waarden casus BSA en instroomland*
 <!-- ## TEKSTBLOK: Groepsgrootte2.R -->
 
-De *Chi-kwadraat toets* wordt onbetrouwbaar als er in meer dan 20 % van de gevallen een verwachte waarde van 5 of lager is.[^5]. Gebruik in die gevallen de *Fisher-Freeman-Halton exact toets*.  
+De *Chi-kwadraat toets* wordt onbetrouwbaar als er in meer dan 20 % van de gevallen een verwachte waarde van 5 of lager is.[^5] Gebruik in die gevallen de *Fisher-Freeman-Halton exact toets*.  
+
+# Post-hoc toetsen
+
+De *Chi-kwadraat toets* en *Fisher-Freeman-Halton exact toets* worden gebruikt om een afhankelijkheid aan te tonen tussen twee ongepaarde categorische variabelen. Wanneer een of beide variabelen meer dan twee categorieën bevat, worden post-hoc toetsen uitgevoerd om te bepalen welke categorieën significant van elkaar verschillen.
+
+Voor de *Chi-kwadraat toets* worden de gestandaardiseerde verschillen tussen de geobserveerde en verwachte waarde gebruikt. Vergelijkbaar met z-scores zijn deze residuen significant bij een waarde groter dan $\pm 1,96$.[^5]
+
+Voor de *Fisher-Freeman-Halton exact toets* is er geen specifiek voorgeschreven post-hoc toets.[^3]<sup>,<sup>[^5] Een goede optie is het uitvoeren van losse *Fisher's exact toetsen* voor elke mogelijke combinatie van 2x2 tabellen met daarbij een correctie op de p-waarden vanwege meerdere testen tegelijkertijd. 
 
 
 # De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken.R -->
-Er is een kruistabel ingeladen over de het BSA advies voor bachelorstudenten antropologie met verschillende instroomlanden. Zowel de variabele voor BSA advies in binair (positief of negatief), maar de variabele voor instroomland bestaat uit zeven niveaus. Deze tabel is gebaseerd op een dataset waarin BSA advies en instroomland voor studenten wordt bijgehouden. 
+Er is een kruistabel ingeladen over de het BSA advies voor bachelorstudenten antropologie met verschillende instroomlanden. De variabele voor BSA advies is binair (positief of negatief) en de variabele voor instroomland bestaat uit zeven categorieën Deze kruistabel is gebaseerd op een dataset waarin BSA advies en instroomland voor studenten wordt bijgehouden. 
 Print de kruistabel of geef deze grafisch weer met `barplot()`. 
 <!-- ## /TEKSTBLOK: Data-bekijken.R -->
 <!-- ## OPENBLOK: Data-bekijken.R -->
@@ -125,10 +133,35 @@ vDF <- Chi2$parameter
 
 <!-- ## /TEKSTBLOK: Chi2-toets.R-->
 
+## Post-hoc toets: gestandaardiseerde residuen
+
+
+Voer post-hoc toetsen uit om te bepalen welke instroomlanden van elkaar verschillen wat betreft het percentage studenten met positief BSA. Inspecteer hiervoor de Pearson residuen van de *Chi-kwadraat toets* op waarden groter of kleiner dan 1,96 of -1,96 respectievelijke. Let op dat hier dus geen correctie voor meerdere testen plaatsvindt.
+
+<!-- ## OPENBLOK: Chi2-toets post-hoc1-->
+```{r collapse=TRUE}
+resultaat <- chisq.test(Bsa_kt)
+resultaat$residuals
+```
+<!-- ## /OPENBLOK: Chi2-toets post-hoc1-->
+
+<!-- ## TEKSTBLOK: Chi2-toets post-hoc2.R-->
+* Significant lagere geobserveerde waarde bij negatief BSA Nederland (NL), *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","NL"])`
+* Significant hogere geobserveerde waarde bij negatief BSA Italië (IT), *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","IT"])`
+* Significant lagere geobserveerde waarde bij negatief BSA Verenigd Koninkrijk (VK), *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","UK"])`
+* Significant hogere geobserveerde waarde bij negatief BSA Spanje (ES), *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","ES"])`
+* Significant hogere geobserveerde waarde bij negatief BSA verenigde Staten (US), *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","US"])`
+
+<!-- ## TEKSTBLOK: Chi2-toets post-hoc2.R-->
+
+
+
 ## Rapportage
 
 <!-- ## TEKSTBLOK: RapportageChi2.R -->
-De *Chi-kwadraat toets* is uitgevoerd om te onderzoeken of het percentage studenten met positief BSA verschilt per instroomland. De resultaten illustreren dat de nulthypothese verworpen kan worden, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* < 0,05. Er zijn dus verschillen zijn tussen de instroomlanden.
+De *Chi-kwadraat toets* is uitgevoerd om te onderzoeken of het percentage studenten met positief BSA verschilt per instroomland. De resultaten illustreren dat de nulthypothese verworpen kan worden, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* < 0,05. Er zijn dus verschillen tussen de instroomlanden.
+
+De geobserveerde waarden voor de verschillende instroomlanden bij een positief BSA verschillen niet significant van de verwachte waarden. Bij een negatief BSA zijn er echter een aantal landen waarbij significante verschillen van de verwachte waarde zijn op te merken. Nederland (NL; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","NL"])`) en het Verenigd Koninkrijk (UK; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","UK"])`) hebben een lager aantal studenten met een negatief BSA dan verwacht; Italië (IT; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","IT"])`), Spanje (ES; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","ES"])`) en de Verenigde Staten (US; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","US"])`) een hoger aantal studenten met negatief BSA dan verwacht.
 <!-- ## TEKSTBLOK: RapportageChi2.R -->
 
 
@@ -145,7 +178,7 @@ print(Bsa_kt_n10)
 <!-- ## /OPENBLOK: data-bekijken-n10 -->
 
 <!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets-->
-Gebruik `simulate.p.value = TRUE` bij `fisher.test()` om de p-waardes via een Monte Carlo simulatie te laten uitrekenen. Dit is handig voor tabellen die groter zijn dan 2 bij 2.
+Gebruik `simulate.p.value = TRUE` bij `fisher.test()` om de p-waardes via een Monte Carlo simulatie te laten uitrekenen. Dit kost de computer minder rekentijd waardoor de resultaten sneller weergegeven kunnen worden.
 <!-- ## /TEKSTBLOK: Fisher-Freeman-Halton-exact-toets-->
 <!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets-->
 ``` {r fisher toets}
@@ -153,6 +186,22 @@ fisher.test(Bsa_kt_n10, simulate.p.value = TRUE)
 ```
 <!-- ## /OPENBLOK: Fisher-Freeman-Halton-exact-toets-->
 * p-waarde > 0,05, dus de H~0~ kan niet worden verworpen [^6]
+
+## Post-hoc toets: Fisher's exact toets
+
+<!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets post-hoc1 -->
+Omdat er geen afhankelijkheid is tussen het wel of niet halen van een positief BSA en het instroomland, hoeven er geen post-hoc toetsen uitgevoerd te worden. Indien dit wel nodig is, voer deze dan uit met de functie `fisher.multcomp()` met als eerste argument de kruistabel `Bsa_kt_10` en als tweede argument de gebruikte methode om te corrigeren voor meerdere testen, in dit geval `p.method="bonferroni"`.
+<!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets post-hoc1 -->
+
+
+<!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets post-hoc2 -->
+``` {r fisher toets post hoc, warning=FALSE, message=FALSE}
+library(RVAideMemoire)
+fisher.multcomp(Bsa_kt_n10,p.method="bonferroni")
+```
+<!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets post-hoc2 -->
+
+Geen van de post-hoc toetsen is significant, wat logisch aangezien de *Fisher-Freeman-Halton exact toets* niet significant was. De resultaten laten de significantie zien van de *Fisher's exact toets* voor elk mogelijke combinatie van 2x2 tabellen. De eerste waarde is bijvoorbeeld de p-waarde van deze toets voor de kruistabel bestaande uit de aantallen positief en negatief BSA voor Nederland en Duitsland (NL:GE).
 
 
 ## Rapportage

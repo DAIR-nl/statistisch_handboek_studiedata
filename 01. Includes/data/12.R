@@ -32,3 +32,15 @@ FOS_studenten <- data.frame(c(Studentnr, Studentnr),
 colnames(FOS_studenten)<-c("Studentnr", "FOS?", "Datum")
 
 FOS_studenten <- FOS_studenten[order(FOS_studenten$Studentnr),]
+
+### Exact McNemar toets
+EMN_confusiematrix <- as.table(matrix(c(20,3,4,25),2,2,byrow=TRUE))
+rownames(EMN_confusiematrix) <- c("December_ja","December_nee")
+colnames(EMN_confusiematrix) <- c("Juni_ja","Juni_nee")
+
+EMN_kruistabel <- matrix(NA,2,2)
+EMN_kruistabel[1:2,1] <- rowSums(EMN_confusiematrix)
+EMN_kruistabel[1:2,2] <- colSums(EMN_confusiematrix)
+EMN_kruistabel <- as.table(EMN_kruistabel)
+rownames(EMN_kruistabel) <- c("FOS","geen FOS")
+colnames(EMN_kruistabel) <- c("December","Juni")

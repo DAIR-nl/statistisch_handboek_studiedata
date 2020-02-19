@@ -9,3 +9,9 @@ hbo_achtergrond [hbo_achtergrond == 1] <- "ja"
 hbo_achtergrond [hbo_achtergrond == 0] <- "nee"
 
 Instroom_2018_totaal <- data.frame(Studentnr, hbo_achtergrond)
+
+# neem sample van dataset voor binomiaaltoets
+indices <- sample.int(nrow(Instroom_2018_totaal),20)
+Instroom_2018_totaal_steekproef <- Instroom_2018_totaal[indices,]
+
+

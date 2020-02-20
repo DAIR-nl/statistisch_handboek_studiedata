@@ -1,0 +1,571 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Fisher-Freeman-Halton exact toets},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{Fisher-Freeman-Halton exact toets}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\begin{verbatim}
+<div class="navbar-header">
+  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="navbar-brand" href="Index.html">Statistisch Handboek Studiedata</a>
+</div>
+<div id="navbar" class="navbar-collapse collapse">
+  <ul class="nav navbar-nav navbar-start">
+    <li>
+\end{verbatim}
+
+Toetsmatrix (R)
+
+Toetsmatrix (Python)
+
+Over
+
+Verantwoording
+
+Feedback
+
+\begin{verbatim}
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+
+  </ul>
+</div><!--/.nav-collapse -->
+\end{verbatim}
+
+Disclaimer: Het peer review proces voor deze toets is nog niet afgerond;
+daarom is deze pagina nog in concept.
+
+\hypertarget{toepassing}{%
+\section{Toepassing}\label{toepassing}}
+
+Gebruik de \emph{Chi-kwadraat toets}\footnote{Van Geloven, N. (20
+  augustus 2015). \emph{Chi-kwadraat toets}.
+  \href{https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets}{Wiki
+  Statistiek Academisch Medisch Centrum}.} of de
+\emph{Fisher-Freeman-Halton exact toets}\footnote{Van Geloven, N. \&
+  Holman, R. (6 mei 2016). \emph{Fisher's exact toets} Co-Auteur dr. R.
+  \href{https://wikistatistiek.amc.nl/index.php/Fisher\%27s_exact_toets}{Wiki
+  Statistiek Academisch Medisch Centrum}.} om te toetsen of er een
+verband is tussen twee ongepaarde variabelen, waarin één of beide
+variabelen meer dan twee categorieën hebben. Deze
+\emph{Fisher-Freeman-Halton exact toets} is een alternatief voor de
+\emph{Chi-kwadraat toets} wanneer er kleine aantallen observaties zijn.
+\footnote{Van Geloven, N. \& Holman, R. (6 mei 2016). \emph{Fisher's
+  exact toets} Co-Auteur dr. R.
+  \href{https://wikistatistiek.amc.nl/index.php/Fisher\%27s_exact_toets}{Wiki
+  Statistiek Academisch Medisch Centrum}.},\footnote{Agresti, A. (2003).
+  \emph{Categorical data analysis}. Vol. 482, John Wiley \& Sons.} Deze
+is een uitbreiding van de \emph{Fisher's exact toets} die gebruikt wordt
+om te toetsen of er een verband bestaat tussen twee ongepaarde binaire
+variabelen, oftewel een 2x2 tabel.
+
+\hypertarget{onderwijscasus}{%
+\section{Onderwijscasus}\label{onderwijscasus}}
+
+\leavevmode\hypertarget{casus}{}%
+De opleidingsdirecteur van de Bachelor Antropologie vraagt zich af wat
+de invloed is van de instroom van internationale studenten op het
+behalen van een positief BSA. Krijgen studenten uit bepaalde landen
+vaker een positief BSA dan studenten uit andere landen? Internationale
+studenten zijn `studenten met een buitenlandse vooropleiding of een
+opleiding van een Europese school'.
+
+H\textsubscript{0}: De verhouding wel/geen positief BSA is onder de
+studenten van de Bachelor Antropologie hetzelfde voor studenten uit elk
+land.
+
+H\textsubscript{A}: De verhouding wel/geen positief BSA is onder de
+studenten van de Bachelor Antropologie anders voor een groep voor
+studenten uit één of meerdere landen.
+
+\hypertarget{assumpties}{%
+\section{Assumpties}\label{assumpties}}
+
+Voor een valide resultaat moeten de data aan een aantal voorwaarden
+voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op
+nominaal of ordinaal \footnote{Nominaal: variabelen die niet afhankelijk
+  van elkaar zijn en niet op inhoudelijke basis geordend kunnen worden;
+  voorbeelden hiervan zijn geslacht of achternamen. Een binaire
+  variabele is een voorbeeld van een nominale variabele. Binaire
+  variabelen hebben twee mogelijkheden, ja of nee, terwijl nominale
+  variabelen meerdere mogelijkheden kunnen hebben.} niveau gemeten en
+daarmee onafhankelijk van elkaar.
+
+\hypertarget{groepsgrootte}{%
+\subsection{Groepsgrootte}\label{groepsgrootte}}
+
+Beide testen maken gebruik van een kruistabel; zie tabel 1 voor de
+geoberveerde waarden van de casus.
+
+\begin{longtable}[]{@{}lllllllll@{}}
+\toprule
+& NL & GE & IT & UK & BE & ES & US &\tabularnewline
+\midrule
+\endhead
+\textbf{Positief BSA} & 1171 & 213 & 60 & 119 & 45 & 81 & 270 &
+\textbf{1959}\tabularnewline
+\textbf{Negatief BSA} & 117 & 30 & 22 & 5 & 5 & 18 & 51 &
+\textbf{248}\tabularnewline
+\textbf{Totaal} & \textbf{1288} & \textbf{243} & \textbf{82} &
+\textbf{124} & \textbf{50} & \textbf{99} & \textbf{321} &
+\textbf{2207}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\emph{Tabel 1. Geobserveerde waarden casus BSA en instroomland}
+
+Op basis van geobserveerde waarden kunnen de verwachte waarden berekend
+worden. In deze casus kan de verwachte waarde van de studenten uit
+Nederland met positief BSA berekend worden door het aantal studenten met
+positief BSA te vermenigvuldigen met het aantal studenten uit Nederland
+en de uitkomst te delen door het totaal aantal studenten:
+
+\begin{itemize}
+\tightlist
+\item
+  aantal studenten positief BSA: 1959\\
+\item
+  aantal studenten uit Nederland: 1288\\
+\item
+  totaal aantal studenten: 2207
+\item
+  verwacht aantal studenten uit Nederland met positief BSA:
+  1959*1288/2207 ≈ 1143. Deze en overige waarden zijn berekend in tabel
+  2.
+\end{itemize}
+
+\begin{longtable}[]{@{}lllllllll@{}}
+\toprule
+& NL & GE & IT & UK & BE & ES & US &\tabularnewline
+\midrule
+\endhead
+\textbf{Positief BSA} & 1143 & 216 & 73 & 110 & 44 & 88 & 285 &
+\textbf{1959}\tabularnewline
+\textbf{Negatief BSA} & 145 & 27 & 9 & 14 & 6 & 11 & 36 &
+\textbf{248}\tabularnewline
+\textbf{Totaal} & \textbf{1288} & \textbf{243} & \textbf{82} &
+\textbf{124} & \textbf{50} & \textbf{99} & \textbf{321} &
+\textbf{2207}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\emph{Tabel 2. Verwachte waarden casus BSA en instroomland}
+
+De \emph{Chi-kwadraat toets} wordt onbetrouwbaar als er in meer dan 20
+\% van de gevallen een verwachte waarde van 5 of lager is.\footnote{Field,
+  A., Miles, J., \& Field, Z. (2012). \emph{Discovering statistics using
+  R}. London: Sage publications.} Gebruik in die gevallen de
+\emph{Fisher-Freeman-Halton exact toets}.
+
+\hypertarget{post-hoc-toetsen}{%
+\section{Post-hoc toetsen}\label{post-hoc-toetsen}}
+
+De \emph{Chi-kwadraat toets} en \emph{Fisher-Freeman-Halton exact toets}
+worden gebruikt om een afhankelijkheid aan te tonen tussen twee
+ongepaarde categorische variabelen. Wanneer een of beide variabelen meer
+dan twee categorieën bevat, worden post-hoc toetsen uitgevoerd om te
+bepalen welke categorieën significant van elkaar verschillen.
+
+Als post-hoc toets voor de \emph{Chi-kwadraat toets} wordt het
+gestandaardiseerde residu gebruikt. Dit is het gestandaardiseerde
+verschil tussen de geobserveerde en verwachte waarde. Voor elke cel in
+de kruistabel kan het gestandaardiseerde residu bepaald worden.
+Vergelijkbaar met z-scores zijn deze residuen significant bij een waarde
+groter dan \(\pm 1,96\). Op deze manier kan bepaald worden in welke
+cellen er afwijkingen van de verwachte waarden zijn.\footnote{Field, A.,
+  Miles, J., \& Field, Z. (2012). \emph{Discovering statistics using R}.
+  London: Sage publications.}
+
+Voor de \emph{Fisher-Freeman-Halton exact toets} is er geen specifiek
+voorgeschreven post-hoc toets.\footnote{Agresti, A. (2003).
+  \emph{Categorical data analysis}. Vol. 482, John Wiley \& Sons.},\footnote{Field,
+  A., Miles, J., \& Field, Z. (2012). \emph{Discovering statistics using
+  R}. London: Sage publications.} Een goede optie is het uitvoeren van
+losse \emph{Fisher's exact toetsen} voor elke mogelijke combinatie van
+2x2 tabellen met daarbij een correctie op de p-waarden vanwege meerdere
+testen tegelijkertijd.
+
+\hypertarget{de-data-bekijken}{%
+\section{De data bekijken}\label{de-data-bekijken}}
+
+Er is een kruistabel ingeladen over het BSA advies voor
+bachelorstudenten antropologie met verschillende instroomlanden. De
+variabele voor BSA advies is binair (positief of negatief) en de
+variabele voor instroomland bestaat uit zeven categorieën Deze
+kruistabel is gebaseerd op een dataset waarin BSA advies en instroomland
+voor studenten wordt bijgehouden. Print de kruistabel of geef deze
+grafisch weer met \texttt{barplot()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(Bsa_kt)}
+\CommentTok{##           NL  GE IT  UK BE ES  US}
+\CommentTok{## Pos_bsa 1171 213 60 119 45 81 270}
+\CommentTok{## Neg_bsa  117  30 22   5  5 18  51}
+\KeywordTok{barplot}\NormalTok{(Bsa_kt, }\DataTypeTok{beside =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{legend.text =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{16-Fisher-Freeman-Halton-exact-toets-R_files/figure-latex/data bekijken-1.pdf}
+
+\hypertarget{chi-kwadraat-toets}{%
+\section{Chi-kwadraat toets}\label{chi-kwadraat-toets}}
+
+\hypertarget{uitvoering}{%
+\subsection{Uitvoering}\label{uitvoering}}
+
+De \emph{chi-kwadraat toets} wordt uitgevoerd om de vraag te
+beantwoorden of het percentage studenten met positief BSA gelijk is voor
+de verschillende instroomlanden. Gebruik \texttt{chisq.test()} op de
+kruistabel \texttt{Bsa\_kt}.\\
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{chisq.test}\NormalTok{(Bsa_kt)}
+\CommentTok{## }
+\CommentTok{##  Pearson's Chi-squared test}
+\CommentTok{## }
+\CommentTok{## data:  Bsa_kt}
+\CommentTok{## X-squared = 44.552, df = 6, p-value = 5.745e-08}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{χ\textsuperscript{2}} \textsubscript{6} ≈ 44,55, \emph{p} ≈ 0\\
+\item
+  Vrijheidsgraden: \emph{df} = (\emph{k}-1)(\emph{r}-1), waar k staat
+  voor kolom en r voor rij. In dit geval geldt \emph{df} = 6.
+\item
+  p-waarde \textless{} 0,05, de H\textsubscript{0} wordt
+  verworpen.\footnote{Dit voorbeeld gaat uit van een waarschijnlijkheid
+    van 95\% en zodoende een p-waardegrens van 0,05. Dit is naar eigen
+    inzicht aan te passen. Hou hierbij rekening met type I en type II
+    fouten.}
+\end{itemize}
+
+\hypertarget{post-hoc-toets-gestandaardiseerde-residuen}{%
+\subsection{Post-hoc toets: gestandaardiseerde
+residuen}\label{post-hoc-toets-gestandaardiseerde-residuen}}
+
+Voer post-hoc toetsen uit om te bepalen welke instroomlanden van elkaar
+verschillen wat betreft het percentage studenten met positief BSA.
+Inspecteer hiervoor de Pearson residuen van de \emph{Chi-kwadraat toets}
+op waarden groter of kleiner dan 1,96 of -1,96 respectievelijke. Let op
+dat hier dus geen correctie voor meerdere testen plaatsvindt.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{resultaat <-}\StringTok{ }\KeywordTok{chisq.test}\NormalTok{(Bsa_kt)}
+\NormalTok{resultaat}\OperatorTok{$}\NormalTok{residuals}
+\CommentTok{##                 NL         GE        IT         UK          BE         ES}
+\CommentTok{## Pos_bsa  0.8201827 -0.1834439 -1.498652  0.8515529  0.09283875 -0.7334392}
+\CommentTok{## Neg_bsa -2.3051647  0.5155785  4.212038 -2.3933322 -0.26092797  2.0613677}
+\CommentTok{##                US}
+\CommentTok{## Pos_bsa -0.884446}
+\CommentTok{## Neg_bsa  2.485780}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Significant hogere geobserveerde waarde bij negatief BSA Italië (IT),
+  \emph{z} = 4,21
+\item
+  Significant hogere geobserveerde waarde bij negatief BSA Spanje (ES),
+  \emph{z} = 2,06
+\item
+  Significant hogere geobserveerde waarde bij negatief BSA verenigde
+  Staten (US), \emph{z} = 2,49
+\item
+  Significant lagere geobserveerde waarde bij negatief BSA Nederland
+  (NL), \emph{z} = -2,31
+\item
+  Significant lagere geobserveerde waarde bij negatief BSA Verenigd
+  Koninkrijk (VK), \emph{z} = -2,39
+\end{itemize}
+
+\hypertarget{rapportage}{%
+\subsection{Rapportage}\label{rapportage}}
+
+De \emph{Chi-kwadraat toets} is uitgevoerd om te onderzoeken of het
+percentage studenten met positief BSA verschilt per instroomland. De
+resultaten illustreren dat de nulthypothese verworpen kan worden,
+\emph{χ\textsuperscript{2}} \textsubscript{6} ≈ 44,55, \emph{p}
+\textless{} 0,05. Er zijn dus verschillen tussen de instroomlanden.
+
+De geobserveerde waarden voor de verschillende instroomlanden bij een
+positief BSA verschillen niet significant van de verwachte waarden. Bij
+een negatief BSA zijn er echter een aantal landen waarbij significante
+verschillen van de verwachte waarde zijn op te merken. Nederland (NL;
+\emph{z} = -2,31) en het Verenigd Koninkrijk (UK; \emph{z} = -2,39)
+hebben een lager aantal studenten met een negatief BSA dan verwacht;
+Italië (IT; \emph{z} = 4,21), Spanje (ES; \emph{z} = 2,06) en de
+Verenigde Staten (US; \emph{z} = 2,49) een hoger aantal studenten met
+negatief BSA dan verwacht.
+
+\begin{longtable}[]{@{}lllllllll@{}}
+\toprule
+& NL & GE & IT & UK & BE & ES & US &\tabularnewline
+\midrule
+\endhead
+\textbf{Positief BSA} & 1171 & 213 & 60 & 119 & 45 & 81 & 270 &
+\textbf{1959}\tabularnewline
+\textbf{Negatief BSA} & 117* & 30 & 22* & 5* & 5 & 18* & 51* &
+\textbf{248}\tabularnewline
+\textbf{Totaal} & \textbf{1288} & \textbf{243} & \textbf{82} &
+\textbf{124} & \textbf{50} & \textbf{99} & \textbf{321} &
+\textbf{2207}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\emph{Tabel 3. Geobserveerde waarden casus BSA en instroomland. Waarden
+met asterisk zijn significant verschillend van verwachte waarden.}
+
+\hypertarget{fisher-freeman-halton-exact-toets}{%
+\section{Fisher-Freeman-Halton exact
+toets}\label{fisher-freeman-halton-exact-toets}}
+
+\hypertarget{uitvoering-1}{%
+\subsection{Uitvoering}\label{uitvoering-1}}
+
+De \emph{Fisher-Freeman-Halton exact toets} wordt uitgevoerd om de vraag
+te beantwoorden of het percentage studenten met positief BSA verschilt
+per instroomland. Deze toets wordt in plaats van de \emph{Chi-kwadraat
+toets} gebruikt wanneer er in meer dan 20 \% van de cellen een verwachte
+waarde van 5 of lager is. Er is een steekproef van \texttt{Bsa\_kt}
+ingeladen genaamd \texttt{Bsa\_kt\_n10} met daarin een lager aantal
+observaties per cel.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(Bsa_kt_n10)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             NL GE IT UK BE ES US
+## Pos_bsa_n10 49 37 62 67 73 70 69
+## Neg_bsa_n10 10  7 13 14 15 19 18
+\end{verbatim}
+
+Gebruik de functie \texttt{fisher.test()} met als eerste argument de
+dataset \texttt{Bsa\_kt\_n10} en als tweede argument
+\texttt{simulate.p.value\ =\ TRUE}. Hierdoor wordt de p-waarde met een
+simulatie berekent waardoor de rekentijd voor de copmuter een stuk lager
+is en de resultaten sneller weergegeven kunnen worden.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{fisher.test}\NormalTok{(Bsa_kt_n10, }\DataTypeTok{simulate.p.value =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Fisher's Exact Test for Count Data with simulated p-value (based on
+##  2000 replicates)
+## 
+## data:  Bsa_kt_n10
+## p-value = 0.977
+## alternative hypothesis: two.sided
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  p-waarde \textgreater{} 0,05, de H\textsubscript{0} kan niet worden
+  verworpen \footnote{Dit voorbeeld gaat uit van een waarschijnlijkheid
+    van 95\% en zodoende een p-waardegrens van 0,05. Dit is naar eigen
+    inzicht aan te passen. Hou hierbij rekening met type I en type II
+    fouten.}
+\end{itemize}
+
+\hypertarget{post-hoc-toets-fishers-exact-toets}{%
+\subsection{Post-hoc toets: Fisher's exact
+toets}\label{post-hoc-toets-fishers-exact-toets}}
+
+Omdat er geen afhankelijkheid is tussen het wel of niet halen van een
+positief BSA en het instroomland, hoeven er geen post-hoc toetsen
+uitgevoerd te worden. Indien dit wel nodig is, voer deze dan uit met de
+functie \texttt{fisher.multcomp()} met als eerste argument de kruistabel
+\texttt{Bsa\_kt\_10} en als tweede argument de gebruikte methode om te
+corrigeren voor meerdere testen, in dit geval
+\texttt{p.method="bonferroni"}. Deze correctie past de p-waarde aan door
+de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en
+verlaagt hiermee de kans dat er bij toeval een verband wordt ontdekt dat
+er niet is.\footnote{Field, A., Miles, J., \& Field, Z. (2012).
+  \emph{Discovering statistics using R}. London: Sage publications.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(RVAideMemoire)}
+\KeywordTok{fisher.multcomp}\NormalTok{(Bsa_kt_n10,}\DataTypeTok{p.method=}\StringTok{"bonferroni"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##         Pairwise comparisons using Fisher's exact test for count data
+## 
+## data:  Bsa_kt_n10
+## 
+##                         NL:GE NL:IT NL:UK NL:BE NL:ES NL:US GE:IT GE:UK GE:BE
+## Pos_bsa_n10:Neg_bsa_n10     1     1     1     1     1     1     1     1     1
+##                         GE:ES GE:US IT:UK IT:BE IT:ES IT:US UK:BE UK:ES UK:US
+## Pos_bsa_n10:Neg_bsa_n10     1     1     1     1     1     1     1     1     1
+##                         BE:ES BE:US ES:US
+## Pos_bsa_n10:Neg_bsa_n10     1     1     1
+## 
+## P value adjustment method: bonferroni
+\end{verbatim}
+
+Geen van de post-hoc toetsen is significant, wat logisch is aangezien de
+\emph{Fisher-Freeman-Halton exact toets} niet significant was. De
+resultaten laten de significantie zien van de \emph{Fisher's exact
+toets} voor elk mogelijke combinatie van 2x2 tabellen. De eerste waarde
+is bijvoorbeeld de p-waarde van deze toets voor de kruistabel bestaande
+uit de aantallen positief en negatief BSA voor Nederland en Duitsland
+(NL:GE). De opmerkelijke p-waardes van 1 zouden kunnen komen door de
+Bonferroni correctie die de oorspronkelijke p-waarde met het aantal
+vergelijken (21) vermenigvuldigt .
+
+\hypertarget{rapportage-1}{%
+\subsection{Rapportage}\label{rapportage-1}}
+
+De \emph{Fisher-Freeman-Halton exact toets} is uitgevoerd om te toetsen
+of het percentage studenten met positief BSA verschilt per instroomland.
+De resultaten ondersteunen de nulhypothese: het percentage studenten met
+een positief BSA verschilt niet per instroomland, \emph{p}
+\textgreater{} 0,05.
+
+\leavevmode\hypertarget{footer}{}%
+Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata,
+ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata
+van het Versnellingsplan. R code is uitgevoerd met R versie 3.6.1;
+Python code is uitgevoerd in Python 3.7. © 2020 Versnellingsplan -
+Statistisch Handboek Studiedata - Licentie Laatst gewijzigd
+op:20-02-2020
+
+\end{document}

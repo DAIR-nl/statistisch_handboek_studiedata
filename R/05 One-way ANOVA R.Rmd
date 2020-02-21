@@ -139,12 +139,13 @@ Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen 
 ```{r Data beschrijven 1}
 ## Aantallen, gemiddelde en standaarddeviatie
 library(dplyr)
-group_by(Reistijd_per_opleiding, Opleiding) %>%
+Reistijd_per_opleiding %>% group_by(Opleiding) %>%
   summarise(
     N = length(Reistijd),
     Gemiddelde = mean(Reistijd),
-    Standaardafwijking = sd(Reistijd)
-  )
+    Standaardafwijking = sd(Reistijd) # Optioneel hieronder
+  ) %>% mutate(Gemiddelde = Round_and_format(Gemiddelde),
+               Standaardafwijking = Round_and_format(Standaardafwijking))
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-1.R -->
 <!-- ## CLOSEDBLOK: Data-beschrijven.R -->
@@ -171,7 +172,7 @@ vN_GSC  <- Round_and_format(length(Reistijd_GSC))
 <!-- ## /TEKSTBLOK: Datatekst-beschrijven.R -->
 
 ## Visuele inspectie van normaliteit
-Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
+Geef de verdeling van de data visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
 <!-- ## OPENBLOK: Histogram.R -->
@@ -370,7 +371,7 @@ vF_waarde <- Round_and_format(ANOVA[[1]]$`F value`[1])
 <!-- ## /CLOSEDBLOK: ANOVA-toets.R -->
 
 <!-- ## TEKSTBLOK: ANOVA-toets1.R -->
-* *F* ~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, *p* < 0,05.
+* *F* ~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, *p* < 0,0001.
 * De p-waarde < 0,05, dus de H~0~ wordt verworpen.[^16] 
 * Vrijheidsgraden: het aantal groepen - 1 = `r vDF1`; *n~1~* + *n~2~* + *n~3~*- 3 = `r vDF2`.
 
@@ -419,14 +420,14 @@ vFILvsGSC <- Round_and_format(THSD$Opleiding[3,1])
 ```
 <!-- ## /CLOSEDBLOK: Tukey-HSD.R -->
 <!-- ## TEKSTBLOK: Tukey-HSD1.R -->
-Het verschil tussen Filosofie en Arabische Taal en Cultuur: *MD* = `r vATCvsFIL`, p < 0,01.  
-Het verschil tussen Geschiedenis en Arabische Taal en Cultuur: *MD* = `r vATCvsGSC`, p < 0,01.  
+Het verschil tussen Filosofie en Arabische Taal en Cultuur: *MD* = `r vATCvsFIL`, p < 0,0001.  
+Het verschil tussen Geschiedenis en Arabische Taal en Cultuur: *MD* = `r vATCvsGSC`, p < 0,0001.  
 Het verschil tussen Geschiedenis en Filosofie: *MD* = `r vFILvsGSC`, p = 0,26.  
 <!-- ## /TEKSTBLOK: Tukey-HSD1.R -->
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De opleidingen zijn: Arabische Taal en Cultuur (*M~atc~* = `r vM_ATC`, *SD~atc~* = `r vSD_ATC`), Filosofie (*M~fil~* = `r vM_FIL`, *SD~fil~* = `r vSD_FIL`) en Geschiedenis (*M~gsc~* = `r vM_GSC`, *SD~fil~* = `r vSD_FIL`); zie ook tabel. De gemiddelde reistijd van de groepen verschillen significant van elkaar, *F*(`r vDF1`, `r vDF2`) = `r vF_waarde`, *p* < 0,05, *η^2^* = `r Esq`. De sterkte van het effect van de type opleiding op de reistijd is groot.
+Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De opleidingen zijn: Arabische Taal en Cultuur (*M~atc~* = `r vM_ATC`, *SD~atc~* = `r vSD_ATC`), Filosofie (*M~fil~* = `r vM_FIL`, *SD~fil~* = `r vSD_FIL`) en Geschiedenis (*M~gsc~* = `r vM_GSC`, *SD~fil~* = `r vSD_FIL`); zie ook tabel. De gemiddelde reistijd van de groepen verschillen significant van elkaar, *F*(`r vDF1`, `r vDF2`) = `r vF_waarde`, *p* < 0,0001, *η^2^* = `r Esq`. De sterkte van het effect van de type opleiding op de reistijd is groot.
 
 | Opleiding     | N          | M          | SD          |
 | ------------- | ---------- | ---------- | ----------- |
@@ -437,7 +438,7 @@ Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de
 *Tabel 1. Groepsgrootte, gemiddelde reistijd en standaarddeviatie per opleiding*
 <!-- ## TEKSTBLOK: Rapportage-tukey.R -->
 
-*Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen. Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = `r vATCvsFIL`, p < 0,01). Tussen Geschiedenis en Arabische Taal en Cultuur is een significant verschil (*MD* = `r vATCvsGSC`, p < 0,01). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = `r vFILvsGSC`, p = 0,26). 
+*Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen. Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = `r vATCvsFIL`, p < 0,0001). Tussen Geschiedenis en Arabische Taal en Cultuur is een significant verschil (*MD* = `r vATCvsGSC`, p < 0,0001). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = `r vFILvsGSC`, p = 0,26). 
 <!-- ## /TEKSTBLOK: Rapportage-tukey.R -->
 
 Aan de hand van de resultaten kan geconcludeerd worden dat de studenten van Arabische Taal en Cultuur significant langer moeten reizen dan de andere twee opleidingen. Tussen de Filosofie en Geschiedenis is geen significant verschil gevonden. 

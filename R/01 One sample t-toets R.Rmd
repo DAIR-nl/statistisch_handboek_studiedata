@@ -114,7 +114,7 @@ vN <- Round_and_format(length(Gemiddeld_cijfer_WNS))
 <!-- ## /TEKSTBLOK: Data-beschrijven2.R-->
 
 ## Visuele inspectie van normaliteit
-Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
+Geef de verdeling van de data visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
 <!-- ## OPENBLOK: Histogram.R -->
@@ -192,7 +192,7 @@ lillie.test(Gemiddeld_cijfer_WNS)
 <!-- ## /OPENBLOK: Lilliefors-test.R -->
 
 <!-- ## TEKSTBLOK: Lilliefors-test2.R -->
-De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
+De p-waarde is `r Round_and_format(lillie.test(Gemiddeld_cijfer_WNS)$p.value)`, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
 <!-- ## /TEKSTBLOK: Lilliefors-test2.R -->
 
 ### Shapiro-Wilk Test
@@ -207,7 +207,9 @@ shapiro.test(Gemiddeld_cijfer_WNS_n30)
 ```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test.R -->
 
-De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
+<!-- ## TEKSTBLOK: Shapiro-Wilk-test2.R -->
+De p-waarde is `r Round_and_format(shapiro.test(Gemiddeld_cijfer_WNS_n30)$p.value)`, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
+<!-- ## /TEKSTBLOK: Shapiro-Wilk-test2.R -->
 
 ##  One sample t-toets
 <!-- ## TEKSTBLOK: T-test.R -->
@@ -227,7 +229,7 @@ vP <- Round_and_format(t$p.value)
 <!-- ## /CLOSEDBLOK: T-test.R -->
 <!-- ## TEKSTBLOK: T-test2.R -->
 * Vrijheidsgraden, *df* = *n* -1 = `r Round_and_format(t$parameter+1)`-1 = `r t$parameter`  
-* *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* < 0,05
+* *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* < 0,0001
 * p-waarde < 0,05, dus de H~0~ wordt verworpen [^10]
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95% van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het gemiddeld eindexamencijfer exacte vakken minus 6.8. In deze casus is het interval tussen `r Round_and_format(t$conf.int[1])` en `r Round_and_format(t$conf.int[2])`. Aangezien 6.8 niet in dit interval zit, verschilt het gemiddelde significant van 6.8.
 * Het gemiddelde van de steekproef is `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`
@@ -235,7 +237,7 @@ vP <- Round_and_format(t$p.value)
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`, *SD* = `r Round_and_format(sd(Gemiddeld_cijfer_WNS))`) is significant verschillend van het landelijk gemiddelde van 6,8, *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* < 0,05. 
+De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`, *SD* = `r Round_and_format(sd(Gemiddeld_cijfer_WNS))`) is significant verschillend van het landelijk gemiddelde van 6,8, *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* < 0,0001. 
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor de exacte vakken van studenten Werktuigbouwkunde met een vwo vooropleiding hoger ligt dan het landelijk gemiddelde.
 

@@ -151,7 +151,7 @@ vSD_t1 <-Round_and_format(sd(Cijfers_2011))
 <!-- ## /TEKSTBLOK: Data-beschrijven-4.R -->
 
 ## Visuele inspectie van normaliteit
-Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
+Geef de verdeling van de data visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
 <!-- ## OPENBLOK: Histogram.R -->
@@ -280,7 +280,7 @@ shapiro.test(Cijfers_2011_n30)
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-2.R -->
   </div>
 </div>
-De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
+De p-waarde is > 0,05 voor beide groepen, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
 
 ## Test assumpties: Levene's test
 <!-- ## TEKSTBLOK: Levenes-test -->

@@ -164,7 +164,7 @@ vp <- Round_and_format(mcnemar$p.value)
 <!-- ## /CLOSEDBLOK: McNemar-toets3.R -->
 
 <!-- ## TEKSTBLOK: McNemar-toets4.R -->
-* $\chi^2$~`r vdf`~ = `r vChi2`, *p* ≈ `r vp`  
+* $\chi^2$~`r vdf`~ = `r vChi2`, *p* < 0,0001  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen.[^5]
 
 <!-- ## /TEKSTBLOK: McNemar-toets4.R -->
@@ -172,7 +172,7 @@ vp <- Round_and_format(mcnemar$p.value)
 ## Rapportage
 
 <!-- ## TEKSTBLOK: McNemar-toets5.R -->
-De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. De resultaten laten een significant verschil zien tussen de percentages voor en na de interventie ($\chi^2$~`r vdf`~ = `r vChi2`, *p* ≈ `r vp`), wat betekent dat de nulhypothese verworpen kan worden. De kruistabel laat zien dat het percentage studenten dat een beroep doet op de FOS is toegenomen na de interventie; de *McNemar toets* toont aan dat deze toename significant is. 
+De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. De resultaten laten een significant verschil zien tussen de percentages voor en na de interventie ($\chi^2$~`r vdf`~ = `r vChi2`, *p* <0,0001), wat betekent dat de nulhypothese verworpen kan worden. De kruistabel laat zien dat het percentage studenten dat een beroep doet op de FOS is toegenomen na de interventie; de *McNemar toets* toont aan dat deze toename significant is. 
 <!-- ## /TEKSTBLOK: McNemar-toets5.R -->
 
 # Exacte McNemar toets
@@ -207,14 +207,14 @@ mcnemar.exact(EMN_confusiematrix, conf.level = 0.95)
 <!-- ## /OPENBLOK: exMcNemar-toets5.R -->
 
 <!-- ## TEKSTBLOK: exMcNemar-toets6.R -->
-* p-waarde > 0,05, dus de H~0~ kan niet worden verworpen.[^5]
+* p-waarde is `r mcnemar.exact(EMN_confusiematrix, conf.level = 0.95)$p.value`, dus de H~0~ kan niet worden verworpen.[^5]
 
 <!-- ## /TEKSTBLOK: exMcNemar-toets6.R -->
 
 ## Rapportage
 
 <!-- ## TEKSTBLOK: McNemar-toets7.R -->
-De exacte versie van de *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. De resultaten laten geen significant verschil zien tussen de percentages voor en na de interventie (*p* = 1), dus de nulhypothese kan niet worden verworpen. Er is geen significant verschil tussen het percentage studenten dat een beroep op de FOS doet voor en na de interventie.
+De exacte versie van de *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. De resultaten laten geen significant verschil zien tussen de percentages voor en na de interventie (*p* = `r mcnemar.exact(EMN_confusiematrix, conf.level = 0.95)$p.value`), dus de nulhypothese kan niet worden verworpen. Er is geen significant verschil tussen het percentage studenten dat een beroep op de FOS doet voor en na de interventie.
 <!-- ## /TEKSTBLOK: McNemar-toets7.R -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->

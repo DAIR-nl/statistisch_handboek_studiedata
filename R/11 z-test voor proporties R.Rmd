@@ -49,9 +49,9 @@ Gebruik de *Chi-kwadraat toets* bij het vergelijken van een geobserveerd percent
 <div id = "casus">
 De controller van een Universiteit is geïnteresseerd in de instroom van studenten met een hbo-achtergrond. Zij wil weten of haar Universiteit relatief veel studenten met een achtergrond in het hbo heeft in vergelijking met het landelijke gemiddelde. Zij vindt op de website van de VSNU dat studenten met een hbo-achtergrond in het hbo 11,13% uitmaken van de totale instroom voor Bachelors en Masters in het wetenschappelijk onderwijs (wo) in 2018.[^3] Ze wil weten of er op haar instelling naar verhouiding meer hbo-studenten zijn dan het landelijk gemiddelde. 
 
-H~0~: Het percentage hbo-studenten is gelijk aan het landelijk percentage van 11.13 %. 
+H~0~: Het percentage hbo-studenten is gelijk aan het landelijk percentage van 11,13 %. 
 
-H~A~: Het percentage hb0-studenten verschilt van het landelijk percentage van 11.13 %.
+H~A~: Het percentage hb0-studenten verschilt van het landelijk percentage van 11,13 %.
 </div>
 
 # Assumpties
@@ -126,7 +126,7 @@ vub <-  Round_and_format(chi2$conf.int[2])
 <!-- ## /CLOSEDBLOK: Chi-kwadraat3.R-->
 
 <!-- ## TEKSTBLOK: Chi-kwadraat4.R-->
-* $\chi^2$~`r vdf`~ = `r vchi2`, *p* ≈ `r vp`
+* $\chi^2$~`r vdf`~ = `r vchi2`, *p* < 0,0001
 * p-waarde < 0,05, dus de H~0~ wordt verworpen.[^6]
 * de geschatte proportie in de data is `r vest`, het 95-% betrouwbaarheidsinterval loopt van `r vlb` tot `r vub`
 
@@ -136,7 +136,7 @@ vub <-  Round_and_format(chi2$conf.int[2])
 
 ## Rapportage
 <!-- ## TEKSTBLOK: Chi-kwadraat5.R-->
-De *Chi-kwadraat toets* is uitgevoerd om te onderzoeken of het percentage studenten met een hbo-achtergrond verschilt van het landelijk percentage van 11,13 %. Het percentage hbo-studenten is significant verschillend van 11,13 % ($\chi^2$~`r vdf`~ = `r vchi2`, *p* ≈ `r vp`), dus de nulhypothese kan verworpen worden. De schatting van het percentage is `r vest` met een 95-% betrouwbaarheidsinterval van `r vlb` tot `r vub` en ligt hoger dan het landelijk gemiddelde van 11,13 %.
+De *Chi-kwadraat toets* is uitgevoerd om te onderzoeken of het percentage studenten met een hbo-achtergrond verschilt van het landelijk percentage van 11,13 %. Het percentage hbo-studenten is significant verschillend van 11,13 % ($\chi^2$~`r vdf`~ = `r vchi2`, *p* < 0,0001), dus de nulhypothese kan verworpen worden. De schatting van het percentage is `r vest` met een 95-% betrouwbaarheidsinterval van `r vlb` tot `r vub` en ligt hoger dan het landelijk gemiddelde van 11,13 %.
 
 <!-- ## /TEKSTBLOK: Chi-kwadraat5.R-->
 
@@ -218,7 +218,7 @@ De *binomiaaltoets* is uitgevoerd om te onderzoeken of het percentage studenten 
 <!-- ## /CLOSEDBLOK: Footer.R -->
 
 [^2]: Agresti, A. (2003). *Categorical data analysis*. Vol. 482, John Wiley & Sons.
-[^3]: Het percentage is een berekening op basis van cijfers van de Vereniging van Universiteiten (VSNU). In 2018 zijn er 102.147 studenten ingestroomd in Universitaire Bachelors en Masters. In dat zelfde jaar stroomden bij de universiteiten 11.374 studenten met een hbo achtergrond in. Deze studenten maken dus 11.13% uit van de totale instroom.  Deze cijfers zijn respectievelijk te vinden in de volgende website en publicatie: Vereniging van Universiteiten (2019). *Downloadbare tabellen Studenten*. Opgehaald van de website van de VSNU: https://www.vsnu.nl/nl_NL/f_c_studenten_downloads.html. Vereniging van Universiteiten (2019). *Factsheet - Nederlandse Universiteiten Zijn Toegankelijk*. Opgehaald van de website van de VSNU: https://www.vsnu.nl/files/documenten/Nederlands%20universiteiten%20zijn%20toegankelijk%20-%20tbv%20AO%20Toegankelijkheid%20en%20Kansengelijkheid%20in%20het%20hoger%20onderwijs%20d.d.%2020-2-2019.pdf
+[^3]: Het percentage is een berekening op basis van cijfers van de Vereniging van Universiteiten (VSNU). In 2018 zijn er 102.147 studenten ingestroomd in Universitaire Bachelors en Masters. In dat zelfde jaar stroomden bij de universiteiten 11.374 studenten met een hbo achtergrond in. Deze studenten maken dus 11,13% uit van de totale instroom.  Deze cijfers zijn respectievelijk te vinden in de volgende website en publicatie: Vereniging van Universiteiten (2019). *Downloadbare tabellen Studenten*. Opgehaald van de website van de VSNU: https://www.vsnu.nl/nl_NL/f_c_studenten_downloads.html. Vereniging van Universiteiten (2019). *Factsheet - Nederlandse Universiteiten Zijn Toegankelijk*. Opgehaald van de website van de VSNU: https://www.vsnu.nl/files/documenten/Nederlands%20universiteiten%20zijn%20toegankelijk%20-%20tbv%20AO%20Toegankelijkheid%20en%20Kansengelijkheid%20in%20het%20hoger%20onderwijs%20d.d.%2020-2-2019.pdf
 [^4]: Binaire variabelen: twee elkaar uitsluitende waarden, zoals ja of nee, 0 of 1, aan of uit.
 [^5]: Van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets).
 [^6]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

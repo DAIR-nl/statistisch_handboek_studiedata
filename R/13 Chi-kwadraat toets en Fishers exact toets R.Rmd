@@ -129,7 +129,7 @@ vDF <- Chi2$parameter
 
 ## Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Chi-kwadraat toets* is uitgevoerd om te toetsen of studenten met een functiebeperking meer of minder uitvallen sinds de invoering van het leenstelsel. De resultaten ondersteunen de alternatieve hypothese: het percentage uitval van het aantal studenten met een functiebeperking is na de invoering van het leenstelsel veranderd, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* < 0,05.
+De *Chi-kwadraat toets* is uitgevoerd om te toetsen of studenten met een functiebeperking meer of minder uitvallen sinds de invoering van het leenstelsel. De resultaten ondersteunen de alternatieve hypothese: het percentage uitval van het aantal studenten met een functiebeperking is na de invoering van het leenstelsel veranderd, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* = `r vP`.
 
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 
@@ -170,7 +170,9 @@ vConf.int2 <- Round_and_format(fish$conf.int[2])
 <!-- ## /TEKSTBLOK: Fishers-Exact-toets.R -->
 
 ## Rapportage 
-De *Fisher's exact toets* is uitgevoerd om te toetsen of studenten met een functiebeperking meer of minder uitvallen sinds de invoering van het leenstelsel. De resultaten ondersteunen de nulhypothese: het percentage uitval van het aantal studenten met een functiebeperking is na de invoering van het leenstelsel gelijk gebleven, *p* > 0,05. 
+<!-- ## TEKSTBLOK: Rapportage Fishers-Exact-toets.R -->
+De *Fisher's exact toets* is uitgevoerd om te toetsen of studenten met een functiebeperking meer of minder uitvallen sinds de invoering van het leenstelsel. De resultaten ondersteunen de nulhypothese: het percentage uitval van het aantal studenten met een functiebeperking is na de invoering van het leenstelsel gelijk gebleven, *p* = `r vF_p`. 
+<!-- ## /TEKSTBLOK: Rapportage Fishers-Exact-toets.R -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}

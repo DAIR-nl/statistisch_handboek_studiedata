@@ -144,7 +144,7 @@ vN_t1    <- Round_and_format(length(Uren_studeren_T1))
 <!-- ## /TEKSTBLOK: Data-beschrijven.R -->
 
 ## Visuele inspectie van normaliteit
-Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
+Geef de verdeling van de data visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
 <!-- ## OPENBLOK: Histogram.R -->
@@ -212,10 +212,6 @@ De boxplotten geven de spreiding weer van het gemiddelde aantal uur studeren per
 
 Op basis van de grafieken lijken er geen grote afwijkingen van de normaalverdeling voor de studieuren in beide groepen te zijn, maar normaliteit kan ook getest worden met statistische toetsen.
 
-```{r opmerking2, include=FALSE, eval=FALSE}
-# Irene, is dit goed
-```
-
 ## Toetsen van normaliteit
 Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
@@ -238,7 +234,9 @@ lillie.test(Uren_studeren_verschil)
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-1.R -->
 
-De test heeft een p-waarde groter dan 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden. 
+<!-- ## TEKSTBLOK: Lilliefors-test-2.R -->
+De test heeft een p-waarde van `r Round_and_format(lillie.test(Uren_studeren_verschil)$p.value)`, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden. 
+<!-- ## /TEKSTBLOK: Lilliefors-test-2.R -->
 
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
@@ -257,7 +255,9 @@ shapiro.test(Uren_studeren_verschil_n30)
 ```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-1.R -->
 
-Voor deze subset is de *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden.  
+<!-- ## TEKSTBLOK: Shapiro-Wilk-test-2.R -->
+Voor deze subset is de p-waarde `r Round_and_format(shapiro.test(Uren_studeren_verschil_n30)$p.value)`, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden.  
+<!-- ## /TEKSTBLOK: Shapiro-Wilk-test-2.R -->
 
 ## Gepaarde t-toets
 <!-- ## TEKSTBLOK: T-test.R -->
@@ -284,7 +284,7 @@ vDiffMean <- Round_and_format(t$estimate*-1)
 ```
 <!-- ## /CLOSEDBLOK: T-test.R -->
 <!-- ## TEKSTBLOK: T-test2.R -->
-* *t*~`r vDF`~ = `r vT_waarde`, *p* < 0,05
+* *t*~`r vDF`~ = `r vT_waarde`, *p* < 0,0001
 * Vrijheidsgraden, *df* = *n* -1 = `r vN`-1 = `r vDF`  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen [^9]
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95% van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het verschil tussen het aantal studieuren voor en na de cursus,  µ~verschil~ = µ~T1~ - µ~T0~. In deze casus is het interval tussen `r vconf.int1` en `r vconf.int2`. Aangezien 0 niet in dit interval zit, is er een significant verschil tussen µ~T1~ en µ~T0~.
@@ -319,7 +319,7 @@ vD_waarde <- Round_and_format(d$estimate)
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddeld aantal uur studeren van de studenten is veranderd na deelname aan de cursus 'Plannen'. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r vMean_t0`, *SD~T0~* = `r vSD_t0`) en het gemiddelde van T~1~ (*M~T1~* =`r vMean_t1`, *SD~T1~* = `r vSD_t1`) is significant, *t* ~`r vDF`~ = `r vT_waarde`, *p* < 0,01. Gemiddeld studeren de studenten `r vDiffMean` uur meer na deelname aan de cursus. 
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddeld aantal uur studeren van de studenten is veranderd na deelname aan de cursus 'Plannen'. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r vMean_t0`, *SD~T0~* = `r vSD_t0`) en het gemiddelde van T~1~ (*M~T1~* =`r vMean_t1`, *SD~T1~* = `r vSD_t1`) is significant, *t* ~`r vDF`~ = `r vT_waarde`, *p* < 0,0001. Gemiddeld studeren de studenten `r vDiffMean` uur meer na deelname aan de cursus. 
 Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vconf.int1` tot `r vconf.int2`. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is groot, *d* = `r vD_waarde`. 
 
 

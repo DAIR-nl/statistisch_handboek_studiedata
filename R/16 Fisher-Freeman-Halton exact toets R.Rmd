@@ -131,7 +131,7 @@ vDF <- Chi2$parameter
 <!-- ## /CLOSEDBLOK: Chi2-toets.R-->
 
 <!-- ## TEKSTBLOK: Chi2-toets.R-->
-* *χ^2^* ~6~ ≈ `r vChi2`, *p* ≈ `r vP`  
+* *χ^2^* ~6~ ≈ `r vChi2`, *p* < 0,0001  
 * Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r vDF`. 
 * p-waarde < 0,05, de H~0~ wordt verworpen.[^6]  
 
@@ -163,7 +163,7 @@ resultaat$residuals
 ## Rapportage
 
 <!-- ## TEKSTBLOK: RapportageChi2.R -->
-De *Chi-kwadraat toets* is uitgevoerd om te onderzoeken of het percentage studenten met positief BSA verschilt per instroomland. De resultaten illustreren dat de nulthypothese verworpen kan worden, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* < 0,05. Er zijn dus verschillen tussen de instroomlanden.
+De *Chi-kwadraat toets* is uitgevoerd om te onderzoeken of het percentage studenten met positief BSA verschilt per instroomland. De resultaten illustreren dat de nulthypothese verworpen kan worden, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* < 0,0001. Er zijn dus verschillen tussen de instroomlanden.
 
 De geobserveerde waarden voor de verschillende instroomlanden bij een positief BSA verschillen niet significant van de verwachte waarden. Bij een negatief BSA zijn er echter een aantal landen waarbij significante verschillen van de verwachte waarde zijn op te merken. Nederland (NL; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","NL"])`) en het Verenigd Koninkrijk (UK; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","UK"])`) hebben een lager aantal studenten met een negatief BSA dan verwacht; Italië (IT; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","IT"])`), Spanje (ES; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","ES"])`) en de Verenigde Staten (US; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","US"])`) een hoger aantal studenten met negatief BSA dan verwacht.
 <!-- ## TEKSTBLOK: RapportageChi2.R -->
@@ -196,10 +196,13 @@ Gebruik de functie `fisher.test()` met als eerste argument de dataset `Bsa_kt_n1
 <!-- ## /TEKSTBLOK: Fisher-Freeman-Halton-exact-toets-->
 <!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets-->
 ``` {r fisher toets}
-fisher.test(Bsa_kt_n10, simulate.p.value = TRUE)
+bb<-fisher.test(Bsa_kt_n10, simulate.p.value = TRUE)
 ```
 <!-- ## /OPENBLOK: Fisher-Freeman-Halton-exact-toets-->
-* p-waarde > 0,05, de H~0~ kan niet worden verworpen [^6]
+
+<!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets2-->
+* p-waarde is `r Round_and_format(fisher.test(Bsa_kt_n10, simulate.p.value = TRUE)$p.value)` , de H~0~ kan niet worden verworpen [^6]
+<!-- ## /TEKSTBLOK: Fisher-Freeman-Halton-exact-toets2-->
 
 ## Post-hoc toets: Fisher's exact toets
 
@@ -220,7 +223,7 @@ Geen van de post-hoc toetsen is significant, wat logisch is aangezien de *Fisher
 
 ## Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Fisher-Freeman-Halton exact toets* is uitgevoerd om te toetsen of het percentage studenten met positief BSA verschilt per instroomland. De resultaten ondersteunen de nulhypothese: het percentage studenten met een positief BSA verschilt niet per instroomland, *p* > 0,05. 
+De *Fisher-Freeman-Halton exact toets* is uitgevoerd om te toetsen of het percentage studenten met positief BSA verschilt per instroomland. De resultaten ondersteunen de nulhypothese: het percentage studenten met een positief BSA verschilt niet per instroomland, *p* = `r Round_and_format(fisher.test(Bsa_kt_n10, simulate.p.value = TRUE)$p.value)`. 
 
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 

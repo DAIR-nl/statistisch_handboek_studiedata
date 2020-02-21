@@ -73,7 +73,7 @@ __Categorisch__
 
 __Normaal verdeeld__
 
-Bepaalde toetsen bevatten de assumptie dat data normaal verdeeld zijn. Dit kan ingeschat worden door naar een histogram, QQ-plot of boxplot te kijken en kan worden getoetst door nomaliteitstoetsen. Bij een groepsgrootte van *n* > 100 kan er vanuit gegaan worden dat per groep de data zich normaal gedraagt.[^3] 
+Bepaalde toetsen bevatten de assumptie dat data normaal verdeeld zijn. Dit kan ingeschat worden door naar een histogram, QQ-plot of boxplot te kijken en kan worden getoetst door normaliteitstoetsen. Bij een groepsgrootte van *n* > 100 kan er vanuit gegaan worden dat per groep de data zich normaal gedraagt.[^3] 
 
 ## Soort vergelijking
 * *Vergelijking van één groep met een referentie*: Een bekende gemiddelde of norm van de totale populatie, zoals de gemiddelde levensverwachting, wordt vergeleken met een specifieke groep, zoals de gemiddelde levensverwachting van Amsterdammers.    

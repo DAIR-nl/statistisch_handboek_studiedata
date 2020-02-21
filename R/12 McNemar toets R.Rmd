@@ -59,9 +59,9 @@ De decaan van een hogeschool merkt dat weinig studenten met een functiebeperking
 
 # Assumpties
 
-Om de *McNemar toets* uit te voeren, moeten de data aan een aantal voorwaarden voldoen. Er moet een categorische variabele zijn met twee categorieën en een binaire variabele die de twee gepaarde groepen weergeeft. Daarnaast mag er geen overlap zijn tussen de categorieën van de categorische variabele, wat wil zeggen dat elke observatie slechts in een van beide categorieën past.[^3]
+Om de *McNemar toets* uit te voeren, moeten de data aan een aantal voorwaarden voldoen. Er dient een categorische variabele te zijn met twee categorieën en een binaire variabele die de twee gepaarde groepen weergeeft. Daarnaast mag er geen overlap zijn tussen de categorieën van de categorische variabele, wat wil zeggen dat elke observatie slechts in een van beide categorieën past.[^3]
 
-## Aantal observaties
+## Groepsgrootte
 
 De *McNemar toets* gaat uit van een confusiematrix, een matrix waarin de rijen de eerste meting van de steekproef bevat en de kolommen de tweede meting. Een voorbeeld bij de casus is weergegeven in tabel 1.
 
@@ -83,8 +83,9 @@ FOS_studenten_confusiematrix <- table(December, Juni)
 ||                      | FOS | geen FOS|
 |**December**| FOS      | `r FOS_studenten_confusiematrix["ja","ja"]` | `r FOS_studenten_confusiematrix["ja","nee"]`     |
 |            | Geen FOS | `r FOS_studenten_confusiematrix["nee","ja"]` | `r FOS_studenten_confusiematrix["nee","nee"]`     |
+*Tabel 1. Confusiematrix van aantal studenten dat beroep doet op FOS in december en juni*
 
-De cel linksboven bevat het aantal studenten dat zowel in december als juni een beroep heeft gedaan op de FOS, dit zijn er `r FOS_studenten_confusiematrix["ja","ja"]`. De cel rechtsonder bevat het aantal studenten dat zowel in december als juni geen beroep heeft gedaan op de FOS, dit zijn er `r FOS_studenten_confusiematrix["nee","nee"]`. Beide cellen staan op de diagonaal van de tabel en worden daarom de diagonale elementen genoemd.
+De cel linksboven bevat het aantal studenten dat zowel in december als juni een beroep heeft gedaan op de FOS, dit zijn er `r FOS_studenten_confusiematrix["ja","ja"]`. De cel rechtsonder bevat het aantal studenten dat zowel in december als juni geen beroep heeft gedaan op de FOS, dit zijn er `r FOS_studenten_confusiematrix["nee","nee"]`. Beide cellen staan op de diagonaal van de tabel en worden daarom de *diagonale elementen* genoemd.
 
 In de cel rechtsboven staat het aantal studenten dat wel in december maar niet in juni een beroep op de FOS heeft gedaan, dit zijn er `r FOS_studenten_confusiematrix["ja","nee"]`. In de cel linksonder staat het aantal studenten dat niet in december maar wel in juni een beroep op de FOS heeft gedaan, dit zijn er `r FOS_studenten_confusiematrix["nee","ja"]`. Deze cellen zijn geen onderdeel van de diagonaal van de tabel. Bij een laag aantal observaties in de cellen die niet op de diagonaal zitten laag is, kan de exacte versie van de *McNemar toets* gebruikt. Wanneer de som van deze niet-diagonale elementen kleiner dan 11 is, is de exacte *McNemar toets* nuttig om te gebruiken. [^4]
 <!-- ## /TEKSTBLOK: Groepsgrootte2.R -->
@@ -122,7 +123,7 @@ print(FOS_studenten_kruistabel)
 ```
 <!-- ## /OPENBLOK: Data-kruistabel2.R -->
 
-De kruistabel laat zien dat het aantal studenten dat een beroep op de FOS heeft gedaan hoger is in juni en het aantal studenten dat geen beroep op de FOS heeft gedaan lager is in juni. Het percentage studenten dat een beroep op de FOS heeft gedaan is dus toegenomen.
+De kruistabel laat zien dat het aantal studenten dat een beroep op de FOS heeft gedaan hoger is in juni en het aantal studenten dat geen beroep op de FOS heeft gedaan lager is in juni. Het percentage studenten dat een beroep op de FOS heeft gedaan is daarom toegenomen.
 
 <!-- ## TEKSTBLOK: Data-bekijken3.R -->
 De *McNemar toets* wordt niet uitgevoerd met een kruistabel, maar met een confusiematrix. In deze tabel worden de aantallen studenten die wel of geen beroep op de FOS hebben gedaan tegen elkaar uitgezet voor december en juni. Sla daarom de variabele `FOS` apart op in twee vectoren, een voor december en een voor juni. Maak daarna de confusiematrix.

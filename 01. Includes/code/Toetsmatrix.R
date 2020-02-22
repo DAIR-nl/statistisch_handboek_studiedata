@@ -21,8 +21,9 @@
 ## 22-09-2019: TB: Aanmaak bestand
 ## 12-02-2020: TB: Correctie van cellen
 ## 13-02-2020: TB: Afhankelijk gemaakt van de sModus (wissel tussen R of Python)
+## 22-02-2020: TB: Verbetering dat bij 2 links in 1 box deze onafhankelijke van 
+## elkaar zijn in te stellen
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 00 VOORBEREIDINGEN ####
@@ -102,23 +103,28 @@ maak_html_toetscel_combi <- function(published_1, sToets_1,
   sToets_naam_2    <- Corrigeer_toetsnaam(Verwijder_voorloop_cijfers(sToets_2))
   sToets_dashed_2  <- Vervang_spaties_door_dashes(sToets_2)
   sToets_url_2     <- Maak_url(published_2, sModus, sToets_dashed_2)
-  ## Als de toets gepubliceerd is, gebruik dan published + a,
-  ## anders unpublished en geen a.
-  if (published_1) {
-    htmltools::withTags(td(class = "innercell published",
+  ## Als de toets gepubliceerd is, gebruik dan published + a-tag,
+  ## anders unpublished en geen a-tag.
+  ## TODO: deze code onafhankelijk maken voor published_1 en published_2
+  
+    htmltools::withTags(td(class = "innercell",
+      if (published_1) {            
       a(href = sToets_url_1,
         title = sToets_naam_1,
-        sToets_naam_1),
+        class = "published",
+        sToets_naam_1)
+        } else {
+        span(class = "unpublished", sToets_naam_1)
+        },
       "/",
+      if (published_2) {            
       a(href = sToets_url_2,
         title = sToets_naam_2,
-        sToets_naam_2),
-    ))
-  } else {
-    htmltools::withTags(td(class = "innercell unpublished",
-      paste(sToets_naam_1, "/", sToets_naam_2)
-    ))
-  }
+        class = "published",
+        sToets_naam_2)
+        } else {
+        span(class = "unpublished", sToets_naam_1)
+        }))
 }
 
 ## Functies om de toetsmatrix in HTML per regel op te bouwen

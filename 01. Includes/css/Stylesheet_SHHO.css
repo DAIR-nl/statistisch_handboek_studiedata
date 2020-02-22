@@ -97,7 +97,7 @@ td.published {
     color: #158cba;
 }
 
-td.unpublished, td.unpublished a {
+td.unpublished, td.unpublished a, span.unpublished {
     color: #A6A6A6;
 }
 

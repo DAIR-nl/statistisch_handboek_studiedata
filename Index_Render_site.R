@@ -22,6 +22,7 @@
 ## 04-12-2019: TB: Toevoeging aan statistisch_handboek_ho files
 ## 06-02-2020: TB: Aanpassing zodat subfolder meegenomen worden
 ## 12-02-2020: TB: Controle consistentie namen + Review kolommen
+## 22-02-2020: TB: Toevoeging sitemap + google bestanden
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -132,6 +133,32 @@ ifelse(!dir.exists("_site/images"), dir.create("_site/images"), FALSE)
 
 current_folder <- "01. Includes/images/"
 new_folder     <- "_site/images"
+list_of_files  <- list.files(current_folder) 
+
+## Kopieer het logo naar deze folder
+file.copy(file.path(current_folder,list_of_files), new_folder, 
+          overwrite = TRUE, 
+          recursive = FALSE,
+          copy.mode = TRUE)
+
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## 02.4 KOPIEER SITEMAP EN GOOGLE VERIFICATIECODE ####
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Kopieer het html bestand voor Google
+current_folder <- "01. Includes/google/"
+new_folder     <- "_site"
+list_of_files  <- list.files(current_folder) 
+
+## Kopieer het logo naar deze folder
+file.copy(file.path(current_folder,list_of_files), new_folder, 
+          overwrite = TRUE, 
+          recursive = FALSE,
+          copy.mode = TRUE)
+
+## Kopieer de sitemap
+current_folder <- "01. Includes/sitemap/"
+new_folder     <- "_site"
 list_of_files  <- list.files(current_folder) 
 
 ## Kopieer het logo naar deze folder

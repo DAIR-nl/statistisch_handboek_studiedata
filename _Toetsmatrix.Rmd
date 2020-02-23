@@ -1,15 +1,13 @@
 ---
 output:
-  word_document:
-    toc: yes
-  pdf_document:
-    toc: yes
   html_document:
-    number_sections: yes
     theme: lumen
     toc: yes
-    toc_float:
-      collapsed: no
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+    includes:
+      in_header: "01. Includes/html/favicon.html" 
 ---
 
 ```{r echo = FALSE}

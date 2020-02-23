@@ -2,16 +2,12 @@
 title: "Fisher-Freeman-Halton exact toets"
 output:
   html_document:
-    number_sections: yes
     theme: lumen
     toc: yes
-    toc_float:
-      collapsed: no
-  keywords:
-  - statistisch handboek
-  - studiedata
-  pdf_document:
-    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+  keywords: [statistisch handboek, studiedata]
 ---
 
 <!-- ## CLOSEDBLOK: Functies.R -->

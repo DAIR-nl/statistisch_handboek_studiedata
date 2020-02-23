@@ -1,6 +1,5 @@
 ---
 title: 'McNemar toets / Wilcoxon signed rank toets'
-author: "© `r format(Sys.time(), '%Y')`, Versnellingsplan - Statistisch Handboek Hoger Onderwijs"
 output:
   html_document:
     theme: lumen

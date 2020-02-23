@@ -56,21 +56,21 @@ table.toetsmatrix {
 }
 
 
-td.header1 {
+.header1 {
     font-weight: bold;
     color: #FFFFFF;
     background-color: #158CBA;
     text-align: center;
 }
 
-td.header2 {
+.header2 {
     font-weight: bold;
     color: #FFFFFF;
     background-color: #A6A6A6;
     text-align: center;
 }
 
-td.header3 {
+.header3 {
     font-weight: bold;
     background-color: #D9D9D9;
     text-align: center;
@@ -145,7 +145,7 @@ td.unpublished a:hover {
 }
 .col {
   display: table-cell;
-  padding: 0px;
+  padding: 0;
   
   -webkit-column-rule: 4px double #ff00ff; 
   -moz-column-rule: 4px double #ff00ff; 
@@ -163,7 +163,7 @@ body{ /* Normal  */
 }
 
 #TOC {
-    margin: 0px 0px 20px 0px !important;
+    margin: 0 0 20px 0 !important;
 }
 
 .navbar-start{

@@ -90,9 +90,7 @@ De cel linksboven bevat het aantal studenten dat zowel in december als juni een 
 In de cel rechtsboven staat het aantal studenten dat wel in december maar niet in juni een beroep op de FOS heeft gedaan, dit zijn er `r FOS_studenten_confusiematrix["ja","nee"]`. In de cel linksonder staat het aantal studenten dat niet in december maar wel in juni een beroep op de FOS heeft gedaan, dit zijn er `r FOS_studenten_confusiematrix["nee","ja"]`. Deze cellen zijn geen onderdeel van de diagonaal van de tabel. Bij een laag aantal observaties in de cellen die niet op de diagonaal zitten laag is, kan de exacte versie van de *McNemar toets* gebruikt. Wanneer de som van deze niet-diagonale elementen kleiner dan 11 is, is de exacte *McNemar toets* nuttig om te gebruiken. [^4]
 <!-- ## /TEKSTBLOK: Groepsgrootte2.R -->
 
-# Uitvoering in R
-
-## De data bekijken
+# De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken1.R -->
 Er is een dataset ingeladen genaamd `Beroep_FOS_functiebeperking`. In deze dataset is voor elke student aangegeven of ze wel of geen beroep op de FOS hebben gedaan in december en in juni. 
 <!-- ## /TEKSTBLOK: Data-bekijken1.R -->
@@ -145,13 +143,15 @@ print(FOS_studenten_confusiematrix)
 
 # McNemar toets
 
+## Uitvoering
+
 <!-- ## TEKSTBLOK: McNemar-toets1.R -->
-De *McNemar toets* wordt uitgevoerd om te onderzoeken of er een verschil is tussen het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. Gebruik de functie `mcnemar.test()` met als eerste argument de confusiematrix `FOS_studenten_confusiematrix` en als tweede argument `correct = FALSE` zodat er geen continuiteitscorrectie wordt uitgevoerd.
+De *McNemar toets* wordt uitgevoerd om te onderzoeken of er een verschil is tussen het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. Gebruik de functie `mcnemar.test()` met als eerste argument de confusiematrix `FOS_studenten_confusiematrix` en als tweede argument `correct = TRUE` zodat er een continuiteitscorrectie wordt uitgevoerd. De continuiteitscorrectie heeft als doel de kans op het onterecht verwerpen van de nulhypothese (type I fout) te verkleinen.[^5]
 <!-- ## /TEKSTBLOK: McNemar-toets1.R -->
 
 <!-- ## OPENBLOK: McNemar-toets2.R -->
 ```{r mcnemar}
-mcnemar.test(FOS_studenten_confusiematrix, correct = FALSE)
+mcnemar.test(FOS_studenten_confusiematrix, correct = TRUE)
 ```
 <!-- ## /OPENBLOK: McNemar-toets2.R -->
 
@@ -166,20 +166,29 @@ vp <- Round_and_format(mcnemar$p.value)
 
 <!-- ## TEKSTBLOK: McNemar-toets4.R -->
 * $\chi^2$~`r vdf`~ = `r vChi2`, *p* < 0,0001  
-* p-waarde < 0,05, dus de H~0~ wordt verworpen.[^5]
+* p-waarde < 0,05, dus de H~0~ wordt verworpen.[^6]
 
 <!-- ## /TEKSTBLOK: McNemar-toets4.R -->
 
 ## Rapportage
 
 <!-- ## TEKSTBLOK: McNemar-toets5.R -->
-De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. De resultaten laten een significant verschil zien tussen de percentages voor en na de interventie ($\chi^2$~`r vdf`~ = `r vChi2`, *p* <0,0001), wat betekent dat de nulhypothese verworpen kan worden. De kruistabel laat zien dat het percentage studenten dat een beroep doet op de FOS is toegenomen na de interventie; de *McNemar toets* toont aan dat deze toename significant is. 
+De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. De resultaten laten een significant verschil zien tussen de percentages voor en na de interventie ($\chi^2$~`r vdf`~ = `r vChi2`, *p* <0,0001), wat betekent dat de nulhypothese verworpen kan worden. De kruistabel (tabel 2) laat zien dat het percentage studenten dat een beroep doet op de FOS is toegenomen na de interventie; de *McNemar toets* toont aan dat deze toename significant is. 
+
+|                      | December | Juni |
+| -------------------- | -------------| ------------| 
+| **FOS** | `r FOS_studenten_kruistabel["ja","December"]`    | `r FOS_studenten_kruistabel["ja","Juni"]`     |
+| **geen FOS**  | `r FOS_studenten_kruistabel["nee","December"]`      | `r FOS_studenten_kruistabel["nee","Juni"]`     |
+*Tabel 2. Kruistabel van aantal studenten dat beroep doet op FOS in december en juni*
+
 <!-- ## /TEKSTBLOK: McNemar-toets5.R -->
 
 # Exacte McNemar toets
 
+## Uitvoering
+
 <!-- ## TEKSTBLOK: exMcNemar-toets1.R -->
-De exacte versie van de *McNemar toets* wordt uitgevoerd om te onderzoeken of er een verschil is tussen het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. Bij een lage hoeveelheid observaties in de niet-diagonale elementen van de confusiematrix is deze test een goede optie. Om deze test te illustreren bij deze casus wordt een confusiematrix `EMN_confusiematrix` ingeladen waarbij de niet-diagonale elementen minder dan elf observaties bevatten.
+De exacte versie van de *McNemar toets* wordt uitgevoerd om te onderzoeken of er een verschil is tussen het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. Bij een lage hoeveelheid observaties in de niet-diagonale elementen van de confusiematrix is deze test nuttig om te gebruiken. Om deze test te illustreren bij deze casus wordt een confusiematrix `EMN_confusiematrix` ingeladen waarbij de niet-diagonale elementen minder dan elf observaties bevatten.
 <!-- ## /TEKSTBLOK: exMcNemar-toets1.R -->
 
 <!-- ## OPENBLOK: exMcNemar-toets2.R -->
@@ -191,7 +200,7 @@ print(EMN_confusiematrix)
 De bijbehorende kruistabel wordt ook ingeladen om het aantal studenten dat wel of niet een beroep op de FOS doet te laten zien voor en na de interventie.
 <!-- ## OPENBLOK: exMcNemar-toets3.R -->
 ```{r EMNkruistabel}
-print(EMN_confusiematrix)
+print(EMN_kruistabel)
 ```
 <!-- ## /OPENBLOK: exMcNemar-toets3.R -->
 Het aantal studenten dat een beroep op de FOS doet is iets hoger in juni.
@@ -208,15 +217,25 @@ mcnemar.exact(EMN_confusiematrix, conf.level = 0.95)
 <!-- ## /OPENBLOK: exMcNemar-toets5.R -->
 
 <!-- ## TEKSTBLOK: exMcNemar-toets6.R -->
-* p-waarde is `r mcnemar.exact(EMN_confusiematrix, conf.level = 0.95)$p.value`, dus de H~0~ kan niet worden verworpen.[^5]
+* p-waarde is `r mcnemar.exact(EMN_confusiematrix, conf.level = 0.95)$p.value`, dus de H~0~ kan niet worden verworpen.[^6]
 
 <!-- ## /TEKSTBLOK: exMcNemar-toets6.R -->
 
 ## Rapportage
 
-<!-- ## TEKSTBLOK: McNemar-toets7.R -->
-De exacte versie van de *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. De resultaten laten geen significant verschil zien tussen de percentages voor en na de interventie (*p* = `r mcnemar.exact(EMN_confusiematrix, conf.level = 0.95)$p.value`), dus de nulhypothese kan niet worden verworpen. Er is geen significant verschil tussen het percentage studenten dat een beroep op de FOS doet voor en na de interventie.
-<!-- ## /TEKSTBLOK: McNemar-toets7.R -->
+<!-- ## TEKSTBLOK: exMcNemar-toets7.R -->
+De exacte versie van de *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. De resultaten laten geen significant verschil zien tussen de percentages voor en na de interventie (*p* = `r mcnemar.exact(EMN_confusiematrix, conf.level = 0.95)$p.value`), dus de nulhypothese kan niet worden verworpen. De kruistabel (Tabel 3) illustreert dat het aantal studenten dat een beroep doet op de FOS iets hoger is in juni. Dit verschil is echter niet significant.
+
+
+|                      | December | Juni |
+| -------------------- | -------------| ------------| 
+| **FOS** | `r EMN_kruistabel["FOS","December"]`    | `r EMN_kruistabel["FOS","Juni"]`      |
+| **geen FOS**  | `r EMN_kruistabel["geen FOS","December"]`       | `r EMN_kruistabel["geen FOS","Juni"]`      |
+*Tabel 3. Kruistabel van aantal studenten dat beroep doet op FOS in december en juni*
+
+
+
+<!-- ## /TEKSTBLOK: exMcNemar-toets7.R -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
@@ -226,5 +245,6 @@ De exacte versie van de *McNemar toets* is uitgevoerd om uit te vinden of er een
 [^1]: Binaire variabelen: twee elkaar uitsluitende waarden, zoals ja of nee, 0 of 1, aan of uit. 
 [^2]: Van Geloven, N., & Holman, R., (4 juni 2014). *McNemar toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/McNemar_toets). 
 [^3]: Laerd statistics (2018). *McNemar's test using SPSS Statistics*. [Laerd statistics](https://statistics.laerd.com/spss-tutorials/mcnemars-test-using-spss-statistics.php) 
-[^4]: Agresti, A. (2003). *Categorical data analysis*. Vol. 482, John Wiley & Sons. 
-[^5]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten. 
+[^4]: Agresti, A. (2003). *Categorical data analysis*. Vol. 482, John Wiley & Sons.
+[^5]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
+[^6]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten. 

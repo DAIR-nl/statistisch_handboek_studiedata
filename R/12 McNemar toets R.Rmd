@@ -63,7 +63,7 @@ Om de *McNemar toets* uit te voeren, moeten de data aan een aantal voorwaarden v
 
 ## Groepsgrootte
 
-De *McNemar toets* gaat uit van een confusiematrix, een matrix waarin de rijen de eerste meting van de steekproef bevat en de kolommen de tweede meting. Een voorbeeld bij de casus is weergegeven in tabel 1.
+De *McNemar toets* gaat uit van een confusiematrix, een matrix waarin de rijen de eerste meting van de steekproef bevat en de kolommen de tweede meting. Een voorbeeld bij de casus is weergegeven in Tabel 1.
 
 <!-- ## OPENBLOK: Groepsgrootte1.R -->
 ```{r groepsgrootte, include=FALSE, echo=TRUE}
@@ -106,7 +106,7 @@ tail(FOS_studenten)
 <!-- ## /OPENBLOK: Data-bekijken2.R -->
 
 <!-- ## TEKSTBLOK: Data-kruistabel1.R -->
-Met een kruistabel wordt weergegeven hoeveel studenten er wel of niet een beroep doen op de FOS in december en in januari. Maak de kruistabel met de functie `table()` met als argumenten de variabele `FOS_studenten$`FOS?` ` - die weergeeft of studenten wel of geen beroep op de FOS doen - en de variabele `FOS_studenten$Datum ` die de het meetmoment (december of juni) weergeeft. 
+Een kruistabel geeft weer hoeveel studenten er wel of niet een beroep doen op de FOS in december en in januari. Maak de kruistabel met de functie `table()` met als argumenten de variabele `FOS_studenten$FOS? ` - die weergeeft of studenten wel of geen beroep op de FOS doen - en de variabele `FOS_studenten$Datum ` die de het meetmoment (december of juni) weergeeft. 
 <!-- ## /TEKSTBLOK: Data-kruistabel1.R -->
 
 <!-- ## OPENBLOK: Data-kruistabel2.R -->
@@ -124,7 +124,7 @@ print(FOS_studenten_kruistabel)
 De kruistabel laat zien dat het aantal studenten dat een beroep op de FOS heeft gedaan hoger is in juni en het aantal studenten dat geen beroep op de FOS heeft gedaan lager is in juni. Het percentage studenten dat een beroep op de FOS heeft gedaan is daarom toegenomen.
 
 <!-- ## TEKSTBLOK: Data-bekijken3.R -->
-De *McNemar toets* wordt niet uitgevoerd met een kruistabel, maar met een confusiematrix. In deze tabel worden de aantallen studenten die wel of geen beroep op de FOS hebben gedaan tegen elkaar uitgezet voor december en juni. Sla daarom de variabele `FOS` apart op in twee vectoren, een voor december en een voor juni. Maak daarna de confusiematrix.
+De *McNemar toets* gebruikt een confusiematrix in plaats van een kruistabel. In een confusiematrix worden de aantallen studenten die wel of geen beroep op de FOS hebben gedaan tegen elkaar uitgezet voor december en juni. Sla daarom de variabele `FOS` apart op in twee vectoren, een voor december en een voor juni. Maak daarna de confusiematrix.
 <!-- ## /TEKSTBLOK: Data-bekijken3.R -->
 
 <!-- ## OPENBLOK: Data-beschrijven.R -->
@@ -146,7 +146,7 @@ print(FOS_studenten_confusiematrix)
 ## Uitvoering
 
 <!-- ## TEKSTBLOK: McNemar-toets1.R -->
-De *McNemar toets* wordt uitgevoerd om te onderzoeken of er een verschil is tussen het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. Gebruik de functie `mcnemar.test()` met als eerste argument de confusiematrix `FOS_studenten_confusiematrix` en als tweede argument `correct = TRUE` zodat er een continuiteitscorrectie wordt uitgevoerd. De continuiteitscorrectie heeft als doel de kans op het onterecht verwerpen van de nulhypothese (type I fout) te verkleinen.[^5]
+Voer de *McNemar toets* uit om te onderzoeken of er een verschil is tussen het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. Gebruik de functie `mcnemar.test()` met als eerste argument de confusiematrix `FOS_studenten_confusiematrix` en als tweede argument `correct = TRUE` zodat er een continuiteitscorrectie wordt uitgevoerd. De continuiteitscorrectie heeft als doel de kans op het onterecht verwerpen van de nulhypothese (type I fout) te verkleinen.[^5]
 <!-- ## /TEKSTBLOK: McNemar-toets1.R -->
 
 <!-- ## OPENBLOK: McNemar-toets2.R -->
@@ -173,7 +173,7 @@ vp <- Round_and_format(mcnemar$p.value)
 ## Rapportage
 
 <!-- ## TEKSTBLOK: McNemar-toets5.R -->
-De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. De resultaten laten een significant verschil zien tussen de percentages voor en na de interventie ($\chi^2$~`r vdf`~ = `r vChi2`, *p* <0,0001), wat betekent dat de nulhypothese verworpen kan worden. De kruistabel (tabel 2) laat zien dat het percentage studenten dat een beroep doet op de FOS is toegenomen na de interventie; de *McNemar toets* toont aan dat deze toename significant is. 
+De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. De resultaten laten een significant verschil zien tussen de percentages voor en na de interventie ($\chi^2$~`r vdf`~ = `r vChi2`, *p* <0,0001), wat betekent dat de nulhypothese verworpen kan worden. De kruistabel (Tabel 2) illustreert dat het percentage studenten dat een beroep doet op de FOS is toegenomen na de interventie; de *McNemar toets* toont aan dat deze toename significant is. 
 
 |                      | December | Juni |
 | -------------------- | -------------| ------------| 
@@ -188,7 +188,7 @@ De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het p
 ## Uitvoering
 
 <!-- ## TEKSTBLOK: exMcNemar-toets1.R -->
-De exacte versie van de *McNemar toets* wordt uitgevoerd om te onderzoeken of er een verschil is tussen het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. Bij een lage hoeveelheid observaties in de niet-diagonale elementen van de confusiematrix is deze test nuttig om te gebruiken. Om deze test te illustreren bij deze casus wordt een confusiematrix `EMN_confusiematrix` ingeladen waarbij de niet-diagonale elementen minder dan elf observaties bevatten.
+Voer de exacte versie van de *McNemar toets* uit om te onderzoeken of er een verschil is tussen het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. Bij een lage hoeveelheid observaties in de niet-diagonale elementen van de confusiematrix is deze toets nuttig om te gebruiken. Om deze toets te illustreren bij deze casus wordt een confusiematrix `EMN_confusiematrix` ingeladen waarbij de niet-diagonale elementen minder dan elf observaties bevatten.
 <!-- ## /TEKSTBLOK: exMcNemar-toets1.R -->
 
 <!-- ## OPENBLOK: exMcNemar-toets2.R -->
@@ -197,7 +197,7 @@ print(EMN_confusiematrix)
 ```
 <!-- ## /OPENBLOK: exMcNemar-toets2.R -->
 
-De bijbehorende kruistabel wordt ook ingeladen om het aantal studenten dat wel of niet een beroep op de FOS doet te laten zien voor en na de interventie.
+Laad de bijbehorende kruistabel in om het aantal studenten dat wel of niet een beroep op de FOS doet te laten zien voor en na de interventie.
 <!-- ## OPENBLOK: exMcNemar-toets3.R -->
 ```{r EMNkruistabel}
 print(EMN_kruistabel)

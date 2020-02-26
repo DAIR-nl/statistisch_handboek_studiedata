@@ -68,11 +68,12 @@ dfToetsen <- tribble(
 
 ## Verwerk codeblokken met OPENBLOK, TEKSTBLOK
 sRegEx <- "## [/]{0,1}[A-Z]{4,6}BLOK: "
+# EG: snap ik niet
 
 ## Loop over de toetsen die in gebruik zijn
 for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
 
-    ## Bepaal de R Markdown en Pyton Markdown
+    ## Bepaal de R Markdown en Python Markdown
     thisRmd_R      <- paste0("R/", paste0(sToets, " R.Rmd"))
     thisRmd_Python <- paste0("04. Python chunks/", paste0(sToets, " py.Rmd"))
     
@@ -87,6 +88,7 @@ for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
       lRegelnummers <- grep(paste0(sRegEx), 
                             readLines(con = thisRmd_R, warn = F))
       lCodeblokken <- thisRmd_R_file[lRegelnummers]
+      # EG: ik volg dit niet helemaal
       
       ## Verwijder regels met /BLOK en verwijder begin + einde string (<--! -->)
       ## en trim
@@ -135,7 +137,8 @@ for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
         unlink(sPythonFile_Merged)
         print(paste0("VERWIJDERD OM OPNIEUW OP TE BOUWEN: ", sPythonFile_Merged))
       }
-        
+      
+      # EG: hieronder raak ik 'm ook even kwijt  
       ## Loop over de .py bestanden en vervang de .R code blokken met de .py code blokken
       ## Maak een teller, zodat na de 1e loop het bestand dat gemaakt is kan gebruikt
       ## worden als basis in plaats van het originel R rmd file.

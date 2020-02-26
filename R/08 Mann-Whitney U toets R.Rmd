@@ -70,7 +70,7 @@ rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^5]
 
 # Uitvoering 
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is een dataset `Studiepunten_jaar2` ingeladen met het aantal punten dat studenten in het tweede jaar halen.
+Er is een dataset `Studiepunten_studiejaar2` ingeladen met het aantal punten dat studenten in het tweede jaar halen.
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
@@ -80,9 +80,9 @@ Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
 ## Eerste 6 observaties
-head(Studiepunten_jaar2)
+head(Studiepunten_studiejaar2)
 ## Eerste 6 observaties
-tail(Studiepunten_jaar2)
+tail(Studiepunten_studiejaar2)
 ```
 <!-- ## /OPENBLOK: Data-bekijken.R -->
 <!-- ## TEKSTBLOK: Data-beschrijven.R -->
@@ -90,7 +90,7 @@ Bekijk de grootte, de mediaan en de kwantielen van het aantal studiepunten met `
 <!-- ## /TEKSTBLOK: Data-beschrijven.R -->
 <!-- ## OPENBLOK: Data-selecteren.R -->
 ```{r data selecteren}
-Nederlands <- Studiepunten_jaar2$Vooropleiding == "Nederland"
+Vooropleiding_Nederlands <- Studiepunten_studiejaar2$Vooropleiding == "Nederlands"
 ```
 <!-- ## /OPENBLOK: Data-selecteren.R -->
 
@@ -102,16 +102,16 @@ Nederlands <- Studiepunten_jaar2$Vooropleiding == "Nederland"
   <div class="col">
 <!-- ## OPENBLOK: Data-beschrijven-1.R -->
 ```{r, data beschrijven 1, collapse=TRUE}
-length(Studiepunten_jaar2$Studiepunten[Nederlands])
-quantile(Studiepunten_jaar2$Studiepunten[Nederlands])
+length(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands])
+quantile(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands])
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-1.R -->
   </div>
   <div class="col">
 <!-- ## OPENBLOK: Data-beschrijven-2.R -->
 ``````{r Data beschrijven 2, collapse=TRUE}
-length(Studiepunten_jaar2$Studiepunten[!Nederlands])
-quantile(Studiepunten_jaar2$Studiepunten[!Nederlands])
+length(Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands])
+quantile(Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands])
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-2.R -->
   </div>
@@ -121,7 +121,7 @@ quantile(Studiepunten_jaar2$Studiepunten[!Nederlands])
 ## Onderstaand zijn de dynamische variabelen te vinden
 library(dplyr)
 
-x <- group_by(Studiepunten_jaar2, Vooropleiding) %>%
+x <- group_by(Studiepunten_studiejaar2, Vooropleiding) %>%
   summarise(
     N = n(),
     Q1 = quantile(Studiepunten)[2],
@@ -151,13 +151,15 @@ vQ3_Inter <- Round_and_format(x[1,5])
 
 ## Mann-Whitney U toets
 <!-- ## TEKSTBLOK: Mann-Whitney-U-toets-1.R -->
-Gebruik `wilcox.test()` om een *Mann-Whitney U toets* te doen. Het eerste argument bevat het aantal studiepunten van studenten met een Nederlandse vooropleiding `Studiepunten_jaar2$Studiepunten[Nederlands]`; het tweede argument het aantal studiepunten van studenten met een buitenlandse vooropleiding `Studiepunten_jaar2$Studiepunten[!Nederlands]`.
+Gebruik `wilcox.test()` om een *Mann-Whitney U toets* te doen. Het eerste argument bevat het aantal studiepunten van studenten met een Nederlandse vooropleiding `Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands]`; het tweede argument het aantal studiepunten van studenten met een buitenlandse vooropleiding `Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands]`. Voer daarna de argument `paired = FALSE` omdat de steekproeven ongepaard zijn, het argument `alternative = "two.sided" ` vanwege de tweezijdige alternatieve hypothese en
+het argument `conf.int = TRUE` om een schatting met bijbehorend betrouwbaarheidsinterval te geven voor de mediaan 
+van de verschilscores.
 <!-- ## /TEKSTBLOK: Mann-Whitney-U-toets-1.R -->
 
 <!-- ## OPENBLOK: Mann-Whitney-U-toets-2.R -->
 ```{r Mann Whitney U toets}
-wilcox.test(Studiepunten_jaar2$Studiepunten[Nederlands], 
-            Studiepunten_jaar2$Studiepunten[!Nederlands],
+wilcox.test(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands], 
+            Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands],
             paired = FALSE,
             alternative = "two.sided",
             conf.int = TRUE)
@@ -165,8 +167,8 @@ wilcox.test(Studiepunten_jaar2$Studiepunten[Nederlands],
 <!-- ## /OPENBLOK: Mann-Whitney-U-toets-2.R -->
 <!-- ## CLOSEDBLOK: Mann-Whitney-U-toets-3.R -->
 ```{r Mann Whitney U toets als object, include = FALSE}
-wcx <- wilcox.test(Studiepunten_jaar2$Studiepunten[Nederlands], 
-            Studiepunten_jaar2$Studiepunten[!Nederlands],
+wcx <- wilcox.test(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands], 
+            Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands],
             paired = FALSE,
             alternative = "two.sided",
             conf.int = TRUE)
@@ -182,16 +184,16 @@ vW_ub <- Round_and_format(wcx$conf.int[2])
 Bereken de effectgrootte *r* vervolgens op basis van de *p*-waarde van de *Mann-Whitney U toets*.
 ```{r effectgrootte}
 # Sla p-waarde op
-pwaarde <- wilcox.test(Studiepunten_jaar2$Studiepunten[Nederlands], 
-            Studiepunten_jaar2$Studiepunten[!Nederlands],
+pwaarde <- wilcox.test(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands], 
+            Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands],
             paired = FALSE,
             alternative = "two.sided",
             conf.int = TRUE)$p.value
 
 # Bereken effectgrootte tweezijdige test
-r <- qnorm(pwaarde/2) / sqrt(nrow(Studiepunten_jaar2))
+r <- qnorm(pwaarde/2) / sqrt(nrow(Studiepunten_studiejaar2))
 # Bereken effectgrootte eenzijdige test
-#r <- qnorm(pwaarde) / sqrt(nrow(Studiepunten_jaar2))
+#r <- qnorm(pwaarde) / sqrt(nrow(Studiepunten_studiejaar2))
 
 # Print effectgrootte
 paste("Effectgrootte is",Round_and_format(r))
@@ -210,7 +212,7 @@ paste("Effectgrootte is",Round_and_format(r))
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal studiepunten in het tweede jaar hetzelfde is voor studenten met buitenlandse vooropleiding als voor studenten met Nederlandse vooropleiding. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen het aantal studiepunten van studenten met een buitenlandse vooropleiding en met een Nederlandse vooropleiding, *W* = `r vW_W`, *p* < 0,0001, *r* = `r Round_and_format(r)`. Er is een klein tot gemiddeld effect, het verschil in mediaan tussen beide groepen (Nederlandse minus buitenlandse vooropleiding) is geschat op `r vW_est ` met een 95-betrouwbaarheidsinterval van `r vW_lb` tot `r vW_ub`.  
+De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal studiepunten in het tweede jaar hetzelfde is voor studenten met buitenlandse vooropleiding als voor studenten met Nederlandse vooropleiding. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen het aantal studiepunten van studenten met een buitenlandse vooropleiding en met een Nederlandse vooropleiding, *W* = `r vW_W`, *p* < 0,0001, *r* = `r Round_and_format(r)`. Er is een klein tot gemiddeld effect, het verschil in mediaan tussen beide groepen (Nederlandse minus buitenlandse vooropleiding) is geschat op `r vW_est ` met een 95%-betrouwbaarheidsinterval van `r vW_lb` tot `r vW_ub`.  
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->

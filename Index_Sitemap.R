@@ -34,6 +34,7 @@ library(httr)    # Library om een webpagina te openen
 library(RCurl)   # Library om een pagina te ftp-en
 library(glue)    # Library om strings aan elkaar te plakken met placeholders
 
+# EG: snap ik niet
 ## Het basis xml template
 xmltemplate <- '<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
@@ -49,6 +50,7 @@ xmltemplate <- '<?xml version="1.0" encoding="UTF-8"?>
 </urlset>
 '
 
+# EG: snap ik niet
 ## Functie om links te maken
 map_links <- function(l) {
   sRoot  <- "http://www.sh-studiedata.nl/"
@@ -117,6 +119,8 @@ for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_Python == 1]) {
 ## 03 PAS DE FUNCTIE map_links TOE OP DE PAGINALIJST EN CREËER EEN SITEMAP ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+# EG: zorgt code hieronder dat je links in de toetsmatrices krijgt?
+
 lPaginas <- lapply(lPaginas, map_links)
 
 print(paste(length(lPaginas), "pagina's staan in de sitemap"))
@@ -133,6 +137,8 @@ sink()
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 04 FTP DE SITEMAP NAAR DE LIVE SITE ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# EG: maak je hier automatisch site mee? Of moet je dan alsnog naar WinCSP?
 
 ## Plaats het bestand op de FTP server; gebruik verbose = TRUE om te zien 
 ## wat de server antwoordt

@@ -21,7 +21,7 @@ Resultaten_internationale_studenten <- rbind (
 Punten_jaar2_inter <- margin.table(Resultaten_internationale_studenten, 1)
 Studentnr <- sample(3000000:4000000, length(c(Punten_jaar2_NL, Punten_jaar2_inter)))
 
-Studiepunten_jaar2 <- data.frame(Studentnr, c(Punten_jaar2_NL, Punten_jaar2_inter), 
-                           c(rep("Nederland", length(Punten_jaar2_NL)), rep("buitenland", length(Punten_jaar2_inter))))
-colnames(Studiepunten_jaar2)<-c("Studentnummer", "Studiepunten", "Vooropleiding")
+Studiepunten_studiejaar2 <- data.frame(Studentnr, c(Punten_jaar2_NL, Punten_jaar2_inter), 
+                           c(rep("Nederlands", length(Punten_jaar2_NL)), rep("buitenlands", length(Punten_jaar2_inter))))
+colnames(Studiepunten_studiejaar2)<-c("Studentnummer", "Studiepunten", "Vooropleiding")
 Studiepunten_studiejaar2 <- Studiepunten_studiejaar2[order(Studentnr),]

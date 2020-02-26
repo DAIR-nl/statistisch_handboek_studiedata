@@ -68,6 +68,7 @@ dfToetsen <- tribble(
 
 ## Bepaal de modus; deze bepaalt de opbouw van de paden
 sModus <- "Root"
+## EG: wat is root en wat zijn paden
 
 ## lProgrammeertalen
 lProgrammeertalen <- c("R","Python")
@@ -84,13 +85,14 @@ rmarkdown::render_site(
   quiet = FALSE,
   encoding = "UTF-8"
 )
+# EG: snap functie wel, argumenten niet
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 01.2 MAAK DE TOETSMATRIX ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## We maken 2x de toetsmatrix: 1x voor R en 1x voor Python.
-## Als de R of Pyhton folder niet bestaan, maak deze dan aan
+## Als de R of Python folder niet bestaan, maak deze dan aan
 ## en maak vervolgens de bijbehorende toetsmatrix op basis van de modus
 
 for (p in lProgrammeertalen) {
@@ -99,6 +101,8 @@ for (p in lProgrammeertalen) {
   render("_Toetsmatrix.Rmd",
          output_file = paste0('_site/', p, '/Toetsmatrix.html'))
 }
+
+# EG: wat maak je hier precies, de toetsmatrixpagina's van website?
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 02.1 MAAK R BESTANDEN ####
@@ -166,6 +170,7 @@ file.copy(file.path(current_folder,list_of_files), new_folder,
           overwrite = TRUE, 
           recursive = FALSE,
           copy.mode = TRUE)
+# EG: ik zie beide bestanden niet in sitemap
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 03 CONTROLEER DE UITKOMST ####
@@ -180,3 +185,5 @@ browseURL(output_file)
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 rm(list = ls())
 
+# EG: in het algemeen kan ik het enigszins volgen, maar weet niet of ik dit zelf
+# beheers of veranderingen in aan zou kunnen brengen.

@@ -64,6 +64,13 @@ De *Kruskal Wallis toets* toetst of twee of meerdere groepen van elkaar verschil
 
 Gebruik de *Bonferroni correctie* om Type I fouten te voorkomen. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans dat er bij toeval een verband wordt ontdekt dat er niet is.[^8]<sup>, </sup>[^9]
 
+# Effectmaat
+De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^10] 
+
+Bij de *Kruskal Wallis toets* wordt eta-squared ($\eta^2$) als effectmaat gebruikt. De effectmaat eta squared (*η^2^*) berekent de proportie van de variantie in de afhankelijke variabele wat verklaard wordt door de onafhankelijke variabele. In deze casus berekent het de proportie van de variantie in het aantal studiepunten wat verklaard kan worden door de vooropleiding. Een indicatie om *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^11]
+
+
+
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
 Er is een dataset ingeladen met studieresultaten van de master Arbeidsrecht per vooropleiding: Fiscaal Recht, Notarieel Recht, Rechtsgeleerdheid en de Premaster.
@@ -161,7 +168,7 @@ boxplot(EC_Jaar1 ~ Vooropleiding, Resultaten_Arbeidsrecht,
 ```
 <!-- ## /OPENBLOK: Boxplot.R -->
 
-De mediaan van studenten met een vooropleiding Rechtsgeleerdheid heeft duidelijk minder studiepunten dan studenten met een vooropleiding Fiscaal Recht en Notarieel Recht. De mediaan van de studenten met de Premaster als vooropleiding ligt er tussen in.[^10]
+De mediaan van studenten met een vooropleiding Rechtsgeleerdheid heeft duidelijk minder studiepunten dan studenten met een vooropleiding Fiscaal Recht en Notarieel Recht. De mediaan van de studenten met de Premaster als vooropleiding ligt er tussen in.[^12]
 
 ## Kruskal Wallis toets
 <!-- ## TEKSTBLOK: Kruskal-Wallis-test-1.R -->
@@ -174,26 +181,42 @@ kruskal.test(EC_Jaar1 ~ Vooropleiding, Resultaten_Arbeidsrecht)
 ```
 <!-- ## /OPENBLOK: Kruskal-Wallis-test-2.R -->
 
-<!-- ## CLOSEDBLOK: Kruskal-Wallis-test-3.R -->
+<!-- ## OPENBLOK: Kruskal-Wallis-test-3.R -->
+```{r effectsize}
+# Sla de teststatistiek op
+KW_teststatistiek <- kruskal.test(EC_Jaar1 ~ Vooropleiding, Resultaten_Arbeidsrecht)$statistic
+
+# Bereken eta squared
+Eta_squared <- KW_teststatistiek / (nrow(Resultaten_Arbeidsrecht) - 1)
+
+# Print effectgrootte
+paste("Eta squared is",Round_and_format(Eta_squared))
+
+
+```
+<!-- ## /OPENBLOK: Kruskal-Wallis-test-3.R -->
+
+
+<!-- ## CLOSEDBLOK: Kruskal-Wallis-test-4.R -->
 ```{r Kruskal Wallis test als object, include= FALSE, echo= TRUE}
 Ktest <- kruskal.test(EC_Jaar1 ~ Vooropleiding, Resultaten_Arbeidsrecht)
 vK_DF <- Round_and_format(Ktest$parameter)
 vK_Chi2 <- Round_and_format(Ktest$statistic)
 vK_P <- Round_and_format(Ktest$p.value)
 ```
-<!-- ## /CLOSEDBLOK: Kruskal-Wallis-test-3.R -->
-<!-- ## TEKSTBLOK: Kruskal-Wallis-test-4.R -->
+<!-- ## /CLOSEDBLOK: Kruskal-Wallis-test-4.R -->
+<!-- ## TEKSTBLOK: Kruskal-Wallis-test-5.R -->
 * *df*: het aantal groepen - 1 = `r vK_DF`  
-* *H*~3~ = `r vK_Chi2`, p < 0,0001  
-* De test-statistiek *H* volgt bij benadering de chi-kwadraat verdeling. Onder deze hypothese is *H* chi-kwadraat, vandaar dat dit in de output uitgedrukt wordt in chi-kwadraat    
-* p-waarde < 0,05, dus de H~0~ wordt verworpen[^11]
+* *H*~3~ = `r vK_Chi2`, p < 0,0001, $\eta^2$ = `r Round_and_format(Eta_squared)`  [^13]  
+* p-waarde < 0,05, dus de H~0~ wordt verworpen[^14]
+* Eta squared is `r Round_and_format(Eta_squared)` wat duidt op een gemiddeld tot groot effect 
 
-<!-- ## /TEKSTBLOK: Kruskal-Wallis-test-4.R -->
+<!-- ## /TEKSTBLOK: Kruskal-Wallis-test-5.R -->
 
 
 ## Post-hoc toets: Mann-Whitney U toets
 <!-- ## TEKSTBLOK: Mann-Whitney-U-test.R -->
-Gebruik de *Mann-Whitney U toets* als post-hoc toets om te bepalen wélke groepen significant verschillen. De *Mann-Whitney U toets* wordt ook wel de *Wilcoxon rank-sum toets* genoemd.[^12] Gebruik de functie `pairwise.wilcox.test()` met als eerste argument de afhankelijke variabele `Resultaten_Arbeidsrecht$EC_Jaar1` en als tweed argument de definitie van de groepen `Resultaten_Arbeidsrecht$Vooropleiding`. Pas de *Bonferroni correctie* toe met `p.adjust.method = "bonferroni"`.    
+Gebruik de *Mann-Whitney U toets* als post-hoc toets om te bepalen wélke groepen significant verschillen. De *Mann-Whitney U toets* wordt ook wel de *Wilcoxon rank-sum toets* genoemd.[^15] Gebruik de functie `pairwise.wilcox.test()` met als eerste argument de afhankelijke variabele `Resultaten_Arbeidsrecht$EC_Jaar1` en als tweed argument de definitie van de groepen `Resultaten_Arbeidsrecht$Vooropleiding`. Pas de *Bonferroni correctie* toe met `p.adjust.method = "bonferroni"`. Naast de p-waarde toont de *Mann-Whitney U toets* het verschil in mediaan en bijbehorend betrouwbaarheidsinterval als resultaat en *r* als effectmaat. Voor meer informatie, zie de toetspagina van de *Mann-Whitney U toets*.   
 <!-- ## /TEKSTBLOK: Mann-Whitney-U-test.R -->
 <!-- ## OPENBLOK: Mann-Whitney-U-test.R -->
 ``` {r pairwise wilcox test}
@@ -207,7 +230,7 @@ pairwise.wilcox.test(Resultaten_Arbeidsrecht$EC_Jaar1, Resultaten_Arbeidsrecht$V
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Kruskal Wallis toets* is uitgevoerd om te toetsen of significante verschillen zijn tussen de studenten van de Master Arbeidsrecht met als vooropleiding Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster en het aantal studiepunten dat de studenten in het eerste jaar behalen. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen het aantal studiepunten en het type vooropleiding dat de student heeft afgerond. *H*~`r vK_DF`~ ≈ `r vK_Chi2` < 0,0001.   
+De *Kruskal Wallis toets* is uitgevoerd om te toetsen of significante verschillen zijn tussen de studenten van de Master Arbeidsrecht met als vooropleiding Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster en het aantal studiepunten dat de studenten in het eerste jaar behalen. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen het aantal studiepunten en het type vooropleiding dat de student heeft afgerond. *H*~`r vK_DF`~ ≈ `r vK_Chi2` < 0,0001, $\eta^2$ = `r Round_and_format(Eta_squared)`.   
 
 | Vooropleiding     | N          | Q1         | M           | Q3          |
 | ------------- | ---------- | ---------- | ----------- | ----------- |
@@ -237,7 +260,10 @@ Studenten met de vooropleiding Fiscaal Recht (mediaan = `r vMed_FIS`) en Notarie
 [^7]: Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
 [^8]: Type I fout: Ten onrechte H~0~ verwerpen.
 [^9]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test).
-[^10]: Bij niet normaal verdeelde data wordt de mediaan berekend in plaats van een gemiddelde om het midden van de data aan te geven. 
-[^11]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met Type I en Type II fouten. 
-[^12]: Van Geloven, N. (13 maart 2018).  *Mann-Whitney U toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
+[^10]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
+[^11]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
+[^12]: Bij niet normaal verdeelde data wordt de mediaan berekend in plaats van een gemiddelde om het midden van de data aan te geven.
+[^13]: De test-statistiek *H* volgt bij benadering de chi-kwadraat verdeling. Onder deze hypothese is *H* chi-kwadraat, vandaar dat dit in de output uitgedrukt wordt in chi-kwadraat    
+[^14]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met Type I en Type II fouten. 
+[^15]: Van Geloven, N. (13 maart 2018).  *Mann-Whitney U toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
 

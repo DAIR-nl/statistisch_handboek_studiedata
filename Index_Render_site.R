@@ -154,7 +154,7 @@ current_folder <- "01. Includes/google/"
 new_folder     <- "_site"
 list_of_files  <- list.files(current_folder) 
 
-## Kopieer het logo naar deze folder
+## Kopieer het html bestand naar deze folder
 file.copy(file.path(current_folder,list_of_files), new_folder, 
           overwrite = TRUE, 
           recursive = FALSE,
@@ -165,7 +165,7 @@ current_folder <- "01. Includes/sitemap/"
 new_folder     <- "_site"
 list_of_files  <- list.files(current_folder) 
 
-## Kopieer het logo naar deze folder
+## Kopieer de sitemap naar deze folder
 file.copy(file.path(current_folder,list_of_files), new_folder, 
           overwrite = TRUE, 
           recursive = FALSE,

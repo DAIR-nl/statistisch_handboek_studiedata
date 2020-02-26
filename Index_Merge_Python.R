@@ -40,25 +40,25 @@ bDebug <- F
 ## Bepaal de lijst van toetsen; wijzig 0 in 1 om in gebruik te nemen
 dfToetsen <- tribble(
     ~Toets, ~InGebruik,
-    "01 One sample t-toets",                "1", 
-    "02 Gepaarde t-toets",                  "0", 
-    "03 Ongepaarde t-toets",                "0", 
-    "04 Linear mixed model",                "0", 
-    "05 One-way ANOVA",                     "0", 
-    "06 Tekentoets",                        "0", 
-    "07 Wilcoxon signed rank toets",        "0", 
-    "08 Mann-Whitney U toets",              "0", 
-    "09 Friedman toets",                    "0", 
-    "10 Kruskal Wallis",                    "0", 
-    "11 z-test voor proporties",            "0", 
-    "12 McNemar toets",                     "0", 
-    "13 Chi2 toets",                        "0", 
-    "14 Fisher’s exact toets",              "0", 
-    "15 Cochran’s Q toets",                 "0", 
-    "16 Fisher-Freeman-Halton exact toets", "0", 
-    "17 Chi2 toets (trend)",                "0", 
-    "18 GLMM",                              "0", 
-    "19 GEE",                               "0" 
+    "01 One sample t-toets",                        "1", 
+    "02 Gepaarde t-toets",                          "1", 
+    "03 Ongepaarde t-toets",                        "1", 
+    "04 Linear mixed model",                        "0", 
+    "05 One-way ANOVA",                             "1", 
+    "06 Tekentoets",                                "0", 
+    "07 Wilcoxon signed rank toets",                "0", 
+    "08 Mann-Whitney U toets",                      "1", 
+    "09 Friedman toets",                            "0", 
+    "10 Kruskal Wallis toets",                      "1", 
+    "11 z-test voor proporties",                    "0", 
+    "12 McNemar toets",                             "0", 
+    "13 Chi-kwadraat toets en Fishers exact toets", "1", 
+    "14 Fisher’s exact toets",                      "0", 
+    "15 Cochran’s Q toets",                         "0", 
+    "16 Fisher-Freeman-Halton exact toets",         "0", 
+    "17 Chi2 toets (trend)",                        "0", 
+    "18 GLMM",                                      "0", 
+    "19 GEE",                                       "0" 
 )
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -67,11 +67,12 @@ dfToetsen <- tribble(
 
 ## Verwerk codeblokken met OPENBLOK, TEKSTBLOK
 sRegEx <- "## [/]{0,1}[A-Z]{4,6}BLOK: "
+# EG: snap ik niet
 
 ## Loop over de toetsen die in gebruik zijn
 for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
 
-    ## Bepaal de R Markdown en Pyton Markdown
+    ## Bepaal de R Markdown en Python Markdown
     thisRmd_R      <- paste0("R/", paste0(sToets, " R.Rmd"))
     thisRmd_Python <- paste0("04. Python chunks/", paste0(sToets, " py.Rmd"))
     
@@ -86,6 +87,7 @@ for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
       lRegelnummers <- grep(paste0(sRegEx), 
                             readLines(con = thisRmd_R, warn = F))
       lCodeblokken <- thisRmd_R_file[lRegelnummers]
+      # EG: ik volg dit niet helemaal
       
       ## Verwijder regels met /BLOK en verwijder begin + einde string (<--! -->)
       ## en trim
@@ -134,7 +136,8 @@ for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
         unlink(sPythonFile_Merged)
         print(paste0("VERWIJDERD OM OPNIEUW OP TE BOUWEN: ", sPythonFile_Merged))
       }
-        
+      
+      # EG: hieronder raak ik 'm ook even kwijt  
       ## Loop over de .py bestanden en vervang de .R code blokken met de .py code blokken
       ## Maak een teller, zodat na de 1e loop het bestand dat gemaakt is kan gebruikt
       ## worden als basis in plaats van het originel R rmd file.

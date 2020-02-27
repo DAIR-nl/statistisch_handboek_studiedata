@@ -89,6 +89,13 @@ Op basis van geobserveerde waarden kunnen de verwachte waarden berekend worden. 
 
 Naast onbetrouwbaarheid bij geobserveerde waarden lager dan 10, wordt de *chi-kwadraat toets* ook onbetrouwbaar als één van de verwachte waarden lager dan 5 is. Gebruik in die gevallen de *Fisher’s exact toets*.[^7]  
 
+# Effectmaat
+
+De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^6] 
+De *Chi-kwadraat toets* heeft als effectmaat *w*.[^8] Een indicatie om *w* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^9]
+
+
+
 # De data bekijken
 <!-- ## TEKSTBLOK: Dataset-inladen.R -->
 Er is een kruistabel `Uitval_functiebeperking` ingeladen over de uitval van studenten met een functiebeperking voor en na de invoering van het leenstelsel. Zowel de variabele voor uitval (wel of geen uitval) als voor functiebeperking (wel of geen functiebeperking) zijn binair. Deze tabel is gebaseerd op een dataset waarin uitval en functiebeperking voor studenten wordt bijgehouden. 
@@ -111,25 +118,47 @@ chisq.test(Uitval_functiebeperking)
 ```
 <!-- ## /OPENBLOK: Chi2-toets-2.R -->
 
-<!-- ## CLOSEDBLOK: Chi2-toets-3.R -->
+Bereken de effectmaat *w* vervolgens op basis van de $\chi^2$-waarde van de *Chi-kwadraat toets*.
+<!-- ## OPENBLOK: Chi2-toets-3.R -->
+```{r effectsize}
+# Sla de teststatistiek op
+Chi2_teststatistiek <- chisq.test(Uitval_functiebeperking)$statistic
+
+# Bereken het totaal aantal observaties als som van de kruistabel
+N <- sum(Uitval_functiebeperking)
+
+# Bereken eta squared
+w <- sqrt(Chi2_teststatistiek / N)
+
+# Print effectgrootte
+paste("Effectgrootte is",Round_and_format(w))
+
+
+```
+<!-- ## /OPENBLOK: Chi2-toets-3.R -->
+
+
+<!-- ## CLOSEDBLOK: Chi2-toets-4.R -->
 ```{r chi2 als object, include=FALSE, echo=TRUE}
 Chi2 <- chisq.test(Uitval_functiebeperking)
 vChi2 <- Round_and_format(Chi2$statistic)
 vP <- Round_and_format(Chi2$p.value)
 vDF <- Chi2$parameter
 ```
-<!-- ## /CLOSEDBLOK: Chi2-toets-3.R -->
+<!-- ## /CLOSEDBLOK: Chi2-toets-4.R -->
 
-<!-- ## TEKSTBLOK: Chi2-toets-4.R-->
-* *χ^2^* ~1~ ≈ `r vChi2`, *p* ≈ `r vP`  
+<!-- ## TEKSTBLOK: Chi2-toets-5.R-->
+* *χ^2^* ~1~ ≈ `r vChi2`, *p* ≈ `r vP`, *w* = `r Round_and_format(w)`  
 * Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r vDF`. De continuïteitscorrectie van Yates wordt automatisch toegepast wanneer het aantal vrijheidsgraden 1 is.[^6]   
-* p-waarde < 0,05, dus de H~0~ wordt verworpen.[^8]  
+* p-waarde < 0,05, dus de H~0~ wordt verworpen.[^10]
+* Effectmaat is `r Round_and_format(w)`, dus een klein effect
 
-<!-- ## /TEKSTBLOK: Chi2-toets-4.R-->
+
+<!-- ## /TEKSTBLOK: Chi2-toets-5.R-->
 
 ## Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Chi-kwadraat toets* is uitgevoerd om te toetsen of studenten met een functiebeperking meer of minder uitvallen sinds de invoering van het leenstelsel. De resultaten ondersteunen de alternatieve hypothese: het percentage uitval van het aantal studenten met een functiebeperking is na de invoering van het leenstelsel veranderd, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* = `r vP`.
+De *Chi-kwadraat toets* is uitgevoerd om te toetsen of studenten met een functiebeperking meer of minder uitvallen sinds de invoering van het leenstelsel. De resultaten ondersteunen de alternatieve hypothese: het percentage uitval van het aantal studenten met een functiebeperking is na de invoering van het leenstelsel veranderd, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* = `r vP`, *w* = `r Round_and_format(w)`.
 
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 
@@ -163,9 +192,9 @@ vConf.int2 <- Round_and_format(fish$conf.int[2])
 ```
 <!-- ## /CLOSEDBLOK: Fishers-Exact-toets.R -->
 <!-- ## TEKSTBLOK: Fishers-Exact-toets.R -->
-* *p* = `r vF_p`; p-waarde > 0,05, dus de H~0~ wordt niet verworpen.[^8]  
+* *p* = `r vF_p`; p-waarde > 0,05, dus de H~0~ wordt niet verworpen.[^10]  
 * 95% betrouwbaarheidsinterval is tussen `r vConf.int1` en `r vConf.int2`.  
-* De odds ratio is 1,8. Dat wil zeggen dat de kans op uitval van studenten met een functiebeperking met leenstelsel 1,8 keer zo groot is als de kans op uitval van studenten met een functiebeperking zonder het leenstelsel. Deze relatie is niet significant en daarom wordt het in het rapport ook niet benoemd.  
+* De odds ratio is 1,8. Dat wil zeggen dat de kans op uitval van studenten met een functiebeperking met leenstelsel 1,8 keer zo groot is als de kans op uitval van studenten met een functiebeperking zonder het leenstelsel. Deze relatie is niet significant en daarom wordt het in de rapportage ook niet benoemd.  
 
 <!-- ## /TEKSTBLOK: Fishers-Exact-toets.R -->
 
@@ -186,4 +215,7 @@ De *Fisher's exact toets* is uitgevoerd om te toetsen of studenten met een funct
 [^5]: Nominaal: variabelen die niet afhankelijk van elkaar zijn en niet op inhoudelijke basis geordend kunnen worden. Voorbeelden hiervan zijn geslacht of achternamen. Een binaire variabele is een voorbeeld van een nominale variabele. Binaire variabelen hebben twee mogelijkheden, ja of nee, terwijl nominale variabelen meerdere mogelijkheden kunnen hebben. 
 [^6]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^7]: Van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets).
-[^8]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
+[^8]: De effectmaat *w* wordt voor de *Chi-kwadraat toets* berekend door de wortel te nemen van de
+$\chi^2$-waarde gedeeld door het totaal aantal observaties, i.e. $\sqrt{ \frac{\chi^2}{N} }$.
+[^9]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
+[^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

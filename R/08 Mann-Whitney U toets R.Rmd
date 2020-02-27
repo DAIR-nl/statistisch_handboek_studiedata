@@ -63,10 +63,8 @@ Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voor
 
 # Effectmaat
 
-Een effectmaat geeft informatie over de grootte van het significante resultaat
-dat in een studie is gevonden. De *Mann-Whitney U toets* heeft als effectmaat
-*r*.[^4] Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, 
-rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^5]
+De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^3] 
+De *Mann-Whitney U toets* heeft als effectmaat *r*.[^4] Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^5]
 
 # Uitvoering 
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
@@ -181,7 +179,7 @@ vW_ub <- Round_and_format(wcx$conf.int[2])
 <!-- ## /CLOSEDBLOK: Mann-Whitney-U-toets-3.R -->
 
 <!-- ## OPENBLOK: Mann-Whitney-U-toets-4.R -->
-Bereken de effectgrootte *r* vervolgens op basis van de *p*-waarde van de *Mann-Whitney U toets*.
+Bereken de effectmaat *r* vervolgens op basis van de *p*-waarde van de *Mann-Whitney U toets*.
 ```{r effectgrootte}
 # Sla p-waarde op
 pwaarde <- wilcox.test(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands], 
@@ -195,8 +193,8 @@ r <- qnorm(pwaarde/2) / sqrt(nrow(Studiepunten_studiejaar2))
 # Bereken effectgrootte eenzijdige test
 #r <- qnorm(pwaarde) / sqrt(nrow(Studiepunten_studiejaar2))
 
-# Print effectgrootte
-paste("Effectgrootte is",Round_and_format(r))
+# Print effectmaat
+paste("Effectmaat is",Round_and_format(r))
 
 ```
 <!-- ## /OPENBLOK: Mann-Whitney-U-toets-4.R -->
@@ -204,7 +202,7 @@ paste("Effectgrootte is",Round_and_format(r))
 <!-- ## TEKSTBLOK: Mann-Whitney-U-toets-4.R -->
 * *W* = `r vW_W`, *p* = < 0,0001, *r* = `r Round_and_format(r)`
 * *p*-waarde < 0,05, dus de H~0~ wordt niet verworpen.[^6]
-* Effectgrootte is `r Round_and_format(r)`, dus een klein tot gemiddeld effect
+* Effectmaat is `r Round_and_format(r)`, dus een klein tot gemiddeld effect
 * De mediaan van de verschilscores is `r vW_est` met een 
 95%-betrouwbaarheidsinterval  van `r vW_lb` tot `r vW_ub`
 <!-- ## /TEKSTBLOK: Mann-Whitney-U-toets-4.R -->

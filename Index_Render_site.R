@@ -8,7 +8,7 @@
 ##
 ## Doel: Een pagina om de website te maken
 ##
-## Afhankelijkheden: De gegenereerde HTML
+## Afhankelijkheden: De codepagina's per toets
 ##
 ## Datasets: Geen
 ##
@@ -31,8 +31,6 @@
 
 ## Installeer packages en functies
 source("99. Functies en Libraries/00. Voorbereidingen.R")
-
-library("rmarkdown")
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 01 BEPAAL WELKE TOETSEN GEMAAKT MOETEN WORDEN ####

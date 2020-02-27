@@ -45,6 +45,7 @@ Gebruikte_packages <- c(
     "here",
     "htmltools",
     #"klippy",
+    "markdown",
     "nortest",
     "plotly",
     "purrr",
@@ -71,7 +72,6 @@ if (length(Nieuwe_packages) > 0) {
                      ## buiten rstudio werkt
                      repos = "https://cloud.r-project.org/")
 }
-
 
 # Laad de packages in de library
 lapply(Gebruikte_packages, library, character.only = TRUE, quietly = TRUE)

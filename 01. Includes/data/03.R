@@ -26,5 +26,5 @@ Cijfers_2011_n30 <- Cijfers_2011_n30[Cijfers_2011_n30 <= 10 & Cijfers_2011_n30 >
 Cijfers_2011_n30 <- sapply(Cijfers_2011, round, 3)
 
 Cijfers <- c(Cijfers_2010, Cijfers_2011)
-Cohort <- c(replicate(180, 2010), replicate(160, 2011))
+Cohort <- as.character(c(replicate(180, 2010), replicate(160, 2011)))
 Cijfers_gem <- data.frame(Cijfers, Cohort)

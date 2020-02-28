@@ -90,6 +90,13 @@ De cel linksboven bevat het aantal studenten dat zowel in december als juni een 
 In de cel rechtsboven staat het aantal studenten dat wel in december maar niet in juni een beroep op de FOS heeft gedaan, dit zijn er `r FOS_studenten_confusiematrix["ja","nee"]`. In de cel linksonder staat het aantal studenten dat niet in december maar wel in juni een beroep op de FOS heeft gedaan, dit zijn er `r FOS_studenten_confusiematrix["nee","ja"]`. Deze cellen zijn geen onderdeel van de diagonaal van de tabel. Bij een laag aantal observaties in de cellen die niet op de diagonaal zitten laag is, kan de exacte versie van de *McNemar toets* gebruikt. Wanneer de som van deze niet-diagonale elementen kleiner dan 11 is, is de exacte *McNemar toets* nuttig om te gebruiken. [^4]
 <!-- ## /TEKSTBLOK: Groepsgrootte2.R -->
 
+# Effectmaat
+
+# Effectmaat
+De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^5] 
+
+
+
 # De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken1.R -->
 Er is een dataset ingeladen genaamd `Beroep_FOS_functiebeperking`. In deze dataset is voor elke student aangegeven of ze wel of geen beroep op de FOS hebben gedaan in december en in juni. 
@@ -164,11 +171,36 @@ vp <- Round_and_format(mcnemar$p.value)
 ```
 <!-- ## /CLOSEDBLOK: McNemar-toets3.R -->
 
-<!-- ## TEKSTBLOK: McNemar-toets4.R -->
+Bereken het verschil proportie en bijbehorend betrouwbaarheidsinterval als effectmaat.
+
+<!-- ## OPENBLOK: McNemar-toets5.R -->
+```{r verschil proportie}
+# Bereken proporties FOS voor juni en december
+Proportie_FOS_juni <- sum(FOS_studenten_confusiematrix[,"ja"])/sum(FOS_studenten_confusiematrix)
+Proportie_FOS_december <- sum(FOS_studenten_confusiematrix["ja",])/sum(FOS_studenten_confusiematrix)
+
+# Bereken verschil in proporties
+Verschil_proporties <- Proportie_FOS_juni - Proportie_FOS_december
+
+# Bereken standaardafwijking
+Verschil_proporties_standaardafwijking <- sqrt((FOS_studenten_confusiematrix["nee","ja"] + FOS_studenten_confusiematrix["ja","nee"]) / sum(FOS_studenten_confusiematrix)^2 )  
+
+# Bereken 95%-betrouwbaarheidsinterval
+Betrouwbaarheidsinterval <- c(Verschil_proporties - 1.96 * Verschil_proporties_standaardafwijking,
+                              Verschil_proporties + 1.96 * Verschil_proporties_standaardafwijking)
+# Print interval
+paste("Het verschil in proporties is",Round_and_format(Verschil_proporties),"met bijbehorend 95%-betrouwbaarheidsinterval van",
+      Round_and_format(Betrouwbaarheidsinterval[1]),"tot", Round_and_format(Betrouwbaarheidsinterval[2]))
+
+```
+<!-- ## /OPENBLOK: McNemar-toets5.R -->
+
+
+<!-- ## TEKSTBLOK: McNemar-toets5.R -->
 * $\chi^2$~`r vdf`~ = `r vChi2`, *p* < 0,0001  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen.[^6]
 
-<!-- ## /TEKSTBLOK: McNemar-toets4.R -->
+<!-- ## /TEKSTBLOK: McNemar-toets5.R -->
 
 ## Rapportage
 

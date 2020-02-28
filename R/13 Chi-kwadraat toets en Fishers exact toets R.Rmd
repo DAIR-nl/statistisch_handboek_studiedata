@@ -94,6 +94,7 @@ Naast onbetrouwbaarheid bij geobserveerde waarden lager dan 10, wordt de *chi-kw
 De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^6] 
 De *Chi-kwadraat toets* heeft als effectmaat *w*.[^8] Een indicatie om *w* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^9]
 
+De odds ratio is een effectmaat die voor zowel de *Chi-kwadraat toets* als de *Fisher's exact toets* kan worden gebruikt. Een voorwaarde is echter dat beide variabelen binair zijn. In andere woorden, er moet een 2x2 kruistabel gevormd kunnen worden. Odds is een Engelse term voor de verhouding van twee kansen, bijvoorbeeld de verhouding tussen het aantal studenten dat uitvalt en niet uitvalt. Een odds ratio is de verhouding tussen twee odds, dus de verhouding van de odds van studentenuitval voor de periode met leenstelsel en de periode zonder leenstelsel. De odds ratio geeft dus een interpretatie van het effect van een leenstelse op het uitvallen van studenten.[^6]
 
 
 # De data bekijken
@@ -194,7 +195,8 @@ vConf.int2 <- Round_and_format(fish$conf.int[2])
 <!-- ## TEKSTBLOK: Fishers-Exact-toets.R -->
 * *p* = `r vF_p`; p-waarde > 0,05, dus de H~0~ wordt niet verworpen.[^10]  
 * 95% betrouwbaarheidsinterval is tussen `r vConf.int1` en `r vConf.int2`.  
-* De odds ratio is 1,8. Dat wil zeggen dat de kans op uitval van studenten met een functiebeperking met leenstelsel 1,8 keer zo groot is als de kans op uitval van studenten met een functiebeperking zonder het leenstelsel. Deze relatie is niet significant en daarom wordt het in de rapportage ook niet benoemd.  
+* De odds ratio is 1,8 met een 95%-betrouwbaarheidsinterval van `r vConf.int1` tot `r vConf.int2`. De kans op uitval van studenten met een functiebeperking met leenstelsel is dus 1,8 keer zo groot is als de kans op uitval van studenten met een functiebeperking zonder het leenstelsel. Deze relatie is echter niet significant
+
 
 <!-- ## /TEKSTBLOK: Fishers-Exact-toets.R -->
 

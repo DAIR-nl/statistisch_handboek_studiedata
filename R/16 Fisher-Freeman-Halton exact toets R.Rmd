@@ -94,6 +94,11 @@ Als post-hoc toets voor de *Chi-kwadraat toets* wordt het gestandaardiseerde res
 
 Voor de *Fisher-Freeman-Halton exact toets* is er geen specifiek voorgeschreven post-hoc toets.[^3]<sup>,</sup>[^5] Een goede optie is het uitvoeren van losse *Fisher's exact toetsen* voor elke mogelijke combinatie van 2x2 tabellen met daarbij een correctie op de p-waarden vanwege meerdere testen tegelijkertijd. 
 
+# Effectmaat
+
+De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^5] 
+De *Chi-kwadraat toets* heeft als effectmaat *w*.[^6] Een indicatie om *w* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^7]
+
 
 # De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken.R -->
@@ -126,10 +131,32 @@ vDF <- Chi2$parameter
 ```
 <!-- ## /CLOSEDBLOK: Chi2-toets.R-->
 
+Bereken de effectmaat *w* vervolgens op basis van de $\chi^2$-waarde van de *Chi-kwadraat toets*.
+<!-- ## OPENBLOK: Chi2-toets-2.R -->
+```{r effectsize}
+# Sla de teststatistiek op
+Chi2_teststatistiek <- chisq.test(Bsa_kt)$statistic
+
+# Bereken het totaal aantal observaties als som van de kruistabel
+N <- sum(Bsa_kt)
+
+# Bereken eta squared
+w <- sqrt(Chi2_teststatistiek / N)
+
+# Print effectgrootte
+paste("Effectgrootte is",Round_and_format(w))
+
+
+```
+<!-- ## /OPENBLOK: Chi2-toets-2.R -->
+
+
 <!-- ## TEKSTBLOK: Chi2-toets.R-->
 * *χ^2^* ~6~ ≈ `r vChi2`, *p* < 0,0001  
 * Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r vDF`. 
-* p-waarde < 0,05, de H~0~ wordt verworpen.[^6]  
+* p-waarde < 0,05, de H~0~ wordt verworpen.[^8]
+* Effectmaat is `r Round_and_format(w)`, dus een klein tot gemiddeld effect
+
 
 <!-- ## /TEKSTBLOK: Chi2-toets.R-->
 
@@ -159,7 +186,7 @@ resultaat$residuals
 ## Rapportage
 
 <!-- ## TEKSTBLOK: RapportageChi2.R -->
-De *Chi-kwadraat toets* is uitgevoerd om te onderzoeken of het percentage studenten met positief BSA verschilt per instroomland. De resultaten illustreren dat de nulthypothese verworpen kan worden, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* < 0,0001. Er zijn dus verschillen tussen de instroomlanden.
+De *Chi-kwadraat toets* is uitgevoerd om te onderzoeken of het percentage studenten met positief BSA verschilt per instroomland. De resultaten illustreren dat de nulthypothese verworpen kan worden, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* < 0,0001, *w* = `r Round_and_format(w)`. Er zijn dus verschillen tussen de instroomlanden.
 
 De geobserveerde waarden voor de verschillende instroomlanden bij een positief BSA verschillen niet significant van de verwachte waarden. Bij een negatief BSA zijn er echter een aantal landen waarbij significante verschillen van de verwachte waarde zijn op te merken. Nederland (NL; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","NL"])`) en het Verenigd Koninkrijk (UK; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","UK"])`) hebben een lager aantal studenten met een negatief BSA dan verwacht; Italië (IT; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","IT"])`), Spanje (ES; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","ES"])`) en de Verenigde Staten (US; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","US"])`) een hoger aantal studenten met negatief BSA dan verwacht.
 <!-- ## TEKSTBLOK: RapportageChi2.R -->
@@ -192,18 +219,18 @@ Gebruik de functie `fisher.test()` met als eerste argument de dataset `Bsa_kt_n1
 <!-- ## /TEKSTBLOK: Fisher-Freeman-Halton-exact-toets-->
 <!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets-->
 ``` {r fisher toets}
-bb<-fisher.test(Bsa_kt_n10, simulate.p.value = TRUE)
+fisher.test(Bsa_kt_n10, simulate.p.value = TRUE)
 ```
 <!-- ## /OPENBLOK: Fisher-Freeman-Halton-exact-toets-->
 
 <!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets2-->
-* p-waarde is `r Round_and_format(fisher.test(Bsa_kt_n10, simulate.p.value = TRUE)$p.value)` , de H~0~ kan niet worden verworpen [^6]
+* p-waarde is `r Round_and_format(fisher.test(Bsa_kt_n10, simulate.p.value = TRUE)$p.value)` , de H~0~ kan niet worden verworpen [^8]
 <!-- ## /TEKSTBLOK: Fisher-Freeman-Halton-exact-toets2-->
 
 ## Post-hoc toets: Fisher's exact toets
 
 <!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets post-hoc1 -->
-Omdat er geen afhankelijkheid is tussen het wel of niet halen van een positief BSA en het instroomland, hoeven er geen post-hoc toetsen uitgevoerd te worden. Indien dit wel nodig is, voer deze dan uit met de functie `fisher.multcomp()` met als eerste argument de kruistabel `Bsa_kt_10` en als tweede argument de gebruikte methode om te corrigeren voor meerdere testen, in dit geval `p.method="bonferroni"`. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans dat er bij toeval een verband wordt ontdekt dat er niet is.[^5]
+Omdat er geen afhankelijkheid is tussen het wel of niet halen van een positief BSA en het instroomland, hoeven er geen post-hoc toetsen uitgevoerd te worden. Indien dit wel nodig is, voer deze dan uit met de functie `fisher.multcomp()` met als eerste argument de kruistabel `Bsa_kt_10` en als tweede argument de gebruikte methode om te corrigeren voor meerdere testen, in dit geval `p.method="bonferroni"`. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans dat er bij toeval een verband wordt ontdekt dat er niet is.[^5] Naast de p-waarde toont *Fisher's exact toets* de odds ratio als effectmaat. Voor meer informatie, zie de toetspagina van de *Fisher's exact toets*.   
 <!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets post-hoc1 -->
 
 
@@ -234,4 +261,7 @@ De *Fisher-Freeman-Halton exact toets* is uitgevoerd om te toetsen of het percen
 [^3]: Agresti, A. (2003). *Categorical data analysis*. Vol. 482, John Wiley & Sons.
 [^4]: Nominaal: variabelen die niet afhankelijk van elkaar zijn en niet op inhoudelijke basis geordend kunnen worden; voorbeelden hiervan zijn geslacht of achternamen. Een binaire variabele is een voorbeeld van een nominale variabele. Binaire variabelen hebben twee mogelijkheden, ja of nee, terwijl nominale variabelen meerdere mogelijkheden kunnen hebben. 
 [^5]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
-[^6]: Dit voorbeeld gaat uit van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.
+[^6]: De effectmaat *w* wordt voor de *Chi-kwadraat toets* berekend door de wortel te nemen van de
+$\chi^2$-waarde gedeeld door het totaal aantal observaties, i.e. $\sqrt{ \frac{\chi^2}{N} }$.
+[^7]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
+[^8]: Dit voorbeeld gaat uit van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.

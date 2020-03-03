@@ -1,5 +1,5 @@
 ---
-title: "Fisher-Freeman-Halton exact toets"
+title: "Chi-kwadraat toets en Fisher-Freeman-Halton exact toets"
 output:
   html_document:
     theme: lumen
@@ -41,47 +41,48 @@ source(paste0(here::here(),"/01. Includes/data/16.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *Chi-kwadraat toets*[^1] of de *Fisher-Freeman-Halton exact toets*[^2] om te toetsen of er een verband is tussen twee ongepaarde variabelen, waarin één of beide variabelen meer dan twee categorieën hebben. Deze *Fisher-Freeman-Halton exact toets* is een alternatief voor de *Chi-kwadraat toets* wanneer er kleine aantallen observaties zijn. [^2]<sup>,</sup>[^3] Deze is een uitbreiding van de *Fisher's exact toets* die gebruikt wordt om te toetsen of er een verband bestaat tussen twee ongepaarde binaire variabelen, oftewel een 2x2 tabel. 
+Gebruik de *Chi-kwadraat toets*[^1] of de *Fisher-Freeman-Halton exact toets*[^2] om te toetsen of er een verband is tussen twee ongepaarde variabelen, waarin één of beide variabelen meer dan twee categorieën hebben. De *Fisher-Freeman-Halton exact toets* is een alternatief voor de *Chi-kwadraat toets* wanneer er kleine aantallen observaties zijn. [^2]<sup>,</sup>[^3] De *Fisher-Freeman-Halton exact toets* is een uitbreiding van de *Fisher's exact toets* welke gebruikt wordt om te toetsen of er een verband bestaat tussen twee ongepaarde binaire variabelen, oftewel een 2x2 tabel. 
 
 # Onderwijscasus
 <div id = "casus">
-De opleidingsdirecteur van de Bachelor Antropologie vraagt zich af wat de invloed is van de instroom van internationale studenten op het behalen van een positief BSA. Krijgen studenten uit bepaalde landen vaker een positief BSA dan studenten uit andere landen? Internationale studenten zijn 'studenten met een buitenlandse vooropleiding of een opleiding van een Europese school’. 
+De opleidingsdirecteur van de Bachelor Antropologie vraagt zich af wat de invloed is van de instroom van studenten met een vooropleiding in het buitenland op het behalen van een positief BSA. Krijgen studenten met een vooropleiding uit bepaalde landen vaker een positief BSA dan studenten met een vooropleiding uit andere landen? Op basis van deze analyse kan de opleidingsdirecteur overwegen om bij de inrichting van het tutoraat rekening te houden met de achtergronden van studenten.
 
-H~0~: De verhouding wel/geen positief BSA is onder de studenten van de Bachelor Antropologie hetzelfde voor studenten uit elk land.  
 
-H~A~: De verhouding wel/geen positief BSA is onder de studenten van de Bachelor Antropologie anders voor een groep voor studenten uit één of meerdere landen.  
+H~0~: De verhouding wel/geen positief BSA is onder de studenten van de Bachelor Antropologie hetzelfde voor studenten ongeacht het land van de hoogste vooropleiding.
+
+H~A~: De verhouding wel/geen positief BSA is onder de studenten van de Bachelor Antropologie anders voor ten minste een land van hoogste vooropleiding.  
 </div>
 
 # Assumpties
-Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal of ordinaal [^4] niveau gemeten en daarmee onafhankelijk van elkaar. 
+Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal of ordinaal niveau [^4] gemeten en daarmee onafhankelijk van elkaar. 
 
 ## Groepsgrootte
-Beide testen maken gebruik van een kruistabel; zie tabel 1 voor de geoberveerde waarden van de casus. 
+Beide testen maken gebruik van een kruistabel; zie Tabel 1 voor de geoberveerde waarden van de casus. 
 
 <!-- ## TEKSTBLOK: Groepsgrootte1.R -->
 
 |                      | NL   | GE | IT | UK | BE | ES | US |   |
 | ------------- | ---------| ------------| -------------| ---------|---------|---------|---------| ------------- |
-| **Positief BSA** |`r Bsa_kt[1,1]` | `r Bsa_kt[1,2]`  | `r Bsa_kt[1,3]`  | `r Bsa_kt[1,4]`  | `r Bsa_kt[1,5]`  | `r Bsa_kt[1,6]`  | `r Bsa_kt[1,7]`  | **`r sum(Bsa_kt[1,1:7])`**|
-| **Negatief BSA**  |`r Bsa_kt[2,1]`   | `r Bsa_kt[2,2]` | `r Bsa_kt[2,3]` | `r Bsa_kt[2,4]` | `r Bsa_kt[2,5]` | `r Bsa_kt[2,6]` | `r Bsa_kt[2,7]` | **`r sum(Bsa_kt[2,1:7])`**|
-|**Totaal** |**`r sum(Bsa_kt[1:2,1])`**   | **`r sum(Bsa_kt[1:2,2])`** | **`r sum(Bsa_kt[1:2,3])`**   | **`r sum(Bsa_kt[1:2,4])`**   | **`r sum(Bsa_kt[1:2,5])`**   | **`r sum(Bsa_kt[1:2,6])`**   | **`r sum(Bsa_kt[1:2,7])`**   | **`r sum(Bsa_kt)`** |
-*Tabel 1. Geobserveerde waarden casus BSA en instroomland*
+| **Positief BSA** |`r BSA_kruistabel[1,1]` | `r BSA_kruistabel[1,2]`  | `r BSA_kruistabel[1,3]`  | `r BSA_kruistabel[1,4]`  | `r BSA_kruistabel[1,5]`  | `r BSA_kruistabel[1,6]`  | `r BSA_kruistabel[1,7]`  | **`r sum(BSA_kruistabel[1,1:7])`**|
+| **Negatief BSA**  |`r BSA_kruistabel[2,1]`   | `r BSA_kruistabel[2,2]` | `r BSA_kruistabel[2,3]` | `r BSA_kruistabel[2,4]` | `r BSA_kruistabel[2,5]` | `r BSA_kruistabel[2,6]` | `r BSA_kruistabel[2,7]` | **`r sum(BSA_kruistabel[2,1:7])`**|
+|**Totaal** |**`r sum(BSA_kruistabel[1:2,1])`**   | **`r sum(BSA_kruistabel[1:2,2])`** | **`r sum(BSA_kruistabel[1:2,3])`**   | **`r sum(BSA_kruistabel[1:2,4])`**   | **`r sum(BSA_kruistabel[1:2,5])`**   | **`r sum(BSA_kruistabel[1:2,6])`**   | **`r sum(BSA_kruistabel[1:2,7])`**   | **`r sum(BSA_kruistabel)`** |
+*Tabel 1. Geobserveerde waarden casus BSA en land van hoogste vooropleiding.*
 <!-- ## TEKSTBLOK: Groepsgrootte1.R -->
 
-Op basis van geobserveerde waarden kunnen de verwachte waarden berekend worden. In deze casus kan de verwachte waarde van de studenten uit Nederland met positief BSA berekend worden door het aantal studenten met positief BSA te vermenigvuldigen met het aantal studenten uit Nederland en de uitkomst te delen door het totaal aantal studenten:
+Op basis van geobserveerde waarden kunnen de verwachte waarden berekend worden. In deze casus kan de verwachte waarde van de studenten met een Nederlandse vooropleiding met positief BSA berekend worden door het aantal studenten met positief BSA te vermenigvuldigen met het aantal studenten met Nederlandse vooropleiding en de uitkomst te delen door het totaal aantal studenten:
 
 <!-- ## TEKSTBLOK: Groepsgrootte2.R -->
-* aantal studenten positief BSA: `r sum(Bsa_kt[1,1:7])`   
-* aantal studenten uit Nederland: `r sum(Bsa_kt[1:2,1])`  
-* totaal aantal studenten: `r sum(Bsa_kt)` 
-* verwacht aantal studenten uit Nederland met positief BSA: `r sum(Bsa_kt[1,1:7])`*`r sum(Bsa_kt[1:2,1])`/`r sum(Bsa_kt)` ≈ `r round(sum(Bsa_kt[1,1:7])*sum(Bsa_kt[1:2,1])/sum(Bsa_kt)) `. Deze en overige waarden zijn berekend in tabel 2. 
+* aantal studenten positief BSA: `r sum(BSA_kruistabel[1,1:7])`   
+* aantal studenten met Nederlandse vooropleiding: `r sum(BSA_kruistabel[1:2,1])`  
+* totaal aantal studenten: `r sum(BSA_kruistabel)` 
+* verwacht aantal studenten met Nederlandse vooropleiding met positief BSA: `r sum(BSA_kruistabel[1,1:7])`*`r sum(BSA_kruistabel[1:2,1])`/`r sum(BSA_kruistabel)` ≈ `r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,1])/sum(BSA_kruistabel)) `. Deze en overige waarden zijn berekend in Tabel 2. 
 
 |                      | NL   | GE | IT | UK | BE | ES | US |   |
 | ------------- | ---------| ------------| -------------| ---------|---------|---------|---------| ------------- |
-| **Positief BSA** |`r round(sum(Bsa_kt[1,1:7])*sum(Bsa_kt[1:2,1])/sum(Bsa_kt)) ` | `r round(sum(Bsa_kt[1,1:7])*sum(Bsa_kt[1:2,2])/sum(Bsa_kt)) `  | `r round(sum(Bsa_kt[1,1:7])*sum(Bsa_kt[1:2,3])/sum(Bsa_kt)) `  | `r round(sum(Bsa_kt[1,1:7])*sum(Bsa_kt[1:2,4])/sum(Bsa_kt)) `  | `r round(sum(Bsa_kt[1,1:7])*sum(Bsa_kt[1:2,5])/sum(Bsa_kt)) `  | `r round(sum(Bsa_kt[1,1:7])*sum(Bsa_kt[1:2,6])/sum(Bsa_kt)) `  | `r round(sum(Bsa_kt[1,1:7])*sum(Bsa_kt[1:2,7])/sum(Bsa_kt)) `  | **`r sum(Bsa_kt[1,1:7])`**|
-| **Negatief BSA**  |`r round(sum(Bsa_kt[2,1:7])*sum(Bsa_kt[1:2,1])/sum(Bsa_kt)) `   | `r round(sum(Bsa_kt[2,1:7])*sum(Bsa_kt[1:2,2])/sum(Bsa_kt)) ` | `r round(sum(Bsa_kt[2,1:7])*sum(Bsa_kt[1:2,3])/sum(Bsa_kt)) ` | `r round(sum(Bsa_kt[2,1:7])*sum(Bsa_kt[1:2,4])/sum(Bsa_kt)) ` | `r round(sum(Bsa_kt[2,1:7])*sum(Bsa_kt[1:2,5])/sum(Bsa_kt)) ` | `r round(sum(Bsa_kt[2,1:7])*sum(Bsa_kt[1:2,6])/sum(Bsa_kt)) ` | `r round(sum(Bsa_kt[2,1:7])*sum(Bsa_kt[1:2,7])/sum(Bsa_kt)) ` | **`r sum(Bsa_kt[2,1:7])`**|
-|**Totaal** |**`r sum(Bsa_kt[1:2,1])`**   | **`r sum(Bsa_kt[1:2,2])`** | **`r sum(Bsa_kt[1:2,3])`**   | **`r sum(Bsa_kt[1:2,4])`**   | **`r sum(Bsa_kt[1:2,5])`**   | **`r sum(Bsa_kt[1:2,6])`**   | **`r sum(Bsa_kt[1:2,7])`**   | **`r sum(Bsa_kt)`** |
-*Tabel 2. Verwachte waarden casus BSA en instroomland*
+| **Positief BSA** |`r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,1])/sum(BSA_kruistabel)) ` | `r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,2])/sum(BSA_kruistabel)) `  | `r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,3])/sum(BSA_kruistabel)) `  | `r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,4])/sum(BSA_kruistabel)) `  | `r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,5])/sum(BSA_kruistabel)) `  | `r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,6])/sum(BSA_kruistabel)) `  | `r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,7])/sum(BSA_kruistabel)) `  | **`r sum(BSA_kruistabel[1,1:7])`**|
+| **Negatief BSA**  |`r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,1])/sum(BSA_kruistabel)) `   | `r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,2])/sum(BSA_kruistabel)) ` | `r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,3])/sum(BSA_kruistabel)) ` | `r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,4])/sum(BSA_kruistabel)) ` | `r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,5])/sum(BSA_kruistabel)) ` | `r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,6])/sum(BSA_kruistabel)) ` | `r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,7])/sum(BSA_kruistabel)) ` | **`r sum(BSA_kruistabel[2,1:7])`**|
+|**Totaal** |**`r sum(BSA_kruistabel[1:2,1])`**   | **`r sum(BSA_kruistabel[1:2,2])`** | **`r sum(BSA_kruistabel[1:2,3])`**   | **`r sum(BSA_kruistabel[1:2,4])`**   | **`r sum(BSA_kruistabel[1:2,5])`**   | **`r sum(BSA_kruistabel[1:2,6])`**   | **`r sum(BSA_kruistabel[1:2,7])`**   | **`r sum(BSA_kruistabel)`** |
+*Tabel 2. Verwachte waarden casus BSA en land van hoogste vooropleiding.*
 <!-- ## TEKSTBLOK: Groepsgrootte2.R -->
 
 De *Chi-kwadraat toets* wordt onbetrouwbaar als er in meer dan 20 % van de gevallen een verwachte waarde van 5 of lager is.[^5] Gebruik in die gevallen de *Fisher-Freeman-Halton exact toets*.  
@@ -90,9 +91,9 @@ De *Chi-kwadraat toets* wordt onbetrouwbaar als er in meer dan 20 % van de geval
 
 De *Chi-kwadraat toets* en *Fisher-Freeman-Halton exact toets* worden gebruikt om een afhankelijkheid aan te tonen tussen twee ongepaarde categorische variabelen. Wanneer een of beide variabelen meer dan twee categorieën bevat, worden post-hoc toetsen uitgevoerd om te bepalen welke categorieën significant van elkaar verschillen.
 
-Als post-hoc toets voor de *Chi-kwadraat toets* wordt het gestandaardiseerde residu gebruikt. Dit is het gestandaardiseerde verschil tussen de geobserveerde en verwachte waarde. Voor elke cel in de kruistabel kan het gestandaardiseerde residu bepaald worden. Vergelijkbaar met z-scores zijn deze residuen significant bij een waarde groter dan $\pm 1,96$. Op deze manier kan bepaald worden in welke cellen er afwijkingen van de verwachte waarden zijn.[^5]
+Als post-hoc toets voor de *Chi-kwadraat toets* wordt het gestandaardiseerde residu gebruikt. Dit is het gestandaardiseerde verschil tussen de geobserveerde en verwachte waarde, waarbij gestandaardiseerd betekent dat het een gemiddelde van 0 en standaardafwijking van 1 heeft. Op deze manier kunnen de verschillende residuen met elkaar vergeleken worden omdat ze dezelfde schaal hebben. Voor elke cel in de kruistabel kan het gestandaardiseerde residu bepaald worden. Vergelijkbaar met z-scores zijn deze residuen significant bij een waarde groter dan ± 1,96 wanneer een significantieniveau (α) van 0,05 wordt gehanteerd. Op deze manier kan bepaald worden in welke cellen er afwijkingen van de verwachte waarden zijn. [^5]
 
-Voor de *Fisher-Freeman-Halton exact toets* is er geen specifiek voorgeschreven post-hoc toets.[^3]<sup>,</sup>[^5] Een goede optie is het uitvoeren van losse *Fisher's exact toetsen* voor elke mogelijke combinatie van 2x2 tabellen met daarbij een correctie op de p-waarden vanwege meerdere testen tegelijkertijd. 
+Voor de *Fisher-Freeman-Halton exact toets* is er geen specifiek voorgeschreven post-hoc toets.[^3]<sup>,</sup>[^5] Een goede optie is het uitvoeren van losse *Fisher's exact toetsen* voor elke mogelijke combinatie van 2x2 tabellen. Gebruik een correctie op de p-waarden, omdat er meerdere testen tegelijk uitgevoerd worden. Een bekende correctie is de Bonferroni methode, andere opties zijn ook mogelijk.
 
 # Effectmaat
 
@@ -102,29 +103,31 @@ De *Chi-kwadraat toets* heeft als effectmaat *w*.[^6] Een indicatie om *w* te in
 
 # De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken.R -->
-Er is een kruistabel ingeladen over het BSA advies voor bachelorstudenten antropologie met verschillende instroomlanden. De variabele voor BSA advies is binair (positief of negatief) en de variabele voor instroomland bestaat uit zeven categorieën Deze kruistabel is gebaseerd op een dataset waarin BSA advies en instroomland voor studenten wordt bijgehouden. 
+Er is een kruistabel ingeladen over het BSA advies voor bachelorstudenten antropologie met verschillende landen van hoogste vooropleiding. De variabele voor BSA advies is binair (positief of negatief) en de variabele voor land van hoogste vooropleiding bestaat uit zeven categorieën Deze kruistabel is gebaseerd op een dataset waarin BSA advies en land van hoogste vooropleiding voor studenten wordt bijgehouden. 
 Print de kruistabel of geef deze grafisch weer met `barplot()`. 
 <!-- ## /TEKSTBLOK: Data-bekijken.R -->
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse=TRUE}
-print(Bsa_kt)
-barplot(Bsa_kt, beside = TRUE, legend.text = TRUE)
+print(BSA_kruistabel)
+barplot(BSA_kruistabel, beside = TRUE, legend.text = TRUE)
 ```
 <!-- ## /OPENBLOK: Data-bekijken.R -->
+
+Hieronder wordt eerst de *Chi-kwadraat toets* met de data over het BSA advies voor bachelorstudenten antropologie (`BSA_kruistabel`). Daarna wordt de *Fisher-Freeman-Halton exact toets* uitgevoerd op een dataset met een lager aantal observaties.
 
 # Chi-kwadraat toets
 ## Uitvoering
 <!-- ## TEKSTBLOK: Chi2-toets.R -->
-De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met positief BSA gelijk is voor de verschillende instroomlanden. Gebruik `chisq.test()` op de kruistabel `Bsa_kt`.  
+De *chi-kwadraat toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met positief BSA gelijk is voor de verschillende landen van hoogste vooropleiding. Gebruik `chisq.test()` op de kruistabel `BSA_kruistabel`.  
 <!-- ## /TEKSTBLOK: Chi2-toets.R -->
 <!-- ## OPENBLOK: Chi2-toets-->
 ```{r collapse=TRUE}
-chisq.test(Bsa_kt)
+chisq.test(BSA_kruistabel)
 ```
 <!-- ## /OPENBLOK: Chi2-toets-->
 <!-- ## CLOSEDBLOK: Chi2-toets.R-->
 ```{r chi2 als object, include=FALSE, echo=TRUE}
-Chi2 <- chisq.test(Bsa_kt)
+Chi2 <- chisq.test(BSA_kruistabel)
 vChi2 <- Round_and_format(Chi2$statistic)
 vP <- Round_and_format(Chi2$p.value)
 vDF <- Chi2$parameter
@@ -135,10 +138,10 @@ Bereken de effectmaat *w* vervolgens op basis van de $\chi^2$-waarde van de *Chi
 <!-- ## OPENBLOK: Chi2-toets-2.R -->
 ```{r effectsize}
 # Sla de teststatistiek op
-Chi2_teststatistiek <- chisq.test(Bsa_kt)$statistic
+Chi2_teststatistiek <- chisq.test(BSA_kruistabel)$statistic
 
 # Bereken het totaal aantal observaties als som van de kruistabel
-N <- sum(Bsa_kt)
+N <- sum(BSA_kruistabel)
 
 # Bereken eta squared
 w <- sqrt(Chi2_teststatistiek / N)
@@ -163,11 +166,11 @@ paste("Effectgrootte is",Round_and_format(w))
 ## Post-hoc toets: gestandaardiseerde residuen
 
 
-Voer post-hoc toetsen uit om te bepalen welke instroomlanden van elkaar verschillen wat betreft het percentage studenten met positief BSA. Inspecteer hiervoor de Pearson residuen van de *Chi-kwadraat toets* op waarden groter of kleiner dan 1,96 of -1,96 respectievelijke. Let op dat hier dus geen correctie voor meerdere testen plaatsvindt.
+Voer post-hoc toetsen uit om te bepalen welke landen van hoogste vooropleiding van elkaar verschillen wat betreft het percentage studenten met positief BSA. Inspecteer hiervoor de Pearson residuen van de *Chi-kwadraat toets* op waarden groter dan 1,96 en kleiner dan -1,96. Let op dat hier nog geen correctie voor meerdere testen plaatsvindt.[^9]
 
 <!-- ## OPENBLOK: Chi2-toets post-hoc1-->
 ```{r collapse=TRUE}
-resultaat <- chisq.test(Bsa_kt)
+resultaat <- chisq.test(BSA_kruistabel)
 resultaat$residuals
 ```
 <!-- ## /OPENBLOK: Chi2-toets post-hoc1-->
@@ -175,7 +178,7 @@ resultaat$residuals
 <!-- ## TEKSTBLOK: Chi2-toets post-hoc2.R-->
 * Significant hogere geobserveerde waarde bij negatief BSA Italië (IT), *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","IT"])`
 * Significant hogere geobserveerde waarde bij negatief BSA Spanje (ES), *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","ES"])`
-* Significant hogere geobserveerde waarde bij negatief BSA verenigde Staten (US), *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","US"])`
+* Significant hogere geobserveerde waarde bij negatief BSA Verenigde Staten (US), *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","US"])`
 * Significant lagere geobserveerde waarde bij negatief BSA Nederland (NL), *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","NL"])`
 * Significant lagere geobserveerde waarde bij negatief BSA Verenigd Koninkrijk (VK), *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","UK"])`
 
@@ -186,67 +189,68 @@ resultaat$residuals
 ## Rapportage
 
 <!-- ## TEKSTBLOK: RapportageChi2.R -->
-De *Chi-kwadraat toets* is uitgevoerd om te onderzoeken of het percentage studenten met positief BSA verschilt per instroomland. De resultaten illustreren dat de nulthypothese verworpen kan worden, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* < 0,0001, *w* = `r Round_and_format(w)`. Er zijn dus verschillen tussen de instroomlanden.
+De *Chi-kwadraat toets* is uitgevoerd om te onderzoeken of het percentage studenten met positief BSA verschilt per land van hoogste vooropleiding. De resultaten illustreren dat de nulthypothese verworpen kan worden, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* < 0,0001, *w* = `r Round_and_format(w)`. Er zijn verschillen tussen de landen van hoogste vooropleiding.
 
-De geobserveerde waarden voor de verschillende instroomlanden bij een positief BSA verschillen niet significant van de verwachte waarden. Bij een negatief BSA zijn er echter een aantal landen waarbij significante verschillen van de verwachte waarde zijn op te merken. Nederland (NL; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","NL"])`) en het Verenigd Koninkrijk (UK; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","UK"])`) hebben een lager aantal studenten met een negatief BSA dan verwacht; Italië (IT; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","IT"])`), Spanje (ES; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","ES"])`) en de Verenigde Staten (US; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","US"])`) een hoger aantal studenten met negatief BSA dan verwacht.
+De resultaten van de post-hoc toetsen van de *Chi-kwadraat toets* zijn te vinden in Tabel 3, waarin geobserveerde waarden met asterisk significant verschillend zijn van verwachte waarden. De geobserveerde waarden voor de verschillende landen van hoogste vooropleiding bij een positief BSA verschillen niet significant van de verwachte waarden. Bij een negatief BSA is er echter een aantal landen waarbij significante verschillen van de verwachte waarde zijn op te merken. Nederland (NL; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","NL"])`) en het Verenigd Koninkrijk (UK; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","UK"])`) hebben een lager aantal studenten met een negatief BSA dan verwacht; Italië (IT; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","IT"])`), Spanje (ES; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","ES"])`) en de Verenigde Staten (US; *z* = `r Round_and_format(resultaat$residuals["Neg_bsa","US"])`) een hoger aantal studenten met negatief BSA dan verwacht.
 <!-- ## TEKSTBLOK: RapportageChi2.R -->
 
 <!-- ## TEKSTBLOK: RapportageChi3.R -->
 
 |                      | NL   | GE | IT | UK | BE | ES | US |   |
 | ------------- | ---------| ------------| -------------| ---------|---------|---------|---------| ------------- |
-| **Positief BSA** |`r Bsa_kt[1,1]` | `r Bsa_kt[1,2]`  | `r Bsa_kt[1,3]`  | `r Bsa_kt[1,4]`  | `r Bsa_kt[1,5]`  | `r Bsa_kt[1,6]`  | `r Bsa_kt[1,7]`  | **`r sum(Bsa_kt[1,1:7])`**|
-| **Negatief BSA**  |`r Bsa_kt[2,1]`\*   | `r Bsa_kt[2,2]` | `r Bsa_kt[2,3]`\* | `r Bsa_kt[2,4]`\* | `r Bsa_kt[2,5]` | `r Bsa_kt[2,6]`\* | `r Bsa_kt[2,7]`\* | **`r sum(Bsa_kt[2,1:7])`**|
-|**Totaal** |**`r sum(Bsa_kt[1:2,1])`**   | **`r sum(Bsa_kt[1:2,2])`** | **`r sum(Bsa_kt[1:2,3])`**   | **`r sum(Bsa_kt[1:2,4])`**   | **`r sum(Bsa_kt[1:2,5])`**   | **`r sum(Bsa_kt[1:2,6])`**   | **`r sum(Bsa_kt[1:2,7])`**   | **`r sum(Bsa_kt)`** |
-*Tabel 3. Geobserveerde waarden casus BSA en instroomland. Waarden met asterisk zijn significant verschillend van verwachte waarden.*
+| **Positief BSA** |`r BSA_kruistabel[1,1]` | `r BSA_kruistabel[1,2]`  | `r BSA_kruistabel[1,3]`  | `r BSA_kruistabel[1,4]`  | `r BSA_kruistabel[1,5]`  | `r BSA_kruistabel[1,6]`  | `r BSA_kruistabel[1,7]`  | **`r sum(BSA_kruistabel[1,1:7])`**|
+| **Negatief BSA**  |`r BSA_kruistabel[2,1]`\*   | `r BSA_kruistabel[2,2]` | `r BSA_kruistabel[2,3]`\* | `r BSA_kruistabel[2,4]`\* | `r BSA_kruistabel[2,5]` | `r BSA_kruistabel[2,6]`\* | `r BSA_kruistabel[2,7]`\* | **`r sum(BSA_kruistabel[2,1:7])`**|
+|**Totaal** |**`r sum(BSA_kruistabel[1:2,1])`**   | **`r sum(BSA_kruistabel[1:2,2])`** | **`r sum(BSA_kruistabel[1:2,3])`**   | **`r sum(BSA_kruistabel[1:2,4])`**   | **`r sum(BSA_kruistabel[1:2,5])`**   | **`r sum(BSA_kruistabel[1:2,6])`**   | **`r sum(BSA_kruistabel[1:2,7])`**   | **`r sum(BSA_kruistabel)`** |
+*Tabel 3. Geobserveerde waarden casus BSA en land van hoogste vooropleiding. Waarden met asterisk zijn significant verschillend van verwachte waarden.*
 <!-- ## TEKSTBLOK: RapportageChi3.R -->
 
 
 # Fisher-Freeman-Halton exact toets
 ## Uitvoering
 <!-- ## TEKSTBLOK: UitvoeringFFH.R -->
-De *Fisher-Freeman-Halton exact toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met positief BSA verschilt per instroomland. Deze toets wordt in plaats van de *Chi-kwadraat toets* gebruikt wanneer er in meer dan 20 % van de cellen een verwachte waarde van 5 of lager is. Er is een steekproef van `Bsa_kt` ingeladen genaamd `Bsa_kt_n10` met daarin een lager aantal observaties per cel.
+De *Fisher-Freeman-Halton exact toets* wordt uitgevoerd om de vraag te beantwoorden of het percentage studenten met positief BSA verschilt per land van hoogste vooropleiding. Deze toets wordt in plaats van de *Chi-kwadraat toets* gebruikt wanneer er in meer dan 20 % van de cellen een verwachte waarde van 5 of lager is. Er is een steekproef van `BSA_kruistabel` ingeladen genaamd `BSA_kruistabel_n10` met daarin een lager aantal observaties per cel.
 <!-- ## TEKSTBLOK: UitvoeringFFH.R -->
 
 <!-- ## OPENBLOK: data-bekijken-n10 -->
 ```{r data bekijken n10}
-print(Bsa_kt_n10)
+print(BSA_kruistabel_n10)
 ```
 <!-- ## /OPENBLOK: data-bekijken-n10 -->
 
 <!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets-->
-Gebruik de functie `fisher.test()` met als eerste argument de dataset `Bsa_kt_n10` en als tweede argument `simulate.p.value = TRUE`. Hierdoor wordt de p-waarde met een simulatie berekent waardoor de rekentijd voor de copmuter een stuk lager is en de resultaten sneller weergegeven kunnen worden.
+Gebruik de functie `fisher.test()` met als eerste argument de dataset `BSA_kruistabel_n10` en als tweede argument `simulate.p.value = TRUE`. Hierdoor wordt de p-waarde met een simulatie berekent waardoor de rekentijd voor de copmuter een stuk lager is en de resultaten sneller weergegeven kunnen worden.
 <!-- ## /TEKSTBLOK: Fisher-Freeman-Halton-exact-toets-->
 <!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets-->
 ``` {r fisher toets}
-fisher.test(Bsa_kt_n10, simulate.p.value = TRUE)
+fisher.test(BSA_kruistabel_n10, simulate.p.value = TRUE)
 ```
 <!-- ## /OPENBLOK: Fisher-Freeman-Halton-exact-toets-->
 
 <!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets2-->
-* p-waarde is `r Round_and_format(fisher.test(Bsa_kt_n10, simulate.p.value = TRUE)$p.value)` , de H~0~ kan niet worden verworpen [^8]
+* p-waarde is `r Round_and_format(fisher.test(BSA_kruistabel_n10, simulate.p.value = TRUE)$p.value)` , de H~0~ kan niet worden verworpen [^8]
 <!-- ## /TEKSTBLOK: Fisher-Freeman-Halton-exact-toets2-->
 
 ## Post-hoc toets: Fisher's exact toets
 
 <!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets post-hoc1 -->
-Omdat er geen afhankelijkheid is tussen het wel of niet halen van een positief BSA en het instroomland, hoeven er geen post-hoc toetsen uitgevoerd te worden. Indien dit wel nodig is, voer deze dan uit met de functie `fisher.multcomp()` met als eerste argument de kruistabel `Bsa_kt_10` en als tweede argument de gebruikte methode om te corrigeren voor meerdere testen, in dit geval `p.method="bonferroni"`. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans dat er bij toeval een verband wordt ontdekt dat er niet is.[^5] Naast de p-waarde toont *Fisher's exact toets* de odds ratio als effectmaat. Voor meer informatie, zie de toetspagina van de *Fisher's exact toets*.   
+Omdat er geen afhankelijkheid is tussen het wel of niet halen van een positief BSA en het land van hoogste vooropleiding, hoeven er geen post-hoc toetsen uitgevoerd te worden. Indien dit wel nodig is, voer deze dan uit met de functie `fisher.multcomp()` met als eerste argument de kruistabel `BSA_kruistabel_10` en als tweede argument de gebruikte methode om te corrigeren voor meerdere testen, in dit geval `p.method="bonferroni"`. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans dat er bij toeval een verband wordt ontdekt dat er niet is.[^5] Naast de p-waarde toont *Fisher's exact toets* de odds ratio als effectmaat. Voor meer informatie, zie de toetspagina van de *Fisher's exact toets*.   
 <!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets post-hoc1 -->
 
 
 <!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets post-hoc2 -->
 ``` {r fisher toets post hoc, warning=FALSE, message=FALSE}
 library(RVAideMemoire)
-fisher.multcomp(Bsa_kt_n10,p.method="bonferroni")
+fisher.multcomp(BSA_kruistabel_n10, p.method = "none")
+
 ```
 <!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets post-hoc2 -->
 
-Geen van de post-hoc toetsen is significant, wat logisch is aangezien de *Fisher-Freeman-Halton exact toets* niet significant was. De resultaten laten de significantie zien van de *Fisher's exact toets* voor elk mogelijke combinatie van 2x2 tabellen. De eerste waarde is bijvoorbeeld de p-waarde van deze toets voor de kruistabel bestaande uit de aantallen positief en negatief BSA voor Nederland en Duitsland (NL:GE). De opmerkelijke p-waardes van 1 zouden kunnen komen door de Bonferroni correctie die de oorspronkelijke p-waarde met het aantal vergelijken (21) vermenigvuldigt .
+De resultaten laten de significantie zien van de *Fisher's exact toets* voor elk mogelijke combinatie van 2x2 tabellen. Geen van de post-hoc toetsen is significant, wat logisch is aangezien de *Fisher-Freeman-Halton exact toets* niet significant was.  De eerste waarde is bijvoorbeeld de p-waarde van deze toets voor de kruistabel bestaande uit de aantallen positief en negatief BSA voor Nederland en Duitsland (NL:GE). De opmerkelijke p-waardes van 1 komen in een aantal gevallen door de Bonferroni correctie die de oorspronkelijke p-waarde met het aantal vergelijken (21) vermenigvuldigt. In andere gevallen zijn de verschillen zo klein dat dit leidt tot een p-waarde van 1.
 
 
 ## Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Fisher-Freeman-Halton exact toets* is uitgevoerd om te toetsen of het percentage studenten met positief BSA verschilt per instroomland. De resultaten ondersteunen de nulhypothese: het percentage studenten met een positief BSA verschilt niet per instroomland, *p* = `r Round_and_format(fisher.test(Bsa_kt_n10, simulate.p.value = TRUE)$p.value)`. 
+De *Fisher-Freeman-Halton exact toets* is uitgevoerd om te toetsen of het percentage studenten met positief BSA verschilt per land van hoogste vooropleiding voor een dataset met een laag aantal observaties. De resultaten ondersteunen de nulhypothese: het percentage studenten met een positief BSA verschilt niet per land van hoogste vooropleiding, *p* = `r Round_and_format(fisher.test(BSA_kruistabel_n10, simulate.p.value = TRUE)$p.value)`. 
 
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 
@@ -265,3 +269,4 @@ De *Fisher-Freeman-Halton exact toets* is uitgevoerd om te toetsen of het percen
 $\chi^2$-waarde gedeeld door het totaal aantal observaties, i.e. $\sqrt{ \frac{\chi^2}{N} }$.
 [^7]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
 [^8]: Dit voorbeeld gaat uit van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.
+[^9]: De waarde 1,96 is een z-score en correspondeert met het significantieniveau 0,05 voor een tweezijdige toets. Om te corrigeren voor meerdere testen kan een ander significantieniveau gekozen worden wat resulteert in een andere z-score om mee te vergelijken. Bij een significantieniveau van 0,01 is de z-score bijvoorbeeld 2,58.

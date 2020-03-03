@@ -55,43 +55,43 @@ Gebruik de *one-way ANOVA* bij het toetsen of de gemiddeldes van drie of meer on
 
 # Onderwijscasus
 <div id = "casus">
-In verband met wervingsactiviteiten wil het hoofd van de afdeling Communicatie weten wat de reistijd is van studenten van verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. 
+Om de wervingsactiviteiten beter af te stemmen op de aankomende studenten, wil het hoofd van de afdeling Communicatie weten wat de reistijd is van studenten van verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. 
 
 *H~0~*: De gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar: µ~1~ = µ~2~ = µ~3~   
 
-*H~A~*: Tenminste voor één opleiding is de gemiddelde reistijd niet gelijk aan de gemiddelde reistijd van studenten voor andere opleidingen, bijvoorbeeld: µ~1~ ≠ µ~2~ = µ~3~ 
+*H~A~*: Voor tenminste één opleiding is de gemiddelde reistijd niet gelijk aan de gemiddelde reistijd van studenten voor andere opleidingen, bijvoorbeeld: µ~1~ ≠ µ~2~ = µ~3~ 
 </div>
 
 # Assumpties
 Om een valide toetsresultaat te bereiken moeten de data aan een aantal voorwaarden voldoen. Controleer of de steekproef aan de volgende assumpties voldoet: normaliteit, homogeniteit van varianties en onafhankelijkheid.  
-De *one-way ANOVA* is een robuuste test: als één groep uit de steekproef niet voldoet aan de assumptie van normaliteit of homogeniteit van varianties dan kan de *one-way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden.[^2] Hierdoor kan het wel zijn dat de toets minder onderscheidend vermogen heeft, dan wanneer de assumpties niet geschonden worden.[^3]<sup>, </sup>[^4] De *Kruskal-Wallis test* wordt gezien als een alternatief voor de *one-way ANOVA* als er geen sprake is van normaliteit en/of homogeniteit.[^5]<sup>, </sup>[^6]
+De *one-way ANOVA* is een robuuste test: als één groep uit de steekproef niet voldoet aan de assumptie van normaliteit of homogeniteit van varianties, dan kan de *one-way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden.[^2] Hierdoor kan het wel zijn dat de toets minder onderscheidend vermogen heeft, dan wanneer de assumpties niet geschonden worden.[^3]<sup>, </sup>[^4] Als er geen sprake is van normaliteit of homogeniteit van varianties, is de *Kruskal-Wallis toets* een alternatief voor de *one-way ANOVA*.[^5]<sup>, </sup>[^6]
 
 ## Normaliteit
 Controleer de assumptie van normaliteit voor elke groep met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
 2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^7]<sup>, </sup>[^8]  
 
-Als blijkt dat de data niet normaal verdeeld zijn,  is het transformeren de data ook een optie. Bepaal daarna of de data wel normaal verdeeld zijn.
+Als blijkt dat de data niet normaal verdeeld zijn, is het transformeren de data ook een optie [^9]. Bepaal daarna of de data wel normaal verdeeld zijn.
 
 ## Homogeniteit van Varianties
-Toets met de *Levene's Test (for equality of variance)* of de spreiding van iedere groep ongeveer hetzelfde is. Bij een *p* < 0,05 is de spreiding van de groepen significant verschillend.[^9]
+Toets met de *Levene's Test (for equality of variance)* of de spreiding van iedere groep ongeveer hetzelfde is. Bij een *p* < 0,05 is de spreiding van de groepen significant verschillend.[^10]
 
 # Effectmaat
-De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^10] Voor de *one-way ANOVA* wordt de effectmaat eta squared vaak gebruikt.
+De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^11] Voor de *one-way ANOVA* wordt de effectmaat eta squared vaak gebruikt.
 
 ## Eta squared
-De effectmaat eta squared (*η^2^*) berekent de proportie van de variantie in de afhankelijke variabele wat verklaard wordt door de onafhankelijke variabele. In deze casus berekent het de proportie van de variantie in de lengte van de reistijd wat verklaard kan worden door de opleiding. Een indicatie om *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^11]<sup>,</sup>[^12]
+De effectmaat eta squared (*η^2^*) berekent de proportie van de variantie in de afhankelijke variabele wat verklaard wordt door de onafhankelijke variabele. In deze casus berekent het de proportie van de variantie in de lengte van de reistijd die verklaard kan worden door de opleiding. Een indicatie om *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^12]<sup>,</sup>[^13]
 
 # Post-hoc toetsen
-De one-way ANOVA toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Er wordt een post-hoc toets uitgevoerd om te bepalen welke groepen significant verschillen.
+De one-way ANOVA toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Voer een post-hoc toets uit om te bepalen welke groepen significant verschillen.
 
-Er zijn meerdere post-hoc toetsen. Welke toets gekozen wordt hangt onder andere af of de spreiding van de groepen ongeveer hetzelfde zijn (zie Levene's Test):   
-* Gebruik Tukey bij gelijke spreiding.[^13]  
-* Gebruik Games-Howell bij ongelijke spreiding.[^14]  
+Er zijn meerdere post-hoc toetsen. De keuze voor een toets hangt onder andere af of de spreiding van de groepen ongeveer hetzelfde zijn (zie Levene's Test):   
+* Gebruik Tukey bij gelijke spreiding.[^14]  
+* Gebruik Games-Howell bij ongelijke spreiding.[^15]  
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is een dataset ingeladen met de reistijden van uitwonende studenten per opleiding ingeladen genaamd `Reistijd_per_opleiding`. 
+Er is een dataset ingeladen met de reistijden van uitwonende studenten per opleiding genaamd `Reistijd_per_opleiding`. 
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
@@ -192,6 +192,7 @@ ggplot(Reistijd_per_opleiding,
   labs(title = "Reistijd per opleiding")
 ```
 <!-- ## /OPENBLOK: Histogram.R -->
+
 De opleidingen Geschiedenis en Arabische taal en Cultuur zijn niet geheel symetrisch, maar tonen geen grote afwijkingen van een normale verdeling. Filosofie heeft een lagere frequentie bij een reistijd van 40 minuten, wat kan duiden op niet normaal verdeelde data. 
 
 ### Q-Q plot
@@ -199,7 +200,7 @@ De opleidingen Geschiedenis en Arabische taal en Cultuur zijn niet geheel symetr
 Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
 <!-- ## /TEKSTBLOK: QQplot.R-->
 
-Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
+Als over het algemeen de meeste datapunten op de lijn liggen, neem dan aan dat de data normaal verdeeld zijn.
 <div class = "col-container">
   <div class="col">
 <!-- ## OPENBLOK: QQplot1.R -->
@@ -244,7 +245,7 @@ qqline(Reistijd_GSC)
 Bij de Q-Q plot van de reistijd van studenten Geschiedenis liggen de meeste punten op de lijn behalve bij de uiteinden. De cirkels van de Q-Q plot van studenten Arabische Taal en Cultuur en studenten Filosofie liggen net naast de lijn. De discrepantie is minimaal; vermoedelijk zijn de data normaal verdeeld.
 
 ### Boxplot
-De box geeft de middelste 50% van de reistijd weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^15]<sup>, </sup>[^16] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
+De box geeft de middelste 50% van de reistijd weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^16]<sup>, </sup>[^17] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
 
 <!-- ## OPENBLOK: Boxplot.R -->
 ```{r boxplot}
@@ -259,7 +260,7 @@ De boxplotten geven de spreiding weer van de gemiddelde reistijd van uitwonende 
 Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov
-De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
+De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is vereist als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn, wat meestal het geval is bij een steekproef. Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
 
 <!-- ## TEKSTBLOK: Lilliefors-test1.R -->
 
@@ -295,10 +296,10 @@ lillie.test(Reistijd_GSC)
   </div>
 </div>
 
-De p-waarde is *p* > 0,05 voor elke groep; er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. [^17] De *one-way ANOVA* kan uitgevoerd worden.
+De p-waarde is *p* > 0,05 voor elke groep; er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. [^18] De *one-way ANOVA* kan uitgevoerd worden.
 
 ### Shapiro-Wilk Test
-De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
+De *Shapiro-Wilk test* is een soortgelijke toets als de *Kolmogorov-Smirnov test* en vooral geschikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
 
 <div class="col-container"> 
   <div class="col">
@@ -327,7 +328,7 @@ shapiro.test(Reistijd_ATC)
 De p-waarde is *p* > 0,05 voor elke groep, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one-way ANOVA* kan uitgevoerd worden.
 
 ## Toetsen van Homogeniteit van varianties
-Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie kan de *Kruskal-Wallis test* uitgevoerd worden. Omdat de ANOVA een robuuste test is, kan deze ook gebruikt worden wanneer deze assumptie geschonden is, maar dan heeft de test misschien minder onderscheidend vermogen.
+Test met de Levene's test de homogeniteit van varianties. Als uit de *Levene's test* blijkt dat de steekproeven verschillen in variantie, voer dan de *Kruskal-Wallis toets* uit. Omdat de ANOVA een robuuste test is, kan deze ook gebruikt worden wanneer deze assumptie geschonden is, maar dan heeft de test misschien minder onderscheidend vermogen.
 
 <!-- ## OPENBLOK: Levenes-test.R -->
 ```{r LeveneTest, warning = FALSE, message = FALSE}
@@ -372,7 +373,7 @@ vF_waarde <- Round_and_format(ANOVA[[1]]$`F value`[1])
 
 <!-- ## TEKSTBLOK: ANOVA-toets1.R -->
 * *F* ~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, *p* < 0,0001.
-* De p-waarde < 0,05, dus de H~0~ wordt verworpen.[^17] 
+* De p-waarde < 0,05, dus de H~0~ wordt verworpen.[^18] 
 * Vrijheidsgraden: het aantal groepen - 1 = `r vDF1`; *n~1~* + *n~2~* + *n~3~*- 3 = `r vDF2`.
 
 <!-- ## /TEKSTBLOK: ANOVA-toets1.R -->
@@ -396,14 +397,14 @@ Esq <- Round_and_format(EtaSq(res.aov)[1])
 ```
 <!-- ## /CLOSEDBLOK: Eta-squared.R -->
 <!-- ## TEKSTBLOK: Eta-squared.R -->
-*η^2^* = `r Esq`
+*η^2^* = `r Esq`, de sterkte van het effect van de type opleiding op de reistijd is groot. 
+
 <!-- ## /TEKSTBLOK: Eta-squared.R -->
-De sterkte van het effect van de type opleiding op de reistijd is groot. 
 
 ## Post-hoc toets: Tukey's toets
 Voer om te bepalen welke van de type opleidingen in reistijd verschillen een post-hoc toets uit. Gebruik bij groepen met gelijke variantie de Tukey Honestly Significant Difference Test.
 <!-- ## TEKSTBLOK: Tukey-HSD.R -->
-Gebruik `TukeyHSD()` op het ANOVA-object.
+Gebruik `TukeyHSD()` op de uitkomsten van de *one-way ANOVA*, het ANOVA-object `res.aov`.
 <!-- ## /TEKSTBLOK: Tukey-HSD.R -->
 
 <!-- ## OPENBLOK: Tukey-HSD.R -->
@@ -441,7 +442,7 @@ Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de
 *Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen. Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = `r vATCvsFIL`, p < 0,0001). Tussen Geschiedenis en Arabische Taal en Cultuur is een significant verschil (*MD* = `r vATCvsGSC`, p < 0,0001). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = `r vFILvsGSC`, p = 0,26). 
 <!-- ## /TEKSTBLOK: Rapportage-tukey.R -->
 
-Aan de hand van de resultaten kan geconcludeerd worden dat de studenten van Arabische Taal en Cultuur significant langer moeten reizen dan de andere twee opleidingen. Tussen de Filosofie en Geschiedenis is geen significant verschil gevonden. 
+Aan de hand van de resultaten kan geconcludeerd worden dat de studenten van Arabische Taal en Cultuur significant langer moeten reizen dan de andere twee opleidingen. Tussen de studenten Filosofie en Geschiedenis is geen significant verschil gevonden. 
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
@@ -455,13 +456,14 @@ Aan de hand van de resultaten kan geconcludeerd worden dat de studenten van Arab
 [^5]: Van Geloven, N. (21 maart 2018). *Kruskal Wallis*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis).
 [^6]: De *Kruskal-Wallis test* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, omdat bij het maken van een rankschikking de dataset informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Kruskal-Wallis test* minder onderscheidend vermogen dan wanneer de *one-way ANOVA* uitgevoerd zou worden.
 [^7]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php. 
-[^8]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).  
-[^9]: Wikipedia (7 september 2019). *Analysis of variance*. https://en.wikipedia.org/wiki/Analysis_of_variance.
-[^10]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
-[^11]: Watson, P. (30 oktober 2019). *Rules of thumb on magnitudes of effect sizes*. [MRC Cognition and Brain Sciences Unit Wiki](http://imaging.mrc-cbu.cam.ac.uk/statswiki/FAQ/effectSize).
-[^12]: Eta-squared. (2019 May 14). Retrieved from: https://en.wikiversity.org/wiki/Eta-squared.
-[^13]: Universiteit van Amsterdam (26 augustus 2014). *MANOVA*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/MANOVA).
-[^14]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf. 
-[^15]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
-[^16]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
-[^17]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
+[^8]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).
+[^9]: Bereken de logaritme van de variabele, en de inverse (1 gedeeld door de variabele), en bekijk of deze normaal verdeeld zijn. Als dat zo is mag je die gebruiken voor de analyse.
+[^10]: Wikipedia (7 september 2019). *Analysis of variance*. https://en.wikipedia.org/wiki/Analysis_of_variance.
+[^11]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
+[^12]: Watson, P. (30 oktober 2019). *Rules of thumb on magnitudes of effect sizes*. [MRC Cognition and Brain Sciences Unit Wiki](http://imaging.mrc-cbu.cam.ac.uk/statswiki/FAQ/effectSize).
+[^13]: Eta-squared. (2019 May 14). Retrieved from: https://en.wikiversity.org/wiki/Eta-squared.
+[^14]: Universiteit van Amsterdam (26 augustus 2014). *MANOVA*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/MANOVA).
+[^15]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf. 
+[^16]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
+[^17]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
+[^18]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

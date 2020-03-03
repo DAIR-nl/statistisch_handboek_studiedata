@@ -40,11 +40,11 @@ source(paste0(here::here(),"/01. Includes/data/06.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 # Toepassing
-Gebruik de *tekentoets* om de mediaan van een steekproef te vergelijken met een bekende mediaan of norm in de populatie.[^1] 
+Gebruik de *tekentoets* om de mediaan van een steekproef te vergelijken met een bekende mediaan of norm in een populatie.[^1] 
 
 # Onderwijscasus
 <div id ="casus">
-De opleidingsdirecteur van de school voor Journalistiek is benieuwd wat alumni verdienen ten opzichte van de gemiddelde nederlander. Daarom wil zij de jaarinkomens van oud-studenten vergelijken met het modale inkomen van €36.000.[^2] Op deze manier vergaart zij meer informatie over het succes op de arbeidsmarkt na de opleiding Journalistiek.
+De opleidingsdirecteur van de school voor Journalistiek is benieuwd wat alumni verdienen ten opzichte van de gemiddelde Nederlander. Daarom wil zij de jaarinkomens van oud-studenten vergelijken met het modale inkomen van €36.000.[^2] Op deze manier vergaart zij meer informatie over het succes op de arbeidsmarkt na de opleiding Journalistiek.
 
 *H~0~*: De mediaan van het jaarinkomen van alumni Journalistiek is gelijk aan €36.000, het modale jaarinkomen in Nederland.
 
@@ -53,7 +53,7 @@ De opleidingsdirecteur van de school voor Journalistiek is benieuwd wat alumni v
 
 # Assumpties
 
-Er zijn geen assumpties vereist voor deze test.
+Er zijn geen assumpties vereist voor deze toets.
 
 # Uitvoering in R
 Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de school voor Journalistiek genaamd `Jaarlijks_inkomen`. De directeur wil kijken hoe haar oud-studenten scoren ten opzichte van gemiddelde inkomens in Nederland.
@@ -95,12 +95,12 @@ vMed  <- Round_and_format(median(Jaarlijks_inkomen))
 <!-- ## /CLOSEDBLOK: Data-beschrijven2.R -->
 
 <!-- ## TEKSTBLOK: Datatekst-beschrijven2.R -->
-Het gemiddelde jaarinkomen van de alumni is `r vMean` met een standaardafwijking van `r vSD` (*n* = `r vN`). De mediaan van het inkomen is `r vMed`.
+Het gemiddelde jaarinkomen van de alumni is `r paste("€", vMean, sep="")` met een standaardafwijking van `r paste("€", vSD, sep="")` (*n* = `r vN`). De mediaan van het inkomen is `r paste("€", vMed, sep="")`.
 <!-- ## /TEKSTBLOK: Datatekst-beschrijven2.R -->
 
-## Normaliteit visualizeren en testen
+## Normaliteit visualiseren en testen
 
-De *tekentoets* is een alternatief voor de *one-sample t-toets* wanneer de data geen normale verdeling volgt. Hoewel het visueel inspecteren en testen van normaliteit [^3] niet vereist is, is het nuttig om de verdeling van de data te visualizeren en te vergelijken met de normaalverdeling.
+De *tekentoets* is een alternatief voor de *one-sample t-toets* wanneer de data geen normale verdeling volgt. Hoewel het visueel inspecteren en testen van normaliteit [^3] niet vereist is, is het nuttig om de verdeling van de data te visualiseren en te vergelijken met de normaalverdeling.
 
 ### Histogram
 Geef de verdeling van de data weer in een histogram.
@@ -126,14 +126,14 @@ labs(title = "Jaarinkomen alumni Journalistiek",
 ```
 <!-- ## /OPENBLOK: Histogram.R -->
 
-De histogram laat zien dat de verdeling een langere staart aan de rechterkant heeft en daarom enigszins afwijkt van de (symmetrische) normaalverdeling.
+De histogram laat zien dat de verdeling een langere staart aan de rechterkant heeft en dus enigszins afwijkt van de (symmetrische) normaalverdeling.
 
 ## Toetsen van normaliteit
 Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov test
 
-De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde en standaardafwijking niet van tevoren bekend of bepaald zijn. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
+De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is vereist als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn, wat meestal het geval is bij een steekproef. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
 <!-- ## OPENBLOK: Library-nortest.R -->
 ```{r normaliteit, warning=FALSE}
@@ -141,10 +141,10 @@ library(nortest)
 lillie.test(Jaarlijks_inkomen)
 ```
 <!-- ## /OPENBLOK: Library-nortest.R -->
-De p-waarde van de Kolmogorov-Smirnov test is kleiner dan 0,0001, dus de data zijn niet normaal verdeeld. Naast deze test, kan de Shapiro-Wilk test ook gebruikt worden om normaliteit te testen. Gebruik bij normaal verdeelde data de *One-sample t-toets*.
+De p-waarde van de *Kolmogorov-Smirnov test* is kleiner dan 0,0001, dus de data zijn niet normaal verdeeld. Naast deze test, kan de *Shapiro-Wilk test* ook gebruikt worden om normaliteit te testen. Gebruik bij normaal verdeelde data de *One-sample t-toets*.
 
 # Tekentoets 
-Voer een tweezijdige *tekentoets* uit om te bepalen of het mediane jaarinkomen van de alumni Journalistiek hoger ligt dan het modale inkomen van €36.000. Gebruik de `binom.test` functie [^4] met de volgende argumenten: het aantal alumni dat een hoger jaarinkomen heeft dan het modale inkomen van €36.000 `boven_modaal`, het totale aantal alumni `totaal_alumni` (gelijk aan de steekproefgrootte) en `alternative="two.sided"` om een tweezijdige alternatieve hypothese te testen.
+Voer een tweezijdige *tekentoets* uit om te bepalen of het mediane jaarinkomen van de alumni Journalistiek hoger ligt dan het modale inkomen van €36.000. Gebruik de `binom.test` functie [^4] met de volgende argumenten: het aantal alumni dat een hoger jaarinkomen heeft dan het modale inkomen van €36.000 `boven_modaal`, het totale aantal alumni `totaal_alumni` (gelijk aan de steekproefgrootte) en `alternative="two.sided"` om een tweezijdige alternatieve hypothese te toetsen.
 
 <!-- ## OPENBLOK: Tekentoets.R -->
 ```{r Tekentoets}
@@ -172,16 +172,16 @@ vProp <- Round_and_format(b$estimate)
 <!-- ## /CLOSEDBLOK: Tekentoets.R -->
 
 <!-- ## TEKSTBLOK: Tekentoets.R -->
-* `r boven_modaal` van de `r totaal_alumni` alumni verdienen boven_modaal, dit is een proportie van `r vProp`
+* Vnan de `r totaal_alumni` alumni verdienen `r boven_modaal` alumni boven modaal, dit is een proportie van `r vProp`
 * p-waarde < 0,0001, dus de H~0~ wordt verworpen [^5]
-* 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de proportie in het interval vallen. In deze casus is het interval tussen `r vconf.int1` en `r vconf.int2`.
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de proportie in het interval vallen. In deze casus is het interval tussen `r paste(vconf.int1, "0", sep = "")` en `r vconf.int2`.
 
 <!-- ## /TEKSTBLOK: Tekentoets.R -->
 
 
 # Rapportage
 
-De *tekentoets* is uitgevoerd om te toetsen of het mediane inkomen van alumni van de opleiding Journalistiek veschilt van het modale inkomen in Nederland van €36.000. `r boven_modaal` van de `r totaal_alumni` alumni verdienen meer dan het modale inkomen, *p* < 0,0001. Deze resultaten duiden op een significant verschil tussen de inkomens van alumni van de opleiding Journalistiek en de gemiddelde Nederlander waarbij de inkomens van de alumni hoger lijken te liggen.
+De *tekentoets* is uitgevoerd om te toetsen of het mediane inkomen van alumni van de opleiding Journalistiek veschilt van het modale inkomen in Nederland van €36.000. `r boven_modaal` van de `r totaal_alumni` alumni verdienen meer dan het modale inkomen, *p* < 0,0001. Deze resultaten duiden op een significant verschil tussen de inkomens van alumni van de opleiding Journalistiek en de gemiddelde Nederlander. De inkomens van de alumni lijken hoger te liggen dan dat van de gemiddelde Nederlander.
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}

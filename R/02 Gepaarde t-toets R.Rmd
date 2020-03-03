@@ -71,7 +71,7 @@ Controleer de assumptie van normaliteit met de volgende stappen:
 1. Controleer de data visueel met een histogram, een Q-Q plot of een boxplot.  
 2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^3]<sup>, </sup>[^4]  
 
-Als blijkt dat de data niet normaal verdeeld zijn, transformeer dan de data eventueel en bepaal daarna of deze wel normaal verdeeld is of gebruik de *Wilcoxon Signed Rank Test*.[^5]<sup>, </sup>[^6]
+Als blijkt dat de data niet normaal verdeeld zijn, transformeer dan de data eventueel en bepaal daarna of deze wel normaal verdeeld is [^5] of gebruik de *Wilcoxon Signed Rank Test*.[^6]<sup>, </sup>[^7]
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
@@ -152,7 +152,7 @@ Geef de verdeling van de data visueel weer met een histogram, Q-Q plot of boxplo
 ## Histogram met ggplot2
 library(ggplot2)
 
-# Zet de variable om in een dataframe zodat het met ggplot gevisualizeerd kan worden
+# Zet de variable om in een dataframe zodat het met ggplot gevisualiseerd kan worden
 Uren_studeren_verschil_dataframe <- as.data.frame(Uren_studeren_verschil)
 
 ggplot(Uren_studeren_verschil_dataframe,
@@ -198,7 +198,7 @@ qqline(Uren_studeren_verschil)
 In deze casus liggen de meeste datapunten op of vlakbij de lijn. Hoewel er bij de uiteinden wat afwijkingen zijn, duidt deze grafiek op een normaalverdeling.
 
 ### Boxplot
-De box geeft de middelste 50% van het studielogboek weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^7]<sup>, </sup>[^8]
+De box geeft de middelste 50% van het studielogboek weer. De zwarte lijn binnen de box is de mediaan. In de staarten zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8]<sup>, </sup>[^9]
 
 <!-- ## OPENBLOK: Boxplot.R -->
 ``` {r Boxplot}
@@ -216,7 +216,7 @@ Op basis van de grafieken lijken er geen grote afwijkingen van de normaalverdeli
 Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov 
-De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
+De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is vereist als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn, wat meestal het geval is bij een steekproef. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
 <!-- ## TEKSTBLOK: Lilliefors-test1.R -->
 
@@ -239,7 +239,7 @@ De test heeft een p-waarde van `r Round_and_format(lillie.test(Uren_studeren_ver
 <!-- ## /TEKSTBLOK: Lilliefors-test-2.R -->
 
 ### Shapiro-Wilk Test
-De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
+De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en vooral geschikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
 
 <!-- ## CLOSEDBLOK: data inladen-2.R -->
 
@@ -286,14 +286,14 @@ vDiffMean <- Round_and_format(t$estimate*-1)
 <!-- ## TEKSTBLOK: T-test2.R -->
 * *t*~`r vDF`~ = `r vT_waarde`, *p* < 0,0001
 * Vrijheidsgraden, *df* = *n* -1 = `r vN`-1 = `r vDF`  
-* p-waarde < 0,05, dus de H~0~ wordt verworpen [^9]
+* p-waarde < 0,05, dus de H~0~ wordt verworpen [^10]
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95% van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het verschil tussen het aantal studieuren voor en na de cursus,  µ~verschil~ = µ~T1~ - µ~T0~. In deze casus is het interval tussen `r vconf.int1` en `r vconf.int2`. Aangezien 0 niet in dit interval zit, is er een significant verschil tussen µ~T1~ en µ~T0~.
 * Het absolute gemiddelde verschil tussen de twee groepen: `r vDiffMean`.
 <!-- ## /TEKSTBLOK: T-test2.R -->
 
 ### Effectmaat: Cohen's d
-De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^10] Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft een gestandaardiseerd verschil weer: het verschil in gemiddelden tussen twee groepen gecorrigeerd voor de gecombineerde standaardafwijking van de twee groepen.  
-Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.[^11]  
+De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^11] Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft een gestandaardiseerd verschil weer: het verschil in gemiddelden tussen twee groepen gecorrigeerd voor de gecombineerde standaardafwijking van de twee groepen.  
+Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.[^12]  
 
 <!-- ## TEKSTBLOK: Cohen-d.R -->
 Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
@@ -341,13 +341,14 @@ Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na deel
 [^2]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). The importance of the normality assumption in large public health data sets. *Annu Rev Public Health, 23*, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf 
 [^3]: Van Geloven, N. (25 september2013). *Wilcoxon signed rank toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets).
 [^4]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. [Testing for Normality using SPSS Statistics](https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php).  
-[^5]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).  
-[^6]: De *Wilcoxon signed rank toets* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen dan wanneer de *one sample t-toets* uitgevoerd zou worden.  
-[^7]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
-[^8]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport.
-[^9]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houd hierbij rekening met type I en type II fouten.
-[^10]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
-[^11]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf 
+[^5]: Bereken de logaritme van de variabele, en de inverse (1 gedeeld door de variabele), en bekijk of deze normaal verdeeld zijn. Als dat zo is mag je die gebruiken voor de analyse.
+[^6]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).  
+[^7]: De *Wilcoxon signed rank toets* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen dan wanneer de *one sample t-toets* uitgevoerd zou worden.  
+[^8]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
+[^9]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport.
+[^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houd hierbij rekening met type I en type II fouten.
+[^11]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
+[^12]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf 
 
 
 <!-- ## TEKSTBLOK: Extra-Bron.R -->

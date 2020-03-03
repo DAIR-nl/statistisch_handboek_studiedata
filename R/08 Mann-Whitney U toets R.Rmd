@@ -194,15 +194,15 @@ r <- qnorm(pwaarde/2) / sqrt(nrow(Studiepunten_studiejaar2))
 #r <- qnorm(pwaarde) / sqrt(nrow(Studiepunten_studiejaar2))
 
 # Print effectmaat
-paste("Effectmaat is",Round_and_format(r))
+paste("Effectmaat is",Round_and_format(abs(r)))
 
 ```
 <!-- ## /OPENBLOK: Mann-Whitney-U-toets-4.R -->
 
 <!-- ## TEKSTBLOK: Mann-Whitney-U-toets-4.R -->
-* *W* = `r vW_W`, *p* = < 0,0001, *r* = `r Round_and_format(r)`
+* *W* = `r vW_W`, *p* = < 0,0001, *r* = `r Round_and_format(abs(r))`
 * *p*-waarde < 0,05, dus de H~0~ wordt niet verworpen.[^6]
-* Effectmaat is `r Round_and_format(r)`, dus een klein tot gemiddeld effect
+* Effectmaat is `r Round_and_format(abs(r))`, dus een klein tot gemiddeld effect
 * De mediaan van de verschilscores is `r vW_est` met een 
 95%-betrouwbaarheidsinterval  van `r vW_lb` tot `r vW_ub`
 <!-- ## /TEKSTBLOK: Mann-Whitney-U-toets-4.R -->
@@ -210,7 +210,7 @@ paste("Effectmaat is",Round_and_format(r))
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal studiepunten in het tweede jaar hetzelfde is voor studenten met buitenlandse vooropleiding als voor studenten met Nederlandse vooropleiding. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen het aantal studiepunten van studenten met een buitenlandse vooropleiding en met een Nederlandse vooropleiding, *W* = `r vW_W`, *p* < 0,0001, *r* = `r Round_and_format(r)`. Er is een klein tot gemiddeld effect, het verschil in mediaan tussen beide groepen (Nederlandse minus buitenlandse vooropleiding) is geschat op `r vW_est ` met een 95%-betrouwbaarheidsinterval van `r vW_lb` tot `r vW_ub`.  
+De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal studiepunten in het tweede jaar hetzelfde is voor studenten met buitenlandse vooropleiding als voor studenten met Nederlandse vooropleiding. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen het aantal studiepunten van studenten met een buitenlandse vooropleiding en met een Nederlandse vooropleiding, *W* = `r vW_W`, *p* < 0,0001, *r* = `r Round_and_format(abs(r))`. Er is een klein tot gemiddeld effect, het verschil in mediaan tussen beide groepen (Nederlandse minus buitenlandse vooropleiding) is geschat op `r vW_est ` met een 95%-betrouwbaarheidsinterval van `r vW_lb` tot `r vW_ub`.  
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->

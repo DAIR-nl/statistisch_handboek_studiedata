@@ -37,6 +37,7 @@ Gebruikte_packages <- c(
     "dplyr",
     "DescTools",
     "effsize",
+    "ez",
     "exact2x2",
     "ggplot2",
     "ggridges",

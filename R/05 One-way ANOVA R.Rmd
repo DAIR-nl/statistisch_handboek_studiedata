@@ -83,7 +83,7 @@ De p-waarde geeft aan of het verschil tussen groepen statistisch significant is.
 De effectmaat eta squared (*η^2^*) berekent de proportie van de variantie in de afhankelijke variabele wat verklaard wordt door de onafhankelijke variabele. In deze casus berekent het de proportie van de variantie in de lengte van de reistijd die verklaard kan worden door de opleiding. Een indicatie om *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^12]<sup>,</sup>[^13]
 
 # Post-hoc toetsen
-De one-way ANOVA toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Voer een post-hoc toets uit om te bepalen welke groepen significant verschillen.
+De *one-way ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Voer een post-hoc toets uit om te bepalen welke groepen significant verschillen.
 
 Er zijn meerdere post-hoc toetsen. De keuze voor een toets hangt onder andere af of de spreiding van de groepen ongeveer hetzelfde zijn (zie Levene's Test):   
 * Gebruik Tukey bij gelijke spreiding.[^14]  
@@ -193,7 +193,7 @@ ggplot(Reistijd_per_opleiding,
 ```
 <!-- ## /OPENBLOK: Histogram.R -->
 
-De opleidingen Geschiedenis en Arabische taal en Cultuur zijn niet geheel symetrisch, maar tonen geen grote afwijkingen van een normale verdeling. Filosofie heeft een lagere frequentie bij een reistijd van 40 minuten, wat kan duiden op niet normaal verdeelde data. 
+De opleidingen Geschiedenis en Arabische taal en Cultuur zijn niet geheel symmetrisch, maar tonen geen grote afwijkingen van een normale verdeling. Filosofie heeft een lagere frequentie bij een reistijd van 40 minuten, wat kan duiden op niet normaal verdeelde data. 
 
 ### Q-Q plot
 <!-- ## TEKSTBLOK: QQplot.R-->

@@ -7,11 +7,10 @@ output:
       collapsed: FALSE 
     number_sections: true
     includes:
-      in_header: "01. Includes/html/favicon.html" 
+      in_header: ["01. Includes/html/favicon.html", "01. Includes/html/analytics.html"]  
 ---
 
 ```{r echo = FALSE}
-
 title_var <- paste0("Toetsmatrix (", sModus, ")")
 ```
 

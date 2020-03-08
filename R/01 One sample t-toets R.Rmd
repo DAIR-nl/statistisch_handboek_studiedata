@@ -7,6 +7,8 @@ output:
     toc_float: 
       collapsed: FALSE 
     number_sections: true
+    includes:
+      in_header: ["../01. Includes/html/favicon.html", "../01. Includes/html/analytics.html"]  
   keywords: [statistisch handboek, studiedata]
 ---
 <!-- ## CLOSEDBLOK: Functies.R -->
@@ -19,9 +21,11 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Functies.R -->
 
+<!-- ## CLOSEDBLOK: CSS -->
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
+<!-- ## /CLOSEDBLOK: CSS -->
 
 <!-- ## CLOSEDBLOK: Header.R -->
 ```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 

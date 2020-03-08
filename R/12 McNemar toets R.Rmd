@@ -20,9 +20,11 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Functies.R -->
 
+<!-- ## CLOSEDBLOK: CSS -->
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
+<!-- ## /CLOSEDBLOK: CSS -->
 
 <!-- ## CLOSEDBLOK: Header.R -->
 ```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 

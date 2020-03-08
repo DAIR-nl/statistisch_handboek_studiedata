@@ -23,6 +23,7 @@
 ## 06-02-2020: TB: Aanpassing zodat subfolder meegenomen worden
 ## 12-02-2020: TB: Controle consistentie namen + Review kolommen
 ## 22-02-2020: TB: Toevoeging sitemap + google bestanden
+## 08-03-2020: TB: Locatie van het aanmaken van images naar voren gehaald
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -86,48 +87,7 @@ rmarkdown::render_site(
 # EG: snap functie wel, argumenten niet
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## 01.2 MAAK DE TOETSMATRIX ####
-## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-## We maken 2x de toetsmatrix: 1x voor R en 1x voor Python.
-## Als de R of Python folder niet bestaan, maak deze dan aan
-## en maak vervolgens de bijbehorende toetsmatrix op basis van de modus
-
-for (p in lProgrammeertalen) {
-  ifelse(!dir.exists(paste0("_site/", p)), dir.create(paste0("_site/", p)), FALSE)
-  sModus  <- p
-  render("_Toetsmatrix.Rmd",
-         output_file = paste0('_site/', p, '/Toetsmatrix.html'))
-}
-
-# EG: wat maak je hier precies, de toetsmatrixpagina's van website?
-
-## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## 02.1 MAAK R BESTANDEN ####
-## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-## Loop over de toetsen die in gebruik zijn en genereer die pagina's
-for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_R == 1]) {
-    sModus  <- "R"
-    bStatus <- dfToetsen$Review_R[dfToetsen$Toets == sToets]
-    render(paste0("R/",sToets," R.Rmd"), 
-           output_file = paste0('_site/R/', gsub(" ", "-", sToets), '-R.html'))    
-}
-
-## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## 02.2 MAAK PYTHON BESTANDEN ####
-## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-## Loop over de toetsen die in gebruik zijn en genereer die pagina's
-for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_Python == 1]) {
-    sModus <- "Python"
-    bStatus <- dfToetsen$Review_Python[dfToetsen$Toets == sToets]
-    render(paste0("Python/",sToets,"-Python.Rmd"), 
-           output_file = paste0('_site/Python/', gsub(" ", "-", sToets), '-Python.html'))    
-}
-
-## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## 02.3 MAAK IMAGE FOLDER ####
+## 01.2 MAAK IMAGE FOLDER ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## Als images folder niet bestaat, maak deze dan aan
@@ -144,7 +104,48 @@ file.copy(file.path(current_folder,list_of_files), new_folder,
           copy.mode = TRUE)
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## 02.4 KOPIEER SITEMAP EN GOOGLE VERIFICATIECODE ####
+## 01.3 MAAK DE TOETSMATRIX ####
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## We maken 2x de toetsmatrix: 1x voor R en 1x voor Python.
+## Als de R of Python folder niet bestaan, maak deze dan aan
+## en maak vervolgens de bijbehorende toetsmatrix op basis van de modus
+
+for (p in lProgrammeertalen) {
+  ifelse(!dir.exists(paste0("_site/", p)), dir.create(paste0("_site/", p)), FALSE)
+  sModus  <- p
+  rmarkdown::render("_Toetsmatrix.Rmd",
+         output_file = paste0('_site/', p, '/Toetsmatrix.html'))
+}
+
+# EG: wat maak je hier precies, de toetsmatrixpagina's van website?
+
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## 02.1 MAAK R BESTANDEN ####
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Loop over de toetsen die in gebruik zijn en genereer die pagina's
+for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_R == 1]) {
+    sModus  <- "R"
+    bStatus <- dfToetsen$Review_R[dfToetsen$Toets == sToets]
+    rmarkdown::render(paste0("R/",sToets," R.Rmd"), 
+           output_file = paste0('_site/R/', gsub(" ", "-", sToets), '-R.html'))    
+}
+
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## 02.2 MAAK PYTHON BESTANDEN ####
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Loop over de toetsen die in gebruik zijn en genereer die pagina's
+for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_Python == 1]) {
+    sModus <- "Python"
+    bStatus <- dfToetsen$Review_Python[dfToetsen$Toets == sToets]
+    rmarkdown::render(paste0("Python/",sToets,"-Python.Rmd"), 
+           output_file = paste0('_site/Python/', gsub(" ", "-", sToets), '-Python.html'))    
+}
+
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## 02.3 KOPIEER SITEMAP EN GOOGLE VERIFICATIECODE ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## Kopieer het html bestand voor Google

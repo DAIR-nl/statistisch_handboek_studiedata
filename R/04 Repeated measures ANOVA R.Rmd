@@ -1,5 +1,5 @@
 ---
-title: "Rpeated measures ANOVA"
+title: "Repeated measures ANOVA"
 output:
   html_document:
     theme: lumen
@@ -98,7 +98,7 @@ Houd de volgende richtlijnen aan bij het interpreteren van de *repeated measures
 
 * Wanneer beide correcties significant zijn, rapporteer de (conservatieve) Greenhouse-Geisser correctie.
 * Wanneer beide correcties niet significant zijn, rapporteer de (liberale) Huynh-Feldt correctie.
-* Wanneer de een significant is en de ander niet, bereken de gemiddelde p-waarde van beide testen.
+* Wanneer de een significant is en de ander niet, bereken de gemiddelde p-waarde van beide correcties.
     * Wanneer deze p-waarde significant is, rapporteer dan de significante correctie.
     * Wanneer deze p-waarde niet significant is, rapporteer dan de niet significante correctie.
 
@@ -114,7 +114,7 @@ De effectmaat eta squared (*η^2^*) berekent de proportie van de variantie in de
 # Post-hoc toetsen
 De *repeated measures ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Voer een post-hoc toets uit om te bepalen welke groepen significant verschillen.
 
-Gebruik een correctie voor de p-waarden, omdat er meerdere testen tegelijkertijd worden gebruikt. In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans dat er bij toeval een verband wordt ontdekt dat er niet is (type I fout).[^8] Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^6]
+Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans dat er bij toeval een verband wordt ontdekt dat er niet is (type I fout).[^8] Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^6]
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
@@ -140,9 +140,9 @@ Selecteer de drie groepen en sla deze op in een vector om deze makkelijker aan t
 <!-- ## OPENBLOK: Data-selecteren.R -->
 ```{r data selecteren}
 
-Studieuren_lineaire_algebra <- Studieuren_technische_natuurkunde$Studieuren[Studieuren_technische_natuurkunde$Vak=="Lineaire Algebra"]
-Studieuren_relativiteitstheorie <- Studieuren_technische_natuurkunde$Studieuren[Studieuren_technische_natuurkunde$Vak=="Relativiteitstheorie"]
-Studieuren_kosmologie <- Studieuren_technische_natuurkunde$Studieuren[Studieuren_technische_natuurkunde$Vak=="Kosmologie"]
+Studieuren_lineaire_algebra <- Studieuren_technische_natuurkunde$Studieuren[Studieuren_technische_natuurkunde$Vak == "Lineaire Algebra"]
+Studieuren_relativiteitstheorie <- Studieuren_technische_natuurkunde$Studieuren[Studieuren_technische_natuurkunde$Vak == "Relativiteitstheorie"]
+Studieuren_kosmologie <- Studieuren_technische_natuurkunde$Studieuren[Studieuren_technische_natuurkunde$Vak == "Kosmologie"]
 ```
 <!-- ## /OPENBLOK: Data-selecteren.R -->
 
@@ -411,7 +411,7 @@ eta2 <- Round_and_format(obj$ANOVA$ges)
 
 ## Post-hoc toets
 <!-- ## TEKSTBLOK: posthoc1.R -->
-Voer post-hoc toetsen uit om te onderzoeken welke vakken uit periode 1 van elkaar verschillen wat betreft het aantal studieuren dat eerstejaars studenten van de bachelor Technische Natuurkunde hieraan besteden. Gebruik hiervoor de functie `pairwise.t.test` met als argumenten de afhankelijk variabele `Studieuren_technische_natuurkunde$Studieuren`, de onafhankelijke variabele `Studieuren_technische_natuurkunde$Vak` en de gebruikte methode om te corrigeren voor meerdere testen `p.adjust.method = "bonferroni"`.
+Voer post-hoc toetsen uit om te onderzoeken welke vakken uit periode 1 van elkaar verschillen wat betreft het aantal studieuren dat eerstejaars studenten van de bachelor Technische Natuurkunde hieraan besteden. Gebruik hiervoor de functie `pairwise.t.test` met als argumenten de afhankelijk variabele `Studieuren_technische_natuurkunde$Studieuren`, de onafhankelijke variabele `Studieuren_technische_natuurkunde$Vak` en de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`.
 <!-- ## /TEKSTBLOK: posthoc1.R -->
 
 <!-- ## OPENBLOK: posthoc2.R -->
@@ -452,7 +452,7 @@ phtest <- pairwise.t.test(Studieuren_technische_natuurkunde$Studieuren, Studieur
 # Rapportage
 
 <!-- ## TEKSTBLOK: rapportage.R -->
-Een *repeated measures ANOVA* is uitgevoerd om te onderzoeken of er verschillen zijn tussen het aantal studieuren dat eerstejaars studenten van de bachelor Technische Natuurkunde besteden aan de vakken in periode. De vakken zijn Lineaire Algebra, Relativiteitstheorie en Kosmologie; beschrijvende statistieken zijn te vinden in Tabel 1. De data voldoen niet aan de assumptie van sphericiteit ($\chi^2$ = `r Mauchly_W`, p < 0,0001), daarom is de Greenhouse-Geisser correctie gebruikt. Het aantal studieuren voor de drie vakken in periode 1 verschilt significant van elkaar, *F* = `r GG_F`, p < 0,0001, *η^2^* = `r eta2`. De sterkte van het effect van het vak op het aantal studieuren is groot. Post-hoc toetsen - waarbij een Bonferroni correctie is toegepast om te corrigeren voor meerdere testen -  tonen aan dat elk van de drie de vakken significant verschilt van de andere twee vakken.
+Een *repeated measures ANOVA* is uitgevoerd om te onderzoeken of er verschillen zijn tussen het aantal studieuren dat eerstejaars studenten van de bachelor Technische Natuurkunde besteden aan de vakken in periode. De vakken zijn Lineaire Algebra, Relativiteitstheorie en Kosmologie; beschrijvende statistieken zijn te vinden in Tabel 1. De data voldoen niet aan de assumptie van sphericiteit ($\chi^2$ = `r Mauchly_W`, p < 0,0001), daarom is de Greenhouse-Geisser correctie gebruikt. Het aantal studieuren voor de drie vakken in periode 1 verschilt significant van elkaar, *F* = `r GG_F`, p < 0,0001, *η^2^* = `r eta2`. De sterkte van het effect van het vak op het aantal studieuren is groot. Post-hoc toetsen - waarbij een Bonferroni correctie is toegepast om te corrigeren voor meerdere toetsen -  tonen aan dat elk van de drie de vakken significant verschilt van de andere twee vakken.
 
 
 | Opleiding     | M          | SD          | N          |

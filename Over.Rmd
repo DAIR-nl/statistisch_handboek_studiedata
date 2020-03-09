@@ -32,15 +32,15 @@ if (!exists("Substitute_var")) {
 # Het doel van dit handboek
 Het handboek is een gemeenschappelijk groeidocument voor het uitvoeren van statistische toetsen aan de hand van concrete cases uit het hoger onderwijs met bijbehorende code. De basis voor het handboek is een keuzemodel van het [AMC](https://wikistatistiek.amc.nl/index.php/), waarbij de 20 keuzes c.q. tegels aan de hand van zowel bestaande analyses en rapporten als nieuwe analyseopdrachten uitgewerkt worden. 
 
-Achter iedere ‘tegel’ bevindt zich een uitleg van de regels om een toets te kiezen, een voorbeeld casus uit het onderwijs, bijbehorende code, een uitleg van de interpretatie van de resultaten, en een uitwerking van de manier waarop de resultaten beschreven worden in een rapport (in [APA format](https://apastyle.apa.org/)). 
+Achter iedere ‘tegel’ bevindt zich een uitleg van de regels om een toets te kiezen, een voorbeeld casus uit het onderwijs, bijbehorende code, een uitleg van de interpretatie van de resultaten, en een uitwerking van de manier waarop de resultaten beschreven worden in een rapport (zoveel mogelijk in [APA format](https://apastyle.apa.org/)). 
 
 # Totstandkoming
 
 **Auteurs**
 
-* Irene van der Staaij, VU, hoofdredactie
-* Elian Griffioen, VU, redactie
+* Elian Griffioen, VU, hoofdredactie
 * Theo Bakker, VU, eindredactie
+* Irene van der Staaij, VU, redactie
 * Megiel Kerkhoven, VU, programmeur
 * Jet Doeswijk, VU, student-assistent 
 * Faaris Akbar, VU, student-assistent 

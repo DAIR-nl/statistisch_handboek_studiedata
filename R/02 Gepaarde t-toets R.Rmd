@@ -324,7 +324,7 @@ vD_waarde <- Round_and_format(d$estimate)
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
 Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddeld aantal uur studeren van de studenten is veranderd na deelname aan de cursus 'Plannen'. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r vMean_t0`, *SD~T0~* = `r vSD_t0`) en het gemiddelde van T~1~ (*M~T1~* =`r vMean_t1`, *SD~T1~* = `r vSD_t1`) is significant, *t* ~`r vDF`~ = `r vT_waarde`, *p* < 0,0001. Gemiddeld studeren de studenten `r vDiffMean` uur meer na deelname aan de cursus. 
-Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vconf.int1` tot `r vconf.int2`. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is groot, *d* = `r vD_waarde`. 
+Het 95%-betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen is van `r vconf.int1` tot `r vconf.int2`. Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is groot, *d* = `r vD_waarde`. 
 
 
 | Meting     | N         | M            | SD         |

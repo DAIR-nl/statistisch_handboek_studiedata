@@ -2,13 +2,13 @@
 RNGkind(sample.kind = "Rounding")
 set.seed (7)
 aantal_studenten <- 7348
-Studentnr <- sample(5000000:6000000, aantal_studenten)
+Studentnummer <- sample(5000000:6000000, aantal_studenten)
 
-hbo_achtergrond <- round(rnorm(aantal_studenten, 0.4, 0.1))
-hbo_achtergrond [hbo_achtergrond == 1] <- "ja"
-hbo_achtergrond [hbo_achtergrond == 0] <- "nee"
+hbo_vooropleiding <- round(rnorm(aantal_studenten, 0.4, 0.1))
+hbo_vooropleiding [hbo_vooropleiding == 1] <- "ja"
+hbo_vooropleiding [hbo_vooropleiding == 0] <- "nee"
 
-Instroom_2018_totaal <- data.frame(Studentnr, hbo_achtergrond)
+Instroom_2018_totaal <- data.frame(Studentnummer, hbo_vooropleiding)
 
 # neem sample van dataset voor binomiaaltoets
 indices <- sample.int(nrow(Instroom_2018_totaal),20)

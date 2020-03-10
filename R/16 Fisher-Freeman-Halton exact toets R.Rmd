@@ -49,7 +49,7 @@ Gebruik de *Chi-kwadraat toets*[^1] of de *Fisher-Freeman-Halton exact toets*[^2
 
 # Onderwijscasus
 <div id = "casus">
-De opleidingsdirecteur van de Bachelor Antropologie vraagt zich af wat de invloed is van de instroom van studenten met een vooropleiding in het buitenland op het behalen van een positief BSA. Krijgen studenten met een vooropleiding uit bepaalde landen vaker een positief BSA dan studenten met een vooropleiding uit andere landen? Op basis van deze analyse kan de opleidingsdirecteur overwegen om bij de inrichting van het tutoraat rekening te houden met de achtergronden van studenten.
+De opleidingsdirecteur van de Bachelor Antropologie vraagt zich af wat de invloed is van de instroom van studenten met een vooropleiding in het buitenland op het behalen van een positief BSA. Krijgen studenten met een vooropleiding uit bepaalde landen vaker een positief BSA dan studenten met een vooropleiding uit andere landen? Op basis van deze analyse kan de opleidingsdirecteur overwegen om bij de inrichting van het tutoraat rekening te houden met de vooropleidingen van studenten.
 
 
 H~0~: De verhouding wel/geen positief BSA is onder de studenten van de Bachelor Antropologie hetzelfde voor studenten ongeacht het land van de hoogste vooropleiding.
@@ -152,7 +152,7 @@ N <- sum(BSA_kruistabel)
 w <- sqrt(Chi2_teststatistiek / N)
 
 # Print effectgrootte
-paste("Effectgrootte is",Round_and_format(w))
+paste("Effectgrootte is",w)
 
 
 ```

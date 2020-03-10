@@ -135,8 +135,8 @@ N <- sum(Uitval_functiebeperking)
 # Bereken eta squared
 w <- sqrt(Chi2_teststatistiek / N)
 
-# Print effectgrootte
-paste("Effectgrootte is",Round_and_format(w))
+# Print de effectgrootte
+paste("De effectgrootte is",w)
 
 
 ```

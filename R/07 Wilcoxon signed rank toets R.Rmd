@@ -179,17 +179,17 @@ wilcox.test(Alumni_jaarinkomens_T2, Alumni_jaarinkomens_T1,
 <!-- ## OPENBLOK: Wilcoxon-signed-rank-toets2.R -->
 Bereken de effectmaat *r* vervolgens op basis van de *p*-waarde van de *Wilcoxon signed rank toets*.
 ```{r effectgrootte}
-# Sla p-waarde op
+# Sla de p-waarde op
 pwaarde <- wilcox.test(Alumni_jaarinkomens_T2, Alumni_jaarinkomens_T1, 
                        paired = TRUE, alternative = "greater")$p.value
 
-# Bereken effectgrootte tweezijdige toets
+# Bereken de effectgrootte voor een tweezijdige toets
 #r <- qnorm(pwaarde/2) / sqrt(nrow(Studiepunten_studiejaar2))
-# Bereken effectgrootte eenzijdige toets
+# Bereken de effectgrootte voor een eenzijdige toets
 r <- abs(qnorm(pwaarde) / sqrt(nrow(Alumni_jaarinkomens)))
 
-# Print effectgrootte
-paste("Effectmaat is", Round_and_format(r))
+# Print de effectgrootte
+paste("De effectmaat is", r)
 
 ```
 <!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets2.R -->

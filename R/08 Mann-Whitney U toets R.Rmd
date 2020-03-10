@@ -49,13 +49,13 @@ source(paste0(here::here(),"/01. Includes/data/08.R"))
 # Toepassing
 Gebruik de *Mann-Whitney U toets* om te toetsen of twee onafhankelijke groepen significant van elkaar verschillen. 
 
-Deze toets wordt ook *Mann–Whitney–Wilcoxon*, *Wilcoxon rank-sum toets*, of *Wilcoxon–Mann–Whitney toets* genoemd.[^1] Niet te verwarren met de *Wilcoxon Signed Rank Test* die toets of twee afhankelijke groepen significant van elkaar verschillen. 
+Deze toets wordt ook *Mann–Whitney–Wilcoxon*, *Wilcoxon rank-sum toets*, of *Wilcoxon–Mann–Whitney toets* genoemd.[^1] Niet te verwarren met de *Wilcoxon Signed Rank Test* die toetst of twee afhankelijke groepen significant van elkaar verschillen. 
 
 De *Mann-Whitney U toets* kan een alternatief zijn voor de *ongepaarde t-toets*. De *Mann-Whitney U toets* stelt minder eisen aan de data en hoeft onder andere niet te voldoen aan de assumptie van normaliteit. Bij de *Mann-Whitney U toets* hebben uitbijters minder invloed op het eindresultaat dan bij de *ongepaarde t-toets*. Daarentegen, als de data wel normaal verdeeld zijn heeft de *Mann-Whitney U toets* minder onderscheidend vermogen dan de *ongepaarde t-toets*.[^2] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Mann-Whitney U toets* gekozen wordt. 
 
 # Onderwijscasus
 <div id ="casus">
-De onderwijsdirecteur van de opleiding Business Administration van een hogeschool vraagt zich af of er verschil is in de studieresultaten van studenten met een Nederlandse vooropleiding en een buitenlandse vooropleiding. Met name in het tweede studiejaar lijken er verschillen op te treden die hij wil begrijpen om mogelijke interventies met haar docenten te bespreken. Hij vraagt zich af: ‘Verschilt het aantal studiepunten in het tweede studiejaar van studenten met een Nederlandse vooropleiding van het aantal studiepunten in het tweede studiejaar van studenten met een buitenlandse vooropleiding?
+De onderwijsdirecteur van de opleiding Business Administration van een hogeschool vraagt zich af of er verschil is in de studieresultaten van studenten met een Nederlandse vooropleiding en een buitenlandse vooropleiding. Met name in het tweede studiejaar lijken er verschillen op te treden die hij wil begrijpen om mogelijke interventies met zijn docenten te bespreken. Hij vraagt zich af: ‘Verschilt het aantal studiepunten in het tweede studiejaar van studenten met een Nederlandse vooropleiding van het aantal studiepunten in het tweede studiejaar van studenten met een buitenlandse vooropleiding?
 
 *H~0~*: De verdeling van het behaalde aantal studiepunten in het tweede jaar van studenten met een buitenlandse vooropleiding is hetzelfde als de verdeling van studenten met een Nederlandse vooropleiding. 
 
@@ -63,7 +63,7 @@ De onderwijsdirecteur van de opleiding Business Administration van een hogeschoo
 </div>
 
 # Assumpties
-Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden: de data zijn ordinaal of numeriek. De groepen zijn onafhankelijk van elkaar [^3] en het aantal groepen is twee. Gebruik bij meer dan twee groepen de *Kruskal Wallis toets*.
+Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden: de data zijn ordinaal of numeriek, de groepen zijn onafhankelijk van elkaar [^3] en het aantal groepen is twee. Gebruik bij meer dan twee groepen de *Kruskal Wallis toets*.
 
 # Effectmaat
 
@@ -155,7 +155,7 @@ vQ3_Inter <- Round_and_format(x[1,5])
 <!-- ## TEKSTBLOK: Mann-Whitney-U-toets-1.R -->
 Gebruik `wilcox.test()` om een *Mann-Whitney U toets* te doen. Het eerste argument bevat het aantal studiepunten van studenten met een Nederlandse vooropleiding `Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands]`; het tweede argument het aantal studiepunten van studenten met een buitenlandse vooropleiding `Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands]`. Voer daarna de argument `paired = FALSE` omdat de steekproeven ongepaard zijn, het argument `alternative = "two.sided" ` vanwege de tweezijdige alternatieve hypothese en
 het argument `conf.int = TRUE` om een schatting met bijbehorend betrouwbaarheidsinterval te geven voor de mediaan 
-van de verschilscores.
+van de verschilscores.[^6]<sup>,</sup>[^7]
 <!-- ## /TEKSTBLOK: Mann-Whitney-U-toets-1.R -->
 
 <!-- ## OPENBLOK: Mann-Whitney-U-toets-2.R -->
@@ -183,29 +183,29 @@ vW_ub <- Round_and_format(wcx$conf.int[2])
 <!-- ## /CLOSEDBLOK: Mann-Whitney-U-toets-3.R -->
 
 <!-- ## OPENBLOK: Mann-Whitney-U-toets-4.R -->
-Bereken de effectmaat *r* vervolgens op basis van de *p*-waarde van de *Mann-Whitney U toets*.
+Bereken vervolgens de effectmaat *r* op basis van de *p*-waarde van de *Mann-Whitney U toets*.
 ```{r effectgrootte}
-# Sla p-waarde op
+# Sla de p-waarde op
 pwaarde <- wilcox.test(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands], 
             Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands],
             paired = FALSE,
             alternative = "two.sided",
             conf.int = TRUE)$p.value
 
-# Bereken effectgrootte tweezijdige toets
+# Bereken de effectgrootte van de tweezijdige toets
 r <- qnorm(pwaarde/2) / sqrt(nrow(Studiepunten_studiejaar2))
-# Bereken effectgrootte eenzijdige toets
+# Bereken de effectgrootte van de eenzijdige toets
 #r <- qnorm(pwaarde) / sqrt(nrow(Studiepunten_studiejaar2))
 
-# Print effectmaat
-paste("Effectmaat is",Round_and_format(abs(r)))
+# Print de effectmaat
+paste("De effectmaat is", abs(r))
 
 ```
 <!-- ## /OPENBLOK: Mann-Whitney-U-toets-4.R -->
 
 <!-- ## TEKSTBLOK: Mann-Whitney-U-toets-4.R -->
 * *W* = `r vW_W`, *p* = < 0,0001, *r* = `r Round_and_format(abs(r))`
-* *p*-waarde < 0,05, dus de H~0~ wordt niet verworpen.[^6]
+* *p*-waarde < 0,05, dus de H~0~ wordt niet verworpen.[^8]
 * Effectmaat is `r Round_and_format(abs(r))`, dus een klein tot gemiddeld effect
 * De mediaan van de verschilscores is `r vW_est` met een 
 95%-betrouwbaarheidsinterval  van `r vW_lb` tot `r vW_ub`
@@ -214,7 +214,7 @@ paste("Effectmaat is",Round_and_format(abs(r)))
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal studiepunten in het tweede jaar hetzelfde is voor studenten met buitenlandse vooropleiding als voor studenten met Nederlandse vooropleiding. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen het aantal studiepunten van studenten met een buitenlandse vooropleiding en met een Nederlandse vooropleiding, *W* = `r vW_W`, *p* < 0,0001, *r* = `r Round_and_format(abs(r))`. Er is een klein tot gemiddeld effect, het verschil in mediaan tussen beide groepen (Nederlandse minus buitenlandse vooropleiding) is geschat op `r vW_est ` met een 95%-betrouwbaarheidsinterval van `r vW_lb` tot `r vW_ub`.  
+De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal studiepunten in het tweede jaar hetzelfde is voor studenten met buitenlandse vooropleiding als voor studenten met Nederlandse vooropleiding. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen het aantal studiepunten van studenten met een buitenlandse vooropleiding en met een Nederlandse vooropleiding, *W* = `r vW_W`, *p* < 0,0001, *r* = `r Round_and_format(abs(r))`. Er is een klein tot gemiddeld effect: het verschil in mediaan tussen beide groepen (Nederlandse minus buitenlandse vooropleiding) is geschat op `r vW_est ` met een 95%-betrouwbaarheidsinterval van `r vW_lb` tot `r vW_ub`.  
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->
@@ -228,5 +228,7 @@ De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal stu
 [^4]: De effectmaat *r* wordt voor de *Mann-Whitney U toets* berekend door de
 *z*-waarde behorend bij de *p*-waarde van de toets te delen door de wortel van
 het aantal observaties, i.e. $\frac{z}{\sqrt{N}}$.
-[^5]: Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst. 
-[^6]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
+[^5]: Elke groep heeft geen overlap met één van de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.
+[^6]: De mediaan van de verschilscores kan bij twee ongepaarde steekproeven bijvoorbeeld geschat worden door alle *m x n* verschilscores te berekenen tussen *m* observaties uit de ene steekproef en *n* observaties uit de andere steekproef. De mediaan van deze *m x n* verschilscores is dan de schatting.
+[^7]: Wikipedia (10 maart 2020). *Hogdes-Lehmann estimator*.[https://en.wikipedia.org/wiki/Hodges%E2%80%93Lehmann_estimator](https://en.wikipedia.org/wiki/Hodges%E2%80%93Lehmann_estimator) 
+[^8]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

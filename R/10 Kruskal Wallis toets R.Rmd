@@ -194,8 +194,8 @@ KW_teststatistiek <- kruskal.test(EC_Jaar1 ~ Vooropleiding, Resultaten_Arbeidsre
 # Bereken eta squared
 Eta_squared <- KW_teststatistiek / (nrow(Resultaten_Arbeidsrecht) - 1)
 
-# Print effectgrootte
-paste("Eta squared is",Round_and_format(Eta_squared))
+# Print de effectgrootte
+paste("Eta squared is",Eta_squared)
 
 
 ```

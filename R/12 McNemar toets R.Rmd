@@ -191,8 +191,8 @@ Verschil_proporties_standaardafwijking <- sqrt((FOS_studenten_confusiematrix["ne
 Betrouwbaarheidsinterval <- c(Verschil_proporties - 1.96 * Verschil_proporties_standaardafwijking,
                               Verschil_proporties + 1.96 * Verschil_proporties_standaardafwijking)
 # Print interval
-paste("Het verschil in proporties is",Round_and_format(Verschil_proporties),"met bijbehorend 95%-betrouwbaarheidsinterval van",
-      Round_and_format(Betrouwbaarheidsinterval[1]),"tot", Round_and_format(Betrouwbaarheidsinterval[2]))
+paste("Het verschil in proporties is", Verschil_proporties,"met bijbehorend 95%-betrouwbaarheidsinterval van",
+      Betrouwbaarheidsinterval[1],"tot", Betrouwbaarheidsinterval[2])
 
 ```
 <!-- ## /OPENBLOK: McNemar-toets5.R -->
@@ -240,7 +240,7 @@ print(EMN_kruistabel)
 Het aantal studenten dat een beroep op de FOS doet is iets hoger in juni.
 
 <!-- ## TEKSTBLOK: exMcNemar-toets4.R -->
-Gebruik de functie `mcnemar.exact()` met als eerste argument de confusiematrix `EMN_confusiematrix` en als tweede argument `conf.level = 0.95` om een significantieniveau van 5 % te gebruiken.
+Gebruik de functie `mcnemar.exact()` met als eerste argument de confusiematrix `EMN_confusiematrix` en als tweede argument `conf.level = 0.95` om een significantieniveau van 0,05 te gebruiken.
 <!-- ## /TEKSTBLOK: exMcNemar-toets4.R -->
 
 <!-- ## OPENBLOK: exMcNemar-toets5.R -->

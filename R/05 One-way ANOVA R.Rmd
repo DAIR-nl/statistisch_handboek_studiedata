@@ -140,7 +140,20 @@ Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen 
 <!-- ## /OPENBLOK: Data-beschrijven-inladen.R -->
 
 <!-- ## OPENBLOK: Data-beschrijven-1.R -->
-```{r Data beschrijven 1}
+```{r Data beschrijven 1, eval = FALSE}
+## Aantallen, gemiddelde en standaarddeviatie
+library(dplyr)
+Reistijd_per_opleiding %>% group_by(Opleiding) %>%
+  summarise(
+    N = length(Reistijd),
+    Gemiddelde = mean(Reistijd),
+    Standaardafwijking = sd(Reistijd) # Optioneel hieronder
+  ) 
+```
+<!-- ## /OPENBLOK: Data-beschrijven-1.R -->
+
+<!-- ## CLOSEDBLOK: Data-beschrijven-11.R -->
+```{r Data beschrijven 11, echo = FALSE}
 ## Aantallen, gemiddelde en standaarddeviatie
 library(dplyr)
 Reistijd_per_opleiding %>% group_by(Opleiding) %>%
@@ -151,7 +164,8 @@ Reistijd_per_opleiding %>% group_by(Opleiding) %>%
   ) %>% mutate(Gemiddelde = Round_and_format(Gemiddelde),
                Standaardafwijking = Round_and_format(Standaardafwijking))
 ```
-<!-- ## /OPENBLOK: Data-beschrijven-1.R -->
+<!-- ## /CLOSEDBLOK: Data-beschrijven-11.R -->
+
 <!-- ## CLOSEDBLOK: Data-beschrijven.R -->
 ```{r data beschrijven als object, include=FALSE, echo=TRUE}
 vM_ATC  <- Round_and_format(mean(Reistijd_ATC))

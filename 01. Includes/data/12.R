@@ -17,21 +17,20 @@ Niet_achteraf <- replicate(1368, "nee")
 Achteraf <- c(Wel_achteraf, Niet_achteraf)
 
 ## Datum
-Datum_vooraf <- replicate(length(Vooraf), "December")
-Datum_achteraf <- replicate(length(Achteraf), "Juni")
+Maand_vooraf <- replicate(length(Vooraf), "december")
+Maand_achteraf <- replicate(length(Achteraf), "juni")
 
 ## Hussel met behoudt logische paren
-Studentnr <- sample(4000000:5000000, length(Vooraf))
-Vooraf <- Vooraf[order(Studentnr)]
-Achteraf <- Achteraf[order(Studentnr)]
-
+Studentnummer <- sample(4000000:5000000, length(Vooraf))
+Vooraf <- Vooraf[order(Studentnummer)]
+Achteraf <- Achteraf[order(Studentnummer)]
 ## Data.frame
-FOS_studenten <- data.frame(c(Studentnr, Studentnr),
+FOS_studenten <- data.frame(c(Studentnummer, Studentnummer),
                             c(Vooraf, Achteraf),
-                            c(Datum_vooraf, Datum_achteraf))
-colnames(FOS_studenten)<-c("Studentnr", "FOS?", "Datum")
+                            c(Maand_vooraf, Maand_achteraf))
+colnames(FOS_studenten)<-c("Studentnummer", "FOS", "Maand")
 
-FOS_studenten <- FOS_studenten[order(FOS_studenten$Studentnr),]
+FOS_studenten <- FOS_studenten[order(FOS_studenten$Studentnummer),]
 
 ### Exact McNemar toets
 EMN_confusiematrix <- as.table(matrix(c(20,3,4,25),2,2,byrow=TRUE))

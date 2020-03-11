@@ -140,7 +140,7 @@ vub <-  Round_and_format(chi2$conf.int[2])
 
 ## Rapportage
 <!-- ## TEKSTBLOK: Chi-kwadraat5.R-->
-De *Chi-kwadraat toets* is uitgevoerd om te onderzoeken of het percentage studenten met een hbo vooropleiding verschilt van het landelijk percentage van 11,13%. Het percentage hbo-studenten is significant verschillend van 11,13% ($\chi^2$~`r vdf`~ = `r vchi2`, *p* < 0,0001), dus de nulhypothese kan verworpen worden. De schatting van het percentage is `r vest` met een 95%-betrouwbaarheidsinterval van `r vlb` tot `r vub` en ligt hoger dan het landelijk gemiddelde van 11,13%.
+De *Chi-kwadraat toets* is uitgevoerd om te onderzoeken of het percentage studenten met een hbo vooropleiding verschilt van het landelijk percentage van 11,13%. Het percentage hbo-studenten is significant verschillend van 11,13% ($\chi^2$~`r vdf`~ = `r vchi2`, *p* < 0,0001), dus de nulhypothese kan verworpen worden. De schatting van het percentage is `r vest` met een 95%-betrouwbaarheidsinterval van `r vlb` tot `r vub`. Aan de hand van de resultaten kan geconcludeerd worden dat het percentage studenten met een hbo vooropleiding hoger ligt dan het landelijk gemiddelde van 11,13%.
 
 <!-- ## /TEKSTBLOK: Chi-kwadraat5.R-->
 
@@ -211,7 +211,7 @@ bprop <- Round_and_format(b$estimate)
 ## Rapportage
 
 <!-- ## TEKSTBLOK: Binomiaaltoets8.R-->
-De *binomiaaltoets* is uitgevoerd om te onderzoeken of het percentage studenten met een hbo vooropleiding verschilt van het landelijk percentage van 11,13% voor een dataset met een laag aantal observaties. Het percentage hbo-studenten is niet significant verschillend van 11,13% (*p* = `r bp`), dus de nulhypothese kan niet verworpen worden. De schatting van het percentage is `r bprop` met een 95%-betrouwbaarheidsinterval van `r blb` tot `r bub` en is niet significant verschillend van het landelijk gemiddelde van 11,13%.
+De *binomiaaltoets* is uitgevoerd om te onderzoeken of het percentage studenten met een hbo vooropleiding verschilt van het landelijk percentage van 11,13% voor een dataset met een laag aantal observaties. Het percentage hbo-studenten is niet significant verschillend van 11,13% (*p* = `r bp`), dus de nulhypothese kan niet verworpen worden. De schatting van het percentage is `r bprop` met een 95%-betrouwbaarheidsinterval van `r blb` tot `r bub` en is niet significant verschillend van het landelijk gemiddelde van 11,13%. De resultaten suggereren dat het percentage studenten met een hbo vooropleiding niet hoger ligt dan het landelijk gemiddelde van 11,13%.
 
 <!-- ## /TEKSTBLOK: Binomiaaltoets8.R-->
 

@@ -55,21 +55,21 @@ source(paste0(here::here(),"/01. Includes/data/04.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *repeated measures ANOVA* om te toetsen of de gemiddelden te vergelijken van een groep bij drie of meer herhaalde metingen.[^1] 
+Gebruik de *repeated measures ANOVA* om gemiddelden te vergelijken van een groep bij drie of meer herhaalde metingen.[^1] 
 
 # Onderwijscasus
 <div id = "casus">
 
-De opleidingsdirecteur van de bachelor Technische Natuurkunde hoort vanuit de opleidingscommissie dat de eerstejaarsstudenten de studielast van de eerste onderwijsperiode als erg hoog ervaren. Om te onderzoeken hoe deze ervaren studielast verminderd kan worden, wil hij onderzoeken hoeveel tijd deze studenten per week besteden aan hun vakken. Uit vakevaluaties verzamelt hij gegevens van het aantal uur per week dat eerstejaars studenten besteden aan de vakken in periode 1: Lineaire Algebra, Relativiteitstheorie en Kosmologie. Op deze manier kan hij onderzoeken of er verschillen in de tijdsbesteding aan de verschillende vakken zijn en om te bepalen van welke vakken de studielast aangepast moeten worden.
+De opleidingsdirecteur van de bachelor Technische Natuurkunde van een universiteit hoort vanuit de opleidingscommissie dat de eerstejaars studenten de studielast van de eerste onderwijsperiode als erg hoog ervaren. Om te onderzoeken hoe deze ervaren studielast verminderd kan worden, wil hij onderzoeken hoeveel tijd de studenten per week besteden aan hun vakken. Uit vakevaluaties verzamelt hij gegevens van het aantal uur per week dat eerstejaars studenten besteden aan de vakken in de eerste onderwijsperiode: Lineaire Algebra, Relativiteitstheorie en Kosmologie. Op deze manier kan hij onderzoeken of er verschillen in de tijdsbesteding aan de verschillende vakken zijn en om te bepalen van welke vakken de studielast aangepast moet worden.
 
-*H~0~*: Het aantal studieuren per week van eerstejaars studenten van de bachelor Technische Natuurkunde is hetzelfde voor de drie vakken in periode 1
+*H~0~*: Het aantal studieuren per week van eerstejaars studenten van de bachelor Technische Natuurkunde is hetzelfde voor de drie vakken in de eerste onderwijsperiode
 
-*H~A~*: Het aantal studieuren per week van eerstejaars studenten van de bachelor Technsiche Natuurkunde is niet hetzelfde voor de drie vakken in periode 1
+*H~A~*: Het aantal studieuren per week van eerstejaars studenten van de bachelor Technsiche Natuurkunde is niet hetzelfde voor de drie vakken in de eerste onderwijsperiode
 
 </div>
 
 # Assumpties
-Om een valide toetsresultaat te bereiken met de *repeated measures ANOVA*, moeten de data aan een aantal voorwaarden voldoen: normaliteit, sphericiteit en onafhankelijkheid.[^1] 
+Om een valide toetsresultaat te bereiken met de *repeated measures ANOVA* moeten de data aan een aantal voorwaarden voldoen: normaliteit, sphericiteit en onafhankelijkheid.[^1] 
 
 ## Normaliteit
 De assumptie van normaliteit houdt in dat er een normale
@@ -92,7 +92,7 @@ $`Sphericity Corrections`
 2    Vak   0.47683     0.05279         *   0.56298      0.04692         ")
 ```
 
-Bij een p-waarde < 0,05, toont *Mauchly's test* dat de assumptie van sphericiteit geschonden is. In de output is dit te zien aan de p-waarde van 0,0051 onder ` $Mauchly's Test for Sphericity `. Er zijn twee mogelijke correcties wanneer er geen sphericiteit is: de Greenhouse-Geisser (GG) en Huynh-Feldt (HF) correctie. De Greenhouse-Geisser correctie staat bekend als conservatief wat betekent dat de correctie een relatief lage kans op een type I fout heeft. In andere woorden, het zal niet vaak gebeuren dat deze correctie een significant effect aantoont wanneer dat er in werkelijkheid niet is. De Huynh-Feldt correctie staat echter bekend als liberaal, wat betekent dat er een relatief hoge kans op een type I fout is. De teststatistiek en p-waarde van beide correcties is in de output te vinden onder ` $Sphericity Corrections `.
+Bij een p-waarde < 0,05, toont *Mauchly's test* dat de assumptie van sphericiteit geschonden is. In de output is dit te zien aan de p-waarde van 0,0051 onder ` $Mauchly's Test for Sphericity `. Er zijn twee mogelijke correcties wanneer er geen sphericiteit is: de Greenhouse-Geisser (GG) en Huynh-Feldt (HF) correctie. De Greenhouse-Geisser correctie staat bekend als conservatief, wat betekent dat de correctie een relatief lage kans op een type I fout heeft. In andere woorden, het zal niet vaak gebeuren dat deze correctie een significant effect aantoont wanneer dat er in werkelijkheid niet is. De Huynh-Feldt correctie staat echter bekend als liberaal, wat betekent dat er een relatief hoge kans op een type I fout is. De teststatistiek en p-waarde van beide correcties zijn in de output te vinden onder ` $Sphericity Corrections `.
 
 Houd de volgende richtlijnen aan bij het interpreteren van de *repeated measures ANOVA* wanneer niet aan sphericiteit is voldaan:
 
@@ -106,10 +106,10 @@ In de voorbeeldoutput is de p-waarde van de Greenhouse-Geisser correctie > 0,05 
 
 
 # Effectmaat
-De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^6] Voor de *repeated measures ANOVA* wordt de effectmaat eta squared vaak gebruikt.
+De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^6] Voor de *repeated measures ANOVA* wordt de effectmaat eta squared vaak gebruikt.
 
 ## Eta squared
-De effectmaat eta squared (*η^2^*) berekent de proportie van de variantie in de afhankelijke variabele wat verklaard wordt door de onafhankelijke variabele. In deze casus berekent het de proportie van de variantie in het aantal uren studeren die verklaard kan worden door het vak in de eerste periode. Een indicatie om *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^7]
+De effectmaat eta squared (*η^2^*) berekent de proportie van de variantie in de afhankelijke variabele die verklaard wordt door de onafhankelijke variabele. In deze casus berekent het de proportie van de variantie in het aantal uren studeren die verklaard kan worden door het vak in de eerste onderwijsperiode. Een indicatie om *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^7]
 
 # Post-hoc toetsen
 De *repeated measures ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Voer een post-hoc toets uit om te bepalen welke groepen significant verschillen.
@@ -118,7 +118,7 @@ Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertij
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is een dataset `Studieuren_technische_natuurkunde` ingeladen met het aantal studieuren van eerstejaars studenten van de bachelor Technische Natuurkunde voor de drie vakken in periode 1.
+Er is een dataset `Studieuren_technische_natuurkunde` ingeladen met het aantal studieuren van eerstejaars studenten van de bachelor Technische Natuurkunde voor de drie vakken in de eerste onderwijsperiode.
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
@@ -299,7 +299,7 @@ boxplot(Studieuren ~ Vak, Studieuren_technische_natuurkunde)
 ```
 <!-- ## /OPENBLOK: Boxplot.R -->
 
-De boxplotten geven de spreiding weer van het aantal studieuren voor de drie vakken in periode 1: Kosmologie, Lineaire Algebra en Relativiteitstheorie. Bij Kosmologie lijkt er enige asymmetrie te zijn: de boxen zijn niet even breed. Daarnaast liggen de medianen van Kosmologie en Lineaire Algebra een stuk lager dan de mediaan van Relativiteitstheorie. Kosmologie en Relativiteitstheorie hebben mogelijke uitbijters. In het algemeen lijken de vakken een symmetrische verdeling te hebben.
+De boxplotten geven de spreiding weer van het aantal studieuren voor de drie vakken in de eerste onderwijsperiode: Kosmologie, Lineaire Algebra en Relativiteitstheorie. Bij Kosmologie lijkt er enige asymmetrie te zijn: de boxen zijn niet even breed. Daarnaast liggen de medianen van Kosmologie en Lineaire Algebra een stuk lager dan de mediaan van Relativiteitstheorie. Kosmologie en Relativiteitstheorie hebben mogelijke uitbijters. In het algemeen lijken de vakken een symmetrische verdeling te hebben.
 
 
 ## Toetsen van normaliteit
@@ -377,7 +377,7 @@ De p-waarde is *p* > 0,05 voor elk vak, dus er is geen statistisch significant v
 ## Repeated measures ANOVA 
 
 <!-- ## TEKSTBLOK: ANOVA-toets.R -->
-Voer de *repeated measures ANOVA* uit om de vraag te beantwoorden of er verschillen zijn tussen het aantal studieuren voor de vakken in periode 1 van het eerste jaar van de bachelor Technische Natuurkunde. Gebruik de functie `ezANOVA` met als argumenten de dataset ``Studieuren_technische_natuurkunde`, de afhankelijke variabele `dv = Studieuren`, de variabele die de observaties aangeeft `wid = Studentnummer` en de onafhankelijke variabele `within = Vak`.
+Voer de *repeated measures ANOVA* uit om de vraag te beantwoorden of er verschillen zijn tussen het aantal studieuren voor de vakken in de eerste onderwijsperiode van het eerste jaar van de bachelor Technische Natuurkunde. Gebruik de functie `ezANOVA` met als argumenten de dataset ``Studieuren_technische_natuurkunde`, de afhankelijke variabele `dv = Studieuren`, de variabele die de observaties aangeeft `wid = Studentnummer` en de onafhankelijke variabele `within = Vak`.
 <!-- ## /TEKSTBLOK: ANOVA-toets.R -->
 
 <!-- ## OPENBLOK: ANOVA-toets.R -->
@@ -401,17 +401,17 @@ eta2 <- Round_and_format(obj$ANOVA$ges)
 <!-- ## /CLOSEDBLOK: ANOVA-toets.R -->
 
 <!-- ## TEKSTBLOK: ANOVA-toets1.R -->
-*Mauchly's test* toont aan de de assumptie van sphericiteit niet standthoudt in deze casus ($\chi^2$ = `r Mauchly_W`, p < 0,0001); gebruik in dit geval een van de correcties. Zowel de Greenhouse-Geisser als de Huynh-Feldt correctie laten een significant resultaat zien; rapporteer in dit geval de (conservatieve) Greenhouse-Geisser correctie.
+*Mauchly's test* toont aan dat de assumptie van sphericiteit niet standthoudt in deze casus ($\chi^2$ = `r Mauchly_W`, p < 0,0001); gebruik in dit geval een van de correcties. Zowel de Greenhouse-Geisser als de Huynh-Feldt correctie laten een significant resultaat zien; rapporteer in dit geval de (conservatieve) Greenhouse-Geisser correctie.
 
 * De data voldoet niet aan de assumptie van sphericiteit, $\chi^2$ = `r Mauchly_W`, p < 0,0001
 * De resultaten van de Greenhouse-Geisser correctie zijn *F* = `r GG_F`, p < 0,0001, *η^2^* = `r eta2`
 * De p-waarde < 0,05, dus de H~0~ wordt verworpen.[^11]
-* Er is een significant verschil tussen het aantal studieuren voor de drie vakken in periode 1; het effect van het vak op het aantal studieuren is groot
+* Er is een significant verschil tussen het aantal studieuren voor de drie vakken in de eerste onderwijsperiode; het effect van de verschillende vakken op het aantal studieuren is groot
 <!-- ## /TEKSTBLOK: ANOVA-toets1.R -->
 
 ## Post-hoc toets
 <!-- ## TEKSTBLOK: posthoc1.R -->
-Voer post-hoc toetsen uit om te onderzoeken welke vakken uit periode 1 van elkaar verschillen wat betreft het aantal studieuren dat eerstejaars studenten van de bachelor Technische Natuurkunde hieraan besteden. Gebruik hiervoor de functie `pairwise.t.test` met als argumenten de afhankelijk variabele `Studieuren_technische_natuurkunde$Studieuren`, de onafhankelijke variabele `Studieuren_technische_natuurkunde$Vak` en de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`.
+Voer post-hoc toetsen uit om te onderzoeken welke vakken uit de eerste onderwijsperiode van elkaar verschillen wat betreft het aantal studieuren dat eerstejaars studenten van de bachelor Technische Natuurkunde hieraan besteden. Gebruik hiervoor de functie `pairwise.t.test` met als argumenten de afhankelijk variabele `Studieuren_technische_natuurkunde$Studieuren`, de onafhankelijke variabele `Studieuren_technische_natuurkunde$Vak` en de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`.
 <!-- ## /TEKSTBLOK: posthoc1.R -->
 
 <!-- ## OPENBLOK: posthoc2.R -->
@@ -452,7 +452,7 @@ phtest <- pairwise.t.test(Studieuren_technische_natuurkunde$Studieuren, Studieur
 # Rapportage
 
 <!-- ## TEKSTBLOK: rapportage.R -->
-Een *repeated measures ANOVA* is uitgevoerd om te onderzoeken of er verschillen zijn tussen het aantal studieuren dat eerstejaars studenten van de bachelor Technische Natuurkunde besteden aan de vakken in periode. De vakken zijn Lineaire Algebra, Relativiteitstheorie en Kosmologie; beschrijvende statistieken zijn te vinden in Tabel 1. De data voldoen niet aan de assumptie van sphericiteit ($\chi^2$ = `r Mauchly_W`, p < 0,0001), daarom is de Greenhouse-Geisser correctie gebruikt. Het aantal studieuren voor de drie vakken in periode 1 verschilt significant van elkaar, *F* = `r GG_F`, p < 0,0001, *η^2^* = `r eta2`. De sterkte van het effect van het vak op het aantal studieuren is groot. Post-hoc toetsen - waarbij een Bonferroni correctie is toegepast om te corrigeren voor meerdere toetsen -  tonen aan dat elk van de drie de vakken significant verschilt van de andere twee vakken.
+Een *repeated measures ANOVA* is uitgevoerd om te onderzoeken of er verschillen zijn tussen het aantal studieuren dat eerstejaars studenten van de bachelor Technische Natuurkunde besteden aan de vakken in de eerste onderwijsperiode. De vakken zijn Lineaire Algebra, Relativiteitstheorie en Kosmologie; beschrijvende statistieken zijn te vinden in Tabel 1. De data voldoen niet aan de assumptie van sphericiteit ($\chi^2$ = `r Mauchly_W`, p < 0,0001), daarom is de Greenhouse-Geisser correctie gebruikt. Het aantal studieuren voor de drie vakken in de eerste onderwijsperiode verschilt significant van elkaar, *F* = `r GG_F`, p < 0,0001, *η^2^* = `r eta2`. De sterkte van het effect van het vak op het aantal studieuren is groot. Post-hoc toetsen - waarbij een Bonferroni correctie is toegepast om te corrigeren voor meerdere toetsen -  tonen aan dat elk van de drie de vakken significant verschilt van de andere twee vakken.
 
 
 | Opleiding     | M          | SD          | N          |
@@ -460,7 +460,7 @@ Een *repeated measures ANOVA* is uitgevoerd om te onderzoeken of er verschillen 
 | Lineaire Algebra      | `r vM_LA` | `r vSD_LA` | `r vN_LA` |
 | Relativiteitstheorie  | `r vM_RT` | `r vSD_RT` | `r vN_RT` |
 | Kosmologie            | `r vM_KL` | `r vSD_KL` | `r vN_KL` |
-*Tabel 1. Het gemiddelde aantal studieuren, bijbehorende standaarddeviatie en groepsgrootte voor de vakken in periode 1 van de bachelor Technische Natuurkunde.*
+*Tabel 1. Het gemiddelde aantal studieuren, bijbehorende standaarddeviatie en groepsgrootte voor de vakken in de eerste onderwijsperiode van de bachelor Technische Natuurkunde.*
 <!-- ## /TEKSTBLOK: rapportage.R -->
 
 
@@ -471,7 +471,7 @@ Een *repeated measures ANOVA* is uitgevoerd om te onderzoeken of er verschillen 
 <!-- ## /CLOSEDBLOK: Footer.R -->
 
 [^1]: Universiteit van Amsterdam (26 augustus 2014). *Repeated-Measures ANOVA*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Repeated-Measures_ANOVA).
-[^2]: Bereken de logaritme van de variabele, en de inverse (1 gedeeld door de variabele), en bekijk of deze normaal verdeeld zijn. Als dat zo is mag je die gebruiken voor de analyse.
+[^2]: Bereken de logaritme van de variabele en de inverse (1 gedeeld door de variabele), en bekijk of deze normaal verdeeld zijn. Als dat zo is, mag je die gebruiken voor de analyse.
 [^3]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
 [^4]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php. 
 [^5]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).

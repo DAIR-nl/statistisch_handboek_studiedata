@@ -52,6 +52,7 @@ Het handboek is nog volop in ontwikkeling en zal gedurende 2020 aangevuld worden
 
 * 13 januari 2020: Lancering eerste versie website
 * 21 februari 2020: Verbeteringen doorgevoerd
+* 11 Maart 2020: Nieuwe toetsen toegevoegd: repeated measures ANOVA, Wilcoxon signed rank toets, Chi-kwadraat toets en binomiaaltoets en Mcnemar toets
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer_simpel.R"))}

@@ -61,7 +61,7 @@ De decaan van een hogeschool merkt dat weinig studenten met een functiebeperking
 
 # Assumpties
 
-Om de *McNemar toets* uit te voeren, moeten de data aan een aantal voorwaarden voldoen. Er dient een categorische variabele te zijn met twee categorieën en een binaire variabele die de twee gepaarde groepen weergeeft. Daarnaast mag er geen overlap zijn tussen de categorieën van de categorische variabele, wat wil zeggen dat elke observatie slechts in een van beide categorieën past.[^3]
+Om de *McNemar toets* uit te voeren, moeten de data aan een aantal voorwaarden voldoen. Er dient een categorische variabele te zijn met twee categorieën en een binaire variabele die de twee gepaarde groepen weergeeft. Daarnaast mag er geen overlap zijn tussen de categorieën van de categorische variabele: elke observatie past slechts in een van beide categorieën.[^3]
 
 ## Groepsgrootte
 
@@ -69,9 +69,9 @@ De *McNemar toets* gaat uit van een confusiematrix, een matrix waarin de rijen d
 
 <!-- ## OPENBLOK: Groepsgrootte1.R -->
 ```{r groepsgrootte, include=FALSE, echo=TRUE}
-### Definieer groepen
-December <- FOS_studenten$`FOS?`[FOS_studenten$Datum == "December"]
-Juni <- FOS_studenten$`FOS?`[FOS_studenten$Datum == "Juni"]
+### Definieer de groepen
+December <- FOS_studenten$`FOS`[FOS_studenten$Maand == "december"]
+Juni <- FOS_studenten$`FOS`[FOS_studenten$Maand == "juni"]
 
 ## Maak een confusiematrix
 FOS_studenten_confusiematrix <- table(December, Juni)
@@ -85,19 +85,12 @@ FOS_studenten_confusiematrix <- table(December, Juni)
 ||                      | FOS | geen FOS|
 |**December**| FOS      | `r FOS_studenten_confusiematrix["ja","ja"]` | `r FOS_studenten_confusiematrix["ja","nee"]`     |
 |            | Geen FOS | `r FOS_studenten_confusiematrix["nee","ja"]` | `r FOS_studenten_confusiematrix["nee","nee"]`     |
-*Tabel 1. Confusiematrix van aantal studenten dat beroep doet op FOS in december en juni*
+*Tabel 1. Confusiematrix van het aantal studenten dat een beroep doet op de FOS in december en juni.*
 
-De cel linksboven bevat het aantal studenten dat zowel in december als juni een beroep heeft gedaan op de FOS, dit zijn er `r FOS_studenten_confusiematrix["ja","ja"]`. De cel rechtsonder bevat het aantal studenten dat zowel in december als juni geen beroep heeft gedaan op de FOS, dit zijn er `r FOS_studenten_confusiematrix["nee","nee"]`. Beide cellen staan op de diagonaal van de tabel en worden daarom de *diagonale elementen* genoemd.
+De cel linksboven bevat het aantal studenten dat zowel in december als juni een beroep heeft gedaan op de FOS; dit zijn er `r FOS_studenten_confusiematrix["ja","ja"]`. De cel rechtsonder bevat het aantal studenten dat zowel in december als juni geen beroep heeft gedaan op de FOS; dit zijn er `r FOS_studenten_confusiematrix["nee","nee"]`. Beide cellen staan op de diagonaal van de tabel en worden daarom de *diagonale elementen* genoemd.
 
-In de cel rechtsboven staat het aantal studenten dat wel in december maar niet in juni een beroep op de FOS heeft gedaan, dit zijn er `r FOS_studenten_confusiematrix["ja","nee"]`. In de cel linksonder staat het aantal studenten dat niet in december maar wel in juni een beroep op de FOS heeft gedaan, dit zijn er `r FOS_studenten_confusiematrix["nee","ja"]`. Deze cellen zijn geen onderdeel van de diagonaal van de tabel. Bij een laag aantal observaties in de cellen die niet op de diagonaal zitten laag is, kan de exacte versie van de *McNemar toets* gebruikt. Wanneer de som van deze niet-diagonale elementen kleiner dan 11 is, is de exacte *McNemar toets* nuttig om te gebruiken. [^4]
+In de cel rechtsboven staat het aantal studenten dat wel in december maar niet in juni een beroep op de FOS heeft gedaan; dit zijn er `r FOS_studenten_confusiematrix["ja","nee"]`. In de cel linksonder staat het aantal studenten dat niet in december maar wel in juni een beroep op de FOS heeft gedaan; dit zijn er `r FOS_studenten_confusiematrix["nee","ja"]`. Deze cellen zijn geen onderdeel van de diagonaal van de tabel. Bij een laag aantal observaties in de cellen die niet op de diagonaal zitten, kan de exacte versie van de *McNemar toets* gebruikt worden. Wanneer de som van deze niet-diagonale elementen kleiner dan 11 is, is de exacte *McNemar toets* nuttig om te gebruiken. [^4]
 <!-- ## /TEKSTBLOK: Groepsgrootte2.R -->
-
-# Effectmaat
-
-# Effectmaat
-De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^5] 
-
-
 
 # De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken1.R -->
@@ -115,7 +108,7 @@ tail(FOS_studenten)
 <!-- ## /OPENBLOK: Data-bekijken2.R -->
 
 <!-- ## TEKSTBLOK: Data-kruistabel1.R -->
-Een kruistabel geeft weer hoeveel studenten er wel of niet een beroep doen op de FOS in december en in januari. Maak de kruistabel met de functie `table()` met als argumenten de variabele `FOS_studenten$FOS? ` - die weergeeft of studenten wel of geen beroep op de FOS doen - en de variabele `FOS_studenten$Datum ` die de het meetmoment (december of juni) weergeeft. 
+Een kruistabel geeft weer hoeveel studenten er wel of niet een beroep doen op de FOS in december en in juni. Maak de kruistabel met de functie `table()` met als argumenten de variabele `FOS_studenten$FOS`, die weergeeft of studenten wel of geen beroep op de FOS doen, en de variabele `FOS_studenten$Maand `, die de het meetmoment (december of juni) weergeeft. 
 <!-- ## /TEKSTBLOK: Data-kruistabel1.R -->
 
 <!-- ## OPENBLOK: Data-kruistabel2.R -->
@@ -123,29 +116,33 @@ Een kruistabel geeft weer hoeveel studenten er wel of niet een beroep doen op de
 ```{r kruistabel}
 
 ## Maak een kruistabel
-FOS_studenten_kruistabel <- table(FOS_studenten$`FOS?`, FOS_studenten$Datum)
+FOS_studenten_kruistabel <- table(FOS_studenten$`FOS`, FOS_studenten$Maand)
 
-## Print kruistabel 
+## Print de kruistabel 
 print(FOS_studenten_kruistabel)
+
+## Print een tabel met proporties, tweede argument 2 zorgt ervoor dat de 
+## proporties per kolom berekend worden
+prop.table(FOS_studenten_kruistabel, 2)
 ```
 <!-- ## /OPENBLOK: Data-kruistabel2.R -->
 
-De kruistabel laat zien dat het aantal studenten dat een beroep op de FOS heeft gedaan hoger is in juni en het aantal studenten dat geen beroep op de FOS heeft gedaan lager is in juni. Het percentage studenten dat een beroep op de FOS heeft gedaan is daarom toegenomen.
+De kruistabel laat zien dat het aantal studenten dat een beroep op de FOS heeft gedaan hoger is in juni en het aantal studenten dat geen beroep op de FOS heeft gedaan lager is in juni. Het percentage studenten dat een beroep op de FOS heeft gedaan is toegenomen; dit is ook te zien in de kruistabel met proporties.
 
 <!-- ## TEKSTBLOK: Data-bekijken3.R -->
-De *McNemar toets* gebruikt een confusiematrix in plaats van een kruistabel. In een confusiematrix worden de aantallen studenten die wel of geen beroep op de FOS hebben gedaan tegen elkaar uitgezet voor december en juni. Sla daarom de variabele `FOS` apart op in twee vectoren, een voor december en een voor juni. Maak daarna de confusiematrix.
+De *McNemar toets* gebruikt een confusiematrix in plaats van een kruistabel. In een confusiematrix worden de aantallen studenten die wel of geen beroep op de FOS hebben gedaan tegen elkaar uitgezet voor december en juni. Sla daarom de variabele `FOS` apart op in twee vectoren: een voor december en een voor juni. Maak daarna de confusiematrix.
 <!-- ## /TEKSTBLOK: Data-bekijken3.R -->
 
 <!-- ## OPENBLOK: Data-beschrijven.R -->
 ```{r data aanmaken}
-## Definieer groepen
-December <- FOS_studenten$`FOS?`[FOS_studenten$Datum == "December"]
-Juni <- FOS_studenten$`FOS?`[FOS_studenten$Datum == "Juni"]
+## Definieer de groepen
+December <- FOS_studenten$`FOS`[FOS_studenten$Maand == "december"]
+Juni <- FOS_studenten$`FOS`[FOS_studenten$Maand == "juni"]
 
 ## Maak een confusiematrix
 FOS_studenten_confusiematrix <- table(December, Juni)
 
-## Print confusiematrix 
+## Print de confusiematrix 
 print(FOS_studenten_confusiematrix)
 ```
 <!-- ## /OPENBLOK: Data-beschrijven.R -->
@@ -177,20 +174,20 @@ Bereken het verschil proportie en bijbehorend betrouwbaarheidsinterval als effec
 
 <!-- ## OPENBLOK: McNemar-toets5.R -->
 ```{r verschil proportie}
-# Bereken proporties FOS voor juni en december
+# Bereken de proporties FOS voor juni en december
 Proportie_FOS_juni <- sum(FOS_studenten_confusiematrix[,"ja"])/sum(FOS_studenten_confusiematrix)
 Proportie_FOS_december <- sum(FOS_studenten_confusiematrix["ja",])/sum(FOS_studenten_confusiematrix)
 
-# Bereken verschil in proporties
+# Bereken het verschil in proporties
 Verschil_proporties <- Proportie_FOS_juni - Proportie_FOS_december
 
-# Bereken standaardafwijking
+# Bereken de standaardafwijking
 Verschil_proporties_standaardafwijking <- sqrt((FOS_studenten_confusiematrix["nee","ja"] + FOS_studenten_confusiematrix["ja","nee"]) / sum(FOS_studenten_confusiematrix)^2 )  
 
-# Bereken 95%-betrouwbaarheidsinterval
+# Bereken het 95%-betrouwbaarheidsinterval
 Betrouwbaarheidsinterval <- c(Verschil_proporties - 1.96 * Verschil_proporties_standaardafwijking,
                               Verschil_proporties + 1.96 * Verschil_proporties_standaardafwijking)
-# Print interval
+# Print het interval
 paste("Het verschil in proporties is", Verschil_proporties,"met bijbehorend 95%-betrouwbaarheidsinterval van",
       Betrouwbaarheidsinterval[1],"tot", Betrouwbaarheidsinterval[2])
 
@@ -207,13 +204,13 @@ paste("Het verschil in proporties is", Verschil_proporties,"met bijbehorend 95%-
 ## Rapportage
 
 <!-- ## TEKSTBLOK: McNemar-toets5.R -->
-De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. De resultaten laten een significant verschil zien tussen de percentages voor en na de interventie ($\chi^2$~`r vdf`~ = `r vChi2`, *p* <0,0001), wat betekent dat de nulhypothese verworpen kan worden. De kruistabel (Tabel 2) illustreert dat het percentage studenten dat een beroep doet op de FOS is toegenomen na de interventie; de *McNemar toets* toont aan dat deze toename significant is. 
+De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. De interventie heeft als doel het aantal studenten met een functiebeperking dat een beroep doet op de FOS te verhogen. De resultaten laten een significant verschil zien tussen de percentages voor en na de interventie ($\chi^2$~`r vdf`~ = `r vChi2`, *p* <0,0001), wat betekent dat de nulhypothese verworpen kan worden. De kruistabel (Tabel 2) illustreert dat het percentage studenten dat een beroep doet op de FOS is toegenomen na de interventie; de *McNemar toets* toont aan dat deze toename significant is. 
 
 |                      | December | Juni |
 | -------------------- | -------------| ------------| 
-| **FOS** | `r FOS_studenten_kruistabel["ja","December"]`    | `r FOS_studenten_kruistabel["ja","Juni"]`     |
-| **geen FOS**  | `r FOS_studenten_kruistabel["nee","December"]`      | `r FOS_studenten_kruistabel["nee","Juni"]`     |
-*Tabel 2. Kruistabel van aantal studenten dat beroep doet op FOS in december en juni*
+| **FOS** | `r FOS_studenten_kruistabel["ja","december"]`    | `r FOS_studenten_kruistabel["ja","juni"]`     |
+| **geen FOS**  | `r FOS_studenten_kruistabel["nee","december"]`      | `r FOS_studenten_kruistabel["nee","juni"]`     |
+*Tabel 2. Kruistabel van het aantal studenten dat een beroep doet op de FOS in december en juni*
 
 <!-- ## /TEKSTBLOK: McNemar-toets5.R -->
 
@@ -222,7 +219,7 @@ De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het p
 ## Uitvoering
 
 <!-- ## TEKSTBLOK: exMcNemar-toets1.R -->
-Voer de exacte versie van de *McNemar toets* uit om te onderzoeken of er een verschil is tussen het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. Bij een lage hoeveelheid observaties in de niet-diagonale elementen van de confusiematrix is deze toets nuttig om te gebruiken. Om deze toets te illustreren bij deze casus wordt een confusiematrix `EMN_confusiematrix` ingeladen waarbij de niet-diagonale elementen minder dan elf observaties bevatten.
+Bij een lage hoeveelheid observaties (minder dan 11) in de niet-diagonale elementen van de confusiematrix is de exacte versie van de *McNemar toets* nuttig om te gebruiken. Om deze toets te illustreren bij deze casus wordt een confusiematrix `EMN_confusiematrix` ingeladen waarbij de niet-diagonale elementen minder dan 11 observaties bevatten. Voer de exacte versie van de *McNemar toets* uit om te onderzoeken of er een verschil is tussen het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. 
 <!-- ## /TEKSTBLOK: exMcNemar-toets1.R -->
 
 <!-- ## OPENBLOK: exMcNemar-toets2.R -->
@@ -231,13 +228,17 @@ print(EMN_confusiematrix)
 ```
 <!-- ## /OPENBLOK: exMcNemar-toets2.R -->
 
-Laad de bijbehorende kruistabel in om het aantal studenten dat wel of niet een beroep op de FOS doet te laten zien voor en na de interventie.
+Print de bijbehorende kruistabel en de proporties om het aantal studenten dat wel of niet een beroep op de FOS doet te laten zien voor en na de interventie.
 <!-- ## OPENBLOK: exMcNemar-toets3.R -->
 ```{r EMNkruistabel}
+# Print de kruistabel
 print(EMN_kruistabel)
+# Print een tabel met proporties, tweede argument 2 zorgt ervoor dat de 
+# proporties per kolom berekend worden
+prop.table(EMN_kruistabel, 2)
 ```
 <!-- ## /OPENBLOK: exMcNemar-toets3.R -->
-Het aantal studenten dat een beroep op de FOS doet is iets hoger in juni.
+Het aantal studenten dat een beroep op de FOS doet is in juni iets hoger.
 
 <!-- ## TEKSTBLOK: exMcNemar-toets4.R -->
 Gebruik de functie `mcnemar.exact()` met als eerste argument de confusiematrix `EMN_confusiematrix` en als tweede argument `conf.level = 0.95` om een significantieniveau van 0,05 te gebruiken.
@@ -258,14 +259,14 @@ mcnemar.exact(EMN_confusiematrix, conf.level = 0.95)
 ## Rapportage
 
 <!-- ## TEKSTBLOK: exMcNemar-toets7.R -->
-De exacte versie van de *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. De resultaten laten geen significant verschil zien tussen de percentages voor en na de interventie (*p* = `r mcnemar.exact(EMN_confusiematrix, conf.level = 0.95)$p.value`), dus de nulhypothese kan niet worden verworpen. De kruistabel (Tabel 3) illustreert dat het aantal studenten dat een beroep doet op de FOS iets hoger is in juni. Dit verschil is echter niet significant.
+De exacte versie van de *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. De interventie heeft als doel het aantal studenten met een functiebeperking dat een beroep doet op de FOS te verhogen. De resultaten laten geen significant verschil zien tussen de percentages voor en na de interventie (*p* = `r mcnemar.exact(EMN_confusiematrix, conf.level = 0.95)$p.value`), dus de nulhypothese kan niet worden verworpen. De kruistabel (Tabel 3) illustreert dat het aantal studenten dat een beroep doet op de FOS iets hoger is in juni. Dit verschil is echter niet significant.
 
 
 |                      | December | Juni |
 | -------------------- | -------------| ------------| 
 | **FOS** | `r EMN_kruistabel["FOS","December"]`    | `r EMN_kruistabel["FOS","Juni"]`      |
 | **geen FOS**  | `r EMN_kruistabel["geen FOS","December"]`       | `r EMN_kruistabel["geen FOS","Juni"]`      |
-*Tabel 3. Kruistabel van aantal studenten dat beroep doet op FOS in december en juni*
+*Tabel 3. Kruistabel van het aantal studenten dat een beroep doet op de FOS in december en juni*
 
 
 

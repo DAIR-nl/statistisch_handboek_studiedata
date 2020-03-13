@@ -44,15 +44,3 @@ Studieuren_technische_natuurkunde <- cbind.data.frame(Studentnummer, Vak, Studie
 # Sorteer data
 
 Studieuren_technische_natuurkunde <- Studieuren_technische_natuurkunde[order(Studieuren_technische_natuurkunde$Studentnummer),]
-
-
-# test repeated measures ANOVA
-library(ez)
-rma <- ezANOVA(Studieuren_technische_natuurkunde, dv = Studieuren, wid = Studentnummer,
-               within = Vak, detailed = TRUE, return_aov = TRUE)
-
-print(rma)
-
-
-pairwise.t.test(Studieuren_technische_natuurkunde$Studieuren, Studieuren_technische_natuurkunde$Vak,
-                p.adjust.method = "bonferroni")

@@ -1,5 +1,5 @@
 ---
-title: "Repeated measures ANOVA"
+title: "Friedman's ANOVA"
 output:
   html_document:
     theme: lumen
@@ -55,66 +55,36 @@ source(paste0(here::here(),"/01. Includes/data/04.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *repeated measures ANOVA* om gemiddelden te vergelijken van een groep bij drie of meer herhaalde metingen of om drie of meer gepaarde groepen te vergelijken.[^1] 
+Gebruik *Friedman's ANOVA* om gemiddelden te vergelijken van een groep bij drie of meer herhaalde metingen of om drie of meer gepaarde groepen te vergelijken.[^1]<sup>, </sup>[^2] *Friedman's ANOVA* is een alternatief voor de *repeated measures ANOVA* wanneer de data niet aan de assumptie van normaliteit voldoen. Daarnaast hebben uitbijters minder invloed op het resultaat van de *Friedman's ANOVA* in vergelijking tot de *repeated measures ANOVA*. Echter, als de data aan de assumpties van de *repeated measures ANOVA* voldoen, heeft deze toets een hoger onderscheidend vermogen dan *Friedman's ANOVA*.[^3]
+
+
 
 # Onderwijscasus
 <div id = "casus">
 
-De opleidingsdirecteur van de bachelor Technische Natuurkunde van een universiteit hoort vanuit de opleidingscommissie dat de eerstejaars studenten de studielast van de eerste onderwijsperiode als erg hoog ervaren. Om te onderzoeken hoe deze ervaren studielast verminderd kan worden, wil hij onderzoeken hoeveel tijd de studenten per week besteden aan hun vakken. Uit vakevaluaties verzamelt hij gegevens van het aantal uur per week dat eerstejaars studenten besteden aan de vakken in de eerste onderwijsperiode: Lineaire Algebra, Relativiteitstheorie en Kosmologie. Op deze manier kan hij onderzoeken of er verschillen in de tijdsbesteding aan de verschillende vakken zijn en om te bepalen van welke vakken de studielast aangepast moet worden.
+De vastgoedmanager van de  Facultaire Dienst (FD) van een hogeschool is nieuwsgierig hoe de verschillende eetgelegenheden op de campus gewaardeerd worden door studenten om te inventarisen op welke manier het horeca-aanbod verbeterd kan worden. Uit de Nationale Studenten Enquête (NSE) blijkt dat studenten van de hogeschool ontevreden zijn over het horeca-aanbod op de campus. Als vervolgonderzoek hierop wordt een groep studenten gevraagd om de eetgelegenheden op de campus te beoordelen. Aan de hand daarvan vergelijkt de FD kantines in vier gebouwen: het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt. Met deze gegevens wil de vastgoedmanager onderzoeken of er verschillen zijn in de waarderingscijfers van de kantines in de vier gebouwen. Als deze verschillen aanwezig zijn, is zij benieuwd welke kantines van elkaar verschillen.
 
-*H~0~*: Het aantal studieuren per week van eerstejaars studenten van de bachelor Technische Natuurkunde is hetzelfde voor de drie vakken in de eerste onderwijsperiode
+*H~0~*: De verdelingen van de beoordelingen van studenten zijn hetzelfde voor de kantine in het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt.
 
-*H~A~*: Het aantal studieuren per week van eerstejaars studenten van de bachelor Technsiche Natuurkunde is niet hetzelfde voor de drie vakken in de eerste onderwijsperiode
+
+*H~A~*: De verdelingen van de beoordelingen van studenten zijn niet hetzelfde voor de kantine in het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt
 
 </div>
 
 # Assumpties
-Om een valide toetsresultaat te bereiken met de *repeated measures ANOVA* moeten de data aan een aantal voorwaarden voldoen: normaliteit, sphericiteit en onafhankelijkheid.[^1] 
 
-## Normaliteit
-De assumptie van normaliteit houdt in dat er een normale
-verdeling van de afhankelijke variabele is in elke groep. Wanneer er duidelijke afwijkingen van normaliteit zijn,
-is het transformeren van de data een optie.[^2] Een andere optie is het gebruik van de nonparametrische
-*Friedman toets* waar normaliteit geen assumptie is.[^3] Controleer de assumptie van normaliteit voor elke groep met de volgende stappen:  
-1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
-2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^4]<sup>, </sup>[^5]  
-
-## Sphericiteit
-De assumptie van sphericiteit houdt in dat de variantie van de verschilscores tussen groepen ongeveer aan elkaar gelijk zijn.[^6] In deze casus zijn dat de verschilscores tussen de drie vakken: Lineaire Algebra minus Relativiteitstheorie, Relativiteitstheorie minus Kosmologie en Kosmologie minus Lineaire Algebra. Toets deze assumptie met *Mauchly's test*. Wanneer de data niet aan de assumptie voldoen, geeft de gewone *repeated measures ANOVA* een verkeerd resultaat. Er zijn echter correcties die gebruikt kunnen worden wanneer de data niet aan sphericiteit voldoen. Een voorbeeld van mogelijke output van *Mauchly's test* in R is hieronder weergegeven.
-
-```{r, echo=FALSE}
-cat("$`Mauchly's Test for Sphericity`
-  Effect         W           p p<.05
-2    Vak 0.8732982 0.005073887     *
-
-$`Sphericity Corrections`
-  Effect       GGe        p[GG] p[GG]<.05       HFe        p[HF] p[HF]<.05
-2    Vak   0.47683     0.05279         *   0.56298      0.04692         ")
-```
-
-Bij een p-waarde < 0,05, toont *Mauchly's test* dat de assumptie van sphericiteit geschonden is. In de output is dit te zien aan de p-waarde van 0,0051 onder ` $Mauchly's Test for Sphericity `. Er zijn twee mogelijke correcties wanneer er geen sphericiteit is: de Greenhouse-Geisser (GG) en Huynh-Feldt (HF) correctie. De Greenhouse-Geisser correctie staat bekend als conservatief, wat betekent dat de correctie een relatief lage kans op een type I fout heeft. In andere woorden, het zal niet vaak gebeuren dat deze correctie een significant effect aantoont wanneer dat er in werkelijkheid niet is. De Huynh-Feldt correctie staat echter bekend als liberaal, wat betekent dat er een relatief hoge kans op een type I fout is. De teststatistiek en p-waarde van beide correcties zijn in de output te vinden onder ` $Sphericity Corrections `.
-
-Houd de volgende richtlijnen aan bij het interpreteren van de *repeated measures ANOVA* wanneer niet aan sphericiteit is voldaan:
-
-* Wanneer beide correcties significant zijn, rapporteer de (conservatieve) Greenhouse-Geisser correctie.
-* Wanneer beide correcties niet significant zijn, rapporteer de (liberale) Huynh-Feldt correctie.
-* Wanneer de een significant is en de ander niet, bereken de gemiddelde p-waarde van beide correcties.
-    * Wanneer deze p-waarde significant is, rapporteer dan de significante correctie.
-    * Wanneer deze p-waarde niet significant is, rapporteer dan de niet significante correctie.
-
-In de voorbeeldoutput is de p-waarde van de Greenhouse-Geisser correctie > 0,05 en de p-waarde van de Huynh-Feldt correctie < 0,05. Het gemiddelde van beide p-waarden is 0,049855, wat betekent dat er een significant resultaat is. Rapporteer in dit geval dus de (significante) Huynh-Feldt correctie, i.e. *F* = 0,56, *p* < 0,05.  
+Om een valide toetsresultaat te bereiken, moeten de data aan een aantal assumpties voldoen. De afhankelijke variabele moet ordinaal of continu zijn. Bij herhaalde metingen van dezelfde observatie-eenheden, moet de groep observatie-eenheden drie of meer keren gemeten zijn en een willekeurige steekproef van de populatie zijn. Bij gepaarde groepen, moet elk paar bestaan uit drie of meer gepaarde observatie-eenheden en moet de steekproef met alle paren een willekeurige steekproef van de populatie zijn.[^4]
 
 
 # Effectmaat
-De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^6] Voor de *repeated measures ANOVA* wordt de effectmaat eta squared vaak gebruikt.
+De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^5] Voor de *repeated measures ANOVA* wordt de effectmaat *Kendall's W* vaak gebruikt. Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^6]
 
-## Eta squared
-De effectmaat eta squared (*η^2^*) berekent de proportie van de variantie in de afhankelijke variabele die verklaard wordt door de onafhankelijke variabele. In deze casus berekent het de proportie van de variantie in het aantal uren studeren die verklaard kan worden door het vak in de eerste onderwijsperiode. Een indicatie om *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^7]
+
 
 # Post-hoc toetsen
-De *repeated measures ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Voer een post-hoc toets uit om te bepalen welke groepen significant verschillen.
+De *repeated measures ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Voer een post-hoc toets uit om te bepalen welke groepen significant verschillen. Gebruik de *Wilcoxon signed rank toets* als post-hoc toets.
 
-Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans dat er bij toeval een verband wordt ontdekt dat er niet is (type I fout).[^8] Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^6]
+Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans dat er bij toeval een verband wordt ontdekt dat er niet is (type I fout).[^7] Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^5]
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
@@ -215,163 +185,6 @@ vN_KL  <- Round_and_format(length(Studieuren_kosmologie))
 
 <!-- ## /TEKSTBLOK: Datatekst-beschrijven.R -->
 
-## Visuele inspectie van normaliteit
-Geef de verdeling van de data visueel weer met een histogram, Q-Q plot of boxplot.
-
-### Histogram
-<!-- ## OPENBLOK: Histogram.R -->
-```{r histogram}
-## Histogram met ggplot
-library(ggplot2)
-
-ggplot(Studieuren_technische_natuurkunde,
-  aes(x = Studieuren)) +
-  geom_histogram(aes(y = ..density..),
-                 binwidth = 2,
-                 color = "grey30",
-                 fill = "#0089CF") +
-  facet_wrap(~ Vak) +
-  geom_density(alpha = .2, adjust = 1) +
-  ylab("Frequentiedichtheid") +
-  labs(title = "Aantal studieuren")
-```
-<!-- ## /OPENBLOK: Histogram.R -->
-
-Alle drie de vakken lijken redelijk normaal verdeeld te zijn.
-
-### Q-Q plot
-<!-- ## TEKSTBLOK: QQplot.R-->
-Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
-<!-- ## /TEKSTBLOK: QQplot.R-->
-
-Als over het algemeen de meeste datapunten op de lijn liggen, neem dan aan dat de data normaal verdeeld zijn.
-<div class = "col-container">
-  <div class="col">
-<!-- ## OPENBLOK: QQplot1.R -->
-```{r qqplot la}
-qqnorm(
- Studieuren_lineaire_algebra, pch = 1,
- main = "Normaal Q-Q plot van aantal studieuren Lineaire Algebra",
- ylab = "Kwantielen in data",
- xlab = "Theoretische kwantielen")
-qqline(Studieuren_lineaire_algebra)
-```
-<!-- ## /OPENBLOK: QQplot1.R -->
-  </div>
-  <div class = "col">
-<!-- ## OPENBLOK: QQplot2.R -->
-```{r qqplot rt}
-qqnorm(
- Studieuren_relativiteitstheorie, pch = 1,
- main = "Normaal Q-Q plot van aantal studieuren Relativiteitstheorie",
- ylab = "Kwantielen in data",
- xlab = "Theoretische kwantielen")
-qqline(Studieuren_relativiteitstheorie)
-```
-<!-- ## /OPENBLOK: QQplot2.R -->
-  </div>
-  <div class = "col">
-<!-- ## OPENBLOK: QQplot3.R -->
-```{r qqplot gsc}
-qqnorm(
- Studieuren_kosmologie, pch = 1,
- main = "Normaal Q-Q plot van aantal studieuren Kosmologie",
- ylab = "Kwantielen in data",
- xlab = "Theoretische kwantielen")
-
-
-qqline(Studieuren_kosmologie)
-```
-<!-- ## OPENBLOK: QQplot3.R -->
-  </div>
-</div>
-
-Bij de Q-Q plots van Lineaire Algebra en Kosmologie liggen de punten rond de lijn die normaliteit aangeeft; vermoedelijk zijn deze data normaal verdeeld. Bij Relativiteitstheorie echter zijn er afwijkingen van de lijn bij de staarten van de verdeling. De statistische toetsen wijzen uit of deze afwijking van de normale verdeling significant is.
-
-
-### Boxplot
-De box geeft de middelste 50% van de reistijd weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9]<sup>, </sup>[^10] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
-
-<!-- ## OPENBLOK: Boxplot.R -->
-```{r boxplot}
-library(graphics)
-boxplot(Studieuren ~ Vak, Studieuren_technische_natuurkunde)
-```
-<!-- ## /OPENBLOK: Boxplot.R -->
-
-De boxplotten geven de spreiding weer van het aantal studieuren voor de drie vakken in de eerste onderwijsperiode: Kosmologie, Lineaire Algebra en Relativiteitstheorie. Bij Kosmologie lijkt er enige asymmetrie te zijn: de boxen zijn niet even breed. Daarnaast liggen de medianen van Kosmologie en Lineaire Algebra een stuk lager dan de mediaan van Relativiteitstheorie. Kosmologie en Relativiteitstheorie hebben mogelijke uitbijters. In het algemeen lijken de vakken een symmetrische verdeling te hebben.
-
-
-## Toetsen van normaliteit
-Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
-
-### Kolmogorov-Smirnov
-De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is vereist als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn, wat meestal het geval is bij een steekproef. Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
-
-<!-- ## TEKSTBLOK: Lilliefors-test1.R -->
-
-<!-- ## /TEKSTBLOK: Lilliefors-test1.R -->
-
-<!-- ## OPENBLOK: Library-nortest.R -->
-```{r library nortest}
-library("nortest")
-```
-<!-- ## /OPENBLOK: Library-nortest.R -->
-
-<div class="col-container"> 
-  <div class="col">
-<!-- ## OPENBLOK: Lilliefors-test-1.R -->
-```{r Lilliefors Test-1, warning=FALSE}
-lillie.test(Studieuren_lineaire_algebra)
-```
-<!-- ## OPENBLOK: Lilliefors-test-1.R -->
-  </div>
-  <div class = "col">
-<!-- ## OPENBLOK: Lilliefors-test-2.R -->
-```{r Lilliefors Test-2, warning=FALSE}
-lillie.test(Studieuren_relativiteitstheorie)
-```
-<!-- ## OPENBLOK: Lilliefors-test-2.R -->
-  </div>
-  <div class = "col">
-<!-- ## OPENBLOK: Lilliefors-test-3.R -->
-```{r Lilliefors Test-3, warning=FALSE}
-lillie.test(Studieuren_kosmologie)
-```
-<!-- ## /OPENBLOK: Lilliefors-test-3.R -->
-  </div>
-</div>
-
-De p-waarde is *p* > 0,05 voor elk vak; er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. [^11] De *repeated measures ANOVA* kan uitgevoerd worden.
-
-### Shapiro-Wilk Test
-De *Shapiro-Wilk test* is een soortgelijke toets als de *Kolmogorov-Smirnov test* en vooral geschikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
-
-<div class="col-container"> 
-  <div class="col">
-<!-- ## OPENBLOK: Shapiro-Wilk-test-3.R -->
-``` {r Shapiro-Wilk Test-3, warning=FALSE}
-shapiro.test(Studieuren_lineaire_algebra)
-```
-<!-- ## /OPENBLOK: Shapiro-Wilk-test-3.R -->
-  </div>
-  <div class= "col">
-<!-- ## OPENBLOK: Shapiro-Wilk-test-2.R -->
-``` {r Shapiro-Wilk Test-2, warning=FALSE}
-shapiro.test(Studieuren_relativiteitstheorie)
-```
-<!-- ## OPENBLOK: Shapiro-Wilk-test-2.R -->
-  </div>
-  <div class= "col"> 
-<!-- ## OPENBLOK: Shapiro-Wilk-test-1.R -->
-``` {r Shapiro-Wilk Test-1, warning=FALSE}
-shapiro.test(Studieuren_kosmologie)
-```
-<!-- ## OPENBLOK: Shapiro-Wilk-test-1.R -->
-  </div>
-</div>
-
-De p-waarde is *p* > 0,05 voor elk vak, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling.[^11] De *repeated measures ANOVA* kan uitgevoerd worden.
 
 
 ## Repeated measures ANOVA 
@@ -469,6 +282,16 @@ Een *repeated measures ANOVA* is uitgevoerd om te onderzoeken of er verschillen 
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
 ```
 <!-- ## /CLOSEDBLOK: Footer.R -->
+
+[^1]: Van Geloven, N. (4 oktober 2019). *Friedman toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Friedman_toets). 
+[^2]: Universiteit van Amsterdam (7 juli 2014). *Friedmans ANOVA*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Friedmans_ANOVA). 
+[^3]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage.
+[^4]: Laerd statistics (2018). *Friedman Test in SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/friedman-test-using-spss-statistics.php. 
+[^5]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
+[^6]: University of Sheffield. *Friedman test in SPSS*. [Mathematics and Statistics Help (MASH)](https://www.sheffield.ac.uk/polopoly_fs/1.714575!/file/stcp-marshall-FriedmanS.pdf). Bezocht op 13 maart 2020.
+[^7]: Type I fout: Ten onrechte H~0~ verwerpen.
+
+
 
 [^1]: Universiteit van Amsterdam (26 augustus 2014). *Repeated-Measures ANOVA*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Repeated-Measures_ANOVA).
 [^2]: Bereken de logaritme van de variabele en de inverse (1 gedeeld door de variabele), en bekijk of deze normaal verdeeld zijn. Als dat zo is, mag je die gebruiken voor de analyse.

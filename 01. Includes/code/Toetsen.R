@@ -36,7 +36,7 @@ dfToetsen <- tribble(
     "06 Tekentoets",                                   "1",          "0",       "0",               "0",       
     "07 Wilcoxon signed rank toets",                   "0",          "0",       "0",               "0",       
     "08 Mann-Whitney U toets",                         "1",          "0",       "1",               "0",       
-    "09 Friedman toets",                               "0",          "0",       "0",               "0",       
+    "09 Friedmans ANOVA",                              "0",          "0",       "0",               "0",       
     "10 Kruskal Wallis toets",                         "1",          "0",       "1",               "0",       
     "11 Chi-kwadraat toets en binomiaaltoets",         "0",          "0",       "0",               "0",       
     "12 McNemar toets",                                "0",          "0",       "0",               "0",       

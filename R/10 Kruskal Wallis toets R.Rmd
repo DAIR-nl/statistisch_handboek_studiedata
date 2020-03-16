@@ -77,7 +77,7 @@ Bij de *Kruskal Wallis toets* wordt eta-squared ($\eta^2$) als effectmaat gebrui
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is een dataset ingeladen met studieresultaten van de master Arbeidsrecht per vooropleiding: Fiscaal Recht, Notarieel Recht, Rechtsgeleerdheid en de Premaster.
+Er is een dataset `Resultaten_Arebeidsrecht` ingeladen met studieresultaten van de master Arbeidsrecht per vooropleiding: Fiscaal Recht, Notarieel Recht, Rechtsgeleerdheid en de Premaster.
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken

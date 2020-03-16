@@ -192,9 +192,9 @@ pwaarde <- wilcox.test(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Neder
             alternative = "two.sided",
             conf.int = TRUE)$p.value
 
-# Bereken de effectgrootte van de tweezijdige toets
+# Bereken de effectmaat van de tweezijdige toets
 r <- qnorm(pwaarde/2) / sqrt(nrow(Studiepunten_studiejaar2))
-# Bereken de effectgrootte van de eenzijdige toets
+# Bereken de effectmaat van de eenzijdige toets
 #r <- qnorm(pwaarde) / sqrt(nrow(Studiepunten_studiejaar2))
 
 # Print de effectmaat

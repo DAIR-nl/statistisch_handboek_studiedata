@@ -42,14 +42,10 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Status.R -->
 
-```{r set-options, echo=FALSE, cache=FALSE}
-options(width = 80)
-## Zodat de TukeyHSD naast elkaar geprint wordt
-```
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-source(paste0(here::here(),"/01. Includes/data/04.R"))
+source(paste0(here::here(),"/01. Includes/data/09.R"))
 ```
 
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
@@ -62,12 +58,12 @@ Gebruik *Friedman's ANOVA* om gemiddelden te vergelijken van een groep bij drie 
 # Onderwijscasus
 <div id = "casus">
 
-De vastgoedmanager van de  Facultaire Dienst (FD) van een hogeschool is nieuwsgierig hoe de verschillende eetgelegenheden op de campus gewaardeerd worden door studenten om te inventarisen op welke manier het horeca-aanbod verbeterd kan worden. Uit de Nationale Studenten Enquête (NSE) blijkt dat studenten van de hogeschool ontevreden zijn over het horeca-aanbod op de campus. Als vervolgonderzoek hierop wordt een groep studenten gevraagd om de eetgelegenheden op de campus te beoordelen. Aan de hand daarvan vergelijkt de FD kantines in vier gebouwen: het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt. Met deze gegevens wil de vastgoedmanager onderzoeken of er verschillen zijn in de waarderingscijfers van de kantines in de vier gebouwen. Als deze verschillen aanwezig zijn, is zij benieuwd welke kantines van elkaar verschillen.
+De vastgoedmanager van de  Facultaire Dienst (FD) van een hogeschool is nieuwsgierig hoe de verschillende eetgelegenheden op de campus gewaardeerd worden door studenten om te inventarisen op welke manier het horeca-aanbod verbeterd kan worden. Uit de Nationale Studenten Enquête (NSE) blijkt dat studenten van de hogeschool ontevreden zijn over het horeca-aanbod op de campus. Als vervolgonderzoek hierop wordt een groep studenten gevraagd om de eetgelegenheden op de campus te beoordelen. Aan de hand daarvan vergelijkt de FD eetgelegenheden in vier gebouwen: het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt. Met deze gegevens wil de vastgoedmanager onderzoeken of er verschillen zijn in de waarderingscijfers van de eetgelegenheden in de vier gebouwen. Als deze verschillen aanwezig zijn, is zij benieuwd welke eetgelegenheden van elkaar verschillen.
 
-*H~0~*: De verdelingen van de beoordelingen van studenten zijn hetzelfde voor de kantine in het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt.
+*H~0~*: De verdelingen van de beoordelingen van studenten zijn hetzelfde voor de eetgelegenheid in het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt.
 
 
-*H~A~*: De verdelingen van de beoordelingen van studenten zijn niet hetzelfde voor de kantine in het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt
+*H~A~*: De verdelingen van de beoordelingen van studenten zijn niet hetzelfde voor de eetgelegenheid in het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt
 
 </div>
 
@@ -77,202 +73,229 @@ Om een valide toetsresultaat te bereiken, moeten de data aan een aantal assumpti
 
 
 # Effectmaat
-De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^5] Voor de *repeated measures ANOVA* wordt de effectmaat *Kendall's W* vaak gebruikt. Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^6]
+De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^5] Voor *Friedman's ANOVA* wordt de effectmaat *Kendall's W* vaak gebruikt.[^6]<sup>, </sup>[^7]<sup>, </sup>[^8]. Een indicatie om *Kendall's W* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^6]
 
 
 
 # Post-hoc toetsen
 De *repeated measures ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Voer een post-hoc toets uit om te bepalen welke groepen significant verschillen. Gebruik de *Wilcoxon signed rank toets* als post-hoc toets.
 
-Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans dat er bij toeval een verband wordt ontdekt dat er niet is (type I fout).[^7] Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^5]
+Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans dat er bij toeval een verband wordt ontdekt dat er niet is (type I fout).[^9] Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^5]
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is een dataset `Studieuren_technische_natuurkunde` ingeladen met het aantal studieuren van eerstejaars studenten van de bachelor Technische Natuurkunde voor de drie vakken in de eerste onderwijsperiode.
+Er is een dataset `Beoordelingen_eetgelegenheden` ingeladen met de beoordelingen van de eetgelegenheden in het hoofdgebouw, bestuursgebouw, sportcentrum en cultuurcentrum.
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken.R -->
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 <!-- ## /TEKSTBLOK: Data-bekijken.R -->
-
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
-## Eerste 5 observaties
-head(Studieuren_technische_natuurkunde)
+## Eerste 6 observaties
+head(Beoordelingen_eetgelegenheden)
 
-## Laatste 5 observaties
-tail(Studieuren_technische_natuurkunde)
+## Laatste 6 observaties
+tail(Beoordelingen_eetgelegenheden)
 ```
 <!-- ## /OPENBLOK: Data-bekijken.R -->
 
-Selecteer de drie groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. 
-<!-- ## OPENBLOK: Data-selecteren.R -->
-```{r data selecteren}
+<!-- ## TEKSTBLOK: Data-bekijken2.R-->
+De dataset bevat beoordelingen van studenten van eetgelegenheden in verschillende gebouwen. Gebruik `unique()` om te onderzoeken welke gebouwen er in de data aanwezig zijn. 
+<!-- ## /TEKSTBLOK: Data-bekijken2.R-->
 
-Studieuren_lineaire_algebra <- Studieuren_technische_natuurkunde$Studieuren[Studieuren_technische_natuurkunde$Vak == "Lineaire Algebra"]
-Studieuren_relativiteitstheorie <- Studieuren_technische_natuurkunde$Studieuren[Studieuren_technische_natuurkunde$Vak == "Relativiteitstheorie"]
-Studieuren_kosmologie <- Studieuren_technische_natuurkunde$Studieuren[Studieuren_technische_natuurkunde$Vak == "Kosmologie"]
+<!-- ## OPENBLOK: Data-bekijken-2.R -->
+```{r data bekijken 2}
+## Unieke opleidingen
+unique(Beoordelingen_eetgelegenheden$Eetgelegenheid)
 ```
-<!-- ## /OPENBLOK: Data-selecteren.R -->
+<!-- ## /OPENBLOK: Data-bekijken-2.R -->
 
+<!-- ## TEKSTBLOK: Data-bekijken.R-->
+Inspecteer de beoordelingen per gebouw met de functies `length()`, `median()` en `quantile()`. Gebruik de mediaan en kwartielen omdat de data waarschijnlijk niet normaal verdeeld zijn. Groepeer hiervoor met `group_by()`.
+<!-- ## /TEKSTBLOK: Data-bekijken.R-->
 
-<!-- ## TEKSTBLOK: Data-beschrijven.R -->
-Inspecteer de data met `mean()`, `sd()` en `length()` om meer inzicht te krijgen in de data.
-<!-- ## /TEKSTBLOK: Data-beschrijven.R -->
-
-
-<div class="col-container"> 
-  <div class="col">
-<!-- ## OPENBLOK: Lilliefors-test-1.R -->
-```{r descriptives 1, warning=FALSE, collapse=TRUE}
-# Gemiddelde
-mean(Studieuren_lineaire_algebra)
-# Standaardafwijking
-sd(Studieuren_lineaire_algebra)
-# Aantal observaties
-length(Studieuren_lineaire_algebra)
+<!-- ## OPENBLOK: Data-beschrijven.R -->
+``` {r data beschrijven, warning=FALSE, message=FALSE}
+## Groepsgrootes, mediaan en kwantielen
+library(dplyr)
+group_by(Beoordelingen_eetgelegenheden, Eetgelegenheid) %>%
+  summarise(
+    N = length(Beoordeling),
+    Q1 = quantile(Beoordeling)[2], ## de eerste waarde is het minimum; Q1 is dus op de 2e positie
+    Mediaan = median(Beoordeling),
+    Q3 = quantile(Beoordeling)[4]
+  )
 ```
-<!-- ## OPENBLOK: Lilliefors-test-1.R -->
-  </div>
-  <div class = "col">
-<!-- ## OPENBLOK: Lilliefors-test-2.R -->
-```{r descriptives 2, warning=FALSE, collapse=TRUE}
-# Gemiddelde
-mean(Studieuren_relativiteitstheorie)
-# Standaardafwijking
-sd(Studieuren_relativiteitstheorie)
-# Aantal observaties
-length(Studieuren_relativiteitstheorie)
-```
-<!-- ## OPENBLOK: Lilliefors-test-2.R -->
-  </div>
-  <div class = "col">
-<!-- ## OPENBLOK: Lilliefors-test-3.R -->
-```{r descriptives 3, warning=FALSE, collapse=TRUE}
-# Gemiddelde
-mean(Studieuren_kosmologie)
-# Standaardafwijking
-sd(Studieuren_kosmologie)
-# Aantal observaties
-length(Studieuren_kosmologie)
-```
-<!-- ## /OPENBLOK: Lilliefors-test-3.R -->
-  </div>
-</div>
-
-
+<!-- ## /OPENBLOK: Data-beschrijven.R -->
 <!-- ## CLOSEDBLOK: Data-beschrijven.R -->
-```{r data beschrijven als object, include=FALSE, echo=TRUE}
-vM_LA  <- Round_and_format(mean(Studieuren_lineaire_algebra))
-vSD_LA <- Round_and_format(sd(Studieuren_lineaire_algebra))
-vN_LA  <- Round_and_format(length(Studieuren_lineaire_algebra))
+``` {r data beschrijven als object, include=FALSE, echo=TRUE}
+x <- group_by(Beoordelingen_eetgelegenheden, Eetgelegenheid) %>%
+  summarise(
+    N = length(Beoordeling),
+    Q1 = quantile(Beoordeling)[2], ## de eerste waarde is het minimum; Q1 is dus op de 2e positie
+    Mediaan = median(Beoordeling),
+    Q3 = quantile(Beoordeling)[4]
+  )
 
-vM_RT  <- Round_and_format(mean(Studieuren_relativiteitstheorie))
-vSD_RT <- Round_and_format(sd(Studieuren_relativiteitstheorie))
-vN_RT  <- Round_and_format(length(Studieuren_relativiteitstheorie))
+vN_HG <- Round_and_format(x[1,2])
+vN_BG <- Round_and_format(x[2,2])
+vN_SC <- Round_and_format(x[4,2])
+vN_CC <- Round_and_format(x[3,2])
 
-vM_KL  <- Round_and_format(mean(Studieuren_kosmologie))
-vSD_KL <- Round_and_format(sd(Studieuren_kosmologie))
-vN_KL  <- Round_and_format(length(Studieuren_kosmologie))
+vQ1_HG <- Round_and_format(x[1,3])
+vQ1_BG <- Round_and_format(x[2,3])
+vQ1_SC <- Round_and_format(x[4,3])
+vQ1_CC <- Round_and_format(x[3,3])
+
+vMed_HG <- Round_and_format(x[1,4])
+vMed_BG <- Round_and_format(x[2,4])
+vMed_SC <- Round_and_format(x[4,4])
+vMed_CC <- Round_and_format(x[3,4])
+
+vQ3_HG <- Round_and_format(x[1,5])
+vQ3_BG <- Round_and_format(x[2,5])
+vQ3_SC <- Round_and_format(x[4,5])
+vQ3_CC <- Round_and_format(x[3,5])
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven.R -->
 
-<!-- ## TEKSTBLOK: Datatekst-beschrijven.R -->
-* Gemiddelde aantal studieuren Lineaire Algebra (standaarddeviatie): `r vM_LA` (`r vSD_LA`), *n* = `r vN_LA`  
-* Gemiddelde aantal studieuren Relativiteitstheorie (standaarddeviatie): `r vM_RT` (`r vSD_RT`), *n* = `r vN_RT`  
-* Gemiddelde aantal studieuren Kosmologie (standaarddeviatie): `r vM_KL` (`r vSD_KL`), *n* = `r vN_KL`  
+<!-- ## TEKSTBLOK: Data-beschrijven.R-->
+* Hoofdgebouw: *Mdn* =  `r vMed_HG`, *Q1* = `r vQ1_HG`, *Q3* = `r vQ3_HG`, *n* = `r vN_HG`.
+* Bestuursgebouw: *Mdn* =  `r vMed_BG`, *Q1* = `r vQ1_BG`, *Q3* = `r vQ3_BG`, *n* = `r vN_BG`.
+* Sportcentrum: *Mdn* =  `r vMed_SC`, *Q1* = `r vQ1_SC`, *Q3* = `r vQ3_SC`, *n* = `r vN_SC`.
+* Cultuurcentrum: *Mdn* =  `r vMed_CC`, *Q1* = `r vQ1_CC`, *Q3* = `r vQ3_CC`, *n* = `r vN_CC`.
 
-<!-- ## /TEKSTBLOK: Datatekst-beschrijven.R -->
+<!-- ## /TEKSTBLOK: Data-beschrijven.R-->
 
 
 
-## Repeated measures ANOVA 
+## Histogram
+
+Geef de verdeling van de beoordelingen per gebouw visueel weer met een histogram.
+
+<!-- ## OPENBLOK: Histogram.R -->
+```{r histogram}
+## Histogram met ggplot
+library(ggplot2)
+
+ggplot(Beoordelingen_eetgelegenheden,
+  aes(x = Beoordeling)) +
+  geom_histogram(aes(y = ..density..),
+                 binwidth = 1,
+                 color = "grey30",
+                 fill = "#0089CF") +
+  facet_wrap(~ Eetgelegenheid) +
+  geom_density(alpha = .2, adjust = 1) +
+  ylab("Frequentiedichtheid") +
+  labs(title = "Beoordelingen")
+```
+<!-- ## /OPENBLOK: Histogram.R -->
+
+Bij alle vier de gebouwen lijken er afwijkingen te zijn van de (symmetrische) normale verdeling. De verdeling van het bestuursgebouw heeft een langere staart aan de rechterkant, terwijl de verdelingen van het hoofdgebouw en het sportcentrum juist een langere staart aan de linkerkant hebben. Bij het cultuurcentrum zijn er meer observaties links van het midden dan rechts van het midden, waardoor er ook een vorm van asymmetrie is. 
+
+
+
+## Friedman's ANOVA
 
 <!-- ## TEKSTBLOK: ANOVA-toets.R -->
-Voer de *repeated measures ANOVA* uit om de vraag te beantwoorden of er verschillen zijn tussen het aantal studieuren voor de vakken in de eerste onderwijsperiode van het eerste jaar van de bachelor Technische Natuurkunde. Gebruik de functie `ezANOVA` met als argumenten de dataset ``Studieuren_technische_natuurkunde`, de afhankelijke variabele `dv = Studieuren`, de variabele die de observaties aangeeft `wid = Studentnummer` en de onafhankelijke variabele `within = Vak`.
+Voer *Friedman's ANOVA* uit om de vraag te beantwoorden of er verschillen zijn tussen de beoordelingen van de eetgelegenheden in de vier gebouwen op de campus van de hogeschool. Gebruik de functie `friedman.test()` met als argumenten de afhankelijke variabele `y = Beoordelingen_eetgelegenheden$Beoordeling`, de vier groepen die vergeleken worden (onafhankelijke variabele) `groups = Beoordelingen_eetgelegenheden$Kantine` en de variabele die de observatie-eenheden aangeeft `blocks = Beoordelingen_eetgelegenheden$Studentnummer`.
+
 <!-- ## /TEKSTBLOK: ANOVA-toets.R -->
 
 <!-- ## OPENBLOK: ANOVA-toets.R -->
 ```{r ANOVA2, warning = FALSE}
-library(ez)
-ezANOVA(Studieuren_technische_natuurkunde, dv = Studieuren, wid = Studentnummer,
-               within = Vak)
-
+friedman.test(y = Beoordelingen_eetgelegenheden$Beoordeling, 
+              groups = Beoordelingen_eetgelegenheden$Eetgelegenheid,
+              blocks = Beoordelingen_eetgelegenheden$Studentnummer)
 ```
 <!-- ## /OPENBLOK: ANOVA-toets.R -->
 
 <!-- ## CLOSEDBLOK: ANOVA-toets.R -->
 ```{r ANOVA als object, echo=FALSE}
-library(ez)
-obj <- ezANOVA(Studieuren_technische_natuurkunde, dv = Studieuren, wid = Studentnummer,
-               within = Vak)
-Mauchly_W <- Round_and_format(obj$`Mauchly's Test for Sphericity`$W)
-GG_F <- Round_and_format(obj$`Sphericity Corrections`$GGe)
-eta2 <- Round_and_format(obj$ANOVA$ges)
+obj <-friedman.test(y = Beoordelingen_eetgelegenheden$Beoordeling, 
+              groups = Beoordelingen_eetgelegenheden$Eetgelegenheid,
+              blocks = Beoordelingen_eetgelegenheden$Studentnummer)
+vChi2 <- Round_and_format(obj$statistic)
+vdf <- Round_and_format(obj$parameter)
 ```
 <!-- ## /CLOSEDBLOK: ANOVA-toets.R -->
 
-<!-- ## TEKSTBLOK: ANOVA-toets1.R -->
-*Mauchly's test* toont aan dat de assumptie van sphericiteit niet standthoudt in deze casus ($\chi^2$ = `r Mauchly_W`, p < 0,0001); gebruik in dit geval een van de correcties. Zowel de Greenhouse-Geisser als de Huynh-Feldt correctie laten een significant resultaat zien; rapporteer in dit geval de (conservatieve) Greenhouse-Geisser correctie.
+Bereken vervolgens de effectmaat *Kendall's W* op basis van de &chi;^2 waarde van *Friedman's ANOVA*.
+```{r effectgrootte}
+# Sla de Chi-kwadraat waarde op
+Chi2 <- friedman.test(y = Beoordelingen_eetgelegenheden$Beoordeling, 
+              groups = Beoordelingen_eetgelegenheden$Eetgelegenheid,
+              blocks = Beoordelingen_eetgelegenheden$Studentnummer)$statistic
 
-* De data voldoet niet aan de assumptie van sphericiteit, $\chi^2$ = `r Mauchly_W`, p < 0,0001
-* De resultaten van de Greenhouse-Geisser correctie zijn *F* = `r GG_F`, p < 0,0001, *η^2^* = `r eta2`
-* De p-waarde < 0,05, dus de H~0~ wordt verworpen.[^11]
-* Er is een significant verschil tussen het aantal studieuren voor de drie vakken in de eerste onderwijsperiode; het effect van de verschillende vakken op het aantal studieuren is groot
+# Sla het aantal observatie-eenheden op
+N <- length(unique(Beoordelingen_eetgelegenheden$Studentnummer))  
+
+# Sla het aantal groepen op
+k <- length(unique(Beoordelingen_eetgelegenheden$Eetgelegenheid))
+
+# Bereken de effectmaat
+W <- Chi2 / (N * (k - 1))
+
+# Print de effectmaat
+paste("De effectmaat is", W)
+
+```
+
+
+<!-- ## TEKSTBLOK: ANOVA-toets1.R -->
+* &chi;^2_3 = `r vChi2`, *p* < 0,001, *W* = `r Round_and_format(W)`
+* De p-waarde < 0,05, dus de H~0~ wordt verworpen.[^10]
+* Er is een significant verschil tussen de beoordelingen van de eetgelegenheden in de vier gebouwen; het effect van de verschillende gebouwen op de beoordelingen van studenten is gemiddeld
+
 <!-- ## /TEKSTBLOK: ANOVA-toets1.R -->
 
 ## Post-hoc toets
 <!-- ## TEKSTBLOK: posthoc1.R -->
-Voer post-hoc toetsen uit om te onderzoeken welke vakken uit de eerste onderwijsperiode van elkaar verschillen wat betreft het aantal studieuren dat eerstejaars studenten van de bachelor Technische Natuurkunde hieraan besteden. Gebruik hiervoor de functie `pairwise.t.test` met als argumenten de afhankelijk variabele `Studieuren_technische_natuurkunde$Studieuren`, de onafhankelijke variabele `Studieuren_technische_natuurkunde$Vak` en de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`.
+Voer post-hoc toetsen uit om te onderzoeken tussen welke gebouwen er verschillen zijn in de beoordelingen van studenten. De vier gebouwen zijn het hoofdgebouw, bestuursgebouw, sportcentrum en cultuurcentrum Rembrandt. Gebruik de *Wilcoxon signed-rank toets* als post-hoc toets met bijbehorende functie `pairwise.wilcox.test()`. De ingevoerde argumenten van de functie zijn de afhankelijke variabele `Beoordelingen_eetgelegenheden$Beoordeling`, de onafhankelijke variabele `Beoordelingen_eetgelegenheden$Eetgelegenheid` die de groepen aangeeft, de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`, het argument `paired = TRUE` om aan te geven dat er een gepaarde steekproef is en het argument `exact = FALSE` om aan te geven dat de p-waarden niet op een exacte manier berekend worden. Het laatste argument wordt gebruikt omdat de exacte methode in bepaalde gevallen niet mogelijk is.    
 <!-- ## /TEKSTBLOK: posthoc1.R -->
 
-<!-- ## OPENBLOK: posthoc2.R -->
-```{r }
-# Bereken de verschillen in gemiddelde tussen de drie vakken
-Verschil_gemiddelde_LA_RT <- mean(Studieuren_lineaire_algebra) - mean(Studieuren_relativiteitstheorie)
-Verschil_gemiddelde_RT_KL <- mean(Studieuren_relativiteitstheorie) - mean(Studieuren_kosmologie)
-Verschil_gemiddelde_KL_LA <- mean(Studieuren_kosmologie) - mean(Studieuren_lineaire_algebra)
-
-# Bereken de p-waarden van de post-hoc toets
-pairwise.t.test(Studieuren_technische_natuurkunde$Studieuren, Studieuren_technische_natuurkunde$Vak,
-                p.adjust.method = "bonferroni")
-
+<!-- ## OPENBLOK: post-hoc2.R -->
+``` {r pairwise wilcox test}
+pairwise.wilcox.test(Beoordelingen_eetgelegenheden$Beoordeling, Beoordelingen_eetgelegenheden$Eetgelegenheid,
+                     p.adjust.method = "bonferroni", paired = TRUE, exact = FALSE)
 ```
-<!-- ## /OPENBLOK: posthoc2.R -->
-
-<!-- ## CLOSEDBLOK: posthoc3.R -->
-```{r, include = FALSE}
-# Bereken de verschillen in gemiddelde tussen de drie vakken
-Mu_diff_LA_RT <- Round_and_format(mean(Studieuren_lineaire_algebra) - mean(Studieuren_relativiteitstheorie))
-Mu_diff_RT_KL <- Round_and_format(mean(Studieuren_relativiteitstheorie) - mean(Studieuren_kosmologie))
-Mu_diff_KL_LA <- Round_and_format(mean(Studieuren_kosmologie) - mean(Studieuren_lineaire_algebra))
-
-# Bereken de p-waarden van de post-hoc toets
-phtest <- pairwise.t.test(Studieuren_technische_natuurkunde$Studieuren, Studieuren_technische_natuurkunde$Vak,
-                p.adjust.method = "bonferroni")
+<!-- ## /OPENBLOK: post-hoc2.R -->
 
 
-
+<!-- ## CLOSEDBLOK: post-hoc3.R -->
+``` {r pairwise wilcox test 2}
+posthoc <- pairwise.wilcox.test(Beoordelingen_eetgelegenheden$Beoordeling, Beoordelingen_eetgelegenheden$Eetgelegenheid,
+                     p.adjust.method = "bonferroni", paired = TRUE, 
+                     exact = FALSE)$p.value
 ```
-<!-- ## /CLOSEDBLOK: posthoc3.R -->
+<!-- ## /CLOSEDBLOK: post-hoc3.R -->
 
-* Er is een significant verschil tussen Lineaire algebra en Relativiteitstheorie, *MD* = `r Mu_diff_LA_RT`, p < 0,0001
-* Er is een significant verschil tussen Relativiteitstheorie en Kosmologie, *MD* = `r Mu_diff_RT_KL`, p < 0,0001
-* Er is een significant verschil tussen Kosmologie en Lineaire algebra, *MD* = `r Mu_diff_KL_LA`, p < 0,03
+<!-- ## TEKSTBLOK: posthoc4.R -->
+* De beoordelingen van het hoofdgebouw verschillen niet significant van het bestuursgebouw (*p* = `r Round_and_format(posthoc[2,1])`), niet significant van het sportcentrum (*p* = `r Round_and_format(posthoc[3,3])`) en wel significant van het cultuurcentrum (*p* = `r Round_and_format(posthoc[2,2])`)
+* De beoordelingen van het bestuursgebouw verschillen niet significant van het hoofdgebouw (*p* = `r Round_and_format(posthoc[2,1])`), niet significant van het sportcentrum (*p* = `r Round_and_format(posthoc[3,1])`) en niet significant van het cultuurcentrum (*p* = `r Round_and_format(posthoc[1,1])`)
+* De beoordelingen van het sportcentrum verschillen niet significant van het hoofdgebouw (*p* = `r Round_and_format(posthoc[3,3])`), niet significant van het bestuursgebouw (*p* = `r Round_and_format(posthoc[3,1])`) en wel significant van het cultuurcentrum (*p* = `r Round_and_format(posthoc[3,2])`)
+* De beoordelingen van het cultuurcentrum verschillen wel significant van het hoofdgebouw (*p* = `r Round_and_format(posthoc[2,2])`), niet significant van het bestuursgebouw (*p* = `r Round_and_format(posthoc[1,1])`) en wel significant van het sportcentrum (*p* = `r Round_and_format(posthoc[3,2])`)
+
+<!-- ## /TEKSTBLOK: posthoc4.R -->
+
 
 
 # Rapportage
 
 <!-- ## TEKSTBLOK: rapportage.R -->
-Een *repeated measures ANOVA* is uitgevoerd om te onderzoeken of er verschillen zijn tussen het aantal studieuren dat eerstejaars studenten van de bachelor Technische Natuurkunde besteden aan de vakken in de eerste onderwijsperiode. De vakken zijn Lineaire Algebra, Relativiteitstheorie en Kosmologie; beschrijvende statistieken zijn te vinden in Tabel 1. De data voldoen niet aan de assumptie van sphericiteit ($\chi^2$ = `r Mauchly_W`, p < 0,0001), daarom is de Greenhouse-Geisser correctie gebruikt. Het aantal studieuren voor de drie vakken in de eerste onderwijsperiode verschilt significant van elkaar, *F* = `r GG_F`, p < 0,0001, *η^2^* = `r eta2`. De sterkte van het effect van het vak op het aantal studieuren is groot. Post-hoc toetsen - waarbij een Bonferroni correctie is toegepast om te corrigeren voor meerdere toetsen -  tonen aan dat elk van de drie de vakken significant verschilt van de andere twee vakken.
+Een *repeated measures ANOVA* is uitgevoerd om te onderzoeken of er verschillen zijn tussen het aantal studieuren dat eerstejaars studenten van de bachelor Technische Natuurkunde besteden aan de vakken in de eerste onderwijsperiode. De vakken zijn Lineaire Algebra, Relativiteitstheorie en Kosmologie; beschrijvende statistieken zijn te vinden in Tabel 1. De data voldoen niet aan de assumptie van sphericiteit ($\chi^2$ = 3, p < 0,0001), daarom is de Greenhouse-Geisser correctie gebruikt. Het aantal studieuren voor de drie vakken in de eerste onderwijsperiode verschilt significant van elkaar, *F* = 3, p < 0,0001, *η^2^* = 3. De sterkte van het effect van het vak op het aantal studieuren is groot. Post-hoc toetsen - waarbij een Bonferroni correctie is toegepast om te corrigeren voor meerdere toetsen -  tonen aan dat elk van de drie de vakken significant verschilt van de andere twee vakken.
+
+| Eetgelegenheid | Mediaan     | Q1        |  Q3        | N        |
+| -------------  | ----------  | --------- | ---------- | -------- |
+| Hoofdgebouw    | `r vMed_HG` | `r vQ1_HG`| `r vQ3_HG` | `r vN_HG`|
+| Bestuursgebouw | `r vMed_BG` | `r vQ1_BG`| `r vQ3_BG` | `r vN_BG`|
+| Sportcentrum   | `r vMed_SC` | `r vQ1_SC`| `r vQ3_SC` | `r vN_SC`|
+| Cultuurcentrum | `r vMed_CC` | `r vQ1_CC`| `r vQ3_CC` | `r vN_CC`|
 
 
-| Opleiding     | M          | SD          | N          |
-| ------------- | ---------- | ---------- | ----------- |
-| Lineaire Algebra      | `r vM_LA` | `r vSD_LA` | `r vN_LA` |
-| Relativiteitstheorie  | `r vM_RT` | `r vSD_RT` | `r vN_RT` |
-| Kosmologie            | `r vM_KL` | `r vSD_KL` | `r vN_KL` |
+
 *Tabel 1. Het gemiddelde aantal studieuren, bijbehorende standaarddeviatie en groepsgrootte voor de vakken in de eerste onderwijsperiode van de bachelor Technische Natuurkunde.*
 <!-- ## /TEKSTBLOK: rapportage.R -->
 
@@ -289,18 +312,7 @@ Een *repeated measures ANOVA* is uitgevoerd om te onderzoeken of er verschillen 
 [^4]: Laerd statistics (2018). *Friedman Test in SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/friedman-test-using-spss-statistics.php. 
 [^5]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^6]: University of Sheffield. *Friedman test in SPSS*. [Mathematics and Statistics Help (MASH)](https://www.sheffield.ac.uk/polopoly_fs/1.714575!/file/stcp-marshall-FriedmanS.pdf). Bezocht op 13 maart 2020.
-[^7]: Type I fout: Ten onrechte H~0~ verwerpen.
-
-
-
-[^1]: Universiteit van Amsterdam (26 augustus 2014). *Repeated-Measures ANOVA*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Repeated-Measures_ANOVA).
-[^2]: Bereken de logaritme van de variabele en de inverse (1 gedeeld door de variabele), en bekijk of deze normaal verdeeld zijn. Als dat zo is, mag je die gebruiken voor de analyse.
-[^3]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
-[^4]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php. 
-[^5]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).
-[^6]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
-[^7]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
-[^8]: Type I fout: Ten onrechte H~0~ verwerpen.
-[^9]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
-[^10]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
-[^11]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
+[^7]: *Kendall's W* wordt berekend door de test statistiek van *Friedman's ANOVA* (dit is de &chi;^2) te delen door het aantal observatie-eenheden *N* en het aantal groepen *k* minus één, i.e. $W = \frac{\chi^2}{N(k-1)}$.
+[^8]: Kassambara, A. (2020). *rstatix: Pipe-Friendly Framework for Basic Statistical Tests*. [R package version 0.4.0.](https://CRAN.R-project.org/package=rstatix).
+[^9]: Type I fout: Ten onrechte H~0~ verwerpen.
+[^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

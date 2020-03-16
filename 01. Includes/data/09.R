@@ -27,7 +27,7 @@ Studentnummer <- rep(Studentnummer_uniek, times = 4)
 Studentnummer <- as.factor(Studentnummer)
 
 # Maak kantine variabele
-Kantine <- rep(c("Hoofdgebouw", "Bestuursgebouw", "Sportcentrum",
+Eetgelegenheid <- rep(c("Hoofdgebouw", "Bestuursgebouw", "Sportcentrum",
                  "Cultuurcentrum"), 
            each = N)
 
@@ -103,12 +103,27 @@ Beoordeling <- c(Beoordeling_hoofdgebouw[Indexen_hoofdgebouw],
 
 
 # Maak dataset
-Beoordelingen_kantines <- cbind.data.frame(Studentnummer, Kantine, Beoordeling)
+Beoordelingen_eetgelegenheden <- cbind.data.frame(Studentnummer, Eetgelegenheid, Beoordeling)
 
 # Sorteer data
+Beoordelingen_eetgelegenheden <- Beoordelingen_eetgelegenheden[order(Beoordelingen_eetgelegenheden$Studentnummer),]
 
-Beoordelingen_kantines <- Beoordelingen_kantines[order(Beoordelingen_kantines$Studentnummer),]
+# Verwijder alles behalve dataset
+rm(N, Studentnummers_opties, Studentnummer_uniek, Studentnummer, Eetgelegenheid,
+   Gewichten_hoofdgebouw, Beoordeling_hoofdgebouw,
+   Gewichten_bestuursgebouw, Beoordeling_bestuursgebouw,
+   Gewichten_sportcentrum, Beoordeling_sportcentrum,
+   Gewichten_cultuurcentrum, Beoordeling_cultuurcentrum,
+   Indexen_hoofdgebouw, Indexen_bestuursgebouw, Indexen_sportcentrum,
+   Indexen_cultuurcentrum, Beoordeling)
 
-friedman.test(y = Beoordelingen_kantines$Beoordeling, 
-              groups = Beoordelingen_kantines$Kantine,
-              blocks = Beoordelingen_kantines$Studentnummer)
+
+
+
+
+# https://statistics.laerd.com/spss-tutorials/friedman-test-using-spss-statistics.php
+# https://www.datanovia.com/en/lessons/friedman-test-in-r/
+# https://www.sheffield.ac.uk/polopoly_fs/1.714575!/file/stcp-marshall-FriedmanS.pdf
+# https://rdrr.io/cran/rstatix/man/friedman_effsize.html
+# https://www.sheffield.ac.uk/mash/statistics/nonparametric
+

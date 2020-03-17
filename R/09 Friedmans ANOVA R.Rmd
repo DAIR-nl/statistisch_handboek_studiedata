@@ -137,27 +137,29 @@ x <- group_by(Beoordelingen_eetgelegenheden, Eetgelegenheid) %>%
     Q1 = quantile(Beoordeling)[2], ## de eerste waarde is het minimum; Q1 is dus op de 2e positie
     Mediaan = median(Beoordeling),
     Q3 = quantile(Beoordeling)[4]
-  )
+  ) %>% arrange(factor(Eetgelegenheid, 
+                       levels =c("Hoofdgebouw", "Bestuursgebouw", 
+                                 "Sportcentrum", "Cultuurcentrum")))
 
 vN_HG <- Round_and_format(x[1,2])
 vN_BG <- Round_and_format(x[2,2])
-vN_SC <- Round_and_format(x[4,2])
-vN_CC <- Round_and_format(x[3,2])
+vN_SC <- Round_and_format(x[3,2])
+vN_CC <- Round_and_format(x[4,2])
 
 vQ1_HG <- Round_and_format(x[1,3])
 vQ1_BG <- Round_and_format(x[2,3])
-vQ1_SC <- Round_and_format(x[4,3])
-vQ1_CC <- Round_and_format(x[3,3])
+vQ1_SC <- Round_and_format(x[3,3])
+vQ1_CC <- Round_and_format(x[4,3])
 
 vMed_HG <- Round_and_format(x[1,4])
 vMed_BG <- Round_and_format(x[2,4])
-vMed_SC <- Round_and_format(x[4,4])
-vMed_CC <- Round_and_format(x[3,4])
+vMed_SC <- Round_and_format(x[3,4])
+vMed_CC <- Round_and_format(x[4,4])
 
 vQ3_HG <- Round_and_format(x[1,5])
 vQ3_BG <- Round_and_format(x[2,5])
-vQ3_SC <- Round_and_format(x[4,5])
-vQ3_CC <- Round_and_format(x[3,5])
+vQ3_SC <- Round_and_format(x[3,5])
+vQ3_CC <- Round_and_format(x[4,5])
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven.R -->
 
@@ -285,7 +287,7 @@ posthoc <- pairwise.wilcox.test(Beoordelingen_eetgelegenheden$Beoordeling, Beoor
 # Rapportage
 
 <!-- ## TEKSTBLOK: rapportage.R -->
-Een *repeated measures ANOVA* is uitgevoerd om te onderzoeken of er verschillen zijn tussen het aantal studieuren dat eerstejaars studenten van de bachelor Technische Natuurkunde besteden aan de vakken in de eerste onderwijsperiode. De vakken zijn Lineaire Algebra, Relativiteitstheorie en Kosmologie; beschrijvende statistieken zijn te vinden in Tabel 1. De data voldoen niet aan de assumptie van sphericiteit ($\chi^2$ = 3, p < 0,0001), daarom is de Greenhouse-Geisser correctie gebruikt. Het aantal studieuren voor de drie vakken in de eerste onderwijsperiode verschilt significant van elkaar, *F* = 3, p < 0,0001, *η^2^* = 3. De sterkte van het effect van het vak op het aantal studieuren is groot. Post-hoc toetsen - waarbij een Bonferroni correctie is toegepast om te corrigeren voor meerdere toetsen -  tonen aan dat elk van de drie de vakken significant verschilt van de andere twee vakken.
+*Friedman's ANVOA* is uitgevoerd om te onderzoeken of de beoordeling van eetgelegenheden door studenten verschilt voor vier gebouwen op de campus van een hogeschool. De vier gebouwen zijn het hoofdgebouw, het bestuursgebouw, het sportcentrum en cultuurcentrum Rembrandt; beschrijvende statistieken zijn te vinden in Tabel 1. De beoordelingen van de vier gebouwen verschillen significant van elkaar (&chi;^2^~3~ = `r vChi2`, *p* < 0,001, *W* = `r Round_and_format(W)`). De sterkte van het effect van de verschillen in gebouwen op de beoordelingen van studenten is gemiddeld. Post-hoc toetsen met een Bonferroni correctie voor meerdere toetsen zijn uitgevoerd voor alle vergelijkingen tussen twee gebouwen. Hieruit blijkt dat er alleen significante verschillen zijn tussen het hoofdgebouw (Mediaan = `r vMed_HG`) en cultuurcentrum Rembrandt (Mediaan = `r vMed_CC`), en tussen het sportcentrum (Mediaan = `r vMed_SC`) en cultuurcentrum Rembrandt (Mediaan = `r vMed_CC`). De eetgelegenheid van cultuurcentrum Rembrandt wordt dus slechter beoordeeld dan de eetgelegenheden in het hoofdgebouw en het sportcentrum; verder zijn er geen significante verschillen tussen de beoordelingen van de eetgelegenheden op de campus.
 
 | Eetgelegenheid | Mediaan     | Q1        |  Q3        | N        |
 | -------------  | ----------  | --------- | ---------- | -------- |
@@ -294,9 +296,7 @@ Een *repeated measures ANOVA* is uitgevoerd om te onderzoeken of er verschillen 
 | Sportcentrum   | `r vMed_SC` | `r vQ1_SC`| `r vQ3_SC` | `r vN_SC`|
 | Cultuurcentrum | `r vMed_CC` | `r vQ1_CC`| `r vQ3_CC` | `r vN_CC`|
 
-
-
-*Tabel 1. Het gemiddelde aantal studieuren, bijbehorende standaarddeviatie en groepsgrootte voor de vakken in de eerste onderwijsperiode van de bachelor Technische Natuurkunde.*
+*Tabel 1. De mediaan, eerste en derde kwartiel en aantal observatie-eenheden voor de beoordelingen door studenten van de eetgelegenheden van de vier gebouwen op de campus van de hogeschool.*
 <!-- ## /TEKSTBLOK: rapportage.R -->
 
 

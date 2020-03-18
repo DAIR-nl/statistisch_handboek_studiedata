@@ -51,7 +51,7 @@ source(paste0(here::here(),"/01. Includes/data/09.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik *Friedman's ANOVA* om gemiddelden te vergelijken van een groep bij drie of meer herhaalde metingen of om drie of meer gepaarde groepen te vergelijken.[^1]<sup>, </sup>[^2] *Friedman's ANOVA* is een alternatief voor de *repeated measures ANOVA* wanneer de data niet aan de assumptie van normaliteit voldoen. Daarnaast hebben uitbijters minder invloed op het resultaat van de *Friedman's ANOVA* in vergelijking tot de *repeated measures ANOVA*. Echter, als de data aan de assumpties van de *repeated measures ANOVA* voldoen, heeft deze toets een hoger onderscheidend vermogen dan *Friedman's ANOVA*.[^3]
+Gebruik *Friedman's ANOVA* om verdelingen te vergelijken van een groep bij drie of meer herhaalde metingen of om drie of meer gepaarde groepen te vergelijken.[^1]<sup>, </sup>[^2] *Friedman's ANOVA* is een alternatief voor de *repeated measures ANOVA* wanneer de data niet aan de assumptie van normaliteit voldoen. Daarnaast hebben uitbijters minder invloed op het resultaat van de *Friedman's ANOVA* in vergelijking tot de *repeated measures ANOVA*. Echter, als de data aan de assumpties van de *repeated measures ANOVA* voldoen, heeft deze toets een hoger onderscheidend vermogen dan *Friedman's ANOVA*.[^3]
 
 
 
@@ -78,7 +78,7 @@ De p-waarde geeft aan of het verschil tussen groepen statistisch significant is.
 
 
 # Post-hoc toetsen
-De *repeated measures ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Voer een post-hoc toets uit om te bepalen welke groepen significant verschillen. Gebruik de *Wilcoxon signed rank toets* als post-hoc toets.
+*Friedman's ANOVA* toetst of er verschillen zijn tussen de verdelingen van groepen. Voer een post-hoc toets uit om te bepalen welke groepen van elkaar verschillen. Gebruik de *Wilcoxon signed rank toets* als post-hoc toets.
 
 Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans dat er bij toeval een verband wordt ontdekt dat er niet is (type I fout).[^9] Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^5]
 
@@ -249,45 +249,65 @@ paste("De effectmaat is", W)
 <!-- ## TEKSTBLOK: ANOVA-toets1.R -->
 * &chi;^2_3 = `r vChi2`, *p* < 0,001, *W* = `r Round_and_format(W)`
 * De p-waarde < 0,05, dus de H~0~ wordt verworpen.[^10]
-* Er is een significant verschil tussen de beoordelingen van de eetgelegenheden in de vier gebouwen; het effect van de verschillende gebouwen op de beoordelingen van studenten is gemiddeld
+* Er is een significant verschil tussen de beoordelingen van de eetgelegenheden in de vier gebouwen; het effect van de verschillende gebouwen op de beoordelingen van studenten is klein tot gemiddeld
 
 <!-- ## /TEKSTBLOK: ANOVA-toets1.R -->
 
 ## Post-hoc toets
 <!-- ## TEKSTBLOK: posthoc1.R -->
-Voer post-hoc toetsen uit om te onderzoeken tussen welke gebouwen er verschillen zijn in de beoordelingen van studenten. De vier gebouwen zijn het hoofdgebouw, bestuursgebouw, sportcentrum en cultuurcentrum Rembrandt. Gebruik de *Wilcoxon signed-rank toets* als post-hoc toets met bijbehorende functie `pairwise.wilcox.test()`. De ingevoerde argumenten van de functie zijn de afhankelijke variabele `Beoordelingen_eetgelegenheden$Beoordeling`, de onafhankelijke variabele `Beoordelingen_eetgelegenheden$Eetgelegenheid` die de groepen aangeeft, de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`, het argument `paired = TRUE` om aan te geven dat er een gepaarde steekproef is en het argument `exact = FALSE` om aan te geven dat de p-waarden niet op een exacte manier berekend worden. Het laatste argument wordt gebruikt omdat de exacte methode in bepaalde gevallen niet mogelijk is.    
+Voer post-hoc toetsen uit om te onderzoeken tussen welke gebouwen er verschillen zijn in de beoordelingen van studenten. De vier gebouwen zijn het hoofdgebouw, bestuursgebouw, sportcentrum en cultuurcentrum Rembrandt. Gebruik de *Wilcoxon signed-rank toets* als post-hoc toets met bijbehorende functie `pairwise.wilcox.test()`. De ingevoerde argumenten van de functie zijn de afhankelijke variabele `Beoordelingen_eetgelegenheden$Beoordeling`, de onafhankelijke variabele `Beoordelingen_eetgelegenheden$Eetgelegenheid` die de groepen aangeeft, de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`, het argument `paired = TRUE` om aan te geven dat er een gepaarde steekproef is en het argument `exact = FALSE` om de p-waarden niet op een exacte manier te berekenen. Gebruik het laatste argument omdat de exacte methode in bepaalde gevallen niet mogelijk is. Het significantieniveau is 0,05.[^10]
 <!-- ## /TEKSTBLOK: posthoc1.R -->
 
 <!-- ## OPENBLOK: post-hoc2.R -->
 ``` {r pairwise wilcox test}
-pairwise.wilcox.test(Beoordelingen_eetgelegenheden$Beoordeling, Beoordelingen_eetgelegenheden$Eetgelegenheid,
-                     p.adjust.method = "bonferroni", paired = TRUE, exact = FALSE)
+pairwise.wilcox.test(Beoordelingen_eetgelegenheden$Beoordeling, Beoordelingen_eetgelegenheden$Eetgelegenheid, p.adjust.method = "bonferroni", paired = TRUE, exact = FALSE)
 ```
 <!-- ## /OPENBLOK: post-hoc2.R -->
 
+Bereken de effectmaat *r* voor elke individuele post-hoc toets.[^11]
 
-<!-- ## CLOSEDBLOK: post-hoc3.R -->
-``` {r pairwise wilcox test 2}
-posthoc <- pairwise.wilcox.test(Beoordelingen_eetgelegenheden$Beoordeling, Beoordelingen_eetgelegenheden$Eetgelegenheid,
-                     p.adjust.method = "bonferroni", paired = TRUE, 
-                     exact = FALSE)$p.value
+<!-- ## OPENBLOK: post-hoc4.R -->
+``` {r pairwise wilcox test effectmaat}
+# Sla de p-waarden van de post-hoc toetsen op
+posthoc <- pairwise.wilcox.test(Beoordelingen_eetgelegenheden$Beoordeling, Beoordelingen_eetgelegenheden$Eetgelegenheid, p.adjust.method = "bonferroni", paired = TRUE, exact = FALSE)$p.value
+
+# Effectmaat hoofdgebouw vs. bestuursgebouw
+(Effectmaat_HG_BG <- abs(qnorm(posthoc[2,1]/2)) / sqrt(length(unique(Beoordelingen_eetgelegenheden$Studentnummer))))
+
+# Effectmaat hoofdgebouw vs. sportcentrum
+(Effectmaat_HG_SC <- abs(qnorm(posthoc[3,3]/2)) / sqrt(length(unique(Beoordelingen_eetgelegenheden$Studentnummer))))
+
+# Effectmaat hoofdgebouw vs. cultuurcentrum
+(Effectmaat_HG_CC <- abs(qnorm(posthoc[2,2]/2)) / sqrt(length(unique(Beoordelingen_eetgelegenheden$Studentnummer))))
+
+# Effectmaat bestuursgebouw vs. sportcentrum
+(Effectmaat_BG_SC <- abs(qnorm(posthoc[3,1]/2)) / sqrt(length(unique(Beoordelingen_eetgelegenheden$Studentnummer))))
+
+# Effectmaat bestuursgebouw vs. cultuurcentrum
+(Effectmaat_BG_CC <- abs(qnorm(posthoc[1,1]/2)) / sqrt(length(unique(Beoordelingen_eetgelegenheden$Studentnummer))))
+
+# Effectmaat sportcentrum vs. cultuurcentrum
+(Effectmaat_SC_CC <- abs(qnorm(posthoc[3,2]/2)) / sqrt(length(unique(Beoordelingen_eetgelegenheden$Studentnummer))))
+
+
 ```
-<!-- ## /CLOSEDBLOK: post-hoc3.R -->
+<!-- ## /OPENBLOK: post-hoc4.R -->
 
-<!-- ## TEKSTBLOK: posthoc4.R -->
-* De beoordelingen van het hoofdgebouw verschillen niet significant van het bestuursgebouw (*p* = `r Round_and_format(posthoc[2,1])`), niet significant van het sportcentrum (*p* = `r Round_and_format(posthoc[3,3])`) en wel significant van het cultuurcentrum (*p* = `r Round_and_format(posthoc[2,2])`)
-* De beoordelingen van het bestuursgebouw verschillen niet significant van het hoofdgebouw (*p* = `r Round_and_format(posthoc[2,1])`), niet significant van het sportcentrum (*p* = `r Round_and_format(posthoc[3,1])`) en niet significant van het cultuurcentrum (*p* = `r Round_and_format(posthoc[1,1])`)
-* De beoordelingen van het sportcentrum verschillen niet significant van het hoofdgebouw (*p* = `r Round_and_format(posthoc[3,3])`), niet significant van het bestuursgebouw (*p* = `r Round_and_format(posthoc[3,1])`) en wel significant van het cultuurcentrum (*p* = `r Round_and_format(posthoc[3,2])`)
-* De beoordelingen van het cultuurcentrum verschillen wel significant van het hoofdgebouw (*p* = `r Round_and_format(posthoc[2,2])`), niet significant van het bestuursgebouw (*p* = `r Round_and_format(posthoc[1,1])`) en wel significant van het sportcentrum (*p* = `r Round_and_format(posthoc[3,2])`)
 
-<!-- ## /TEKSTBLOK: posthoc4.R -->
+<!-- ## TEKSTBLOK: posthoc5.R -->
+* De beoordelingen van het hoofdgebouw verschillen niet significant van het bestuursgebouw (*p* = `r Round_and_format(posthoc[2,1])`, *r* = `r Round_and_format(Effectmaat_HG_BG)`), niet significant van het sportcentrum (*p* = `r Round_and_format(posthoc[3,3])`, *r* = `r Round_and_format(Effectmaat_HG_SC)`) en wel significant van het cultuurcentrum (*p* = `r Round_and_format(posthoc[2,2])`, *r* = `r Round_and_format(Effectmaat_HG_CC)`)
+* De beoordelingen van het bestuursgebouw verschillen niet significant van het hoofdgebouw (*p* = `r Round_and_format(posthoc[2,1])`, *r* = `r Round_and_format(Effectmaat_HG_BG)`), niet significant van het sportcentrum (*p* = `r Round_and_format(posthoc[3,1])`, *r* = `r Round_and_format(Effectmaat_BG_SC)`) en niet significant van het cultuurcentrum (*p* = `r Round_and_format(posthoc[1,1])`, *r* = `r Round_and_format(Effectmaat_BG_CC)`)
+* De beoordelingen van het sportcentrum verschillen niet significant van het hoofdgebouw (*p* = `r Round_and_format(posthoc[3,3])`, *r* = `r Round_and_format(Effectmaat_HG_SC)`), niet significant van het bestuursgebouw (*p* = `r Round_and_format(posthoc[3,1])`, *r* = `r Round_and_format(Effectmaat_BG_SC)`) en wel significant van het cultuurcentrum (*p* = `r Round_and_format(posthoc[3,2])`, *r* = `r Round_and_format(Effectmaat_SC_CC)`)
+* De beoordelingen van het cultuurcentrum verschillen wel significant van het hoofdgebouw (*p* = `r Round_and_format(posthoc[2,2])`, *r* = `r Round_and_format(Effectmaat_HG_CC)`), niet significant van het bestuursgebouw (*p* = `r Round_and_format(posthoc[1,1])`, *r* = `r Round_and_format(Effectmaat_BG_CC)`) en wel significant van het sportcentrum (*p* = `r Round_and_format(posthoc[3,2])`, *r* = `r Round_and_format(Effectmaat_SC_CC)`)
+
+<!-- ## /TEKSTBLOK: posthoc5.R -->
 
 
 
 # Rapportage
 
 <!-- ## TEKSTBLOK: rapportage.R -->
-*Friedman's ANVOA* is uitgevoerd om te onderzoeken of de beoordeling van eetgelegenheden door studenten verschilt voor vier gebouwen op de campus van een hogeschool. De vier gebouwen zijn het hoofdgebouw, het bestuursgebouw, het sportcentrum en cultuurcentrum Rembrandt; beschrijvende statistieken zijn te vinden in Tabel 1. De beoordelingen van de vier gebouwen verschillen significant van elkaar (&chi;^2^~3~ = `r vChi2`, *p* < 0,001, *W* = `r Round_and_format(W)`). De sterkte van het effect van de verschillen in gebouwen op de beoordelingen van studenten is gemiddeld. Post-hoc toetsen met een Bonferroni correctie voor meerdere toetsen zijn uitgevoerd voor alle vergelijkingen tussen twee gebouwen. Hieruit blijkt dat er alleen significante verschillen zijn tussen het hoofdgebouw (Mediaan = `r vMed_HG`) en cultuurcentrum Rembrandt (Mediaan = `r vMed_CC`), en tussen het sportcentrum (Mediaan = `r vMed_SC`) en cultuurcentrum Rembrandt (Mediaan = `r vMed_CC`). De eetgelegenheid van cultuurcentrum Rembrandt wordt dus slechter beoordeeld dan de eetgelegenheden in het hoofdgebouw en het sportcentrum; verder zijn er geen significante verschillen tussen de beoordelingen van de eetgelegenheden op de campus.
+*Friedman's ANOVA* is uitgevoerd om te onderzoeken of de beoordeling van eetgelegenheden door studenten verschilt voor vier gebouwen op de campus van een hogeschool. De vier gebouwen zijn het hoofdgebouw, het bestuursgebouw, het sportcentrum en cultuurcentrum Rembrandt; beschrijvende statistieken zijn te vinden in Tabel 1. De beoordelingen van de vier gebouwen verschillen significant van elkaar (&chi;^2^~3~ = `r vChi2`, *p* < 0,001, *W* = `r Round_and_format(W)`). De sterkte van het effect van de verschillen in gebouwen op de beoordelingen van studenten is klein tot gemiddeld. Post-hoc toetsen met een Bonferroni correctie voor meerdere toetsen zijn uitgevoerd voor alle vergelijkingen tussen twee gebouwen. Hieruit blijkt dat er alleen significante verschillen zijn tussen het hoofdgebouw (Mediaan = `r vMed_HG`) en cultuurcentrum Rembrandt (Mediaan = `r vMed_CC`), en tussen het sportcentrum (Mediaan = `r vMed_SC`) en cultuurcentrum Rembrandt (Mediaan = `r vMed_CC`). De eetgelegenheid van cultuurcentrum Rembrandt wordt dus slechter beoordeeld dan de eetgelegenheden in het hoofdgebouw en het sportcentrum; verder zijn er geen significante verschillen tussen de beoordelingen van de eetgelegenheden op de campus.
 
 | Eetgelegenheid | Mediaan     | Q1        |  Q3        | N        |
 | -------------  | ----------  | --------- | ---------- | -------- |
@@ -312,7 +332,10 @@ posthoc <- pairwise.wilcox.test(Beoordelingen_eetgelegenheden$Beoordeling, Beoor
 [^4]: Laerd statistics (2018). *Friedman Test in SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/friedman-test-using-spss-statistics.php. 
 [^5]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^6]: University of Sheffield. *Friedman test in SPSS*. [Mathematics and Statistics Help (MASH)](https://www.sheffield.ac.uk/polopoly_fs/1.714575!/file/stcp-marshall-FriedmanS.pdf). Bezocht op 13 maart 2020.
-[^7]: *Kendall's W* wordt berekend door de test statistiek van *Friedman's ANOVA* (dit is de &chi;^2) te delen door het aantal observatie-eenheden *N* en het aantal groepen *k* minus één, i.e. $W = \frac{\chi^2}{N(k-1)}$.
+[^7]: *Kendall's W* wordt berekend door de teststatistiek van *Friedman's ANOVA* (dit is de &chi;^2) te delen door het aantal observatie-eenheden *N* en het aantal groepen *k* minus één, i.e. $W = \frac{\chi^2}{N(k-1)}$.
 [^8]: Kassambara, A. (2020). *rstatix: Pipe-Friendly Framework for Basic Statistical Tests*. [R package version 0.4.0.](https://CRAN.R-project.org/package=rstatix).
 [^9]: Type I fout: Ten onrechte H~0~ verwerpen.
 [^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
+[^11]: De effectmaat *r* wordt voor de *Wilcoxon signed rank toets* berekend door de
+*z*-waarde behorend bij de *p*-waarde van de toets te delen door de wortel van
+het aantal observatie-eenheden, i.e. $\frac{z}{\sqrt{N}}$.

@@ -79,7 +79,7 @@ Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test*.[^
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R -->
-Er is een dataset ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde: `Gemiddeld_cijfer_WNS` .
+Er is een dataset ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde: `Gemiddeld_cijfer_WNS`.
 <!-- ## /TEKSTBLOK: Dataset-inladen.R -->
 
 ## De data bekijken

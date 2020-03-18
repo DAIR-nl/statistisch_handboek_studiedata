@@ -184,9 +184,9 @@ pwaarde <- wilcox.test(Alumni_jaarinkomens_T2, Alumni_jaarinkomens_T1,
                        paired = TRUE, alternative = "greater")$p.value
 
 # Bereken de effectgrootte voor een tweezijdige toets
-#r <- qnorm(pwaarde/2) / sqrt(nrow(Studiepunten_studiejaar2))
+#r <- abs(qnorm(pwaarde/2)) / sqrt(length(Alumni_jaarinkomens_T1))
 # Bereken de effectgrootte voor een eenzijdige toets
-r <- abs(qnorm(pwaarde) / sqrt(nrow(Alumni_jaarinkomens)))
+r <- abs(qnorm(pwaarde)) / sqrt(length(Alumni_jaarinkomens_T1))
 
 # Print de effectgrootte
 paste("De effectmaat is", r)
@@ -204,7 +204,7 @@ vVstatistic <- Round_and_format(wilcox$statistic)
 <!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
 * *V* = `r vVstatistic`, p < 0,0001 , *r* = `r Round_and_format(r)` 
 * p-waarde < 0,05, dus de H~0~ wordt verworpen[^9]
-* Effectmaat is `r Round_and_format(r)`, dus een gemiddeld tot groot effect
+* Effectmaat is `r Round_and_format(r)`, dus een groot effect
 
 
 <!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
@@ -226,7 +226,7 @@ De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of het
 [^5]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^6]: De effectmaat *r* wordt voor de *Wilcoxon signed rank toets* berekend door de
 *z*-waarde behorend bij de *p*-waarde van de toets te delen door de wortel van
-het aantal observaties, i.e. $\frac{z}{\sqrt{N}}$.
+het aantal observatie-eenheden, i.e. $\frac{z}{\sqrt{N}}$.
 [^7]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
 [^8]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 [^9]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

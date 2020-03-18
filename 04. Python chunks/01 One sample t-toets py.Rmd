@@ -44,7 +44,7 @@ source(paste0(here::here(),"/01. Includes/data/01.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.py -->
 
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->
-Er is een dataframe ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde: `dfGemiddeld_cijfer_WNS`.
+Er is een dataset ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde: `Gemiddeld_cijfer_WNS`.
 <!-- ## /TEKSTBLOK: Dataset-inladen.py -->
 
 <!-- ## TEKSTBLOK: Data-bekijken.py -->
@@ -74,7 +74,7 @@ print(dfGemiddeld_cijfer_WNS.tail(6))
 <!-- ## /OPENBLOK: Data-bekijken.py -->
 
 <!-- ## TEKSTBLOK: Data-beschrijven.py-->
-Gebruik de variabele `Gemiddeld_cijfer_WNS`. Krijg meer inzicht in de dataset door de groepsgrootte, het gemiddelde en de spreiding te bekijken, `np.size()`, `np.mean()` en `np.sqrt(np.var(<variabele>, ddof = 1))`, door deze functies aan te roepen uit de library `numpy`.
+Gebruik de variabele `Gemiddeld_cijfer_WNS`. Inspecteer de dataset door de groepsgrootte, het gemiddelde en de standaardafwijking te bekijken met de functies `np.size()`, `np.mean()` en `np.sqrt(np.var(<variabele>, ddof = 1))`uit de library `numpy`.
 <!-- ## /TEKSTBLOK: Data-beschrijven.py-->
 
 <!-- ## OPENBLOK: Data-beschrijven.py -->
@@ -144,7 +144,7 @@ plt.show()
 <!-- ## /OPENBLOK: Boxplot.py -->
 
 <!-- ## TEKSTBLOK: Lilliefors-test1.py -->
-De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`.
+De standaard interpretatie van een statistische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`.
 <!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
 
 <!-- ## OPENBLOK: Lilliefors-test.py -->
@@ -153,14 +153,26 @@ De standaard interpretatie van een statitische toets in Python is als volgt: `(<
 import statsmodels.stats.api
 print(statsmodels.stats.api.lilliefors(Gemiddeld_cijfer_WNS))
 ```
+```{python Kolmogorov-Smirnov Test2, warning=FALSE, include = FALSE}
+## Kolmogorov-Smirnov test
+import statsmodels.stats.api
+lillieforstest = statsmodels.stats.api.lilliefors(Gemiddeld_cijfer_WNS)
+```
 <!-- ## /OPENBLOK: Lilliefors-test.py -->
+
+
+<!-- ## TEKSTBLOK: Lilliefors-test2.py -->
+De p-waarde is `r Round_and_format(py$lillieforstest[2])`, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
+<!-- ## /TEKSTBLOK: Lilliefors-test2.py -->
+
+
 
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test.py -->
 ```{python, include=FALSE}
 Gemiddeld_cijfer_WNS_n30 = r.Gemiddeld_cijfer_WNS_n30
 N30 = len(Gemiddeld_cijfer_WNS_n30)
 ```
-Er is een steekproef van `Gemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS_n30`. De steekproef bevat `r py$N30` studenten.
+Er is een subset van `Gemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS_n30`. De steekproef bevat `r py$N30` studenten.
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test.py -->
 
 <!-- ## OPENBLOK: Shapiro-Wilk-test.py -->
@@ -168,11 +180,20 @@ Er is een steekproef van `Gemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS
 #Shapiro-Wilk test
 print(stats.shapiro(Gemiddeld_cijfer_WNS_n30))
 ```
+``` {python Shapiro-Wilk Test2, warning=FALSE, include = FALSE}
+#Shapiro-Wilk test
+swtest = stats.shapiro(Gemiddeld_cijfer_WNS_n30)
+```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test.py -->
+
+<!-- ## TEKSTBLOK: Shapiro-Wilk-test2.py -->
+De p-waarde is `r Round_and_format(shapiro.test(Gemiddeld_cijfer_WNS_n30)$p.value)`, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
+<!-- ## /TEKSTBLOK: Shapiro-Wilk-test2.py -->
+
 
 <!-- ## TEKSTBLOK: T-test.py -->
 Gebruik `scipy.stats.ttest_1samp()` om een t-toets uit te voeren. Geef het gemiddelde waarmee wordt vergeleken, in dit geval `r Round_and_format(py$mean)`. De standaard in Python is dat er tweezijdig wordt getoetst. De dataframe met `dfGemiddeld_cijfer_WNS` is ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde, *n* = `r py$N`. 
-De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren dan het landelijk gemiddelde is er voor gekozen om tweezijdig te toetsen.
+De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren dan het landelijk gemiddelde is er voor gekozen om tweezijdig te toetsen. Gebruik de hele dataset `dfGemiddeld_cijfer_WNS` met *n* = `r py$N`.
 <!-- ## /TEKSTBLOK: T-test.py -->
 
 <!-- ## OPENBLOK: T-test.py -->

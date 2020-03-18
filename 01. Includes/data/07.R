@@ -27,11 +27,14 @@ Alumni_inkomens_T1 <- Alumni_inkomens_T1[volgorde]
 Alumni_inkomens_T2 <- Alumni_inkomens_T2[volgorde]
 
 ## link studentnummer aan vastgestelde volgorde en maak dataframe
-Studentnr <- sample(3000000:4000000, length(Alumni_inkomens_T1))
-Studentnr <- c(Studentnr,Studentnr)
+Studentnummer <- sample(3000000:4000000, length(Alumni_inkomens_T1))
+Studentnummer <- c(Studentnummer,Studentnummer)
 Inkomen<- c(Alumni_inkomens_T1, Alumni_inkomens_T2)
 Meetmoment <- c(replicate(length(Alumni_inkomens_T1), "T1"), (replicate(length(Alumni_inkomens_T2), "T2")))
-Alumni_jaarinkomens <- data.frame(Studentnr, Meetmoment, Inkomen)
+Alumni_jaarinkomens <- data.frame(Studentnummer, Meetmoment, Inkomen)
 
-## Sorteer op inkomen voor presentatie dataset
-#Alumni_inkomens <- Alumni_inkomens[order(Alumni_inkomens$Inkomen, decreasing = TRUE),]
+# Verwijder alles behalve dataset
+
+rm(Alumni_inkomens_T1, Alumni_inkomens_T2, Inkomen, Meetmoment, Opslag, 
+        Promotie_mogelijkheden, Studentnummer, volgorde)
+

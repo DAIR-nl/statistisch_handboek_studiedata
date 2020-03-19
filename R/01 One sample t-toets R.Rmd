@@ -231,11 +231,20 @@ t <- t.test(Gemiddeld_cijfer_WNS, mu = 6.8, alternative = "two.sided")
 vP <- Round_and_format(t$p.value)
 ```
 <!-- ## /CLOSEDBLOK: T-test.R -->
+
+<!-- ## TEKSTBLOK: betrouwbaarheidsintervaltekst.R -->
+
+<!-- ## /TEKSTBLOK: betrouwbaarheidsintervaltekst.R -->
+
+<!-- ## OPENBLOK: betrouwbaarheidsinterval.R -->
+
+<!-- ## /OPENBLOK: betrouwbaarheidsinterval.R -->
+
 <!-- ## TEKSTBLOK: T-test2.R -->
 * Vrijheidsgraden, *df* = *n* -1 = `r Round_and_format(t$parameter+1)`-1 = `r t$parameter`  
 * *t* ~`r t$parameter`~ = `r Round_and_format(t$statistic)`, *p* < 0,0001
 * p-waarde < 0,05, dus de H~0~ wordt verworpen [^11]
-* 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95% van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het gemiddeld eindexamencijfer exacte vakken minus 6.8. In deze casus is het interval tussen `r Round_and_format(t$conf.int[1])` en `r Round_and_format(t$conf.int[2])`. Aangezien 6.8 niet in dit interval zit, verschilt het gemiddelde significant van 6.8.
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95% van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het gemiddeld eindexamencijfer exacte vakken. In deze casus is het interval tussen `r Round_and_format(t$conf.int[1])` en `r Round_and_format(t$conf.int[2])`. Aangezien 6.8 niet in dit interval zit, verschilt het gemiddelde significant van 6.8.
 * Het gemiddelde van de steekproef is `r Round_and_format(mean(Gemiddeld_cijfer_WNS))`
 <!-- ## /TEKSTBLOK: T-test2.R -->
 

@@ -162,7 +162,7 @@ lillieforstest = statsmodels.stats.api.lilliefors(Gemiddeld_cijfer_WNS)
 
 
 <!-- ## TEKSTBLOK: Lilliefors-test2.py -->
-De p-waarde is `r Round_and_format(py$lillieforstest[2])`, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
+De p-waarde is `r Round_and_format(unlist(py$lillieforstest[2]))`, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
 <!-- ## /TEKSTBLOK: Lilliefors-test2.py -->
 
 
@@ -187,13 +187,12 @@ swtest = stats.shapiro(Gemiddeld_cijfer_WNS_n30)
 <!-- ## /OPENBLOK: Shapiro-Wilk-test.py -->
 
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test2.py -->
-De p-waarde is `r Round_and_format(shapiro.test(Gemiddeld_cijfer_WNS_n30)$p.value)`, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
+De p-waarde is `r Round_and_format(unlist(py$swtest[2]))`, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
 <!-- ## /TEKSTBLOK: Shapiro-Wilk-test2.py -->
 
 
 <!-- ## TEKSTBLOK: T-test.py -->
-Gebruik `scipy.stats.ttest_1samp()` om een t-toets uit te voeren. Geef het gemiddelde waarmee wordt vergeleken, in dit geval `r Round_and_format(py$mean)`. De standaard in Python is dat er tweezijdig wordt getoetst. De dataframe met `dfGemiddeld_cijfer_WNS` is ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde, *n* = `r py$N`. 
-De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren dan het landelijk gemiddelde is er voor gekozen om tweezijdig te toetsen. Gebruik de hele dataset `dfGemiddeld_cijfer_WNS` met *n* = `r py$N`.
+Gebruik `scipy.stats.ttest_1samp()` om een t-toets uit te voeren. Gebruik het argument `popmean = 6.8` om het gemiddelde te specificeren waarmee wordt vergeleken. De standaard in Python is dat er tweezijdig wordt getoetst. De verwachting is dat de studenten hoger scoren, maar omdat het relevant is om te weten of de studenten ook lager scoren dan het landelijk gemiddelde, is er voor gekozen om tweezijdig te toetsen. Een eenzijdige toets kan uitgevoerd worden door de p-waarde te verdubbelen en daarna te vergelijken met het significantieniveau. Gebruik de hele dataset `dfGemiddeld_cijfer_WNS` met *n* = `r py$N`. 
 <!-- ## /TEKSTBLOK: T-test.py -->
 
 <!-- ## OPENBLOK: T-test.py -->
@@ -210,10 +209,36 @@ par = N - 1
 ```
 <!-- ## /CLOSEDBLOK: T-test.py -->
 
+<!-- ## TEKSTBLOK: betrouwbaarheidsintervaltekst.py -->
+Bereken het 95%-betrouwbaarheidsinterval van het gemiddelde handmatig.
+<!-- ## /TEKSTBLOK: betrouwbaarheidsintervaltekst.py -->
+
+<!-- ## OPENBLOK: betrouwbaarheidsinterval.py -->
+```{python betrouwbaarheidsinterval, echo = FALSE}
+# Bereken het gemiddelde
+Gemiddelde = np.mean(Gemiddeld_cijfer_WNS)
+# Sla het aantal observaties op
+N = np.size(Gemiddeld_cijfer_WNS)
+
+# Bereken de standaardafwijking van de dataset
+Standaardafwijking = np.sqrt(np.var(Gemiddeld_cijfer_WNS, ddof = 1))
+
+# Bereken de t-waarde behorend bij het aantal vrijheidsgraden in deze toets
+t = - stats.t.ppf(0.025, N - 1)
+
+# Bereken het 95%-betrouwbaarheidsinterval
+Ondergrens = Gemiddelde - t * Standaardafwijking / np.sqrt(N)
+Bovengrens = Gemiddelde + t * Standaardafwijking / np.sqrt(N)
+print(Ondergrens, Bovengrens)
+```
+<!-- ## /OPENBLOK: betrouwbaarheidsinterval.py -->
+
+
 <!-- ## TEKSTBLOK: T-test2.py -->
 * Vrijheidsgraden, *df* = *n* -1 = `r Round_and_format(py$N)`-1 = `r py$par`  
-* *t* ~`r py$par`~ = `r Round_and_format(py$stat)`, *p* < 0,05
+* *t* ~`r py$par`~ = `r Round_and_format(py$stat)`, *p* < 0,0001
 * p-waarde < 0,05, dus de H~0~ wordt verworpen[^9]
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95% van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het gemiddeld eindexamencijfer exacte vakken. In deze casus is het interval tussen `r Round_and_format(py$Ondergrens)` en `r Round_and_format(py$Bovengrens)`. Aangezien 6.8 niet in dit interval zit, verschilt het gemiddelde significant van 6.8.
 * Het gemiddelde van de steekproef is `r Round_and_format(py$mean)`  
 <!-- ## /TEKSTBLOK: T-test2.py -->
 

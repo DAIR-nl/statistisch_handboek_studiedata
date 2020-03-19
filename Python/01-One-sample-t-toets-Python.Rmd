@@ -7,6 +7,8 @@ output:
     toc_float: 
       collapsed: FALSE 
     number_sections: true
+    includes:
+      in_header: ["../01. Includes/html/favicon.html", "../01. Includes/html/analytics.html"]  
   keywords: [statistisch handboek, studiedata]
 ---
 <!-- ## CLOSEDBLOK: Functies.R -->
@@ -19,9 +21,11 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Functies.R -->
 
+<!-- ## CLOSEDBLOK: CSS -->
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
+<!-- ## /CLOSEDBLOK: CSS -->
 
 <!-- ## CLOSEDBLOK: Header.R -->
 ```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
@@ -72,13 +76,13 @@ Controleer de assumptie van normaliteit met de volgende stappen:
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
 2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^4]<sup>, </sup>[^5]  
 
-Als blijkt dat de data niet normaal verdeeld zijn, transformeer dan de data eventueel en bepaal daarna of deze wel normaal verdeeld zijn.
+Als blijkt dat de data niet normaal verdeeld zijn, transformeer dan de data eventueel en bepaal daarna of deze wel normaal verdeeld zijn.[^6]
 
-Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test*.[^6]<sup>, </sup>[^7]
+Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test*.[^7]<sup>, </sup>[^8]
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->
-Er is een dataframe ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde: `dfGemiddeld_cijfer_WNS`.
+Er is een dataset ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde: `Gemiddeld_cijfer_WNS`.
 <!-- ## /TEKSTBLOK: Dataset-inladen.py -->
 
 ## De data bekijken
@@ -107,7 +111,7 @@ print(dfGemiddeld_cijfer_WNS.tail(6))
 ```
 <!-- ## /OPENBLOK: Data-bekijken.py -->
 <!-- ## TEKSTBLOK: Data-beschrijven.py-->
-Gebruik de variabele `Gemiddeld_cijfer_WNS`. Krijg meer inzicht in de dataset door de groepsgrootte, het gemiddelde en de spreiding te bekijken, `np.size()`, `np.mean()` en `np.sqrt(np.var(<variabele>, ddof = 1))`, door deze functies aan te roepen uit de library `numpy`.
+Gebruik de variabele `Gemiddeld_cijfer_WNS`. Inspecteer de dataset door de groepsgrootte, het gemiddelde en de standaardafwijking te bekijken met de functies `np.size()`, `np.mean()` en `np.sqrt(np.var(<variabele>, ddof = 1))`uit de library `numpy`.
 <!-- ## /TEKSTBLOK: Data-beschrijven.py-->
 <!-- ## OPENBLOK: Data-beschrijven.py -->
 ```{python}
@@ -134,7 +138,7 @@ N = np.size(Gemiddeld_cijfer_WNS)
 <!-- ## /TEKSTBLOK: Data-beschrijven2.py -->
 
 ## Visuele inspectie van normaliteit
-Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
+Geef de verdeling van de data visueel weer met een histogram, Q-Q plot of boxplot.
 
 ### Histogram
 <!-- ## OPENBLOK: Histogram.py -->
@@ -174,7 +178,7 @@ plt.show()
 In deze casus liggen de meeste punten op de lijn. Bij de uiteinden liggen de punten dichtbij de lijn. 
 
 ### Boxplot
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^8] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
 
 <!-- ## OPENBLOK: Boxplot.py -->
 ``` {python boxplot}
@@ -186,16 +190,16 @@ plt.show()
 ```
 <!-- ## /OPENBLOK: Boxplot.py -->
 
-De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte vakken weer van de studenten Werktuigbouwkunde. De box en staarten zien er symmetrisch uit, wat een indicatie is van een normale verdeling.[^9]  
+De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte vakken weer van de studenten Werktuigbouwkunde. De box en staarten zien er symmetrisch uit, wat een indicatie is van een normale verdeling.[^10]  
 
 ## Toetsen van normaliteit
 Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov
-De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
+De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef.De Lilliefors correctie is vereist als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn, wat meestal het geval is bij een steekproef. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
 <!-- ## TEKSTBLOK: Lilliefors-test1.py -->
-De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`.
+De standaard interpretatie van een statistische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`.
 <!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
 
 <!-- ## OPENBLOK: Lilliefors-test.py -->
@@ -204,34 +208,44 @@ De standaard interpretatie van een statitische toets in Python is als volgt: `(<
 import statsmodels.stats.api
 print(statsmodels.stats.api.lilliefors(Gemiddeld_cijfer_WNS))
 ```
+```{python Kolmogorov-Smirnov Test2, warning=FALSE, include = FALSE}
+## Kolmogorov-Smirnov test
+import statsmodels.stats.api
+lillieforstest = statsmodels.stats.api.lilliefors(Gemiddeld_cijfer_WNS)
+```
 <!-- ## /OPENBLOK: Lilliefors-test.py -->
 
-<!-- ## TEKSTBLOK: Lilliefors-test2.R -->
-De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
-<!-- ## /TEKSTBLOK: Lilliefors-test2.R -->
+<!-- ## TEKSTBLOK: Lilliefors-test2.py -->
+De p-waarde is `r Round_and_format(py$lillieforstest[2])`, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
+<!-- ## /TEKSTBLOK: Lilliefors-test2.py -->
 
 ### Shapiro-Wilk Test
-De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
+De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en vooral geschikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test.py -->
 ```{python, include=FALSE}
 Gemiddeld_cijfer_WNS_n30 = r.Gemiddeld_cijfer_WNS_n30
 N30 = len(Gemiddeld_cijfer_WNS_n30)
 ```
-Er is een steekproef van `Gemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS_n30`. De steekproef bevat `r py$N30` studenten.
+Er is een subset van `Gemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS_n30`. De steekproef bevat `r py$N30` studenten.
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test.py -->
 <!-- ## OPENBLOK: Shapiro-Wilk-test.py -->
 ``` {python Shapiro-Wilk Test, warning=FALSE}
 #Shapiro-Wilk test
 print(stats.shapiro(Gemiddeld_cijfer_WNS_n30))
 ```
+``` {python Shapiro-Wilk Test2, warning=FALSE, include = FALSE}
+#Shapiro-Wilk test
+swtest = stats.shapiro(Gemiddeld_cijfer_WNS_n30)
+```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test.py -->
 
-De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
+<!-- ## TEKSTBLOK: Shapiro-Wilk-test2.py -->
+De p-waarde is `r Round_and_format(py$swtest[2])`, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
+<!-- ## /TEKSTBLOK: Shapiro-Wilk-test2.py -->
 
 ##  One sample t-toets
 <!-- ## TEKSTBLOK: T-test.py -->
-Gebruik `scipy.stats.ttest_1samp()` om een t-toets uit te voeren. Geef het gemiddelde waarmee wordt vergeleken, in dit geval `r Round_and_format(py$mean)`. De standaard in Python is dat er tweezijdig wordt getoetst. De dataframe met `dfGemiddeld_cijfer_WNS` is ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde, *n* = `r py$N`. 
-De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren dan het landelijk gemiddelde is er voor gekozen om tweezijdig te toetsen.
+Gebruik `scipy.stats.ttest_1samp()` om een t-toets uit te voeren. Gebruik het argument `popmean = 6.8` om het gemiddelde te specificeren waarmee wordt vergeleken. De standaard in Python is dat er tweezijdig wordt getoetst. De verwachting is dat de studenten hoger scoren, maar omdat het relevant is om te weten of de studenten ook lager scoren dan het landelijk gemiddelde, is er voor gekozen om tweezijdig te toetsen. Een eenzijdige toets kan uitgevoerd worden door de p-waarde te verdubbelen en daarna te vergelijken met het significantieniveau. Gebruik de hele dataset `dfGemiddeld_cijfer_WNS` met *n* = `r py$N`. 
 <!-- ## /TEKSTBLOK: T-test.py -->
 <!-- ## OPENBLOK: T-test.py -->
 ```{python ttest}
@@ -245,10 +259,36 @@ stat, pval = stats.ttest_1samp(Gemiddeld_cijfer_WNS, popmean = 6.8)
 par = N - 1
 ```
 <!-- ## /CLOSEDBLOK: T-test.py -->
+
+<!-- ## TEKSTBLOK: betrouwbaarheidsintervaltekst.py -->
+Bereken het 95%-betrouwbaarheidsinterval van het gemiddelde handmatig.
+<!-- ## /TEKSTBLOK: betrouwbaarheidsintervaltekst.py -->
+
+<!-- ## OPENBLOK: betrouwbaarheidsinterval.py -->
+```{python betrouwbaarheidsinterval, echo = FALSE}
+# Bereken het gemiddelde
+Gemiddelde = np.mean(Gemiddeld_cijfer_WNS)
+# Sla het aantal observaties op
+N = np.size(Gemiddeld_cijfer_WNS)
+
+# Bereken de standaardafwijking van de dataset
+Standaardafwijking = np.sqrt(np.var(Gemiddeld_cijfer_WNS, ddof = 1))
+
+# Bereken de t-waarde behorend bij het aantal vrijheidsgraden in deze toets
+t = - stats.t.ppf(0.025, N - 1)
+
+# Bereken het 95%-betrouwbaarheidsinterval
+Ondergrens = Gemiddelde - t * Standaardafwijking / np.sqrt(N)
+Bovengrens = Gemiddelde + t * Standaardafwijking / np.sqrt(N)
+print(Ondergrens, Bovengrens)
+```
+<!-- ## /OPENBLOK: betrouwbaarheidsinterval.py -->
+
 <!-- ## TEKSTBLOK: T-test2.py -->
 * Vrijheidsgraden, *df* = *n* -1 = `r Round_and_format(py$N)`-1 = `r py$par`  
-* *t* ~`r py$par`~ = `r Round_and_format(py$stat)`, *p* < 0,05
+* *t* ~`r py$par`~ = `r Round_and_format(py$stat)`, *p* < 0,0001
 * p-waarde < 0,05, dus de H~0~ wordt verworpen[^9]
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95% van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het gemiddeld eindexamencijfer exacte vakken. In deze casus is het interval tussen `r Round_and_format(py$Ondergrens)` en `r Round_and_format(py$Bovengrens)`. Aangezien 6.8 niet in dit interval zit, verschilt het gemiddelde significant van 6.8.
 * Het gemiddelde van de steekproef is `r Round_and_format(py$mean)`  
 <!-- ## /TEKSTBLOK: T-test2.py -->
 
@@ -268,8 +308,9 @@ De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor
 [^3]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). The importance of the normality assumption in large public health data sets. Annu Rev Public Health, 23, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf
 [^4]: Laerd statistics (2018). [Testing for Normality using SPSS Statistics](https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php).  
 [^5]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).
-[^6]: De *Wilcoxon signed rank toets* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen dan wanneer de *one sample t-toets* uitgevoerd zou worden. 
-[^7]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html  
-[^8]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
-[^9]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
-[^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
+[^6]: Bereken de logaritme van de variabele en de inverse (1 gedeeld door de variabele), en bekijk of deze normaal verdeeld zijn. Als dat zo is, mag je die gebruiken voor de analyse.
+[^7]: De *Wilcoxon signed rank toets* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen dan wanneer de *one sample t-toets* uitgevoerd zou worden. 
+[^8]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html  
+[^9]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
+[^10]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
+[^11]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

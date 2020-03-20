@@ -51,6 +51,7 @@ Gebruikte_packages <- c(
     "plotly",
     "purrr",
     "rapport",
+    "rcompanion",
     "readxl",
     "reticulate",
     "RVAideMemoire",

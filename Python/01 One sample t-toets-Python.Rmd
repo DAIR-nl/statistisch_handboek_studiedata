@@ -199,19 +199,19 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst 
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef.De Lilliefors correctie is vereist als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn, wat meestal het geval is bij een steekproef. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
 
 <!-- ## TEKSTBLOK: Lilliefors-test1.py -->
-De standaard interpretatie van een statistische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`.
+De standaard interpretatie van een statistische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`. Gebruik bij deze toets het argument `pvalmethod = "table"` om een betrouwbare p-waarde te krijgen.
 <!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
 
 <!-- ## OPENBLOK: Lilliefors-test.py -->
 ```{python Kolmogorov-Smirnov Test, warning=FALSE}
 ## Kolmogorov-Smirnov test
 import statsmodels.stats.api
-print(statsmodels.stats.api.lilliefors(Gemiddeld_cijfer_WNS))
+print(statsmodels.stats.api.lilliefors(Gemiddeld_cijfer_WNS, pvalmethod = "table"))
 ```
 ```{python Kolmogorov-Smirnov Test2, warning=FALSE, include = FALSE}
 ## Kolmogorov-Smirnov test
 import statsmodels.stats.api
-lillieforstest = statsmodels.stats.api.lilliefors(Gemiddeld_cijfer_WNS)
+lillieforstest = statsmodels.stats.api.lilliefors(Gemiddeld_cijfer_WNS, pvalmethod = "table")
 ```
 <!-- ## /OPENBLOK: Lilliefors-test.py -->
 
@@ -265,7 +265,7 @@ Bereken het 95%-betrouwbaarheidsinterval van het gemiddelde handmatig.
 <!-- ## /TEKSTBLOK: betrouwbaarheidsintervaltekst.py -->
 
 <!-- ## OPENBLOK: betrouwbaarheidsinterval.py -->
-```{python betrouwbaarheidsinterval, echo = FALSE}
+```{python betrouwbaarheidsinterval}
 # Bereken het gemiddelde
 Gemiddelde = np.mean(Gemiddeld_cijfer_WNS)
 # Sla het aantal observaties op

@@ -65,7 +65,13 @@ De opleidingsdirecteur van de bacheloropleiding Kunstmatige Intelligentie merkt 
 
 Om *Cochran's Q toets* uit te voeren, moeten de data aan een aantal voorwaarden voldoen. Er dient een categorische afhankelijke variabele te zijn met twee categorieën zonder overlap. Elke observatie past slechts in een van beide categorieën. Daarnaast zijn er drie of meer herhaalde metingen van één groep of zijn er drie of meer gepaarde groepen. In beide gevallen zijn de observationele eenheden een willekeurige steekproef van de populatie.[^3]
 
-*Cochran's Q toets* is te gebruiken wanneer het product van het aantal observatie-eenheden en het aantal groepen groter of gelijk aan 24 is.[^4] Gebruik de exacte versie van *Cochran's Q toets* wanneer dit niet het geval is.[^5]
+*Cochran's Q toets* is te gebruiken wanneer het product van het aantal observatie-eenheden en het aantal herhaalde metingen groter of gelijk aan 24 is.[^4] Gebruik de exacte versie van *Cochran's Q toets* wanneer dit niet het geval is.[^5]
+
+# Post-hoc toetsen
+
+*Cochran's Q toets* toetst of er verschillen zijn tussen een percentage op drie of meer herhaalde metingen. Voer een post-hoc toets om te bepalen welke metingen van elkaar verschillen. Gebruik de *McNemar toets* of de exacte *McNemar toets* als post-hoc toets.[^6]
+
+Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. In deze toetspagina wordt de *Benjamini-Hochberg correctie* gebruikt. Deze correctie zorgt ervoor dat de proportie type I fouten (false discovery rate) berekend over alle toetsen gereduceerd wordt. Deze correctie is minder strict dan de *Bonferroni correctie* die ervoor zorgt dat de kans op ten minste één type I fout in alle toetsen gereduceerd wordt.[^7]<sup>,/<sup>[^8] Er zijn ook nog andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^9]
 
 # De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken1.R -->
@@ -83,8 +89,9 @@ tail(Herkansingen_kunstmatige_intelligentie)
 ```
 <!-- ## /OPENBLOK: Data-bekijken2.R -->
 
-<!-- ## TEKSTBLOK: Data-kruistabel1.R -->
 
+
+<!-- ## TEKSTBLOK: Data-kruistabel1.R -->
 Een kruistabel geeft weer hoeveel studenten wel of geen herkansingen hebben in de vier onderwijsperiodes. Maak de kruistabel met de functie `table()` met als argumenten de variabele `Herkansingen_kunstmatige_intelligentie$Herkansingen` die aangeeft of studenten wel of geen herkansing hebben en de variabele `Herkansingen_kunstmatige_intelligentie$Onderwijsperiode` die aangeeft in welke onderwijsperiode een observatie is gedaan. 
 <!-- ## /TEKSTBLOK: Data-kruistabel1.R -->
 
@@ -104,9 +111,36 @@ prop.table(Herkansingen_kruistabel, 2)
 ```
 <!-- ## /OPENBLOK: Data-kruistabel2.R -->
 
-De kruistabel en bijbehorende tabel met proporties laten zien dat het aantal studenten dat een herkansing doet in onderwijsperiode 1 relatief laag is en relatief hoog is in onderwijsperiode 2. Onderwijsperiode 3 en 4 zitten qua aantal herkansende studenten er tussenin.  
+De kruistabel en bijbehorende tabel met proporties laten zien dat het aantal studenten dat een herkansing doet in onderwijsperiode 1 relatief laag is en relatief hoog is in onderwijsperiode 2. Onderwijsperiode 3 en 4 zitten qua aantal herkansende studenten er tussenin.
 
 # Uitvoering
+
+## Assumptie steekproefgrootte
+
+Een assumptie van *Cochran's Q toets* is dat het product van het aantal observatie-eenheden en het aantal herhaalde metingen groter of gelijk is aan 24. In deze casus gaat het om het product van het aantal studenten en het aantal onderwijsperiode. Toets deze assumpties door dit product te berekenen.
+
+<!-- ## OPENBLOK: Data-bekijken-2.R -->
+```{r data bekijken 2}
+# Bereken het aantal studenten
+N <- length(unique(Herkansingen_kunstmatige_intelligentie$Studentnummer))
+
+# Bereken het aantal onderwijsperiodes
+k <- length(unique(Herkansingen_kunstmatige_intelligentie$Onderwijsperiode))
+
+# Bereken het product van beide
+Product <- N * k
+
+# Print het resultaat
+print(Product)
+```
+<!-- ## /OPENBLOK: Data-bekijken-2.R -->
+
+<!-- ## TEKSTBLOK: McNemar-toets1.R -->
+Het product van het aantal studenten en het aantal onderwijsperiodes is `r Product`. Aangezien dit aantal groter dan 24 is, is aan de assumptie wat betreft de steekproefgrootte voldaan.
+<!-- ## /TEKSTBLOK: McNemar-toets1.R -->
+
+
+
 
 ## Cochran's Q toets
 <!-- ## TEKSTBLOK: McNemar-toets1.R -->
@@ -114,126 +148,109 @@ Voer *Cochran's Q toets* uit om te onderzoeken of er verschillen zijn tussen de 
 <!-- ## /TEKSTBLOK: McNemar-toets1.R -->
 
 <!-- ## OPENBLOK: McNemar-toets2.R -->
-```{r mcnemar}
+```{r cochran}
 CochranQTest(Herkansingen ~ Onderwijsperiode | Studentnummer,
               data = Herkansingen_kunstmatige_intelligentie)
 ```
 <!-- ## /OPENBLOK: McNemar-toets2.R -->
 
 <!-- ## CLOSEDBLOK: McNemar-toets3.R -->
-```{r mcnemar object, include=FALSE, echo=TRUE}
-mcnemar <- mcnemar.test(FOS_studenten_confusiematrix, correct = FALSE)
-vChi2 <- Round_and_format(mcnemar$statistic)
-vdf <- Round_and_format(mcnemar$parameter)
-vp <- Round_and_format(mcnemar$p.value)
+```{r cochran object, include=FALSE, echo=TRUE}
+cochran <- CochranQTest(Herkansingen ~ Onderwijsperiode | Studentnummer,
+              data = Herkansingen_kunstmatige_intelligentie)
+
+vQ <- Round_and_format(cochran$statistic)
+vdf <- cochran$parameter
+
 ```
 <!-- ## /CLOSEDBLOK: McNemar-toets3.R -->
 
-Bereken het verschil proportie en bijbehorend betrouwbaarheidsinterval als effectmaat.
-
-<!-- ## OPENBLOK: McNemar-toets5.R -->
-```{r verschil proportie}
-# Bereken de proporties FOS voor juni en december
-Proportie_FOS_juni <- sum(FOS_studenten_confusiematrix[,"ja"])/sum(FOS_studenten_confusiematrix)
-Proportie_FOS_december <- sum(FOS_studenten_confusiematrix["ja",])/sum(FOS_studenten_confusiematrix)
-
-# Bereken het verschil in proporties
-Verschil_proporties <- Proportie_FOS_juni - Proportie_FOS_december
-
-# Bereken de standaardafwijking
-Verschil_proporties_standaardafwijking <- sqrt((FOS_studenten_confusiematrix["nee","ja"] + FOS_studenten_confusiematrix["ja","nee"]) / sum(FOS_studenten_confusiematrix)^2 )  
-
-# Bereken het 95%-betrouwbaarheidsinterval
-Betrouwbaarheidsinterval <- c(Verschil_proporties - 1.96 * Verschil_proporties_standaardafwijking,
-                              Verschil_proporties + 1.96 * Verschil_proporties_standaardafwijking)
-# Print het interval
-paste("Het verschil in proporties is", Verschil_proporties,"met bijbehorend 95%-betrouwbaarheidsinterval van",
-      Betrouwbaarheidsinterval[1],"tot", Betrouwbaarheidsinterval[2])
-
-```
-<!-- ## /OPENBLOK: McNemar-toets5.R -->
-
-
 <!-- ## TEKSTBLOK: McNemar-toets5.R -->
-* $\chi^2$~`r vdf`~ = `r vChi2`, *p* < 0,0001  
-* p-waarde < 0,05, dus de H~0~ wordt verworpen.[^6]
-
+* Q (`r vdf`, *N* = `r N`) = `r vQ`, *p* < 0,0001
+* Aantal vrijheidsgraden is gelijk aan aantal herhaalde metingen minus één, in deze casus `r k` - 1 = `r vdf`
+* p-waarde < 0,05, dus de H~0~ wordt verworpen.[^10]
+* Er is een significant verschil tussen de vier onderwijsperiode wat betreft het percentage studenten met een or meerdere herkansingen
 <!-- ## /TEKSTBLOK: McNemar-toets5.R -->
 
 
 ## Post-hoc toets
 
+<!-- ## TEKSTBLOK: posthoc1.R -->
+Voer post-hoc toetsen uit om te onderzoeken tussen welke onderwijsperiodes er verschillen zijn in het percentage studenten met herkansingen. Gebruik de *McNemar toets* of exacte *McNemar toets* als post-hoc toets. De exacte versie van de *McNemar toets* is nuttig om te gebruiken wanneer het aantal observaties in de niet-diagonale elementen van de confusiematrix kleiner dan 11 is. Omdat er bij post-hoc toetsen vaak meerdere vergelijkingen gemaakt worden, is het tijdrovend om voor elke idnividuele vergelijking de confusiematrix te inspecteren. Voer daarom de *McNemar toets* en de exacte *McNemar toets* beide uit en vergelijk de significantie op beide toetsen. Wanneer een vergelijking op de ene toets significant is en op de andere toets niet significant, bepaal dan aan de hand van de confusiematrix welk toetsresultaat gekozen moet worden.
+
+Voer de post-hoc toetsen uit met de functie `pairwiseMcnemar()` met als eerste argument `Herkansingen ~ Onderwijsperiode | Studentnummer` waarin `Herkansingen` de afhankelijke variabele is, `Onderwijsperiode` de variabele is die de verschillende groepen aangeeft en `Studentnummer` de variabele is die de observatie-eenheden aangeeft. Het tweede argument is de dataset `data = Herkansingen_kunstmatige_intelligentie` en het vierde argument `method = "BH"` geeft de correctie voor meerdere testen weer (Benjamini-Hochberg (BH) in dit geval). Het derde argument `test = "mcnemar"` geeft aan dat de *McNemar toets* gebruikt moet worden; gebruik het argument `test = "exact"` om een exacte *McNemar toets* uit te voeren. Het significantieniveau is 0,05 voor beide toetsen.[^10]
+<!-- ## /TEKSTBLOK: posthoc1.R -->
+
+
+<!-- ## OPENBLOK: posthoc1.R -->
+```{r mcnemar}
+# Voer post-hoc toetsen met de McNemar toets uit
+pairwiseMcnemar(Herkansingen ~ Onderwijsperiode | Studentnummer,
+                data   = Herkansingen_kunstmatige_intelligentie,
+                test   = "mcnemar",
+                method = "BH")
+
+# Voer post-hoc toetsen met de exacte McNemar toets uit
+pairwiseMcnemar(Herkansingen ~ Onderwijsperiode | Studentnummer,
+                data   = Herkansingen_kunstmatige_intelligentie,
+                test   = "exact",
+                method = "BH")
+
+```
+<!-- ## /OPENBLOK: posthoc1.R -->
+
+<!-- ## CLOSEDBLOK: posthoc1.R -->
+```{r dd, include=FALSE, echo=TRUE}
+posthoc <- pairwiseMcnemar(Herkansingen ~ Onderwijsperiode | Studentnummer,
+                data   = Herkansingen_kunstmatige_intelligentie,
+                test   = "mcnemar",
+                method = "BH")
+
+
+```
+<!-- ## /CLOSEDBLOK: posthoc1.R -->
+
+Er zijn zes vergelijkingen tussen de onderwijsperiodes getoets bij deze post-hoc toetsen. De significantie van de zes vergelijkingen verschilt niet tussen de *McNemar toets* en de exacte *McNemar toets*. Beide toetsen kunnen gerapporteerd worden, in deze toetspagina wordt de *McNemar toets* gerapporteerd.
+
+<!-- ## TEKSTBLOK: posthoc1.R -->
+* Er is een significant verschil in het percentage studenten met herkansingen gevonden tussen onderwijsperiode 1 en onderwijsperiode 2 (*p* = `r Round_and_format(posthoc$Pairwise$p.adjust[1])`).
+* Er zijn geen significante verschillen gevonden bij de overige vergelijkingen tussen onderwijsperiodes
+<!-- ## TEKSTBLOK: posthoc1.R -->
+
+
 
 # Rapportage
+<!-- ## CLOSEDBLOK: McNemar-toets5.R -->
+```{r proptabel, include=FALSE, echo=TRUE}
+## Maak een kruistabel
+Herkansingen_kruistabel <- table(Herkansingen_kunstmatige_intelligentie$Herkansingen, Herkansingen_kunstmatige_intelligentie$Onderwijsperiode)
+
+## Print een tabel met proporties, tweede argument 2 zorgt ervoor dat de 
+## proporties per kolom berekend worden
+tabel <- 100 * prop.table(Herkansingen_kruistabel, 2)
+```
+<!-- ## /CLOSEDBLOK: McNemar-toets5.R -->
 
 <!-- ## TEKSTBLOK: McNemar-toets5.R -->
-De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. De interventie heeft als doel het aantal studenten met een functiebeperking dat een beroep doet op de FOS te verhogen. De resultaten laten een significant verschil zien tussen de percentages voor en na de interventie ($\chi^2$~`r vdf`~ = `r vChi2`, *p* <0,0001), wat betekent dat de nulhypothese verworpen kan worden. De kruistabel (Tabel 2) illustreert dat het percentage studenten dat een beroep doet op de FOS is toegenomen na de interventie; de *McNemar toets* toont aan dat deze toename significant is. 
+*Cochran's Q toets* is uitgevoerd om te onderzoeken of er verschillen zijn tussen de vier onderwijsperiodes wat betreft het percentage eerstejaarsstudenten van de bachelor kunstmatige intelligentie dat een of meerdere herkansingen heeft. Het percentage studenten dat een of meerdere herkansingen heeft is per onderwijsperiode weergegeven in Tabel 1. *Cochran's Q toets* toont aan dat het percentage studenten met een of meerdere herkansingen significant verschillend is voor de vier onderwijsperiodes, Q (`r vdf`, *N* = `r N`) = `r vQ`, *p* < 0,0001. Om te bepalen tussen welke onderwijsperiodes deze percentages verschillen, is de *McNemar toets* als post-hoc toets uitgevoerd met een Benjamini-Hochberg correctie voor meerdere testen. Uit de post-hoc toetsen blijkt dat er alleen een significant verschil is tussen onderwijsperiode 1 (`r tabel[1,1]`% studenten met herkansingen) en onderwijsperiode 2 (`r tabel[1,2]`% studenten met herkansingen) met als gecorrigeerde p-waarde `r Round_and_format(posthoc$Pairwise$p.adjust[1])`. Er zijn dus significant meer studenten met een of meerdere herkansingen in periode 2 in vergelijking tot periode 1, maar verder zijn er geen verschillen tussen de onderwijsperiodes.
+<!-- ## /TEKSTBLOK: McNemar-toets5.R -->
 
-|                      | December | Juni |
-| -------------------- | -------------| ------------| 
-| **FOS** | `r FOS_studenten_kruistabel["ja","december"]`    | `r FOS_studenten_kruistabel["ja","juni"]`     |
-| **geen FOS**  | `r FOS_studenten_kruistabel["nee","december"]`      | `r FOS_studenten_kruistabel["nee","juni"]`     |
-*Tabel 2. Kruistabel van het aantal studenten dat een beroep doet op de FOS in december en juni*
+
+
+|                      | Periode 1          | Periode 2          | Periode 3          | Periode 4 |
+|-------------| -------------------- | -------------| ------------|-------------| ------------| 
+|Herkansingen (%) | `r tabel[1,1]` | `r tabel[1,2]` | `r tabel[1,3]` | `r tabel[1,4]` |
+|Geen herkansingen (%) | `r tabel[2,1]` | `r tabel[2,2]` | `r tabel[2,3]` | `r tabel[2,4]` |
+*Tabel 1. Het percentage *
+<!-- ## /TEKSTBLOK: rapportage.R -->
+
+
+
+De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. De interventie heeft als doel het aantal studenten met een functiebeperking dat een beroep doet op de FOS te verhogen. De resultaten laten een significant verschil zien tussen de percentages voor en na de interventie ( *p* <0,0001), wat betekent dat de nulhypothese verworpen kan worden. De kruistabel (Tabel 2) illustreert dat het percentage studenten dat een beroep doet op de FOS is toegenomen na de interventie; de *McNemar toets* toont aan dat deze toename significant is. 
+
 
 <!-- ## /TEKSTBLOK: McNemar-toets5.R -->
 
-# Exacte McNemar toets
-
-## Uitvoering
-
-<!-- ## TEKSTBLOK: exMcNemar-toets1.R -->
-Bij een lage hoeveelheid observaties (minder dan 11) in de niet-diagonale elementen van de confusiematrix is de exacte versie van de *McNemar toets* nuttig om te gebruiken. Om deze toets te illustreren bij deze casus wordt een confusiematrix `EMN_confusiematrix` ingeladen waarbij de niet-diagonale elementen minder dan 11 observaties bevatten. Voer de exacte versie van de *McNemar toets* uit om te onderzoeken of er een verschil is tussen het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. 
-<!-- ## /TEKSTBLOK: exMcNemar-toets1.R -->
-
-<!-- ## OPENBLOK: exMcNemar-toets2.R -->
-```{r EMNconfusiematrix}
-print(EMN_confusiematrix)
-```
-<!-- ## /OPENBLOK: exMcNemar-toets2.R -->
-
-Print de bijbehorende kruistabel en de proporties om het aantal studenten dat wel of niet een beroep op de FOS doet te laten zien voor en na de interventie.
-<!-- ## OPENBLOK: exMcNemar-toets3.R -->
-```{r EMNkruistabel}
-# Print de kruistabel
-print(EMN_kruistabel)
-# Print een tabel met proporties, tweede argument 2 zorgt ervoor dat de 
-# proporties per kolom berekend worden
-prop.table(EMN_kruistabel, 2)
-```
-<!-- ## /OPENBLOK: exMcNemar-toets3.R -->
-Het aantal studenten dat een beroep op de FOS doet is in juni iets hoger.
-
-<!-- ## TEKSTBLOK: exMcNemar-toets4.R -->
-Gebruik de functie `mcnemar.exact()` met als eerste argument de confusiematrix `EMN_confusiematrix` en als tweede argument `conf.level = 0.95` om een significantieniveau van 0,05 te gebruiken.
-<!-- ## /TEKSTBLOK: exMcNemar-toets4.R -->
-
-<!-- ## OPENBLOK: exMcNemar-toets5.R -->
-```{r exmcnemar, warning=FALSE,message=FALSE}
-library(exact2x2)
-mcnemar.exact(EMN_confusiematrix, conf.level = 0.95)
-```
-<!-- ## /OPENBLOK: exMcNemar-toets5.R -->
-
-<!-- ## TEKSTBLOK: exMcNemar-toets6.R -->
-* p-waarde is `r mcnemar.exact(EMN_confusiematrix, conf.level = 0.95)$p.value`, dus de H~0~ kan niet worden verworpen.[^6]
-
-<!-- ## /TEKSTBLOK: exMcNemar-toets6.R -->
-
-## Rapportage
-
-<!-- ## TEKSTBLOK: exMcNemar-toets7.R -->
-De exacte versie van de *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. De interventie heeft als doel het aantal studenten met een functiebeperking dat een beroep doet op de FOS te verhogen. De resultaten laten geen significant verschil zien tussen de percentages voor en na de interventie (*p* = `r mcnemar.exact(EMN_confusiematrix, conf.level = 0.95)$p.value`), dus de nulhypothese kan niet worden verworpen. De kruistabel (Tabel 3) illustreert dat het aantal studenten dat een beroep doet op de FOS iets hoger is in juni. Dit verschil is echter niet significant.
-
-
-|                      | December | Juni |
-| -------------------- | -------------| ------------| 
-| **FOS** | `r EMN_kruistabel["FOS","December"]`    | `r EMN_kruistabel["FOS","Juni"]`      |
-| **geen FOS**  | `r EMN_kruistabel["geen FOS","December"]`       | `r EMN_kruistabel["geen FOS","Juni"]`      |
-*Tabel 3. Kruistabel van het aantal studenten dat een beroep doet op de FOS in december en juni*
-
-
-
-<!-- ## /TEKSTBLOK: exMcNemar-toets7.R -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
@@ -245,13 +262,10 @@ De exacte versie van de *McNemar toets* is uitgevoerd om uit te vinden of er een
 [^3]: Laerd statistics (2018). *Cochran's Q test using SPSS Statistics*. [Laerd statistics](https://statistics.laerd.com/spss-tutorials/cochrans-q-test-in-spss-statistics.php#assumption4) 
 [^4]: Statistics How To (18 juli 2016). *Cochran’s Q Test*. [Statistics How to](https://www.statisticshowto.datasciencecentral.com/cochrans-q-test/).
 [^5]: Er is geen package kunnen vinden om de exacte versie van *Cochran's Q toets* uit te voeren in R. De exacte versie is echter wel uit te voeren in SPSS.
+[^6]: De exacte McNemar toets wordt gebruikt wanneer het aantal observaties in de niet-diagonale elementen van de confusiematrix kleiner dan 11 is. Voor meer informatie, zie de toetspagina van de [McNemar toets](12 McNemar toets R.Rmd).
+[^7]: Statistics How To (29 oktober 2017). *False Discovery Rate: Simple Definition, Adjusting for FDR*. [Statistics How to](https://www.statisticshowto.datasciencecentral.com/false-discovery-rate/). 
+[^8]: Statistics How To (12 oktober 2015). *Benjamini-Hochberg Procedure*. [Statistics How to](https://www.statisticshowto.datasciencecentral.com/benjamini-hochberg-procedure/). 
+[^9]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
+[^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten. 
 
 
-
-
-
-[^2]: Van Geloven, N., & Holman, R., (4 juni 2014). *McNemar toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/McNemar_toets). 
-[^3]: Laerd statistics (2018). *McNemar's test using SPSS Statistics*. [Laerd statistics](https://statistics.laerd.com/spss-tutorials/mcnemars-test-using-spss-statistics.php) 
-[^4]: Agresti, A. (2003). *Categorical data analysis*. Vol. 482, John Wiley & Sons.
-[^5]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
-[^6]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten. 

@@ -59,6 +59,8 @@ Gebruik de *Chi-kwadraat toets* of de *Fisher's exact toets* om te toetsen of er
 <div id = "casus">
 De studentendecaan van een hogeschool vraagt zich af of studenten met een functiebeperking sinds het invoeren van het leenstelsel meer of minder uitvallen.
 
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+
 *H~0~*: Onder de studenten met een functiebeperking is het percentage uitval na de invoering van het leenstelsel gelijk gebleven.
 
 *H~A~*: Onder de studenten met een functiebeperking is het percentage uitval na de invoering van het leenstelsel veranderd.

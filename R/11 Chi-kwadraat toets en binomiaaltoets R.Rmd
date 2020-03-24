@@ -51,7 +51,9 @@ Gebruik de *Chi-kwadraat toets* bij het vergelijken van een geobserveerd percent
 
 # Onderwijscasus
 <div id = "casus">
-De controller van een Universiteit is geïnteresseerd in de instroom van studenten met een hbo vooropleiding. Zij wil weten of haar Universiteit relatief veel studenten met een vooropleiding in het hbo heeft in vergelijking met het landelijke gemiddelde. Op de website van de VSNU vindt ze dat studenten met een hbo vooropleiding in het hbo 11,13% uitmaken van de totale instroom voor Bachelors en Masters in het wetenschappelijk onderwijs (wo) in 2018.[^2] Ze wil weten of er op haar instelling naar verhouiding meer hbo-studenten zijn dan het landelijk gemiddelde. 
+De controller van een Universiteit is geïnteresseerd in de instroom van studenten met een hbo vooropleiding. Zij wil weten of haar Universiteit relatief veel studenten met een vooropleiding in het hbo heeft in vergelijking met het landelijke gemiddelde. Op de website van de VSNU vindt ze dat studenten met een hbo vooropleiding in het hbo 11,13% uitmaken van de totale instroom voor Bachelors en Masters in het wetenschappelijk onderwijs (wo) in 2018.[^2] Ze wil weten of er op haar instelling naar verhouiding meer hbo-studenten zijn dan het landelijk gemiddelde.
+
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
 
 H~0~: Het percentage hbo-studenten is gelijk aan het landelijk percentage van 11,13%. 
 

@@ -50,6 +50,8 @@ Gebruik de *tekentoets* om de mediaan van een steekproef te vergelijken met een 
 <div id ="casus">
 De opleidingsdirecteur van de school voor Journalistiek is benieuwd wat alumni verdienen ten opzichte van de gemiddelde Nederlander. Daarom wil zij de jaarinkomens van oud-studenten vergelijken met het modale inkomen van €36.000.[^2] Op deze manier vergaart zij meer informatie over het succes op de arbeidsmarkt na de opleiding Journalistiek.
 
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+
 *H~0~*: De mediaan van het jaarinkomen van alumni Journalistiek is gelijk aan €36.000, het modale jaarinkomen in Nederland.
 
 *H~A~*: De mediaan van het jaarinkomen van alumni Journalistiek is niet gelijk aan €36.000, het modale jaarinkomen in Nederland. 
@@ -107,7 +109,7 @@ Het gemiddelde jaarinkomen van de alumni is `r paste("€", vMean, sep="")` met 
 De *tekentoets* is een alternatief voor de *one-sample t-toets* wanneer de data geen normale verdeling volgt. Hoewel het visueel inspecteren en testen van normaliteit [^3] niet vereist is, is het nuttig om de verdeling van de data te visualiseren en te vergelijken met de normaalverdeling.
 
 ### Histogram
-Geef de verdeling van de data weer in een histogram.
+Geef de verdeling van de data weer in een histogram. Focus bij het analyseren van een histogram op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.[^6]<sup>, </sup>[^7]
 <!-- ## OPENBLOK: Histogram.R -->
 ```{r histogram, warning=FALSE, message=FALSE}
 ## Histogram met ggplot2
@@ -130,7 +132,7 @@ labs(title = "Jaarinkomen alumni Journalistiek",
 ```
 <!-- ## /OPENBLOK: Histogram.R -->
 
-De histogram laat zien dat de verdeling een langere staart aan de rechterkant heeft en dus enigszins afwijkt van de (symmetrische) normaalverdeling.
+De verdeling heeft één top en geen uitbijters. De histogram laat echter ook zien dat de verdeling een langere staart aan de rechterkant heeft en dus enigszins afwijkt van de (symmetrische) normaalverdeling.
 
 ## Toetsen van normaliteit
 Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
@@ -196,4 +198,7 @@ De *tekentoets* is uitgevoerd om te toetsen of het mediane inkomen van alumni va
 [^2]: Bruto modaal inkomen 2019, Centraal Planbureau. 
 [^3]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).  
 [^4]: Wikipedia (5 februari 2020). *Sign test*. [https://en.wikipedia.org/wiki/Sign_test](https://en.wikipedia.org/wiki/Sign_test).
-[^5]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten. 
+[^5]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
+[^6]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
+[^7]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport.
+

@@ -77,7 +77,7 @@ Controleer de assumptie van normaliteit met de volgende stappen:
 1. Controleer de data visueel met een histogram, een Q-Q plot of een boxplot.  
 2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^3]<sup>, </sup>[^4]  
 
-Als blijkt dat de data niet normaal verdeeld zijn, transformeer dan de data eventueel en bepaal daarna of deze wel normaal verdeeld is [^5] of gebruik de *Wilcoxon Signed Rank Test*.[^6]<sup>, </sup>[^7]
+Als blijkt dat de data niet normaal verdeeld zijn, transformeer dan de data eventueel en bepaal daarna of deze wel normaal verdeeld is [^5] of gebruik de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html).[^6]<sup>, </sup>[^7]
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
@@ -192,7 +192,7 @@ Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als 
 
 <!-- ## /OPENBLOK: QQplot-inladen.R -->
 
-Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
+Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data bij benadering normaal verdeeld zijn.
 
 <!-- ## OPENBLOK: QQplot-1.R -->
 ```{r qqplot-1}
@@ -354,7 +354,7 @@ Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na deel
 [^4]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. [Testing for Normality using SPSS Statistics](https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php).  
 [^5]: Bereken de logaritme van de variabele en de inverse (1 gedeeld door de variabele), en bekijk of deze normaal verdeeld zijn. Als dat zo is, mag je die gebruiken voor de analyse.
 [^6]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).  
-[^7]: De *Wilcoxon signed rank toets* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen dan wanneer de *one sample t-toets* uitgevoerd zou worden.  
+[^7]: De [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html) maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html) minder onderscheidend vermogen dan wanneer de *one sample t-toets* uitgevoerd zou worden.  
 [^8]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 [^9]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport.
 [^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houd hierbij rekening met type I en type II fouten.

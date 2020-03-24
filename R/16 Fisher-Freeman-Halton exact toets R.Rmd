@@ -51,6 +51,7 @@ Gebruik de *Chi-kwadraat toets*[^1] of de *Fisher-Freeman-Halton exact toets*[^2
 <div id = "casus">
 De opleidingsdirecteur van de Bachelor Antropologie vraagt zich af wat de invloed is van de instroom van studenten met een vooropleiding in het buitenland op het behalen van een positief BSA. Krijgen studenten met een vooropleiding uit bepaalde landen vaker een positief BSA dan studenten met een vooropleiding uit andere landen? Op basis van deze analyse kan de opleidingsdirecteur overwegen om bij de inrichting van het tutoraat rekening te houden met de vooropleidingen van studenten.
 
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
 
 H~0~: De verhouding wel/geen positief BSA is onder de studenten van de Bachelor Antropologie hetzelfde voor studenten ongeacht het land van de hoogste vooropleiding.
 

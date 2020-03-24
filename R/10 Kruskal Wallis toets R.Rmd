@@ -52,7 +52,9 @@ Gebruik de *Kruskal Wallis toets* om te toetsen of 2 of meer groepen significant
 
 # Onderwijscasus
 <div id="casus">
-De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht is geïnteresseerd in de afstudeersnelheid van haar studenten. Zij vraagt zich af of er een verschil zit in het type vooropleiding die de studenten hebben gehaald en de hoeveel studiepunten die de studenten behalen in het eerste jaar. Zij kijkt naar de vier meest gangbare vooropleidingen die de studenten doorlopen voordat ze met de Master Arbeidsrecht beginnen: de Bachelors Fiscaal Recht, Notarieel Recht en Rechtsgeleerdheid en de Premaster.  
+De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht is geïnteresseerd in de afstudeersnelheid van haar studenten. Zij vraagt zich af of er een verschil zit in het type vooropleiding die de studenten hebben gehaald en de hoeveel studiepunten die de studenten behalen in het eerste jaar. Zij kijkt naar de vier meest gangbare vooropleidingen die de studenten doorlopen voordat ze met de Master Arbeidsrecht beginnen: de Bachelors Fiscaal Recht, Notarieel Recht en Rechtsgeleerdheid en de Premaster. 
+
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
 
 *H~0~*: De verdeling van het aantal behaalde studiepunten in het eerste jaar van de master Arbeidsrecht is gelijk voor studenten met als vooropleiding Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster.
 
@@ -162,7 +164,7 @@ vQ3_PM <- Round_and_format(x[3,5])
 <!-- ## /TEKSTBLOK: Data-beschrijven.R-->
 
 ### Boxplot
-De box geeft de middelste 50% van het aantal studiepunten weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters. Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
+De box geeft de middelste 50% van het aantal studiepunten weer. De zwarte lijn binnen de box is de mediaan. In de staarten of snorreharen zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters. Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
 
 <!-- ## OPENBLOK: Boxplot.R -->
 ``` {r Boxplot}

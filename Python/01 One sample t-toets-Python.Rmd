@@ -78,7 +78,7 @@ Controleer de assumptie van normaliteit met de volgende stappen:
 
 Als blijkt dat de data niet normaal verdeeld zijn, transformeer dan de data eventueel en bepaal daarna of deze wel normaal verdeeld zijn.[^6]
 
-Als er geen sprake is van normaliteit, gebruik de *Wilcoxon Signed Rank Test*.[^7]<sup>, </sup>[^8]
+Als er geen sprake is van normaliteit, gebruik de [Wilcoxon Signed Rank Test](07-Wilcoxon-signed-rank-toets-R.html).[^7]<sup>, </sup>[^8]
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->

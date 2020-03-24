@@ -54,6 +54,8 @@ Gebruik de *McNemar toets* om te toetsen of er verschillen zijn op een binaire[^
 <div id = "casus">
 De decaan van een hogeschool merkt dat weinig studenten met een functiebeperking een beroep doen op de Financiële Ondersteuning Studenten (FOS). Ze besluit daarom in december een interventie te doen en stuurt al deze studenten een e-mail over de FOS. Een half jaar later maakt ze de balans op: doen studenten met een functiebeperking vaker een beroep op de FOS na de interventie?
 
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+
 *H~0~*: Het percentage studenten dat gebruik maakt van de FOS is gelijk aan elkaar voor en na de interventie.
 
 *H~A~*: Het percentage studenten dat gebruik maakt van de FOS is verschillend van elkaar voor en na de interventie.

@@ -23,7 +23,7 @@ mu <- 6.45
 sigma <- 1.2
 Cijfers_2011_n30 <- rnorm(30, mu, sigma)
 Cijfers_2011_n30 <- Cijfers_2011_n30[Cijfers_2011_n30 <= 10 & Cijfers_2011_n30 >= 1]
-Cijfers_2011_n30 <- sapply(Cijfers_2011, round, 3)
+Cijfers_2011_n30 <- sapply(Cijfers_2011_n30, round, 3)
 
 Cijfers <- c(Cijfers_2010, Cijfers_2011)
 Cohort <- as.character(c(replicate(180, 2010), replicate(160, 2011)))

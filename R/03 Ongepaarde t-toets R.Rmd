@@ -58,6 +58,8 @@ Gebruik de *ongepaarde t-toets* om de gemiddelden van twee onafhankelijke groepe
 <div id = "casus">
 Vanaf 2011 heeft de opleiding Taalwetenschap een Bindend Studieadvies (BSA) die de selectiviteit van het eerste jaar moet vergroten. De studieadviseur vraagt zich af of het gemiddelde cijfer van de opleiding Taalwetenschap op 1 februari, na invoering van het BSA, veranderd is. De data is beschikbaar voor het cohort gestart in 2010 en voor het cohort gestart in 2011.
 
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+
 *H~0~*: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taalwetenschap is niet veranderd na de invoer van het BSA, µ~0~ = µ~1~  
 
 *H~A~*: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taalwetenschap is veranderd na de invoer van het BSA, µ~0~ ≠ µ~1~
@@ -75,7 +77,7 @@ Controleer de assumptie van normaliteit met de volgende stappen:
 
 Als blijkt dat de data niet normaal verdeeld zijn, transformeer[^5] dan de data eventueel en bepaal daarna of deze wel normaal verdeeld zijn.
 
-Als er geen sprake is van normaliteit gebruik de *Mann-Whitney U toets*, ook bekend als de *Wilcoxon rank-sum toets*.[^6]<sup>, </sup>[^7]  
+Als er geen sprake is van normaliteit gebruik de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html), ook bekend als de *Wilcoxon rank-sum toets*.[^6]<sup>, </sup>[^7]  
 
 ## Homogeniteit van varianties 
 Toets met de *Levene’s Test (for equality of variance)* of de spreiding van iedere groep globaal hetzelfde is. Bij een *p* < 0,05 is de variantie van de groepen statistisch significant verschillend.[^8] Als uit de *Levene's test* blijkt dat de steekproeven verschillen in variantie, voer dan de *ongepaarde t-toets* met ongelijke varianties uit.
@@ -222,7 +224,7 @@ qqline(Cijfers_2011)
 Voor beide Q-Q plots liggen de meeste datapunten op of vlakbij de lijn. Hoewel er bij de uiteinden van de verdeling wat afwijkingen zijn, duidt deze grafiek op een goede benadering van de normaalverdeling voor beide cohorten.
 
 ### Boxplot
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten of snorreharen zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
 
 <!-- ## OPENBLOK: Boxplot.R -->
 ```{r boxplot}
@@ -231,7 +233,7 @@ boxplot(Cijfers ~ Cohort, Cijfers_gem,
 ```
 <!-- ## /OPENBLOK: Boxplot.R -->
 
-De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer voor de BSA en na de BSA. De boxplotten en de staarten lijken symmetrisch, wat een teken kan zijn van normaal verdeelde data. Het cohort van 2011 heeft een aantal mogelijke uitbijters.[^10] 
+De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer voor de BSA en na de BSA. De boxplotten en de staarten lijken symmetrisch, wat een teken is van bij benadering normaal verdeelde data. Het cohort van 2011 heeft een aantal mogelijke uitbijters.[^10] 
 
 ## Toetsen van normaliteit
 Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
@@ -404,7 +406,7 @@ Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentam
 [^4]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).
 [^5]: Bereken de logaritme van de variabele en de inverse (1 gedeeld door de variabele), en bekijk of deze normaal verdeeld zijn. Als dat zo is, mag je die gebruiken voor de analyse.
 [^6]: Van Geloven, N. (13 maart 2018). *Mann-Whitney U toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
-[^7]: De *Mann-Whitney U toets* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Mann-Whitney U toets* minder onderscheidend vermogen dan wanneer de *ongepaarde t-toets* uitgevoerd zou worden. 
+[^7]: De [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) minder onderscheidend vermogen dan wanneer de *ongepaarde t-toets* uitgevoerd zou worden. 
 [^8]: Van Geloven, N. (25 mei 2016). *One-way ANOVA* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/One-way_ANOVA).
 [^9]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 [^10]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 

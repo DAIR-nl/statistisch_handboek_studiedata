@@ -61,6 +61,8 @@ Gebruik de *one-way ANOVA* bij het toetsen of de gemiddeldes van drie of meer on
 <div id = "casus">
 Om de wervingsactiviteiten beter af te stemmen op de aankomende studenten, wil het hoofd van de afdeling Communicatie weten wat de reistijd is van studenten van verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. 
 
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+
 *H~0~*: De gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar: µ~1~ = µ~2~ = µ~3~   
 
 *H~A~*: Voor tenminste één opleiding is de gemiddelde reistijd niet gelijk aan de gemiddelde reistijd van studenten voor andere opleidingen, bijvoorbeeld: µ~1~ ≠ µ~2~ = µ~3~ 
@@ -190,9 +192,12 @@ vN_GSC  <- Round_and_format(length(Reistijd_GSC))
 <!-- ## /TEKSTBLOK: Datatekst-beschrijven.R -->
 
 ## Visuele inspectie van normaliteit
-Geef de verdeling van de data visueel weer met een histogram, Q-Q plot of boxplot.
+Geef de verdeling van de data visueel weer met een histogram, Q-Q plot en boxplot.
 
 ### Histogram
+
+Focus bij het analyseren van een histogram op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.[^16]<sup>, </sup>[^17]
+
 <!-- ## OPENBLOK: Histogram.R -->
 ```{r histogram}
 ## Histogram met ggplot
@@ -211,7 +216,7 @@ ggplot(Reistijd_per_opleiding,
 ```
 <!-- ## /OPENBLOK: Histogram.R -->
 
-De opleidingen Geschiedenis en Arabische taal en Cultuur zijn niet geheel symmetrisch, maar tonen geen grote afwijkingen van een normale verdeling. Filosofie heeft een lagere frequentie bij een reistijd van 40 minuten, wat kan duiden op niet normaal verdeelde data. 
+De verdelingen van de opleidingen Filosofie en Geschiedenis lijken twee toppen te hebben. Alle drie de opleidingen hebben een niet geheel symmetrische verdeling, maar vertonen ook geen uitbijters. De verdeling van de opleiding Arabische taal en Cultuur is bij benadering normaal; voor de opleidingen Filosofie en Geschiedenis zijn de histogrammen niet overtuigend genoeg om een bij benadering normale verdeling aan te nemen.
 
 ### Q-Q plot
 <!-- ## TEKSTBLOK: QQplot.R-->
@@ -228,6 +233,7 @@ qqnorm(
  main = "Normaal Q-Q plot van reistijd Arabische Taal en Cultuur",
  ylab = "Kwantielen in data",
  xlab = "Theoretische kwantielen")
+
 qqline(Reistijd_ATC)
 ```
 <!-- ## /OPENBLOK: QQplot1.R -->
@@ -259,11 +265,11 @@ qqline(Reistijd_GSC)
 <!-- ## OPENBLOK: QQplot3.R -->
   </div>
 </div>
+Bij alle drie de verdelingen liggen de meeste datapunten op of vlakbij de lijn. Hoewel er bij de uiteinden van de verdeling wat afwijkingen zijn, duidt deze grafiek op een goede benadering van de normaalverdeling voor de drie verdelingen.
 
-Bij de Q-Q plot van de reistijd van studenten Geschiedenis liggen de meeste punten op de lijn behalve bij de uiteinden. De cirkels van de Q-Q plot van studenten Arabische Taal en Cultuur en studenten Filosofie liggen net naast de lijn. De discrepantie is minimaal; vermoedelijk zijn de data normaal verdeeld.
 
 ### Boxplot
-De box geeft de middelste 50% van de reistijd weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^16]<sup>, </sup>[^17] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
+De box geeft de middelste 50% van de reistijd weer. De zwarte lijn binnen de box is de mediaan. In de staarten of snorreharen zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^16]<sup>, </sup>[^17] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
 
 <!-- ## OPENBLOK: Boxplot.R -->
 ```{r boxplot}
@@ -272,7 +278,7 @@ boxplot(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 ```
 <!-- ## /OPENBLOK: Boxplot.R -->
 
-De boxplotten geven de spreiding weer van de gemiddelde reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. De boxplotten Arabische Taal en Cultuur en Geschiedenis zien er symmetrisch uit; de boxen zijn even hoog boven als onder de mediaan. De staarten zijn onder en boven even groot. De boxplot van Filosofie is boven de mediaan groter dan onder de mediaan, de data kan wat scheef verdeeld zijn. De mediaan Arabische Taal en Cultuur ligt hoger dan de twee andere opleidingen.
+De boxplotten geven de spreiding weer van de gemiddelde reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. De boxplotten Arabische Taal en Cultuur en Geschiedenis zien er symmetrisch uit; de boxen zijn even hoog boven als onder de mediaan en de snorreharen zijn onder en boven even groot. De boxplot van Filosofie is boven de mediaan groter dan onder de mediaan, de data kan wat scheef verdeeld zijn. De mediaan Arabische Taal en Cultuur ligt hoger dan de twee andere opleidingen.
 
 ## Toetsen van normaliteit
 Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.

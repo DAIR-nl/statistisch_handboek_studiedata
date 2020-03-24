@@ -55,6 +55,8 @@ Gebruik de *Wilcoxon signed rank toets* om te toetsen of de waardes van twee gep
 <div id ="casus">
 De directeur van de Academie Mens & Maatschappij wil bekijken hoe het inkomen van zijn alumni zich ontwikkelt nadat zij zijn afgestudeerd. Deze informatie is interessant om te gebruiken bij voorlichtingsactiviteiten van de Academie. Hij verwacht dat er na vijf jaar een groei te zien is in het inkomen. Hij bekijkt het bruto jaarinkomen van de alumni 1 jaar na afstuderen en vergelijkt het met het bruto jaarinkomen 5 jaar na afstuderen. 
 
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+
 *H~0~*: De mediaan van het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij is in vier jaar tijd verminderd of gelijk gebleven.  
 *H~A~*: De mediaan van het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij is in vier jaar tijd gestegen. 
 </div>
@@ -132,8 +134,12 @@ vN_T2 <- length(Alumni_jaarinkomens_T2)
 * Aangezien de gegevens gepaard zijn, zijn de groepsgroottes op beide meetmomenten gelijk: *n~T1~* = `r vN_T1` en *n~T2~* = `r vN_T2`
 <!-- ## /TEKSTBLOK: Data-beschrijven.R-->
 
+Geef de data visueel weer met een histogram en boxplot.
+
 ### Histogram
-Geef de data visueel weer met een histogram of boxplot.
+
+Focus bij het analyseren van een histogram op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.[^8]<sup>, </sup>[^10]
+
 <!-- ## OPENBLOK: Histogram.R -->
 ```{r histogram, warnings=FALSE, message=FALSE}
 ## Histogram met ggplot2
@@ -150,10 +156,10 @@ ggplot(Alumni_jaarinkomens,
 ```
 <!-- ## /OPENBLOK: Histogram.R -->
 
-Op beide meetmomenten is te zien dat de meeste alumni tussen de 0 en €60.000 euro per jaar verdienen en dat een paar alumni hier ver boven zit. 
+Op beide meetmomenten is te zien dat de meeste alumni tussen de 0 en €60.000 euro per jaar verdienen en dat een paar alumni hier ver boven zit. Beide verdelingen hebben één top, maar zijn niet symmetrisch door de lange staart aan de rechterkant van de verdeling. Daarnaast zijn er een aantal uitbijters in beide verdelingen te vinden. Beide verdelingen wijken dus af van de normaalverdeling, waardoor de *Wilcoxon signed rank toets* een toepasselijke toets is. Deze toets vereist namelijk geen normale verdeling en uitbijters hebben minder invloed op het toetsresultaat.
 
 ### Boxplot
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters. De uitbijters zijn niet direct van invloed op de uitkomst van de *Wilcoxon signed rang toets*.[^8] Hoe meer de boxen overlappen, hoe waarschijnlijker dat er geen significant verschil is tussen de groepen.  
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan.  In de staarten of snorreharen zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters. De uitbijters zijn niet direct van invloed op de uitkomst van de *Wilcoxon signed rank toets*.[^8] Hoe meer de boxen overlappen, hoe waarschijnlijker dat er geen significant verschil is tussen de groepen.  
 
 <!-- ## OPENBLOK: Boxplot.R -->
 ```{r boxplot}
@@ -230,3 +236,5 @@ het aantal observatie-eenheden, i.e. $\frac{z}{\sqrt{N}}$.
 [^7]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
 [^8]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 [^9]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
+[^10]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
+

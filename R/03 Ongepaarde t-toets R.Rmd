@@ -155,9 +155,12 @@ vSD_t1 <-Round_and_format(sd(Cijfers_2011))
 <!-- ## /TEKSTBLOK: Data-beschrijven-4.R -->
 
 ## Visuele inspectie van normaliteit
-Geef de verdeling van de data visueel weer met een histogram, Q-Q plot of boxplot.
+Geef de verdeling van de data visueel weer met een histogram, Q-Q plot en boxplot.
 
 ### Histogram
+
+Focus bij het analyseren van een histogram op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.[^9]<sup>, </sup>[^10]
+
 <!-- ## OPENBLOK: Histogram.R -->
 ```{r histogram}
 ## Histogram met ggplot2
@@ -182,7 +185,7 @@ ggplot(Cijfers_gem,
 ```
 <!-- ## /OPENBLOK: Histogram.R -->
 
-Beide histogrammen hebben wat weg van een Bell Curve en zouden normaal verdeeld kunnen zijn: veel waardes liggen rondom de gemiddeldes. 
+Beide histogrammen laten een verdeling zien die redelijk symmetrisch is, één top heeft en geen uitbijters. Daarom zijn beide verdeling bij benadering normaal verdeeld.
 
 ### Q-Q plot
 <!-- ## TEKSTBLOK: QQplot.R-->
@@ -215,7 +218,8 @@ qqline(Cijfers_2011)
 <!-- ## /OPENBLOK: QQplot-t2.R -->
   </div>
 </div>
-Bij beide groepen liggen de meeste punten op de lijn behalve bij de uiteinden, dit zou kunnen liggen aan de onder- en bovengrens van het cijfersysteem. Er zit een limiet aan de hoogte van het cijfer, namelijk een 10, en daarom vallen mogelijk de hoogste datapunten niet meer perfect op de lijn van de normaalverdeling. Vergelijkbaar liggen de laagste datapunten ook niet meer perfect op de lijn omdat de studenten al enige kennis van het vak hebben. Studenten bij de groep van 2010 halen niet minder dan een 4 halen; studenten bij de groep van 2011 halen niet minder dan een 3.  
+
+Voor beide Q-Q plots liggen de meeste datapunten op of vlakbij de lijn. Hoewel er bij de uiteinden van de verdeling wat afwijkingen zijn, duidt deze grafiek op een goede benadering van de normaalverdeling voor beide cohorten.
 
 ### Boxplot
 De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 

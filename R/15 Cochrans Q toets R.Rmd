@@ -53,12 +53,12 @@ Gebruik *Cochran's Q toets* om te toetsen of er verschillen zijn op een binaire 
 
 # Onderwijscasus
 <div id = "casus">
-De opleidingsdirecteur van de bacheloropleiding Kunstmatige Intelligentie merkt dat er tijdens het eerste studiejaar veel studenten zijn die niet alle vakken voldoende afsluiten. Hij wilt uitvinden in welke onderwijsperiode dit vooral plaatsvindt om te onderzoeken waardoor de studievertraging veroorzaakt wordt. Daarom vraagt hij studieresultaten op van eerstejaars studenten in het vorige collegejaar die niet zijn uitgevallen gedurende dat jaar. Met deze resultaten wilt hij onderzoeken of het percentage eerstejaars studenten dat een of meer herkansingen heeft, verschilt tussen de vier onderwijsperiodes.
+De opleidingsdirecteur van de bacheloropleiding Kunstmatige Intelligentie van een universiteit merkt dat er tijdens het eerste studiejaar veel studenten zijn die niet alle vakken voldoende afsluiten. Hij wilt uitvinden in welke onderwijsperiode dit vooral plaatsvindt om te onderzoeken waardoor de studievertraging veroorzaakt wordt. Daarom vraagt hij studieresultaten op van eerstejaars studenten in het vorige collegejaar die niet zijn uitgevallen gedurende dat jaar. Met deze resultaten wilt hij onderzoeken of het percentage eerstejaars studenten dat een of meer herkansingen heeft, verschilt tussen de vier onderwijsperiodes.
 
-*H~0~*: Het percentage studenten dat een of meerdere herkansingen heeft is gelijk in elke onderwijsperiode.
+*H~0~*: Het percentage eerstejaars studenten dat een of meerdere herkansingen heeft is gelijk in elke onderwijsperiode.
 
 
-*H~A~*: Het percentage studenten dat een of meerdere herkansingen heeft is niet gelijk in elke onderwijsperiode.
+*H~A~*: Het percentage eerstejaars studenten dat een of meerdere herkansingen heeft is niet gelijk in elke onderwijsperiode.
 </div>
 
 # Assumpties
@@ -71,12 +71,11 @@ Om *Cochran's Q toets* uit te voeren, moeten de data aan een aantal voorwaarden 
 
 *Cochran's Q toets* toetst of er verschillen zijn tussen een percentage op drie of meer herhaalde metingen. Voer een post-hoc toets om te bepalen welke metingen van elkaar verschillen. Gebruik de *McNemar toets* of de exacte *McNemar toets* als post-hoc toets.[^6]
 
-Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. In deze toetspagina wordt de *Benjamini-Hochberg correctie* gebruikt. Deze correctie zorgt ervoor dat de proportie type I fouten (false discovery rate) berekend over alle toetsen gereduceerd wordt. Deze correctie is minder strict dan de *Bonferroni correctie* die ervoor zorgt dat de kans op ten minste één type I fout in alle toetsen gereduceerd wordt.[^7]<sup>,/<sup>[^8] Er zijn ook nog andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^9]
+Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. In deze toetspagina wordt de *Benjamini-Hochberg correctie* gebruikt. Deze correctie zorgt ervoor dat de proportie type I fouten (*false discovery rate*) in het aantal significante toetsen gereduceerd wordt. Deze correctie is minder strict dan de *Bonferroni correctie* die ervoor zorgt dat de kans op ten minste één type I fout in alle toetsen gereduceerd wordt.[^7]<sup>,</sup>[^8] Er zijn ook nog andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^9]
 
 # De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken1.R -->
 Er is een dataset ingeladen genaamd `Herkansingen_kunstmatige_intelligentie`. In deze dataset is per onderwijsperiode aangegeven of een student wel of geen herkansingen heeft gemaakt.
-
 <!-- ## /TEKSTBLOK: Data-bekijken1.R -->
 
 <!-- ## OPENBLOK: Data-bekijken2.R -->
@@ -92,11 +91,10 @@ tail(Herkansingen_kunstmatige_intelligentie)
 
 
 <!-- ## TEKSTBLOK: Data-kruistabel1.R -->
-Een kruistabel geeft weer hoeveel studenten wel of geen herkansingen hebben in de vier onderwijsperiodes. Maak de kruistabel met de functie `table()` met als argumenten de variabele `Herkansingen_kunstmatige_intelligentie$Herkansingen` die aangeeft of studenten wel of geen herkansing hebben en de variabele `Herkansingen_kunstmatige_intelligentie$Onderwijsperiode` die aangeeft in welke onderwijsperiode een observatie is gedaan. 
+Een kruistabel geeft weer hoeveel eerstejaars studenten wel of geen herkansingen hebben in de vier onderwijsperiodes. Maak de kruistabel met de functie `table()` met als argumenten de variabele `Herkansingen_kunstmatige_intelligentie$Herkansingen` die aangeeft of eerstejaars studenten wel of geen herkansing hebben en de variabele `Herkansingen_kunstmatige_intelligentie$Onderwijsperiode` die aangeeft in welke onderwijsperiode een observatie is gedaan. 
 <!-- ## /TEKSTBLOK: Data-kruistabel1.R -->
 
 <!-- ## OPENBLOK: Data-kruistabel2.R -->
-
 ```{r kruistabel}
 
 ## Maak een kruistabel
@@ -111,17 +109,36 @@ prop.table(Herkansingen_kruistabel, 2)
 ```
 <!-- ## /OPENBLOK: Data-kruistabel2.R -->
 
-De kruistabel en bijbehorende tabel met proporties laten zien dat het aantal studenten dat een herkansing doet in onderwijsperiode 1 relatief laag is en relatief hoog is in onderwijsperiode 2. Onderwijsperiode 3 en 4 zitten qua aantal herkansende studenten er tussenin.
+<!-- ## CLOSEDBLOK: Data-kruistabel3.R -->
+```{r kruistabel2, include=FALSE, echo=TRUE}
+
+## Maak een kruistabel
+Herkansingen_kruistabel <- table(Herkansingen_kunstmatige_intelligentie$Herkansingen, Herkansingen_kunstmatige_intelligentie$Onderwijsperiode)
+
+## Print de kruistabel 
+print(Herkansingen_kruistabel)
+
+## Print een tabel met proporties, tweede argument 2 zorgt ervoor dat de 
+## proporties per kolom berekend worden
+proptable <- prop.table(Herkansingen_kruistabel, 2)
+```
+<!-- ## /CLOSEDBLOK: Data-kruistabel3.R -->
+
+
+
+<!-- ## TEKSTBLOK: Data-kruistabel4.R -->
+De kruistabel en bijbehorende tabel met proporties laten zien dat het aantal eerstejaars studenten dat een herkansing doet in onderwijsperiode 1 (`r Herkansingen_kruistabel[1,1]`) relatief laag is en relatief hoog is in onderwijsperiode 2 (`r Herkansingen_kruistabel[1,2]`). Onderwijsperiode 3 en 4 (`r Herkansingen_kruistabel[1,3]` en `r Herkansingen_kruistabel[1,4]`) zitten qua aantal herkansende eerstejaars studenten ertussenin.
+<!-- ## /TEKSTBLOK: Data-kruistabel4.R -->
 
 # Uitvoering
 
 ## Assumptie steekproefgrootte
 
-Een assumptie van *Cochran's Q toets* is dat het product van het aantal observatie-eenheden en het aantal herhaalde metingen groter of gelijk is aan 24. In deze casus gaat het om het product van het aantal studenten en het aantal onderwijsperiode. Toets deze assumpties door dit product te berekenen.
+Een assumptie van *Cochran's Q toets* is dat het product van het aantal observatie-eenheden en het aantal herhaalde metingen groter of gelijk is aan 24. In deze casus gaat het om het product van het aantal eerstejaars studenten en het aantal onderwijsperiode. Toets deze assumpties door dit product te berekenen.
 
-<!-- ## OPENBLOK: Data-bekijken-2.R -->
+<!-- ## OPENBLOK: steekproefgrootte1.R -->
 ```{r data bekijken 2}
-# Bereken het aantal studenten
+# Bereken het aantal eerstejaars studenten
 N <- length(unique(Herkansingen_kunstmatige_intelligentie$Studentnummer))
 
 # Bereken het aantal onderwijsperiodes
@@ -133,56 +150,57 @@ Product <- N * k
 # Print het resultaat
 print(Product)
 ```
-<!-- ## /OPENBLOK: Data-bekijken-2.R -->
+<!-- ## /OPENBLOK: steekproefgrootte1.R -->
 
-<!-- ## TEKSTBLOK: McNemar-toets1.R -->
-Het product van het aantal studenten en het aantal onderwijsperiodes is `r Product`. Aangezien dit aantal groter dan 24 is, is aan de assumptie wat betreft de steekproefgrootte voldaan.
-<!-- ## /TEKSTBLOK: McNemar-toets1.R -->
+<!-- ## TEKSTBLOK: steekproefgrootte2.R -->
+Het product van het aantal eerstejaars studenten en het aantal onderwijsperiodes is `r Product`. Aangezien dit aantal groter dan 24 is, is aan de assumptie wat betreft de steekproefgrootte voldaan.
+<!-- ## /TEKSTBLOK: steekproefgrootte2.R -->
 
 
 
 
 ## Cochran's Q toets
-<!-- ## TEKSTBLOK: McNemar-toets1.R -->
-Voer *Cochran's Q toets* uit om te onderzoeken of er verschillen zijn tussen de vier onderwijsperiodes wat betreft het percentage studenten van de bachelor kunstmatige intelligentie dat een of meerdere herkansingen heeft gemaakt. Gebruik de functie `CochransQTest()` met als eerste argument `Herkansingen ~ Onderwijsperiode | Studentnummer` waarin `Herkansingen` de afhankelijke variabele is, `Onderwijsperiode` de variabele is die de verschillende groepen aangeeft en `Studentnummer` de variabele is die de observatie-eenheden aangeeft. Het tweede argument is de dataset `data = Herkansingen_kunstmatige_intelligentie`.
-<!-- ## /TEKSTBLOK: McNemar-toets1.R -->
+<!-- ## TEKSTBLOK: Cochran1.R -->
+Voer *Cochran's Q toets* uit om te onderzoeken of er verschillen zijn tussen de vier onderwijsperiodes wat betreft het percentage eerstejaars studenten van de bachelor Kunstmatige Intelligentie dat een of meerdere herkansingen heeft gemaakt. Gebruik de functie `CochransQTest()` met als eerste argument `Herkansingen ~ Onderwijsperiode | Studentnummer` waarin `Herkansingen` de afhankelijke variabele is, `Onderwijsperiode` de variabele is die de verschillende groepen aangeeft en `Studentnummer` de variabele is die de observatie-eenheden aangeeft. Het tweede argument is de dataset `data = Herkansingen_kunstmatige_intelligentie`.
+<!-- ## /TEKSTBLOK: Cochran1.R -->
 
-<!-- ## OPENBLOK: McNemar-toets2.R -->
+<!-- ## OPENBLOK: Cochran2.R -->
 ```{r cochran}
 CochranQTest(Herkansingen ~ Onderwijsperiode | Studentnummer,
               data = Herkansingen_kunstmatige_intelligentie)
 ```
-<!-- ## /OPENBLOK: McNemar-toets2.R -->
+<!-- ## /OPENBLOK: Cochran2.R -->
 
-<!-- ## CLOSEDBLOK: McNemar-toets3.R -->
+<!-- ## CLOSEDBLOK: Cochran3.R -->
 ```{r cochran object, include=FALSE, echo=TRUE}
 cochran <- CochranQTest(Herkansingen ~ Onderwijsperiode | Studentnummer,
               data = Herkansingen_kunstmatige_intelligentie)
 
 vQ <- Round_and_format(cochran$statistic)
 vdf <- cochran$parameter
+vp <- Round_and_format(cochran$p.value)
 
 ```
-<!-- ## /CLOSEDBLOK: McNemar-toets3.R -->
+<!-- ## /CLOSEDBLOK: Cochran3.R -->
 
-<!-- ## TEKSTBLOK: McNemar-toets5.R -->
-* Q (`r vdf`, *N* = `r N`) = `r vQ`, *p* < 0,0001
+<!-- ## TEKSTBLOK: Cochran4.R -->
+* Q (`r vdf`, *N* = `r N`) = `r vQ`, *p* = `r vp`
 * Aantal vrijheidsgraden is gelijk aan aantal herhaalde metingen minus één, in deze casus `r k` - 1 = `r vdf`
 * p-waarde < 0,05, dus de H~0~ wordt verworpen.[^10]
-* Er is een significant verschil tussen de vier onderwijsperiode wat betreft het percentage studenten met een or meerdere herkansingen
-<!-- ## /TEKSTBLOK: McNemar-toets5.R -->
+* Er is een significant verschil tussen de vier onderwijsperiode wat betreft het percentage eerstejaars studenten met een of meerdere herkansingen
+<!-- ## /TEKSTBLOK: Cochran4.R -->
 
 
 ## Post-hoc toets
 
 <!-- ## TEKSTBLOK: posthoc1.R -->
-Voer post-hoc toetsen uit om te onderzoeken tussen welke onderwijsperiodes er verschillen zijn in het percentage studenten met herkansingen. Gebruik de *McNemar toets* of exacte *McNemar toets* als post-hoc toets. De exacte versie van de *McNemar toets* is nuttig om te gebruiken wanneer het aantal observaties in de niet-diagonale elementen van de confusiematrix kleiner dan 11 is. Omdat er bij post-hoc toetsen vaak meerdere vergelijkingen gemaakt worden, is het tijdrovend om voor elke idnividuele vergelijking de confusiematrix te inspecteren. Voer daarom de *McNemar toets* en de exacte *McNemar toets* beide uit en vergelijk de significantie op beide toetsen. Wanneer een vergelijking op de ene toets significant is en op de andere toets niet significant, bepaal dan aan de hand van de confusiematrix welk toetsresultaat gekozen moet worden.
+Voer post-hoc toetsen uit om te onderzoeken tussen welke onderwijsperiodes er verschillen zijn in het percentage eerstejaars studenten met herkansingen. Gebruik de *McNemar toets* of exacte *McNemar toets* als post-hoc toets. De exacte versie van de *McNemar toets* is nuttig om te gebruiken wanneer het aantal observaties in de niet-diagonale elementen van de confusiematrix kleiner dan 11 is. Omdat er bij post-hoc toetsen vaak meerdere vergelijkingen gemaakt worden, is het tijdrovend om voor elke idnividuele vergelijking de confusiematrix te inspecteren. Voer daarom de *McNemar toets* en de exacte *McNemar toets* beide uit en vergelijk de significantie op beide toetsen. Wanneer een vergelijking op de ene toets significant is en op de andere toets niet significant, bepaal dan aan de hand van de confusiematrix welk toetsresultaat gebruikt moet worden.
 
-Voer de post-hoc toetsen uit met de functie `pairwiseMcnemar()` met als eerste argument `Herkansingen ~ Onderwijsperiode | Studentnummer` waarin `Herkansingen` de afhankelijke variabele is, `Onderwijsperiode` de variabele is die de verschillende groepen aangeeft en `Studentnummer` de variabele is die de observatie-eenheden aangeeft. Het tweede argument is de dataset `data = Herkansingen_kunstmatige_intelligentie` en het vierde argument `method = "BH"` geeft de correctie voor meerdere testen weer (Benjamini-Hochberg (BH) in dit geval). Het derde argument `test = "mcnemar"` geeft aan dat de *McNemar toets* gebruikt moet worden; gebruik het argument `test = "exact"` om een exacte *McNemar toets* uit te voeren. Het significantieniveau is 0,05 voor beide toetsen.[^10]
+Voer de post-hoc toetsen uit met de functie `pairwiseMcnemar()` met als eerste argument `Herkansingen ~ Onderwijsperiode | Studentnummer` waarin `Herkansingen` de afhankelijke variabele is, `Onderwijsperiode` de variabele is die de verschillende groepen aangeeft en `Studentnummer` de variabele is die de observatie-eenheden aangeeft. Het tweede argument is de dataset `data = Herkansingen_kunstmatige_intelligentie` en het vierde argument `method = "BH"` geeft de correctie voor meerdere toetsen weer (Benjamini-Hochberg (BH) in dit geval). Het derde argument `test = "mcnemar"` geeft aan dat de *McNemar toets* gebruikt moet worden; gebruik het argument `test = "exact"` om een exacte *McNemar toets* uit te voeren. Het significantieniveau is 0,05 voor beide toetsen.[^10]
 <!-- ## /TEKSTBLOK: posthoc1.R -->
 
 
-<!-- ## OPENBLOK: posthoc1.R -->
+<!-- ## OPENBLOK: posthoc2.R -->
 ```{r mcnemar}
 # Voer post-hoc toetsen met de McNemar toets uit
 pairwiseMcnemar(Herkansingen ~ Onderwijsperiode | Studentnummer,
@@ -197,9 +215,9 @@ pairwiseMcnemar(Herkansingen ~ Onderwijsperiode | Studentnummer,
                 method = "BH")
 
 ```
-<!-- ## /OPENBLOK: posthoc1.R -->
+<!-- ## /OPENBLOK: posthoc2.R -->
 
-<!-- ## CLOSEDBLOK: posthoc1.R -->
+<!-- ## CLOSEDBLOK: posthoc3.R -->
 ```{r dd, include=FALSE, echo=TRUE}
 posthoc <- pairwiseMcnemar(Herkansingen ~ Onderwijsperiode | Studentnummer,
                 data   = Herkansingen_kunstmatige_intelligentie,
@@ -208,19 +226,19 @@ posthoc <- pairwiseMcnemar(Herkansingen ~ Onderwijsperiode | Studentnummer,
 
 
 ```
-<!-- ## /CLOSEDBLOK: posthoc1.R -->
+<!-- ## /CLOSEDBLOK: posthoc3.R -->
 
 Er zijn zes vergelijkingen tussen de onderwijsperiodes getoets bij deze post-hoc toetsen. De significantie van de zes vergelijkingen verschilt niet tussen de *McNemar toets* en de exacte *McNemar toets*. Beide toetsen kunnen gerapporteerd worden, in deze toetspagina wordt de *McNemar toets* gerapporteerd.
 
-<!-- ## TEKSTBLOK: posthoc1.R -->
-* Er is een significant verschil in het percentage studenten met herkansingen gevonden tussen onderwijsperiode 1 en onderwijsperiode 2 (*p* = `r Round_and_format(posthoc$Pairwise$p.adjust[1])`).
+<!-- ## TEKSTBLOK: posthoc4.R -->
+* Er is een significant verschil in het percentage eerstejaars studenten met herkansingen gevonden tussen onderwijsperiode 1 en onderwijsperiode 2 (*p* = `r Round_and_format(posthoc$Pairwise$p.adjust[1])`).
 * Er zijn geen significante verschillen gevonden bij de overige vergelijkingen tussen onderwijsperiodes
-<!-- ## TEKSTBLOK: posthoc1.R -->
+<!-- ## TEKSTBLOK: posthoc4.R -->
 
 
 
 # Rapportage
-<!-- ## CLOSEDBLOK: McNemar-toets5.R -->
+<!-- ## CLOSEDBLOK: rapportage1.R -->
 ```{r proptabel, include=FALSE, echo=TRUE}
 ## Maak een kruistabel
 Herkansingen_kruistabel <- table(Herkansingen_kunstmatige_intelligentie$Herkansingen, Herkansingen_kunstmatige_intelligentie$Onderwijsperiode)
@@ -229,27 +247,24 @@ Herkansingen_kruistabel <- table(Herkansingen_kunstmatige_intelligentie$Herkansi
 ## proporties per kolom berekend worden
 tabel <- 100 * prop.table(Herkansingen_kruistabel, 2)
 ```
-<!-- ## /CLOSEDBLOK: McNemar-toets5.R -->
+<!-- ## /CLOSEDBLOK: rapportage1.R -->
 
-<!-- ## TEKSTBLOK: McNemar-toets5.R -->
-*Cochran's Q toets* is uitgevoerd om te onderzoeken of er verschillen zijn tussen de vier onderwijsperiodes wat betreft het percentage eerstejaarsstudenten van de bachelor kunstmatige intelligentie dat een of meerdere herkansingen heeft. Het percentage studenten dat een of meerdere herkansingen heeft is per onderwijsperiode weergegeven in Tabel 1. *Cochran's Q toets* toont aan dat het percentage studenten met een of meerdere herkansingen significant verschillend is voor de vier onderwijsperiodes, Q (`r vdf`, *N* = `r N`) = `r vQ`, *p* < 0,0001. Om te bepalen tussen welke onderwijsperiodes deze percentages verschillen, is de *McNemar toets* als post-hoc toets uitgevoerd met een Benjamini-Hochberg correctie voor meerdere testen. Uit de post-hoc toetsen blijkt dat er alleen een significant verschil is tussen onderwijsperiode 1 (`r tabel[1,1]`% studenten met herkansingen) en onderwijsperiode 2 (`r tabel[1,2]`% studenten met herkansingen) met als gecorrigeerde p-waarde `r Round_and_format(posthoc$Pairwise$p.adjust[1])`. Er zijn dus significant meer studenten met een of meerdere herkansingen in periode 2 in vergelijking tot periode 1, maar verder zijn er geen verschillen tussen de onderwijsperiodes.
-<!-- ## /TEKSTBLOK: McNemar-toets5.R -->
+<!-- ## TEKSTBLOK: rapportage2.R -->
+*Cochran's Q toets* is uitgevoerd om te onderzoeken of er verschillen zijn tussen de vier onderwijsperiodes wat betreft het percentage eerstejaars studenten van de bachelor Kunstmatige Intelligentie dat een of meerdere herkansingen heeft. Het percentage eerstejaars studenten dat een of meerdere herkansingen heeft is per onderwijsperiode weergegeven in Tabel 1. *Cochran's Q toets* toont aan dat het percentage eerstejaars studenten met een of meerdere herkansingen significant verschillend is voor de vier onderwijsperiodes, Q (`r vdf`, *N* = `r N`) = `r vQ`, *p* = `r Round_and_format(posthoc$Pairwise$p.adjust[1])`. Om te bepalen tussen welke onderwijsperiodes deze percentages verschillen, is de *McNemar toets* als post-hoc toets uitgevoerd met een Benjamini-Hochberg correctie voor meerdere toetsen. Uit de post-hoc toetsen blijkt dat er alleen een significant verschil is tussen onderwijsperiode 1 (`r tabel[1,1]`% eerstejaars studenten met herkansingen) en onderwijsperiode 2 (`r tabel[1,2]`% eerstejaars studenten met herkansingen) met als gecorrigeerde p-waarde `r Round_and_format(posthoc$Pairwise$p.adjust[1])`. Er zijn dus significant meer eerstejaars studenten met een of meerdere herkansingen in periode 2 in vergelijking tot periode 1, maar verder zijn er geen verschillen tussen de onderwijsperiodes.
+<!-- ## /TEKSTBLOK: rapportage2.R -->
 
 
 
+<!-- ## TEKSTBLOK: rapportage3.R -->
 |                      | Periode 1          | Periode 2          | Periode 3          | Periode 4 |
 |-------------| -------------------- | -------------| ------------|-------------| ------------| 
 |Herkansingen (%) | `r tabel[1,1]` | `r tabel[1,2]` | `r tabel[1,3]` | `r tabel[1,4]` |
 |Geen herkansingen (%) | `r tabel[2,1]` | `r tabel[2,2]` | `r tabel[2,3]` | `r tabel[2,4]` |
-*Tabel 1. Het percentage *
-<!-- ## /TEKSTBLOK: rapportage.R -->
+*Tabel 1. Het percentage eerstejaars studenten van de bachelor Kunstmatige Intelligentie dat wel of geen herkansingen heeft voor de vakken in de vier onderwijsperiodes.
+<!-- ## /TEKSTBLOK: rapportage3.R -->
 
 
 
-De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in het percentage studenten dat een beroep doet op de FOS voor en na de interventie van de decaan. De interventie heeft als doel het aantal studenten met een functiebeperking dat een beroep doet op de FOS te verhogen. De resultaten laten een significant verschil zien tussen de percentages voor en na de interventie ( *p* <0,0001), wat betekent dat de nulhypothese verworpen kan worden. De kruistabel (Tabel 2) illustreert dat het percentage studenten dat een beroep doet op de FOS is toegenomen na de interventie; de *McNemar toets* toont aan dat deze toename significant is. 
-
-
-<!-- ## /TEKSTBLOK: McNemar-toets5.R -->
 
 
 <!-- ## CLOSEDBLOK: Footer.R -->

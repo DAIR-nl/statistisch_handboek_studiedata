@@ -106,7 +106,7 @@ Het gemiddelde jaarinkomen van de alumni is `r paste("€", vMean, sep="")` met 
 
 ## Normaliteit visualiseren en testen
 
-De *tekentoets* is een alternatief voor de *one-sample t-toets* wanneer de data geen normale verdeling volgt. Hoewel het visueel inspecteren en testen van normaliteit [^3] niet vereist is, is het nuttig om de verdeling van de data te visualiseren en te vergelijken met de normaalverdeling.
+De *tekentoets* is een alternatief voor de [one-sample t-toets](01-One-sample-t-toets-R.html) wanneer de data geen normale verdeling volgt. Hoewel het visueel inspecteren en testen van normaliteit [^3] niet vereist is, is het nuttig om de verdeling van de data te visualiseren en te vergelijken met de normaalverdeling.
 
 ### Histogram
 Geef de verdeling van de data weer in een histogram. Focus bij het analyseren van een histogram op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.[^6]<sup>, </sup>[^7]
@@ -147,7 +147,7 @@ library(nortest)
 lillie.test(Jaarlijks_inkomen)
 ```
 <!-- ## /OPENBLOK: Library-nortest.R -->
-De p-waarde van de *Kolmogorov-Smirnov test* is kleiner dan 0,0001, dus de data zijn niet normaal verdeeld. Naast deze test, kan de *Shapiro-Wilk test* ook gebruikt worden om normaliteit te testen. Gebruik bij normaal verdeelde data de *One-sample t-toets*.
+De p-waarde van de *Kolmogorov-Smirnov test* is kleiner dan 0,0001, dus de data zijn niet normaal verdeeld. Naast deze test, kan de *Shapiro-Wilk test* ook gebruikt worden om normaliteit te testen. Gebruik bij normaal verdeelde data de [one-sample t-toets](01-One-sample-t-toets-R.html).
 
 # Tekentoets 
 Voer een tweezijdige *tekentoets* uit om te bepalen of het mediane jaarinkomen van de alumni Journalistiek hoger ligt dan het modale inkomen van €36.000. Gebruik de `binom.test` functie [^4] met de volgende argumenten: het aantal alumni dat een hoger jaarinkomen heeft dan het modale inkomen van €36.000 `boven_modaal`, het totale aantal alumni `totaal_alumni` (gelijk aan de steekproefgrootte) en `alternative="two.sided"` om een tweezijdige alternatieve hypothese te toetsen.

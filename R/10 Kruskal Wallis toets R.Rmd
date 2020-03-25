@@ -48,7 +48,7 @@ source(paste0(here::here(),"/01. Includes/data/10.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *Kruskal Wallis toets* om te toetsen of 2 of meer groepen significant van elkaar verschillen.[^1] De *Kruskal Wallis toets* kan een alternatief zijn voor de *one-way ANOVA*.[^2] De *Kruskal Wallis toets* stelt minder eisen aan de data; die hoeft onder andere niet te voldoen aan de assumptie normaliteit. Bij de *Kruskal Wallis toets* hebben uitbijters minder invloed op het eindresultaat dan bij de *one-way ANOVA*. Daarentegen, als de data wel normaal verdeeld zijn, heeft de *Kruskal Wallis toets* minder onderscheidend vermogen dan de *one way ANOVA*.[^3]<sup>, </sup>[^4] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Kruskal Wallis toets* test gekozen wordt. 
+Gebruik de *Kruskal Wallis toets* om te toetsen of 2 of meer groepen significant van elkaar verschillen.[^1] De *Kruskal Wallis toets* kan een alternatief zijn voor de [one-way ANOVA](05-One-way-ANOVA-R.html).[^2] De *Kruskal Wallis toets* stelt minder eisen aan de data; die hoeft onder andere niet te voldoen aan de assumptie normaliteit. Bij de *Kruskal Wallis toets* hebben uitbijters minder invloed op het eindresultaat dan bij de [one-way ANOVA](05-One-way-ANOVA-R.html). Daarentegen, als de data wel normaal verdeeld zijn, heeft de *Kruskal Wallis toets* minder onderscheidend vermogen dan de [one-way ANOVA](05-One-way-ANOVA-R.html).[^3]<sup>, </sup>[^4] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Kruskal Wallis toets* test gekozen wordt. 
 
 # Onderwijscasus
 <div id="casus">
@@ -63,15 +63,15 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 </div>
 
 # Assumpties
-Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden: de data zijn (semi-)continu,[^5]<sup>, </sup>[^6] de groepen zijn onafhankelijk van elkaar [^7] en het aantal groepen is groter dan 2. Gebruik bij 2 groepen de *Mann-Whitney U toets*.
+Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden: de data zijn (semi-)continu,[^5]<sup>, </sup>[^6] de groepen zijn onafhankelijk van elkaar [^7] en het aantal groepen is groter dan 2. Gebruik bij 2 groepen de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html).
 
 # Post-hoc toets 
-De *Kruskal Wallis toets* toetst of twee of meerdere groepen van elkaar verschillen. Een post-hoc toets specificeert welke groep significant van andere groepen verschillen. Gebruik de *Mann-Whitney U toets* als post-hoc toets. 
+De *Kruskal Wallis toets* toetst of twee of meerdere groepen van elkaar verschillen. Een post-hoc toets specificeert welke groep significant van andere groepen verschillen. Gebruik de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) als post-hoc toets. 
 
 Gebruik een correctie voor de p-waarden, omdat er meerdere testen tegelijkertijd worden gebruikt. In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans dat er bij toeval een verband wordt ontdekt dat er niet is (type I fout). [^8]<sup>, </sup>[^9] Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^2]
 
 # Effectmaat
-De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^2] 
+De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^2] 
 
 Bij de *Kruskal Wallis toets* wordt eta-squared ($\eta^2$) als effectmaat gebruikt.[^10] De effectmaat eta squared (*η^2^*) berekent de proportie van de variantie in de afhankelijke variabele die verklaard wordt door de onafhankelijke variabele. In deze casus berekent het de proportie van de variantie in het aantal studiepunten wat verklaard kan worden door de vooropleiding. Een indicatie om *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^11]
 
@@ -223,7 +223,7 @@ vK_P <- Round_and_format(Ktest$p.value)
 
 ## Post-hoc toets: Mann-Whitney U toets
 <!-- ## TEKSTBLOK: Mann-Whitney-U-test.R -->
-Gebruik de *Mann-Whitney U toets* als post-hoc toets om te bepalen wélke groepen significant verschillen. De *Mann-Whitney U toets* wordt ook wel de *Wilcoxon rank-sum toets* genoemd.[^15] Gebruik de functie `pairwise.wilcox.test()` met als eerste argument de afhankelijke variabele `Resultaten_Arbeidsrecht$EC_Jaar1` en als tweede argument de definitie van de groepen `Resultaten_Arbeidsrecht$Vooropleiding`. Pas de *Bonferroni correctie* toe met `p.adjust.method = "bonferroni"`. Naast de p-waarde toont de *Mann-Whitney U toets* het verschil in mediaan en bijbehorend betrouwbaarheidsinterval als resultaat en *r* als effectmaat. Voor meer informatie, zie de toetspagina van de *Mann-Whitney U toets*.   
+Gebruik de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) als post-hoc toets om te bepalen wélke groepen significant verschillen. De [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) wordt ook wel de *Wilcoxon rank-sum toets* genoemd.[^15] Gebruik de functie `pairwise.wilcox.test()` met als eerste argument de afhankelijke variabele `Resultaten_Arbeidsrecht$EC_Jaar1` en als tweede argument de definitie van de groepen `Resultaten_Arbeidsrecht$Vooropleiding`. Pas de *Bonferroni correctie* toe met `p.adjust.method = "bonferroni"`. Naast de p-waarde toont de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) het verschil in mediaan en bijbehorend betrouwbaarheidsinterval als resultaat en *r* als effectmaat. Voor meer informatie, zie de toetspagina van de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html).   
 <!-- ## /TEKSTBLOK: Mann-Whitney-U-test.R -->
 <!-- ## OPENBLOK: Mann-Whitney-U-test.R -->
 ``` {r pairwise wilcox test}
@@ -270,7 +270,7 @@ Studenten met de vooropleiding Fiscaal Recht (mediaan = `r vMed_FIS`) en Notarie
 [^10]: De effectmaat $\eta^2$ wordt voor de *Kruskal-Wallis toets* berekend door de $\chi^2$-waarde te delen door het totaal aantal observaties minus één, i.e. $\frac{\chi^2}{N-1} $.
 [^11]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
 [^12]: Bij niet normaal verdeelde data wordt de mediaan berekend in plaats van een gemiddelde om het midden van de data aan te geven.
-[^13]: De test-statistiek *H* volgt bij benadering de chi-kwadraat verdeling. Onder deze hypothese is *H* chi-kwadraat, vandaar dat dit in de output uitgedrukt wordt in chi-kwadraat    
+[^13]: De test-statistiek *H* volgt bij benadering de chi-kwadraat verdeling. Onder deze hypothese is *H* chi-kwadraat, vandaar dat dit in de output uitgedrukt wordt in chi-kwadraat.
 [^14]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met Type I en Type II fouten. 
 [^15]: Van Geloven, N. (13 maart 2018).  *Mann-Whitney U toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
 

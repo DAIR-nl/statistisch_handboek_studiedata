@@ -51,7 +51,7 @@ source(paste0(here::here(),"/01. Includes/data/09.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik *Friedman's ANOVA* om verdelingen te vergelijken van een groep bij drie of meer herhaalde metingen of om drie of meer gepaarde groepen te vergelijken.[^1]<sup>, </sup>[^2] *Friedman's ANOVA* is een alternatief voor de *repeated measures ANOVA* wanneer de data niet aan de assumptie van normaliteit voldoen. Daarnaast hebben uitbijters minder invloed op het resultaat van de *Friedman's ANOVA* in vergelijking tot de *repeated measures ANOVA*. Echter, als de data aan de assumpties van de *repeated measures ANOVA* voldoen, heeft deze toets een hoger onderscheidend vermogen dan *Friedman's ANOVA*.[^3]
+Gebruik *Friedman's ANOVA* om verdelingen te vergelijken van een groep bij drie of meer herhaalde metingen of om drie of meer gepaarde groepen te vergelijken.[^1]<sup>, </sup>[^2] *Friedman's ANOVA* is een alternatief voor de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) wanneer de data niet aan de assumptie van normaliteit voldoen. Daarnaast hebben uitbijters minder invloed op het resultaat van de *Friedman's ANOVA* in vergelijking tot de *repeated measures ANOVA*. Echter, als de data aan de assumpties van de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) voldoen, heeft deze toets een hoger onderscheidend vermogen dan *Friedman's ANOVA*.[^3]
 
 
 
@@ -75,12 +75,12 @@ Om een valide toetsresultaat te bereiken, moeten de data aan een aantal assumpti
 
 
 # Effectmaat
-De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^5] Voor *Friedman's ANOVA* wordt de effectmaat *Kendall's W* vaak gebruikt.[^6]<sup>, </sup>[^7]<sup>, </sup>[^8]. Een indicatie om *Kendall's W* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^6]
+De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^5] Voor *Friedman's ANOVA* wordt de effectmaat *Kendall's W* vaak gebruikt.[^6]<sup>, </sup>[^7]<sup>, </sup>[^8]. Een indicatie om *Kendall's W* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^6]
 
 
 
 # Post-hoc toetsen
-*Friedman's ANOVA* toetst of er verschillen zijn tussen de verdelingen van groepen. Voer een post-hoc toets uit om te bepalen welke groepen van elkaar verschillen. Gebruik de *Wilcoxon signed rank toets* als post-hoc toets.
+*Friedman's ANOVA* toetst of er verschillen zijn tussen de verdelingen van groepen. Voer een post-hoc toets uit om te bepalen welke groepen van elkaar verschillen. Gebruik de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html) als post-hoc toets.
 
 Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans dat er bij toeval een verband wordt ontdekt dat er niet is (type I fout).[^9] Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^5]
 
@@ -257,7 +257,7 @@ paste("De effectmaat is", W)
 
 ## Post-hoc toets
 <!-- ## TEKSTBLOK: posthoc1.R -->
-Voer post-hoc toetsen uit om te onderzoeken tussen welke gebouwen er verschillen zijn in de beoordelingen van studenten. De vier gebouwen zijn het hoofdgebouw, bestuursgebouw, sportcentrum en cultuurcentrum Rembrandt. Gebruik de *Wilcoxon signed-rank toets* als post-hoc toets met bijbehorende functie `pairwise.wilcox.test()`. De ingevoerde argumenten van de functie zijn de afhankelijke variabele `Beoordelingen_eetgelegenheden$Beoordeling`, de onafhankelijke variabele `Beoordelingen_eetgelegenheden$Eetgelegenheid` die de groepen aangeeft, de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`, het argument `paired = TRUE` om aan te geven dat er een gepaarde steekproef is en het argument `exact = FALSE` om de p-waarden niet op een exacte manier te berekenen. Gebruik het laatste argument omdat de exacte methode in bepaalde gevallen niet mogelijk is. Het significantieniveau is 0,05.[^10]
+Voer post-hoc toetsen uit om te onderzoeken tussen welke gebouwen er verschillen zijn in de beoordelingen van studenten. De vier gebouwen zijn het hoofdgebouw, bestuursgebouw, sportcentrum en cultuurcentrum Rembrandt. Gebruik de [Wilcoxon signed-rank toets](07-Wilcoxon-signed-rank-toets-R.html) als post-hoc toets met bijbehorende functie `pairwise.wilcox.test()`. De ingevoerde argumenten van de functie zijn de afhankelijke variabele `Beoordelingen_eetgelegenheden$Beoordeling`, de onafhankelijke variabele `Beoordelingen_eetgelegenheden$Eetgelegenheid` die de groepen aangeeft, de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`, het argument `paired = TRUE` om aan te geven dat er een gepaarde steekproef is en het argument `exact = FALSE` om de p-waarden niet op een exacte manier te berekenen. Gebruik het laatste argument omdat de exacte methode in bepaalde gevallen niet mogelijk is. Het significantieniveau is 0,05.[^10]
 <!-- ## /TEKSTBLOK: posthoc1.R -->
 
 <!-- ## OPENBLOK: post-hoc2.R -->
@@ -338,6 +338,6 @@ posthoc <- pairwise.wilcox.test(Beoordelingen_eetgelegenheden$Beoordeling, Beoor
 [^8]: Kassambara, A. (2020). *rstatix: Pipe-Friendly Framework for Basic Statistical Tests*. [R package version 0.4.0.](https://CRAN.R-project.org/package=rstatix).
 [^9]: Type I fout: Ten onrechte H~0~ verwerpen.
 [^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
-[^11]: De effectmaat *r* wordt voor de *Wilcoxon signed rank toets* berekend door de
+[^11]: De effectmaat *r* wordt voor de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html) berekend door de
 *z*-waarde behorend bij de *p*-waarde van de toets te delen door de wortel van
 het aantal observatie-eenheden, i.e. $\frac{z}{\sqrt{N}}$.

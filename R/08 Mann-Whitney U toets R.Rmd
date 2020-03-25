@@ -49,9 +49,9 @@ source(paste0(here::here(),"/01. Includes/data/08.R"))
 # Toepassing
 Gebruik de *Mann-Whitney U toets* om te toetsen of twee onafhankelijke groepen significant van elkaar verschillen. 
 
-Deze toets wordt ook *Mann–Whitney–Wilcoxon*, *Wilcoxon rank-sum toets*, of *Wilcoxon–Mann–Whitney toets* genoemd.[^1] Niet te verwarren met de *Wilcoxon Signed Rank Test* die toetst of twee afhankelijke groepen significant van elkaar verschillen. 
+Deze toets wordt ook *Mann–Whitney–Wilcoxon*, *Wilcoxon rank-sum toets*, of *Wilcoxon–Mann–Whitney toets* genoemd.[^1] Niet te verwarren met de [Wilcoxon Signed Rank Toets](07-Wilcoxon-signed-rank-toets-R.html) die toetst of twee afhankelijke groepen significant van elkaar verschillen. 
 
-De *Mann-Whitney U toets* kan een alternatief zijn voor de *ongepaarde t-toets*. De *Mann-Whitney U toets* stelt minder eisen aan de data en hoeft onder andere niet te voldoen aan de assumptie van normaliteit. Bij de *Mann-Whitney U toets* hebben uitbijters minder invloed op het eindresultaat dan bij de *ongepaarde t-toets*. Daarentegen, als de data wel normaal verdeeld zijn heeft de *Mann-Whitney U toets* minder onderscheidend vermogen dan de *ongepaarde t-toets*.[^2] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Mann-Whitney U toets* gekozen wordt. 
+De *Mann-Whitney U toets* kan een alternatief zijn voor de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html). De *Mann-Whitney U toets* stelt minder eisen aan de data en hoeft onder andere niet te voldoen aan de assumptie van normaliteit. Bij de *Mann-Whitney U toets* hebben uitbijters minder invloed op het eindresultaat dan bij de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html). Daarentegen, als de data wel normaal verdeeld zijn heeft de *Mann-Whitney U toets* minder onderscheidend vermogen dan de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html).[^2] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Mann-Whitney U toets* gekozen wordt. 
 
 # Onderwijscasus
 <div id ="casus">
@@ -65,11 +65,11 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 </div>
 
 # Assumpties
-Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden: de data zijn ordinaal of numeriek, de groepen zijn onafhankelijk van elkaar [^3] en het aantal groepen is twee. Gebruik bij meer dan twee groepen de *Kruskal Wallis toets*.
+Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden: de data zijn ordinaal of numeriek, de groepen zijn onafhankelijk van elkaar [^3] en het aantal groepen is twee. Gebruik bij meer dan twee groepen de [Kruskal Wallis toets](10-Kruskal-Wallis-toets-R.html).
 
 # Effectmaat
 
-De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^3] 
+De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^3] 
 De *Mann-Whitney U toets* heeft als effectmaat *r*.[^4] Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^5]
 
 # Uitvoering 

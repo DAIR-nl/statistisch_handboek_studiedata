@@ -62,13 +62,13 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 </div>
 
 # Assumpties
-De data zijn (semi)continu.[^2] De *Wilcoxon signed rank toets* kan een alternatief zijn voor de *gepaarde t-toets*. 
+De data zijn (semi)continu.[^2] De *Wilcoxon signed rank toets* kan een alternatief zijn voor de [gepaarde t-toets](02-Gepaarde-t-toets-R.html). 
 
-Een voordeel van de *Wilcoxon signed rank toets* is dat de data niet aan de assumptie van normaliteit hoeven te voldoen. Maar als de data wel normaal verdeeld zijn, heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen dan de *gepaarde t-toets*.[^3]<sup>, </sup>[^4] Vandaar dat ondanks dit voordeel minder vaak voor de *Wilcoxon signed rank toets* gekozen wordt. 
+Een voordeel van de *Wilcoxon signed rank toets* is dat de data niet aan de assumptie van normaliteit hoeven te voldoen. Maar als de data wel normaal verdeeld zijn, heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen dan de [gepaarde t-toets](02-Gepaarde-t-toets-R.html).[^3]<sup>, </sup>[^4] Vandaar dat ondanks dit voordeel minder vaak voor de *Wilcoxon signed rank toets* gekozen wordt. 
 
 # Effectmaat
 
-De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^5] 
+De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^5] 
 De *Wilcoxon signed rank toets* heeft als effectmaat *r*.[^6] Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^7]
 
 # Uitvoering

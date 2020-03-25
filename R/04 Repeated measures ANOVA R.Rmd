@@ -50,7 +50,7 @@ source(paste0(here::here(),"/01. Includes/data/04.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *repeated measures ANOVA* om gemiddelden te vergelijken van een groep bij drie of meer herhaalde metingen of om drie of meer gepaarde groepen te vergelijken.[^1] 
+Gebruik de *repeated measures ANOVA* om gemiddelden te vergelijken van een groep bij drie of meer herhaalde metingen of om gemiddelden van drie of meer gepaarde groepen te vergelijken.[^1] 
 
 # Onderwijscasus
 <div id = "casus">
@@ -72,7 +72,7 @@ Om een valide toetsresultaat te bereiken met de *repeated measures ANOVA* moeten
 De assumptie van normaliteit houdt in dat er een normale
 verdeling van de afhankelijke variabele is in elke groep. Wanneer er duidelijke afwijkingen van normaliteit zijn,
 is het transformeren van de data een optie.[^2] Een andere optie is het gebruik van de nonparametrische
-*Friedman toets* waar normaliteit geen assumptie is.[^3] Controleer de assumptie van normaliteit voor elke groep met de volgende stappen:  
+[Friedman's ANOVA](09-Friedmans-ANOVA-R.html) waar normaliteit geen assumptie is.[^3] Controleer de assumptie van normaliteit voor elke groep met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
 2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^4]<sup>, </sup>[^5]  
 
@@ -107,7 +107,7 @@ In de voorbeeldoutput is de p-waarde van de Greenhouse-Geisser correctie > 0,05 
 
 
 # Effectmaat
-De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten vergeleken kunnen worden voor verschillende onderzoeken.[^6] Voor de *repeated measures ANOVA* wordt de effectmaat eta squared vaak gebruikt.
+De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^6] Voor de *repeated measures ANOVA* wordt de effectmaat eta squared vaak gebruikt.
 
 ## Eta squared
 De effectmaat eta squared (*η^2^*) berekent de proportie van de variantie in de afhankelijke variabele die verklaard wordt door de onafhankelijke variabele. In deze casus berekent het de proportie van de variantie in het aantal uren studeren die verklaard kan worden door het vak in de eerste onderwijsperiode. Een indicatie om *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^7]

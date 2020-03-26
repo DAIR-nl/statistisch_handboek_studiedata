@@ -1,5 +1,5 @@
 ---
-title: "Tekentoets"
+title: "Wilcoxon signed rank toets"
 output:
   html_document:
     theme: lumen
@@ -44,7 +44,7 @@ source(paste0(here::here(),"/01. Includes/data/06.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 # Toepassing
-Gebruik de *tekentoets* om de mediaan van een steekproef te vergelijken met een bekende mediaan of norm in een populatie.[^1] 
+Gebruik de *wilcoxon signed rank toets* om de mediaan van een steekproef te vergelijken met een bekende mediaan of norm in een populatie.[^1] Deze toets is een alternatief voor de [one sample t-toets](01-One-sample-t-toets-R.html) wanneer de data niet normaal verdeeld is. In principe toetst de *wilcoxon signed rank toets* of twee verdelingen van elkaar verschillen door de gemiddelde ranking van verdelingen te vergelijken. 
 
 # Onderwijscasus
 <div id ="casus">

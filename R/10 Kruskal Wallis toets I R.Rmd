@@ -48,7 +48,7 @@ source(paste0(here::here(),"/01. Includes/data/10.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *Kruskal Wallis toets* om te toetsen of 2 of meer groepen significant van elkaar verschillen.[^1] De *Kruskal Wallis toets* kan een alternatief zijn voor de [one-way ANOVA](05-One-way-ANOVA-R.html).[^2] De *Kruskal Wallis toets* stelt minder eisen aan de data; die hoeft onder andere niet te voldoen aan de assumptie normaliteit. Bij de *Kruskal Wallis toets* hebben uitbijters minder invloed op het eindresultaat dan bij de [one-way ANOVA](05-One-way-ANOVA-R.html). Daarentegen, als de data wel normaal verdeeld zijn, heeft de *Kruskal Wallis toets* minder onderscheidend vermogen dan de [one-way ANOVA](05-One-way-ANOVA-R.html).[^3]<sup>, </sup>[^4] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Kruskal Wallis toets* test gekozen wordt. 
+Gebruik de *Kruskal Wallis toets* om te toetsen of de verdelingen van twee of meer groepen van elkaar verschillen.[^1] De *Kruskal Wallis toets* kan een alternatief zijn voor de [one-way ANOVA](05-One-way-ANOVA-R.html).[^2] De *Kruskal Wallis toets* stelt minder eisen aan de data; die hoeft onder andere niet te voldoen aan de assumptie normaliteit. Bij de *Kruskal Wallis toets* hebben uitbijters minder invloed op het eindresultaat dan bij de [one-way ANOVA](05-One-way-ANOVA-R.html). Daarentegen, als de data wel normaal verdeeld zijn, heeft de *Kruskal Wallis toets* minder onderscheidend vermogen dan de [one-way ANOVA](05-One-way-ANOVA-R.html).[^3]<sup>, </sup>[^4] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Kruskal Wallis toets* test gekozen wordt. 
 
 # Onderwijscasus
 <div id="casus">
@@ -164,7 +164,8 @@ vQ3_PM <- Round_and_format(x[3,5])
 <!-- ## /TEKSTBLOK: Data-beschrijven.R-->
 
 ### Boxplot
-De box geeft de middelste 50% van het aantal studiepunten weer. De zwarte lijn binnen de box is de mediaan. In de staarten of snorreharen zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters. Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
+
+De boxplot visualiseert de mediaan en eerste en derde kwartielen die zojuist beschreven zijn. De box geeft de middelste 50% van het aantal studiepunten weer. De zwarte lijn binnen de box is de mediaan. In de staarten of snorreharen zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters. Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
 
 <!-- ## OPENBLOK: Boxplot.R -->
 ``` {r Boxplot}
@@ -174,7 +175,7 @@ boxplot(EC_Jaar1 ~ Vooropleiding, Resultaten_Arbeidsrecht,
 ```
 <!-- ## /OPENBLOK: Boxplot.R -->
 
-De mediaan van studenten met een vooropleiding Rechtsgeleerdheid heeft duidelijk minder studiepunten dan studenten met een vooropleiding Fiscaal Recht en Notarieel Recht. De mediaan van de studenten met de Premaster als vooropleiding ligt er tussen in.[^12]
+De mediaan van studenten met een vooropleiding Rechtsgeleerdheid heeft minder studiepunten dan studenten met een vooropleiding Fiscaal Recht en Notarieel Recht. De mediaan van de studenten met de Premaster als vooropleiding ligt ertussenin.[^12]
 
 ## Kruskal Wallis toets
 <!-- ## TEKSTBLOK: Kruskal-Wallis-test-1.R -->
@@ -214,7 +215,7 @@ vK_P <- Round_and_format(Ktest$p.value)
 <!-- ## /CLOSEDBLOK: Kruskal-Wallis-test-4.R -->
 <!-- ## TEKSTBLOK: Kruskal-Wallis-test-5.R -->
 * *df*: het aantal groepen - 1 = `r vK_DF`  
-* *H*~3~ = `r vK_Chi2`, p < 0,0001, $\eta^2$ = `r Round_and_format(Eta_squared)`  [^13]  
+* *H* = `r vK_Chi2`, *df* = `r vK_DF`, p < 0,0001, $\eta^2$ = `r Round_and_format(Eta_squared)`  [^13]  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen[^14]
 * Eta squared is `r Round_and_format(Eta_squared)` wat duidt op een gemiddeld tot groot effect 
 
@@ -237,7 +238,7 @@ pairwise.wilcox.test(Resultaten_Arbeidsrecht$EC_Jaar1, Resultaten_Arbeidsrecht$V
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Kruskal Wallis toets* is uitgevoerd om te toetsen of significante verschillen zijn tussen de studenten van de Master Arbeidsrecht met als vooropleiding Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster en het aantal studiepunten dat de studenten in het eerste jaar behalen. Uit de resultaten kan afgelezen worden dat er een significant verschil is tussen het aantal studiepunten en het type vooropleiding dat de student heeft afgerond. *H*~`r vK_DF`~ ≈ `r vK_Chi2` < 0,0001, $\eta^2$ = `r Round_and_format(Eta_squared)`.   
+De *Kruskal Wallis toets* is uitgevoerd om te toetsen of significante verschillen zijn tussen de studenten van de Master Arbeidsrecht met als vooropleiding Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster en het aantal studiepunten dat de studenten in het eerste jaar behalen. Uit de resultaten kan afgelezen worden dat er een significant verschil is tussen het aantal studiepunten en het type vooropleiding dat de student heeft afgerond. *H* = `r vK_Chi2`, *df* = `r vK_DF` ,*p* < 0,0001, $\eta^2$ = `r Round_and_format(Eta_squared)`.   
 
 | Vooropleiding     | N          | Q1         | M           | Q3          |
 | ------------- | ---------- | ---------- | ----------- | ----------- |

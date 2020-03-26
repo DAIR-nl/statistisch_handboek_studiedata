@@ -61,11 +61,12 @@ Maak_url <- function(published, sModus, sToets_dashed) {
 
 Corrigeer_toetsnaam <- function(sToetsnaam) {
   case_when(
-      sToetsnaam == "Fishers exact toets" ~ "Fisher's exact toets",
+      sToetsnaam == "Chi-kwadraat toets voor onafhankelijkheid en Fishers exact toets" ~ "Chi-kwadraat toets voor onafhankelijkheid en Fisher's exact toets",
       sToetsnaam == "Cochrans Q toets" ~ "Cochran's Q toets",
       sToetsnaam == "Fisher-Freeman-Halton exact toets" ~ "Fisher-Freeman- Halton exact toets",
-      sToetsnaam == "Friedmans ANOVA" ~ "Friedman's ANOVA",
-      sToetsnaam == "Chi-kwadraat toets trend" ~ "Chi-kwadraat toets (trend)",
+      sToetsnaam == "Friedmans ANOVA I" ~ "Friedman's ANOVA I",
+      sToetsnaam == "Friedmans ANOVA II" ~ "Friedman's ANOVA II",
+      #sToetsnaam == "Chi-kwadraat toets trend" ~ "Chi-kwadraat toets (trend)",
       TRUE ~ sToetsnaam
     )
 }
@@ -186,7 +187,7 @@ maak_html_r3 <- function() {
   htmltools::withTags(
     tr(
       td(rowspan = 3, class = "header2 innercell", "categorisch",tags$br(),"(discreet)"),
-      td(class = "header3 innercell", "binair", tags$br(), "(2 categorieen)"),
+      td(class = "header3 innercell", "binair", tags$br(), "(2 waarden)"),
       ## Toets 11 tm 15
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[11,]$InGebruik)),  
                    dfToetsen[11,]$Toets, 
@@ -213,26 +214,26 @@ maak_html_r3 <- function() {
 maak_html_r4 <- function() {
   htmltools::withTags(
     tr(
-      td(class = "header3 innercell", "nominaal ",tags$br(),"( >2 categorieen)"),
+      td(class = "header3 innercell", "nominaal ",tags$br(), "(>2 waarden)"),
       ## Toets 16 tm 19
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[20,]$InGebruik)),
-                         dfToetsen[20,]$Toets,
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[17,]$InGebruik)),
+                         dfToetsen[17,]$Toets,
                          sModus = sModus),
       ## McNemar
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[12,]$InGebruik)),  
-                         dfToetsen[12,]$Toets, 
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[18,]$InGebruik)),  
+                         dfToetsen[18,]$Toets, 
                          sModus = sModus),
       ## Combinatie: Chi-kwadraat toets / Fisher-Freeman-Halton exact toets
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[16,]$InGebruik)),  
-                         dfToetsen[16,]$Toets,
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[19,]$InGebruik)),  
+                         dfToetsen[19,]$Toets,
                          sModus = sModus),
       ## GLM/GEE
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[19,]$InGebruik)),
-                   dfToetsen[19,]$Toets,
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[20,]$InGebruik)),
+                   dfToetsen[20,]$Toets,
                    sModus = sModus),
       ## Chi-kwadraat toets (trend)
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[16,]$InGebruik)),  
-                         dfToetsen[16,]$Toets,
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[21,]$InGebruik)),  
+                         dfToetsen[21,]$Toets,
                          sModus = sModus)
     )
   )
@@ -244,24 +245,27 @@ maak_html_r5 <- function() {
     tr(
       td(class = "header3 innercell", "ordinaal"),
       ## Toets 16 tm 19
-      maak_html_toetscel(F,  
-                         "...", 
+      #maak_html_toetscel(F,  
+      #                   "...", 
+      #                   sModus = sModus),
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[17,]$InGebruik)),
+                         dfToetsen[17,]$Toets,
                          sModus = sModus),
       ## Wilcoxon
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[7,]$InGebruik)),  
-                         dfToetsen[7,]$Toets, 
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[22,]$InGebruik)),  
+                         dfToetsen[22,]$Toets, 
                          sModus = sModus),
       ## Chi-kwadraat toets (trend)
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[18,]$InGebruik)),
-                         dfToetsen[18,]$Toets,
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[23,]$InGebruik)),
+                         dfToetsen[23,]$Toets,
                          sModus = sModus),
       ## Friedman's ANOVA
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[9,]$InGebruik)),  
-                         dfToetsen[9,]$Toets, 
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[24,]$InGebruik)),  
+                         dfToetsen[24,]$Toets, 
                          sModus = sModus),
       ## Chi-kwadraat toets (trend)
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[18,]$InGebruik)),
-                         dfToetsen[18,]$Toets,
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[25,]$InGebruik)),
+                         dfToetsen[25,]$Toets,
                          sModus = sModus)
     )
   )

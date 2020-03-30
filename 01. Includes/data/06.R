@@ -1,5 +1,5 @@
 RNGkind(sample.kind = "Rounding")
-set.seed(1)
+set.seed(123)
 Mogelijkheden <- c(1616:7000)
 p_2014 <- c(
   rep(0.4,  385),     #1616-2000
@@ -13,3 +13,45 @@ p_2014 <- c(
   rep(0.01, 1000)     #6001-7000
 )
 Jaarlijks_inkomen <- replicate(2314, 13*(sample(Mogelijkheden, 1, replace=TRUE, p_2014)))
+
+
+# Maken grafieken assumpties verdelingen
+
+vvv <- rnorm(1000, 0, 2)
+vvv <- vvv - median(vvv)
+plot(density(vvv), ylab = "Frequentiedichtheid", xlab = "Waarden", 
+     main = "Symmetrische verdeling met nul als mediaan")
+
+hist(vvv, breaks=20)
+median(vvv)
+
+ranks <- sign(vvv)*rank(abs(vvv))
+hist(ranks, breaks=10, xlab = "Rangschikkingen", ylab = "Frequentie",
+     main = "Histogram met rangschikkingen symmetrische verdelingen")
+mean(ranks)
+median(ranks)
+
+lll <- rnorm(1000, 0, 2)
+hist(lll, breaks = 20)
+lll[sign(lll) == 1] <- 2*lll[sign(lll) == 1]
+lll <- lll - median(lll)
+plot(density(lll), ylab = "Frequentiedichtheid", xlab = "Waarden", 
+     main = "Scheve verdeling met nul als mediaan")
+hist(lll, breaks=20)
+median(lll)
+
+ranks <- sign(lll)*rank(abs(lll))
+hist(ranks, breaks=10, xlab = "Rangschikkingen", ylab = "Frequentie",
+     main = "Histogram met rangschikkingen scheve verdeling")
+mean(ranks)
+median(ranks)
+
+
+#median(lll)
+#lll <- 10 * (lll - median(lll))
+#hist(lll)
+#median(lll)
+
+# wilcoxon test
+wilcox.test(vvv, mu = 0)
+wilcox.test(lll, mu = 0)

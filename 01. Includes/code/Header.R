@@ -71,6 +71,9 @@ thisHeader <- Substitute_var(htmltools::htmlPreserve('
 <li>
   <a href="https://docs.google.com/forms/d/1UQcCVTNLpVAg7vSffJCPkBCklsfMlGB0QxyxLDgqosI/edit" target=\"_blank\">Feedback</a>
 </li>
+<li>
+  <a href="https://docs.google.com/forms/d/1d2jQRQyFvLw7FvFB8iLs5X0lWH7ydEt1XjErQM7Tq5M/viewform?ts=5e7878b6&edit_requested=true" target=\"_blank\">Nieuwsbrief</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
 

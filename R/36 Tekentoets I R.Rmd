@@ -43,8 +43,8 @@ if (!exists("Substitute_var")) {
 source(paste0(here::here(),"/01. Includes/data/06.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
-# Toepassing
 
+# Toepassing
 
 Gebruik de *Wilcoxon signed rank toets* om de mediaan van een steekproef te vergelijken met een bekende mediaan of norm in een populatie.[^1] Deze toets is een alternatief voor de [one sample t-toets](01-One-sample-t-toets-R.html) wanneer de data niet normaal verdeeld is. De [tekentoets](26-Tekentoets-I-R.html) kan ook gebruikt worden om de mediaan van een steekproef te vergelijken met een bekende mediaan. Deze toets heeft een lager onderscheidend vermogen[^2], maar stelt geen eisen aan de verdeling van de data. De *Wilcoxon signed rank toets* heeft een hoger onderscheidend vermogen, maar vereist dat de data een symmetrische verdeling volgt.
 

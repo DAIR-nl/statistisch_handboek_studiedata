@@ -33,7 +33,7 @@ dfToetsen <- tribble(
     "03 Ongepaarde t-toets",                                                                  "1",          "0",       "1",               "0",       
     "04 Repeated measures ANOVA",                                                             "1",          "0",       "0",               "0",       
     "05 One-way ANOVA",                                                                       "1",          "0",       "1",               "0",       
-    "06 Wilcoxon signed rank toets I",                                                        "1",          "0",       "0",               "0",       
+    "06 Tekentoets I",                                                                        "1",          "0",       "0",               "0",       
     "07 Wilcoxon signed rank toets II",                                                       "1",          "0",       "0",               "0",       
     "08 Mann-Whitney U toets I",                                                              "1",          "0",       "1",               "0",       
     "09 Friedmans ANOVA I",                                                                   "0",          "0",       "0",               "0",       

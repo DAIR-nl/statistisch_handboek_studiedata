@@ -60,7 +60,7 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 # Assumpties
 
-Het meetniveau van de variabele is continu.
+Het meetniveau van de variabele is continu.[^10]
 
 # Uitvoering in R
 Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de school voor Journalistiek genaamd `Jaarlijks_inkomen`. De directeur wil kijken hoe haar oud-studenten scoren ten opzichte van gemiddelde inkomens in Nederland.
@@ -203,5 +203,5 @@ De *tekentoets* is uitgevoerd om te toetsen of het mediane inkomen van alumni va
 [^6]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 [^7]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport.
 [^8]: Statistics How To (27 mei 2018). *One Sample Median Test*. [Statistics How to](https://www.statisticshowto.datasciencecentral.com/one-sample-median-test/).
-[^9]: Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese waar is.  
-
+[^9]: Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese waar is.
+[^10]: Miller, I. & Miller, C. (2012). *John E. Freund's Mathematical Statistics with Applications*. Pearson: eighth edition.

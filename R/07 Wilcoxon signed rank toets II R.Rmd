@@ -49,7 +49,7 @@ source(paste0(here::here(),"/01. Includes/data/07.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *Wilcoxon signed rank toets* om te toetsen of de verdelingen van twee gepaarde groepen van elkaar verschillen.[^1] Deze toets is een alternatief voor de [gepaarde t-toets](02-Gepaarde-t-toets-R.html) wanneer de verschilscores van de gepaarde groepen niet normaal verdeeld zijn. Wanneer de verdeling van de verschilscores symmetrisch is, kan de *Wilcoxon signed rank toets* gebruikt worden om een verschil tussen de medianen van gepaarde groepen te toetsen. Gebruik de gepaarde tekentoets om medianen te toetsen wanneer de verdeling van verschilscores niet symmetrisch is.
+Gebruik de *Wilcoxon signed rank toets* om te toetsen of de verdelingen van twee gepaarde groepen van elkaar verschillen.[^1] Deze toets is een alternatief voor de [gepaarde t-toets](02-Gepaarde-t-toets-R.html) wanneer de verschilscores van de gepaarde groepen niet normaal verdeeld zijn. Alleen als de verdeling van de verschilscores symmetrisch is, kan de *Wilcoxon signed rank toets* gebruikt worden om een verschil tussen de medianen van gepaarde groepen te toetsen.[^2] Gebruik de gepaarde [tekentoets](27-Tekentoets-II-R.html) om medianen te toetsen wanneer de verdeling van verschilscores niet symmetrisch is.
 
 # Onderwijscasus
 <div id ="casus">
@@ -63,20 +63,20 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 # Assumpties
 
-Het meetniveau van de data is ordinaal of continu.[^2] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data is te vinden in een andere toetspagina.
+Het meetniveau van de afhankelijke variabele is ordinaal of continu.[^1] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data is te vinden in een andere toetspagina.
 
-De *Wilcoxon signed rank toets* kan een alternatief zijn voor de [gepaarde t-toets](02-Gepaarde-t-toets-R.html). Een voordeel van de *Wilcoxon signed rank toets* is dat de data niet aan de assumptie van normaliteit hoeven te voldoen. Maar als de data wel normaal verdeeld zijn, heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen dan de [gepaarde t-toets](02-Gepaarde-t-toets-R.html).[^3]<sup>, </sup>[^4] Vandaar dat ondanks dit voordeel minder vaak voor de *Wilcoxon signed rank toets* gekozen wordt. 
+De *Wilcoxon signed rank toets* kan een alternatief zijn voor de [gepaarde t-toets](02-Gepaarde-t-toets-R.html). Een voordeel van de *Wilcoxon signed rank toets* is dat de data niet aan de assumptie van normaliteit hoeven te voldoen. Maar als de data wel normaal verdeeld zijn, heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen[^4] dan de [gepaarde t-toets](02-Gepaarde-t-toets-R.html).[^5] Vandaar dat ondanks dit voordeel minder vaak voor de *Wilcoxon signed rank toets* gekozen wordt. 
 
-## Verdeling data
+## Verdeling steekproef
 
-De *Wilcoxon signed rank toets* schrijft geen assumpties voor over de verdeling van de verschilscores (verschillen tussen beide meetmomenten voor alle observatie-eenheden). In principe toetst de *Wilcoxon signed rank toets* een hypothese over het verschil tussen de verdelingen van twee gepaarde groepen. Als de verschilscores echter symmetrisch zijn, toetst de *Wilcoxon signed rank toets* ook een hypothese over het verschil tussen de medianen van twee gepaarde groepen. In dat geval heeft de *Wilcoxon signed rank toets* een hoger onderscheidend vermogen[^4] dan de [tekentoets](06-Tekentoets-R.html) om medianen te toetsen.[^11]
+De *Wilcoxon signed rank toets* schrijft geen assumpties voor over de verdeling van de verschilscores (verschillen tussen beide meetmomenten voor alle observatie-eenheden).[^5] In principe toetst de *Wilcoxon signed rank toets* een hypothese over het verschil tussen de verdelingen van twee gepaarde groepen. Als de verschilscores echter symmetrisch zijn, toetst de *Wilcoxon signed rank toets* ook een hypothese over het verschil tussen de medianen van twee gepaarde groepen. In dat geval heeft de *Wilcoxon signed rank toets* een hoger onderscheidend vermogen[^4] dan de [tekentoets](06-Tekentoets-R.html) om medianen te toetsen.[^5]
 
-Als er geen symmetrische verdeling van verschilscores is, doet de *Wilcoxon signed rank toets* een uitspraak over het verschil tussen verdelingen.[^12] Een verschil tussen verdelingen kan meerdere oorzaken hebben. De top van de verdelingen kan verschillend zijn, maar ook de spreiding van de verdeling kan verschillen. De *Wilcoxon signed rank toets* maakt een rangschikking van de absolute waarden van de verschilscores en telt vervolgens de rangschikkingen op voor de positieve en negatieve verschilscores. Het verschil tussen de som van de positieve en negatieve rangschikkingen bepaalt de significantie van de toets. Benoem daarom de sommen van positieve en negatieve rangschikkingen in de rapportage en visualiseer de verdeling van beide gepaarde groepen om duidelijk te maken op welke manier de verdelingen van elkaar verschillen.
+Als er geen symmetrische verdeling van verschilscores is, doet de *Wilcoxon signed rank toets* een uitspraak over het verschil tussen verdelingen. Een verschil tussen verdelingen kan meerdere oorzaken hebben. De top van de verdelingen kan verschillend zijn, maar ook de spreiding van de verdeling kan verschillen. De *Wilcoxon signed rank toets* maakt een rangschikking van de absolute waarden van de verschilscores en telt vervolgens de rangschikkingen op voor de positieve en negatieve verschilscores. Het verschil tussen de som van de positieve en negatieve rangschikkingen bepaalt de significantie van de toets. Benoem daarom de sommen van positieve en negatieve rangschikkingen in de rapportage en visualiseer de verdeling van beide gepaarde groepen om duidelijk te maken op welke manier de verdelingen van elkaar verschillen.
 
 # Effectmaat
 
-De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^5] 
-De *Wilcoxon signed rank toets* heeft als effectmaat *r*.[^6] Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^7]
+De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^6] 
+De *Wilcoxon signed rank toets* heeft als effectmaat *r*.[^7] Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^8]
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
@@ -141,9 +141,9 @@ vN_T2 <- length(Alumni_jaarinkomens_T2)
 * Aangezien de gegevens gepaard zijn, zijn de groepsgroottes op beide meetmomenten gelijk: *n~T1~* = `r vN_T1` en *n~T2~* = `r vN_T2`
 <!-- ## /TEKSTBLOK: Data-beschrijven.R-->
 
-Geef de data visueel weer met een histogram en boxplot.
 
-### Histogram
+
+## De data visualiseren
 
 Maak een histogram om de verdeling van de bruto jaarinkomens van de alumni één jaar en vijf jaar na afstuderen visueel weer te geven.
 
@@ -157,8 +157,7 @@ ggplot(Alumni_jaarinkomens,
   geom_histogram(color = "grey30",
                  fill = "#0089CF") +
   facet_wrap(~ Meetmoment, labeller = labeller(Meetmoment = c(T1="Een jaar na afstudereren", T2="Vijf jaar na afstuderen"))) +
-  geom_density(alpha = .2, adjust = 1) +
-  ylab("Frequentiedichtheid") +
+  ylab("Frequentie") +
   labs(title = "Bruto jaarinkomen alumni Mens & Maatschappij")
 ```
 <!-- ## /OPENBLOK: Histogram1.R -->
@@ -233,16 +232,13 @@ Rangschikkingen <- rank(abs(Verschilscores))
 # Maak een vector met daarin de tekens (plus of min) van verschilscores)
 Tekens <- sign(Verschilscores)
 
-# Bereken de het aantal en de som van de positieve rangschikkingen
+# Bereken het aantal en de som van de positieve rangschikkingen
 N_positief <- length(Tekens[Tekens == 1])
 Som_positief <- sum(Rangschikkingen[Tekens == 1])
 
-# Bereken de het aantal en de som van de negatieve rangschikkingen
+# Bereken het aantal en de som van de negatieve rangschikkingen
 N_negatief <- length(Tekens[Tekens == -1])
 Som_negatief <- sum(Rangschikkingen[Tekens == -1])
-
-print(round(Som_positief))
-
 ```
 <!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets3.R -->
 
@@ -274,15 +270,14 @@ De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de 
 ```
 <!-- ## /CLOSEDBLOK: Footer.R -->
 
-[^1]: Van Geloven, N. (25 september2013). *Wilcoxon signed rank toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets).
-[^2]: Laerd Statistics (2018). *Wilcoxon Signed-Rank Test using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/wilcoxon-signed-rank-test-using-spss-statistics.php  
-[^3]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test).
+[^1]: Laerd Statistics (2018). *Wilcoxon Signed-Rank Test using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/wilcoxon-signed-rank-test-using-spss-statistics.php
+[^2]: Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese waar is.  
+[^3]: Statistics How To (27 mei 2018). *One Sample Median Test*. [Statistics How to](https://www.statisticshowto.datasciencecentral.com/one-sample-median-test/).
 [^4]: Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese waar is.  
-[^5]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
-[^6]: De effectmaat *r* wordt voor de *Wilcoxon signed rank toets* berekend door de
+[^5]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage.
+[^6]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
+[^7]: De effectmaat *r* wordt voor de *Wilcoxon signed rank toets* berekend door de
 *z*-waarde behorend bij de *p*-waarde van de toets te delen door de wortel van
 het aantal observatie-eenheden, i.e. $\frac{z}{\sqrt{N}}$.
-[^7]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
+[^8]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
 [^9]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
-[^11]: Statistics How To (27 mei 2018). *One Sample Median Test*. [Statistics How to](https://www.statisticshowto.datasciencecentral.com/one-sample-median-test/).
-[^12]: Divine, G. W., Norton, H. J., Barón, A. E., & Juarez-Colunga, E. (2018). *The Wilcoxon–Mann–Whitney procedure fails as a test of medians*. The American Statistician, 72(3), 278-286.

@@ -40,7 +40,7 @@ if (!exists("Substitute_var")) {
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-source(paste0(here::here(),"/01. Includes/data/26.R"))
+source(paste0(here::here(),"/01. Includes/data/06.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 # Toepassing
@@ -107,7 +107,7 @@ Het gemiddelde jaarinkomen van de alumni is `r paste("€", vMean, sep="")` met 
 
 ## Normaliteit visualiseren en testen
 
-De *tekentoets* is een alternatief voor de [one-sample t-toets](01-One-sample-t-toets-R.html) wanneer de data geen normale verdeling volgt. Hoewel het visueel inspecteren en testen van normaliteit [^3] niet vereist is, is het nuttig om de verdeling van de data te visualiseren en te vergelijken met de normaalverdeling.
+De *tekentoets* is een alternatief voor de [one-sample t-toets](01-One-sample-t-toets-R.html) wanneer de data geen normale verdeling volgt. Hoewel het visueel inspecteren en testen van normaliteit niet vereist is, is het nuttig om de verdeling van de data te visualiseren en te vergelijken met de normaalverdeling.
 
 ### Histogram
 Geef de verdeling van de data weer in een histogram. Focus bij het analyseren van een histogram op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.[^6]<sup>, </sup>[^7]
@@ -122,7 +122,7 @@ ggplot(data.frame(Jaarlijks_inkomen),
                  binwidth = 10000, 
                  color = "white", 
                  fill = "#158CBA") +
-  geom_density(alpha = .2, adjust = 1) +
+  #geom_density(alpha = .2, adjust = 1) +
   ylab("Frequentiedichtheid") +
   xlab("Jaarlijks_inkomen") +
 scale_x_continuous(labels = as.character(seq(20000, 100000, 20000)), 
@@ -151,44 +151,42 @@ lillie.test(Jaarlijks_inkomen)
 De p-waarde van de *Kolmogorov-Smirnov test* is kleiner dan 0,0001, dus de data zijn niet normaal verdeeld. Naast deze test, kan de *Shapiro-Wilk test* ook gebruikt worden om normaliteit te testen. Gebruik bij normaal verdeelde data de [one-sample t-toets](01-One-sample-t-toets-R.html).
 
 # Tekentoets 
-Voer een tweezijdige *tekentoets* uit om te bepalen of het mediane jaarinkomen van de alumni Journalistiek hoger ligt dan het modale inkomen van €36.000. Gebruik de `binom.test` functie [^4] met de volgende argumenten: het aantal alumni dat een hoger jaarinkomen heeft dan het modale inkomen van €36.000 `boven_modaal`, het totale aantal alumni `totaal_alumni` (gelijk aan de steekproefgrootte) en `alternative="two.sided"` om een tweezijdige alternatieve hypothese te toetsen.
+Voer een tweezijdige *tekentoets* uit om te bepalen of het mediane jaarinkomen van de alumni Journalistiek hoger ligt dan het modale inkomen van €36.000. Gebruik van het `DescTools` package de `SignTest()` functie met de argumenten `x = Jaarlijks_inkomen` voor de data van de steekproef, `mu = 36000` voor de mediaan die getoetst wordt en `alternative="two.sided"` om een tweezijdige alternatieve hypothese te toetsen.
 
 <!-- ## OPENBLOK: Tekentoets.R -->
 ```{r Tekentoets}
-boven_modaal  <- length(Jaarlijks_inkomen[Jaarlijks_inkomen > 36000])
-totaal_alumni <- length(Jaarlijks_inkomen)
-
-binom.test(boven_modaal, totaal_alumni, alternative = "two.sided")
+library(DescTools)
+SignTest(x = Jaarlijks_inkomen, mu = 36000, alternative = "two.sided")
 ```
 <!-- ## /OPENBLOK: Tekentoets.R -->
 
 <!-- ## CLOSEDBLOK: Tekentoets.R -->
 ```{r T-test als object, echo = FALSE}
-boven_modaal  <- length(Jaarlijks_inkomen[Jaarlijks_inkomen > 36000])
-totaal_alumni <- length(Jaarlijks_inkomen)
+b <- SignTest(x = Jaarlijks_inkomen, mu = 36000, alternative = "two.sided")
 
-b <- binom.test(boven_modaal, totaal_alumni, alternative = "two.sided")
-
-vD_waarde <- Round_and_format(b$statistic)
+vS <- b$statistic
 vN <- b$parameter
-vDF <- b$parameter
 vconf.int1 <- Round_and_format(b$conf.int[1])
 vconf.int2 <- Round_and_format(b$conf.int[2])
-vProp <- Round_and_format(b$estimate)
+vMed <- Round_and_format(b$estimate)
 ```
 <!-- ## /CLOSEDBLOK: Tekentoets.R -->
 
 <!-- ## TEKSTBLOK: Tekentoets.R -->
-* Van de `r totaal_alumni` alumni verdienen `r boven_modaal` alumni boven modaal, dit is een proportie van `r vProp`
-* p-waarde < 0,0001, dus de H~0~ wordt verworpen [^5]
-* 95%-betrouwbaarheidsinterval: bij het herhalen van het onderzoek zal in 95% van de gevallen de proportie van alumni data boven modaal verdient in het interval vallen. In deze casus is het interval tussen `r paste(vconf.int1, "0", sep = "")` en `r vconf.int2`.
+* De mediaan van de steekproef is significant verschillend van €36.000, *S* = `r vS`, *N* = `r vN`, p-waarde < 0,0001. De H~0~ wordt verworpen. [^5]
+* De toetsstatistiek *S* is het aantal positieve verschillen (inkomen hoger dan modaal inkomen), *N* is het totaal aantal verschillen
+* Van de `r vN` alumni verdienen `r vS` alumni boven modaal
+* De geschatte mediaan van de steekproef is `r vMed` met bijbehorend 95%-betrouwbaarheidsinterval van `r vconf.int1` tot `r vconf.int2`.
 
 <!-- ## /TEKSTBLOK: Tekentoets.R -->
 
 
 # Rapportage
 
-De *tekentoets* is uitgevoerd om te toetsen of het mediane inkomen van alumni van de opleiding Journalistiek veschilt van het modale inkomen in Nederland van €36.000.Van de `r totaal_alumni` alumni verdienen `r boven_modaal` alumni boven modaal, *p* < 0,0001. Dit is een proportie van `r vProp` met bijbehorend 95%-betrouwbaarheidsinterval van `r paste(vconf.int1, "0", sep = "")` tot `r vconf.int2`. Deze resultaten duiden op een significant verschil tussen het mediane jaarinkomen van alumni van de opleiding Journalistiek en het mediane jaarinkomen van de gemiddelde Nederlander. De inkomens van de alumni lijken hoger te liggen dan dat van de gemiddelde Nederlander.
+De *tekentoets* is uitgevoerd om te toetsen of het mediane inkomen van alumni van de opleiding Journalistiek veschilt van het modale inkomen in Nederland van €36.000. Het mediane inkomen van alumni verschilt significant van €36.000 (*S* = `r vS`, *N* = `r vN`, *p* < 0,0001). De geschatte mediaan is `r vMed` met bijbehorend 95%-betrouwbaarheidsinterval van `r vconf.int1` tot `r vconf.int2`. Van de `r vN` alumni verdienen `r vS` alumni boven modaal. Deze resultaten duiden op een verschil tussen het mediane jaarinkomen van alumni van de opleiding Journalistiek en het mediane jaarinkomen van de gemiddelde Nederlander waarbij de inkomens van de alumni hoger lijken te liggen.
+
+
+
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
@@ -197,8 +195,6 @@ De *tekentoets* is uitgevoerd om te toetsen of het mediane inkomen van alumni va
 
 [^1]: Van Geloven, N. (25 mei 2016). *Tekentoets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Tekentoets). 
 [^2]: Bruto modaal inkomen 2019, Centraal Planbureau. 
-[^3]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).  
-[^4]: Wikipedia (5 februari 2020). *Sign test*. [https://en.wikipedia.org/wiki/Sign_test](https://en.wikipedia.org/wiki/Sign_test).
 [^5]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
 [^6]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 [^7]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport.

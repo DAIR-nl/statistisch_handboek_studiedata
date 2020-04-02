@@ -17,8 +17,8 @@ Vooropleiding <-  ifelse(Seed == 1, "Rechtsgeleerdheid",
 Punten_mogelijkheden <- c(6, 12, 18, 24, 30, 36, 36, 42, 42, 42, 48, 48, 48, 48, 54, 54, 54, 60, 60, 60, 60, 60, 60)
 EC_Jaar1 <- sample(Punten_mogelijkheden, 300, replace = TRUE)
 
-Studentnr <- sample(3000000:4000000, 300)
-Resultaten_Arbeidsrecht <- data.frame(Studentnr, Vooropleiding, EC_Jaar1)
+Studentnummer <- sample(3000000:4000000, 300)
+Resultaten_Arbeidsrecht <- data.frame(Studentnummer, Vooropleiding, EC_Jaar1)
 
 ## puntencorrectie om Fiscaal en Notarieel +6 punten te geven en Rechtsgeleerdheid -6 punten
 Resultaten_Arbeidsrecht$EC_Jaar1[Vooropleiding == "Fiscaal Recht" | Vooropleiding == "Notarieel Recht"] <-

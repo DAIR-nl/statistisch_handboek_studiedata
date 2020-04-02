@@ -47,11 +47,8 @@ source(paste0(here::here(),"/01. Includes/data/08.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 # Toepassing
-Gebruik de *Mann-Whitney U toets* om te toetsen of twee onafhankelijke groepen significant van elkaar verschillen. 
+Gebruik de *Mann-Whitney U toets* om te toetsen of de verdelingen twee onafhankelijke groepen significant van elkaar verschillen.[^1] De *Mann-Whitney U toets* kan een alternatief zijn voor de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html) als de verdelingen niet normaal verdeeld zijn. Alleen als de verdelingen van beide groepen dezelfde vorm hebben, kan de *Mann-Whitney U toets* gebruikt worden om het verschil tussen de medianen van twee groepen te toetsen.[^9] Gebruik *Mood's mediaan toets* om medianen te toetsen bij twee verdelingen die niet dezelfde vorm hebben.
 
-Deze toets wordt ook *Mann–Whitney–Wilcoxon*, *Wilcoxon rank-sum toets*, of *Wilcoxon–Mann–Whitney toets* genoemd.[^1] Niet te verwarren met de [Wilcoxon Signed Rank Toets](07-Wilcoxon-signed-rank-toets-R.html) die toetst of twee afhankelijke groepen significant van elkaar verschillen. 
-
-De *Mann-Whitney U toets* kan een alternatief zijn voor de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html). De *Mann-Whitney U toets* stelt minder eisen aan de data en hoeft onder andere niet te voldoen aan de assumptie van normaliteit. Bij de *Mann-Whitney U toets* hebben uitbijters minder invloed op het eindresultaat dan bij de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html). Daarentegen, als de data wel normaal verdeeld zijn heeft de *Mann-Whitney U toets* minder onderscheidend vermogen dan de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html).[^2] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Mann-Whitney U toets* gekozen wordt. 
 
 # Onderwijscasus
 <div id ="casus">
@@ -65,7 +62,16 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 </div>
 
 # Assumpties
-Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden: de data zijn ordinaal of numeriek, de groepen zijn onafhankelijk van elkaar [^3] en het aantal groepen is twee. Gebruik bij meer dan twee groepen de [Kruskal Wallis toets](10-Kruskal-Wallis-toets-R.html).
+
+Het meetniveau van de afhankelijke variabele is ordinaal of continu.[^9] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data is te vinden in een andere toetspagina.
+
+De *Mann-Whitney U toets* stelt minder eisen aan de data en hoeft onder andere niet te voldoen aan de assumptie van normaliteit.  Bij de *Mann-Whitney U toets* hebben uitbijters minder invloed op het eindresultaat dan bij de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html). Daarentegen, als de data wel normaal verdeeld zijn heeft de *Mann-Whitney U toets* minder onderscheidend vermogen dan de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html).[^2] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Mann-Whitney U toets* gekozen wordt.
+
+## Verdeling steekproeven
+
+De *Mann-Whitney U toets* schrijft geen assumpties voor over de verdeling van de verschilscores (verschillen tussen beide meetmomenten voor alle observatie-eenheden).[^5] In principe toetst de *Mann-Whitney U toets* een hypothese over het verschil tussen de verdelingen van twee ongepaarde groepen. Als de verdelingen van beide ongepaarde groepen echter dezelfde vorm hebben, toetst de *Mann-Whitney U toets* ook een hypothese over het verschil tussen de medianen. Immers, het enige verschil tussen de verdeling is in dat geval een verschuiving van de verdeling, dus een verandering van de mediaan. In dat geval heeft de *Mann-Whitney U toets* een hoger onderscheidend vermogen[^4] dan *Mood's mediaan toets* om medianen te toetsen.[^10]
+
+Als de verdelingen van de groepen niet dezelfde vorm hebben, doet de *Mann-Whitney U toets* een uitspraak over het verschil tussen verdelingen. Een verschil tussen verdelingen kan meerdere oorzaken hebben. De top van de verdelingen kan verschillend zijn, maar ook de spreiding van de verdeling kan verschillen.[^9] De *Mann-Whitney U toets* maakt een rangschikking van alle observaties van beide groepen samengevoegd en telt vervolgens apart de rangschikkingen op voor de observaties in beide groepen. Het verschil tussen de som van de rangschikkingen in beide groepen bepaalt de significantie van de toets.[^10] Met behulp van de groepsgroottes kan ook de gemiddelde rangschikking van beide groepen berekend worden. Vanuit dat perspectief kan de *Mann-Whitney U toets* gezien worden als een toets die de gemiddelde rangschikking van twee groepen vergelijkt. Benoem daarom de gemiddelde rangschikking van beide groepen in de rapportage en visualiseer de verdeling van beide groepen om duidelijk te maken op welke manier de verdelingen van elkaar verschillen.
 
 # Effectmaat
 
@@ -153,6 +159,30 @@ vQ3_Inter <- Round_and_format(x[1,5])
 
 <!-- ## /TEKSTBLOK: Data-beschrijven2.R -->
 
+
+## De data visualiseren
+
+Maak een histogram om de verdeling van het aantal studiepunten in het tweede jaar voor studenten met een Nederlandse en buitenlandse vooropleiding visueel weer te geven.
+
+<!-- ## OPENBLOK: Histogram1.R -->
+```{r histogram, warnings=FALSE, message=FALSE}
+## Histogram met ggplot2
+library(ggplot2)
+
+ggplot(Studiepunten_studiejaar2,
+  aes(x = Studiepunten)) +
+  geom_histogram(aes(y = ..density..),
+                 color = "grey30",
+                 fill = "#0089CF") +
+  facet_wrap(~ Vooropleiding, labeller = labeller(Vooropleiding = c(Nederlands="Nederlandse vooropleiding", buitenlands="Buitenlandse vooropleiding"))) +
+  ylab("Frequentie") +
+  labs(title = "Studiepunten van studenten Business Administration in het tweede jaar ")
+```
+<!-- ## /OPENBLOK: Histogram1.R -->
+
+Beide histogrammen bevatten een grote groep studenten met een laag aantal studiepunten (twaalf of minder). De overige studenten volgen een ietwat scheve verdeling met de top rond de vijftig studiepunten. De verdelingen van beide groepen studenten hebben echter niet dezelfde vorm. De frequentiedichtheid van het aantal studenten rond de vijftig studiepunten is veel hoger voor de studenten met Nederlandse vooropleiding, terwijl de frequentiedichtheid van het aantal studenten met twaalf of minder studiepunten juist hoger is voor de studenten met een buitenlandse vooropleiding. De *Mann-Whitney U toets* kan in dit geval dus niet gebruikt worden om een uitspraak te doen over de significantie van het verschil van de medianen van beide groepen. 
+
+
 ## Mann-Whitney U toets
 <!-- ## TEKSTBLOK: Mann-Whitney-U-toets-1.R -->
 Gebruik `wilcox.test()` om een *Mann-Whitney U toets* te doen. Het eerste argument bevat het aantal studiepunten van studenten met een Nederlandse vooropleiding `Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands]`; het tweede argument het aantal studiepunten van studenten met een buitenlandse vooropleiding `Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands]`. Voer daarna de argument `paired = FALSE` omdat de steekproeven ongepaard zijn, het argument `alternative = "two.sided" ` vanwege de tweezijdige alternatieve hypothese en
@@ -162,20 +192,13 @@ van de verschilscores.[^6]<sup>,</sup>[^7]
 
 <!-- ## OPENBLOK: Mann-Whitney-U-toets-2.R -->
 ```{r Mann Whitney U toets}
-wilcox.test(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands], 
-            Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands],
-            paired = FALSE,
-            alternative = "two.sided",
-            conf.int = TRUE)
+wilcox.test(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands], Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands], paired = FALSE, alternative = "two.sided", conf.int = TRUE)
 ```
 <!-- ## /OPENBLOK: Mann-Whitney-U-toets-2.R -->
 <!-- ## CLOSEDBLOK: Mann-Whitney-U-toets-3.R -->
 ```{r Mann Whitney U toets als object, include = FALSE}
-wcx <- wilcox.test(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands], 
-            Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands],
-            paired = FALSE,
-            alternative = "two.sided",
-            conf.int = TRUE)
+wcx <- wilcox.test(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands], Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands], paired = FALSE, alternative = "two.sided", conf.int = TRUE)
+
 vW_W <- Round_and_format_0decimals(wcx$statistic)
 vW_P <- Round_and_format(wcx$p.value)
 vW_est <- Round_and_format(wcx$estimate)
@@ -205,18 +228,30 @@ paste("De effectmaat is", abs(r))
 ```
 <!-- ## /OPENBLOK: Mann-Whitney-U-toets-4.R -->
 
+Bereken ten slotte de gemiddelde rangschikking van beide groepen.
+<!-- ## OPENBLOK: Wilcoxon-signed-rank-toets3.R -->
+```{r sommen}
+Rangschikkingen_Nederlandse_vooropleiding <- mean(rank(Studiepunten_studiejaar2$Studiepunten)[Vooropleiding_Nederlands])
+
+Rangschikkingen_buitenlandse_vooropleiding <- mean(rank(Studiepunten_studiejaar2$Studiepunten)[!Vooropleiding_Nederlands])
+```
+<!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets3.R -->
+
 <!-- ## TEKSTBLOK: Mann-Whitney-U-toets-4.R -->
 * *W* = `r vW_W`, *p* = < 0,0001, *r* = `r Round_and_format(abs(r))`
 * *p*-waarde < 0,05, dus de H~0~ wordt niet verworpen.[^8]
 * Effectmaat is `r Round_and_format(abs(r))`, dus een klein tot gemiddeld effect
+* De gemiddelde rangschikking is `r Round_and_format(Rangschikkingen_Nederlandse_vooropleiding)` (*n*=`r vN_NL`) voor studenten met een Nederlandse vooropleiding en `r Round_and_format(Rangschikkingen_buitenlandse_vooropleiding)` (*n*=`r vN_Inter`) voor studenten met een buitenlandse vooropleiding  
 * De mediaan van de verschilscores is `r vW_est` met een 
-95%-betrouwbaarheidsinterval  van `r vW_lb` tot `r vW_ub`
+95%-betrouwbaarheidsinterval  van `r vW_lb` tot `r vW_ub`. Aangezien de verdelingen niet dezelfde vorm hebben, is de mediaan niet informatief en wordt deze niet opgenomen in de rapportage.
 <!-- ## /TEKSTBLOK: Mann-Whitney-U-toets-4.R -->
 
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal studiepunten in het tweede jaar hetzelfde is voor studenten met buitenlandse vooropleiding als voor studenten met Nederlandse vooropleiding. Uit de resultaten kan afgelezen worden dat er een statistisch significant verschil is tussen het aantal studiepunten van studenten met een buitenlandse vooropleiding en met een Nederlandse vooropleiding, *W* = `r vW_W`, *p* < 0,0001, *r* = `r Round_and_format(abs(r))`. Er is een klein tot gemiddeld effect: het verschil in mediaan tussen beide groepen (Nederlandse minus buitenlandse vooropleiding) is geschat op `r vW_est ` met een 95%-betrouwbaarheidsinterval van `r vW_lb` tot `r vW_ub`.  
+De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal studiepunten in het tweede jaar hetzelfde is voor studenten met buitenlandse vooropleiding als voor studenten met Nederlandse vooropleiding. Uit de resultaten kan afgelezen worden dat er een significant verschil is tussen het aantal studiepunten van studenten met een buitenlandse vooropleiding en met een Nederlandse vooropleiding, *W* = `r vW_W`, *p* < 0,0001, *r* = `r Round_and_format(abs(r))`. Er is een klein tot gemiddeld effect van het verschil in het land van vooropleiding op het aantal studiepunten. De gemiddelde rangschikking is `r Round_and_format(Rangschikkingen_Nederlandse_vooropleiding)` (*n*=`r vN_NL`) voor studenten met een Nederlandse vooropleiding en `r Round_and_format(Rangschikkingen_buitenlandse_vooropleiding)` (*n*=`r vN_Inter`) voor studenten met een buitenlandse vooropleiding. Studenten met een Nederlandse vooropleiding lijken dus een hoger aantal studiepunten te halen in het tweede jaar dan studenten met een buitenlandse vooropleiding.  
+
+
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->
@@ -234,3 +269,7 @@ het aantal observaties, i.e. $\frac{z}{\sqrt{N}}$.
 [^6]: De mediaan van de verschilscores kan bij twee ongepaarde steekproeven bijvoorbeeld geschat worden door alle *m x n* verschilscores te berekenen tussen *m* observaties uit de ene steekproef en *n* observaties uit de andere steekproef. De mediaan van deze *m x n* verschilscores is dan de schatting.
 [^7]: Wikipedia (10 maart 2020). *Hogdes-Lehmann estimator*.[https://en.wikipedia.org/wiki/Hodges%E2%80%93Lehmann_estimator](https://en.wikipedia.org/wiki/Hodges%E2%80%93Lehmann_estimator) 
 [^8]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
+[^9]: Laerd Statistics (2018). *Mann-Whitney U Test using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/mann-whitney-u-test-using-spss-statistics.php
+[^10]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage.
+[^11]: Miller, I. & Miller, C. (2012). *John E. Freund's Mathematical Statistics with Applications*. Pearson: eighth edition.
+

@@ -257,7 +257,7 @@ De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test*
 <!-- ## /CLOSEDBLOK: data inladen-2.R -->
 
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test.R -->
-Er is een subset van de verschillen tussen het aantal studieuren op T~0~ en T~1~ ingeladen, `Uren_studeren_verschil_n30` met daarin `r length(Uren_studeren_verschil_n30)` observaties.
+Er is een subset van de verschillen tussen het aantal studieuren op T~0~ en T~1~ ingeladen, `Uren_studeren_verschil_n30`, met daarin `r length(Uren_studeren_verschil_n30)` observaties. Voor een relatief kleine steekproef als deze is de *Shapiro-Wilk Test* geschikt.
 
 <!-- ## /TEKSTBLOK: Shapiro-Wilk-test.R -->
 <!-- ## OPENBLOK: Shapiro-Wilk-test-1.R -->
@@ -272,7 +272,7 @@ Voor deze subset is de p-waarde `r Round_and_format(shapiro.test(Uren_studeren_v
 
 ## Gepaarde t-toets
 <!-- ## TEKSTBLOK: T-test.R -->
-Gebruik `t.test()`. Om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn, gebruik het argument `paired = TRUE` om een *gepaarde t-toets* uit te voeren. Gebruik hier weer het hele dataframe `Studielogboek`. Het eerste argument bestaat uit de afhankelijke variabele `Uren_studeren` en de groepvariabele `Meetmoment`. 
+Gebruik `t.test()`. Gebruik het argument `paired = TRUE` om een *gepaarde t-toets* uit te voeren. Gebruik hier weer het hele dataframe `Studielogboek`. Het eerste argument bestaat uit de afhankelijke variabele `Uren_studeren` en de groepvariabele `Meetmoment`. 
 <!-- ## /TEKSTBLOK: T-test.R -->
 De verwachting is dat de studenten gemiddeld meer gaan studeren, maar omdat het relevant is om te weten of de studenten meer of minder gaan studeren na de cursus is er voor gekozen om tweezijdig te toetsen. 
 
@@ -307,7 +307,7 @@ De p-waarde geeft aan of het verschil tussen twee groepen statistisch significan
 Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.[^12]  
 
 <!-- ## TEKSTBLOK: Cohen-d.R -->
-Gebruik `cohen.d()` met `paired = TRUE` om de effectgrootte te meten.
+Gebruik `cohen.d()` om de effectmaat te berekenen. Gebruik het argument `paired = TRUE` omdat het de effectmaat van een *gepaarde t-toets* is. Gebruik hier weer het hele dataframe `Studielogboek`. Het eerste argument bestaat uit de afhankelijke variabele `Uren_studeren` en de groepvariabele `Meetmoment`.
 <!-- ## /TEKSTBLOK: Cohen-d.R  -->
 
 <!-- ## OPENBLOK: Cohens-d-test.R -->

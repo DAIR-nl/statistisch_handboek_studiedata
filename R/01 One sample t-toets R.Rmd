@@ -207,7 +207,8 @@ De p-waarde is `r Round_and_format(lillie.test(Gemiddeld_cijfer_WNS)$p.value)`, 
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en vooral geschikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test.R -->
-Er is een subset van `Gemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS_n30`. De subset bevat `r length(Gemiddeld_cijfer_WNS_n30)` studenten.
+Er is een subset van `Gemiddeld_cijfer_WNS` ingeladen: `Gemiddeld_cijfer_WNS_n30`. De subset bevat `r length(Gemiddeld_cijfer_WNS_n30)` studenten. Voor een relatief kleine steekproef als deze is de *Shapiro-Wilk Test* geschikt.
+
 <!-- ## /TEKSTBLOK: Shapiro-Wilk-test.R -->
 <!-- ## OPENBLOK: Shapiro-Wilk-test.R -->
 ``` {r Shapiro-Wilk Test, warning=FALSE}

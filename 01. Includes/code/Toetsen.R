@@ -53,4 +53,6 @@ dfToetsen <- tribble(
     "23 Mann-Whitney U toets II",                                                             "0",          "0",       "0",               "0",       
     "24 Friedmans ANOVA II",                                                                  "0",          "0",       "0",               "0",       
     "25 Kruskal Wallis toets II",                                                             "0",          "0",       "0",               "0",       
+    "26 Tekentoets II",                                                                       "0",          "0",       "0",               "0",       
+    "27 Mood's mediaan toets",                                                                "0",          "0",       "0",               "0",       
 )

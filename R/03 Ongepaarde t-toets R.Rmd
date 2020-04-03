@@ -275,7 +275,8 @@ Bij deze casus is van beide groepen de p-waarde > 0,05; er is geen statistisch s
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en vooral geschikt bij kleine steekproeven (n < 50). Als de p-waarde < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling. 
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test -->
-Er zijn 2 subsets van `Cijfers_gem` ingeladen: `Cijfers_2010_n30` en `Cijfers_2011_n30`. Beide subsets bevatten `r length(Cijfers_2010_n30)` studenten.
+Er zijn twee subsets van `Cijfers_gem` ingeladen: `Cijfers_2010_n30` en `Cijfers_2011_n30`. Beide subsets bevatten `r length(Cijfers_2010_n30)` studenten. Voor relatief kleine steekproeven als deze is de *Shapiro-Wilk Test* geschikt.
+
 <!-- ## /TEKSTBLOK: Shapiro-Wilk-test -->
 <div class = "col-container">
   <div class="col">

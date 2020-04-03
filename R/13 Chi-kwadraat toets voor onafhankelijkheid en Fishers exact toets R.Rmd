@@ -167,13 +167,13 @@ prop.table(Uitval_studenten_kruistabel, 1)
 <!-- ## /OPENBLOK: Data-kruistabel2.R -->
 
 <!-- ## TEKSTBLOK: Data-kruistabel3.R -->
-De kruistabel en bijbehorende tabel met proporties laat zien dat het percentage uitgevallen studenten hoger is na invoering van het leenstelsel (`r Round_and_format(100 * prop.table(Uitval_studenten_kruistabel, 1)[2,2])`) dan voor invoering van het leenstelsel (`r Round_and_format(100 * prop.table(Uitval_studenten_kruistabel, 1)[1,2])`).
+De kruistabel en bijbehorende tabel met proporties laat zien dat het percentage uitgevallen studenten hoger is na invoering van het leenstelsel (`r Round_and_format(100 * prop.table(Uitval_studenten_kruistabel, 1)[2,2])`%) dan voor invoering van het leenstelsel (`r Round_and_format(100 * prop.table(Uitval_studenten_kruistabel, 1)[1,2])`%).
 <!-- ## /TEKSTBLOK: Data-kruistabel3.R -->
 
 
 ## Assumptie groepsgrootte
 
-Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk of kleiner dan vijf is. Bereken de verwachte waarde met het argument `chisq.test()$expected` van de functie `chisq.test()` met als argumenten de variabelen `Uitval_studenten_functiebeperking_leenstelsel$Periode` (voor of na invoering leenstelsel) en `Uitval_studenten_functiebeperking_leenstelsel$Uitval` (wel of niet uitgevallen). 
+Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk of kleiner dan vijf is. Bereken het verwacht aantal observaties met het argument `chisq.test()$expected` van de functie `chisq.test()` met als argumenten de variabelen `Uitval_studenten_functiebeperking_leenstelsel$Periode` (voor of na invoering leenstelsel) en `Uitval_studenten_functiebeperking_leenstelsel$Uitval` (wel of niet uitgevallen). 
 
 <!-- ## OPENBLOK: Assumptie1.R -->
 ```{r chi2 assumptie}
@@ -198,7 +198,7 @@ chisq.test(Uitval_studenten_functiebeperking_leenstelsel$Periode,
 ```
 <!-- ## /OPENBLOK: Chi2-toets-2.R -->
 
-Bereken de effectmaat *w* vervolgens op basis van de $\chi^2$-waarde van de *Chi-kwadraat toets voor onafhankelijkheid*.
+Bereken de effectmaat *w* vervolgens op basis van de &chi;^2^-waarde van de *Chi-kwadraat toets voor onafhankelijkheid*.
 <!-- ## OPENBLOK: Chi2-toets-3.R -->
 ```{r effectsize}
 # Sla de teststatistiek op
@@ -228,8 +228,8 @@ vDF <- Chi2$parameter
 <!-- ## /CLOSEDBLOK: Chi2-toets-4.R -->
 
 <!-- ## TEKSTBLOK: Chi2-toets-5.R-->
-* *χ^2^* ~1~ = `r vChi2`, *p* = `r vP`, *w* = `r Round_and_format(w)`  
-* Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar *k* staat voor kolom en *r* voor rij. In dit geval geldt *df* = `r vDF`. De continuïteitscorrectie van Yates wordt automatisch toegepast wanneer het aantal vrijheidsgraden 1 is.[^7]   
+* &chi;^2^ ~1~ = `r vChi2`, *p* = `r vP`, *w* = `r Round_and_format(w)`  
+* Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar *k* staat voor kolom en *r* voor rij. In dit geval geldt *df* = `r vDF`.  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen.[^11]
 * Effectmaat is `r Round_and_format(w)`, dus een klein effect
 
@@ -254,7 +254,7 @@ ptable <- prop.table(Uitval_studenten_kruistabel, 1)
 
 
 <!-- ## TEKSTBLOK: Rapportage2.R -->
-De *Chi-kwadraat toets voor onafhankelijkheid* is uitgevoerd om te toetsen of er een afhankelijkheid is tussen het uitvallen van studenten met een functiebeperking en het wel of niet invoeren van het leenstelsel. De nulhypothese dat uitval en invoering van het leenstelsel onafhankelijk zijn kan verworpen worden, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* = `r vP`, *w* = `r Round_and_format(w)`. De propoties per rij in Tabel 3 laten zien dat er relatief meer studenten uitvallen wanneer er een leenstelsel is ingevoerd.
+De *Chi-kwadraat toets voor onafhankelijkheid* is uitgevoerd om te toetsen of er een afhankelijkheid is tussen het uitvallen van studenten met een functiebeperking en het wel of niet invoeren van het leenstelsel. De nulhypothese dat uitval en invoering van het leenstelsel onafhankelijk zijn kan verworpen worden, &chi;^2^ ~`r vDF`~ ≈ `r vChi2`, *p* = `r vP`, *w* = `r Round_and_format(w)`. De propoties per rij in Tabel 3 laten zien dat er relatief meer studenten uitvallen wanneer er een leenstelsel is ingevoerd.
 
 |                      | geen uitval   | uitval | 
 | -------------------- | ---------| ------------| 
@@ -289,13 +289,13 @@ prop.table(Fisher_Uitval_studenten_kruistabel, 1)
 <!-- ## /OPENBLOK: Data-kruistabel2Fisher.R -->
 
 <!-- ## TEKSTBLOK: Data-kruistabel3Fisher.R -->
-De kruistabel en bijbehorende tabel met proporties laat zien dat het percentage uitgevallen studenten lager is na invoering van het leenstelsel (`r Round_and_format(100 * prop.table(Fisher_Uitval_studenten_kruistabel, 1)[2,2])`) dan voor invoering van het leenstelsel (`r Round_and_format(100 * prop.table(Fisher_Uitval_studenten_kruistabel, 1)[1,2])`).
+De kruistabel en bijbehorende tabel met proporties laat zien dat het percentage uitgevallen studenten lager is na invoering van het leenstelsel (`r Round_and_format(100 * prop.table(Fisher_Uitval_studenten_kruistabel, 1)[2,2])`%) dan voor invoering van het leenstelsel (`r Round_and_format(100 * prop.table(Fisher_Uitval_studenten_kruistabel, 1)[1,2])`%).
 <!-- ## /TEKSTBLOK: Data-kruistabel3Fisher.R -->
 
 
 ## Assumptie groepsgrootte
 
-Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk of kleiner dan vijf is. Bereken de verwachte waarde met het argument `chisq.test()$expected` van de functie `chisq.test()` met als argumenten de variabelen `Fisher_Uitval_studenten_functiebeperking_leenstelsel$Periode` (voor of na invoering leenstelsel) en `Fisher_Uitval_studenten_functiebeperking_leenstelsel$Uitval` (wel of niet uitgevallen). 
+Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk of kleiner dan vijf is. Bereken het verwachte aantal observaties met het argument `chisq.test()$expected` van de functie `chisq.test()` met als argumenten de variabelen `Fisher_Uitval_studenten_functiebeperking_leenstelsel$Periode` (voor of na invoering leenstelsel) en `Fisher_Uitval_studenten_functiebeperking_leenstelsel$Uitval` (wel of niet uitgevallen). 
 
 <!-- ## OPENBLOK: Assumptie1Fisher.R -->
 ```{r chi2 fisher}
@@ -378,11 +378,9 @@ Fisher_ptable <- prop.table(Fisher_Uitval_studenten_kruistabel, 1)
 [^1]: Binaire variabelen: twee elkaar uitsluitende waarden, zoals ja of nee, 0 of 1, aan of uit. 
 [^2]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html.
 [^4]: Van Geloven, N., & Holman, R., (6 mei 2016). *Fisher's exact toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Fisher's_exact_toets).
-[^5]: De continuiteitscorrectie van Yates wordt toegepast omdat de *Chi-kwadraat toets voor onafhankelijkheid* bij één vrijheidsgraad een hoge type I fout heeft: de toets verwerpt de nulhypothese te vaak wanneer de nulhypothese waar is. De continuiteitscorrectie corrigeert deze type I fout met een aanpassing in de berekening van de teststatistiek. Voor meer info, zie *Discovering statistics using R* van Field, Miles & Field (2012).
 [^6]: Nominaal: variabelen die niet afhankelijk van elkaar zijn en niet op inhoudelijke basis geordend kunnen worden. Voorbeelden hiervan zijn geslacht of achternamen. Een binaire variabele is een voorbeeld van een nominale variabele. Binaire variabelen hebben twee mogelijkheden, ja of nee, terwijl nominale variabelen meerdere mogelijkheden kunnen hebben. 
-[^7]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^8]: Van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets).
 [^9]: De effectmaat *w* wordt voor de *Chi-kwadraat toets* berekend door de wortel te nemen van de
-$\chi^2$-waarde gedeeld door het totaal aantal observaties, i.e. $\sqrt{ \frac{\chi^2}{N} }$.
+&chi;^2^-waarde gedeeld door het totaal aantal observaties, i.e. $\sqrt{ \frac{\chi^2}{N} }$.
 [^10]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
 [^11]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

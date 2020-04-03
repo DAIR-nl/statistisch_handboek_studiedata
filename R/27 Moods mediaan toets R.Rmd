@@ -1,0 +1,233 @@
+---
+title: "Tekentoets"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+    includes:
+      in_header: ["../01. Includes/html/favicon.html", "../01. Includes/html/analytics.html"]
+  keywords: [statistisch handboek, studiedata]
+---
+
+<!-- ## CLOSEDBLOK: Functies.R -->
+```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
+library(here)
+if (!exists("Substitute_var")) {
+  ## Installeer packages en functies
+  source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
+}
+```
+<!-- ## /CLOSEDBLOK: Functies.R -->
+
+<!-- ## CLOSEDBLOK: CSS -->
+<style>
+`r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
+</style>
+<!-- ## /CLOSEDBLOK: CSS -->
+
+<!-- ## CLOSEDBLOK: Header.R -->
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Header.R -->
+
+<!-- ## CLOSEDBLOK: Status.R -->
+```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Status.R -->
+
+```{r opmerking, include=FALSE, eval=FALSE}
+# Onderwijscasus idee 2: Beoordelen studenten opleiding X positiever nadat ze met hun tutor hebben gesproken?
+```
+
+<!-- ## OPENBLOK: Data-aanmaken.R -->
+```{r aanmaken data, include=FALSE, echo=TRUE}
+source(paste0(here::here(),"/01. Includes/data/07.R"))
+```
+<!-- ## /OPENBLOK: Data-aanmaken.R -->
+
+# Toepassing
+Gebruik de *tekentoets* om te toetsen of de medianen van twee gepaarde groepen van elkaar verschillen.[^1] Deze toets is een alternatief voor de [gepaarde t-toets](02-Gepaarde-t-toets-R.html) wanneer de verschilscores van de gepaarde groepen niet normaal verdeeld zijn. De *Wilcoxon signed rank toets* kan ook gebruikt worden om het verschil tussen medianen van gepaarde groepen te toetsen. Deze toets heeft een hoger onderscheidend vermogen[^2], maar vereist dat de verdeling van de verschilscores symmetrisch is.[^3] De *tekentoets* kan ook gebruikt worden wanneer de verdeling niet symmetrisch is. 
+
+# Onderwijscasus
+<div id ="casus">
+De directeur van de Academie Mens & Maatschappij wil bekijken hoe het inkomen van zijn alumni zich ontwikkelt nadat zij zijn afgestudeerd. Deze informatie is interessant om te gebruiken bij voorlichtingsactiviteiten van de Academie. Hij bekijkt het bruto jaarinkomen van de alumni 1 jaar na afstuderen en vergelijkt het met het bruto jaarinkomen 5 jaar na afstuderen. 
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+
+*H~0~*: De mediaan van het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij is in vier jaar tijd gelijk gebleven.  
+*H~A~*: De mediaan van het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij is in vier jaar veranderd. 
+</div>
+
+# Assumpties
+
+Het meetniveau van de variabelen is continu.[^1]
+
+
+# Uitvoering
+<!-- ## TEKSTBLOK: Dataset-inladen.R-->
+Er is data ingeladen met het bruto jaarinkomen van alumni van de Academie Mens & Maatschappij genaamd `Alumni_jaarinkomen`. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkelt vier jaar nadat zij afgestudeerd zijn. Meetmoment T~1~ is één jaar na afstuderen, meetmoment T~2~ is vijf jaar na afstuderen. 
+<!-- ## /TEKSTBLOK: Dataset-inladen.R-->
+
+## De data bekijken
+<!-- ## TEKSTBLOK: Data-bekijken.R -->
+Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
+<!-- ## /TEKSTBLOK: Data-bekijken.R -->
+
+<!-- ## OPENBLOK: Data-bekijken.R -->
+```{r data bekijken, collapse = TRUE}
+## Eerste 6 observaties
+head(Alumni_jaarinkomens)
+
+## Laatste 6 observaties
+tail(Alumni_jaarinkomens)
+```
+<!-- ## /OPENBLOK: Data-bekijken.R -->
+
+<!-- ## OPENBLOK: Data-selecteren.R -->
+<!-- ## TEKSTBLOK: Data-beschrijven.R-->
+Bekijk de grootte en de mediaan  van de data met `length()` en `median()`. Maak hiervoor twee vectoren met daarin de jaarinkomens op T~1~ en T~2~.
+<!-- ## /TEKSTBLOK: Data-beschrijven.R-->
+<!-- ## OPENBLOK: Data-selecteren.R-->
+```{r data selecteren}
+Alumni_jaarinkomens_T1 <- Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T1"]
+Alumni_jaarinkomens_T2 <- Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T2"]
+```
+<!-- ## /OPENBLOK: Data-selecteren.R-->
+
+<div class="col-container">
+  <div class="col">
+<!-- ## OPENBLOK: Data-beschrijven-1.R -->
+```{r, data beschrijven 1, collapse=TRUE}
+length(Alumni_jaarinkomens_T1)
+median(Alumni_jaarinkomens_T1)
+```
+<!-- ## /OPENBLOK: Data-beschrijven-1.R -->
+  </div>
+  <div class="col">
+<!-- ## OPENBLOK: Data-beschrijven-2.R -->
+```{r Data beschrijven 2, collapse=TRUE}
+length(Alumni_jaarinkomens_T2)
+median(Alumni_jaarinkomens_T2)
+```
+<!-- ## /OPENBLOK: Data-beschrijven-2.R -->
+  </div>
+</div>
+<!-- ## CLOSEDBLOK: Data-beschrijven-2.R -->
+```{r data beschrijven als object, include=FALSE, echo=TRUE}
+vMed_T1 <- median(Alumni_jaarinkomens_T1)
+vN_T1 <- length(Alumni_jaarinkomens_T1)
+vMed_T2 <- median(Alumni_jaarinkomens_T2)
+vN_T2 <- length(Alumni_jaarinkomens_T2)
+```
+<!-- ## /CLOSEDBLOK: Data-beschrijven-2.R -->
+<!-- ## TEKSTBLOK: Data-beschrijven.R-->
+* Mediaan bruto jaarinkomen op T~1~: `r paste0("€",format(vMed_T1, scientific = FALSE))` 
+* Mediaan bruto jaarinkomen op T~2~: `r paste0("€",format(vMed_T2, scientific = FALSE))` 
+* Aangezien de gegevens gepaard zijn, zijn de groepsgroottes op beide meetmomenten gelijk: *n~T1~* = `r vN_T1` en *n~T2~* = `r vN_T2`
+<!-- ## /TEKSTBLOK: Data-beschrijven.R-->
+
+
+### Histogram
+
+Maak een histogram om de verdeling van de bruto jaarinkomens van de alumni één jaar en vijf jaar na afstuderen visueel weer te geven.
+
+<!-- ## OPENBLOK: Histogram1.R -->
+```{r histogram, warnings=FALSE, message=FALSE}
+## Histogram met ggplot2
+library(ggplot2)
+
+ggplot(Alumni_jaarinkomens,
+  aes(x = Inkomen)) +
+  geom_histogram(color = "grey30",
+                 fill = "#0089CF") +
+  facet_wrap(~ Meetmoment, labeller = labeller(Meetmoment = c(T1="Een jaar na afstudereren", T2="Vijf jaar na afstuderen"))) +
+  geom_density(alpha = .2, adjust = 1) +
+  ylab("Frequentiedichtheid") +
+  labs(title = "Bruto jaarinkomen alumni Mens & Maatschappij")
+```
+<!-- ## /OPENBLOK: Histogram1.R -->
+
+Op beide meetmomenten is te zien dat de meeste alumni tussen de 0 en €60.000 euro per jaar verdienen en dat een paar alumni hier ver boven zit. Beide verdelingen hebben één top, maar zijn niet symmetrisch door de lange staart aan de rechterkant van de verdeling. Beide verdeling lijken qua vorm en spreiding sterk op elkaar.
+
+Maak vervolgens een histogram van de verschilscores.
+
+<!-- ## OPENBLOK: Histogram2.R -->
+```{r histogram2, warnings=FALSE, message=FALSE}
+# Maak een dataset met de verschilscores
+Alumni_verschilscores <- data.frame(Verschilscores = Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T2"] - Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T1"])
+
+## Histogram met ggplot2
+library(ggplot2)
+
+ggplot(Alumni_verschilscores,
+  aes(x = Verschilscores)) +
+  geom_histogram(color = "grey30",
+                 fill = "#0089CF") +
+  geom_density(alpha = .2, adjust = 1) +
+  ylab("Frequentiedichtheid") +
+  labs(title = "Verschilscores bruto jaarinkomen alumni Mens & Maatschappij")
+```
+<!-- ## /OPENBLOK: Histogram2.R -->
+
+De verdeling van de verschilscores bevat voornamelijk positieve waarden en een paar negatieve waarden; de meeste alumni zijn er dus in bruto jaarinkomen op vooruitgegaan. De verdeling heeft een lange staart aan de rechterkant en is dus niet symmetrisch. 
+
+
+
+## Tekentoets
+<!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
+Voer de *tekentoets* uit om de vraag te beantwoorden of de verdeling van de bruto jaarinkomens van alumni in vier jaar veranderd zijn. Gebruik om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn het argument `paired = TRUE`.  Toets tweezijdig door het argument `alternative = "two.sided"` te gebruiken.
+<!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
+
+<!-- ## OPENBLOK: Wilcoxon-signed-rank-toets.R -->
+```{r wilcox test}
+library(DescTools)
+SignTest(Alumni_jaarinkomens_T2, Alumni_jaarinkomens_T1, alternative = "two.sided")
+```
+<!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets.R -->
+
+
+
+
+<!-- ## CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
+```{r wilcox test als object, include=FALSE, echo=TRUE}
+b <- SignTest(Alumni_jaarinkomens_T2, Alumni_jaarinkomens_T1, 
+              alternative = "two.sided")
+
+vS <- b$statistic
+vN <- b$parameter
+vconf.int1 <- Round_and_format(b$conf.int[1])
+vconf.int2 <- Round_and_format(b$conf.int[2])
+vMed <- Round_and_format(b$estimate)
+```
+<!-- ## /CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
+<!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
+* Er is een significant verschil tussen het mediane inkomen vijf jaar en één jaar na afstuderen, *S* = `r vS`, *N* = `r vN`, *p* < 0.0001 [^4]
+* De toetsstatistiek *S* is het aantal positieve verschillen (inkomen vijf jaar na afstuderen hoger dan één jaar na afstuderen), *N* is het totaal aantal observatie-eenheden (alumni)
+* Van de `r vN` alumni verdienen `r vS` alumni meer vijf jaar na afstuderen
+* De geschatte mediaan van de verschilscores is `r vMed` met bijbehorend 96%-betrouwbaarheidsinterval[^5] van `r vconf.int1` tot `r vconf.int2`.
+
+
+
+<!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
+
+# Rapportage
+<!-- ## TEKSTBLOK: Rapportage.R -->
+
+De *tekentoets* is uitgevoerd om te onderzoeken of er een verschil is tussen het mediane bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij één jaar en vijf jaar na afstuderen. De resultaten van de toets laten zien dat er een significant verschil is tussen beide medianen, *S* = `r vS`, *N* = `r vN`, *p* < 0.0001. Het geschatte mediaan van de verschilscores is `r vMed` met bijbehorend 96%-betrouwbaarheidsinterval van `r vconf.int1` tot `r vconf.int2`. Van de `r vN` alumni verdienen `r vS` alumni meer vijf jaar na afstuderen. Deze resultaten duiden op een verschil in het mediane bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij waarbij de inkomens vijf jaar na afstuderen hoger lijken te liggen.
+<!-- ## /TEKSTBLOK: Rapportage.R -->
+
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
+```
+<!-- ## /CLOSEDBLOK: Footer.R -->
+
+[^1]: Laerd Statistics (2018). *Sign Test using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/sign-test-using-spss-statistics.php
+[^2]: Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese waar is.
+[^3]: Statistics How To (27 mei 2018). *One Sample Median Test*. [Statistics How to](https://www.statisticshowto.datasciencecentral.com/one-sample-median-test/).
+[^4]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
+[^5]: Omdat het betrouwbaarheidsinterval van de mediaan van verschilscores exact berekend wordt, kan het percentage van het betrouwbaarheidsinterval afwijken van 95%. In dit geval is het 96%.
+
+
+

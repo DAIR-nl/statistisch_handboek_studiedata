@@ -66,6 +66,7 @@ Corrigeer_toetsnaam <- function(sToetsnaam) {
       sToetsnaam == "Fisher-Freeman-Halton exact toets" ~ "Fisher-Freeman- Halton exact toets",
       sToetsnaam == "Friedmans ANOVA I" ~ "Friedman's ANOVA I",
       sToetsnaam == "Friedmans ANOVA II" ~ "Friedman's ANOVA II",
+      sToetsnaam == "Moods mediaan toets" ~ "Mood's mediaan toets",
       #sToetsnaam == "Chi-kwadraat toets trend" ~ "Chi-kwadraat toets (trend)",
       TRUE ~ sToetsnaam
     )
@@ -125,7 +126,7 @@ maak_html_toetscel_combi <- function(published_1, sToets_1,
         class = "published",
         sToets_naam_2)
         } else {
-        span(class = "unpublished", sToets_naam_1)
+        span(class = "unpublished", sToets_naam_2)
         }))
 }
 
@@ -166,12 +167,21 @@ maak_html_r2 <- function() {
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[6,]$InGebruik)),  
                    dfToetsen[6,]$Toets, 
                    sModus = sModus),
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[7,]$InGebruik)),  
+#      maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[13,]$InGebruik)),  
+#                               dfToetsen[13,]$Toets, 
+#                               as.logical(as.numeric(dfToetsen[16,]$InGebruik)),  
+#                               dfToetsen[16,]$Toets, 
+#                               sModus = sModus)
+      maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[7,]$InGebruik)),  
                    dfToetsen[7,]$Toets, 
-                   sModus = sModus),
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[8,]$InGebruik)),  
+                   as.logical(as.numeric(dfToetsen[26,]$InGebruik)),  
+                   dfToetsen[26,]$Toets, 
+                   sModus = sModus),      
+      maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[8,]$InGebruik)),  
                    dfToetsen[8,]$Toets, 
-                   sModus = sModus),
+                   as.logical(as.numeric(dfToetsen[27,]$InGebruik)),  
+                   dfToetsen[27,]$Toets, 
+                   sModus = sModus),      
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[9,]$InGebruik)),  
                    dfToetsen[9,]$Toets, 
                    sModus = sModus),

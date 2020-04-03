@@ -8,7 +8,7 @@ set.seed(2)
 #SD <- 9
 
 # parameters verschil groepen
-MU_verschil <- 5
+MU_verschil <- 3.5
 SD_verschil <- 2.5
 
 # genereer verschillen met normale verdeling

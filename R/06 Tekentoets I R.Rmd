@@ -44,7 +44,7 @@ source(paste0(here::here(),"/01. Includes/data/06.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 # Toepassing
-Gebruik de *tekentoets* om de mediaan van een steekproef te vergelijken met een bekende mediaan of norm in een populatie.[^1] Deze toets is een alternatief voor de [one sample t-toets](01-One-sample-t-toets-R.html) wanneer de data niet normaal verdeeld is. De Wilcoxon signed rank toets kan ook gebruikt worden om de mediaan van een steekproef te vergelijken met een bekende mediaan. Deze toets heeft een hoger onderscheidend vermogen[^9], maar vereist dat de verdeling van de data symmetrisch is.[^8] Dit is geen vereiste bij de *tekentoets*.
+Gebruik de *tekentoets* om de mediaan van een steekproef te vergelijken met een bekende mediaan of norm in een populatie.[^1] Deze toets is een alternatief voor de [one sample t-toets](01-One-sample-t-toets-R.html) wanneer de data niet normaal verdeeld is. De *Wilcoxon signed rank toets* kan ook gebruikt worden om de mediaan van een steekproef te vergelijken met een bekende mediaan. Deze toets heeft een hoger onderscheidend vermogen[^9], maar vereist dat de verdeling van de data symmetrisch is.[^8] Dit is geen vereiste bij de *tekentoets*.
 
 
 # Onderwijscasus
@@ -63,7 +63,7 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 Het meetniveau van de variabele is continu.[^10]
 
 # Uitvoering in R
-Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de school voor Journalistiek genaamd `Jaarlijks_inkomen`. De directeur wil kijken hoe haar oud-studenten scoren ten opzichte van gemiddelde inkomens in Nederland.
+Er is data ingeladen met jaarlijkse bruto inkomens van alumni van de school voor Journalistiek genaamd `Jaarlijks_inkomen`. De directeur wil kijken hoe haar oud-studenten scoren ten opzichte van het modale inkomen in Nederland.
 
 ## De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken.R -->
@@ -81,7 +81,7 @@ tail(Jaarlijks_inkomen)
 <!-- ## /OPENBLOK: Data-bekijken.R -->
 
 <!-- ## TEKSTBLOK: Data-beschrijven.R -->
-Inspecteer de data met `mean()`, `sd()`, `median()` en `length()` om meer inzicht te krijgen in de dataa.
+Inspecteer de data met `mean()`, `sd()`, `median()` en `length()` om meer inzicht te krijgen in de data.
 <!-- ## /TEKSTBLOK: Data-beschrijven.R -->
 
 <!-- ## OPENBLOK: Data-beschrijven.R -->
@@ -140,7 +140,7 @@ Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst 
 
 ### Kolmogorov-Smirnov test
 
-De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is vereist als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn, wat meestal het geval is bij een steekproef. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
+De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is vereist als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn, wat meestal het geval is bij een steekproef. Als de p-waarde < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
 
 <!-- ## OPENBLOK: Library-nortest.R -->
 ```{r normaliteit, warning=FALSE}
@@ -151,7 +151,7 @@ lillie.test(Jaarlijks_inkomen)
 De p-waarde van de *Kolmogorov-Smirnov test* is kleiner dan 0,0001, dus de data zijn niet normaal verdeeld. Naast deze test, kan de *Shapiro-Wilk test* ook gebruikt worden om normaliteit te testen. Gebruik bij normaal verdeelde data de [one-sample t-toets](01-One-sample-t-toets-R.html).
 
 # Tekentoets 
-Voer een tweezijdige *tekentoets* uit om te bepalen of het mediane jaarinkomen van de alumni Journalistiek hoger ligt dan het modale inkomen van €36.000. Gebruik van het `DescTools` package de `SignTest()` functie met de argumenten `x = Jaarlijks_inkomen` voor de data van de steekproef, `mu = 36000` voor de mediaan die getoetst wordt en `alternative="two.sided"` om een tweezijdige alternatieve hypothese te toetsen.
+Voer een tweezijdige *tekentoets* uit om te bepalen of het mediane jaarinkomen van de alumni Journalistiek hoger ligt dan het modale inkomen van €36.000. Gebruik van het `DescTools` package de `SignTest()` functie met de argumenten `x = Jaarlijks_inkomen` voor de data van de steekproef, `mu = 36000` voor de waarde van de mediaan die getoetst wordt en `alternative="two.sided"` om een tweezijdige alternatieve hypothese te toetsen.
 
 <!-- ## OPENBLOK: Tekentoets.R -->
 ```{r Tekentoets}
@@ -173,7 +173,7 @@ vMed <- Round_and_format(b$estimate)
 <!-- ## /CLOSEDBLOK: Tekentoets.R -->
 
 <!-- ## TEKSTBLOK: Tekentoets.R -->
-* De mediaan van de steekproef is significant verschillend van €36.000, *S* = `r vS`, *N* = `r vN`, p-waarde < 0,0001. De H~0~ wordt verworpen. [^5]
+* De mediaan van de steekproef is significant verschillend van €36.000, *S* = `r vS`, *N* = `r vN`, *p* < 0,0001. De H~0~ wordt verworpen. [^5]
 * De toetsstatistiek *S* is het aantal positieve verschillen (inkomen hoger dan modaal inkomen), *N* is het totaal aantal verschillen
 * Van de `r vN` alumni verdienen `r vS` alumni boven modaal
 * De geschatte mediaan van de steekproef is `r vMed` met bijbehorend 95%-betrouwbaarheidsinterval van `r vconf.int1` tot `r vconf.int2`.

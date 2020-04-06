@@ -65,7 +65,7 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 Het meetniveau van de afhankelijke variabele is ordinaal of continu.[^1] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data is te vinden in een andere toetspagina.
 
-De *Wilcoxon signed rank toets* kan een alternatief zijn voor de [gepaarde t-toets](02-Gepaarde-t-toets-R.html). Een voordeel van de *Wilcoxon signed rank toets* is dat de data niet aan de assumptie van normaliteit hoeven te voldoen. Maar als de data wel normaal verdeeld zijn, heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen[^4] dan de [gepaarde t-toets](02-Gepaarde-t-toets-R.html).[^5] Vandaar dat ondanks dit voordeel minder vaak voor de *Wilcoxon signed rank toets* gekozen wordt. 
+De *Wilcoxon signed rank toets* kan een alternatief zijn voor de [gepaarde t-toets](02-Gepaarde-t-toets-R.html). Een voordeel van de *Wilcoxon signed rank toets* is dat de data niet aan de assumptie van normaliteit hoeven te voldoen. Maar als de data wel normaal verdeeld is, heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen[^4] dan de [gepaarde t-toets](02-Gepaarde-t-toets-R.html).[^5] Vandaar dat ondanks dit voordeel minder vaak voor de *Wilcoxon signed rank toets* gekozen wordt. 
 
 ## Verdeling steekproef
 
@@ -80,7 +80,7 @@ De *Wilcoxon signed rank toets* heeft als effectmaat *r*.[^7] Een indicatie om *
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is data ingeladen met het bruto jaarinkomen van alumni van de Academie Mens & Maatschappij genaamd `Alumni_jaarinkomen`. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkelt 4 jaar nadat zij afgestudeerd zijn. Meetmoment T~1~ is 1 jaar na afstuderen, meetmoment T~2~ is 5 jaar na afstuderen. 
+Er is data ingeladen met het bruto jaarinkomen van alumni van de Academie Mens & Maatschappij genaamd `Alumni_jaarinkomen`. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkelt vier jaar nadat zij afgestudeerd zijn. Meetmoment T~1~ is één jaar na afstuderen, meetmoment T~2~ is vijf jaar na afstuderen. 
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
@@ -191,7 +191,7 @@ De verdeling van de verschilscores bevat voornamelijk positieve waarden en een p
 
 ## Wilcoxon signed rank toets
 <!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
-Voer de *Wilcoxon signed rank toets* uit om de vraag te beantwoorden of de verdeling van de bruto jaarinkomens van alumni in vier jaar veranderd zijn. Gebruik om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn het argument `paired = TRUE`.  Toets tweezijdig door het argument `alternative = "two.sided"` te gebruiken.
+Voer de *Wilcoxon signed rank toets* uit om de vraag te beantwoorden of de verdeling van de bruto jaarinkomens van alumni in vier jaar veranderd zijn. Gebruik de functie `wilcox.test()` met als eerste argument `Inkomen ~ Meetmoment` waarin `Inkomen` de afhankelijke variabele is en `Meetmoment` de onafhankelijke variabele is die twee meetmomenten aangeeft. Gebruik om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn het argument `paired = TRUE`.  Toets tweezijdig door het argument `alternative = "two.sided"` te gebruiken.
 <!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
 
 <!-- ## OPENBLOK: Wilcoxon-signed-rank-toets.R -->
@@ -202,7 +202,7 @@ wilcox.test(Inkomen ~ Meetmoment, Alumni_jaarinkomens,
 <!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets.R -->
 
 <!-- ## OPENBLOK: Wilcoxon-signed-rank-toets2.R -->
-Bereken de effectmaat *r* vervolgens op basis van de *p*-waarde van de *Wilcoxon signed rank toets*.
+Bereken de effectmaat *r* vervolgens op basis van de p-waarde van de *Wilcoxon signed rank toets*.
 ```{r effectgrootte}
 # Sla de p-waarde op
 pwaarde <- wilcox.test(Inkomen ~ Meetmoment, Alumni_jaarinkomens, 
@@ -250,7 +250,7 @@ vVstatistic <- Round_and_format(wilcox$statistic)
 ```
 <!-- ## /CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
 <!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
-* *V* = `r vVstatistic`, p < 0,0001 , *r* = `r Round_and_format(r)`
+* *V* = `r vVstatistic`, *p* < 0,0001 , *r* = `r Round_and_format(r)`
 * De toetsstatistiek *V* is in deze casus gelijk aan de som van de negatieve rangschikkingen
 * Het aantal positieve rangschikkingen is `r N_positief`; de som is `r format(round(Som_positief), scientific = FALSE)`
 * Het aantal negatieve rangschikkingen is `r N_negatief`; de som is `r round(Som_negatief)`
@@ -262,7 +262,7 @@ vVstatistic <- Round_and_format(wilcox$statistic)
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de verdeling van het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij in vier jaar tijd is veranderd De resultaten van de toets laten zien dat er een statistisch significant verschil is tussen het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij één jaar en vijf jaar na afstuderen, *V* = `r vVstatistic`, *p* < 0,0001, *r* = `r Round_and_format(r)`. Er zijn `r N_positief` alumni die vijf jaar na afstuderen meer verdienen dan één jaar na afstuderen (som van rangschikkingen is `r format(round(Som_positief), scientific = FALSE)`) en er zijn `r N_negatief` alumni die vijf jaar na afstuderen minder verdienen dan één jaar na afstuderen (som van rangschikkingen is `r Som_negatief`). Alumni lijken dus meer te verdienen wanneer ze vijf jaar afgestudeerd zijn.
+De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de verdeling van het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij in vier jaar tijd is veranderd De resultaten van de toets laten zien dat er een significant verschil is tussen het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij één jaar en vijf jaar na afstuderen, *V* = `r vVstatistic`, *p* < 0,0001, *r* = `r Round_and_format(r)`. Er zijn `r N_positief` alumni die vijf jaar na afstuderen meer verdienen dan één jaar na afstuderen (som van rangschikkingen is `r format(round(Som_positief), scientific = FALSE)`) en er zijn `r N_negatief` alumni die vijf jaar na afstuderen minder verdienen dan één jaar na afstuderen (som van rangschikkingen is `r Som_negatief`). Alumni lijken dus meer te verdienen wanneer ze vijf jaar afgestudeerd zijn.
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->
@@ -277,7 +277,7 @@ De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de 
 [^5]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage.
 [^6]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^7]: De effectmaat *r* wordt voor de *Wilcoxon signed rank toets* berekend door de
-*z*-waarde behorend bij de *p*-waarde van de toets te delen door de wortel van
+*z*-waarde behorend bij de p-waarde van de toets te delen door de wortel van
 het aantal observatie-eenheden, i.e. $\frac{z}{\sqrt{N}}$.
 [^8]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
 [^9]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

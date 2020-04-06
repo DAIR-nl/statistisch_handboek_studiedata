@@ -63,10 +63,16 @@ thisHeader <- Substitute_var(htmltools::htmlPreserve('
   <a href="`sRoot`Python/Toetsmatrix.html">Toetsmatrix (Python)</a>
 </li>
 <li>
+  <a href="`sRoot`Begrippenlijst.html">Begrippenlijst</a>
+</li>
+<li>
   <a href="`sRoot`Over.html">Over</a>
 </li>
 <li>
   <a href="`sRoot`Verantwoording.html">Verantwoording</a>
+</li>
+<li>
+  <a href="`sRoot`Changelog_website.html">Wijzigingen website</a>
 </li>
 <li>
   <a href="https://docs.google.com/forms/d/1UQcCVTNLpVAg7vSffJCPkBCklsfMlGB0QxyxLDgqosI/edit" target=\"_blank\">Feedback</a>

@@ -44,7 +44,7 @@ source(paste0(here::here(),"/01. Includes/data/11.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 # Toepassing
 
-Gebruik de *Chi-kwadraat toets voor goodness of fit* om te onderzoeken of de geobserveerde verdeling van de aantallen observaties voor de categorieën van één categorische variabele overeenkomt met de verwachte verdeling van de categorische variabele.[^6]<sup>,</sup>[^7] Met deze toets kan een geobserveerd percentage met een bekend of verwacht percentage. Gebruik de exacte *binomiaaltoets* bij een laag aantal observaties.[^1] 
+Gebruik de *Chi-kwadraat toets voor goodness of fit* om te onderzoeken of de geobserveerde verdeling van de aantallen observaties voor de categorieën van één categorische variabele overeenkomt met de verwachte verdeling van de categorische variabele.[^6]<sup>,</sup>[^7] Met deze toets kan een geobserveerd percentage met een bekend of verwacht percentage vergeleken worden. Gebruik de exacte *binomiaaltoets* bij een laag aantal observaties.[^1] 
 
 
 
@@ -102,7 +102,7 @@ Het percentage studenten met hbo vooropleiding is `r Round_and_format(100*prop.t
 ## Asssumptie verwacht aantal observaties
 
 <!-- ## TEKSTBLOK: Assumptie.R -->
-Het verwacht aantal observaties mag niet vijf of minder zijn in 20% van de categorieën van de categorische variabele. Aangezien er een binaire variabele getoetst wordt, mag geen van beide categoriën dus vijf of minder verwachte observaties hebben. Bereken de verwachte waarde met het argument `chisq.test()$expected` van de functie `chisq.test()` met als argumenten de tabel met daarin de hoeveelheid studenten met en zonder hbo vooropleiding `Tabel` en een vector die aangeeft wat de verwachte proporties zijn voor het aantal studenten met en zonder hbo vooropleiding `p = c(0.1113, 1 - 0.1113)`.
+Het verwacht aantal observaties mag niet vijf of minder zijn in 20% van de categorieën van de categorische variabele. Aangezien er een binaire variabele getoetst wordt, mag geen van beide categorieën dus vijf of minder verwachte observaties hebben. Bereken het verwacht aantal observaties met het argument `chisq.test()$expected` van de functie `chisq.test()`. De argumenten van de functie zijn de tabel met daarin de hoeveelheid studenten met en zonder hbo vooropleiding `Tabel` en een vector die aangeeft wat de verwachte proporties zijn voor het aantal studenten met en zonder hbo vooropleiding `p = c(0.1113, 1 - 0.1113)`.
 <!-- ## /TEKSTBLOK: Assumptie.R -->
 
 
@@ -201,7 +201,7 @@ Het aantal studenten met een hbo vooropleiding is `r table(Instroom_2018_totaal_
 <!-- ## /TEKSTBLOK: Binomiaaltoets3.R -->
 
 <!-- ## TEKSTBLOK: Binomiaaltoets4.R -->
-Tel eerst het aantal studenten met een hbo vooropleiding in de dataset. Voer daarna de *binomiaaltoets* uit met de functie `binom.test()` en met argument  `x =` voor de hoeveelheid studenten met een hbo vooropleiding, `n =` voor de totale instroom van de universiteit, `p =` voor de referentieproportie,  `alternative =` voor het soort toets (eenzijdig of tweezijdig) en `conf.level` om het significantieniveau aan te geven.
+Tel eerst het aantal studenten met een hbo vooropleiding in de dataset. Voer daarna de *binomiaaltoets* uit met de functie `binom.test()` en met argument  `x = Aantal_studenten_hbo_vooropleiding` voor de hoeveelheid studenten met een hbo vooropleiding, `n = length(Instroom_2018_totaal_steekproef$hbo_vooropleiding)` voor de totale instroom van de universiteit, `p = 0.1113` voor de referentieproportie,  `alternative = two.sided` voor het soort toets (eenzijdig of tweezijdig) en `conf.level = 0.95` om het significantieniveau aan te geven.
 <!-- ## /TEKSTBLOK: Binomiaaltoets4.R -->
 
 
@@ -235,7 +235,7 @@ bprop <- Round_and_format(100*b$estimate)
 <!-- ## /CLOSEDBLOK: Binomiaaltoets6.R -->
 
 <!-- ## TEKSTBLOK: Binomiaaltoets7.R-->
-* de geschatte proportie in de data is `r bprop`, het 95%-betrouwbaarheidsinterval loopt van `r blb` tot `r bub`
+* de geschatte proportie studenten met een hbo vooropleiding in de data is `r bprop`, het 95%-betrouwbaarheidsinterval loopt van `r blb` tot `r bub`
 * p-waarde = `r bp`, dus de H~0~ kan niet worden verworpen.[^5]  
 
 <!-- ## /TEKSTBLOK: Binomiaaltoets7.R-->

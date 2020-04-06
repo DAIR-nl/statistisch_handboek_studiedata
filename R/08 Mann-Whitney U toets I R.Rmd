@@ -65,7 +65,7 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 Het meetniveau van de afhankelijke variabele is ordinaal of continu.[^9] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data is te vinden in een andere toetspagina.
 
-De *Mann-Whitney U toets* stelt minder eisen aan de data en hoeft onder andere niet te voldoen aan de assumptie van normaliteit.  Bij de *Mann-Whitney U toets* hebben uitbijters minder invloed op het eindresultaat dan bij de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html). Daarentegen, als de data wel normaal verdeeld zijn heeft de *Mann-Whitney U toets* minder onderscheidend vermogen dan de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html).[^2] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Mann-Whitney U toets* gekozen wordt.
+De *Mann-Whitney U toets* stelt minder eisen aan de data en hoeft onder andere niet te voldoen aan de assumptie van normaliteit.  Bij de *Mann-Whitney U toets* hebben uitbijters minder invloed op het eindresultaat dan bij de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html). Daarentegen, als de data wel normaal verdeeld is, heeft de *Mann-Whitney U toets* minder onderscheidend vermogen dan de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html).[^2] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Mann-Whitney U toets* gekozen wordt.
 
 ## Verdeling steekproeven
 
@@ -208,7 +208,7 @@ vW_ub <- Round_and_format(wcx$conf.int[2])
 <!-- ## /CLOSEDBLOK: Mann-Whitney-U-toets-3.R -->
 
 <!-- ## OPENBLOK: Mann-Whitney-U-toets-4.R -->
-Bereken vervolgens de effectmaat *r* op basis van de *p*-waarde van de *Mann-Whitney U toets*.
+Bereken vervolgens de effectmaat *r* op basis van de p-waarde van de *Mann-Whitney U toets*.
 ```{r effectgrootte}
 # Sla de p-waarde op
 pwaarde <- wilcox.test(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands], 
@@ -249,7 +249,7 @@ Rangschikkingen_buitenlandse_vooropleiding <- mean(rank(Studiepunten_studiejaar2
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal studiepunten in het tweede jaar hetzelfde is voor studenten met buitenlandse vooropleiding als voor studenten met Nederlandse vooropleiding. Uit de resultaten kan afgelezen worden dat er een significant verschil is tussen het aantal studiepunten van studenten met een buitenlandse vooropleiding en met een Nederlandse vooropleiding, *W* = `r vW_W`, *p* < 0,0001, *r* = `r Round_and_format(abs(r))`. Er is een klein tot gemiddeld effect van het verschil in het land van vooropleiding op het aantal studiepunten. De gemiddelde rangschikking is `r Round_and_format(Rangschikkingen_Nederlandse_vooropleiding)` (*n*=`r vN_NL`) voor studenten met een Nederlandse vooropleiding en `r Round_and_format(Rangschikkingen_buitenlandse_vooropleiding)` (*n*=`r vN_Inter`) voor studenten met een buitenlandse vooropleiding. Studenten met een Nederlandse vooropleiding lijken dus een hoger aantal studiepunten te halen in het tweede jaar dan studenten met een buitenlandse vooropleiding.  
+De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal studiepunten in het tweede jaar van de bachelor Business Administration hetzelfde is voor studenten met buitenlandse vooropleiding als voor studenten met Nederlandse vooropleiding. Uit de resultaten kan afgelezen worden dat er een significant verschil is tussen het aantal studiepunten van studenten met een buitenlandse vooropleiding en met een Nederlandse vooropleiding, *W* = `r vW_W`, *p* < 0,0001, *r* = `r Round_and_format(abs(r))`. Er is een klein tot gemiddeld effect van het verschil in het land van vooropleiding op het aantal studiepunten. De gemiddelde rangschikking is `r Round_and_format(Rangschikkingen_Nederlandse_vooropleiding)` (*n*=`r vN_NL`) voor studenten met een Nederlandse vooropleiding en `r Round_and_format(Rangschikkingen_buitenlandse_vooropleiding)` (*n*=`r vN_Inter`) voor studenten met een buitenlandse vooropleiding. Studenten met een Nederlandse vooropleiding lijken dus een hoger aantal studiepunten te halen in het tweede jaar dan studenten met een buitenlandse vooropleiding.  
 
 
 <!-- ## /TEKSTBLOK: Rapportage.R -->
@@ -271,5 +271,4 @@ het aantal observaties, i.e. $\frac{z}{\sqrt{N}}$.
 [^8]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
 [^9]: Laerd Statistics (2018). *Mann-Whitney U Test using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/mann-whitney-u-test-using-spss-statistics.php
 [^10]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage.
-[^11]: Miller, I. & Miller, C. (2012). *John E. Freund's Mathematical Statistics with Applications*. Pearson: eighth edition.
 

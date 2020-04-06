@@ -1,5 +1,5 @@
 ---
-title: "Begrippenlijst"
+title: "Wijzigingen website"
 output:
   html_document:
     theme: lumen
@@ -8,9 +8,8 @@ output:
       collapsed: FALSE 
     number_sections: true
     includes:
-      in_header: ["01. Includes/html/favicon.html", "01. Includes/html/analytics.html"] 
+      in_header: ["01. Includes/html/favicon.html", "01. Includes/html/analytics.html"]
 ---
-
 <!-- ## CLOSEDBLOK: Functies.R -->
 ```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
 library(here)
@@ -30,15 +29,16 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
-Deze begrippenlijst bevat een korte uitleg van de in de toetspagina voorkomende begrippen. De begrippen zijn uitgewerkt aan de hand van *Discovering statistics using IBM SPSS Statistics* van Andy Field.[^1]
+# Wijzigingen
+Het handboek is nog volop in ontwikkeling en zal gedurende 2020 aangevuld worden met nieuwe toetsvormen:
 
-**Normale verdeling**: Een normale verdeling is een verdeling die één top heeft, symmetrisch is en geen outliers heeft. In de verdeling komen de waarden rondom het gemiddelde het meest voor. Hoe verder de waarden van het gemiddelde af zijn, hoe minder ze voorkomen.
+* 13 januari 2020: Lancering eerste versie website
+* 21 februari 2020: Verbeteringen inhoud en tekstueel
+* 11 maart 2020: Nieuwe toetsen toegevoegd: Repeated measures ANOVA, Wilcoxon signed rank toets, Chi-kwadraat toets en binomiaaltoets, en McNemar toets
+* 31 maart 2020: Aanmelding nieuwsbrief toegevoegd en links naar andere toetsen aangebracht
 
-**Gemiddelde**: Het gemiddelde is een maat waarmee een variabele beschreven kan worden. Het gemiddelde wordt berekend door de som te nemen van alle geobserveerder waarden en deze te delen door het aantal geobserveerde waarden, i.e. $ \frac{\sum_{i=1}^N X_i}{N}$
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer_simpel.R"))}
 ```
 <!-- ## /CLOSEDBLOK: Footer.R -->
-
-[^1]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage.

@@ -51,7 +51,7 @@ source(paste0(here::here(),"/01. Includes/data/09.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik *Friedman's ANOVA* om verdelingen te vergelijken van een groep bij drie of meer herhaalde metingen of om drie of meer gepaarde groepen te vergelijken.[^1]<sup>, </sup>[^2] *Friedman's ANOVA* is een alternatief voor de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) wanneer de data niet aan de assumptie van normaliteit voldoen. Daarnaast hebben uitbijters minder invloed op het resultaat van de *Friedman's ANOVA* in vergelijking tot de *repeated measures ANOVA*. Echter, als de data aan de assumpties van de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) voldoen, heeft deze toets een hoger onderscheidend vermogen dan *Friedman's ANOVA*.[^3]
+Gebruik *Friedman's ANOVA* om verdelingen te vergelijken van een groep bij drie of meer herhaalde metingen of om drie of meer gepaarde groepen te vergelijken.[^1]<sup>, </sup>[^2] *Friedman's ANOVA* is een alternatief voor de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) wanneer de data niet aan de assumptie van normaliteit voldoet. Daarnaast hebben uitbijters minder invloed op het resultaat van *Friedman's ANOVA* in vergelijking tot de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html). Echter, als de data aan de assumpties van de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) voldoet, heeft deze toets een hoger onderscheidend vermogen dan *Friedman's ANOVA*.[^3]
 
 
 
@@ -75,7 +75,7 @@ Om een valide toetsresultaat te bereiken, moeten de data aan een aantal assumpti
 
 
 # Effectmaat
-De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^5] Voor *Friedman's ANOVA* wordt de effectmaat *Kendall's W* vaak gebruikt.[^6]<sup>, </sup>[^7]<sup>, </sup>[^8]. Een indicatie om *Kendall's W* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^6]
+De p-waarde geeft aan of het verschil tussen groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^5] Voor *Friedman's ANOVA* wordt de effectmaat *Kendall's W* vaak gebruikt.[^6]<sup>, </sup>[^7]<sup>, </sup>[^8]. Een indicatie om *Kendall's W* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^6]
 
 
 # Post-hoc toetsen
@@ -224,7 +224,7 @@ vdf <- Round_and_format(obj$parameter)
 ```
 <!-- ## /CLOSEDBLOK: ANOVA-toets.R -->
 
-Bereken vervolgens de effectmaat *Kendall's W* op basis van de &chi;^2 waarde van *Friedman's ANOVA*.
+Bereken vervolgens de effectmaat *Kendall's W* op basis van de *&chi;^2* waarde van *Friedman's ANOVA*.
 ```{r effectgrootte}
 # Sla de Chi-kwadraat waarde op
 Chi2 <- friedman.test(y = Beoordelingen_eetgelegenheden$Beoordeling, 
@@ -247,7 +247,7 @@ paste("De effectmaat is", W)
 
 
 <!-- ## TEKSTBLOK: ANOVA-toets1.R -->
-* &chi;^2_3 = `r vChi2`, *p* < 0,001, *W* = `r Round_and_format(W)`
+* *&chi;^2^~3~* = `r vChi2`, *p* < 0,001, *W* = `r Round_and_format(W)`
 * De p-waarde < 0,05, dus de H~0~ wordt verworpen.[^10]
 * Er is een significant verschil tussen de beoordelingen van de eetgelegenheden in de vier gebouwen; het effect van de verschillende gebouwen op de beoordelingen van studenten is klein tot gemiddeld
 
@@ -381,7 +381,7 @@ De significante verschillen op de post-hoc toetsen zijn:
 # Rapportage
 
 <!-- ## TEKSTBLOK: rapportage.R -->
-*Friedman's ANOVA* is uitgevoerd om te onderzoeken of de beoordeling van eetgelegenheden door studenten verschilt voor vier gebouwen op de campus van een hogeschool. De vier gebouwen zijn het hoofdgebouw, het bestuursgebouw, het sportcentrum en cultuurcentrum Rembrandt; beschrijvende statistieken zijn te vinden in Tabel 1. De beoordelingen van de vier gebouwen verschillen significant van elkaar (&chi;^2^~3~ = `r vChi2`, *p* < 0,001, *W* = `r Round_and_format(W)`). De sterkte van het effect van de verschillen in gebouwen op de beoordelingen van studenten is klein tot gemiddeld. Post-hoc toetsen met een Bonferroni correctie voor meerdere toetsen zijn uitgevoerd voor alle vergelijkingen tussen twee gebouwen. Hieruit blijkt dat er alleen significante verschillen zijn tussen het hoofdgebouw en cultuurcentrum Rembrandt, en tussen het sportcentrum  en cultuurcentrum Rembrandt. De eetgelegenheid van cultuurcentrum Rembrandt wordt slechter beoordeeld dan de eetgelegenheden in het hoofdgebouw en het sportcentrum; verder zijn er geen significante verschillen tussen de beoordelingen van de eetgelegenheden op de campus.
+*Friedman's ANOVA* is uitgevoerd om te onderzoeken of de beoordeling van eetgelegenheden door studenten verschilt voor vier gebouwen op de campus van een hogeschool. De vier gebouwen zijn het hoofdgebouw, het bestuursgebouw, het sportcentrum en cultuurcentrum Rembrandt; beschrijvende statistieken zijn te vinden in Tabel 1. De beoordelingen van de vier gebouwen verschillen significant van elkaar (*&chi;^2^~3~* = `r vChi2`, *p* < 0,001, *W* = `r Round_and_format(W)`). De sterkte van het effect van de verschillen in gebouwen op de beoordelingen van studenten is klein tot gemiddeld. Post-hoc toetsen met een Bonferroni correctie voor meerdere toetsen zijn uitgevoerd voor alle vergelijkingen tussen twee gebouwen. Hieruit blijkt dat er alleen significante verschillen zijn tussen het hoofdgebouw en cultuurcentrum Rembrandt, en tussen het sportcentrum  en cultuurcentrum Rembrandt. De eetgelegenheid van cultuurcentrum Rembrandt wordt slechter beoordeeld dan de eetgelegenheden in het hoofdgebouw en het sportcentrum; verder zijn er geen significante verschillen tussen de beoordelingen van de eetgelegenheden op de campus.
 <!-- ## /TEKSTBLOK: rapportage.R -->
 
 
@@ -397,7 +397,7 @@ De significante verschillen op de post-hoc toetsen zijn:
 [^4]: Laerd statistics (2018). *Friedman Test in SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/friedman-test-using-spss-statistics.php. 
 [^5]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^6]: University of Sheffield. *Friedman test in SPSS*. [Mathematics and Statistics Help (MASH)](https://www.sheffield.ac.uk/polopoly_fs/1.714575!/file/stcp-marshall-FriedmanS.pdf). Bezocht op 13 maart 2020.
-[^7]: *Kendall's W* wordt berekend door de teststatistiek van *Friedman's ANOVA* (dit is de &chi;^2) te delen door het aantal observatie-eenheden *N* en het aantal groepen *k* minus één, i.e. $W = \frac{\chi^2}{N(k-1)}$.
+[^7]: *Kendall's W* wordt berekend door de teststatistiek van *Friedman's ANOVA* (dit is de *&chi;^2*) te delen door het aantal observatie-eenheden *N* en het aantal groepen *k* minus één, i.e. $W = \frac{\chi^2}{N(k-1)}$.
 [^8]: Kassambara, A. (2020). *rstatix: Pipe-Friendly Framework for Basic Statistical Tests*. [R package version 0.4.0.](https://CRAN.R-project.org/package=rstatix).
 [^9]: Type I fout: Ten onrechte H~0~ verwerpen.
 [^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

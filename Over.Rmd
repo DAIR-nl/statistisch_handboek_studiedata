@@ -49,6 +49,8 @@ Achter iedere ‘tegel’ bevindt zich een uitleg van de regels om een toets te 
 
 * Martijn Meeter, VU, wetenschappelijke review
 * Sandjai Bhulai, VU, wetenschappelijke review
+* Marjolein Blaauboer, VU, review op toepasbaarheid
+* Corneel den Hartogh, VU, review op toepasbaarheid
 * Daniël Drittij, VU, review op toepasbaarheid
 * Jelger van Zaane, VU, review op toepasbaarheid
 * Nanny Kempers, VU, review op toepasbaarheid
@@ -59,6 +61,7 @@ Achter iedere ‘tegel’ bevindt zich een uitleg van de regels om een toets te 
 * Bram Enning, Hogeschool Leiden
 * Martine Baars, Erasmus Universiteit, School of Social and Behavioural Sciences
 * Tsjerk Wassenaar, Hanzehogeschool Groningen
+* Dirk Tempelaar, Maastricht University
 
 **Bijzondere dank aan**
 

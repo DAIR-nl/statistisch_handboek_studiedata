@@ -126,8 +126,6 @@ for (p in lProgrammeertalen) {
          output_file = paste0('_site/', p, '/Toetsmatrix.html'))
 }
 
-
-
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 02.1 MAAK R BESTANDEN ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -177,7 +175,6 @@ file.copy(file.path(current_folder,list_of_files), new_folder,
           overwrite = TRUE, 
           recursive = FALSE,
           copy.mode = TRUE)
-
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 03 CONTROLEER DE UITKOMST ####

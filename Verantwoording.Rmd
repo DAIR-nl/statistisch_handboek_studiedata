@@ -8,7 +8,7 @@ output:
       collapsed: FALSE 
     number_sections: true
     includes:
-      in_header: ["01. Includes/html/favicon.html", "01. Includes/html/analytics.html"] 
+      in_header: ["01. Includes/html/nocache.html", "01. Includes/html/favicon.html", "01. Includes/html/analytics.html"] 
 ---
 <!-- ## CLOSEDBLOK: Functies.R -->
 ```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}

@@ -33,8 +33,8 @@ Uren_studeren <- c(Uren_studeren_t0, Uren_studeren_t1)
 #Uren_studeren <- c(Uren_studeren_t0, Uren_studeren_t1)
 
 ## Maak studentnummer aan en verdubbel
-Studentnr <-sample(300000:400000, (length(Uren_studeren_t0)))
-Studentnr <- c(Studentnr, Studentnr)
+Studentnummer <-sample(300000:400000, (length(Uren_studeren_t0)))
+Studentnummer <- c(Studentnummer, Studentnummer)
 
 ## Maak meetmoment aan en voeg samen als factor
 Meetmoment_t0 <- replicate(length(Uren_studeren_t0), "T0")
@@ -42,9 +42,13 @@ Meetmoment_t1 <- replicate(length(Uren_studeren_t1), "T1")
 Meetmoment <- as.factor(c(Meetmoment_t0, Meetmoment_t1))
 
 ## Voeg samen in data.frame
-Studielogboek <- data.frame(Studentnr, Uren_studeren, Meetmoment)
+Studielogboek <- data.frame(Studentnummer, Uren_studeren, Meetmoment)
 
 ## MAAK N30 SAMPLE, let op klopt niet helemaal
 indices <- sample.int(nrow(Studielogboek)/2,30)
 Uren_studeren_verschil_n30 <- Studielogboek$Uren_studeren[indices + nrow(Studielogboek)/2] - Studielogboek$Uren_studeren[indices]
 
+# Verwijder alles behalve dataset
+rm(MU_verschil, SD_verschil, Uren_studeren_verschillen, Uren_studeren_t0,
+   Uren_studeren_t1, Uren_studeren, Studentnummer, Meetmoment_t0, Meetmoment_t1,
+   Meetmoment, indices)

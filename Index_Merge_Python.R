@@ -41,8 +41,8 @@ bDebug <- F
 dfToetsen <- tribble(
     ~Toets, ~InGebruik,
     "01 One sample t-toets",                        "1", 
-    "02 Gepaarde t-toets",                          "0", 
-    "03 Ongepaarde t-toets",                        "0", 
+    "02 Gepaarde t-toets",                          "1", 
+    "03 Ongepaarde t-toets",                        "1", 
     "04 Linear mixed model",                        "0", 
     "05 One-way ANOVA",                             "0", 
     "06 Tekentoets",                                "0", 

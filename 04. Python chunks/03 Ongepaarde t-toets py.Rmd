@@ -44,7 +44,7 @@ source(paste0(here::here(),"/01. Includes/data/03.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.py -->
 
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->
-Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap: `Cijfers_gem`. De data bevatten cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
+Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap: `Cijfers_gemiddeld`. De data bevatten cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
 <!-- ## /TEKSTBLOK: Dataset-inladen.py -->
 
 <!-- ## TEKSTBLOK: Data-bekijken.py -->
@@ -54,24 +54,24 @@ Gebruik `<dataframe>.head()` en `<dataframe>.tail()` om de structuur van de data
 <!-- ## OPENBLOK: Data-bekijken.py -->
 ```{python, include=FALSE}
 import pandas as pd
-dfCijfers_gem = pd.DataFrame(r.Cijfers_gem)
+dfCijfers_gemiddeld = pd.DataFrame(r.Cijfers_gemiddeld)
 ```
 
 ```{python data bekijken-1, collapse = TRUE}
 ## Eerste 6 observaties
-print(dfCijfers_gem.head(6))
+print(dfCijfers_gemiddeld.head(6))
 ```
 
 ```{python data bekijken-2, collapse = TRUE}
 ## Laatste 6 observaties
-print(dfCijfers_gem.tail(6))
+print(dfCijfers_gemiddeld.tail(6))
 ```
 <!-- ## /OPENBLOK: Data-bekijken.py -->
 
 <!-- ## OPENBLOK: Data-selecteren.py -->
 ```{python data selecteren}
-Cijfers_2010 = dfCijfers_gem[dfCijfers_gem['Cohort'] == 2010]['Cijfers']
-Cijfers_2011 = dfCijfers_gem[dfCijfers_gem['Cohort'] == 2011]['Cijfers']
+Cijfers_2010 = dfCijfers_gemiddeld[dfCijfers_gemiddeld['Cohort'] == "2010"]['Cijfers']
+Cijfers_2011 = dfCijfers_gemiddeld[dfCijfers_gemiddeld['Cohort'] == "2011"]['Cijfers']
 ```
 <!-- ## /OPENBLOK: Data-selecteren.py -->
 
@@ -177,24 +177,30 @@ plt.show()
 <!-- ## /OPENBLOK: Boxplot.py -->
 
 <!-- ## TEKSTBLOK: Lilliefors-test1.py -->
-De standaard interpretatie van een statitische toets in Python is: `(<teststatistiek>, <p-waarde>)`. Verder toetst Python standaard tweezijdig.
+De standaard interpretatie van de statistische toetsen van normaliteit in Python is: `(<teststatistiek>, <p-waarde>)`. Verder toetst Python hierbij tweezijdig. Gebruik bij deze toets het argument `pvalmethod = "table"` om een betrouwbare p-waarde te krijgen.
 <!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
 
 <!-- ## OPENBLOK: Library-nortest.py -->
 ```{python}
-import statsmodels.stats.api
+import statsmodels.stats.api as smod
 ```
 <!-- ## OPENBLOK: Library-nortest.py -->
 
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
-print(statsmodels.stats.api.lilliefors(Cijfers_2010))
+print(smod.lilliefors(Cijfers_2010, pvalmethod="table"))
+```
+``` {python Lilliefors Test-1 closed, warning=FALSE, include = FALSE}
+lilliefors2010 = smod.lilliefors(Cijfers_2010, pvalmethod="table")
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-1.py -->
 
 <!-- ## OPENBLOK: Lilliefors-test-2.py -->
 ``` {python Lilliefors Test-2, warning=FALSE}
-print(statsmodels.stats.api.lilliefors(Cijfers_2011))
+print(smod.lilliefors(Cijfers_2011, pvalmethod="table"))
+```
+``` {python Lilliefors Test-2 closed, warning=FALSE, include = FALSE}
+lilliefors2011 = smod.lilliefors(Cijfers_2011, pvalmethod="table")
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-2.py -->
 
@@ -204,116 +210,80 @@ Cijfers_2010_n30 = r.Cijfers_2010_n30
 Cijfers_2011_n30 = r.Cijfers_2011_n30
 n = len(Cijfers_2010_n30)
 ```
-Er zijn 2 steekproeven van `Cijfers_gem` ingeladen: `Cijfers_2010_n30` en `Cijfers_2011_n30`. Beide steekproeven bevatten `r py$n` studenten
+Er zijn twee subsets van `Cijfers_gemiddeld` ingeladen: `Cijfers_2010_n30` en `Cijfers_2011_n30`. Beide subsets bevatten `r py$n` studenten. Voor relatief kleine steekproeven als deze is de *Shapiro-Wilk Test* geschikt.
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test -->
 
 <!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
-```{python, include=FALSE}
-Cijfers_2011_n30 = r.Cijfers_2011_n30
-```
-
 ``` {python Shapiro-Wilk Test-1, warning=FALSE}
-print(stats.shapiro(Cijfers_2011_n30))
+print(stats.shapiro(Cijfers_2010_n30))
 ```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-1.py -->
 
 <!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
-```{python, include=FALSE}
-Cijfers_2010_n30 = r.Cijfers_2010_n30
-```
-
 ``` {python Shapiro-Wilk Test-2, warning=FALSE}
-print(stats.shapiro(Cijfers_2010_n30))
+print(stats.shapiro(Cijfers_2011_n30))
 ```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-2.py -->
 
-<!-- ## TEKSTBLOK: Levenes-test -->
-Test met de Levene's test de homogeniteit van varianties. Gebruik hier de variabelen `Cijfers_2010` en `Cijfers_2011`.
-<!-- ## /TEKSTBLOK: Levenes-test -->
-
-<!-- ## OPENBLOK: Levenes-test.py -->
-```{python Levenes test}
-print(stats.levene(Cijfers_2010, Cijfers_2011))
-```
-<!-- ## /OPENBLOK: Levenes-test.py -->
-
-<!-- ## CLOSEDBLOK: Levenes-test.py -->
-```{python Levenes test als object, echo = FALSE, warning=FALSE}
-stat, pval = stats.levene(Cijfers_2010, Cijfers_2011)
-DF1 = 1
-DF2 = len(Cijfers_2010) + len(Cijfers_2011) - 2
-```
-<!-- ## /CLOSEDBLOK: Levenes-test.py -->
-
-<!-- ## TEKSTBLOK: Levenes-test2.py -->
-* *F*~`r py$DF1`~~,~~`r py$DF2`~ = `r Round_and_format(py$stat)`, p-waarde = `r Round_and_format(py$pval)` 
-* p-waarde > 0,05, dus de groepen zijn niet significant verschillend in spreiding.  
-* Vrijheidsgraden bestaan uit twee cijfers: het eerste cijfer (het aantal groepen - 1 = `r py$DF1`) en het tweede cijfer (*n~2010~* + *n~2011~* - 2 = `r py$DF2`)
-<!-- ## /TEKSTBLOK: Levenes-test2.py -->
-
 <!-- ## TEKSTBLOK: T-test.py -->
-Voer een ongepaarde t-toets uit met de functie `stats.ttest_ind()` .
+Voer een ongepaarde t-toets uit in twee stappen. Definieer eerst de vergelijking van de twee groepen met `CompareMeans()` met als argumenten de observaties uit 2010 `DescrStatsW(Cijfers_2010)` en de observaties uit 2011 `DescrStatsW(Cijfers_2011)`. Voer daarna de t-toets uit met `ttest_ind()` met de argumenten `alternative='two-sided'` vanwege de tweezijdige alternatieve hypothese en `usevar = 'unequal'` omdat er geen gepoolde variantie wordt gebruikt. Bereken daarna het 95%-betrouwbaarheidsinterval met `tconfint_diff()` met als nieuw argument `alpha = 0.05` om het significantieniveau aan te geven.
 <!-- ## /TEKSTBLOK: T-test.py -->
 
 <!-- ## OPENBLOK: T-test.py -->
 ```{python statistische toets}
-print(stats.ttest_ind(Cijfers_2010, Cijfers_2011))
+# Importeer library voor statistische toets
+import statsmodels.stats.api as stat
+# Maak een object voor de groepen die vergeleken worden
+Groepen = stat.CompareMeans(stat.DescrStatsW(Cijfers_2010), stat.DescrStatsW(Cijfers_2011))
+# Print de resultaten van de ongepaarde t-toets
+print(Groepen.ttest_ind(alternative = 'two-sided', usevar = 'unequal'))
+# Print het 95%-betrouwbaarheidsinterval
+print(Groepen.tconfint_diff(alpha = 0.05, alternative = 'two-sided', usevar = 'pooled'))
 ```
 <!-- ## /OPENBLOK: T-test.py -->
 
 <!-- ## CLOSEDBLOK: T-test.py -->
 ```{python T-test als object, echo = FALSE}
-stat, pval = stats.ttest_ind(Cijfers_2010, Cijfers_2011)
-n = len(Cijfers_2010)
-df = len(Cijfers_2010) - 1
+stat, pval, df = Groepen.ttest_ind(alternative='two-sided', usevar = 'unequal')
+lb, ub = Groepen.tconfint_diff(alpha=0.05, alternative='two-sided', usevar='pooled')
 mean1 = np.mean(Cijfers_2010)
 mean2 = np.mean(Cijfers_2011)
 ```
 <!-- ## /CLOSEDBLOK: T-test.py -->
 
 <!-- ## TEKSTBLOK: T-test2.py -->
-* *t* ~`r py$df`~ = `r Round_and_format(py$stat)`, *p* = `r Round_and_format(py$pval)`
+* *t* = `r Round_and_format(py$stat)`, *p* = `r Round_and_format(py$pval)`
 * Vrijheidsgraden, *df* = *n* -1 = `r py$n`-1 = `r py$df`  
 * p-waarde > 0,05, dus de H~0~ wordt niet verworpen [^11]
-* Het gemiddelde van de steekproef in 2010: `r Round_and_format(py$mean1)`
-* Het gemiddelde van de steekproef in 2011: `r Round_and_format(py$mean2)`
+* Vrijheidsgraden: *df* = `r Round_and_format(py$df)`, niet gelijk aan aantal observaties min één bij een ongepaarde t-toets zonder gepoolde varianties
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95% van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het verschil tussen de hoogte van de cijfers voor en na de BSA  cursus, µ~verschil~ = µ~T2011~ - µ~T2010~. In deze casus is het interval tussen `r Round_and_format(py$lb)` en `r Round_and_format(py$ub)`. Aangezien 0 in dit interval zit, is er geen significant verschil tussen beide gemiddelden in 2010 en 2011.
+* Het gemiddelde van de steekproef is in 2010 `r Round_and_format(py$mean1)`
+* Het gemiddelde van de steekproef is in 2011 `r Round_and_format(py$mean2)`
 <!-- ## /TEKSTBLOK: T-test2.py -->
 
+
 <!-- ## TEKSTBLOK: Cohen-d.py -->
-Om Cohen's D te kunnen berekenen, moet de onderstaande functie `cohen_d()` worden overgenomen, omdat deze niet een Python eigen functie is.[^13]
+Er is geen Python functie voor Cohen's d. Bereken daarom de effectmaat zelf door het verschil tussen de gemiddelden van beide groepen te delen door de ongepoolde standaardafwijking. Neem de absolute waarde omdat het gebruikelijk is om een effectmaat als positief getal weer te geven.
 <!-- ## /TEKSTBLOK: Cohen-d.py -->
 
 <!-- ## OPENBLOK: Cohens-d-test.py -->
 ```{python}
-def cohen_d(x, y):
-  # import numpy
-  import numpy as np
-	
-	# calculate the size of samples
-  n1, n2 = len(x), len(y)
-	
-	# calculate the variance of the samples
-  v1, v2 = np.var(x, ddof=1), np.var(y, ddof=1)
-	
-	# calculate the pooled standard deviation
-  s = np.sqrt(((n1 - 1) * v1 + (n2 - 1) * v2) / (n1 + n2 - 2))
-	
-	# calculate the means of the samples
-  m1, m2 = np.mean(x), np.mean(y)
-	
-	# calculate the effect size
-  return (m1 - m2) / s
+# Bereken verschil in gemiddelden beide groepen
+Verschil = np.mean(Cijfers_2011) - np.mean(Cijfers_2010)
+
+# Bereken ongepoolde standaardafwijking
+SD = np.sqrt((np.var(Cijfers_2010, ddof = 1) + np.var(Cijfers_2010, ddof = 1)) / 2)
+
+# Bereken Cohen's d
+d = abs(Verschil / SD)
+
+# Print effectmaat
+print(d)
 ```
 
-```{python}
-print(cohen_d(Cijfers_2010, Cijfers_2011))
-```
 <!-- ## /OPENBLOK: Cohens-d-test.py -->
 
 <!-- ## CLOSEDBLOK: Cohens-d-test.py -->
-```{python var Cohens d, echo = FALSE}
-d = cohen_d(Cijfers_2010, Cijfers_2011)
-```
 <!-- ## /CLOSEDBLOK: Cohens-d-test.py -->
 
 <!-- ## TEKSTBLOK: Cohens-d-test.py -->
@@ -321,9 +291,7 @@ d = cohen_d(Cijfers_2010, Cijfers_2011)
 <!-- ## /TEKSTBLOK: Cohens-d-test.py -->
 
 <!-- ## TEKSTBLOK: Rapportage.py -->
-Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = `r Round_and_format(py$vMean_t0)`, *SD~2010~* = `r Round_and_format(py$vSD_t0)`) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = `r Round_and_format(py$vMean_t1)`, *SD~2011~* = `r Round_and_format(py$vSD_t1)`) is statistisch niet significant, *t* ~`r py$df`~ = `r Round_and_format(py$stat)`, *p* > 0,05, zie tabel hieronder.
-
-Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentamencijfer niet is veranderd na de invoer van het BSA. 
+Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = `r Round_and_format(py$vMean_t0)`, *SD~2010~* = `r Round_and_format(py$vSD_t0)`) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = `r Round_and_format(py$vMean_t1)`, *SD~2011~* = `r Round_and_format(py$vSD_t1)`) is  niet significant, *t* ~`r py$df`~ = `r Round_and_format(py$stat)`, *p* = `r Round_and_format(py$pval)`. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen loopt van `r Round_and_format(py$lb)` tot `r Round_and_format(py$ub)`. Het gemiddelde tentamencijfer lijkt niet veranderd te zijn na de invoer van het BSA. 
 
 | Cohort   | N         | M            | SD         |
 | -------- | --------- | ------------ | ---------- |
@@ -332,5 +300,7 @@ Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentam
 <!-- ## /TEKSTBLOK: Rapportage.py -->
 
 <!-- ## TEKSTBLOK: Extra-Bron.py -->
-[^13]: De geschreven Python functie voor Cohen's D is verkregen vanuit de volgende pagina op [Stackoverflow](https://stackoverflow.com/questions/21532471/how-to-calculate-cohens-d-in-python)
+[^15]: Navarro, D. J. (2015). *Learning statistics with R: A tutorial for psychology students
+  and other beginners. (Version 0.5)* University of Adelaide. Adelaide, Australia. 
+[Link](http://www.fon.hum.uva.nl/paul/lot2015/Navarro2014.pdf)
 <!-- ## /TEKSTBLOK: Extra-Bron.py -->

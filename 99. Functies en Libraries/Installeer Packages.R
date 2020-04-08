@@ -36,7 +36,7 @@ Gebruikte_packages <- c(
     "checkmate",
     "dplyr",
     "DescTools",
-    "effsize",
+    "effsize", # misschien niet meer nodig door lsr
     "ez",
     "exact2x2",
     "ggplot2",
@@ -46,6 +46,7 @@ Gebruikte_packages <- c(
     "here",
     "htmltools",
     #"klippy",
+    "lsr",
     "markdown",
     "nortest",
     "plotly",

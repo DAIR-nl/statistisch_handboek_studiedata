@@ -162,7 +162,7 @@ lillieforstest = statsmodels.stats.api.lilliefors(Gemiddeld_cijfer_WNS, pvalmeth
 
 
 <!-- ## TEKSTBLOK: Lilliefors-test2.py -->
-De p-waarde is `r Round_and_format(unlist(py$lillieforstest[2]))`, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
+De p-waarde is `r Round_and_format(unlist(py$lillieforstest[2]))`, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
 <!-- ## /TEKSTBLOK: Lilliefors-test2.py -->
 
 
@@ -187,7 +187,7 @@ swtest = stats.shapiro(Gemiddeld_cijfer_WNS_n30)
 <!-- ## /OPENBLOK: Shapiro-Wilk-test.py -->
 
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test2.py -->
-De p-waarde is `r Round_and_format(unlist(py$swtest[2]))`, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
+De p-waarde is `r Round_and_format(unlist(py$swtest[2]))`, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
 <!-- ## /TEKSTBLOK: Shapiro-Wilk-test2.py -->
 
 

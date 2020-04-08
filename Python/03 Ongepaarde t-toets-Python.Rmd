@@ -7,6 +7,8 @@ output:
     toc_float: 
       collapsed: FALSE 
     number_sections: true
+    includes:
+      in_header: ["../01. Includes/html/nocache.html", "../01. Includes/html/favicon.html", "../01. Includes/html/analytics.html"]
   keywords: [statistisch handboek, studiedata]
 ---
 
@@ -20,9 +22,11 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Functies.R -->
 
+<!-- ## CLOSEDBLOK: CSS -->
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
+<!-- ## /CLOSEDBLOK: CSS -->
 
 <!-- ## CLOSEDBLOK: Header.R -->
 ```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
@@ -57,6 +61,8 @@ Gebruik de *ongepaarde t-toets* om de gemiddelden van twee onafhankelijke groepe
 <div id = "casus">
 Vanaf 2011 heeft de opleiding Taalwetenschap een Bindend Studieadvies (BSA) die de selectiviteit van het eerste jaar moet vergroten. De studieadviseur vraagt zich af of het gemiddelde cijfer van de opleiding Taalwetenschap op 1 februari, na invoering van het BSA, veranderd is. De data is beschikbaar voor het cohort gestart in 2010 en voor het cohort gestart in 2011.
 
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+
 *H~0~*: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taalwetenschap is niet veranderd na de invoer van het BSA, µ~0~ = µ~1~  
 
 *H~A~*: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taalwetenschap is veranderd na de invoer van het BSA, µ~0~ ≠ µ~1~
@@ -66,22 +72,24 @@ Vanaf 2011 heeft de opleiding Taalwetenschap een Bindend Studieadvies (BSA) die 
 Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
 
 ## Normaliteit 
-De *t-toets* gaat ervan uit dat de data van de steekproef normaal verdeeld zijn. Ga er bij een n > 100 vanuit dat de t-toets robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgen.[^2] 
+De *t-toets* gaat ervan uit dat de data van de steekproef normaal verdeeld is. Ga er bij een aantal observaties *n* > 100 vanuit dat de t-toets robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgt.[^2] 
 
 Controleer de assumptie van normaliteit met de volgende stappen:  
-1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
-2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^3]<sup>, </sup>[^4]  
+1. Controleer de data visueel met een histogram, een boxplot en een Q-Q plot.   
+2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^3]<sup>, </sup>[^4]  
 
-Als blijkt dat de data niet normaal verdeeld zijn, transformeer[^5] dan de data eventueel en bepaal daarna of deze wel normaal verdeeld zijn.
+Als blijkt dat de data niet normaal verdeeld is, transformeer[^5] dan de data eventueel en bepaal daarna of deze wel normaal verdeeld is.
 
-Als er geen sprake is van normaliteit gebruik de *Mann-Whitney U toets*, ook bekend als de *Wilcoxon rank-sum toets*.[^6]<sup>, </sup>[^7]  
+Als er geen sprake is van normaliteit gebruik de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html).[^6]<sup>, </sup>[^7]  
 
-## Homogeniteit van varianties 
-Toets met de *Levene’s Test (for equality of variance)* of de spreiding van iedere groep globaal hetzelfde is. Bij een *p* < 0,05 is de variantie van de groepen statistisch significant verschillend.[^8] Als uit de *Levene's test* komt dat de steekproeven verschillen in variantie, dan kan de *ongepaarde t-toets* met ongelijke varianties uitgevoerd worden.
+## Wel of geen gepoolde variantie
+De *ongepaarde t-toets* kan met en zonder gepoolde variantie uitgevoerd worden. Bij een gepoolde variantie is de berekening van de variantie van het verschil in gemiddelden anders en wordt aangenomen dat de varianties van beide steekproeven even groot zijn. Deze aanname is te toetsen met de *Levene's Test*, waarbij een significant resultaat aangeeft dat er een verschil is in de varianties van beide groepen. De hedendaagse consensus is echter om altijd deze aanname niet te toetsen en de *ongepaarde t-toets* zonder gepoolde variantie uit te voeren.[^8] Een gepoolde variantie zorgt ervoor dat het onderscheidend vermogen[^14] van de *ongepaarde t-toets* iets hoger is als de varianties van beide groepen ongeveer gelijk zijn, maar geeft verkeerde resultaten als de varianties van elkaar afwijken. Daarnaast heeft *Levene's Test* een laag onderscheidend vermogen, wat betekent dat het lastig is om ongelijke varianties goed te toetsen. Gebruik daarom de *ongepaarde t-toets* zonder gepoolde variantie; deze staat ook wel bekend als *Welch's t-toets*.[^8]
+
+
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->
-Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap: `Cijfers_gem`. De data bevatten cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
+Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap: `Cijfers_gemiddeld`. De data bevatten cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
 <!-- ## /TEKSTBLOK: Dataset-inladen.py -->
 
 ## De data bekijken
@@ -91,25 +99,25 @@ Gebruik `<dataframe>.head()` en `<dataframe>.tail()` om de structuur van de data
 <!-- ## OPENBLOK: Data-bekijken.py -->
 ```{python, include=FALSE}
 import pandas as pd
-dfCijfers_gem = pd.DataFrame(r.Cijfers_gem)
+dfCijfers_gemiddeld = pd.DataFrame(r.Cijfers_gemiddeld)
 ```
 
 ```{python data bekijken-1, collapse = TRUE}
 ## Eerste 6 observaties
-print(dfCijfers_gem.head(6))
+print(dfCijfers_gemiddeld.head(6))
 ```
 
 ```{python data bekijken-2, collapse = TRUE}
 ## Laatste 6 observaties
-print(dfCijfers_gem.tail(6))
+print(dfCijfers_gemiddeld.tail(6))
 ```
 <!-- ## /OPENBLOK: Data-bekijken.py -->
 
 Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. 
 <!-- ## OPENBLOK: Data-selecteren.py -->
 ```{python data selecteren}
-Cijfers_2010 = dfCijfers_gem[dfCijfers_gem['Cohort'] == 2010]['Cijfers']
-Cijfers_2011 = dfCijfers_gem[dfCijfers_gem['Cohort'] == 2011]['Cijfers']
+Cijfers_2010 = dfCijfers_gemiddeld[dfCijfers_gemiddeld['Cohort'] == "2010"]['Cijfers']
+Cijfers_2011 = dfCijfers_gemiddeld[dfCijfers_gemiddeld['Cohort'] == "2011"]['Cijfers']
 ```
 <!-- ## /OPENBLOK: Data-selecteren.py -->
 
@@ -163,9 +171,12 @@ vSD_t1 = np.sqrt(np.var(Cijfers_2011))
 <!-- ## /TEKSTBLOK: Data-beschrijven-4.py -->
 
 ## Visuele inspectie van normaliteit
-Geef normaliteit visueel weer met een histogram, Q-Q plot of boxplot.
+Geef de verdeling van de data visueel weer met een histogram, Q-Q plot en boxplot.
 
 ### Histogram
+
+Focus bij het analyseren van een histogram op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.[^9]<sup>, </sup>[^10]
+
 <!-- ## OPENBLOK: Histogram.py -->
 ```{python histogram}
 ## Histogram met matplotlib
@@ -187,14 +198,14 @@ plt.show()
 ```
 <!-- ## /OPENBLOK: Histogram.py -->
 
-Beide histogrammen hebben wat weg van een Bell Curve en zouden normaal verdeeld kunnen zijn: veel waardes liggen rondom de gemiddeldes. 
+Beide histogrammen laten een verdeling zien die redelijk symmetrisch is, één top heeft en geen uitbijters. Daarom zijn beide verdeling bij benadering normaal verdeeld.
 
 ### Q-Q plot
 <!-- ## TEKSTBLOK: QQplot.py -->
 Importeer `scipy.stats` om een Q-Q plot te maken en statistische testen uit te voeren. Voor een Q-Q plot kan de functie `scipy.stats.probplot()` worden gebruikt.
 <!-- ## TEKSTBLOK: QQplot.py -->
 
-Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
+Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is.
 <div class ="col-container">
   <div class = "col"> 
 <!-- ## OPENBLOK: QQplot-t1.py -->
@@ -221,10 +232,11 @@ plt.show()
 <!-- ## /OPENBLOK: QQplot-t2.py -->
   </div>
 </div>
-Bij beide groepen liggen de meeste punten op de lijn behalve bij de uiteinden, dit zou kunnen liggen aan de onder- en bovengrens van het cijfersysteem. Er zit een limiet aan de hoogte van het cijfer, namelijk een 10, en daarom vallen mogelijk de hoogste datapunten niet meer perfect op de lijn van de normaalverdeling. Vergelijkbaar liggen de laagste datapunten ook niet meer perfect op de lijn omdat de studenten al enige kennis van het vak hebben. Studenten bij de groep van 2010 halen niet minder dan een 4 halen; studenten bij de groep van 2011 halen niet minder dan een 3.  
+
+Voor beide Q-Q plots liggen de meeste datapunten op of vlakbij de lijn. Hoewel er bij de uiteinden van de verdeling wat afwijkingen zijn, duidt deze grafiek op een goede benadering van de normaalverdeling voor beide cohorten.
 
 ### Boxplot
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten of snorreharen zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
 
 <!-- ## OPENBLOK: Boxplot.py -->
 ```{python boxplot}
@@ -235,21 +247,21 @@ plt.show()
 ```
 <!-- ## /OPENBLOK: Boxplot.py -->
 
-De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer voor de BSA en na de BSA. De boxplotten en de staarten lijken symmetrisch, wat een teken kan zijn van normaal verdeelde data. Het cohort van 2011 heeft een aantal mogelijke uitbijters.[^10] 
+De boxplotten geven de spreiding weer van het gemiddelde tentamencijfer voor de BSA en na de BSA. De boxplotten en de staarten lijken symmetrisch, wat een teken is van bij benadering normaal verdeelde data. Het cohort van 2011 heeft een aantal mogelijke uitbijters.[^10] 
 
 ## Toetsen van normaliteit
-Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
+Om te controleren of de data normaal verdeeld is, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov
-De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie wordt gebruikt als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
+De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is vereist als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn, wat meestal het geval is bij een steekproef. Als de p-waarde kleiner dan 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
 
 <!-- ## TEKSTBLOK: Lilliefors-test1.py -->
-De standaard interpretatie van een statitische toets in Python is: `(<teststatistiek>, <p-waarde>)`. Verder toetst Python standaard tweezijdig.
+De standaard interpretatie van de statistische toetsen van normaliteit in Python is: `(<teststatistiek>, <p-waarde>)`. Verder toetst Python hierbij tweezijdig. Gebruik bij deze toets het argument `pvalmethod = "table"` om een betrouwbare p-waarde te krijgen.
 <!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
 
 <!-- ## OPENBLOK: Library-nortest.py -->
 ```{python}
-import statsmodels.stats.api
+import statsmodels.stats.api as smod
 ```
 <!-- ## OPENBLOK: Library-nortest.py -->
 
@@ -257,144 +269,113 @@ import statsmodels.stats.api
   <div class = "col">
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
-print(statsmodels.stats.api.lilliefors(Cijfers_2010))
+print(smod.lilliefors(Cijfers_2010, pvalmethod="table"))
+```
+``` {python Lilliefors Test-1 closed, warning=FALSE, include = FALSE}
+lilliefors2010 = smod.lilliefors(Cijfers_2010, pvalmethod="table")
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-1.py -->
   </div>
   <div class = "col">
 <!-- ## OPENBLOK: Lilliefors-test-2.py -->
 ``` {python Lilliefors Test-2, warning=FALSE}
-print(statsmodels.stats.api.lilliefors(Cijfers_2011))
+print(smod.lilliefors(Cijfers_2011, pvalmethod="table"))
+```
+``` {python Lilliefors Test-2 closed, warning=FALSE, include = FALSE}
+lilliefors2011 = smod.lilliefors(Cijfers_2011, pvalmethod="table")
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-2.py -->
   </div>
 </div>
 
-Bij deze casus is van beide groepen de p-waarde > 0,05; er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
+Bij deze casus is van beide groepen de p-waarde groter dan 0,05, dus er zijn geen  significante verschillen gevonden tussen de verdeling van de steekproef en de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
 
 ### Shapiro-Wilk Test
-De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en wordt vooral gebruikt bij kleine steekproeven. Als de p-waarde < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling. 
+De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en vooral geschikt bij kleine steekproeven (*n* < 50). Als de p-waarde kleiner dan 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling. 
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test -->
-Er zijn 2 subsets van `Cijfers_gem` ingeladen: `Cijfers_2010_n30` en `Cijfers_2011_n30`. Beide subsets bevatten `r length(Cijfers_2010_n30)` studenten.
+Er zijn twee subsets van `Cijfers_gemiddeld` ingeladen: `Cijfers_2010_n30` en `Cijfers_2011_n30`. Beide subsets bevatten `r length(Cijfers_2010_n30)` studenten. Voor relatief kleine steekproeven als deze is de *Shapiro-Wilk Test* geschikt.
+
 <!-- ## /TEKSTBLOK: Shapiro-Wilk-test -->
 <div class = "col-container">
   <div class="col">
 <!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
-```{python, include=FALSE}
-Cijfers_2011_n30 = r.Cijfers_2011_n30
-```
-
 ``` {python Shapiro-Wilk Test-1, warning=FALSE}
-print(stats.shapiro(Cijfers_2011_n30))
+print(stats.shapiro(Cijfers_2010_n30))
 ```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-1.py -->
   </div>
   <div class="col">
 <!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
-```{python, include=FALSE}
-Cijfers_2010_n30 = r.Cijfers_2010_n30
-```
-
 ``` {python Shapiro-Wilk Test-2, warning=FALSE}
-print(stats.shapiro(Cijfers_2010_n30))
+print(stats.shapiro(Cijfers_2011_n30))
 ```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-2.py -->
   </div>
 </div>
-De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
-
-## Test assumpties: Levene's test
-<!-- ## TEKSTBLOK: Levenes-test -->
-Test met de Levene's test de homogeniteit van varianties. Gebruik hier weer het hele dataframe `Cijfers_gem`.
-<!-- ## /TEKSTBLOK: Levenes-test -->
-<!-- ## OPENBLOK: Levenes-test.py -->
-```{python Levenes test}
-print(stats.levene(Cijfers_2010, Cijfers_2011))
-```
-<!-- ## /OPENBLOK: Levenes-test.py -->
-
-<!-- ## CLOSEDBLOK: Levenes-test.py -->
-```{python Levenes test als object, echo = FALSE, warning=FALSE}
-stat, pval = stats.levene(Cijfers_2010, Cijfers_2011)
-DF1 = 1
-DF2 = len(Cijfers_2010) + len(Cijfers_2011) - 2
-```
-<!-- ## /CLOSEDBLOK: Levenes-test.py -->
-
-<!-- ## TEKSTBLOK: Levenes-test2.py -->
-* *F*~`r py$DF1`~~,~~`r py$DF2`~ = `r Round_and_format(py$stat)`, p-waarde = `r Round_and_format(py$pval)` 
-* p-waarde > 0,05, dus de groepen zijn niet significant verschillend in spreiding.  
-* Vrijheidsgraden bestaan uit twee cijfers: het eerste cijfer (het aantal groepen - 1 = `r py$DF1`) en het tweede cijfer (*n~2010~* + *n~2011~* - 2 = `r py$DF2`)
-<!-- ## /TEKSTBLOK: Levenes-test2.py -->
+De p-waarde is groter dan 0,05 voor beide groepen, dus er zijn geen significante verschillen gevonden tussen de verdeling van de steekproef en de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
 
 ## Ongepaarde t-toets
 <!-- ## TEKSTBLOK: T-test.py -->
-Voer een ongepaarde t-toets uit met de functie `stats.ttest_ind()` .
+Voer een ongepaarde t-toets uit in twee stappen. Definieer eerst de vergelijking van de twee groepen met `CompareMeans()` met als argumenten de observaties uit 2010 `DescrStatsW(Cijfers_2010)` en de observaties uit 2011 `DescrStatsW(Cijfers_2011)`. Voer daarna de t-toets uit met `ttest_ind()` met de argumenten `alternative='two-sided'` vanwege de tweezijdige alternatieve hypothese en `usevar = 'unequal'` omdat er geen gepoolde variantie wordt gebruikt. Bereken daarna het 95%-betrouwbaarheidsinterval met `tconfint_diff()` met als nieuw argument `alpha = 0.05` om het significantieniveau aan te geven.
 <!-- ## /TEKSTBLOK: T-test.py -->
-De verwachting is dat de studenten hoger scoren, maar omdat het relevant om te weten of de studenten ook lager scoren na de invoering is er voor gekozen om tweezijdig te toetsen. 
 
 <!-- ## OPENBLOK: T-test.py -->
 ```{python statistische toets}
-print(stats.ttest_ind(Cijfers_2010, Cijfers_2011))
+# Importeer library voor statistische toets
+import statsmodels.stats.api as stat
+# Maak een object voor de groepen die vergeleken worden
+Groepen = stat.CompareMeans(stat.DescrStatsW(Cijfers_2010), stat.DescrStatsW(Cijfers_2011))
+# Print de resultaten van de ongepaarde t-toets
+print(Groepen.ttest_ind(alternative = 'two-sided', usevar = 'unequal'))
+# Print het 95%-betrouwbaarheidsinterval
+print(Groepen.tconfint_diff(alpha = 0.05, alternative = 'two-sided', usevar = 'pooled'))
 ```
 <!-- ## /OPENBLOK: T-test.py -->
 <!-- ## CLOSEDBLOK: T-test.py -->
 ```{python T-test als object, echo = FALSE}
-stat, pval = stats.ttest_ind(Cijfers_2010, Cijfers_2011)
-n = len(Cijfers_2010)
-df = len(Cijfers_2010) - 1
+stat, pval, df = Groepen.ttest_ind(alternative='two-sided', usevar = 'unequal')
+lb, ub = Groepen.tconfint_diff(alpha=0.05, alternative='two-sided', usevar='pooled')
 mean1 = np.mean(Cijfers_2010)
 mean2 = np.mean(Cijfers_2011)
 ```
 <!-- ## /CLOSEDBLOK: T-test.py -->
 
 <!-- ## TEKSTBLOK: T-test2.py -->
-* *t* ~`r py$df`~ = `r Round_and_format(py$stat)`, *p* = `r Round_and_format(py$pval)`
+* *t* = `r Round_and_format(py$stat)`, *p* = `r Round_and_format(py$pval)`
 * Vrijheidsgraden, *df* = *n* -1 = `r py$n`-1 = `r py$df`  
 * p-waarde > 0,05, dus de H~0~ wordt niet verworpen [^11]
-* Het gemiddelde van de steekproef in 2010: `r Round_and_format(py$mean1)`
-* Het gemiddelde van de steekproef in 2011: `r Round_and_format(py$mean2)`
+* Vrijheidsgraden: *df* = `r Round_and_format(py$df)`, niet gelijk aan aantal observaties min één bij een ongepaarde t-toets zonder gepoolde varianties
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95% van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het verschil tussen de hoogte van de cijfers voor en na de BSA  cursus, µ~verschil~ = µ~T2011~ - µ~T2010~. In deze casus is het interval tussen `r Round_and_format(py$lb)` en `r Round_and_format(py$ub)`. Aangezien 0 in dit interval zit, is er geen significant verschil tussen beide gemiddelden in 2010 en 2011.
+* Het gemiddelde van de steekproef is in 2010 `r Round_and_format(py$mean1)`
+* Het gemiddelde van de steekproef is in 2011 `r Round_and_format(py$mean2)`
 <!-- ## /TEKSTBLOK: T-test2.py -->
 
 ### Effectmaat: Cohen's d 
-De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. Bereken de effectmaat om te bepalen of de gevonden p-waarde van een t-toets betekenisvol is. Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft een gestandaardiseerd verschil weer: het verschil in gemiddelden tussen twee groepen gecorrigeerd voor de gecombineerde standaardafwijking van de twee groepen. Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect.[^12]
+De p-waarde geeft aan of het verschil tussen twee groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^12] Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft een gestandaardiseerd verschil weer: het verschil in gemiddelden tussen twee groepen gecorrigeerd voor de gecombineerde standaardafwijking van de twee groepen. Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect.[^13]
 
-In dit voorbeeld is de p > 0,05, dus is een effectmaat uitrekenen onnodig. Pas de volgende stappen toe bij een p < 0,05.
+In dit voorbeeld is de p-waarde groter dan 0,05, dus is een effectmaat uitrekenen onnodig. Pas de volgende stappen toe bij een p-waarde kleiner dan 0,05.
 
 <!-- ## TEKSTBLOK: Cohen-d.py -->
-Om Cohen's D te kunnen berekenen, moet de onderstaande functie `cohen_d()` worden overgenomen, omdat deze niet een Python eigen functie is.[^13]
+Er is geen Python functie voor Cohen's d. Bereken daarom de effectmaat zelf door het verschil tussen de gemiddelden van beide groepen te delen door de ongepoolde standaardafwijking. Neem de absolute waarde omdat het gebruikelijk is om een effectmaat als positief getal weer te geven.
 <!-- ## /TEKSTBLOK: Cohen-d.py -->
 
 <!-- ## OPENBLOK: Cohens-d-test.py -->
 ```{python}
-def cohen_d(x, y):
-  # import numpy
-  import numpy as np
-	
-	# calculate the size of samples
-  n1, n2 = len(x), len(y)
-	
-	# calculate the variance of the samples
-  v1, v2 = np.var(x, ddof=1), np.var(y, ddof=1)
-	
-	# calculate the pooled standard deviation
-  s = np.sqrt(((n1 - 1) * v1 + (n2 - 1) * v2) / (n1 + n2 - 2))
-	
-	# calculate the means of the samples
-  m1, m2 = np.mean(x), np.mean(y)
-	
-	# calculate the effect size
-  return (m1 - m2) / s
+# Bereken verschil in gemiddelden beide groepen
+Verschil = np.mean(Cijfers_2011) - np.mean(Cijfers_2010)
+
+# Bereken ongepoolde standaardafwijking
+SD = np.sqrt((np.var(Cijfers_2010, ddof = 1) + np.var(Cijfers_2010, ddof = 1)) / 2)
+
+# Bereken Cohen's d
+d = abs(Verschil / SD)
+
+# Print effectmaat
+print(d)
 ```
 
-```{python}
-print(cohen_d(Cijfers_2010, Cijfers_2011))
-```
 <!-- ## /OPENBLOK: Cohens-d-test.py -->
 <!-- ## CLOSEDBLOK: Cohens-d-test.py -->
-```{python var Cohens d, echo = FALSE}
-d = cohen_d(Cijfers_2010, Cijfers_2011)
-```
 <!-- ## /CLOSEDBLOK: Cohens-d-test.py -->
 <!-- ## TEKSTBLOK: Cohens-d-test.py -->
 *d* = `r Round_and_format(py$d)`. De sterkte van het effect van de tutor op het cijfer is verwaarloosbaar. 
@@ -402,9 +383,7 @@ d = cohen_d(Cijfers_2010, Cijfers_2011)
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.py -->
-Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = `r Round_and_format(py$vMean_t0)`, *SD~2010~* = `r Round_and_format(py$vSD_t0)`) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = `r Round_and_format(py$vMean_t1)`, *SD~2011~* = `r Round_and_format(py$vSD_t1)`) is statistisch niet significant, *t* ~`r py$df`~ = `r Round_and_format(py$stat)`, *p* > 0,05, zie tabel hieronder.
-
-Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentamencijfer niet is veranderd na de invoer van het BSA. 
+Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = `r Round_and_format(py$vMean_t0)`, *SD~2010~* = `r Round_and_format(py$vSD_t0)`) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = `r Round_and_format(py$vMean_t1)`, *SD~2011~* = `r Round_and_format(py$vSD_t1)`) is  niet significant, *t* ~`r py$df`~ = `r Round_and_format(py$stat)`, *p* = `r Round_and_format(py$pval)`. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen loopt van `r Round_and_format(py$lb)` tot `r Round_and_format(py$ub)`. Het gemiddelde tentamencijfer lijkt niet veranderd te zijn na de invoer van het BSA. 
 
 | Cohort   | N         | M            | SD         |
 | -------- | --------- | ------------ | ---------- |
@@ -422,15 +401,20 @@ Aan de hand van de resultaten kan geconcludeerd worden dat het gemiddelde tentam
 [^2]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). The importance of the normality assumption in large public health data sets. *Annu Rev Public Health, 23*, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf 
 [^3]: Laerd statistics. (2018). [Testing for Normality using SPSS Statistics](https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php).
 [^4]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).
-[^5]: Bereken de logaritme van de variabele, en de inverse (1 gedeeld door de variabele), en bekijk of deze normaal verdeeld zijn. Als dat zo is mag je die gebruiken voor de analyse.
+[^5]: Bereken de logaritme van de variabele en de inverse (1 gedeeld door de variabele), en bekijk of deze normaal verdeeld is. Als dat zo is, mag je die gebruiken voor de analyse.
 [^6]: Van Geloven, N. (13 maart 2018). *Mann-Whitney U toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
-[^7]: De *Mann-Whitney U toets* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Mann-Whitney U toets* minder onderscheidend vermogen dan wanneer de *ongepaarde t-toets* uitgevoerd zou worden. 
-[^8]: Van Geloven, N. (25 mei 2016). *One-way ANOVA* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/One-way_ANOVA).
+[^7]: De [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld is, heeft de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) minder onderscheidend vermogen dan wanneer de *ongepaarde t-toets* uitgevoerd zou worden. 
+[^8]: Lakens, D. (26 januari 2015). *Always use Welch's t-test instead of Student's t-test*. [The 20% Statistician](http://daniellakens.blogspot.com/2015/01/always-use-welchs-t-test-instead-of.html).
 [^9]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 [^10]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
 [^11]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
-[^12]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf.
+[^12]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
+[^13]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf.
+[^14]: Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  
+
 <!-- ## TEKSTBLOK: Extra-Bron.py -->
-[^13]: De geschreven Python functie voor Cohen's D is verkregen vanuit de volgende pagina op [Stackoverflow](https://stackoverflow.com/questions/21532471/how-to-calculate-cohens-d-in-python)
+[^15]: Navarro, D. J. (2015). *Learning statistics with R: A tutorial for psychology students
+  and other beginners. (Version 0.5)* University of Adelaide. Adelaide, Australia. 
+[Link](http://www.fon.hum.uva.nl/paul/lot2015/Navarro2014.pdf)
 <!-- ## /TEKSTBLOK: Extra-Bron.py -->
 

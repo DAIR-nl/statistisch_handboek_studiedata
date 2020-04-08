@@ -1,4 +1,3 @@
-RNGkind(sample.kind = "Rounding")
 set.seed(1)
 
 mu <- 6.3
@@ -25,6 +24,12 @@ Cijfers_2011_n30 <- rnorm(30, mu, sigma)
 Cijfers_2011_n30 <- Cijfers_2011_n30[Cijfers_2011_n30 <= 10 & Cijfers_2011_n30 >= 1]
 Cijfers_2011_n30 <- sapply(Cijfers_2011_n30, round, 3)
 
+## Maak studentnummer aan
+Studentnummer <-sample(300000:400000, (length(c(Cijfers_2010, Cijfers_2011))))
+
 Cijfers <- c(Cijfers_2010, Cijfers_2011)
 Cohort <- as.character(c(replicate(180, 2010), replicate(160, 2011)))
-Cijfers_gem <- data.frame(Cijfers, Cohort)
+Cijfers_gemiddeld <- data.frame(Studentnummer, Cohort, Cijfers)
+
+# Verwijder objecten die niet nodig zijn
+rm(Cijfers, Cijfers_2010, Cijfers_2011, Cohort, mu, sigma, Studentnummer)

@@ -72,9 +72,6 @@ thisHeader <- Substitute_var(htmltools::htmlPreserve('
   <a href="`sRoot`Verantwoording.html">Verantwoording</a>
 </li>
 <li>
-  <a href="`sRoot`Changelog_website.html">Wijzigingen website</a>
-</li>
-<li>
   <a href="https://docs.google.com/forms/d/1UQcCVTNLpVAg7vSffJCPkBCklsfMlGB0QxyxLDgqosI/edit" target=\"_blank\">Feedback</a>
 </li>
 <li>

@@ -61,6 +61,8 @@ Gebruik de *one sample t-toets* om het gemiddelde van de steekproef te vergelijk
 <div id = "casus">
 De opleidingsdirecteur van de opleiding Werktuigbouwkunde wil weten of het gemiddelde eindexamencijfer voor de exacte vakken (Wiskunde, Natuurkunde en Scheikunde; WNS) van vwo studenten anders is dan het landelijk gemiddelde (6,8).[^2] Met deze gegevens probeert zij een inschatting te maken van het niveau van de studenten en kan zij bepalen of het curriculum van de inleidende vakken genoeg aansluit bij eerstejaars studenten met een vwo vooropleiding.
 
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+
 *H~0~*: Het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde is gelijk aan het landelijk gemiddelde: µ = 6,8. 
 
 *H~A~*: Het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die beginnen aan de Bachelor Werktuigbouwkunde is anders dan het landelijk gemiddelde: µ ≠ 6,8. 
@@ -70,7 +72,7 @@ De opleidingsdirecteur van de opleiding Werktuigbouwkunde wil weten of het gemid
 Om een valide resultaat te bereiken moeten, voordat de toets kan worden uitgevoerd, de data aan een aantal voorwaarden voldoen. 
 
 ## Normaliteit 
-De *t-toets* gaat ervan uit dat de data van de steekproef normaal verdeeld zijn. Ga er bij een n > 100 vanuit dat de t-toets robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgen.[^3] 
+De *t-toets* gaat ervan uit dat de data van de steekproef normaal verdeeld zijn. Ga er bij meer dan 100 observaties vanuit dat de t-toets robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgen.[^3] 
 
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
@@ -78,7 +80,7 @@ Controleer de assumptie van normaliteit met de volgende stappen:
 
 Als blijkt dat de data niet normaal verdeeld zijn, transformeer dan de data eventueel en bepaal daarna of deze wel normaal verdeeld zijn.[^6]
 
-Als er geen sprake is van normaliteit, gebruik de [Wilcoxon Signed Rank Test](07-Wilcoxon-signed-rank-toets-R.html).[^7]<sup>, </sup>[^8]
+Als er geen sprake is van normaliteit, gebruik de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html).[^7]<sup>, </sup>[^8]
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->
@@ -138,9 +140,12 @@ N = np.size(Gemiddeld_cijfer_WNS)
 <!-- ## /TEKSTBLOK: Data-beschrijven2.py -->
 
 ## Visuele inspectie van normaliteit
-Geef de verdeling van de data visueel weer met een histogram, Q-Q plot of boxplot.
+Geef de verdeling van de data visueel weer met een histogram, Q-Q plot en boxplot.
 
 ### Histogram
+
+Focus bij het analyseren van een histogram op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.[^9]<sup>, </sup>[^10]
+
 <!-- ## OPENBLOK: Histogram.py -->
 ```{python histogram, include=TRUE}
 ## Histogram met matplotlib
@@ -153,7 +158,7 @@ plt.show()
 ```
 <!-- ## /OPENBLOK: Histogram.py -->
 
-Het histogram laat een Bell Curve zien vergelijkbaar met een normale verdeling: veel waardes liggen rondom het gemiddelde en weinig bij de staarten van de verdeling. Daarnaast ziet de verdeling er in grote mate symmetrisch uit.
+De histogram lijkt symmetrisch, heeft één top en geen outliers. De data is dus bij benadering normaal verdeeld.
 
 ### Q-Q plot
 <!-- ## TEKSTBLOK: QQplot.py-->
@@ -175,10 +180,10 @@ plt.show()
 ```
 <!-- ## /OPENBLOK: QQplot.py -->
 
-In deze casus liggen de meeste punten op de lijn. Bij de uiteinden liggen de punten dichtbij de lijn. 
+In deze casus liggen de meeste punten op de lijn. Bij de uiteinden liggen de punten dichtbij de lijn. Deze Q-Q plot duidt dus op een goede benadering van de normaalverdeling.
 
 ### Boxplot
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. De staarten bevatten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten of snorreharen zitten de eerste 25% en de laatste 25%.. Cirkels visualiseren mogelijke uitbijters.[^9] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
 
 <!-- ## OPENBLOK: Boxplot.py -->
 ``` {python boxplot}
@@ -216,7 +221,7 @@ lillieforstest = statsmodels.stats.api.lilliefors(Gemiddeld_cijfer_WNS, pvalmeth
 <!-- ## /OPENBLOK: Lilliefors-test.py -->
 
 <!-- ## TEKSTBLOK: Lilliefors-test2.py -->
-De p-waarde is `r Round_and_format(unlist(py$lillieforstest[2]))`, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
+De p-waarde is `r Round_and_format(unlist(py$lillieforstest[2]))`, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
 <!-- ## /TEKSTBLOK: Lilliefors-test2.py -->
 
 ### Shapiro-Wilk Test
@@ -240,7 +245,7 @@ swtest = stats.shapiro(Gemiddeld_cijfer_WNS_n30)
 <!-- ## /OPENBLOK: Shapiro-Wilk-test.py -->
 
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test2.py -->
-De p-waarde is `r Round_and_format(unlist(py$swtest[2]))`, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
+De p-waarde is `r Round_and_format(unlist(py$swtest[2]))`, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one sample-t-toets* kan uitgevoerd worden.
 <!-- ## /TEKSTBLOK: Shapiro-Wilk-test2.py -->
 
 ##  One sample t-toets
@@ -309,7 +314,7 @@ De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor
 [^4]: Laerd statistics (2018). [Testing for Normality using SPSS Statistics](https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php).  
 [^5]: Normaliteit. (14 juli 2014). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).
 [^6]: Bereken de logaritme van de variabele en de inverse (1 gedeeld door de variabele), en bekijk of deze normaal verdeeld zijn. Als dat zo is, mag je die gebruiken voor de analyse.
-[^7]: De *Wilcoxon signed rank toets* maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen dan wanneer de *one sample t-toets* uitgevoerd zou worden. 
+[^7]: De [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html) maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html) minder onderscheidend vermogen dan wanneer de *one sample t-toets* uitgevoerd zou worden. 
 [^8]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html  
 [^9]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 [^10]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 

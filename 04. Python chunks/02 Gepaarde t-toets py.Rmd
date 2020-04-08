@@ -75,25 +75,34 @@ Uren_studeren_verschil = Uren_studeren_T1 - Uren_studeren_T0
 ```
 <!-- ## /OPENBLOK: Data-selecteren.py -->
 
+<!-- ## TEKSTBLOK: Data-inspectie.py-->
+Inspecteer de data met `np.size()`, `np.mean()` en `np.sqrt(np.var())`, door deze aan te roepen uit de library `numpy`.
+<!-- ## /TEKSTBLOK: Data-inspectie.py-->
+
 <!-- ## OPENBLOK: numpy-inladen.py -->
 ```{python}
 # Om het gemiddelde en de standaard deviatie te berekenen, hebben we de library 'numpy' nodig
 import numpy as np
 ```
-
-```{python, include = FALSE}
-Uren_studeren_verschil = np.array(Uren_studeren_T1) - np.array(Uren_studeren_T0)
-```
 <!-- ## OPENBLOK: numpy-inladen.py -->
 
 <!-- ## OPENBLOK: Data-beschrijven-1.py -->
 ```{python data beschrijven t1, collapse = TRUE}
-## aantallen, gemiddelde en standaarddeviatie voor tutorgesprek
+## aantallen, gemiddelde en standaarddeviatie voor cursus
 print(len(Uren_studeren_T0))
 print(np.mean(Uren_studeren_T0))
 print(np.sqrt(np.var(Uren_studeren_T0, ddof = 1)))
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-1.py -->
+
+<!-- ## OPENBLOK: Data-beschrijven-2.py -->
+```{python data bekijken t2, collapse=TRUE}
+## aantallen, gemiddelde en standaarddeviatie na tutorgesprek
+print(len(Uren_studeren_T1))
+print(np.mean(Uren_studeren_T1))
+print(np.sqrt(np.var(Uren_studeren_T1, ddof = 1)))
+```
+<!-- ## /OPENBLOK: Data-beschrijven-2.py -->
 
 <!-- ## CLOSEDBLOK: Data-beschrijven.py -->
 ```{python Var beschrijven, include=FALSE, echo=TRUE}
@@ -109,19 +118,15 @@ vN_t1 = np.size(Uren_studeren_T1)
 <!-- ## TEKSTBLOK: Data-beschrijven.py -->
 * Gemiddeld uren studeren T~0~ (standaardafwijking): `r Round_and_format(py$vMean_t0)` (`r Round_and_format(py$vSD_t0)`). *n* = `r py$vN_t0`.
 * Gemiddeld uren studeren T~1~ (standaardafwijking): `r Round_and_format(py$vMean_t1)` (`r Round_and_format(py$vSD_t1)`). *n* = `r py$vN_t1`.
+
 <!-- ## /TEKSTBLOK: Data-beschrijven.py -->
 
-<!-- ## OPENBLOK: Data-beschrijven-2.py -->
-```{python data bekijken t2, collapse=TRUE}
-## aantallen, gemiddelde en standaarddeviatie na tutorgesprek
-print(len(Uren_studeren_T1))
-print(np.mean(Uren_studeren_T1))
-print(np.sqrt(np.var(Uren_studeren_T1, ddof = 1)))
-```
-<!-- ## /OPENBLOK: Data-beschrijven-2.py -->
 
 <!-- ## OPENBLOK: Histogram.py -->
 ```{python histogram}
+## Bereken verschil in uren studeren met numpy
+Uren_studeren_verschil = np.array(Uren_studeren_T1) - np.array(Uren_studeren_T0)
+
 ## Histogram met matplotlib
 import matplotlib.pyplot as plt
 hist = plt.hist(Uren_studeren_verschil, density = True, edgecolor = "black", bins = 12)
@@ -164,20 +169,28 @@ plt.show()
 <!-- ## /OPENBLOK: Boxplot.py -->
 
 <!-- ## TEKSTBLOK: Lilliefors-test1.py -->
-De standaard interpretatie van een statitische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`. Verder wordt er standaard tweezijdig getoetst.
+De standaard interpretatie van een statistische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`. Verder wordt er standaard tweezijdig getoetst. Gebruik bij deze toets het argument `pvalmethod = "table"` om een betrouwbare p-waarde te krijgen.
 <!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
 
 <!-- ## OPENBLOK: Library-nortest.py -->
 ```{python}
-import statsmodels.stats.api
+import statsmodels.stats.api as smod
 ```
 <!-- ## /OPENBLOK: Library-nortest.py -->
 
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
-print(statsmodels.stats.api.lilliefors(Uren_studeren_verschil, pvalmethod="approx"))
+print(smod.lilliefors(Uren_studeren_verschil, pvalmethod="table"))
+```
+``` {python Lilliefors Test-1 closed, warning=FALSE, include = FALSE}
+lilliefors = smod.lilliefors(Uren_studeren_verschil, pvalmethod="table")
+print(lilliefors)
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-1.py -->
+
+<!-- ## TEKSTBLOK: Lilliefors-test-2.py -->
+De test heeft een p-waarde van `r Round_and_format(unlist(py$lilliefors[2]))`, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden. 
+<!-- ## /TEKSTBLOK: Lilliefors-test-2.py -->
 
 <!-- ## CLOSEDBLOK: data inladen-2.py -->
 ```{python, include=FALSE}
@@ -187,22 +200,35 @@ N = len(Uren_studeren_verschil_n30)
 <!-- ## /CLOSEDBLOK: data inladen-2.py -->
 
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test.py -->
-Er is een subset van de verschillen tussen het aantal studieuren op T~0~ en T~1~ ingeladen, `Uren_studeren_verschil_n30` met daarin `r py$N` observaties.
+Er is een subset van de verschillen tussen het aantal studieuren op T~0~ en T~1~ ingeladen, `Uren_studeren_verschil_n30` met daarin `r py$N` observaties. Voor een relatief kleine steekproef als deze is de *Shapiro-Wilk Test* geschikt.
 <!-- ## /TEKSTBLOK: Shapiro-Wilk-test.py -->
 
 <!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
 ``` {python Shapiro-Wilk Test-1}
 print(stats.shapiro(Uren_studeren_verschil_n30))
 ```
+``` {python Shapiro-Wilk Test-2, include = FALSE}
+swtest = stats.shapiro(Uren_studeren_verschil_n30)
+```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-1.py -->
 
+<!-- ## TEKSTBLOK: Shapiro-Wilk-test-2.py -->
+Voor deze subset is de p-waarde `r Round_and_format(unlist(py$swtest[2]))`, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden.  
+<!-- ## /TEKSTBLOK: Shapiro-Wilk-test-2.py -->
+
 <!-- ## TEKSTBLOK: T-test.py -->
-Gebruik `stats.ttest_rel()` om een *gepaarde t-toets* uit te voeren. Gebruik hier weer de twee variabelen `Uren_studeren_T0` en `Uren_studeren_T1`.
+Gebruik de functie `stats.ttest_rel()` om een *gepaarde t-toets* uit te voeren. Gebruik als argumenten de twee variabelen `Uren_studeren_T0` en `Uren_studeren_T1` die de observaties van beide groepen bevatten.
 <!-- ## /TEKSTBLOK: T-test.py -->
 
 <!-- ## OPENBLOK: T-toets.py -->
 ```{python T-test}
-print(stats.ttest_rel(Uren_studeren_T0, Uren_studeren_T1))
+## Bereken verschil in uren studeren met numpy
+Uren_studeren_verschil = np.array(Uren_studeren_T0) - np.array(Uren_studeren_T1)
+# Voer gepaarde t-toets uit
+print(smod.DescrStatsW(Uren_studeren_verschil).ttest_mean(value = 0, alternative = 'two-sided'))
+# Print 95%-betrouwbaarheidsinterval
+print(smod.DescrStatsW(Uren_studeren_verschil).tconfint_mean(alpha = 0.05, alternative = 'two-sided'))
+
 ```
 ```{python}
 # Absoluut gemiddeld verschil berekenen
@@ -213,63 +239,45 @@ print(absoluut_verschil)
 
 <!-- ## CLOSEDBLOK: T-test.py -->
 ```{python T-test als object, echo = FALSE}
-stat, pval = stats.ttest_rel(Uren_studeren_T0, Uren_studeren_T1)
+stat, pval, df = smod.DescrStatsW(Uren_studeren_verschil).ttest_mean(value = 0, alternative = 'two-sided')
 N_tot = len(Uren_studeren_verschil)
-df = N_tot - 1
+lb, ub = smod.DescrStatsW(Uren_studeren_verschil).tconfint_mean(alpha = 0.05, alternative = 'two-sided')
 ```
 <!-- ## /CLOSEDBLOK: T-test.py -->
 
 <!-- ## TEKSTBLOK: T-test2.py -->
-* *t*~`r py$df`~ = `r Round_and_format(py$stat)`, *p* < 0,05
+* *t*~`r py$df`~ = `r Round_and_format(py$stat)`, *p* < 0,0001`
 * Vrijheidsgraden, *df* = *n* -1 = `r py$N_tot`-1 = `r py$df`  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen [^10]
-* het absolute verschil tussen de twee groepen: `r Round_and_format(py$absoluut_verschil)` 
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95% van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het verschil tussen het aantal studieuren voor en na de cursus,  µ~verschil~ = µ~T0~ - µ~T1~. In deze casus is het interval tussen `r Round_and_format(py$lb)` en `r Round_and_format(py$ub)`. Aangezien 0 niet in dit interval zit, is er een significant verschil tussen µ~T1~ en µ~T0~.
+* het absolute verschil tussen de twee groepen is `r Round_and_format(py$absoluut_verschil)` 
 <!-- ## TEKSTBLOK: T-test2.py -->
 
 <!-- ## TEKSTBLOK: Cohen-d.py -->
-Er is geen Python eigenfunctie voor Cohen's D, neem daarom onderstaande functie `cohen_d()` over.[^11]
+Er is geen Python functie voor Cohen's d. Bereken daarom de effectmaat zelf door het gemiddelde van de verschilscores `Uren_studeren_verschil` te delen door de standaardafwijking van de scores van de studenten voor de cursus `Uren_studeren_T0`. Neem de absolute waarde omdat het gebruikelijk is om een effectmaat als positief getal weer te geven.[^11]
 <!-- ## /TEKSTBLOK: Cohen-d.py  -->
 
 <!-- ## OPENBLOK: Cohens-d-test.py -->
 ```{python}
-def cohen_d(x, y):
-  # import numpy
-  import numpy as np
-	
-	# calculate the size of samples
-  n1, n2 = len(x), len(y)
-	
-	# calculate the variance of the samples
-  v1, v2 = np.var(x, ddof=1), np.var(y, ddof=1)
-	
-	# calculate the pooled standard deviation
-  s = np.sqrt(((n1 - 1) * v1 + (n2 - 1) * v2) / (n1 + n2 - 2))
-	
-	# calculate the means of the samples
-  m1, m2 = np.mean(x), np.mean(y)
-	
-	# calculate the effect size
-  return (m1 - m2) / s
-```
+# Bereken de effectmaat door het gemiddelde van de verschilscores te delen door de standaardafwijking van de scores van de studenten voor de cursus
+abs(np.mean(Uren_studeren_verschil)/np.sqrt(np.var(Uren_studeren_T0, ddof = 1)))
 
-```{python}
-print(cohen_d(Uren_studeren_T0, Uren_studeren_T1))
 ```
 <!-- ## OPENBLOK: Cohens-d-test.py -->
 
 <!-- ## CLOSEDBLOK: Cohens-d-test.py -->
 ```{python}
-d = cohen_d(Uren_studeren_T0, Uren_studeren_T1)
+d = abs(np.mean(Uren_studeren_verschil)/np.sqrt(np.var(Uren_studeren_T0, ddof = 1)))
 ```
 <!-- ## /CLOSEDBLOK: Cohens-d-test.py -->
 
 <!-- ## TEKSTBLOK: Cohens-d-test.py -->
-*d* = `r Round_and_format(py$d)`. De sterkte van het effect van de tutor op het cijfer is minimaal. 
+*d* = `r Round_and_format(py$d)`. De sterkte van het effect van de tutor op het cijfer is groot.
 <!-- ## /TEKSTBLOK: Cohens-d-test.py -->
 
 <!-- ## TEKSTBLOK: Rapportage.py -->
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddeld aantal uur studeren van de studenten is veranderd na deelname aan de cursus 'Plannen'. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r Round_and_format(py$vMean_t0)`, *SD~T0~* = `r Round_and_format(py$vSD_t0)`) en het gemiddelde van T~1~ (*M~T1~* =`r Round_and_format(py$vMean_t1)`, *SD~T1~* = `r Round_and_format(py$vSD_t1)`) is significant, *t* ~`r py$df`~ = `r Round_and_format(py$stat)`, *p* < 0,01. Gemiddeld studeren de studenten `r Round_and_format(py$absoluut_verschil)` uur meer na deelname aan de cursus. 
-Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is groot, *d* = `r Round_and_format(py$d)`. 
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddeld aantal uur studeren van de studenten is veranderd na deelname aan de cursus 'Plannen'. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r Round_and_format(py$vMean_t0)`, *SD~T0~* = `r Round_and_format(py$vSD_t0)`) en het gemiddelde van T~1~ (*M~T1~* =`r Round_and_format(py$vMean_t1)`, *SD~T1~* = `r Round_and_format(py$vSD_t1)`) is significant, *t* ~`r py$df`~ = `r Round_and_format(py$stat)`, *p* < 0,0001. Gemiddeld studeren de studenten `r Round_and_format(py$absoluut_verschil)` uur meer na deelname aan de cursus, dit is een groot effect. Het 95%-betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen (T~0~ - T~1~) loopt van `r Round_and_format(-py$lb)` tot `r Round_and_format(-py$ub)`.
+
 
 | Meting     | N         | M            | SD         |
 | --------   | --------- | ------------ | ---------- |
@@ -278,5 +286,5 @@ Het valt op dat het gemiddelde van T~1~ hoger is dan van T~0~. Het effect is gro
 <!-- ## /TEKSTBLOK: Rapportage.py -->
 
 <!-- ## TEKSTBLOK: Extra-Bron.py -->
-[^11]: De geschreven Python functie voor Cohen's D is verkregen vanuit de volgende pagina op [Stackoverflow](https://stackoverflow.com/questions/21532471/how-to-calculate-cohens-d-in-python)
+[^13]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage.
 <!-- ## /TEKSTBLOK: Extra-Bron.py -->

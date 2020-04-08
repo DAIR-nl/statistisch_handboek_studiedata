@@ -51,14 +51,14 @@ source(paste0(here::here(),"/01. Includes/data/09.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik *Friedman's ANOVA* om verdelingen te vergelijken van een groep bij drie of meer herhaalde metingen of om drie of meer gepaarde groepen te vergelijken.[^1]<sup>, </sup>[^2] *Friedman's ANOVA* is een alternatief voor de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) wanneer de data niet aan de assumptie van normaliteit voldoet. Daarnaast hebben uitbijters minder invloed op het resultaat van *Friedman's ANOVA* in vergelijking tot de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html). Echter, als de data aan de assumpties van de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) voldoet, heeft deze toets een hoger onderscheidend vermogen dan *Friedman's ANOVA*.[^3]
+Gebruik *Friedman's ANOVA* om verdelingen te vergelijken van een groep bij drie of meer herhaalde metingen of om drie of meer gepaarde groepen te vergelijken.[^1]<sup>, </sup>[^2] *Friedman's ANOVA* is een alternatief voor de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) wanneer de data niet aan de assumptie van normaliteit voldoet. Daarnaast hebben uitbijters minder invloed op het resultaat van *Friedman's ANOVA* in vergelijking tot de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html). Echter, als de data aan de assumpties van de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) voldoet, heeft die toets een hoger onderscheidend vermogen dan *Friedman's ANOVA*.[^3]
 
 
 
 # Onderwijscasus
 <div id = "casus">
 
-De vastgoedmanager van de  Facultaire Dienst (FD) van een hogeschool is nieuwsgierig hoe de verschillende eetgelegenheden op de campus gewaardeerd worden door studenten om te inventarisen op welke manier het horeca-aanbod verbeterd kan worden. Uit de Nationale Studenten Enquête (NSE) blijkt dat studenten van de hogeschool ontevreden zijn over het horeca-aanbod op de campus. Als vervolgonderzoek hierop wordt een groep studenten gevraagd om de eetgelegenheden op de campus te beoordelen. Aan de hand daarvan vergelijkt de FD eetgelegenheden in vier gebouwen: het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt. Met deze gegevens wil de vastgoedmanager onderzoeken of er verschillen zijn in de waarderingscijfers van de eetgelegenheden in de vier gebouwen. Als deze verschillen aanwezig zijn, is zij benieuwd welke eetgelegenheden van elkaar verschillen.
+De vastgoedmanager van de  Facultaire Dienst (FD) van een hogeschool is nieuwsgierig hoe de verschillende eetgelegenheden op de campus gewaardeerd worden door studenten om te inventarisen op welke manier het horeca-aanbod verbeterd kan worden. Uit de Nationale Studenten Enquête (NSE) blijkt dat studenten van de hogeschool ontevreden zijn over het horeca-aanbod op de campus. Als vervolgonderzoek hierop wordt een groep studenten gevraagd om de eetgelegenheden op de campus te beoordelen. Aan de hand daarvan vergelijkt de vastgoedmanager eetgelegenheden in vier gebouwen: het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt. Met deze gegevens wil de vastgoedmanager onderzoeken of er verschillen zijn in de waarderingscijfers van de eetgelegenheden in de vier gebouwen. Als deze verschillen aanwezig zijn, is zij benieuwd welke eetgelegenheden van elkaar verschillen.
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
 
@@ -119,7 +119,7 @@ Inspecteer de beoordelingen per gebouw met de functies `length()`, `median()` en
 
 <!-- ## OPENBLOK: Data-beschrijven.R -->
 ``` {r data beschrijven, warning=FALSE, message=FALSE}
-## Groepsgrootes, mediaan en kwantielen
+## Groepsgroottes, mediaan en kwantielen
 library(dplyr)
 group_by(Beoordelingen_eetgelegenheden, Eetgelegenheid) %>%
   summarise(
@@ -224,7 +224,7 @@ vdf <- Round_and_format(obj$parameter)
 ```
 <!-- ## /CLOSEDBLOK: ANOVA-toets.R -->
 
-Bereken vervolgens de effectmaat *Kendall's W* op basis van de *&chi;^2* waarde van *Friedman's ANOVA*.
+Bereken vervolgens de effectmaat *Kendall's W* op basis van de *&chi;^2^* waarde van *Friedman's ANOVA*.
 ```{r effectgrootte}
 # Sla de Chi-kwadraat waarde op
 Chi2 <- friedman.test(y = Beoordelingen_eetgelegenheden$Beoordeling, 
@@ -298,7 +298,7 @@ De [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html) gebruikt d
 <!-- ## OPENBLOK: post-hoc5.R -->
 ```{r som rang}
 
-# Definieer een functie die som positieve en negatieve rangschikkingen berekend
+# Definieer een functie die som positieve en negatieve rangschikkingen berekent
 Sommen_rangschikkingen <- function(Beoordeling_gebouw_1, Beoordeling_gebouw_2){
   
   # Bereken verschilscores
@@ -307,7 +307,7 @@ Sommen_rangschikkingen <- function(Beoordeling_gebouw_1, Beoordeling_gebouw_2){
   # Rangschik de absolute waarden van verschilscores
   Rangschikkingen <- rank(abs(Verschilscores))
 
-  # Maak een vector met daarin de tekens (plus of min) van verschilscores)
+  # Maak een vector met daarin de tekens (plus of min) van verschilscores
   Tekens <- sign(Verschilscores)
 
   # Bereken de som van de positieve rangschikkingen
@@ -371,7 +371,9 @@ Som_SC_CC <- Sommen_rangschikkingen(Beoordeling_sportcentrum, Beoordeling_cultuu
 
 <!-- ## TEKSTBLOK: posthoc7.R -->
 De significante verschillen op de post-hoc toetsen zijn:
+
 * De beoordelingen van het hoofdgebouw (Som = `r Round_and_format(Som_HG_CC[[1]])`) verschillen significant van het cultuurcentrum (Som = `r Round_and_format(Som_HG_CC[[2]])`), *p* = `r Round_and_format(posthoc[2,2])`, *r* = `r Round_and_format(Effectmaat_HG_CC)`. De hogere som van rangschikkingen voor het hoofdgebouw duidt erop dat de beoordelingen van het hoofdgebouw beter zijn dan die van het cultuurcentrum.
+
 * De beoordelingen van het sportcentrum (Som = `r Round_and_format(Som_SC_CC[[1]])`) verschillen significant van het cultuurcentrum (Som = `r Round_and_format(Som_SC_CC[[2]])`), *p* = `r Round_and_format(posthoc[3,2])`, *r* = `r Round_and_format(Effectmaat_SC_CC)`. De hogere som van rangschikkingen voor het sportcentrum duidt erop dat de beoordelingen van het sportcentrum beter zijn dan die van het cultuurcentrum.
 
 <!-- ## /TEKSTBLOK: posthoc7.R -->
@@ -381,7 +383,9 @@ De significante verschillen op de post-hoc toetsen zijn:
 # Rapportage
 
 <!-- ## TEKSTBLOK: rapportage.R -->
-*Friedman's ANOVA* is uitgevoerd om te onderzoeken of de beoordeling van eetgelegenheden door studenten verschilt voor vier gebouwen op de campus van een hogeschool. De vier gebouwen zijn het hoofdgebouw, het bestuursgebouw, het sportcentrum en cultuurcentrum Rembrandt; beschrijvende statistieken zijn te vinden in Tabel 1. De beoordelingen van de vier gebouwen verschillen significant van elkaar (*&chi;^2^~3~* = `r vChi2`, *p* < 0,001, *W* = `r Round_and_format(W)`). De sterkte van het effect van de verschillen in gebouwen op de beoordelingen van studenten is klein tot gemiddeld. Post-hoc toetsen met een Bonferroni correctie voor meerdere toetsen zijn uitgevoerd voor alle vergelijkingen tussen twee gebouwen. Hieruit blijkt dat er alleen significante verschillen zijn tussen het hoofdgebouw en cultuurcentrum Rembrandt, en tussen het sportcentrum  en cultuurcentrum Rembrandt. De eetgelegenheid van cultuurcentrum Rembrandt wordt slechter beoordeeld dan de eetgelegenheden in het hoofdgebouw en het sportcentrum; verder zijn er geen significante verschillen tussen de beoordelingen van de eetgelegenheden op de campus.
+*Friedman's ANOVA* is uitgevoerd om te onderzoeken of de beoordeling van eetgelegenheden door studenten verschilt voor vier gebouwen op de campus van een hogeschool. De vier gebouwen zijn het hoofdgebouw, het bestuursgebouw, het sportcentrum en cultuurcentrum Rembrandt; beschrijvende statistieken zijn te vinden in Tabel 1. De beoordelingen van de vier gebouwen verschillen significant van elkaar (*&chi;^2^~3~* = `r vChi2`, *p* < 0,001, *W* = `r Round_and_format(W)`). De sterkte van het effect van de verschillen in gebouwen op de beoordelingen van studenten is klein tot gemiddeld.
+
+Post-hoc toetsen met een Bonferroni correctie voor meerdere toetsen zijn uitgevoerd voor alle vergelijkingen tussen twee gebouwen. Hieruit blijkt dat er alleen significante verschillen zijn tussen het hoofdgebouw en cultuurcentrum Rembrandt, en tussen het sportcentrum  en cultuurcentrum Rembrandt. De eetgelegenheid van cultuurcentrum Rembrandt wordt slechter beoordeeld dan de eetgelegenheden in het hoofdgebouw en het sportcentrum; verder zijn er geen significante verschillen tussen de beoordelingen van de eetgelegenheden op de campus.
 <!-- ## /TEKSTBLOK: rapportage.R -->
 
 
@@ -397,7 +401,7 @@ De significante verschillen op de post-hoc toetsen zijn:
 [^4]: Laerd statistics (2018). *Friedman Test in SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/friedman-test-using-spss-statistics.php. 
 [^5]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^6]: University of Sheffield. *Friedman test in SPSS*. [Mathematics and Statistics Help (MASH)](https://www.sheffield.ac.uk/polopoly_fs/1.714575!/file/stcp-marshall-FriedmanS.pdf). Bezocht op 13 maart 2020.
-[^7]: *Kendall's W* wordt berekend door de teststatistiek van *Friedman's ANOVA* (dit is de *&chi;^2*) te delen door het aantal observatie-eenheden *N* en het aantal groepen *k* minus één, i.e. $W = \frac{\chi^2}{N(k-1)}$.
+[^7]: *Kendall's W* wordt berekend door de teststatistiek van *Friedman's ANOVA* (dit is de *&chi;^2^*) te delen door het aantal observatie-eenheden *N* en het aantal groepen *k* minus één, i.e. $W = \frac{\chi^2}{N(k-1)}$.
 [^8]: Kassambara, A. (2020). *rstatix: Pipe-Friendly Framework for Basic Statistical Tests*. [R package version 0.4.0.](https://CRAN.R-project.org/package=rstatix).
 [^9]: Type I fout: Ten onrechte H~0~ verwerpen.
 [^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

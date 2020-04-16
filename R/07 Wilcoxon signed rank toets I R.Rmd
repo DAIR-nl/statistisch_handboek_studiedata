@@ -1,0 +1,284 @@
+---
+title: "Wilcoxon signed rank toets"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+    includes:
+      in_header: ["../01. Includes/html/nocache.html", "../01. Includes/html/favicon.html", "../01. Includes/html/analytics.html"]
+  keywords: [statistisch handboek, studiedata]
+---
+
+<!-- ## CLOSEDBLOK: Functies.R -->
+```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
+library(here)
+if (!exists("Substitute_var")) {
+  ## Installeer packages en functies
+  source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
+}
+```
+<!-- ## /CLOSEDBLOK: Functies.R -->
+
+<!-- ## CLOSEDBLOK: CSS -->
+<style>
+`r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
+</style>
+<!-- ## /CLOSEDBLOK: CSS -->
+
+<!-- ## CLOSEDBLOK: Header.R -->
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Header.R -->
+
+<!-- ## CLOSEDBLOK: Status.R -->
+```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Status.R -->
+
+```{r opmerking, include=FALSE, eval=FALSE}
+# Onderwijscasus idee 2: Beoordelen studenten opleiding X positiever nadat ze met hun tutor hebben gesproken?
+```
+
+<!-- ## OPENBLOK: Data-aanmaken.R -->
+```{r aanmaken data, include=FALSE, echo=TRUE}
+source(paste0(here::here(),"/01. Includes/data/07.R"))
+```
+<!-- ## /OPENBLOK: Data-aanmaken.R -->
+
+# Toepassing
+Gebruik de *Wilcoxon signed rank toets* om te toetsen of de verdelingen van twee gepaarde groepen van elkaar verschillen.[^1] Deze toets is een alternatief voor de [gepaarde t-toets](02-Gepaarde-t-toets-R.html) wanneer de verschilscores van de gepaarde groepen niet normaal verdeeld zijn. Alleen als de verdeling van de verschilscores symmetrisch is, kan de *Wilcoxon signed rank toets* gebruikt worden om een verschil tussen de medianen van gepaarde groepen te toetsen.[^3] Gebruik de gepaarde [tekentoets](27-Tekentoets-II-R.html) om medianen te toetsen wanneer de verdeling van verschilscores niet symmetrisch is.
+
+# Onderwijscasus
+<div id ="casus">
+De directeur van de Academie Mens & Maatschappij wil bekijken hoe het inkomen van zijn alumni zich ontwikkelt nadat zij zijn afgestudeerd. Deze informatie is interessant om te gebruiken bij voorlichtingsactiviteiten van de Academie. Hij bekijkt het bruto jaarinkomen van de alumni één jaar na afstuderen en vergelijkt het met het bruto jaarinkomen vijf jaar na afstuderen. 
+
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+
+*H~0~*: De verdeling van het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij één jaar na afstuderen is hetzelfde als de verdeling vijf jaar na afstuderen.  
+*H~A~*: De verdeling van het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij één jaar na afstuderen is niet hetzelfde als de verdeling vijf jaar na afstuderen. 
+</div>
+
+# Assumpties
+
+Het meetniveau van de afhankelijke variabele is ordinaal of continu.[^1] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data is te vinden in een andere toetspagina.
+
+De *Wilcoxon signed rank toets* kan een alternatief zijn voor de [gepaarde t-toets](02-Gepaarde-t-toets-R.html). Een voordeel van de *Wilcoxon signed rank toets* is dat de data niet aan de assumptie van normaliteit hoeven te voldoen. Maar als de data wel normaal verdeeld is, heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen[^4] dan de [gepaarde t-toets](02-Gepaarde-t-toets-R.html).[^5] Vandaar dat ondanks dit voordeel minder vaak voor de *Wilcoxon signed rank toets* gekozen wordt. 
+
+## Verdeling steekproef
+
+De *Wilcoxon signed rank toets* schrijft geen assumpties voor over de verdeling van de verschilscores (verschillen tussen beide meetmomenten voor alle observatie-eenheden).[^5] In principe toetst de *Wilcoxon signed rank toets* een hypothese over het verschil tussen de verdelingen van twee gepaarde groepen. Als de verschilscores echter symmetrisch zijn, toetst de *Wilcoxon signed rank toets* ook een hypothese over het verschil tussen de medianen van twee gepaarde groepen. In dat geval heeft de *Wilcoxon signed rank toets* een hoger onderscheidend vermogen[^4] dan de [tekentoets](06-Tekentoets-R.html) om medianen te toetsen.[^5] De [tekentoets](06-Tekentoets-R.html) vereist niet dat de verschilscores symmetrisch zijn en toetst alleen een hypothese over het verschil tussen medianen van gepaarde groepen.
+
+Als er geen symmetrische verdeling van verschilscores is, doet de *Wilcoxon signed rank toets* een uitspraak over het verschil tussen verdelingen. Een verschil tussen verdelingen kan meerdere oorzaken hebben. De top van de verdelingen kan verschillend zijn, maar ook de spreiding van de verdeling kan verschillen. De *Wilcoxon signed rank toets* maakt een rangschikking van de absolute waarden van de verschilscores en telt vervolgens de rangschikkingen op voor de positieve en negatieve verschilscores. Het verschil tussen de som van de positieve en negatieve rangschikkingen bepaalt de significantie van de toets. Benoem daarom de sommen van positieve en negatieve rangschikkingen in de rapportage en visualiseer de verdeling van beide gepaarde groepen om duidelijk te maken op welke manier de verdelingen van elkaar verschillen.
+
+# Effectmaat
+
+De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^6] 
+De *Wilcoxon signed rank toets* heeft als effectmaat *r*.[^7] Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^8]
+
+# Uitvoering
+<!-- ## TEKSTBLOK: Dataset-inladen.R-->
+Er is data ingeladen met het bruto jaarinkomen van alumni van de Academie Mens & Maatschappij genaamd `Alumni_jaarinkomen`. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkelt vier jaar nadat zij afgestudeerd zijn. Meetmoment T~1~ is één jaar na afstuderen, meetmoment T~2~ is vijf jaar na afstuderen. 
+<!-- ## /TEKSTBLOK: Dataset-inladen.R-->
+
+## De data bekijken
+<!-- ## TEKSTBLOK: Data-bekijken.R -->
+Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
+<!-- ## /TEKSTBLOK: Data-bekijken.R -->
+
+<!-- ## OPENBLOK: Data-bekijken.R -->
+```{r data bekijken, collapse = TRUE}
+## Eerste 6 observaties
+head(Alumni_jaarinkomens)
+
+## Laatste 6 observaties
+tail(Alumni_jaarinkomens)
+```
+<!-- ## /OPENBLOK: Data-bekijken.R -->
+
+<!-- ## TEKSTBLOK: Data-beschrijven.R-->
+Bekijk de grootte en de mediaan  van de data met `length()` en `median()`. 
+<!-- ## /TEKSTBLOK: Data-beschrijven.R-->
+<!-- ## OPENBLOK: Data-selecteren.R-->
+```{r data selecteren}
+Alumni_jaarinkomens_T1 <- Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T1"]
+Alumni_jaarinkomens_T2 <- Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T2"]
+```
+<!-- ## /OPENBLOK: Data-selecteren.R-->
+
+<div class="col-container">
+  <div class="col">
+<!-- ## OPENBLOK: Data-beschrijven-1.R -->
+```{r, data beschrijven 1, collapse=TRUE}
+length(Alumni_jaarinkomens_T1)
+median(Alumni_jaarinkomens_T1)
+```
+<!-- ## /OPENBLOK: Data-beschrijven-1.R -->
+  </div>
+  <div class="col">
+<!-- ## OPENBLOK: Data-beschrijven-2.R -->
+```{r Data beschrijven 2, collapse=TRUE}
+length(Alumni_jaarinkomens_T2)
+median(Alumni_jaarinkomens_T2)
+```
+<!-- ## /OPENBLOK: Data-beschrijven-2.R -->
+  </div>
+</div>
+<!-- ## CLOSEDBLOK: Data-beschrijven-2.R -->
+```{r data beschrijven als object, include=FALSE, echo=TRUE}
+vMed_T1 <- median(Alumni_jaarinkomens_T1)
+vN_T1 <- length(Alumni_jaarinkomens_T1)
+vMed_T2 <- median(Alumni_jaarinkomens_T2)
+vN_T2 <- length(Alumni_jaarinkomens_T2)
+```
+<!-- ## /CLOSEDBLOK: Data-beschrijven-2.R -->
+
+<!-- ## TEKSTBLOK: Data-beschrijven3.R-->
+* Mediaan bruto jaarinkomen op T~1~: `r paste0("€",format(vMed_T1, scientific = FALSE))` 
+* Mediaan bruto jaarinkomen op T~2~: `r paste0("€",format(vMed_T2, scientific = FALSE))` 
+* Aangezien de gegevens gepaard zijn, zijn de groepsgroottes op beide meetmomenten gelijk: *n~T1~* = `r vN_T1` en *n~T2~* = `r vN_T2`
+
+<!-- ## /TEKSTBLOK: Data-beschrijven3.R-->
+
+
+
+## De data visualiseren
+
+Maak een histogram om de verdeling van de bruto jaarinkomens van de alumni één jaar en vijf jaar na afstuderen visueel weer te geven.
+
+<!-- ## OPENBLOK: Histogram1.R -->
+```{r histogram, warnings=FALSE, message=FALSE}
+## Histogram met ggplot2
+library(ggplot2)
+
+ggplot(Alumni_jaarinkomens,
+  aes(x = Inkomen)) +
+  geom_histogram(color = "grey30",
+                 fill = "#0089CF") +
+  facet_wrap(~ Meetmoment, labeller = labeller(Meetmoment = c(T1 = "Een jaar na afstudereren", T2 = "Vijf jaar na afstuderen"))) +
+  ylab("Frequentie") +
+  labs(title = "Bruto jaarinkomen alumni Mens & Maatschappij")
+```
+<!-- ## /OPENBLOK: Histogram1.R -->
+
+Op beide meetmomenten is te zien dat de meeste alumni tussen de 0 en €60.000 euro per jaar verdienen en dat een paar alumni hier ver boven zit. Beide verdelingen hebben één top, maar zijn niet symmetrisch door de lange staart aan de rechterkant van de verdeling. Beide verdeling lijken qua vorm en spreiding sterk op elkaar.
+
+Maak vervolgens een histogram van de verschilscores om te onderzoeken of deze verdeling symmetrisch is.
+
+
+<!-- ## OPENBLOK: Histogram2.R -->
+```{r histogram2, warnings=FALSE, message=FALSE}
+# Maak een dataset met de verschilscores
+Alumni_verschilscores <- data.frame(Verschilscores = Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T2"] - Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T1"])
+
+## Histogram met ggplot2
+library(ggplot2)
+
+ggplot(Alumni_verschilscores,
+  aes(x = Verschilscores)) +
+  geom_histogram(color = "grey30",
+                 fill = "#0089CF") +
+  geom_density(alpha = .2, adjust = 1) +
+  ylab("Frequentiedichtheid") +
+  labs(title = "Verschilscores bruto jaarinkomen alumni Mens & Maatschappij")
+```
+<!-- ## /OPENBLOK: Histogram2.R -->
+
+De verdeling van de verschilscores bevat voornamelijk positieve waarden en een paar negatieve waarden; de meeste alumni zijn er dus in bruto jaarinkomen op vooruitgegaan. De verdeling heeft een lange staart aan de rechterkant en is dus niet symmetrisch. Gebruik de *Wilcoxon signed rank toets* dus niet om een uitspraak te doen over het verschil in medianen.
+
+
+
+## Wilcoxon signed rank toets
+<!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
+Voer de *Wilcoxon signed rank toets* uit om de vraag te beantwoorden of de verdeling van de bruto jaarinkomens van alumni in vier jaar veranderd zijn. Gebruik de functie `wilcox.test()` met als eerste argument `Inkomen ~ Meetmoment` waarin `Inkomen` de afhankelijke variabele is en `Meetmoment` de onafhankelijke variabele is die twee meetmomenten aangeeft. Gebruik om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn het argument `paired = TRUE`.  Toets tweezijdig door het argument `alternative = "two.sided"` te gebruiken.
+<!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
+
+<!-- ## OPENBLOK: Wilcoxon-signed-rank-toets.R -->
+```{r wilcox test}
+wilcox.test(Inkomen ~ Meetmoment, Alumni_jaarinkomens, 
+            paired = TRUE, alternative = "two.sided")
+```
+<!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets.R -->
+
+<!-- ## OPENBLOK: Wilcoxon-signed-rank-toets2.R -->
+Bereken de effectmaat *r* vervolgens op basis van de p-waarde van de *Wilcoxon signed rank toets*.
+```{r effectgrootte}
+# Sla de p-waarde op
+pwaarde <- wilcox.test(Inkomen ~ Meetmoment, Alumni_jaarinkomens, 
+                       paired = TRUE, alternative = "two.sided")$p.value
+
+# Bereken de effectgrootte voor een tweezijdige toets
+r <- abs(qnorm(pwaarde/2)) / sqrt(length(Alumni_jaarinkomens_T1))
+# Bereken de effectgrootte voor een eenzijdige toets
+#r <- abs(qnorm(pwaarde)) / sqrt(length(Alumni_jaarinkomens_T1))
+
+# Print de effectgrootte
+paste("De effectmaat is", r)
+
+```
+<!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets2.R -->
+
+Bereken de aantallen en de sommen van positieve en negatieve rangschikkingen op basis van de verschilscores.
+
+<!-- ## OPENBLOK: Wilcoxon-signed-rank-toets3.R -->
+```{r sommen}
+# Bereken verschilscores
+Verschilscores <- Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T2"] - Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T1"]
+
+# Rangschik de absolute waarden van verschilscores
+Rangschikkingen <- rank(abs(Verschilscores))
+
+# Maak een vector met daarin de tekens (plus of min) van verschilscores)
+Tekens <- sign(Verschilscores)
+
+# Bereken het aantal en de som van de positieve rangschikkingen
+N_positief <- length(Tekens[Tekens == 1])
+Som_positief <- sum(Rangschikkingen[Tekens == 1])
+
+# Bereken het aantal en de som van de negatieve rangschikkingen
+N_negatief <- length(Tekens[Tekens == -1])
+Som_negatief <- sum(Rangschikkingen[Tekens == -1])
+```
+<!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets3.R -->
+
+
+<!-- ## CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
+```{r wilcox test als object, include=FALSE, echo=TRUE}
+wilcox <- wilcox.test(Inkomen ~ Meetmoment, Alumni_jaarinkomens, paired = TRUE, alternative = "two.sided")
+vVstatistic <- Round_and_format(wilcox$statistic)
+```
+<!-- ## /CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
+
+<!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets4.R -->
+* *V* = `r vVstatistic`, *p* < 0,0001 , *r* = `r Round_and_format(r)`
+* De toetsstatistiek *V* is in deze casus gelijk aan de som van de negatieve rangschikkingen
+* Het aantal positieve rangschikkingen is `r N_positief`; de som is `r format(round(Som_positief), scientific = FALSE)`
+* Het aantal negatieve rangschikkingen is `r N_negatief`; de som is `r round(Som_negatief)`
+* p-waarde < 0,05, dus de H~0~ wordt verworpen[^9]
+* Effectmaat is `r Round_and_format(r)`, dus een groot effect
+
+
+<!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets4.R -->
+
+# Rapportage
+<!-- ## TEKSTBLOK: Rapportage.R -->
+De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de verdeling van het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij in vier jaar tijd is veranderd. De resultaten van de toets laten zien dat er een significant verschil is tussen het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij één jaar en vijf jaar na afstuderen, *V* = `r vVstatistic`, *p* < 0,0001, *r* = `r Round_and_format(r)`. Er zijn `r N_positief` alumni die vijf jaar na afstuderen meer verdienen dan één jaar na afstuderen (som van rangschikkingen is `r format(round(Som_positief), scientific = FALSE)`) en er zijn `r N_negatief` alumni die vijf jaar na afstuderen minder verdienen dan één jaar na afstuderen (som van rangschikkingen is `r Som_negatief`). Alumni lijken dus meer te verdienen wanneer ze vijf jaar afgestudeerd zijn.
+<!-- ## /TEKSTBLOK: Rapportage.R -->
+
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
+```
+<!-- ## /CLOSEDBLOK: Footer.R -->
+
+[^1]: Laerd Statistics (2018). *Wilcoxon Signed-Rank Test using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/wilcoxon-signed-rank-test-using-spss-statistics.php
+[^3]: Statistics How To (27 mei 2018). *One Sample Median Test*. [Statistics How to](https://www.statisticshowto.datasciencecentral.com/one-sample-median-test/).
+[^4]: Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese waar is.  
+[^5]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage.
+[^6]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
+[^7]: De effectmaat *r* wordt voor de *Wilcoxon signed rank toets* berekend door de
+*z*-waarde behorend bij de p-waarde van de toets te delen door de wortel van
+het aantal observatie-eenheden, i.e. $\frac{z}{\sqrt{N}}$.
+[^8]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
+[^9]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

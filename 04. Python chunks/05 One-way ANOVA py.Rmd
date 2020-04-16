@@ -43,7 +43,7 @@ source(paste0(here::here(),"/01. Includes/data/05.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.py -->
 
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->
-Er is een dataframe ingeladen met de reistijden van uitwonende studenten per opleiding ingeladen genaamd `dfReistijd_per_opleiding`. 
+Er is een dataset ingeladen met de reistijden van uitwonende studenten per opleiding genaamd `dfReistijd_per_opleiding`. 
 <!-- ## /TEKSTBLOK: Dataset-inladen.py -->
 
 <!-- ## TEKSTBLOK: Data-bekijken.py -->
@@ -68,13 +68,13 @@ print(dfReistijd_per_opleiding.tail(5))
 <!-- ## /OPENBLOK: Data-bekijken.py -->
 
 <!-- ## TEKSTBLOK: Data-bekijken2.py -->
-De dataset bevat gegevens van studenten van verschillende opleidingen. Gebruik `<data.frame>.<kolomnaam>.unique()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
+De dataset bevat gegevens van studenten van verschillende opleidingen. Gebruik `.unique()` om te onderzoeken welke opleidingen er in de data aanwezig zijn. 
 <!-- ## /TEKSTBLOK: Data-bekijken2.py -->
 
 <!-- ## OPENBLOK: Data-bekijken2.py -->
 ```{python data bekijken 2}
 ## Opleidingen in de data aanwezig
-print(dfReistijd_per_opleiding.Opleiding.unique())
+print(dfReistijd_per_opleiding['Opleiding'].unique())
 ```
 <!-- ## /OPENBLOK: Data-bekijken2.py -->
 
@@ -102,36 +102,36 @@ import numpy as np
 ## Aantallen, gemiddelde en standaarddeviatie voor Arabische Taal en Cultuur
 print(len(Reistijd_ATC))
 print(np.mean(Reistijd_ATC))
-print(np.sqrt(np.var(Reistijd_ATC)))
+print(np.std(Reistijd_ATC))
 ```
 
 ```{python Data beschrijven 2, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie voor Filosofie
 print(len(Reistijd_FIL))
 print(np.mean(Reistijd_FIL))
-print(np.sqrt(np.var(Reistijd_FIL)))
+print(np.std(Reistijd_FIL))
 ```
 
 ```{python Data beschrijven 3, collapse=TRUE}
 ## Aantallen, gemiddelde en standaarddeviatie voor Geschiedenis
 print(len(Reistijd_GSC))
 print(np.mean(Reistijd_GSC))
-print(np.sqrt(np.var(Reistijd_GSC)))
+print(np.std(Reistijd_GSC))
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-1.py -->
 
 <!-- ## CLOSEDBLOK: Data-beschrijven.py -->
 ```{python data beschrijven als object, include=FALSE, echo=TRUE}
 vM_ATC = np.mean(Reistijd_ATC)
-vSD_ATC = np.sqrt(np.var(Reistijd_ATC, ddof=1))
+vSD_ATC = np.std(Reistijd_ATC)
 vN_ATC = np.size(Reistijd_ATC)
 
 vM_FIL = np.mean(Reistijd_FIL)
-vSD_FIL = np.sqrt(np.var(Reistijd_FIL, ddof=1))
+vSD_FIL = np.std(Reistijd_FIL)
 vN_FIL = np.size(Reistijd_FIL)
 
 vM_GSC = np.mean(Reistijd_GSC)
-vSD_GSC = np.sqrt(np.var(Reistijd_GSC, ddof=1))
+vSD_GSC = np.std(Reistijd_GSC)
 vN_GSC = np.size(Reistijd_GSC)
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven.py -->
@@ -190,6 +190,7 @@ title = plt.title("Filosofie")
 xlab = plt.xlabel("Theoretische kwantielen")
 ylab = plt.ylabel("Kwantielen in data")
 plt.show()
+
 ```
 <!-- ## /OPENBLOK: QQplot2.py -->
 
@@ -201,6 +202,7 @@ title = plt.title("Geschiedenis")
 xlab = plt.xlabel("Theoretische kwantielen")
 ylab = plt.ylabel("Kwantielen in data")
 plt.show()
+
 ```
 <!-- ## OPENBLOK: QQplot3.py -->
 
@@ -220,25 +222,25 @@ De standaard interpretatie van een statitische toets in Python is: `(<teststatis
 
 <!-- ## OPENBLOK: Library-nortest.py -->
 ```{python}
-import statsmodels.stats.api
+import statsmodels.stats.api as smod
 ```
 <!-- ## /OPENBLOK: Library-nortest.py -->
 
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
-print(statsmodels.stats.api.lilliefors(Reistijd_ATC, pvalmethod="approx"))
+print(statsmodels.stats.api.lilliefors(Reistijd_ATC, pvalmethod="table"))
 ```
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
 
 <!-- ## OPENBLOK: Lilliefors-test-2.py -->
 ``` {python Lilliefors Test-2, warning=FALSE}
-print(statsmodels.stats.api.lilliefors(Reistijd_FIL, pvalmethod="approx"))
+print(statsmodels.stats.api.lilliefors(Reistijd_FIL, pvalmethod="table"))
 ```
 <!-- ## OPENBLOK: Lilliefors-test-2.py -->
 
 <!-- ## OPENBLOK: Lilliefors-test-3.py -->
 ``` {python Lilliefors Test-3, warning=FALSE}
-print(statsmodels.stats.api.lilliefors(Reistijd_GSC, pvalmethod="approx"))
+print(statsmodels.stats.api.lilliefors(Reistijd_GSC, pvalmethod="table"))
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-3.py -->
 
@@ -246,6 +248,7 @@ print(statsmodels.stats.api.lilliefors(Reistijd_GSC, pvalmethod="approx"))
 ``` {python Shapiro-Wilk Test-1, warning=FALSE}
 import scipy.stats as stats
 print(stats.shapiro(Reistijd_GSC))
+
 ```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-3.py -->
 
@@ -253,6 +256,7 @@ print(stats.shapiro(Reistijd_GSC))
 ``` {python Shapiro-Wilk Test-2, warning=FALSE}
 import scipy.stats as stats
 print(stats.shapiro(Reistijd_FIL))
+
 ```
 <!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
 
@@ -266,6 +270,7 @@ print(stats.shapiro(Reistijd_ATC))
 <!-- ## OPENBLOK: Levenes-test.py -->
 ```{python Levenes test}
 import scipy.stats as stats
+# Geef de drie variabelen met de reistijden per opleiding als argumenten
 print(stats.levene(Reistijd_ATC, Reistijd_FIL, Reistijd_GSC))
 ```
 <!-- ## /OPENBLOK: Levenes-test.py -->
@@ -280,12 +285,12 @@ vDF2 = len(Reistijd_ATC) + len(Reistijd_FIL) + len(Reistijd_GSC) - 3
 
 <!-- ## TEKSTBLOK: Levenes-test.py -->
 * *F*~`r py$vDF1`~~,~~`r py$vDF2`~ = `r Round_and_format(py$stat)`, p-waarde = `r Round_and_format(py$pval)`, 
-* De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de groepen in spreiding.
+* De p-waarde is groter dan 0,05, dus er is geen significant verschil gevonden tussen de groepen in spreiding.
 *  Vrijheidsgraden bestaan uit twee cijfers, het eerste cijfer (het aantal groepen - 1 = `r py$vDF1`) en het tweede cijfer (*n~1~* + *n~2~*+*n~3~* - 3 = `r py$vDF2`).  
 <!-- ## TEKSTBLOK: Levenes-test.py -->
 
 <!-- ## TEKSTBLOK: ANOVA-toets.py -->
-Gebruik `pingouin.anova()` om een ANOVA-test uit te voeren.
+Gebruik `.anova()` uit de package `pingouin` om een ANOVA-test uit te voeren. De argumenten van de functie zijn de dataset `data = dfReistijd_per_opleiding`, de afhankelijke variabele `dv = "Reistijd"`, de groepsvariabele `between = "Opleiding"` en `detailed = True` om aan te geven dat de functie een uitgebreide versie van de resultaten geeft.
 <!-- ## /TEKSTBLOK: ANOVA-toets.py -->  
 
 <!-- ## OPENBLOK: ANOVA-toets.py -->
@@ -295,7 +300,7 @@ import pingouin as pg
 ```
 
 ```{python ANOVA}
-aov = pg.anova(data=dfReistijd_per_opleiding, dv='Reistijd', between='Opleiding', detailed=True)
+aov = pg.anova(data = dfReistijd_per_opleiding, dv = 'Reistijd', between = 'Opleiding', detailed = True)
 print(aov)
 ```
 <!-- ## /OPENBLOK: ANOVA-toets.py -->
@@ -309,36 +314,33 @@ vF_waarde = aov['F'][0]
 <!-- ## /CLOSEDBLOK: ANOVA-toets.py -->
 
 <!-- ## TEKSTBLOK: ANOVA-toets1.py -->
-* *F* ~`r py$vDF1`~~,~~`r py$vDF2`~ = `r Round_and_format(py$stat)`, *p* < 0,05.
-* p-waarde < 0,05, dus de H~0~ wordt verworpen.[^16] 
+* *F* ~`r py$vDF1`~~,~~`r py$vDF2`~ = `r Round_and_format(py$stat)`, *p* < 0,0001.
+* p-waarde is kleiner dan 0,05, dus de H~0~ wordt verworpen.[^16] 
 * Vrijheidsgraden: het aantal groepen - 1 = `r py$vDF1`; *n~1~* + *n~2~* + *n~3~*- 3 = `r py$vDF2`.
 
 <!-- ## /TEKSTBLOK: ANOVA-toets1.py -->
 
+<!-- ## TEKSTBLOK: Eta-squared-tekst.py -->
+De effectmaat *η^2^* is in de resultaten te vinden onder `np2`.
+<!-- ## /TEKSTBLOK: Eta-squared-tekst.py -->
+
+
+
 <!-- ## OPENBLOK: Eta-squared.py --> 
+<!-- ## /OPENBLOK: Eta-squared.py -->
+
+<!-- ## CLOSEDBLOK: Eta-squared.py -->
 ```{python, include=FALSE}
 Esq = float(aov["np2"][0])
 ```
-
-```{python}
-print("Eta Squared:", Esq)
-```
-<!-- ## /OPENBLOK: Eta-squared.py -->
-
-<!-- ## TEKSTBLOK: Eta-squared-tekst.py -->
-
-<!-- ## /TEKSTBLOK: Eta-squared-tekst.py -->
-
-<!-- ## CLOSEDBLOK: Eta-squared.py -->
-
 <!-- ## /CLOSEDBLOK: Eta-squared.py -->
 
 <!-- ## TEKSTBLOK: Eta-squared.py -->
-*η^2^* = `r Round_and_format(py$Esq)`
+*η^2^* = `r Round_and_format(py$Esq)`, de sterkte van het effect van de type opleiding op de reistijd is groot. 
 <!-- ## /TEKSTBLOK: Eta-squared.py -->
 
 <!-- ## TEKSTBLOK: Tukey-HSD.py -->
-Gebruik `pingouin.pairwise_tukey` op het ANOVA-object.
+Gebruik de functie `.pairwise_tukey()` met als argumenten de dataset `data = dfReistijd_per_opleiding`, de afhankelijke variabele `dv = "Reistijd"`, de groepsvariabele `between = "Opleiding"` en `effsize = "cohen"` om aan te geven dat Cohen's d als effectmaat voor de post-hoc toets wordt gebruikt.
 <!-- ## /TEKSTBLOK: Tukey-HSD.py -->
 
 <!-- ## OPENBLOK: Tukey-HSD.py -->
@@ -353,17 +355,18 @@ THSD = pg.pairwise_tukey(data = dfReistijd_per_opleiding, dv = "Reistijd", betwe
 vATCvsFIL = THSD['diff'][0]
 vATCvsGSC = THSD['diff'][1]
 vFILvsGSC = THSD['diff'][2]
+vpFILvsGSC = THSD['p-tukey'][2]
 ```
 <!-- ## /CLOSEDBLOK: Tukey-HSD.py -->
 
 <!-- ## TEKSTBLOK: Tukey-HSD1.py -->
-Het verschil tussen Filosofie en Arabische Taal en Cultuur: *MD* = `r Round_and_format(py$vATCvsFIL)`, p < 0,01.  
-Het verschil tussen Geschiedenis en Arabische Taal en Cultuur: *MD* = `r Round_and_format(py$vATCvsGSC)`, p < 0,01.  
-Het verschil tussen Geschiedenis en Filosofie: *MD* = `r Round_and_format(py$vFILvsGSC)`, p = 0,26.  
+Het verschil tussen Filosofie en Arabische Taal en Cultuur is *MD* = `r Round_and_format(py$vATCvsFIL)`, *p* = 0,001.  
+Het verschil tussen Geschiedenis en Arabische Taal en Cultuur is *MD* = `r Round_and_format(py$vATCvsGSC)`, *p* = 0,001.  
+Het verschil tussen Geschiedenis en Filosofie is *MD* = `r Round_and_format(py$vFILvsGSC)`, *p* = `r Round_and_format(py$vpFILvsGSC)`.  
 <!-- ## /TEKSTBLOK: Tukey-HSD1.py -->
 
 <!-- ## TEKSTBLOK: Rapportage.py -->
-Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar is. De opleidingen zijn: Arabische Taal en Cultuur (*M~atc~* = `r Round_and_format(py$vM_ATC)`, *SD~atc~* = `r Round_and_format(py$vSD_ATC)`), Filosofie (*M~fil~* = `r Round_and_format(py$vM_FIL)`, *SD~fil~* = `r Round_and_format(py$vSD_FIL)`) en Geschiedenis (*M~gsc~* = `r Round_and_format(py$vM_GSC)`, *SD~fil~* = `r Round_and_format(py$vSD_FIL)`, zie ook tabel. De gemiddelde reistijd van de groepen verschillen significant van elkaar, *F*(`r py$vDF1`, `r py$vDF2`) = `r Round_and_format(py$vF_waarde)`, *p* < 0,05. De sterkte van het effect van de type opleiding op de reistijd is groot.
+Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten per opleiding gelijk is aan elkaar. De opleidingen zijn: Arabische Taal en Cultuur (*M~atc~* = `r Round_and_format(py$vM_ATC)`, *SD~atc~* = `r Round_and_format(py$vSD_ATC)`), Filosofie (*M~fil~* = `r Round_and_format(py$vM_FIL)`, *SD~fil~* = `r Round_and_format(py$vSD_FIL)`) en Geschiedenis (*M~gsc~* = `r Round_and_format(py$vM_GSC)`, *SD~fil~* = `r Round_and_format(py$vSD_FIL)`; zie ook Tabel 1. De gemiddelde reistijd van de groepen verschilt significant van elkaar, *F*(`r py$vDF1`, `r py$vDF2`) = `r Round_and_format(py$vF_waarde)`, *p* < 0,0001, *η^2^* = `r Round_and_format(py$Esq)`. De sterkte van het effect van de type opleiding op de reistijd is groot.
 
 
 | Opleiding     | N          | M          | SD          |
@@ -374,5 +377,8 @@ Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de
 <!-- ## /TEKSTBLOK: Rapportage.py -->
 
 <!-- ## TEKSTBLOK: Rapportage-tukey.py -->
-*Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen. Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = `r Round_and_format(py$vATCvsFIL)`, p < 0,01). Tussen Geschiedenis en Arabische Taal en Cultuur is een significant verschil (*MD* = `r Round_and_format(py$vATCvsGSC)`, p < 0,01). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = `r Round_and_format(py$vFILvsGSC)`, p = 0,26). 
+*Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen. Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = `r Round_and_format(py$vATCvsFIL)`, *p* < 0,01). Tussen Geschiedenis en Arabische Taal en Cultuur is een significant verschil (*MD* = `r Round_and_format(py$vATCvsGSC)`, *p* < 0,01). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = `r Round_and_format(py$vFILvsGSC)`, *p* = 0,26). 
 <!-- ## /TEKSTBLOK: Rapportage-tukey.py -->
+
+
+

@@ -29,9 +29,18 @@ Opleiding <- c(namenlijst_atc, namenlijst_gsc, namenlijst_fil)
 Opleiding <- Opleiding[order(Reistijd)]
 Reistijd <- sort(Reistijd)
 
-Reistijd_per_opleiding <- data.frame(Reistijd, Opleiding)
-colnames(Reistijd_per_opleiding) <- c("Reistijd", "Opleiding")
+Studentnummers_opties <- c(4000000:4500000)
+Studentnummer <- sample(Studentnummers_opties, 257)
+Studentnummer <- as.factor(Studentnummer)
+
+
+Reistijd_per_opleiding <- data.frame(Studentnummer, Opleiding, Reistijd)
+colnames(Reistijd_per_opleiding) <- c("Studentnummer","Opleiding", "Reistijd")
 
 
 Reistijd_per_opleiding <- Reistijd_per_opleiding %>%
   mutate(Reistijd = if_else(Reistijd < 0, Reistijd*-1, Reistijd))
+
+rm(namenlijst_atc, namenlijst_fil, namenlijst_gsc, Opleiding, Reistijd,
+   Reistijd_ATC, Reistijd_FIL, Reistijd_GSC, reistijd_gem, sd_gem,
+   Studentnummer, Studentnummers_opties, Studiegrootte)

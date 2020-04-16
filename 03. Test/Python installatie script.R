@@ -13,7 +13,7 @@ py_install("matplotlib")
 py_install("scipy")
 py_install("statsmodels")
 py_install("statsmodels.api")
-
+py_install("pingouin")
 
 
 

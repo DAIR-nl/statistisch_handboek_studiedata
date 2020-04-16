@@ -204,14 +204,14 @@ lilliefors2011 = smod.lilliefors(Cijfers_2011, pvalmethod="table")
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-2.py -->
 
-<!-- ## TEKSTBLOK: Shapiro-Wilk-test -->
-```{python, include=FALSE}
+<!-- ## TEKSTBLOK: Shapiro-Wilk-test.py -->
+```{python, include=FALSE, echo = TRUE}
 Cijfers_2010_n30 = r.Cijfers_2010_n30
 Cijfers_2011_n30 = r.Cijfers_2011_n30
 n = len(Cijfers_2010_n30)
 ```
 Er zijn twee subsets van `Cijfers_gemiddeld` ingeladen: `Cijfers_2010_n30` en `Cijfers_2011_n30`. Beide subsets bevatten `r py$n` studenten. Voor relatief kleine steekproeven als deze is de *Shapiro-Wilk Test* geschikt.
-<!-- ## TEKSTBLOK: Shapiro-Wilk-test -->
+<!-- ## TEKSTBLOK: Shapiro-Wilk-test.py -->
 
 <!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
 ``` {python Shapiro-Wilk Test-1, warning=FALSE}
@@ -263,7 +263,7 @@ mean2 = np.mean(Cijfers_2011)
 
 
 <!-- ## TEKSTBLOK: Cohen-d.py -->
-Er is geen Python functie voor Cohen's d. Bereken daarom de effectmaat zelf door het verschil tussen de gemiddelden van beide groepen te delen door de ongepoolde standaardafwijking. Neem de absolute waarde omdat het gebruikelijk is om een effectmaat als positief getal weer te geven.
+Er is geen Python functie voor Cohen's d. Bereken daarom de effectmaat zelf door het verschil tussen de gemiddelden van beide groepen te delen door de ongepoolde standaardafwijking.[^15] Neem de absolute waarde omdat het gebruikelijk is om een effectmaat als positief getal weer te geven.
 <!-- ## /TEKSTBLOK: Cohen-d.py -->
 
 <!-- ## OPENBLOK: Cohens-d-test.py -->

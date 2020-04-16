@@ -320,10 +320,10 @@ lillie.test(Reistijd_GSC)
   </div>
 </div>
 
-De p-waarde is *p* > 0,05 voor elke groep; er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. [^18] De *one-way ANOVA* kan uitgevoerd worden.
+De p-waarde is groter dan 0,05 voor elke groep; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. [^18] De *one-way ANOVA* kan uitgevoerd worden.
 
 ### Shapiro-Wilk Test
-De *Shapiro-Wilk test* is een soortgelijke toets als de *Kolmogorov-Smirnov test* en vooral geschikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
+De *Shapiro-Wilk test* is een soortgelijke toets als de *Kolmogorov-Smirnov test* en vooral geschikt bij kleine steekproeven (*n* < 50). Als de p-waarde kleiner dan 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
 
 <div class="col-container"> 
   <div class="col">
@@ -349,7 +349,7 @@ shapiro.test(Reistijd_ATC)
   </div>
 </div>
 
-De p-waarde is *p* > 0,05 voor elke groep, dus er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one-way ANOVA* kan uitgevoerd worden.
+De p-waarde is groter dan 0,05 voor elke groep, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *one-way ANOVA* kan uitgevoerd worden.
 
 ## Toetsen van Homogeniteit van varianties
 Toets met de *Levene's test* de homogeniteit van varianties. Als uit de *Levene's test* blijkt dat de steekproeven verschillen in variantie, voer dan de [Kruskal-Wallis toets](10-Kruskal-Wallis-toets-R.html) uit. Omdat de ANOVA een robuuste toets is, kan deze ook gebruikt worden wanneer deze assumptie geschonden is, maar dan heeft de toets misschien minder onderscheidend vermogen.
@@ -371,7 +371,7 @@ vDF2 <- Round_and_format(L$`Df`[2])
 <!-- ## /CLOSEDBLOK: Levenes-test.R -->
 <!-- ## TEKSTBLOK: Levenes-test.R -->
 * *F*~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, p-waarde = `r vF_p`, 
-* De p-waarde is *p* > 0,05, dus er is geen statistisch significant verschil gevonden tussen de groepen in variantie.
+* De p-waarde is groter dan 0,05, dus er is geen significant verschil gevonden tussen de groepen in variantie.
 * Vrijheidsgraden bestaan uit twee cijfers: het eerste cijfer (het aantal groepen - 1 = `r vDF1`) en het tweede cijfer (*n~1~* + *n~2~*+*n~3~* - 3 = `r vDF2`).  
 
 <!-- ## TEKSTBLOK: Levenes-test.R -->
@@ -397,7 +397,7 @@ vF_waarde <- Round_and_format(ANOVA[[1]]$`F value`[1])
 
 <!-- ## TEKSTBLOK: ANOVA-toets1.R -->
 * *F* ~`r vDF1`~~,~~`r vDF2`~ = `r vF_waarde`, *p* < 0,0001.
-* De p-waarde < 0,05, dus de H~0~ wordt verworpen.[^18] 
+* De p-waarde is kleiner dan 0,05, dus de H~0~ wordt verworpen.[^18] 
 * Vrijheidsgraden: het aantal groepen - 1 = `r vDF1`; *n~1~* + *n~2~* + *n~3~*- 3 = `r vDF2`.
 
 <!-- ## /TEKSTBLOK: ANOVA-toets1.R -->
@@ -442,17 +442,20 @@ THSD <- TukeyHSD(res.aov)
 vATCvsFIL <- Round_and_format(THSD$Opleiding[1,1])
 vATCvsGSC <- Round_and_format(THSD$Opleiding[2,1])
 vFILvsGSC <- Round_and_format(THSD$Opleiding[3,1])
+vpFILvsGSC <- Round_and_format(THSD$Opleiding[3,4])
 ```
 <!-- ## /CLOSEDBLOK: Tukey-HSD.R -->
 <!-- ## TEKSTBLOK: Tukey-HSD1.R -->
-Het verschil tussen Filosofie en Arabische Taal en Cultuur: *MD* = `r vATCvsFIL`, p < 0,0001.  
-Het verschil tussen Geschiedenis en Arabische Taal en Cultuur: *MD* = `r vATCvsGSC`, p < 0,0001.  
-Het verschil tussen Geschiedenis en Filosofie: *MD* = `r vFILvsGSC`, p = 0,26.  
+
+* Het verschil tussen Filosofie en Arabische Taal en Cultuur is *MD* = `r vATCvsFIL`, *p* < 0,0001.  
+* Het verschil tussen Geschiedenis en Arabische Taal en Cultuur is *MD* = `r vATCvsGSC`, *p* < 0,0001.  
+* Het verschil tussen Geschiedenis en Filosofie is *MD* = `r vFILvsGSC`, *p* = `r vpFILvsGSC`.  
+
 <!-- ## /TEKSTBLOK: Tukey-HSD1.R -->
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten per opleiding gelijk is aan elkaar. De opleidingen zijn: Arabische Taal en Cultuur (*M~atc~* = `r vM_ATC`, *SD~atc~* = `r vSD_ATC`), Filosofie (*M~fil~* = `r vM_FIL`, *SD~fil~* = `r vSD_FIL`) en Geschiedenis (*M~gsc~* = `r vM_GSC`, *SD~fil~* = `r vSD_FIL`); zie ook tabel. De gemiddelde reistijd van de groepen verschillen significant van elkaar, *F*(`r vDF1`, `r vDF2`) = `r vF_waarde`, *p* < 0,0001, *η^2^* = `r Esq`. De sterkte van het effect van de type opleiding op de reistijd is groot.
+Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten per opleiding gelijk is aan elkaar. De opleidingen zijn: Arabische Taal en Cultuur (*M~atc~* = `r vM_ATC`, *SD~atc~* = `r vSD_ATC`), Filosofie (*M~fil~* = `r vM_FIL`, *SD~fil~* = `r vSD_FIL`) en Geschiedenis (*M~gsc~* = `r vM_GSC`, *SD~fil~* = `r vSD_FIL`); zie ook Tabel 1. De gemiddelde reistijd van de groepen verschilt significant van elkaar, *F*(`r vDF1`, `r vDF2`) = `r vF_waarde`, *p* < 0,0001, *η^2^* = `r Esq`. De sterkte van het effect van de type opleiding op de reistijd is groot.
 
 | Opleiding     | N          | M          | SD          |
 | ------------- | ---------- | ---------- | ----------- |
@@ -463,7 +466,7 @@ Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de
 *Tabel 1. Groepsgrootte, gemiddelde reistijd en standaarddeviatie per opleiding*
 <!-- ## TEKSTBLOK: Rapportage-tukey.R -->
 
-*Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen. Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = `r vATCvsFIL`, p < 0,0001). Tussen Geschiedenis en Arabische Taal en Cultuur is een significant verschil (*MD* = `r vATCvsGSC`, p < 0,0001). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = `r vFILvsGSC`, p = 0,26). 
+*Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen. Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = `r vATCvsFIL`, *p* < 0,0001). Tussen Geschiedenis en Arabische Taal en Cultuur is een significant verschil (*MD* = `r vATCvsGSC`, *p* < 0,0001). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = `r vFILvsGSC`, *p* = `r vpFILvsGSC`). 
 <!-- ## /TEKSTBLOK: Rapportage-tukey.R -->
 
 Aan de hand van de resultaten kan geconcludeerd worden dat de studenten van Arabische Taal en Cultuur significant langer moeten reizen dan de andere twee opleidingen. Tussen de studenten Filosofie en Geschiedenis is geen significant verschil gevonden. 

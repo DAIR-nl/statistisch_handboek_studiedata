@@ -42,11 +42,11 @@ if (!exists("Substitute_var")) {
 # Onderwijscasus idee 2: Beoordelen studenten opleiding X positiever nadat ze met hun tutor hebben gesproken?
 ```
 
-<!-- ## OPENBLOK: Data-aanmaken.R -->
-```{r aanmaken data, include=FALSE, echo=TRUE}
+<!-- ## OPENBLOK: Data-aanmaken.py -->
+```{r aanmaken data, include=FALSE, echo=TRUE, results='hide'}
 source(paste0(here::here(),"/01. Includes/data/07.R"))
 ```
-<!-- ## /OPENBLOK: Data-aanmaken.R -->
+<!-- ## /OPENBLOK: Data-aanmaken.py -->
 
 # Toepassing
 Gebruik de *Wilcoxon signed rank toets* om te toetsen of de verdelingen van twee gepaarde groepen van elkaar verschillen.[^1] Deze toets is een alternatief voor de [gepaarde t-toets](02-Gepaarde-t-toets-R.html) wanneer de verschilscores van de gepaarde groepen niet normaal verdeeld zijn. Alleen als de verdeling van de verschilscores symmetrisch is, kan de *Wilcoxon signed rank toets* gebruikt worden om een verschil tussen de medianen van gepaarde groepen te toetsen.[^3] Gebruik de gepaarde [tekentoets](27-Tekentoets-II-R.html) om medianen te toetsen wanneer de verdeling van verschilscores niet symmetrisch is.
@@ -79,67 +79,81 @@ De p-waarde geeft aan of het verschil tussen twee groepen statistisch significan
 De *Wilcoxon signed rank toets* heeft als effectmaat *r*.[^7] Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^8]
 
 # Uitvoering
-<!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is data ingeladen met het bruto jaarinkomen van alumni van de Academie Mens & Maatschappij genaamd `Alumni_jaarinkomen`. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkelt vier jaar nadat zij afgestudeerd zijn. Meetmoment T~1~ is één jaar na afstuderen, meetmoment T~2~ is vijf jaar na afstuderen. 
-<!-- ## /TEKSTBLOK: Dataset-inladen.R-->
+<!-- ## TEKSTBLOK: Dataset-inladen.py-->
+Er is data ingeladen met het bruto jaarinkomen van alumni van de Academie Mens & Maatschappij genaamd `dfAlumni_jaarinkomens`. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkelt vier jaar nadat zij afgestudeerd zijn. Meetmoment T~1~ is één jaar na afstuderen, meetmoment T~2~ is vijf jaar na afstuderen. 
+<!-- ## /TEKSTBLOK: Dataset-inladen.py-->
 
 ## De data bekijken
-<!-- ## TEKSTBLOK: Data-bekijken.R -->
-Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
-<!-- ## /TEKSTBLOK: Data-bekijken.R -->
+<!-- ## TEKSTBLOK: Data-bekijken.py -->
+Gebruik `<dataframe>.head()` en `<dataframe>.tail()` om de structuur van de data te bekijken.
+<!-- ## /TEKSTBLOK: Data-bekijken.py -->
 
-<!-- ## OPENBLOK: Data-bekijken.R -->
-```{r data bekijken, collapse = TRUE}
+<!-- ## OPENBLOK: Data-bekijken.py -->
+```{python}
+# Pandas library importeren
+import pandas as pd
+```
+```{python, include=FALSE}
+import pandas as pd
+dfAlumni_jaarinkomens = pd.DataFrame(r.Alumni_jaarinkomens)
+```
+
+```{python data bekijken, collapse = TRUE}
 ## Eerste 6 observaties
-head(Alumni_jaarinkomens)
+print(dfAlumni_jaarinkomens.head(6))
+```
 
+```{python data bekijken2f, collapse = TRUE}
 ## Laatste 6 observaties
-tail(Alumni_jaarinkomens)
+print(dfAlumni_jaarinkomens.tail(6))
 ```
-<!-- ## /OPENBLOK: Data-bekijken.R -->
+<!-- ## /OPENBLOK: Data-bekijken.py -->
 
-<!-- ## OPENBLOK: Data-selecteren.R -->
-<!-- ## TEKSTBLOK: Data-beschrijven.R-->
-Bekijk de grootte en de mediaan  van de data met `length()` en `median()`. 
-<!-- ## /TEKSTBLOK: Data-beschrijven.R-->
-<!-- ## OPENBLOK: Data-selecteren.R-->
-```{r data selecteren}
-Alumni_jaarinkomens_T1 <- Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T1"]
-Alumni_jaarinkomens_T2 <- Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T2"]
+<!-- ## TEKSTBLOK: Data-beschrijven.py-->
+Bekijk de grootte en de mediaan  van de data met `len()` en `numpy.median()` van het `numpy` package. 
+<!-- ## /TEKSTBLOK: Data-beschrijven.py-->
+<!-- ## OPENBLOK: Data-selecteren.py -->
+```{python data selecteren}
+Alumni_jaarinkomens_T1 = dfAlumni_jaarinkomens[dfAlumni_jaarinkomens["Meetmoment"] == "T1"]["Inkomen"]
+Alumni_jaarinkomens_T2 = dfAlumni_jaarinkomens[dfAlumni_jaarinkomens["Meetmoment"] == "T2"]["Inkomen"]
 ```
-<!-- ## /OPENBLOK: Data-selecteren.R-->
+<!-- ## /OPENBLOK: Data-selecteren.py -->
 
 <div class="col-container">
   <div class="col">
-<!-- ## OPENBLOK: Data-beschrijven-1.R -->
-```{r, data beschrijven 1, collapse=TRUE}
-length(Alumni_jaarinkomens_T1)
-median(Alumni_jaarinkomens_T1)
+<!-- ## OPENBLOK: Data-beschrijven-1.py -->
+```{python, data beschrijven 1, collapse=TRUE}
+import numpy as np
+print(len(Alumni_jaarinkomens_T1))
+print(np.median(Alumni_jaarinkomens_T1))
 ```
-<!-- ## /OPENBLOK: Data-beschrijven-1.R -->
+<!-- ## /OPENBLOK: Data-beschrijven-1.py -->
   </div>
   <div class="col">
-<!-- ## OPENBLOK: Data-beschrijven-2.R -->
-```{r Data beschrijven 2, collapse=TRUE}
-length(Alumni_jaarinkomens_T2)
-median(Alumni_jaarinkomens_T2)
+<!-- ## OPENBLOK: Data-beschrijven-2.py -->
+``````{python Data beschrijven 2, collapse=TRUE}
+print(len(Alumni_jaarinkomens_T2))
+print(np.median(Alumni_jaarinkomens_T2))
 ```
-<!-- ## /OPENBLOK: Data-beschrijven-2.R -->
+<!-- ## /OPENBLOK: Data-beschrijven-2.py -->
   </div>
 </div>
-<!-- ## CLOSEDBLOK: Data-beschrijven-2.R -->
-```{r data beschrijven als object, include=FALSE, echo=TRUE}
-vMed_T1 <- median(Alumni_jaarinkomens_T1)
-vN_T1 <- length(Alumni_jaarinkomens_T1)
-vMed_T2 <- median(Alumni_jaarinkomens_T2)
-vN_T2 <- length(Alumni_jaarinkomens_T2)
+<!-- ## CLOSEDBLOK: Data-beschrijven-2.py -->
+```{python data beschrijven als object, include=FALSE, echo=TRUE}
+vMed_T1 = np.median(Alumni_jaarinkomens_T1)
+vN_T1 = len(Alumni_jaarinkomens_T1)
+vMed_T2 = np.median(Alumni_jaarinkomens_T2)
+vN_T2 = len(Alumni_jaarinkomens_T2)
 ```
-<!-- ## /CLOSEDBLOK: Data-beschrijven-2.R -->
-<!-- ## TEKSTBLOK: Data-beschrijven.R-->
-* Mediaan bruto jaarinkomen op T~1~: `r paste0("€",format(vMed_T1, scientific = FALSE))` 
-* Mediaan bruto jaarinkomen op T~2~: `r paste0("€",format(vMed_T2, scientific = FALSE))` 
-* Aangezien de gegevens gepaard zijn, zijn de groepsgroottes op beide meetmomenten gelijk: *n~T1~* = `r vN_T1` en *n~T2~* = `r vN_T2`
-<!-- ## /TEKSTBLOK: Data-beschrijven.R-->
+<!-- ## /CLOSEDBLOK: Data-beschrijven-2.py -->
+
+<!-- ## TEKSTBLOK: Data-beschrijven3.py-->
+
+* Mediaan bruto jaarinkomen op T~1~: `r paste0("€",format(py$vMed_T1, scientific = FALSE))` 
+* Mediaan bruto jaarinkomen op T~2~: `r paste0("€",format(py$vMed_T2, scientific = FALSE))` 
+* Aangezien de gegevens gepaard zijn, zijn de groepsgroottes op beide meetmomenten gelijk: *n~T1~* = `r py$vN_T1` en *n~T2~* = `r py$vN_T2`
+
+<!-- ## /TEKSTBLOK: Data-beschrijven3.py-->
 
 
 
@@ -147,123 +161,125 @@ vN_T2 <- length(Alumni_jaarinkomens_T2)
 
 Maak een histogram om de verdeling van de bruto jaarinkomens van de alumni één jaar en vijf jaar na afstuderen visueel weer te geven.
 
-<!-- ## OPENBLOK: Histogram1.R -->
-```{r histogram, warnings=FALSE, message=FALSE}
-## Histogram met ggplot2
-library(ggplot2)
+<!-- ## OPENBLOK: Histogram1.py -->
+```{python histogram}
+## Histogram met matplotlib
+import matplotlib.pyplot as plt
+fig = plt.figure(figsize = (15, 10))
+sub1 = fig.add_subplot(1, 2, 1)
+title1 = plt.title("Een jaar na afstudereren")
+hist1 = plt.hist(Alumni_jaarinkomens_T1, density = True, edgecolor = "black", bins = 29)
 
-ggplot(Alumni_jaarinkomens,
-  aes(x = Inkomen)) +
-  geom_histogram(color = "grey30",
-                 fill = "#0089CF") +
-  facet_wrap(~ Meetmoment, labeller = labeller(Meetmoment = c(T1="Een jaar na afstudereren", T2="Vijf jaar na afstuderen"))) +
-  ylab("Frequentie") +
-  labs(title = "Bruto jaarinkomen alumni Mens & Maatschappij")
+sub2 = fig.add_subplot(1, 2, 2)
+title2 = plt.title("Vijf jaar na afstudereren")
+hist2 = plt.hist(Alumni_jaarinkomens_T2, density = True, edgecolor = "black", bins = 31)
+
+main = fig.suptitle('Bruto jaarinkomen alumni Mens & Maatschappij')
+plt.show()
 ```
-<!-- ## /OPENBLOK: Histogram1.R -->
+<!-- ## /OPENBLOK: Histogram1.py -->
 
 Op beide meetmomenten is te zien dat de meeste alumni tussen de 0 en €60.000 euro per jaar verdienen en dat een paar alumni hier ver boven zit. Beide verdelingen hebben één top, maar zijn niet symmetrisch door de lange staart aan de rechterkant van de verdeling. Beide verdeling lijken qua vorm en spreiding sterk op elkaar.
 
 Maak vervolgens een histogram van de verschilscores om te onderzoeken of deze verdeling symmetrisch is.
 
 
-<!-- ## OPENBLOK: Histogram2.R -->
-```{r histogram2, warnings=FALSE, message=FALSE}
-# Maak een dataset met de verschilscores
-Alumni_verschilscores <- data.frame(Verschilscores = Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T2"] - Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T1"])
+<!-- ## OPENBLOK: Histogram2.py -->
+```{python histogram2, warnings=FALSE, message=FALSE}
+# Maak een variabele met de verschilscores
+Alumni_verschilscores = np.array(Alumni_jaarinkomens_T2) - np.array(Alumni_jaarinkomens_T1)
 
-## Histogram met ggplot2
-library(ggplot2)
+## Histogram met matplotlib
+import matplotlib.pyplot as plt
+hist = plt.hist(Alumni_verschilscores, density = True, edgecolor = "black", bins = 9)
+title = plt.title("Verschilscores bruto jaarinkomen alumni Mens & Maatschappij")
+xlab = plt.xlabel("Verschilscores")
+ylab = plt.ylabel("Frequentiedichtheid")
+plt.show()
 
-ggplot(Alumni_verschilscores,
-  aes(x = Verschilscores)) +
-  geom_histogram(color = "grey30",
-                 fill = "#0089CF") +
-  geom_density(alpha = .2, adjust = 1) +
-  ylab("Frequentiedichtheid") +
-  labs(title = "Verschilscores bruto jaarinkomen alumni Mens & Maatschappij")
 ```
-<!-- ## /OPENBLOK: Histogram2.R -->
+<!-- ## /OPENBLOK: Histogram2.py -->
 
 De verdeling van de verschilscores bevat voornamelijk positieve waarden en een paar negatieve waarden; de meeste alumni zijn er dus in bruto jaarinkomen op vooruitgegaan. De verdeling heeft een lange staart aan de rechterkant en is dus niet symmetrisch. Gebruik de *Wilcoxon signed rank toets* dus niet om een uitspraak te doen over het verschil in medianen.
 
 
 
 ## Wilcoxon signed rank toets
-<!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
-Voer de *Wilcoxon signed rank toets* uit om de vraag te beantwoorden of de verdeling van de bruto jaarinkomens van alumni in vier jaar veranderd zijn. Gebruik de functie `wilcox.test()` met als eerste argument `Inkomen ~ Meetmoment` waarin `Inkomen` de afhankelijke variabele is en `Meetmoment` de onafhankelijke variabele is die twee meetmomenten aangeeft. Gebruik om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn het argument `paired = TRUE`.  Toets tweezijdig door het argument `alternative = "two.sided"` te gebruiken.
-<!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
+<!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.py -->
+Voer de *Wilcoxon signed rank toets* uit om de vraag te beantwoorden of de verdeling van de bruto jaarinkomens van alumni in vier jaar veranderd zijn. Gebruik de functie `wilcoxon()` van het `scipy` package met als eerste argument de jaarinkomens vijf jaar na afstuderen `Alumni_jaarinkomens_T2`, als tweede argument de jaarinkomens één jaar na afstuderen `Alumni_jaarinkomens_T1` en als derde argument `alternative = 'two-sided'` om tweezijdig te toetsen.
+<!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.py -->
 
-<!-- ## OPENBLOK: Wilcoxon-signed-rank-toets.R -->
-```{r wilcox test}
-wilcox.test(Inkomen ~ Meetmoment, Alumni_jaarinkomens, 
-            paired = TRUE, alternative = "two.sided")
+<!-- ## OPENBLOK: Wilcoxon-signed-rank-toets.py -->
+```{python}
+import scipy.stats as sp
+sp.wilcoxon(Alumni_jaarinkomens_T2, Alumni_jaarinkomens_T1, alternative = 'two-sided')
+sp.norm.ppf(0.05)
 ```
-<!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets.R -->
+<!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets.py -->
 
-<!-- ## OPENBLOK: Wilcoxon-signed-rank-toets2.R -->
+<!-- ## OPENBLOK: Wilcoxon-signed-rank-toets2.py -->
 Bereken de effectmaat *r* vervolgens op basis van de p-waarde van de *Wilcoxon signed rank toets*.
-```{r effectgrootte}
+```{python effectgrootte}
 # Sla de p-waarde op
-pwaarde <- wilcox.test(Inkomen ~ Meetmoment, Alumni_jaarinkomens, 
-                       paired = TRUE, alternative = "two.sided")$p.value
+stat, pval = sp.wilcoxon(Alumni_jaarinkomens_T2, Alumni_jaarinkomens_T1, alternative = 'two-sided')
 
 # Bereken de effectgrootte voor een tweezijdige toets
-r <- abs(qnorm(pwaarde/2)) / sqrt(length(Alumni_jaarinkomens_T1))
+r = sp.norm.ppf(pval/2) / np.sqrt(len(Alumni_jaarinkomens_T1))
 # Bereken de effectgrootte voor een eenzijdige toets
-#r <- abs(qnorm(pwaarde)) / sqrt(length(Alumni_jaarinkomens_T1))
+#r = sp.norm.ppf(pval) / np.sqrt(len(Alumni_jaarinkomens_T1))
 
-# Print de effectgrootte
-paste("De effectmaat is", r)
+# Print de effectgrootte (vaak weergegeven als absolute waarde)
+print(np.abs(r))
 
 ```
-<!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets2.R -->
+<!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets2.py -->
 
 Bereken de aantallen en de sommen van positieve en negatieve rangschikkingen op basis van de verschilscores.
 
-<!-- ## OPENBLOK: Wilcoxon-signed-rank-toets3.R -->
-```{r sommen}
+<!-- ## OPENBLOK: Wilcoxon-signed-rank-toets3.py -->
+```{python sommen}
 # Bereken verschilscores
-Verschilscores <- Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T2"] - Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T1"]
+Verschilscores = np.array(Alumni_jaarinkomens_T2) - np.array(Alumni_jaarinkomens_T1)
 
-# Rangschik de absolute waarden van verschilscores
-Rangschikkingen <- rank(abs(Verschilscores))
+# Rangschik de absolute waarden van verschilscores met scipy.rankdata()
+Rangschikkingen = sp.rankdata(np.abs(Verschilscores))
 
-# Maak een vector met daarin de tekens (plus of min) van verschilscores)
-Tekens <- sign(Verschilscores)
+# Maak een vector met daarin de tekens (plus of min) van verschilscores) met numpy.sign()
+
+Tekens = np.sign(Verschilscores)
 
 # Bereken het aantal en de som van de positieve rangschikkingen
-N_positief <- length(Tekens[Tekens == 1])
-Som_positief <- sum(Rangschikkingen[Tekens == 1])
+N_positief = len(Tekens[Tekens == 1])
+Som_positief = np.sum(Rangschikkingen[Tekens == 1])
 
 # Bereken het aantal en de som van de negatieve rangschikkingen
-N_negatief <- length(Tekens[Tekens == -1])
-Som_negatief <- sum(Rangschikkingen[Tekens == -1])
+N_negatief = len(Tekens[Tekens == -1])
+Som_negatief = np.sum(Rangschikkingen[Tekens == -1])
 ```
-<!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets3.R -->
+<!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets3.py -->
 
 
-<!-- ## CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
-```{r wilcox test als object, include=FALSE, echo=TRUE}
-wilcox <- wilcox.test(Inkomen ~ Meetmoment, Alumni_jaarinkomens, paired=TRUE, alternative = "two.sided")
-vVstatistic <- Round_and_format(wilcox$statistic)
+<!-- ## CLOSEDBLOK: Wilcoxon-signed-rank-toets.py -->
+```{python wilcox test als object, include=FALSE, echo=TRUE}
+stat, pval = sp.wilcoxon(Alumni_jaarinkomens_T2, Alumni_jaarinkomens_T1, alternative = 'two-sided')
 ```
-<!-- ## /CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
-<!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
-* *V* = `r vVstatistic`, *p* < 0,0001 , *r* = `r Round_and_format(r)`
+<!-- ## /CLOSEDBLOK: Wilcoxon-signed-rank-toets.py -->
+
+<!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets4.py -->
+* *V* = `r Round_and_format(py$stat)`, *p* < 0,0001 , *r* = `r Round_and_format(py$r)`
 * De toetsstatistiek *V* is in deze casus gelijk aan de som van de negatieve rangschikkingen
-* Het aantal positieve rangschikkingen is `r N_positief`; de som is `r format(round(Som_positief), scientific = FALSE)`
-* Het aantal negatieve rangschikkingen is `r N_negatief`; de som is `r round(Som_negatief)`
+* Het aantal positieve rangschikkingen is `r py$N_positief`; de som is `r format(round(py$Som_positief), scientific = FALSE)`
+* Het aantal negatieve rangschikkingen is `r py$N_negatief`; de som is `r round(py$Som_negatief)`
 * p-waarde < 0,05, dus de H~0~ wordt verworpen[^9]
-* Effectmaat is `r Round_and_format(r)`, dus een groot effect
+* Effectmaat is `r Round_and_format(py$r)`, dus een groot effect
 
 
-<!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
+<!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets4.py -->
 
 # Rapportage
-<!-- ## TEKSTBLOK: Rapportage.R -->
-De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de verdeling van het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij in vier jaar tijd is veranderd. De resultaten van de toets laten zien dat er een significant verschil is tussen het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij één jaar en vijf jaar na afstuderen, *V* = `r vVstatistic`, *p* < 0,0001, *r* = `r Round_and_format(r)`. Er zijn `r N_positief` alumni die vijf jaar na afstuderen meer verdienen dan één jaar na afstuderen (som van rangschikkingen is `r format(round(Som_positief), scientific = FALSE)`) en er zijn `r N_negatief` alumni die vijf jaar na afstuderen minder verdienen dan één jaar na afstuderen (som van rangschikkingen is `r Som_negatief`). Alumni lijken dus meer te verdienen wanneer ze vijf jaar afgestudeerd zijn.
-<!-- ## /TEKSTBLOK: Rapportage.R -->
+<!-- ## TEKSTBLOK: Rapportage.py -->
+De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de verdeling van het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij in vier jaar tijd is veranderd. De resultaten van de toets laten zien dat er een significant verschil is tussen het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij één jaar en vijf jaar na afstuderen, *V* = `r Round_and_format(py$stat)`, *p* < 0,0001, *r* = `r Round_and_format(py$r)`. Er zijn `r py$N_positief` alumni die vijf jaar na afstuderen meer verdienen dan één jaar na afstuderen (som van rangschikkingen is `r format(round(py$Som_positief), scientific = FALSE)`) en er zijn `r py$N_negatief` alumni die vijf jaar na afstuderen minder verdienen dan één jaar na afstuderen (som van rangschikkingen is `r py$Som_negatief`). Alumni lijken dus meer te verdienen wanneer ze vijf jaar afgestudeerd zijn.
+<!-- ## /TEKSTBLOK: Rapportage.py -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}

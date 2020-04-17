@@ -107,9 +107,9 @@ unique(Resultaten_Arbeidsrecht$Vooropleiding)
 ```
 <!-- ## /OPENBLOK: Data-bekijken-2.R -->
 
-<!-- ## TEKSTBLOK: Data-bekijken.R-->
+<!-- ## TEKSTBLOK: Data-bekijken3.R-->
 Inspecteer om meer inzicht te krijgen in de data de groepen met `length()`, `median()` en `quantile()`. Groepeer hiervoor eerst met `group_by()`.
-<!-- ## /TEKSTBLOK: Data-bekijken.R-->
+<!-- ## /TEKSTBLOK: Data-bekijken3.R-->
 
 <!-- ## OPENBLOK: Data-beschrijven.R -->
 ``` {r data beschrijven, warning=FALSE, message=FALSE}
@@ -180,6 +180,7 @@ ggplot(Resultaten_Arbeidsrecht,
                  fill = "#0089CF") +
   facet_wrap(~ Vooropleiding) +
   ylab("Frequentiedichtheid") +
+  xlab("Aantal studiepunten jaar 1")
   labs(title = "Beoordelingen")
 ```
 <!-- ## /OPENBLOK: Histogram.R -->
@@ -208,7 +209,6 @@ Eta_squared <- KW_teststatistiek / (nrow(Resultaten_Arbeidsrecht) - 1)
 
 # Print de effectgrootte
 paste("Eta squared is",Eta_squared)
-
 
 ```
 <!-- ## /OPENBLOK: Kruskal-Wallis-test-3.R -->
@@ -298,6 +298,7 @@ Gem_PM_RG <- Gemiddelde_rangschikking(Studiepunten_Premaster, Studiepunten_Recht
 ```
 <!-- ## /OPENBLOK: Mann-Whitney-U-test2.R -->
 
+<!-- ## TEKSTBLOK: Mann-Whitney-U-test3.R -->
 | Vergelijking | p-waarde     | Gemiddelde rangschikking (links)  | Gemiddelde rangschikking (rechts)     |
 | -------------  | ----------  | ---------- | -------- |
 | FR vs. NR    | `r Round_and_format(posthoc[1,1])` |  `r Round_and_format(Gem_FR_NR[[1]])` | `r Round_and_format(Gem_FR_NR[[2]])` |
@@ -309,6 +310,7 @@ Gem_PM_RG <- Gemiddelde_rangschikking(Studiepunten_Premaster, Studiepunten_Recht
 *Tabel 1. Resultaten post-hoc toetsen voor vergelijking Fiscaal Recht (FR), Notarieel Recht (NR), Premaster (PM) en Rechtsgeleerdheid (RG).*
 
 Als voorbeeld wordt de bovenste rij van Tabel 1 in woorden uitgelegd. Er is geen  significant verschil gevonden tussen Fiscaal (Gemiddelde rangschikking = `r Round_and_format(Gem_FR_NR[[1]])`,  *n*=`r vN_FIS`) Recht en Notarieel Recht (Gemiddelde rangschikking = `r Round_and_format(Gem_FR_NR[[2]])`,  *n*=`r vN_NOT`), *p*=1.
+<!-- ## /TEKSTBLOK: Mann-Whitney-U-test3.R -->
 
 
 # Rapportage

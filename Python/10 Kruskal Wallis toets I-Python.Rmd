@@ -1,14 +1,16 @@
 ---
 title: "Kruskal Wallis toets"
-output:
+output: 
   html_document:
-    toc: TRUE
-    toc_float:
-      collapsed: FALSE
-    number_sections: TRUE
     theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+    includes:
+      in_header: ["../01. Includes/html/nocache.html", "../01. Includes/html/favicon.html", "../01. Includes/html/analytics.html"]
+  keywords: [statistisch handboek, studiedata]
 ---
-
 <!-- ## CLOSEDBLOK: Functies.R -->
 ```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
 library(here)
@@ -19,14 +21,21 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Functies.R -->
 
+<!-- ## CLOSEDBLOK: CSS -->
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
+<!-- ## /CLOSEDBLOK: CSS -->
 
 <!-- ## CLOSEDBLOK: Header.R -->
 ```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
+
+<!-- ## CLOSEDBLOK: Status.R -->
+```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Status.R -->
 
 <!-- ## CLOSEDBLOK: Reticulate.py -->
 ```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}
@@ -41,15 +50,45 @@ source(paste0(here::here(),"/01. Includes/data/10.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.py -->
 
+# Toepassing
+Gebruik de *Kruskal Wallis toets* om te toetsen of de verdelingen van twee of meer groepen van elkaar verschillen.[^1] De *Kruskal Wallis toets* kan een alternatief zijn voor de [one-way ANOVA](05-One-way-ANOVA-R.html).[^2] De *Kruskal Wallis toets* stelt minder eisen aan de data; die hoeft onder andere niet te voldoen aan de assumptie normaliteit. Bij de *Kruskal Wallis toets* hebben uitbijters minder invloed op het eindresultaat dan bij de [one-way ANOVA](05-One-way-ANOVA-R.html). Daarentegen, als de data wel normaal verdeeld is, heeft de *Kruskal Wallis toets* minder onderscheidend vermogen dan de [one-way ANOVA](05-One-way-ANOVA-R.html).[^3]<sup>, </sup>[^4] Vandaar dat ondanks de voordelen er toch minder vaak voor de *Kruskal Wallis toets* gekozen wordt. 
+
+# Onderwijscasus
+<div id="casus">
+De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht is geïnteresseerd in de afstudeersnelheid van haar studenten. Zij vraagt zich af of er een verschil zit in het type vooropleiding die de studenten hebben gehaald en de hoeveel studiepunten die de studenten behalen in het eerste jaar. Zij kijkt naar de vier meest gangbare vooropleidingen die de studenten doorlopen voordat ze met de Master Arbeidsrecht beginnen: de Bachelors Fiscaal Recht, Notarieel Recht en Rechtsgeleerdheid en de Premaster. 
+
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+
+*H~0~*: De verdeling van het aantal behaalde studiepunten in het eerste jaar van de master Arbeidsrecht is gelijk voor de studenten met als vooropleidingen Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster.
+
+*H~A~*: De verdeling van het aantal behaalde studiepunten in het eerste jaar van de master Arbeidsrecht is niet gelijk voor de studenten met als vooropleiding Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster.
+
+</div>
+
+# Assumpties
+Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. Het meetniveau van de afhankelijke variabele is ordinaal of continu.[^6] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data is te vinden in een andere toetspagina. 
+
+# Post-hoc toets 
+De *Kruskal Wallis toets* toetst of twee of meerdere groepen van elkaar verschillen. Een post-hoc toets specificeert of groep significant van een andere groep verschilt. Gebruik de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) als post-hoc toets. Hoewel het minder gebruikelijk is, is *Moods'mediaan toets* ook een optie als post-hoc toets. Deze toets toetst het verschil tussen de medianen van twee ongepaarde groepen.
+
+Gebruik een correctie voor de p-waarden, omdat er meerdere testen tegelijkertijd worden gebruikt. In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans dat er bij toeval een verband wordt ontdekt dat er niet is (type I fout). [^8]<sup>, </sup>[^9] Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^2]
+
+# Effectmaat
+De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^2] 
+
+Bij de *Kruskal Wallis toets* wordt eta-squared (*η^2^*) als effectmaat gebruikt.[^10] De effectmaat eta squared (*η^2^*) berekent de proportie van de variantie in de afhankelijke variabele die verklaard wordt door de onafhankelijke variabele. In deze casus berekent het de proportie van de variantie in het aantal studiepunten wat verklaard kan worden door de vooropleiding. Een indicatie om *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^11]
+
+
+
+# Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.py-->
 Er is een dataset `dfResultaten_Arbeidsrecht` ingeladen met studieresultaten van het eerste jaar van de master Arbeidsrecht per vooropleiding: Fiscaal Recht, Notarieel Recht, Rechtsgeleerdheid en de Premaster.
 <!-- ## /TEKSTBLOK: Dataset-inladen.py-->
 
-
+## De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken.py -->
 Gebruik `<dataframe>.head()` en `<dataframe>.tail()` om de structuur van de data te bekijken.
 <!-- ## /TEKSTBLOK: Data-bekijken.py -->
-
 <!-- ## OPENBLOK: Data-bekijken.py -->
 ```{python, include=FALSE}
 import pandas as pd
@@ -92,7 +131,6 @@ print(dfResultaten_Arbeidsrecht.groupby(['Vooropleiding']).size())
 print(dfResultaten_Arbeidsrecht.groupby(['Vooropleiding']).quantile([0.25, 0.5, 0.75]))
 ```
 <!-- ## /OPENBLOK: Data-beschrijven.py -->
-
 <!-- ## CLOSEDBLOK: Data-beschrijven.py -->
 ``` {python data beschrijven als object, include=FALSE, echo=TRUE}
 import numpy as np
@@ -122,7 +160,6 @@ vQ3_RCH = np.quantile(EC_REC, 0.75)
 vQ3_PM = np.quantile(EC_PRE, 0.75)
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven.py -->
-
 <!-- ## TEKSTBLOK: Data-beschrijven.py -->
 * Mediaan Fiscaal Recht: `r Round_and_format(py$vMed_FIS)`. *n* = `r py$vN_FIS`.
 * Mediaan Notarieel Recht: `r Round_and_format(py$vMed_NOT)`. *n* = `r py$vN_NOT`.
@@ -131,6 +168,9 @@ vQ3_PM = np.quantile(EC_PRE, 0.75)
 
 <!-- ## /TEKSTBLOK: Data-beschrijven.py -->
 
+## De data visualiseren
+
+Geef de verdeling van de verschillende vooropleidingen visueel weer met een histogram.
 
 <!-- ## OPENBLOK: Histogram.py -->
 ```{python histogram}
@@ -148,10 +188,9 @@ plt.show()
 ```
 <!-- ## /OPENBLOK: Histogram.py -->
 
+Allereerst valt op dat de verdeling enigszins discreet is. Aangezien er in deze casus zes studiepunten per vak te verdienen zijn met een totaal van 60 in het eerste jaar, bestaan de histogrammen uit staven waartussen de verschillen zes studiepunten zijn. De verdeling van alle vier de vooropleidingen zijn niet normaal maar scheef verdeeld. Met uitzondering van de vooropleiding Rechtsgeleerdheid ligt de top op 60 studiepunten en is er een staart links daarvan.
 
-
-
-
+## Kruskal Wallis toets
 <!-- ## TEKSTBLOK: Kruskal-Wallis-test-1.py -->
 Voer de *Kruskal Wallis toets* uit om te onderzoeken of er verschillen zijn in het aantal studiepunten in het eerste jaar tussen de studenten van de master Arbeidsrecht met vier verschillende vooropleidingen   Gebruik de functie `kruskal()` van het package `scipy` met als argumenten vier variabelen met het aantal studiepunten `EC_Jaar1` voor elk van de vier vooropleidingen. Bij deze functie toetst Python standaard tweezijdig.
 <!-- ## /TEKSTBLOK: Kruskal-Wallis-test-1.py -->
@@ -172,6 +211,7 @@ print(sp.kruskal(EC_FSC, EC_NTR, EC_PRE, EC_REC))
 ```
 <!-- ## /OPENBLOK: Kruskal-Wallis-test-2.py -->
 
+Bereken de effectmaat *&eta;^2^* vervolgens op basis van de *&chi;^2^*-waarde van de *Kruskal-Wallis toets*.
 <!-- ## OPENBLOK: Kruskal-Wallis-test-3.py -->
 ```{python effectsize}
 # Sla de teststatistiek op
@@ -186,6 +226,7 @@ print(Eta_squared)
 
 ```
 <!-- ## /OPENBLOK: Kruskal-Wallis-test-3.py -->
+
 
 <!-- ## CLOSEDBLOK: Kruskal-Wallis-test-4.py -->
 ```{python Kruskal Wallis test als object, include= FALSE, echo= TRUE}
@@ -202,17 +243,10 @@ df = 3
 <!-- ## /TEKSTBLOK: Kruskal-Wallis-test-5.py -->
 
 
-
-
+## Post-hoc toets: Mann-Whitney U toets
 <!-- ## TEKSTBLOK: Mann-Whitney-U-test.py -->
 Gebruik de *Mann-Whitney U toets* als post-hoc toets om te bepalen wélke groepen significant verschillen. De *Mann-Whitney U toets* wordt ook wel de *Wilcoxon rank-sum toets* genoemd.[^10] Gebruik de functie `pg.mwu()`. 
 <!-- ## /TEKSTBLOK: Mann-Whitney-U-test.py -->
-
-<!-- ## TEKSTBLOK: Mann-Whitney-U-test.R -->
-Gebruik de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) als post-hoc toets om te bepalen welke groepen significant verschillen. Gebruik de functie `posthoc_mannwhitney()` van het package `scikit_posthocs` met als argumenten de dataset `dfResultaten_Arbeidsrecht`, de afhankelijke variabele `val_col = 'EC_Jaar1'`, de groepsvariabele `group_col = 'Vooropleiding'`. Pas de *Bonferroni correctie* toe met p_adjust = 'bonferroni'. Naast de p-waarde worden bij de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) de gemiddelde rangschikkingen en de effectmaat *r* gerapporteerd. Voor meer informatie, zie de toetspagina van de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html).
-<!-- ## /TEKSTBLOK: Mann-Whitney-U-test.R -->
-
-
 <!-- ## OPENBLOK: Mann-Whitney-U-test.py -->
 ```{python}
 import scikit_posthocs as skph
@@ -226,7 +260,7 @@ skph.posthoc_mannwhitney(dfResultaten_Arbeidsrecht, val_col = 'EC_Jaar1', group_
 <!-- ## /OPENBLOK: Mann-Whitney-U-test.py-->
 
 <!-- ## CLOSEDBLOK: Mann-Whitney-U-test1.py -->
-```{python, include= FALSE, echo= TRUE}
+```{python}
 import scikit_posthocs as skph
 
 pTabel = skph.posthoc_mannwhitney(dfResultaten_Arbeidsrecht, val_col = 'EC_Jaar1', group_col = 'Vooropleiding', p_adjust = 'bonferroni')
@@ -241,8 +275,7 @@ p_PM_RG = pTabel['Premaster']['Rechtsgeleerdheid']
 ```
 <!-- ## /CLOSEDBLOK: Mann-Whitney-U-test1.py -->
 
-
-
+De [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) gebruikt de gemiddelde rangschikking van twee ongepaarde groepen om de significantie van de toets te bepalen. Met behulp van de gemiddelde rangschikking kan bepaald worden welke groep hogere rangschikkingen heeft wat een benadering is voor het verschil tussen twee verdelingen.[^15] In deze casus heeft de vooropleiding met een hogere rangschikking dus over het algemeen studenten met een hoger aantal studiepunten. Bereken en rapporteer daarom de gemiddelde rangschikking.
 
 <!-- ## OPENBLOK: Mann-Whitney-U-test2.py -->
 ```{python mean rank}
@@ -287,7 +320,6 @@ Gem_PM_RG_1, Gem_PM_RG_2 = Gemiddelde_rangschikking(Studiepunten_Premaster, Stud
 ```
 <!-- ## /OPENBLOK: Mann-Whitney-U-test2.py -->
 
-
 <!-- ## TEKSTBLOK: Mann-Whitney-U-test3.py -->
 | Vergelijking | p-waarde     | Gemiddelde rangschikking (links)  | Gemiddelde rangschikking (rechts)     |
 | -------------  | ----------  | ---------- | -------- |
@@ -303,8 +335,28 @@ Als voorbeeld wordt de bovenste rij van Tabel 1 in woorden uitgelegd. Er is geen
 <!-- ## /TEKSTBLOK: Mann-Whitney-U-test3.py -->
 
 
+# Rapportage
 <!-- ## TEKSTBLOK: Rapportage.py -->
 De *Kruskal Wallis toets* is uitgevoerd om te toetsen of er verschillen zijn tussen de studenten van de Master Arbeidsrecht met als vooropleiding Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster wat betreft de verdeling van het aantal studiepunten dat de studenten in het eerste jaar behalen. Uit de resultaten kan afgelezen worden dat er een significant verschil is tussen de verdelingen van het aantal studiepunten voor de verschillende vooropleidingen, *H* = `r Round_and_format(py$stat)`, *df* = `r py$df`, *p* < 0,0001, *&eta;^2^* = `r Round_and_format(py$Eta_squared)`. De resultaten ondersteunen de conclusie dat er een verschil is tussen studenten van de vier verschillende vooropleidingen wat betreft de verdeling van de hoeveelheid studiepunten die studenten behalen tijdens het eerste jaar van de master Arbeidsrecht.  
 
 De [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) is uitgevoerd als post-hoc toets om te onderzoeken welke vooropleidingen van elkaar verschillen qua aantal studiepunten dat studenten behalen.  De studenten met Rechtsgeleerdheid als vooropleiding behalen significant minder punten bij de Master Arbeidsrecht, dan de studenten met een andere vooropleiding. Er is ook een significant verschil gevonden tussen de behaalde studiepunten van studenten met de vooropleiding Notarieel Recht en de Premaster, waarbij de studenten van de Premaster minder punten behaalden dan de studenten van Notarieel Recht. Er zijn geen significante verschillen gevonden tussen de vooropleidingen Fiscaal Recht en Notarieel Recht, en Fiscaal Recht en Premaster. De *Bonferroni correctie* is gebruikt om de Type I fout te voorkomen die gepaard gaat met het veelvuldig toetsen. De gemiddelde rangschikkingen en p-waarden van de post-hoc toetsen zijn te vinden in Tabel 1. 
 <!-- ## /TEKSTBLOK: Rapportage.py -->
+
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
+```
+<!-- ## /CLOSEDBLOK: Footer.R -->
+
+[^1]: De toets rangschikt de datapunten van laag naar hoog en geeft elke datapunt een rangschikking. Vervolgens wordt per groep het gemiddelde berekend van de rangschikking. Dit gemiddelde wordt met elkaar vergeleken. Voor meer informatie lees: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
+[^2]: Van Geloven, N. (21 maart 2018). *Kruskal Wallis*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis). 
+[^3]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test). 
+[^4]: Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  
+[^6]: Van Geloven, N. (21 November 2017). *KEUZE TOETS*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS).
+[^8]: Type I fout: Ten onrechte H~0~ verwerpen.
+[^9]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test).
+[^10]: De effectmaat *&eta;^2^* wordt voor de *Kruskal-Wallis toets* berekend door de *&chi;^2^*-waarde te delen door het totaal aantal observaties minus één, i.e. $\frac{\chi^2}{N-1} $.
+[^11]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
+[^13]: De test-statistiek *H* volgt bij benadering de chi-kwadraat verdeling. Onder deze hypothese is *H* chi-kwadraat, vandaar dat dit in de output uitgedrukt wordt in chi-kwadraat.
+[^14]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met Type I en Type II fouten. 
+[^15]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage.
+

@@ -377,7 +377,7 @@ Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de
 <!-- ## /TEKSTBLOK: Rapportage.py -->
 
 <!-- ## TEKSTBLOK: Rapportage-tukey.py -->
-*Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen. Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = `r Round_and_format(py$vATCvsFIL)`, *p* < 0,01). Tussen Geschiedenis en Arabische Taal en Cultuur is een significant verschil (*MD* = `r Round_and_format(py$vATCvsGSC)`, *p* < 0,01). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = `r Round_and_format(py$vFILvsGSC)`, *p* = 0,26). 
+*Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen. Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = `r Round_and_format(py$vATCvsFIL)`, *p* < 0,01). Tussen Geschiedenis en Arabische Taal en Cultuur is een significant verschil (*MD* = `r Round_and_format(py$vATCvsGSC)`, *p* < 0,01). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = `r Round_and_format(py$vFILvsGSC)`, *p* = `r Round_and_format(py$vpFILvsGSC)`). 
 <!-- ## /TEKSTBLOK: Rapportage-tukey.py -->
 
 

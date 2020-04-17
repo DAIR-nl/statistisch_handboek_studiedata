@@ -101,7 +101,6 @@ En22 <- ((n21 + n22) * (n12 + n22) / NN)
 | **wel leenstelsel**  |`r n21`   | `r n22`          | **`r n21 + n22`**|
 |**totaal**            |**`r n11 + n21`**   | **`r n12 + n22`**     | **`r NN`** |
 *Tabel 1. Geobserveerde aantallen casus uitval met of zonder leenstelsel*
-<!-- ## /TEKSTBLOK: Groepsgrootte1.R -->
 
 
 De *Chi-kwadraat toets voor onafhankelijkheid* wordt onbetrouwbaar als er in meer dan 20% van de cellen van de kruistabel een verwacht aantal observaties van 5 of lager is. Gebruik in dat geval *Fisher's exact toets*.[^8] Het verwacht aantal observaties in een cel is het aantal observaties dat zich in een cel op basis van kansrekening zou moeten bevinden wanneer er geen afhankelijkheid tussen de twee variabelen is. Op basis van de nulhypothese van onafhankelijkheid tussen de variabelen kunnen de verwachte aantallen observaties in elke cel berekend worden. Een voorbeeldberekening van het verwacht aantal observaties voor de cel linksboven (geen leenstelsel; geen uitval) werkt als volgt: vermenigvuldig het totaal aantal studenten in de groep geen leenstelsel (`r n11 + n12`) met het totaal aantal studenten dat uitvalt (`r n11 + n21`) en deel dit door het totaal aantal studenten (`r NN`).
@@ -120,6 +119,7 @@ Alle verwachte aantallen observaties zijn te vinden in Tabel 2. Merk ook op dat 
 | **wel leenstelsel**  |`r Round_and_format(En21)`   | `r Round_and_format(En22)`          | **`r Round_and_format(En21 + En22)`**|
 |**totaal**            |**`r Round_and_format(En11 + En21)`**   | **`r Round_and_format(En12 + En22)`**     | **`r NN`** |
 *Tabel 2. Verwachte aantallen casus uitval met of zonder leenstelsel*
+<!-- ## /TEKSTBLOK: Groepsgrootte1.R -->
 
 
 # Effectmaat
@@ -173,7 +173,9 @@ De kruistabel en bijbehorende tabel met proporties laat zien dat het percentage 
 
 ## Assumptie groepsgrootte
 
+<!-- ## TEKSTBLOK: Assumptie.R -->
 Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk of kleiner dan vijf is. Bereken het verwacht aantal observaties met het argument `chisq.test()$expected` van de functie `chisq.test()` met als argumenten de variabelen `Uitval_studenten_functiebeperking_leenstelsel$Periode` (voor of na invoering leenstelsel) en `Uitval_studenten_functiebeperking_leenstelsel$Uitval` (wel of niet uitgevallen). 
+<!-- ## /TEKSTBLOK: Assumptie.R -->
 
 <!-- ## OPENBLOK: Assumptie1.R -->
 ```{r chi2 assumptie}
@@ -232,7 +234,6 @@ vDF <- Chi2$parameter
 * Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar *k* staat voor kolom en *r* voor rij. In dit geval geldt *df* = `r vDF`.  
 * p-waarde < 0,05, dus de H~0~ wordt verworpen.[^11]
 * Effectmaat is `r Round_and_format(w)`, dus een klein effect
-
 
 <!-- ## /TEKSTBLOK: Chi2-toets-5.R-->
 
@@ -295,7 +296,9 @@ De kruistabel en bijbehorende tabel met proporties laat zien dat het percentage 
 
 ## Assumptie groepsgrootte
 
+<!-- ## TEKSTBLOK: AssumptieFisher.R -->
 Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk of kleiner dan vijf is. Bereken het verwachte aantal observaties met het argument `chisq.test()$expected` van de functie `chisq.test()` met als argumenten de variabelen `Fisher_Uitval_studenten_functiebeperking_leenstelsel$Periode` (voor of na invoering leenstelsel) en `Fisher_Uitval_studenten_functiebeperking_leenstelsel$Uitval` (wel of niet uitgevallen). 
+<!-- ## /TEKSTBLOK: AssumptieFisher.R -->
 
 <!-- ## OPENBLOK: Assumptie1Fisher.R -->
 ```{r chi2 fisher}
@@ -336,6 +339,7 @@ vOR <- Round_and_format(fish$estimate)
 <!-- ## TEKSTBLOK: Fishers-Exact-toets.R -->
 * *p* = `r vF_p`; p-waarde > 0,05, dus de H~0~ wordt niet verworpen.[^11]  
 * De odds ratio is `r vOR` met een 95%-betrouwbaarheidsinterval van `r vConf.int1` tot `r vConf.int2`. De kans op uitval van studenten met een functiebeperking met leenstelsel is dus `r vOR` keer zo groot is als de kans op uitval van studenten met een functiebeperking zonder het leenstelsel. Deze relatie is echter niet significant.
+
 <!-- ## /TEKSTBLOK: Fishers-Exact-toets.R -->
 
 
@@ -384,3 +388,8 @@ Fisher_ptable <- prop.table(Fisher_Uitval_studenten_kruistabel, 1)
 &chi;^2^-waarde gedeeld door het totaal aantal observaties, i.e. $\sqrt{ \frac{\chi^2}{N} }$.
 [^10]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
 [^11]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
+
+
+<!-- ## TEKSTBLOK: Extra-Bron.R -->
+
+<!-- ## /TEKSTBLOK: Extra-Bron.R -->

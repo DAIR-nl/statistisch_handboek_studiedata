@@ -78,7 +78,8 @@ Fisher_Tabel_uitval_functiebeperking <- table(Fisher_Uitval_studenten_functiebep
                                        Fisher_Uitval_studenten_functiebeperking_leenstelsel$Uitval)
 
 
-
+rm(Periode, Studentnummer, Studentnummers_opties, Uitval, Uitval_na_leenstelsel, 
+   Uitval_voor_leenstelsel)
 
 
 #Geen_leenstelsel <- c(375, 496)

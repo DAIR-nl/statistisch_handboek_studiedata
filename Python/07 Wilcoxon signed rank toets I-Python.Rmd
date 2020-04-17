@@ -224,12 +224,12 @@ Bereken de effectmaat *r* vervolgens op basis van de p-waarde van de *Wilcoxon s
 stat, pval = sp.wilcoxon(Alumni_jaarinkomens_T2, Alumni_jaarinkomens_T1, alternative = 'two-sided')
 
 # Bereken de effectgrootte voor een tweezijdige toets
-r = sp.norm.ppf(pval/2) / np.sqrt(len(Alumni_jaarinkomens_T1))
+Effectmaat = sp.norm.ppf(pval/2) / np.sqrt(len(Alumni_jaarinkomens_T1))
 # Bereken de effectgrootte voor een eenzijdige toets
 #r = sp.norm.ppf(pval) / np.sqrt(len(Alumni_jaarinkomens_T1))
 
 # Print de effectgrootte (vaak weergegeven als absolute waarde)
-print(np.abs(r))
+print(np.abs(Effectmaat))
 
 ```
 <!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets2.py -->
@@ -266,19 +266,19 @@ stat, pval = sp.wilcoxon(Alumni_jaarinkomens_T2, Alumni_jaarinkomens_T1, alterna
 <!-- ## /CLOSEDBLOK: Wilcoxon-signed-rank-toets.py -->
 
 <!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets4.py -->
-* *V* = `r Round_and_format(py$stat)`, *p* < 0,0001 , *r* = `r Round_and_format(py$r)`
+* *V* = `r Round_and_format(py$stat)`, *p* < 0,0001 , *r* = `r Round_and_format(abs(as.numeric(py$Effectmaat)))`
 * De toetsstatistiek *V* is in deze casus gelijk aan de som van de negatieve rangschikkingen
 * Het aantal positieve rangschikkingen is `r py$N_positief`; de som is `r format(round(py$Som_positief), scientific = FALSE)`
 * Het aantal negatieve rangschikkingen is `r py$N_negatief`; de som is `r round(py$Som_negatief)`
 * p-waarde < 0,05, dus de H~0~ wordt verworpen[^9]
-* Effectmaat is `r Round_and_format(py$r)`, dus een groot effect
+* Effectmaat is `r Round_and_format(abs(as.numeric(py$Effectmaat)))`, dus een groot effect
 
 
 <!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets4.py -->
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.py -->
-De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de verdeling van het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij in vier jaar tijd is veranderd. De resultaten van de toets laten zien dat er een significant verschil is tussen het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij één jaar en vijf jaar na afstuderen, *V* = `r Round_and_format(py$stat)`, *p* < 0,0001, *r* = `r Round_and_format(py$r)`. Er zijn `r py$N_positief` alumni die vijf jaar na afstuderen meer verdienen dan één jaar na afstuderen (som van rangschikkingen is `r format(round(py$Som_positief), scientific = FALSE)`) en er zijn `r py$N_negatief` alumni die vijf jaar na afstuderen minder verdienen dan één jaar na afstuderen (som van rangschikkingen is `r py$Som_negatief`). Alumni lijken dus meer te verdienen wanneer ze vijf jaar afgestudeerd zijn.
+De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de verdeling van het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij in vier jaar tijd is veranderd. De resultaten van de toets laten zien dat er een significant verschil is tussen het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij één jaar en vijf jaar na afstuderen, *V* = `r Round_and_format(py$stat)`, *p* < 0,0001, *r* = `r Round_and_format(abs(py$Effectmaat))`. Er zijn `r py$N_positief` alumni die vijf jaar na afstuderen meer verdienen dan één jaar na afstuderen (som van rangschikkingen is `r format(round(py$Som_positief), scientific = FALSE)`) en er zijn `r py$N_negatief` alumni die vijf jaar na afstuderen minder verdienen dan één jaar na afstuderen (som van rangschikkingen is `r py$Som_negatief`). Alumni lijken dus meer te verdienen wanneer ze vijf jaar afgestudeerd zijn.
 <!-- ## /TEKSTBLOK: Rapportage.py -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->

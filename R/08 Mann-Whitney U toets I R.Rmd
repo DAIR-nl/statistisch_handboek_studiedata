@@ -174,7 +174,7 @@ ggplot(Studiepunten_studiejaar2,
   geom_histogram(aes(y = ..density..),
                  color = "grey30",
                  fill = "#0089CF") +
-  facet_wrap(~ Vooropleiding, labeller = labeller(Vooropleiding = c(Nederlands="Nederlandse vooropleiding", buitenlands="Buitenlandse vooropleiding"))) +
+  facet_wrap(~ Vooropleiding, labeller = labeller(Vooropleiding = c(Nederlands = "Nederlandse vooropleiding", buitenlands = "Buitenlandse vooropleiding"))) +
   ylab("Frequentie") +
   labs(title = "Studiepunten van studenten Business Administration in het tweede jaar ")
 ```
@@ -207,8 +207,9 @@ vW_ub <- Round_and_format(wcx$conf.int[2])
 ```
 <!-- ## /CLOSEDBLOK: Mann-Whitney-U-toets-3.R -->
 
-<!-- ## OPENBLOK: Mann-Whitney-U-toets-4.R -->
 Bereken vervolgens de effectmaat *r* op basis van de p-waarde van de *Mann-Whitney U toets*.
+
+<!-- ## OPENBLOK: Mann-Whitney-U-toets-4.R -->
 ```{r effectgrootte}
 # Sla de p-waarde op
 pwaarde <- wilcox.test(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands], 
@@ -239,7 +240,7 @@ Rangschikkingen_buitenlandse_vooropleiding <- mean(rank(Studiepunten_studiejaar2
 
 <!-- ## TEKSTBLOK: Mann-Whitney-U-toets-4.R -->
 * *W* = `r vW_W`, *p* = < 0,0001, *r* = `r Round_and_format(abs(r))`
-* *p*-waarde < 0,05, dus de H~0~ wordt niet verworpen.[^8]
+* *p*-waarde < 0,05, dus de H~0~ wordt verworpen.[^8]
 * Effectmaat is `r Round_and_format(abs(r))`, dus een klein tot gemiddeld effect
 * De gemiddelde rangschikking is `r Round_and_format(Rangschikkingen_Nederlandse_vooropleiding)` (*n*=`r vN_NL`) voor studenten met een Nederlandse vooropleiding en `r Round_and_format(Rangschikkingen_buitenlandse_vooropleiding)` (*n*=`r vN_Inter`) voor studenten met een buitenlandse vooropleiding  
 * De mediaan van de verschilscores is `r vW_est` met een 

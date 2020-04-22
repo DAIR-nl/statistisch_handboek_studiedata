@@ -53,7 +53,7 @@ source(paste0(here::here(),"/01. Includes/data/13.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *Chi-kwadraat toets voor onafhankelijkheid* of de *Fisher's exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde, binaire variabelen.[^1]<sup>, </sup>[^2] In tegenstelling tot de *Chi-kwadraat toets voor onafhankelijkheid* kan de *Fisher's exact toets* ook bij lage aantallen gebruikt worden.[^4] De *Chi-kwadraat toets voor onafhankelijkheid* kan ook gebruikt worden wanneer de twee categorische variabelen meer dan twee categorieën bevatten, maar *Fisher's exact toets* vereist wel dat beide variabelen binair zijn. Deze casus illustreert de test echter voor twee ongepaarde binaire variabelen.
+Gebruik de *Chi-kwadraat toets voor onafhankelijkheid* of de *Fisher's exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde, binaire variabelen.[^1]<sup>, </sup>[^2] In tegenstelling tot de *Chi-kwadraat toets voor onafhankelijkheid* kan de *Fisher's exact toets* ook bij lage aantallen gebruikt worden.[^4] De *Chi-kwadraat toets voor onafhankelijkheid* kan ook gebruikt worden wanneer de twee categorische variabelen meer dan twee categorieën bevatten, maar *Fisher's exact toets* vereist wel dat beide variabelen binair zijn. Deze toetspagina illustreert de toets echter voor twee ongepaarde binaire variabelen.
 
 
 # Onderwijscasus
@@ -255,7 +255,7 @@ ptable <- prop.table(Uitval_studenten_kruistabel, 1)
 
 
 <!-- ## TEKSTBLOK: Rapportage2.R -->
-De *Chi-kwadraat toets voor onafhankelijkheid* is uitgevoerd om te toetsen of er een afhankelijkheid is tussen het uitvallen van studenten met een functiebeperking en het wel of niet invoeren van het leenstelsel. De nulhypothese dat uitval en invoering van het leenstelsel onafhankelijk zijn kan verworpen worden, &chi;^2^ ~`r vDF`~ ≈ `r vChi2`, *p* = `r vP`, *w* = `r Round_and_format(w)`. De propoties per rij in Tabel 3 laten zien dat er relatief meer studenten uitvallen wanneer er een leenstelsel is ingevoerd.
+De *Chi-kwadraat toets voor onafhankelijkheid* is uitgevoerd om te toetsen of er een afhankelijkheid is tussen het uitvallen van studenten met een functiebeperking en het wel of niet invoeren van het leenstelsel. De nulhypothese dat uitval en invoering van het leenstelsel onafhankelijk zijn kan verworpen worden, &chi;^2^ ~`r vDF`~ = `r vChi2`, *p* = `r vP`, *w* = `r Round_and_format(w)`. De propoties per rij in Tabel 3 laten zien dat er relatief meer studenten uitvallen wanneer er een leenstelsel is ingevoerd.
 
 |                      | geen uitval   | uitval | 
 | -------------------- | ---------| ------------| 

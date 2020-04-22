@@ -49,7 +49,7 @@ source(paste0(here::here(),"/01. Includes/data/07.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *tekentoets* om te toetsen of de medianen van twee gepaarde groepen van elkaar verschillen.[^1] Deze toets is een alternatief voor de [gepaarde t-toets](02-Gepaarde-t-toets-R.html) wanneer de verschilscores van de gepaarde groepen niet normaal verdeeld zijn. De *Wilcoxon signed rank toets* kan ook gebruikt worden om het verschil tussen medianen van gepaarde groepen te toetsen. Deze toets heeft een hoger onderscheidend vermogen[^2], maar vereist dat de verdeling van de verschilscores symmetrisch is.[^3] De *tekentoets* kan ook gebruikt worden wanneer de verdeling niet symmetrisch is. 
+Gebruik de *tekentoets* om te toetsen of de medianen van twee gepaarde groepen van elkaar verschillen.[^1] Deze toets is een alternatief voor de [gepaarde t-toets](02-Gepaarde-t-toets-R.html) wanneer de verschilscores van de gepaarde groepen niet normaal verdeeld zijn. De [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-I-R.html) kan ook gebruikt worden om het verschil tussen medianen van gepaarde groepen te toetsen. Deze toets heeft een hoger onderscheidend vermogen[^2], maar vereist dat de verdeling van de verschilscores symmetrisch is.[^3] De *tekentoets* kan ook gebruikt worden wanneer de verdeling niet symmetrisch is. 
 
 # Onderwijscasus
 <div id ="casus">
@@ -142,7 +142,7 @@ ggplot(Alumni_jaarinkomens,
   aes(x = Inkomen)) +
   geom_histogram(color = "grey30",
                  fill = "#0089CF") +
-  facet_wrap(~ Meetmoment, labeller = labeller(Meetmoment = c(T1="Een jaar na afstudereren", T2="Vijf jaar na afstuderen"))) +
+  facet_wrap(~ Meetmoment, labeller = labeller(Meetmoment = c(T1 = "Een jaar na afstudereren", T2 = "Vijf jaar na afstuderen"))) +
   geom_density(alpha = .2, adjust = 1) +
   ylab("Frequentiedichtheid") +
   labs(title = "Bruto jaarinkomen alumni Mens & Maatschappij")

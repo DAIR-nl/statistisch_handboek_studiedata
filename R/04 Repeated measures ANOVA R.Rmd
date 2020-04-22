@@ -55,7 +55,7 @@ Gebruik de *repeated measures ANOVA* om gemiddelden te vergelijken van een groep
 # Onderwijscasus
 <div id = "casus">
 
-De opleidingsdirecteur van de bachelor Technische Natuurkunde van een universiteit hoort vanuit de opleidingscommissie dat de eerstejaars studenten de studielast van de eerste onderwijsperiode als erg hoog ervaren. Om te onderzoeken hoe deze ervaren studielast verminderd kan worden, wil hij onderzoeken hoeveel tijd de studenten per week besteden aan hun vakken. Uit vakevaluaties verzamelt hij gegevens van het aantal uur per week dat eerstejaars studenten besteden aan de vakken in de eerste onderwijsperiode: Lineaire Algebra, Relativiteitstheorie en Kosmologie. Op deze manier kan hij onderzoeken of er verschillen in de tijdsbesteding aan de verschillende vakken zijn en om te bepalen van welke vakken de studielast aangepast moet worden.
+De opleidingsdirecteur van de bachelor Technische Natuurkunde van een universiteit hoort vanuit de opleidingscommissie dat de eerstejaars studenten de studielast van de eerste onderwijsperiode als erg hoog ervaren. Om te onderzoeken hoe deze ervaren studielast verminderd kan worden, wil hij onderzoeken hoeveel tijd de studenten per week besteden aan hun vakken. Met behulp van een vragenlijst over de studiebelasting in het eerste jaar verzamelt hij gegevens van het aantal uur per week dat eerstejaars studenten besteden aan de vakken in de eerste onderwijsperiode: Lineaire Algebra, Relativiteitstheorie en Kosmologie. Op deze manier kan hij onderzoeken of er verschillen in de tijdsbesteding aan de verschillende vakken zijn en om te bepalen van welke vakken de studielast aangepast moet worden.
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
 
@@ -293,7 +293,7 @@ Bij de Q-Q plots van Lineaire Algebra en Kosmologie liggen de punten rond de lij
 
 
 ### Boxplot
-De box geeft de middelste 50% van de reistijd weer. De zwarte lijn binnen de box is de mediaan. In de staarten of snorreharen zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9]<sup>, </sup>[^10] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
+De box geeft de middelste 50% van het aantal studieuren per week weer. De zwarte lijn binnen de box is de mediaan. In de staarten of snorreharen zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9]<sup>, </sup>[^10] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
 
 <!-- ## OPENBLOK: Boxplot.R -->
 ```{r boxplot}

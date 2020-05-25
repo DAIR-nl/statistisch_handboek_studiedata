@@ -87,3 +87,48 @@ table(subset$Bibliotheek, subset$Periode)
 
 
 table(Data_bibliotheken$Bibliotheek, Data_bibliotheken$Periode)
+
+
+
+## OUD
+
+# install.packages("mclogit")
+# library(mclogit)
+
+
+# data("Transport")
+# summary(mclogit(
+#   cbind(resp,suburb)~distance+cost,
+#   data=Transport
+#   ))
+
+# data(electors)
+
+# summary(mclogit(
+#   cbind(Freq,interaction(time,class))~econ.left/class+welfare/class+auth/class,
+#   random=~1|party.time,
+#   data=within(electors,party.time<-interaction(party,time))))
+
+# install.packages("multgee")
+# library(multgee)
+# help(multgee)
+
+# library("multgee")
+# data("arthritis")
+# head(arthritis)
+# intrinsic.pars(y = y, data = arthritis, id = id, repeated = time,
+# rscale = "ordinal")
+
+# ordLORgee(formula = y ~ factor(time) + factor(trt) + factor(baseline),
+# link = "logit", id = id, repeated = time, data = arthritis,
+# LORstr = "uniform")
+
+# vvv <- nomLORgee(formula = Bibliotheek ~ 1, data = Data_bibliotheken,
+#           id = Studentnummer)
+# summary(vvv)
+
+# vvv2 <- nomLORgee(formula = Bibliotheek ~ Periode, data = Data_bibliotheken,
+#           id = Studentnummer)
+# summary(vvv2)# 
+
+

@@ -124,10 +124,10 @@ Alle verwachte aantallen observaties zijn te vinden in Tabel 2. Merk ook op dat 
 
 # Effectmaat
 
-De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^7] 
-De *Chi-kwadraat toets voor onafhankelijkheid* heeft als effectmaat *w*.[^9] Een indicatie om *w* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^10]
+De p-waarde geeft aan of een (mogelijk) verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^7] 
+De *Chi-kwadraat toets voor onafhankelijkheid* heeft als effectmaat Cohen's *w*.[^9] Een indicatie om Cohen's *w* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^10]
 
-De odds ratio is een effectmaat die voor zowel de *Chi-kwadraat toets voor onafhankelijkheid* als de *Fisher's exact toets* kan worden gebruikt. Een voorwaarde is echter dat beide variabelen binair zijn. In andere woorden, er moet een 2x2 kruistabel gevormd kunnen worden. Odds is een Engelse term voor de verhouding van twee kansen, bijvoorbeeld de verhouding tussen het aantal studenten dat uitvalt en niet uitvalt. Een odds ratio is de verhouding tussen twee odds, dus de verhouding van de odds van studentenuitval voor de periode met leenstelsel en de periode zonder leenstelsel. De odds ratio geeft dus een interpretatie van het effect van een leenstelsel op het uitvallen van studenten.[^7]
+De odds ratio is een andere effectmaat die voor zowel de *Chi-kwadraat toets voor onafhankelijkheid* als de *Fisher's exact toets* kan worden gebruikt. Een voorwaarde is echter dat beide variabelen binair zijn. In andere woorden, er moet een 2x2 kruistabel gevormd kunnen worden. Odds is een Engelse term voor de verhouding van twee kansen, bijvoorbeeld de verhouding tussen het aantal studenten dat uitvalt en niet uitvalt. Een odds ratio is de verhouding tussen twee odds, dus de verhouding van de odds van studentenuitval voor de periode met leenstelsel en de periode zonder leenstelsel. De odds ratio geeft dus een interpretatie van het effect van een leenstelsel op het uitvallen van studenten.[^7]
 
 
 # De data bekijken
@@ -174,7 +174,7 @@ De kruistabel en bijbehorende tabel met proporties laat zien dat het percentage 
 ## Assumptie groepsgrootte
 
 <!-- ## TEKSTBLOK: Assumptie.R -->
-Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk of kleiner dan vijf is. Bereken het verwacht aantal observaties met het argument `chisq.test()$expected` van de functie `chisq.test()` met als argumenten de variabelen `Uitval_studenten_functiebeperking_leenstelsel$Periode` (voor of na invoering leenstelsel) en `Uitval_studenten_functiebeperking_leenstelsel$Uitval` (wel of niet uitgevallen). 
+Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk aan of kleiner dan vijf is. Bereken het verwacht aantal observaties met het argument `chisq.test()$expected` van de functie `chisq.test()` met als argumenten de variabelen `Uitval_studenten_functiebeperking_leenstelsel$Periode` (voor of na invoering leenstelsel) en `Uitval_studenten_functiebeperking_leenstelsel$Uitval` (wel of niet uitgevallen). 
 <!-- ## /TEKSTBLOK: Assumptie.R -->
 
 <!-- ## OPENBLOK: Assumptie1.R -->
@@ -184,7 +184,7 @@ chisq.test(Uitval_studenten_functiebeperking_leenstelsel$Periode,
 ```
 <!-- ## /OPENBLOK: Assumptie1.R -->
 
-Geen van de verwachte aantallen observaties is gelijk of kleiner dan vijf, dus de *Chi-kwadraat toets voor onafhankelijkheid* kan worden uitgevoerd.
+Geen van de verwachte aantallen observaties is gelijk aan of kleiner dan vijf, dus de *Chi-kwadraat toets voor onafhankelijkheid* kan worden uitgevoerd.
 
 
 # Chi-kwadraat toets voor onafhankelijkheid
@@ -200,7 +200,7 @@ chisq.test(Uitval_studenten_functiebeperking_leenstelsel$Periode,
 ```
 <!-- ## /OPENBLOK: Chi2-toets-2.R -->
 
-Bereken de effectmaat *w* vervolgens op basis van de &chi;^2^-waarde van de *Chi-kwadraat toets voor onafhankelijkheid*.
+Bereken de effectmaat Cohen's *w* vervolgens op basis van de &chi;^2^-waarde van de *Chi-kwadraat toets voor onafhankelijkheid*.
 <!-- ## OPENBLOK: Chi2-toets-3.R -->
 ```{r effectsize}
 # Sla de teststatistiek op
@@ -265,6 +265,7 @@ De *Chi-kwadraat toets voor onafhankelijkheid* is uitgevoerd om te toetsen of er
 <!-- ## /TEKSTBLOK: Rapportage2.R -->
 
 
+
 # Fisher's exact toets
 ## Uitvoering 
 <!-- ## TEKSTBLOK: Data-inladen-Fisher.R -->
@@ -297,7 +298,7 @@ De kruistabel en bijbehorende tabel met proporties laat zien dat het percentage 
 ## Assumptie groepsgrootte
 
 <!-- ## TEKSTBLOK: AssumptieFisher.R -->
-Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk of kleiner dan vijf is. Bereken het verwachte aantal observaties met het argument `chisq.test()$expected` van de functie `chisq.test()` met als argumenten de variabelen `Fisher_Uitval_studenten_functiebeperking_leenstelsel$Periode` (voor of na invoering leenstelsel) en `Fisher_Uitval_studenten_functiebeperking_leenstelsel$Uitval` (wel of niet uitgevallen). 
+Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk aan of kleiner dan vijf is. Bereken het verwachte aantal observaties met het argument `chisq.test()$expected` van de functie `chisq.test()` met als argumenten de variabelen `Fisher_Uitval_studenten_functiebeperking_leenstelsel$Periode` (voor of na invoering leenstelsel) en `Fisher_Uitval_studenten_functiebeperking_leenstelsel$Uitval` (wel of niet uitgevallen). 
 <!-- ## /TEKSTBLOK: AssumptieFisher.R -->
 
 <!-- ## OPENBLOK: Assumptie1Fisher.R -->
@@ -384,7 +385,7 @@ Fisher_ptable <- prop.table(Fisher_Uitval_studenten_kruistabel, 1)
 [^4]: Van Geloven, N., & Holman, R., (6 mei 2016). *Fisher's exact toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Fisher's_exact_toets).
 [^6]: Nominaal: variabelen die niet afhankelijk van elkaar zijn en niet op inhoudelijke basis geordend kunnen worden. Voorbeelden hiervan zijn geslacht of achternamen. Een binaire variabele is een voorbeeld van een nominale variabele. Binaire variabelen hebben twee mogelijkheden, ja of nee, terwijl nominale variabelen meerdere mogelijkheden kunnen hebben. 
 [^8]: Van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets).
-[^9]: De effectmaat *w* wordt voor de *Chi-kwadraat toets* berekend door de wortel te nemen van de
+[^9]: De effectmaat Cohen's *w* wordt voor de *Chi-kwadraat toets* berekend door de wortel te nemen van de
 &chi;^2^-waarde gedeeld door het totaal aantal observaties, i.e. $\sqrt{ \frac{\chi^2}{N} }$.
 [^10]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
 [^11]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

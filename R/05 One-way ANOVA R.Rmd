@@ -90,6 +90,7 @@ De effectmaat eta squared (*η^2^*) berekent de proportie van de variantie in de
 
 # Post-hoc toetsen
 De *one-way ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Voer een post-hoc toets uit om te bepalen welke groepen significant verschillen.
+De post-hoc toetsen voeren meestal een correctie voor de p-waarden uit, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout).
 
 Er zijn meerdere post-hoc toetsen. De keuze voor een toets hangt onder andere af van het wel of niet schenden van de assumptie van homogeniteit van varianties:   
 * Gebruik Tukey bij gelijke variantie.[^14]  

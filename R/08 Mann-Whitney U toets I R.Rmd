@@ -47,7 +47,7 @@ source(paste0(here::here(),"/01. Includes/data/08.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 # Toepassing
-Gebruik de *Mann-Whitney U toets* om te toetsen of de verdelingen twee onafhankelijke groepen significant van elkaar verschillen.[^1] De *Mann-Whitney U toets* kan een alternatief zijn voor de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html) als de verdelingen niet normaal verdeeld zijn. Alleen als de verdelingen van beide groepen dezelfde vorm hebben, kan de *Mann-Whitney U toets* ook gebruikt worden om het verschil tussen de medianen van twee groepen te toetsen.[^9] Gebruik *Mood's mediaan toets* om medianen te toetsen bij twee verdelingen die niet dezelfde vorm hebben.
+Gebruik de *Mann-Whitney U toets* om te toetsen of de verdelingen twee onafhankelijke groepen van elkaar verschillen.[^1] De *Mann-Whitney U toets* is een alternatief voor de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html) als de verdelingen niet normaal verdeeld zijn. Alleen als de verdelingen van beide groepen dezelfde vorm hebben, kan de *Mann-Whitney U toets* ook gebruikt worden om het verschil tussen de medianen van twee groepen te toetsen.[^9] Gebruik *Mood's mediaan toets* om medianen te toetsen bij twee verdelingen die niet dezelfde vorm hebben.
 
 
 # Onderwijscasus
@@ -63,7 +63,7 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 # Assumpties
 
-Het meetniveau van de afhankelijke variabele is ordinaal of continu.[^9] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data is te vinden in een andere toetspagina.
+Het meetniveau van de afhankelijke variabele is ordinaal[^12] of continu.[^9] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data is te vinden in een andere toetspagina.
 
 De *Mann-Whitney U toets* hoeft - in tegenstelling tot de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html) - niet te voldoen aan de assumptie van normaliteit.  Daarnaast hebben uitbijters minder invloed op het eindresultaat dan bij de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html). Daarentegen, als de data wel normaal verdeeld is, heeft de *Mann-Whitney U toets* minder onderscheidend vermogen[^2] dan de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html). Vandaar dat ondanks de voordelen er toch minder vaak voor de *Mann-Whitney U toets* gekozen wordt.
 
@@ -75,8 +75,11 @@ Als de verdelingen van de groepen niet dezelfde vorm hebben, doet de *Mann-Whitn
 
 # Effectmaat
 
-De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^3] 
-De *Mann-Whitney U toets* heeft als effectmaat *r*.[^4] Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^5]
+De p-waarde geeft aan of een (mogelijk) verschil tussen twee groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^3] 
+
+De *Mann-Whitney U toets* heeft als effectmaat *r*. Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^5] De effectmaat *r* wordt voor de *Mann-Whitney U toets* berekend door de
+*z*-waarde behorend bij de *p*-waarde van de toets te delen door de wortel van
+het aantal observaties, i.e. $\frac{z}{\sqrt{N}}$.[^5] Een correlatie tussen twee variabelen wordt vaak ook aangeduid met symbool *r*, maar beide varianten van *r* hebben een verschillende betekenis.
 
 # Uitvoering 
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
@@ -96,7 +99,7 @@ tail(Studiepunten_studiejaar2)
 ```
 <!-- ## /OPENBLOK: Data-bekijken.R -->
 <!-- ## TEKSTBLOK: Data-beschrijven.R -->
-Bekijk de grootte, de mediaan en de kwantielen van het aantal studiepunten met `length()` en `quantile()`.
+Bekijk de grootte, de mediaan en de kwantielen van het aantal studiepunten met `length()` en `quantile()`. De mediaan en kwantielen worden vaak gebruikt als maat wanneer een verdeling niet symmetrisch is. 
 <!-- ## /TEKSTBLOK: Data-beschrijven.R -->
 <!-- ## OPENBLOK: Data-selecteren.R -->
 ```{r data selecteren}
@@ -231,10 +234,14 @@ paste("De effectmaat is", abs(r))
 
 Bereken ten slotte de gemiddelde rangschikking van beide groepen.
 <!-- ## OPENBLOK: Wilcoxon-signed-rank-toets3.R -->
-```{r sommen}
+```{r sommen, collapse = TRUE}
 Rangschikkingen_Nederlandse_vooropleiding <- mean(rank(Studiepunten_studiejaar2$Studiepunten)[Vooropleiding_Nederlands])
 
 Rangschikkingen_buitenlandse_vooropleiding <- mean(rank(Studiepunten_studiejaar2$Studiepunten)[!Vooropleiding_Nederlands])
+
+# Print gemiddelde rangschikkingen
+Rangschikkingen_Nederlandse_vooropleiding
+Rangschikkingen_buitenlandse_vooropleiding
 ```
 <!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets3.R -->
 
@@ -263,9 +270,6 @@ De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal stu
 [^1]: Van Geloven, N. (13 maart 2018). *Mann-Whitney U toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets).
 [^2]: Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.
 [^3]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
-[^4]: De effectmaat *r* wordt voor de *Mann-Whitney U toets* berekend door de
-*z*-waarde behorend bij de *p*-waarde van de toets te delen door de wortel van
-het aantal observaties, i.e. $\frac{z}{\sqrt{N}}$.
 [^5]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
 [^6]: De mediaan van de verschilscores kan bij twee ongepaarde steekproeven bijvoorbeeld geschat worden door alle *m x n* verschilscores te berekenen tussen *m* observaties uit de ene steekproef en *n* observaties uit de andere steekproef. De mediaan van deze *m x n* verschilscores is dan de schatting.
 [^7]: Wikipedia (10 maart 2020). *Hogdes-Lehmann estimator*.[https://en.wikipedia.org/wiki/Hodges%E2%80%93Lehmann_estimator](https://en.wikipedia.org/wiki/Hodges%E2%80%93Lehmann_estimator) 
@@ -273,3 +277,4 @@ het aantal observaties, i.e. $\frac{z}{\sqrt{N}}$.
 [^9]: Laerd Statistics (2018). *Mann-Whitney U Test using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/mann-whitney-u-test-using-spss-statistics.php
 [^10]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage.
 [^11]: Voor zowel de *Mann-Whitney U toets* als de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-I-R.html) wordt functie `wilcox.test()` in R gebruikt. Het verschil is dat de *Mann-Whitney U toets* wordt uitgevoerd met het argument `paired = FALSE` en de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-I-R.html) bij het argument `paired = TRUE`, aangezien de eerste toets ongepaarde groepen en de tweede toets gepaarde groepen vergelijkt.
+[^12]: Een ordinale variabele is een categorische variabele waarbij de categorieën geordend kunnen worden. Een voorbeeld is de variabele beoordeling met de categorieën Onvoldoende, Voldoende, Goed en Uitstekend.

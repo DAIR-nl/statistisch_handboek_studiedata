@@ -71,7 +71,7 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 # Assumpties
 
-Om een valide toetsresultaat te bereiken, moeten de data aan een aantal assumpties voldoen. Het meetniveau van de afhankelijke variabele is ordinaal of continu.[^9] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data is te vinden in een andere toetspagina. Bij herhaalde metingen van dezelfde observatie-eenheden, moet de groep observatie-eenheden drie of meer keren gemeten zijn en een willekeurige steekproef van de populatie zijn. Bij gepaarde groepen, moet elk paar bestaan uit drie of meer gepaarde observatie-eenheden en moet de steekproef met alle paren een willekeurige steekproef van de populatie zijn.[^4]
+Om een valide toetsresultaat te bereiken, moeten de data aan een aantal assumpties voldoen. Het meetniveau van de afhankelijke variabele is ordinaal of continu.[^4] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data is te vinden in een andere toetspagina. Bij herhaalde metingen van dezelfde observatie-eenheden, moet de groep observatie-eenheden drie of meer keren gemeten zijn en een willekeurige steekproef van de populatie zijn. Bij gepaarde groepen, moet elk paar bestaan uit drie of meer gepaarde observatie-eenheden en moet de steekproef met alle paren een willekeurige steekproef van de populatie zijn.[^4]
 
 
 # Effectmaat
@@ -81,7 +81,7 @@ De p-waarde geeft aan of het verschil tussen groepen significant is. De grootte 
 # Post-hoc toetsen
 *Friedman's ANOVA* toetst of er verschillen zijn tussen de verdelingen van groepen. Voer een post-hoc toets uit om te bepalen welke groepen van elkaar verschillen. Gebruik de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html) als post-hoc toets. De [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html) toetst of er een verschil tussen de verdelingen is van twee gepaarde groepen. Hoewel het minder gebruikelijk is, is de [tekentoets](27-Tekentoets-II-R.html) ook een optie als post-hoc toets. Deze toets toetst het verschil tussen de medianen van twee gepaarde groepen.
 
-Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans dat er bij toeval een verband wordt ontdekt dat er niet is (type I fout).[^9] Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^5]
+Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout. Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^5]
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
@@ -403,7 +403,6 @@ Post-hoc toetsen met een Bonferroni correctie voor meerdere toetsen zijn uitgevo
 [^6]: University of Sheffield. *Friedman test in SPSS*. [Mathematics and Statistics Help (MASH)](https://www.sheffield.ac.uk/polopoly_fs/1.714575!/file/stcp-marshall-FriedmanS.pdf). Bezocht op 13 maart 2020.
 [^7]: *Kendall's W* wordt berekend door de teststatistiek van *Friedman's ANOVA* (dit is de *&chi;^2^*) te delen door het aantal observatie-eenheden *N* en het aantal groepen *k* minus één, i.e. $W = \frac{\chi^2}{N(k-1)}$.
 [^8]: Kassambara, A. (2020). *rstatix: Pipe-Friendly Framework for Basic Statistical Tests*. [R package version 0.4.0.](https://CRAN.R-project.org/package=rstatix).
-[^9]: Type I fout: Ten onrechte H~0~ verwerpen.
 [^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
 [^11]: De effectmaat *r* wordt voor de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html) berekend door de
 *z*-waarde behorend bij de *p*-waarde van de toets te delen door de wortel van

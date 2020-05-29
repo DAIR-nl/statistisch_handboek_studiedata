@@ -59,7 +59,7 @@ dfToetsen <- tribble(
     "17 Chi-kwadraat toets voor goodness of fit en multinomiaaltoets",                          "0",          "0",       "0",               "0",       
     "18 McNemar toets II",                                                                      "0",          "0",       "0",               "0",      
     "19 Chi-kwadraat toets voor onafhankelijkheid en Fisher-Freeman-Halton exact toets II",     "0",          "0",       "0",               "0",       
-    "20 Generalized Linear Mixed Model",                                                        "0",          "0",       "0",               "0",       
+    "20 Multilevel multinomiale logistische regressie",                                         "0",          "0",       "0",               "0",       
     "21 Chi-kwadraat toets voor onafhankelijkheid en Fisher-Freeman-Halton exact toets III",    "0",          "0",       "0",               "0",       
     "22 Wilcoxon signed rank toets II",                                                         "0",          "0",       "0",               "0",       
     "23 Mann-Whitney U toets II",                                                               "0",          "0",       "0",               "0",       

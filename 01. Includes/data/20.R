@@ -1,8 +1,15 @@
-# Case: meerdere studenten worden vijf periodes gevolgd. Hierin geven ze aan in
-# welke van drie bibliotheken zij het meest geweest zijn. Hieruit krijg je een
-# kruistabel met het in de rijen de drie bibliotheken en in de kolommen de vijf
-# perioden. In elke cel wordt het aantal observaties geteld. De onderzoeksvraag is
-# of er een afhankelijkheid is tussen de bibliotheken en de perioden.# 
+# In de bachelor Psychologie kiezen studenten aan het einde van het eerste jaar 
+# een specialisatie voor jaar 2 en 3. Hierbij kunnen studenten kiezen uit de 
+# richtingen Klinische Neuropsychologie, Sociale Psychologie, en Arbeids- en 
+# Organisatiepsychologie. De opleidingsdirecteur wilt onderzoeken op welk moment 
+# in het eerste studiejaar studenten ontdekken welke specialisatie zij willen 
+# doen. Daarom start zij een experiment waarin ze aan een groep eerstejaars 
+# studenten vraagt om na elke onderwijsperiode aan te geven welke specialisatie 
+# ze op dat moment zouden kiezen. Met dit experiment kan zij ontdekken op welk 
+# moment in het eerste studiejaar studenten de keuze maken, maar ook in welke 
+# periode studenten van voorkeur veranderen. Op basis van deze analyse kan de 
+# opleidingsdirecteur onderzoeken op welk moment in het jaar er behoefte is aan 
+# voorlichting over de verschillende specialisaties in de bachelor Psychologie.# 
 
 # Seed om te reproduceren
 set.seed(12345)
@@ -14,80 +21,129 @@ Studentnummer <- rep(Studentnummer_uniek, times = 5)
 Studentnummer <- as.factor(Studentnummer)
 
 ## Maak periode
-Periode <- c(rep("P1", 60), rep("P2", 60), rep("P3", 60),
+Onderwijsperiode <- c(rep("P1", 60), rep("P2", 60), rep("P3", 60),
              rep("P4", 60), rep("P5", 60))
 
-## Maak keuze voor bibliotheken
+## Maak keuze voor specialisatie
 
-# Maak verdelingen aantal bibliotheken per periode
-Bibliotheken_P1 <- c(rep("Bieb1", 20), rep("Bieb2", 20), rep("Bieb3", 20))
-Bibliotheken_P2 <- c(rep("Bieb1", 30), rep("Bieb2", 20), rep("Bieb3", 10))
-Bibliotheken_P3 <- c(rep("Bieb1", 40), rep("Bieb2", 10), rep("Bieb3", 10))
-Bibliotheken_P4 <- c(rep("Bieb1", 40), rep("Bieb2", 15), rep("Bieb3", 5))
-Bibliotheken_P5 <- c(rep("Bieb1", 45), rep("Bieb2", 10), rep("Bieb3", 5))
+# Maak verdelingen aantal specialisaties per periode
+Specialisatie_P1 <- c(rep("KNP", 20), rep("SP", 20), rep("AOP", 20))
+Specialisatie_P2 <- c(rep("KNP", 30), rep("SP", 20), rep("AOP", 10))
+Specialisatie_P3 <- c(rep("KNP", 40), rep("SP", 10), rep("AOP", 10))
+Specialisatie_P4 <- c(rep("KNP", 40), rep("SP", 15), rep("AOP", 5))
+Specialisatie_P5 <- c(rep("KNP", 45), rep("SP", 10), rep("AOP", 5))
 
-# Hussel de bibliotheken door elkaar door indexen te simuleren van 0 tot 60
+# Hussel de Specialisatie door elkaar door indexen te simuleren van 0 tot 60
 Indexen_P1 <- sample.int(60, 60) 
 Indexen_P2 <- sample.int(60, 60) 
 Indexen_P3 <- sample.int(60, 60) 
 Indexen_P4 <- sample.int(60, 60) 
 Indexen_P5 <- sample.int(60, 60) 
 
-# Voeg bibliotheken en indexen samen in een vector
-Bibliotheek <- c(Bibliotheken_P1[Indexen_P1], Bibliotheken_P2[Indexen_P2], 
-                 Bibliotheken_P3[Indexen_P3], Bibliotheken_P4[Indexen_P4], 
-                 Bibliotheken_P5[Indexen_P5])
+# Voeg Specialisatie en indexen samen in een vector
+Specialisatie <- c(Specialisatie_P1[Indexen_P1], Specialisatie_P2[Indexen_P2], 
+                 Specialisatie_P3[Indexen_P3], Specialisatie_P4[Indexen_P4], 
+                 Specialisatie_P5[Indexen_P5])
 
 # Maak een dataset
-Data_bibliotheken <- data.frame(Studentnummer, Periode, Bibliotheek)
+Data_Specialisatie <- data.frame(Studentnummer, Onderwijsperiode, Specialisatie)
+
+rm(Studentnummers_opties, Studentnummer_uniek, Studentnummer, Onderwijsperiode,
+   Specialisatie_P1, Specialisatie_P2, Specialisatie_P3, Specialisatie_P4,
+   Specialisatie_P5, Indexen_P1, Indexen_P2, Indexen_P3, Indexen_P4,
+    Indexen_P5, Specialisatie)
+
 
 
 #### Analyse
 
-library(brms)
-library(MCMCglmm)
+# library(brms)
 
-fit <- brm(formula = Bibliotheek ~ (1 | Studentnummer), 
-           data = Data_bibliotheken, family = "categorical",
-           seed = 12345)
+# fit1 <- brm(formula = Specialisatie ~ (1 | Studentnummer), 
+#            data = Data_Specialisatie, family = "categorical",
+#            seed = 12345, save_all_pars = TRUE)
 
-fit <- MCMCglmm(fixed = Bibliotheek ~ 1, random = ~Studentnummer, data = Data_bibliotheken,
-                                     family = "categorical")
+# fit1
 
+# fit2 <- brm(formula = Specialisatie ~ Periode + (1 | Studentnummer), 
+#            data = Data_Specialisatie, family = "categorical",
+#            seed = 12345, save_all_pars = TRUE)
 
+# fit2# 
+# 
 
-pkgbuild::has_build_tools(debug = TRUE)
+# WAIC(fit1)
 
-## CMH test
-
-mantelhaen.test(Data_bibliotheken$Bibliotheek, Data_bibliotheken$Periode,
-                Data_bibliotheken$Studentnummer, exact = TRUE, correct = TRUE)
-
-?mantelhaen.test
-
-### post hoc
-
-library(rcompanion)
-
-pairwiseMcnemar(Bibliotheek ~ Periode | Studentnummer, data = Data_bibliotheken,
-                test = "mcnemar", correct = FALSE)
-
-# niks significant
-
-# test los paar
-
-subset <- Data_bibliotheken[Data_bibliotheken$Periode %in% c("P1", "P5"),]
-mcnemar.test(Data_bibliotheken$Bibliotheek[Data_bibliotheken$Periode == "P1"],
-             Data_bibliotheken$Bibliotheek[Data_bibliotheken$Periode == "P5"],
-             correct = TRUE)
-
-table(Data_bibliotheken$Bibliotheek[Data_bibliotheken$Periode == "P1"],
-             Data_bibliotheken$Bibliotheek[Data_bibliotheken$Periode == "P5"])
-table(subset$Bibliotheek, subset$Periode)
+# llfit1 <- log_lik(fit1)
+# lfit1 <- exp(llfit1)
+# mean_lfit1 <- colMeans(lfit1)
+# log_mean_lfit <- log(mean_lfit1)
+# log_mean_lfit1_tot <- sum(log_mean_lfit)
 
 
-table(Data_bibliotheken$Bibliotheek, Data_bibliotheken$Periode)
+# llfit1 <- sum(log(colMeans(exp(log_lik(fit1)))))
+# llfit2 <- sum(log(colMeans(exp(log_lik(fit2)))))
 
+# chi2 <- -2 * (llfit1 - llfit2)
+# 1 - pchisq(chi2, df = 8)
+
+
+
+#pkgbuild::has_build_tools(debug = TRUE)
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
+#
+#
+#
+#
+#
+
+#
+#
+
+#
+
+#
+
+#
+#
+#
+
+#
+
+#
+
+#
+#
+
+#
+
+#
+
+#
+#
+#
+#
+
+#
+#
+#
+
+
+#
+#
 
 
 ## OUD

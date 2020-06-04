@@ -32,6 +32,7 @@
 
 ## Bepaal de gebruikte packages
 Gebruikte_packages <- c(
+    "brms",
     "car",
     "checkmate",
     "dplyr",

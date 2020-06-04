@@ -54,7 +54,6 @@ rm(Studentnummers_opties, Studentnummer_uniek, Studentnummer, Onderwijsperiode,
     Indexen_P5, Specialisatie)
 
 
-
 #### Analyse
 
 # library(brms)
@@ -87,6 +86,10 @@ rm(Studentnummers_opties, Studentnummer_uniek, Studentnummer, Onderwijsperiode,
 # chi2 <- -2 * (llfit1 - llfit2)
 # 1 - pchisq(chi2, df = 8)
 
+
+### Links
+
+# https://bookdown.org/ajkurz/Statistical_Rethinking_recoded/overfitting-regularization-and-information-criteria.html
 
 
 #pkgbuild::has_build_tools(debug = TRUE)

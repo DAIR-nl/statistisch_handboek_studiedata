@@ -24,6 +24,7 @@
 ## 12-02-2020: TB: Controle consistentie namen + Review kolommen
 ## 22-02-2020: TB: Toevoeging sitemap + google bestanden
 ## 08-03-2020: TB: Locatie van het aanmaken van images naar voren gehaald
+## 11-06-2020: EG: Nieuwe toetsen aan tibble toegevoed
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -46,10 +47,10 @@ dfToetsen <- tribble(
     "04 Repeated measures ANOVA",                                                               "1",          "0",       "0",               "0",       
     "05 One-way ANOVA",                                                                         "1",          "0",       "1",               "0",       
     "06 Tekentoets I",                                                                          "1",          "0",       "0",               "0",       
-    "07 Wilcoxon signed rank toets I",                                                          "1",          "0",       "1",               "0",       
+    "07 Wilcoxon signed rank toets I",                                                          "1",          "1",       "1",               "0",       
     "08 Mann-Whitney U toets I",                                                                "1",          "0",       "0",               "0",       
     "09 Friedmans ANOVA I",                                                                     "1",          "0",       "0",               "0",       
-    "10 Kruskal Wallis toets I",                                                                "1",          "0",       "1",               "0",       
+    "10 Kruskal Wallis toets I",                                                                "1",          "1",       "1",               "0",       
     "11 Chi-kwadraat toets voor goodness of fit en binomiaaltoets",                             "1",          "0",       "0",               "0",       
     "12 McNemar toets I",                                                                       "1",          "0",       "0",               "0",       
     "13 Chi-kwadraat toets voor onafhankelijkheid en Fishers exact toets",                      "1",          "0",       "1",               "0",       
@@ -59,14 +60,14 @@ dfToetsen <- tribble(
     "17 Chi-kwadraat toets voor goodness of fit en multinomiaaltoets",                          "0",          "0",       "0",               "0",       
     "18 McNemar toets II",                                                                      "0",          "0",       "0",               "0",      
     "19 Chi-kwadraat toets voor onafhankelijkheid en Fisher-Freeman-Halton exact toets II",     "0",          "0",       "0",               "0",       
-    "20 Multilevel multinomiale logistische regressie",                                         "0",          "0",       "0",               "0",       
+    "20 Multilevel multinomiale logistische regressie",                                         "1",          "0",       "0",               "0",       
     "21 Chi-kwadraat toets voor onafhankelijkheid en Fisher-Freeman-Halton exact toets III",    "0",          "0",       "0",               "0",       
     "22 Wilcoxon signed rank toets II",                                                         "0",          "0",       "0",               "0",       
     "23 Mann-Whitney U toets II",                                                               "0",          "0",       "0",               "0",       
     "24 Friedmans ANOVA II",                                                                    "0",          "0",       "0",               "0",       
     "25 Kruskal Wallis toets II",                                                               "0",          "0",       "0",               "0",       
     "26 Tekentoets II",                                                                         "1",          "0",       "0",               "0",       
-    "27 Mood's mediaan toets",                                                                  "0",          "0",       "0",               "0",       
+    "27 Moods mediaan toets",                                                                   "1",          "0",       "0",               "0",       
 )
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

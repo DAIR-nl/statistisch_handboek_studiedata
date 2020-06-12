@@ -57,11 +57,12 @@ Achter iedere ‘tegel’ bevindt zich een uitleg van de regels om een toets te 
 
 **Externe review**
 
-* Aswin van Oijen, Tilburg University
 * Bram Enning, Hogeschool Leiden
-* Martine Baars, Erasmus Universiteit, School of Social and Behavioural Sciences
-* Tsjerk Wassenaar, Hanzehogeschool Groningen
 * Dirk Tempelaar, Maastricht University
+* Victoria Smit, Universiteit Leiden
+* Martine Baars, Erasmus Universiteit
+* Tsjerk Wassenaar, Hanzehogeschool Groningen
+* Aswin van Oijen, Tilburg University
 
 **Bijzondere dank aan**
 

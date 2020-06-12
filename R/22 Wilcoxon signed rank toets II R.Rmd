@@ -1,0 +1,281 @@
+---
+title: "Wilcoxon signed rank toets"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+    includes:
+      in_header: ["../01. Includes/html/nocache.html", "../01. Includes/html/favicon.html", "../01. Includes/html/analytics.html"]
+  keywords: [statistisch handboek, studiedata]
+---
+
+<!-- ## CLOSEDBLOK: Functies.R -->
+```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
+library(here)
+if (!exists("Substitute_var")) {
+  ## Installeer packages en functies
+  source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
+}
+```
+<!-- ## /CLOSEDBLOK: Functies.R -->
+
+<!-- ## CLOSEDBLOK: CSS -->
+<style>
+`r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
+</style>
+<!-- ## /CLOSEDBLOK: CSS -->
+
+<!-- ## CLOSEDBLOK: Header.R -->
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Header.R -->
+
+<!-- ## CLOSEDBLOK: Status.R -->
+```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Status.R -->
+
+<!-- ## OPENBLOK: Data-aanmaken.R -->
+```{r aanmaken data, include=FALSE, echo=TRUE}
+source(paste0(here::here(),"/01. Includes/data/22.R"))
+```
+<!-- ## /OPENBLOK: Data-aanmaken.R -->
+
+# Toepassing
+Gebruik de *Wilcoxon signed rank toets* om te toetsen of twee gepaarde groepen van elkaar verschillen op een ordinale variabele. Een alternatief voor een vergelijking van twee groepen op een ordinale variabele is de *McNemar toets*. Bij de *McNemar toets* wordt echter geen rekening gehouden met de ordening van de categorieën van de ordinale variabele: de variabele wordt behandeld als een nominale variabele.
+
+# Onderwijscasus
+<div id ="casus">
+De hoofddocent van het vak ‘Speech schrijven’ van de bachelor Politicologie is benieuwd naar de effectiviteit van zijn eigen vak. Daarom laat hij studenten bij de eerste bijeenkomst van het vak een speech schrijven die zij beoordeeld als onvoldoende, voldoende, goed of uitstekend. Gedurende het vak leren studenten het schrijven van speeches vanuit verschillende perspectieven. Aan het einde van het vak schrijven studenten wederom een speech die op dezelfde wijze door de hoofddocent beoordeeld wordt. Op deze manier kan hij onderzoeken of zijn lessen ervoor zorgen dat studenten beter worden in het schrijven van speeches.
+
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+
+*H~0~*: Er is geen verschil tussen de (som van rangschikkingen van de) beoordelingen van de speeches geschreven door studenten aan het begin en aan het eind van het vak.
+
+*H~A~*: Er is een verschil tussen de (som van rangschikkingen van de) beoordelingen van de speeches geschreven door studenten aan het begin en aan het eind van het vak. De beoordelingen zijn hoger voor een van de twee meetmomenten.
+ 
+</div>
+
+# Assumpties
+
+Het meetniveau van de afhankelijke variabele is ordinaal[^10] of continu.[^1] In deze toetspagina staat een casus met ordinale data centraal; een casus met continue data is te vinden in [een andere toetspagina](07-Wilcoxon-signed-rank-toets-I-R.html).
+
+Om de *Wilcoxon signed rank toets* uit te voeren met een ordinale afhankelijke variabele, moet deze variabele omgezet worden in getallen. Wanneer er vier categorieën zijn, worden ze genummerd van 1 tot en met 4 op basis van de ordening van de variabele. De categorieën onvoldoende, voldoende, goed en uitstekend worden dan omgezet in 1, 2, 3 en 4 respectievelijke. Met behulp van deze getallen worden verschilscores berekend per observatie-eenheid. Een persoon die van voldoende naar uitstekend gaat, krijgt als verschilscore 2. Hierbij wordt impliciet aangenomen dat de afstand tussen alle categorieën even groot is. In andere woorden, het verschil tussen onvoldoende en voldoende is even groot als het verschil tussen voldoende en goed en tussen goed en uitstekend. Bij de *McNemar toets* wordt deze aanname niet gedaan, maar wordt de ordinale variabele als nominaal beschouwd. De *Wilcoxon signed rank toets* maakt een rangschikking van de absolute waarden van de verschilscores en telt vervolgens de rangschikkingen op voor de positieve en negatieve verschilscores. Het verschil tussen de som van de positieve en negatieve rangschikkingen bepaalt de significantie van de toets.  
+
+# Effectmaat
+
+De p-waarde geeft aan of een (mogelijk) verschil tussen twee groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^6] 
+
+De *Wilcoxon signed rank toets* heeft als effectmaat *r*. Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^8] De effectmaat *r* wordt voor de *Wilcoxon signed rank toets* berekend door de *z*-waarde behorend bij de p-waarde van de toets te delen door de wortel van het aantal observatie-eenheden, i.e. $\frac{z}{\sqrt{N}}$.[^8] Een correlatie tussen twee variabelen wordt vaak ook aangeduid met symbool *r*, maar beide varianten van *r* hebben een verschillende betekenis.
+
+# Uitvoering
+
+## De data bekijken
+<!-- ## TEKSTBLOK: Data-bekijken.R -->
+Er is data ingeladen met het de beoordeling van studenten van het vak 'Speech schrijven' aan het begin en eind van het vak. Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
+<!-- ## /TEKSTBLOK: Data-bekijken.R -->
+
+<!-- ## OPENBLOK: Data-bekijken.R -->
+```{r data bekijken, collapse = TRUE}
+## Eerste 6 observaties
+head(Beoordelingen_speech_schrijven)
+
+## Laatste 6 observaties
+tail(Beoordelingen_speech_schrijven)
+```
+<!-- ## /OPENBLOK: Data-bekijken.R -->
+
+<!-- ## TEKSTBLOK: Data-kruistabel1.R -->
+Een kruistabel geeft de aantallen observaties weer voor de combinaties van de categorieën van de variabelen `Meetmoment` en `Beoordeling`. In feite laat dit zien welke beoordelingen studenten krijgen aan het begin en eind van de cursus. Maak de kruistabel met de functie `table()` met als argumenten de variabele `Beoordelingen_speech_schrijven$Meetmoment`, die weergeeft of de speech aan het begin of eind van de cursus is geschreven en de variabele `Beoordelingen_speech_schrijven$Beoordeling` die de beoordeling weergeeft.
+<!-- ## /TEKSTBLOK: Data-kruistabel1.R -->
+
+<!-- ## OPENBLOK: Data-kruistabel2.R -->
+
+```{r kruistabel}
+## Maak een kruistabel
+Beoordelingen_kruistabel <- table(Beoordelingen_speech_schrijven$Meetmoment, Beoordelingen_speech_schrijven$Beoordeling)
+
+## Bepaal volgorde van de beoordelingen
+Volgorde <- c("Onvoldoende", "Voldoende", "Goed", "Uitstekend")
+
+## Print de kruistabel 
+print(Beoordelingen_kruistabel[,Volgorde])
+
+## Print een tabel met proporties, tweede argument 2 zorgt ervoor dat de 
+## proporties per kolom berekend worden
+prop.table(Beoordelingen_kruistabel[,Volgorde], 1)
+```
+<!-- ## /OPENBLOK: Data-kruistabel2.R -->
+
+De kruistabel laat zien dat er aan het eind van het vak meer speeches als goed en uitstekend worden beoordeeld en minder speeches als onvoldoende of voldoende. Dit is ook te zien in de kruistabel met proporties.
+
+Naast de kruistabel, is de confusiematrix ook relevant om te bekijken. Bij een confusiematrix worden de beoordelingen van studenten tegen elkaar uitgezet voor het begin en eind van de cursus. la daarom de variabele `Beoordeling` apart op in twee vectoren: een voor het begin van het vak en een voor het eind. Maak daarna de confusiematrix.
+
+<!-- ## OPENBLOK: Data-beschrijven.R -->
+```{r data aanmaken}
+## Definieer de groepen
+Begin <- Beoordelingen_speech_schrijven$Beoordeling[Beoordelingen_speech_schrijven$Meetmoment == "Begin"]
+Eind <- Beoordelingen_speech_schrijven$Beoordeling[Beoordelingen_speech_schrijven$Meetmoment == "Eind"]
+
+## Bepaal volgorde van de beoordelingen
+Volgorde <- c("Onvoldoende", "Voldoende", "Goed", "Uitstekend")
+
+## Maak een confusiematrix
+Beoordelingen_confusiematrix <- table(Begin, Eind)
+
+## Print de confusiematrix 
+print(Beoordelingen_confusiematrix[Volgorde, Volgorde])
+```
+<!-- ## /OPENBLOK: Data-beschrijven.R -->
+
+De confusiematrix geeft informatie over de verschillen tussen de beoordelingen aan het begin en eind van het vak. Er zijn bijvoorbeeld 19 studenten die aan het begin goed als beoordeling ontvingen en aan het eind de beoordeling uitstekend.
+
+
+## De data visualiseren
+
+Maak een histogram om de verdeling van de bruto jaarinkomens van de alumni één jaar en vijf jaar na afstuderen visueel weer te geven.[^11]
+
+<!-- ## OPENBLOK: Histogram1.R -->
+```{r histogram, warnings=FALSE, message=FALSE}
+## Histogram met ggplot2
+library(ggplot2)
+
+ggplot(Beoordelingen_speech_schrijven,
+  aes(x = Inkomen)) +
+  geom_histogram(color = "grey30",
+                 fill = "#0089CF") +
+  facet_wrap(~ Meetmoment, labeller = labeller(Meetmoment = c(T1 = "Een jaar na afstuderen", T2 = "Vijf jaar na afstuderen"))) +
+  ylab("Frequentie") +
+  labs(title = "Bruto jaarinkomen alumni Mens & Maatschappij")
+```
+<!-- ## /OPENBLOK: Histogram1.R -->
+
+Op beide meetmomenten is te zien dat de meeste alumni tussen de 0 en €60.000 euro per jaar verdienen en dat een paar alumni hier ver boven zit. Beide verdelingen hebben één top, maar zijn niet symmetrisch door de lange staart aan de rechterkant van de verdeling. Beide verdeling lijken qua vorm en spreiding sterk op elkaar.
+
+Maak vervolgens een histogram van de verschilscores om te onderzoeken of deze verdeling symmetrisch is.
+
+
+<!-- ## OPENBLOK: Histogram2.R -->
+```{r histogram2, warnings=FALSE, message=FALSE}
+# Maak een dataset met de verschilscores
+Alumni_verschilscores <- data.frame(Verschilscores = Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T2"] - Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T1"])
+
+## Histogram met ggplot2
+library(ggplot2)
+
+ggplot(Alumni_verschilscores,
+  aes(x = Verschilscores)) +
+  geom_histogram(color = "grey30",
+                 fill = "#0089CF") +
+  geom_density(alpha = .2, adjust = 1) +
+  ylab("Frequentiedichtheid") +
+  labs(title = "Verschilscores bruto jaarinkomen alumni Mens & Maatschappij")
+```
+<!-- ## /OPENBLOK: Histogram2.R -->
+
+De verdeling van de verschilscores bevat voornamelijk positieve waarden en een paar negatieve waarden; de meeste alumni zijn er dus in bruto jaarinkomen op vooruitgegaan. De verdeling heeft een lange staart aan de rechterkant en is dus niet symmetrisch. Gebruik de *Wilcoxon signed rank toets* dus niet om een uitspraak te doen over het verschil in medianen.
+
+
+
+## Wilcoxon signed rank toets
+<!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
+Voer de *Wilcoxon signed rank toets* uit om de vraag te beantwoorden of de verdeling van de bruto jaarinkomens van alumni verschillend is voor de inkomens één jaar en vijf jaar na afstuderen. Gebruik de functie `wilcox.test()` met als eerste argument `Inkomen ~ Meetmoment` waarin `Inkomen` de afhankelijke variabele is en `Meetmoment` de onafhankelijke variabele is die twee meetmomenten aangeeft. Gebruik om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn het argument `paired = TRUE`.  Toets tweezijdig door het argument `alternative = "two.sided"` te gebruiken.
+<!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
+
+<!-- ## OPENBLOK: Wilcoxon-signed-rank-toets.R -->
+```{r wilcox test}
+wilcox.test(Inkomen ~ Meetmoment, Alumni_jaarinkomens, 
+            paired = TRUE, alternative = "two.sided")
+```
+<!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets.R -->
+
+<!-- ## OPENBLOK: Wilcoxon-signed-rank-toets2.R -->
+Bereken de effectmaat *r* vervolgens op basis van de p-waarde van de *Wilcoxon signed rank toets*.
+```{r effectgrootte}
+# Sla de p-waarde op
+pwaarde <- wilcox.test(Inkomen ~ Meetmoment, Alumni_jaarinkomens, 
+                       paired = TRUE, alternative = "two.sided")$p.value
+
+# Bereken de effectgrootte voor een tweezijdige toets
+r <- abs(qnorm(pwaarde/2)) / sqrt(length(Alumni_jaarinkomens_T1))
+# Bereken de effectgrootte voor een eenzijdige toets
+#r <- abs(qnorm(pwaarde)) / sqrt(length(Alumni_jaarinkomens_T1))
+
+# Print de effectgrootte
+paste("De effectmaat is", r)
+
+```
+<!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets2.R -->
+
+Bereken de aantallen en de sommen van positieve en negatieve rangschikkingen op basis van de verschilscores.
+
+<!-- ## OPENBLOK: Wilcoxon-signed-rank-toets3.R -->
+```{r sommen, collapse = TRUE}
+# Bereken verschilscores
+Verschilscores <- Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T2"] - Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T1"]
+
+# Rangschik de absolute waarden van verschilscores
+Rangschikkingen <- rank(abs(Verschilscores))
+
+# Maak een vector met daarin de tekens (plus of min) van verschilscores)
+Tekens <- sign(Verschilscores)
+
+# Bereken het aantal en de som van de positieve rangschikkingen
+N_positief <- length(Tekens[Tekens == 1])
+Som_positief <- sum(Rangschikkingen[Tekens == 1])
+
+# Bereken het aantal en de som van de negatieve rangschikkingen
+N_negatief <- length(Tekens[Tekens == -1])
+Som_negatief <- sum(Rangschikkingen[Tekens == -1])
+
+# Print de resultaten
+N_positief
+Som_positief
+N_negatief
+Som_negatief
+
+```
+<!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets3.R -->
+
+
+<!-- ## CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
+```{r wilcox test als object, include=FALSE, echo=TRUE}
+wilcox <- wilcox.test(Inkomen ~ Meetmoment, Alumni_jaarinkomens, paired = TRUE, alternative = "two.sided")
+vVstatistic <- Round_and_format(wilcox$statistic)
+```
+<!-- ## /CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
+
+<!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets4.R -->
+* *V* = `r vVstatistic`, *p* < 0,0001 , *r* = `r Round_and_format(r)`
+* p-waarde < 0,05, dus de H~0~ wordt verworpen[^9]
+* De toetsstatistiek *V* is in deze casus gelijk aan de som van de negatieve rangschikkingen
+* Het aantal positieve rangschikkingen is `r N_positief`; de som is `r format(round(Som_positief), scientific = FALSE)`
+* Het aantal negatieve rangschikkingen is `r N_negatief`; de som is `r round(Som_negatief)`
+* De som van de positieve rangschikkingen is hoger dan de som van de negatieve rangschikkingen. De verdeling van de bruto jaarinkomens bevat dus hogere waarden vijf jaar na afstuderen.
+* Effectmaat is `r Round_and_format(r)`, dus een groot effect
+
+
+<!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets4.R -->
+
+# Rapportage
+<!-- ## TEKSTBLOK: Rapportage.R -->
+De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de verdeling van het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij verschillend is voor de inkomens één jaar na afstuderen en vijf jaar na afstuderen. De resultaten van de toets laten zien dat er een significant verschil is tussen het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij één jaar en vijf jaar na afstuderen, *V* = `r vVstatistic`, *p* < 0,0001, *r* = `r Round_and_format(r)`. Er zijn `r N_positief` alumni die vijf jaar na afstuderen meer verdienen dan één jaar na afstuderen (som van rangschikkingen is `r format(round(Som_positief), scientific = FALSE)`) en er zijn `r N_negatief` alumni die vijf jaar na afstuderen minder verdienen dan één jaar na afstuderen (som van rangschikkingen is `r Som_negatief`). Alumni lijken dus meer te verdienen wanneer ze vijf jaar afgestudeerd zijn.
+<!-- ## /TEKSTBLOK: Rapportage.R -->
+
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
+```
+<!-- ## /CLOSEDBLOK: Footer.R -->
+
+[^1]: Laerd Statistics (2018). *Wilcoxon Signed-Rank Test using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/wilcoxon-signed-rank-test-using-spss-statistics.php
+[^3]: Statistics How To (27 mei 2018). *One Sample Median Test*. [Statistics How to](https://www.statisticshowto.datasciencecentral.com/one-sample-median-test/).
+[^4]: Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese waar is.  
+[^5]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage.
+[^6]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
+[^8]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
+[^9]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
+[^10]: Een ordinale variabele is een categorische variabele waarbij de categorieën geordend kunnen worden. Een voorbeeld is de variabele beoordeling met de categorieën Onvoldoende, Voldoende, Goed en Uitstekend.
+[^11]: De breedte van de staven van het histogram worden hier automatisch bepaald, maar kunnen handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.

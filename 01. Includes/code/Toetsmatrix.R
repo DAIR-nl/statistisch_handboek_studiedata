@@ -23,6 +23,8 @@
 ## 13-02-2020: TB: Afhankelijk gemaakt van de sModus (wissel tussen R of Python)
 ## 22-02-2020: TB: Verbetering dat bij 2 links in 1 box deze onafhankelijke van 
 ## elkaar zijn in te stellen
+## 11-06-2020: EG: Veranderingen toetsmatrix (onafhankelijke en afhankelijke
+## variabele)
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -135,8 +137,8 @@ maak_html_toetscel_combi <- function(published_1, sToets_1,
 maak_html_r1 <- function() {
   htmltools::withTags(
     tr(
-      td(rowspan = 5, class = "header1 innercell", "Type data"),
-      td(rowspan = 2, class = "header2 innercell", "numeriek",tags$br(),"(continu)"),
+      td(rowspan = 5, class = "header1 innercell", "Afhankelijke variabele"),
+      td(rowspan = 2, class = "header2 innercell", "continu",tags$br(),"(interval en ratio)"),
       td(class = "header3 innercell", "normaal",tags$br(),"verdeeld"),
       ## Toets 01 tm 05
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[1,]$InGebruik)),  
@@ -196,7 +198,7 @@ maak_html_r2 <- function() {
 maak_html_r3 <- function() {
   htmltools::withTags(
     tr(
-      td(rowspan = 3, class = "header2 innercell", "categorisch",tags$br(),"(discreet)"),
+      td(rowspan = 3, class = "header2 innercell", "categorisch",tags$br(),""),
       td(class = "header3 innercell", "binair", tags$br(), "(2 waarden)"),
       ## Toets 11 tm 15
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[11,]$InGebruik)),  

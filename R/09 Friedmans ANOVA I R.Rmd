@@ -51,7 +51,7 @@ source(paste0(here::here(),"/01. Includes/data/09.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik *Friedman's ANOVA* om verdelingen te vergelijken van een groep bij drie of meer herhaalde metingen of om drie of meer gepaarde groepen te vergelijken.[^1]<sup>, </sup>[^2] *Friedman's ANOVA* is een alternatief voor de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) wanneer de data niet aan de assumptie van normaliteit voldoet. Daarnaast hebben uitbijters minder invloed op het resultaat van *Friedman's ANOVA* in vergelijking tot de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html). Echter, als de data aan de assumpties van de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) voldoet, heeft die toets een hoger onderscheidend vermogen dan *Friedman's ANOVA*.[^3]
+Gebruik *Friedman's ANOVA* om de gemiddelde rangschikking van de verdelingen te vergelijken voor drie of meer herhaalde metingen van één groep of voor drie of meer gepaarde groepen.[^1]<sup>, </sup>[^2] *Friedman's ANOVA* is een alternatief voor de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) wanneer de data niet aan de assumptie van normaliteit voldoet. Daarnaast hebben uitbijters minder invloed op het resultaat van *Friedman's ANOVA* in vergelijking tot de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html). Echter, als de data aan de assumpties van de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) voldoet, heeft die toets een hoger onderscheidend vermogen dan *Friedman's ANOVA*.[^3]
 
 
 
@@ -62,10 +62,10 @@ De vastgoedmanager van de  Facultaire Dienst (FD) van een hogeschool is nieuwsgi
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
 
-*H~0~*: De verdelingen van de beoordelingen van studenten zijn hetzelfde voor de eetgelegenheid in het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt.
+*H~0~*: De gemiddelde rangschikking van de verdelingen van de beoordelingen van studenten is hetzelfde voor de eetgelegenheid in het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt.
 
 
-*H~A~*: De verdelingen van de beoordelingen van studenten zijn niet hetzelfde voor de eetgelegenheid in het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt
+*H~A~*: De gemiddelde rangschikking van de verdelingen van de beoordelingen van studenten is niet hetzelfde voor de eetgelegenheid in het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt
 
 </div>
 
@@ -176,7 +176,7 @@ vQ3_CC <- Round_and_format(x[4,5])
 
 ## Histogram
 
-Geef de verdeling van de beoordelingen per gebouw visueel weer met een histogram.
+Geef de verdeling van de beoordelingen per gebouw visueel weer met een histogram.[^12]
 
 <!-- ## OPENBLOK: Histogram.R -->
 ```{r histogram}
@@ -216,7 +216,7 @@ friedman.test(y = Beoordelingen_eetgelegenheden$Beoordeling,
 
 <!-- ## CLOSEDBLOK: ANOVA-toets.R -->
 ```{r ANOVA als object, echo=FALSE}
-obj <-friedman.test(y = Beoordelingen_eetgelegenheden$Beoordeling, 
+obj <- friedman.test(y = Beoordelingen_eetgelegenheden$Beoordeling, 
               groups = Beoordelingen_eetgelegenheden$Eetgelegenheid,
               blocks = Beoordelingen_eetgelegenheden$Studentnummer)
 vChi2 <- Round_and_format(obj$statistic)
@@ -407,3 +407,4 @@ Post-hoc toetsen met een Bonferroni correctie voor meerdere toetsen zijn uitgevo
 [^11]: De effectmaat *r* wordt voor de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html) berekend door de
 *z*-waarde behorend bij de *p*-waarde van de toets te delen door de wortel van
 het aantal observatie-eenheden, i.e. $\frac{z}{\sqrt{N}}$.
+[^12]: De breedte van de staven van het histogram worden hier automatisch bepaald, maar kunnen handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.

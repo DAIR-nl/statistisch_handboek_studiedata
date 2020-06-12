@@ -51,7 +51,7 @@ Gebruik de *Chi-kwadraat toets voor goodness of fit* om te onderzoeken of de geo
 
 # Onderwijscasus
 <div id = "casus">
-De controller van een Universiteit is geïnteresseerd in de instroom van studenten met een hbo vooropleiding. Zij wil weten of haar Universiteit relatief veel studenten met een vooropleiding in het hbo heeft in vergelijking met het landelijke gemiddelde. Op de website van de VSNU vindt ze dat studenten met een hbo vooropleiding in het hbo 11,13% uitmaken van de totale instroom voor Bachelors en Masters in het wetenschappelijk onderwijs (wo) in 2018.[^2] Ze wil weten of er op haar instelling naar verhouding evenveel hbo-studenten zijn als het landelijk gemiddelde.
+De controller van een universiteit is geïnteresseerd in de instroom van studenten met een hbo vooropleiding. Zij wil weten of haar Universiteit relatief veel studenten met een vooropleiding in het hbo heeft in vergelijking met het landelijke gemiddelde. Op de website van de VSNU vindt ze dat studenten met een hbo vooropleiding 11,13% uitmaken van de totale instroom voor Bachelors en Masters in het wetenschappelijk onderwijs (wo) in 2018.[^2] Ze wil weten of er op haar instelling naar verhouding evenveel hbo-studenten zijn als het landelijk gemiddelde.
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
 
@@ -135,11 +135,6 @@ Gebruik de functie `chisq.test()` met als argumenten de tabel met daarin de hoev
 Tabel <- table(Instroom_2018_totaal$hbo_vooropleiding)
 # Voer de toets uit
 chisq.test(Tabel, p = c(0.1113, 1 - 0.1113))
-
-prop.test(x = length(Instroom_2018_totaal$hbo_vooropleiding[Instroom_2018_totaal$hbo_vooropleiding == "ja"]), 
-          n = length(Instroom_2018_totaal$hbo_vooropleiding), 
-          p = 0.1113,
-          alternative = "two.sided")
 ```
 <!-- ## /OPENBLOK: Chi-kwadraat2.R-->
 

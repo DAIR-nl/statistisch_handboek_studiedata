@@ -54,7 +54,7 @@ Gebruik *multilevel multinomiale logistische regressie* om te toetsen of er vers
 # Onderwijscasus
 <div id = "casus">
 
-In de bachelor Psychologie kiezen studenten aan het einde van het eerste jaar een specialisatie voor jaar 2 en 3. Hierbij kunnen studenten kiezen uit de richtingen Klinische Neuropsychologie (KNP), Sociale Psychologie (SP), en Arbeids- en Organisatiepsychologie (AOP). De opleidingsdirecteur wilt onderzoeken op welk moment in het eerste studiejaar studenten ontdekken welke specialisatie zij willen doen. Daarom start zij een experiment waarin ze aan een groep eerstejaars studenten vraagt om na elke onderwijsperiode aan te geven welke specialisatie ze op dat moment zouden kiezen. Met dit experiment kan zij ontdekken op welk moment in het eerste studiejaar studenten de keuze maken, maar ook in welke periode studenten van voorkeur veranderen. Op basis van deze analyse kan de opleidingsdirecteur onderzoeken op welk moment in het jaar er behoefte is aan voorlichting over de verschillende specialisaties in de bachelor Psychologie. 
+In de bachelor Psychologie kiezen studenten aan het einde van het eerste jaar een specialisatie voor jaar 2 en 3. Hierbij kunnen studenten kiezen uit de richtingen Klinische Neuropsychologie (KNP), Sociale Psychologie (SP), en Arbeids- en Organisatiepsychologie (AOP). De opleidingsdirecteur wil onderzoeken op welk moment in het eerste studiejaar studenten ontdekken welke specialisatie zij willen doen. Daarom start zij een experiment waarin ze aan een groep eerstejaars studenten vraagt om na elke onderwijsperiode aan te geven welke specialisatie ze op dat moment zouden kiezen. Met dit experiment kan zij ontdekken op welk moment in het eerste studiejaar studenten de keuze maken, maar ook in welke periode studenten van voorkeur veranderen. Op basis van deze analyse kan de opleidingsdirecteur onderzoeken op welk moment in het jaar er behoefte is aan voorlichting over de verschillende specialisaties in de bachelor Psychologie. 
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
 
@@ -66,9 +66,9 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 # Multilevel multinomiale logistische regressie
 
-*Multilevel multinomiale logistische regressie* is een techniek waarbij een nominale afhankelijke variabele wordt voorspeld met behulp van één of meerdere onafhankelijke variabelen.[^1] De term *multilevel* houdt in dat rekening wordt gehouden met de hiërarchische structuur in de data. Elke student wordt gemeten in vijf onderwijsperiodes, wat betekent dat de observaties onderdeel zijn van de student. Om met deze hierarchie rekening te houden, wordt de multilevel variant van *multinomiale logistische regressie* uitgevoerd.[^1]<sup>,</sup>[^12]<sup>,</sup>[^13]
+*Multilevel multinomiale logistische regressie* is een techniek waarbij een nominale afhankelijke variabele wordt voorspeld met behulp van één of meerdere onafhankelijke variabelen.[^1] De term *multilevel* houdt in dat rekening wordt gehouden met de hiërarchische structuur in de data. Elke student wordt gemeten in vijf onderwijsperiodes, wat betekent dat de observaties gekoppeld zijn aan een bepaalde student. Om met deze hiërarchie rekening te houden, wordt de multilevel variant van *multinomiale logistische regressie* uitgevoerd.[^1]<sup>,</sup>[^12]<sup>,</sup>[^13]
 
-Om de hypothese te toetsen dat er geen afhankelijkheid bestaat tussen de keuze voor een specialisatie en de onderwijsperiodes worden twee regressiemodellen geschat. In de eerste vergelijking wordt de afhankelijke variabele specialisatie voorspeld met behulp van een student specifieke intercept. Reden hiervoor is dat er op deze manier gecontroleerd wordt voor het feit dat de observaties onderdeel zijn van de student, i.e. de hiërarchische structuur van de data. Het eerste model noemt men het *intercept-only model* en is als volgt geformuleerd[^2]:
+Om de hypothese te toetsen dat er geen afhankelijkheid bestaat tussen de keuze voor een specialisatie en de onderwijsperiodes worden twee regressiemodellen geschat. In de eerste vergelijking wordt de afhankelijke variabele specialisatie voorspeld met behulp van een student specifieke intercept. Reden hiervoor is dat er op deze manier gecontroleerd wordt voor het feit dat de observaties gekoppeld zijn aan een bepaalde student, i.e. de hiërarchische structuur van de data. Het eerste model noemt men het *intercept-only model* en is als volgt geformuleerd[^2]:
 
 $$ Specialisatie_{it} = \beta_{0i} + e_{it}$$
 
@@ -81,7 +81,7 @@ met $t$ als indicator van de onderwijsperiode, $i$ als indicator van de student,
 
 Model 1 en model 2 zijn geneste modellen. Bij geneste modellen is het ene model te schrijven als een versie van het andere model na het verwijderen van een aantal predictors. In deze casus zijn beide modellen genest, omdat model 1 te schrijven is als een versie van model 2 na het verwijderen van alle onderwijsperiodes uit de regressie-vergelijking van model 2. Het model waarbij de predictors verwijderd zijn, wordt als het ware gereduceerd. Daarom wordt dit het gereduceerde model genoemd. Het model waar de predictors niet verwijderd zijn, wordt het uitgebreide model genoemd. Model 1 is dus het gereduceerde model; model 2 het uitgebreide model.[^11]
 
-De hypothese van afhankelijkheid tussen de keuze voor een specialisatie en de onderwijsperiodes wordt getoetst door beide modellen met elkaar te vergelijken met een *likelihood ratio toets*. Een *likelihood ratio* toets toetst of het verschil tussen twee geneste modellen significant is op basis van de log-likelihood van de modellen. De log-likelihood van een model is een maat voor de kwaliteit van het model en wordt berekend door voorspellingen en observaties te vergelijken. Deze toets wordt bij regressie-analyses gebruikt als meerdere predictors tegelijkertijd toegevoegd worden. Een niet significant resultaat bij de *likelihood ratio toets* betekent dat er geen significante verschil is tussen het gereduceerde en uitgebreide model. In andere woorden, het uitbreiden van het model is geen significante toevoeging en het gereduceerde model volstaat. Een significant resultaat bij de *likelihood ratio toets* betekent dat er wel een significant verschil is tussen het gereduceerde en uitgebreide model. In dat geval is het uitgebreide model een betere representatie van de werkelijkheid en heeft de toevoeging van predictors waarde.[^11]
+De hypothese van afhankelijkheid tussen de keuze voor een specialisatie en de onderwijsperiodes wordt getoetst door beide modellen met elkaar te vergelijken met een *likelihood ratio toets*. Een *likelihood ratio toets* toetst of het verschil tussen twee geneste modellen significant is op basis van de log-likelihood van de modellen. De log-likelihood van een model is een maat voor de kwaliteit van het model en wordt berekend door voorspellingen en observaties te vergelijken. Deze toets wordt bij regressie-analyses gebruikt als meerdere predictors tegelijkertijd toegevoegd worden. Een niet significant resultaat bij de *likelihood ratio toets* betekent dat er geen significante verschil is tussen het gereduceerde en uitgebreide model. In andere woorden, het uitbreiden van het model is geen significante toevoeging en het gereduceerde model volstaat. Een significant resultaat bij de *likelihood ratio toets* betekent dat er wel een significant verschil is tussen het gereduceerde en uitgebreide model. In dat geval is het uitgebreide model een betere representatie van de werkelijkheid en heeft de toevoeging van predictors waarde.[^11]
 
 De toetsstatistiek van de *likelihood ratio toets* is te berekenen als $- 2 * (LL_r - LL_u)$ waarin $LL_r$ de loglikelihood van het gereduceerde model is en $LL_u$ de loglikelihood van het uitgebreide model is. De toetsstatistiek volgt een chi-kwadraat verdeling met als aantal vrijheidsgraden het aantal predictors dat is verwijderd in het gereduceerde model.[^11] In dit geval zijn er vier predictors verwijderd. Echter, bij multinomiale logistische regressie moet dit getal vermenigvuldigd worden met het aantal categorieën van de afhankelijke variabele minus één.[^3] In deze casus zijn er drie categorieën (de drie specialisaties), dus wordt het aantal verwijderde predictors (vier) vermenigvuldigd met twee. Het aantal vrijheidsgraden bij de *likelihood ratio toets* is dus acht.
 
@@ -183,14 +183,20 @@ Bereken daarna de loglikelihood voor beide modellen met de zelfgemaakte functie 
 library(brms)
 ```
 ```{r, cache=TRUE, message = FALSE, results='hide'}
+# Stel model 1 op: student specifiek intercept
+Model_1 <- "Specialisatie ~ (1 | Studentnummer)"
+
+# Stel model 2 op: student specifiek intercept plus onderwijsperiodes
+Model_2 <- "Specialisatie ~ Onderwijsperiode + (1 | Studentnummer)"
+
 # Fit het gereduceerde model: student specifiek intercept
-fit1 <- brm(formula = Specialisatie ~ (1 | Studentnummer), 
+Fit_1 <- brm(formula = Model_1,
            data = Data_Specialisatie, 
            family = "categorical",
            seed = 12345, save_all_pars = TRUE)
 
 # Fit het uitgebeide model: student specifiek intercept plus onderwijsperiodes
-fit2 <- brm(formula = Specialisatie ~ Onderwijsperiode + (1 | Studentnummer), 
+Fit_2 <- brm(formula = Model_2, 
            data = Data_Specialisatie, 
            family = "categorical",
            seed = 12345, save_all_pars = TRUE)
@@ -213,8 +219,8 @@ LogLikelihood_Functie <- function(fit){
 }
 
 # Bereken de loglikelihood voor beide modellen
-Loglikelihood_Model_1 <- LogLikelihood_Functie(fit1)
-Loglikelihood_Model_2 <- LogLikelihood_Functie(fit2)
+Loglikelihood_Model_1 <- LogLikelihood_Functie(Fit_1)
+Loglikelihood_Model_2 <- LogLikelihood_Functie(Fit_2)
 
 # Bereken de toetsstatistiek van de likelihood ratio toets
 Toetsstatistiek <- -2 * (Loglikelihood_Model_1 - Loglikelihood_Model_2)
@@ -245,7 +251,7 @@ p_waarde
 ## Post-hoc toets
 
 <!-- ## TEKSTBLOK: posthoc1.R -->
-Voer post-hoc toetsen uit om te onderzoeken tussen welke onderwijsperiodes er verschillen zijn in de verdeling van de keuzes voor de specialisaties van de eerstejaars studenten Psychologie. Gebruik de [McNemar toets](12-McNemar-toets-R.html) of exacte [McNemar toets](12-McNemar-toets-R.html) als post-hoc toets. De exacte versie van de [McNemar toets](12-McNemar-toets-R.html) is nuttig om te gebruiken als het aantal observaties in de niet-diagonale elementen van de confusiematrix kleiner dan 11 is. Omdat er bij post-hoc toetsen vaak meerdere vergelijkingen gemaakt worden, is het tijdrovend om voor elke idnividuele vergelijking de confusiematrix te inspecteren. Voer daarom de [McNemar toets](12-McNemar-toets-R.html) en de exacte [McNemar toets](12-McNemar-toets-R.html) beide uit en vergelijk de significantie op beide toetsen. Als een vergelijking op de ene toets significant is en op de andere toets niet significant, bepaal dan aan de hand van de confusiematrix welk toetsresultaat gebruikt moet worden.
+Voer post-hoc toetsen uit om te onderzoeken tussen welke onderwijsperiodes er verschillen zijn in de verdeling van de keuzes voor de specialisaties van de eerstejaars studenten Psychologie. Gebruik de [McNemar toets](12-McNemar-toets-R.html) of exacte [McNemar toets](12-McNemar-toets-R.html) als post-hoc toets. De exacte versie van de [McNemar toets](12-McNemar-toets-R.html) is nuttig om te gebruiken als het aantal observaties in de niet-diagonale elementen van de confusiematrix kleiner dan 11 is. Omdat er bij post-hoc toetsen vaak meerdere vergelijkingen gemaakt worden, is het tijdrovend om voor elke individuele vergelijking de confusiematrix te inspecteren. Voer daarom de [McNemar toets](12-McNemar-toets-R.html) en de exacte [McNemar toets](12-McNemar-toets-R.html) beide uit en vergelijk de significantie op beide toetsen. Als een vergelijking op de ene toets significant is en op de andere toets niet significant, bepaal dan aan de hand van de confusiematrix welk toetsresultaat gebruikt moet worden.
 
 Voer de post-hoc toetsen uit met de functie `pairwiseMcnemar()` met als eerste argument `Specialisatie ~ Onderwijsperiode | Studentnummer` waarin `Specialisatie` de afhankelijke variabele is, `Onderwijsperiode` de variabele is die de onderwijsperiodes aangeeft en `Studentnummer` de variabele is die de observatie-eenheden aangeeft. Het tweede argument is de dataset `data = Data_Specialisatie`. Het derde argument `test = "mcnemar"` geeft aan dat de [McNemar toets](12-McNemar-toets-R.html) gebruikt moet worden; gebruik het argument `test = "exact"` om een exacte [McNemar toets](12-McNemar-toets-R.html) uit te voeren. Het vierde argument `method = "BH"` geeft de correctie voor meerdere toetsen weer (Benjamini-Hochberg (BH) in dit geval). Het significantieniveau is 0,05 voor beide toetsen.[^10]
 <!-- ## /TEKSTBLOK: posthoc1.R -->

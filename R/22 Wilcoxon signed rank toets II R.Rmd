@@ -136,7 +136,7 @@ De confusiematrix geeft informatie over de verschillen tussen de beoordelingen a
 
 ## De data visualiseren
 
-Maak een histogram om de verdeling van de bruto jaarinkomens van de alumni één jaar en vijf jaar na afstuderen visueel weer te geven.[^11]
+Maak een staafdiagram om de verdeling van de beoordelingen aan het begin en eind van het vak visueel weer te geven.
 
 <!-- ## OPENBLOK: Histogram1.R -->
 ```{r histogram, warnings=FALSE, message=FALSE}
@@ -144,50 +144,37 @@ Maak een histogram om de verdeling van de bruto jaarinkomens van de alumni één
 library(ggplot2)
 
 ggplot(Beoordelingen_speech_schrijven,
-  aes(x = Inkomen)) +
-  geom_histogram(color = "grey30",
+  aes(Beoordeling)) +
+  geom_bar(color = "grey30",
                  fill = "#0089CF") +
-  facet_wrap(~ Meetmoment, labeller = labeller(Meetmoment = c(T1 = "Een jaar na afstuderen", T2 = "Vijf jaar na afstuderen"))) +
+  scale_x_discrete(limits = c("Onvoldoende", "Voldoende", "Goed", "Uitstekend")) +
+  facet_wrap(~ Meetmoment, labeller = labeller(Meetmoment = c(Begin = "Begin van het vak", Eind = "Eind van het vak"))) +
   ylab("Frequentie") +
-  labs(title = "Bruto jaarinkomen alumni Mens & Maatschappij")
+  labs(title = "Beoordeling van het speech schrijven aan het begin en eind van het vak")
 ```
 <!-- ## /OPENBLOK: Histogram1.R -->
 
-Op beide meetmomenten is te zien dat de meeste alumni tussen de 0 en €60.000 euro per jaar verdienen en dat een paar alumni hier ver boven zit. Beide verdelingen hebben één top, maar zijn niet symmetrisch door de lange staart aan de rechterkant van de verdeling. Beide verdeling lijken qua vorm en spreiding sterk op elkaar.
-
-Maak vervolgens een histogram van de verschilscores om te onderzoeken of deze verdeling symmetrisch is.
-
-
-<!-- ## OPENBLOK: Histogram2.R -->
-```{r histogram2, warnings=FALSE, message=FALSE}
-# Maak een dataset met de verschilscores
-Alumni_verschilscores <- data.frame(Verschilscores = Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T2"] - Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T1"])
-
-## Histogram met ggplot2
-library(ggplot2)
-
-ggplot(Alumni_verschilscores,
-  aes(x = Verschilscores)) +
-  geom_histogram(color = "grey30",
-                 fill = "#0089CF") +
-  geom_density(alpha = .2, adjust = 1) +
-  ylab("Frequentiedichtheid") +
-  labs(title = "Verschilscores bruto jaarinkomen alumni Mens & Maatschappij")
-```
-<!-- ## /OPENBLOK: Histogram2.R -->
-
-De verdeling van de verschilscores bevat voornamelijk positieve waarden en een paar negatieve waarden; de meeste alumni zijn er dus in bruto jaarinkomen op vooruitgegaan. De verdeling heeft een lange staart aan de rechterkant en is dus niet symmetrisch. Gebruik de *Wilcoxon signed rank toets* dus niet om een uitspraak te doen over het verschil in medianen.
-
+Aan het eind van het vak zijn er meer speeches als goed en uitstekend beoordeeld in vergelijking tot het begin van het vak. Daarnaast zijn er minder speeches als onvoldoende en voldoende beoordeeld.
 
 
 ## Wilcoxon signed rank toets
 <!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
-Voer de *Wilcoxon signed rank toets* uit om de vraag te beantwoorden of de verdeling van de bruto jaarinkomens van alumni verschillend is voor de inkomens één jaar en vijf jaar na afstuderen. Gebruik de functie `wilcox.test()` met als eerste argument `Inkomen ~ Meetmoment` waarin `Inkomen` de afhankelijke variabele is en `Meetmoment` de onafhankelijke variabele is die twee meetmomenten aangeeft. Gebruik om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn het argument `paired = TRUE`.  Toets tweezijdig door het argument `alternative = "two.sided"` te gebruiken.
+Voer de *Wilcoxon signed rank toets* uit om de vraag te beantwoorden of de beoordelingen van het schrijven van speeches bij het vak 'Speech schrijven' verschillen tussen het begin en eind van het vak. Zet eerst de categorische variabele `Beoordeling` om in een numerieke variabele door de categorieën onvoldoende, voldoende, goed en uitstekend om te zetten in 1, 2, 3 en 4 respectievelijke. Gebruik daarna de functie `wilcox.test()` met als eerste argument `Beoordeling ~ Meetmoment` waarin `Beoordeling` de afhankelijke variabele is en `Meetmoment` de onafhankelijke variabele is die twee meetmomenten aangeeft. Gebruik om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn het argument `paired = TRUE`.  Toets tweezijdig door het argument `alternative = "two.sided"` te gebruiken.
 <!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
 
 <!-- ## OPENBLOK: Wilcoxon-signed-rank-toets.R -->
 ```{r wilcox test}
-wilcox.test(Inkomen ~ Meetmoment, Alumni_jaarinkomens, 
+# Zet de categorieën om in getallen
+Beoordelingen_speech_schrijven$Beoordeling_numeriek[Beoordelingen_speech_schrijven$Beoordeling == "Onvoldoende"] <- 1
+Beoordelingen_speech_schrijven$Beoordeling_numeriek[Beoordelingen_speech_schrijven$Beoordeling == "Voldoende"] <- 2
+Beoordelingen_speech_schrijven$Beoordeling_numeriek[Beoordelingen_speech_schrijven$Beoordeling == "Goed"] <- 3
+Beoordelingen_speech_schrijven$Beoordeling_numeriek[Beoordelingen_speech_schrijven$Beoordeling == "Uitstekend"] <- 4
+
+# Maak de variabele numeriek
+Beoordelingen_speech_schrijven$Beoordeling_numeriek <- as.numeric(Beoordelingen_speech_schrijven$Beoordeling_numeriek)
+
+# Voer de wilcoxon signed rank toets uit
+wilcox.test(Beoordeling_numeriek ~ Meetmoment, Beoordelingen_speech_schrijven, 
             paired = TRUE, alternative = "two.sided")
 ```
 <!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets.R -->
@@ -196,13 +183,13 @@ wilcox.test(Inkomen ~ Meetmoment, Alumni_jaarinkomens,
 Bereken de effectmaat *r* vervolgens op basis van de p-waarde van de *Wilcoxon signed rank toets*.
 ```{r effectgrootte}
 # Sla de p-waarde op
-pwaarde <- wilcox.test(Inkomen ~ Meetmoment, Alumni_jaarinkomens, 
-                       paired = TRUE, alternative = "two.sided")$p.value
+pwaarde <- wilcox.test(Beoordeling_numeriek ~ Meetmoment, Beoordelingen_speech_schrijven, 
+            paired = TRUE, alternative = "two.sided")$p.value
 
 # Bereken de effectgrootte voor een tweezijdige toets
-r <- abs(qnorm(pwaarde/2)) / sqrt(length(Alumni_jaarinkomens_T1))
+r <- abs(qnorm(pwaarde/2)) / sqrt(length(Beoordelingen_speech_schrijven))
 # Bereken de effectgrootte voor een eenzijdige toets
-#r <- abs(qnorm(pwaarde)) / sqrt(length(Alumni_jaarinkomens_T1))
+#r <- abs(qnorm(pwaarde)) / sqrt(length(Beoordelingen_speech_schrijven))
 
 # Print de effectgrootte
 paste("De effectmaat is", r)
@@ -215,7 +202,7 @@ Bereken de aantallen en de sommen van positieve en negatieve rangschikkingen op 
 <!-- ## OPENBLOK: Wilcoxon-signed-rank-toets3.R -->
 ```{r sommen, collapse = TRUE}
 # Bereken verschilscores
-Verschilscores <- Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T2"] - Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T1"]
+Verschilscores <- Beoordelingen_speech_schrijven$Beoordeling_numeriek[Beoordelingen_speech_schrijven$Meetmoment == "Eind"] - Beoordelingen_speech_schrijven$Beoordeling_numeriek[Beoordelingen_speech_schrijven$Meetmoment == "Begin"]
 
 # Rangschik de absolute waarden van verschilscores
 Rangschikkingen <- rank(abs(Verschilscores))
@@ -243,7 +230,8 @@ Som_negatief
 
 <!-- ## CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
 ```{r wilcox test als object, include=FALSE, echo=TRUE}
-wilcox <- wilcox.test(Inkomen ~ Meetmoment, Alumni_jaarinkomens, paired = TRUE, alternative = "two.sided")
+wilcox <- wilcox.test(Beoordeling_numeriek ~ Meetmoment, Beoordelingen_speech_schrijven, 
+            paired = TRUE, alternative = "two.sided")
 vVstatistic <- Round_and_format(wilcox$statistic)
 ```
 <!-- ## /CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
@@ -251,10 +239,9 @@ vVstatistic <- Round_and_format(wilcox$statistic)
 <!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets4.R -->
 * *V* = `r vVstatistic`, *p* < 0,0001 , *r* = `r Round_and_format(r)`
 * p-waarde < 0,05, dus de H~0~ wordt verworpen[^9]
-* De toetsstatistiek *V* is in deze casus gelijk aan de som van de negatieve rangschikkingen
 * Het aantal positieve rangschikkingen is `r N_positief`; de som is `r format(round(Som_positief), scientific = FALSE)`
 * Het aantal negatieve rangschikkingen is `r N_negatief`; de som is `r round(Som_negatief)`
-* De som van de positieve rangschikkingen is hoger dan de som van de negatieve rangschikkingen. De verdeling van de bruto jaarinkomens bevat dus hogere waarden vijf jaar na afstuderen.
+* De som van de positieve rangschikkingen is hoger dan de som van de negatieve rangschikkingen. Er zijn dus hogere beoordelingen aan het eind van het vak in vergelijking tot het begin van het vak.
 * Effectmaat is `r Round_and_format(r)`, dus een groot effect
 
 
@@ -262,7 +249,7 @@ vVstatistic <- Round_and_format(wilcox$statistic)
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de verdeling van het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij verschillend is voor de inkomens één jaar na afstuderen en vijf jaar na afstuderen. De resultaten van de toets laten zien dat er een significant verschil is tussen het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij één jaar en vijf jaar na afstuderen, *V* = `r vVstatistic`, *p* < 0,0001, *r* = `r Round_and_format(r)`. Er zijn `r N_positief` alumni die vijf jaar na afstuderen meer verdienen dan één jaar na afstuderen (som van rangschikkingen is `r format(round(Som_positief), scientific = FALSE)`) en er zijn `r N_negatief` alumni die vijf jaar na afstuderen minder verdienen dan één jaar na afstuderen (som van rangschikkingen is `r Som_negatief`). Alumni lijken dus meer te verdienen wanneer ze vijf jaar afgestudeerd zijn.
+De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of er verschil is tussen de beoordelingen van het schrijven van speeches aan het begin en eind van het vak 'Speech schrijven'. De resultaten van de toets laten zien dat er een significant verschil is tussen het de beoordelingen aan het begin en eind van het vak, *V* = `r vVstatistic`, *p* < 0,0001, *r* = `r Round_and_format(r)`. Er zijn `r N_positief` studenten met een hogere beoordeling aan het eind van het vak (som van rangschikkingen is `r format(round(Som_positief), scientific = FALSE)`) en er zijn `r N_negatief` studenten met een lagere beoordeling aan het eind van het vak. Studenten lijken dus beter speeches te schrijven aan het eind vak het vak.
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->
@@ -271,11 +258,7 @@ De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de 
 <!-- ## /CLOSEDBLOK: Footer.R -->
 
 [^1]: Laerd Statistics (2018). *Wilcoxon Signed-Rank Test using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/wilcoxon-signed-rank-test-using-spss-statistics.php
-[^3]: Statistics How To (27 mei 2018). *One Sample Median Test*. [Statistics How to](https://www.statisticshowto.datasciencecentral.com/one-sample-median-test/).
-[^4]: Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese waar is.  
-[^5]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage.
 [^6]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^8]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
 [^9]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
 [^10]: Een ordinale variabele is een categorische variabele waarbij de categorieën geordend kunnen worden. Een voorbeeld is de variabele beoordeling met de categorieën Onvoldoende, Voldoende, Goed en Uitstekend.
-[^11]: De breedte van de staven van het histogram worden hier automatisch bepaald, maar kunnen handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.

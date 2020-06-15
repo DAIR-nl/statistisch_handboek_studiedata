@@ -72,12 +72,13 @@ Beoordeling[Beoordeling == 1] <- "Onvoldoende"
 Beoordeling[Beoordeling == 2] <- "Voldoende"
 Beoordeling[Beoordeling == 3] <- "Goed"
 Beoordeling[Beoordeling == 4] <- "Uitstekend"
-Beoordeling <- as.factor(Beoordeling)
+Beoordeling <- as.character(Beoordeling)
 
 # Maak dataset
 Beoordelingen_speech_schrijven <- data.frame(Studentnummer,
                                              Meetmoment,
-                                             Beoordeling)
+                                             Beoordeling,
+                                             stringsAsFactors=FALSE)
 
 
 rm(Beoordeling, 

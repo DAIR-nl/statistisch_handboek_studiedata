@@ -141,25 +141,40 @@ Bij zowel mannen als vrouwen krijgen de meeste studenten de beoordeling goed. He
 
 ## Mann-Whitney U toets
 <!-- ## TEKSTBLOK: Mann-Whitney-U-toets-1.R -->
-Gebruik `wilcox.test()` om een *Mann-Whitney U toets* te doen.[^11] Het eerste argument bevat het aantal studiepunten van studenten met een Nederlandse vooropleiding `Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands]`; het tweede argument het aantal studiepunten van studenten met een buitenlandse vooropleiding `Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands]`. Voer daarna het argument `paired = FALSE` omdat de steekproeven ongepaard zijn, het argument `alternative = "two.sided" ` vanwege de tweezijdige alternatieve hypothese en
-het argument `conf.int = TRUE` om een schatting met bijbehorend betrouwbaarheidsinterval te geven voor de mediaan 
-van de verschilscores.[^6]<sup>,</sup>[^7]
+Voer de *Mann-Whitney U toets* uit om de vraag te beantwoorden of er verschillen zijn tussen de beoordelingen van de gesprekstechnieken van mannen en vrouwen. Zet eerst de categorische variabele `Beoordeling` om in een numerieke variabele door de categorieën onvoldoende, voldoende en goed om te zetten in 1, 2 en 3 respectievelijke. Gebruik daarna de functie `wilcox.test()` met als eerste argument `Beoordeling ~ Geslacht` waarin `Beoordeling` de afhankelijke variabele is en `Geslacht` de onafhankelijke variabele. Voer daarna het argument `paired = FALSE` in omdat de steekproeven ongepaard zijn en het argument `alternative = "two.sided"` vanwege de tweezijdige alternatieve hypothese
+
+
 <!-- ## /TEKSTBLOK: Mann-Whitney-U-toets-1.R -->
 
 <!-- ## OPENBLOK: Mann-Whitney-U-toets-2.R -->
-```{r Mann Whitney U toets}
-wilcox.test(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands], Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands], paired = FALSE, alternative = "two.sided", conf.int = TRUE)
+```{r wilcox test}
+# Zet de categorieën om in getallen
+Beoordelingen_gesprekstechnieken$Beoordeling_numeriek[Beoordelingen_gesprekstechnieken$Beoordeling == "Onvoldoende"] <- 1
+Beoordelingen_gesprekstechnieken$Beoordeling_numeriek[Beoordelingen_gesprekstechnieken$Beoordeling == "Voldoende"] <- 2
+Beoordelingen_gesprekstechnieken$Beoordeling_numeriek[Beoordelingen_gesprekstechnieken$Beoordeling == "Goed"] <- 3
+
+# Maak de variabele numeriek
+Beoordelingen_gesprekstechnieken$Beoordeling_numeriek <- as.numeric(Beoordelingen_gesprekstechnieken$Beoordeling_numeriek)
+
+# Voer de wilcoxon signed rank toets uit
+wilcox.test(Beoordeling_numeriek ~ Geslacht, 
+            Beoordelingen_gesprekstechnieken, 
+            paired = FALSE, 
+            alternative = "two.sided")
 ```
 <!-- ## /OPENBLOK: Mann-Whitney-U-toets-2.R -->
+
 <!-- ## CLOSEDBLOK: Mann-Whitney-U-toets-3.R -->
 ```{r Mann Whitney U toets als object, include = FALSE}
-wcx <- wilcox.test(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands], Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands], paired = FALSE, alternative = "two.sided", conf.int = TRUE)
+wcx <- wilcox.test(Beoordeling_numeriek ~ Geslacht, 
+                   Beoordelingen_gesprekstechnieken, 
+                   paired = FALSE, 
+                   alternative = "two.sided")
 
 vW_W <- Round_and_format_0decimals(wcx$statistic)
 vW_P <- Round_and_format(wcx$p.value)
-vW_est <- Round_and_format(wcx$estimate)
-vW_lb <- Round_and_format(wcx$conf.int[1])
-vW_ub <- Round_and_format(wcx$conf.int[2])
+vN_man <- sum(Beoordelingen_gesprekstechnieken$Geslacht == "Man")
+vN_vrouw <- sum(Beoordelingen_gesprekstechnieken$Geslacht == "Vrouw")
 ```
 <!-- ## /CLOSEDBLOK: Mann-Whitney-U-toets-3.R -->
 
@@ -168,14 +183,13 @@ Bereken vervolgens de effectmaat *r* op basis van de p-waarde van de *Mann-Whitn
 <!-- ## OPENBLOK: Mann-Whitney-U-toets-4.R -->
 ```{r effectgrootte}
 # Sla de p-waarde op
-pwaarde <- wilcox.test(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands], 
-            Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands],
-            paired = FALSE,
-            alternative = "two.sided",
-            conf.int = TRUE)$p.value
+pwaarde <- wilcox.test(Beoordeling_numeriek ~ Geslacht,
+                       Beoordelingen_gesprekstechnieken, 
+                       paired = FALSE, 
+                       alternative = "two.sided")$p.value
 
 # Bereken de effectmaat van de tweezijdige toets
-r <- qnorm(pwaarde/2) / sqrt(nrow(Studiepunten_studiejaar2))
+r <- qnorm(pwaarde/2) / sqrt(nrow(Beoordelingen_gesprekstechnieken))
 # Bereken de effectmaat van de eenzijdige toets
 #r <- qnorm(pwaarde) / sqrt(nrow(Studiepunten_studiejaar2))
 
@@ -188,30 +202,31 @@ paste("De effectmaat is", abs(r))
 Bereken ten slotte het gemiddelde rangnummer van beide groepen. Beoordeel op basis van de gemiddelde rangnummers welke groep hogere waardes bevat.
 <!-- ## OPENBLOK: Wilcoxon-signed-rank-toets3.R -->
 ```{r sommen, collapse = TRUE}
-Rangnummer_Nederlandse_vooropleiding <- mean(rank(Studiepunten_studiejaar2$Studiepunten)[Vooropleiding_Nederlands])
+# Maak een index met daarin alle mannen
+Index_mannen <- Beoordelingen_gesprekstechnieken$Geslacht == "Man"
 
-Rangnummer_buitenlandse_vooropleiding <- mean(rank(Studiepunten_studiejaar2$Studiepunten)[!Vooropleiding_Nederlands])
+# Bereken de gemiddelde rangnummers
+Rangnummer_mannen <- mean(rank(Beoordelingen_gesprekstechnieken$Beoordeling_numeriek)[Index_mannen])
+
+Rangnummer_vrouwen <- mean(rank(Beoordelingen_gesprekstechnieken$Beoordeling_numeriek)[!Index_mannen])
 
 # Print gemiddelde rangnummers
-Rangnummer_Nederlandse_vooropleiding
-Rangnummer_buitenlandse_vooropleiding
+Rangnummer_mannen
+Rangnummer_vrouwen
 ```
 <!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets3.R -->
 
 <!-- ## TEKSTBLOK: Mann-Whitney-U-toets-4.R -->
-* *W* = `r vW_W`, *p* = < 0,0001, *r* = `r Round_and_format(abs(r))`
-* *p*-waarde < 0,05, dus de H~0~ wordt verworpen.[^8]
-* Effectmaat is `r Round_and_format(abs(r))`, dus een klein tot gemiddeld effect
-* Het gemiddelde rangnummer is `r Round_and_format(Rangnummer_Nederlandse_vooropleiding)` (*n*=`r vN_NL`) voor studenten met een Nederlandse vooropleiding en `r Round_and_format(Rangnummer_buitenlandse_vooropleiding)` (*n*=`r vN_Inter`) voor studenten met een buitenlandse vooropleiding. De verdeling van studenten met een Nederlandse vooropleiding bevat dus hogere waarden dan de verdeling van studenten met een buitenlandse vooropleiding.
-* De mediaan van de verschilscores is `r vW_est` met een 
-95%-betrouwbaarheidsinterval  van `r vW_lb` tot `r vW_ub`. Aangezien de verdelingen niet dezelfde vorm hebben, is de mediaan niet informatief en wordt deze niet opgenomen in de rapportage.
+* *W* = `r vW_W`, *p* = `r vW_P`, *r* = `r Round_and_format(abs(r))`
+* *p*-waarde > 0,05, dus de H~0~ wordt niet verworpen.[^8]
+* Het gemiddelde rangnummer is `r Round_and_format(Rangnummer_mannen)` (*n*=`r vN_man`) voor mannen en `r Round_and_format(Rangnummer_vrouwen)` (*n*=`r vN_vrouw`) voor vrouwen. De verdeling van vrouwen bevat dus iets hogere waarden dan de verdeling van mannen, maar dit verschil is niet significant.
+
 <!-- ## /TEKSTBLOK: Mann-Whitney-U-toets-4.R -->
 
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal studiepunten in het tweede jaar van de bachelor Business Administration hetzelfde is voor studenten met buitenlandse vooropleiding als voor studenten met Nederlandse vooropleiding. Uit de resultaten kan afgelezen worden dat er een significant verschil is tussen de verdelingen van het aantal studiepunten van studenten met een buitenlandse vooropleiding en met een Nederlandse vooropleiding, *W* = `r vW_W`, *p* < 0,0001, *r* = `r Round_and_format(abs(r))`. Er is een klein tot gemiddeld effect van het verschil in het land van vooropleiding op het aantal studiepunten. Het gemiddelde rangnummer is `r Round_and_format(Rangnummer_Nederlandse_vooropleiding)` (*n*=`r vN_NL`) voor studenten met een Nederlandse vooropleiding en `r Round_and_format(Rangnummer_buitenlandse_vooropleiding)` (*n*=`r vN_Inter`) voor studenten met een buitenlandse vooropleiding. Studenten met een Nederlandse vooropleiding lijken dus een hoger aantal studiepunten te halen in het tweede jaar dan studenten met een buitenlandse vooropleiding.  
-
+De *Mann-Whitney U toets* is uitgevoerd om te toetsen of de beoordeling van gesprekstechnieken bij het vak Gesprekstechnieken van de hbo lerarenopleiding Frans verschillend is voor mannen en vrouwen. De resultaten laten zien dat er geen significant verschil is tussen de beoordeling van mannen en vrouwen, *W* = `r vW_W`, *p* < 0,0001, *r* = `r Round_and_format(abs(r))`. Het gemiddelde rangnummer is `r Round_and_format(Rangnummer_mannen)` (*n*=`r vN_man`) voor mannen en `r Round_and_format(Rangnummer_vrouwen)` (*n*=`r vN_vrouw`) voor vrouwen. Ondanks het feit dat mannen het vak als moeilijk ervaren, lijken ze niet slechter te presteren dan vrouwen wat betreft gesprekstechnieken.
 
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 

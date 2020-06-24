@@ -45,7 +45,7 @@ source(paste0(here::here(),"/01. Includes/data/16.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *Chi-kwadraat toets voor onafhankelijkheid*[^1] of de *Fisher-Freeman-Halton exact toets*[^2] om te toetsen of er een afhankelijkheid is tussen twee ongepaarde categorische variabelen. De *Fisher-Freeman-Halton exact toets* is een alternatief voor de *Chi-kwadraat toets voor onafhankelijkheid* wanneer er kleine aantallen observaties zijn. [^2]<sup>,</sup>[^3] De *Fisher-Freeman-Halton exact toets* is een uitbreiding van de [Fisher's exact toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) welke gebruikt wordt om te toetsen of er een verband bestaat tussen twee ongepaarde binaire variabelen, oftewel een 2x2 tabel. 
+Gebruik de *Chi-kwadraat toets voor onafhankelijkheid*[^1] of de *Fisher-Freeman-Halton exact toets*[^2] om te toetsen of er een afhankelijkheid is tussen twee ongepaarde categorische variabelen. De *Fisher-Freeman-Halton exact toets* is een alternatief voor de *Chi-kwadraat toets voor onafhankelijkheid* bij een laag aantal observaties.[^2]<sup>,</sup>[^3] De *Fisher-Freeman-Halton exact toets* is een uitbreiding van de [Fisher's exact toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) welke gebruikt wordt om te toetsen of er een verband bestaat tussen twee ongepaarde binaire variabelen, oftewel een 2x2 tabel. 
 
 # Onderwijscasus
 <div id = "casus">
@@ -59,7 +59,7 @@ H~A~: Er is een afhankelijkheid tussen het land van de hoogste vooropleiding en 
 </div>
 
 # Assumpties
-Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal of ordinaal niveau [^4] gemeten en daarmee onafhankelijk van elkaar. 
+Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal[^4] of ordinaal[^10] niveau gemeten en zijn onafhankelijk van elkaar. 
 
 ## Groepsgrootte
 De *Chi-kwadraat toets voor onafhankelijkheid* heeft een assumptie wat betreft het aantal observaties in een kruistabel. Een kruistabel is een tabel waarin de aantallen observaties worden weergegeven per combinatie van de categorieën van beide variabelen. De kruistabel van de data in de huidige casus is te vinden in Tabel 1.   
@@ -68,13 +68,13 @@ De *Chi-kwadraat toets voor onafhankelijkheid* heeft een assumptie wat betreft h
 
 |                      | NL   | GE | IT | UK | BE | ES | US |   |
 | ------------- | ---------| ------------| -------------| ---------|---------|---------|---------| ------------- |
-| **Positief BSA** |`r BSA_kruistabel[1,1]` | `r BSA_kruistabel[1,2]`  | `r BSA_kruistabel[1,3]`  | `r BSA_kruistabel[1,4]`  | `r BSA_kruistabel[1,5]`  | `r BSA_kruistabel[1,6]`  | `r BSA_kruistabel[1,7]`  | **`r sum(BSA_kruistabel[1,1:7])`**|
-| **Negatief BSA**  |`r BSA_kruistabel[2,1]`   | `r BSA_kruistabel[2,2]` | `r BSA_kruistabel[2,3]` | `r BSA_kruistabel[2,4]` | `r BSA_kruistabel[2,5]` | `r BSA_kruistabel[2,6]` | `r BSA_kruistabel[2,7]` | **`r sum(BSA_kruistabel[2,1:7])`**|
+| **Negatief BSA** |`r BSA_kruistabel[1,1]` | `r BSA_kruistabel[1,2]`  | `r BSA_kruistabel[1,3]`  | `r BSA_kruistabel[1,4]`  | `r BSA_kruistabel[1,5]`  | `r BSA_kruistabel[1,6]`  | `r BSA_kruistabel[1,7]`  | **`r sum(BSA_kruistabel[1,1:7])`**|
+| **Positief BSA**  |`r BSA_kruistabel[2,1]`   | `r BSA_kruistabel[2,2]` | `r BSA_kruistabel[2,3]` | `r BSA_kruistabel[2,4]` | `r BSA_kruistabel[2,5]` | `r BSA_kruistabel[2,6]` | `r BSA_kruistabel[2,7]` | **`r sum(BSA_kruistabel[2,1:7])`**|
 |**Totaal** |**`r sum(BSA_kruistabel[1:2,1])`**   | **`r sum(BSA_kruistabel[1:2,2])`** | **`r sum(BSA_kruistabel[1:2,3])`**   | **`r sum(BSA_kruistabel[1:2,4])`**   | **`r sum(BSA_kruistabel[1:2,5])`**   | **`r sum(BSA_kruistabel[1:2,6])`**   | **`r sum(BSA_kruistabel[1:2,7])`**   | **`r sum(BSA_kruistabel)`** |
 *Tabel 1. Geobserveerde aantallen casus BSA en land van hoogste vooropleiding.*
 <!-- ## TEKSTBLOK: Groepsgrootte1.R -->
 
-De *Chi-kwadraat toets voor onafhankelijkheid* wordt onbetrouwbaar als er in meer dan 20% van de cellen van de kruistabel een verwacht aantal observaties van 5 of lager is.[^5]<sup>,</sup>[^7] Gebruik in dat geval de *Fisher-Freeman-Halton toets*. Het verwacht aantal observaties in een cel is het aantal observaties dat zich in een cel op basis van kansrekening zou moeten bevinden wanneer er geen afhankelijkheid tussen de twee variabelen is. Op basis van de nulhypothese van onafhankelijkheid tussen de variabelen kunnen de verwachte aantallen observaties in elke cel berekend worden. 
+De *Chi-kwadraat toets voor onafhankelijkheid* wordt onbetrouwbaar als er in meer dan 20% van de cellen van de kruistabel een verwacht aantal observaties van 5 of lager is.[^5]<sup>,</sup>[^7] Gebruik in dat geval de *Fisher-Freeman-Halton toets*. Het verwachte aantal observaties in een cel is het aantal observaties dat zich in een cel op basis van kansrekening zou moeten bevinden wanneer er geen afhankelijkheid tussen de twee variabelen is. Op basis van de nulhypothese van onafhankelijkheid tussen de variabelen kunnen de verwachte aantallen observaties in elke cel berekend worden. 
 
 Een voorbeeldberekening van het het verwachte aantal observaties van de studenten met een Nederlandse vooropleiding met positief BSA werkt als volgt: vermenigvuldig het totaal aantal studenten met een Nederlandse vooropleiding (`r sum(BSA_kruistabel[1:2,1])`) met het totaal aantal studenten met een positief BSA (`r sum(BSA_kruistabel[1,1:7])`) en deel dit door het totaal aantal studenten (`r sum(BSA_kruistabel)`).
 
@@ -87,8 +87,8 @@ Een voorbeeldberekening van het het verwachte aantal observaties van de studente
 
 |                      | NL   | GE | IT | UK | BE | ES | US |   |
 | ------------- | ---------| ------------| -------------| ---------|---------|---------|---------| ------------- |
-| **Positief BSA** |`r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,1])/sum(BSA_kruistabel)) ` | `r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,2])/sum(BSA_kruistabel)) `  | `r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,3])/sum(BSA_kruistabel)) `  | `r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,4])/sum(BSA_kruistabel)) `  | `r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,5])/sum(BSA_kruistabel)) `  | `r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,6])/sum(BSA_kruistabel)) `  | `r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,7])/sum(BSA_kruistabel)) `  | **`r sum(BSA_kruistabel[1,1:7])`**|
-| **Negatief BSA**  |`r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,1])/sum(BSA_kruistabel)) `   | `r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,2])/sum(BSA_kruistabel)) ` | `r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,3])/sum(BSA_kruistabel)) ` | `r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,4])/sum(BSA_kruistabel)) ` | `r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,5])/sum(BSA_kruistabel)) ` | `r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,6])/sum(BSA_kruistabel)) ` | `r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,7])/sum(BSA_kruistabel)) ` | **`r sum(BSA_kruistabel[2,1:7])`**|
+| **Negatief BSA** |`r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,1])/sum(BSA_kruistabel)) ` | `r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,2])/sum(BSA_kruistabel)) `  | `r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,3])/sum(BSA_kruistabel)) `  | `r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,4])/sum(BSA_kruistabel)) `  | `r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,5])/sum(BSA_kruistabel)) `  | `r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,6])/sum(BSA_kruistabel)) `  | `r round(sum(BSA_kruistabel[1,1:7])*sum(BSA_kruistabel[1:2,7])/sum(BSA_kruistabel)) `  | **`r sum(BSA_kruistabel[1,1:7])`**|
+| **Positief BSA**  |`r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,1])/sum(BSA_kruistabel)) `   | `r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,2])/sum(BSA_kruistabel)) ` | `r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,3])/sum(BSA_kruistabel)) ` | `r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,4])/sum(BSA_kruistabel)) ` | `r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,5])/sum(BSA_kruistabel)) ` | `r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,6])/sum(BSA_kruistabel)) ` | `r round(sum(BSA_kruistabel[2,1:7])*sum(BSA_kruistabel[1:2,7])/sum(BSA_kruistabel)) ` | **`r sum(BSA_kruistabel[2,1:7])`**|
 |**Totaal** |**`r sum(BSA_kruistabel[1:2,1])`**   | **`r sum(BSA_kruistabel[1:2,2])`** | **`r sum(BSA_kruistabel[1:2,3])`**   | **`r sum(BSA_kruistabel[1:2,4])`**   | **`r sum(BSA_kruistabel[1:2,5])`**   | **`r sum(BSA_kruistabel[1:2,6])`**   | **`r sum(BSA_kruistabel[1:2,7])`**   | **`r sum(BSA_kruistabel)`** |
 *Tabel 2. Verwachte aantallen observaties casus BSA en land van hoogste vooropleiding.*
 <!-- ## TEKSTBLOK: Groepsgrootte2.R -->
@@ -97,9 +97,9 @@ Alle verwachte aantallen observaties zijn te vinden in Tabel 2. Merk ook op dat 
 
 # Post-hoc toetsen
 
-De *Chi-kwadraat toets voor onafhankelijkheid* en *Fisher-Freeman-Halton exact toets* worden gebruikt om een afhankelijkheid aan te tonen tussen twee ongepaarde categorische variabelen. Wanneer een of beide variabelen meer dan twee categorieën bevat, worden post-hoc toetsen uitgevoerd om te bepalen welke categorieën significant van elkaar verschillen.
+De *Chi-kwadraat toets voor onafhankelijkheid* en *Fisher-Freeman-Halton exact toets* worden gebruikt om een afhankelijkheid aan te tonen tussen twee ongepaarde categorische variabelen. Wanneer één of beide variabelen meer dan twee categorieën bevat, worden post-hoc toetsen uitgevoerd om te bepalen welke categorieën significant van elkaar verschillen.
 
-Als post-hoc toets voor de *Chi-kwadraat toets voor onafhankelijkheid* wordt het gestandaardiseerde residu gebruikt. Dit is het gestandaardiseerde verschil tussen de geobserveerde en verwacht aantal, waarbij gestandaardiseerd betekent dat het een gemiddelde van 0 en standaardafwijking van 1 heeft. Op deze manier kunnen de verschillende residuen met elkaar vergeleken worden omdat ze dezelfde schaal hebben. Voor elke cel in de kruistabel kan het gestandaardiseerde residu bepaald worden. Vergelijkbaar met z-scores zijn deze residuen significant bij een waarde groter dan ± 1,96 wanneer een significantieniveau (α) van 0,05 wordt gehanteerd. Op deze manier kan bepaald worden in welke cellen er afwijkingen van de verwachte aantallen zijn. [^5]
+Als post-hoc toets voor de *Chi-kwadraat toets voor onafhankelijkheid* wordt het gestandaardiseerde residu gebruikt. Dit is het gestandaardiseerde verschil tussen het (geobserveerde) aantal observaties en het verwachte aantal observaties, waarbij gestandaardiseerd betekent dat het een gemiddelde van 0 en standaardafwijking van 1 heeft. Op deze manier kunnen de verschillende residuen met elkaar vergeleken worden, omdat ze dezelfde schaal hebben. Voor elke cel in de kruistabel kan het gestandaardiseerde residu bepaald worden. Vergelijkbaar met z-scores[^11] zijn deze residuen significant bij een waarde groter dan ± 1,96 wanneer een significantieniveau (α) van 0,05 wordt gehanteerd. Op deze manier kan bepaald worden in welke cellen er afwijkingen van de verwachte aantallen zijn. [^5]
 
 Voor de *Fisher-Freeman-Halton exact toets* is er geen specifiek voorgeschreven post-hoc toets.[^3]<sup>,</sup>[^5] Een goede optie is het uitvoeren van losse [Fisher's exact toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) voor elke mogelijke combinatie van 2x2 tabellen. Gebruik een correctie op de p-waarden, omdat er meerdere testen tegelijk uitgevoerd worden. Een bekende correctie is de Bonferroni methode, andere opties zijn ook mogelijk. De keuze voor een correctie is afhankelijk van het onderzoek.[^5]
 
@@ -153,7 +153,7 @@ De kruistabel en bijbehorende tabel met proporties laat zien dat de meerderheid 
 
 ## Assumptie groepsgrootte
 
-Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk of kleiner dan vijf is. Bereken het verwacht aantal observaties met het argument `chisq.test()$expected` van de functie `chisq.test()` met als argumenten de variabelen `BSA_antropologie$BSA` (positief of negatief BSA) en `BSA_antropologie$Landen_vooropleiding` (landen van hoogst genoten vooropleiding).
+Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk of kleiner dan vijf is. Bereken het verwachte aantal observaties met het argument `chisq.test()$expected` van de functie `chisq.test()` met als argumenten de variabelen `BSA_antropologie$BSA` (positief of negatief BSA) en `BSA_antropologie$Landen_vooropleiding` (landen van hoogst genoten vooropleiding).
 
 <!-- ## OPENBLOK: Assumptie1.R -->
 ```{r chi2 assumptie}
@@ -215,7 +215,6 @@ paste("Effectgrootte is",w)
 
 ## Post-hoc toets: gestandaardiseerde residuen
 
-
 Voer post-hoc toetsen uit om te bepalen welke landen van hoogste vooropleiding van elkaar verschillen wat betreft de verdeling van het aantal studenten met positief en negatief BSA. Inspecteer hiervoor de Pearson residuen van de *Chi-kwadraat toets voor onafhankelijkheid* op waarden groter dan 1,96 en kleiner dan -1,96. Let op dat hier nog geen correctie voor meerdere testen plaatsvindt.[^9]
 
 <!-- ## OPENBLOK: Chi2-toets post-hoc1-->
@@ -231,7 +230,7 @@ resultaat$residuals
 * Significant lager aantal observaties bij negatief BSA Nederland (NL), *z* = `r Round_and_format(resultaat$residuals["Negatief","NL"])`
 * Significant lager aantal observaties bij negatief BSA Verenigd Koninkrijk (UK), *z* = `r Round_and_format(resultaat$residuals["Negatief","UK"])`
 * Significant hoger aantal observaties bij negatief BSA Verenigde Staten (US), *z* = `r Round_and_format(resultaat$residuals["Negatief","US"])`
-* Significant lager aantal observaties bij positief BSA Verenigde Staten (US), *z* = `r Round_and_format(resultaat$residuals["Positief","US"])`
+* Significant lager aantal observaties bij positief BSA Italië (IT), *z* = `r Round_and_format(resultaat$residuals["Positief","IT"])`
 
 <!-- ## TEKSTBLOK: Chi2-toets post-hoc2.R-->
 
@@ -243,7 +242,7 @@ resultaat$residuals
 De *Chi-kwadraat toets voor onafhankelijkheid* is uitgevoerd om te onderzoeken of er een afhankelijkheid is tussen het land van hoogst genoten vooropleiding en het wel of niet behalen van een positief BSA. De resultaten illustreren dat de nulthypothese verworpen kan worden, *χ^2^* ~`r vDF`~ ≈ `r vChi2`, *p* < 0,0001, *w* = `r Round_and_format(w)`. Het land van hoogst genoten vooropleiding en het behalen van een positief of negatief BSA zijn dus niet onafhankelijk van elkaar. Dat betekent dat er verschillen zijn tussen de landen wat betreft de proportie studenten met een positief BSA.
 
 
-De resultaten van de post-hoc toetsen van de *Chi-kwadraat toets voor onafhankelijkheid* zijn te vinden in Tabel 3, waarin geobserveerde aantallen met asterisk significant verschillend zijn van verwachte aantallen. De geobserveerde aantallen voor de verschillende landen van hoogste vooropleiding bij een positief BSA verschillen niet significant van de verwachte aantallen. Bij een negatief BSA is er echter een aantal landen waarbij significante verschillen van het verwachte aantal zijn op te merken. Nederland (NL; *z* = `r Round_and_format(resultaat$residuals["Negatief","NL"])`) en het Verenigd Koninkrijk (UK; *z* = `r Round_and_format(resultaat$residuals["Negatief","UK"])`) hebben een lager aantal studenten met een negatief BSA dan verwacht; Italië (IT; *z* = `r Round_and_format(resultaat$residuals["Negatief","IT"])`), Spanje (ES; *z* = `r Round_and_format(resultaat$residuals["Negatief","ES"])`) en de Verenigde Staten (US; *z* = `r Round_and_format(resultaat$residuals["Negatief","US"])`) een hoger aantal studenten met negatief BSA dan verwacht. Daarnaast heeft de Verenigde Staten (US; *z* = `r Round_and_format(resultaat$residuals["Positief","US"])`) ook een hoger aantal studenten met positief BSA dan verwacht.
+De resultaten van de post-hoc toetsen van de *Chi-kwadraat toets voor onafhankelijkheid* zijn te vinden in Tabel 3, waarin geobserveerde aantallen met asterisk significant verschillend zijn van verwachte aantallen. De geobserveerde aantallen voor de verschillende landen van hoogste vooropleiding bij een positief BSA verschillen niet significant van de verwachte aantallen. Bij een negatief BSA is er echter een aantal landen waarbij significante verschillen van het verwachte aantal zijn op te merken. Nederland (NL; *z* = `r Round_and_format(resultaat$residuals["Negatief","NL"])`) en het Verenigd Koninkrijk (UK; *z* = `r Round_and_format(resultaat$residuals["Negatief","UK"])`) hebben een lager aantal studenten met een negatief BSA dan verwacht; Italië (IT; *z* = `r Round_and_format(resultaat$residuals["Negatief","IT"])`), Spanje (ES; *z* = `r Round_and_format(resultaat$residuals["Negatief","ES"])`) en de Verenigde Staten (US; *z* = `r Round_and_format(resultaat$residuals["Negatief","US"])`) een hoger aantal studenten met negatief BSA dan verwacht. Daarnaast heeft Italië (IT; *z* = `r Round_and_format(resultaat$residuals["Positief","IT"])`) ook een lager aantal studenten met positief BSA dan verwacht.
 <!-- ## TEKSTBLOK: RapportageChi2.R -->
 
 <!-- ## TEKSTBLOK: RapportageChi3.R -->
@@ -289,7 +288,7 @@ De kruistabel en bijbehorende tabel met proporties laat zien dat de meerderheid 
 
 ## Assumptie groepsgrootte
 
-Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk of kleiner dan vijf is. Bereken het verwacht aantal observaties met het argument `chisq.test()$expected` van de functie `chisq.test()` met als argumenten de variabelen `Fisher_BSA_antropologie$BSA` (positief of negatief BSA) en `Fisher_BSA_antropologie$Landen_vooropleiding` (landen van hoogst genoten vooropleiding).
+Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk of kleiner dan vijf is. Bereken het verwachte aantal observaties met het argument `chisq.test()$expected` van de functie `chisq.test()` met als argumenten de variabelen `Fisher_BSA_antropologie$BSA` (positief of negatief BSA) en `Fisher_BSA_antropologie$Landen_vooropleiding` (landen van hoogst genoten vooropleiding).
 
 <!-- ## OPENBLOK: Assumptie1f.R -->
 ```{r fisher assumptie}
@@ -301,7 +300,7 @@ Drie van de 14 (21,43%) verwachte aantallen observaties zijn kleiner dan vijf. M
 
 ## Uitvoering
 <!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets.R-->
-Gebruik de functie `fisher.test()` met als argumenten de variabelen `Fisher_BSA_antropologie$BSA` (positief of negatief BSA), de variabele `Fisher_BSA_antropologie$Landen_vooropleiding` (landen van hoogst genoten vooropleiding) en als laatste argument `simulate.p.value = TRUE`. Hierdoor wordt de p-waarde met een simulatie berekent waardoor de rekentijd voor de computer een stuk lager is en de resultaten sneller weergegeven kunnen worden. Gebruik een seed (`set.seed(123`) om ervoor te zorgen dat de p-waarde reproduceerbaar is. Bij een simulatie kunnen er namelijk kleine verschillen tussen de resultaten zijn bij het herhalen van de simulatie.
+Gebruik de functie `fisher.test()` met als argumenten de variabele `Fisher_BSA_antropologie$BSA` (positief of negatief BSA), de variabele `Fisher_BSA_antropologie$Landen_vooropleiding` (landen van hoogst genoten vooropleiding) en als laatste argument `simulate.p.value = TRUE`. Hierdoor wordt de p-waarde met een simulatie berekent waardoor de rekentijd voor de computer een stuk lager is en de resultaten sneller weergegeven kunnen worden. Gebruik een seed (`set.seed(123)`) om ervoor te zorgen dat de p-waarde reproduceerbaar is. Bij een simulatie kunnen er namelijk kleine verschillen tussen de resultaten zijn bij het herhalen van de simulatie.
 <!-- ## /TEKSTBLOK: Fisher-Freeman-Halton-exact-toets.R-->
 <!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets.R-->
 ``` {r fisher toets}
@@ -370,4 +369,6 @@ De *Fisher-Freeman-Halton exact toets* is uitgevoerd om te onderzoeken of er een
 *&chi;^2^*-waarde gedeeld door het totaal aantal observaties, i.e. $\sqrt{ \frac{\chi^2}{N} }$.
 [^7]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
 [^8]: Dit voorbeeld gaat uit van een waarschijnlijkheid van 95% en zodoende een p-waardegrens van 0,05. Dit is naar eigen inzicht aan te passen. Hou hierbij rekening met type I en type II fouten.
-[^9]: De waarde 1,96 is een z-score en correspondeert met het significantieniveau 0,05 voor een tweezijdige toets. Om te corrigeren voor meerdere testen kan een ander significantieniveau gekozen worden wat resulteert in een andere z-score om mee te vergelijken. Bij een significantieniveau van 0,01 is de z-score bijvoorbeeld 2,58.
+[^9]: De waarde 1,96 is een z-score en correspondeert met het significantieniveau 0,05 voor een tweezijdige toets. Om te corrigeren voor meerdere testen kan een ander significantieniveau gekozen worden wat resulteert in een andere z-score om mee te vergelijken. Bij een significantieniveau van 0,01 is de z-score bijvoorbeeld 2,58. De z-score per significantieniveau is te berekenen met `abs(qnorm(alfa/2))` waarbij `alfa` het gewenste significantieniveau is.
+[^10]: Een ordinale variabele is een categorische variabele waarbij de categorieën geordend kunnen worden. Een voorbeeld is de variabele beoordeling met de categorieën Onvoldoende, Voldoende, Goed en Uitstekend.
+[^11]: Een z-score is een maat om aan te geven hoeveel een observatie afwijkt van het gemiddelde. De z-score wordt berekend door het gemiddelde van de observatie af te halen en dit daarna te delen door de standaarddeviatie, i.e. $\frac{X - \mu}{\sigma}$. In feite geeft een z-score aan hoeveel standaarddeviaties de observatie van het gemiddelde afwijkt.

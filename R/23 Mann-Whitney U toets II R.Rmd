@@ -43,38 +43,28 @@ if (!exists("Substitute_var")) {
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-source(paste0(here::here(),"/01. Includes/data/08.R"))
+source(paste0(here::here(),"/01. Includes/data/23.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 # Toepassing
-Gebruik de *Mann-Whitney U toets* om te toetsen of de gemiddelde rangnummers van de verdelingen van twee ongepaarde groepen van elkaar verschillen.[^1] De *Mann-Whitney U toets* is een alternatief voor de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html) als de verdelingen niet normaal verdeeld zijn. Alleen als de verdelingen van beide groepen dezelfde vorm hebben, kan de *Mann-Whitney U toets* ook gebruikt worden om het verschil tussen de medianen van twee groepen te toetsen.[^9] Gebruik *Mood's mediaan toets* om medianen te toetsen bij twee ongepaarde groepen waarvan de verdelingen niet dezelfde vorm hebben.
-
+Gebruik de *Mann-Whitney U toets* om te toetsen of twee ongepaarde groepen van elkaar verschillen op een ordinale variabele. Een alternatief voor een vergelijking van twee groepen op een ordinale variabele is de *chi-kwadraat toets voor onafhankelijkheid* of de *Fisher-Freeman-Halton toets* (bij een laag aantal observaties). Bij deze toetsen wordt echter geen rekening gehouden met de ordening van de categorieën van de ordinale variabele: de variabele wordt behandeld als een nominale variabele.
 
 # Onderwijscasus
 <div id ="casus">
-De onderwijsdirecteur van de opleiding Business Administration van een hogeschool vraagt zich af of er verschil is in de studieresultaten van studenten met een Nederlandse vooropleiding en een buitenlandse vooropleiding. Met name in het tweede studiejaar lijken er verschillen op te treden die hij wil begrijpen om mogelijke interventies met zijn docenten te bespreken. Hij vraagt zich af: ‘Verschilt het aantal studiepunten in het tweede studiejaar van studenten met een Nederlandse vooropleiding van het aantal studiepunten in het tweede studiejaar van studenten met een buitenlandse vooropleiding?
+Bij de hbo lerarenopleiding Frans leren studenten bij het vak Gesprekstechnieken om gesprekken te voeren in een praktijksetting. Aan het einde van het vak worden zij beoordeeld op basis van een mentorgesprek met een acteur waarin zij de aangeleerde vaardigheden in de praktijk kunnen toepassen. In vakevaluaties wordt vaak door mannen aangegeven dat ze het vak als erg moeilijk ervaren. Daarom wil de hoofddocent graag uitzoeken of er verschillen zijn tussen manen en vrouwen wat betreft de beoordeling van de gesprekstechnieken.
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
 
-*H~0~*: Er is geen verschil in het gemiddelde rangnummer van het behaalde aantal studiepunten in het tweede jaar tussen studenten met een buitenlandse vooropleiding en een Nederlandse vooropleiding.
+*H~0~*: Er is geen verschil tussen mannen en vrouwen wat betreft het gemiddelde rangnummer van de beoordelingen van gesprekstechnieken.
 
-*H~A~*: Er is een verschil in  gemiddelde rangnummer van het behaalde aantal studiepunten in het tweede jaar tussen studenten met een buitenlandse vooropleiding en een Nederlandse vooropleiding. Eén van beide verdelingen bevat hogere waarden betreffende het behaalde aantal studiepunten.
+*H~A~*: Er is een verschil tussen mannen en vrouwen wat betreft het gemiddelde rangnummer van de beoordelingen van gesprekstechnieken. De beoordelingen zijn hoger voor mannen of vrouwen.
 </div>
 
 # Assumpties
 
-Het meetniveau van de afhankelijke variabele is ordinaal[^12] of continu.[^9] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data is te vinden in een andere toetspagina.
+Het meetniveau van de afhankelijke variabele is ordinaal[^12] of continu.[^9] In deze toetspagina staat een casus met ordinale data centraal; een casus met continue data is te vinden in [een andere toetspagina](08-Mann-Whitney-U-toets-R.html).
 
-De *Mann-Whitney U toets* hoeft - in tegenstelling tot de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html) - niet te voldoen aan de assumptie van normaliteit.  Daarnaast hebben uitbijters minder invloed op het eindresultaat dan bij de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html). Daarentegen, als de data wel normaal verdeeld is, heeft de *Mann-Whitney U toets* minder onderscheidend vermogen[^2] dan de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html). Vandaar dat ondanks het voordeel van de grotere robuustheid er toch minder vaak voor de *Mann-Whitney U toets* gekozen wordt.
-
-## Verdeling steekproeven
-
-De *Mann-Whitney U toets* schrijft geen assumpties voor over de verdeling van de twee ongepaarde groepen.[^9] In principe toetst de *Mann-Whitney U toets* een hypothese over het verschil tussen het gemiddelde rangnummer van de verdelingen van twee ongepaarde groepen. De *Mann-Whitney U toets* maakt een rangschikking van alle observaties van beide groepen samengevoegd en telt vervolgens apart de rangnummers op voor de observaties in beide groepen. Met behulp van de groepsgroottes kan ook het gemiddelde rangnummer van beide groepen berekend worden. Het verschil tussen de gemiddelde rangnummers in beide groepen bepaalt de significantie van de toets.[^10]  Daarom kan de *Mann-Whitney U toets* gezien worden als een toets die het gemiddelde rangnummer van twee groepen vergelijkt.
-
-Als de verdelingen van de groepen niet dezelfde vorm hebben, doet de *Mann-Whitney U toets* een uitspraak over het verschil tussen verdelingen. Een verschil tussen verdelingen kan meerdere oorzaken hebben. De top of toppen van de verdelingen kunnen verschillend zijn, maar ook de spreiding van de verdeling kan verschillen.[^9] In alle gevallen is er echter een verschil tussen het gemiddelde rangnummer van de verdelingen. In andere woorden, de ene verdeling bevat hogere waarden dan de andere verdeling. Benoem daarom het gemiddelde rangnummer van beide groepen in de rapportage en visualiseer de verdeling van beide groepen om duidelijk te maken op welke manier de verdelingen van elkaar verschillen.
-
-Als de verdelingen van beide ongepaarde groepen echter dezelfde vorm hebben, toetst de *Mann-Whitney U toets* ook een hypothese over het verschil tussen de medianen. Immers, het enige verschil tussen de verdeling is in dat geval een verschuiving van de verdeling, dus een verandering van de mediaan. In dat geval heeft de *Mann-Whitney U toets* een hoger onderscheidend vermogen[^2] dan *Mood's mediaan toets* om medianen te toetsen.[^10]
-
+Om de *Mann-Whitney U toets* uit te voeren met een ordinale afhankelijke variabele, moet deze variabele omgezet worden in getallen. Wanneer er drie categorieën zijn, worden ze genummerd van 1 tot en met 3 op basis van de ordening van de variabele. De categorieën onvoldoende, voldoende en goed worden dan omgezet in 1, 2 en 3 respectievelijke. Met behulp van deze getallen worden verschilscores berekend per observatie-eenheid. Een persoon die van onvoldoende naar goed gaat, krijgt als verschilscore 2. Hierbij wordt impliciet aangenomen dat de afstand tussen alle categorieën even groot is. In andere woorden, het verschil tussen onvoldoende en voldoende is even groot als het verschil tussen voldoende en goed. Bij de *chi-kwadraat toets voor onafhankelijkheid* en de *Fisher-Freeman_Halton toets* wordt deze aanname niet gedaan, maar wordt de ordinale variabele als nominaal beschouwd. De *Mann-Whitney U toets* maakt een rangschikking van alle observaties van beide groepen samengevoegd en telt vervolgens apart de rangnummers op voor de observaties in beide groepen. Met behulp van de groepsgroottes kan ook het gemiddelde rangnummer van beide groepen berekend worden. Het verschil tussen de gemiddelde rangnummers in beide groepen bepaalt de significantie van de toets.[^10]
 
 # Effectmaat
 
@@ -86,7 +76,7 @@ het aantal observaties, i.e. $\frac{z}{\sqrt{N}}$.[^5] Een correlatie tussen twe
 
 # Uitvoering 
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is een dataset `Studiepunten_studiejaar2` ingeladen met het aantal punten dat studenten in het tweede jaar halen.
+Er is een dataset `Beoordelingen_gesprekstechnieken` ingeladen met het aantal punten dat studenten in het tweede jaar halen.
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
@@ -96,98 +86,58 @@ Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
 ## Eerste 6 observaties
-head(Studiepunten_studiejaar2)
+head(Beoordelingen_gesprekstechnieken)
 ## Eerste 6 observaties
-tail(Studiepunten_studiejaar2)
+tail(Beoordelingen_gesprekstechnieken)
 ```
 <!-- ## /OPENBLOK: Data-bekijken.R -->
-<!-- ## TEKSTBLOK: Data-beschrijven.R -->
-Bekijk de grootte, de mediaan en de kwantielen van het aantal studiepunten met `length()` en `quantile()`. De mediaan en kwantielen worden vaak gebruikt als maat wanneer een verdeling niet symmetrisch is. 
-<!-- ## /TEKSTBLOK: Data-beschrijven.R -->
-<!-- ## OPENBLOK: Data-selecteren.R -->
-```{r data selecteren}
-Vooropleiding_Nederlands <- Studiepunten_studiejaar2$Vooropleiding == "Nederlands"
+
+<!-- ## TEKSTBLOK: Data-kruistabel1.R -->
+Een kruistabel geeft de aantallen observaties weer voor de combinaties van de categorieën van de variabelen `Geslacht` en `Beoordeling`. In feite laat dit zien welke beoordelingen mannen en vrouwen krijgen. Maak de kruistabel met de functie `table()` met als argumenten de variabele `Beoordelingen_gesprekstechnieken$Geslacht` en de variabele `Beoordelingen_gesprekstechnieken$Beoordeling`.
+<!-- ## /TEKSTBLOK: Data-kruistabel1.R -->
+
+<!-- ## OPENBLOK: Data-kruistabel2.R -->
+
+```{r kruistabel}
+## Maak een kruistabel
+Beoordelingen_kruistabel <- table(Beoordelingen_gesprekstechnieken$Geslacht, Beoordelingen_gesprekstechnieken$Beoordeling)
+
+## Bepaal volgorde van de beoordelingen
+Volgorde <- c("Onvoldoende", "Voldoende", "Goed")
+
+## Print de kruistabel 
+print(Beoordelingen_kruistabel[,Volgorde])
+
+## Print een tabel met proporties, tweede argument 2 zorgt ervoor dat de 
+## proporties per kolom berekend worden
+prop.table(Beoordelingen_kruistabel[,Volgorde], 1)
 ```
-<!-- ## /OPENBLOK: Data-selecteren.R -->
+<!-- ## /OPENBLOK: Data-kruistabel2.R -->
 
-<!-- ## OPENBLOK: Numpy-inladen.R -->
-
-<!-- ## /OPENBLOK: Numpy-inladen.R -->
-
-<div class="col-container">
-  <div class="col">
-<!-- ## OPENBLOK: Data-beschrijven-1.R -->
-```{r, data beschrijven 1, collapse=TRUE}
-length(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands])
-quantile(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands])
-```
-<!-- ## /OPENBLOK: Data-beschrijven-1.R -->
-  </div>
-  <div class="col">
-<!-- ## OPENBLOK: Data-beschrijven-2.R -->
-``````{r Data beschrijven 2, collapse=TRUE}
-length(Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands])
-quantile(Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands])
-```
-<!-- ## /OPENBLOK: Data-beschrijven-2.R -->
-  </div>
-</div>
-<!-- ## CLOSEDBLOK: Data-beschrijven-3.R -->
-``` {r data beschrijven als object, include=FALSE, echo=TRUE}
-## Onderstaand zijn de dynamische variabelen te vinden
-library(dplyr)
-
-x <- group_by(Studiepunten_studiejaar2, Vooropleiding) %>%
-  summarise(
-    N = n(),
-    Q1 = quantile(Studiepunten)[2],
-    Mediaan = median(Studiepunten),
-    Q3 = quantile(Studiepunten)[4]
-  )
-
-vN_NL <- Round_and_format(x[2,2])
-vN_Inter <- Round_and_format(x[1,2])
-
-vQ1_NL <- Round_and_format(x[2,3])
-vQ1_Inter <- Round_and_format(x[1,3])
-
-vMed_NL <- Round_and_format(x[2,4])
-vMed_Inter <- Round_and_format(x[1,4])
-
-vQ3_NL <- Round_and_format(x[2,5])
-vQ3_Inter <- Round_and_format(x[1,5])
-```
-<!-- ## /CLOSEDBLOK: Data-beschrijven-3.R -->
-
-<!-- ## TEKSTBLOK: Data-beschrijven2.R -->
-* Mediaan studenten Nederlandse vooropleiding: `r vMed_NL`. *n* = `r vN_NL`.
-* Mediaan studenten buitenlandse vooropleiding: `r vMed_Inter`. *n* = `r vN_Inter`.
-
-<!-- ## /TEKSTBLOK: Data-beschrijven2.R -->
+De kruistabel en bijbehorende kruistabel met proporties laten zien dat de gesprekstechnieken van vrouwen relatief iets vaker als goed beoordeeld worden en iets minder vaak als onvoldoende in vergelijking met de gesprechtstechnieken van mannen.
 
 
 ## De data visualiseren
 
-Maak een histogram om de verdeling van het aantal studiepunten in het tweede jaar voor studenten met een Nederlandse en buitenlandse vooropleiding visueel weer te geven.[^13]
+Maak een staafdiagram om de verdeling van de beoordelingen aan het begin en eind van het vak visueel weer te geven.
 
 <!-- ## OPENBLOK: Histogram1.R -->
 ```{r histogram, warnings=FALSE, message=FALSE}
 ## Histogram met ggplot2
 library(ggplot2)
 
-ggplot(Studiepunten_studiejaar2,
-  aes(x = Studiepunten)) +
-  geom_histogram(aes(y = ..density..),
-                 color = "grey30",
+ggplot(Beoordelingen_gesprekstechnieken,
+  aes(Beoordeling)) +
+  geom_bar(color = "grey30",
                  fill = "#0089CF") +
-  facet_wrap(~ Vooropleiding, labeller = labeller(Vooropleiding = c(Nederlands = "Nederlandse vooropleiding", buitenlands = "Buitenlandse vooropleiding"))) +
+  scale_x_discrete(limits = c("Onvoldoende", "Voldoende", "Goed")) +
+  facet_wrap(~ Geslacht) +
   ylab("Frequentie") +
-  labs(title = "Studiepunten van studenten Business Administration in het tweede jaar ")
+  labs(title = "Beoordeling van gesprekstechnieken voor mannen en vrouwen")
 ```
 <!-- ## /OPENBLOK: Histogram1.R -->
 
-Beide histogrammen bevatten een grote groep studenten met een laag aantal studiepunten (twaalf of minder). De overige studenten volgen een ietwat scheve verdeling met de top rond de vijftig studiepunten. De verdelingen van beide groepen studenten hebben echter niet dezelfde vorm. De frequentie van het aantal studenten rond de vijftig studiepunten is veel hoger voor de studenten met Nederlandse vooropleiding, terwijl de frequentie van het aantal studenten met twaalf of minder studiepunten juist hoger is voor de studenten met een buitenlandse vooropleiding. De *Mann-Whitney U toets* kan in dit geval dus niet gebruikt worden om een uitspraak te doen over de significantie van het verschil van de medianen van beide groepen. 
-
+Bij zowel mannen als vrouwen krijgen de meeste studenten de beoordeling goed. Het aantal studenten waarvan de gesprekstechnieken als onvoldoende wordt beoordeeld is beide groepen het laagst.
 
 ## Mann-Whitney U toets
 <!-- ## TEKSTBLOK: Mann-Whitney-U-toets-1.R -->

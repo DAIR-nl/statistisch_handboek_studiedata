@@ -48,7 +48,7 @@ source(paste0(here::here(),"/01. Includes/data/10.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *Kruskal Wallis toets* om te toetsen of de gemiddelde rangschikkingen van de verdelingen van twee of meer groepen van elkaar verschillen.[^1]<sup>, </sup>[&17] De *Kruskal Wallis toets* kan een alternatief zijn voor de [one-way ANOVA](05-One-way-ANOVA-R.html).[^2] De *Kruskal Wallis toets* hoeft niet te voldoen aan de assumptie van normaliteit van de verdelingen van elke groep. Daarnaast hebben uitbijters bij de *Kruskal Wallis toets*  minder invloed op het eindresultaat dan bij de [one-way ANOVA](05-One-way-ANOVA-R.html). Daarentegen, als de data wel normaal verdeeld is, heeft de *Kruskal Wallis toets* minder onderscheidend vermogen[^4] dan de [one-way ANOVA](05-One-way-ANOVA-R.html).[^3] Vandaar dat ondanks de voordelen van de grotere robuustheid er toch minder vaak voor de *Kruskal Wallis toets* gekozen wordt. 
+Gebruik de *Kruskal Wallis toets* om te toetsen of de gemiddelde rangnummers van de verdelingen van twee of meer groepen van elkaar verschillen.[^1]<sup>, </sup>[&17] De *Kruskal Wallis toets* kan een alternatief zijn voor de [one-way ANOVA](05-One-way-ANOVA-R.html).[^2] De *Kruskal Wallis toets* hoeft niet te voldoen aan de assumptie van normaliteit van de verdelingen van elke groep. Daarnaast hebben uitbijters bij de *Kruskal Wallis toets*  minder invloed op het eindresultaat dan bij de [one-way ANOVA](05-One-way-ANOVA-R.html). Daarentegen, als de data wel normaal verdeeld is, heeft de *Kruskal Wallis toets* minder onderscheidend vermogen[^4] dan de [one-way ANOVA](05-One-way-ANOVA-R.html).[^3] Vandaar dat ondanks de voordelen van de grotere robuustheid er toch minder vaak voor de *Kruskal Wallis toets* gekozen wordt. 
 
 # Onderwijscasus
 <div id="casus">
@@ -56,9 +56,9 @@ De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht is geïnte
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
 
-*H~0~*: De gemiddelde rangschikking van de verdeling van het aantal behaalde studiepunten in het eerste jaar van de master Arbeidsrecht is gelijk voor de studenten met als vooropleidingen Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster.
+*H~0~*: Het gemiddelde rangnummer van de verdeling van het aantal behaalde studiepunten in het eerste jaar van de master Arbeidsrecht is gelijk voor de studenten met als vooropleidingen Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster.
 
-*H~A~*: De gemiddelde rangschikking van de verdeling van het aantal behaalde studiepunten in het eerste jaar van de master Arbeidsrecht is niet gelijk voor de studenten met als vooropleiding Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster.
+*H~A~*: Het gemiddelde rangnummer van de verdeling van het aantal behaalde studiepunten in het eerste jaar van de master Arbeidsrecht is niet gelijk voor de studenten met als vooropleiding Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster.
 
 </div>
 
@@ -233,7 +233,7 @@ vK_P <- Round_and_format(Ktest$p.value)
 
 ## Post-hoc toets: Mann-Whitney U toets
 <!-- ## TEKSTBLOK: Mann-Whitney-U-test.R -->
-Gebruik de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) als post-hoc toets om te bepalen welke groepen significant verschillen. Gebruik de functie `pairwise.wilcox.test()` met als eerste argument de afhankelijke variabele `Resultaten_Arbeidsrecht$EC_Jaar1` en als tweede argument de definitie van de groepen `Resultaten_Arbeidsrecht$Vooropleiding`. Pas de *Bonferroni correctie* toe met `p.adjust.method = "bonferroni"`. Naast de p-waarde worden bij de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) de gemiddelde rangschikkingen en de effectmaat *r* gerapporteerd. Voor meer informatie, zie de toetspagina van de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html).
+Gebruik de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) als post-hoc toets om te bepalen welke groepen significant verschillen. Gebruik de functie `pairwise.wilcox.test()` met als eerste argument de afhankelijke variabele `Resultaten_Arbeidsrecht$EC_Jaar1` en als tweede argument de definitie van de groepen `Resultaten_Arbeidsrecht$Vooropleiding`. Pas de *Bonferroni correctie* toe met `p.adjust.method = "bonferroni"`. Naast de p-waarde worden bij de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) de gemiddelde rangnummers en de effectmaat *r* gerapporteerd. Voor meer informatie, zie de toetspagina van de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html).
 <!-- ## /TEKSTBLOK: Mann-Whitney-U-test.R -->
 <!-- ## OPENBLOK: Mann-Whitney-U-test.R -->
 ``` {r pairwise wilcox test}
@@ -247,12 +247,12 @@ posthoc <-pairwise.wilcox.test(Resultaten_Arbeidsrecht$EC_Jaar1, Resultaten_Arbe
 ```
 <!-- ## /CLOSEDBLOK: Mann-Whitney-U-test1.R -->
 
-De [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) gebruikt de gemiddelde rangschikking van twee ongepaarde groepen om de significantie van de toets te bepalen. Met behulp van de gemiddelde rangschikking kan bepaald worden welke groep hogere rangschikkingen heeft wat een benadering is voor het verschil tussen twee verdelingen.[^15] In deze casus heeft de vooropleiding met een hogere rangschikking dus over het algemeen studenten met een hoger aantal studiepunten. Bereken en rapporteer daarom de gemiddelde rangschikking.
+De [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) gebruikt het gemiddelde rangnummer van twee ongepaarde groepen om de significantie van de toets te bepalen. Met behulp van het gemiddelde rangnummer kan bepaald worden welke groep hogere rangnummers heeft wat een benadering is voor het verschil tussen twee verdelingen.[^15] In deze casus heeft de vooropleiding met een hoger rangnummer dus over het algemeen studenten met een hoger aantal studiepunten. Bereken en rapporteer daarom het gemiddelde rangnummer.
 
 <!-- ## OPENBLOK: Mann-Whitney-U-test2.R -->
 ```{r mean rank}
-# Maak een functie om de gemiddelde rangschikking te berekenen voor een vergelijking van twee groepen
-Gemiddelde_rangschikking <- function(Vooropleiding_1, Vooropleiding_2){
+# Maak een functie om het gemiddelde rangnummer te berekenen voor een vergelijking van twee groepen
+Gemiddeld_rangnummer <- function(Vooropleiding_1, Vooropleiding_2){
   
   # Bind alle observaties in een variabele
   Aantal_studiepunten <- c(Vooropleiding_1, Vooropleiding_2)
@@ -260,15 +260,15 @@ Gemiddelde_rangschikking <- function(Vooropleiding_1, Vooropleiding_2){
   # Maak een variabele die aangeeft in welke groep de observatie zit
   Groepsindicator <- c(rep(1, length(Vooropleiding_1)), rep(2, length(Vooropleiding_2)))
   
-  # Bereken de rangschikkingen van alle observaties
+  # Bereken de rangnummers van alle observaties
   Rangschikkingen <- rank(Aantal_studiepunten)
   
-  # Bereken de gemiddelde rangschikking voor beide vooropleidingen
-  Gemiddelde_rangschikking_Vooropleiding_1 <- mean(Rangschikkingen[Groepsindicator == 1])
-  Gemiddelde_rangschikking_Vooropleiding_2 <- mean(Rangschikkingen[Groepsindicator == 2])
+  # Bereken het gemiddelde rangnummer voor beide vooropleidingen
+  Gemiddeld_rangnummer_Vooropleiding_1 <- mean(Rangschikkingen[Groepsindicator == 1])
+  Gemiddeld_rangnummer_Vooropleiding_2 <- mean(Rangschikkingen[Groepsindicator == 2])
   
-  # Retourneer beide gemiddelde rangschikkingen
-  return(list(Groep_1 = Gemiddelde_rangschikking_Vooropleiding_1, Groep_2 = Gemiddelde_rangschikking_Vooropleiding_2))
+  # Retourneer beide gemiddelde rangnummers
+  return(list(Groep_1 = Gemiddeld_rangnummer_Vooropleiding_1, Groep_2 = Gemiddeld_rangnummer_Vooropleiding_2))
 }
 
 
@@ -282,24 +282,24 @@ Studiepunten_Premaster <- Resultaten_Arbeidsrecht$EC_Jaar1[Resultaten_Arbeidsrec
 Studiepunten_Rechtsgeleerdheid <- Resultaten_Arbeidsrecht$EC_Jaar1[Resultaten_Arbeidsrecht$Vooropleiding == "Rechtsgeleerdheid"]
 
 
-# Bereken de gemiddelde rangschikkingen voor elke vergelijking
-Gem_FR_NR <- Gemiddelde_rangschikking(Studiepunten_Fiscaal_Recht, Studiepunten_Notarieel_Recht)
+# Bereken de gemiddelde rangnummers voor elke vergelijking
+Gem_FR_NR <- Gemiddeld_rangnummer(Studiepunten_Fiscaal_Recht, Studiepunten_Notarieel_Recht)
 
-Gem_FR_PM <- Gemiddelde_rangschikking(Studiepunten_Fiscaal_Recht, Studiepunten_Premaster)
+Gem_FR_PM <- Gemiddeld_rangnummer(Studiepunten_Fiscaal_Recht, Studiepunten_Premaster)
 
-Gem_FR_RG <- Gemiddelde_rangschikking(Studiepunten_Fiscaal_Recht, Studiepunten_Rechtsgeleerdheid)
+Gem_FR_RG <- Gemiddeld_rangnummer(Studiepunten_Fiscaal_Recht, Studiepunten_Rechtsgeleerdheid)
 
-Gem_NR_PM <- Gemiddelde_rangschikking(Studiepunten_Notarieel_Recht, Studiepunten_Premaster)
+Gem_NR_PM <- Gemiddeld_rangnummer(Studiepunten_Notarieel_Recht, Studiepunten_Premaster)
 
-Gem_NR_RG <- Gemiddelde_rangschikking(Studiepunten_Notarieel_Recht, Studiepunten_Rechtsgeleerdheid)
+Gem_NR_RG <- Gemiddeld_rangnummer(Studiepunten_Notarieel_Recht, Studiepunten_Rechtsgeleerdheid)
 
-Gem_PM_RG <- Gemiddelde_rangschikking(Studiepunten_Premaster, Studiepunten_Rechtsgeleerdheid)
+Gem_PM_RG <- Gemiddeld_rangnummer(Studiepunten_Premaster, Studiepunten_Rechtsgeleerdheid)
 
 ```
 <!-- ## /OPENBLOK: Mann-Whitney-U-test2.R -->
 
 <!-- ## TEKSTBLOK: Mann-Whitney-U-test3.R -->
-| Vergelijking | p-waarde     | Gemiddelde rangschikking (links)  | Gemiddelde rangschikking (rechts)     |
+| Vergelijking | p-waarde     | Gemiddeld rangnummer (links)  | Gemiddeld rangnummer (rechts)     |
 | -------------  | ----------  | ---------- | -------- |
 | FR vs. NR    | 1,00 `r #Round_and_format(posthoc[1,1])` |  `r Round_and_format(Gem_FR_NR[[1]])` | `r Round_and_format(Gem_FR_NR[[2]])` |
 | FR vs. PM    | 0,10 `r #Round_and_format(posthoc[2,1])` |  `r Round_and_format(Gem_FR_PM[[1]])` | `r Round_and_format(Gem_FR_PM[[2]])` |
@@ -309,7 +309,7 @@ Gem_PM_RG <- Gemiddelde_rangschikking(Studiepunten_Premaster, Studiepunten_Recht
 | PM vs. RG    | 0,03`r #Round_and_format(posthoc[3,3])` |  `r Round_and_format(Gem_PM_RG[[1]])` | `r Round_and_format(Gem_PM_RG[[2]])` |
 *Tabel 1. Resultaten post-hoc toetsen voor vergelijking Fiscaal Recht (FR), Notarieel Recht (NR), Premaster (PM) en Rechtsgeleerdheid (RG).*
 
-Als voorbeeld wordt de bovenste rij van Tabel 1 in woorden uitgelegd. Er is geen significant verschil gevonden tussen Fiscaal (Gemiddelde rangschikking = `r Round_and_format(Gem_FR_NR[[1]])`,  *n*=`r vN_FIS`) Recht en Notarieel Recht (Gemiddelde rangschikking = `r Round_and_format(Gem_FR_NR[[2]])`,  *n*=`r vN_NOT`), *p*=1.
+Als voorbeeld wordt de bovenste rij van Tabel 1 in woorden uitgelegd. Er is geen significant verschil gevonden tussen Fiscaal (Gemiddeld rangnummer = `r Round_and_format(Gem_FR_NR[[1]])`,  *n*=`r vN_FIS`) Recht en Notarieel Recht (Gemiddeld rangnummer = `r Round_and_format(Gem_FR_NR[[2]])`,  *n*=`r vN_NOT`), *p*=1.
 <!-- ## /TEKSTBLOK: Mann-Whitney-U-test3.R -->
 
 
@@ -317,7 +317,7 @@ Als voorbeeld wordt de bovenste rij van Tabel 1 in woorden uitgelegd. Er is geen
 <!-- ## TEKSTBLOK: Rapportage.R -->
 De *Kruskal Wallis toets* is uitgevoerd om te toetsen of er verschillen zijn tussen de studenten van de Master Arbeidsrecht met als vooropleiding Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster wat betreft de verdeling van het aantal studiepunten dat de studenten in het eerste jaar behalen. Uit de resultaten kan afgelezen worden dat er een significant verschil is tussen de verdelingen van het aantal studiepunten voor de verschillende vooropleidingen, *H* = `r vK_Chi2`, *df* = `r vK_DF` ,*p* < 0,0001, *&eta;^2^* = `r Round_and_format(Eta_squared)`. De resultaten ondersteunen de conclusie dat er een verschil is tussen studenten van de vier verschillende vooropleidingen wat betreft de verdeling van de hoeveelheid studiepunten die studenten behalen tijdens het eerste jaar van de master Arbeidsrecht.  
 
-De [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) is uitgevoerd als post-hoc toets om te onderzoeken welke vooropleidingen van elkaar verschillen qua aantal studiepunten dat studenten behalen.  De *Bonferroni correctie* is gebruikt om de Type I fout te voorkomen die gepaard gaat met het veelvuldig toetsen. De studenten met Rechtsgeleerdheid als vooropleiding behalen significant minder punten bij de Master Arbeidsrecht, dan de studenten met een andere vooropleiding. Er is ook een significant verschil gevonden tussen de behaalde studiepunten van studenten met de vooropleiding Notarieel Recht en de Premaster, waarbij de studenten van de Premaster minder punten behaalden dan de studenten van Notarieel Recht. Er zijn geen significante verschillen gevonden tussen de vooropleidingen Fiscaal Recht en Notarieel Recht, en Fiscaal Recht en Premaster. De gemiddelde rangschikkingen en p-waarden van de post-hoc toetsen zijn te vinden in Tabel 1. 
+De [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) is uitgevoerd als post-hoc toets om te onderzoeken welke vooropleidingen van elkaar verschillen qua aantal studiepunten dat studenten behalen.  De *Bonferroni correctie* is gebruikt om de Type I fout te voorkomen die gepaard gaat met het veelvuldig toetsen. De studenten met Rechtsgeleerdheid als vooropleiding behalen significant minder punten bij de Master Arbeidsrecht, dan de studenten met een andere vooropleiding. Er is ook een significant verschil gevonden tussen de behaalde studiepunten van studenten met de vooropleiding Notarieel Recht en de Premaster, waarbij de studenten van de Premaster minder punten behaalden dan de studenten van Notarieel Recht. Er zijn geen significante verschillen gevonden tussen de vooropleidingen Fiscaal Recht en Notarieel Recht, en Fiscaal Recht en Premaster. De gemiddelde rangnummers en p-waarden van de post-hoc toetsen zijn te vinden in Tabel 1. 
 
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 
@@ -326,7 +326,7 @@ De [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html) is uitgevoerd als post
 ```
 <!-- ## /CLOSEDBLOK: Footer.R -->
 
-[^1]: De toets rangschikt de datapunten van laag naar hoog en geeft elke datapunt een rangschikking. Vervolgens wordt per groep het gemiddelde berekend van de rangschikking. Dit gemiddelde wordt met elkaar vergeleken. Voor meer informatie lees: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
+[^1]: De toets rangschikt de datapunten van laag naar hoog en geeft elke datapunt een rangnummer. Vervolgens wordt per groep het gemiddelde berekend van de rangnummers. Deze gemiddelden wordt met elkaar vergeleken. Voor meer informatie lees: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^2]: Van Geloven, N. (21 maart 2018). *Kruskal Wallis*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis). 
 [^3]: Universiteit van Amsterdam (7 juli 2014). *Kruskal-Wallis Test*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test). 
 [^4]: Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  

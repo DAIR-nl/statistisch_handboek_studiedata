@@ -1,5 +1,5 @@
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## 22.R ####
+## 25.R ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## R code voor Student Analytics Vrije Universiteit Amsterdam
 ## Copyright 2020 VU
@@ -7,7 +7,7 @@
 ## Contact: Theo Bakker (t.c.bakker@vu.nl)
 ## Verspreiding buiten de VU: Ja
 ##
-## Doel: Data genereren voor script 22 Wilcoxon signed rank toets II R.Rmd
+## Doel: Data genereren voor script 25 Kruskal Wallis toets II R.Rmd
 ##
 ## Afhankelijkheden: Geen
 ##
@@ -23,48 +23,46 @@
 ##
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## Geschiedenis:
-## 12-06-2020: EG: Aanmaak bestand
+## 25-06-2020: EG: Aanmaak bestand
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-# De hoofddocent van het vak ‘Speech schrijven’ van de bachelor Politicologie is 
-# benieuwd naar de effectiviteit van zijn eigen vak. Daarom laat hij studenten 
-# bij de eerste bijeenkomst van het vak een speech schrijven die zij beoordeeld 
-# als onvoldoende, voldoende, goed of uitstekend. Gedurende het vak leren 
-# studenten het schrijven van speeches vanuit verschillende perspectieven. Aan 
-# het einde van het vak schrijven studenten wederom een speech die op dezelfde 
-# wijze door de hoofddocent beoordeeld wordt. Op deze manier kan hij onderzoeken 
-# of zijn lessen ervoor zorgen dat studenten beter worden in het schrijven van 
-# speeches.
+# Bij het interdisciplinaire vak ‘Presentatievaardigheden’ van de faculteit 
+# Economie en Bedrijfswetenschappen leren studenten om een overtuigende 
+# presentatie te geven over een product. Het vak wordt afgesloten met een 
+# individuele presentatie die beoordeeld wordt als onvoldoende, voldoende, goed 
+# of uitstekend. Het vak wordt gevolgd door studenten van de masters Economics, 
+# Finance, Entrepeneurship en Marketing. De hoofddocent wil graag onderzoeken of 
+# er verschillen zijn tussen de beoordelingen van studenten van deze vier 
+# masters. Wanneer er verschillen zijn, kan hij in gesprek gaan met studenten 
+# van een master die minder goed scoort om te onderzoeken wat de oorzaak hiervan 
+# zou kunnen zijn.
 
 # set seed
 set.seed(12345)
 
-## Maak 80 studentnummers
-Studentnummer <- sample(3000000:4000000, 80)
+## Maak 120 studentnummers
+Studentnummer <- sample(3000000:4000000, 120)
 Studentnummer <- c(Studentnummer,Studentnummer)
 
-## Maak variabele voor meetmoment
-Meetmoment <- c(rep("Begin", 80), rep("Eind", 80))
+## Maak variabele voor opleiding
+Opleiding <- c(rep("Economics", 20),
+               rep("Finance", 25),
+               rep("Entrepeneurship", 40),
+               rep("Marketing", 35))
 
-## Maak beoordelingen van studenten
-# Eerst numeriek van 1 tot 4
-Beoordeling_begin <- c(rep(1, 12), rep(2, 35), rep(3, 25), rep(4, 8))
-Beoordeling_begin <- Beoordeling_begin[sample.int(80, 80)]
-Beoordeling_verschil <- c(rep(-1, 6), rep(0, 20), rep(1, 40), rep(2, 14))
-Beoordeling_verschil <- Beoordeling_verschil[sample.int(80, 80)]
+## Maak beoordelingen
 
-# Bereken eindscores
-Beoordeling_eind <- Beoordeling_begin + Beoordeling_verschil
-# Verander 0 in 1 en groter dan 4 in 4
-Beoordeling_eind[Beoordeling_eind == 0] <- 1
-Beoordeling_eind[Beoordeling_eind > 4] <- 4
+# Per opleiding
+Beoordeling_Economics <- c(rep(1, 2), rep(2, 10), rep(3, 6), rep(4, 2))
+Beoordeling_Finance <- c(rep(1, 4), rep(2, 15), rep(3, 2), rep(4, 4))
+Beoordeling_Entrepeneurship <- c(rep(1, 3), rep(2, 10), rep(3, 15), rep(4, 12))
+Beoordeling_Marketing <- c(rep(1, 2), rep(2, 8), rep(3, 10), rep(4, 15))
 
-# Check verdeling
-#table(Beoordeling_eind)
-#table(Beoordeling_begin)
-
-# Bind begin en eind in een variabele
-Beoordeling <- c(Beoordeling_begin, Beoordeling_eind)
+# Bind ze aan elkaar
+Beoordeling <- c(Beoordeling_Economics,
+                 Beoordeling_Finance,
+                 Beoordeling_Entrepeneurship,
+                 Beoordeling_Marketing)
 
 # Verander variabele in factor met levels onvoldoende, voldoende, goed en 
 # uitstekend
@@ -74,16 +72,23 @@ Beoordeling[Beoordeling == 3] <- "Goed"
 Beoordeling[Beoordeling == 4] <- "Uitstekend"
 Beoordeling <- as.character(Beoordeling)
 
+
+
 # Maak dataset
-Beoordelingen_speech_schrijven <- data.frame(Studentnummer,
-                                             Meetmoment,
+Beoordelingen_presentatievaardigheden <- data.frame(Studentnummer,
+                                             Opleiding,
                                              Beoordeling,
-                                             stringsAsFactors=FALSE)
+                                             stringsAsFactors = FALSE)
+
+# Hussel dataset door elkaar
+Beoordelingen_presentatievaardigheden <- Beoordelingen_presentatievaardigheden[sample.int(120, 120),]
 
 
 rm(Beoordeling, 
-   Beoordeling_begin,    
-   Beoordeling_eind,    
-   Beoordeling_verschil, 
-   Meetmoment,
+   Beoordeling_Economics,    
+   Beoordeling_Entrepeneurship,    
+   Beoordeling_Finance,
+   Beoordeling_Marketing,
+   Opleiding,
    Studentnummer)
+

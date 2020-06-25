@@ -47,7 +47,7 @@ source(paste0(here::here(),"/01. Includes/data/23.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 # Toepassing
-Gebruik de *Mann-Whitney U toets* om te toetsen of twee ongepaarde groepen van elkaar verschillen op een ordinale variabele. Een alternatief voor een vergelijking van twee groepen op een ordinale variabele is de *chi-kwadraat toets voor onafhankelijkheid* of de *Fisher-Freeman-Halton toets* (bij een laag aantal observaties). Bij deze toetsen wordt echter geen rekening gehouden met de ordening van de categorieën van de ordinale variabele: de variabele wordt behandeld als een nominale variabele.
+Gebruik de *Mann-Whitney U toets* om te toetsen of twee ongepaarde groepen van elkaar verschillen op een ordinale variabele. Een alternatief voor een vergelijking van twee groepen op een ordinale variabele is de *chi-kwadraat toets voor onafhankelijkheid* of de *Fisher-Freeman-Halton exact toets* (bij een laag aantal observaties). Bij deze toetsen wordt echter geen rekening gehouden met de ordening van de categorieën van de ordinale variabele: de variabele wordt behandeld als een nominale variabele.
 
 # Onderwijscasus
 <div id ="casus">
@@ -55,16 +55,16 @@ Bij de hbo lerarenopleiding Frans leren studenten bij het vak Gesprekstechnieken
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
 
-*H~0~*: Er is geen verschil tussen mannen en vrouwen wat betreft het gemiddelde rangnummer van de beoordelingen van gesprekstechnieken.
+*H~0~*: Er is geen verschil tussen mannen en vrouwen wat betreft (het gemiddelde rangnummer van) de beoordelingen van gesprekstechnieken.
 
-*H~A~*: Er is een verschil tussen mannen en vrouwen wat betreft het gemiddelde rangnummer van de beoordelingen van gesprekstechnieken. De beoordelingen zijn hoger voor mannen of vrouwen.
+*H~A~*: Er is een verschil tussen mannen en vrouwen wat betreft (het gemiddelde rangnummer van) de beoordelingen van gesprekstechnieken. De beoordelingen zijn hoger voor mannen of vrouwen.
 </div>
 
 # Assumpties
 
 Het meetniveau van de afhankelijke variabele is ordinaal[^12] of continu.[^9] In deze toetspagina staat een casus met ordinale data centraal; een casus met continue data is te vinden in [een andere toetspagina](08-Mann-Whitney-U-toets-R.html).
 
-Om de *Mann-Whitney U toets* uit te voeren met een ordinale afhankelijke variabele, moet deze variabele omgezet worden in getallen. Wanneer er drie categorieën zijn, worden ze genummerd van 1 tot en met 3 op basis van de ordening van de variabele. De categorieën onvoldoende, voldoende en goed worden dan omgezet in 1, 2 en 3 respectievelijke. Met behulp van deze getallen worden verschilscores berekend per observatie-eenheid. Een persoon die van onvoldoende naar goed gaat, krijgt als verschilscore 2. Hierbij wordt impliciet aangenomen dat de afstand tussen alle categorieën even groot is. In andere woorden, het verschil tussen onvoldoende en voldoende is even groot als het verschil tussen voldoende en goed. Bij de *chi-kwadraat toets voor onafhankelijkheid* en de *Fisher-Freeman_Halton toets* wordt deze aanname niet gedaan, maar wordt de ordinale variabele als nominaal beschouwd. De *Mann-Whitney U toets* maakt een rangschikking van alle observaties van beide groepen samengevoegd en telt vervolgens apart de rangnummers op voor de observaties in beide groepen. Met behulp van de groepsgroottes kan ook het gemiddelde rangnummer van beide groepen berekend worden. Het verschil tussen de gemiddelde rangnummers in beide groepen bepaalt de significantie van de toets.[^10]
+Om de *Mann-Whitney U toets* uit te voeren met een ordinale afhankelijke variabele, moet deze variabele omgezet worden in getallen. Wanneer er drie categorieën zijn, worden ze genummerd van 1 tot en met 3 op basis van de ordening van de variabele. De categorieën onvoldoende, voldoende en goed worden dan omgezet in 1, 2 en 3 respectievelijke. Met behulp van deze getallen worden verschilscores berekend per observatie-eenheid. Een persoon die van onvoldoende naar goed gaat, krijgt als verschilscore 2. Hierbij wordt impliciet aangenomen dat de afstand tussen alle categorieën even groot is. In andere woorden, het verschil tussen onvoldoende en voldoende is even groot als het verschil tussen voldoende en goed. Bij de *chi-kwadraat toets voor onafhankelijkheid* en de *Fisher-Freeman_Halton exact toets* wordt deze aanname niet gedaan, maar wordt de ordinale variabele als nominaal beschouwd. De *Mann-Whitney U toets* maakt een rangschikking van alle observaties van beide groepen samengevoegd en telt vervolgens apart de rangnummers op voor de observaties in beide groepen. Met behulp van de groepsgroottes kan ook het gemiddelde rangnummer van beide groepen berekend worden. Het verschil tussen de gemiddelde rangnummers in beide groepen bepaalt de significantie van de toets.[^10]
 
 # Effectmaat
 

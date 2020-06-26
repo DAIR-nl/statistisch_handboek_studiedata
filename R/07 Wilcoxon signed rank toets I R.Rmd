@@ -81,7 +81,7 @@ Als de verschilscores echter symmetrisch zijn, toetst de *Wilcoxon signed rank t
 
 De p-waarde geeft aan of een (mogelijk) verschil tussen twee groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^6] 
 
-De *Wilcoxon signed rank toets* heeft als effectmaat *r*. Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^8] De effectmaat *r* wordt voor de *Wilcoxon signed rank toets* berekend door de *z*-waarde behorend bij de p-waarde van de toets te delen door de wortel van het aantal observatie-eenheden, i.e. $\frac{z}{\sqrt{N}}$.[^8] Een correlatie tussen twee variabelen wordt vaak ook aangeduid met symbool *r*, maar beide varianten van *r* hebben een verschillende betekenis.
+De *Wilcoxon signed rank toets* heeft als effectmaat *r*. Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^8] De effectmaat *r* wordt voor de *Wilcoxon signed rank toets* berekend door de *z*-waarde behorend bij de p-waarde van de toets te delen door de wortel van het aantal observatie-eenheden, i.e. $\frac{z}{\sqrt{N}}$.[^8] Een correlatie tussen twee variabelen wordt vaak ook aangeduid met het symbool *r*, maar beide varianten van *r* hebben een verschillende betekenis.
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->

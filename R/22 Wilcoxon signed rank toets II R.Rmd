@@ -49,7 +49,7 @@ Gebruik de *Wilcoxon signed rank toets* om te toetsen of twee gepaarde groepen v
 
 # Onderwijscasus
 <div id ="casus">
-De hoofddocent van het vak ‘Speech schrijven’ van de bachelor Politicologie is benieuwd naar de effectiviteit van zijn eigen vak. Daarom laat hij studenten bij de eerste bijeenkomst van het vak een speech schrijven die zij beoordeeld als onvoldoende, voldoende, goed of uitstekend. Gedurende het vak leren studenten het schrijven van speeches vanuit verschillende perspectieven. Aan het einde van het vak schrijven studenten wederom een speech die op dezelfde wijze door de hoofddocent beoordeeld wordt. Op deze manier kan hij onderzoeken of zijn lessen ervoor zorgen dat studenten beter worden in het schrijven van speeches.
+De hoofddocent van het vak ‘Speech schrijven’ van de bachelor Politicologie is benieuwd naar de effectiviteit van zijn eigen vak. Daarom laat hij studenten bij de eerste bijeenkomst van het vak een speech schrijven die zij beoordeelt als onvoldoende, voldoende, goed of uitstekend. Gedurende het vak leren studenten het schrijven van speeches vanuit verschillende perspectieven. Aan het einde van het vak schrijven studenten wederom een speech die op dezelfde wijze door de hoofddocent beoordeeld wordt. Op deze manier kan hij onderzoeken of zijn lessen ervoor zorgen dat studenten beter worden in het schrijven van speeches.
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
 
@@ -61,21 +61,21 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 # Assumpties
 
-Het meetniveau van de afhankelijke variabele is ordinaal[^10] of continu.[^1] In deze toetspagina staat een casus met ordinale data centraal; een casus met continue data is te vinden in [een andere toetspagina](07-Wilcoxon-signed-rank-toets-I-R.html).
+Het meetniveau van de afhankelijke variabele is ordinaal[^10] of continu.[^1] In deze toetspagina staat een casus met ordinale data centraal; een casus met continue data en bijbehorende uitwerking zijn te vinden in [de Wilcoxon signed rank toets I](07-Wilcoxon-signed-rank-toets-I-R.html).
 
-Om de *Wilcoxon signed rank toets* uit te voeren met een ordinale afhankelijke variabele, moet deze variabele omgezet worden in getallen. Wanneer er vier categorieën zijn, worden ze genummerd van 1 tot en met 4 op basis van de ordening van de variabele. De categorieën onvoldoende, voldoende, goed en uitstekend worden dan omgezet in 1, 2, 3 en 4 respectievelijke. Met behulp van deze getallen worden verschilscores berekend per observatie-eenheid. Een persoon die van voldoende naar uitstekend gaat, krijgt als verschilscore 2. Hierbij wordt impliciet aangenomen dat de afstand tussen alle categorieën even groot is. In andere woorden, het verschil tussen onvoldoende en voldoende is even groot als het verschil tussen voldoende en goed en tussen goed en uitstekend. Bij de *McNemar toets* wordt deze aanname niet gedaan, maar wordt de ordinale variabele als nominaal beschouwd. De *Wilcoxon signed rank toets* maakt een rangschikking van de absolute waarden van de verschilscores en telt vervolgens de rangschikkingen op voor de positieve en negatieve verschilscores. Het verschil tussen de som van de positieve en negatieve rangschikkingen bepaalt de significantie van de toets.  
+Om de *Wilcoxon signed rank toets* uit te voeren met een ordinale afhankelijke variabele, moet deze variabele omgezet worden in getallen. Wanneer er vier categorieën zijn, worden ze genummerd van 1 tot en met 4 op basis van de ordening van de variabele. De categorieën onvoldoende, voldoende, goed en uitstekend worden dan omgezet in respectievelijk 1, 2, 3 en 4. Met behulp van deze getallen worden verschilscores berekend per observatie-eenheid. Een persoon die van voldoende naar uitstekend gaat, krijgt als verschilscore 2. Hierbij wordt impliciet aangenomen dat de afstand tussen alle categorieën even groot is. In andere woorden, het verschil tussen onvoldoende en voldoende is even groot als het verschil tussen voldoende en goed en tussen goed en uitstekend. Bij de *McNemar toets* wordt deze aanname niet gedaan, maar wordt de ordinale variabele als nominaal beschouwd. De *Wilcoxon signed rank toets* maakt een rangschikking van de absolute waarden van de verschilscores en telt vervolgens de rangschikkingen op voor de positieve en negatieve verschilscores. Het verschil tussen de som van de positieve en negatieve rangschikkingen bepaalt de significantie van de toets.  
 
 # Effectmaat
 
 De p-waarde geeft aan of een (mogelijk) verschil tussen twee groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^6] 
 
-De *Wilcoxon signed rank toets* heeft als effectmaat *r*. Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^8] De effectmaat *r* wordt voor de *Wilcoxon signed rank toets* berekend door de *z*-waarde behorend bij de p-waarde van de toets te delen door de wortel van het aantal observatie-eenheden, i.e. $\frac{z}{\sqrt{N}}$.[^8] Een correlatie tussen twee variabelen wordt vaak ook aangeduid met symbool *r*, maar beide varianten van *r* hebben een verschillende betekenis.
+De *Wilcoxon signed rank toets* heeft als effectmaat *r*. Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^8] De effectmaat *r* wordt voor de *Wilcoxon signed rank toets* berekend door de *z*-waarde behorend bij de p-waarde van de toets te delen door de wortel van het aantal observatie-eenheden, i.e. $\frac{z}{\sqrt{N}}$.[^8] Een correlatie tussen twee variabelen wordt vaak ook aangeduid met het symbool *r*, maar beide varianten van *r* hebben een verschillende betekenis.
 
 # Uitvoering
 
 ## De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken.R -->
-Er is data ingeladen met het de beoordeling van studenten van het vak 'Speech schrijven' aan het begin en eind van het vak. Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
+Er is data ingeladen met de beoordeling van studenten van het vak 'Speech schrijven' aan het begin en eind van het vak. Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 <!-- ## /TEKSTBLOK: Data-bekijken.R -->
 
 <!-- ## OPENBLOK: Data-bekijken.R -->
@@ -98,13 +98,13 @@ Een kruistabel geeft de aantallen observaties weer voor de combinaties van de ca
 ## Maak een kruistabel
 Beoordelingen_kruistabel <- table(Beoordelingen_speech_schrijven$Meetmoment, Beoordelingen_speech_schrijven$Beoordeling)
 
-## Bepaal volgorde van de beoordelingen
+## Bepaal de volgorde van de beoordelingen
 Volgorde <- c("Onvoldoende", "Voldoende", "Goed", "Uitstekend")
 
 ## Print de kruistabel 
 print(Beoordelingen_kruistabel[,Volgorde])
 
-## Print een tabel met proporties, tweede argument 2 zorgt ervoor dat de 
+## Print een tabel met proporties; het tweede argument `1` zorgt ervoor dat de 
 ## proporties per kolom berekend worden
 prop.table(Beoordelingen_kruistabel[,Volgorde], 1)
 ```
@@ -112,7 +112,7 @@ prop.table(Beoordelingen_kruistabel[,Volgorde], 1)
 
 De kruistabel laat zien dat er aan het eind van het vak meer speeches als goed en uitstekend worden beoordeeld en minder speeches als onvoldoende of voldoende. Dit is ook te zien in de kruistabel met proporties.
 
-Naast de kruistabel, is de confusiematrix ook relevant om te bekijken. Bij een confusiematrix worden de beoordelingen van studenten tegen elkaar uitgezet voor het begin en eind van de cursus. la daarom de variabele `Beoordeling` apart op in twee vectoren: een voor het begin van het vak en een voor het eind. Maak daarna de confusiematrix.
+Naast de kruistabel, is de confusiematrix ook relevant om te bekijken. Bij een confusiematrix worden de beoordelingen van studenten aan het begin en eind van de cursus tegen elkaar uitgezet. Sla daarom de variabele `Beoordeling` apart op in twee vectoren: een voor het begin van het vak en een voor het eind. Maak daarna de confusiematrix.
 
 <!-- ## OPENBLOK: Data-beschrijven.R -->
 ```{r data aanmaken}
@@ -120,7 +120,7 @@ Naast de kruistabel, is de confusiematrix ook relevant om te bekijken. Bij een c
 Begin <- Beoordelingen_speech_schrijven$Beoordeling[Beoordelingen_speech_schrijven$Meetmoment == "Begin"]
 Eind <- Beoordelingen_speech_schrijven$Beoordeling[Beoordelingen_speech_schrijven$Meetmoment == "Eind"]
 
-## Bepaal volgorde van de beoordelingen
+## Bepaal de volgorde van de beoordelingen
 Volgorde <- c("Onvoldoende", "Voldoende", "Goed", "Uitstekend")
 
 ## Maak een confusiematrix
@@ -159,7 +159,7 @@ Aan het eind van het vak zijn er meer speeches als goed en uitstekend beoordeeld
 
 ## Wilcoxon signed rank toets
 <!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
-Voer de *Wilcoxon signed rank toets* uit om de vraag te beantwoorden of de beoordelingen van het schrijven van speeches bij het vak 'Speech schrijven' verschillen tussen het begin en eind van het vak. Zet eerst de categorische variabele `Beoordeling` om in een numerieke variabele door de categorieën onvoldoende, voldoende, goed en uitstekend om te zetten in 1, 2, 3 en 4 respectievelijke. Gebruik daarna de functie `wilcox.test()` met als eerste argument `Beoordeling ~ Meetmoment` waarin `Beoordeling` de afhankelijke variabele is en `Meetmoment` de onafhankelijke variabele is die twee meetmomenten aangeeft. Gebruik om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn het argument `paired = TRUE`.  Toets tweezijdig door het argument `alternative = "two.sided"` te gebruiken.
+Voer de *Wilcoxon signed rank toets* uit om de vraag te beantwoorden of de beoordelingen van het schrijven van speeches bij het vak 'Speech schrijven' verschillen tussen het begin en eind van het vak. Zet eerst de categorische variabele `Beoordeling` om in een numerieke variabele door de categorieën onvoldoende, voldoende, goed en uitstekend om te zetten in respectievelijk 1, 2, 3 en 4. Gebruik daarna de functie `wilcox.test()` met als eerste argument `Beoordeling ~ Meetmoment` waarin `Beoordeling` de afhankelijke variabele is en `Meetmoment` de onafhankelijke variabele is die twee meetmomenten aangeeft. Gebruik het argument `paired = TRUE` om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn.  Toets tweezijdig door het argument `alternative = "two.sided"` te gebruiken.
 <!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
 
 <!-- ## OPENBLOK: Wilcoxon-signed-rank-toets.R -->
@@ -201,13 +201,13 @@ Bereken de aantallen en de sommen van positieve en negatieve rangschikkingen op 
 
 <!-- ## OPENBLOK: Wilcoxon-signed-rank-toets3.R -->
 ```{r sommen, collapse = TRUE}
-# Bereken verschilscores
+# Bereken de verschilscores
 Verschilscores <- Beoordelingen_speech_schrijven$Beoordeling_numeriek[Beoordelingen_speech_schrijven$Meetmoment == "Eind"] - Beoordelingen_speech_schrijven$Beoordeling_numeriek[Beoordelingen_speech_schrijven$Meetmoment == "Begin"]
 
-# Rangschik de absolute waarden van verschilscores
+# Rangschik de absolute waarden van de verschilscores
 Rangschikkingen <- rank(abs(Verschilscores))
 
-# Maak een vector met daarin de tekens (plus of min) van verschilscores)
+# Maak een vector met daarin de tekens (plus of min) van de verschilscores)
 Tekens <- sign(Verschilscores)
 
 # Bereken het aantal en de som van de positieve rangschikkingen

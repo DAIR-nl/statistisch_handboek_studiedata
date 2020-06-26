@@ -51,7 +51,7 @@ Gebruik de *Mann-Whitney U toets* om te toetsen of twee ongepaarde groepen van e
 
 # Onderwijscasus
 <div id ="casus">
-Bij de hbo lerarenopleiding Frans leren studenten bij het vak Gesprekstechnieken om gesprekken te voeren in een praktijksetting. Aan het einde van het vak worden zij beoordeeld op basis van een mentorgesprek met een acteur waarin zij de aangeleerde vaardigheden in de praktijk kunnen toepassen. In vakevaluaties wordt vaak door mannen aangegeven dat ze het vak als erg moeilijk ervaren. Daarom wil de hoofddocent graag uitzoeken of er verschillen zijn tussen manen en vrouwen wat betreft de beoordeling van de gesprekstechnieken.
+Bij de hbo lerarenopleiding Frans leren studenten bij het vak Gesprekstechnieken om gesprekken te voeren in een praktijksetting. Aan het einde van het vak worden zij beoordeeld op basis van een mentorgesprek met een acteur waarin zij de aangeleerde vaardigheden in de praktijk kunnen toepassen. In vakevaluaties wordt vaak door mannen aangegeven dat ze het vak als erg moeilijk ervaren. Daarom wil de hoofddocent graag uitzoeken of er verschillen zijn tussen mannen en vrouwen wat betreft de beoordeling van de gesprekstechnieken.
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
 
@@ -62,9 +62,9 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 # Assumpties
 
-Het meetniveau van de afhankelijke variabele is ordinaal[^12] of continu.[^9] In deze toetspagina staat een casus met ordinale data centraal; een casus met continue data is te vinden in [een andere toetspagina](08-Mann-Whitney-U-toets-R.html).
+Het meetniveau van de afhankelijke variabele is ordinaal[^12] of continu.[^9] In deze toetspagina staat een casus met ordinale data centraal; een casus met continue data en bijbehorende uitwerking is te vinden in de [Mann-Whitney U toets I](08-Mann-Whitney-U-toets-R.html).
 
-Om de *Mann-Whitney U toets* uit te voeren met een ordinale afhankelijke variabele, moet deze variabele omgezet worden in getallen. Wanneer er drie categorieën zijn, worden ze genummerd van 1 tot en met 3 op basis van de ordening van de variabele. De categorieën onvoldoende, voldoende en goed worden dan omgezet in 1, 2 en 3 respectievelijke. Met behulp van deze getallen worden verschilscores berekend per observatie-eenheid. Een persoon die van onvoldoende naar goed gaat, krijgt als verschilscore 2. Hierbij wordt impliciet aangenomen dat de afstand tussen alle categorieën even groot is. In andere woorden, het verschil tussen onvoldoende en voldoende is even groot als het verschil tussen voldoende en goed. Bij de *chi-kwadraat toets voor onafhankelijkheid* en de *Fisher-Freeman_Halton exact toets* wordt deze aanname niet gedaan, maar wordt de ordinale variabele als nominaal beschouwd. De *Mann-Whitney U toets* maakt een rangschikking van alle observaties van beide groepen samengevoegd en telt vervolgens apart de rangnummers op voor de observaties in beide groepen. Met behulp van de groepsgroottes kan ook het gemiddelde rangnummer van beide groepen berekend worden. Het verschil tussen de gemiddelde rangnummers in beide groepen bepaalt de significantie van de toets.[^10]
+Om de *Mann-Whitney U toets* uit te voeren met een ordinale afhankelijke variabele, moet deze variabele omgezet worden in getallen. Wanneer er drie categorieën zijn, worden ze genummerd van 1 tot en met 3 op basis van de ordening van de variabele. De categorieën onvoldoende, voldoende en goed worden dan omgezet in respectievelijk 1, 2 en 3. Bij de *chi-kwadraat toets voor onafhankelijkheid* en de *Fisher-Freeman_Halton exact toets* wordt dit niet gedaan, maar wordt de ordinale variabele als nominaal beschouwd. De *Mann-Whitney U toets* maakt een rangschikking van alle observaties van beide groepen samengevoegd en telt vervolgens apart de rangnummers op voor de observaties in beide groepen. Met behulp van de groepsgroottes kan ook het gemiddelde rangnummer van beide groepen berekend worden. Het verschil tussen de gemiddelde rangnummers in beide groepen bepaalt de significantie van de toets.[^10]
 
 # Effectmaat
 
@@ -72,11 +72,11 @@ De p-waarde geeft aan of een (mogelijk) verschil tussen twee groepen significant
 
 De *Mann-Whitney U toets* heeft als effectmaat *r*. Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^5] De effectmaat *r* wordt voor de *Mann-Whitney U toets* berekend door de
 *z*-waarde behorend bij de *p*-waarde van de toets te delen door de wortel van
-het aantal observaties, i.e. $\frac{z}{\sqrt{N}}$.[^5] Een correlatie tussen twee variabelen wordt vaak ook aangeduid met symbool *r*, maar beide varianten van *r* hebben een verschillende betekenis.
+het aantal observaties, i.e. $\frac{z}{\sqrt{N}}$.[^5] Een correlatie tussen twee variabelen wordt vaak ook aangeduid met het symbool *r*, maar beide varianten van *r* hebben een verschillende betekenis.
 
 # Uitvoering 
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is een dataset `Beoordelingen_gesprekstechnieken` ingeladen met het aantal punten dat studenten in het tweede jaar halen.
+Er is een dataset `Beoordelingen_gesprekstechnieken` ingeladen met het aantal studiepunten dat studenten in het tweede jaar halen.
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
@@ -102,13 +102,13 @@ Een kruistabel geeft de aantallen observaties weer voor de combinaties van de ca
 ## Maak een kruistabel
 Beoordelingen_kruistabel <- table(Beoordelingen_gesprekstechnieken$Geslacht, Beoordelingen_gesprekstechnieken$Beoordeling)
 
-## Bepaal volgorde van de beoordelingen
+## Bepaal de volgorde van de beoordelingen
 Volgorde <- c("Onvoldoende", "Voldoende", "Goed")
 
 ## Print de kruistabel 
 print(Beoordelingen_kruistabel[,Volgorde])
 
-## Print een tabel met proporties, tweede argument 2 zorgt ervoor dat de 
+## Print een tabel met proporties; het tweede argument `1` zorgt ervoor dat de 
 ## proporties per kolom berekend worden
 prop.table(Beoordelingen_kruistabel[,Volgorde], 1)
 ```
@@ -137,11 +137,11 @@ ggplot(Beoordelingen_gesprekstechnieken,
 ```
 <!-- ## /OPENBLOK: Histogram1.R -->
 
-Bij zowel mannen als vrouwen krijgen de meeste studenten de beoordeling goed. Het aantal studenten waarvan de gesprekstechnieken als onvoldoende wordt beoordeeld is beide groepen het laagst.
+Bij zowel mannen als vrouwen krijgen de meeste studenten de beoordeling goed. Het aantal studenten waarvan de gesprekstechnieken als onvoldoende wordt beoordeeld is bij beide groepen het laagst.
 
 ## Mann-Whitney U toets
 <!-- ## TEKSTBLOK: Mann-Whitney-U-toets-1.R -->
-Voer de *Mann-Whitney U toets* uit om de vraag te beantwoorden of er verschillen zijn tussen de beoordelingen van de gesprekstechnieken van mannen en vrouwen. Zet eerst de categorische variabele `Beoordeling` om in een numerieke variabele door de categorieën onvoldoende, voldoende en goed om te zetten in 1, 2 en 3 respectievelijke. Gebruik daarna de functie `wilcox.test()` met als eerste argument `Beoordeling ~ Geslacht` waarin `Beoordeling` de afhankelijke variabele is en `Geslacht` de onafhankelijke variabele. Voer daarna het argument `paired = FALSE` in omdat de steekproeven ongepaard zijn en het argument `alternative = "two.sided"` vanwege de tweezijdige alternatieve hypothese
+Voer de *Mann-Whitney U toets* uit om de vraag te beantwoorden of er verschillen zijn tussen de beoordelingen van de gesprekstechnieken van mannen en vrouwen. Zet eerst de categorische variabele `Beoordeling` om in een numerieke variabele door de categorieën onvoldoende, voldoende en goed om te zetten in respectievelijk 1, 2 en 3. Gebruik daarna de functie `wilcox.test()` met als eerste argument `Beoordeling ~ Geslacht` waarin `Beoordeling` de afhankelijke variabele is en `Geslacht` de onafhankelijke variabele. Voer daarna het argument `paired = FALSE` in omdat de steekproeven ongepaard zijn en het argument `alternative = "two.sided"` vanwege de tweezijdige alternatieve hypothese
 
 
 <!-- ## /TEKSTBLOK: Mann-Whitney-U-toets-1.R -->
@@ -210,7 +210,7 @@ Rangnummer_mannen <- mean(rank(Beoordelingen_gesprekstechnieken$Beoordeling_nume
 
 Rangnummer_vrouwen <- mean(rank(Beoordelingen_gesprekstechnieken$Beoordeling_numeriek)[!Index_mannen])
 
-# Print gemiddelde rangnummers
+# Print de gemiddelde rangnummers
 Rangnummer_mannen
 Rangnummer_vrouwen
 ```

@@ -82,7 +82,7 @@ De p-waarde geeft aan of een (mogelijk) verschil tussen twee groepen significant
 
 De *Mann-Whitney U toets* heeft als effectmaat *r*. Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^5] De effectmaat *r* wordt voor de *Mann-Whitney U toets* berekend door de
 *z*-waarde behorend bij de *p*-waarde van de toets te delen door de wortel van
-het aantal observaties, i.e. $\frac{z}{\sqrt{N}}$.[^5] Een correlatie tussen twee variabelen wordt vaak ook aangeduid met symbool *r*, maar beide varianten van *r* hebben een verschillende betekenis.
+het aantal observaties, i.e. $\frac{z}{\sqrt{N}}$.[^5] Een correlatie tussen twee variabelen wordt vaak ook aangeduid met het symbool *r*, maar beide varianten van *r* hebben een verschillende betekenis.
 
 # Uitvoering 
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->

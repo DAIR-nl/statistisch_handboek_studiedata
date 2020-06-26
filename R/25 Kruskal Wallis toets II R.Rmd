@@ -65,7 +65,9 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 # Assumpties
 
-Het meetniveau van de afhankelijke variabele is ordinaal[^16] of continu.[^17] In deze toetspagina staat een casus met ordinale data centraal; een casus met continue data is te vinden in [een andere toetspagina](10-Kruskal-Wallis-toets-I-R.html). 
+Het meetniveau van de afhankelijke variabele is ordinaal[^16] of continu.[^17] In deze toetspagina staat een casus met ordinale data centraal; een casus met continue data en bijbehorende uitwerking is te vinden in de [Kruskal Wallis toets I](10-Kruskal-Wallis-toets-I-R.html).
+
+Om de *Kruskal Wallis toets* uit te voeren met een ordinale afhankelijke variabele, moet deze variabele omgezet worden in getallen. Wanneer er vier categorieën zijn, worden ze genummerd van 1 tot en met 4 op basis van de ordening van de variabele. De categorieën onvoldoende, voldoende, goed en uitstekend worden dan omgezet in respectievelijk 1, 2, 3 en 4. Bij de *chi-kwadraat toets voor onafhankelijkheid* en de *Fisher-Freeman_Halton exact toets* wordt dit niet gedaan, maar wordt de ordinale variabele als nominaal beschouwd. De *Kruskal Wallis toets* maakt een rangschikking van alle observaties van alle groepen samengevoegd en telt vervolgens apart de rangnummers op voor de observaties in alle groepen. Met behulp van de groepsgroottes kan ook het gemiddelde rangnummer van de groepen berekend worden. Het verschil tussen de gemiddelde rangnummers van de groepen bepaalt de significantie van de toets.[^17]
 
 # Post-hoc toets 
 De *Kruskal Wallis toets* toetst of twee of meerdere groepen van elkaar verschillen. Een post-hoc toets specificeert of groep significant van een andere groep verschilt. Gebruik de [Mann-Whitney U toets](23-Mann-Whitney-U-toets-II-R.html) als post-hoc toets.
@@ -79,7 +81,7 @@ Bij de *Kruskal Wallis toets* wordt eta-squared (*η^2^*) als effectmaat gebruik
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is een dataset `Resultaten_Arbeidsrecht` ingeladen met studieresultaten van het eerste jaar van de master Arbeidsrecht per vooropleiding: Fiscaal Recht, Notarieel Recht, Rechtsgeleerdheid en de Premaster.
+Er is een dataset `Beoordelingen_presentatievaardigheden` ingeladen met daarin de beoordelingen voor het vak Presentatievaardigheden van studenten afkomstig van de opleidingen Economics, Finance, Entrepeneurship en Marketing.
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
@@ -102,7 +104,7 @@ De dataset bevat gegevens van studenten van verschillende opleidingen. Gebruik `
 
 <!-- ## OPENBLOK: Data-bekijken-2.R -->
 ```{r data bekijken 2}
-## Unieke opleidingen
+## Bepaal welke opleidingen er zijn in de dataset
 unique(Beoordelingen_presentatievaardigheden$Opleiding)
 ```
 <!-- ## /OPENBLOK: Data-bekijken-2.R -->
@@ -118,19 +120,19 @@ Een kruistabel geeft de aantallen observaties weer voor de combinaties van de ca
 Beoordelingen_kruistabel <- table(Beoordelingen_presentatievaardigheden$Beoordeling,
                                   Beoordelingen_presentatievaardigheden$Opleiding)
 
-## Bepaal volgorde van de beoordelingen
+## Bepaal de volgorde van de beoordelingen
 Volgorde <- c("Onvoldoende", "Voldoende", "Goed", "Uitstekend")
 
 ## Print de kruistabel 
 print(Beoordelingen_kruistabel[Volgorde,])
 
-## Print een tabel met proporties, tweede argument 2 zorgt ervoor dat de 
+## Print een tabel met proporties; het tweede argument `2` zorgt ervoor dat de 
 ## proporties per kolom berekend worden
 prop.table(Beoordelingen_kruistabel[Volgorde,], 2)
 ```
 <!-- ## /OPENBLOK: Data-kruistabel2.R -->
 
-De kruistabel en bijbehorende kruistabel met proporties geven informatie over de verdeling van de beoordelingen van studenten. Bij Economics en Finance krijgen de meeste studenten een voldoende als beoordeling. Bij Entrepeneurship worden de presentatievaardigheden van studenten het meest als goed beoordeeld en bij Marketing het meest als uitstekend.
+De kruistabel en bijbehorende kruistabel met proporties geven informatie over de verdeling van de beoordelingen van studenten. Bij Economics en Finance krijgen de meeste studenten een voldoende als beoordeling. Bij Entrepeneurship worden de presentatievaardigheden van studenten het vaakst als goed beoordeeld en bij Marketing het meest als uitstekend.
 
 ## De data visualiseren
 Maak een staafdiagram om de verdeling van de beoordelingen aan het begin en eind van het vak visueel weer te geven.
@@ -155,7 +157,7 @@ De staafdiagram maakt duidelijk dat bij Economics en Finance de meeste studenten
 
 ## Kruskal Wallis toets
 <!-- ## TEKSTBLOK: Kruskal-Wallis-test-1.R -->
-Voer de *Kruskal Wallis toets* uit om te onderzoeken of er verschillen zijn tussen de beoordelingen van de presentatievaardigheden van studenten van de opleidingen Economics, Finance, Entrpeneurship en Marketing. Zet eerst de categorische variabele `Beoordeling` om in een numerieke variabele door de categorieën onvoldoende, voldoende, goed en uitstekend om te zetten in 1, 2, 3 en 4 respectievelijke. Gebruik de functie `kruskal.test()` met als eerste argument de afhankelijke variabele `Beoordeling_numeriek` en de variabele die de groep definiëert: `Opleiding`. Het tweede argument is het dataframe `Beoordelingen_presentatievaardigheden`. 
+Voer de *Kruskal Wallis toets* uit om te onderzoeken of er verschillen zijn tussen de beoordelingen van de presentatievaardigheden van studenten van de opleidingen Economics, Finance, Entrpeneurship en Marketing. Zet eerst de categorische variabele `Beoordeling` om in een numerieke variabele door de categorieën onvoldoende, voldoende, goed en uitstekend om te zetten in respectievelijk 1, 2, 3 en 4. Gebruik de functie `kruskal.test()` met als eerste argument de afhankelijke variabele `Beoordeling_numeriek` en de variabele die de groep definiëert: `Opleiding`. Het tweede argument is het dataframe `Beoordelingen_presentatievaardigheden`. 
 <!-- ## /TEKSTBLOK: Kruskal-Wallis-test-1.R -->
 
 <!-- ## OPENBLOK: Kruskal-Wallis-test-2.R -->
@@ -245,7 +247,7 @@ Gemiddeld_rangnummer <- function(Opleiding_1, Opleiding_2){
   # Bereken de rangnummers van alle observaties
   Rangschikkingen <- rank(Beoordelingen)
   
-  # Bereken het gemiddelde rangnummer voor beide Opleidingen
+  # Bereken het gemiddelde rangnummer voor beide opleidingen
   Gemiddeld_rangnummer_Opleiding_1 <- mean(Rangschikkingen[Groepsindicator == 1])
   Gemiddeld_rangnummer_Opleiding_2 <- mean(Rangschikkingen[Groepsindicator == 2])
   
@@ -254,7 +256,7 @@ Gemiddeld_rangnummer <- function(Opleiding_1, Opleiding_2){
 }
 
 
-# Definieer variabelen die observaties bevatten voor de verschillende Opleidingen
+# Definieer variabelen die observaties bevatten voor de verschillende opleidingen
 Beoordeling_Economics <- Beoordelingen_presentatievaardigheden$Beoordeling_numeriek[Beoordelingen_presentatievaardigheden$Opleiding == "Economics"]
 
 Beoordeling_Finance <- Beoordelingen_presentatievaardigheden$Beoordeling_numeriek[Beoordelingen_presentatievaardigheden$Opleiding == "Finance"]

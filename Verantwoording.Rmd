@@ -55,6 +55,7 @@ Het handboek is nog volop in ontwikkeling en zal gedurende 2020 aangevuld worden
 * 11 maart 2020: Nieuwe toetsen toegevoegd: Repeated measures ANOVA, Wilcoxon signed rank toets, Chi-kwadraat toets en binomiaaltoets, en McNemar toets
 * 31 maart 2020: Aanmelding nieuwsbrief toegevoegd en links naar andere toetsen aangebracht
 * 20 april 2020: Begrippenlijst toegevoegd, Python toetsen verbeterd en nieuwe toetsen toegevoegd (Tekentoets, Friedman's ANOVA, Cochran's Q toets)
+* 29 juni 2020: Nieuwe toetsen toegevoegd voor R (Multilevel multinomiale logistische regressie, Wilcoxon II, Mann-Whitney U II en Kruskall Wallis II) en Python (Repeated measures ANOVA en Mann-Whitney U I)
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer_simpel.R"))}

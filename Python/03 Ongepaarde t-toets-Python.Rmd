@@ -360,7 +360,7 @@ De p-waarde geeft aan of het verschil tussen twee groepen significant is. De gro
 In dit voorbeeld is de p-waarde groter dan 0,05, dus is een effectmaat uitrekenen onnodig. Pas de volgende stappen toe bij een p-waarde kleiner dan 0,05.
 
 <!-- ## TEKSTBLOK: Cohen-d.py -->
-Er is geen Python functie voor Cohen's d. Bereken daarom de effectmaat zelf door het verschil tussen de gemiddelden van beide groepen te delen door de ongepoolde standaardafwijking. Neem de absolute waarde omdat het gebruikelijk is om een effectmaat als positief getal weer te geven.
+Er is geen Python functie voor Cohen's d. Bereken daarom de effectmaat zelf door het verschil tussen de gemiddelden van beide groepen te delen door de ongepoolde standaardafwijking.[^15] Neem de absolute waarde omdat het gebruikelijk is om een effectmaat als positief getal weer te geven.
 <!-- ## /TEKSTBLOK: Cohen-d.py -->
 
 <!-- ## OPENBLOK: Cohens-d-test.py -->

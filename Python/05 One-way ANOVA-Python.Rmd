@@ -92,6 +92,7 @@ De effectmaat eta squared (*η^2^*) berekent de proportie van de variantie in de
 
 # Post-hoc toetsen
 De *one-way ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Voer een post-hoc toets uit om te bepalen welke groepen significant verschillen.
+De post-hoc toetsen voeren meestal een correctie voor de p-waarden uit, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout).
 
 Er zijn meerdere post-hoc toetsen. De keuze voor een toets hangt onder andere af van het wel of niet schenden van de assumptie van homogeniteit van varianties:   
 * Gebruik Tukey bij gelijke variantie.[^14]  
@@ -143,7 +144,7 @@ Reistijd_GSC = dfReistijd_per_opleiding[dfReistijd_per_opleiding['Opleiding'] ==
 <!-- ## /OPENBLOK: Data-selecteren.py -->
 
 <!-- ## TEKSTBLOK: Data-beschrijven.py -->
-Om meer inzicht te krijgen in de data, inspecteer de data met `len()`, `np.mean()` en `np.sqrt(np.var())`, door deze aan te roepen uit de library `numpy`.
+Om meer inzicht te krijgen in de data, inspecteer de data met `len()`, `np.mean()` en `np.std())`, door deze aan te roepen uit de library `numpy`.
 <!-- ## /TEKSTBLOK: Data-beschrijven.py -->
 
 <!-- ## OPENBLOK: Data-beschrijven-inladen.py -->
@@ -248,7 +249,7 @@ De verdelingen van de opleidingen Filosofie en Geschiedenis lijken twee toppen t
 
 ### Q-Q plot
 <!-- ## TEKSTBLOK: QQplot.py -->
-Importeer `scipy.stats` om een Q-Q plot te maken en statistische testen uit te voeren. Voor een Q-Q plot kan de functie `scipy.stats.probplot()` worden gebruikt.
+Importeer `scipy.stats` om een Q-Q plot te maken. Gebruik de functie `scipy.stats.probplot()` om een Q-Q plot te maken.
 <!-- ## TEKSTBLOK: QQplot.py -->
 
 Als over het algemeen de meeste datapunten op de lijn liggen, neem dan aan dat de data normaal verdeeld zijn.
@@ -498,7 +499,7 @@ Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de
 <!-- ## /TEKSTBLOK: Rapportage.py -->
 *Tabel 1. Groepsgrootte, gemiddelde reistijd en standaarddeviatie per opleiding*
 <!-- ## TEKSTBLOK: Rapportage-tukey.py -->
-*Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen. Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = `r Round_and_format(py$vATCvsFIL)`, *p* < 0,01). Tussen Geschiedenis en Arabische Taal en Cultuur is een significant verschil (*MD* = `r Round_and_format(py$vATCvsGSC)`, *p* < 0,01). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = `r Round_and_format(py$vFILvsGSC)`, *p* = 0,26). 
+*Tukey's HSD test* is uitgevoerd om te toetsen welke van de drie gemiddelden significant verschillen. Filosofie en Arabische Taal en Cultuur verschillen significant (*MD* = `r Round_and_format(py$vATCvsFIL)`, *p* < 0,01). Tussen Geschiedenis en Arabische Taal en Cultuur is een significant verschil (*MD* = `r Round_and_format(py$vATCvsGSC)`, *p* < 0,01). Tussen Geschiedenis en Filosofie is geen significant verschil gevonden (*MD* = `r Round_and_format(py$vFILvsGSC)`, *p* = `r Round_and_format(py$vpFILvsGSC)`). 
 <!-- ## /TEKSTBLOK: Rapportage-tukey.py -->
 
 Aan de hand van de resultaten kan geconcludeerd worden dat de studenten van Arabische Taal en Cultuur significant langer moeten reizen dan de andere twee opleidingen. Tussen de studenten Filosofie en Geschiedenis is geen significant verschil gevonden. 

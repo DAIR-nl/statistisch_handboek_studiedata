@@ -87,7 +87,7 @@ Reistijd_GSC = dfReistijd_per_opleiding[dfReistijd_per_opleiding['Opleiding'] ==
 <!-- ## /OPENBLOK: Data-selecteren.py -->
 
 <!-- ## TEKSTBLOK: Data-beschrijven.py -->
-Om meer inzicht te krijgen in de data, inspecteer de data met `len()`, `np.mean()` en `np.sqrt(np.var())`, door deze aan te roepen uit de library `numpy`.
+Om meer inzicht te krijgen in de data, inspecteer de data met `len()`, `np.mean()` en `np.std())`, door deze aan te roepen uit de library `numpy`.
 <!-- ## /TEKSTBLOK: Data-beschrijven.py -->
 
 <!-- ## OPENBLOK: Data-beschrijven-inladen.py -->
@@ -168,7 +168,7 @@ plt.show()
 <!-- ## /OPENBLOK: Histogram.py -->
 
 <!-- ## TEKSTBLOK: QQplot.py -->
-Importeer `scipy.stats` om een Q-Q plot te maken en statistische testen uit te voeren. Voor een Q-Q plot kan de functie `scipy.stats.probplot()` worden gebruikt.
+Importeer `scipy.stats` om een Q-Q plot te maken. Gebruik de functie `scipy.stats.probplot()` om een Q-Q plot te maken.
 <!-- ## TEKSTBLOK: QQplot.py -->
 
 <!-- ## OPENBLOK: QQplot1.py -->

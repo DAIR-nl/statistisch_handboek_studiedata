@@ -49,7 +49,9 @@ source(paste0(here::here(),"/01. Includes/data/07.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
+<!-- ## TEKSTBLOK: link1.R-->
 Gebruik de *Wilcoxon signed rank toets* om te toetsen of de som van de rangnummers van de verdelingen van twee gepaarde groepen van elkaar verschillen.[^1] Deze toets is een alternatief voor de [gepaarde t-toets](02-Gepaarde-t-toets-R.html) als de verschilscores van de gepaarde groepen niet normaal verdeeld zijn. Alleen als de verdeling van de verschilscores symmetrisch is, kan de *Wilcoxon signed rank toets* gebruikt worden om een verschil tussen de medianen van gepaarde groepen te toetsen.[^3] Als de verdeling van verschilscores niet symmetrisch is, gebruik dan de gepaarde [tekentoets](27-Tekentoets-II-R.html) om medianen te toetsen.
+<!-- ## /TEKSTBLOK: link1.R-->
 
 # Onderwijscasus
 <div id ="casus">
@@ -64,10 +66,11 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 </div>
 
 # Assumpties
-
-Het meetniveau van de afhankelijke variabele is ordinaal[^10] of continu.[^1] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data is te vinden in [een andere toetspagina](22-Wilcoxon-signed-rank-toets-II-R.html).
+<!-- ## TEKSTBLOK: link2.R-->
+Het meetniveau van de afhankelijke variabele is ordinaal[^10] of continu.[^1] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data met bijbehorende uitwerking is te vinden in de [Wilcoxon signed rank toets II](22-Wilcoxon-signed-rank-toets-II-R.html).
 
 De *Wilcoxon signed rank toets* is een alternatief voor de [gepaarde t-toets](02-Gepaarde-t-toets-R.html). Een voordeel van de *Wilcoxon signed rank toets* is dat de data niet aan de assumptie van normaliteit hoeven te voldoen. Maar als de data wel normaal verdeeld is, heeft de *Wilcoxon signed rank toets* minder onderscheidend vermogen[^4] dan de [gepaarde t-toets](02-Gepaarde-t-toets-R.html).[^5] Vandaar dat ondanks het voordeel van de grotere robuustheid minder vaak voor de *Wilcoxon signed rank toets* gekozen wordt. 
+<!-- ## /TEKSTBLOK: link2.R-->
 
 ## Verdeling steekproef
 
@@ -75,7 +78,9 @@ De *Wilcoxon signed rank toets* schrijft geen assumpties voor over de verdeling 
 
 Als er geen symmetrische verdeling van verschilscores is, doet de *Wilcoxon signed rank toets* een uitspraak over het verschil tussen verdelingen. Een verschil tussen verdelingen kan meerdere oorzaken hebben. De top of toppen van de verdelingen kunnen verschillend zijn, maar ook de spreiding van de verdeling kan verschillen. In alle gevallen is er echter een verschil tussen de som van de rangnummers van de verdelingen. In andere woorden, de ene verdeling bevat hogere waarden dan de andere verdeling. Benoem daarom de sommen van positieve en negatieve rangnummers in de rapportage en visualiseer de verdeling van beide gepaarde groepen om duidelijk te maken op welke manier de verdelingen van elkaar verschillen.
 
+<!-- ## TEKSTBLOK: link3.R-->
 Als de verschilscores echter symmetrisch zijn, toetst de *Wilcoxon signed rank toets* ook een hypothese over het verschil tussen de medianen van twee gepaarde groepen. In dat geval heeft de *Wilcoxon signed rank toets* een hoger onderscheidend vermogen[^4] dan de [tekentoets](06-Tekentoets-R.html) om medianen te toetsen.[^5] De [tekentoets](06-Tekentoets-R.html) vereist niet dat de verschilscores symmetrisch zijn en toetst alleen een hypothese over het verschil tussen medianen van gepaarde groepen.
+<!-- ## /TEKSTBLOK: link3.R-->
 
 # Effectmaat
 
@@ -197,13 +202,14 @@ De verdeling van de verschilscores bevat voornamelijk positieve waarden en een p
 
 ## Wilcoxon signed rank toets
 <!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
-Voer de *Wilcoxon signed rank toets* uit om de vraag te beantwoorden of de verdeling van de bruto jaarinkomens van alumni verschillend is voor de inkomens één jaar en vijf jaar na afstuderen. Gebruik de functie `wilcox.test()` met als eerste argument `Inkomen ~ Meetmoment` waarin `Inkomen` de afhankelijke variabele is en `Meetmoment` de onafhankelijke variabele is die twee meetmomenten aangeeft. Gebruik om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn het argument `paired = TRUE`.  Toets tweezijdig door het argument `alternative = "two.sided"` te gebruiken.
+Voer de *Wilcoxon signed rank toets* uit om de vraag te beantwoorden of de verdeling van de bruto jaarinkomens van alumni verschillend is voor de inkomens één jaar en vijf jaar na afstuderen. Gebruik de functie `wilcox.test()` met als eerste argument `Inkomen ~ Meetmoment` waarin `Inkomen` de afhankelijke variabele is en `Meetmoment` de onafhankelijke variabele is die twee meetmomenten aangeeft. Gebruik het argument `paired = TRUE` om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn. Toets tweezijdig door het argument `alternative = "two.sided"` te gebruiken.
 <!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
 
 <!-- ## OPENBLOK: Wilcoxon-signed-rank-toets.R -->
 ```{r wilcox test}
-wilcox.test(Inkomen ~ Meetmoment, Alumni_jaarinkomens, 
-            paired = TRUE, alternative = "two.sided")
+wilcox.test(Inkomen ~ Meetmoment, Alumni_jaarinkomens,
+            paired = TRUE, 
+            alternative = "two.sided")
 ```
 <!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets.R -->
 
@@ -211,8 +217,10 @@ wilcox.test(Inkomen ~ Meetmoment, Alumni_jaarinkomens,
 Bereken de effectmaat *r* vervolgens op basis van de p-waarde van de *Wilcoxon signed rank toets*.
 ```{r effectgrootte}
 # Sla de p-waarde op
-pwaarde <- wilcox.test(Inkomen ~ Meetmoment, Alumni_jaarinkomens, 
-                       paired = TRUE, alternative = "two.sided")$p.value
+pwaarde <- wilcox.test(Inkomen ~ Meetmoment, 
+                       Alumni_jaarinkomens, 
+                       paired = TRUE, 
+                       alternative = "two.sided")$p.value
 
 # Bereken de effectgrootte voor een tweezijdige toets
 r <- abs(qnorm(pwaarde/2)) / sqrt(length(Alumni_jaarinkomens_T1))

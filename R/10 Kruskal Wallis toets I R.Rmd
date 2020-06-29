@@ -48,7 +48,9 @@ source(paste0(here::here(),"/01. Includes/data/10.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
+<!-- ## TEKSTBLOK: link1.R -->
 Gebruik de *Kruskal Wallis toets* om te toetsen of de gemiddelde rangnummers van de verdelingen van twee of meer groepen van elkaar verschillen.[^1]<sup>, </sup>[&17] De *Kruskal Wallis toets* kan een alternatief zijn voor de [one-way ANOVA](05-One-way-ANOVA-R.html).[^2] De *Kruskal Wallis toets* hoeft niet te voldoen aan de assumptie van normaliteit van de verdelingen van elke groep. Daarnaast hebben uitbijters bij de *Kruskal Wallis toets*  minder invloed op het eindresultaat dan bij de [one-way ANOVA](05-One-way-ANOVA-R.html). Daarentegen, als de data wel normaal verdeeld is, heeft de *Kruskal Wallis toets* minder onderscheidend vermogen[^4] dan de [one-way ANOVA](05-One-way-ANOVA-R.html).[^3] Vandaar dat ondanks de voordelen van de grotere robuustheid er toch minder vaak voor de *Kruskal Wallis toets* gekozen wordt. 
+<!-- ## /TEKSTBLOK: link1.R -->
 
 # Onderwijscasus
 <div id="casus">
@@ -63,10 +65,14 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 </div>
 
 # Assumpties
-Het meetniveau van de afhankelijke variabele is ordinaal[^16] of continu.[^6] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data is te vinden in een andere toetspagina. 
+<!-- ## TEKSTBLOK: link2.R -->
+Het meetniveau van de afhankelijke variabele is ordinaal[^16] of continu.[^6] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data met bijbehorende uitwerking is te vinden in de [Kruskal Wallis toets II](25-Kruskall-Wallis-toets-II-R.html). 
+<!-- ## /TEKSTBLOK: link2.R -->
 
 # Post-hoc toets 
+<!-- ## TEKSTBLOK: link3.R -->
 De *Kruskal Wallis toets* toetst of twee of meerdere groepen van elkaar verschillen. Een post-hoc toets specificeert of groep significant van een andere groep verschilt. Gebruik de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-I-R.html) als post-hoc toets. Hoewel het minder gebruikelijk is, is *Moods'mediaan toets* ook een optie als post-hoc toets. Deze toets toetst het verschil tussen de medianen van twee ongepaarde groepen. De [Mann-Whitney U toets](08-Mann-Whitney-U-toets-I-R.html) toetst het verschil tussen de verdelingen van twee ongepaarde groepen.
+<!-- ## /TEKSTBLOK: link3.R -->
 
 Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout.[^9] Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^2]
 
@@ -156,10 +162,10 @@ vQ3_PM <- Round_and_format(x[3,5])
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven.R -->
 <!-- ## TEKSTBLOK: Data-beschrijven.R-->
-* Mediaan Fiscaal Recht: `r vMed_FIS`. *n* = `r vN_FIS`.
-* Mediaan Notarieel Recht: `r vMed_NOT`. *n* = `r vN_NOT`.
-* Mediaan Premaster: `r vMed_PM`. *n* = `r vN_PM`.
-* Mediaan Rechtsgeleerdheid: `r vMed_RCH`. *n* = `r vN_RCH`.
+* Mediaan Fiscaal Recht is `r vMed_FIS`, *n* = `r vN_FIS`.
+* Mediaan Notarieel Recht is `r vMed_NOT`, *n* = `r vN_NOT`.
+* Mediaan Premaster is `r vMed_PM`, *n* = `r vN_PM`.
+* Mediaan Rechtsgeleerdheid is `r vMed_RCH`, *n* = `r vN_RCH`.
 
 <!-- ## /TEKSTBLOK: Data-beschrijven.R-->
 
@@ -247,7 +253,9 @@ posthoc <-pairwise.wilcox.test(Resultaten_Arbeidsrecht$EC_Jaar1, Resultaten_Arbe
 ```
 <!-- ## /CLOSEDBLOK: Mann-Whitney-U-test1.R -->
 
+<!-- ## TEKSTBLOK: link4.R -->
 De [Mann-Whitney U toets](08-Mann-Whitney-U-toets-I-R.html) gebruikt het gemiddelde rangnummer van twee ongepaarde groepen om de significantie van de toets te bepalen. Met behulp van het gemiddelde rangnummer kan bepaald worden welke groep hogere rangnummers heeft wat een benadering is voor het verschil tussen twee verdelingen.[^15] In deze casus heeft de vooropleiding met een hoger rangnummer dus over het algemeen studenten met een hoger aantal studiepunten. Bereken en rapporteer daarom het gemiddelde rangnummer.
+<!-- ## /TEKSTBLOK: link4.R -->
 
 <!-- ## OPENBLOK: Mann-Whitney-U-test2.R -->
 ```{r mean rank}
@@ -283,17 +291,23 @@ Studiepunten_Rechtsgeleerdheid <- Resultaten_Arbeidsrecht$EC_Jaar1[Resultaten_Ar
 
 
 # Bereken de gemiddelde rangnummers voor elke vergelijking
-Gem_FR_NR <- Gemiddeld_rangnummer(Studiepunten_Fiscaal_Recht, Studiepunten_Notarieel_Recht)
+Gem_FR_NR <- Gemiddeld_rangnummer(Studiepunten_Fiscaal_Recht, 
+                                  Studiepunten_Notarieel_Recht)
 
-Gem_FR_PM <- Gemiddeld_rangnummer(Studiepunten_Fiscaal_Recht, Studiepunten_Premaster)
+Gem_FR_PM <- Gemiddeld_rangnummer(Studiepunten_Fiscaal_Recht, 
+                                  Studiepunten_Premaster)
 
-Gem_FR_RG <- Gemiddeld_rangnummer(Studiepunten_Fiscaal_Recht, Studiepunten_Rechtsgeleerdheid)
+Gem_FR_RG <- Gemiddeld_rangnummer(Studiepunten_Fiscaal_Recht, 
+                                  Studiepunten_Rechtsgeleerdheid)
 
-Gem_NR_PM <- Gemiddeld_rangnummer(Studiepunten_Notarieel_Recht, Studiepunten_Premaster)
+Gem_NR_PM <- Gemiddeld_rangnummer(Studiepunten_Notarieel_Recht, 
+                                  Studiepunten_Premaster)
 
-Gem_NR_RG <- Gemiddeld_rangnummer(Studiepunten_Notarieel_Recht, Studiepunten_Rechtsgeleerdheid)
+Gem_NR_RG <- Gemiddeld_rangnummer(Studiepunten_Notarieel_Recht,
+                                  Studiepunten_Rechtsgeleerdheid)
 
-Gem_PM_RG <- Gemiddeld_rangnummer(Studiepunten_Premaster, Studiepunten_Rechtsgeleerdheid)
+Gem_PM_RG <- Gemiddeld_rangnummer(Studiepunten_Premaster, 
+                                  Studiepunten_Rechtsgeleerdheid)
 
 ```
 <!-- ## /OPENBLOK: Mann-Whitney-U-test2.R -->

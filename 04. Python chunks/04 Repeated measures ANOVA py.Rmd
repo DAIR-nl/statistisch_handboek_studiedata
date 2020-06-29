@@ -1,0 +1,401 @@
+---
+title: "Repeated measures ANOVA"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+  keywords: [statistisch handboek, studiedata]
+---
+
+<!-- ## CLOSEDBLOK: Functies.R -->
+```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
+library(here)
+if (!exists("Substitute_var")) {
+  ## Installeer packages en functies
+  source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
+}
+```
+<!-- ## /CLOSEDBLOK: Functies.R -->
+
+<style>
+`r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
+</style>
+
+<!-- ## CLOSEDBLOK: Header.R -->
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Header.R -->
+
+<!-- ## CLOSEDBLOK: Reticulate.py -->
+```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}
+library(reticulate)
+knitr::knit_engines$set(python = reticulate::eng_python)
+```
+<!-- ## /CLOSEDBLOK: Reticulate.py -->
+
+<!-- ## OPENBLOK: Data-aanmaken.py -->
+```{r aanmaken data, include=FALSE, echo=TRUE}
+source(paste0(here::here(),"/01. Includes/data/04.R"))
+```
+<!-- ## /OPENBLOK: Data-aanmaken.py -->
+
+<!-- ## TEKSTBLOK: link1.R -->
+De assumptie van normaliteit houdt in dat er een normale
+verdeling van de afhankelijke variabele is in elke groep. Wanneer er duidelijke afwijkingen van normaliteit zijn,
+is het transformeren van de data een optie.[^2] Een andere optie is het gebruik van de nonparametrische
+[Friedman's ANOVA](09-Friedmans-ANOVA-Python.html) waar normaliteit geen assumptie is.[^3] Controleer de assumptie van normaliteit voor elke groep met de volgende stappen:  
+1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
+2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^4]<sup>, </sup>[^5]  
+<!-- ## /TEKSTBLOK: link1.R -->
+
+<!-- ## CLOSEDBLOK: Sphericiteit.py -->
+```{r, echo=FALSE}
+cat("$`Mauchly's Test for Sphericity`
+  Effect         W           p p<.05
+2    Vak 0.8732982 0.005073887     *
+
+$`Sphericity Corrections`
+  Effect       GGe        p[GG] p[GG]<.05       HFe        p[HF] p[HF]<.05
+2    Vak   0.47683     0.05279         *   0.56298      0.04692         ")
+```
+<!-- ## /CLOSEDBLOK: Sphericiteit.py -->
+
+<!-- ## TEKSTBLOK: Sphericiteit1.py -->
+Bij een p-waarde < 0,05, toont *Mauchly's test* dat de assumptie van sphericiteit geschonden is. In de output is dit te zien aan de p-waarde van 0,0051 onder ` $Mauchly's Test for Sphericity `. Er zijn twee mogelijke correcties wanneer er geen sphericiteit is: de Greenhouse-Geisser (GG) en Huynh-Feldt (HF) correctie. De Greenhouse-Geisser correctie staat bekend als conservatief, wat betekent dat de correctie een relatief lage kans op een type I fout heeft. In andere woorden, het zal niet vaak gebeuren dat deze correctie een significant effect aantoont wanneer dat er in werkelijkheid niet is. De Huynh-Feldt correctie staat echter bekend als liberaal, wat betekent dat er een relatief hoge kans op een type I fout is. De teststatistiek en p-waarde van beide correcties zijn in de output te vinden onder ` $Sphericity Corrections `.
+<!-- ## TEKSTBLOK: Sphericiteit1.py -->
+
+<!-- ## TEKSTBLOK: Dataset-inladen.R-->
+Er is een dataset `Studieuren_technische_natuurkunde` ingeladen met het aantal studieuren van eerstejaars studenten van de bachelor Technische Natuurkunde voor de drie vakken in de eerste onderwijsperiode.
+<!-- ## /TEKSTBLOK: Dataset-inladen.R-->
+
+<!-- ## TEKSTBLOK: Dataset-inladen.py -->
+Er is een dataset `dfStudieuren_technische_natuurkunde` ingeladen met het aantal studieuren van eerstejaars studenten van de bachelor Technische Natuurkunde voor de drie vakken in de eerste onderwijsperiode.
+<!-- ## /TEKSTBLOK: Dataset-inladen.py -->
+
+<!-- ## TEKSTBLOK: Data-bekijken.py -->
+Gebruik `<dataframe>.head()` en `<dataframe>.tail()` om de structuur van de data te bekijken.
+<!-- ## /TEKSTBLOK: Data-bekijken.py -->
+
+<!-- ## OPENBLOK: Data-bekijken1.py -->
+```{python, include=FALSE}
+import pandas as pd
+dfStudieuren_technische_natuurkunde = pd.DataFrame(r.Studieuren_technische_natuurkunde)
+```
+
+```{python data bekijken-1, collapse = TRUE}
+## Eerste 5 observaties
+print(dfStudieuren_technische_natuurkunde.head(5))
+```
+
+```{python data bekijken-2, collapse = TRUE}
+## Laatste 5 observaties
+print(dfStudieuren_technische_natuurkunde.tail(5))
+```
+<!-- ## /OPENBLOK: Data-bekijken1.py -->
+
+<!-- ## OPENBLOK: Data-selecteren.py -->
+```{python data selecteren}
+Studieuren_lineaire_algebra = dfStudieuren_technische_natuurkunde[dfStudieuren_technische_natuurkunde['Vak'] == "Lineaire Algebra"]['Studieuren']
+Studieuren_relativiteitstheorie = dfStudieuren_technische_natuurkunde[dfStudieuren_technische_natuurkunde['Vak'] == "Relativiteitstheorie"]['Studieuren']
+Studieuren_kosmologie = dfStudieuren_technische_natuurkunde[dfStudieuren_technische_natuurkunde['Vak'] == "Kosmologie"]['Studieuren']
+```
+<!-- ## /OPENBLOK: Data-selecteren.py -->
+
+<!-- ## TEKSTBLOK: Data-beschrijven.R -->
+Inspecteer de data met `mean()`, `sd()` en `length()` om meer inzicht te krijgen in de data.
+<!-- ## /TEKSTBLOK: Data-beschrijven.R -->
+
+
+<!-- ## TEKSTBLOK: Data-beschrijven.py -->
+Inspecteer de data met `np.mean()`, `np.std()` en `len()` om meer inzicht te krijgen in de data,, door deze aan te roepen uit het `numpy` package.
+<!-- ## /TEKSTBLOK: Data-beschrijven.py -->
+
+<!-- ## OPENBLOK: numpy1.py -->
+```{python}
+import numpy as np
+```
+<!-- ## /OPENBLOK: numpy1.py -->
+
+<!-- ## OPENBLOK: Data-beschrijven1.py -->
+```{python Data beschrijven 1, collapse=TRUE}
+# Gemiddelde
+print(np.mean(Studieuren_lineaire_algebra))
+# Standaardafwijking
+print(np.std(Studieuren_lineaire_algebra))
+# Aantal observaties
+print(len(Studieuren_lineaire_algebra))
+```
+<!-- ## OPENBLOK: Data-beschrijven1.py -->
+<!-- ## OPENBLOK: Data-beschrijven2.py -->
+```{python Data beschrijven 2, collapse=TRUE}
+# Gemiddelde
+print(np.mean(Studieuren_relativiteitstheorie))
+# Standaardafwijking
+print(np.std(Studieuren_relativiteitstheorie))
+# Aantal observaties
+print(len(Studieuren_relativiteitstheorie))
+```
+<!-- ## OPENBLOK: Data-beschrijven2.py -->
+<!-- ## OPENBLOK: Data-beschrijven3.py -->
+```{python Data beschrijven 3, collapse=TRUE}
+# Gemiddelde
+print(np.mean(Studieuren_kosmologie))
+# Standaardafwijking
+print(np.std(Studieuren_kosmologie))
+# Aantal observaties
+print(len(Studieuren_kosmologie))
+```
+<!-- ## /OPENBLOK: Data-beschrijven3.py -->
+
+<!-- ## CLOSEDBLOK: Data-beschrijven4.py -->
+```{python data beschrijven als object, include=FALSE, echo=TRUE}
+vM_LA = np.mean(Studieuren_lineaire_algebra)
+vSD_LA = np.std(Studieuren_lineaire_algebra)
+vN_LA = np.size(Studieuren_lineaire_algebra)
+
+vM_RT = np.mean(Studieuren_relativiteitstheorie)
+vSD_RT = np.std(Studieuren_relativiteitstheorie)
+vN_RT = np.size(Studieuren_relativiteitstheorie)
+
+vM_KL = np.mean(Studieuren_kosmologie)
+vSD_KL = np.std(Studieuren_kosmologie)
+vN_KL = np.size(Studieuren_kosmologie)
+```
+<!-- ## /CLOSEDBLOK: Data-beschrijven4.py -->
+
+<!-- ## TEKSTBLOK: Datatekst-beschrijven.py -->
+* Gemiddeld aantal studieuren Lineaire Algebra (standaarddeviatie): `r Round_and_format(py$vM_LA)` (`r Round_and_format(py$vSD_LA)`). *n* = `r py$vN_LA`  
+* Gemiddeld aantal studieuren Relativiteitstheorie (standaarddeviatie): `r Round_and_format(py$vM_RT)` (`r Round_and_format(py$vSD_RT)`). *n* = `r py$vN_RT`.
+* Gemiddeld aantal studieuren Kosmologie (standaarddeviatie): `r Round_and_format(py$vM_KL)` (`r Round_and_format(py$vSD_KL)`). *n* = `r py$vN_KL`.
+
+<!-- ## /TEKSTBLOK: Datatekst-beschrijven.py -->
+
+
+<!-- ## OPENBLOK: Histogram.py -->
+```{python histogram}
+# Laad seaborn of facets te maken
+import seaborn as sb
+# Laad matplotlib.pyplot om plots te maken
+import matplotlib.pyplot as plt
+
+# Maak een facet plot met een histogram voor elke vooropleiding
+g = sb.FacetGrid(dfStudieuren_technische_natuurkunde, col="Vak")
+g = (g.map(plt.hist, "Studieuren", edgecolor = "black").set_axis_labels("Aantal studieuren"))
+plt.show()
+```
+<!-- ## /OPENBLOK: Histogram.py -->
+
+<!-- ## TEKSTBLOK: QQplot.py -->
+Importeer `scipy.stats` om een Q-Q plot te maken. Gebruik de functie `scipy.stats.probplot()` om een Q-Q plot te maken.
+<!-- ## TEKSTBLOK: QQplot.py -->
+
+<!-- ## OPENBLOK: QQplot1.py -->
+```{python QQplot-t1}
+import scipy.stats as stats
+qq = stats.probplot(Studieuren_lineaire_algebra, dist="norm", plot=plt)
+title = plt.title("Lineaire algebra")
+xlab = plt.xlabel("Theoretische kwantielen")
+ylab = plt.ylabel("Kwantielen in data")
+plt.show()
+```
+<!-- ## /OPENBLOK: QQplot1.py -->
+
+<!-- ## OPENBLOK: QQplot2.py -->
+```{python QQplot-t2}
+import scipy.stats as stats
+qq = stats.probplot(Studieuren_relativiteitstheorie, dist="norm", plot=plt)
+title = plt.title("Relativiteitstheorie")
+xlab = plt.xlabel("Theoretische kwantielen")
+ylab = plt.ylabel("Kwantielen in data")
+plt.show()
+
+```
+<!-- ## /OPENBLOK: QQplot2.py -->
+
+<!-- ## OPENBLOK: QQplot3.py -->
+```{python QQplot-t3}
+import scipy.stats as stats
+qq = stats.probplot(Studieuren_kosmologie, 
+dist="norm", 
+plot=plt)
+title = plt.title("Kosmologie")
+xlab = plt.xlabel("Theoretische kwantielen")
+ylab = plt.ylabel("Kwantielen in data")
+plt.show()
+
+```
+<!-- ## OPENBLOK: QQplot3.py -->
+
+<!-- ## OPENBLOK: Boxplot.py -->
+```{python boxplot}
+fig, ax = plt.subplots()
+box = ax.boxplot([Studieuren_lineaire_algebra, Studieuren_relativiteitstheorie, Studieuren_kosmologie], labels = ["Lineaire algebra", "Relativiteitstheorie", "Kosmologie"])
+title = plt.title("")
+ylab = plt.ylabel("Aantal studieuren")
+plt.show()
+```
+<!-- ## /OPENBLOK: Boxplot.py -->
+
+<!-- ## TEKSTBLOK: Lilliefors-test1.py -->
+De standaard interpretatie van een statitische toets in Python is: `(<teststatistiek>, <p-waarde>)`. Verder toetst Python standaard tweezijdig.
+<!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
+
+<!-- ## OPENBLOK: Library-nortest.py -->
+```{python}
+import statsmodels.stats.api as smod
+```
+<!-- ## /OPENBLOK: Library-nortest.py -->
+
+<!-- ## OPENBLOK: Lilliefors-test-1.py -->
+``` {python Lilliefors Test-1, warning=FALSE}
+print(statsmodels.stats.api.lilliefors(Studieuren_lineaire_algebra, pvalmethod="table"))
+```
+<!-- ## OPENBLOK: Lilliefors-test-1.py -->
+
+<!-- ## OPENBLOK: Lilliefors-test-2.py -->
+``` {python Lilliefors Test-2, warning=FALSE}
+print(statsmodels.stats.api.lilliefors(Studieuren_relativiteitstheorie, pvalmethod="table"))
+```
+<!-- ## OPENBLOK: Lilliefors-test-2.py -->
+
+<!-- ## OPENBLOK: Lilliefors-test-3.py -->
+``` {python Lilliefors Test-3, warning=FALSE}
+print(statsmodels.stats.api.lilliefors(Studieuren_kosmologie, pvalmethod="table"))
+```
+<!-- ## /OPENBLOK: Lilliefors-test-3.py -->
+
+<!-- ## OPENBLOK: Shapiro-Wilk-test-3.py -->
+``` {python Shapiro-Wilk Test-1, warning=FALSE}
+import scipy.stats as stats
+print(stats.shapiro(Studieuren_lineaire_algebra))
+
+```
+<!-- ## /OPENBLOK: Shapiro-Wilk-test-3.py -->
+
+<!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
+``` {python Shapiro-Wilk Test-2, warning=FALSE}
+import scipy.stats as stats
+print(stats.shapiro(Studieuren_relativiteitstheorie))
+
+```
+<!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
+
+<!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
+``` {python Shapiro-Wilk Test-3, warning=FALSE}
+import scipy.stats as stats
+print(stats.shapiro(Studieuren_kosmologie))
+```
+<!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
+
+
+<!-- ## TEKSTBLOK: repeatedmeasuresANOVA1.py -->
+Voer de *repeated measures ANOVA* uit om de vraag te beantwoorden of er verschillen zijn tussen het aantal studieuren voor de vakken in de eerste onderwijsperiode van het eerste jaar van de bachelor Technische Natuurkunde. Gebruik de functie `rm_anova` van het package `pingouin` met als argumenten de dataset `dfStudieuren_technische_natuurkunde`, de afhankelijke variabele `dv = 'Studieuren'`, de onafhankelijke variabele `within = 'Vak'`, de variabele die de observaties aangeeft `subject = 'Studentnummer'` en `detailed = True` om een uitgebreide tabel met resultaten te verkrijgen.
+<!-- ## /TEKSTBLOK: repeatedmeasuresANOVA1.py -->
+
+<!-- ## OPENBLOK: repeatedmeasuresANOVA2.py -->
+```{python ANOVA2}
+# Importeer package pingouin
+import pingouin as pg
+
+# Voer de repeated measures ANOVA uit
+aov = pg.rm_anova(data = dfStudieuren_technische_natuurkunde, 
+dv = 'Studieuren', 
+within = 'Vak',
+subject = 'Studentnummer')
+
+# Print de resultaten van Mauchly's test
+print(aov[['eps','p-GG-corr','W-spher','p-spher','sphericity']])
+
+# Print de resultaten van repeated measures ANOVA
+print(aov[['Source','ddof1','ddof2','F','p-unc','np2']])
+#aov['p-GG-corr']
+```
+<!-- ## /OPENBLOK: repeatedmeasuresANOVA2.py -->
+
+<!-- ## CLOSEDBLOK: repeatedmeasuresANOVA3.py -->
+```{python ANOVA als object, echo=FALSE}
+import pingouin as pg
+aov2 = pg.rm_anova(data = dfStudieuren_technische_natuurkunde, 
+dv = 'Studieuren', 
+within = 'Vak',
+subject = 'Studentnummer')
+
+Mauchly_W = aov2['W-spher']
+GG_F = aov2['eps']
+eta2 = aov2['np2']
+```
+<!-- ## /CLOSEDBLOK: repeatedmeasuresANOVA3.py -->
+
+<!-- ## TEKSTBLOK: repeatedmeasuresANOVA4.py -->
+
+* *Mauchly's test* toont aan dat de assumptie van sphericiteit niet standthoudt in deze casus ($\chi^2$ = `r Round_and_format(py$Mauchly_W)`, p < 0,0001); gebruik in dit geval een van de correcties. In Python is alleen de (conservatieve) Greenhouse-Geisser correctie mogelijk, dus rapporteer deze.
+* De data voldoet niet aan de assumptie van sphericiteit, $\chi^2$ = `r Round_and_format(py$Mauchly_W)`, p < 0,0001
+* De resultaten van de Greenhouse-Geisser correctie zijn *F* = `r Round_and_format(py$GG_F)`, p < 0,0001, *η^2^* = `r Round_and_format(py$eta2)`
+* De p-waarde < 0,05, dus de H~0~ wordt verworpen.[^11]
+* Er is een significant verschil tussen het aantal studieuren voor de drie vakken in de eerste onderwijsperiode; het effect van de verschillende vakken op het aantal studieuren is groot
+
+<!-- ## /TEKSTBLOK: repeatedmeasuresANOVA4.py -->
+
+
+<!-- ## TEKSTBLOK: posthoc1.py -->
+Voer post-hoc toetsen uit om te onderzoeken welke vakken uit de eerste onderwijsperiode van elkaar verschillen wat betreft het aantal studieuren dat eerstejaars studenten van de bachelor Technische Natuurkunde hieraan besteden. Bereken eerst de verschillen in gemiddelde tussen de drie vakken. Gebruik daarna voor de post-hoc toetsen de functie `pairwise_ttests` van het `pingouin` package met als argumenten de dataset `data = dfStudieuren_technische_natuurkunde`, de afhankelijke variabele `dv = 'Studieuren'`, de onafhankelijke variabele `within = 'Vak'`, de variabele die de observaties aangeeft `subject = 'Studentnummer'`, de methode om te corrigeren voor meerdere toetsen (Bonferroni) `padjust = 'bonf`' en `parametric = True` om aan te geven dat er een parametrische toets (de t-toets) gebruikt moet worden.
+<!-- ## /TEKSTBLOK: posthoc1.py -->
+
+<!-- ## OPENBLOK: posthoc2.py -->
+```{python }
+# Bereken de verschillen in gemiddelde tussen de drie vakken
+Verschil_gemiddelde_LA_RT = np.mean(Studieuren_lineaire_algebra) - np.mean(Studieuren_relativiteitstheorie)
+Verschil_gemiddelde_RT_KL = np.mean(Studieuren_relativiteitstheorie) - np.mean(Studieuren_kosmologie)
+Verschil_gemiddelde_KL_LA = np.mean(Studieuren_kosmologie) - np.mean(Studieuren_lineaire_algebra)
+
+# Voer de post-hoc toetsen uit
+post_hoc = pg.pairwise_ttests(data = dfStudieuren_technische_natuurkunde, 
+dv = 'Studieuren', 
+within = 'Vak',
+subject = 'Studentnummer',
+padjust = 'bonf',
+parametric = True)
+
+# Print de benodigde resultaten
+print(post_hoc[['A', 'B', 'T', 'p-corr']])
+
+```
+<!-- ## /OPENBLOK: posthoc2.py -->
+
+<!-- ## CLOSEDBLOK: posthoc3.py -->
+```{python, include = FALSE}
+# Bereken de p-waarden van de post-hoc toets
+phtest = pg.pairwise_ttests(data = dfStudieuren_technische_natuurkunde, 
+dv = 'Studieuren', 
+within = 'Vak',
+subject = 'Studentnummer',
+padjust = 'bonf',
+parametric = True)
+
+# Sla de p-waarde van niet significante toets op
+pwaardes = phtest['p-corr']
+pwaarde_niet_significant = pwaardes[1]
+
+```
+<!-- ## /CLOSEDBLOK: posthoc3.py -->
+
+<!-- ## /TEKSTBLOK: posthoc4.py -->
+* Er is een significant verschil tussen Lineaire algebra en Relativiteitstheorie, *MD* = `r Round_and_format(py$Verschil_gemiddelde_LA_RT)`, p < 0,0001
+* Er is een significant verschil tussen Relativiteitstheorie en Kosmologie, *MD* = `r Round_and_format(py$Verschil_gemiddelde_RT_KL)`, p < 0,0001
+* Er is geen significant verschil tussen Kosmologie en Lineaire algebra, *MD* = `r Round_and_format(py$Verschil_gemiddelde_KL_LA)`, p = `r Round_and_format(py$pwaarde_niet_significant)`
+
+<!-- ## /TEKSTBLOK: posthoc4.py -->
+
+<!-- ## TEKSTBLOK: rapportage.py -->
+Een *repeated measures ANOVA* is uitgevoerd om te onderzoeken of er verschillen zijn tussen het aantal studieuren dat eerstejaars studenten van de bachelor Technische Natuurkunde besteden aan de vakken in de eerste onderwijsperiode. De vakken zijn Lineaire Algebra, Relativiteitstheorie en Kosmologie; beschrijvende statistieken zijn te vinden in Tabel 1. De data voldoen niet aan de assumptie van sphericiteit ($\chi^2$ = `r Round_and_format(py$Mauchly_W)`, p < 0,0001), daarom is de Greenhouse-Geisser correctie gebruikt. Het aantal studieuren voor de drie vakken in de eerste onderwijsperiode verschilt significant van elkaar, *F* = `r Round_and_format(py$GG_F)`, p < 0,0001, *η^2^* = `r Round_and_format(py$eta2)`. De sterkte van het effect van het vak op het aantal studieuren is groot. Post-hoc toetsen - waarbij een Bonferroni correctie is toegepast om te corrigeren voor meerdere toetsen -  tonen aan dat het aantal studieuren voor het vak Relativiteitstheorie significant verschilt van het aantal studieuren voor zowel het vak Lineaire Algebra als Kosmologie (voor beide p < 0,0001), maar dat er geen significant verschil is tussen de vakken Lineaire Algebra en Kosmologie (p = `r Round_and_format(py$pwaarde_niet_significant)`. De resultaten suggereren dat eerstejaars studenten van de bachelor Technische Natuurkunde een hoger aantal uren steken in het vak Relativiteitstheorie dan in de vakken Lineaire Algebra en Kosmologie.
+
+| Opleiding     | M          | SD          | N          |
+| ------------- | ---------- | ---------- | ----------- |
+| Lineaire Algebra      | `r Round_and_format(py$vM_LA)` | `r Round_and_format(py$vSD_LA)` | `r Round_and_format(py$vN_LA)` |
+| Relativiteitstheorie  | `r Round_and_format(py$vM_RT)` | `r Round_and_format(py$vSD_RT)` | `r Round_and_format(py$vN_RT)` |
+| Kosmologie            | `r Round_and_format(py$vM_KL)` | `r Round_and_format(py$vSD_KL)` | `r Round_and_format(py$vN_KL)` |
+*Tabel 1. Het gemiddelde aantal studieuren, bijbehorende standaarddeviatie en groepsgrootte voor de vakken in de eerste onderwijsperiode van de bachelor Technische Natuurkunde.*
+<!-- ## /TEKSTBLOK: rapportage.py -->

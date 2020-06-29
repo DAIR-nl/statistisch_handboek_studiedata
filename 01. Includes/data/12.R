@@ -1,3 +1,31 @@
+
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## 12.R ####
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## R code voor Student Analytics Vrije Universiteit Amsterdam
+## Copyright 2020 VU
+## Web Page: http://www.vu.nl
+## Contact: Theo Bakker (t.c.bakker@vu.nl)
+## Verspreiding buiten de VU: Ja
+##
+## Doel: Doel
+##
+## Afhankelijkheden: Afhankelijkheid
+##
+## Datasets: Datasets
+##
+## Opmerkingen:
+## 1) Geen.
+## 2) ___
+##
+## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## TODO:
+## 1) ___.
+##
+## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## Geschiedenis:
+## 29-06-2020: EG: Aanmaak bestand
+## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## De decaan van een Hogeschool merkt dat weinig studenten met een functiebeperking een beroep doen op de Financiële Ondersteuning Studenten (FOS).
 ## Ze besluit daarom in December al deze studenten een e-mail te sturen over de FOS.
 ## Een half jaar later maakt ze de balans op: doen studenten met een functiebeperking vaker een beroep op de FOS na een ingreep van de studentendecaan?

@@ -1,3 +1,32 @@
+
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## 04.R ####
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## R code voor Student Analytics Vrije Universiteit Amsterdam
+## Copyright 2020 VU
+## Web Page: http://www.vu.nl
+## Contact: Theo Bakker (t.c.bakker@vu.nl)
+## Verspreiding buiten de VU: Ja
+##
+## Doel: Doel
+##
+## Afhankelijkheden: Afhankelijkheid
+##
+## Datasets: Datasets
+##
+## Opmerkingen:
+## 1) Geen.
+## 2) ___
+##
+## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## TODO:
+## 1) ___.
+##
+## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## Geschiedenis:
+## 29-06-2020: EG: Aanmaak bestand
+## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 # De opleidingsdirecteur van de bachelor Technische Natuurkunde hoort vanuit de 
 # opleidingscommissie dat de eerstejaarsstudenten de studielast van de eerste 
 # onderwijsperiode als erg hoog ervaren. Om te onderzoeken hoe deze ervaren 
@@ -14,7 +43,7 @@
 # nemen 80 eerstejaars studenten
 
 # set seed
-set.seed(1234)
+set.seed(12345)
 
 # Simuleer studentnummers
 Studentnummers_opties <- c(4000000:4500000)
@@ -42,5 +71,4 @@ Studieuren <- c(Uren_Lineaire_Algebra, Uren_Relativiteitstheorie,
 Studieuren_technische_natuurkunde <- cbind.data.frame(Studentnummer, Vak, Studieuren)
 
 # Sorteer data
-
 Studieuren_technische_natuurkunde <- Studieuren_technische_natuurkunde[order(Studieuren_technische_natuurkunde$Studentnummer),]

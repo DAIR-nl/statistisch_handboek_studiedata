@@ -1,3 +1,31 @@
+
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## 11.R ####
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## R code voor Student Analytics Vrije Universiteit Amsterdam
+## Copyright 2020 VU
+## Web Page: http://www.vu.nl
+## Contact: Theo Bakker (t.c.bakker@vu.nl)
+## Verspreiding buiten de VU: Ja
+##
+## Doel: Doel
+##
+## Afhankelijkheden: Afhankelijkheid
+##
+## Datasets: Datasets
+##
+## Opmerkingen:
+## 1) Geen.
+## 2) ___
+##
+## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## TODO:
+## 1) ___.
+##
+## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## Geschiedenis:
+## 29-06-2020: EG: Aanmaak bestand
+## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## De controller van een Universiteit is geïnteresseerd in de instroom van tweedekansstudenten. Zij vraagt zich af: Heeft onze Universiteit relatief veel tweedekansstudenten in vergelijking met het landelijke gemiddelde?
 RNGkind(sample.kind = "Rounding")
 set.seed (7)

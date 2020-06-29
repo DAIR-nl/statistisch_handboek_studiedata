@@ -47,7 +47,10 @@ source(paste0(here::here(),"/01. Includes/data/08.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 # Toepassing
+
+<!-- ## TEKSTBLOK: link1.R -->
 Gebruik de *Mann-Whitney U toets* om te toetsen of de gemiddelde rangnummers van de verdelingen van twee ongepaarde groepen van elkaar verschillen.[^1] De *Mann-Whitney U toets* is een alternatief voor de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html) als de verdelingen niet normaal verdeeld zijn. Alleen als de verdelingen van beide groepen dezelfde vorm hebben, kan de *Mann-Whitney U toets* ook gebruikt worden om het verschil tussen de medianen van twee groepen te toetsen.[^9] Gebruik *Mood's mediaan toets* om medianen te toetsen bij twee ongepaarde groepen waarvan de verdelingen niet dezelfde vorm hebben.
+<!-- ## /TEKSTBLOK: link1.R -->
 
 
 # Onderwijscasus
@@ -62,10 +65,11 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 </div>
 
 # Assumpties
-
-Het meetniveau van de afhankelijke variabele is ordinaal[^12] of continu.[^9] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data is te vinden in een andere toetspagina.
+<!-- ## TEKSTBLOK: link2.R -->
+Het meetniveau van de afhankelijke variabele is ordinaal[^12] of continu.[^9] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data met bijbehorende uitwerking is te vinden in de [Mann-Whitney U toets II](23-Mann-Whitney-U-toets-II-R.html).
 
 De *Mann-Whitney U toets* hoeft - in tegenstelling tot de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html) - niet te voldoen aan de assumptie van normaliteit.  Daarnaast hebben uitbijters minder invloed op het eindresultaat dan bij de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html). Daarentegen, als de data wel normaal verdeeld is, heeft de *Mann-Whitney U toets* minder onderscheidend vermogen[^2] dan de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html). Vandaar dat ondanks het voordeel van de grotere robuustheid er toch minder vaak voor de *Mann-Whitney U toets* gekozen wordt.
+<!-- ## /TEKSTBLOK: link2.R -->
 
 ## Verdeling steekproeven
 
@@ -86,7 +90,7 @@ het aantal observaties, i.e. $\frac{z}{\sqrt{N}}$.[^5] Een correlatie tussen twe
 
 # Uitvoering 
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is een dataset `Studiepunten_studiejaar2` ingeladen met het aantal punten dat studenten in het tweede jaar halen.
+Er is een dataset `Studiepunten_studiejaar2` ingeladen met het aantal studiepunten dat studenten in het tweede jaar halen.
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
@@ -160,8 +164,8 @@ vQ3_Inter <- Round_and_format(x[1,5])
 <!-- ## /CLOSEDBLOK: Data-beschrijven-3.R -->
 
 <!-- ## TEKSTBLOK: Data-beschrijven2.R -->
-* Mediaan studenten Nederlandse vooropleiding: `r vMed_NL`. *n* = `r vN_NL`.
-* Mediaan studenten buitenlandse vooropleiding: `r vMed_Inter`. *n* = `r vN_Inter`.
+* Mediaan studenten Nederlandse vooropleiding: `r vMed_NL`, *n* = `r vN_NL`.
+* Mediaan studenten buitenlandse vooropleiding: `r vMed_Inter`, *n* = `r vN_Inter`.
 
 <!-- ## /TEKSTBLOK: Data-beschrijven2.R -->
 
@@ -182,7 +186,7 @@ ggplot(Studiepunten_studiejaar2,
                  fill = "#0089CF") +
   facet_wrap(~ Vooropleiding, labeller = labeller(Vooropleiding = c(Nederlands = "Nederlandse vooropleiding", buitenlands = "Buitenlandse vooropleiding"))) +
   ylab("Frequentie") +
-  labs(title = "Studiepunten van studenten Business Administration in het tweede jaar ")
+  labs(title = "Studiepunten van studenten Business Administration in het tweede jaar")
 ```
 <!-- ## /OPENBLOK: Histogram1.R -->
 
@@ -198,7 +202,11 @@ van de verschilscores.[^6]<sup>,</sup>[^7]
 
 <!-- ## OPENBLOK: Mann-Whitney-U-toets-2.R -->
 ```{r Mann Whitney U toets}
-wilcox.test(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands], Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands], paired = FALSE, alternative = "two.sided", conf.int = TRUE)
+wilcox.test(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands],
+            Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands], 
+            paired = FALSE, 
+            alternative = "two.sided", 
+            conf.int = TRUE)
 ```
 <!-- ## /OPENBLOK: Mann-Whitney-U-toets-2.R -->
 <!-- ## CLOSEDBLOK: Mann-Whitney-U-toets-3.R -->
@@ -240,7 +248,7 @@ paste("De effectmaat is", abs(r))
 <!-- ## /OPENBLOK: Mann-Whitney-U-toets-4.R -->
 
 Bereken ten slotte het gemiddelde rangnummer van beide groepen. Beoordeel op basis van de gemiddelde rangnummers welke groep hogere waardes bevat.
-<!-- ## OPENBLOK: Wilcoxon-signed-rank-toets3.R -->
+<!-- ## OPENBLOK: Mann-Whitney-U-toets-5.R -->
 ```{r sommen, collapse = TRUE}
 # Bepaal de index met daarin studenten met een Nederlandse vooropleiding
 Vooropleiding_Nederlands <- Studiepunten_studiejaar2$Vooropleiding == "Nederlands"
@@ -254,16 +262,17 @@ Rangnummer_buitenlandse_vooropleiding <- mean(rank(Studiepunten_studiejaar2$Stud
 Rangnummer_Nederlandse_vooropleiding
 Rangnummer_buitenlandse_vooropleiding
 ```
-<!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets3.R -->
+<!-- ## /OPENBLOK: Mann-Whitney-U-toets-5.R -->
 
-<!-- ## TEKSTBLOK: Mann-Whitney-U-toets-4.R -->
+<!-- ## TEKSTBLOK: Mann-Whitney-U-toets-6.R -->
 * *W* = `r vW_W`, *p* = < 0,0001, *r* = `r Round_and_format(abs(r))`
 * *p*-waarde < 0,05, dus de H~0~ wordt verworpen.[^8]
 * Effectmaat is `r Round_and_format(abs(r))`, dus een klein tot gemiddeld effect
 * Het gemiddelde rangnummer is `r Round_and_format(Rangnummer_Nederlandse_vooropleiding)` (*n*=`r vN_NL`) voor studenten met een Nederlandse vooropleiding en `r Round_and_format(Rangnummer_buitenlandse_vooropleiding)` (*n*=`r vN_Inter`) voor studenten met een buitenlandse vooropleiding. De verdeling van studenten met een Nederlandse vooropleiding bevat dus hogere waarden dan de verdeling van studenten met een buitenlandse vooropleiding.
 * De mediaan van de verschilscores is `r vW_est` met een 
 95%-betrouwbaarheidsinterval  van `r vW_lb` tot `r vW_ub`. Aangezien de verdelingen niet dezelfde vorm hebben, is de mediaan niet informatief en wordt deze niet opgenomen in de rapportage.
-<!-- ## /TEKSTBLOK: Mann-Whitney-U-toets-4.R -->
+
+<!-- ## /TEKSTBLOK: Mann-Whitney-U-toets-6.R -->
 
 
 # Rapportage

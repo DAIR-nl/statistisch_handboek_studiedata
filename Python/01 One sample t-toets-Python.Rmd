@@ -1,15 +1,24 @@
 ---
 title: "One-sample t-toets"
 output:
+  word_document:
+    toc: yes
+  keywords:
+  - statistisch handboek
+  - studiedata
+  pdf_document:
+    toc: yes
   html_document:
+    includes:
+      in_header:
+      - ../01. Includes/html/nocache.html
+      - ../01. Includes/html/favicon.html
+      - ../01. Includes/html/analytics.html
+    number_sections: yes
     theme: lumen
     toc: yes
-    toc_float: 
-      collapsed: FALSE 
-    number_sections: true
-    includes:
-      in_header: ["../01. Includes/html/nocache.html", "../01. Includes/html/favicon.html", "../01. Includes/html/analytics.html"]  
-  keywords: [statistisch handboek, studiedata]
+    toc_float:
+      collapsed: no
 ---
 <!-- ## CLOSEDBLOK: Functies.R -->
 ```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}

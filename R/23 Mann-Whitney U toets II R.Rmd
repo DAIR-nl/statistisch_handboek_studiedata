@@ -62,7 +62,7 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 # Assumpties
 
-Het meetniveau van de afhankelijke variabele is ordinaal[^12] of continu.[^9] In deze toetspagina staat een casus met ordinale data centraal; een casus met continue data en bijbehorende uitwerking is te vinden in de [Mann-Whitney U toets I](08-Mann-Whitney-U-toets-R.html).
+Het meetniveau van de afhankelijke variabele is ordinaal[^12] of continu.[^9] In deze toetspagina staat een casus met ordinale data centraal; een casus met continue data met bijbehorende uitwerking is te vinden in de [Mann-Whitney U toets I](08-Mann-Whitney-U-toets-I-R.html).
 
 Om de *Mann-Whitney U toets* uit te voeren met een ordinale afhankelijke variabele, moet deze variabele omgezet worden in getallen. Wanneer er drie categorieën zijn, worden ze genummerd van 1 tot en met 3 op basis van de ordening van de variabele. De categorieën onvoldoende, voldoende en goed worden dan omgezet in respectievelijk 1, 2 en 3. Bij de *chi-kwadraat toets voor onafhankelijkheid* en de *Fisher-Freeman_Halton exact toets* wordt dit niet gedaan, maar wordt de ordinale variabele als nominaal beschouwd. De *Mann-Whitney U toets* maakt een rangschikking van alle observaties van beide groepen samengevoegd en telt vervolgens apart de rangnummers op voor de observaties in beide groepen. Met behulp van de groepsgroottes kan ook het gemiddelde rangnummer van beide groepen berekend worden. Het verschil tussen de gemiddelde rangnummers in beide groepen bepaalt de significantie van de toets.[^10]
 

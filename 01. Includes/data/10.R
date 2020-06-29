@@ -1,3 +1,31 @@
+
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## 10.R ####
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## R code voor Student Analytics Vrije Universiteit Amsterdam
+## Copyright 2020 VU
+## Web Page: http://www.vu.nl
+## Contact: Theo Bakker (t.c.bakker@vu.nl)
+## Verspreiding buiten de VU: Ja
+##
+## Doel: Doel
+##
+## Afhankelijkheden: Afhankelijkheid
+##
+## Datasets: Datasets
+##
+## Opmerkingen:
+## 1) Geen.
+## 2) ___
+##
+## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## TODO:
+## 1) ___.
+##
+## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## Geschiedenis:
+## 29-06-2020: EG: Aanmaak bestand
+## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## H0 en H1 medianen of gemiddelden, ook in toepassing 
 ## is het wel interessant om gemiddelden te tonen? 
 ## link naar Mann W-U test 

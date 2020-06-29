@@ -65,7 +65,7 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 # Assumpties
 
-Het meetniveau van de afhankelijke variabele is ordinaal[^16] of continu.[^17] In deze toetspagina staat een casus met ordinale data centraal; een casus met continue data en bijbehorende uitwerking is te vinden in de [Kruskal Wallis toets I](10-Kruskal-Wallis-toets-I-R.html).
+Het meetniveau van de afhankelijke variabele is ordinaal[^16] of continu.[^17] In deze toetspagina staat een casus met ordinale data centraal; een casus met continue data met bijbehorende uitwerking is te vinden in de [Kruskal Wallis toets I](10-Kruskal-Wallis-toets-I-R.html).
 
 Om de *Kruskal Wallis toets* uit te voeren met een ordinale afhankelijke variabele, moet deze variabele omgezet worden in getallen. Wanneer er vier categorieën zijn, worden ze genummerd van 1 tot en met 4 op basis van de ordening van de variabele. De categorieën onvoldoende, voldoende, goed en uitstekend worden dan omgezet in respectievelijk 1, 2, 3 en 4. Bij de *chi-kwadraat toets voor onafhankelijkheid* en de *Fisher-Freeman_Halton exact toets* wordt dit niet gedaan, maar wordt de ordinale variabele als nominaal beschouwd. De *Kruskal Wallis toets* maakt een rangschikking van alle observaties van alle groepen samengevoegd en telt vervolgens apart de rangnummers op voor de observaties in alle groepen. Met behulp van de groepsgroottes kan ook het gemiddelde rangnummer van de groepen berekend worden. Het verschil tussen de gemiddelde rangnummers van de groepen bepaalt de significantie van de toets.[^17]
 

@@ -60,7 +60,6 @@ Achter iedere ‘tegel’ bevindt zich een uitleg van de regels om een toets te 
 * Bram Enning, Hogeschool Leiden
 * Dirk Tempelaar, Maastricht University
 * Victoria Smit, Universiteit Leiden
-* Martine Baars, Erasmus Universiteit
 * Tsjerk Wassenaar, Hanzehogeschool Groningen
 * Aswin van Oijen, Tilburg University
 

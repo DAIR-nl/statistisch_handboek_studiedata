@@ -220,12 +220,10 @@ b <- binom.test(x = Aantal_studenten_hbo_vooropleiding,
           alternative = "two.sided",
           conf.level = 0.95)
 
-baantal <- Round_and_format(b$statistic)
-btotaal <- b$parameter
 bp <- Round_and_format(b$p.value)
-blb <- Round_and_format(100*b$conf.int[1])
-bub <- Round_and_format(100*b$conf.int[2])
-bprop <- Round_and_format(100*b$estimate)
+blb <- Round_and_format(b$conf.int[1])
+bub <- Round_and_format(b$conf.int[2])
+bprop <- Round_and_format(b$estimate)
 ```
 <!-- ## /CLOSEDBLOK: Binomiaaltoets6.R -->
 
@@ -257,4 +255,7 @@ De *binomiaaltoets* is uitgevoerd om te onderzoeken of de verdeling van het inst
 [^5]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
 [^6]: Laerd Statistics (2018). *Chi-Square Goodness-of-Fit Test in SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/chi-square-goodness-of-fit-test-in-spss-statistics.php
 [^7]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
+<!-- ## TEKSTBLOK: Extra-Bron.R -->
+
+<!-- ## /TEKSTBLOK: Extra-Bron.R -->
 

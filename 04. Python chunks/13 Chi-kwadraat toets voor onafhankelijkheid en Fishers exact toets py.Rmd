@@ -1,5 +1,5 @@
 ---
-title: "Chi-kwadraat toets en Fisher's exact toets"
+title: "Chi-kwadraat toets voor onafhankelijkheid en Fisher's exact toets"
 output:
   html_document:
     theme: lumen
@@ -359,10 +359,10 @@ OR, pval = sps.fisher_exact(Fisher_Uitval_studenten_kruistabel, alternative = 't
 Fisher_Prop_Uitval_studenten_kruistabel = pd.crosstab(dfFisher_Uitval_studenten_functiebeperking_leenstelsel['Periode'], dfFisher_Uitval_studenten_functiebeperking_leenstelsel['Uitval'], normalize = 'index')
 
 # Sla vier waarden apart op
-fgg = np.array(Prop_Uitval_studenten_kruistabel)[0,0]
-fgu = np.array(Prop_Uitval_studenten_kruistabel)[0,1]
-fwg = np.array(Prop_Uitval_studenten_kruistabel)[1,0]
-fwu = np.array(Prop_Uitval_studenten_kruistabel)[1,1]
+fgg = np.array(Fisher_Prop_Uitval_studenten_kruistabel)[0,0]
+fgu = np.array(Fisher_Prop_Uitval_studenten_kruistabel)[0,1]
+fwg = np.array(Fisher_Prop_Uitval_studenten_kruistabel)[1,0]
+fwu = np.array(Fisher_Prop_Uitval_studenten_kruistabel)[1,1]
 ```
 <!-- ## /CLOSEDBLOK: Rapportage1Fisher.py -->
 

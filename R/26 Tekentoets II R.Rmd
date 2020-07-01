@@ -56,8 +56,10 @@ Gebruik de *tekentoets* om te toetsen of de medianen van twee gepaarde groepen v
 De directeur van de Academie Mens & Maatschappij wil bekijken hoe het inkomen van zijn alumni zich ontwikkelt nadat zij zijn afgestudeerd. Deze informatie is interessant om te gebruiken bij voorlichtingsactiviteiten van de Academie. Hij bekijkt het bruto jaarinkomen van de alumni 1 jaar na afstuderen en vergelijkt het met het bruto jaarinkomen 5 jaar na afstuderen. 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
 
-*H~0~*: De mediaan van het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij is in vier jaar tijd gelijk gebleven.  
-*H~A~*: De mediaan van het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij is in vier jaar veranderd. 
+*H~0~*: Er is geen verschil in de medianen van het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij één jaar na afstuderen en vijf jaar na afstuderen.
+
+*H~A~*: Er is een verschil in de medianen van het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij één jaar na afstuderen en vijf jaar na afstuderen.
+ 
 </div>
 
 # Assumpties
@@ -67,7 +69,7 @@ Het meetniveau van de variabelen is continu.[^1]
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is data ingeladen met het bruto jaarinkomen van alumni van de Academie Mens & Maatschappij genaamd `Alumni_jaarinkomen`. De directeur wil kijken hoe het inkomen van zijn alumni zich ontwikkelt vier jaar nadat zij afgestudeerd zijn. Meetmoment T~1~ is één jaar na afstuderen, meetmoment T~2~ is vijf jaar na afstuderen. 
+Er is data ingeladen met het bruto jaarinkomen van alumni van de Academie Mens & Maatschappij genaamd `Alumni_jaarinkomen`. De directeur wil een vergelijking maken tussen het inkomen één jaar na afstuderen (meetmoment T~1~) en vijf jaar na afstuderen (meetmoment T~2~). 
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
@@ -177,7 +179,7 @@ De verdeling van de verschilscores bevat voornamelijk positieve waarden en een p
 
 ## Tekentoets
 <!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
-Voer de *tekentoets* uit om de vraag te beantwoorden of de verdeling van de bruto jaarinkomens van alumni in vier jaar veranderd zijn. Gebruik om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn het argument `paired = TRUE`.  Toets tweezijdig door het argument `alternative = "two.sided"` te gebruiken.
+Voer de *tekentoets* uit om de vraag te beantwoorden of de mediaan van de bruto jaarinkomens van alumni verschillend is voor de inkomens één jaar en vijf jaar na afstuderen. Gebruik om aan te geven dat de twee meetmomenten aan elkaar gepaard zijn het argument `paired = TRUE`.  Toets tweezijdig door het argument `alternative = "two.sided"` te gebruiken.
 <!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
 
 <!-- ## OPENBLOK: Wilcoxon-signed-rank-toets.R -->

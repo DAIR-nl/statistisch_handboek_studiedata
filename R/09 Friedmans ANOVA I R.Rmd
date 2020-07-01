@@ -51,7 +51,7 @@ source(paste0(here::here(),"/01. Includes/data/09.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik *Friedman's ANOVA* om de gemiddelde rangschikking van de verdelingen te vergelijken voor drie of meer herhaalde metingen van één groep of voor drie of meer gepaarde groepen.[^1]<sup>, </sup>[^2] *Friedman's ANOVA* is een alternatief voor de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) wanneer de data niet aan de assumptie van normaliteit voldoet. Daarnaast hebben uitbijters minder invloed op het resultaat van *Friedman's ANOVA* in vergelijking tot de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html). Echter, als de data aan de assumpties van de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) voldoet, heeft die toets een hoger onderscheidend vermogen dan *Friedman's ANOVA*.[^3]
+Gebruik *Friedman's ANOVA* om de gemiddelde rangnummers te vergelijken voor de verdelingen van drie of meer herhaalde metingen van één groep of voor de verdelingen van drie of meer gepaarde groepen.[^1]<sup>, </sup>[^2] *Friedman's ANOVA* is een alternatief voor de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) wanneer de data niet aan de assumptie van normaliteit voldoet. Daarnaast hebben uitbijters minder invloed op het resultaat van *Friedman's ANOVA* in vergelijking tot de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html). Echter, als de data aan de assumpties van de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) voldoet, heeft die toets een hoger onderscheidend vermogen dan *Friedman's ANOVA*.[^3]
 
 
 
@@ -62,16 +62,15 @@ De vastgoedmanager van de  Facultaire Dienst (FD) van een hogeschool is nieuwsgi
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
 
-*H~0~*: De gemiddelde rangschikking van de verdelingen van de beoordelingen van studenten is hetzelfde voor de eetgelegenheid in het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt.
+*H~0~*: Het gemiddelde rangnummer van de verdelingen van de beoordelingen van studenten is hetzelfde voor de eetgelegenheid in het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt.
 
-
-*H~A~*: De gemiddelde rangschikking van de verdelingen van de beoordelingen van studenten is niet hetzelfde voor de eetgelegenheid in het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt
+*H~A~*: Het gemiddelde rangnummer van de verdelingen van de beoordelingen van studenten is niet hetzelfde voor de eetgelegenheid in het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt
 
 </div>
 
 # Assumpties
 
-Om een valide toetsresultaat te bereiken, moeten de data aan een aantal assumpties voldoen. Het meetniveau van de afhankelijke variabele is ordinaal of continu.[^4] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data is te vinden in een andere toetspagina. Bij herhaalde metingen van dezelfde observatie-eenheden, moet de groep observatie-eenheden drie of meer keren gemeten zijn en een willekeurige steekproef van de populatie zijn. Bij gepaarde groepen, moet elk paar bestaan uit drie of meer gepaarde observatie-eenheden en moet de steekproef met alle paren een willekeurige steekproef van de populatie zijn.[^4]
+Om een valide toetsresultaat te bereiken, moeten de data aan een aantal assumpties voldoen. Het meetniveau van de afhankelijke variabele is ordinaal of continu.[^4] In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data met bijbehorende uitwerking is te vinden in een andere toetspagina. Bij herhaalde metingen van dezelfde observatie-eenheden, moet de groep observatie-eenheden drie of meer keren gemeten zijn en een willekeurige steekproef van de populatie zijn. Bij gepaarde groepen, moet elk paar bestaan uit drie of meer gepaarde observatie-eenheden en moet de steekproef met alle paren een willekeurige steekproef van de populatie zijn.[^4]
 
 
 # Effectmaat
@@ -202,7 +201,7 @@ Bij alle vier de gebouwen lijken er afwijkingen te zijn van de (symmetrische) no
 ## Friedman's ANOVA
 
 <!-- ## TEKSTBLOK: ANOVA-toets.R -->
-Voer *Friedman's ANOVA* uit om de vraag te beantwoorden of er verschillen zijn tussen de beoordelingen van de eetgelegenheden in de vier gebouwen op de campus van de hogeschool. Gebruik de functie `friedman.test()` met als argumenten de afhankelijke variabele `y = Beoordelingen_eetgelegenheden$Beoordeling`, de vier groepen die vergeleken worden (onafhankelijke variabele) `groups = Beoordelingen_eetgelegenheden$Kantine` en de variabele die de observatie-eenheden aangeeft `blocks = Beoordelingen_eetgelegenheden$Studentnummer`.
+Voer *Friedman's ANOVA* uit om de vraag te beantwoorden of er verschillen zijn tussen de (gemiddelde rangnummers van de)beoordelingen van de eetgelegenheden in de vier gebouwen op de campus van de hogeschool. Gebruik de functie `friedman.test()` met als argumenten de afhankelijke variabele `y = Beoordelingen_eetgelegenheden$Beoordeling`, de vier groepen die vergeleken worden (onafhankelijke variabele) `groups = Beoordelingen_eetgelegenheden$Kantine` en de variabele die de observatie-eenheden aangeeft `blocks = Beoordelingen_eetgelegenheden$Studentnummer`.
 
 <!-- ## /TEKSTBLOK: ANOVA-toets.R -->
 
@@ -293,30 +292,30 @@ Effectmaat_SC_CC <- abs(qnorm(posthoc[3,2]/2)) / sqrt(length(unique(Beoordelinge
 ```
 <!-- ## /OPENBLOK: post-hoc4.R -->
 
-De [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html) gebruikt de som van positieve en negatieve rangschikkingen van de verschilscores om de significantie van de toets te bepalen. Deze sommen beschrijven het verschil tussen twee gepaarde groepen waarbij de groep met een hogere som van rangschikkingen ook hogere waarden op de afhankelijke variabele heeft. In deze casus heeft het gebouw met hogere rangschikkingen een hogere beoordeling door studenten. Bereken de som van de positieve en negatieve rangschikkingen voor alle vergelijken.
+De [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html) gebruikt de som van positieve en negatieve rangnummers van de verschilscores om de significantie van de toets te bepalen. Deze sommen beschrijven het verschil tussen twee gepaarde groepen waarbij de groep met een hogere som van rangnummers ook hogere waarden op de afhankelijke variabele heeft. In deze casus heeft het gebouw met hogere rangnummers een hogere beoordeling door studenten. Bereken de som van de positieve en negatieve rangnummers voor alle vergelijken.
 
 <!-- ## OPENBLOK: post-hoc5.R -->
 ```{r som rang}
 
-# Definieer een functie die som positieve en negatieve rangschikkingen berekent
-Sommen_rangschikkingen <- function(Beoordeling_gebouw_1, Beoordeling_gebouw_2){
+# Definieer een functie die som positieve en negatieve rangnummers berekent
+Sommen_rangnummers <- function(Beoordeling_gebouw_1, Beoordeling_gebouw_2){
   
   # Bereken verschilscores
   Verschilscores <- Beoordeling_gebouw_1 - Beoordeling_gebouw_2
   
   # Rangschik de absolute waarden van verschilscores
-  Rangschikkingen <- rank(abs(Verschilscores))
+  Rangnummers <- rank(abs(Verschilscores))
 
   # Maak een vector met daarin de tekens (plus of min) van verschilscores
   Tekens <- sign(Verschilscores)
 
-  # Bereken de som van de positieve rangschikkingen
-  Som_positief <- sum(Rangschikkingen[Tekens == 1])
+  # Bereken de som van de positieve rangnummers
+  Som_positief <- sum(Rangnummers[Tekens == 1])
 
-  # Bereken de som van de negatieve rangschikkingen
-  Som_negatief <- sum(Rangschikkingen[Tekens == -1])
+  # Bereken de som van de negatieve rangnummers
+  Som_negatief <- sum(Rangnummers[Tekens == -1])
   
-  # Retourneer som van positieve en negatieve rangschikkingen
+  # Retourneer som van positieve en negatieve rangnummers
   return(list(Positief = Som_positief, Negatief = Som_negatief))
 }
 
@@ -329,25 +328,25 @@ Beoordeling_sportcentrum <- Beoordelingen_eetgelegenheden$Beoordeling[Beoordelin
 
 Beoordeling_cultuurcentrum <- Beoordelingen_eetgelegenheden$Beoordeling[Beoordelingen_eetgelegenheden$Eetgelegenheid == "Cultuurcentrum"]
 
-# Bereken positieve en negatieve som van rangschikkingen
+# Bereken positieve en negatieve som van rangnummers
 
-## Som rangschikkingen hoofdgebouw vs. bestuursgebouw
-(Som_HG_BG <- Sommen_rangschikkingen(Beoordeling_hoofdgebouw, Beoordeling_bestuursgebouw))
+## Som rangnummers hoofdgebouw vs. bestuursgebouw
+(Som_HG_BG <- Sommen_rangnummers(Beoordeling_hoofdgebouw, Beoordeling_bestuursgebouw))
 
-## Som rangschikkingen hoofdgebouw vs. sportcentrum
-Som_HG_SC <- Sommen_rangschikkingen(Beoordeling_hoofdgebouw, Beoordeling_sportcentrum)
+## Som rangnummers hoofdgebouw vs. sportcentrum
+Som_HG_SC <- Sommen_rangnummers(Beoordeling_hoofdgebouw, Beoordeling_sportcentrum)
 
-## Som rangschikkingen hoofdgebouw vs. cultuurcentrum
-Som_HG_CC <- Sommen_rangschikkingen(Beoordeling_hoofdgebouw, Beoordeling_cultuurcentrum)
+## Som rangnummers hoofdgebouw vs. cultuurcentrum
+Som_HG_CC <- Sommen_rangnummers(Beoordeling_hoofdgebouw, Beoordeling_cultuurcentrum)
 
-## Som rangschikkingen bestuursgebouw vs. sportcentrum
-Som_BG_SC <- Sommen_rangschikkingen(Beoordeling_bestuursgebouw, Beoordeling_sportcentrum)
+## Som rangnummers bestuursgebouw vs. sportcentrum
+Som_BG_SC <- Sommen_rangnummers(Beoordeling_bestuursgebouw, Beoordeling_sportcentrum)
 
-## Som rangschikkingen bestuursgebouw vs. cultuurcentrum
-Som_BG_CC <- Sommen_rangschikkingen(Beoordeling_bestuursgebouw, Beoordeling_cultuurcentrum)
+## Som rangnummers bestuursgebouw vs. cultuurcentrum
+Som_BG_CC <- Sommen_rangnummers(Beoordeling_bestuursgebouw, Beoordeling_cultuurcentrum)
 
-## Som rangschikkingen sportcentrum vs. cultuurcentrum
-Som_SC_CC <- Sommen_rangschikkingen(Beoordeling_sportcentrum, Beoordeling_cultuurcentrum)
+## Som rangnummers sportcentrum vs. cultuurcentrum
+Som_SC_CC <- Sommen_rangnummers(Beoordeling_sportcentrum, Beoordeling_cultuurcentrum)
 
 
 ```
@@ -355,7 +354,7 @@ Som_SC_CC <- Sommen_rangschikkingen(Beoordeling_sportcentrum, Beoordeling_cultuu
 
 <!-- ## TEKSTBLOK: posthoc6.R -->
 
-| Vergelijking | p-waarde     | Effectmaat        |  Som positieve rangschikkingen        | Som negatieve rangschikkingen     |
+| Vergelijking | p-waarde     | Effectmaat        |  Som positieve rangnummers        | Som negatieve rangnummers     |
 | -------------  | ----------  | --------- | ---------- | -------- |
 | HG vs. BG    | `r Round_and_format(posthoc[2,1])` | `r Round_and_format(Effectmaat_HG_BG)`| `r Round_and_format(Som_HG_BG[[1]])` | `r Round_and_format(Som_HG_BG[[2]])` |
 | HG vs. SC    | `r Round_and_format(posthoc[3,3])` | `r Round_and_format(Effectmaat_HG_SC)`| `r Round_and_format(Som_HG_SC[[1]])` | `r Round_and_format(Som_HG_SC[[2]])` |
@@ -372,9 +371,9 @@ Som_SC_CC <- Sommen_rangschikkingen(Beoordeling_sportcentrum, Beoordeling_cultuu
 <!-- ## TEKSTBLOK: posthoc7.R -->
 De significante verschillen op de post-hoc toetsen zijn:
 
-* De beoordelingen van het hoofdgebouw (Som = `r Round_and_format(Som_HG_CC[[1]])`) verschillen significant van het cultuurcentrum (Som = `r Round_and_format(Som_HG_CC[[2]])`), *p* = `r Round_and_format(posthoc[2,2])`, *r* = `r Round_and_format(Effectmaat_HG_CC)`. De hogere som van rangschikkingen voor het hoofdgebouw duidt erop dat de beoordelingen van het hoofdgebouw beter zijn dan die van het cultuurcentrum.
+* De beoordelingen van het hoofdgebouw (Som = `r Round_and_format(Som_HG_CC[[1]])`) verschillen significant van het cultuurcentrum (Som = `r Round_and_format(Som_HG_CC[[2]])`), *p* = `r Round_and_format(posthoc[2,2])`, *r* = `r Round_and_format(Effectmaat_HG_CC)`. De hogere som van rangnummers voor het hoofdgebouw duidt erop dat de beoordelingen van het hoofdgebouw beter zijn dan die van het cultuurcentrum.
 
-* De beoordelingen van het sportcentrum (Som = `r Round_and_format(Som_SC_CC[[1]])`) verschillen significant van het cultuurcentrum (Som = `r Round_and_format(Som_SC_CC[[2]])`), *p* = `r Round_and_format(posthoc[3,2])`, *r* = `r Round_and_format(Effectmaat_SC_CC)`. De hogere som van rangschikkingen voor het sportcentrum duidt erop dat de beoordelingen van het sportcentrum beter zijn dan die van het cultuurcentrum.
+* De beoordelingen van het sportcentrum (Som = `r Round_and_format(Som_SC_CC[[1]])`) verschillen significant van het cultuurcentrum (Som = `r Round_and_format(Som_SC_CC[[2]])`), *p* = `r Round_and_format(posthoc[3,2])`, *r* = `r Round_and_format(Effectmaat_SC_CC)`. De hogere som van rangnummers voor het sportcentrum duidt erop dat de beoordelingen van het sportcentrum beter zijn dan die van het cultuurcentrum.
 
 <!-- ## /TEKSTBLOK: posthoc7.R -->
 

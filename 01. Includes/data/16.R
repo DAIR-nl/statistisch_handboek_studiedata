@@ -121,7 +121,7 @@ BSA[BSA == 0] <- "Negatief"
 # Maak dataset
 Fisher_BSA_antropologie <- data.frame(Studentnummer, Landen_vooropleiding, BSA)
 # Sorteer dataset
-Fisher_BSA_antropologie <- Fisher_BSA_antropologie[order(BSA_antropologie$Studentnummer),]
+Fisher_BSA_antropologie <- Fisher_BSA_antropologie[order(Fisher_BSA_antropologie$Studentnummer),]
 
 # Maak een tabel
 Fisher_Tabel_BSA_antropologie <- table(BSA_antropologie$BSA, 

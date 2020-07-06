@@ -1,5 +1,3 @@
-
-
 library(reticulate)
 reticulate::install_miniconda()
 py_config()
@@ -18,6 +16,7 @@ py_install("statsmodels.api")
 py_install("pingouin")
 py_install("seaborn")
 py_install("scikit-posthocs", pip = TRUE)
+py_install("FisherExact", pip = TRUE)
 
 # https://github.com/rstudio/reticulate/issues/578
 # https://cran.r-project.org/web/packages/reticulate/vignettes/python_packages.html

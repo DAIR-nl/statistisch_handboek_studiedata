@@ -45,7 +45,9 @@ source(paste0(here::here(),"/01. Includes/data/16.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
+<!-- ## TEKSTBLOK: link1.R -->
 Gebruik de *Chi-kwadraat toets voor onafhankelijkheid*[^1] of de *Fisher-Freeman-Halton exact toets*[^2] om te toetsen of er een afhankelijkheid is tussen twee ongepaarde categorische variabelen. De *Fisher-Freeman-Halton exact toets* is een alternatief voor de *Chi-kwadraat toets voor onafhankelijkheid* bij een laag aantal observaties.[^2]<sup>,</sup>[^3] De *Fisher-Freeman-Halton exact toets* is een uitbreiding van de [Fisher's exact toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) welke gebruikt wordt om te toetsen of er een verband bestaat tussen twee ongepaarde binaire variabelen, oftewel een 2x2 tabel. 
+<!-- ## /TEKSTBLOK: link1.R -->
 
 # Onderwijscasus
 <div id = "casus">
@@ -76,9 +78,9 @@ De *Chi-kwadraat toets voor onafhankelijkheid* heeft een assumptie wat betreft h
 
 De *Chi-kwadraat toets voor onafhankelijkheid* wordt onbetrouwbaar als er in meer dan 20% van de cellen van de kruistabel een verwacht aantal observaties van 5 of lager is.[^5]<sup>,</sup>[^7] Gebruik in dat geval de *Fisher-Freeman-Halton toets*. Het verwachte aantal observaties in een cel is het aantal observaties dat zich in een cel op basis van kansrekening zou moeten bevinden wanneer er geen afhankelijkheid tussen de twee variabelen is. Op basis van de nulhypothese van onafhankelijkheid tussen de variabelen kunnen de verwachte aantallen observaties in elke cel berekend worden. 
 
+<!-- ## TEKSTBLOK: Groepsgrootte2.R -->
 Een voorbeeldberekening van het het verwachte aantal observaties van de studenten met een Nederlandse vooropleiding met positief BSA werkt als volgt: vermenigvuldig het totaal aantal studenten met een Nederlandse vooropleiding (`r sum(BSA_kruistabel[1:2,1])`) met het totaal aantal studenten met een positief BSA (`r sum(BSA_kruistabel[1,1:7])`) en deel dit door het totaal aantal studenten (`r sum(BSA_kruistabel)`).
 
-<!-- ## TEKSTBLOK: Groepsgrootte2.R -->
 * aantal studenten positief BSA: `r sum(BSA_kruistabel[1,1:7])`   
 * aantal studenten met Nederlandse vooropleiding: `r sum(BSA_kruistabel[1:2,1])`  
 * totaal aantal studenten: `r sum(BSA_kruistabel)` 
@@ -101,14 +103,18 @@ De *Chi-kwadraat toets voor onafhankelijkheid* en *Fisher-Freeman-Halton exact t
 
 Als post-hoc toets voor de *Chi-kwadraat toets voor onafhankelijkheid* wordt het gestandaardiseerde residu gebruikt. Dit is het gestandaardiseerde verschil tussen het (geobserveerde) aantal observaties en het verwachte aantal observaties, waarbij gestandaardiseerd betekent dat het een gemiddelde van 0 en standaardafwijking van 1 heeft. Op deze manier kunnen de verschillende residuen met elkaar vergeleken worden, omdat ze dezelfde schaal hebben. Voor elke cel in de kruistabel kan het gestandaardiseerde residu bepaald worden. Vergelijkbaar met z-scores[^11] zijn deze residuen significant bij een waarde groter dan ± 1,96 wanneer een significantieniveau (α) van 0,05 wordt gehanteerd. Op deze manier kan bepaald worden in welke cellen er afwijkingen van de verwachte aantallen zijn. [^5]
 
+<!-- ## TEKSTBLOK: link2.R -->
 Voor de *Fisher-Freeman-Halton exact toets* is er geen specifiek voorgeschreven post-hoc toets.[^3]<sup>,</sup>[^5] Een goede optie is het uitvoeren van losse [Fisher's exact toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) voor elke mogelijke combinatie van 2x2 tabellen. Gebruik een correctie op de p-waarden, omdat er meerdere testen tegelijk uitgevoerd worden. Een bekende correctie is de Bonferroni methode, andere opties zijn ook mogelijk. De keuze voor een correctie is afhankelijk van het onderzoek.[^5]
+<!-- ## /TEKSTBLOK: link2.R -->
 
 # Effectmaat
 
 De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^5] 
 De *Chi-kwadraat toets voor onafhankelijkheid* heeft als effectmaat *w*.[^6] Een indicatie om *w* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^7]
 
+<!-- ## TEKSTBLOK: link3.R -->
 De *Fisher-Freeman-Halton exact toets* heeft geen specifieke effectmaat. De post-hoc toets van deze toets - [Fisher's exact toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) - gebruikt echter de odds ratio als effectmaat. De odds ratio is een effectmaat die voor zowel de *Chi-kwadraat toets voor onafhankelijkheid* als de [Fisher's exact toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) kan worden gebruikt. Een voorwaarde is echter dat beide variabelen binair zijn. In andere woorden, er moet een 2x2 kruistabel gevormd kunnen worden. Odds is een Engelse term voor de verhouding van twee kansen, bijvoorbeeld de verhouding tussen het aantal studenten met positief BSA en negatief BSA. Een odds ratio is de verhouding tussen twee odds, dus de verhouding van de odds van studenten met Nederland als land van hoogste vooropleiding en studenten met Duitsland als land van hoogste vooropleiding. De odds ratio geeft dus een interpretatie van de verschillen tussen landen op het behalen van een positief of negatief BSA.[^5]
+<!-- ## /TEKSTBLOK: link3.R -->
 
 # De data bekijken
 
@@ -135,25 +141,27 @@ Een kruistabel geeft de aantallen observaties weer voor de combinaties van de ca
 ```{r kruistabel}
 
 ## Maak een kruistabel
-BSA_antropolgie_kruistabel <- table(BSA_antropologie$BSA, BSA_antropologie$Landen_vooropleiding)
+BSA_antropologie_kruistabel <- table(BSA_antropologie$BSA, BSA_antropologie$Landen_vooropleiding)
 
 ## Print de kruistabel 
-print(BSA_antropolgie_kruistabel)
+print(BSA_antropologie_kruistabel)
 
 ## Print een tabel met proporties, tweede argument 2 zorgt ervoor dat de 
 ## proporties per kolom berekend worden
-prop.table(BSA_antropolgie_kruistabel, 2)
+prop.table(BSA_antropologie_kruistabel, 2)
 ```
 <!-- ## /OPENBLOK: Data-kruistabel2.R -->
 
 <!-- ## TEKSTBLOK: Data-kruistabel3.R -->
-De kruistabel en bijbehorende tabel met proporties laat zien dat de meerderheid van de studenten een positief BSA ontvangt voor elk land van vooropleiding. Van studenten uit het Verenigd Koninkrijk (UK) haalt verhoudingsgewijs het grootste deel een positief BSA. Het percentage studenten met een positief BSA is hier `r Round_and_format(100 * prop.table(BSA_antropolgie_kruistabel, 2)[2,6])`%.
+De kruistabel en bijbehorende tabel met proporties laat zien dat de meerderheid van de studenten een positief BSA ontvangt voor elk land van vooropleiding. Van studenten uit het Verenigd Koninkrijk (UK) haalt verhoudingsgewijs het grootste deel een positief BSA. Het percentage studenten met een positief BSA is hier `r Round_and_format(100 * prop.table(BSA_antropologie_kruistabel, 2)[2,6])`%.
 <!-- ## /TEKSTBLOK: Data-kruistabel3.R -->
 
 
 ## Assumptie groepsgrootte
 
+<!-- ## TEKSTBLOK: Assumptie.R -->
 Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk of kleiner dan vijf is. Bereken het verwachte aantal observaties met het argument `chisq.test()$expected` van de functie `chisq.test()` met als argumenten de variabelen `BSA_antropologie$BSA` (positief of negatief BSA) en `BSA_antropologie$Landen_vooropleiding` (landen van hoogst genoten vooropleiding).
+<!-- ## /TEKSTBLOK: Assumptie.R -->
 
 <!-- ## OPENBLOK: Assumptie1.R -->
 ```{r chi2 assumptie}
@@ -169,11 +177,11 @@ Geen van de verwachte aantallen observaties is gelijk of kleiner dan vijf, dus d
 De *Chi-kwadraat toets voor onafhankelijkheid* wordt uitgevoerd om de vraag te beantwoorden of er een afhankelijkheid is tussen het land van vooropleiding en het wel of niet halen van een positief BSA. Gebruik de functie `chisq.test()` met als argumenten de variabelen `BSA_antropologie$BSA` (positief of negatief BSA) en `BSA_antropologie$Landen_vooropleiding` (landen van hoogst genoten vooropleiding).
 <!-- ## /TEKSTBLOK: Chi2-toets.R -->
 
-<!-- ## OPENBLOK: Chi2-toets-->
+<!-- ## OPENBLOK: Chi2-toets.R -->
 ```{r collapse=TRUE}
 chisq.test(BSA_antropologie$BSA, BSA_antropologie$Landen_vooropleiding)
 ```
-<!-- ## /OPENBLOK: Chi2-toets-->
+<!-- ## /OPENBLOK: Chi2-toets.R -->
 
 <!-- ## CLOSEDBLOK: Chi2-toets.R-->
 ```{r chi2 als object, include=FALSE, echo=TRUE}
@@ -205,11 +213,10 @@ paste("Effectgrootte is",w)
 
 
 <!-- ## TEKSTBLOK: Chi2-toets.R-->
-* *&chi;^2^* ~6~ ≈ `r vChi2`, *p* < 0,0001  
+* *&chi;^2^* ~`r vDF`~ = `r vChi2`, *p* < 0,0001  
 * Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r vDF`. 
 * p-waarde < 0,05, de H~0~ wordt verworpen.[^8]
 * Effectmaat is `r Round_and_format(w)`, dus een klein tot gemiddeld effect
-
 
 <!-- ## /TEKSTBLOK: Chi2-toets.R-->
 
@@ -217,12 +224,12 @@ paste("Effectgrootte is",w)
 
 Voer post-hoc toetsen uit om te bepalen welke landen van hoogste vooropleiding van elkaar verschillen wat betreft de verdeling van het aantal studenten met positief en negatief BSA. Inspecteer hiervoor de Pearson residuen van de *Chi-kwadraat toets voor onafhankelijkheid* op waarden groter dan 1,96 en kleiner dan -1,96. Let op dat hier nog geen correctie voor meerdere testen plaatsvindt.[^9]
 
-<!-- ## OPENBLOK: Chi2-toets post-hoc1-->
+<!-- ## OPENBLOK: Chi2-toets post-hoc1.R -->
 ```{r collapse=TRUE}
 resultaat <- chisq.test(BSA_antropologie$BSA, BSA_antropologie$Landen_vooropleiding)
 resultaat$residuals
 ```
-<!-- ## /OPENBLOK: Chi2-toets post-hoc1-->
+<!-- ## /OPENBLOK: Chi2-toets post-hoc1.R -->
 
 <!-- ## TEKSTBLOK: Chi2-toets post-hoc2.R-->
 * Significant hoger aantal observaties bij negatief BSA Spanje (ES), *z* = `r Round_and_format(resultaat$residuals["Negatief","ES"])`
@@ -345,7 +352,9 @@ fisher.multcomp(Fisher_BSA_antropologie_kruistabel, p.method = "bonferroni")
 ```
 <!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets post-hoc2.R -->
 
+<!-- ## TEKSTBLOK: link4.R -->
 De resultaten laten de significantie zien van de [Fisher's exact toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) voor elk mogelijke combinatie van 2x2 tabellen. Geen van de post-hoc toetsen is significant, wat logisch is aangezien de *Fisher-Freeman-Halton exact toets* niet significant was.  De eerste waarde is bijvoorbeeld de p-waarde van deze toets voor de kruistabel bestaande uit de aantallen positief en negatief BSA voor Nederland en Duitsland (NL:GE). De opmerkelijke p-waardes van 1 komen in een aantal gevallen door de Bonferroni correctie die de oorspronkelijke p-waarde met het aantal vergelijken (21) vermenigvuldigt. In andere gevallen zijn de verschillen zo klein dat dit leidt tot een p-waarde van 1.
+<!-- ## /TEKSTBLOK: link4.R -->
 
 
 ## Rapportage

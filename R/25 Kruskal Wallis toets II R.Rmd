@@ -55,7 +55,7 @@ Gebruik de *Kruskal Wallis toets* om te toetsen of twee of meer ongepaarde groep
 
 Bij het interdisciplinaire vak ‘Presentatievaardigheden’ van de faculteit Economie en Bedrijfswetenschappen leren studenten om een overtuigende presentatie te geven over een product. Het vak wordt afgesloten met een individuele presentatie die beoordeeld wordt als onvoldoende, voldoende, goed of uitstekend. Het vak wordt gevolgd door studenten van de masters Economics, Finance, Entrepeneurship en Marketing. De hoofddocent wil graag onderzoeken of er verschillen zijn tussen de beoordelingen van studenten van deze vier masters. Wanneer er verschillen zijn, kan hij in gesprek gaan met studenten van een master die minder goed scoort om te onderzoeken wat de oorzaak hiervan zou kunnen zijn. 
 
-Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
 *H~0~*: Er zijn geen verschillen tussen (de gemiddelde rangnummers van) de beoordeling van het vak Presentatievaardigheden voor studenten afkomstig van de opleidingen Economics, Finance, Entrepeneurship en Marketing.
 

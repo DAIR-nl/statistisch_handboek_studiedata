@@ -55,10 +55,9 @@ Gebruik *Cochran's Q toets* om te toetsen of er verschillen zijn op een binaire 
 <div id = "casus">
 De opleidingsdirecteur van de bacheloropleiding Kunstmatige Intelligentie van een universiteit merkt dat er tijdens het eerste studiejaar veel studenten zijn die niet alle vakken voldoende afsluiten. Hij wilt uitvinden in welke onderwijsperiode dit vooral plaatsvindt om te onderzoeken waardoor de studievertraging veroorzaakt wordt. Op deze universiteit bestaat het eerste jaar uit vier onderwijsperiodes. Daarom vraagt hij studieresultaten op van eerstejaars studenten in het vorige collegejaar die niet zijn uitgevallen gedurende dat jaar. Met deze resultaten wilt hij onderzoeken of het percentage eerstejaars studenten dat een of meer herkansingen heeft, verschilt tussen de vier onderwijsperiodes.
 
-Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
 *H~0~*: Het percentage eerstejaars studenten dat een of meerdere herkansingen heeft is gelijk in elke onderwijsperiode.
-
 
 *H~A~*: Het percentage eerstejaars studenten dat een of meerdere herkansingen heeft is niet gelijk in elke onderwijsperiode.
 </div>

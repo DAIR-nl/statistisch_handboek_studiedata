@@ -51,7 +51,7 @@ Gebruik de *Wilcoxon signed rank toets* om te toetsen of twee gepaarde groepen v
 <div id ="casus">
 De hoofddocent van het vak ‘Speech schrijven’ van de bachelor Politicologie is benieuwd naar de effectiviteit van zijn eigen vak. Daarom laat hij studenten bij de eerste bijeenkomst van het vak een speech schrijven die zij beoordeelt als onvoldoende, voldoende, goed of uitstekend. Gedurende het vak leren studenten het schrijven van speeches vanuit verschillende perspectieven. Aan het einde van het vak schrijven studenten wederom een speech die op dezelfde wijze door de hoofddocent beoordeeld wordt. Op deze manier kan hij onderzoeken of zijn lessen ervoor zorgen dat studenten beter worden in het schrijven van speeches.
 
-Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
 *H~0~*: Er is geen verschil tussen de (som van rangschikkingen van de) beoordelingen van de speeches geschreven door studenten aan het begin en aan het eind van het vak.
 

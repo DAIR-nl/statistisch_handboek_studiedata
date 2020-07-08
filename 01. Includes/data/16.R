@@ -1,4 +1,3 @@
-
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 16.R ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -42,7 +41,7 @@ Studentnummer <- as.factor(Studentnummer)
 
 # Maak een variabele met de landen erin
 Landen_vooropleiding <- c(rep("NL", 1287), rep("GE", 242), rep("IT", 81),
-                          rep("UK", 123), rep("BE", 49), rep("ES", 98),
+                          rep("UK", 123), rep("ES", 49), rep("BE", 98),
                           rep("US", 320))
 
 # Maak variabele voor positief of negatief BSA
@@ -55,12 +54,12 @@ NL <- rbinom(1287, 1, proporties[1])
 GE <- rbinom(242, 1, proporties[2])
 IT <- rbinom(81, 1, proporties[3])
 UK <- rbinom(123, 1, proporties[4])
-BE <- rbinom(49, 1, proporties[5])
-ES <- rbinom(98, 1, proporties[6])
+ES <- rbinom(49, 1, proporties[5])
+BE <- rbinom(98, 1, proporties[6])
 US <- rbinom(320, 1, proporties[7])
 
 ## Verbind alle landen
-BSA_numeriek <- c(NL, GE, IT, UK, BE, ES, US)
+BSA_numeriek <- c(NL, GE, IT, UK, ES, BE, US)
 
 ## Zet 1 om in positief en 0 om in negatief, dan heb je BSA variabele
 BSA <- BSA_numeriek
@@ -77,7 +76,7 @@ BSA_antropologie <- BSA_antropologie[order(BSA_antropologie$Studentnummer),]
 Tabel_BSA_antropologie <- table(BSA_antropologie$BSA, 
                                 BSA_antropologie$Landen_vooropleiding)
 # Verander volgorde tabel
-BSA_kruistabel <- Tabel_BSA_antropologie[, c("NL", "GE", "IT", "UK", "BE", "ES", "US")]
+BSA_kruistabel <- Tabel_BSA_antropologie[, c("NL", "GE", "IT", "UK", "ES", "BE", "US")]
 
 
 

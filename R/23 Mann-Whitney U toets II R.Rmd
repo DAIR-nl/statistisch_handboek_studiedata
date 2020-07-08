@@ -53,7 +53,7 @@ Gebruik de *Mann-Whitney U toets* om te toetsen of twee ongepaarde groepen van e
 <div id ="casus">
 Bij de hbo lerarenopleiding Frans leren studenten bij het vak Gesprekstechnieken om gesprekken te voeren in een praktijksetting. Aan het einde van het vak worden zij beoordeeld op basis van een mentorgesprek met een acteur waarin zij de aangeleerde vaardigheden in de praktijk kunnen toepassen. In vakevaluaties wordt vaak door mannen aangegeven dat ze het vak als erg moeilijk ervaren. Daarom wil de hoofddocent graag uitzoeken of er verschillen zijn tussen mannen en vrouwen wat betreft de beoordeling van de gesprekstechnieken.
 
-Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
 *H~0~*: Er is geen verschil tussen mannen en vrouwen wat betreft (het gemiddelde rangnummer van) de beoordelingen van gesprekstechnieken.
 

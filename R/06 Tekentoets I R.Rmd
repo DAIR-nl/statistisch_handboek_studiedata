@@ -51,7 +51,7 @@ Gebruik de *tekentoets* om de mediaan van een steekproef te vergelijken met een 
 <div id ="casus">
 De opleidingsdirecteur van de school voor Journalistiek is benieuwd wat alumni verdienen ten opzichte van de gemiddelde Nederlander. Daarom wil zij de jaarinkomens van oud-studenten vergelijken met het modale inkomen van €36.000.[^2] Op deze manier vergaart zij meer informatie over het succes op de arbeidsmarkt na de opleiding Journalistiek.
 
-Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
 *H~0~*: De mediaan van het jaarinkomen van alumni Journalistiek is gelijk aan €36.000, het modale jaarinkomen in Nederland.
 

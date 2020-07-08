@@ -56,10 +56,9 @@ Gebruik *multilevel multinomiale logistische regressie* om te toetsen of er vers
 
 In de bachelor Psychologie kiezen studenten aan het einde van het eerste jaar een specialisatie voor jaar 2 en 3. Hierbij kunnen studenten kiezen uit de richtingen Klinische Neuropsychologie (KNP), Sociale Psychologie (SP), en Arbeids- en Organisatiepsychologie (AOP). De opleidingsdirecteur wil onderzoeken op welk moment in het eerste studiejaar studenten ontdekken welke specialisatie zij willen doen. Daarom start zij een experiment waarin ze aan een groep eerstejaars studenten vraagt om na elke onderwijsperiode aan te geven welke specialisatie ze op dat moment zouden kiezen. Met dit experiment kan zij ontdekken op welk moment in het eerste studiejaar studenten de keuze maken, maar ook in welke periode studenten van voorkeur veranderen. Op basis van deze analyse kan de opleidingsdirecteur onderzoeken op welk moment in het jaar er behoefte is aan voorlichting over de verschillende specialisaties in de bachelor Psychologie. 
 
-Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
 *H~0~*: Er is geen afhankelijkheid tussen de verschillende periodes en de keuze voor een specialisatie.
-
 
 *H~A~*: Er is een afhankelijkheid tussen de verschillende periodes en de keuze voor een specialisatie.
 </div>

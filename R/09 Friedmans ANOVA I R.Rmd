@@ -51,7 +51,7 @@ source(paste0(here::here(),"/01. Includes/data/09.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik *Friedman's ANOVA* om de gemiddelde rangnummers te vergelijken voor de verdelingen van drie of meer herhaalde metingen van één groep of voor de verdelingen van drie of meer gepaarde groepen.[^1]<sup>, </sup>[^2] *Friedman's ANOVA* is een alternatief voor de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) wanneer de data niet aan de assumptie van normaliteit voldoet. Daarnaast hebben uitbijters minder invloed op het resultaat van *Friedman's ANOVA* in vergelijking tot de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html). Echter, als de data aan de assumpties van de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) voldoet, heeft die toets een hoger onderscheidend vermogen dan *Friedman's ANOVA*.[^3]
+Gebruik *Friedman's ANOVA* om de gemiddelde rangnummers[^13] te vergelijken voor de verdelingen van drie of meer herhaalde metingen van één groep of voor de verdelingen van drie of meer gepaarde groepen.[^1]<sup>, </sup>[^2] *Friedman's ANOVA* is een alternatief voor de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) wanneer de data niet aan de assumptie van normaliteit voldoet. Daarnaast hebben uitbijters minder invloed op het resultaat van *Friedman's ANOVA* in vergelijking tot de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html). Echter, als de data aan de assumpties van de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) voldoet, heeft die toets een hoger onderscheidend vermogen dan *Friedman's ANOVA*.[^3]
 
 
 
@@ -64,7 +64,7 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 *H~0~*: Het gemiddelde rangnummer van de verdelingen van de beoordelingen van studenten is hetzelfde voor de eetgelegenheid in het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt.
 
-*H~A~*: Het gemiddelde rangnummer van de verdelingen van de beoordelingen van studenten is niet hetzelfde voor de eetgelegenheid in het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt
+*H~A~*: Het gemiddelde rangnummer van de verdelingen van de beoordelingen van studenten is niet hetzelfde voor de eetgelegenheid in het hoofdgebouw, het bestuursgebouw, het sportcentrum en het cultuurcentrum Rembrandt.
 
 </div>
 
@@ -407,3 +407,4 @@ Post-hoc toetsen met een Bonferroni correctie voor meerdere toetsen zijn uitgevo
 *z*-waarde behorend bij de *p*-waarde van de toets te delen door de wortel van
 het aantal observatie-eenheden, i.e. $\frac{z}{\sqrt{N}}$.
 [^12]: De breedte van de staven van het histogram worden hier automatisch bepaald, maar kunnen handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
+[^13]: Bij *Friedman's ANOVA* en andere nonparametrische toetsen wordt de data eerst gerangschikt zodat elke observatie een rangnummer toegewezen krijgt. Deze rangnummers worden vervolgens gebruikt om de toets uit te voeren.

@@ -165,7 +165,12 @@ Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties 
 
 <!-- ## OPENBLOK: Assumptie1.R -->
 ```{r chi2 assumptie}
-chisq.test(BSA_antropologie$BSA, BSA_antropologie$Landen_vooropleiding)$expected
+# Bereken het verwacht aantal observaties per cel van de kruistabel
+Tabel_assumptie <- chisq.test(BSA_antropologie$BSA, BSA_antropologie$Landen_vooropleiding)$expected
+# Print de tabel
+Tabel_assumptie
+# Extra: bereken het percentage verwachte aantallen observaties van vijf of minder
+100 * (sum(Tabel_assumptie <= 5) / length(Tabel_assumptie))
 ```
 <!-- ## /OPENBLOK: Assumptie1.R -->
 
@@ -217,6 +222,7 @@ paste("Effectgrootte is",w)
 * Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r vDF`. 
 * p-waarde < 0,05, de H~0~ wordt verworpen.[^8]
 * Effectmaat is `r Round_and_format(w)`, dus een klein tot gemiddeld effect
+* 
 
 <!-- ## /TEKSTBLOK: Chi2-toets.R-->
 
@@ -307,7 +313,7 @@ Drie van de 14 (21,43%) verwachte aantallen observaties zijn kleiner dan vijf. M
 
 ## Uitvoering
 <!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets.R-->
-Gebruik de functie `fisher.test()` met als argumenten de variabele `Fisher_BSA_antropologie$BSA` (positief of negatief BSA), de variabele `Fisher_BSA_antropologie$Landen_vooropleiding` (landen van hoogst genoten vooropleiding) en als laatste argument `simulate.p.value = TRUE`. Hierdoor wordt de p-waarde met een simulatie berekent waardoor de rekentijd voor de computer een stuk lager is en de resultaten sneller weergegeven kunnen worden. Gebruik een seed (`set.seed(123)`) om ervoor te zorgen dat de p-waarde reproduceerbaar is. Bij een simulatie kunnen er namelijk kleine verschillen tussen de resultaten zijn bij het herhalen van de simulatie.
+Gebruik de functie `fisher.test()` met als argumenten de variabele `Fisher_BSA_antropologie$BSA` (positief of negatief BSA), de variabele `Fisher_BSA_antropologie$Landen_vooropleiding` (landen van hoogst genoten vooropleiding) en als laatste argument `simulate.p.value = TRUE`. Hierdoor wordt de p-waarde met een simulatie berekend waardoor de rekentijd voor de computer een stuk lager is en de resultaten sneller weergegeven kunnen worden. Gebruik een seed (`set.seed(123)`) om ervoor te zorgen dat de p-waarde reproduceerbaar is. Bij een simulatie kunnen er namelijk kleine verschillen tussen de resultaten zijn bij het herhalen van de simulatie.
 <!-- ## /TEKSTBLOK: Fisher-Freeman-Halton-exact-toets.R-->
 <!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets.R-->
 ``` {r fisher toets}
@@ -353,13 +359,13 @@ fisher.multcomp(Fisher_BSA_antropologie_kruistabel, p.method = "bonferroni")
 <!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets post-hoc2.R -->
 
 <!-- ## TEKSTBLOK: link4.R -->
-De resultaten laten de significantie zien van de [Fisher's exact toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) voor elk mogelijke combinatie van 2x2 tabellen. Geen van de post-hoc toetsen is significant, wat logisch is aangezien de *Fisher-Freeman-Halton exact toets* niet significant was.  De eerste waarde is bijvoorbeeld de p-waarde van deze toets voor de kruistabel bestaande uit de aantallen positief en negatief BSA voor Nederland en Duitsland (NL:GE). De opmerkelijke p-waardes van 1 komen in een aantal gevallen door de Bonferroni correctie die de oorspronkelijke p-waarde met het aantal vergelijken (21) vermenigvuldigt. In andere gevallen zijn de verschillen zo klein dat dit leidt tot een p-waarde van 1.
+De resultaten laten de significantie zien van de [Fisher's exact toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) voor elk mogelijke combinatie van 2x2 tabellen. Geen van de post-hoc toetsen is significant, wat logisch is aangezien de *Fisher-Freeman-Halton exact toets* niet significant was.  De eerste waarde is bijvoorbeeld de p-waarde van deze toets voor de kruistabel bestaande uit de aantallen positief en negatief BSA voor Nederland en Duitsland (NL:GE). De opmerkelijke p-waardes van 1 komen in een aantal gevallen door de Bonferroni correctie die de oorspronkelijke p-waarde met het aantal vergelijkingen (21) vermenigvuldigt. In andere gevallen zijn de verschillen zo klein dat dit leidt tot een p-waarde van 1.
 <!-- ## /TEKSTBLOK: link4.R -->
 
 
 ## Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Fisher-Freeman-Halton exact toets* is uitgevoerd om te onderzoeken of er een afhankelijkheid is tussen het land van hoogst genoten vooropleiding en het wel of niet behalen van een positief BSA voor een dataset met een laag aantal observaties. De nulhypothese kan niet verworpen worden (*p* = `r Round_and_format(fish)`), dus er is geen afhankelijkheid tussen het wel of niet ontvangen van een positief BSA en het land van de hoogst genoten vooropleiding. Het percentage studenten met een positief BSA lijkt niet te verschillen per land van hoogst genoten vooropleiding. 
+De *Fisher-Freeman-Halton exact toets* is uitgevoerd om te onderzoeken of er een afhankelijkheid is tussen het land van hoogst genoten vooropleiding en het wel of niet behalen van een positief BSA voor een dataset met een laag aantal observaties. De nulhypothese kan niet verworpen worden (*p* = `r Round_and_format(fish)`), dus er lijkt geen afhankelijkheid te zijn tussen het wel of niet ontvangen van een positief BSA en het land van de hoogst genoten vooropleiding. Het percentage studenten met een positief BSA lijkt niet te verschillen per land van hoogst genoten vooropleiding. 
 
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 

@@ -49,7 +49,7 @@ source(paste0(here::here(),"/01. Includes/data/08.R"))
 # Toepassing
 
 <!-- ## TEKSTBLOK: link1.R -->
-Gebruik de *Mann-Whitney U toets* om te toetsen of de gemiddelde rangnummers van de verdelingen van twee ongepaarde groepen van elkaar verschillen.[^1] De *Mann-Whitney U toets* is een alternatief voor de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html) als de verdelingen niet normaal verdeeld zijn. Alleen als de verdelingen van beide groepen dezelfde vorm hebben, kan de *Mann-Whitney U toets* ook gebruikt worden om het verschil tussen de medianen van twee groepen te toetsen.[^9] Gebruik *Mood's mediaan toets* om medianen te toetsen bij twee ongepaarde groepen waarvan de verdelingen niet dezelfde vorm hebben.
+Gebruik de *Mann-Whitney U toets* om te toetsen of de gemiddelde rangnummers[^14] van de verdelingen van twee ongepaarde groepen van elkaar verschillen.[^1] De *Mann-Whitney U toets* is een alternatief voor de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html) als de verdelingen niet normaal verdeeld zijn. Alleen als de verdelingen van beide groepen dezelfde vorm hebben, kan de *Mann-Whitney U toets* ook gebruikt worden om het verschil tussen de medianen van twee groepen te toetsen.[^9] Gebruik *Mood's mediaan toets* om medianen te toetsen bij twee ongepaarde groepen waarvan de verdelingen niet dezelfde vorm hebben.
 <!-- ## /TEKSTBLOK: link1.R -->
 
 
@@ -299,3 +299,4 @@ De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal stu
 [^11]: Voor zowel de *Mann-Whitney U toets* als de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-I-R.html) wordt functie `wilcox.test()` in R gebruikt. Het verschil is dat de *Mann-Whitney U toets* wordt uitgevoerd met het argument `paired = FALSE` en de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-I-R.html) bij het argument `paired = TRUE`, aangezien de eerste toets ongepaarde groepen en de tweede toets gepaarde groepen vergelijkt.
 [^12]: Een ordinale variabele is een categorische variabele waarbij de categorieën geordend kunnen worden. Een voorbeeld is de variabele beoordeling met de categorieën Onvoldoende, Voldoende, Goed en Uitstekend.
 [^13]: De breedte van de staven van het histogram worden hier automatisch bepaald, maar kunnen handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
+[^14]: Bij de *Mann-Whitney U toets* en andere nonparametrische toetsen wordt de data eerst gerangschikt zodat elke observatie een rangnummer toegewezen krijgt. Deze rangnummers worden vervolgens gebruikt om de toets uit te voeren.

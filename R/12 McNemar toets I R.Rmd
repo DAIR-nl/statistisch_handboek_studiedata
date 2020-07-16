@@ -48,7 +48,7 @@ source(paste0(here::here(),"/01. Includes/data/12.R"))
 
 # Toepassing
 
-Gebruik de *McNemar toets* om te toetsen of er verschillen zijn op een binaire[^1] variabele tussen twee gepaarde groepen.[^2]<sup>, </sup>[^3] De *McNemar toets* heeft ook een exacte variant die gebruikt kan worden bij een laag aantal obervaties. De *McNemar toets* kan ook gebruikt worden om twee gepaarde groepen te vergelijken op een nominale variabele met meer dan twee categorieën. Deze toetspagina illustreert de toets echter voor een binaire variabele.
+Gebruik de *McNemar toets* om te toetsen of er verschillen zijn voor een binaire[^1] variabele tussen twee gepaarde groepen.[^2]<sup>, </sup>[^3] De *McNemar toets* heeft ook een exacte variant die gebruikt kan worden bij een laag aantal obervaties. De *McNemar toets* kan ook gebruikt worden om twee gepaarde groepen te vergelijken op een nominale variabele met meer dan twee categorieën. Deze toetspagina illustreert de toets echter voor een binaire variabele.
 
 
 # Onderwijscasus
@@ -57,9 +57,9 @@ De decaan van een hogeschool merkt dat weinig studenten met een functiebeperking
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
-*H~0~*: Er is geen verschil in de verdeling van het aantal studenten dat wel of niet gebruik maakt van de FOS voor en na de interventie.
+*H~0~*: Er is geen verschil in de verdeling van het aantal studenten voor en na de interventie dat wel of niet gebruik maakt van de FOS.
 
-*H~A~*: Er is een verschil in de verdeling van het aantal studenten dat wel of niet gebruik maakt van de FOS voor en na de interventie.
+*H~A~*: Er is een verschil in de verdeling van het aantal studenten voor en na de interventie dat wel of niet gebruik maakt van de FOS.
 </div>
 
 # Assumpties
@@ -111,7 +111,7 @@ tail(FOS_studenten)
 <!-- ## /OPENBLOK: Data-bekijken2.R -->
 
 <!-- ## TEKSTBLOK: Data-kruistabel1.R -->
-Een kruistabel geeft de aantallen observaties weer voor de combinaties van de categorieën van de variabelen `Maand` en `FOS`. In feite laat dit zien hoeveel studenten er wel of niet een beroep doen op de FOS in december en in juni. Maak de kruistabel met de functie `table()` met als argumenten de variabele `FOS_studenten$FOS`, die weergeeft of studenten wel of geen beroep op de FOS doen, en de variabele `FOS_studenten$Maand `, die de het meetmoment (december of juni) weergeeft. 
+Een kruistabel geeft de aantallen observaties weer voor de combinaties van de categorieën van de variabelen `Maand` en `FOS`. In feite laat dit zien hoeveel studenten er wel of niet een beroep doen op de FOS in december en in juni. Maak de kruistabel met de functie `table()` met als argumenten de variabele `FOS_studenten$FOS`, die weergeeft of studenten wel of geen beroep op de FOS doen, en de variabele `FOS_studenten$Maand `, die het meetmoment (december of juni) weergeeft. 
 <!-- ## /TEKSTBLOK: Data-kruistabel1.R -->
 
 <!-- ## OPENBLOK: Data-kruistabel2.R -->
@@ -129,7 +129,7 @@ prop.table(FOS_studenten_kruistabel, 2)
 ```
 <!-- ## /OPENBLOK: Data-kruistabel2.R -->
 
-De kruistabel laat zien dat het aantal studenten dat een beroep op de FOS heeft gedaan hoger is in juni en het aantal studenten dat geen beroep op de FOS heeft gedaan lager is in juni. Het percentage studenten dat een beroep op de FOS heeft gedaan is toegenomen; dit is ook te zien in de kruistabel met proporties.
+De kruistabel laat zien dat het aantal studenten dat een beroep op de FOS heeft gedaan hoger is en het aantal studenten dat geen beroep op de FOS heeft gedaan lager is in juni. Het percentage studenten dat een beroep op de FOS heeft gedaan is toegenomen; dit is ook te zien in de kruistabel met proporties.
 
 ## Assumptie groepsgrootte
 
@@ -185,7 +185,7 @@ vp <- Round_and_format(mcnemar$p.value)
 ```
 <!-- ## /CLOSEDBLOK: McNemar-toets3.R -->
 
-Bereken het verschil proportie en bijbehorend betrouwbaarheidsinterval als effectmaat.
+Bereken het verschil tussen de proporties studenten dat een beroep doet op de FOS in december en juni en bijbehorend betrouwbaarheidsinterval als effectmaat. Op deze manier kan een (eventueel) significant resultaat geïnterpreteerd worden.
 
 <!-- ## OPENBLOK: McNemar-toets5.R -->
 ```{r verschil proportie}
@@ -203,8 +203,8 @@ Verschil_proporties_standaardafwijking <- sqrt((FOS_studenten_confusiematrix["ne
 Betrouwbaarheidsinterval <- c(Verschil_proporties - 1.96 * Verschil_proporties_standaardafwijking,
                               Verschil_proporties + 1.96 * Verschil_proporties_standaardafwijking)
 # Print het interval
-paste("Het verschil in proporties is", Verschil_proporties,"met bijbehorend 95%-betrouwbaarheidsinterval van",
-      Betrouwbaarheidsinterval[1],"tot", Betrouwbaarheidsinterval[2])
+paste("Het verschil in proporties is", round(Verschil_proporties, 2),"met bijbehorend 95%-betrouwbaarheidsinterval van",
+      round(Betrouwbaarheidsinterval[1],2),"tot", round(Betrouwbaarheidsinterval[2],2))
 
 ```
 <!-- ## /OPENBLOK: McNemar-toets5.R -->

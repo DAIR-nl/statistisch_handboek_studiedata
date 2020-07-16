@@ -49,7 +49,7 @@ source(paste0(here::here(),"/01. Includes/data/10.R"))
 
 # Toepassing
 <!-- ## TEKSTBLOK: link1.R -->
-Gebruik de *Kruskal Wallis toets* om te toetsen of de gemiddelde rangnummers van de verdelingen van twee of meer groepen van elkaar verschillen.[^1]<sup>, </sup>[&17] De *Kruskal Wallis toets* kan een alternatief zijn voor de [one-way ANOVA](05-One-way-ANOVA-R.html).[^2] De *Kruskal Wallis toets* hoeft niet te voldoen aan de assumptie van normaliteit van de verdelingen van elke groep. Daarnaast hebben uitbijters bij de *Kruskal Wallis toets*  minder invloed op het eindresultaat dan bij de [one-way ANOVA](05-One-way-ANOVA-R.html). Daarentegen, als de data wel normaal verdeeld is, heeft de *Kruskal Wallis toets* minder onderscheidend vermogen[^4] dan de [one-way ANOVA](05-One-way-ANOVA-R.html).[^3] Vandaar dat ondanks de voordelen van de grotere robuustheid er toch minder vaak voor de *Kruskal Wallis toets* gekozen wordt. 
+Gebruik de *Kruskal Wallis toets* om te toetsen of de gemiddelde rangnummers[^19] van de verdelingen van twee of meer groepen van elkaar verschillen.[^1]<sup>, </sup>[&17] De *Kruskal Wallis toets* kan een alternatief zijn voor de [one-way ANOVA](05-One-way-ANOVA-R.html).[^2] De *Kruskal Wallis toets* hoeft niet te voldoen aan de assumptie van normaliteit van de verdelingen van elke groep. Daarnaast hebben uitbijters bij de *Kruskal Wallis toets*  minder invloed op het eindresultaat dan bij de [one-way ANOVA](05-One-way-ANOVA-R.html). Daarentegen, als de data wel normaal verdeeld is, heeft de *Kruskal Wallis toets* minder onderscheidend vermogen[^4] dan de [one-way ANOVA](05-One-way-ANOVA-R.html).[^3] Vandaar dat ondanks de voordelen van de grotere robuustheid er toch minder vaak voor de *Kruskal Wallis toets* gekozen wordt. 
 <!-- ## /TEKSTBLOK: link1.R -->
 
 # Onderwijscasus
@@ -354,4 +354,5 @@ De [Mann-Whitney U toets](08-Mann-Whitney-U-toets-I-R.html) is uitgevoerd als po
 [^16]: Een ordinale variabele is een categorische variabele waarbij de categorieën geordend kunnen worden. Een voorbeeld is de variabele beoordeling met de categorieën Onvoldoende, Voldoende, Goed en Uitstekend.
 [^17]:  Laerd statistics (2018). *Kruskal-Wallis H Test using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/kruskal-wallis-h-test-using-spss-statistics.php.
 [^18]: De breedte van de staven van het histogram worden hier automatisch bepaald, maar kunnen handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
+[^19]: Bij de *Kruskal Wallis toets* en andere nonparametrische toetsen wordt de data eerst gerangschikt zodat elke observatie een rangnummer toegewezen krijgt. Deze rangnummers worden vervolgens gebruikt om de toets uit te voeren.
 

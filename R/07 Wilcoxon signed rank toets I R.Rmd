@@ -50,7 +50,7 @@ source(paste0(here::here(),"/01. Includes/data/07.R"))
 
 # Toepassing
 <!-- ## TEKSTBLOK: link1.R-->
-Gebruik de *Wilcoxon signed rank toets* om te toetsen of de som van de rangnummers van de verdelingen van twee gepaarde groepen van elkaar verschillen.[^1] Deze toets is een alternatief voor de [gepaarde t-toets](02-Gepaarde-t-toets-R.html) als de verschilscores van de gepaarde groepen niet normaal verdeeld zijn. Alleen als de verdeling van de verschilscores symmetrisch is, kan de *Wilcoxon signed rank toets* gebruikt worden om een verschil tussen de medianen van gepaarde groepen te toetsen.[^3] Als de verdeling van verschilscores niet symmetrisch is, gebruik dan de gepaarde [tekentoets](27-Tekentoets-II-R.html) om medianen te toetsen.
+Gebruik de *Wilcoxon signed rank toets* om te toetsen of de som van de rangnummers[^12] van de verdelingen van twee gepaarde groepen van elkaar verschillen.[^1] Deze toets is een alternatief voor de [gepaarde t-toets](02-Gepaarde-t-toets-R.html) als de verschilscores van de gepaarde groepen niet normaal verdeeld zijn. Alleen als de verdeling van de verschilscores symmetrisch is, kan de *Wilcoxon signed rank toets* gebruikt worden om een verschil tussen de medianen van gepaarde groepen te toetsen.[^3] Als de verdeling van verschilscores niet symmetrisch is, gebruik dan de gepaarde [tekentoets](27-Tekentoets-II-R.html) om medianen te toetsen.
 <!-- ## /TEKSTBLOK: link1.R-->
 
 # Onderwijscasus
@@ -302,3 +302,4 @@ De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de 
 [^9]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
 [^10]: Een ordinale variabele is een categorische variabele waarbij de categorieën geordend kunnen worden. Een voorbeeld is de variabele beoordeling met de categorieën Onvoldoende, Voldoende, Goed en Uitstekend.
 [^11]: De breedte van de staven van het histogram worden hier automatisch bepaald, maar kunnen handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
+[^12]: Bij de *Wilcoxon signed rank toets* en andere nonparametrische toetsen wordt de data eerst gerangschikt zodat elke observatie een rangnummer toegewezen krijgt. Deze rangnummers worden vervolgens gebruikt om de toets uit te voeren.

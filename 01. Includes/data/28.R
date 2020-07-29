@@ -63,9 +63,9 @@ Aantal_hoorcolleges <- sample.int(10,
 
 # Geslacht
 Geslacht <- c(rep("Man", 
-                  20),
+                  40),
               rep("Vrouw", 
-                  80))[sample.int(100,100)]
+                  60))[sample.int(100,100)]
 Geslacht_dummy <- rep(1,
                       100)
 Geslacht_dummy[Geslacht == "Man"] <- 0
@@ -101,6 +101,13 @@ Studenten_Methoden_Statistiek <- data.frame(Studentnummer,
 #model <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_hoorcolleges,
 #   Studenten_Methoden_Statistiek)
 #summary(model)
+
+# Bootstrap
+#library(car)
+#Regressiemodel <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_hoorcolleges, Studenten_Methoden_Statistiek)
+#Bootstrap_resultaat <- Boot(Regressiemodel, R = 10000)
+#summary(Bootstrap_resultaat)
+#confint(Bootstrap_resultaat, type = "bca")
 
 rm(Studentnummer,
    Geslacht,

@@ -86,7 +86,7 @@ De regressiecoefficiënten ($\beta_0$, $\beta_1$, $\beta_2$ en $\beta_3$) worden
 
 <div class = "col-container">
   <div class="col">
-<!-- ## OPENBLOK: QQplot1.R -->
+<!-- ## CLOSEDBLOK: Regressie1.R -->
 ```{r, echo = FALSE, message = FALSE}
 set.seed(12345)
 x <- rnorm(100,5,2)
@@ -104,10 +104,10 @@ ggplot(dataset, aes(x = Predictor, y = Afhankelijke_variabele)) +
   ggtitle("Interceptmodel")
 
 ```
-<!-- ## /OPENBLOK: QQplot1.R -->
+<!-- ## /CLOSEDBLOK: Regressie1.R -->
   </div>
   <div class = "col">
-<!-- ## OPENBLOK: QQplot2.R -->
+<!-- ## CLOSEDBLOK: Regressie2.R -->
 ```{r, echo = FALSE, message = FALSE}
 set.seed(12345)
 x <- rnorm(100,5,2)
@@ -124,7 +124,7 @@ ggplot(dataset, aes(x = Predictor, y = Afhankelijke_variabele)) +
   ggtitle("Regressiemodel")
 
 ```
-<!-- ## /OPENBLOK: QQplot2.R -->
+<!-- ## /CLOSEDBLOK: Regressie2.R -->
   </div>
 </div>
 
@@ -204,7 +204,7 @@ De assumptie van lineariteit wordt onderzocht met behulp van scatter plots, zoal
 
 <div class = "col-container">
   <div class="col">
-<!-- ## OPENBLOK: QQplot1.R -->
+<!-- ## CLOSEDBLOK: Lineariteit1.R -->
 ```{r, echo = FALSE, message = FALSE}
 set.seed(12345)
 x <- rnorm(100,0,2)
@@ -216,10 +216,10 @@ ggplot(dataset, aes(x = Predictor, y = Afhankelijke_variabele)) +
   ggtitle("Lineare relatie")
 
 ```
-<!-- ## /OPENBLOK: QQplot1.R -->
+<!-- ## /CLOSEDBLOK: Lineariteit1.R -->
   </div>
   <div class = "col">
-<!-- ## OPENBLOK: QQplot2.R -->
+<!-- ## CLOSEDBLOK: Lineariteit2.R -->
 ```{r, echo = FALSE, message = FALSE}
 set.seed(12345)
 x <- rnorm(100,0,2)
@@ -231,7 +231,7 @@ ggplot(dataset, aes(x = Predictor, y = Afhankelijke_variabele)) +
   ggtitle("Niet-lineaire relatie")
 
 ```
-<!-- ## /OPENBLOK: QQplot2.R -->
+<!-- ## /CLOSEDBLOK: Lineariteit2.R -->
   </div>
 </div>
 
@@ -245,7 +245,7 @@ Homoskedasticiteit houdt in dat de variantie van de residuën niet afhangt van d
 
 <div class = "col-container">
   <div class="col">
-<!-- ## OPENBLOK: QQplot1.R -->
+<!-- ## CLOSEDBLOK: Homoskedasticiteit1.R -->
 ```{r, echo = FALSE, message = FALSE}
 set.seed(12345)
 x <- rnorm(1000,10,2)
@@ -257,10 +257,10 @@ ggplot(dataset, aes(x = Voorspelling, y = Residu)) +
   ggtitle("Homoskedasticiteit")
 
 ```
-<!-- ## /OPENBLOK: QQplot1.R -->
+<!-- ## /CLOSEDBLOK: Homoskedasticiteit1.R -->
   </div>
   <div class = "col">
-<!-- ## OPENBLOK: QQplot2.R -->
+<!-- ## CLOSEDBLOK: Homoskedasticiteit2.R -->
 ```{r, echo = FALSE, message = FALSE}
 set.seed(12345)
 x <- seq(from = 4.01,to = 16.5, length.out = 1000)
@@ -277,7 +277,7 @@ ggplot(dataset, aes(x = Voorspelling, y = Residu)) +
   ggtitle("Heteroskedasticiteit")
 
 ```
-<!-- ## /OPENBLOK: QQplot2.R -->
+<!-- ## /CLOSEDBLOK: Homoskedasticiteit2.R -->
   </div>
 </div>
 
@@ -428,7 +428,7 @@ Onderzoek of er een lineaire relatie is tussen de continue predictoren en de afh
 <div class = "col-container">
   <div class="col">
 <!-- ## OPENBLOK: QQplot1.R -->
-```{r, echo = FALSE, message = FALSE}
+```{r}
 plot(Eindcijfer_MS ~ Eindexamencijfer_Wiskunde, data = Studenten_Methoden_Statistiek,
      xlab = "Eindexamencijfer Wiskunde", ylab = "Eindcijfer Methoden & Statistiek")
 
@@ -437,7 +437,7 @@ plot(Eindcijfer_MS ~ Eindexamencijfer_Wiskunde, data = Studenten_Methoden_Statis
   </div>
   <div class = "col">
 <!-- ## OPENBLOK: QQplot2.R -->
-```{r, echo = FALSE, message = FALSE}
+```{r}
 plot(Eindcijfer_MS ~ Aantal_hoorcolleges, data = Studenten_Methoden_Statistiek,
      xlab = "Aantal hoorcolleges", ylab = "Eindcijfer Methoden & Statistiek")
 
@@ -505,7 +505,7 @@ summary(Regressiemodel)
 # Presenteer de 95%-betrouwbaarheidsintervallen
 confint(Regressiemodel)
 ```
-```{r}
+```{r, echo = FALSE, message = FALSE}
 # Voer de multipele lineaire regressie uit
 Regressiemodel <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_hoorcolleges, Studenten_Methoden_Statistiek)
 
@@ -513,7 +513,6 @@ Regressiemodel <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aant
 Reg <- summary(Regressiemodel)
 F_toets <- Reg$fstatistic
 R2 <- Reg$r.squared
-Reg$coefficients
 CI <- confint(Regressiemodel)
 ```
 
@@ -533,7 +532,7 @@ Voor de intercept en de regressiecoefficienten van de predictors zijn de geschat
 
 De regressiecoefficienten van de predictors Eindexamencijfer_Wiskunde en Aantal_hoorcolleges zijn significant verschillend van nul en dragen dus bij aan het voorspellen van het eindcijfer Methoden & Statistiek. Met behulp van de gestandaardiseerde regressiecoefficienten kan bepaald worden welke predictor het sterkst gerelateerd is aan de afhankelijke variabele. Gebruik hiervoor de functie `lm.beta()` van het package `QuantPsyc` met als argument `Regressiemodel_numeriek` (het object van het regressiemodel). Een voorwaarde voor de functie is dat alle variabelen numeriek zijn. Zet daarom eerst de variabele `Geslacht` om in een numerieke variabele met de waarde 1 voor vrouwen en 0 voor mannen. Het omzetten van een categorische variabele in een of meer numerieke variabele heet dummycoderen; de variabelen worden vaak dummies genoemd. Gebruik de numerieke variabele `Geslacht_numeriek` vervolgens om de multipele lineaire regressie uit te voeren met de functie `lm()` op dezelfde manier als eerder is gedaan.
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 # Laad het package QuantPsyc in
 library(QuantPsyc)
 
@@ -547,7 +546,7 @@ Regressiemodel_numeriek <- lm(Eindcijfer_MS ~ Geslacht_numeriek + Eindexamencijf
 lm.beta(Regressiemodel_numeriek)
 
 ```
-```{r}
+```{r, echo = FALSE, message = FALSE}
 Coefficienten_std <- lm.beta(Regressiemodel_numeriek)
 
 ```

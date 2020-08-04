@@ -19,6 +19,7 @@
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## Geschiedenis:
 ## 08-02-2020: TB: Aanmaak bestand
+## 04-08-2020: EG: http in https veranderd site versnellingsplan
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -31,7 +32,7 @@ lVars <- list(
     paste0(
         "&copy; ",
         format(Sys.time(), '%Y') ,
-        " <a href=\"http://www.versnellingsplan.nl\" target=\"_blank\">Versnellingsplan</a> - Statistisch Handboek Studiedata - ",
+        " <a href=\"https://www.versnellingsplan.nl\" target=\"_blank\">Versnellingsplan</a> - Statistisch Handboek Studiedata - ",
         "<a href=\"",sRoot,"Licentie.html\">Licentie</a> "
     )
 )

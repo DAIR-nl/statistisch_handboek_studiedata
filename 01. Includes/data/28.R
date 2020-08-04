@@ -47,7 +47,7 @@ set.seed(12345)
 ## Simuleer data
 
 # Aantal hoorcolleges: tussen 1 en 10, zwartepunt bij twee keer en acht keer
-Aantal_hoorcolleges <- sample.int(10, 
+Aantal_Hoorcolleges <- sample.int(10, 
                                   100, 
                                   replace = TRUE,
                                   prob = c(0.05,
@@ -77,7 +77,7 @@ Eindexamencijfer_Wiskunde <- ceiling(2 * rnorm(100,
 Eindexamencijfer_Wiskunde[Eindexamencijfer_Wiskunde < 5.5] <- 5.5
 
 # Maak afhankelijke variabele eindcijfer Methoden & Statistiek
-Eindcijfer_MS <- 2 + 0.4 * Aantal_hoorcolleges + 0 * Geslacht_dummy + 0.25 * Eindexamencijfer_Wiskunde + rnorm(100,0,1)
+Eindcijfer_MS <- 2 + 0.4 * Aantal_Hoorcolleges + 0 * Geslacht_dummy + 0.25 * Eindexamencijfer_Wiskunde + rnorm(100,0,1)
 Eindcijfer_MS <- round(Eindcijfer_MS,
                        1)
 Eindcijfer_MS[Eindcijfer_MS > 10] <- 10.0
@@ -94,17 +94,17 @@ Studentnummer <- sample(300000:400000,
 Studenten_Methoden_Statistiek <- data.frame(Studentnummer,
                                             Geslacht,
                                             Eindexamencijfer_Wiskunde,
-                                            Aantal_hoorcolleges,
+                                            Aantal_Hoorcolleges,
                                             Eindcijfer_MS)
 
 # lm
-#model <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_hoorcolleges,
+#model <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges,
 #   Studenten_Methoden_Statistiek)
 #summary(model)
 
 # Bootstrap
 #library(car)
-#Regressiemodel <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_hoorcolleges, Studenten_Methoden_Statistiek)
+#Regressiemodel <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges, Studenten_Methoden_Statistiek)
 #Bootstrap_resultaat <- Boot(Regressiemodel, R = 10000)
 #summary(Bootstrap_resultaat)
 #confint(Bootstrap_resultaat, type = "bca")
@@ -113,7 +113,7 @@ rm(Studentnummer,
    Geslacht,
    Geslacht_dummy,
    Eindexamencijfer_Wiskunde,
-   Aantal_hoorcolleges,
+   Aantal_Hoorcolleges,
    Eindcijfer_MS
    )
 

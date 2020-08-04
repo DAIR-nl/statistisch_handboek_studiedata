@@ -26,6 +26,7 @@
 ## 08-03-2020: TB: Locatie van het aanmaken van images naar voren gehaald
 ## 11-06-2020: EG: Nieuwe toetsen aan tibble toegevoed
 ## 17-06-2020: EG: Toetsmatrix II toegevoegd
+## 04-08-2020: EG: Toetspagina 28 regressie toegevoegd
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -69,7 +70,7 @@ dfToetsen <- tribble(
     "25 Kruskal Wallis toets II",                                                               "1",          "0",       "0",               "0",       
     "26 Tekentoets II",                                                                         "1",          "0",       "0",               "0",       
     "27 Moods mediaan toets",                                                                   "1",          "0",       "0",               "0",       
-    "28 Multipele lineaire regressie",                                                          "0",          "0",       "0",               "0",       
+    "28 Multipele lineaire regressie",                                                          "1",          "0",       "0",               "0",       
     "29 Factoriele ANOVA",                                                                      "0",          "0",       "0",               "0",       
     "30 Multipele lineaire regressie",                                                          "0",          "0",       "0",               "0",       
     "31 ANCOVA",                                                                                "0",          "0",       "0",               "0",       

@@ -145,3 +145,22 @@ Fisher_BSA_kruistabel <- Fisher_Tabel_BSA_antropologie[, c("NL", "GE", "IT", "UK
 #BSA_kruistabel_n10 <- data.frame(Pos_bsa_n10, Neg_bsa_n10)
 #BSA_kruistabel_n10 <- t(BSA_kruistabel_n10)
 #colnames (BSA_kruistabel_n10) <- Landen_vooropleiding
+
+rm(Studentnummers_opties, 
+Studentnummer, 
+Landen_vooropleiding, 
+proporties, 
+NL, 
+GE, 
+IT, 
+UK, 
+ES, 
+BE, 
+US, 
+BSA_numeriek, 
+BSA, 
+Tabel_BSA_antropologie, 
+Pos, 
+Neg, 
+Fisher_Tabel_BSA_antropologie
+)

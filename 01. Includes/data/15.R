@@ -108,19 +108,3 @@ rm(Studentnummers_opties, Studentnummer_uniek, Studentnummer,
 #                test   = "exact",
 #                method = "fdr",
 #                digits = 3)
-
-# Relevante links
-# https://stats.stackexchange.com/questions/9867/effect-size-of-cochrans-q
-# https://www.statisticshowto.datasciencecentral.com/false-discovery-rate/
-# https://www.statisticshowto.datasciencecentral.com/benjamini-hochberg-procedure/
-# https://www.statisticshowto.datasciencecentral.com/cochrans-q-test/
-# https://ncss-wpengine.netdna-ssl.com/wp-content/themes/ncss/pdf/Procedures/NCSS/Cochrans_Q_Test.pdf
-# https://en.wikipedia.org/wiki/Cochran%27s_Q_test
-# https://rcompanion.org/handbook/H_07.html
-# https://statistics.laerd.com/spss-tutorials/cochrans-q-test-in-spss-statistics.php#assumption4
-# https://wikistatistiek.amc.nl/index.php/Cochran%27s_Q_toets
-# https://dl.acm.org/doi/pdf/10.1145/3095076?casa_token=u4SSnddtJLsAAAAA%3AisfjdwaAzuLBdyns8e3eIPRp1T8_I34rNA-xIYdJ-EhlB48B3bl1FhohXMoPUbTPon7V0d9jsBPh
-# 
-# 
-# 
-

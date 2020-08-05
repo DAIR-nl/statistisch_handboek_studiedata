@@ -15,7 +15,7 @@
 ## Datasets: Datasets
 ##
 ## Opmerkingen:
-## 1) Geen.
+## 1) Dit script is door Megiel gemaakt en wordt niet gebruikt
 ## 2) ___
 ##
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

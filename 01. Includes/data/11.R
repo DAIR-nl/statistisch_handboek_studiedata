@@ -27,8 +27,7 @@
 ## 29-06-2020: EG: Aanmaak bestand
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## De controller van een Universiteit is geïnteresseerd in de instroom van tweedekansstudenten. Zij vraagt zich af: Heeft onze Universiteit relatief veel tweedekansstudenten in vergelijking met het landelijke gemiddelde?
-RNGkind(sample.kind = "Rounding")
-set.seed (7)
+set.seed(7)
 aantal_studenten <- 7348
 Studentnummer <- sample(5000000:6000000, aantal_studenten)
 
@@ -42,4 +41,10 @@ Instroom_2018_totaal <- data.frame(Studentnummer, hbo_vooropleiding)
 indices <- sample.int(nrow(Instroom_2018_totaal),20)
 Instroom_2018_totaal_steekproef <- Instroom_2018_totaal[indices,]
 
+rm(
+  aantal_studenten,
+  Studentnummer,
+  hbo_vooropleiding,
+  indices
+)
 

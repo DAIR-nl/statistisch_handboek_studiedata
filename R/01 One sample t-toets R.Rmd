@@ -1,13 +1,6 @@
 ---
 title: "One-sample t-toets"
 output:
-  word_document:
-    toc: yes
-  keywords:
-  - statistisch handboek
-  - studiedata
-  pdf_document:
-    toc: yes
   html_document:
     includes:
       in_header:
@@ -19,6 +12,13 @@ output:
     toc: yes
     toc_float:
       collapsed: no
+  keywords:
+  - statistisch handboek
+  - studiedata
+  pdf_document:
+    toc: yes
+  word_document:
+    toc: yes
 ---
 <!-- ## CLOSEDBLOK: Functies.R -->
 ```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}

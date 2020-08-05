@@ -1,4 +1,3 @@
-
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 10.R ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -26,11 +25,7 @@
 ## Geschiedenis:
 ## 29-06-2020: EG: Aanmaak bestand
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## H0 en H1 medianen of gemiddelden, ook in toepassing 
-## is het wel interessant om gemiddelden te tonen? 
-## link naar Mann W-U test 
 
-RNGkind(sample.kind = "Rounding")
 set.seed(8)
 # 3
 ## 300 waarnemingen voor Vooropleiding
@@ -53,3 +48,12 @@ Resultaten_Arbeidsrecht$EC_Jaar1[Vooropleiding == "Fiscaal Recht" | Vooropleidin
   Resultaten_Arbeidsrecht$EC_Jaar1[Vooropleiding == "Fiscaal Recht" | Vooropleiding == "Notarieel Recht"] + 6
 Resultaten_Arbeidsrecht$EC_Jaar1[Vooropleiding == "Rechtsgeleerdheid"] <-
   Resultaten_Arbeidsrecht$EC_Jaar1[Vooropleiding == "Rechtsgeleerdheid"] - 6
+
+# Verwijder niet benodigde objecten
+rm(
+Seed, 
+Vooropleiding, 
+Punten_mogelijkheden, 
+EC_Jaar1, 
+Studentnummer
+)

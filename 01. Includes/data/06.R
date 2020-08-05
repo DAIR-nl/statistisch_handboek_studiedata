@@ -42,7 +42,7 @@ p_2014 <- c(
   rep(0.1,  1000),    #5001-6000
   rep(0.01, 1000)     #6001-7000
 )
-Jaarlijks_inkomen <- replicate(2314, 13*(sample(Mogelijkheden, 1, replace=TRUE, p_2014)))
+Jaarlijks_inkomen <- replicate(2314, 13*(sample(Mogelijkheden, 1, replace = TRUE, p_2014)))
 
 
 # Maken grafieken assumpties verdelingen
@@ -85,3 +85,8 @@ Jaarlijks_inkomen <- replicate(2314, 13*(sample(Mogelijkheden, 1, replace=TRUE, 
 # wilcoxon test
 #wilcox.test(vvv, mu = 0)
 #wilcox.test(lll, mu = 0)
+
+rm(
+  Mogelijkheden,
+  p_2014
+)

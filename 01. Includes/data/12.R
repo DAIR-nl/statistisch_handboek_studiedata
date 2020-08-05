@@ -56,12 +56,12 @@ Achteraf <- Achteraf[order(Studentnummer)]
 FOS_studenten <- data.frame(c(Studentnummer, Studentnummer),
                             c(Vooraf, Achteraf),
                             c(Maand_vooraf, Maand_achteraf))
-colnames(FOS_studenten)<-c("Studentnummer", "FOS", "Maand")
+colnames(FOS_studenten) <- c("Studentnummer", "FOS", "Maand")
 
 FOS_studenten <- FOS_studenten[order(FOS_studenten$Studentnummer),]
 
 ### Exact McNemar toets
-EMN_confusiematrix <- as.table(matrix(c(20,3,4,25),2,2,byrow=TRUE))
+EMN_confusiematrix <- as.table(matrix(c(20,3,4,25),2,2, byrow = TRUE))
 rownames(EMN_confusiematrix) <- c("December_ja","December_nee")
 colnames(EMN_confusiematrix) <- c("Juni_ja","Juni_nee")
 
@@ -71,3 +71,15 @@ EMN_kruistabel[1:2,2] <- colSums(EMN_confusiematrix)
 EMN_kruistabel <- as.table(EMN_kruistabel)
 rownames(EMN_kruistabel) <- c("FOS","geen FOS")
 colnames(EMN_kruistabel) <- c("December","Juni")
+
+rm(
+Wel_vooraf, 
+Niet_vooraf, 
+Vooraf, 
+Wel_achteraf, 
+Niet_achteraf, 
+Achteraf, 
+Maand_vooraf, 
+Maand_achteraf, 
+Studentnummer
+)

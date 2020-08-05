@@ -29,8 +29,6 @@
 ## Het hoofd communicatie wil in verband met wervingsactiviteiten weten wat de reistijd is van studenten aan verschillende opleidingen.
 
 ## Doel: tidy data met een kolom reistijd (value) en een kolom opleiding (factor)
-library(dplyr)
-RNGkind(sample.kind = "Rounding")
 set.seed(3)
 
 Studiegrootte <- 29
@@ -61,13 +59,10 @@ Studentnummers_opties <- c(4000000:4500000)
 Studentnummer <- sample(Studentnummers_opties, 257)
 Studentnummer <- as.factor(Studentnummer)
 
-
 Reistijd_per_opleiding <- data.frame(Studentnummer, Opleiding, Reistijd)
 colnames(Reistijd_per_opleiding) <- c("Studentnummer","Opleiding", "Reistijd")
 
-
-Reistijd_per_opleiding <- Reistijd_per_opleiding %>%
-  mutate(Reistijd = if_else(Reistijd < 0, Reistijd*-1, Reistijd))
+Reistijd_per_opleiding$Reistijd[Reistijd_per_opleiding$Reistijd < 0] <- Reistijd_per_opleiding$Reistijd * -1
 
 rm(namenlijst_atc, namenlijst_fil, namenlijst_gsc, Opleiding, Reistijd,
    Reistijd_ATC, Reistijd_FIL, Reistijd_GSC, reistijd_gem, sd_gem,

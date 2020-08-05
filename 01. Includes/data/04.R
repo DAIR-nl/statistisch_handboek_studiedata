@@ -72,3 +72,14 @@ Studieuren_technische_natuurkunde <- cbind.data.frame(Studentnummer, Vak, Studie
 
 # Sorteer data
 Studieuren_technische_natuurkunde <- Studieuren_technische_natuurkunde[order(Studieuren_technische_natuurkunde$Studentnummer),]
+
+rm(
+  Studentnummers_opties, 
+Studentnummer_uniek, 
+Studentnummer, 
+Vak, 
+Uren_Lineaire_Algebra, 
+Uren_Relativiteitstheorie, 
+Uren_Kosmologie, 
+Studieuren
+)

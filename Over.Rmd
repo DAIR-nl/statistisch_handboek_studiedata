@@ -38,22 +38,26 @@ Achter iedere ‘tegel’ bevindt zich een uitleg van de regels om een toets te 
 
 **Auteurs**
 
-* Elian Griffioen, VU, hoofdredactie
+* Elian Griffioen, VU, hoofdredactie 
 * Theo Bakker, VU, eindredactie
-* Irene van der Staaij, VU, redactie
-* Megiel Kerkhoven, VU, programmeur
-* Jet Doeswijk, VU, student-assistent 
-* Faaris Akbar, VU, student-assistent 
+* Irene van der Staaij, VU, redactie\*
+* Megiel Kerkhoven, VU, programmeur\*
+* Jet Doeswijk, VU, student-assistent\* 
+* Faaris Akbar, VU, student-assistent \*
 
-**Interne review**
+**Interne wetenschappelijke review**
 
 * Martijn Meeter, VU, wetenschappelijke review
 * Sandjai Bhulai, VU, wetenschappelijke review
+
+**Interne review op toepasbaarheid**
+
 * Marjolein Blaauboer, VU, review op toepasbaarheid
 * Corneel den Hartogh, VU, review op toepasbaarheid
-* Daniël Drittij, VU, review op toepasbaarheid
-* Jelger van Zaane, VU, review op toepasbaarheid
 * Nanny Kempers, VU, review op toepasbaarheid
+* Patricia den Otter, VU, review op toepasbaarheid
+* Daniël Drittij, VU, review op toepasbaarheid\*
+* Jelger van Zaane, VU, review op toepasbaarheid\*
 
 **Externe review**
 
@@ -66,6 +70,8 @@ Achter iedere ‘tegel’ bevindt zich een uitleg van de regels om een toets te 
 **Bijzondere dank aan**
 
 * Nan van Geloven en Rebecca Holman, AMC/UMC Leiden, voor de ter beschikking stelling van het materiaal van de [AMC wiki](https://wikistatistiek.amc.nl/index.php/).
+
+\* Op dit moment niet meer actief voor het Statistisch Handboek Studiedata
 
 # Financiering
 Het handboek is gefinancierd door het Versnellingsplan.

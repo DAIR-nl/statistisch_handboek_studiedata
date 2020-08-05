@@ -39,7 +39,7 @@ Het doel van het Statisch Handboek Studiedata is om collega's in het hoger onder
 * deze toetsen kunnen uitvoeren op hun data 
 * en er tot slot een rapport bij kunnen schrijven. 
 
-We hebben ervoor gekozen om de stappen zo bondig mogelijk te beschrijven en waar nodig achtergrondinformatie in de voetnoten te zetten of te verwijzen naar andere sites. 
+We hebben ervoor gekozen om de stappen zo bondig mogelijk te beschrijven en waar nodig achtergrondinformatie in de voetnoten te zetten of te verwijzen naar andere sites. Voor beginners raden we, in aanvulling op het Statistisch Handboek Studiedata, het boek *Discovering Statistics using IBM SPSS Statistics* van Andy Field aan. In dit boek worden op een laagdrempelige manier de basis van statistiek en verschillende statistische analyses uitgelegd. Het boek is ook nuttig als aanvulling op het Statistisch Handboek Studiedata voor iedereen met al enige kennis van statistiek.
 
 # Casussen
 We hebben casussen verzameld die relevant kunnen zijn in het Hoger Onderwijs. Alle informatie bij de casussen is fictief en de data is gesimuleerd. De uitkomsten van de toetsen kunnen marginaal verschillen tussen de verschillende programmeertalen: R, SPSS of Python. 
@@ -56,6 +56,7 @@ Het handboek is nog volop in ontwikkeling en zal gedurende 2020 aangevuld worden
 * 31 maart 2020: Aanmelding nieuwsbrief toegevoegd en links naar andere toetsen aangebracht
 * 20 april 2020: Begrippenlijst toegevoegd, Python toetsen verbeterd en nieuwe toetsen toegevoegd (Tekentoets, Friedman's ANOVA, Cochran's Q toets)
 * 29 juni 2020: Nieuwe toetsen toegevoegd voor R (Multilevel multinomiale logistische regressie, Wilcoxon II, Mann-Whitney U II en Kruskall Wallis II) en Python (Repeated measures ANOVA en Mann-Whitney U I)
+* 5 augustus 2020: Tweede toetsmatrix toegevoegd en toetspagina multipele lineaire regressie toegevoegd
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer_simpel.R"))}

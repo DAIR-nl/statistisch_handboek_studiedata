@@ -27,7 +27,6 @@
 ## 29-06-2020: EG: Aanmaak bestand
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-RNGkind(sample.kind = "Rounding")
 set.seed(1)
 Mogelijkheden <- c(1616:7000)
 p_2014 <- c(
@@ -41,4 +40,8 @@ p_2014 <- c(
   rep(0.1,  1000),    #5001-6000
   rep(0.01, 1000)     #6001-7000
 )
-Jaarlijks_inkomen <- replicate(2314, 13*(sample(Mogelijkheden, 1, replace=TRUE, p_2014)))
+Jaarlijks_inkomen <- replicate(2314, 13*(sample(Mogelijkheden, 1, replace = TRUE, p_2014)))
+
+# Verwijder objecten die niet nodig zijn voor de toetspagina
+rm(Mogelijkheden,
+   p_2014)

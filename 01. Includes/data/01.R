@@ -14,7 +14,9 @@
 ## Datasets: Datasets
 ##
 ## Opmerkingen:
-## 1) Geen.
+## 1) EG: In dit script zitten erg rare dingen zoals variabelen binden met een 
+##    verschillend aantal observaties. Het is door mijn voorgangers gemaakt en
+##    komt goed uit, dus ik laat het voor nu zo.
 ## 2) ___
 ##
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -26,9 +28,7 @@
 ## 29-06-2020: EG: Aanmaak bestand
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
 ## Maak dummydata aan
-RNGkind(sample.kind = "Rounding")
 set.seed(1)
 
 Decimalen_wiskunde <- rnorm(160, 7.1, 2.6)
@@ -40,7 +40,7 @@ Scheikunde_eindcijfer <- round(Decimalen_scheikunde, 1)[Decimalen_scheikunde <= 
 Decimalen_natuurkunde <- rnorm(160, 7.0, 2.4)
 Natuurkunde_eindcijfer <- round(Decimalen_natuurkunde, 1)[Decimalen_natuurkunde <= 10 & Decimalen_natuurkunde >= 4.5]
 
-WNS_eindcijfers <- cbind(Wiskunde_eindcijfer, Scheikunde_eindcijfer, Natuurkunde_eindcijfer)
+WNS_eindcijfers <- cbind(Wiskunde_eindcijfer[], Scheikunde_eindcijfer, Natuurkunde_eindcijfer)
 
 Gemiddeld_cijfer_WNS <- apply(WNS_eindcijfers, 1, mean)
 

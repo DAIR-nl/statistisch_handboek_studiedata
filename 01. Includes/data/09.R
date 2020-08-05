@@ -146,10 +146,6 @@ rm(N, Studentnummers_opties, Studentnummer_uniek, Studentnummer, Eetgelegenheid,
    Indexen_hoofdgebouw, Indexen_bestuursgebouw, Indexen_sportcentrum,
    Indexen_cultuurcentrum, Beoordeling)
 
-
-
-
-
 # https://statistics.laerd.com/spss-tutorials/friedman-test-using-spss-statistics.php
 # https://www.datanovia.com/en/lessons/friedman-test-in-r/
 # https://www.sheffield.ac.uk/polopoly_fs/1.714575!/file/stcp-marshall-FriedmanS.pdf

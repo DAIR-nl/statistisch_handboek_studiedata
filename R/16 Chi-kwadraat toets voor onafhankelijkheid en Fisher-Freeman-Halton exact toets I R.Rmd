@@ -304,7 +304,7 @@ De kruistabel en bijbehorende tabel met proporties laat zien dat de meerderheid 
 Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk of kleiner dan vijf is. Bereken het verwachte aantal observaties met het argument `chisq.test()$expected` van de functie `chisq.test()` met als argumenten de variabelen `Fisher_BSA_antropologie$BSA` (positief of negatief BSA) en `Fisher_BSA_antropologie$Landen_vooropleiding` (landen van hoogst genoten vooropleiding).
 
 <!-- ## OPENBLOK: Assumptie1f.R -->
-```{r fisher assumptie}
+```{r fisher assumptie, warning = FALSE}
 chisq.test(Fisher_BSA_antropologie$BSA, Fisher_BSA_antropologie$Landen_vooropleiding)$expected
 ```
 <!-- ## /OPENBLOK: Assumptie1f.R -->

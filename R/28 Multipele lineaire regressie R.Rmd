@@ -719,8 +719,7 @@ Een *multipele lineaire regressie* is uitgevoerd om de vraag te beantwoorden of 
 <!-- ## /CLOSEDBLOK: Footer.R -->
 
 [^1]: Laerd Statistics (2018). *Multiple Regression Analysis using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/multiple-regression-using-spss-statistics.php
-[^2]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Blz. 293-356.
-Sage.
+[^2]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage. Pagina 293-356.
 [^3]: Universiteit van Amsterdam (13 augustus 2016). *Lineariteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).  
 [^4]: Standaardiseren houdt in dat de variabelen getransformeerd worden zodat ze een gemiddelde van 0 hebben en een standaardafwijking van 1. Dit wordt gedaan door voor alle observaties van een variabele eerst het gemiddelde af te trekken en daarna te delen door de standaardafwijking, i.e. $\frac{x_i - \mu}{\sigma}$.
 [^5]: Er zijn verschillende opties om variabelen te transformeren, zoals de logaritme, wortel of inverse (1 gedeeld door de variabele) nemen van de variabele. Zie *Discovering statistics using IBM SPSS statistics* van Field (2013) pagina 201-210 voor meer informatie over welke transformaties wanneer gebruikt kunnen worden.

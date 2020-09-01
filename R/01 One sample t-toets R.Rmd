@@ -10,6 +10,7 @@ output:
     number_sections: yes
     theme: lumen
     toc: yes
+    toc_depth: 2
     toc_float:
       collapsed: no
   keywords:

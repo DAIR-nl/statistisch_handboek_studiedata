@@ -8,6 +8,8 @@ output:
     toc_float: 
       collapsed: FALSE 
     number_sections: true
+    includes:
+      in_header: ["../01. Includes/html/nocache.html", "../01. Includes/html/favicon.html", "../01. Includes/html/analytics.html"]
   keywords: [statistisch handboek, studiedata]
 ---
 
@@ -43,6 +45,7 @@ if (!exists("Substitute_var")) {
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
+set.seed(12345)
 source(paste0(here::here(),"/01. Includes/data/28.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
@@ -55,7 +58,7 @@ Gebruik *multipele lineaire regressie* om te toetsen of een continue afhankelijk
 # Onderwijscasus
 <div id = "casus">
 
-De docent van het van Methoden & Statistiek van de bachelor Onderwijskunde wil zijn studenten ervan overtuigen dat het nuttig is om naar zijn colleges te komen. Hij wil daarom onderzoeken of er een relatie is tussen het aantal colleges dat studenten volgen en het eindcijfer voor zijn vak. Daarnaast vermoedt hij dat het eindexamencijfer voor Wiskunde ook gerelateerd is aan het eindcijfer voor het vak en dat er man-vrouw verschillen zouden kunnen zijn. Op basis van de data van vorig jaar onderzoekt hij of er een relatie is tussen het aantal hoorcolleges dat studenten volgen, waarbij hij rekening houdt met het eindexamencijfer Wiskunde en man-vrouw verschillen. Met de resultaten hiervan hoopt hij zijn studenten ervan te overtuigen om de hoorcolleges van het vak bij te wonen.
+De docent van het vak Methoden & Statistiek van de bachelor Onderwijskunde wil zijn studenten ervan overtuigen dat het nuttig is om naar zijn colleges te komen. Hij wil daarom onderzoeken of er een relatie is tussen het aantal colleges dat studenten volgen en het eindcijfer voor zijn vak. Daarnaast vermoedt hij dat het eindexamencijfer voor Wiskunde ook gerelateerd is aan het eindcijfer voor het vak en dat er man-vrouw verschillen zouden kunnen zijn. Op basis van de data van vorig jaar onderzoekt hij of er een relatie is tussen het aantal hoorcolleges dat studenten volgen, waarbij hij rekening houdt met het eindexamencijfer Wiskunde en man-vrouw verschillen. Met de resultaten hiervan hoopt hij zijn studenten ervan te overtuigen om de hoorcolleges van het vak bij te wonen.
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is. Bij *multipele lineaire regressie* wordt er een hypothese opgesteld voor het complete model en hypotheses voor de individuele predictors.
 
@@ -131,7 +134,7 @@ ggplot(dataset, aes(x = Predictor, y = Afhankelijke_variabele)) +
 
 *Figuur 1.  Illustratie van multipele lineaire regressie met behulp van een interceptmodel (links) en een regressiemodel (rechts) waarbij de punten de observaties zijn, de blauwe lijn de voorspelling van het model en de zwarte lijn het residu.*
 
-Beide figuren laten een manier zien om een goede voorspelling te maken. De punten zijn de observaties, de blauwe lijn is de voorspelling en de zwarte lijnen zijn het verschil tussen observatie en voorspelling oftewel het residu. In de linkerfiguur wordt de voorspelling gemaakt met behulp van alleen een intercept (horizontale lijn), dit heet een interceptmodel. Echter,in de rechterfiguur wordt de voorspelling gemaakt door een lijn te trekken waarbij de kwadraten van de residuën zo klein mogelijk zijn. Het trekken van de best passende lijn is in feite wat er gedaan wordt bij *multipele lineaire regressie*.
+Beide figuren laten een manier zien om een goede voorspelling te maken. De punten zijn de observaties, de blauwe lijn is de voorspelling en de zwarte lijnen zijn het verschil tussen observatie en voorspelling oftewel het residu. In de linkerfiguur wordt de voorspelling gemaakt met behulp van alleen een intercept (horizontale lijn), dit heet een interceptmodel. Echter, in de rechterfiguur wordt de voorspelling gemaakt door een lijn te trekken waarbij de kwadraten van de residuën zo klein mogelijk zijn. Het trekken van de best passende lijn is in feite wat er gedaan wordt bij *multipele lineaire regressie*.
 
 ## F-toets voor significantie regressiemodel
 
@@ -296,7 +299,7 @@ Multicollineariteit wordt getoetst met de Variance Inflation Factor (VIF) die me
 
 # Bootstrappen
 
-Als er niet voldaan is aan de assumpties van normaliteit of  homoskedasticiteit, dan zijn de standaardfouten, betrouwbaarheidsintervallen en significantietoetsen van het regressiemodel incorrect. Bootstrappen is hier een oplossing voor. Bij bootstrappen wordt de verdelingen van de parameters van het regressiemodel nagebootst. Als eerste stap wordt de steekproef gezien als een populatie waaruit een nieuwe steekproef getrokken kan worden. Deze steekproef is even groot als de echte steekproef, maar toch verschillend omdat het mogelijk is dezelfde participant meerdere keren in de steekproef te hebben. Op basis van de nieuwe steekproef wordt het regressiemodel opnieuw geschat en is er een schatting van de regressiecoëfficiënten. Deze procedure wordt een groot aantal keer (10000) herhaald, waardoor er 10000 keer regressiecoëfficiënten worden behaald. Met behulp van deze 10000 waarden van de regressiecoëfficiënten is er een verdeling gemaakt voor elke regressiecoëfficiënt waaruit de standaardfout en de betrouwbaarheidsintervallen kunnen worden berekend. Op basis van de betrouwbaarheidsintervallen kunnen er ook significantietoetsen worden uitgevoerd. Op deze manier is bootstrappen de oplossing voor *multipele lineaire regressie* als er niet voldaan is aan normaliteit of homoskedasticiteit.[^2]
+Als er niet voldaan is aan de assumpties van normaliteit of  homoskedasticiteit, dan zijn de standaardfouten, betrouwbaarheidsintervallen en significantietoetsen van het regressiemodel incorrect. Bootstrappen is hier een oplossing voor. Bij bootstrappen wordt de verdelingen van de parameters van het regressiemodel nagebootst. Als eerste stap wordt de steekproef gezien als een populatie waaruit een nieuwe steekproef getrokken kan worden. Deze steekproef is even groot als de echte steekproef, maar toch verschillend omdat het mogelijk is dezelfde participant meerdere keren in de steekproef te hebben. Op basis van de nieuwe steekproef wordt het regressiemodel opnieuw geschat en is er een schatting van de regressiecoëfficiënten. Deze procedure wordt een groot aantal keer (10000) herhaald, waardoor er 10000 keer regressiecoëfficiënten worden bepaald. Met behulp van deze 10000 waarden van de regressiecoëfficiënten is er een verdeling gemaakt voor elke regressiecoëfficiënt waaruit de standaardfout en de betrouwbaarheidsintervallen kunnen worden berekend. Op basis van de betrouwbaarheidsintervallen kunnen er ook significantietoetsen worden uitgevoerd. Op deze manier is bootstrappen de oplossing voor *multipele lineaire regressie* als er niet voldaan is aan normaliteit of homoskedasticiteit.[^2]
 
 # Uitvoering
 
@@ -574,6 +577,7 @@ Bepaal als eerste stap de significantie van het regressiemodel met behulp van de
 
 <!-- ## TEKSTBLOK: Coefficienten1.R -->
 Voor de intercept en de regressiecoëfficiënten van de predictors zijn de geschatte coëfficiënt (`Estimate`), de standaardfout van de geschatte coëfficiënt (`Std. Error`) en de t-statistiek (`t value`) en p-waarde (`Pr(>|t|)`) van de t-toets voor de regressiecoëfficiënt weergegeven:
+
 * Intercept: de geschatte waarde voor de intercept is `r Round_and_format(Reg$coefficients[1,1])` en is significant verschillend van 0 (*t* = `r Round_and_format(Reg$coefficients[1,3])`, *p* < 0,001)[^8]. De intercept staat voor het voorspelde eindcijfer Methoden & Statistiek als alle predictors een waarde van nul hebben. Een man met een 0 als eindexamencijfer Wiskunde die nul hoorcolleges volgt zal naar verwachting een `r Round_and_format(Reg$coefficients[1,1])` behalen als eindcijfer voor het vak Methoden & Statistiek.
 * Geslacht: de geschatte waarde voor de regressiecoëfficiënt van de variabele Geslacht is `r Round_and_format(Reg$coefficients[2,1])` en is niet significant verschillend van 0 (*t* = `r Round_and_format(Reg$coefficients[2,3])`, *p* = `r Round_and_format(Reg$coefficients[2,4])`)[^8]. De coëfficiënt hoeft dus niet geïnterpreteerd te worden.
 * Eindexamencijfer_Wiskunde: de geschatte waarde voor de regressiecoëfficiënt van de variabele Eindexamencijfer_Wiskunde is `r Round_and_format(Reg$coefficients[3,1])` en is significant verschillend van 0 (*t* = `r Round_and_format(Reg$coefficients[3,3])`, *p* < 0,01)[^8]. Als het eindexamencijfer Wiskunde met één punt toeneemt, neemt de voorspelling voor het eindcijfer Methoden & Statistiek met `r Round_and_format(Reg$coefficients[3,1])` toe.
@@ -705,7 +709,7 @@ Een *multipele lineaire regressie* is uitgevoerd om de vraag te beantwoorden of 
 <!-- ## /TEKSTBLOK: Rapportage1.R -->
 
 <!-- ## TEKSTBLOK: Rapportage2.R -->
-|                           | coëfficiënt   | Standaard- fout | t | p-waarde | 95%-betrouwbaarheids- interval | Gestandaardiseerde coëfficiënt  | 
+|                           | Coëfficiënt   | Standaard- fout | t | p-waarde | 95%-betrouwbaarheids- interval | Gestandaardiseerde coëfficiënt  | 
 | ------------------------- | ---------| ---------| ---------| ---------| ---------| ---------| 
 | Intercept                 | `r Round_and_format(Reg$coefficients[1,1])` |  `r Round_and_format(Reg$coefficients[1,2])` |  `r Round_and_format(Reg$coefficients[1,3])` |  < 0,0001*  |  `r Round_and_format(CI[1,1])` - `r Round_and_format(CI[1,2])`  | - |
 | Geslacht (vrouw)          | `r Round_and_format(Reg$coefficients[2,1])`0 |  `r Round_and_format(Reg$coefficients[2,2])` |  `r Round_and_format(Reg$coefficients[2,3])` |  `r Round_and_format(Reg$coefficients[2,4])` |  `r Round_and_format(CI[2,1])` - `r Round_and_format(CI[2,2])`  | `r Round_and_format(Coefficienten_std[1])`|

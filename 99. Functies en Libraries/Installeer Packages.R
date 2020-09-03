@@ -52,14 +52,17 @@ Gebruikte_packages <- c(
     "nortest",
     "plotly",
     "purrr",
+    "QuantPsyc", # 28 
     "rapport",
     "rcompanion",
     "readxl",
     "reticulate",
+    "rstatix", # 29
     "RVAideMemoire",
     "rlist",
     "stringi",
     "stringr",
+    "summarytools", # 29
     "tidyverse"
 )
 

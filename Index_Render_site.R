@@ -56,7 +56,7 @@ dfToetsen <- tribble(
     "08 Mann-Whitney U toets I",                                                                1,          1,       1,               0,       
     "09 Friedmans ANOVA I",                                                                     1,          0,       0,               0,       
     "10 Kruskal Wallis toets I",                                                                1,          1,       1,               0,       
-    "11 Chi-kwadraat toets voor goodness of fit en binomiaaltoets",                             1,          0,       2,               0,       
+    "11 Chi-kwadraat toets voor goodness of fit en binomiaaltoets",                             1,          0,       1,               0,       
     "12 McNemar toets I",                                                                       1,          0,       0,               0,       
     "13 Chi-kwadraat toets voor onafhankelijkheid en Fishers exact toets",                      1,          0,       1,               0,       
     "14 NIET IN GEBRUIK; NIET VERWIJDEREN",                                                     0,          0,       0,               0,       
@@ -184,7 +184,7 @@ for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_R == 1]) {
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## Loop over de toetsen die in gebruik zijn en genereer die pagina's
-for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_Python == 2]) {
+for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_Python == 1]) {
     sModus <- "Python"
     bStatus <- dfToetsen$Review_Python[dfToetsen$Toets == sToets]
     rmarkdown::render(paste0("Python/",sToets,"-Python.Rmd"), 
@@ -229,5 +229,3 @@ browseURL(output_file)
 ## 04 RUIM OP ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 rm(list = ls())
-
-

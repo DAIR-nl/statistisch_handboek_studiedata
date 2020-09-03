@@ -38,12 +38,11 @@ if (!exists("Substitute_var")) {
 <!-- ## /CLOSEDBLOK: Header.R -->
 
 # Toetskeuze
-De eerste stap van een analyse begint bij een vraag: een opleidingsdirecteur wil bijvoorbeeld  weten wat de verschillen zijn tussen bepaalde groepen of het effect van een bepaalde cursus of interventie Zodra een vraagstuk bekend is, moet de onderzoeker bepalen wat er nodig is om de vraag te kunnen beantwoorden. Hierbij is het van belang wat voor type afhankelijke variabele er is, hoeveel groepen met elkaar vergeleken worden en hoe de vergelijking gemaakt wordt.
+De eerste stap van een analyse begint bij een vraag: een opleidingsdirecteur wil bijvoorbeeld  weten wat de verschillen zijn tussen bepaalde groepen of het effect van een bepaalde cursus of interventie Zodra een vraagstuk bekend is, moet de analist bepalen wat is er nodig om de vraag te kunnen beantwoorden. Van belang is welk type data bechikbaar is, hoeveel groepen met elkaar vergeleken worden en hoe de vergelijking gemaakt wordt.  
 
-De toetsmatrices tonen per type afhankelijke en onafhankelijke variabele(n) welke toets er gebruikt kan worden voor die combinatie. Iedere optie is voorzien van een relevante casus uit het hoger onderwijs, een uitleg van de situaties waarin de toets gekozen kan worden, de assumpties en uitwerking van de toets in R, Python of SPSS, een interpretatie van de resultaten, en een rapport dat de resultaten beschrijft. In toetsmatrix I worden voornamelijk statistische toetsen uitgewerkt om groepen te vergelijken. In toetsmatrix II ligt de focus op regressiemodellen en andere technieken waarin de relatie tussen meerdere onafhankelijke variabelen en een afhankelijke variabele getoetst wordt. De keuze tussen toetsmatrix I en II hangt af van het aantal onafhankelijke variabelen. Gebruik toetsmatrix I bij één onafhankelijke variabele en toetsmatrix II bij meerdere onafhankelijke variabelen
+De toetsmatrix toont per type data, aantal groepen en vergelijking welke toetsen gebruikt kunnen worden in die combinatie. Iedere optie is voorzien van een relevante casus uit het Hoger onderwijs, een uitleg van de regels om een toets te kiezen, de assumpties en uitwerking van de toets in R, Python of SPSS, een interpretatie van de resultaten, en een rapport dat de resultaten beschrijft.   
 
-# Toetsmatrix I
-Onder de toetsmatrix staat een uitgebreide beschrijving van de verschillende opties voor het type afhankelijke en onafhankelijke variabele.
+Onder de toetsmatrix staat een uitgebreide beschrijving van de typen data en het soort vergelijkingen.
 
 ```{r, echo = FALSE}
 htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/R/toetsmatrix_header.html"))
@@ -53,43 +52,30 @@ htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/R/toetsmatrix_hea
 ```{r, echo = FALSE}
 htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/R/toetsmatrix_footer.html"))
 ```
-*Toetsmatrix I. Schematisch overzicht van verschillende toetsen per type afhankelijke en onafhankelijke variabele.*
-
-# Toetsmatrix II
-Onder de toetsmatrix staat een uitgebreide beschrijving van de verschillende opties voor het type afhankelijke en onafhankelijke variabele.
-
-```{r, echo = FALSE}
-htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/R/toetsmatrix_II_header.html"))
-```
-```{r toetsmatrix, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Toetsmatrix_II.R"))} 
-```
-```{r, echo = FALSE}
-htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/R/toetsmatrix_II_footer.html"))
-```
-*Toetsmatrix II. Schematisch overzicht van verschillende toetsen per type afhankelijke en onafhankelijke variabele.*
-
+*Toetsmatrix 1. Schematische overzicht van verschillende toetsen per type data en per vergelijking. Deze pagina is nog in ontwikkeling, en wordt met de tijd aangevuld en verbeterd.*
 
 # Toelichting op de mogelijke keuzes
 
 ## Type data  
-__Continu__
+__Numeriek__
 
-* *Continu*: Een continue variabele kan iedere waarde aannemen tussen twee meetpunten. De meest bekende continue variabelen zijn lengte en lichaamsgewicht.[^1] Bij *semi-continue* variabelen is de variabele discreet, bijvoorbeeld gehele getallen, met zoveel mogelijkheden dat de data geanalyseerd kunnen worden alsof ze continu zijn. Voorbeelden zijn het aantal studenten dat een tentamen maakt en het aantal broden dat een bakker per dag verkoopt.[^2] 
+* *Continu*: Een continue waarde kan iedere waarde aannemen tussen twee meetpunten. De meest bekende continue variabelen zijn lengte en lichaamsgewicht.[^1]  
+* *Semi-continue data*: de data zijn discreet, bijvoorbeeld gehele getallen, met zoveel mogelijkheden dat de data geanalyseerd kunnen worden alsof ze continu zijn. Voorbeelden zijn het aantal studenten dat een tentamen maakt en het aantal broden dat een bakker per dag verkoopt.[^2]  
 
 __Categorisch__
 
-* *Nominaal*: Nominale variabelen bevatten categorieën die onafhankelijk van elkaar zijn en niet betekenisvol geordend kunnen worden op basis van de inhoud. Voorbeelden hiervan zijn de antwoordmogelijkheden 'man' of 'vrouw', 'rood', 'wit' of 'blauw', of verschillende faculteiten binnen een instelling in het hoger onderwijs.  
-* *Binair*: Een binaire variabele bestaat uit maximaal twee categorieën die elkaar uitsluiten, zoals ‘ja’ of ‘nee’, 0 of 1, ‘man’ of ‘vrouw’. Een binaire variabele is in feite een *nominale* variabele met twee categorieën *Nominale variabelen* kunnen echter ook meerdere categorieën hebben.  
-* *Ordinaal*: Ordinale variabelen bevatten categorieën die onafhankelijk van elkaar zijn waarin wel een ordening gemaakt worden tussen de categorieën Een voorbeeld hiervan is de beoordeling van een toets als 'onvoldoende', 'voldoende' of 'goed'.  
+* *Nominaal*: Nominale variabelen bevatten groepen die onafhankelijk van elkaar zijn en niet betekenisvol geordend kunnen worden op basis van de inhoud. Voorbeelden hiervan zijn de antwoordmogelijkheden ‘ja’ of ‘nee’, 'man' of 'vrouw' of eigennamen.  
+* *Binair*: Een binaire variabele bestaat uit maximaal twee waarden die elkaar uitsluiten, zoals ‘ja’ of ‘nee’, 0 of 1, ‘aan’ of ‘uit’. *Nominale variabelen* kunnen echter ook meerdere mogelijkheden hebben.  
+* *Ordinaal*: Ordinale variabelen bevatten groepen die onafhankelijk van elkaar zijn waarin wel een ordening gemaakt worden tussen de groepen. Een voorbeeld hiervan is de beoordeling van een toets als 'onvoldoende', 'voldoende' of 'goed'.  
 
 __Normaal verdeeld__
 
-Bepaalde toetsen bevatten de assumptie dat de afhankelijke variabele normaal verdeeld is. Dit kan ingeschat worden door naar een histogram, QQ-plot of boxplot te kijken en kan worden getoetst door normaliteitstoetsen.[^3] 
+Bepaalde toetsen bevatten de assumptie dat data normaal verdeeld zijn. Dit kan ingeschat worden door naar een histogram, QQ-plot of boxplot te kijken en kan worden getoetst door normaliteitstoetsen. Bij een groepsgrootte van *n* > 100 kan er vanuit gegaan worden dat per groep de data zich normaal gedraagt.[^3] 
 
 ## Soort vergelijking
-* *Vergelijking van één groep met een referentie*: Een bekende gemiddelde of norm van de totale populatie, zoals het gemiddelde cijfer van een universiteit, wordt vergeleken met een specifieke groep, zoals het gemiddelde cijfer van een opleiding.
-* *Gepaard*: Bij een gepaarde steekproef worden meerdere metingen van dezelfde observationele eenheid (bijvoorbeeld een student) of van gematchte observationele eenheden met elkaar vergeleken. Een voorbeeld is een studie waarbij studenten vóór een cursus en nà een cursus getest worden op algemene kennis. De score van de algemene kennis van een student voor de cursus wordt gepaard met de score van de algemene kennis van dezelfde student na de cursus. Door de verschillen tussen de voor- en nameting te vergelijken kunnen conclusies worden getrokken over het effect van de cursus op de algemene kennis van de studenten. 
-* *Ongepaard*: Bij ongepaarde steekproeven zijn de observationele eenheden onafhankelijk van elkaar. Er zijn meerdere groepen met meestal verschillende observationele eenheden waartussen geen paring/matching heeft plaatsgevonden. Een voorbeeld is het vergelijken van het gemiddeld cijfer van drie verschillende bacheloropleidingen.
+* *Vergelijking van één groep met een referentie*: Een bekende gemiddelde of norm van de totale populatie, zoals de gemiddelde levensverwachting, wordt vergeleken met een specifieke groep, zoals de gemiddelde levensverwachting van Amsterdammers.    
+* *Gepaard*: Bij een herhaalde meting worden beide metingen met elkaar vergeleken. Bijvoorbeeld een studie waarbij studenten vóór een cursus en nà een cursus getest worden op algemene kennis. De score van de algemene kennis van een student voor de cursus wordt gepaard met de score van de algemene kennis van dezelfde student na de cursus. Door de verschillen tussen de voor- en nameting te vergelijken kunnen conclusies worden getrokken over het effect van de cursus op de algemene kennis van de studenten. 
+* *Ongepaard*: De groepen zijn onafhankelijk van elkaar. Elke groep heeft geen overlap met de andere groepen en de groepen kunnen elkaars deelname niet beïnvloeden. Deze stap wordt beredeneerd en wordt niet getoetst.  
 
 [^1]: https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS
 [^2]: Van Geloven, N. (21 November 2017). *KEUZE TOETS*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS).

@@ -27,8 +27,9 @@
 ## 01 MAAK HTML ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-## Plaats  variabelen in een lijst: de root van de site; als de modus gelijk is aan Root,
-## verwijs dan nergens naar, verwijs anders naar de bovenliggende directory
+## Plaats  variabelen in een lijst: de root van de site; als de modus gelijk is 
+## aan Root, verwijs dan nergens naar, verwijs anders naar de bovenliggende 
+## directory
 if (!exists("sModus")) {
   sModus <- "Root"
 }

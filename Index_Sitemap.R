@@ -136,7 +136,6 @@ sink()
 ## 04 FTP DE SITEMAP NAAR DE LIVE SITE ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
 ## Plaats het bestand op de FTP server; gebruik verbose = TRUE om te zien 
 ## wat de server antwoordt
 
@@ -145,12 +144,13 @@ password  <- "k35xDLUYUAIeRUZIDdej"
 server    <- "ftp://jlweb320.prolocation.net/html"
 
 ftpUpload(what = "_site/sitemap.xml",
-          to = glue("{server}/sitemap/sitemap.xml"),
+          to = glue("{server}/sitemap.xml"),
           verbose = TRUE,
           userpwd = glue("{user}:{password}"), 
           ftp.ssl = TRUE, 
           ssl.verifypeer = FALSE, 
-          ssl.verifyhost = FALSE
+          ssl.verifyhost = FALSE,
+          prequote="CWD /var/www/virtual/jlweb32049/html/"
           )
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

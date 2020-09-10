@@ -618,7 +618,7 @@ Coefficienten_std <- lm.beta(Regressiemodel_numeriek)
 <!-- ## /CLOSEDBLOK: CoefficientenStd3.R -->
 
 <!-- ## TEKSTBLOK: CoefficientenStd4.R -->
-De gestandaardiseerde regressiecoëfficiënten is `r Round_and_format(Coefficienten_std[2])` voor de predictor Eindexamen_Wiskunde en `r Round_and_format(Coefficienten_std[3])` voor de predictor Aantal_Hoorcolleges. Het aantal hoorcolleges heeft dus meer invloed op het eindcijfer Methoden & Statistiek dan het eindexamencijfer Wiskunde. Een toename van één standaardafwijking in het aantal hoorcolleges resulteert in een toename van `r Round_and_format(Coefficienten_std[3])` standaardafwijkingen in het eindcijfer Methoden & Statistiek. De gestandaardiseerde regressiecoëfficiënt van de variabele Geslacht_numeriek hoeft niet geïnterpreteerd te worden omdat deze niet significant is (de significatietoetsen veranderen niet door standaardisatie).
+De gestandaardiseerde regressiecoëfficiënt is `r Round_and_format(Coefficienten_std[2])` voor de predictor Eindexamen_Wiskunde en `r Round_and_format(Coefficienten_std[3])` voor de predictor Aantal_Hoorcolleges. Het aantal hoorcolleges heeft dus meer invloed op het eindcijfer Methoden & Statistiek dan het eindexamencijfer Wiskunde. Een toename van één standaardafwijking in het aantal hoorcolleges resulteert in een toename van `r Round_and_format(Coefficienten_std[3])` standaardafwijkingen in het eindcijfer Methoden & Statistiek. De gestandaardiseerde regressiecoëfficiënt van de variabele Geslacht_numeriek hoeft niet geïnterpreteerd te worden omdat deze niet significant is (de significatietoetsen veranderen niet door standaardisatie).
 <!-- ## /TEKSTBLOK: CoefficientenStd4.R -->
 
 # Uitvoering F-toets voor vergelijking twee regressiemodellen
@@ -717,7 +717,7 @@ Een *multipele lineaire regressie* is uitgevoerd om de vraag te beantwoorden of 
 | Geslacht (vrouw)          | `r Round_and_format(Reg$coefficients[2,1])`0 |  `r Round_and_format(Reg$coefficients[2,2])` |  `r Round_and_format(Reg$coefficients[2,3])` |  `r Round_and_format(Reg$coefficients[2,4])` |  `r Round_and_format(CI[2,1])` - `r Round_and_format(CI[2,2])`  | `r Round_and_format(Coefficienten_std[1])`|
 | Eindexamencijfer_Wiskunde | `r Round_and_format(Reg$coefficients[3,1])` |  `r Round_and_format(Reg$coefficients[3,2])` |  `r Round_and_format(Reg$coefficients[3,3])` |  < 0,01* |  `r Round_and_format(CI[3,1])` - `r Round_and_format(CI[3,2])` | `r Round_and_format(Coefficienten_std[2])`|
 | Aantal_Hoorcolleges       | `r Round_and_format(Reg$coefficients[4,1])` |  `r Round_and_format(Reg$coefficients[4,2])` |  `r Round_and_format(Reg$coefficients[4,3])` |  < 0,0001* |  `r Round_and_format(CI[4,1])` - `r Round_and_format(CI[4,2])` | `r Round_and_format(Coefficienten_std[3])`|
-*Tabel 1. Regressiecoëfficiënten en bijbehorende standaardfouten, t-statistieken, p-waardes en 95%-betrouwbaarheidsintervallen.*
+*Tabel 1. Regressiecoëfficiënten en bijbehorende standaardfouten, t-statistieken, p-waardes,  95%-betrouwbaarheidsintervallen en gestandaardiseerde coëfficiënten.*
 <!-- ## /TEKSTBLOK: Rapportage2.R -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->

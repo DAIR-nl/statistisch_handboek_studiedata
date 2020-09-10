@@ -25,6 +25,7 @@
 ## elkaar zijn in te stellen
 ## 11-06-2020: EG: Veranderingen toetsmatrix (onafhankelijke en afhankelijke
 ## variabele)
+## 10-09-2020: EG: Functies in aparte R-code gezet
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -43,7 +43,7 @@
 # is al vroeg in het vizier te krijgen en de juiste begeleiding aan te bieden.
 
 # seed
-set.seed(1235)
+set.seed(123)
 
 ## Simuleer data
 
@@ -95,8 +95,8 @@ Eindexamencijfer[Eindexamencijfer < 5.5] <- 5.5
 
 # Maak afhankelijke variabele eindcijfer Methoden & Statistiek
 
-Logit_y <- 20 + - 1.2 * Leeftijd + 1.4 * Geslacht_dummy + 0 * Vooropleiding_dummy + 1.2 * Eindexamencijfer# + rnorm(250,0,1)
-Kans_y <- 1/(1 + exp( - Logit_y))
+Logit_y <- 17  - 1.1 * Leeftijd + 1.5 * Geslacht_dummy + 0 * Vooropleiding_dummy + 1.2 * Eindexamencijfer #+ rnorm(250,0,0.1)
+Kans_y <- 1/(1 + exp( - 1 * Logit_y))
 
 hist(Kans_y)
 plot(Kans_y)
@@ -114,15 +114,17 @@ Uitval_Elektrotechniek <- data.frame(Studentnummer,
                                         Geslacht_dummy,
                                         Vooropleiding_dummy)
 
-vvv <- glm(Uitval ~ Leeftijd + Geslacht + Vooropleiding + Eindexamencijfer,
-    data = Uitval_Elektrotechniek,
-    family = "binomial")
+#vvv <- glm(Uitval ~ Leeftijd + Geslacht + Vooropleiding + Eindexamencijfer,
+#    data = Uitval_Elektrotechniek,
+#    family = "quasibinomial")
 
-library(lmtest)
-lrtest(vvv)
+#summary(vvv)
 
-summary(vvv)
-exp(coefficients(vvv))
+#exp(coefficients(vvv))
+
+#library(lmtest)
+#lrtest(vvv)
+
 
 
 
@@ -142,9 +144,13 @@ exp(coefficients(vvv))
 rm(Studentnummer,
    Geslacht,
    Geslacht_dummy,
-   Eindexamencijfer_Wiskunde,
-   Aantal_Hoorcolleges,
-   Eindcijfer_MS
+   Eindexamencijfer,
+   Kans_y,
+   Leeftijd,
+   Logit_y,
+   Uitval,
+   Vooropleiding,
+   Vooropleiding_dummy
    )
 
 #vv <- lm(Eindcijfer_MS ~ 1, Studenten_Methoden_Statistiek )

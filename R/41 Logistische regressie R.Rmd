@@ -205,21 +205,23 @@ Multicollineariteit wordt getoetst met de Variance Inflation Factor (VIF) die me
 
 Bij *logistische regressie* is de afhankelijke variabele binair wat betekent dat de variabele twee mogelijkheden heeft. Dit kan een probleem opleveren als er categorische predictors zijn. Voor elke categorie van een categorische predictor moeten er observaties zijn voor beide mogelijkheden van de afhankelijke variabele. Deze assumptie kan onderzocht worden door een kruistabel te maken voor de combinatie van elke categorische predictor en de afhankelijke variabele. Een voorbeeld van een dergelijke kruistabel is te zien in Tabel 1 voor de afhankelijke variabele uitval en predictor vooropleiding. In deze kruistabel is te zien dat er binnen de categorie `mbo` van de predictor vooropleiding nul participanten zijn die uitvallen. Deze categorie bevat dus een lege cel en voldoet niet aan de assumptie.
 
-```{r, echo = FALSE}
-vvv <- as.table(matrix(c(0,50,40,160),2,2))
-rownames(vvv) <- c("Uitval", "Geen uitval")
-colnames(vvv) <- c("mbo", "havo")
-vvv
-```
+||                      | Vooropleiding    |
+|-------------| -------------------- | -------------| ------------| 
+||                            | mbo | havo|
+|**Uitval**     | Uitval      | 0     | 40         |
+|               | Geen uitval | 50    | 160        |
+
+*Tabel 2. Kruistabel van de observaties voor de afhankelijke variabele Uitval en predictor Vooropleiding waarbij voor de categorie mbo niet alle waarden van de afhankelijke variabele aanwezig zijn.*
 
 Daarnaast is het met een binaire afhankelijke variabele mogelijk dat er een categorische predictor is die perfect de waarde van de afhankelijek variabele voorspelt. Een voorbeeld hiervan is te zien in Tabel 2, wederom voor de afhankelijke variabele uitval en predictor vooropleiding. De categorie `mbo` bevat alleen studenten die uitgevallen zijn en de categorie `havo` alleen studenten die niet uitgevallen zijn. De predictor vooropleiding voorspelt dus perfect of een student wel of niet gaat uitvallen. Dit fenomeen wordt *complete separation* genoemd en komt af en toe voor als er heel veel predictors aanwezig zijn en weinig observaties. Als dit gebeurt, dan werkt de *maximum likelihood* methode niet.
 
-```{r, echo = FALSE}
-vvv <- as.table(matrix(c(50,0,0,200),2,2))
-rownames(vvv) <- c("Uitval", "Geen uitval")
-colnames(vvv) <- c("mbo", "havo")
-vvv
-```
+||                      | Vooropleiding    |
+|-------------| -------------------- | -------------| ------------| 
+||                            | mbo | havo|
+|**Uitval**     | Uitval      | 50     | 0          |
+|               | Geen uitval | 0      | 200        |
+
+*Tabel 3. Kruistabel van de observaties voor de afhankelijke variabele Uitval en predictor Vooropleiding waarbij er sprake is van complete separation.*
 
 Het gevolg van de assumptie voor observaties per variabele zijn dat er extreem hoge regressiecoëfficiënten en standaardfouten worden gevonden of dat de *maximum likelihood* methode niet werkt. Toets daarom deze assumptie door voor elke categorische predictor een kruistabel te maken met de afhankelije variabele en onderzoek of er lege cellen zijn en of er *complete separation* plaatsvindt. Als er niet aan deze assumptie voldaan is, dan zijn er meerdere oplossingen mogelijk. De categorie die problemen geeft bij de categorische predictor kan verwijderd worden of worden samengevoegd met een andere categorie. Daarnaast kan de hele predictor verwijderd worden. Ten slotte is meer data verzamelen ook een optie als dit mogelijk is.[^6]
 
@@ -229,6 +231,8 @@ Bij *logistische regressie* wordt aangenomen dat de residuën niet gecorreleerd 
 
 De dispersieparameter geeft aan of er sprake is van overdispersie. De dispersieparameter hoort in de buurt van 1 te zitten. Als de parameter hoger dan 2 is, is er sprake van overdispersie. De gevolgen van overdispersie kunnen verholpen worden door de standaardfouten van de regressiecoëfficiënten te herschalen op basis van de overdispersie. Het onderzoeken van de dispersieparameter en het corrigeren in het geval van overdispersie worden toegelicht bij het toetsen van de assumpties in deze toetspagina.
 
+Er kan ook sprake zijn van onderdispersie: de situatie waarin de variantie in voorspelde kansen kleiner is dan op basis van het model wordt verwacht. Dit leidt tot meer conservatieve toetsen voor de regressiecoëfficiënten en een erg lage kans op type I fouten. Deze situatie is minder erg dan overdispersie en er wordt in dit geval meestal geen correctie uitgevoerd. Dezelfde correctie als bij overdispersie kan echter wel uitgevoerd worden en zorgt er in dit geval voor dat de significantietoetsen minder conservatief worden.
+
 FIELD nalopen
 
 # Uitvoering
@@ -236,7 +240,7 @@ FIELD nalopen
 Voer *logistische regressie* uit om te onderzoeken of de uitval in het eerste jaar van de bachelor Elektrotechniek te voorspellen is op basis van het geslacht, gemiddeld eindexamencijfer, de vooropleiding en de leeftijd van studenten. Start met het toetsen van de assumpties en voer vervolgens de *logistische regressie* uit als hieraan voldaan is.
 
 <!-- ## TEKSTBLOK: Uitvoering1.R -->
-Voer eerst de *logistische regressie* uit omdat deze nodig is voor het toetsen van assumpties en sla het resultaat op. Interpreteer de resultaten pas na het toetsen van de assumpties. Gebruik de functie `glm()` met als eerste argument de regressievergelijking `Uitval ~ Leeftijd + Geslacht + Vooropleiding + Eindexamencijfer` met links van het golfteken de afhankelijke variabele `Uitval` en rechts de vier onafhankelijke variabelen `Leeftijd`, `Geslacht`, `Vooropleiding` en `Eindexamencijfer`. Het tweede argument is de dataset `Uitval_Elektrotechniek` en het derde argument `family = binomial` geeft aan dat er een *logistische regressie* uitgevoerd moet worden.
+Voer eerst de *logistische regressie* uit omdat deze nodig is voor het toetsen van assumpties en sla het resultaat op. Interpreteer de resultaten pas na het toetsen van de assumpties. Gebruik de functie `glm()` met als eerste argument de regressievergelijking `Uitval ~ Leeftijd + Geslacht + Vooropleiding + Eindexamencijfer` met links van het golfteken de afhankelijke variabele `Uitval` en rechts de vier onafhankelijke variabelen `Leeftijd`, `Geslacht`, `Vooropleiding` en `Eindexamencijfer`. Het tweede argument is de dataset `Uitval_Elektrotechniek` en het derde argument `family = "binomial"` geeft aan dat er een *logistische regressie* uitgevoerd moet worden.
 <!-- ## /TEKSTBLOK: Uitvoering1.R -->
 
 <!-- ## OPENBLOK: Uitvoering2.R -->
@@ -244,6 +248,7 @@ Voer eerst de *logistische regressie* uit omdat deze nodig is voor het toetsen v
 Regressiemodel <- glm(Uitval ~ Leeftijd + Geslacht + Vooropleiding + Eindexamencijfer,
     data = Uitval_Elektrotechniek,
     family = "binomial")
+
 ```
 <!-- ## /OPENBLOK: Uitvoering2.R -->
 
@@ -337,6 +342,7 @@ Bereken daarna de criteriumwaarde op basis van het gewenste significantieniveau 
 # Zet Geslacht om in een numerieke variabele met een 1 voor een vrouw en 0 voor een man
 Uitval_Elektrotechniek$Geslacht_dummy <- as.numeric(Uitval_Elektrotechniek$Geslacht == "Man")
 Uitval_Elektrotechniek$Vooropleiding_dummy <- as.numeric(Uitval_Elektrotechniek$Vooropleiding == "havo")
+Uitval_Elektrotechniek$Uitval_dummy <- as.numeric(Uitval_Elektrotechniek$Uitval == "Uitval")
 
 
 # Maak een subset van de dataset met alle predictors
@@ -389,8 +395,7 @@ Er zijn geen participanten met een Cook's afstand groter dan de criteriumwaarde 
 
 ## Lineariteit
 
-Onderzoek of er een lineaire relatie is tussen de continue predictoren en de afhankelijke variabele met behulp van scatter plots. 
-
+Voer de *Box-Tidwell test* uit om te onderzoeken of er een lineaire relatie is tussen de continue predictors en de logit van de afhankelijke variabele. Maak eerst voor elke continue predictor een nieuwe variabele aan die bestaat uit het product van de predictor met de logaritme (`log()`) van de predictor. Voeg daarna deze nieuwe interactietermen toe aan de regressievergelijking en voer de *logistische regressie* uit. Gebruik de functie `glm()` met als eerste argument de regressievergelijking `Uitval ~ Leeftijd + Geslacht + Vooropleiding + Eindexamencijfer + Leeftijd_log_leeftijd + Eindexamencijfer_log_eindexamencijfer` met links van het golfteken de afhankelijke variabele `Uitval` en rechts de vier onafhankelijke variabelen `Leeftijd`, `Geslacht`, `Vooropleiding` en `Eindexamencijfer` en de interactietermen `Leeftijd_log_leeftijd` en `Eindexamencijfer_log_eindexamencijfer`. Het tweede argument is de dataset `Uitval_Elektrotechniek` en het derde argument `family = "binomial"` geeft aan dat er een *logistische regressie* uitgevoerd moet worden.
 
 <!-- ## OPENBLOK: AssLineariteit1.R -->
 ```{r}
@@ -444,107 +449,127 @@ VIF(Regressiemodel)
 
 Geen enkele van de VIFs is hoger dan 10, dus er is voldaan aan de assumptie van multicollineariteit.
 
-## Incomplete cases
+## Observaties per variabele
 
-<!-- ## TEKSTBLOK: AssNormaliteit1.R -->
+Onderzoek met behulp van kruistabellen de assumptie over observaties per variabele. Maak voor elke categorische predictor een kruistabel met de afhankelijke variabele en onderzoek of voor elk niveau van de categorische predictors beide waarden van de afhankelijke variabele aanwezig zijn.
+
+<!-- ## TEKSTBLOK: ObsperVar.R -->
 Onderzoek of de gestandaardiseerde residuën van het regressiemodel een normale verdeling volgen. Sla eerst de gestandaardiseerde residuën op met behulp van de functie `rstandard()` met als argument `Regressiemodel` (het object van het regressiemodel) en maak vervolgens een histogram om de verdeling te inspecteren.
-<!-- ## /TEKSTBLOK: AssNormaliteit1.R -->
+<!-- ## /TEKSTBLOK: ObsperVar.R -->
 
-<!-- ## OPENBLOK: AssNormaliteit2.R -->
+<!-- ## OPENBLOK: ObsperVar1.R -->
 ```{r}
-# Sla de gestandaardiseerde residuën op
-Residu_gestandaardiseerd <- rstandard(Regressiemodel)
-# Maak een histogram
-hist(Residu_gestandaardiseerd, xlab = "Gestandaardiseerde residuën", ylab = "Frequentie", main = "")
+# De tabel voor de predictor Geslacht
+with(Uitval_Elektrotechniek,
+     table(Geslacht,
+           Uitval))
+
+# De tabel voor de predictor Vooropleiding
+with(Uitval_Elektrotechniek,
+     table(Vooropleiding,
+           Uitval))
 
 ```
-<!-- ## /OPENBLOK: AssNormaliteit2.R -->
+<!-- ## /OPENBLOK: ObsperVar1.R -->
 
-De verdeling van de gestandaardiseerde residuën lijkt een normaalverdeling te benaderen. Er is dus voldaan aan de assumptie van normaliteit.
+Voor alle categorieën van beide predictors zijn er studenten die wel en niet uitvallen. Dus beide waarden van de afhankelijke variabele zijn aanwezig in alle categorieën. Er is dus ook geen sprake van *complete separation* dus er is aan deze assumptie voldaan.
 
 ## Overdispersie
 
-<!-- ## TEKSTBLOK: AssHomoskedasticiteit1.R -->
-Toets de assumptie van homoskedasticiteit door te onderzoeken of de variantie ongeveer gelijk is voor alle waarden van de voorspellingen van de afhankelijke variabele. Maak hiervoor een plot van de gestandaardiseerde residuën versus de voorspellingen. De gestandaardiseerde residuën zijn te vinden met de functie `rstandard()` met als argument `Regressiemodel` (het object van het regressiemodel) en de voorspellingen met de functie `fitted()` met wederom als argument `Regressiemodel`.
-<!-- ## /TEKSTBLOK: AssHomoskedasticiteit1.R -->
+Bereken de dispersieparameter om te bepalen of er sprake is van overdispersie. 
 
-<!-- ## OPENBLOK: AssHomoskedasticiteit2.R -->
+<!-- ## TEKSTBLOK: Dispersie1.R -->
+Bereken de dispersieparameter om te bepalen of er sprake is van overdispersie. Voer hiervoor de *logistische regressie* uit met behulp van de functie `glm()` met als derde argument `family = "quasibinomial"` die ervoor zorgt dat de resultaten gecorrigeerd worden voor de dispersie. Het eerste argument de regressievergelijking `Uitval ~ Leeftijd + Geslacht + Vooropleiding + Eindexamencijfer` met links van het golfteken de afhankelijke variabele `Uitval` en rechts de vier onafhankelijke variabelen `Leeftijd`, `Geslacht`, `Vooropleiding` en `Eindexamencijfer`. Het tweede argument is de dataset `Uitval_Elektrotechniek`.
+<!-- ## /TEKSTBLOK: Dispersie1.R -->
+
+<!-- ## OPENBLOK: Dispersie2.R -->
 ```{r}
-# Sla de gestandaardiseerde residuën op
-Residu_gestandaardiseerd <- rstandard(Regressiemodel)
-# Sla de voorspellingen op
-Voorspellingen <- fitted(Regressiemodel)
-# Maak een scatter plot
-plot(Voorspellingen, Residu_gestandaardiseerd, ylab = "Gestandaardiseerde residuën", xlab = "Voorspellingen", main = "")
+# Fit het regressiemodel
+Regressiemodel_dispersie <- glm(Uitval ~ Leeftijd + Geslacht + Vooropleiding + Eindexamencijfer,
+    data = Uitval_Elektrotechniek,
+    family = "quasibinomial")
+
+# Print de waarde van de dispersieparameter
+summary(Regressiemodel_dispersie)$dispersion
 
 ```
-<!-- ## /OPENBLOK: AssHomoskedasticiteit2.R -->
+<!-- ## /OPENBLOK: Dispersie2.R -->
 
-De spreiding van de gestandaardiseerde residuën lijkt redelijk constant te zijn voor de verschillende waarden van de voorspellingen. Er is dus voldaan aan de assumptie van homoskedasticiteit.
+Er is sprake van onderdispersie, aangezien de dispersieparameter (`r Round_and_format(summary(Regressiemodel_dispersie)$dispersion)`) kleiner dan 1 is. Het verschil met 1 is echter niet zo groot en bij onderdispersie wordt er in het algemeen meestal geen correctie uitgevoerd. Voor de *logistische regressie* in deze casus wordt daarom geen correctie uitgevoerd vanwege onderdispersie.
 
-## Multicollineariteit
-
-<!-- ## TEKSTBLOK: AssMulticollineariteit1.R -->
-Onderzoek of er sprake is van multicollineariteit met behulp van Variance Inflation Factors (VIFs). Bereken de VIFs voor elke predictor met de functie `VIF()` van het package `DescTools` waarbij de functie als argument `Regressiemodel` (het object van het regressiemodel) heeft.
-<!-- ## /TEKSTBLOK: AssMulticollineariteit1.R -->
-
-<!-- ## OPENBLOK: AssMulticollineariteit2.R -->
-```{r}
-library(DescTools)
-# Bereken de VIF voor elke predictor
-VIF(Regressiemodel)
-```
-<!-- ## /OPENBLOK: AssMulticollineariteit2.R -->
-
-Geen enkele van de VIFs is hoger dan 10, dus er is voldaan aan de assumptie van multicollineariteit.
 
 ## Uitvoering
 
 <!-- ## TEKSTBLOK: Uitvoering1.R -->
-Als alle assumpties zijn getoetst en aan alle assumpties is voldaan, kan de *logistische regressie* uitgevoerd worden. Gebruik de functie `lm()` met als eerste argument de regressievergelijking `Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges` met links van het golfteken de afhankelijke variabele `Eindcijfer_MS` en rechts de drie onafhankelijke variabelen `Eindexamencijfer_Wiskunde`, `Aantal_Hoorcolleges` en `Eindcijfer_MS`. Het tweede argument is de dataset `Studenten_Methoden_Statistiek`. Sla het model op en presenteer vervolgens een overzicht van de resultaten met de functie `summary`. Bepaal de 95%-betrouwbaarheidsintervallen van de regressiecoëfficiënten met de functie `confint`.
+Als alle assumpties zijn getoetst en aan alle assumpties is voldaan, kan de *logistische regressie* uitgevoerd worden. Gebruik de functie `glm()` met als eerste argument de regressievergelijking `Uitval ~ Leeftijd + Geslacht + Vooropleiding + Eindexamencijfer` met links van het golfteken de afhankelijke variabele `Uitval` en rechts de vier onafhankelijke variabelen `Leeftijd`, `Geslacht`, `Vooropleiding` en `Eindexamencijfer`. Het tweede argument is de dataset `Uitval_Elektrotechniek` en het derde argument `family = "binomial"` geeft aan dat er een *logistische regressie* uitgevoerd moet worden. Voer daarna de *likelihood ratio toets* uit met behulp van de functie `lrtest()` van het package `lmtest` met als argument het object van het regressiemodel (`Regressiemodel`). Sla het model op en presenteer vervolgens een overzicht van de resultaten met de functie `summary()`. Bepaal de 95%-betrouwbaarheidsintervallen van de regressiecoëfficiënten met de functie `confint()`. Bereken ten slotte de Nagelkerke $R^2$ met behulp van de functie `Nagelkerke()` van het package `fmsb`.
+
 <!-- ## /TEKSTBLOK: Uitvoering1.R -->
 
 <!-- ## OPENBLOK: Uitvoering2.R -->
-```{r}
+```{r, message = FALSE, warning = FALSE}
 # Voer de multipele lineaire regressie uit
-Regressiemodel <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges, Studenten_Methoden_Statistiek)
+Regressiemodel <- glm(Uitval ~ Leeftijd + Geslacht + Vooropleiding + Eindexamencijfer,
+    data = Uitval_Elektrotechniek,
+    family = "binomial")
+
+
+#if (!require("pROC")) install.packages("pROC"); library(pROC) # calculate AUC
+
+# Voer de likelihood ratio toets uit
+library(lmtest)
+lrtest(Regressiemodel)
 
 # Presenteer de resultaten
 summary(Regressiemodel)
 
 # Presenteer de 95%-betrouwbaarheidsintervallen
 confint(Regressiemodel)
+
+# Bereken de odds ratio van alle regressiecoëfficiënten door de exponent te nemen
+exp(coef(Regressiemodel))
+
+# Bepaal de Nagelkerke R2
+library(fmsb)
+NagelkerkeR2(Regressiemodel)
+
 ```
 <!-- ## /OPENBLOK: Uitvoering2.R -->
 
 <!-- ## CLOSEDBLOK: Uitvoering3.R -->
 ```{r, echo = FALSE, message = FALSE}
+
 # Voer de multipele lineaire regressie uit
-Regressiemodel <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges, Studenten_Methoden_Statistiek)
+Regressiemodel <- glm(Uitval ~ Leeftijd + Geslacht + Vooropleiding + Eindexamencijfer,
+    data = Uitval_Elektrotechniek,
+    family = "binomial")
+
+# Voer de likelihood ratio toets uit
+LR_test <- lrtest(Regressiemodel)
 
 # Presenteer de resultaten
 Reg <- summary(Regressiemodel)
 F_toets <- Reg$fstatistic
-R2 <- Reg$r.squared
+R2 <- NagelkerkeR2(Regressiemodel)[[2]]
 CI <- confint(Regressiemodel)
+
 ```
 <!-- ## /CLOSEDBLOK: Uitvoering3.R -->
 
 ### Significantie regressiemodel
 
 <!-- ## TEKSTBLOK: Ftoets1.R -->
-Bepaal als eerste stap de significantie van het regressiemodel met behulp van de F-toets. De F-toets voor het regressiemodel laat zien dat het opgestelde regressiemodel een significant hogere verklaarde variantie heeft dan het model met alleen een intercept, *F*(`r Round_and_format_0decimals(F_toets[2])`,`r Round_and_format_0decimals(F_toets[3])`) = `r Round_and_format(F_toets[1])`, *p* < 0,0001.[^8] De nulhypothese dat geen enkele predictor van de predictors geslacht, eindexamencijfer Wiskunde en aantal gevolgde hoorcolleges is gerelateerd aan de afhankelijke variabele eindcijfer Methoden & Statistiek kan verworpen worden. De verklaarde variantie $R^2$ is `r Round_and_format(100*R2)`. Omdat de F-toets voor het gehele model significant is, kunnen de coëfficiënten geinterpreteerd worden.
+Bepaal als eerste stap de significantie van het regressiemodel met behulp van de *likelihood ratio toets*. De *likelihood ratio toets* voor het regressiemodel laat een significant verschil zien tussen het voorgestelde model en een model met alleen een intercept, *&chi;^2^* = `r Round_and_format(LR_test$Chisq[2])`, *df* = `r -1 * LR_test$Df[2]`, *p* < 0,0001, $R^2_N$ = `r Round_and_format(100 * R2)`.[^8] De nulhypothese dat geen enkele predictor van de predictors Geslacht, Eindexamencijfer, Leeftijd en Vooropleidingis gerelateerd aan de afhankelijke variabele Uitval kan verworpen worden. De Nagelkerke $R^2$ is `r Round_and_format(100*R2)`. Omdat de *likelihood ratio toets* voor het gehele model significant is, kunnen de coëfficiënten geinterpreteerd worden.
 <!-- ## TEKSTBLOK: Ftoets1.R -->
 
 ### Significantie en interpretatie coëfficiënten.
 
 <!-- ## TEKSTBLOK: Coefficienten1.R -->
-Voor de intercept en de regressiecoëfficiënten van de predictors zijn de geschatte coëfficiënt (`Estimate`), de standaardfout van de geschatte coëfficiënt (`Std. Error`) en de t-statistiek (`t value`) en p-waarde (`Pr(>|t|)`) van de t-toets voor de regressiecoëfficiënt weergegeven:
+Voor de intercept en de regressiecoëfficiënten van de predictors zijn de geschatte coëfficiënt (`Estimate`), de standaardfout van de geschatte coëfficiënt (`Std. Error`) en de z-statistiek (`z value`) en p-waarde (`Pr(>|z|)`) van de *Wald toets* voor de regressiecoëfficiënt weergegeven:
 
-* Intercept: de geschatte waarde voor de intercept is `r Round_and_format(Reg$coefficients[1,1])` en is significant verschillend van 0 (*t* = `r Round_and_format(Reg$coefficients[1,3])`, *p* < 0,001)[^8]. De intercept staat voor het voorspelde eindcijfer Methoden & Statistiek als alle predictors een waarde van nul hebben. Een man met een 0 als eindexamencijfer Wiskunde die nul hoorcolleges volgt zal naar verwachting een `r Round_and_format(Reg$coefficients[1,1])` behalen als eindcijfer voor het vak Methoden & Statistiek.
-* Geslacht: de geschatte waarde voor de regressiecoëfficiënt van de variabele Geslacht is `r Round_and_format(Reg$coefficients[2,1])` en is niet significant verschillend van 0 (*t* = `r Round_and_format(Reg$coefficients[2,3])`, *p* = `r Round_and_format(Reg$coefficients[2,4])`)[^8]. De coëfficiënt hoeft dus niet geïnterpreteerd te worden.
-* Eindexamencijfer_Wiskunde: de geschatte waarde voor de regressiecoëfficiënt van de variabele Eindexamencijfer_Wiskunde is `r Round_and_format(Reg$coefficients[3,1])` en is significant verschillend van 0 (*t* = `r Round_and_format(Reg$coefficients[3,3])`, *p* < 0,01)[^8]. Als het eindexamencijfer Wiskunde met één punt toeneemt, neemt de voorspelling voor het eindcijfer Methoden & Statistiek met `r Round_and_format(Reg$coefficients[3,1])` toe.
-* Aantal_Hoorcolleges: de geschatte waarde voor de regressiecoëfficiënt van de variabele Aantal_Hoorcolleges is `r Round_and_format(Reg$coefficients[4,1])` en is significant verschillend van 0 (*t* = `r Round_and_format(Reg$coefficients[4,3])`, *p* < 0,0001)[^8]. Als een student een extra hoorcollege volgt, neemt de voorspelling voor het eindcijfer Methoden & Statistiek met `r Round_and_format(Reg$coefficients[4,1])` toe.
+* Leeftijd: de geschatte waarde voor de regressiecoëfficiënt van de variabele Leeftijd is `r Round_and_format(Reg$coefficients[2,1])` en is significant verschillend van 0 (*z* = `r Round_and_format(Reg$coefficients[2,3])`, *p* < 0,0001).[^8] De odds ratio van deze predictor is `r Round_and_format(exp(Reg$coefficients[2,1]))`. Als de overige predictors gelijkblijven is de odds van uitval `r Round_and_format(exp(Reg$coefficients[2,1]))` keer zo hoog bij een toename van leeftijd met één jaar.
+* Geslacht: de geschatte waarde voor de regressiecoëfficiënt van de variabele Geslacht is `r Round_and_format(Reg$coefficients[3,1])` en is significant verschillend van 0 (*z* = `r Round_and_format(Reg$coefficients[3,3])`, *p* < 0,001).[^8] De hoofdcategorie van de variabele Geslacht is `Vrouw`, aangezien de variabele in de resultaten weergegeven is als `GeslachtVrouw`. Dit betekent dat de referentiecategorie `Man` is. Als de overige predictors gelijkblijven is de odds van uitval voor vrouwen `r Round_and_format(exp(Reg$coefficients[3,1]))` keer zo hoog als de odds van uitval voor mannen.
+* Vooropleiding: de geschatte waarde voor de regressiecoëfficiënt van de variabele Vooropleiding is `r Round_and_format(Reg$coefficients[4,1])` en is significant verschillend van 0 (*z* = `r Round_and_format(Reg$coefficients[4,3])`, *p* = `r Round_and_format(Reg$coefficients[4,4])`).[^8] Aangezien deze coëfficiënt niet significant is, hoeft hij niet geïnterpreteerd te worden.
+* Eindexamencijfer: de geschatte waarde voor de regressiecoëfficiënt van de variabele Eindexamencijfer_Wiskunde is `r Round_and_format(Reg$coefficients[5,1])` en is significant verschillend van 0 (*z* = `r Round_and_format(Reg$coefficients[5,3])`, *p* < 0,0001).[^8] De odds ratio van deze predictor is `r Round_and_format(exp(Reg$coefficients[5,1]))`. Als de overige predictors gelijkblijven is de odds van uitval `r Round_and_format(exp(Reg$coefficients[5,1]))` keer zo hoog bij een toename van het gemiddeld eindexamencijfer met één punt.  De odds van uitval is dus eigenlijk `r Round_and_format(1 / exp(Reg$coefficients[5,1]))` (1 / `r Round_and_format(exp(Reg$coefficients[5,1]))`) keer zo laag bij een toename van het gemiddeld eindexamencijfer met één punt.
 
 <!-- ## /TEKSTBLOK: Coefficienten1.R -->
 
@@ -556,97 +581,197 @@ De regressiecoëfficiënten van de predictors Eindexamencijfer_Wiskunde en Aanta
 
 <!-- ## OPENBLOK: CoefficientenStd2.R -->
 ```{r, warning = FALSE, message = FALSE}
-# Laad het package QuantPsyc in
-library(QuantPsyc)
 
 # Zet Geslacht om in een numerieke variabele met een 1 voor een vrouw en 0 voor een man
-Studenten_Methoden_Statistiek$Geslacht_numeriek <- as.numeric(Studenten_Methoden_Statistiek$Geslacht == "Vrouw")
+Uitval_Elektrotechniek$Geslacht_dummy <- as.numeric(Uitval_Elektrotechniek$Geslacht == "Man")
+Uitval_Elektrotechniek$Vooropleiding_dummy <- as.numeric(Uitval_Elektrotechniek$Vooropleiding == "havo")
+Uitval_Elektrotechniek$Uitval_dummy <- as.numeric(Uitval_Elektrotechniek$Uitval == "Uitval")
+
+# Standaardiseer de predictors
+Uitval_Elektrotechniek$Geslacht_dummy_stand <- scale(Uitval_Elektrotechniek$Geslacht_dummy)
+Uitval_Elektrotechniek$Vooropleiding_dummy_stand <- scale(Uitval_Elektrotechniek$Vooropleiding_dummy)
+Uitval_Elektrotechniek$Leeftijd_stand <- scale(Uitval_Elektrotechniek$Leeftijd)
+Uitval_Elektrotechniek$Eindexamencijfer_stand <- scale(Uitval_Elektrotechniek$Eindexamencijfer)
 
 # Stel het regressiemodel op met Geslacht als numerieke variabele
-Regressiemodel_numeriek <- lm(Eindcijfer_MS ~ Geslacht_numeriek + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges, Studenten_Methoden_Statistiek)
+Regressiemodel_gestandaardiseerd <- glm(Uitval ~ Leeftijd_stand + Geslacht_dummy_stand + Vooropleiding_dummy_stand + Eindexamencijfer_stand,
+    data = Uitval_Elektrotechniek,
+    family = "binomial")
 
-# Bereken de gestandaardiseerde coefficienten
-lm.beta(Regressiemodel_numeriek)
+# Laat de gestandaardiseerde coefficienten zien
+coefficients(Regressiemodel_gestandaardiseerd)
+
+# Laat de gestandaardiseerde odds ratios zien
+exp(coefficients(Regressiemodel_gestandaardiseerd))
 
 ```
 <!-- ## /OPENBLOK: CoefficientenStd2.R -->
 
 <!-- ## CLOSEDBLOK: CoefficientenStd3.R -->
 ```{r, echo = FALSE, message = FALSE}
-Coefficienten_std <- lm.beta(Regressiemodel_numeriek)
+Coefficienten_std <- coefficients(Regressiemodel_gestandaardiseerd)
 
 ```
 <!-- ## /CLOSEDBLOK: CoefficientenStd3.R -->
 
 <!-- ## TEKSTBLOK: CoefficientenStd4.R -->
-De gestandaardiseerde regressiecoëfficiënten is `r Round_and_format(Coefficienten_std[2])` voor de predictor Eindexamen_Wiskunde en `r Round_and_format(Coefficienten_std[3])` voor de predictor Aantal_Hoorcolleges. Het aantal hoorcolleges heeft dus meer invloed op het eindcijfer Methoden & Statistiek dan het eindexamencijfer Wiskunde. Een toename van één standaardafwijking in het aantal hoorcolleges resulteert in een toename van `r Round_and_format(Coefficienten_std[3])` standaardafwijkingen in het eindcijfer Methoden & Statistiek. De gestandaardiseerde regressiecoëfficiënt van de variabele Geslacht_numeriek hoeft niet geïnterpreteerd te worden omdat deze niet significant is (de significatietoetsen veranderen niet door standaardisatie).
+De gestandaardiseerde regressiecoëfficiënt is `r Round_and_format(Coefficienten_std[2])` voor de predictor Eindexamencijfer, `r Round_and_format(Coefficienten_std[3])` voor de predictor Geslacht, `r Round_and_format(Coefficienten_std[4])` voor de predictor Vooropleiding en `r Round_and_format(Coefficienten_std[5])` voor de predictor Leeftijd. De leeftijd van een student heeft dus de meeste invloed op uitval. De invloed van Geslacht en Eindexamencijfer is ongeveer even groot. De gestandaardiseerde odds ratio van de predictor Leeftijd laat zien dat een toename van één standaardafwijking in de leeftijd van een student resulteert in een `r Round_and_format(exp(Coefficienten_std[5]))` zo hoge odds dat de student uitvalt, mits de overige predictors gelijkblijven.
 <!-- ## /TEKSTBLOK: CoefficientenStd4.R -->
 
-# Uitvoering F-toets voor vergelijking twee regressiemodellen
+# Uitvoering likelihood ratio toets voor vergelijking twee regressiemodellen
 
-De F-toets wordt bij *logistische regressie* gebruikt om de significantie van het gehele regressiemodel te toetsen ten opzichte van het interceptmodel. Deze F-toets kan ook gebruikt worden om te toetsen of twee geneste regressiemodellen onderling verschillen qua verklaarde variantie. Hoewel deze vergelijking in de casus niet voorbijkomt, wordt deze toch geïllustreerd. Hierbij wordt een model met als enige predictor het geslacht van de student vergeleken met een model met de predictors geslacht, eindexamencijfer Wiskunde en aantal gevolgde hoorcolleges.
+De *likelihood ratio toets* wordt bij *logistische regressie* gebruikt om de significantie van het gehele regressiemodel te toetsen ten opzichte van het interceptmodel. Deze *likelihood ratio toets* kan ook gebruikt worden om te toetsen of twee geneste regressiemodellen onderling verschillen qua model fit. Hoewel deze vergelijking in de casus niet voorbijkomt, wordt deze toch geïllustreerd. Hierbij wordt een model met de predictoren Eindexamencijfer en Vooropleiding vergeleken met een model met de predictors Geslacht, Leeftijd, Eindexamencijfer en Vooropleiding.
 
 <!-- ## TEKSTBLOK: ModellenVergelijken1.R -->
-Voer de F-toets uit met de functie `anova()` met als argumenten de modelobjecten van de resultaten van de twee regressiemodellen die worden vergeleken (`Model_1` en `Model_2`). Voer eerst de *logistische regressie* uit voor beide modellen en vergelijk ze daarna. Bereken ten slotte de verklaarde variantie met de functie `summary()$r.squared` met als argument het modelobject waarvan de verklaarde variantie berekend moet worden.
+Voer de *likelihood ratio toets* uit met de functie `lrtest()` van het package `lmtest` met als argumenten de modelobjecten van de resultaten van de twee regressiemodellen die worden vergeleken (`Model_1` en `Model_2`). Voer eerst de *logistische regressie* uit voor beide modellen en vergelijk ze daarna. Bereken ten slotte de Nagelkerke $R^2$ met de functie `NagelkerkeR2(Model_1)$R2` met als argument het modelobject waarvan de verklaarde variatie berekend moet worden.
 <!-- ## /TEKSTBLOK: ModellenVergelijken1.R -->
 
 <!-- ## OPENBLOK: ModellenVergelijken2.R -->
 ```{r}
-# Stel het regressiemodel op met alleen Geslacht als predictor
-Model_1 <- lm(Eindcijfer_MS ~ Geslacht, Studenten_Methoden_Statistiek)
+# Stel het regressiemodel op met Vooropleiding en Eindexamencijfer als predictor
+Model_1 <- glm(Uitval ~ Vooropleiding + Eindexamencijfer,
+    data = Uitval_Elektrotechniek,
+    family = "binomial")
 
-# Stel het regressiemodel op met Geslacht, Eindexamencijfer_Wiskunde en Aantal_Hoorcolleges als predictors
-Model_2 <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges, Studenten_Methoden_Statistiek)
+# Stel het regressiemodel op met Vooropleiding en Eindexamencijfer als predictor
+Model_2 <- glm(Uitval ~ Vooropleiding + Eindexamencijfer + Geslacht + Leeftijd,
+    data = Uitval_Elektrotechniek,
+    family = "binomial")
 
-# Voer de F-toets uit om beide modellen te vergelijken
-anova(Model_1, Model_2)
+# Voer de likelihood ratio toets uit
+library(lmtest)
+LR_test <- lrtest(Model_1, Model_2)
 
 # Bereken verklaarde variantie (%) van model 1
-100*summary(Model_1)$r.squared
+library(fmsb)
+100*NagelkerkeR2(Model_1)$R2
 
 # Bereken verklaarde variantie (%) van model 2
-100*summary(Model_2)$r.squared
+100*NagelkerkeR2(Model_2)$R2
+
 ```
 <!-- ## /OPENBLOK: ModellenVergelijken2.R -->
 
 <!-- ## CLOSEDBLOK: ModellenVergelijken3.R -->
 ```{r, echo = FALSE, message = FALSE}
-# Stel het regressiemodel op met alleen Aantal hoorcolleges als predictor
-Model_1 <- lm(Eindcijfer_MS ~ Geslacht, Studenten_Methoden_Statistiek)
+# Stel het regressiemodel op met Vooropleiding en Eindexamencijfer als predictor
+Model_1 <- glm(Uitval ~ Vooropleiding + Eindexamencijfer,
+    data = Uitval_Elektrotechniek,
+    family = "binomial")
 
-# Stel het regressiemodel op met Geslacht, Eindexamencijfer_Wiskunde en Aantal_Hoorcolleges als predictors
-Model_2 <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges, Studenten_Methoden_Statistiek)
+# Stel het regressiemodel op met Vooropleiding en Eindexamencijfer als predictor
+Model_2 <- glm(Uitval ~ Vooropleiding + Eindexamencijfer + Geslacht + Leeftijd,
+    data = Uitval_Elektrotechniek,
+    family = "binomial")
 
-# Voer de F-toets uit om beide modellen te vergelijken
-Vergelijking <- anova(Model_1, Model_2)
+# Voer de likelihood ratio toets uit
+library(lmtest)
+Vergelijking <- lrtest(Model_1, Model_2)
 
-# Verklaarde variantie model 1
-R2_model1 <- 100*summary(Model_1)$r.squared
+# Bereken verklaarde variantie (%) van model 1
+library(fmsb)
+R2_model1 <- 100*NagelkerkeR2(Model_1)$R2
 
-# Verklaarde variantie model 2
-R2_model2 <- 100*summary(Model_2)$r.squared
+# Bereken verklaarde variantie (%) van model 2
+R2_model2 <- 100*NagelkerkeR2(Model_2)$R2
+
 ```
 <!-- ## /CLOSEDBLOK: ModellenVergelijken3.R -->
 
 <!-- ## TEKSTBLOK: ModellenVergelijken4.R -->
-De F-toets toont aan dat er een significant verschil is in verklaarde variantie tussen beide modellen, *F*(`r Round_and_format_0decimals(Vergelijking[2,1])`,`r Round_and_format_0decimals(Vergelijking[2,3])`) = `r Round_and_format(Vergelijking[2,5])`, *p* < 0,0001. Het regressiemodel met alleen Geslacht als predictor verklaart slechts `r Round_and_format(R2_model1)`% van de variantie in het eindcijfer Methoden & Statistiek en het regressiemodel met drie predictoren verklaart `r Round_and_format(R2_model2)`% van de variantie. Het verschil in verklaarde variantie is `r Round_and_format(R2_model2 - R2_model1)`%. Het model met het geslacht, eindexamencijfer Wiskunde en aantal gevolgde hoorcolleges van een student als predictors verklaart dus significant meer variantie dan het model met alleen het geslacht van een student als predictor.
+De *likelihood ratio toets* toont aan dat er een significant verschil is in de model fit tussen beide modellen, *&chi;^2^* = `r Round_and_format(Vergelijking$Chisq[2])`, *df* = `r -1 * Vergelijking$Df[2]`, *p* < 0,0001. Het regressiemodel met predictors Vooropleiding en Eindexamencijfer verklaart slechts `r Round_and_format(R2_model1)`% van de variatie in uitval en het regressiemodel met vier predictoren verklaart `r Round_and_format(R2_model2)`% van de variatie. Het verschil in verklaarde variatie is `r Round_and_format(R2_model2 - R2_model1)`%. Het model met het Vooropleiding, Eindexamencijfer, Leeftijd en Geslacht heeft dus een significant betere model fit dan het model met alleen Vooropleiding en Eindexamencijfer als predictors.
 <!-- ## /TEKSTBLOK: ModellenVergelijken4.R -->
+
+# Voorspellen en classificeren
+
+Op basis van het logistisch regressiemodel kan voor iedere student de kans op uitval voorspeld worden. De voorspelde kans kan direct vergeleken worden met de observaties om te onderzoeken hoe goed het model voorspeld. Daarnaast is het ook mogelijk om de studenten te classificeren in de categorieën Uitval en Geen uitval op basis van de voorspelde kans. Met behulp van de classificaties kan een classificatietabel gemaakt worden waarmee de kwaliteit van de voorspelkracht van het model beoordeeld kan worden.
+
+Bepaal eerst de voorspelde kansen met de functie `predict()` met als argumenten het object van het regressie model `Regressiemodel` en `type = response` om aan te geven dat de voorspelde kans bepaald moet worden. Classificeer daarna de studenten op basis van de voorspelde kans met de functie `ifelse()` met als eerste argument de conditie die gecheckt wordt `Voorspelde_kans > 0.5`, als tweede argument de classificatie als de student aan de conditie voldoet (`"Uitval"`) en als derde argument de classificatie als de student niet aan de conditie voldoet (`"Geen uitval"`). De conditie stelt dat de voorspelde kans groter dan 0,5 moet zijn. In dat geval is Uitval de classificatie voor die student. Als de kans 0,5 of kleiner is, dan is Geen uitval de classificatie voor die student. Maak daarna een classificatietabel voor de classificaties en observaties van de studenten Elektrotechniek. Bereken op basis van de classificatietabel de accuraatheid, sensitiviteit en specificiteit van de classificaties. Bereken ten slotte de Area Under the Curve (AUC) van het logistisch regressiemodel met behulp van de functie `roc()$auc` van het package `pROC` met als argumenten de observaties `Uitval_Elektrotechniek$Uitval_dummy` en de voorspelde kansen `Voorspelde_kans`.
+
+NUMERIEK toevoegen
+
+```{r, warning = FALSE, message = FALSE}
+# Bepaal de voorspelde kansen
+Voorspelde_kans <- predict(Regressiemodel,
+                           type = "response")
+
+# Classificeer de studenten op basis van de voorspelde kans
+Classificaties <- ifelse(Voorspelde_kans > 0.5,
+                         "Uitval",
+                         "Geen uitval")
+
+# Maak een classificatietabel
+Tabel <- table(Classificaties = Classificaties,
+      Observaties = Uitval_Elektrotechniek$Uitval)
+print(Tabel)
+
+# Bereken accuraatheid
+Accuraatheid <- (Tabel["Uitval","Uitval"] + Tabel["Geen uitval","Geen uitval"]) / sum(Tabel)
+Accuraatheid
+
+# Bereken sensitiviteit
+Sensitiviteit <- Tabel["Uitval","Uitval"] / (Tabel["Uitval","Uitval"] + Tabel["Geen uitval","Uitval"])
+Sensitiviteit
+
+# Bereken specificiteit
+Specificiteit <- Tabel["Geen uitval","Geen uitval"] / (Tabel["Geen uitval","Geen uitval"] + Tabel["Uitval","Geen uitval"])
+Specificiteit
+
+# Bereken de Area Under the Curve (AUC)
+library(pROC)
+roc(Uitval_Elektrotechniek$Uitval_dummy,
+    Voorspelde_kans)$auc
+
+```
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+# Bepaal de voorspelde kansen
+Voorspelde_kans <- predict(Regressiemodel,
+                           type = "response")
+
+# Classificeer de studenten op basis van de voorspelde kans
+Classificaties <- ifelse(Voorspelde_kans > 0.5,
+                         "Uitval",
+                         "Geen uitval")
+
+# Maak een classificatietabel
+Tabel <- table(Classificaties = Classificaties,
+      Observaties = Uitval_Elektrotechniek$Uitval)
+
+# Bereken accuraatheid
+Accuraatheid <- (Tabel["Uitval","Uitval"] + Tabel["Geen uitval","Geen uitval"]) / sum(Tabel)
+
+# Bereken sensitiviteit
+Sensitiviteit <- Tabel["Uitval","Uitval"] / (Tabel["Uitval","Uitval"] + Tabel["Geen uitval","Uitval"])
+
+# Bereken specificiteit
+Specificiteit <- Tabel["Geen uitval","Geen uitval"] / (Tabel["Geen uitval","Geen uitval"] + Tabel["Uitval","Geen uitval"])
+
+# Bereken de Area Under the Curve (AUC)
+library(pROC)
+AUC <- roc(Uitval_Elektrotechniek$Uitval_dummy,
+    Voorspelde_kans)$auc
+```
+
+De classificatietabel laat zien dat de meeste studenten correct geclassificeerd zijn. De sensitiviteit is `r Round_and_format(Sensitiviteit)`, dus van de studenten die daadwerkelijk uitvallen is `r Round_and_format(100 * Sensitiviteit)` correct geclassificeerd. De specificiteit is `r Round_and_format(Specificiteit)`, dus van de studenten die niet uitvallen is `r Round_and_format(100 * Specificiteit)` correct geclassificeerd. Dit laat zien dat het model er beter in is om het niet uitvallen van studenten te classificeren dan het uitvallen van studenten. De Area Under the Curve van het logistisch regressiemodel is `r Round_and_format(AUC)`.
 
 
 # Rapportage
 
 <!-- ## TEKSTBLOK: Rapportage1.R -->
-Een *logistische regressie* is uitgevoerd om de vraag te beantwoorden of er een relatie is tussen het aantal gevolgde hoorcolleges en het eindcijfer van het vak Methoden & Statistiek van de bachelor Onderwijskunde rekening houdend met het eindexamencijfer Wiskunde van studenten en man-vrouw verschillen. Uit het toetsen van de assumpties van *logistische regressie* bleek dat er aan alle assumpties is voldaan. De resultaten van de *logistische regressie* zijn te vinden in Tabel 1. De F-toets voor het regressiemodel laat zien dat het opgestelde regressiemodel minimaal één coëfficiënt heeft die significant verschilt van nul, *F*(`r Round_and_format_0decimals(F_toets[2])`,`r Round_and_format_0decimals(F_toets[3])`) = `r Round_and_format(F_toets[1])`, *p* < 0,0001. Het eindexamencijfer Wiskunde (*&beta;* = `r Round_and_format(Reg$coefficients[3,1])`, *t* = `r Round_and_format(Reg$coefficients[3,3])`, *p* < 0,01) en het aantal gevolgde hoorcolleges (*&beta;* = `r Round_and_format(Reg$coefficients[4,1])`, *t* = `r Round_and_format(Reg$coefficients[4,3])`, *p* < 0,0001) zijn significante predictors van het eindcijfer voor het vak, maar het geslacht van de student is dit niet (*&beta;* = `r Round_and_format(Reg$coefficients[2,1])`, *t* = `r Round_and_format(Reg$coefficients[2,3])`, *p* = `r Round_and_format(Reg$coefficients[2,4])`). Een toename van het eindexamencijfer Wiskunde leidt tot een toename van het voorspelde eindcijfer voor het vak van `r Round_and_format(Reg$coefficients[3,1])` en het volgen van één extra hoorcollege tot een toename in het voorspelde eindcijfer van `r Round_and_format(Reg$coefficients[4,1])`. De gestandaardiseerde coëfficiënten laten zien dat het aantal gevolgde hoorcolleges het sterkst gerelateerd is aan het eindcijfer. De docent van het vak Methoden & Statistiek kan hieruit concluderen dat er geen man-vrouw verschillen zijn, dat studenten met een hoger eindexamencijfer Wiskunde beter presteren voor zijn vak, maar bovenal dat het volgen van het hoorcolleges de grootste invloed heeft op het eindcijfer.
+Een *logistische regressie* is uitgevoerd om te onderzoeken of de vooropleiding, de leeftijd, het geslacht en het gemiddeld eindexamencijfer van studenten die starten met de bachelor Elektrotechniek gerelateerd is aan het wel of niet uitvallen in het eerste jaar van deze opleiding. Uit het toetsen van de assumpties van *logistische regressie* bleek dat er aan alle assumpties is voldaan. De resultaten van de *logistische regressie* zijn te vinden in Tabel 1. 
+
+De *likelihood ratio toets* voor het regressiemodel laat zien dat het opgestelde regressiemodel minimaal één coëfficiënt heeft die significant verschilt van nul, *&chi;^2^* = `r Round_and_format(LR_test$Chisq[2])`, *df* = `r -1 * LR_test$Df[2]`, *p* < 0,0001, $R^2_N$ = `r Round_and_format(100 * R2)`. Het gemiddeld eindexamencijfer (*&beta;* = `r Round_and_format(Reg$coefficients[5,1])`, *z* = `r Round_and_format(Reg$coefficients[5,3])`, *p* < 0,0001), de leeftijd (*&beta;* = `r Round_and_format(Reg$coefficients[2,1])`, *z* = `r Round_and_format(Reg$coefficients[2,3])`, *p* < 0,0001) en het geslacht (*&beta;* = `r Round_and_format(Reg$coefficients[3,1])`, *z* = `r Round_and_format(Reg$coefficients[3,3])`, *p* < 0,0001) zijn significante predictors van het eindcijfer voor het vak, maar de vooropleiding van de student is dit niet (*&beta;* = `r Round_and_format(Reg$coefficients[4,1])`, *z* = `r Round_and_format(Reg$coefficients[4,3])`, *p* = `r Round_and_format(Reg$coefficients[4,4])`). De gestandaardiseerde coëfficiënten laten zien dat de leeftijd van de student het sterkst gerelateerd is aan de kans op uitval. Om in te schatten of een student extra ondersteuning kan krijgen omdat de kans op uitval hoger is, kan de studieloopbaanbegeleider dus rekening houden met het geslacht, de leeftijd en het gemiddeld eindexamencijfer van studenten, maar hoeft hij geen rekening te houden met de vooropleiding.
 <!-- ## /TEKSTBLOK: Rapportage1.R -->
 
 <!-- ## TEKSTBLOK: Rapportage2.R -->
-|                           | Coëfficiënt   | Standaard- fout | t | p-waarde | 95%-betrouwbaarheids- interval | Gestandaardiseerde coëfficiënt  | 
-| ------------------------- | ---------| ---------| ---------| ---------| ---------| ---------| 
-| Intercept                 | `r Round_and_format(Reg$coefficients[1,1])` |  `r Round_and_format(Reg$coefficients[1,2])` |  `r Round_and_format(Reg$coefficients[1,3])` |  < 0,0001*  |  `r Round_and_format(CI[1,1])` - `r Round_and_format(CI[1,2])`  | - |
-| Geslacht (vrouw)          | `r Round_and_format(Reg$coefficients[2,1])`0 |  `r Round_and_format(Reg$coefficients[2,2])` |  `r Round_and_format(Reg$coefficients[2,3])` |  `r Round_and_format(Reg$coefficients[2,4])` |  `r Round_and_format(CI[2,1])` - `r Round_and_format(CI[2,2])`  | `r Round_and_format(Coefficienten_std[1])`|
-| Eindexamencijfer_Wiskunde | `r Round_and_format(Reg$coefficients[3,1])` |  `r Round_and_format(Reg$coefficients[3,2])` |  `r Round_and_format(Reg$coefficients[3,3])` |  < 0,01* |  `r Round_and_format(CI[3,1])` - `r Round_and_format(CI[3,2])` | `r Round_and_format(Coefficienten_std[2])`|
-| Aantal_Hoorcolleges       | `r Round_and_format(Reg$coefficients[4,1])` |  `r Round_and_format(Reg$coefficients[4,2])` |  `r Round_and_format(Reg$coefficients[4,3])` |  < 0,0001* |  `r Round_and_format(CI[4,1])` - `r Round_and_format(CI[4,2])` | `r Round_and_format(Coefficienten_std[3])`|
-*Tabel 1. Regressiecoëfficiënten en bijbehorende standaardfouten, t-statistieken, p-waardes en 95%-betrouwbaarheidsintervallen.*
+|                           | Coëfficiënt   | Standaard- fout | z | p-waarde | 95%-betrouwbaar- heidsinterval | Gestandaardiseerde coëfficiënt  | Odds ratio |
+| ------------------------- | ---------| ---------| ---------| ---------| ---------| ---------| ---------| 
+| Intercept                 | `r Round_and_format(Reg$coefficients[1,1])` |  `r Round_and_format(Reg$coefficients[1,2])` |  `r Round_and_format(Reg$coefficients[1,3])` |  < 0,0001*  |  `r Round_and_format(CI[1,1])` - `r Round_and_format(CI[1,2])`  | - | - |
+| Leeftijd          | `r Round_and_format(Reg$coefficients[2,1])`0 |  `r Round_and_format(Reg$coefficients[2,2])` |  `r Round_and_format(Reg$coefficients[2,3])` |  `r Round_and_format(Reg$coefficients[2,4])` |  `r Round_and_format(CI[2,1])` - `r Round_and_format(CI[2,2])`  | `r Round_and_format(Coefficienten_std[2])`| `r Round_and_format(exp(Reg$coefficients[2,1]))` |
+| Geslacht (Vrouw) | `r Round_and_format(Reg$coefficients[3,1])` |  `r Round_and_format(Reg$coefficients[3,2])` |  `r Round_and_format(Reg$coefficients[3,3])` |  < 0,01* |  `r Round_and_format(CI[3,1])` - `r Round_and_format(CI[3,2])` | `r Round_and_format(Coefficienten_std[3])`| `r Round_and_format(exp(Reg$coefficients[3,1]))` |
+| Vooropleiding (mbo)       | `r Round_and_format(Reg$coefficients[4,1])` |  `r Round_and_format(Reg$coefficients[4,2])` |  `r Round_and_format(Reg$coefficients[4,3])` |  < 0,0001* |  `r Round_and_format(CI[4,1])` - `r Round_and_format(CI[4,2])` | `r Round_and_format(Coefficienten_std[4])`| `r Round_and_format(exp(Reg$coefficients[4,1]))` |
+| Eindexamencijfer       | `r Round_and_format(Reg$coefficients[5,1])` |  `r Round_and_format(Reg$coefficients[5,2])` |  `r Round_and_format(Reg$coefficients[5,3])` |  < 0,0001* |  `r Round_and_format(CI[5,1])` - `r Round_and_format(CI[5,2])` | `r Round_and_format(Coefficienten_std[5])`| `r Round_and_format(exp(Reg$coefficients[1,1]))` |
+*Tabel 1. Regressiecoëfficiënten en bijbehorende standaardfouten, z-statistieken, p-waardes, 95%-betrouwbaarheidsintervallen, gestandaardiseerde coëfficiënten en odds ratios.*
 <!-- ## /TEKSTBLOK: Rapportage2.R -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->

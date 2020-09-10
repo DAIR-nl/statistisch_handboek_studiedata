@@ -159,15 +159,15 @@ Er is een maat die de kwaliteit van de classificaties weergeeft onafhankelijk va
 
 # Assumpties
 
-Om een valide resultaat te vinden met *multipele lineaire regressie*, dient er aan een aantal assumpties voldaan te worden.[^1]<sup>,</sup>[^2] De assumpties worden allen toegelicht en de opties bij het niet voldoen aan de assumptie worden weergegeven.
+Om een valide resultaat te vinden met *logistische regressie*, dient er aan een aantal assumpties voldaan te worden.[^1]<sup>,</sup>[^2] De assumpties worden allen toegelicht en de opties bij het niet voldoen aan de assumptie worden weergegeven.
 
 ## Outliers
 
-Voordat gestart kan worden met *multipele lineaire regressie*, moet de data gescreend worden op de aanwezigheid van outliers. Outliers (uitbijters) zijn observaties die sterk afwijken van de overige observaties. Univariate outliers zijn observaties die afwijken betreffende één specifieke variabele, zoals een student die twintig jaar over zijn studie heeft gedaan. Multivariate outliers zijn observaties die afwijken door de combinatie van meerdere variabelen, zoals een persoon van 18 jaar met een inkomen van €100.000,-. De leeftijd van 18 jaar is geen outlier op zichzelf en een inkomen van €100.000,- is dat ook niet. Echter, de combinatie van beide zorgt ervoor dat de observatie vrij onwaarschijnlijk is.[^2]
+Voordat gestart kan worden met *logistische regressie*, moet de data gescreend worden op de aanwezigheid van outliers. Outliers (uitbijters) zijn observaties die sterk afwijken van de overige observaties. Univariate outliers zijn observaties die afwijken betreffende één specifieke variabele, zoals een student die twintig jaar over zijn studie heeft gedaan. Multivariate outliers zijn observaties die afwijken door de combinatie van meerdere variabelen, zoals een persoon van 18 jaar met een inkomen van €100.000,-. De leeftijd van 18 jaar is geen outlier op zichzelf en een inkomen van €100.000,- is dat ook niet. Echter, de combinatie van beide zorgt ervoor dat de observatie vrij onwaarschijnlijk is.[^2]
 
 Na het vinden van een outlier is de volgende stap om een goede oplossing voor te outlier te bedenken. Het is van belang hier goed over na te denken en niet zomaar een outlier te verwijderen met als enige argument dat het een outlier is. In het algemeen kan er onderscheid gemaakt worden tussen onmogelijke en onwaarschijnlijke outliers.[^3] Een onmogelijke outlier is een observatie die technisch gezien niet kan kloppen, bijvoorbeeld een leeftijd van 1000 jaar, een negatief salaris of een man die zwanger is. Bij deze outliers is het een optie om de waarde te vervangen als er een overduidelijke fout bij het invoeren van de data is gemaakt. Een andere optie is de waarde te verwijderen. Een onwaarschijnlijke outlier is een observatie die technisch gezien wel kan, maar heel erg afwijkt van de overige observaties. De rijksten der aarde zijn in de stad of het dorp waar zij wonen qua vermogen waarschijnlijk een outlier. Maar het zijn bestaande personen dus het verwijderen van de observatie zou hier foutief zijn. Men kan in deze situatie overwegen de variabele(n) te transformeren, de outlier gewoon mee te nemen in de analyse of de analyse met en zonder de outlier uit te voeren en beide te rapporteren. Ook is het niet verboden om de outlier toch te verwijderen, maar het is in dat geval wel van belang dit transparant te rapporteren en op een goede wijze te beargumenteren.[^3]
 
-Bij *multipele lineaire regressie* zijn er vier nuttige methoden om outliers te vinden.[^2]
+Bij *logistische regressie* zijn er vier nuttige methoden om outliers te vinden.[^2]
 
 ### Boxplots en standaardiseren
 
@@ -177,7 +177,7 @@ Bij categorische variabelen hebben boxplots en standaardisatie geen zin, omdat h
 
 ### Gestandaardiseerde residuën
 
-De residuën van een regressiemodel zijn de verschillen tussen de observaties van de afhankelijke variabele en de voorspellingen. Als er een groot verschil is tussen observatie en voorspelling, zou dat kunnen wijzen op een univariate outlier. Standaardiseer daarom de residuën en onderzoek met een histogram of er outliers zijn. Als een observatie een gestandaardiseerde score van groter dan 3 of kleiner dan -3 heeft, wordt deze beschouwd als een outlier. Op deze manier kunnen outliers bij het regressiemodel kunnen worden geïdentificeerd.[^2]
+De residuën van een logistisch regressiemodel zijn de verschillen tussen de observaties van de afhankelijke variabele en de voorspelde kans. Als er een groot verschil is tussen observatie en voorspelling, zou dat kunnen wijzen op een univariate outlier. Standaardiseer daarom de residuën en onderzoek met een histogram of er outliers zijn. Als een observatie een gestandaardiseerde score van groter dan 3 of kleiner dan -3 heeft, wordt deze beschouwd als een outlier. Op deze manier kunnen outliers bij het regressiemodel kunnen worden geïdentificeerd.[^2]
 
 ### Mahalanobis afstand
 
@@ -189,68 +189,54 @@ De Mahalanobis afstand geeft aan in hoeverre een participant afwijkt van de ande
 
 Hoewel de Mahalanobis afstand en Cook's afstand beide multivariate outliers identificeren, verschillen ze in het soort outlier waarop de focus ligt. Bij de Mahalanobis afstand worden afwijkende datapunten gevonden en bij Cook's distance invloedrijke datapunten. Het is echter niet zo dat een afwijkend datapunt ook tegelijkertijd invloedrijk is en dat een invloedrijk datapunt ook afwijkt. Een afwijkend datapunt kan ondanks zijn afwijking van de de overige datapunten toch op een juiste manier voorspeld worden. En een invloedrijk datapunt hoeft niet per se sterk af te wijken van de overige datapunten wat betreft de waardes voor de predictorvariabelen. Houdt hier rekening mee bij het bepalen hoe om te gaan met de gevonden outlier(s).[^2]
 
-## Lineariteit: Box Tidwell
+## Lineariteit: Box-Tidwell
 
-De regressievergelijking is zo opgesteld dat er een lineaire relatie is tussen elke predictor en de afhankelijke variabele. Een lineaire relatie houdt in dat de toename of afname van de afhankelijke variabele als gevolg van de toename van de predictor constant is: er is een rechte lijn door de data heen te trekken. Een voorbeeld van een lineaire en niet-lineaire relatie is weergegeven in onderstaande figuren. Bij de linkerfiguur kan er duidelijk een rechte lijn door de punten getrokken worden en is er dus sprake van een lineaire relatie. Bij de rechterfiguur is dit niet het geval, daar is er sprake van een curve in de relatie tussen predictor en afhankelijke variabele. De regressiecoëfficiënt van een niet-lineair verband is dan niet informatief, omdat er dan niet aan lineariteit voldaan is.[^2] 
-
-De assumptie van lineariteit wordt onderzocht met behulp van scatter plots, zoals in onderstaande figuren. Deze assumptie hoeft alleen onderzocht te worden voor continue variabelen. Categorische variabelen worden in het regressiemodel omgezet naar variabelen met twee categorieën en met slechts twee categorieën kan niet onderzocht worden of er een lineaire relatie is. Als er geen lineaire relatie is, zijn er verschillende opties. De variabele kan op verschillende manieren getransformeerd[^5] worden zodat er alsnog een lineaire relatie ontstaat.
-
-<div class = "col-container">
-  <div class="col">
-<!-- ## CLOSEDBLOK: Lineariteit1.R -->
-```{r, echo = FALSE, message = FALSE}
-set.seed(12345)
-x <- rnorm(100,0,2)
-y <- 3 + 1.2 * x + rnorm(100,0,1)
-dataset <- data.frame(Afhankelijke_variabele = y, Predictor = x)
-
-ggplot(dataset, aes(x = Predictor, y = Afhankelijke_variabele)) +
-    geom_point() + ylab("Afhankelijke variabele") + 
-  ggtitle("Lineare relatie")
-
-```
-<!-- ## /CLOSEDBLOK: Lineariteit1.R -->
-  </div>
-  <div class = "col">
-<!-- ## CLOSEDBLOK: Lineariteit2.R -->
-```{r, echo = FALSE, message = FALSE}
-set.seed(12345)
-x <- rnorm(100,0,2)
-y <- 3 + 1.2 * x^2 + rnorm(100,0,1)
-dataset <- data.frame(Afhankelijke_variabele = y, Predictor = x)
-
-ggplot(dataset, aes(x = Predictor, y = Afhankelijke_variabele)) +
-    geom_point()  + ylab("Afhankelijke variabele") +
-  ggtitle("Niet-lineaire relatie")
-
-```
-<!-- ## /CLOSEDBLOK: Lineariteit2.R -->
-  </div>
-</div>
-
-*Figuur 2.  Voorbeeld van een lineaire (links) en niet-lineaire (rechts) relatie tussen een afhankelijke variabele en een predictor.*
-
+Bij *logistische regressie* is de regressievergelijking zo opgesteld dat er een lineaire relatie is tussen elke predictor en de logit van de afhankelijke variabele. Een lineaire relatie houdt in dat de toename of afname van de (logit van de) afhankelijke variabele als gevolg van de toename van de predictor constant is. In tegenstelling tot *multipele lineaire regressie* kan bij *logistische regressie* geen grafiek gemaakt worden om een lineaire relatie te onderzoeken. In plaats daarvan is er een statistische toets om te onderzoeken of er een lineaire relatie is tussen de predictor en de logit van de afhankelijke variabele. Bij deze *Box-Tidwell test* wordt er voor elke continue predictor een extra term toegevoegd die bestaat uit het product van de predictor en de logaritme van de predictor. Voor de predictor leeftijd zou dit dus betekenen dat er een extra variabele wordt (Leeftijd * ln[Leeftijd]). Voeg deze interactietermen voor alle continue predictors toe en toets of de regressiecoëfficiënten van deze interactietermen significant zijn. Als dit zo is, dan is er voor die predictor niet voldaan aan de assumptie van lineariteit. Een oplossing hiervoor is het transformeren[^5] van de variabele.
 
 ## Multicollineariteit
 
-Multicollineariteit houdt in dat er een hoge correlatie tussen twee of meerdere predictors is. Er is perfecte collineariteit als één predictor een lineaire combinatie is van een of meerdere andere predictors. In andere woorden, de predictor is precies te berekenen op basis van andere predictor(s). In dat geval kan de regressievergelijking niet wiskundig bepaald worden en werkt *multipele lineaire regressie* niet. Dit komt zeer weinig voor en is vaak makkelijk op te lossen door goed naar de variabelen die het veroorzaken te kijken en een variabele te transformeren of te verwijderen.[^2]
+Multicollineariteit houdt in dat er een hoge correlatie tussen twee of meerdere predictors is. Er is perfecte collineariteit als één predictor een lineaire combinatie is van een of meerdere andere predictors. In andere woorden, de predictor is precies te berekenen op basis van andere predictor(s). In dat geval kan de regressievergelijking niet wiskundig bepaald worden en werkt *logistische regressie* niet. Dit komt zeer weinig voor en is vaak makkelijk op te lossen door goed naar de variabelen die het veroorzaken te kijken en een variabele te transformeren of te verwijderen.[^2]
 
 Bij een hoog niveau van collineariteit kan de regressievergelijking wel geschat worden, maar zijn de uitkomsten minder betrouwbaar. De standaardfouten van de regressiecoëfficiënten worden groter bij meer collineariteit en dit levert bij hoge collineariteit problemen op. Ook is het lastig om te ontdekken wat per predictor de bijdrage is aan de voorspellingen van de afhankelijke variabele, omdat bepaalde predictors sterk gecorreleerd zijn en overlappen in het deel van de variantie dat ze verklaren.[^2] 
 
 Multicollineariteit wordt getoetst met de Variance Inflation Factor (VIF) die meet hoe sterk elke predictor gecorreleerd is met de andere predictors. Als de VIF van een predictor hoger dan 10 is, is er multicollineariteit voor die predictor.[^2]<sup>,</sup>[^7] Multicollineariteit kan opgelost worden door een van de predictors die het veroorzaakt te verwijderen uit het model. Een andere optie is een principale componenten analyse (PCA) uitvoeren op de predictoren zodat er een onderliggende variabele gecreëerd wordt (zie Field[^2] voor meer informatie).
 
-## Incomplete cases en complete separation
+## Observaties per variabele
 
+Bij *logistische regressie* is de afhankelijke variabele binair wat betekent dat de variabele twee mogelijkheden heeft. Dit kan een probleem opleveren als er categorische predictors zijn. Voor elke categorie van een categorische predictor moeten er observaties zijn voor beide mogelijkheden van de afhankelijke variabele. Deze assumptie kan onderzocht worden door een kruistabel te maken voor de combinatie van elke categorische predictor en de afhankelijke variabele. Een voorbeeld van een dergelijke kruistabel is te zien in Tabel 1 voor de afhankelijke variabele uitval en predictor vooropleiding. In deze kruistabel is te zien dat er binnen de categorie `mbo` van de predictor vooropleiding nul participanten zijn die uitvallen. Deze categorie bevat dus een lege cel en voldoet niet aan de assumptie.
+
+```{r, echo = FALSE}
+vvv <- as.table(matrix(c(0,50,40,160),2,2))
+rownames(vvv) <- c("Uitval", "Geen uitval")
+colnames(vvv) <- c("mbo", "havo")
+vvv
+```
+
+Daarnaast is het met een binaire afhankelijke variabele mogelijk dat er een categorische predictor is die perfect de waarde van de afhankelijek variabele voorspelt. Een voorbeeld hiervan is te zien in Tabel 2, wederom voor de afhankelijke variabele uitval en predictor vooropleiding. De categorie `mbo` bevat alleen studenten die uitgevallen zijn en de categorie `havo` alleen studenten die niet uitgevallen zijn. De predictor vooropleiding voorspelt dus perfect of een student wel of niet gaat uitvallen. Dit fenomeen wordt *complete separation* genoemd en komt af en toe voor als er heel veel predictors aanwezig zijn en weinig observaties. Als dit gebeurt, dan werkt de *maximum likelihood* methode niet.
+
+```{r, echo = FALSE}
+vvv <- as.table(matrix(c(50,0,0,200),2,2))
+rownames(vvv) <- c("Uitval", "Geen uitval")
+colnames(vvv) <- c("mbo", "havo")
+vvv
+```
+
+Het gevolg van de assumptie voor observaties per variabele zijn dat er extreem hoge regressiecoëfficiënten en standaardfouten worden gevonden of dat de *maximum likelihood* methode niet werkt. Toets daarom deze assumptie door voor elke categorische predictor een kruistabel te maken met de afhankelije variabele en onderzoek of er lege cellen zijn en of er *complete separation* plaatsvindt. Als er niet aan deze assumptie voldaan is, dan zijn er meerdere oplossingen mogelijk. De categorie die problemen geeft bij de categorische predictor kan verwijderd worden of worden samengevoegd met een andere categorie. Daarnaast kan de hele predictor verwijderd worden. Ten slotte is meer data verzamelen ook een optie als dit mogelijk is.[^6]
 
 ## Overdispersie
 
+Bij *logistische regressie* wordt aangenomen dat de residuën niet gecorreleerd zijn. Dit is in principe het geval als alle deelnemers willekeurig in de steekproef zijn opgenomen. Als deelnemers meerdere keren gemeten zijn of gematcht zijn met andere deelnemers, dan is hier geen sprake van en zijn er waarschijnlijk gecorreleerde residuën. *Logistische regressie* is dan niet de juiste analysemethoden, maar *multilevel logistische regressie* kan hiervoor wel gebruikt worden. Bij *logistische regressie* wordt daarom getoetst of er overdispersie is. Overdispersie betekent dat de variantie in de voorspelde kansen groter is dan op basis van het model wordt verwacht. Het gevolg is dat de standaardfouten te laag zijn en er een hogere kans is op type I fouten (onterecht verwerpen van de nulhypothese) bij het toetsen van de significantie van regressiecoëfficiënten.
+
+De dispersieparameter geeft aan of er sprake is van overdispersie. De dispersieparameter hoort in de buurt van 1 te zitten. Als de parameter hoger dan 2 is, is er sprake van overdispersie. De gevolgen van overdispersie kunnen verholpen worden door de standaardfouten van de regressiecoëfficiënten te herschalen op basis van de overdispersie. Het onderzoeken van de dispersieparameter en het corrigeren in het geval van overdispersie worden toegelicht bij het toetsen van de assumpties in deze toetspagina.
+
+FIELD nalopen
 
 # Uitvoering
 
-Voer *multipele lineaire regressie* uit om te onderzoeken of het eindcijfer voor het vak Methoden & Statistiek van de bachelor Onderwijskunde te voorspellen is op basis van het geslacht, eindexamencijfer Wiskunde en aantal gevolgde hoorcolleges. Start met het toetsen van de assumpties en voer vervolgens de *multipele lineaire regressie* uit als hieraan voldaan is.
+Voer *logistische regressie* uit om te onderzoeken of de uitval in het eerste jaar van de bachelor Elektrotechniek te voorspellen is op basis van het geslacht, gemiddeld eindexamencijfer, de vooropleiding en de leeftijd van studenten. Start met het toetsen van de assumpties en voer vervolgens de *logistische regressie* uit als hieraan voldaan is.
 
 <!-- ## TEKSTBLOK: Uitvoering1.R -->
-Voer eerst de *multipele lineaire regressie* uit omdat deze nodig is voor het toetsen van assumpties en sla het resultaat op. Interpreteer de resultaten pas na het toetsen van de assumpties. Gebruik de functie `lm()` met als eerste argument de regressievergelijking `Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges` met links van het golfteken de afhankelijke variabele `Eindcijfer_MS` en rechts de drie onafhankelijke variabelen `Eindexamencijfer_Wiskunde`, `Aantal_Hoorcolleges` en `Eindcijfer_MS`. Het tweede argument is de dataset `Studenten_Methoden_Statistiek`.
+Voer eerst de *logistische regressie* uit omdat deze nodig is voor het toetsen van assumpties en sla het resultaat op. Interpreteer de resultaten pas na het toetsen van de assumpties. Gebruik de functie `glm()` met als eerste argument de regressievergelijking `Uitval ~ Leeftijd + Geslacht + Vooropleiding + Eindexamencijfer` met links van het golfteken de afhankelijke variabele `Uitval` en rechts de vier onafhankelijke variabelen `Leeftijd`, `Geslacht`, `Vooropleiding` en `Eindexamencijfer`. Het tweede argument is de dataset `Uitval_Elektrotechniek` en het derde argument `family = binomial` geeft aan dat er een *logistische regressie* uitgevoerd moet worden.
 <!-- ## /TEKSTBLOK: Uitvoering1.R -->
 
 <!-- ## OPENBLOK: Uitvoering2.R -->
@@ -266,21 +252,21 @@ Regressiemodel <- glm(Uitval ~ Leeftijd + Geslacht + Vooropleiding + Eindexamenc
 ### Boxplots en standaardiseren
 
 <!-- ## TEKSTBLOK: Outlier1.R -->
-Onderzoek of er univariate outliers zijn met behulp van boxplots en gestandaardiseerde scores voor continue variabelen en tabellen voor categorische variabelen. Begin met de boxplot voor de variabelen `Eindexamencijfer_Wiskunde`, `Aantal_Hoorcolleges` en `Eindcijfer_MS`.
+Onderzoek of er univariate outliers zijn met behulp van boxplots en gestandaardiseerde scores voor continue variabelen en tabellen voor categorische variabelen. Begin met de boxplot voor de variabelen `Leeftijd` en `Eindexamencijfer`.
 <!-- ## /TEKSTBLOK: Outlier1.R -->
 
 <!-- ## OPENBLOK: Outlier2.R -->
 ```{r}
 # Maak een boxplot van de continue variabelen in de dataset
-boxplot(Uitval_Elektrotechniek[,c("Leeftijd",
-                                         "Eindexamencijfer")],
+boxplot(Uitval_Elektrotechniek[,c("Leeftijd", 
+                                  "Eindexamencijfer")],
         names = c("Leeftijd",
-                                         "Eindexamencijfer"))
+                  "Eindexamencijfer"))
 
 ```
 <!-- ## /OPENBLOK: Outlier2.R -->
 
-Voor alle drie de variabelen zijn er geen onmogelijke scores en zijn er geen grote afwijkingen. Bij het eindcijfer Methoden & Statistiek is er wel een punt dat buiten de boxplot valt. Op basis van de gestandaardiseerde scores kan onderzocht worden of dit een outlier is. Onderzoek de gestandaardiseerde scores door een functie te schrijven die het aantal observaties per variabele telt met een gestandaardiseerde score hoger dan 3 of lager dan -3. Pas deze functie vervolgens toe op de drie continue variabelen in de dataset.
+Voor beide variabelen zijn er geen onmogelijke scores en zijn er geen grote afwijkingen. Op basis van de gestandaardiseerde scores kan onderzocht worden of er toch nog een outlier is. Onderzoek de gestandaardiseerde scores door een functie te schrijven die het aantal observaties per variabele telt met een gestandaardiseerde score hoger dan 3 of lager dan -3. Pas deze functie vervolgens toe op de drie continue variabelen in de dataset.
 
 <!-- ## OPENBLOK: Outlier3.R -->
 ```{r}
@@ -302,9 +288,9 @@ Outlier_standaardiseren(Uitval_Elektrotechniek$Leeftijd)
 <!-- ## /OPENBLOK: Outlier3.R -->
 
 
-Alle drie de variabelen hebben nul observaties met een gestandaardiseerde score hoger dan 3 of lager dan -3. Er zijn in de stap voor de continue variabelen geen outliers gevonden.
+Beide variabelen hebben nul observaties met een gestandaardiseerde score hoger dan 3 of lager dan -3. Er zijn in de stap voor de continue variabelen geen outliers gevonden.
 
-Geslacht is de enige categorische variabele in deze dataset. Maak een tabel met de frequenties voor alle categoriëen van deze variabele om te onderzoeken of hier afwijkende waardes zijn.
+Geslacht, Vooropleiding en Uitval zijn de categorische variabelen in deze dataset. Maak een tabel met de frequenties voor alle categoriëen van deze variabelen om te onderzoeken of hier afwijkende waardes zijn.
 
 <!-- ## OPENBLOK: Outlier4.R -->
 ```{r}
@@ -315,7 +301,7 @@ table(Uitval_Elektrotechniek$Vooropleiding)
 ```
 <!-- ## /OPENBLOK: Outlier4.R -->
 
-De categorieën van de variabele Geslacht zijn `Man` en `Vrouw`; beide komen redelijk veel voor. Er zijn dus geen opmerkelijke waarden bij de variabele Geslacht.
+Voor alle drie de categorische variabelen zijn er geen categorieën met opmerkelijke waarden. Er zijn hier dus ook geen outliers.
 
 ### Gestandaardiseerde residuën
 
@@ -339,11 +325,11 @@ Er zijn geen gestandaardiseerde residuën met een score hoger dan 3 of lager dan
 ## Mahalanobis distance
 
 <!-- ## TEKSTBLOK: Outlier7.R -->
-Onderzoek of er multivariate outliers zijn met behulp van de Mahalanobis distance met behulp van de functie `mahalanobis()`. De Mahalanobis afstand geeft aan in hoeverre een participant afwijkt van het gemiddelde van alle participanten voor alle predictors samen. Een voorwaarde voor de functie is dat alle variabelen numeriek zijn. Zet daarom eerst de variabele `Geslacht` om in een numerieke variabele met de waarde 1 voor vrouwen en 0 voor mannen. Het omzetten van een categorische variabele in een of meer numerieke variabele heet dummycoderen; de variabelen worden vaak dummies genoemd.
+Onderzoek of er multivariate outliers zijn met behulp van de Mahalanobis distance met behulp van de functie `mahalanobis()`. De Mahalanobis afstand geeft aan in hoeverre een participant afwijkt van het gemiddelde van alle participanten voor alle predictors samen. Een voorwaarde voor de functie is dat alle variabelen numeriek zijn. Zet daarom eerst de variabelen Geslacht en Vooropleiding om in een numerieke variabele met respectievelijk de waarde 1 voor vrouwen en 0 voor mannen en 1 voor mbo en 0 voor havo. Het omzetten van een categorische variabele in een of meer numerieke variabele heet dummycoderen; de variabelen worden vaak dummies genoemd.
 
-Neem vervolgens een subset van de dataset met alleen de predictors en gebruik deze voor de mahalanobis afstand. Gebruik de functie `mahalanobis()` met als argumenten de dataset `Subset`, de gemiddeldes van elke kolom berekend met `colMeans(Subset)` en de covariantiematrix van de dataset berekend met `cov(Subset)`.
+Neem vervolgens een subset van de dataset met alleen de predictors en gebruik deze voor de Mahalanobis afstand. Gebruik de functie `mahalanobis()` met als argumenten de dataset `Subset`, de gemiddeldes van elke kolom berekend met `colMeans(Subset)` en de covariantiematrix van de dataset berekend met `cov(Subset)`.
 
-Bereken daarna de criteriumwaarde op basis van het gewenste significantieniveau en het aantal predictors. Plot de Mahalanobis afstanden en tel het aantal participanten met een Mahalanobis afstand groter dan de criteriumwaarde.
+Bereken daarna de criteriumwaarde op basis van het gewenste significantieniveau en het aantal predictors. Plot de Mahalanobis afstanden en tel het aantal participanten met een Mahalanobis afstand groter dan de criteriumwaarde. Het gehanteerde significantieniveau is 0,001.
 <!-- ## /TEKSTBLOK: Outlier7.R -->
 
 <!-- ## OPENBLOK: Outlier8.R -->
@@ -355,17 +341,17 @@ Uitval_Elektrotechniek$Vooropleiding_dummy <- as.numeric(Uitval_Elektrotechniek$
 
 # Maak een subset van de dataset met alle predictors
 Subset <- Uitval_Elektrotechniek[,c("Eindexamencijfer",
-                                         "Leeftijd",
-                                         "Vooropleiding_dummy",
-                                         "Geslacht_dummy")]
+                                    "Leeftijd",
+                                    "Vooropleiding_dummy",
+                                    "Geslacht_dummy")]
 
 # Bereken de Mahalanobis afstand voor elke participant 
 Mahalanobis_afstanden <- mahalanobis(Subset,
             colMeans(Subset),
             cov(Subset))
 
-# Bepaal de criteriumwaarde voor de Mahalanobis afstand met de functie qchisq() met als eerste argument 1 - het significantieniveau en als tweede argument het aantal predictors. In deze casus is het significantieniveau voor de Mahalanobis afstand 0.001 en het aantal predictors 4.
-(Criteriumwaarde <- qchisq(1 - 0.001, 4))
+# Bepaal de criteriumwaarde voor de Mahalanobis afstand met de functie qchisq() met als eerste argument 1 - het significantieniveau en als tweede argument het aantal predictors. In deze casus is het significantieniveau voor de Mahalanobis afstand 0.001 en het aantal predictors berekend met ncol(Subset).
+(Criteriumwaarde <- qchisq(1 - 0.001, ncol(Subset)))
 
 # Plot de Mahalanobis afstanden
 plot(Mahalanobis_afstanden, xlab = "Volgorde", ylab = "Mahalanobis afstanden")
@@ -405,28 +391,58 @@ Er zijn geen participanten met een Cook's afstand groter dan de criteriumwaarde 
 
 Onderzoek of er een lineaire relatie is tussen de continue predictoren en de afhankelijke variabele met behulp van scatter plots. 
 
-<div class = "col-container">
-  <div class="col">
+
 <!-- ## OPENBLOK: AssLineariteit1.R -->
 ```{r}
-plot(Eindcijfer_MS ~ Eindexamencijfer_Wiskunde, data = Studenten_Methoden_Statistiek,
-     xlab = "Eindexamencijfer Wiskunde", ylab = "Eindcijfer Methoden & Statistiek")
+# Maak de interactievariabelen aan voor de continue predictors Leeftijd en Eindexamencijfer
+Uitval_Elektrotechniek$Leeftijd_log_leeftijd <- Uitval_Elektrotechniek$Leeftijd * log(Uitval_Elektrotechniek$Leeftijd)
+Uitval_Elektrotechniek$Eindexamencijfer_log_eindexamencijfer <- Uitval_Elektrotechniek$Eindexamencijfer * log(Uitval_Elektrotechniek$Eindexamencijfer)
+
+# Voeg deze interactievariabelen toe aan het regressiemodel en toets het
+Regressiemodel_Box_Tidwell <- glm(Uitval ~ Leeftijd + Geslacht + Vooropleiding + Eindexamencijfer + Leeftijd_log_leeftijd + Eindexamencijfer_log_eindexamencijfer,
+    data = Uitval_Elektrotechniek,
+    family = "binomial")
+
+# Bekijk de significantie van de regressiecoëfficiënten
+summary(Regressiemodel_Box_Tidwell)
 
 ```
 <!-- ## /OPENBLOK: AssLineariteit1.R -->
-  </div>
-  <div class = "col">
-<!-- ## OPENBLOK: AssLineariteit2.R -->
-```{r}
-plot(Eindcijfer_MS ~ Aantal_Hoorcolleges, data = Studenten_Methoden_Statistiek,
-     xlab = "Aantal hoorcolleges", ylab = "Eindcijfer Methoden & Statistiek")
+
+<!-- ## CLOSEDBLOK: AssLineariteit2.R -->
+```{r, echo = FALSE}
+# Maak de interactievariabelen aan voor de continue predictors Leeftijd en Eindexamencijfer
+Uitval_Elektrotechniek$Leeftijd_log_leeftijd <- Uitval_Elektrotechniek$Leeftijd * log(Uitval_Elektrotechniek$Leeftijd)
+Uitval_Elektrotechniek$Eindexamencijfer_log_eindexamencijfer <- Uitval_Elektrotechniek$Eindexamencijfer * log(Uitval_Elektrotechniek$Eindexamencijfer)
+
+# Voeg deze interactievariabelen toe aan het regressiemodel en toets het
+Regressiemodel_Box_Tidwell <- glm(Uitval ~ Leeftijd + Geslacht + Vooropleiding + Eindexamencijfer + Leeftijd_log_leeftijd + Eindexamencijfer_log_eindexamencijfer,
+    data = Uitval_Elektrotechniek,
+    family = "binomial")
+
+# Bekijk de significantie van de regressiecoëfficiënten
+BT <- summary(Regressiemodel_Box_Tidwell)
 
 ```
-<!-- ## /OPENBLOK: AssLineariteit2.R -->
-  </div>
-</div>
+<!-- ## /CLOSEDBLOK: AssLineariteit2.R -->
 
-Bij beide predictors lijkt er een lineaire relatie te zijn met de afhankelijke variabele. Er is dus aan de assumptie van lineariteit voldaan.
+Zowel de predictor Leeftijd (*z* = `r Round_and_format(BT$coefficients[6,3])`, *p* = `r Round_and_format(BT$coefficients[6,4])`) als de predictor Eindexamencijfer (*z* = `r Round_and_format(BT$coefficients[7,3])`, *p* = `r Round_and_format(BT$coefficients[7,4])`) heeft geen significante interactieterm. Er is dus voldaan aan de assumptie van lineariteit.
+
+## Multicollineariteit
+
+<!-- ## TEKSTBLOK: AssMulticollineariteit1.R -->
+Onderzoek of er sprake is van multicollineariteit met behulp van Variance Inflation Factors (VIFs). Bereken de VIFs voor elke predictor met de functie `VIF()` van het package `DescTools` waarbij de functie als argument `Regressiemodel` (het object van het regressiemodel) heeft.
+<!-- ## /TEKSTBLOK: AssMulticollineariteit1.R -->
+
+<!-- ## OPENBLOK: AssMulticollineariteit2.R -->
+```{r}
+library(DescTools)
+# Bereken de VIF voor elke predictor
+VIF(Regressiemodel)
+```
+<!-- ## /OPENBLOK: AssMulticollineariteit2.R -->
+
+Geen enkele van de VIFs is hoger dan 10, dus er is voldaan aan de assumptie van multicollineariteit.
 
 ## Incomplete cases
 
@@ -485,7 +501,7 @@ Geen enkele van de VIFs is hoger dan 10, dus er is voldaan aan de assumptie van 
 ## Uitvoering
 
 <!-- ## TEKSTBLOK: Uitvoering1.R -->
-Als alle assumpties zijn getoetst en aan alle assumpties is voldaan, kan de *multipele lineaire regressie* uitgevoerd worden. Gebruik de functie `lm()` met als eerste argument de regressievergelijking `Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges` met links van het golfteken de afhankelijke variabele `Eindcijfer_MS` en rechts de drie onafhankelijke variabelen `Eindexamencijfer_Wiskunde`, `Aantal_Hoorcolleges` en `Eindcijfer_MS`. Het tweede argument is de dataset `Studenten_Methoden_Statistiek`. Sla het model op en presenteer vervolgens een overzicht van de resultaten met de functie `summary`. Bepaal de 95%-betrouwbaarheidsintervallen van de regressiecoëfficiënten met de functie `confint`.
+Als alle assumpties zijn getoetst en aan alle assumpties is voldaan, kan de *logistische regressie* uitgevoerd worden. Gebruik de functie `lm()` met als eerste argument de regressievergelijking `Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges` met links van het golfteken de afhankelijke variabele `Eindcijfer_MS` en rechts de drie onafhankelijke variabelen `Eindexamencijfer_Wiskunde`, `Aantal_Hoorcolleges` en `Eindcijfer_MS`. Het tweede argument is de dataset `Studenten_Methoden_Statistiek`. Sla het model op en presenteer vervolgens een overzicht van de resultaten met de functie `summary`. Bepaal de 95%-betrouwbaarheidsintervallen van de regressiecoëfficiënten met de functie `confint`.
 <!-- ## /TEKSTBLOK: Uitvoering1.R -->
 
 <!-- ## OPENBLOK: Uitvoering2.R -->
@@ -535,7 +551,7 @@ Voor de intercept en de regressiecoëfficiënten van de predictors zijn de gesch
 ### Sterkte van de relatie tussen de predictor en afhankelijke variabele
 
 <!-- ## TEKSTBLOK: CoefficientenStd1.R -->
-De regressiecoëfficiënten van de predictors Eindexamencijfer_Wiskunde en Aantal_Hoorcolleges zijn significant verschillend van nul en dragen dus bij aan het voorspellen van het eindcijfer Methoden & Statistiek. Met behulp van de gestandaardiseerde regressiecoëfficiënten kan bepaald worden welke predictor het sterkst gerelateerd is aan de afhankelijke variabele. Gebruik hiervoor de functie `lm.beta()` van het package `QuantPsyc` met als argument `Regressiemodel_numeriek` (het object van het regressiemodel). Een voorwaarde voor de functie is dat alle variabelen numeriek zijn. Zet daarom eerst de variabele `Geslacht` om in een numerieke variabele met de waarde 1 voor vrouwen en 0 voor mannen. Het omzetten van een categorische variabele in een of meer numerieke variabele heet dummycoderen; de variabelen worden vaak dummies genoemd. Gebruik de numerieke variabele `Geslacht_numeriek` vervolgens om de *multipele lineaire regressie* uit te voeren met de functie `lm()` op dezelfde manier als eerder is gedaan.
+De regressiecoëfficiënten van de predictors Eindexamencijfer_Wiskunde en Aantal_Hoorcolleges zijn significant verschillend van nul en dragen dus bij aan het voorspellen van het eindcijfer Methoden & Statistiek. Met behulp van de gestandaardiseerde regressiecoëfficiënten kan bepaald worden welke predictor het sterkst gerelateerd is aan de afhankelijke variabele. Gebruik hiervoor de functie `lm.beta()` van het package `QuantPsyc` met als argument `Regressiemodel_numeriek` (het object van het regressiemodel). Een voorwaarde voor de functie is dat alle variabelen numeriek zijn. Zet daarom eerst de variabele `Geslacht` om in een numerieke variabele met de waarde 1 voor vrouwen en 0 voor mannen. Het omzetten van een categorische variabele in een of meer numerieke variabele heet dummycoderen; de variabelen worden vaak dummies genoemd. Gebruik de numerieke variabele `Geslacht_numeriek` vervolgens om de *logistische regressie* uit te voeren met de functie `lm()` op dezelfde manier als eerder is gedaan.
 <!-- ## /TEKSTBLOK: CoefficientenStd1.R -->
 
 <!-- ## OPENBLOK: CoefficientenStd2.R -->
@@ -568,10 +584,10 @@ De gestandaardiseerde regressiecoëfficiënten is `r Round_and_format(Coefficien
 
 # Uitvoering F-toets voor vergelijking twee regressiemodellen
 
-De F-toets wordt bij *multipele lineaire regressie* gebruikt om de significantie van het gehele regressiemodel te toetsen ten opzichte van het interceptmodel. Deze F-toets kan ook gebruikt worden om te toetsen of twee geneste regressiemodellen onderling verschillen qua verklaarde variantie. Hoewel deze vergelijking in de casus niet voorbijkomt, wordt deze toch geïllustreerd. Hierbij wordt een model met als enige predictor het geslacht van de student vergeleken met een model met de predictors geslacht, eindexamencijfer Wiskunde en aantal gevolgde hoorcolleges.
+De F-toets wordt bij *logistische regressie* gebruikt om de significantie van het gehele regressiemodel te toetsen ten opzichte van het interceptmodel. Deze F-toets kan ook gebruikt worden om te toetsen of twee geneste regressiemodellen onderling verschillen qua verklaarde variantie. Hoewel deze vergelijking in de casus niet voorbijkomt, wordt deze toch geïllustreerd. Hierbij wordt een model met als enige predictor het geslacht van de student vergeleken met een model met de predictors geslacht, eindexamencijfer Wiskunde en aantal gevolgde hoorcolleges.
 
 <!-- ## TEKSTBLOK: ModellenVergelijken1.R -->
-Voer de F-toets uit met de functie `anova()` met als argumenten de modelobjecten van de resultaten van de twee regressiemodellen die worden vergeleken (`Model_1` en `Model_2`). Voer eerst de *multipele lineaire regressie* uit voor beide modellen en vergelijk ze daarna. Bereken ten slotte de verklaarde variantie met de functie `summary()$r.squared` met als argument het modelobject waarvan de verklaarde variantie berekend moet worden.
+Voer de F-toets uit met de functie `anova()` met als argumenten de modelobjecten van de resultaten van de twee regressiemodellen die worden vergeleken (`Model_1` en `Model_2`). Voer eerst de *logistische regressie* uit voor beide modellen en vergelijk ze daarna. Bereken ten slotte de verklaarde variantie met de functie `summary()$r.squared` met als argument het modelobject waarvan de verklaarde variantie berekend moet worden.
 <!-- ## /TEKSTBLOK: ModellenVergelijken1.R -->
 
 <!-- ## OPENBLOK: ModellenVergelijken2.R -->
@@ -620,7 +636,7 @@ De F-toets toont aan dat er een significant verschil is in verklaarde variantie 
 # Rapportage
 
 <!-- ## TEKSTBLOK: Rapportage1.R -->
-Een *multipele lineaire regressie* is uitgevoerd om de vraag te beantwoorden of er een relatie is tussen het aantal gevolgde hoorcolleges en het eindcijfer van het vak Methoden & Statistiek van de bachelor Onderwijskunde rekening houdend met het eindexamencijfer Wiskunde van studenten en man-vrouw verschillen. Uit het toetsen van de assumpties van *multipele lineaire regressie* bleek dat er aan alle assumpties is voldaan. De resultaten van de *multipele lineaire regressie* zijn te vinden in Tabel 1. De F-toets voor het regressiemodel laat zien dat het opgestelde regressiemodel minimaal één coëfficiënt heeft die significant verschilt van nul, *F*(`r Round_and_format_0decimals(F_toets[2])`,`r Round_and_format_0decimals(F_toets[3])`) = `r Round_and_format(F_toets[1])`, *p* < 0,0001. Het eindexamencijfer Wiskunde (*&beta;* = `r Round_and_format(Reg$coefficients[3,1])`, *t* = `r Round_and_format(Reg$coefficients[3,3])`, *p* < 0,01) en het aantal gevolgde hoorcolleges (*&beta;* = `r Round_and_format(Reg$coefficients[4,1])`, *t* = `r Round_and_format(Reg$coefficients[4,3])`, *p* < 0,0001) zijn significante predictors van het eindcijfer voor het vak, maar het geslacht van de student is dit niet (*&beta;* = `r Round_and_format(Reg$coefficients[2,1])`, *t* = `r Round_and_format(Reg$coefficients[2,3])`, *p* = `r Round_and_format(Reg$coefficients[2,4])`). Een toename van het eindexamencijfer Wiskunde leidt tot een toename van het voorspelde eindcijfer voor het vak van `r Round_and_format(Reg$coefficients[3,1])` en het volgen van één extra hoorcollege tot een toename in het voorspelde eindcijfer van `r Round_and_format(Reg$coefficients[4,1])`. De gestandaardiseerde coëfficiënten laten zien dat het aantal gevolgde hoorcolleges het sterkst gerelateerd is aan het eindcijfer. De docent van het vak Methoden & Statistiek kan hieruit concluderen dat er geen man-vrouw verschillen zijn, dat studenten met een hoger eindexamencijfer Wiskunde beter presteren voor zijn vak, maar bovenal dat het volgen van het hoorcolleges de grootste invloed heeft op het eindcijfer.
+Een *logistische regressie* is uitgevoerd om de vraag te beantwoorden of er een relatie is tussen het aantal gevolgde hoorcolleges en het eindcijfer van het vak Methoden & Statistiek van de bachelor Onderwijskunde rekening houdend met het eindexamencijfer Wiskunde van studenten en man-vrouw verschillen. Uit het toetsen van de assumpties van *logistische regressie* bleek dat er aan alle assumpties is voldaan. De resultaten van de *logistische regressie* zijn te vinden in Tabel 1. De F-toets voor het regressiemodel laat zien dat het opgestelde regressiemodel minimaal één coëfficiënt heeft die significant verschilt van nul, *F*(`r Round_and_format_0decimals(F_toets[2])`,`r Round_and_format_0decimals(F_toets[3])`) = `r Round_and_format(F_toets[1])`, *p* < 0,0001. Het eindexamencijfer Wiskunde (*&beta;* = `r Round_and_format(Reg$coefficients[3,1])`, *t* = `r Round_and_format(Reg$coefficients[3,3])`, *p* < 0,01) en het aantal gevolgde hoorcolleges (*&beta;* = `r Round_and_format(Reg$coefficients[4,1])`, *t* = `r Round_and_format(Reg$coefficients[4,3])`, *p* < 0,0001) zijn significante predictors van het eindcijfer voor het vak, maar het geslacht van de student is dit niet (*&beta;* = `r Round_and_format(Reg$coefficients[2,1])`, *t* = `r Round_and_format(Reg$coefficients[2,3])`, *p* = `r Round_and_format(Reg$coefficients[2,4])`). Een toename van het eindexamencijfer Wiskunde leidt tot een toename van het voorspelde eindcijfer voor het vak van `r Round_and_format(Reg$coefficients[3,1])` en het volgen van één extra hoorcollege tot een toename in het voorspelde eindcijfer van `r Round_and_format(Reg$coefficients[4,1])`. De gestandaardiseerde coëfficiënten laten zien dat het aantal gevolgde hoorcolleges het sterkst gerelateerd is aan het eindcijfer. De docent van het vak Methoden & Statistiek kan hieruit concluderen dat er geen man-vrouw verschillen zijn, dat studenten met een hoger eindexamencijfer Wiskunde beter presteren voor zijn vak, maar bovenal dat het volgen van het hoorcolleges de grootste invloed heeft op het eindcijfer.
 <!-- ## /TEKSTBLOK: Rapportage1.R -->
 
 <!-- ## TEKSTBLOK: Rapportage2.R -->
@@ -639,14 +655,11 @@ Een *multipele lineaire regressie* is uitgevoerd om de vraag te beantwoorden of 
 <!-- ## /CLOSEDBLOK: Footer.R -->
 
 [^1]: Laerd Statistics (2018). *Binomial Logistic Regression using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/binomial-logistic-regression-using-spss-statistics.php
-
-
-[^2]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage. Pagina 293-356.
-[^3]: Universiteit van Amsterdam (13 augustus 2016). *Lineariteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).  
+[^2]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage. Pagina 293-356 checken.
+[9]^: ROC-curve. https://en.wikipedia.org/wiki/Receiver_operating_characteristic
+[^3]: Universiteit van Amsterdam (13 augustus 2016). *Outliers*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).  
 [^4]: Standaardiseren houdt in dat de variabelen getransformeerd worden zodat ze een gemiddelde van 0 hebben en een standaardafwijking van 1. Dit wordt gedaan door voor alle observaties van een variabele eerst het gemiddelde af te trekken en daarna te delen door de standaardafwijking, i.e. $\frac{x_i - \mu}{\sigma}$.
 [^5]: Er zijn verschillende opties om variabelen te transformeren, zoals de logaritme, wortel of inverse (1 gedeeld door de variabele) nemen van de variabele. Zie *Discovering statistics using IBM SPSS statistics* van Field (2013) pagina 201-210 voor meer informatie over welke transformaties wanneer gebruikt kunnen worden.
-[^6]: Universiteit van Amsterdam (7 juli 2014). *Lineariteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Lineariteit).  
+[^6]: Tabachnick, B.G. & Fidell, L.S. (2013). *Using multivariate statistics*. Sixth Edition, Pearson. Pagina 54 - 55.
 [^7]: Stat 501. *12.4 - Detecting Multicollinearity Using Variance Inflation Factors*. [PennState Eberly College of Science](https://online.stat.psu.edu/stat501/lesson/12/12.4).
 [^8]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten. 
-
-[9]^: ROC-curve. https://en.wikipedia.org/wiki/Receiver_operating_characteristic

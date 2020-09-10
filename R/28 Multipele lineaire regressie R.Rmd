@@ -205,7 +205,7 @@ Hoewel de Mahalanobis afstand en Cook's afstand beide multivariate outliers iden
 
 ## Lineariteit
 
-De regressievergelijking is zo opgesteld dat er een lineaire relatie is tussen elke predictor en de afhankelijke variabele. Een lineaire relatie houdt in dat de toename of afname van de afhankelijke variabele als gevolg van de toename van de predictor constant is: er is een rechte lijn door de data heen te trekken. Een voorbeeld van een lineaire en niet-lineaire relatie is weergegeven in onderstaande figuren. Bij de linkerfiguur kan er duidelijk een rechte lijn door de punten getrokken worden en is er dus sprake van een lineaire relatie. Bij de rechterfiguur is dit niet het geval, daar is er sprake van een curve in de relatie tussen predictor en afhankelijke variabele. De regressiecoëfficiënt van een niet-lineair verband is dan niet informatief, omdat er dan niet aan lineariteit voldaan is.[^2] 
+De regressievergelijking is zo opgesteld dat er een lineaire relatie is tussen elke predictor en de afhankelijke variabele. Een lineaire relatie houdt in dat de toename of afname van de afhankelijke variabele als gevolg van de toename van de predictor constant is: er is een rechte lijn door de data heen te trekken. Een voorbeeld van een lineaire en niet-lineaire relatie is weergegeven in onderstaande figuren. Bij de linkerfiguur kan er duidelijk een rechte lijn door de punten getrokken worden en is er dus sprake van een lineaire relatie. Bij de rechterfiguur is dit niet het geval, daar is er sprake van een curve in de relatie tussen predictor en afhankelijke variabele. De regressiecoëfficiënt van een niet-lineair verband is dan niet informatief, omdat er dan niet aan lineariteit voldaan is.[^2]<sup>,</sup>[^6] 
 
 De assumptie van lineariteit wordt onderzocht met behulp van scatter plots, zoals in onderstaande figuren. Deze assumptie hoeft alleen onderzocht te worden voor continue variabelen. Categorische variabelen worden in het regressiemodel omgezet naar variabelen met twee categorieën en met slechts twee categorieën kan niet onderzocht worden of er een lineaire relatie is. Als er geen lineaire relatie is, zijn er verschillende opties. De variabele kan op verschillende manieren getransformeerd[^5] worden zodat er alsnog een lineaire relatie ontstaat.
 
@@ -401,7 +401,7 @@ Onderzoek of er multivariate outliers zijn met behulp van de Mahalanobis distanc
 
 Neem vervolgens een subset van de dataset met alleen de predictors en gebruik deze voor de mahalanobis afstand. Gebruik de functie `mahalanobis()` met als argumenten de dataset `Subset`, de gemiddeldes van elke kolom berekend met `colMeans(Subset)` en de covariantiematrix van de dataset berekend met `cov(Subset)`.
 
-Bereken daarna de criteriumwaarde op basis van het gewenste significantieniveau en het aantal predictors. Plot de Mahalanobis afstanden en tel het aantal participanten met een Mahalanobis afstand groter dan de criteriumwaarde.
+Bereken daarna de criteriumwaarde op basis van het gewenste significantieniveau en het aantal predictors. Plot de Mahalanobis afstanden en tel het aantal participanten met een Mahalanobis afstand groter dan de criteriumwaarde. Het gehanteerde significantieniveau is 0,001.
 <!-- ## /TEKSTBLOK: Outlier7.R -->
 
 <!-- ## OPENBLOK: Outlier8.R -->
@@ -419,8 +419,8 @@ Mahalanobis_afstanden <- mahalanobis(Subset,
             colMeans(Subset),
             cov(Subset))
 
-# Bepaal de criteriumwaarde voor de Mahalanobis afstand met de functie qchisq() met als eerste argument 1 - het significantieniveau en als tweede argument het aantal predictors. In deze casus is het significantieniveau voor de Mahalanobis afstand 0.001 en het aantal predictors 3.
-(Criteriumwaarde <- qchisq(1 - 0.001, 3))
+# Bepaal de criteriumwaarde voor de Mahalanobis afstand met de functie qchisq() met als eerste argument 1 - het significantieniveau en als tweede argument het aantal predictors. In deze casus is het significantieniveau voor de Mahalanobis afstand 0.001 en het aantal predictors berekend met ncol(Subset).
+(Criteriumwaarde <- qchisq(1 - 0.001, ncol(Subset)))
 
 # Plot de Mahalanobis afstanden
 plot(Mahalanobis_afstanden, xlab = "Volgorde", ylab = "Mahalanobis afstanden")
@@ -727,7 +727,7 @@ Een *multipele lineaire regressie* is uitgevoerd om de vraag te beantwoorden of 
 
 [^1]: Laerd Statistics (2018). *Multiple Regression Analysis using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/multiple-regression-using-spss-statistics.php
 [^2]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage. Pagina 293-356.
-[^3]: Universiteit van Amsterdam (13 augustus 2016). *Lineariteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).  
+[^3]: Universiteit van Amsterdam (13 augustus 2016). *Outliers*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).  
 [^4]: Standaardiseren houdt in dat de variabelen getransformeerd worden zodat ze een gemiddelde van 0 hebben en een standaardafwijking van 1. Dit wordt gedaan door voor alle observaties van een variabele eerst het gemiddelde af te trekken en daarna te delen door de standaardafwijking, i.e. $\frac{x_i - \mu}{\sigma}$.
 [^5]: Er zijn verschillende opties om variabelen te transformeren, zoals de logaritme, wortel of inverse (1 gedeeld door de variabele) nemen van de variabele. Zie *Discovering statistics using IBM SPSS statistics* van Field (2013) pagina 201-210 voor meer informatie over welke transformaties wanneer gebruikt kunnen worden.
 [^6]: Universiteit van Amsterdam (7 juli 2014). *Lineariteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Lineariteit).  

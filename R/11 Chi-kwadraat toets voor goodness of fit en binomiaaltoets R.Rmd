@@ -62,7 +62,7 @@ H~A~: De verdeling van de vooropleiding van de instromende studenten is niet gel
 
 Om de *Chi-kwadraat toets voor goodness of fit* uit te voeren, moet de variabele nominaal[^9] of ordinaal[^8] zijn.[^6] De exacte *binomiaaltoets* vereist een binaire[^3] variabele. In deze casus is de categorische variabele binair. 
 
-De categorieën van de variabele mogen niet overlappen, wat wil zeggen dat elke observatie slechts in een van de categorieën past. Voor de *Chi-kwadraat toets voor goodness of fit* mag in niet meer dan 20% van de categorieën van de variabele de verwachte frequentie vijf of minder zijn. Als dit wel het geval is, gebruik dan de *binomiaaltoets*.[^7]
+De categorieën van de variabele mogen niet overlappen, wat wil zeggen dat elke observatie slechts in een van de categorieën past. Voor de *Chi-kwadraat toets voor goodness of fit* mag in niet meer dan 20% van de categorieën van de variabele de verwachte frequentie minder dan vijf zijn. Als dit wel het geval is, gebruik dan de *binomiaaltoets*.[^7]
 
 # De data bekijken
 
@@ -97,7 +97,7 @@ Het percentage studenten met hbo vooropleiding is `r Round_and_format(100*prop.t
 ## Asssumptie verwachte frequenties
 
 <!-- ## TEKSTBLOK: Assumptie.R -->
-De verwachte frequentie mag niet vijf of minder zijn in 20% van de categorieën van de categorische variabele. Aangezien er een binaire variabele getoetst wordt, mag geen van beide categorieën dus vijf of minder als verwachte frequentie hebben. Bereken de verwachte frequentie met het argument `chisq.test()$expected` van de functie `chisq.test()`. De argumenten van de functie zijn de tabel met daarin de hoeveelheid studenten met en zonder hbo vooropleiding `Tabel` en een vector die aangeeft wat de verwachte proporties[^4] zijn voor het aantal studenten met en zonder hbo vooropleiding `p = c(0.1113, 1 - 0.1113)`.
+De verwachte frequentie mag niet kleiner dan vijf zijn in 20% van de categorieën van de categorische variabele. Aangezien er een binaire variabele getoetst wordt, mag geen van beide categorieën dus minder dan vijf als verwachte frequentie hebben. Bereken de verwachte frequentie met het argument `chisq.test()$expected` van de functie `chisq.test()`. De argumenten van de functie zijn de tabel met daarin de hoeveelheid studenten met en zonder hbo vooropleiding `Tabel` en een vector die aangeeft wat de verwachte proporties[^4] zijn voor het aantal studenten met en zonder hbo vooropleiding `p = c(0.1113, 1 - 0.1113)`.
 <!-- ## /TEKSTBLOK: Assumptie.R -->
 
 
@@ -111,9 +111,7 @@ chisq.test(Tabel, p = c(0.1113, 1 - 0.1113))$expected
 ```
 <!-- ## /OPENBLOK: Assumptie1.R -->
 
-Geen van de verwachte frequenties is gelijk of kleiner dan vijf, dus de *Chi-kwadraat toets voor goodness of fit* kan worden uitgevoerd.
-
-
+Geen van de verwachte frequenties is kleiner dan vijf, dus de *Chi-kwadraat toets voor goodness of fit* kan worden uitgevoerd.
 
 ## Uitvoering
 

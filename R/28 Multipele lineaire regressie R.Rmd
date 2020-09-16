@@ -82,11 +82,11 @@ Het doel van *multipele lineaire regressie* is het voorspellen van een afhankeli
 
 $$ y_i = \beta_0 + \beta_1 * x_{1i} + \beta_2 * x_{2i} + e_i$$
 
-met $y_i$ als afhankelijke variabele, $\beta_0$ als intercept, $x_{1i}$ en $x_{2i}$ als predictors, $\beta_{1}$ en $\beta_{2}$ als regressiecoefficiënten van predictors, $e_i$ als residu of error en $i$ als indicator van de participant uit de steekproef. De intercept $\beta_0$ geeft de waarde van de afhankelijke variabele weer als alle predictors gelijk aan nul zijn. De regressiecoefficiënten $\beta_1$ en $\beta_2$ geven de relatie tussen de afhankelijke variabele en de predictor weer. De residu of error $e_i$ is het verschil tussen de geobserveerde waarde van de afhankelijke variabele en de voorspelde waarde op basis van het regressiemodel. Voor de huidige casus is de volgende regressievergelijking op te stellen:
+met $y_i$ als afhankelijke variabele, $\beta_0$ als intercept, $x_{1i}$ en $x_{2i}$ als predictors, $\beta_{1}$ en $\beta_{2}$ als regressiecoefficiënten van predictors, $e_i$ als residu of error en $i$ als indicator van de deelnemer uit de steekproef. De intercept $\beta_0$ geeft de waarde van de afhankelijke variabele weer als alle predictors gelijk aan nul zijn. De regressiecoefficiënten $\beta_1$ en $\beta_2$ geven de relatie tussen de afhankelijke variabele en de predictor weer. De residu of error $e_i$ is het verschil tussen de geobserveerde waarde van de afhankelijke variabele en de voorspelde waarde op basis van het regressiemodel. Voor de huidige casus is de volgende regressievergelijking op te stellen:
 
 $$ EindcijferM\&S_i = \beta_0 + \beta_1 * Geslacht_i + \beta_2 * EindexamencijferWiskunde_i + \beta_3 * Aantal Hoorcolleges_i + e_i$$
 
-De regressiecoefficiënten ($\beta_0$, $\beta_1$, $\beta_2$ en $\beta_3$) worden geschat door de waardes voor deze coefficiënten te vinden waarbij de som van de kwadraten van de residu $e_i$ zo klein mogelijk is. Multipele regressie wordt daarom ook wel ordinary least squares (OLS) regressie genoemd, omdat men de oplossing vind met de kleinste kwadraten van de residuën.[^2] De reden dat het kwadraat van de residuën gebruikt wordt is dat dit ervoor zorgt dat ook een negatief residu positief gemaakt kan worden. De methode kan als volgt visueel weergegeven worden:
+De regressiecoefficiënten ($\beta_0$, $\beta_1$, $\beta_2$ en $\beta_3$) worden geschat door de waardes voor deze coefficiënten te vinden waarbij de som van de kwadraten van de residu $e_i$ zo klein mogelijk is. Multipele regressie wordt daarom ook wel ordinary least squares (OLS) regressie genoemd, omdat het de oplossing vind met de kleinste kwadraten van de residuën.[^2] De reden dat het kwadraat van de residuën gebruikt wordt is dat dit ervoor zorgt dat ook een negatief residu positief gemaakt kan worden. De methode kan als volgt visueel weergegeven worden:
 
 <div class = "col-container">
   <div class="col">
@@ -140,25 +140,25 @@ Beide figuren laten een manier zien om een goede voorspelling te maken. De punte
 
 Een maat om de kwaliteit van de voorspellingen van het regressiemodel te kwantificeren is de verklaarde variantie van de afhankelijke variabele. De verklaarde variantie - ook wel $R^2$ genoemd - wordt berekend als 1 minus de onverklaarde variantie. De onverklaarde variantie wordt berekend door de som van gekwadrateerde residuën van het regressiemodel te delen door de som van gekwadrateerde residuën van het interceptmodel. De kwaliteit van het regressiemodel wordt dus altijd vergeleken ten opzichte van het interceptmodel. Een goed regressiemodel heeft kleine residuën, wat leidt tot een lage onverklaarde variantie en dus een hoge verklaarde variantie.[^2]
 
-De eerste vraag bij *multipele lineaire regressie* is of het model betere voorspellingen geeft dan een model zonder predictors. Daarom wordt het voorgestelde model vergeleken met een interceptmodel. Men verwacht een toename in verklaarde variantie als beide modellen vergeleken worden. De significantie van deze toename wordt getoetst met een F-toets. De getoetste nulhypothese is dat de verklaarde variantie nul is ($R^2 = 0$) en de getoetste alternatieve hypothese is dat de verklaarde variantie groter dan nul is ($R^2 > 0$). Als de toename in verklaarde variantie significant is, kunnen de individuele predictors getoetst worden. Als de toename niet significant is, is de analyse afgelopen en is de conclusie dat het voorgestelde model niet in staat is om de afhankelijke variabele beter te voorspellen dan een model zonder predictors. De verklaarde variantie $R^2$ wordt ook gebruikt als effectmaat bij *multipele lineaire regressie*. Een verklaarde variantie rond 0,02 kan geïnterpreteerd worden als een klein effect, rond 0,13 als een gemiddeld effect en rond 0,26 als een groot effect.[^2]
+De eerste vraag bij *multipele lineaire regressie* is of het model betere voorspellingen geeft dan een model zonder predictors. Daarom wordt het voorgestelde model vergeleken met een interceptmodel. Er is de verwachting van een toename in verklaarde variantie als beide modellen vergeleken worden. De significantie van deze toename wordt getoetst met een F-toets. De getoetste nulhypothese is dat de verklaarde variantie nul is ($R^2 = 0$) en de getoetste alternatieve hypothese is dat de verklaarde variantie groter dan nul is ($R^2 > 0$). Als de toename in verklaarde variantie significant is, kunnen de individuele predictors getoetst worden. Als de toename niet significant is, is de analyse afgelopen en is de conclusie dat het voorgestelde model niet in staat is om de afhankelijke variabele beter te voorspellen dan een model zonder predictors. De verklaarde variantie $R^2$ wordt ook gebruikt als effectmaat bij *multipele lineaire regressie*. Een verklaarde variantie rond 0,02 kan geïnterpreteerd worden als een klein effect, rond 0,13 als een gemiddeld effect en rond 0,26 als een groot effect.[^2]
 
-De F-toets kan ook gebruikt worden om verschillende regressiemodellen onderling te vergelijken. Hierbij wordt getoetst of er een verschil is tussen de verklaarde variantie van beide modellen. Men kan bijvoorbeeld in eerste instantie een model met twee predictors willen toetsen en daarna willen toetsen of de voorspellingen van het regressiemodel nog beter worden met twee extra predictors. Het verschil in verklaarde variantie tussen het model met twee en vier predictors wordt dan getoetst met een F-toets. Hierbij is de nulhypothese dat het verschil in verklaarde variantie nul is ($\Delta R^2 = 0$) en de alternatieve hypothese dat het verschil in verklaarde variantie groter dan nul is ($\Delta R^2 > 0$). Een eis voor deze toets is dat beide modellen genest zijn. Bij geneste modellen is het ene model te schrijven als een versie van het andere model na het verwijderen van een aantal predictors. 
+De F-toets kan ook gebruikt worden om verschillende regressiemodellen onderling te vergelijken. Hierbij wordt getoetst of er een verschil is tussen de verklaarde variantie van beide modellen. Er kan bijvoorbeeld in eerste instantie een model met twee predictors getoetst worden en daarna toetsen of de voorspellingen van het regressiemodel nog beter worden met twee extra predictors. Het verschil in verklaarde variantie tussen het model met twee en vier predictors wordt dan getoetst met een F-toets. Hierbij is de nulhypothese dat het verschil in verklaarde variantie nul is ($\Delta R^2 = 0$) en de alternatieve hypothese dat het verschil in verklaarde variantie groter dan nul is ($\Delta R^2 > 0$). Een eis voor deze toets is dat beide modellen genest zijn. Bij geneste modellen is het ene model te schrijven als een versie van het andere model na het verwijderen van een aantal predictors. 
 In deze casus zou er een model opgesteld kunnen worden waarin alleen de variabele eindexamencijfer Wiskunde een predictor is van het eindcijfer Methoden & Statistiek en een model waarin de de variabelen geslacht, aantal gevolgde hoorcolleges en eindexamencijfer Wiskunde predictors zijn van statistiek. Dit zijn geneste modellen, omdat het eerste model (alleen eindexamencijfer Wiskunde als predictor) een versie is van het tweede model na het verwijderen van de predictors geslacht en aantal gevolgde hoorcolleges. Het model waarbij de predictors verwijderd zijn, wordt als het ware gereduceerd. Daarom wordt dit het gereduceerde model genoemd. Het model waar de predictors niet verwijderd zijn, wordt het uitgebreide model genoemd. Om modellen met een F-toets te vergelijken, moeten ze dus genest zijn. In andere woorden, het verschil tussen beide regressiemodellen moet dus toe te wijzen zijn aan het toevoegen of verwijderen van een of meerdere predictors.[^2]
 
 
 ## Individuele predictors toetsen en interpreteren
 
-Als de F-toets aantoont dat het regressiemodel betere voorspellingen geeft dan het interceptmodel, kunnen de predictors getoetst worden. De regressiecoefficiënten van de predictors en de intercept worden getoetst met een t-toets waarbij de nulhypothese is dat de coefficiënt gelijk aan nul is ($\beta = 0$) en de (tweezijdige) alternatieve hypothese dat de coefficiënt niet gelijk aan nul is ($\beta \neq 0$). Er kan ook een eenzijdige alternatieve hypothese opgesteld worden, bijvoorbeeld als men verwacht dat de coefficiënt positief of negatief is. De t-toets toont in feite aan of er wel of geen relatie is tussen de predictor en afhankelijke variabele in de aanwezigheid van de andere predictoren van het regressiemodel.[^2]
+Als de F-toets aantoont dat het regressiemodel betere voorspellingen geeft dan het interceptmodel, kunnen de predictors getoetst worden. De regressiecoefficiënten van de predictors en de intercept worden getoetst met een t-toets waarbij de nulhypothese is dat de coefficiënt gelijk aan nul is ($\beta = 0$) en de (tweezijdige) alternatieve hypothese dat de coefficiënt niet gelijk aan nul is ($\beta \neq 0$). Er kan ook een eenzijdige alternatieve hypothese opgesteld worden, bijvoorbeeld als er verwacht wordt dat de coefficiënt positief of negatief is. De t-toets toont in feite aan of er wel of geen relatie is tussen de predictor en afhankelijke variabele in de aanwezigheid van de andere predictoren van het regressiemodel.[^2]
 
 Op basis van de geschatte regressiecoefficiënten kan de regressievergelijking ingevuld worden. Op basis van de data zou bijvoorbeeld de volgende regressievergelijking gemaakt kunnen worden
 
 $$ EindcijferM\&S_i = 3 + 0,5 * Geslacht_i + 0,4 * EindexamencijferWiskunde_i + 0,3 * AantalHoorcolleges_i  +  e_i$$
 waarbij alle regressiecoefficiënten significant zijn. Neem aan dat de variabele Geslacht de waarde 1 heeft voor vrouwen en 0 voor mannen. De regressiecoefficiënten geven informatie over de relatie van predictoren met de afhankelijke variabele:
 
-* Intercept ($\beta_0$): De intercept geeft de waarde van de afhankelijke variabele weer als alle predictors gelijk aan nul zijn. Als een participant dus de waarde 0 voor Geslacht heeft (dus een man is) en een 0 voor eindexamencijfer Wiskunde heeft, dan is het voorspelde eindcijfer Methoden & Statistiek een 3. De intercept geeft soms geen realistische waarde voor de afhankelijke variabele omdat het onwaarschijnlijk is dat de predictor gelijk is aan nul. Met een eindexamencijfer Wiskunde dat gelijk is aan een nul zou iemand nooit bij de bachelor Onderwijskunde terecht kunnen komen. An sich is dit geen groot probleem, omdat het niet altijd nodig is de intercept te kunnen interpreteren. Een oplossing is het centeren van de predictors wat inhoudt dat per predictor het gemiddelde van die predictor van alle waarden wordt afgehaald. Op die manier ontstaat een predictor met een gemiddelde van nul. In die situatie is de intercept gelijk aan de voorspelde waarde van de afhankelijke variabele voor een participant die voor alle predictors gelijk is aan het gemiddelde. Het is in feite de voorspelde waarde voor een gemiddelde participant en daarom erg interessant.
+* Intercept ($\beta_0$): De intercept geeft de waarde van de afhankelijke variabele weer als alle predictors gelijk aan nul zijn. Als een deelnemer dus de waarde 0 voor Geslacht heeft (dus een man is) en een 0 voor eindexamencijfer Wiskunde heeft, dan is het voorspelde eindcijfer Methoden & Statistiek een 3. De intercept geeft soms geen realistische waarde voor de afhankelijke variabele omdat het onwaarschijnlijk is dat de predictor gelijk is aan nul. Met een eindexamencijfer Wiskunde dat gelijk is aan een nul zou iemand nooit bij de bachelor Onderwijskunde terecht kunnen komen. An sich is dit geen groot probleem, omdat het niet altijd nodig is de intercept te kunnen interpreteren. Een oplossing is het centeren van de predictors wat inhoudt dat per predictor het gemiddelde van die predictor van alle waarden wordt afgehaald. Op die manier ontstaat een predictor met een gemiddelde van nul. In die situatie is de intercept gelijk aan de voorspelde waarde van de afhankelijke variabele voor een deelnemer die voor alle predictors gelijk is aan het gemiddelde. Het is in feite de voorspelde waarde voor een gemiddelde deelnemer en daarom erg interessant.
 * Geslacht ($\beta_1$): De coefficiënt van de variabele Geslacht is gelijk aan 0,5. Als de overige predictors gelijkblijven is het eindcijfer Methoden & Statistiek 0,5 punten hoger voor vrouwen dan voor mannen. Immers, het product van predictor en coëfficient is $0,5 * 0 = 0$ voor mannen en $0,5 * 1 = 0,5$ voor vrouwen. Bij een categorische predictor geeft de coefficiënt informatie over het verschil tussen de twee categorieën. Let daarom goed op hoe de categorieën gecodeerd zijn, i.e. welke categorie de waarde 1 en 0 hebben.
-* Eindexamencijfer Wiskunde: De coëfficient van de variabele Eindexamencijfer Wiskunde is gelijk aan 0,4. Dit betekent dat een toename van 1 van de variabele Eindexamencijfer Wiskunde zorgt voor een toename van 0,4 op de afhankelijke variabele Eindcijfer Methoden & Statistiek als de andere predictors gelijkblijven. Er is dus een positieve relatie tussen het eindexamencijfer Wiskunde en het eindcijfer Methoden & Statistiek. Een participant met een eindexamencijfer Wiskunde dat één punt hoger is dan een andere participant zal dus een voorspelde waarde voor het eindcijfer Methoden & Statistiek hebben van 0,4 punt hoger als de overige predictors gelijkblijven.
-* Aantal hoorcolleges: De coëfficient van de variabele Aantal hoorcolleges is gelijk aan 0,3. Dit betekent dat een toename van 1 van de variabele Aantal hoorcolleges zorgt voor een toename van 0,3 op de afhankelijke variabele Eindcijfer Methoden & Statistiek als de andere predictors gelijkblijven. Er is dus een positieve relatie tussen het aantal gevolgde hoorcolleges en het eindcijfer Methoden & Statistiek. Een participant met een extra gevolgd hoorcollege dan een andere participant zal dus een voorspelde waarde voor het eindcijfer Methoden & Statistiek hebben van 0,3 punt hoger als de overige predictors gelijkblijven.
+* Eindexamencijfer Wiskunde: De coëfficient van de variabele Eindexamencijfer Wiskunde is gelijk aan 0,4. Dit betekent dat een toename van 1 van de variabele Eindexamencijfer Wiskunde zorgt voor een toename van 0,4 op de afhankelijke variabele Eindcijfer Methoden & Statistiek als de andere predictors gelijkblijven. Er is dus een positieve relatie tussen het eindexamencijfer Wiskunde en het eindcijfer Methoden & Statistiek. Een deelnemer met een eindexamencijfer Wiskunde dat één punt hoger is dan een andere deelnemer zal dus een voorspelde waarde voor het eindcijfer Methoden & Statistiek hebben van 0,4 punt hoger als de overige predictors gelijkblijven.
+* Aantal hoorcolleges: De coëfficient van de variabele Aantal hoorcolleges is gelijk aan 0,3. Dit betekent dat een toename van 1 van de variabele Aantal hoorcolleges zorgt voor een toename van 0,3 op de afhankelijke variabele Eindcijfer Methoden & Statistiek als de andere predictors gelijkblijven. Er is dus een positieve relatie tussen het aantal gevolgde hoorcolleges en het eindcijfer Methoden & Statistiek. Een deelnemer met een extra gevolgd hoorcollege dan een andere deelnemer zal dus een voorspelde waarde voor het eindcijfer Methoden & Statistiek hebben van 0,3 punt hoger als de overige predictors gelijkblijven.
 
 ## Predictors vergelijkingen door standaardisatie
 
@@ -166,10 +166,10 @@ Op basis van de regressievergelijking en de t-toetsen kan bepaald worden of pred
 
 ## Voorspellen op basis van het regressiemodel
 
-Een regressiemodel maakt het mogelijk om een afhankelijke variabele te voorspellen op basis van een aantal predictors. Als van een student bekend is wat zijn geslacht, eindexamencijfer Wiskunde en aantal gevolgde hoorcolleges is, kan een voorspelling gemaakt worden van het eindcijfer Methoden & Statistiek voor die student. Voor alle participanten in de steekproef is er een voorspelling. De regressievergelijking maakt het echter ook mogelijk om voor nieuwe participanten een voorspelling te maken. Dit wordt een out-of-sample voorspelling genoemd omdat de nieuwe participant niet in de steekproef zit waarop het regressiemodel wordt geschat. Als de docent een jaar later de eindcijfers wilt voorspellen van de studenten die zijn vak volgen, kan hij de regressievergelijking van het jaar ervoor gebruiken. Een mannelijke student met een 7 als eindexamencijfer Wiskunde die 8 hoorcolleges volgt, heeft een voorspeld eindcijfer voor het vak Methoden & Statistiek 
+Een regressiemodel maakt het mogelijk om een afhankelijke variabele te voorspellen op basis van een aantal predictors. Als van een student bekend is wat zijn geslacht, eindexamencijfer Wiskunde en aantal gevolgde hoorcolleges is, kan een voorspelling gemaakt worden van het eindcijfer Methoden & Statistiek voor die student. Voor alle deelnemers in de steekproef is er een voorspelling. De regressievergelijking maakt het echter ook mogelijk om voor nieuwe deelnemers een voorspelling te maken. Dit wordt een out-of-sample voorspelling genoemd omdat de nieuwe deelnemer niet in de steekproef zit waarop het regressiemodel wordt geschat. Als de docent een jaar later de eindcijfers wilt voorspellen van de studenten die zijn vak volgen, kan hij de regressievergelijking van het jaar ervoor gebruiken. Een mannelijke student met een 7 als eindexamencijfer Wiskunde die 8 hoorcolleges volgt, heeft een voorspeld eindcijfer voor het vak Methoden & Statistiek 
 
 $$ EindcijferM\&S_i = 3 + 0,5 * 0 + 0,4 * 7 + 0,3 * 8 = 8,2$$
-een 8,2. Een out-of-sample voorspelling geeft vaak een goede indicatie van de kwaliteit van het regressiemodel, omdat de nieuwe participant niet gebruikt zijn om het model te schatten. Als het doel is om het regressiemodel te gebruiken voor het voorspellen van nieuwe participanten, dan is de kwaliteit van de out-of-sample voorspellingen van belang.[^2]
+een 8,2. Een out-of-sample voorspelling geeft vaak een goede indicatie van de kwaliteit van het regressiemodel, omdat de nieuwe deelnemer niet gebruikt zijn om het model te schatten. Als het doel is om het regressiemodel te gebruiken voor het voorspellen van nieuwe participanten, dan is de kwaliteit van de out-of-sample voorspellingen van belang.[^2]
 
 # Assumpties
 
@@ -177,9 +177,9 @@ Om een valide resultaat te vinden met *multipele lineaire regressie*, dient er a
 
 ## Outliers
 
-Voordat gestart kan worden met *multipele lineaire regressie*, moet de data gescreend worden op de aanwezigheid van outliers. Outliers (uitbijters) zijn observaties die sterk afwijken van de overige observaties. Univariate outliers zijn observaties die afwijken betreffende één specifieke variabele, zoals een student die twintig jaar over zijn studie heeft gedaan. Multivariate outliers zijn observaties die afwijken door de combinatie van meerdere variabelen, zoals een persoon van 18 jaar met een inkomen van €100.000,-. De leeftijd van 18 jaar is geen outlier op zichzelf en een inkomen van €100.000,- is dat ook niet. Echter, de combinatie van beide zorgt ervoor dat de observatie vrij onwaarschijnlijk is.[^2]
+Voordat gestart kan worden met *multipele lineaire regressie*, moet de data gescreend worden op de aanwezigheid van outliers. Outliers (uitbijters) zijn observaties die sterk afwijken van de overige observaties. Univariate outliers zijn observaties die afwijken voor één specifieke variabele, zoals een student die twintig jaar over zijn studie heeft gedaan. Multivariate outliers zijn observaties die afwijken door de combinatie van meerdere variabelen, zoals een persoon van 18 jaar met een inkomen van €100.000,-. De leeftijd van 18 jaar is geen outlier op zichzelf en een inkomen van €100.000,- is dat ook niet. Echter, de combinatie van beide zorgt ervoor dat de observatie vrij onwaarschijnlijk is.[^2]
 
-Na het vinden van een outlier is de volgende stap om een goede oplossing voor te outlier te bedenken. Het is van belang hier goed over na te denken en niet zomaar een outlier te verwijderen met als enige argument dat het een outlier is. In het algemeen kan er onderscheid gemaakt worden tussen onmogelijke en onwaarschijnlijke outliers.[^3] Een onmogelijke outlier is een observatie die technisch gezien niet kan kloppen, bijvoorbeeld een leeftijd van 1000 jaar, een negatief salaris of een man die zwanger is. Bij deze outliers is het een optie om de waarde te vervangen als er een overduidelijke fout bij het invoeren van de data is gemaakt. Een andere optie is de waarde te verwijderen. Een onwaarschijnlijke outlier is een observatie die technisch gezien wel kan, maar heel erg afwijkt van de overige observaties. De rijksten der aarde zijn in de stad of het dorp waar zij wonen qua vermogen waarschijnlijk een outlier. Maar het zijn bestaande personen dus het verwijderen van de observatie zou hier foutief zijn. Men kan in deze situatie overwegen de variabele(n) te transformeren, de outlier gewoon mee te nemen in de analyse of de analyse met en zonder de outlier uit te voeren en beide te rapporteren. Ook is het niet verboden om de outlier toch te verwijderen, maar het is in dat geval wel van belang dit transparant te rapporteren en op een goede wijze te beargumenteren.[^3]
+Na het vinden van een outlier is de volgende stap om een goede oplossing voor te outlier te bedenken. Het is van belang hier goed over na te denken en niet zomaar een outlier te verwijderen met als enige argument dat het een outlier is. In het algemeen kan er onderscheid gemaakt worden tussen onmogelijke en onwaarschijnlijke outliers.[^3] Een onmogelijke outlier is een observatie die technisch gezien niet kan kloppen, bijvoorbeeld een leeftijd van 1000 jaar, een negatief salaris of een man die zwanger is. Bij deze outliers is het een optie om de waarde te vervangen als er een overduidelijke fout bij het invoeren van de data is gemaakt. Een andere optie is de waarde te verwijderen. Een onwaarschijnlijke outlier is een observatie die technisch gezien wel kan, maar heel erg afwijkt van de overige observaties. De rijksten der aarde zijn in de stad of het dorp waar zij wonen qua vermogen waarschijnlijk een outlier. Maar het zijn bestaande personen dus het verwijderen van de observatie zou hier foutief zijn. Opties in deze situatie zijn de variabele(n) te transformeren, de outlier gewoon mee te nemen in de analyse of de analyse met en zonder de outlier uit te voeren en beide te rapporteren. Ook is het niet verboden om de outlier toch te verwijderen, maar het is in dat geval wel van belang dit transparant te rapporteren en op een goede wijze te beargumenteren.[^3]
 
 Bij *multipele lineaire regressie* zijn er vier nuttige methoden om outliers te vinden.[^2]
 
@@ -195,11 +195,11 @@ De residuën van een regressiemodel zijn de verschillen tussen de observaties va
 
 ### Mahalanobis afstand
 
-Multivariate outliers zijn participanten met een combinatie van observaties op verschillende variabelen die erg afwijken van de overige participanten. Deze multivariate outliers kunnen geïdentificeerd worden met de Mahalanobis afstand. De Mahalanobis afstand is een maat die aangeeft in hoeverre de observaties van een participant voor alle predictors afwijken van de gemiddeldes van de predictors. Het is een maat voor een afstand tussen twee punten als meerdere variabelen worden gebruikt. Bereken de Mahalanobis afstand voor elke participant en vergelijk deze met de criteriumwaarde. De criteriumwaarde wordt bepaald op basis van de chi-kwadraat score bij een aantal vrijheidsgraden dat gelijk is aan het aantal predictors en een significantieniveau van 0,001 (of een zelf gekozen significantieniveau). In de code wordt toegelicht hoe de criteriumwaarde bepaald kan worden.[^2]
+Multivariate outliers zijn deelnemers met een combinatie van observaties op verschillende variabelen die erg afwijken van de overige participanten. Deze multivariate outliers kunnen geïdentificeerd worden met de Mahalanobis afstand. De Mahalanobis afstand is een maat die aangeeft in hoeverre de observaties van een deelnemer voor alle predictors afwijken van de gemiddeldes van de predictors. Het is een maat voor een afstand tussen twee punten als meerdere variabelen worden gebruikt. Bereken de Mahalanobis afstand voor elke deelnemer en vergelijk deze met de criteriumwaarde. De criteriumwaarde wordt bepaald op basis van de chi-kwadraat score bij een aantal vrijheidsgraden dat gelijk is aan het aantal predictors en een significantieniveau van 0,001 (of een zelf gekozen significantieniveau). In de code wordt toegelicht hoe de criteriumwaarde bepaald kan worden.[^2]
 
 ### Cook's afstand
 
-De Mahalanobis afstand geeft aan in hoeverre een participant afwijkt van de andere participanten wat betreft de waardes van de predictorvariabelen. Een andere manier om multivariate outliers te vinden is te bepalen hoeveel invloed een participant heeft op de schattingen van het regressiemodel. Als de uitkomsten van het regressiemodel sterk veranderen als een bepaalde participant weggelaten wordt uit de dataset, dan is deze participant invloedrijk. Met behulp van Cook's afstand worden invloedrijke participanten ontdekt. Als Cook's afstand groter dan 1 is, wordt de participant beschouwd als invloedrijk.
+De Mahalanobis afstand geeft aan in hoeverre een deelnemer afwijkt van de andere deelnemers wat betreft de waardes van de predictorvariabelen. Een andere manier om multivariate outliers te vinden is te bepalen hoeveel invloed een deelnemer heeft op de schattingen van het regressiemodel. Als de uitkomsten van het regressiemodel sterk veranderen als een bepaalde deelnemer weggelaten wordt uit de dataset, dan is deze deelnemer invloedrijk. Met behulp van Cook's afstand worden invloedrijke deelnemers ontdekt. Als Cook's afstand groter dan 1 is, wordt de deelnemer beschouwd als invloedrijk.
 
 Hoewel de Mahalanobis afstand en Cook's afstand beide multivariate outliers identificeren, verschillen ze in het soort outlier waarop de focus ligt. Bij de Mahalanobis afstand worden afwijkende datapunten gevonden en bij Cook's distance invloedrijke datapunten. Het is echter niet zo dat een afwijkend datapunt ook tegelijkertijd invloedrijk is en dat een invloedrijk datapunt ook afwijkt. Een afwijkend datapunt kan ondanks zijn afwijking van de de overige datapunten toch op een juiste manier voorspeld worden. En een invloedrijk datapunt hoeft niet per se sterk af te wijken van de overige datapunten wat betreft de waardes voor de predictorvariabelen. Houdt hier rekening mee bij het bepalen hoe om te gaan met de gevonden outlier(s).[^2]
 
@@ -293,15 +293,15 @@ ggplot(dataset, aes(x = Voorspelling, y = Residu)) +
 
 ## Multicollineariteit
 
-Multicollineariteit houdt in dat er een hoge correlatie tussen twee of meerdere predictors is. Er is perfecte collineariteit als één predictor een lineaire combinatie is van een of meerdere andere predictors. In andere woorden, de predictor is precies te berekenen op basis van andere predictor(s). In dat geval kan de regressievergelijking niet wiskundig bepaald worden en werkt *multipele lineaire regressie* niet. Dit komt zeer weinig voor en is vaak makkelijk op te lossen door goed naar de variabelen die het veroorzaken te kijken en een variabele te transformeren of te verwijderen.[^2]
+Multicollineariteit houdt in dat er een hoge correlatie tussen twee of meerdere predictors is. Er is perfecte multicollineariteit als één predictor een lineaire combinatie is van een of meerdere andere predictors. In andere woorden, de predictor is precies te berekenen op basis van andere predictor(s). In dat geval kan de regressievergelijking niet wiskundig bepaald worden en werkt *multipele lineaire regressie* niet. Dit komt zeer weinig voor en is vaak makkelijk op te lossen door goed naar de variabelen die het veroorzaken te kijken en een variabele te transformeren of te verwijderen.[^2]
 
-Bij een hoog niveau van collineariteit kan de regressievergelijking wel geschat worden, maar zijn de uitkomsten minder betrouwbaar. De standaardfouten van de regressiecoëfficiënten worden groter bij meer collineariteit en dit levert bij hoge collineariteit problemen op. Ook is het lastig om te ontdekken wat per predictor de bijdrage is aan de voorspellingen van de afhankelijke variabele, omdat bepaalde predictors sterk gecorreleerd zijn en overlappen in het deel van de variantie dat ze verklaren.[^2] 
+Bij een hoog niveau van multicollineariteit kan de regressievergelijking wel geschat worden, maar zijn de uitkomsten minder betrouwbaar. De standaardfouten van de regressiecoëfficiënten worden groter bij meer multicollineariteit en dit levert bij hoge multicollineariteit problemen op. Ook is het lastig om te ontdekken wat per predictor de bijdrage is aan de voorspellingen van de afhankelijke variabele, omdat bepaalde predictors sterk gecorreleerd zijn en overlappen in het deel van de variantie dat ze verklaren.[^2] 
 
 Multicollineariteit wordt getoetst met de Variance Inflation Factor (VIF) die meet hoe sterk elke predictor gecorreleerd is met de andere predictors. Als de VIF van een predictor hoger dan 10 is, is er multicollineariteit voor die predictor.[^2]<sup>,</sup>[^7] Multicollineariteit kan opgelost worden door een van de predictors die het veroorzaakt te verwijderen uit het model. Een andere optie is een principale componenten analyse (PCA) uitvoeren op de predictoren zodat er een onderliggende variabele gecreëerd wordt (zie Field[^2] voor meer informatie).
 
 # Bootstrappen
 
-Als er niet voldaan is aan de assumpties van normaliteit of  homoskedasticiteit, dan zijn de standaardfouten, betrouwbaarheidsintervallen en significantietoetsen van het regressiemodel incorrect. Bootstrappen is hier een oplossing voor. Bij bootstrappen wordt de verdelingen van de parameters van het regressiemodel nagebootst. Als eerste stap wordt de steekproef gezien als een populatie waaruit een nieuwe steekproef getrokken kan worden. Deze steekproef is even groot als de echte steekproef, maar toch verschillend omdat het mogelijk is dezelfde participant meerdere keren in de steekproef te hebben. Op basis van de nieuwe steekproef wordt het regressiemodel opnieuw geschat en is er een schatting van de regressiecoëfficiënten. Deze procedure wordt een groot aantal keer (10000) herhaald, waardoor er 10000 keer regressiecoëfficiënten worden bepaald. Met behulp van deze 10000 waarden van de regressiecoëfficiënten is er een verdeling gemaakt voor elke regressiecoëfficiënt waaruit de standaardfout en de betrouwbaarheidsintervallen kunnen worden berekend. Op basis van de betrouwbaarheidsintervallen kunnen er ook significantietoetsen worden uitgevoerd. Op deze manier is bootstrappen de oplossing voor *multipele lineaire regressie* als er niet voldaan is aan normaliteit of homoskedasticiteit.[^2]
+Als er niet voldaan is aan de assumpties van normaliteit of  homoskedasticiteit, dan zijn de standaardfouten, betrouwbaarheidsintervallen en significantietoetsen van het regressiemodel incorrect. Bootstrappen is hier een oplossing voor. Bij bootstrappen wordt de verdelingen van de parameters van het regressiemodel nagebootst. Als eerste stap wordt de steekproef gezien als een populatie waaruit een nieuwe steekproef getrokken kan worden. Deze steekproef is even groot als de echte steekproef, maar toch verschillend omdat het mogelijk is dezelfde deelnemer meerdere keren in de steekproef te hebben. Op basis van de nieuwe steekproef wordt het regressiemodel opnieuw geschat en is er een schatting van de regressiecoëfficiënten. Deze procedure wordt een groot aantal keer (10000) herhaald, waardoor er 10000 keer regressiecoëfficiënten worden bepaald. Met behulp van deze 10000 waarden van de regressiecoëfficiënten is er een verdeling gemaakt voor elke regressiecoëfficiënt waaruit de standaardfout en de betrouwbaarheidsintervallen kunnen worden berekend. Op basis van de betrouwbaarheidsintervallen kunnen er ook significantietoetsen worden uitgevoerd. Op deze manier is bootstrappen de oplossing voor *multipele lineaire regressie* als er niet voldaan is aan normaliteit of homoskedasticiteit.[^2]
 
 # Uitvoering
 
@@ -385,8 +385,10 @@ Onderzoek of er outliers zijn met behulp van de gestandaardiseerde residuën van
 ```{r}
 # Sla de gestandaardiseerde residuën op
 Residu_gestandaardiseerd <- rstandard(Regressiemodel)
+
 # Maak een histogram
 plot(Residu_gestandaardiseerd, xlab = "Volgorde", ylab = "Gestandaardiseerde residuën")
+
 # Tel het aantal gestandaardiseerde residuën met een absolute waarde groter dan 3
 sum(abs(Residu_gestandaardiseerd > 3))
 ```
@@ -397,11 +399,11 @@ Er zijn geen gestandaardiseerde residuën met een score hoger dan 3 of lager dan
 ## Mahalanobis distance
 
 <!-- ## TEKSTBLOK: Outlier7.R -->
-Onderzoek of er multivariate outliers zijn met behulp van de Mahalanobis distance met behulp van de functie `mahalanobis()`. De Mahalanobis afstand geeft aan in hoeverre een participant afwijkt van het gemiddelde van alle participanten voor alle predictors samen. Een voorwaarde voor de functie is dat alle variabelen numeriek zijn. Zet daarom eerst de variabele `Geslacht` om in een numerieke variabele met de waarde 1 voor vrouwen en 0 voor mannen. Het omzetten van een categorische variabele in een of meer numerieke variabele heet dummycoderen; de variabelen worden vaak dummies genoemd.
+Onderzoek of er multivariate outliers zijn met behulp van de Mahalanobis distance met behulp van de functie `mahalanobis()`. De Mahalanobis afstand geeft aan in hoeverre een deelnemer afwijkt van het gemiddelde van alle deelnemers voor alle predictors samen. Een voorwaarde voor de functie is dat alle variabelen numeriek zijn. Zet daarom eerst de variabele `Geslacht` om in een numerieke variabele met de waarde 1 voor vrouwen en 0 voor mannen. Het omzetten van een categorische variabele in een of meer numerieke variabele heet dummycoderen; de variabelen worden vaak dummies genoemd.
 
 Neem vervolgens een subset van de dataset met alleen de predictors en gebruik deze voor de mahalanobis afstand. Gebruik de functie `mahalanobis()` met als argumenten de dataset `Subset`, de gemiddeldes van elke kolom berekend met `colMeans(Subset)` en de covariantiematrix van de dataset berekend met `cov(Subset)`.
 
-Bereken daarna de criteriumwaarde op basis van het gewenste significantieniveau en het aantal predictors. Plot de Mahalanobis afstanden en tel het aantal participanten met een Mahalanobis afstand groter dan de criteriumwaarde. Het gehanteerde significantieniveau is 0,001.
+Bereken daarna de criteriumwaarde op basis van het gewenste significantieniveau en het aantal predictors. Plot de Mahalanobis afstanden en tel het aantal deelnemers met een Mahalanobis afstand groter dan de criteriumwaarde. Het gehanteerde significantieniveau is 0,001.
 <!-- ## /TEKSTBLOK: Outlier7.R -->
 
 <!-- ## OPENBLOK: Outlier8.R -->
@@ -414,7 +416,7 @@ Subset <- Studenten_Methoden_Statistiek[,c("Eindexamencijfer_Wiskunde",
                                          "Aantal_Hoorcolleges",
                                          "Eindcijfer_MS","Geslacht_numeriek")]
 
-# Bereken de Mahalanobis afstand voor elke participant 
+# Bereken de Mahalanobis afstand voor elke deelnemer 
 Mahalanobis_afstanden <- mahalanobis(Subset,
             colMeans(Subset),
             cov(Subset))
@@ -432,29 +434,29 @@ sum(Mahalanobis_afstanden > Criteriumwaarde)
 <!-- ## /OPENBLOK: Outlier8.R -->
 
 <!-- ## TEKSTBLOK: Outlier9.R -->
-Er zijn geen participanten met een Mahalanobis afstand groter dan de criteriumwaarde van `r Round_and_format(Criteriumwaarde)`, dus er lijken geen multivariate outliers te zijn op basis van de Mahalanobis afstand.
+Er zijn geen deelnemers met een Mahalanobis afstand groter dan de criteriumwaarde van `r Round_and_format(Criteriumwaarde)`, dus er lijken geen multivariate outliers te zijn op basis van de Mahalanobis afstand.
 <!-- ## /TEKSTBLOK: Outlier9.R -->
 
 ### Cook's afstand
 
 <!-- ## TEKSTBLOK: Outlier10.R -->
-Onderzoek of er multivariate outliers zijn met behulp van Cook's afstand. Cook's afstand geeft aan hoeveel invloed het weglaten van een participant heeft op de uitkomsten van het regressiemodel. Gebruik hiervoor de functie `cooks.distance` met als argument  `Regressiemodel` (het object van het regressiemodel). Plot de Cook's afstanden daarna en tel het aantal Cook's afstanden dat groter is dan de criteriumwaarde van 1.
+Onderzoek of er multivariate outliers zijn met behulp van Cook's afstand. Cook's afstand geeft aan hoeveel invloed het weglaten van een deelnemer heeft op de uitkomsten van het regressiemodel. Gebruik hiervoor de functie `cooks.distance` met als argument  `Regressiemodel` (het object van het regressiemodel). Plot de Cook's afstanden daarna en tel het aantal Cook's afstanden dat groter is dan de criteriumwaarde van 1.
 <!-- ## /TEKSTBLOK: Outlier10.R -->
 
 <!-- ## OPENBLOK: Outlier11.R -->
 ```{r}
 # Bepaal Cook's afstand voor elke participant
 Cooks_afstand <-  cooks.distance(Regressiemodel)
+
 # Plot Cook's afstanden
 plot(Cooks_afstand, xlab = "Volgorde", ylab = "Cook's afstanden")
+
 # Tel het aantal Cook's afstanden groter dan de criteriumwaarde van 1
 sum(Cooks_afstand > 1)
-
-
 ```
 <!-- ## /OPENBLOK: Outlier11.R -->
 
-Er zijn geen participanten met een Cook's afstand groter dan de criteriumwaarde van 1. Er lijken dus geen invloedrijke datapunten of multivariate outliers te zijn.
+Er zijn geen deelnemers met een Cook's afstand groter dan de criteriumwaarde van 1. Er lijken dus geen invloedrijke datapunten of multivariate outliers te zijn.
 
 ## Lineariteit
 
@@ -486,16 +488,16 @@ Bij beide predictors lijkt er een lineaire relatie te zijn met de afhankelijke v
 ## Normaliteit
 
 <!-- ## TEKSTBLOK: AssNormaliteit1.R -->
-Onderzoek of de gestandaardiseerde residuën van het regressiemodel een normale verdeling volgen. Sla eerst de gestandaardiseerde residuën op met behulp van de functie `rstandard()` met als argument `Regressiemodel` (het object van het regressiemodel) en maak vervolgens een histogram om de verdeling te inspecteren.
+Onderzoek of de gestandaardiseerde residuën van het regressiemodel een normale verdeling volgen. Sla eerst de gestandaardiseerde residuën op met behulp van de functie `rstandard()` met als argument `Regressiemodel` (het object van het regressiemodel) en maak vervolgens een histogram om de verdeling te inspecteren. Het is ook mogelijk om normaliteit te onderzoeken met behulp van een QQ-plot.
 <!-- ## /TEKSTBLOK: AssNormaliteit1.R -->
 
 <!-- ## OPENBLOK: AssNormaliteit2.R -->
 ```{r}
 # Sla de gestandaardiseerde residuën op
 Residu_gestandaardiseerd <- rstandard(Regressiemodel)
+
 # Maak een histogram
 hist(Residu_gestandaardiseerd, xlab = "Gestandaardiseerde residuën", ylab = "Frequentie", main = "")
-
 ```
 <!-- ## /OPENBLOK: AssNormaliteit2.R -->
 
@@ -511,8 +513,10 @@ Toets de assumptie van homoskedasticiteit door te onderzoeken of de variantie on
 ```{r}
 # Sla de gestandaardiseerde residuën op
 Residu_gestandaardiseerd <- rstandard(Regressiemodel)
+
 # Sla de voorspellingen op
 Voorspellingen <- fitted(Regressiemodel)
+
 # Maak een scatter plot
 plot(Voorspellingen, Residu_gestandaardiseerd, ylab = "Gestandaardiseerde residuën", xlab = "Voorspellingen", main = "")
 
@@ -530,6 +534,7 @@ Onderzoek of er sprake is van multicollineariteit met behulp van Variance Inflat
 <!-- ## OPENBLOK: AssMulticollineariteit2.R -->
 ```{r}
 library(DescTools)
+
 # Bereken de VIF voor elke predictor
 VIF(Regressiemodel)
 ```
@@ -546,7 +551,8 @@ Als alle assumpties zijn getoetst en aan alle assumpties is voldaan, kan de *mul
 <!-- ## OPENBLOK: Uitvoering2.R -->
 ```{r}
 # Voer de multipele lineaire regressie uit
-Regressiemodel <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges, Studenten_Methoden_Statistiek)
+Regressiemodel <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges,
+                     Studenten_Methoden_Statistiek)
 
 # Presenteer de resultaten
 summary(Regressiemodel)
@@ -559,7 +565,8 @@ confint(Regressiemodel)
 <!-- ## CLOSEDBLOK: Uitvoering3.R -->
 ```{r, echo = FALSE, message = FALSE}
 # Voer de multipele lineaire regressie uit
-Regressiemodel <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges, Studenten_Methoden_Statistiek)
+Regressiemodel <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges,
+                     Studenten_Methoden_Statistiek)
 
 # Presenteer de resultaten
 Reg <- summary(Regressiemodel)
@@ -623,7 +630,7 @@ De gestandaardiseerde regressiecoëfficiënt is `r Round_and_format(Coefficiente
 
 # Uitvoering F-toets voor vergelijking twee regressiemodellen
 
-De F-toets wordt bij *multipele lineaire regressie* gebruikt om de significantie van het gehele regressiemodel te toetsen ten opzichte van het interceptmodel. Deze F-toets kan ook gebruikt worden om te toetsen of twee geneste regressiemodellen onderling verschillen qua verklaarde variantie. Hoewel deze vergelijking in de casus niet voorbijkomt, wordt deze toch geïllustreerd. Hierbij wordt een model met als enige predictor het geslacht van de student vergeleken met een model met de predictors geslacht, eindexamencijfer Wiskunde en aantal gevolgde hoorcolleges.
+De F-toets wordt bij *multipele lineaire regressie* gebruikt om de significantie van het gehele regressiemodel te toetsen ten opzichte van het interceptmodel. Deze F-toets kan ook gebruikt worden om te toetsen of twee geneste regressiemodellen onderling verschillen qua verklaarde variantie. Hoewel deze vergelijking in de casus niet voorbijkomt, wordt deze toch geïllustreerd. Vergelijk hierbij een model met als enige predictor het geslacht van de student met een model met de predictors geslacht, eindexamencijfer Wiskunde en aantal gevolgde hoorcolleges.
 
 <!-- ## TEKSTBLOK: ModellenVergelijken1.R -->
 Voer de F-toets uit met de functie `anova()` met als argumenten de modelobjecten van de resultaten van de twee regressiemodellen die worden vergeleken (`Model_1` en `Model_2`). Voer eerst de *multipele lineaire regressie* uit voor beide modellen en vergelijk ze daarna. Bereken ten slotte de verklaarde variantie met de functie `summary()$r.squared` met als argument het modelobject waarvan de verklaarde variantie berekend moet worden.
@@ -632,10 +639,12 @@ Voer de F-toets uit met de functie `anova()` met als argumenten de modelobjecten
 <!-- ## OPENBLOK: ModellenVergelijken2.R -->
 ```{r}
 # Stel het regressiemodel op met alleen Geslacht als predictor
-Model_1 <- lm(Eindcijfer_MS ~ Geslacht, Studenten_Methoden_Statistiek)
+Model_1 <- lm(Eindcijfer_MS ~ Geslacht, 
+              Studenten_Methoden_Statistiek)
 
 # Stel het regressiemodel op met Geslacht, Eindexamencijfer_Wiskunde en Aantal_Hoorcolleges als predictors
-Model_2 <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges, Studenten_Methoden_Statistiek)
+Model_2 <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges,
+              Studenten_Methoden_Statistiek)
 
 # Voer de F-toets uit om beide modellen te vergelijken
 anova(Model_1, Model_2)
@@ -651,10 +660,12 @@ anova(Model_1, Model_2)
 <!-- ## CLOSEDBLOK: ModellenVergelijken3.R -->
 ```{r, echo = FALSE, message = FALSE}
 # Stel het regressiemodel op met alleen Aantal hoorcolleges als predictor
-Model_1 <- lm(Eindcijfer_MS ~ Geslacht, Studenten_Methoden_Statistiek)
+Model_1 <- lm(Eindcijfer_MS ~ Geslacht, 
+              Studenten_Methoden_Statistiek)
 
 # Stel het regressiemodel op met Geslacht, Eindexamencijfer_Wiskunde en Aantal_Hoorcolleges als predictors
-Model_2 <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges, Studenten_Methoden_Statistiek)
+Model_2 <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges,
+              Studenten_Methoden_Statistiek)
 
 # Voer de F-toets uit om beide modellen te vergelijken
 Vergelijking <- anova(Model_1, Model_2)
@@ -684,7 +695,8 @@ library(car)
 set.seed(12345)
 
 # Voer de multipele lineaire regressie uit
-Regressiemodel <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges, Studenten_Methoden_Statistiek)
+Regressiemodel <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges,
+                     Studenten_Methoden_Statistiek)
 
 # Voer de bootstrap uit voor het regressiemodel
 Bootstrap_resultaat <- Boot(Regressiemodel, R = 10000)

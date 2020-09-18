@@ -379,7 +379,7 @@ Onderzoek of er multivariate outliers zijn met behulp van Cook's afstand. Cook's
 
 <!-- ## OPENBLOK: Outlier11.R -->
 ```{r}
-# Bepaal Cook's afstand voor elke participant
+# Bepaal Cook's afstand voor elke deelnemer
 Cooks_afstand <-  cooks.distance(Regressiemodel)
 
 # Plot Cook's afstanden
@@ -682,8 +682,6 @@ De *likelihood ratio toets* toont aan dat er een significant verschil is in de m
 Op basis van het logistisch regressiemodel kan voor iedere student de kans op uitval voorspeld worden. De voorspelde kans kan direct vergeleken worden met de observaties om te onderzoeken hoe goed het model voorspeld. Daarnaast is het ook mogelijk om de studenten te classificeren in de categorieën Uitval en Geen uitval op basis van de voorspelde kans. Met behulp van de classificaties kan een classificatietabel gemaakt worden waarmee de kwaliteit van de voorspelkracht van het model beoordeeld kan worden.
 
 Bepaal eerst de voorspelde kansen met de functie `predict()` met als argumenten het object van het regressie model `Regressiemodel` en `type = response` om aan te geven dat de voorspelde kans bepaald moet worden. Classificeer daarna de studenten op basis van de voorspelde kans met de functie `ifelse()` met als eerste argument de conditie die gecheckt wordt `Voorspelde_kans > 0.5`, als tweede argument de classificatie als de student aan de conditie voldoet (`"Uitval"`) en als derde argument de classificatie als de student niet aan de conditie voldoet (`"Geen uitval"`). De conditie stelt dat de voorspelde kans groter dan 0,5 moet zijn. In dat geval is Uitval de classificatie voor die student. Als de kans 0,5 of kleiner is, dan is Geen uitval de classificatie voor die student. Maak daarna een classificatietabel voor de classificaties en observaties van de studenten Elektrotechniek. Bereken op basis van de classificatietabel de accuraatheid, sensitiviteit en specificiteit van de classificaties. Bereken ten slotte de Area Under the Curve (AUC) van het logistisch regressiemodel met behulp van de functie `roc()$auc` van het package `pROC` met als argumenten de observaties `Uitval_Elektrotechniek$Uitval_dummy` en de voorspelde kansen `Voorspelde_kans`.
-
-NUMERIEK toevoegen
 
 ```{r, warning = FALSE, message = FALSE}
 # Bepaal de voorspelde kansen

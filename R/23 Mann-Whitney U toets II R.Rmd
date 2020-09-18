@@ -52,7 +52,7 @@ Gebruik de *Mann-Whitney U toets* om te toetsen of twee ongepaarde groepen van e
 
 # Onderwijscasus
 <div id ="casus">
-Bij de hbo lerarenopleiding Frans leren studenten bij het vak Gesprekstechnieken om gesprekken te voeren in een praktijksetting. Aan het einde van het vak worden zij beoordeeld op basis van een mentorgesprek met een acteur waarin zij de aangeleerde vaardigheden in de praktijk kunnen toepassen. In vakevaluaties wordt vaak door mannen aangegeven dat ze het vak als erg moeilijk ervaren. Daarom wil de hoofddocent graag uitzoeken of er verschillen zijn tussen mannen en vrouwen wat betreft de beoordeling van de gesprekstechnieken.
+Bij de hbo lerarenopleiding Frans leren studenten bij het vak Gesprekstechnieken om gesprekken te voeren in een praktijksetting. Aan het einde van het vak worden zij beoordeeld op basis van een mentorgesprek met een acteur waarin zij de aangeleerde vaardigheden in de praktijk kunnen toepassen. De beoordelingen bestaan uit onvoldoende, voldoende en goed. In vakevaluaties wordt vaak door mannen aangegeven dat ze het vak als erg moeilijk ervaren. Daarom wil de hoofddocent graag uitzoeken of er verschillen zijn tussen mannen en vrouwen wat betreft de beoordeling van de gesprekstechnieken.
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
@@ -77,7 +77,7 @@ het aantal observaties, i.e. $\frac{z}{\sqrt{N}}$.[^5] Een correlatie tussen twe
 
 # Uitvoering 
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is een dataset `Beoordelingen_gesprekstechnieken` ingeladen met het aantal studiepunten dat studenten in het tweede jaar halen.
+Er is een dataset `Beoordelingen_gesprekstechnieken` ingeladen met de beoordelingen van studenten voor het vak Gesprekstechnieken.
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
@@ -120,7 +120,7 @@ De kruistabel en bijbehorende kruistabel met proporties laten zien dat de gespre
 
 ## De data visualiseren
 
-Maak een staafdiagram om de verdeling van de beoordelingen aan het begin en eind van het vak visueel weer te geven.
+Maak een staafdiagram om de verdeling van de beoordelingen voor het van Gesprekstechnieken van mannen en vrouwen visueel weer te geven.
 
 <!-- ## OPENBLOK: Histogram1.R -->
 ```{r histogram, warnings=FALSE, message=FALSE}

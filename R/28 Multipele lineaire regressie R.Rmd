@@ -169,7 +169,7 @@ Op basis van de regressievergelijking en de t-toetsen kan bepaald worden of pred
 Een regressiemodel maakt het mogelijk om een afhankelijke variabele te voorspellen op basis van een aantal predictors. Als van een student bekend is wat zijn geslacht, eindexamencijfer Wiskunde en aantal gevolgde hoorcolleges is, kan een voorspelling gemaakt worden van het eindcijfer Methoden & Statistiek voor die student. Voor alle deelnemers in de steekproef is er een voorspelling. De regressievergelijking maakt het echter ook mogelijk om voor nieuwe deelnemers een voorspelling te maken. Dit wordt een out-of-sample voorspelling genoemd omdat de nieuwe deelnemer niet in de steekproef zit waarop het regressiemodel wordt geschat. Als de docent een jaar later de eindcijfers wilt voorspellen van de studenten die zijn vak volgen, kan hij de regressievergelijking van het jaar ervoor gebruiken. Een mannelijke student met een 7 als eindexamencijfer Wiskunde die 8 hoorcolleges volgt, heeft een voorspeld eindcijfer voor het vak Methoden & Statistiek 
 
 $$ EindcijferM\&S_i = 3 + 0,5 * 0 + 0,4 * 7 + 0,3 * 8 = 8,2$$
-een 8,2. Een out-of-sample voorspelling geeft vaak een goede indicatie van de kwaliteit van het regressiemodel, omdat de nieuwe deelnemer niet gebruikt zijn om het model te schatten. Als het doel is om het regressiemodel te gebruiken voor het voorspellen van nieuwe participanten, dan is de kwaliteit van de out-of-sample voorspellingen van belang.[^2]
+een 8,2. Een out-of-sample voorspelling geeft vaak een goede indicatie van de kwaliteit van het regressiemodel, omdat de nieuwe deelnemer niet gebruikt zijn om het model te schatten. Als het doel is om het regressiemodel te gebruiken voor het voorspellen van nieuwe deelnemers, dan is de kwaliteit van de out-of-sample voorspellingen van belang.[^2]
 
 # Assumpties
 
@@ -195,7 +195,7 @@ De residuën van een regressiemodel zijn de verschillen tussen de observaties va
 
 ### Mahalanobis afstand
 
-Multivariate outliers zijn deelnemers met een combinatie van observaties op verschillende variabelen die erg afwijken van de overige participanten. Deze multivariate outliers kunnen geïdentificeerd worden met de Mahalanobis afstand. De Mahalanobis afstand is een maat die aangeeft in hoeverre de observaties van een deelnemer voor alle predictors afwijken van de gemiddeldes van de predictors. Het is een maat voor een afstand tussen twee punten als meerdere variabelen worden gebruikt. Bereken de Mahalanobis afstand voor elke deelnemer en vergelijk deze met de criteriumwaarde. De criteriumwaarde wordt bepaald op basis van de chi-kwadraat score bij een aantal vrijheidsgraden dat gelijk is aan het aantal predictors en een significantieniveau van 0,001 (of een zelf gekozen significantieniveau). In de code wordt toegelicht hoe de criteriumwaarde bepaald kan worden.[^2]
+Multivariate outliers zijn deelnemers met een combinatie van observaties op verschillende variabelen die erg afwijken van de overige deelnemers. Deze multivariate outliers kunnen geïdentificeerd worden met de Mahalanobis afstand. De Mahalanobis afstand is een maat die aangeeft in hoeverre de observaties van een deelnemer voor alle predictors afwijken van de gemiddeldes van de predictors. Het is een maat voor een afstand tussen twee punten als meerdere variabelen worden gebruikt. Bereken de Mahalanobis afstand voor elke deelnemer en vergelijk deze met de criteriumwaarde. De criteriumwaarde wordt bepaald op basis van de chi-kwadraat score bij een aantal vrijheidsgraden dat gelijk is aan het aantal predictors en een significantieniveau van 0,001 (of een zelf gekozen significantieniveau). In de code wordt toegelicht hoe de criteriumwaarde bepaald kan worden.[^2]
 
 ### Cook's afstand
 
@@ -445,7 +445,7 @@ Onderzoek of er multivariate outliers zijn met behulp van Cook's afstand. Cook's
 
 <!-- ## OPENBLOK: Outlier11.R -->
 ```{r}
-# Bepaal Cook's afstand voor elke participant
+# Bepaal Cook's afstand voor elke deelnemer
 Cooks_afstand <-  cooks.distance(Regressiemodel)
 
 # Plot Cook's afstanden

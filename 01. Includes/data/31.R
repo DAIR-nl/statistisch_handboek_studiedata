@@ -92,6 +92,13 @@ Aantal_Hoorcolleges <- c(Aantal_Hoorcolleges_Psychologie,
                          Aantal_Hoorcolleges_Onderwijskunde,
                          Aantal_Hoorcolleges_Sociologie)
 
+# Eindexamencijfer
+Eindexamencijfer <- ceiling(2 * rnorm(1000,
+                                         7,
+                                         1))/2
+Eindexamencijfer[Eindexamencijfer < 5.5] <- 5.5
+Eindexamencijfer[Eindexamencijfer > 9.5] <- 9.5
+
 # Geslacht
 Opleiding <- c(rep("Psychologie", 
                   500),
@@ -108,7 +115,7 @@ Opleiding_Sociologie <- as.numeric(Opleiding == "Sociologie")
 
 
 # Maak afhankelijke variabele eindcijfer Methoden & Statistiek
-Eindcijfer_MS <- 5 + 0.4 * Aantal_Hoorcolleges + 0.36 * Opleiding_Psychologie + 0.4 * Opleiding_Onderwijskunde + rnorm(100,0,0.8)
+Eindcijfer_MS <- 3 + 0.4 * Aantal_Hoorcolleges + 0.36 * Opleiding_Psychologie + 0.4 * Opleiding_Onderwijskunde + 0.2 * Eindexamencijfer +  rnorm(100,0,0.8)
 Eindcijfer_MS <- round(Eindcijfer_MS,
                        1)
 Eindcijfer_MS[Eindcijfer_MS > 10] <- 10.0
@@ -125,6 +132,7 @@ Studentnummer <- sample(300000:400000,
 Studenten_Methoden_Statistiek <- data.frame(Studentnummer,
                                             Opleiding,
                                             Aantal_Hoorcolleges,
+                                            Eindexamencijfer,
                                             Eindcijfer_MS)
 
 # mean(Aantal_Hoorcolleges_Psychologie)
@@ -165,24 +173,18 @@ Studenten_Methoden_Statistiek <- data.frame(Studentnummer,
 
 
 
-# lm
-#model <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges,
-#   Studenten_Methoden_Statistiek)
-#summary(model)
-
-# Bootstrap
-#library(car)
-#Regressiemodel <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges, Studenten_Methoden_Statistiek)
-#Bootstrap_resultaat <- Boot(Regressiemodel, R = 10000)
-#summary(Bootstrap_resultaat)
-#confint(Bootstrap_resultaat, type = "bca")
 
 rm(Studentnummer,
-   Geslacht,
-   Geslacht_dummy,
-   Eindexamencijfer_Wiskunde,
    Aantal_Hoorcolleges,
-   Eindcijfer_MS
+   Eindcijfer_MS,
+   Eindexamencijfer,
+   Aantal_Hoorcolleges_Onderwijskunde,
+   Aantal_Hoorcolleges_Psychologie,
+   Aantal_Hoorcolleges_Sociologie,
+   Opleiding,
+   Opleiding_Onderwijskunde,
+   Opleiding_Psychologie,
+   Opleiding_Sociologie
    )
 
 #vv <- lm(Eindcijfer_MS ~ 1, Studenten_Methoden_Statistiek )

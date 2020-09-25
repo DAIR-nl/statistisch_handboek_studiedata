@@ -132,7 +132,7 @@ maak_html_r3 <- function() {
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[15,]$InGebruik)),  
                    dfToetsen[15,]$Toets, 
                    sModus = sModus),
-      ## Combinatie: Chi-kwadraat toets / Fisher-Freeman-Halton exact toets
+      ## Chi-kwadraat toets / Fisher-Freeman-Halton exact toets
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[16,]$InGebruik)),  
                          dfToetsen[16,]$Toets,
                          sModus = sModus)
@@ -153,17 +153,17 @@ maak_html_r4 <- function() {
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[18,]$InGebruik)),  
                          dfToetsen[18,]$Toets, 
                          sModus = sModus),
-      ## Combinatie: Chi-kwadraat toets / Fisher-Freeman-Halton exact toets
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[19,]$InGebruik)),  
-                         dfToetsen[19,]$Toets,
+      ## Chi-kwadraat toets / Fisher-Freeman-Halton exact toets
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[16,]$InGebruik)),  
+                         dfToetsen[16,]$Toets,
                          sModus = sModus),
-      ## GLM/GEE
+      ## GLMM
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[20,]$InGebruik)),
                    dfToetsen[20,]$Toets,
                    sModus = sModus),
-      ## Chi-kwadraat toets (trend)
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[21,]$InGebruik)),  
-                         dfToetsen[21,]$Toets,
+      ## Chi-kwadraat toets / Fisher-Freeman-Halton exact toets
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[16,]$InGebruik)),  
+                         dfToetsen[16,]$Toets,
                          sModus = sModus)
     )
   )

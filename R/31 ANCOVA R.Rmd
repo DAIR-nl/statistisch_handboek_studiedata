@@ -59,9 +59,7 @@ Gebruik de *ANCOVA* bij het toetsen of de gemiddelden van groepen op basis van t
 
 De docent van het vak Methoden & Statistiek van de faculteit Sociale Wetenschappen wil ontdekken of er verschillen zijn tussen studenten van verschillende opleidingen in het eindcijfer van zijn vak. Het vak wordt gevolgd door studenten Psychologie, Onderwijskunde en Sociologie. Uit ervaring blijkt dat het aantal gevolgde hoorcolleges en het gemiddeld eindexamencijfer van de middelbare school ook van invloed is op het eindcijfer en dat dit nogal eens verschilt tussen studenten. Om een eerlijke vergelijking te maken, wilt hij daarom controleren voor het aantal gevolgde hoorcolleges en het gemiddeld eindexamencijfer van de middelbare school. Op basis van de data van vorig jaar onderzoekt hij of er een verschil is tussen de drie opleidingen wat betreft het eindcijfer van het vak Methoden & Statistiek rekening houdend met het aantal gevolgde hoorcolleges.
 
-Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is. Bij *multipele lineaire regressie* wordt er een hypothese opgesteld voor het complete model en hypotheses voor de individuele predictors.
-
-Hypotheses regressiemodel:
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
 *H~0~*: Er is geen verschil tussen de gemiddelde eindcijfers voor het vak Methoden & Statistiek voor studenten van de opleidingen Psychologie, Onderwijskunde en Sociologie na controleren voor het aantal gevolgde hoorcolleges en het gemiddeld eindexamencijfer van de middelbare school.
 
@@ -112,7 +110,7 @@ Hoewel de Mahalanobis afstand en Cook's afstand beide multivariate outliers iden
 
 ## Lineariteit
 
-In de *ANCOVA* wordt aangenomen dat er een lineaire relatie is tussen elke covariaat en de afhankelijke variabele. Een lineaire relatie houdt in dat de toename of afname van de afhankelijke variabele als gevolg van de toename van de covariaat constant is: er is een rechte lijn door de data heen te trekken. Een voorbeeld van een lineaire en niet-lineaire relatie is weergegeven in Figuur 1. Bij de linkerfiguur kan er duidelijk een rechte lijn door de punten getrokken worden en is er dus sprake van een lineaire relatie. Bij de rechterfiguur is dit niet het geval, daar is er sprake van een curve in de relatie tussen de covariaat en afhankelijke variabele. De regressiecoëfficiënt van een niet-lineair verband is dan niet informatief, omdat er dan niet aan lineariteit voldaan is.[^4]<sup>,</sup>[^8] 
+In de *ANCOVA* wordt aangenomen dat er een lineaire relatie is tussen elke covariaat en de afhankelijke variabele. Een lineaire relatie houdt in dat de toename of afname van de afhankelijke variabele als gevolg van de toename van de covariaat constant is: er is een rechte lijn door de data heen te trekken. Een voorbeeld van een lineaire en niet-lineaire relatie is weergegeven in Figuur 1. Bij de linkerfiguur kan er duidelijk een rechte lijn door de punten getrokken worden en is er dus sprake van een lineaire relatie. Bij de rechterfiguur is dit niet het geval, daar is er sprake van een curve in de relatie tussen de covariaat en afhankelijke variabele. Als er geen lineair verband is tussen de covariaat en de afhankelijke variabele, dan wordt er niet op de juiste manier gecontroleerd voor de covariaat wat gevolgen heeft voor de validiteit van de *ANCOVA*.[^4]<sup>,</sup>[^8] 
 
 De assumptie van lineariteit wordt onderzocht met behulp van scatter plots, zoals in onderstaande figuren. Deze assumptie hoeft alleen onderzocht te worden voor continue variabelen. Bij categorische variabelen krijgt elke categorie een aparte waarde waardoor er geen lineariteit kan zijn. Als er geen lineaire relatie is, zijn er verschillende opties. De variabele kan op verschillende manieren getransformeerd[^7] worden zodat er alsnog een lineaire relatie ontstaat.
 
@@ -203,7 +201,7 @@ ggplot(dataset, aes(x = Voorspelling, y = Residu)) +
 
 Multicollineariteit houdt in dat er een hoge correlatie tussen twee of meerdere covariaten is. Er is perfecte multicollineariteit als één covariaat een lineaire combinatie is van een of meerdere andere covariaten. In andere woorden, de covariaat is precies te berekenen op basis van andere covariaten. In dat geval kan de *ANCOVA* niet wiskundig bepaald worden en werkt de *ANCOVA* niet. Dit komt zeer weinig voor en is vaak makkelijk op te lossen door goed naar de variabelen die het veroorzaken te kijken en een variabele te transformeren of te verwijderen.[^4]
 
-Bij een hoog niveau van multicollineariteit kan de *ANCOVA* wel uitgevoerd worden, maar zijn de uitkomsten minder betrouwbaar. Het is dan lastig om te ontdekken wat per predictor de bijdrage is aan de voorspellingen van de afhankelijke variabele, omdat bepaalde predictors sterk gecorreleerd zijn en overlappen in het deel van de variantie dat ze verklaren. Hierdoor is het moeilijker om goed te controleren voor de covariaten.[^4] 
+Bij een hoog niveau van multicollineariteit kan de *ANCOVA* wel uitgevoerd worden, maar zijn de uitkomsten minder betrouwbaar. Het is dan lastig om te ontdekken wat per covariaat de bijdrage is aan de voorspellingen van de afhankelijke variabele, omdat bepaalde covariaten sterk gecorreleerd zijn en overlappen in het deel van de variantie dat ze verklaren. Hierdoor is het moeilijker om goed te controleren voor de covariaten.[^4] 
 
 Multicollineariteit wordt getoetst met de Variance Inflation Factor (VIF) die meet hoe sterk elke covariaat gecorreleerd is met de andere covariaten. Als de VIF van een covariaat hoger dan 10 is, is er multicollineariteit voor die covariaat.[^4]<sup>,</sup>[^9] Multicollineariteit kan opgelost worden door een van de covariaten die het veroorzaakt te verwijderen. Een andere optie is een principale componenten analyse (PCA) uitvoeren op de covariaten zodat er een onderliggende variabele gecreëerd wordt (zie Field[^4] voor meer informatie).
 
@@ -365,7 +363,7 @@ Voer eerst de *ANCOVA* uit omdat deze nodig is voor het toetsen van assumpties e
 <!-- ## OPENBLOK: Uitvoering2.R -->
 ```{r}
 ANCOVA <- aov(Eindcijfer_MS ~ Opleiding + Aantal_Hoorcolleges + Eindexamencijfer,
-                     Studenten_Methoden_Statistiek)
+              Studenten_Methoden_Statistiek)
 
 ```
 <!-- ## /OPENBLOK: Uitvoering2.R -->
@@ -424,10 +422,10 @@ table(Studenten_Methoden_Statistiek$Opleiding)
 
 De categorieën van de variabele Opleiding zijn `Onderwijskunde`, `Psychologie` en `Sociologie`. Er zijn dus geen opmerkelijke waarden bij de variabele Opleiding.
 
-## Mahalanobis distance
+### Mahalanobis distance
 
 <!-- ## TEKSTBLOK: Outlier7.R -->
-Onderzoek of er multivariate outliers zijn met behulp van de Mahalanobis distance met behulp van de functie `mahalanobis()`. De Mahalanobis afstand geeft aan in hoeverre een deelnemer afwijkt van het gemiddelde van alle deelnemers voor alle predictors samen. Een voorwaarde voor de functie is dat alle variabelen numeriek zijn. Bij een categorische covariaat moet deze dus omgezet worden. Het omzetten van een categorische variabele in een of meer numerieke variabele heet dummycoderen; de variabelen worden vaak dummies genoemd.
+Onderzoek of er multivariate outliers zijn met behulp van de Mahalanobis distance met behulp van de functie `mahalanobis()`. De Mahalanobis afstand geeft aan in hoeverre een deelnemer afwijkt van het gemiddelde van alle deelnemers voor alle covariaten samen. Een voorwaarde voor de functie is dat alle variabelen numeriek zijn. Bij een categorische covariaat moet deze dus omgezet worden. Het omzetten van een categorische variabele in een of meer numerieke variabele heet dummycoderen; de variabelen worden vaak dummies genoemd.
 
 Neem vervolgens een subset van de dataset met alleen de covariaten en gebruik deze voor de Mahalanobis afstand. Gebruik de functie `mahalanobis()` met als argumenten de dataset `Subset`, de gemiddeldes van elke kolom berekend met `colMeans(Subset)` en de covariantiematrix van de dataset berekend met `cov(Subset)`.
 
@@ -464,12 +462,12 @@ Er zijn geen deelnemers met een Mahalanobis afstand groter dan de criteriumwaard
 ### Cook's afstand
 
 <!-- ## TEKSTBLOK: Outlier10.R -->
-Onderzoek of er multivariate outliers zijn met behulp van Cook's afstand. Cook's afstand geeft aan hoeveel invloed het weglaten van een deelnemer heeft op de uitkomsten van het regressiemodel. Gebruik hiervoor de functie `cooks.distance` met als argument  `ANCOVA` (het object van de *ANCOVA*). Plot de Cook's afstanden daarna en tel het aantal Cook's afstanden dat groter is dan de criteriumwaarde van 1.
+Onderzoek of er multivariate outliers zijn met behulp van Cook's afstand. Cook's afstand geeft aan hoeveel invloed het weglaten van een deelnemer heeft op de uitkomsten van de *ANCOVA*. Gebruik hiervoor de functie `cooks.distance` met als argument  `ANCOVA` (het object van de *ANCOVA*). Plot de Cook's afstanden daarna en tel het aantal Cook's afstanden dat groter is dan de criteriumwaarde van 1.
 <!-- ## /TEKSTBLOK: Outlier10.R -->
 
 <!-- ## OPENBLOK: Outlier11.R -->
 ```{r}
-# Bepaal Cook's afstand voor elke participant
+# Bepaal Cook's afstand voor elke deelnemer
 Cooks_afstand <-  cooks.distance(ANCOVA)
 
 # Plot Cook's afstanden
@@ -507,7 +505,7 @@ plot(Eindcijfer_MS ~ Aantal_Hoorcolleges, data = Studenten_Methoden_Statistiek,
   </div>
 </div>
 
-Bij beide predictors lijkt er een lineaire relatie te zijn met de afhankelijke variabele. Er is dus aan de assumptie van lineariteit voldaan.
+Bij beide covariaten lijkt er een lineaire relatie te zijn met de afhankelijke variabele. Er is dus aan de assumptie van lineariteit voldaan.
 
 ## Normaliteit
 
@@ -560,10 +558,11 @@ Onderzoek of er sprake is van multicollineariteit bij de covariaten met behulp v
 ```{r}
 library(DescTools)
 
+# Voer de ANCOVA uit en sla het op in een object
 ANCOVA_multicollineariteit <- aov(Eindcijfer_MS ~ Aantal_Hoorcolleges + Eindexamencijfer,
-                     Studenten_Methoden_Statistiek)
+                                  Studenten_Methoden_Statistiek)
 
-# Bereken de VIF voor elke predictor
+# Bereken de VIF voor elke covariaat
 VIF(ANCOVA_multicollineariteit)
 ```
 <!-- ## /OPENBLOK: AssMulticollineariteit2.R -->
@@ -579,6 +578,7 @@ Toets met de *Levene's test* de assumptie homogeniteit van varianties voor de on
 <!-- ## OPENBLOK: Levenes-test.R -->
 ```{r LeveneTest, warning = FALSE, message = FALSE}
 library(car)
+
 leveneTest(Eindcijfer_MS ~ Opleiding, 
            data = Studenten_Methoden_Statistiek)
 ```
@@ -649,7 +649,7 @@ Gebruik de functie `aov()` met als eerste argument de vergelijking `Eindcijfer_M
 <!-- ## OPENBLOK: Uitvoering2.R -->
 ```{r}
 ANCOVA <- aov(Eindcijfer_MS ~ Opleiding + Aantal_Hoorcolleges + Eindexamencijfer,
-                     Studenten_Methoden_Statistiek)
+              Studenten_Methoden_Statistiek)
 
 summary(ANCOVA)
 ```
@@ -685,6 +685,7 @@ Bereken vervolgens de effectmaat partial eta squared met behulp van de functie `
 <!-- ## OPENBLOK: ANOVA-toets3.R -->
 ```{r}
 library(DescTools)
+
 EtaSq(ANCOVA)
 
 ```
@@ -707,39 +708,38 @@ EsqEC <- Round_and_format(pes[3,2])
 * Het effect van Opleiding op Eindcijfer Methoden & Statistiek is klein tot gemiddeld
 
 
-## Post-hoc toetsen en marginale gemiddelden
+# Post-hoc toetsen en marginale gemiddelden
 
 <!-- ## TEKSTBLOK: PHtest1.R -->
-Omdat er significante verschillen tussen de gemiddelde eindcijfers Methoden & Statistiek zijn voor studenten afkomstig van de opleidingen Psychologie, Onderwijskunde en Sociologie na controleren voor het aantal gevolgde hoorcolleges en het gemiddeld eindexamencijfer van de middelbare school, kunnen er post-hoc toetsen uitgevoerd worden om te onderzoeken tussen welke opleidingen er significante verschillen zijn.  Gebruik hiervoor de functie `emmeans_test` van het package `emmeans` met als argumenten de dataset `Studenten_Methoden_Statistiek`, de formule `Eindcijfer_MS ~ Opleiding` met als afhankelijke variabele `Eindcijfer_MS` en onafhankelijke variabele `Opleiding`, de covariaten `covariate = c(Aantal_Hoorcolleges, Eindexamencijfer)` en de correctie voor meerdere toetsen `p.adjust.method = "bonferroni"`.
+Omdat er significante verschillen tussen de gemiddelde eindcijfers Methoden & Statistiek zijn voor studenten afkomstig van de opleidingen Psychologie, Onderwijskunde en Sociologie na controleren voor het aantal gevolgde hoorcolleges en het gemiddeld eindexamencijfer van de middelbare school, kunnen er post-hoc toetsen uitgevoerd worden om te onderzoeken tussen welke opleidingen er significante verschillen zijn.  Gebruik hiervoor de functie `emmeans_test` van het package `rstatix` met als argumenten de dataset `Studenten_Methoden_Statistiek`, de formule `Eindcijfer_MS ~ Opleiding` met als afhankelijke variabele `Eindcijfer_MS` en onafhankelijke variabele `Opleiding`, de covariaten `covariate = c(Aantal_Hoorcolleges, Eindexamencijfer)` en de correctie voor meerdere toetsen `p.adjust.method = "fdr"`. Hier staat `fdr` voor de *false discovery rate* oftewel de Benjamini-Hochberg correctie.
 <!-- ## /TEKSTBLOK: PHtest1.R -->
 
 <!-- ## OPENBLOK: PHtest2.R -->
 ```{r}
-library(emmeans)
+library(rstatix)
 
 emmeans_test(Studenten_Methoden_Statistiek,
              Eindcijfer_MS ~ Opleiding, 
              covariate = c(Aantal_Hoorcolleges, 
                            Eindexamencijfer),
-             p.adjust.method = "bonferroni"
+             p.adjust.method = "fdr"
     )
 ```
 
-Bereken vervolgens de marginale gemiddelden voor elke opleiding. Het marginale gemiddelde is een gemiddelde dat gecorrigeerd is voor de covariaten. Gebruik de functie `get_emmeans()` van het package `emmeans` met als argument een object dat gemaakt wordt door de post-hoc toetsen uit te voeren.
+Bereken vervolgens de marginale gemiddelden voor elke opleiding. Het marginale gemiddelde is een gemiddelde dat gecorrigeerd is voor de covariaten. Gebruik de functie `get_emmeans()` van het package `rstatix` met als argument een object dat gemaakt wordt door de post-hoc toetsen uit te voeren.
 
 
 ```{r}
-library(emmeans)
+library(rstatix)
 
+# Voer de post-hoc toetsen uit en sla het resultaat op in een object
 Marginale_gemiddelden <- emmeans_test(Studenten_Methoden_Statistiek,
     Eindcijfer_MS ~ Opleiding, covariate = c(Aantal_Hoorcolleges, Eindexamencijfer),
-    p.adjust.method = "bonferroni"
+    p.adjust.method = "fdr"
     )
 
+# Bepaal de marginale gemiddelden
 get_emmeans(Marginale_gemiddelden)
-
-
-
 ```
 <!-- ## /OPENBLOK: PHtest2.R -->
 
@@ -749,7 +749,7 @@ posthoc <- emmeans_test(Studenten_Methoden_Statistiek,
              Eindcijfer_MS ~ Opleiding, 
              covariate = c(Aantal_Hoorcolleges, 
                            Eindexamencijfer),
-             p.adjust.method = "bonferroni"
+             p.adjust.method = "fdr"
     )
 
 marmeans <- get_emmeans(Marginale_gemiddelden)
@@ -761,7 +761,7 @@ marmeans <- get_emmeans(Marginale_gemiddelden)
 <!-- ## TEKSTBLOK: PHtest7.R -->
 De verschillen voor de groepen van de onafhankelijke variabele Opleiding zijn[^11]:
 
-* Onderwijskunde versus Psychologie: het marginale gemiddelden van de studenten Onderwijskunde (`r Round_and_format(marmeans$emmean[1])`) en de studenten Psychologie (`r Round_and_format(marmeans$emmean[1])`) zijn niet significant verschillend van elkaar (*p* = 1,00)
+* Onderwijskunde versus Psychologie: het marginale gemiddelden van de studenten Onderwijskunde (`r Round_and_format(marmeans$emmean[1])`) en de studenten Psychologie (`r Round_and_format(marmeans$emmean[2])`) zijn niet significant verschillend van elkaar (*p* = 1,00)
 * Onderwijskunde versus Sociologie: het marginale gemiddelden van de studenten Onderwijskunde (`r Round_and_format(marmeans$emmean[1])`) en de studenten Psychologie (`r Round_and_format(marmeans$emmean[3])`) zijn niet significant verschillend van elkaar (*p* < 0,0001)
 * Psychologie versus Sociologie: het marginale gemiddelden van de studenten Onderwijskunde (`r Round_and_format(marmeans$emmean[2])`) en de studenten Psychologie (`r Round_and_format(marmeans$emmean[3])`) zijn niet significant verschillend van elkaar (*p* < 0,0001)
 
@@ -773,7 +773,7 @@ De marginale gemiddelden zijn hier gelijk aan de op basis van de *ANCOVA* voorsp
 <!-- ## TEKSTBLOK: Rapportage.R -->
 De *ANCOVA* is uitgevoerd om te toetsen of er verschillen zijn tussen studenten afkomstig van de opleidingen Psychologie, Onderwijskunde en Sociologie wat betreft het gemiddelde eindcijfer voor het vak Methoden & Statistiek controlerend voor het aantal gevolgde hoorcolleges en het gemiddelde eindexamencijfer van de middelbare school. De resultaten laten zien dat er significante verschillen zijn tussen de gemiddelde eindcijfers van de drie opleidingen na controleren voor beide covariaten,  *F* (`r OLvDF1`,`r OLvDF2`) = `r OLvF_waarde`, *p* < 0,0001, *η^2^* = `r EsqOL`.
 
-Om te onderzoeken welke opleidingen van elkaar verschillen in het gemiddeld eindcijfer Methoden & Statistiek, zijn post-hoc toetsen uitgevoerd met een Bonferroni correctie voor meerdere toetsen. De marginale gemiddelden van de opleidingen Psychologie (`r Round_and_format(marmeans$emmean[2])`) en Onderwijskunde (`r Round_and_format(marmeans$emmean[1])`) zijn beide significant hoger dan het marginale gemiddelde van de opleiding Sociologie (`r Round_and_format(marmeans$emmean[3])`), maar verschillen niet significant van elkaar. De resultaten suggereren dat Sociologie studenten minder hoge cijfers halen dan studenten Psychologie en Onderwijskunde als er rekening gehouden wordt met het aantal gevolgde hoorcolleges en het gemiddeld eindexamencijfer van de middelbare school.
+Om te onderzoeken welke opleidingen van elkaar verschillen in het gemiddeld eindcijfer Methoden & Statistiek, zijn post-hoc toetsen uitgevoerd met een Benjamini-Hochberg correctie voor meerdere toetsen. De marginale gemiddelden van de opleidingen Psychologie (`r Round_and_format(marmeans$emmean[2])`) en Onderwijskunde (`r Round_and_format(marmeans$emmean[1])`) zijn beide significant hoger dan het marginale gemiddelde van de opleiding Sociologie (`r Round_and_format(marmeans$emmean[3])`), maar verschillen niet significant van elkaar. De resultaten suggereren dat Sociologie studenten minder hoge cijfers halen dan studenten Psychologie en Onderwijskunde als er rekening gehouden wordt met het aantal gevolgde hoorcolleges en het gemiddeld eindexamencijfer van de middelbare school.
 
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 

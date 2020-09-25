@@ -38,8 +38,10 @@ Gebruikte_packages <- c(
     "dplyr",
     "DescTools",
     "effsize", # misschien niet meer nodig door lsr
-    "ez",
+    "emmeans", # 31
     "exact2x2",
+    "ez",
+    "fmsb", # 41
     "ggplot2",
     "ggridges",
     "gsubfn",
@@ -47,10 +49,12 @@ Gebruikte_packages <- c(
     "here",
     "htmltools",
     #"klippy",
+    "lmtest", # 41
     "lsr",
     "markdown",
     "nortest",
     "plotly",
+    "pROC",
     "purrr",
     "QuantPsyc", # 28 
     "rapport",

@@ -76,7 +76,7 @@ dfToetsen <- tribble(
     
     ## Toetsmatrix II
     "28 Multipele lineaire regressie",                                                          1,          0,       0,               0,       
-    "29 Factoriele ANOVA",                                                                      0,          0,       0,               0,       
+    "29 Factoriele ANOVA",                                                                      1,          0,       0,               0,       
     "30 Multipele lineaire regressie",                                                          0,          0,       0,               0,       
     "31 ANCOVA",                                                                                0,          0,       0,               0,       
     "32 Repeated measures en mixed model ANOVA",                                                0,          0,       0,               0,       

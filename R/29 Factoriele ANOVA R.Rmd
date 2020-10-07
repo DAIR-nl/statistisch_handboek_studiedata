@@ -4,6 +4,7 @@ output:
   html_document:
     theme: lumen
     toc: yes
+    toc_depth: 2
     toc_float: 
       collapsed: FALSE 
     number_sections: true
@@ -41,11 +42,6 @@ if (!exists("Substitute_var")) {
 ```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
 ```
 <!-- ## /CLOSEDBLOK: Status.R -->
-
-```{r set-options, echo=FALSE, cache=FALSE}
-options(width = 80)
-## Zodat de TukeyHSD naast elkaar geprint wordt
-```
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
@@ -169,16 +165,15 @@ Inspecteer voor alle groepen het gemiddelde, de standaardafwijking, de mediaan e
 <!-- ## /TEKSTBLOK: Data-beschrijven.R -->
 
 <!-- ## OPENBLOK: Data-beschrijven-1.R -->
-```{r Data beschrijven 1, message = FALSE}
+```{r Data beschrijven 1, message = FALSE, warning = FALSE}
 # Gemiddelde, standaardafwijking, mediaan en aantal observaties
 library(summarytools)
 
 with(Gemiddelde_cijfers_psychologie, 
      stby(data = Gemiddeld_cijfer, 
           list(Geslacht, Vooropleiding), 
-          descr, 
+          summarytools::descr, 
           stats = c("mean", "sd", "med", "n.valid")))
-
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-1.R -->
 
@@ -354,12 +349,12 @@ Voer een *simple effects analyse* uit om het interactie-effect te interpreteren.
 ### Vooropleiding
 
 <!-- ## TEKSTBLOK: SimEff1.R -->
-Maak eerst een aparte dataset voor mannen en vrouwen aan en voer vervolgens de Games-Howell post hoc toets uit met behulp van de functie `games_howell_test` van het package `rstatix`. Het eerste argument is de dataset (bijvoorbeeld `Mannen_Gemiddelde_cijfers_psychologie`) en het tweede argument is de formule `Gemiddeld_cijfer ~ Vooropleiding` met de afhankelijke variabele `Gemiddeld_cijfer` en de onafhankelijke variabele `Vooropleiding`.
+Maak eerst een aparte dataset voor mannen en vrouwen aan en voer vervolgens de Games-Howell post hoc toets uit met behulp van de functie `posthocTGH()$output` van het package `userfriendlyscience`. Het eerste argument is de afhankelijke variabele (bijvoorbeeld `Mannen_Gemiddelde_cijfers_psychologie$Gemiddeld_cijfer`), het tweede argument is de onafhankelijke variabele (bijvoorbeeld `Mannen_Gemiddelde_cijfers_psychologie$Vooropleiding`) en het derde argument `method = "games-howell"` om aan te geven dat de Games-Howell post-hoc toets uitgevoerd moet worden.
 <!-- ## /TEKSTBLOK: SimEff1.R -->
 
 <!-- ## OPENBLOK: SimEff2.R -->
 ```{r, message = FALSE}
-library(rstatix)
+library(userfriendlyscience)
 
 # Maak een dataset met mannen en een dataset met vrouwen
 Mannen_Gemiddelde_cijfers_psychologie <- Gemiddelde_cijfers_psychologie[Gemiddelde_cijfers_psychologie$Geslacht == "Man",]
@@ -367,10 +362,17 @@ Mannen_Gemiddelde_cijfers_psychologie <- Gemiddelde_cijfers_psychologie[Gemiddel
 Vrouwen_Gemiddelde_cijfers_psychologie <- Gemiddelde_cijfers_psychologie[Gemiddelde_cijfers_psychologie$Geslacht == "Vrouw",]
 
 # Voer voor beide datasets de Games-Howell post-hoc toets uit
-games_howell_test(Mannen_Gemiddelde_cijfers_psychologie, 
-                  Gemiddeld_cijfer ~ Vooropleiding)
-games_howell_test(Vrouwen_Gemiddelde_cijfers_psychologie, 
-                  Gemiddeld_cijfer ~ Vooropleiding)
+Games_Howell_Mannen <- posthocTGH(Mannen_Gemiddelde_cijfers_psychologie$Gemiddeld_cijfer,
+           Mannen_Gemiddelde_cijfers_psychologie$Vooropleiding,
+           method = "games-howell")$output
+
+Games_Howell_Vrouwen <- posthocTGH(Vrouwen_Gemiddelde_cijfers_psychologie$Gemiddeld_cijfer,
+           Vrouwen_Gemiddelde_cijfers_psychologie$Vooropleiding,
+           method = "games-howell")$output
+
+# Geef de resultaten weer van de Games-Howell post-hoc toets
+Games_Howell_Mannen$games.howell
+Games_Howell_Vrouwen$games.howell
 ```
 <!-- ## /OPENBLOK: SimEff2.R -->
 
@@ -382,10 +384,17 @@ Mannen_Gemiddelde_cijfers_psychologie <- Gemiddelde_cijfers_psychologie[Gemiddel
 Vrouwen_Gemiddelde_cijfers_psychologie <- Gemiddelde_cijfers_psychologie[Gemiddelde_cijfers_psychologie$Geslacht == "Vrouw",]
 
 # Voer voor beide datasets de Games-Howell post-hoc toets uit
-GH_man <- games_howell_test(Mannen_Gemiddelde_cijfers_psychologie, 
-                            Gemiddeld_cijfer ~ Vooropleiding)
-GH_vrouw <- games_howell_test(Vrouwen_Gemiddelde_cijfers_psychologie, 
-                              Gemiddeld_cijfer ~ Vooropleiding)
+Games_Howell_Mannen <- posthocTGH(Mannen_Gemiddelde_cijfers_psychologie$Gemiddeld_cijfer,
+           Mannen_Gemiddelde_cijfers_psychologie$Vooropleiding,
+           method = "games-howell")$output
+
+Games_Howell_Vrouwen <- posthocTGH(Vrouwen_Gemiddelde_cijfers_psychologie$Gemiddeld_cijfer,
+           Vrouwen_Gemiddelde_cijfers_psychologie$Vooropleiding,
+           method = "games-howell")$output
+
+# Geef de resultaten weer van de Games-Howell post-hoc toets
+GH_man <- Games_Howell_Mannen$games.howell
+GH_vrouw <- Games_Howell_Vrouwen$games.howell
 
 ```
 <!-- ## /CLOSEDBLOK: SimEff3.R -->
@@ -393,15 +402,15 @@ GH_vrouw <- games_howell_test(Vrouwen_Gemiddelde_cijfers_psychologie,
 <!-- ## TEKSTBLOK: SimEff4.R -->
 Voor mannen zijn de volgende vergelijkingen getoetst[^18]:
 
-* Hbo-p versus vwo: het verschil in gemiddelde (vwo - hbo-p) is `r Round_and_format(GH_man$estimate[1])`, dit is een significant verschil (*p* < 0,0001).
-* Hbo-p versus overig: het verschil in gemiddelde (overig - hbo-p) is `r Round_and_format(GH_man$estimate[2])`, dit is een significant verschil (*p* < 0,01).
-* Vwo versus overig: het verschil in gemiddelde (overig - vwo) is `r Round_and_format(GH_man$estimate[3])`, dit is geen significant verschil (*p* = 1,00).
+* Hbo-p versus vwo: het verschil in gemiddelde (vwo - hbo-p) is `r Round_and_format(GH_man$diff[1])`, dit is een significant verschil (*p* < 0,0001).
+* Hbo-p versus overig: het verschil in gemiddelde (overig - hbo-p) is `r Round_and_format(GH_man$diff[2])`, dit is een significant verschil (*p* < 0,01).
+* Vwo versus overig: het verschil in gemiddelde (overig - vwo) is `r Round_and_format(GH_man$diff[3])`, dit is geen significant verschil (*p* = `r Round_and_format(GH_man$p[3])`).
 
 Voor vrouwen zijn de volgende vergelijkingen getoetst[^18]:
 
-* Hbo-p versus vwo: het verschil in gemiddelde (vwo - hbo-p) is `r Round_and_format(GH_vrouw$estimate[1])`, dit is geen significant verschil (*p* = `r Round_and_format(GH_vrouw$p.adj[1])`).
-* Hbo-p versus overig: het verschil in gemiddelde (overig - hbo-p) is `r Round_and_format(GH_vrouw$estimate[2])`, dit is geen significant verschil (*p* = `r Round_and_format(GH_vrouw$p.adj[2])`).
-* Vwo versus overig: het verschil in gemiddelde (overig - vwo) is  `r Round_and_format(GH_vrouw$estimate[3])`, dit is geen significant verschil (*p* = 1,00).
+* Hbo-p versus vwo: het verschil in gemiddelde (vwo - hbo-p) is `r Round_and_format(GH_vrouw$diff[1])`, dit is geen significant verschil (*p* = `r Round_and_format(GH_vrouw$p[1])`).
+* Hbo-p versus overig: het verschil in gemiddelde (overig - hbo-p) is `r Round_and_format(GH_vrouw$diff[2])`, dit is geen significant verschil (*p* = `r Round_and_format(GH_vrouw$p[2])`).
+* Vwo versus overig: het verschil in gemiddelde (overig - vwo) is  `r Round_and_format(GH_vrouw$diff[3])`, dit is geen significant verschil (*p* = 1,00).
 
 <!-- ## /TEKSTBLOK: SimEff4.R -->
 
@@ -409,13 +418,13 @@ Voor vrouwen zijn de volgende vergelijkingen getoetst[^18]:
 ### Geslacht
 
 <!-- ## TEKSTBLOK: SimEff5.R -->
-Maak eerst aparte datasets voor studenten met een hbo-p, vwo en overige vooropleiding en voer vervolgens de Games-Howell post hoc toets uit met behulp van de functie `games_howell_test` van het package `rstatix`. Het eerste argument is de dataset (bijvoorbeeld `Hbo_Gemiddelde_cijfers_psychologie`) en het tweede argument is de formule `Gemiddeld_cijfer ~ Geslacht` met de afhankelijke variabele `Gemiddeld_cijfer` en de onafhankelijke variabele `Geslacht`.
+Maak eerst aparte datasets voor studenten met een hbo-p, vwo en overige vooropleiding en voer vervolgens de Games-Howell post hoc toets uit met behulp van de functie `posthocTGH()$output` van het package `userfriendlyscience`. Het eerste argument is de afhankelijke variabele (bijvoorbeeld `Hbo_Gemiddelde_cijfers_psychologie$Gemiddeld_cijfer`), het tweede argument is de onafhankelijke variabele (bijvoorbeeld `Hbo_Gemiddelde_cijfers_psychologie$Geslacht`) en het derde argument `method = "games-howell"` om aan te geven dat de Games-Howell post-hoc toets uitgevoerd moet worden.
 <!-- ## /TEKSTBLOK: SimEff5.R -->
 
 <!-- ## OPENBLOK: SimEff6.R -->
 
 ```{r}
-library(rstatix)
+library(userfriendlyscience)
 
 # Maak een dataset met studenten met een hbo-p, vwo en overige vooropleiding
 Hbo_Gemiddelde_cijfers_psychologie <- Gemiddelde_cijfers_psychologie[Gemiddelde_cijfers_psychologie$Vooropleiding == "hbo",]
@@ -425,19 +434,28 @@ Vwo_Gemiddelde_cijfers_psychologie <- Gemiddelde_cijfers_psychologie[Gemiddelde_
 Overig_Gemiddelde_cijfers_psychologie <- Gemiddelde_cijfers_psychologie[Gemiddelde_cijfers_psychologie$Vooropleiding == "overig",]
 
 # Voer voor de drie datasets de Games-Howell post-hoc toets uit
-games_howell_test(Hbo_Gemiddelde_cijfers_psychologie, 
-                  Gemiddeld_cijfer ~ Geslacht)
-games_howell_test(Vwo_Gemiddelde_cijfers_psychologie, 
-                  Gemiddeld_cijfer ~ Geslacht)
-games_howell_test(Overig_Gemiddelde_cijfers_psychologie, 
-                  Gemiddeld_cijfer ~ Geslacht)
+Games_Howell_hbo <- posthocTGH(Hbo_Gemiddelde_cijfers_psychologie$Gemiddeld_cijfer,
+           Hbo_Gemiddelde_cijfers_psychologie$Geslacht,
+           method = "games-howell")$output
+
+Games_Howell_vwo <- posthocTGH(Vwo_Gemiddelde_cijfers_psychologie$Gemiddeld_cijfer,
+           Vwo_Gemiddelde_cijfers_psychologie$Geslacht,
+           method = "games-howell")$output
+
+Games_Howell_overig <- posthocTGH(Overig_Gemiddelde_cijfers_psychologie$Gemiddeld_cijfer,
+           Overig_Gemiddelde_cijfers_psychologie$Geslacht,
+           method = "games-howell")$output
+
+# Geef de resultaten weer van de Games-Howell post-hoc toets
+Games_Howell_hbo$games.howell
+Games_Howell_vwo$games.howell
+Games_Howell_overig$games.howell
 ```
 <!-- ## /OPENBLOK: SimEff6.R -->
 
 <!-- ## CLOSEDBLOK: SimEff7.R -->
 
 ```{r, echo=FALSE}
-
 # Maak een dataset met studenten met een hbo-p, vwo en overige vooropleiding
 Hbo_Gemiddelde_cijfers_psychologie <- Gemiddelde_cijfers_psychologie[Gemiddelde_cijfers_psychologie$Vooropleiding == "hbo",]
 
@@ -446,17 +464,30 @@ Vwo_Gemiddelde_cijfers_psychologie <- Gemiddelde_cijfers_psychologie[Gemiddelde_
 Overig_Gemiddelde_cijfers_psychologie <- Gemiddelde_cijfers_psychologie[Gemiddelde_cijfers_psychologie$Vooropleiding == "overig",]
 
 # Voer voor de drie datasets de Games-Howell post-hoc toets uit
-GH_hbo <- games_howell_test(Hbo_Gemiddelde_cijfers_psychologie, Gemiddeld_cijfer ~ Geslacht)
-GH_vwo <- games_howell_test(Vwo_Gemiddelde_cijfers_psychologie, Gemiddeld_cijfer ~ Geslacht)
-GH_overig <- games_howell_test(Overig_Gemiddelde_cijfers_psychologie, Gemiddeld_cijfer ~ Geslacht)
+Games_Howell_hbo <- posthocTGH(Hbo_Gemiddelde_cijfers_psychologie$Gemiddeld_cijfer,
+           Hbo_Gemiddelde_cijfers_psychologie$Geslacht,
+           method = "games-howell")$output
+
+Games_Howell_vwo <- posthocTGH(Vwo_Gemiddelde_cijfers_psychologie$Gemiddeld_cijfer,
+           Vwo_Gemiddelde_cijfers_psychologie$Geslacht,
+           method = "games-howell")$output
+
+Games_Howell_overig <- posthocTGH(Overig_Gemiddelde_cijfers_psychologie$Gemiddeld_cijfer,
+           Overig_Gemiddelde_cijfers_psychologie$Geslacht,
+           method = "games-howell")$output
+
+# Geef de resultaten weer van de Games-Howell post-hoc toets
+GH_hbo <- Games_Howell_hbo$games.howell
+GH_vwo <- Games_Howell_vwo$games.howell
+GH_overig <- Games_Howell_overig$games.howell
 
 ```
 <!-- ## /CLOSEDBLOK: SimEff7.R -->
 
 <!-- ## TEKSTBLOK: SimEff8.R -->
-* Hbo-p: het verschil in gemiddelde (vrouw - man) is `r Round_and_format(GH_hbo$estimate[1])`, dit is een significant verschil (*p* < 0,0001).[^18]
-* Vwo: het verschil in gemiddelde (vrouw - man) is `r Round_and_format(GH_vwo$estimate[1])`, dit is een significant verschil (*p* = `r Round_and_format(GH_vwo$p.adj[1])`).[^18]
-* Overig: het verschil in gemiddelde (vrouw - man) is `r Round_and_format(GH_overig$estimate[1])`, dit is een significant verschil (*p* = `r Round_and_format(GH_overig$p.adj[1])`).[^18]
+* Hbo-p: het verschil in gemiddelde (vrouw - man) is `r Round_and_format(GH_hbo$diff[1])`, dit is een significant verschil (*p* < 0,0001).[^18]
+* Vwo: het verschil in gemiddelde (vrouw - man) is `r Round_and_format(GH_vwo$diff[1])`, dit is een significant verschil (*p* = `r Round_and_format(GH_vwo$p[1])`).[^18]
+* Overig: het verschil in gemiddelde (vrouw - man) is `r Round_and_format(GH_overig$diff[1])`, dit is een significant verschil (*p* = `r Round_and_format(GH_overig$p[1])`).[^18]
 
 <!-- ## /TEKSTBLOK: SimEff8.R -->
 
@@ -491,20 +522,27 @@ vP <- Round_and_format(FA$`Pr(>F)`[3])
 <!-- ## /CLOSEDBLOK: PHtest3.R -->
 
 <!-- ## TEKSTBLOK: PHtest4.R -->
-Er is geen significant interactie-effect van Vooropleiding en Geslacht op Gemiddeld_cijfer, *F* (`r vDF1`,`r vDF2`) = `r vF_waarde`, *p* = `r vP`.[^18] De hoofdeffecten van Geslacht (*p* < 0,01) en Vooropleiding (*p* < 0,0001) zijn wel significant.[^18] Voer daarom de Games_howell post-hoc toets uit voor beide variabelen. Gebruik hiervoor de functie `games_howell_test` van het package `rstatix`. Het eerste argument is de dataset `Hoofdeffecten_Gemiddelde_cijfers_psychologie` en het tweede argument is de formule `Gemiddeld_cijfer ~ Vooropleiding` met de afhankelijke variabele `Gemiddeld_cijfer` en de onafhankelijke variabele `Vooropleiding`. In het tweede geval is de formule `Gemiddeld_cijfer ~ Geslacht` en de onafhankelijke variabele `Geslacht`.
+Er is geen significant interactie-effect van Vooropleiding en Geslacht op Gemiddeld_cijfer, *F* (`r vDF1`,`r vDF2`) = `r vF_waarde`, *p* = `r vP`.[^18] De hoofdeffecten van Geslacht (*p* < 0,01) en Vooropleiding (*p* < 0,0001) zijn wel significant.[^18] Voer daarom de Games_howell post-hoc toets uit voor beide variabelen. Gebruik hiervoor de functie `posthocTGH()$output` van het package `userfriendlyscience`. Het eerste argument is de afhankelijke variabele `Hoofdeffecten_Gemiddelde_cijfers_psychologie$Gemiddeld_cijfer`, het tweede argument is de onafhankelijke variabele (bijvoorbeeld `Hoofdeffecten_Gemiddelde_cijfers_psychologie$Geslacht`) en het derde argument `method = "games-howell"` om aan te geven dat de Games-Howell post-hoc toets uitgevoerd moet worden.
 <!-- ## /TEKSTBLOK: PHtest4.R -->
 
 <!-- ## OPENBLOK: PHtest5.R -->
 ```{r}
-library(rstatix)
+library(userfriendlyscience)
 
 # Voer de post-hoc toets uit voor de onafhankelijke variabele Vooropleiding
-games_howell_test(Hoofdeffecten_Gemiddelde_cijfers_psychologie, 
-                  Gemiddeld_cijfer ~ Vooropleiding)
+Games_Howell_vooropleiding <- posthocTGH(Hoofdeffecten_Gemiddelde_cijfers_psychologie$Gemiddeld_cijfer,
+           Hoofdeffecten_Gemiddelde_cijfers_psychologie$Vooropleiding,
+           method = "games-howell")$output
 
 # Voer de post-hoc toets uit voor de onafhankelijke variabele Geslacht
-games_howell_test(Hoofdeffecten_Gemiddelde_cijfers_psychologie, 
-                  Gemiddeld_cijfer ~ Geslacht)
+Games_Howell_geslacht <- posthocTGH(Hoofdeffecten_Gemiddelde_cijfers_psychologie$Gemiddeld_cijfer,
+           Hoofdeffecten_Gemiddelde_cijfers_psychologie$Geslacht,
+           method = "games-howell")$output
+
+# Geef de resultaten weer van de Games-Howell post-hoc toets
+Games_Howell_vooropleiding$games.howell
+Games_Howell_geslacht$games.howell
+
 
 ```
 <!-- ## /OPENBLOK: PHtest5.R -->
@@ -512,11 +550,8 @@ games_howell_test(Hoofdeffecten_Gemiddelde_cijfers_psychologie,
 <!-- ## CLOSEDBLOK: PHtest6.R -->
 ````{r, echo=FALSE}
 
-GH_Vooropleiding <- games_howell_test(Hoofdeffecten_Gemiddelde_cijfers_psychologie, 
-                                      Gemiddeld_cijfer ~ Vooropleiding)
-
-GH_Geslacht <- games_howell_test(Hoofdeffecten_Gemiddelde_cijfers_psychologie, 
-                                 Gemiddeld_cijfer ~ Geslacht)
+GH_Vooropleiding <- Games_Howell_vooropleiding$games.howell
+GH_Geslacht <- Games_Howell_geslacht$games.howell
 
 
 ```
@@ -525,13 +560,13 @@ GH_Geslacht <- games_howell_test(Hoofdeffecten_Gemiddelde_cijfers_psychologie,
 <!-- ## TEKSTBLOK: PHtest7.R -->
 De verschillen voor de groepen van de onafhankelijke variabele Vooropleiding zijn[^18]:
 
-* Hbo-p versus vwo: het verschil in gemiddelde (vwo - hbo-p) is `r Round_and_format(GH_Vooropleiding$estimate[1])`, dit is een significant verschil (*p* < 0,0001).
-* Hbo-p versus overig: het verschil in gemiddelde (overig - hbo-p) is `r Round_and_format(GH_Vooropleiding$estimate[2])`, dit is een significant verschil (*p* < 0,001).
-* Vwo versus overig: het verschil in gemiddelde (overig - vwo) is `r Round_and_format(GH_Vooropleiding$estimate[3])`, dit is geen significant verschil (*p* = 1,00).
+* Hbo-p versus vwo: het verschil in gemiddelde (vwo - hbo-p) is `r Round_and_format(GH_Vooropleiding$diff[1])`, dit is een significant verschil (*p* < 0,0001).
+* Hbo-p versus overig: het verschil in gemiddelde (overig - hbo-p) is `r Round_and_format(GH_Vooropleiding$diff[2])`, dit is een significant verschil (*p* < 0,001).
+* Vwo versus overig: het verschil in gemiddelde (overig - vwo) is `r Round_and_format(GH_Vooropleiding$diff[3])`, dit is geen significant verschil (*p* = `r Round_and_format(GH_Vooropleiding$p[3])`).
 
 De verschillen voor de groepen van de onafhankelijke variabele Geslacht zijn[^18]:
 
-* Man versus Vrouw: het verschil in gemiddelde (vrouw - man) is `r Round_and_format(GH_Geslacht$estimate[1])`, dit is een significant verschil (*p* < 0,01).
+* Man versus Vrouw: het verschil in gemiddelde (vrouw - man) is `r Round_and_format(GH_Geslacht$diff[1])`, dit is een significant verschil (*p* = 0,009).
 
 <!-- ## /TEKSTBLOK: PHtest7.R -->
 

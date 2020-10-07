@@ -66,7 +66,8 @@ Gebruikte_packages <- c(
     "rlist",
     "stringi",
     "stringr",
-    "summarytools", # 29
+    "userfriendlyscience", # 29 
+    "summarytools", # 29, LET OP: laad deze na package userfriendlyscience
     "tidyverse"
 )
 

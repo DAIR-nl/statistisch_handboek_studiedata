@@ -4,6 +4,7 @@ output:
   html_document:
     theme: lumen
     toc: yes
+    toc_depth: 2
     toc_float: 
       collapsed: FALSE 
     number_sections: true
@@ -59,7 +60,7 @@ Gebruik de *Kruskal Wallis toets* om te toetsen of de gemiddelde rangnummers van
 <div id="casus">
 De opleidingsdirecteur van de tweejarige Masteropleiding Arbeidsrecht is geïnteresseerd in de afstudeersnelheid van haar studenten. Zij vraagt zich af of er een verschil zit in het type vooropleiding dat de studenten hebben gehaald en de hoeveel studiepunten die de studenten behalen in het eerste jaar. Zij kijkt naar de vier meest gangbare vooropleidingen die de studenten doorlopen voordat ze met de Master Arbeidsrecht beginnen: de Bachelors Fiscaal Recht, Notarieel Recht en Rechtsgeleerdheid en de Premaster. 
 
-Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
 *H~0~*: Het gemiddelde rangnummer van de verdeling van het aantal behaalde studiepunten in het eerste jaar van de master Arbeidsrecht is gelijk voor de studenten met als vooropleidingen Bachelor Fiscaal Recht, Notarieel Recht of Rechtsgeleerdheid of de Premaster.
 
@@ -367,4 +368,5 @@ De [Mann-Whitney U toets](08-Mann-Whitney-U-toets-Python.html) is uitgevoerd als
 [^16]: Een ordinale variabele is een categorische variabele waarbij de categorieën geordend kunnen worden. Een voorbeeld is de variabele beoordeling met de categorieën Onvoldoende, Voldoende, Goed en Uitstekend.
 [^17]:  Laerd statistics (2018). *Kruskal-Wallis H Test using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/kruskal-wallis-h-test-using-spss-statistics.php.
 [^18]: De breedte van de staven van het histogram worden hier automatisch bepaald, maar kunnen handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
+[^19]: Bij de *Kruskal Wallis toets* en andere nonparametrische toetsen wordt de data eerst gerangschikt zodat elke observatie een rangnummer toegewezen krijgt. Deze rangnummers worden vervolgens gebruikt om de toets uit te voeren.
 

@@ -4,6 +4,7 @@ output:
   html_document:
     theme: lumen
     toc: yes
+    toc_depth: 2
     toc_float: 
       collapsed: FALSE 
     number_sections: true
@@ -57,7 +58,7 @@ Gebruik de *Wilcoxon signed rank toets* om te toetsen of de som van de rangnumme
 <div id ="casus">
 De directeur van de Academie Mens & Maatschappij wil bekijken hoe het inkomen van zijn alumni zich ontwikkelt nadat zij zijn afgestudeerd. Deze informatie is interessant om te gebruiken bij voorlichtingsactiviteiten van de Academie. Hij bekijkt het bruto jaarinkomen van de alumni één jaar na afstuderen en vergelijkt het met het bruto jaarinkomen vijf jaar na afstuderen. 
 
-Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
 *H~0~*: Er is geen verschil in de som van rangnummers van de verdeling tussen het bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij één jaar na afstuderen en vijf jaar na afstuderen.
 
@@ -305,3 +306,4 @@ De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de 
 [^9]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
 [^10]: Een ordinale variabele is een categorische variabele waarbij de categorieën geordend kunnen worden. Een voorbeeld is de variabele beoordeling met de categorieën Onvoldoende, Voldoende, Goed en Uitstekend.
 [^11]: De breedte van de staven van het histogram worden hier automatisch bepaald, maar kunnen handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
+[^12]: Bij de *Wilcoxon signed rank toets* en andere nonparametrische toetsen wordt de data eerst gerangschikt zodat elke observatie een rangnummer toegewezen krijgt. Deze rangnummers worden vervolgens gebruikt om de toets uit te voeren.

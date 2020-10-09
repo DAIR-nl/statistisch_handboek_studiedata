@@ -52,8 +52,11 @@ source(paste0(here::here(),"/01. Includes/data/09.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
+
+<!-- ## TEKSTBLOK: Link1.R -->
 Gebruik *Friedman's ANOVA* om de gemiddelde rangnummers[^13] te vergelijken voor de verdelingen van drie of meer herhaalde metingen van één groep of voor de verdelingen van drie of meer gepaarde groepen.[^1]<sup>, </sup>[^2] *Friedman's ANOVA* is een alternatief voor de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) wanneer de data niet aan de assumptie van normaliteit voldoet. Daarnaast hebben uitbijters minder invloed op het resultaat van *Friedman's ANOVA* in vergelijking tot de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html). Echter, als de data aan de assumpties van de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) voldoet, heeft die toets een hoger onderscheidend vermogen dan *Friedman's ANOVA*.[^3]
 
+<!-- ## /TEKSTBLOK: Link1.R -->
 
 
 # Onderwijscasus
@@ -79,7 +82,10 @@ De p-waarde geeft aan of het verschil tussen groepen significant is. De grootte 
 
 
 # Post-hoc toetsen
+
+<!-- ## TEKSTBLOK: Link2.R -->
 *Friedman's ANOVA* toetst of er verschillen zijn tussen de verdelingen van groepen. Voer een post-hoc toets uit om te bepalen welke groepen van elkaar verschillen. Gebruik de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html) als post-hoc toets. De [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html) toetst of er een verschil tussen de verdelingen is van twee gepaarde groepen (i.e. of een van beide verdelingen hogere waardes heeft dan de andere verdeling). Hoewel het minder gebruikelijk is, is de [tekentoets](27-Tekentoets-II-R.html) ook een optie als post-hoc toets. Deze toets toetst het verschil tussen de medianen van twee gepaarde groepen.
+<!-- ## /TEKSTBLOK: Link2.R -->
 
 Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout. Er zijn ook andere opties voor een correctie op de p-waarden.[^5]
 
@@ -92,6 +98,7 @@ Er is een dataset `Beoordelingen_eetgelegenheden` ingeladen met de beoordelingen
 <!-- ## TEKSTBLOK: Data-bekijken.R -->
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 <!-- ## /TEKSTBLOK: Data-bekijken.R -->
+
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
 ## Eerste 6 observaties
@@ -113,10 +120,10 @@ unique(Beoordelingen_eetgelegenheden$Eetgelegenheid)
 ```
 <!-- ## /OPENBLOK: Data-bekijken-2.R -->
 
-<!-- ## TEKSTBLOK: Data-bekijken.R-->
+<!-- ## TEKSTBLOK: Data-bekijken3.R-->
 Inspecteer voor de beoordelingen per gebouw de mediaan, de kwartielen en het aantal observaties. Gebruik de mediaan en kwartielen omdat de beoordelingen waarschijnlijk niet normaal verdeeld zijn. Gebruik hiervoor de functie `descr` en `stby` van het package `summarytools` om de beschrijvende statistieken per groep weer te geven. Voer de gewenste statistieken in met het argument `stats = c("q1","med","q3","n.valid")`.
 
-<!-- ## /TEKSTBLOK: Data-bekijken.R-->
+<!-- ## /TEKSTBLOK: Data-bekijken3.R-->
 
 <!-- ## OPENBLOK: Data-beschrijven.R -->
 ``` {r data beschrijven, warning=FALSE, message=FALSE}
@@ -224,6 +231,7 @@ vdf <- Round_and_format(obj$parameter)
 <!-- ## /CLOSEDBLOK: ANOVA-toets.R -->
 
 Bereken vervolgens de effectmaat *Kendall's W* op basis van de *&chi;^2^* waarde van *Friedman's ANOVA*.
+<!-- ## OPENBLOK: ANOVA-toets2.R -->
 ```{r effectgrootte}
 # Sla de Chi-kwadraat waarde op
 Chi2 <- friedman.test(y = Beoordelingen_eetgelegenheden$Beoordeling, 
@@ -243,6 +251,7 @@ W <- Chi2 / (N * (k - 1))
 paste("De effectmaat is", W)
 
 ```
+<!-- ## /OPENBLOK: ANOVA-toets2.R -->
 
 
 <!-- ## TEKSTBLOK: ANOVA-toets1.R -->
@@ -292,7 +301,9 @@ Effectmaat_SC_CC <- abs(qnorm(posthoc[3,2]/2)) / sqrt(length(unique(Beoordelinge
 ```
 <!-- ## /OPENBLOK: post-hoc4.R -->
 
+<!-- ## TEKSTBLOK: Link4.R -->
 De [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html) gebruikt de som van positieve en negatieve rangnummers van de verschilscores om de significantie van de toets te bepalen. Deze sommen beschrijven het verschil tussen twee gepaarde groepen waarbij de groep met een hogere som van rangnummers ook hogere waarden op de afhankelijke variabele heeft. In deze casus heeft het gebouw met hogere rangnummers een hogere beoordeling door studenten. Bereken de som van de positieve en negatieve rangnummers voor alle vergelijkingen.
+<!-- ## /TEKSTBLOK: Link4.R -->
 
 <!-- ## OPENBLOK: post-hoc5.R -->
 ```{r som rang}

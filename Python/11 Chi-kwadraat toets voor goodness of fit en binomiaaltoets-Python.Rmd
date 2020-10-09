@@ -4,6 +4,7 @@ output:
   html_document:
     theme: lumen
     toc: yes
+    toc_depth: 2
     toc_float: 
       collapsed: FALSE 
     number_sections: true
@@ -48,16 +49,13 @@ source(paste0(here::here(),"/01. Includes/data/11.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.py -->
 # Toepassing
 
-Gebruik de *Chi-kwadraat toets voor goodness of fit* om te onderzoeken of de geobserveerde verdeling van de aantallen observaties voor de categorieën van één categorische variabele overeenkomt met de verwachte verdeling van de categorische variabele.[^6]<sup>,</sup>[^7] Met deze toets kan een geobserveerd percentage met een bekend of verwacht percentage vergeleken worden. Gebruik de exacte *binomiaaltoets* bij een laag aantal observaties.[^1] 
-
-
-
+Gebruik de *Chi-kwadraat toets voor goodness of fit* om te onderzoeken of de geobserveerde frequenties van de categorieën van één categorische variabele overeenkomt met de verwachte frequenties van de categorische variabele.[^6]<sup>,</sup>[^7] Met deze toets kan een geobserveerd percentage met een bekend of verwacht percentage vergeleken worden. Gebruik de exacte *binomiaaltoets* bij een laag aantal observaties.[^1] 
 
 # Onderwijscasus
 <div id = "casus">
-De controller van een universiteit is geïnteresseerd in de instroom van studenten met een hbo vooropleiding. Zij wil weten of haar Universiteit relatief veel studenten met een vooropleiding in het hbo heeft in vergelijking met het landelijke gemiddelde. Op de website van de VSNU vindt ze dat studenten met een hbo vooropleiding 11,13% uitmaken van de totale instroom voor Bachelors en Masters in het wetenschappelijk onderwijs (wo) in 2018.[^2] Ze wil weten of er op haar instelling naar verhouding evenveel hbo-studenten zijn als het landelijk gemiddelde.
+De controller van een universiteit is geïnteresseerd in de instroom van studenten met een hbo vooropleiding. Zij wil weten of haar universiteit relatief veel studenten met een vooropleiding in het hbo heeft in vergelijking met het landelijke gemiddelde. Op de website van de VSNU vindt ze dat studenten met een hbo vooropleiding 11,13% uitmaken van de totale instroom voor Bachelors en Masters in het wetenschappelijk onderwijs (wo) in 2018.[^2] Ze wil weten of er op haar instelling naar verhouding evenveel hbo-studenten zijn als het landelijk gemiddelde.
 
-Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
 H~0~: De verdeling van de vooropleiding van de instromende studenten is gelijk aan de landelijke verdeling (11,13% met een hbo vooropleiding). 
 
@@ -66,12 +64,9 @@ H~A~: De verdeling van de vooropleiding van de instromende studenten is niet gel
 
 # Assumpties
 
-Om de *Chi-kwadraat toets voor goodness of fit* uit te voeren, moet de variabele nominaal of ordinaal zijn.[^6] De exacte *binomiaaltoets* vereist een binaire[^3] variabele. In deze casus is de categorische variabele binair. 
+Om de *Chi-kwadraat toets voor goodness of fit* uit te voeren, moet de variabele nominaal[^9] of ordinaal[^8] zijn.[^6] De exacte *binomiaaltoets* vereist een binaire[^3] variabele. In deze casus is de categorische variabele binair. 
 
-De categorieën van de variabele mogen niet overlappen, wat wil zeggen dat elke observatie slechts in een van de categorieën past. Voor de *Chi-kwadraat toets voor goodness of fit* mag in niet meer dan 20% van de categorieën van de variabele het verwacht aantal observaties vijf of minder zijn. Als dit wel het geval is, gebruik dan de *binomiaaltoets*.[^7]
-
-
-
+De categorieën van de variabele mogen niet overlappen, wat wil zeggen dat elke observatie slechts in een van de categorieën past. Voor de *Chi-kwadraat toets voor goodness of fit* mag in niet meer dan 20% van de categorieën van de variabele de verwachte frequentie minder dan vijf zijn. Als dit wel het geval is, gebruik dan de *binomiaaltoets*.[^7]
 
 # De data bekijken
 
@@ -121,7 +116,7 @@ Het percentage studenten met hbo vooropleiding is `r Round_and_format(py$Percent
 
 # Chi-kwadraat toets voor goodness of fit
 
-## Asssumptie verwacht aantal observaties
+## Asssumptie verwachte frequenties
 
 <!-- ## TEKSTBLOK: Assumptie.py -->
 Het verwacht aantal observaties mag niet vijf of minder zijn in 20% van de categorieën van de categorische variabele. Aangezien er een binaire variabele getoetst wordt, mag geen van beide categorieën dus vijf of minder verwachte observaties hebben. Bereken het verwacht aantal observaties door de proporties van de nulhyothese (11,3% met hbo vooropleiding, dus 0,113 en 1 - 0,113) te vermenigvuldigen met het totaal aantal observaties in de dataset (`len(dfInstroom_2018_totaal)`).
@@ -141,9 +136,7 @@ print(Verwacht_aantal_observaties)
 ```
 <!-- ## /OPENBLOK: Assumptie1.py -->
 
-Geen van de verwachte aantallen observaties is gelijk of kleiner dan vijf, dus de *Chi-kwadraat toets voor goodness of fit* kan worden uitgevoerd.
-
-
+Geen van de verwachte frequenties is kleiner dan vijf, dus de *Chi-kwadraat toets voor goodness of fit* kan worden uitgevoerd.
 
 ## Uitvoering
 
@@ -300,9 +293,13 @@ De *binomiaaltoets* is uitgevoerd om te onderzoeken of de verdeling van het inst
 [^1]: Agresti, A. (2003). *Categorical data analysis*. Vol. 482, John Wiley & Sons.
 [^2]: Het percentage is een berekening op basis van cijfers van de Vereniging van Universiteiten (VSNU). In 2018 zijn er 102.147 studenten ingestroomd in Universitaire Bachelors en Masters. In dat zelfde jaar stroomden bij de universiteiten 11.374 studenten met een hbo vooropleiding in. Deze studenten maken dus 11,13% uit van de totale instroom.  Zie respectievelijk: Vereniging van Universiteiten (2019). *Downloadbare tabellen Studenten*. Opgehaald van de website van de VSNU: https://www.vsnu.nl/nl_NL/f_c_studenten_downloads.html. Vereniging van Universiteiten (2019). *Factsheet - Nederlandse Universiteiten Zijn Toegankelijk*. Opgehaald van de website van de VSNU: https://www.vsnu.nl/files/documenten/Nederlands%20universiteiten%20zijn%20toegankelijk%20-%20tbv%20AO%20Toegankelijkheid%20en%20Kansengelijkheid%20in%20het%20hoger%20onderwijs%20d.d.%2020-2-2019.pdf
 [^3]: Binaire variabelen: twee elkaar uitsluitende waarden, zoals ja of nee, 0 of 1, aan of uit.
+[^4]: Een proportie van een bepaalde categorie is de frequentie van de categorie gedeeld door het totaal aantal observaties. Het kan gezien worden als de kans van een bepaalde categorie en bevat een waarde tussen 0 en 1.
 [^5]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
 [^6]: Laerd Statistics (2018). *Chi-Square Goodness-of-Fit Test in SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/chi-square-goodness-of-fit-test-in-spss-statistics.php
 [^7]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
+[^8]: Een ordinale variabele is een categorische variabele waarbij de categorieën geordend kunnen worden. Een voorbeeld is de variabele beoordeling met de categorieën Onvoldoende, Voldoende, Goed en Uitstekend.
+[^9]: Een nominale variabele is een categorische variabele waarbij de categorieën niet geordend kunnen worden. Een voorbeeld is de variabele windstreek (noord, oost, zuid, west) en geslacht (man of vrouw).
+
 <!-- ## TEKSTBLOK: Extra-Bron.py -->
 [^8]: De proportie studenten met hbo vooropleiding en bijbehorend 95%-betrouwbaarheidsinterval worden bij deze Python functie niet weergegeven. Bij de uitvoering van *binomiaaltoets* in R zitten beide wel in de output.
 <!-- ## /TEKSTBLOK: Extra-Bron.py -->

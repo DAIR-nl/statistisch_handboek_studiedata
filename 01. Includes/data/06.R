@@ -44,6 +44,14 @@ p_2014 <- c(
 )
 Jaarlijks_inkomen <- replicate(2314, 13*(sample(Mogelijkheden, 1, replace = TRUE, p_2014)))
 
+# Simuleer studentnummers
+Studentnummers_opties <- c(4000000:4500000)
+Studentnummer <- sample(Studentnummers_opties, 2314)
+Studentnummer <- as.factor(Studentnummer)
+
+# Maak een dataset
+Jaarlijks_inkomen <- data.frame(Studentnummer =  Studentnummer,
+                                Inkomen = Jaarlijks_inkomen)
 
 # Maken grafieken assumpties verdelingen
 

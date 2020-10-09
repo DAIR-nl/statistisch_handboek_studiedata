@@ -71,7 +71,7 @@ htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/R/toetsmatrix_II_
 
 # Toelichting op de mogelijke keuzes
 
-## Type data  
+## Afhankelijke variabele 
 __Continu__
 
 * *Continu*: Een continue variabele kan iedere waarde aannemen tussen twee meetpunten. De meest bekende continue variabelen zijn lengte en lichaamsgewicht.[^1] Bij *semi-continue* variabelen is de variabele discreet, bijvoorbeeld gehele getallen, met zoveel mogelijkheden dat de data geanalyseerd kunnen worden alsof ze continu zijn. Voorbeelden zijn het aantal studenten dat een tentamen maakt en het aantal broden dat een bakker per dag verkoopt.[^2] 

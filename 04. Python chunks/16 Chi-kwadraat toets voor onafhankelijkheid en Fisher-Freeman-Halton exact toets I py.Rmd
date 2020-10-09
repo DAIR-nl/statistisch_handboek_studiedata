@@ -91,30 +91,28 @@ Er is een dataset ingeladen genaamd `dfBSA_antropologie`. In deze dataset is voo
 
 
 <!-- ## OPENBLOK: Data-bekijken2.py -->
-```{python data bekijken-1, collapse = TRUE}
+```{python data bekijken-1}
 ## Importeer nuttige packages
 import numpy as np
 import pandas as pd
 import scipy.stats as sps
 import statsmodels.stats as sms
-
+import statsmodels.api as sma
 ```
 ```{python kruistabel rapportage, include=FALSE, echo=TRUE}
 dfBSA_antropologie = pd.DataFrame(r.BSA_antropologie)
 dfFisher_BSA_antropologie = pd.DataFrame(r.Fisher_BSA_antropologie)
 ```
-```{python, collapse = TRUE}
+```{python}
 ## Eerste 5 observaties
 print(dfBSA_antropologie.head(5))
 ```
 
-```{python data bekijken-2, collapse = TRUE}
+```{python data bekijken-2}
 ## Laatste 5 observaties
 print(dfBSA_antropologie.tail(5))
 ```
 <!-- ## /OPENBLOK: Data-bekijken2.py -->
-
-Een kruistabel geeft de aantallen observaties weer voor de combinaties van de categorieën van de variabelen `Periode` en `Uitval`. Maak de kruistabel met de functie `.crosstable()` van het package `pandas` met als argumenten de variabele `dfUitval_studenten_functiebeperking_leenstelsel['Periode']` (voor of na invoering leenstelsel) en `dfUitval_studenten_functiebeperking_leenstelsel['Uitval']` (wel of niet uitgevallen).
 
 <!-- ## TEKSTBLOK: Data-kruistabel1.py -->
 Een kruistabel geeft de aantallen observaties weer voor de combinaties van de categorieën van de variabelen `Landen_vooropleiding` en `BSA`. Maak de kruistabel met de functie `.crosstable()` van het package `pandas` met als argumenten de variabele `dfBSA_antropologie['BSA']` (positief of negatief BSA) en `dfBSA_antropologie['Landen_vooropleiding']` (land van hoogst genoten vooropleiding).
@@ -128,9 +126,9 @@ BSA_antropologie_kruistabel =  pd.crosstab(dfBSA_antropologie['BSA'], dfBSA_antr
 # Print de kruistabel
 print(BSA_antropologie_kruistabel)
 
-# Maak een tabel met proporties, argument 'normalize = index' zorgt ervoor dat de proporties
+# Maak een tabel met proporties, argument 'normalize = columns' zorgt ervoor dat de proporties
 # per rij berekend worden
-Prop_BSA_antropologie_kruistabel = pd.crosstab(dfBSA_antropologie['BSA'], dfBSA_antropologie['Landen_vooropleiding'], normalize = 'index')
+Prop_BSA_antropologie_kruistabel = pd.crosstab(dfBSA_antropologie['BSA'], dfBSA_antropologie['Landen_vooropleiding'], normalize = 'columns')
 
 # Print de tabel met proporties met drie decimalen
 print(round(Prop_BSA_antropologie_kruistabel, 3))
@@ -169,7 +167,7 @@ De *Chi-kwadraat toets voor onafhankelijkheid* wordt uitgevoerd om de vraag te b
 <!-- ## /TEKSTBLOK: Chi2-toets.py -->
 
 <!-- ## OPENBLOK: Chi2-toets.py -->
-```{python collapse=TRUE}
+```{python}
 import scipy.stats as sps
 sps.chi2_contingency(BSA_antropologie_kruistabel)
 ```
@@ -182,7 +180,6 @@ sps.chi2_contingency(BSA_antropologie_kruistabel)
 
 <!-- ## OPENBLOK: Chi2-toets-2.py -->
 ```{python effectsize}
-
 # Sla de teststatistiek op
 chi2, pval, df, tab = sps.chi2_contingency(BSA_antropologie_kruistabel)
 
@@ -199,18 +196,21 @@ print(Eta2)
 <!-- ## /OPENBLOK: Chi2-toets-2.py -->
 
 
-<!-- ## TEKSTBLOK: Chi2-toets.py-->
+<!-- ## TEKSTBLOK: Chi2-toets4.py-->
 * *&chi;^2^* ~`r Round_and_format(py$df)`~ = `r Round_and_format(py$chi2)`, *p* < 0,0001  
 * Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r Round_and_format(py$df)`. 
 * p-waarde < 0,05, de H~0~ wordt verworpen.[^8]
 * Effectmaat is `r Round_and_format(py$Eta2)`, dus een klein tot gemiddeld effect
 
-<!-- ## /TEKSTBLOK: Chi2-toets.py-->
+<!-- ## /TEKSTBLOK: Chi2-toets4.py-->
 
 <!-- ## OPENBLOK: Chi2-toets post-hoc1.py -->
 ```{python}
+# Laad het package statsmodels.api in om de gestandaardiseerde residuën weer te geven
+import statsmodels.api as sma
+
 # Bereken de residuen 
-Residuen = sms.contingency_tables.Table(BSA_antropologie_kruistabel).resid_pearson
+Residuen = sma.stats.Table(BSA_antropologie_kruistabel).resid_pearson
 
 # Print de residuen 
 print(round(Residuen,3))
@@ -218,162 +218,154 @@ print(round(Residuen,3))
 <!-- ## /OPENBLOK: Chi2-toets post-hoc1.py -->
 
 <!-- ## TEKSTBLOK: Chi2-toets post-hoc2.py -->
-* Significant hoger aantal observaties bij negatief BSA Spanje (ES), *z* = `r Round_and_format(py$Residuen[1,"ES"])`
+* Significant hoger aantal observaties bij negatief BSA België (BE), *z* = `r Round_and_format(py$Residuen[1,"BE"])`
 * Significant hoger aantal observaties bij negatief BSA Italië (IT), *z* = `r Round_and_format(py$Residuen[1,"IT"])`
 * Significant lager aantal observaties bij negatief BSA Nederland (NL), *z* = `r Round_and_format(py$Residuen[1,"NL"])`
 * Significant lager aantal observaties bij negatief BSA Verenigd Koninkrijk (UK), *z* = `r Round_and_format(py$Residuen[1,"UK"])`
 * Significant hoger aantal observaties bij negatief BSA Verenigde Staten (US), *z* = `r Round_and_format(py$Residuen[1,"US"])`
 * Significant lager aantal observaties bij positief BSA Italië (IT), *z* = `r Round_and_format(py$Residuen[2,"IT"])`
 
-<!-- ## TEKSTBLOK: Chi2-toets post-hoc2.py -->
+<!-- ## /TEKSTBLOK: Chi2-toets post-hoc2.py -->
 
 
 
 <!-- ## TEKSTBLOK: RapportageChi2.py -->
 De *Chi-kwadraat toets voor onafhankelijkheid* is uitgevoerd om te onderzoeken of er een afhankelijkheid is tussen het land van hoogst genoten vooropleiding en het wel of niet behalen van een positief BSA. De resultaten illustreren dat de nulthypothese verworpen kan worden, *&chi;^2^* ~`r Round_and_format(py$df)`~ = `r Round_and_format(py$chi2)`, *p* < 0,0001, *w* = `r Round_and_format(py$Eta2)`. Het land van hoogst genoten vooropleiding en het behalen van een positief of negatief BSA zijn dus niet onafhankelijk van elkaar. Dat betekent dat er verschillen zijn tussen de landen wat betreft de proportie studenten met een positief BSA.
 
-
-De resultaten van de post-hoc toetsen van de *Chi-kwadraat toets voor onafhankelijkheid* zijn te vinden in Tabel 3, waarin geobserveerde aantallen met asterisk significant verschillend zijn van verwachte aantallen. De geobserveerde aantallen voor de verschillende landen van hoogste vooropleiding bij een positief BSA verschillen niet significant van de verwachte aantallen. Bij een negatief BSA is er echter een aantal landen waarbij significante verschillen van het verwachte aantal zijn op te merken. Nederland (NL; *z* = `r Round_and_format(py$Residuen[1,"NL"])`) en het Verenigd Koninkrijk (UK; *z* = `r Round_and_format(py$Residuen[1,"UK"])`) hebben een lager aantal studenten met een negatief BSA dan verwacht; Italië (IT; *z* = `r Round_and_format(py$Residuen[1,"IT"])`), Spanje (ES; *z* = `r Round_and_format(py$Residuen[1,"ES"])`) en de Verenigde Staten (US; *z* = `r Round_and_format(py$Residuen[1,"US"])`) een hoger aantal studenten met negatief BSA dan verwacht. Daarnaast heeft Italië (IT; *z* = `r Round_and_format(py$Residuen[2,"IT"])`) ook een lager aantal studenten met positief BSA dan verwacht.
-<!-- ## TEKSTBLOK: RapportageChi2.py -->
+De resultaten van de post-hoc toetsen van de *Chi-kwadraat toets voor onafhankelijkheid* zijn te vinden in Tabel 3, waarin geobserveerde aantallen met asterisk significant verschillend zijn van verwachte aantallen. De geobserveerde aantallen voor de verschillende landen van hoogste vooropleiding bij een positief BSA verschillen niet significant van de verwachte aantallen. Bij een negatief BSA is er echter een aantal landen waarbij significante verschillen van het verwachte aantal zijn op te merken. Nederland (NL; *z* = `r Round_and_format(py$Residuen[1,"NL"])`) en het Verenigd Koninkrijk (UK; *z* = `r Round_and_format(py$Residuen[1,"UK"])`) hebben een lager aantal studenten met een negatief BSA dan verwacht; Italië (IT; *z* = `r Round_and_format(py$Residuen[1,"IT"])`), België (BE; *z* = `r Round_and_format(py$Residuen[1,"BE"])`) en de Verenigde Staten (US; *z* = `r Round_and_format(py$Residuen[1,"US"])`) een hoger aantal studenten met negatief BSA dan verwacht. Daarnaast heeft Italië (IT; *z* = `r Round_and_format(py$Residuen[2,"IT"])`) ook een lager aantal studenten met positief BSA dan verwacht.
+<!-- ## /TEKSTBLOK: RapportageChi2.py -->
 
 <!-- ## TEKSTBLOK: RapportageChi3.R -->
 
 |                      | NL   | GE | IT | UK | BE | ES | US |   |
 | ------------- | ---------| ------------| -------------| ---------|---------|---------|---------| ------------- |
 | **Positief BSA** |`r BSA_kruistabel[1,1]` | `r BSA_kruistabel[1,2]`  | `r BSA_kruistabel[1,3]`  | `r BSA_kruistabel[1,4]`  | `r BSA_kruistabel[1,5]`  | `r BSA_kruistabel[1,6]`  | `r BSA_kruistabel[1,7]`\*  | **`r sum(BSA_kruistabel[1,1:7])`**|
-| **Negatief BSA**  |`r BSA_kruistabel[2,1]`\*   | `r BSA_kruistabel[2,2]` | `r BSA_kruistabel[2,3]`\* | `r BSA_kruistabel[2,4]`\* | `r BSA_kruistabel[2,5]` | `r BSA_kruistabel[2,6]`\* | `r BSA_kruistabel[2,7]`\* | **`r sum(BSA_kruistabel[2,1:7])`**|
+| **Negatief BSA**  |`r BSA_kruistabel[2,1]`\*   | `r BSA_kruistabel[2,2]` | `r BSA_kruistabel[2,3]`\* | `r BSA_kruistabel[2,4]`\* | `r BSA_kruistabel[2,5]`\* | `r BSA_kruistabel[2,6]` | `r BSA_kruistabel[2,7]`\* | **`r sum(BSA_kruistabel[2,1:7])`**|
 |**Totaal** |**`r sum(BSA_kruistabel[1:2,1])`**   | **`r sum(BSA_kruistabel[1:2,2])`** | **`r sum(BSA_kruistabel[1:2,3])`**   | **`r sum(BSA_kruistabel[1:2,4])`**   | **`r sum(BSA_kruistabel[1:2,5])`**   | **`r sum(BSA_kruistabel[1:2,6])`**   | **`r sum(BSA_kruistabel[1:2,7])`**   | **`r sum(BSA_kruistabel)`** |
 *Tabel 3. Geobserveerde aantallen casus BSA en land van hoogste vooropleiding. Aantallen met asterisk zijn significant verschillend van verwachte aantallen.*
-<!-- ## TEKSTBLOK: RapportageChi3.R -->
+<!-- ## /TEKSTBLOK: RapportageChi3.R -->
 
 
+<!-- ## TEKSTBLOK: UitvoeringFFH.py -->
+De *Fisher-Freeman-Halton exact toets* wordt uitgevoerd om te onderzoeken of er een afhankelijkheid is tussen het land van hoogst genoten vooropleiding en het wel of niet behalen van een positief BSA. Deze toets wordt in plaats van de *Chi-kwadraat toets voor onafhankelijkheid* gebruikt wanneer er in meer dan 20% van de cellen een verwacht aantal observaties van 5 of lager is. Er is een nieuwe dataset `dfFisher_BSA_antropologie` ingeladen met daarin een lager aantal observaties.
+<!-- ## /TEKSTBLOK: UitvoeringFFH.py -->
 
+<!-- ## TEKSTBLOK: Data-kruistabel1f.py -->
+Een kruistabel geeft de aantallen observaties weer voor de combinaties van de categorieën van de variabelen `Landen_vooropleiding` en `BSA`. Maak de kruistabel met de functie `.crosstable()` van het package `pandas` met als argumenten de variabele `dfFisher_BSA_antropologie['BSA']` (positief of negatief BSA) en `dfFisher_BSA_antropologie['Landen_vooropleiding']` (land van hoogst genoten vooropleiding).
+<!-- ## /TEKSTBLOK: Data-kruistabel1f.py -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- ## TEKSTBLOK: Data-inladen-Fisher.py -->
-*Fisher's exact toets* wordt uitgevoerd om de vraag te beantwoorden of er een afhankelijkheid is tussen het uitvallen van studenten met een functiebeperking en het wel of niet invoeren van het leenstelsel. Deze toets is ook betrouwbaar bij een laag aantal observaties. Om de toets te illustreren is een subset van de dataset `dfUitval_studenten_functiebeperking_leenstelsel` ingeladen; de subset heet `dfFisher_Uitval_studenten_functiebeperking_leenstelsel`.
-
-Een kruistabel geeft de aantallen observaties weer voor de combinaties van de categorieën van de variabelen `Periode` en `Uitval`. Maak de kruistabel met de functie `.crosstable()` van het package `pandas` met als argumenten de variabele `dfUitval_studenten_functiebeperking_leenstelsel['Periode']` (voor of na invoering leenstelsel) en `dfUitval_studenten_functiebeperking_leenstelsel['Uitval']` (wel of niet uitgevallen).
-<!-- ## /TEKSTBLOK: Data-inladen-Fisher.py -->
-
-<!-- ## OPENBLOK: Data-kruistabel2Fisher.py -->
-
+<!-- ## OPENBLOK: Data-kruistabel2f.py -->
 ```{python kruistabel fisher}
-import pandas as pd
-
 # Maak een kruistabel
-Fisher_Uitval_studenten_kruistabel =  pd.crosstab(dfFisher_Uitval_studenten_functiebeperking_leenstelsel['Periode'], dfFisher_Uitval_studenten_functiebeperking_leenstelsel['Uitval'])
+Fisher_BSA_antropologie_kruistabel =  pd.crosstab(dfFisher_BSA_antropologie['BSA'], dfFisher_BSA_antropologie['Landen_vooropleiding'])
 
 # Print de kruistabel
-print(Fisher_Uitval_studenten_kruistabel)
+print(Fisher_BSA_antropologie_kruistabel)
 
-# Maak een tabel met proporties, argument 'normalize = index' zorgt ervoor dat de proporties
+
+# Maak een tabel met proporties, argument 'normalize = columns' zorgt ervoor dat de proporties
 # per rij berekend worden
-Fisher_Prop_Uitval_studenten_kruistabel = pd.crosstab(dfFisher_Uitval_studenten_functiebeperking_leenstelsel['Periode'], dfFisher_Uitval_studenten_functiebeperking_leenstelsel['Uitval'], normalize = 'index')
+Fisher_Prop_BSA_antropologie_kruistabel = pd.crosstab(dfFisher_BSA_antropologie['BSA'], dfFisher_BSA_antropologie['Landen_vooropleiding'], normalize = 'columns')
 
-# Print de tabel met proporties
-print(Fisher_Prop_Uitval_studenten_kruistabel)
-
-
+# Print de tabel met proporties met drie decimalen
+print(round(Fisher_Prop_BSA_antropologie_kruistabel, 3))
 ```
 ```{python, include=FALSE, echo=TRUE}
-voor = np.array(Fisher_Prop_Uitval_studenten_kruistabel)[0,1]
-na = np.array(Fisher_Prop_Uitval_studenten_kruistabel)[1,1]
+NL = np.array(Fisher_Prop_BSA_antropologie_kruistabel)[1,4]
 ```
+<!-- ## /OPENBLOK: Data-kruistabel2f.py -->
 
-<!-- ## /OPENBLOK: Data-kruistabel2Fisher.py -->
+<!-- ## TEKSTBLOK: Data-kruistabel3f.py -->
+De kruistabel en bijbehorende tabel met proporties laat zien dat de meerderheid van de studenten een positief BSA ontvangt voor elk land van vooropleiding. Van studenten uit het Nederland (NL) haalt verhoudingsgewijs het grootste deel een positief BSA. Het percentage studenten met een positief BSA is hier (`r Round_and_format(100 * py$NL)`%).
+<!-- ## /TEKSTBLOK: Data-kruistabel3f.py -->
 
-<!-- ## TEKSTBLOK: Data-kruistabel3Fisher.py -->
-De kruistabel en bijbehorende tabel met proporties laat zien dat het percentage uitgevallen studenten lager is na invoering van het leenstelsel (`r Round_and_format(100 * py$na)`%) dan voor invoering van het leenstelsel (`r Round_and_format(100 * py$voor)`%).
-<!-- ## /TEKSTBLOK: Data-kruistabel3Fisher.py -->
+<!-- ## TEKSTBLOK: Assumptie0f.py -->
+Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk of kleiner dan vijf is. Bereken het verwacht aantal observaties met de functie `.contingency.expected_freq()` van het `scipy.stats` package met als argument de kruistabel `Fisher_BSA_antropologie_kruistabel`.
+<!-- ## /TEKSTBLOK: Assumptie0f.py -->
 
 
-<!-- ## TEKSTBLOK: AssumptieFisher.py -->
-Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk of kleiner dan vijf is. Bereken het verwachte aantal observaties met de functie `.contingency.expected_freq()` van het `scipy.stats` package met als argument de kruistabel `Fisher_Uitval_studenten_kruistabel`.
-<!-- ## /TEKSTBLOK: AssumptieFisher.py -->
-
-<!-- ## OPENBLOK: Assumptie1Fisher.py -->
-```{python chi2 fisher}
-import scipy.stats as sps 
+<!-- ## OPENBLOK: Assumptie1f.py -->
+```{python fisher assumptie, warning = FALSE}
 # Maak een kruistabel
-Fisher_Uitval_studenten_kruistabel = pd.crosstab(dfFisher_Uitval_studenten_functiebeperking_leenstelsel['Periode'], dfFisher_Uitval_studenten_functiebeperking_leenstelsel['Uitval'])
+Fisher_BSA_antropologie_kruistabel =  pd.crosstab(dfFisher_BSA_antropologie['BSA'], dfFisher_BSA_antropologie['Landen_vooropleiding'])
 
 # Bereken verwachte aantallen observaties
-sps.contingency.expected_freq(Fisher_Uitval_studenten_kruistabel)
+sps.contingency.expected_freq(Fisher_BSA_antropologie_kruistabel)
 ```
-<!-- ## /OPENBLOK: Assumptie1Fisher.py -->
+<!-- ## /OPENBLOK: Assumptie1f.py -->
 
 
 
-<!-- ## TEKSTBLOK: Fisher1.py -->
-Voer *Fisher's exact toets* uit met de functie `.fisher_exact()` van het package `scipy.stats` met als argumenten de kruistabel `Fisher_Uitval_studenten_kruistabel` en `alternative = 'two-sided'` om tweezijdig te toetsen. De output geeft de odds ratio en de p-waarde weer.
-<!-- ## /TEKSTBLOK: Fisher1.py -->
+<!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets.py-->
+Voor zover bekend is er geen package om de Fisher-Freeman-Halton toets uit te voeren in Python. De Fisher exact toets kan in Python alleen uitgevoerd worden voor 2x2 kruistabellen. Deze stap kan dus in deze toetspagina niet weergegeven worden. Om de Fisher-Freeman-Halton toets uit te voeren. Bekijk de [toetspagina van de Fisher-Freeman-Halton toets in R](16-Chi-kwadraat-toets-voor-onafhankelijkheid-en-Fisher-Freeman-Halton-exact-toets-I-R.html) om deze met de programmeertaal R uit te voeren. Voor het vervolg van deze toetspagina wordt aangenomen dat de Fisher-Freeman-Halton exact toets geen significant resultaat laat zien.
+<!-- ## /TEKSTBLOK: Fisher-Freeman-Halton-exact-toets.py-->
+
+<!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets.py-->
+<!-- ## /OPENBLOK: Fisher-Freeman-Halton-exact-toets.py-->
+
+<!-- ## CLOSEDBLOK: Fisher-Freeman-Halton-exact-toets1.py-->
+<!-- ## /CLOSEDBLOK: Fisher-Freeman-Halton-exact-toets1.py-->
+
+<!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets2.py-->
+<!-- ## /TEKSTBLOK: Fisher-Freeman-Halton-exact-toets2.py-->
 
 
-<!-- ## OPENBLOK: Fishers-Exact-toets.py -->
-```{python fishers exact}
-import scipy.stats as sps
-sps.fisher_exact(Fisher_Uitval_studenten_kruistabel, alternative = 'two-sided')
+
+## Post-hoc toets: Fisher's exact toets
+
+<!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets post-hoc1.py-->
+Omdat er geen afhankelijkheid is tussen het wel of niet halen van een positief BSA en het land van hoogste vooropleiding, hoeven er geen post-hoc toetsen uitgevoerd te worden. Indien dit wel nodig is, toets uitvoert. Voer Fisher's exact toets uit met behulp van de functie `fisher_exact()` van het package `scipy.stats` met als argumenten de kruistabel `Fisher_BSA_antropologie_kruistabel.iloc[:, 
+[i,j]]` en `alternative = 'two-sided'` om aan te geven dat er een tweezijdige alternatieve hypothese 
+getoetst moet worden. Er vindt nu dus geen correctie op de p-waarden plaats, deze kan indien gewenst handmatig doorgevoerd worden op de p-waardes. Een voorbeeld is de Bonferroni cirrectie die de p-waarde aanpast door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en hiermee de kans dat er bij toeval een verband wordt ontdekt dat er niet is te verlagen.[^5]    
+<!-- ## /TEKSTBLOK: Fisher-Freeman-Halton-exact-toets post-hoc1.py -->
+
+<!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets post-hoc2.py -->
+``` {python fisher toets post hoc, warning=FALSE, message=FALSE}
+# Maak een tabel om de p-waardes in op te slaan
+Tabel_p_waardes = np.zeros((7, 7))
+
+# Geef de kolommen en rijen van de tabel de namen van de landen die vergeleken worden
+Landen = Fisher_BSA_antropologie_kruistabel.columns
+Tabel_p_waardes = pd.DataFrame(Tabel_p_waardes, columns = Landen, index = Landen)
+
+# Maak een dubbele for loop om voor elke combinatie van landen Fisher's exact toets uit te voeren
+for i in range(0,7):
+  for j in range(0,7):
+    OR, pval = sps.fisher_exact(Fisher_BSA_antropologie_kruistabel.iloc[:, [i,j]], alternative = 'two-sided')
+    Tabel_p_waardes.iloc[i,j] = round(pval, 3)
+
+# Print de tabel met p-waarden
+print(Tabel_p_waardes)
+
 ```
-<!-- ## /OPENBLOK: Fishers-Exact-toets.py -->
+
+<!-- ## /OPENBLOK: Fisher-Freeman-Halton-exact-toets post-hoc2.py -->
+
+<!-- ## TEKSTBLOK: link4.py -->
+De resultaten laten de significantie zien van de [Fisher's exact toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) voor elk mogelijke combinatie van 2x2 tabellen. Geen van de post-hoc toetsen is significant, wat logisch is aangezien de *Fisher-Freeman-Halton exact toets* niet significant was.  De eerste rij bijvoorbeeld bestaat uit de p-waardes van deze toets voor de vergelijkingen van België (BE) met alle andere landen. Zo is de p-waarde van de vergelijking tussen België (BE) en Spanje (ES) 0,399.  De opmerkelijke p-waardes van 1 komen doordat de verschillen zo klein zijndat dit leidt tot een p-waarde van 1.
+<!-- ## /TEKSTBLOK: link4.py -->
 
 
-<!-- ## CLOSEDBLOK: Fishers-Exact-toets.py -->
-```{python fishers exact als object, include=FALSE, echo=TRUE}
-OR, pval = sps.fisher_exact(Fisher_Uitval_studenten_kruistabel, alternative = 'two-sided')
+## Rapportage
+<!-- ## TEKSTBLOK: Rapportage.py -->
+De *Fisher-Freeman-Halton exact toets* is uitgevoerd om te onderzoeken of er een afhankelijkheid is tussen het land van hoogst genoten vooropleiding en het wel of niet behalen van een positief BSA voor een dataset met een laag aantal observaties. De nulhypothese kan niet verworpen worden, dus er lijkt geen afhankelijkheid te zijn tussen het wel of niet ontvangen van een positief BSA en het land van de hoogst genoten vooropleiding. Het percentage studenten met een positief BSA lijkt niet te verschillen per land van hoogst genoten vooropleiding. 
 
+<!-- ## /TEKSTBLOK: Rapportage.py -->
+
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
 ```
-<!-- ## /CLOSEDBLOK: Fishers-Exact-toets.py -->
-
-<!-- ## TEKSTBLOK: Fishers-Exact-toets.py -->
-* *p* = `r Round_and_format(py$pval)`; p-waarde > 0,05, dus de H~0~ wordt niet verworpen.[^11]  
-* De odds ratio is `r Round_and_format(py$OR)`. De kans op uitval van studenten met een functiebeperking met leenstelsel is dus `r Round_and_format(py$OR)` keer zo groot is als de kans op uitval van studenten met een functiebeperking zonder het leenstelsel. Deze relatie is echter niet significant.
-
-<!-- ## /TEKSTBLOK: Fishers-Exact-toets.py -->
+<!-- ## /CLOSEDBLOK: Footer.R -->
 
 
-<!-- ## CLOSEDBLOK: Rapportage1Fisher.py -->
-```{python kruistabel rapportage fisher, include=FALSE, echo=TRUE}
-# Maak een tabel met proporties, argument 'normalize = index' zorgt ervoor dat de proporties
-# per rij berekend worden
-Fisher_Prop_Uitval_studenten_kruistabel = pd.crosstab(dfFisher_Uitval_studenten_functiebeperking_leenstelsel['Periode'], dfFisher_Uitval_studenten_functiebeperking_leenstelsel['Uitval'], normalize = 'index')
-
-# Sla vier waarden apart op
-fgg = np.array(Fisher_Prop_Uitval_studenten_kruistabel)[0,0]
-fgu = np.array(Fisher_Prop_Uitval_studenten_kruistabel)[0,1]
-fwg = np.array(Fisher_Prop_Uitval_studenten_kruistabel)[1,0]
-fwu = np.array(Fisher_Prop_Uitval_studenten_kruistabel)[1,1]
-```
-<!-- ## /CLOSEDBLOK: Rapportage1Fisher.py -->
 
 
-<!-- ## TEKSTBLOK: Rapportage2Fisher.py -->
-*Fisher's exact toets* is uitgevoerd om te toetsen of er een afhankelijkheid is tussen het uitvallen van studenten met een functiebeperking en het wel of niet invoeren van het leenstelsel. De nulhypothese dat uitval en invoering van het leenstelsel onafhankelijk zijn kan niet verworpen worden, *p* = `r py$pval`. De proporties per rij in Tabel 4 laten zien dat er relatief meer studenten uitvallen wanneer er een leenstelsel is ingevoerd, dit verschil is echter niet significant.
 
-|                      | geen uitval   | uitval | 
-| -------------------- | ---------| ------------| 
-| **geen leenstelsel** |`r Round_and_format(py$fgg)`   | `r Round_and_format(py$fgu)`          | 
-| **wel leenstelsel**  |`r Round_and_format(py$fwg)`   | `r Round_and_format(py$fwu)`          |
-*Tabel 4. Proporties wel of niet uitvallen studenten met of zonder leenstelsel berekend per rij voor dataset Fisher's exact toets.*
-<!-- ## /TEKSTBLOK: Rapportage2Fisher.py -->
+
+
+
+
+
 
 
 <!-- ## TEKSTBLOK: Extra-Bron.py -->

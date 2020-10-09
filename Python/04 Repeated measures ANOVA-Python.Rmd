@@ -4,6 +4,7 @@ output:
   html_document:
     theme: lumen
     toc: yes
+    toc_depth: 2
     toc_float: 
       collapsed: FALSE 
     number_sections: true
@@ -59,7 +60,7 @@ Gebruik de *repeated measures ANOVA* om gemiddelden te vergelijken van een groep
 
 De opleidingsdirecteur van de bachelor Technische Natuurkunde van een universiteit hoort vanuit de opleidingscommissie dat de eerstejaars studenten de studielast van de eerste onderwijsperiode als erg hoog ervaren. Om te onderzoeken hoe deze ervaren studielast verminderd kan worden, wil hij onderzoeken hoeveel tijd de studenten per week besteden aan hun vakken. Met behulp van een vragenlijst over de studiebelasting in het eerste jaar verzamelt hij gegevens van het aantal uur per week dat eerstejaars studenten besteden aan de vakken in de eerste onderwijsperiode: Lineaire Algebra, Relativiteitstheorie en Kosmologie. Op deze manier kan hij onderzoeken of er verschillen in de tijdsbesteding aan de verschillende vakken zijn en om te bepalen van welke vakken de studielast aangepast moet worden.
 
-Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
 *H~0~*: Het aantal studieuren per week van eerstejaars studenten van de bachelor Technische Natuurkunde is hetzelfde voor de drie vakken in de eerste onderwijsperiode
 
@@ -119,7 +120,7 @@ De effectmaat eta squared (*η^2^*) berekent de proportie van de variantie in de
 # Post-hoc toetsen
 De *repeated measures ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Voer een post-hoc toets uit om te bepalen welke groepen significant verschillen.
 
-Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout.[^8] Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^6]
+Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout. Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^6]
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->

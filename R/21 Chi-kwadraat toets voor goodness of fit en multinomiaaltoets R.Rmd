@@ -186,7 +186,7 @@ vdf <- chi2$parameter
 
 ## Post-hoc toets: gestandaardiseerde residuen
 
-Voer post-hoc toetsen uit om te bepalen welke landen van hoogste vooropleiding van elkaar verschillen wat betreft de verdeling van het aantal studenten met positief en negatief BSA. Inspecteer hiervoor de Pearson residuen van de *Chi-kwadraat toets voor onafhankelijkheid* op waarden groter dan 1,96 en kleiner dan -1,96. Let op dat hier nog geen correctie voor meerdere toetsen plaatsvindt.[^10]
+Voer post-hoc toetsen uit om te bepalen voor welke BSA mogelijkheden er verschillen zijn tussen de verdeling van de studenten Maritieme Techniek en de verdeling van de gehele universiteit. Inspecteer hiervoor de Pearson residuen van de *Chi-kwadraat toets voor onafhankelijkheid* op waarden groter dan 1,96 en kleiner dan -1,96. Let op dat hier nog geen correctie voor meerdere toetsen plaatsvindt.[^10]
 
 <!-- ## OPENBLOK: Chi2-toets post-hoc1.R -->
 ```{r collapse=TRUE}
@@ -227,7 +227,9 @@ De post-hoc toetsing op basis van de gestandaardiseerde residuën kan als volgt 
 
 ## Rapportage
 <!-- ## TEKSTBLOK: Chi-kwadraat5.R-->
-De *Chi-kwadraat toets voor goodness of fit* is uitgevoerd om te onderzoeken of de verdeling van het BSA van studenten Maritieme Techniek overeenkomt met de verdeling van de gehele universiteit waar deze opleiding onder valt (70% positief BSA, 20% negatief BSA en 10% uitgesteld BSA). De verdeling van het BSA van de instromende studenten Maritieme Techniek is significant verschillend van de verdeling van de gehele universiteit, &chi;^2^~`r vdf`~ = `r vchi2`, *p* < 0,001. Uit de post-hoc toetsen blijkt dat het aantal studenten met een positief BSA significant lager is dan het percentage van de gehele universiteit (`r Round_and_format(Proptab[2])`%, *z* = `r Round_and_format(PH_res[1])`), het aantal studenten met een negatief BSA significant hoger is dan het percentage van de gehele universiteit (`r Round_and_format(Proptab[1])`%, *z* = `r Round_and_format(PH_res[2])`) en het percentage studenten met een uitgesteld BSA niet significant verschillend is van de gehele universiteit (`r Round_and_format(Proptab[3])`%, *z* = `r Round_and_format(PH_res[3])`). De resultaten suggereren dat de opleiding Maritieme Technieken qua BSA dus afwijkt van de gehele universiteit waarbij het aantal positieve BSA's lager en het aantal negatieve BSA's hoger in vergelijking tot de gehele universiteit.
+De *Chi-kwadraat toets voor goodness of fit* is uitgevoerd om te onderzoeken of de verdeling van het BSA van studenten Maritieme Techniek overeenkomt met de verdeling van de gehele universiteit waar deze opleiding onder valt (70% positief BSA, 20% negatief BSA en 10% uitgesteld BSA). De verdeling van het BSA van de instromende studenten Maritieme Techniek is significant verschillend van de verdeling van de gehele universiteit, &chi;^2^~`r vdf`~ = `r vchi2`, *p* < 0,001. 
+
+Uit de post-hoc toetsen blijkt dat het aantal studenten met een positief BSA significant lager is dan het percentage van de gehele universiteit (`r Round_and_format(Proptab[2])`%, *z* = `r Round_and_format(PH_res[1])`), het aantal studenten met een negatief BSA significant hoger is dan het percentage van de gehele universiteit (`r Round_and_format(Proptab[1])`%, *z* = `r Round_and_format(PH_res[2])`) en het percentage studenten met een uitgesteld BSA niet significant verschillend is van de gehele universiteit (`r Round_and_format(Proptab[3])`%, *z* = `r Round_and_format(PH_res[3])`). De resultaten suggereren dat de opleiding Maritieme Technieken qua BSA dus afwijkt van de gehele universiteit waarbij het aantal positieve BSA's lager en het aantal negatieve BSA's hoger in vergelijking tot de gehele universiteit.
 <!-- ## /TEKSTBLOK: Chi-kwadraat5.R-->
 
 

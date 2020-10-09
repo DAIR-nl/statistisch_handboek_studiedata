@@ -45,17 +45,17 @@ dfToetsen <- tribble(
     "03 Ongepaarde t-toets",                                                                    "1", 
     "04 Repeated measures ANOVA",                                                               "1", 
     "05 One-way ANOVA",                                                                         "1", 
-    "06 Tekentoets",                                                                            "0", 
+    "06 Tekentoets I",                                                                          "1", 
     "07 Wilcoxon signed rank toets I",                                                          "1", 
     "08 Mann-Whitney U toets I",                                                                "1", 
-    "09 Friedmans ANOVA I",                                                                     "0", 
+    "09 Friedmans ANOVA I",                                                                     "1", 
     "10 Kruskal Wallis toets I",                                                                "1", 
     "11 Chi-kwadraat toets voor goodness of fit en binomiaaltoets",                             "1", 
     "12 McNemar toets I",                                                                       "0", 
     "13 Chi-kwadraat toets voor onafhankelijkheid en Fishers exact toets",                      "1", 
     "14 NIET IN GEBRUIK; NIET VERWIJDEREN",                                                     "0", 
     "15 Cochran’s Q toets",                                                                     "0", 
-    "16 Chi-kwadraat toets voor onafhankelijkheid en Fisher-Freeman-Halton exact toets I",      "0", 
+    "16 Chi-kwadraat toets voor onafhankelijkheid en Fisher-Freeman-Halton exact toets I",      "1", 
     "17 Chi-kwadraat toets voor goodness of fit en multinomiaaltoets",                          "0",    
     "18 McNemar toets II",                                                                      "0",   
     "19 Chi-kwadraat toets voor onafhankelijkheid en Fisher-Freeman-Halton exact toets II",     "0",        
@@ -202,6 +202,14 @@ for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
       print(paste("GEEN bestanden aanwezig voor", sToets))
     }
 
+}
+
+## Loop over de toetsen die in gebruik zijn en genereer die pagina's
+for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 2]) {
+    sModus <- "Python"
+    #bStatus <- dfToetsen$Review_Python[dfToetsen$Toets == sToets]
+    rmarkdown::render(paste0("Python/",sToets,"-Python.Rmd"), 
+           output_file = paste0('Python/', gsub(" ", "-", sToets), '-Python.html'))    
 }
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

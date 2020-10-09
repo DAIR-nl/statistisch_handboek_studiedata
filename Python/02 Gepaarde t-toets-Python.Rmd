@@ -4,6 +4,7 @@ output:
   html_document:
     theme: lumen
     toc: yes
+    toc_depth: 2
     toc_float: 
       collapsed: FALSE 
     number_sections: true
@@ -63,7 +64,7 @@ Gebruik de *gepaarde t-toets* om te toetsen of bij een herhaalde meting de gemid
 <div id ="casus">
 Voor het verminderen van de studielast van studenten biedt het Centrum voor Studentbegeleiding van een universiteit een cursus 'Plannen' aan. De cursus is bedoeld om studenten beter inzicht te geven in de gevolgen van de planning van hun studielast. De cursus wordt tussen twee onderwijsperiodes in gegeven. Voor en na de cursus moeten de studenten gedurende een onderwijsperiode een logboek bijhouden over hun studiegedrag. De cursuscoördinator vraagt zich af of er een verandering in het aantal studieuren is na deelname aan de cursus.
 
-Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
 *H~0~*: Het gemiddeld aantal uren studeren per onderwijsperiode verandert niet na de cursus, µ~T0~ = µ~T1~  
 

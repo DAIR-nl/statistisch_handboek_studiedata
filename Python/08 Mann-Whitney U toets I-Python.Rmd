@@ -4,6 +4,7 @@ output:
   html_document:
     theme: lumen
     toc: yes
+    toc_depth: 2
     toc_float: 
       collapsed: FALSE 
     number_sections: true
@@ -60,7 +61,7 @@ Gebruik de *Mann-Whitney U toets* om te toetsen of de gemiddelde rangnummers van
 <div id ="casus">
 De onderwijsdirecteur van de opleiding Business Administration van een hogeschool vraagt zich af of er verschil is in de studieresultaten van studenten met een Nederlandse vooropleiding en een buitenlandse vooropleiding. Met name in het tweede studiejaar lijken er verschillen op te treden die hij wil begrijpen om mogelijke interventies met zijn docenten te bespreken. Hij vraagt zich af: ‘Verschilt het aantal studiepunten in het tweede studiejaar van studenten met een Nederlandse vooropleiding van het aantal studiepunten in het tweede studiejaar van studenten met een buitenlandse vooropleiding?
 
-Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
 *H~0~*: Er is geen verschil in het gemiddelde rangnummer van het behaalde aantal studiepunten in het tweede jaar tussen studenten met een buitenlandse vooropleiding en een Nederlandse vooropleiding.
 
@@ -314,3 +315,4 @@ De *Mann-Whitney U toets* is uitgevoerd om te toetsen of het behaalde aantal stu
 [^11]: Voor zowel de *Mann-Whitney U toets* als de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-I-R.html) wordt functie `wilcox.test()` in R gebruikt. Het verschil is dat de *Mann-Whitney U toets* wordt uitgevoerd met het argument `paired = FALSE` en de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-I-R.html) bij het argument `paired = TRUE`, aangezien de eerste toets ongepaarde groepen en de tweede toets gepaarde groepen vergelijkt.
 [^12]: Een ordinale variabele is een categorische variabele waarbij de categorieën geordend kunnen worden. Een voorbeeld is de variabele beoordeling met de categorieën Onvoldoende, Voldoende, Goed en Uitstekend.
 [^13]: De breedte van de staven van het histogram worden hier automatisch bepaald, maar kunnen handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
+[^14]: Bij de *Mann-Whitney U toets* en andere nonparametrische toetsen wordt de data eerst gerangschikt zodat elke observatie een rangnummer toegewezen krijgt. Deze rangnummers worden vervolgens gebruikt om de toets uit te voeren.

@@ -220,14 +220,14 @@ paste("Effectgrootte is",w)
 <!-- ## /OPENBLOK: Chi2-toets-2.R -->
 
 
-<!-- ## TEKSTBLOK: Chi2-toets.R-->
+<!-- ## TEKSTBLOK: Chi2-toets4.R-->
 * *&chi;^2^* ~`r vDF`~ = `r vChi2`, *p* < 0,0001  
 * Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r vDF`. 
 * p-waarde < 0,05, de H~0~ wordt verworpen.[^8]
 * Effectmaat is `r Round_and_format(w)`, dus een klein tot gemiddeld effect
 * 
 
-<!-- ## /TEKSTBLOK: Chi2-toets.R-->
+<!-- ## /TEKSTBLOK: Chi2-toets4.R-->
 
 ## Post-hoc toets: gestandaardiseerde residuen
 
@@ -248,7 +248,7 @@ resultaat$residuals
 * Significant hoger aantal observaties bij negatief BSA Verenigde Staten (US), *z* = `r Round_and_format(resultaat$residuals["Negatief","US"])`
 * Significant lager aantal observaties bij positief BSA Italië (IT), *z* = `r Round_and_format(resultaat$residuals["Positief","IT"])`
 
-<!-- ## TEKSTBLOK: Chi2-toets post-hoc2.R-->
+<!-- ## /TEKSTBLOK: Chi2-toets post-hoc2.R-->
 
 
 
@@ -259,7 +259,7 @@ De *Chi-kwadraat toets voor onafhankelijkheid* is uitgevoerd om te onderzoeken o
 
 
 De resultaten van de post-hoc toetsen van de *Chi-kwadraat toets voor onafhankelijkheid* zijn te vinden in Tabel 3, waarin geobserveerde aantallen met asterisk significant verschillend zijn van verwachte aantallen. De geobserveerde aantallen voor de verschillende landen van hoogste vooropleiding bij een positief BSA verschillen niet significant van de verwachte aantallen. Bij een negatief BSA is er echter een aantal landen waarbij significante verschillen van het verwachte aantal zijn op te merken. Nederland (NL; *z* = `r Round_and_format(resultaat$residuals["Negatief","NL"])`) en het Verenigd Koninkrijk (UK; *z* = `r Round_and_format(resultaat$residuals["Negatief","UK"])`) hebben een lager aantal studenten met een negatief BSA dan verwacht; Italië (IT; *z* = `r Round_and_format(resultaat$residuals["Negatief","IT"])`), België (BE; *z* = `r Round_and_format(resultaat$residuals["Negatief","ES"])`) en de Verenigde Staten (US; *z* = `r Round_and_format(resultaat$residuals["Negatief","US"])`) een hoger aantal studenten met negatief BSA dan verwacht. Daarnaast heeft Italië (IT; *z* = `r Round_and_format(resultaat$residuals["Positief","IT"])`) ook een lager aantal studenten met positief BSA dan verwacht.
-<!-- ## TEKSTBLOK: RapportageChi2.R -->
+<!-- ## /TEKSTBLOK: RapportageChi2.R -->
 
 <!-- ## TEKSTBLOK: RapportageChi3.R -->
 
@@ -269,14 +269,14 @@ De resultaten van de post-hoc toetsen van de *Chi-kwadraat toets voor onafhankel
 | **Negatief BSA**  |`r BSA_kruistabel[2,1]`\*   | `r BSA_kruistabel[2,2]` | `r BSA_kruistabel[2,3]`\* | `r BSA_kruistabel[2,4]`\* | `r BSA_kruistabel[2,5]` | `r BSA_kruistabel[2,6]`\* | `r BSA_kruistabel[2,7]`\* | **`r sum(BSA_kruistabel[2,1:7])`**|
 |**Totaal** |**`r sum(BSA_kruistabel[1:2,1])`**   | **`r sum(BSA_kruistabel[1:2,2])`** | **`r sum(BSA_kruistabel[1:2,3])`**   | **`r sum(BSA_kruistabel[1:2,4])`**   | **`r sum(BSA_kruistabel[1:2,5])`**   | **`r sum(BSA_kruistabel[1:2,6])`**   | **`r sum(BSA_kruistabel[1:2,7])`**   | **`r sum(BSA_kruistabel)`** |
 *Tabel 3. Geobserveerde aantallen casus BSA en land van hoogste vooropleiding. Aantallen met asterisk zijn significant verschillend van verwachte aantallen.*
-<!-- ## TEKSTBLOK: RapportageChi3.R -->
+<!-- ## /TEKSTBLOK: RapportageChi3.R -->
 
 
 # Fisher-Freeman-Halton exact toets
 
 <!-- ## TEKSTBLOK: UitvoeringFFH.R -->
 De *Fisher-Freeman-Halton exact toets* wordt uitgevoerd om te onderzoeken of er een afhankelijkheid is tussen het land van hoogst genoten vooropleiding en het wel of niet behalen van een positief BSA. Deze toets wordt in plaats van de *Chi-kwadraat toets voor onafhankelijkheid* gebruikt wanneer er in meer dan 20% van de cellen een verwacht aantal observaties van 5 of lager is. Er is een nieuwe dataset `Fisher_BSA_antropologie` ingeladen met daarin een lager aantal observaties.
-<!-- ## TEKSTBLOK: UitvoeringFFH.R -->
+<!-- ## /TEKSTBLOK: UitvoeringFFH.R -->
 
 <!-- ## TEKSTBLOK: Data-kruistabel1f.R -->
 Een kruistabel geeft de aantallen observaties weer voor de combinaties van de categorieën van de categorische variabelen `Landen_vooropleiding` en `BSA`. Maak de kruistabel met de functie `table()` met als argumenten de variabele `Fisher_BSA_antropologie$BSA` (positief of negatief BSA) en `Fisher_BSA_antropologie$Landen_vooropleiding` (land van hoogst genoten vooropleiding). 
@@ -304,7 +304,9 @@ De kruistabel en bijbehorende tabel met proporties laat zien dat de meerderheid 
 
 ## Assumptie groepsgrootte
 
+<!-- ## TEKSTBLOK: Assumptie0f.R -->
 Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk of kleiner dan vijf is. Bereken het verwachte aantal observaties met het argument `chisq.test()$expected` van de functie `chisq.test()` met als argumenten de variabelen `Fisher_BSA_antropologie$BSA` (positief of negatief BSA) en `Fisher_BSA_antropologie$Landen_vooropleiding` (landen van hoogst genoten vooropleiding).
+<!-- ## /TEKSTBLOK: Assumptie0f.R -->
 
 <!-- ## OPENBLOK: Assumptie1f.R -->
 ```{r fisher assumptie, warning = FALSE}
@@ -318,6 +320,7 @@ Drie van de 14 (21,43%) verwachte aantallen observaties zijn kleiner dan vijf. M
 <!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets.R-->
 Gebruik de functie `fisher.test()` met als argumenten de variabele `Fisher_BSA_antropologie$BSA` (positief of negatief BSA), de variabele `Fisher_BSA_antropologie$Landen_vooropleiding` (landen van hoogst genoten vooropleiding) en als laatste argument `simulate.p.value = TRUE`. Hierdoor wordt de p-waarde met een simulatie berekend waardoor de rekentijd voor de computer een stuk lager is en de resultaten sneller weergegeven kunnen worden. Gebruik een seed (`set.seed(123)`) om ervoor te zorgen dat de p-waarde reproduceerbaar is. Bij een simulatie kunnen er namelijk kleine verschillen tussen de resultaten zijn bij het herhalen van de simulatie.
 <!-- ## /TEKSTBLOK: Fisher-Freeman-Halton-exact-toets.R-->
+
 <!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets.R-->
 ``` {r fisher toets}
 # Gebruik een seed zodat dezelfde resultaten getoond worden bij het herhalen
@@ -347,7 +350,7 @@ fish <- fisher.test(Fisher_BSA_antropologie$BSA, Fisher_BSA_antropologie$Landen_
 
 <!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets post-hoc1.R-->
 Omdat er geen afhankelijkheid is tussen het wel of niet halen van een positief BSA en het land van hoogste vooropleiding, hoeven er geen post-hoc toetsen uitgevoerd te worden. Indien dit wel nodig is, voer deze dan uit met de functie `fisher.multcomp()` met als eerste argument de kruistabel van de dataset en als tweede argument de gebruikte methode om te corrigeren voor meerdere testen, in dit geval `p.method = "bonferroni"`. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans dat er bij toeval een verband wordt ontdekt dat er niet is.[^5]    
-<!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets post-hoc1.R -->
+<!-- ## /TEKSTBLOK: Fisher-Freeman-Halton-exact-toets post-hoc1.R -->
 
 
 <!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets post-hoc2.R -->
@@ -359,7 +362,7 @@ Fisher_BSA_antropologie_kruistabel <- table(Fisher_BSA_antropologie$BSA, Fisher_
 fisher.multcomp(Fisher_BSA_antropologie_kruistabel, p.method = "bonferroni")
 
 ```
-<!-- ## OPENBLOK: Fisher-Freeman-Halton-exact-toets post-hoc2.R -->
+<!-- ## /OPENBLOK: Fisher-Freeman-Halton-exact-toets post-hoc2.R -->
 
 <!-- ## TEKSTBLOK: link4.R -->
 De resultaten laten de significantie zien van de [Fisher's exact toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) voor elk mogelijke combinatie van 2x2 tabellen. Geen van de post-hoc toetsen is significant, wat logisch is aangezien de *Fisher-Freeman-Halton exact toets* niet significant was.  De eerste waarde is bijvoorbeeld de p-waarde van deze toets voor de kruistabel bestaande uit de aantallen positief en negatief BSA voor Nederland en Duitsland (NL:GE). De opmerkelijke p-waardes van 1 komen in een aantal gevallen door de Bonferroni correctie die de oorspronkelijke p-waarde met het aantal vergelijkingen (21) vermenigvuldigt. In andere gevallen zijn de verschillen zo klein dat dit leidt tot een p-waarde van 1.

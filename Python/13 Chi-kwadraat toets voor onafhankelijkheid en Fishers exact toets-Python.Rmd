@@ -4,6 +4,7 @@ output:
   html_document:
     theme: lumen
     toc: yes
+    toc_depth: 2
     toc_float: 
       collapsed: FALSE 
     number_sections: true
@@ -63,16 +64,15 @@ Gebruik de *Chi-kwadraat toets voor onafhankelijkheid* of de *Fisher's exact toe
 <div id = "casus">
 De studentendecaan van een hogeschool vraagt zich af of het invoeren van het leenstelsel van invloed is op het uitvallen van studenten met een functiebeperking. Daarom onderzoekt hij of er een afhankelijkheid is tussen het wel of niet uitvallen van studenten met een functiebeperking en het wel of niet invoeren van het leenstelsel.
 
-Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
 *H~0~*: Er is geen afhankelijkheid tussen het wel of niet uitvallen van studenten met een functiebeperking en het wel of niet invoeren van het leenstelsel.
-
 
 *H~A~*: Er is een afhankelijkheid tussen het wel of niet uitvallen van studenten met een functiebeperking en het wel of niet invoeren van het leenstelsel.
 </div>
 
 # Assumpties
-Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De groepen zijn op nominaal of ordinaal niveau gemeten[^6] en daarmee onafhankelijk van elkaar. 
+Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden. De variabelen zijn categorisch (nominaal[^6] of ordinaal[^5]) en de observaties zijn onafhankelijk van elkaar. 
 
 ## Groepsgrootte
 De *Chi-kwadraat toets voor onafhankelijkheid* heeft een assumptie wat betreft het aantal observaties in een kruistabel. Een kruistabel is een tabel waarin de aantallen observaties worden weergegeven per combinatie van de categorieën van beide variabelen. De kruistabel van de data in de huidige casus is te vinden in Tabel 1.   
@@ -419,7 +419,9 @@ fwu = np.array(Fisher_Prop_Uitval_studenten_kruistabel)[1,1]
 [^1]: Binaire variabelen: twee elkaar uitsluitende waarden, zoals ja of nee, 0 of 1, aan of uit. 
 [^2]: Prabhakaran, S. (2016-2017). *Statistical Tests*. http://r-statistics.co/Statistical-Tests-in-R.html.
 [^4]: Van Geloven, N., & Holman, R., (6 mei 2016). *Fisher's exact toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Fisher's_exact_toets).
-[^6]: Nominaal: variabelen die niet afhankelijk van elkaar zijn en niet op inhoudelijke basis geordend kunnen worden. Voorbeelden hiervan zijn geslacht of achternamen. Een binaire variabele is een voorbeeld van een nominale variabele. Binaire variabelen hebben twee mogelijkheden, ja of nee, terwijl nominale variabelen meerdere mogelijkheden kunnen hebben. 
+[^5]: Een ordinale variabele is een categorische variabele waarbij de categorieën geordend kunnen worden. Een voorbeeld is de variabele beoordeling met de categorieën Onvoldoende, Voldoende, Goed en Uitstekend.
+[^6]: Een nominale variabele is een categorische variabele waarbij de categorieën niet geordend kunnen worden. Een voorbeeld is de variabele windstreek (noord, oost, zuid, west) en geslacht (man of vrouw).
+[^7]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^8]: Van Geloven, N. (20 augustus 2015). *Chi-kwadraat toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Chi-kwadraat_toets).
 [^9]: De effectmaat Cohen's *w* wordt voor de *Chi-kwadraat toets* berekend door de wortel te nemen van de
 &chi;^2^-waarde gedeeld door het totaal aantal observaties, i.e. $\sqrt{ \frac{\chi^2}{N} }$.

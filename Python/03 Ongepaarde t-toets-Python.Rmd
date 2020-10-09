@@ -2,14 +2,22 @@
 title: "Ongepaarde t-toets"
 output:
   html_document:
+    includes:
+      in_header:
+      - ../01. Includes/html/nocache.html
+      - ../01. Includes/html/favicon.html
+      - ../01. Includes/html/analytics.html
+    number_sections: yes
     theme: lumen
     toc: yes
-    toc_float: 
-      collapsed: FALSE 
-    number_sections: true
-    includes:
-      in_header: ["../01. Includes/html/nocache.html", "../01. Includes/html/favicon.html", "../01. Includes/html/analytics.html"]
-  keywords: [statistisch handboek, studiedata]
+    toc_depth: 2
+    toc_float:
+      collapsed: no
+  keywords:
+  - statistisch handboek
+  - studiedata
+  word_document:
+    toc: yes
 ---
 
 <!-- ## CLOSEDBLOK: Functies.R -->
@@ -61,7 +69,7 @@ Gebruik de *ongepaarde t-toets* om de gemiddelden van twee onafhankelijke groepe
 <div id = "casus">
 Vanaf 2011 heeft de opleiding Taalwetenschap een Bindend Studieadvies (BSA) die de selectiviteit van het eerste jaar moet vergroten. De studieadviseur vraagt zich af of het gemiddelde cijfer van de opleiding Taalwetenschap op 1 februari, na invoering van het BSA, veranderd is. De data is beschikbaar voor het cohort gestart in 2010 en voor het cohort gestart in 2011.
 
-Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect is en de alternatieve hypothese zo geformuleerd is dat er een effect is wat overeenkomt met de verwachting van de onderzoeker.
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
 *H~0~*: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taalwetenschap is niet veranderd na de invoer van het BSA, µ~0~ = µ~1~  
 

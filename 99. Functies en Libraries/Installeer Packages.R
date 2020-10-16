@@ -36,12 +36,12 @@ Gebruikte_packages <- c(
     "car",
     "checkmate",
     "dplyr",
-    "DescTools",
     "effsize", # misschien niet meer nodig door lsr
     "emmeans", # 31
     "exact2x2",
     "ez",
     "fmsb", # 41
+    "DescTools", # moet na package fmsb omdat functie VIF() overlapt
     "ggplot2",
     "ggridges",
     "gsubfn",

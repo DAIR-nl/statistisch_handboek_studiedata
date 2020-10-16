@@ -52,7 +52,7 @@ source(paste0(here::here(),"/01. Includes/data/31.R"))
 
 # Toepassing
 
-Gebruik de *ANCOVA* bij het toetsen of de gemiddelden van groepen op basis van twee of meer onafhankelijke categorische variabelen van elkaar verschillen na het controleren voor één of meerdere achtergrondvariabelen.[^1] 
+Gebruik de *ANCOVA* bij het toetsen of de gemiddelden van groepen op basis van één of meer onafhankelijke categorische variabelen van elkaar verschillen na het controleren voor één of meerdere achtergrondvariabelen. In de casus behorend bij deze toetspagina is er één onafhankelijke variabele die de groepen definieert. Er wordt dus een *one-way ANCOVA* uitgevoerd.[^1] 
 
 # Onderwijscasus
 <div id = "casus">
@@ -90,13 +90,11 @@ Voordat gestart kan worden met de *ANCOVA*, moet de data gescreend worden op de 
 
 Na het vinden van een outlier is de volgende stap om een goede oplossing voor te outlier te bedenken. Het is van belang hier goed over na te denken en niet zomaar een outlier te verwijderen met als enige argument dat het een outlier is. In het algemeen kan er onderscheid gemaakt worden tussen onmogelijke en onwaarschijnlijke outliers.[^5] Een onmogelijke outlier is een observatie die technisch gezien niet kan kloppen, bijvoorbeeld een leeftijd van 1000 jaar, een negatief salaris of een man die zwanger is. Bij deze outliers is het een optie om de waarde te vervangen als er een overduidelijke fout bij het invoeren van de data is gemaakt. Een andere optie is de waarde te verwijderen. Een onwaarschijnlijke outlier is een observatie die technisch gezien wel kan, maar heel erg afwijkt van de overige observaties. De rijksten der aarde zijn in de stad of het dorp waar zij wonen qua vermogen waarschijnlijk een outlier. Maar het zijn bestaande personen dus het verwijderen van de observatie zou hier foutief zijn. Opties in deze situatie zijn de variabele(n) te transformeren, de outlier gewoon mee te nemen in de analyse of de analyse met en zonder de outlier uit te voeren en beide te rapporteren. Ook is het niet verboden om de outlier toch te verwijderen, maar het is in dat geval wel van belang dit transparant te rapporteren en op een goede wijze te beargumenteren.[^5]
 
-Bij de *ANCOVA* zijn er Drie nuttige methoden om outliers te vinden.[^3]
+Bij de *ANCOVA* zijn er drie nuttige methoden om outliers te vinden.[^3]
 
 ### Boxplots en standaardiseren
 
 Begin voor de analyse met het screenen van de variabelen in de dataset op de aanwezigheid van univariate outliers. Voor continue variabelen bestaat deze screening uit het visualiseren van de variabele met een boxplot en het standaardiseren[^6] van de variabele. Als een observatie een gestandaardiseerde score van groter dan 3 of kleiner dan -3 heeft, wordt deze beschouwd als een outlier. In dat geval wijkt de observatie namelijk meer dan drie standaardafwijkingen af van het gemiddelde van de variabele. Gebruik zowel de boxplot als de standaardisering om outliers te vinden voor continue variabelen.[^5]
-
-Bij categorische variabelen hebben boxplots en standaardisatie geen zin, omdat het geen variabelen met een continue schaal zijn. Bij categorische variabelen is het nuttig om een overzicht te maken van de bestaande categorieën en bijbehorende aantallen observaties en is het nuttig om te onderzoeken of elke observatie slechts in één categorie past. Doe dit met behulp van tabellen.
 
 ### Mahalanobis afstand
 
@@ -112,7 +110,7 @@ Hoewel de Mahalanobis afstand en Cook's afstand beide multivariate outliers iden
 
 In de *ANCOVA* wordt aangenomen dat er een lineaire relatie is tussen elke covariaat en de afhankelijke variabele. Een lineaire relatie houdt in dat de toename of afname van de afhankelijke variabele als gevolg van de toename van de covariaat constant is: er is een rechte lijn door de data heen te trekken. Een voorbeeld van een lineaire en niet-lineaire relatie is weergegeven in Figuur 1. Bij de linkerfiguur kan er duidelijk een rechte lijn door de punten getrokken worden en is er dus sprake van een lineaire relatie. Bij de rechterfiguur is dit niet het geval, daar is er sprake van een curve in de relatie tussen de covariaat en afhankelijke variabele. Als er geen lineair verband is tussen de covariaat en de afhankelijke variabele, dan wordt er niet op de juiste manier gecontroleerd voor de covariaat wat gevolgen heeft voor de validiteit van de *ANCOVA*.[^4]<sup>,</sup>[^8] 
 
-De assumptie van lineariteit wordt onderzocht met behulp van scatter plots, zoals in onderstaande figuren. Deze assumptie hoeft alleen onderzocht te worden voor continue variabelen. Bij categorische variabelen krijgt elke categorie een aparte waarde waardoor er geen lineariteit kan zijn. Als er geen lineaire relatie is, zijn er verschillende opties. De variabele kan op verschillende manieren getransformeerd[^7] worden zodat er alsnog een lineaire relatie ontstaat.
+De assumptie van lineariteit wordt onderzocht met behulp van scatter plots, zoals in onderstaande figuren. Deze assumptie hoeft alleen onderzocht te worden voor continue variabelen. Bij categorische variabelen krijgt elke categorie een aparte waarde waardoor er geen lineariteit kan zijn. Als er geen lineaire relatie is, is het transformeren van de afwijkende variabele een optie. De variabele kan op verschillende manieren getransformeerd[^7] worden zodat er alsnog een lineaire relatie ontstaat.
 
 <div class = "col-container">
   <div class="col">

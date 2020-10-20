@@ -42,13 +42,13 @@ set.seed(1234)
 
 # Maak cijfers voor drie opleidingen
 Cijfers_wiskunde <- mvrnorm(200,
-                            mu = c(7.5,7,6.5),
+                            mu = c(7.5,7.0,6.4),
                             Sigma = matrix(c(0.2,0.1,0.1,0.1,0.2,0.1,0.1,0.1,0.2),3,3))
 cov(Cijfers_wiskunde)
 colMeans(Cijfers_wiskunde)
 
 Cijfers_informatica <- mvrnorm(250,
-                            mu = c(7.4,7.1,6.4),
+                            mu = c(7.5,7.0,6.4),
                             Sigma = matrix(c(0.2,0.1,0.1,0.1,0.2,0.1,0.1,0.1,0.2),3,3))
 cov(Cijfers_informatica)
 colMeans(Cijfers_informatica)

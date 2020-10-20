@@ -66,12 +66,12 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 # Assumpties
 
-Het meetniveau van de afhankelijke variabele is ordinaal[^16] of continu.[^17] In deze toetspagina staat een casus met ordinale data centraal; een casus met continue data met bijbehorende uitwerking is te vinden in de [Kruskal Wallis toets I](10-Kruskal-Wallis-toets-I-R.html).
+Het meetniveau van de afhankelijke variabele is ordinaal[^16] of continu.[^17] In deze toetspagina staat een casus met een ordinale afhankelijke variabele centraal; een casus met een continue afhankelijke variabele met bijbehorende uitwerking is te vinden in de [Kruskal Wallis toets I](10-Kruskal-Wallis-toets-I-R.html).
 
-Om de *Kruskal Wallis toets* uit te voeren met een ordinale afhankelijke variabele, moet deze variabele omgezet worden in getallen. Wanneer er vier categorieën zijn, worden ze genummerd van 1 tot en met 4 op basis van de ordening van de variabele. De categorieën onvoldoende, voldoende, goed en uitstekend worden dan omgezet in respectievelijk 1, 2, 3 en 4. Bij de *chi-kwadraat toets voor onafhankelijkheid* en de *Fisher-Freeman_Halton exact toets* wordt dit niet gedaan, maar wordt de ordinale variabele als nominaal beschouwd. De *Kruskal Wallis toets* maakt een rangschikking van alle observaties van alle groepen samengevoegd en telt vervolgens apart de rangnummers op voor de observaties in alle groepen. Met behulp van de groepsgroottes kan ook het gemiddelde rangnummer van de groepen berekend worden. Het verschil tussen de gemiddelde rangnummers van de groepen bepaalt de significantie van de toets.[^17]
+Om de *Kruskal Wallis toets* uit te voeren met een ordinale afhankelijke variabele, moet deze variabele omgezet worden in getallen. Wanneer er vier categorieën zijn, worden ze genummerd van 1 tot en met 4 op basis van de ordening van de variabele. De categorieën onvoldoende, voldoende, goed en uitstekend worden dan omgezet in respectievelijk 1, 2, 3 en 4. Bij de *chi-kwadraat toets voor onafhankelijkheid* en de *Fisher-Freeman_Halton exact toets* wordt dit niet gedaan, maar wordt de ordinale afhankelijke variabele als nominaal beschouwd. De *Kruskal Wallis toets* maakt een rangschikking van alle observaties van alle groepen samengevoegd en telt vervolgens apart de rangnummers op voor de observaties in alle groepen. Met behulp van de groepsgroottes kan ook het gemiddelde rangnummer van de groepen berekend worden. Het verschil tussen de gemiddelde rangnummers van de groepen bepaalt de significantie van de toets.[^17]
 
 # Post-hoc toets 
-De *Kruskal Wallis toets* toetst of twee of meerdere groepen van elkaar verschillen. Een post-hoc toets specificeert of groep significant van een andere groep verschilt. Gebruik de [Mann-Whitney U toets](23-Mann-Whitney-U-toets-II-R.html) als post-hoc toets.
+De *Kruskal Wallis toets* toetst of er een verschil is tussen de groepen op gebied van de afhankelijke variabele. De post-hoc toets wordt daarna gebruikt om te toetsen tussen welke specifieke groepen er een significant verschil is. Gebruik de [Mann-Whitney U toets](23-Mann-Whitney-U-toets-II-R.html) als post-hoc toets.
 
 Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout.[^9] Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^2]
 
@@ -111,7 +111,7 @@ unique(Beoordelingen_presentatievaardigheden$Opleiding)
 <!-- ## /OPENBLOK: Data-bekijken-2.R -->
 
 <!-- ## TEKSTBLOK: Data-kruistabel1.R -->
-Een kruistabel geeft de aantallen observaties weer voor de combinaties van de categorieën van de variabelen `Opleiding` en `Beoordeling`. In feite laat dit zien welke beoordelingen de studenten van de verschillende opleidingen krijgen. Maak de kruistabel met de functie `table()` met als argumenten de variabele `Beoordelingen_presentatievaardigheden$Opleiding` en de variabele `Beoordelingen_presentatievaardigheden$Beoordeling`.
+Een kruistabel geeft het aantal observaties weer voor de combinaties van de categorieën van de variabelen `Opleiding` en `Beoordeling`. In feite laat dit zien welke beoordelingen de studenten van de verschillende opleidingen krijgen. Maak de kruistabel met de functie `table()` met als argumenten de variabele `Beoordelingen_presentatievaardigheden$Opleiding` en de variabele `Beoordelingen_presentatievaardigheden$Beoordeling`.
 <!-- ## /TEKSTBLOK: Data-kruistabel1.R -->
 
 <!-- ## OPENBLOK: Data-kruistabel2.R -->
@@ -154,11 +154,11 @@ ggplot(Beoordelingen_presentatievaardigheden,
 ```
 <!-- ## /OPENBLOK: Histogram1.R -->
 
-De staafdiagram maakt duidelijk dat bij Economics en Finance de meeste studenten een voldoende halen voor hun presentatievaardigheden. Bij Marketing en Entrepeneurship is de beoordeling met de hoogste frequentie hoger. Bij Marketing ontvangen de meeste studenten goed als beoordeling en bij Entrepeneurship komt de beoordeling uitstekend het meest voor.
+Het staafdiagram maakt duidelijk dat bij Economics en Finance de meeste studenten een voldoende halen voor hun presentatievaardigheden. Bij Marketing en Entrepeneurship is de beoordeling met de hoogste frequentie hoger. Bij Marketing ontvangen de meeste studenten goed als beoordeling en bij Entrepeneurship komt de beoordeling uitstekend het meest voor.
 
 ## Kruskal Wallis toets
 <!-- ## TEKSTBLOK: Kruskal-Wallis-test-1.R -->
-Voer de *Kruskal Wallis toets* uit om te onderzoeken of er verschillen zijn tussen de beoordelingen van de presentatievaardigheden van studenten van de opleidingen Economics, Finance, Entrpeneurship en Marketing. Zet eerst de categorische variabele `Beoordeling` om in een numerieke variabele door de categorieën onvoldoende, voldoende, goed en uitstekend om te zetten in respectievelijk 1, 2, 3 en 4. Gebruik de functie `kruskal.test()` met als eerste argument de afhankelijke variabele `Beoordeling_numeriek` en de variabele die de groep definiëert: `Opleiding`. Het tweede argument is het dataframe `Beoordelingen_presentatievaardigheden`. 
+Voer de *Kruskal Wallis toets* uit om te onderzoeken of er verschillen zijn tussen de beoordelingen van de presentatievaardigheden van studenten van de opleidingen Economics, Finance, Entrepeneurship en Marketing. Zet eerst de categorische variabele `Beoordeling` om in een numerieke variabele door de categorieën onvoldoende, voldoende, goed en uitstekend om te zetten in respectievelijk 1, 2, 3 en 4. Gebruik de functie `kruskal.test()` met als eerste argument de afhankelijke variabele `Beoordeling_numeriek` en de variabele die de groep definiëert: `Opleiding`. Het tweede argument is het dataframe `Beoordelingen_presentatievaardigheden`. 
 <!-- ## /TEKSTBLOK: Kruskal-Wallis-test-1.R -->
 
 <!-- ## OPENBLOK: Kruskal-Wallis-test-2.R -->
@@ -221,7 +221,7 @@ pairwise.wilcox.test(Beoordelingen_presentatievaardigheden$Beoordeling_numeriek,
 <!-- ## /OPENBLOK: Mann-Whitney-U-test.R -->
 
 <!-- ## CLOSEDBLOK: Mann-Whitney-U-test1.R -->
-``` {r pairwise wilcox test closed, warning = FALSE}
+``` {r pairwise wilcox test closed, warning = FALSE, echo = FALSE}
 posthoc <- pairwise.wilcox.test(Beoordelingen_presentatievaardigheden$Beoordeling_numeriek, Beoordelingen_presentatievaardigheden$Opleiding, p.adjust.method = "bonferroni")$p.value
 
 N_EC <- sum(Beoordelingen_presentatievaardigheden$Opleiding == "Economics")
@@ -232,7 +232,7 @@ N_MA <- sum(Beoordelingen_presentatievaardigheden$Opleiding == "Marketing")
 ```
 <!-- ## /CLOSEDBLOK: Mann-Whitney-U-test1.R -->
 
-De [Mann-Whitney U toets](23-Mann-Whitney-U-toets-II-R.html) gebruikt het gemiddelde rangnummer van twee ongepaarde groepen om de significantie van de toets te bepalen. Met behulp van het gemiddelde rangnummer kan bepaald worden welke groep hogere rangnummers heeft wat een benadering is voor het verschil tussen twee groepen.[^15] In deze casus heeft de opleiding met een hoger rangnummer dus over het algemeen studenten met een hogere beoordeling. Bereken en rapporteer daarom het gemiddelde rangnummer.
+De [Mann-Whitney U toets](23-Mann-Whitney-U-toets-II-R.html) gebruikt het gemiddelde rangnummer van twee ongepaarde groepen om de significantie van de toets te bepalen. Met behulp van het gemiddelde rangnummer kan bepaald worden welke groep hogere rangnummers heeft wat een benadering is voor het verschil tussen twee groepen.[^15] In deze casus heeft de opleiding met een hoger rangnummer dus over het algemeen studenten met een hogere beoordeling. Bereken en rapporteer daarom het gemiddelde rangnummer. In de onderstaande code worden de gemiddelde rangnummers voor alle post-hoc toetsen berekend. De resultaten zijn te zien in Tabel 1.
 
 <!-- ## OPENBLOK: Mann-Whitney-U-test2.R -->
 ```{r mean rank}
@@ -306,7 +306,7 @@ Er zijn twee significante verschillen bij de post-hoc toetsen te vinden. Zo is e
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *Kruskal Wallis toets* is uitgevoerd om te toetsen of er verschillen zijn tussen de studenten van de opleidingen Economics, Finance, Entrepeneurship en Marketing wat betreft hun beoordelingen bij het vak Presentatievaardigheden. Uit de resultaten kan afgelezen worden dat er een significant verschil is tussen de verdelingen van het aantal studiepunten voor de verschillende vooropleidingen, *H* = `r vK_Chi2`, *df* = `r vK_DF` ,*p* < 0,01, *&eta;^2^* = `r Round_and_format(Eta_squared)`. De resultaten ondersteunen de conclusie dat er een verschil is tussen de beoordelingen van de presentatievaardigheden voor de vier opleidingen.
+De *Kruskal Wallis toets* is uitgevoerd om te toetsen of er verschillen zijn tussen de studenten van de opleidingen Economics, Finance, Entrepeneurship en Marketing wat betreft hun beoordelingen bij het vak Presentatievaardigheden. Uit de resultaten kan afgelezen worden dat er een significant verschil is tussen de verdelingen van de beoordelingen van de presentatievaardigheden voor de verschillende vooropleidingen, *H* = `r vK_Chi2`, *df* = `r vK_DF` ,*p* < 0,01, *&eta;^2^* = `r Round_and_format(Eta_squared)`. De resultaten ondersteunen de conclusie dat er een verschil is tussen de beoordelingen van de presentatievaardigheden voor de vier opleidingen.
 
 De [Mann-Whitney U toets](23-Mann-Whitney-U-toets-II-R.html) is uitgevoerd als post-hoc toets om te onderzoeken welke opleidingen van elkaar verschillen qua beoordelingen van de presentatievaardigheden van studenten.  De *Bonferroni correctie* is gebruikt om de Type I fout te voorkomen die gepaard gaat met het veelvuldig toetsen. Er is een significant verschil (*p* = 0,03) gevonden tussen de opleidingen  Finance (Gemiddeld rangnummer = `r Round_and_format(Gem_FI_EN[[1]])`,  *n* = `r N_FI`) en Entrepeneurship (Gemiddeld rangnummer = `r Round_and_format(Gem_FI_EN[[2]])`,  *n* = `r N_EN`), waarbij het gemiddeld rangnummer hoger is voor Entrepeneurship. Daarnaast is er een significant verschil (*p* = 0,01) tussen Finance (Gemiddeld rangnummer = `r Round_and_format(Gem_FI_MA[[1]])`,  *n* = `r N_FI`) en Marketing (Gemiddeld rangnummer = `r Round_and_format(Gem_FI_MA[[2]])`,  *n* = `r N_MA`), waarbij het gemiddeld rangnummer hoger is voor Marketing. De overige vergelijkingen tussen opleidingen leidden niet tot een significant verschil. Een overzicht van de resultaten van de post-hoc toetsen is te vinden in Tabel 1. Al met al lijkt er een verschil te zijn tussen de beoordelingen van de presentatievaardigheden van studenten afkomstig van de opleidingen Economics, Finance, Entrepeneurship en Marketing, waarbij de studenten afkomstig van de opleidingen Entrepeneurship en Marketing hogere beoordelingen lijken te behalen dan de studenten van de opleidingen Finance.
 <!-- ## /TEKSTBLOK: Rapportage.R -->

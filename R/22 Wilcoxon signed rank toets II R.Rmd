@@ -132,7 +132,7 @@ print(Beoordelingen_confusiematrix[Volgorde, Volgorde])
 ```
 <!-- ## /OPENBLOK: Data-beschrijven.R -->
 
-De confusiematrix geeft informatie over de verschillen tussen de beoordelingen aan het begin en eind van het vak. Er zijn bijvoorbeeld 19 studenten die aan het begin goed als beoordeling ontvingen en aan het eind de beoordeling uitstekend.
+De confusiematrix geeft informatie over de verschillen tussen de beoordelingen aan het begin en eind van het vak. Er zijn bijvoorbeeld 16 studenten die aan het begin goed als beoordeling ontvingen en aan het eind de beoordeling uitstekend.
 
 
 ## De data visualiseren

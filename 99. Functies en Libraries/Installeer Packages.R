@@ -61,6 +61,7 @@ Gebruikte_packages <- c(
     "rcompanion",
     "readxl",
     "reticulate",
+    "reshape", # 58
     "rstatix", # 29
     "RVAideMemoire",
     "rlist",

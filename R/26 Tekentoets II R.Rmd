@@ -209,7 +209,7 @@ vMed <- Round_and_format(b$estimate)
 <!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
 * Er is een significant verschil tussen het mediane inkomen vijf jaar en één jaar na afstuderen, *S* = `r vS`, *N* = `r vN`, *p* < 0.0001 [^4]
 * De toetsstatistiek *S* is het aantal positieve verschillen (inkomen vijf jaar na afstuderen hoger dan één jaar na afstuderen), *N* is het totaal aantal observatie-eenheden (alumni)
-* Van de `r vN` alumni verdienen `r vS` alumni meer vijf jaar na afstuderen
+* Van de `r vN` alumni verdienen `r vS` alumni meer vijf jaar na afstuderen dan één jaar na afstuderen
 * De geschatte mediaan van de verschilscores is `r vMed` met bijbehorend 96%-betrouwbaarheidsinterval[^5] van `r vconf.int1` tot `r vconf.int2`.
 
 <!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
@@ -217,7 +217,7 @@ vMed <- Round_and_format(b$estimate)
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
 
-De *tekentoets* is uitgevoerd om te onderzoeken of er een verschil is tussen het mediane bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij één jaar en vijf jaar na afstuderen. De resultaten van de toets laten zien dat er een significant verschil is tussen beide medianen, *S* = `r vS`, *N* = `r vN`, *p* < 0.0001. Het geschatte mediaan van de verschilscores is `r vMed` met bijbehorend 96%-betrouwbaarheidsinterval van `r vconf.int1` tot `r vconf.int2`. Van de `r vN` alumni verdienen `r vS` alumni meer vijf jaar na afstuderen. Deze resultaten duiden op een verschil in het mediane bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij waarbij de inkomens vijf jaar na afstuderen hoger lijken te liggen.
+De *tekentoets* is uitgevoerd om te onderzoeken of er een verschil is tussen het mediane bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij één jaar en vijf jaar na afstuderen. De resultaten van de toets laten zien dat er een significant verschil is tussen beide medianen, *S* = `r vS`, *N* = `r vN`, *p* < 0.0001. De geschatte mediaan van de verschilscores is €`r vMed` met bijbehorend 96%-betrouwbaarheidsinterval van €`r vconf.int1` tot €`r vconf.int2`. Van de `r vN` alumni verdienen `r vS` alumni meer vijf jaar na afstuderen. Deze resultaten duiden op een verschil in het mediane bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij waarbij de inkomens vijf jaar na afstuderen hoger lijken te liggen.
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->

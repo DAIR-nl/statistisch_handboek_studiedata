@@ -95,7 +95,7 @@ $`Sphericity Corrections`
 <!-- ## /CLOSEDBLOK: Sphericiteit.R -->
 
 <!-- ## TEKSTBLOK: Sphericiteit1.R -->
-Bij een p-waarde < 0,05, toont *Mauchly's test* dat de assumptie van sphericiteit geschonden is. In de output is dit te zien aan de p-waarde van 0,0051 onder ` $Mauchly's Test for Sphericity `. Er zijn twee mogelijke correcties wanneer er geen sphericiteit is: de Greenhouse-Geisser (GG) en Huynh-Feldt (HF) correctie. De Greenhouse-Geisser correctie staat bekend als conservatief, wat betekent dat de correctie een relatief lage kans op een type I fout heeft. In andere woorden, het zal niet vaak gebeuren dat deze correctie een significant effect aantoont wanneer dat er in werkelijkheid niet is. De Huynh-Feldt correctie staat echter bekend als liberaal, wat betekent dat er een relatief hoge kans op een type I fout is. De teststatistiek en p-waarde van beide correcties zijn in de output te vinden onder ` $Sphericity Corrections `.
+Bij een p-waarde kleiner dan 0,05, toont *Mauchly's test* dat de assumptie van sphericiteit geschonden is. In de output is dit te zien aan de p-waarde van 0,0051 onder ` $Mauchly's Test for Sphericity `. Er zijn twee mogelijke correcties wanneer er geen sphericiteit is: de Greenhouse-Geisser (GG) en Huynh-Feldt (HF) correctie. De Greenhouse-Geisser correctie staat bekend als conservatief, wat betekent dat de correctie een relatief lage kans op een type I fout heeft. In andere woorden, het zal niet vaak gebeuren dat deze correctie een significant effect aantoont wanneer dat er in werkelijkheid niet is. De Huynh-Feldt correctie staat echter bekend als liberaal, wat betekent dat er een relatief hoge kans op een type I fout is. De teststatistiek en p-waarde van beide correcties zijn in de output te vinden onder ` $Sphericity Corrections `.
 <!-- ## TEKSTBLOK: Sphericiteit1.R -->
 
 Houd de volgende richtlijnen aan bij het interpreteren van de *repeated measures ANOVA* wanneer niet aan sphericiteit is voldaan:
@@ -106,7 +106,7 @@ Houd de volgende richtlijnen aan bij het interpreteren van de *repeated measures
     * Wanneer deze p-waarde significant is, rapporteer dan de significante correctie.
     * Wanneer deze p-waarde niet significant is, rapporteer dan de niet significante correctie.
 
-In de voorbeeldoutput is de p-waarde van de Greenhouse-Geisser correctie > 0,05 en de p-waarde van de Huynh-Feldt correctie < 0,05. Het gemiddelde van beide p-waarden is 0,049855, wat betekent dat er een significant resultaat is. Rapporteer in dit geval dus de (significante) Huynh-Feldt correctie, i.e. *F* = 0,56, *p* < 0,05.  
+In de voorbeeldoutput is de p-waarde van de Greenhouse-Geisser correctie groter dan 0,05 en de p-waarde van de Huynh-Feldt correctie kleiner dan 0,05. Het gemiddelde van beide p-waarden is 0,049855, wat betekent dat er een significant resultaat is. Rapporteer in dit geval dus de (significante) Huynh-Feldt correctie, i.e. *F* = 0,56, *p* < 0,05.  
 
 
 # Effectmaat
@@ -315,7 +315,7 @@ De boxplotten geven de spreiding weer van het aantal studieuren voor de drie vak
 Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov
-De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is vereist als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn, wat meestal het geval is bij een steekproef. Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
+De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is vereist als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn, wat meestal het geval is bij een steekproef. Als de p-waarde kleiner dan 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
 <!-- ## TEKSTBLOK: Lilliefors-test1.R -->
 <!-- ## /TEKSTBLOK: Lilliefors-test1.R -->
 
@@ -352,7 +352,7 @@ lillie.test(Studieuren_kosmologie)
 De p-waarde is *p* > 0,05 voor elk vak; er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. [^11] De *repeated measures ANOVA* kan uitgevoerd worden.
 
 ### Shapiro-Wilk Test
-De *Shapiro-Wilk test* is een soortgelijke toets als de *Kolmogorov-Smirnov test* en vooral geschikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
+De *Shapiro-Wilk test* is een soortgelijke toets als de *Kolmogorov-Smirnov test* en vooral geschikt bij kleine steekproeven (n < 50). Als de p-waarde kleiner dan 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
 
 <div class="col-container"> 
   <div class="col">
@@ -384,7 +384,7 @@ De p-waarde is *p* > 0,05 voor elk vak, dus er is geen significant verschil gevo
 ## Repeated measures ANOVA 
 
 <!-- ## TEKSTBLOK: repeatedmeasuresANOVA1.R -->
-Voer de *repeated measures ANOVA* uit om de vraag te beantwoorden of er verschillen zijn tussen het aantal studieuren voor de vakken in de eerste onderwijsperiode van het eerste jaar van de bachelor Technische Natuurkunde. Gebruik de functie `ezANOVA()` met als argumenten de dataset `Studieuren_technische_natuurkunde`, de afhankelijke variabele `dv = Studieuren`, de variabele die de observaties aangeeft `wid = Studentnummer` en de onafhankelijke variabele `within = Vak`.
+Voer de *repeated measures ANOVA* uit om de vraag te beantwoorden of er verschillen zijn tussen het aantal studieuren voor de vakken in de eerste onderwijsperiode van het eerste jaar van de bachelor Technische Natuurkunde. Gebruik de functie `ezANOVA()` van het package `ez` met als argumenten de dataset `Studieuren_technische_natuurkunde`, de afhankelijke variabele `dv = Studieuren`, de variabele die de observatie-eenheden aangeeft `wid = Studentnummer` en de onafhankelijke variabele `within = Vak`.
 <!-- ## /TEKSTBLOK: repeatedmeasuresANOVA1.R -->
 
 <!-- ## OPENBLOK: repeatedmeasuresANOVA2.R -->
@@ -412,14 +412,14 @@ eta2 <- Round_and_format(obj$ANOVA$ges)
 * *Mauchly's test* toont aan dat de assumptie van sphericiteit niet standthoudt in deze casus ($\chi^2$ = `r Mauchly_W`, p < 0,0001); gebruik in dit geval een van de correcties. Zowel de Greenhouse-Geisser als de Huynh-Feldt correctie laten een significant resultaat zien; rapporteer in dit geval de (conservatieve) Greenhouse-Geisser correctie.
 * De data voldoet niet aan de assumptie van sphericiteit, $\chi^2$ = `r Mauchly_W`, p < 0,0001
 * De resultaten van de Greenhouse-Geisser correctie zijn *F* = `r GG_F`, p < 0,0001, *η^2^* = `r eta2`
-* De p-waarde < 0,05, dus de H~0~ wordt verworpen.[^11]
+* De p-waarde is kleiner dan 0,05, dus de H~0~ wordt verworpen.[^11]
 * Er is een significant verschil tussen het aantal studieuren voor de drie vakken in de eerste onderwijsperiode; het effect van de verschillende vakken op het aantal studieuren is groot
 
 <!-- ## /TEKSTBLOK: repeatedmeasuresANOVA4.R -->
 
 ## Post-hoc toets
 <!-- ## TEKSTBLOK: posthoc1.R -->
-Voer post-hoc toetsen uit om te onderzoeken welke vakken uit de eerste onderwijsperiode van elkaar verschillen wat betreft het aantal studieuren dat eerstejaars studenten van de bachelor Technische Natuurkunde hieraan besteden. Gebruik hiervoor de functie `pairwise.t.test` met als argumenten de afhankelijk variabele `Studieuren_technische_natuurkunde$Studieuren`, de onafhankelijke variabele `Studieuren_technische_natuurkunde$Vak` en de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`.
+Voer post-hoc toetsen uit om te onderzoeken welke vakken uit de eerste onderwijsperiode van elkaar verschillen wat betreft het aantal studieuren dat eerstejaars studenten van de bachelor Technische Natuurkunde hieraan besteden. Gebruik hiervoor de functie `pairwise.t.test()` met als argumenten de afhankelijk variabele `Studieuren_technische_natuurkunde$Studieuren`, de onafhankelijke variabele `Studieuren_technische_natuurkunde$Vak` en de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`.
 <!-- ## /TEKSTBLOK: posthoc1.R -->
 
 <!-- ## OPENBLOK: posthoc2.R -->

@@ -208,7 +208,14 @@ Hoofdeffecten_Gemiddelde_cijfers_psychologie$Gemiddeld_cijfer[Hoofdeffecten_Gemi
 Hoofdeffecten_Gemiddelde_cijfers_psychologie <- Hoofdeffecten_Gemiddelde_cijfers_psychologie[sample.int(620,620),]
 
 
-
+rm(Mannen_hbo,
+   Mannen_overig,
+   Mannen_vwo,
+   Vrouwen_hbo,
+   Vrouwen_overig,
+   Vrouwen_vwo,
+   Cijfers,
+   Studentnummer)
 
 #vvv <- aov(Gemiddeld_cijfer ~ Geslacht + Vooropleiding + Geslacht:Vooropleiding,
 #    data = Gemiddelde_cijfers_psychologie)

@@ -62,7 +62,7 @@ dfToetsen <- tribble(
     "29 Factoriele ANOVA",                                                                      "0",          "0",       "0",               "0",       
     "30 Factoriele repeated measures ANOVA ",                                                   "0",          "0",       "0",               "0",       
     "31 ANCOVA",                                                                                "1",          "0",       "0",               "0",       
-    "32 Mixed model ANOVA",                                                                     "0",          "0",       "0",               "0",       
+    "32 Mixed ANOVA",                                                                           "0",          "0",       "0",               "0",       
     "33 Multilevel lineaire regressie",                                                         "0",          "0",       "0",               "0",       
     "34 Multilevel lineaire regressie",                                                         "0",          "0",       "0",               "0",       
     "35 Multilevel lineaire regressie",                                                         "0",          "0",       "0",               "0",       

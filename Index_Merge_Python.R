@@ -205,7 +205,7 @@ for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
 }
 
 ## Loop over de toetsen die in gebruik zijn en genereer die pagina's
-for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 2]) {
+for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
     sModus <- "Python"
     #bStatus <- dfToetsen$Review_Python[dfToetsen$Toets == sToets]
     rmarkdown::render(paste0("Python/",sToets,"-Python.Rmd"), 

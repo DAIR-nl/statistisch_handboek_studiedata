@@ -83,7 +83,9 @@ Controleer de assumptie van normaliteit met de volgende stappen:
 1. Controleer de afhankelijke variabele per groep visueel met een histogram, een boxplot en een Q-Q plot.   
 2. Toets of de afhankelijke variabele voor beide groepen normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (*n* < 50) met de *Shapiro-Wilk test*.[^3]<sup>, </sup>[^4]  
 
+<!-- ## TEKSTBLOK: Link1.R-->
 Als blijkt dat de afhankelijke variabele niet normaal verdeeld is voor één van of allebei de groepen, transformeer[^5] dan de afhankelijke variabele en bepaal daarna of deze wel normaal verdeeld is of gebruik de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html).[^6]<sup>, </sup>[^7]  
+<!-- ## /TEKSTBLOK: Link1.R-->
 
 ## Wel of geen gepoolde variantie
 De *ongepaarde t-toets* kan met en zonder gepoolde variantie uitgevoerd worden. Bij een gepoolde variantie is de berekening van de variantie van het verschil in gemiddelden anders en wordt aangenomen dat de varianties van beide steekproeven even groot zijn. Deze aanname is te toetsen met de *Levene's test*, waarbij een significant resultaat aangeeft dat er een verschil is in de varianties van beide groepen. De hedendaagse consensus is echter om altijd deze aanname niet te toetsen en de *ongepaarde t-toets* zonder gepoolde variantie uit te voeren.[^8] Een gepoolde variantie zorgt ervoor dat het onderscheidend vermogen[^14] van de *ongepaarde t-toets* iets hoger is als de varianties van beide groepen ongeveer gelijk zijn, maar geeft verkeerde resultaten als de varianties van elkaar afwijken. Daarnaast heeft *Levene's test* een laag onderscheidend vermogen, wat betekent dat het lastig is om ongelijke varianties goed te toetsen. Gebruik daarom de *ongepaarde t-toets* zonder gepoolde variantie; deze staat ook wel bekend als *Welch's t-toets*.[^8]

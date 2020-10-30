@@ -1932,19 +1932,17 @@ body{ /* Normal  */
 <p>Gebruik <code>&lt;dataframe&gt;.head()</code> en <code>&lt;dataframe&gt;.tail()</code> uit de library <code>pandas</code> om de structuur van de data te bekijken. <!-- ## /TEKSTBLOK: Data-bekijken.py --> <!-- ## OPENBLOK: Data-bekijken.py --></p>
 <pre class="python"><code># Pandas library importeren
 import pandas as pd</code></pre>
-<pre class="python"><code># Eerste 6 observaties
-print(dfGemiddeld_cijfer_WNS.head(6))</code></pre>
+<pre class="python"><code># Eerste 5 observaties
+print(dfGemiddeld_cijfer_WNS.head(5))</code></pre>
 <pre><code>##           0
 ## 0  7.400000
 ## 1  7.366667
 ## 2  7.366667
 ## 3  7.666667
-## 4  5.933333
-## 5  6.500000</code></pre>
-<pre class="python"><code># Laatste 6 observaties
-print(dfGemiddeld_cijfer_WNS.tail(6))</code></pre>
+## 4  5.933333</code></pre>
+<pre class="python"><code># Laatste 5 observaties
+print(dfGemiddeld_cijfer_WNS.tail())</code></pre>
 <pre><code>##             0
-## 118  6.333333
 ## 119  6.133333
 ## 120  8.066667
 ## 121  5.166667
@@ -1960,14 +1958,14 @@ print(np.size(Gemiddeld_cijfer_WNS))
 ## 124
 print(np.mean(Gemiddeld_cijfer_WNS))
 ## 7.128763440860216
-print(np.sqrt(np.var(Gemiddeld_cijfer_WNS, ddof = 1)))
-## 0.7850377545155413</code></pre>
+print(np.std(Gemiddeld_cijfer_WNS))
+## 0.78186587182893</code></pre>
 <!-- ## /OPENBLOK: Data-beschrijven.py -->
 <!-- ## CLOSEDBLOK: Data-beschrijven.py -->
 <!-- ## /CLOSEDBLOK: Data-beschrijven.py -->
 <!-- ## TEKSTBLOK: Data-beschrijven2.py -->
 <ul>
-<li>Gemiddeld cijfer WNS (standaardafwijking): 7,13 (0,79). <em>n</em> = 124. <!-- ## /TEKSTBLOK: Data-beschrijven2.py --></li>
+<li>Gemiddeld cijfer WNS (standaardafwijking): 7,13 (0,78). <em>n</em> = 124. <!-- ## /TEKSTBLOK: Data-beschrijven2.py --></li>
 </ul>
 </div>
 <div id="visuele-inspectie-van-normaliteit" class="section level2">
@@ -2037,10 +2035,10 @@ print(statsmodels.stats.api.lilliefors(Gemiddeld_cijfer_WNS, pvalmethod = &quot;
 <p>Er is een subset van <code>Gemiddeld_cijfer_WNS</code> ingeladen: <code>Gemiddeld_cijfer_WNS_n30</code>. De steekproef bevat 30 studenten. <!-- ## TEKSTBLOK: Shapiro-Wilk-test.py --> <!-- ## OPENBLOK: Shapiro-Wilk-test.py --></p>
 <pre class="python"><code>#Shapiro-Wilk test
 print(stats.shapiro(Gemiddeld_cijfer_WNS_n30))</code></pre>
-<pre><code>## (0.9815859198570251, 0.8659763336181641)</code></pre>
+<pre><code>## (0.9289001822471619, 0.04591239243745804)</code></pre>
 <!-- ## /OPENBLOK: Shapiro-Wilk-test.py -->
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test2.py -->
-<p>De p-waarde is 0,87, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De <em>one sample-t-toets</em> kan uitgevoerd worden. <!-- ## /TEKSTBLOK: Shapiro-Wilk-test2.py --></p>
+<p>De p-waarde is 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De <em>one sample-t-toets</em> kan uitgevoerd worden. <!-- ## /TEKSTBLOK: Shapiro-Wilk-test2.py --></p>
 </div>
 </div>
 <div id="one-sample-t-toets" class="section level2">
@@ -2088,14 +2086,14 @@ print(Ondergrens, Bovengrens)</code></pre>
 <div id="rapportage" class="section level1">
 <h1><span class="header-section-number">5</span> Rapportage</h1>
 <!-- ## TEKSTBLOK: Rapportage.py -->
-<p>De <em>one sample t-toets</em> is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (<em>M</em> = 7,13, <em>SD</em> = 0,79) is statistisch significant hoger dan het landelijk gemiddelde van 6,8, <em>t</em> <sub>123</sub> = 4,66, <em>p</em> &lt; 0,05. <!-- ## /TEKSTBLOK: Rapportage.py --> De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor de exacte vakken van studenten Werktuigbouwkunde met een vwo vooropleiding hoger ligt dan het landelijk gemiddelde.</p>
+<p>De <em>one sample t-toets</em> is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (<em>M</em> = 7,13, <em>SD</em> = 0,78) is statistisch significant hoger dan het landelijk gemiddelde van 6,8, <em>t</em> <sub>123</sub> = 4,66, <em>p</em> &lt; 0,05. <!-- ## /TEKSTBLOK: Rapportage.py --> De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor de exacte vakken van studenten Werktuigbouwkunde met een vwo vooropleiding hoger ligt dan het landelijk gemiddelde.</p>
 <!-- ## CLOSEDBLOK: Footer.R -->
 <p>
 <div id = "footerborder"><hr/></div>
 <div id = "footer">
 Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 3.6.3; Python code is uitgevoerd in Python 3.7.
 <br/><br/>
-&copy; 2020 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:09-10-2020
+&copy; 2020 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:30-10-2020
 </div> <!-- ## /CLOSEDBLOK: Footer.R --></p>
 </div>
 <div class="footnotes">

@@ -43,7 +43,7 @@
 # masterprogramma en waar eventuele tekortkomingen zitten.
 
 # seed
-set.seed(12345)
+set.seed(12)
 
 # Maak studentnummers
 Studentnummer <- sample(4000000:4500000, 
@@ -132,33 +132,30 @@ Resultaten_SCM <- cbind.data.frame(Studentnummer,
 
 library(ez)
 
-bb <- ezANOVA(Resultaten_SCM, 
+ezANOVA(Resultaten_SCM, 
         dv = Cijfer, 
         wid = Studentnummer,
         within = Vak,
         between = Premaster,
         detailed = TRUE)
 
-?LeveneTest
 
 
-library(schoRsch)
-anova_out(bb)
+#library(schoRsch)
+#anova_out(bb)
 
-
-
-rm(Cijfers,
-   Vaksoort,
-   Periode,
+rm(Cijfer,
+   Vak,
+   Premaster,
    Studentnummer,
-   Cijfers_T1,
-   Cijfers_T2,
-   Cijfers_T3,
-   Cijfers_T4,
-   Cijfers_P1,
-   Cijfers_P2,
-   Cijfers_P3,
-   Cijfers_P4)
+   Cijfers_M_OC,
+   Cijfers_P_OC,
+   Cijfers_M_SI,
+   Cijfers_P_SI,
+   Cijfers_M_OP,
+   Cijfers_P_OP,
+   Cijfers_M_TH,
+   Cijfers_P_TH)
 
 ################################################################################
 
@@ -243,7 +240,7 @@ Vak <- c(rep("Sustainable Innovation",
 
 
 # Bind alles in een dataset
-Resultaten_SCM <- cbind.data.frame(Studentnummer,
+Hoofdeffecten_Resultaten_SCM <- cbind.data.frame(Studentnummer,
                                    Premaster,
                                    Vak,
                                    Cijfer)
@@ -256,18 +253,18 @@ ezANOVA(Resultaten_SCM,
         between = Premaster,
         detailed = TRUE)
 
-rm(Cijfers,
-   Vaksoort,
-   Periode,
+rm(Cijfer,
+   Vak,
+   Premaster,
    Studentnummer,
-   Cijfers_T1,
-   Cijfers_T2,
-   Cijfers_T3,
-   Cijfers_T4,
-   Cijfers_P1,
-   Cijfers_P2,
-   Cijfers_P3,
-   Cijfers_P4)
+   Cijfers_M_OC,
+   Cijfers_P_OC,
+   Cijfers_M_SI,
+   Cijfers_P_SI,
+   Cijfers_M_OP,
+   Cijfers_P_OP,
+   Cijfers_M_TH,
+   Cijfers_P_TH)
 
 
 #vvv <- aov(Gemiddeld_cijfer ~ Geslacht + Vooropleiding + Geslacht:Vooropleiding,

@@ -78,7 +78,9 @@ Controleer de assumptie van normaliteit met de volgende stappen:
 1. Controleer de verschilscores visueel met een histogram, een Q-Q plot en een boxplot.  
 2. Toets of de verschilscores normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (*n* < 50) met de *Shapiro-Wilk test*.[^3]<sup>, </sup>[^4]  
 
+<!-- ## TEKSTBLOK: Link1.R-->
 Als blijkt dat de verschilscores niet normaal verdeeld is, transformeer dan de afhankelijke variabele eventueel en bepaal daarna of de verschilscores wel normaal verdeeld is [^5] of gebruik de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html).[^6]<sup>, </sup>[^7]
+<!-- ## /TEKSTBLOK: Link1.R-->
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->

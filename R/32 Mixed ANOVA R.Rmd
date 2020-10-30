@@ -51,7 +51,7 @@ source(paste0(here::here(),"/01. Includes/data/32.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *mixed ANOVA* om te toetsen of de gemiddelden van groepen op basis van twee of meer onafhankelijke categorische variabelen van elkaar verschillen waarbij de deelnemers gemeten zijn voor elke categorie van de onafhankelijke variabelen (herhaalde metingen).[^1] De onafhankelijke variabelen zijn bij de *factoriële  repeated measures ANOVA* allemaal within-subjects variabelen.
+Gebruik de *mixed ANOVA* om te toetsen of de gemiddelden van groepen op basis van twee of meer onafhankelijke categorische variabelen van elkaar verschillen waarbij er zowel between-subjects als within-subjects variabelen zijn.[^1] 
 
 
 # Onderwijscasus
@@ -62,17 +62,17 @@ er verschillen zijn tussen de resultaten van premasterstudenten en direct toelaa
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is. Bij *mixed ANOVA* zijn er hypotheses op te stellen voor de verschillen tussen groepen van elke onafhankelijke variabele apart (hoofdeffecten) en een hypothese voor de interactie tussen twee of meerdere onafhankelijke variabelen (interactie-effect).
 
-*H~0~*: Het gemiddelde cijfer is gelijk voor theoretische en praktijkvakken, i.e. er is geen hoofdeffect van Vaksoort op Gemiddeld cijfer.
+*H~0~*: Het gemiddelde cijfer is gelijk voor direct toelaatbare studenten en premasterstudenten, i.e. er is geen hoofdeffect van Premaster op Cijfer.
 
-*H~A~*: Het gemiddelde cijfer is niet gelijk voor theoretische en praktijkvakken, i.e. er is een hoofdeffect van Vaksoort op Gemiddeld cijfer.
+*H~A~*: Het gemiddelde cijfer is niet gelijk voor direct toelaatbare studenten en premasterstudenten, i.e. er is geen hoofdeffect van Premaster op Cijfer.
 
-*H~0~*: Het gemiddelde cijfer is gelijk in onderwijsperiode 1, 2, 3 en 4, i.e. er is geen hoofdeffect van Periode op Gemiddeld cijfer.
+*H~0~*: Het gemiddelde cijfer is gelijk voor de vakken Sustainable Innovation, Organizational Change Management en Organizational Psychology en de masterthes, i.e. er is een hoofdeffect van Vak op Cijfer.
 
-*H~A~*: Het gemiddelde cijfer is niet gelijk in onderwijsperiode 1, 2, 3 en 4, i.e. er is een hoofdeffect van Periode op Gemiddeld cijfer.
+*H~A~*: Het gemiddelde cijfer is niet gelijk voor de vakken Sustainable Innovation, Organizational Change Management en Organizational Psychology en de masterthes, i.e. er is een hoofdeffect van Vak op Cijfer.
 
-*H~0~*: Er is geen interactie-effect tussen de variabelen Vaksoort en Periode op het gemiddeld cijfer.
+*H~0~*: Er is geen interactie-effect tussen de variabelen Vak en Premaster op het gemiddeld cijfer.
 
-*H~A~*: Er is een interactie-effect tussen de variabelen Vaksoort en Periode op het gemiddeld cijfer.
+*H~A~*: Er is een interactie-effect tussen de variabelen Vak en Premaster op het gemiddeld cijfer.
 
 </div>
 
@@ -80,48 +80,48 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 Binnen de *ANOVA* familie zijn er verschillende soorten analyses die afhangen van het type onafhankelijke variabele dat wordt gebruikt. Een onafhankelijke variabele kan een between-subjects en within-subjects variabele zijn. Between-subjects houdt in dat elke categorie van de variabele andere deelnemers bevat; elke deelnemer zit slechts in één van de categoriëen. Een voorbeeld van een between-subjects variabele is Geslacht: de deelnemer zit in de categorie man of categorie vrouw en kan niet in beide zitten. Een within-subjects variabele kan op twee manieren ontworpen worden. De eerste manier is dat elke deelnemer in elke categorie zit doordat hij of zij in elke categorie gemeten is (herhaalde metingen). Een voorbeeld hiervan is de variabele onderwijsperiode: de deelnemer wordt in elke onderwijsperiode gemeten wat betreft zijn gemiddelde cijfer. De tweede manier is dat deelnemers in elke categorie aan elkaar gematcht worden. Dit betekent dat er op basis van achtergrondkenmerken deelnemers aan elkaar gekoppeld worden die erg op elkaar lijken. Een herhaalde meting wordt op deze manier als het ware nagebootst.
 
-Het soort onafhankelijke variabelen bepaalt het type *ANOVA* dat gebruikt moet worden. Bij één between-subjects variabele is de [one-way ANOVA](05-One-way-ANOVA-R.html) de juiste toets en bij één within-subjects variabele is de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) de juiste toets. Bij meerdere variabelen wordt het iets compelexer. Als alle variabelen between-subjects variabelen zijn is de [factoriële ANOVA](29-Factoriele-ANOVA-R.html) de juiste toets. Als alle variabelen within-subjects variabelen zijn, is de *factoriële repeated measures ANOVA* (de huidige toetspagina) de juiste toets. Als er een combinatie is van within-subjects en between-subjects variabelen, dan is de *mixed ANOVA* de juiste toets. Bekijk dus van tevoren wat voor soort onafhankelijke variabelen worden gebruikt om de juiste toets te bepalen.
+Het soort onafhankelijke variabelen bepaalt het type *ANOVA* dat gebruikt moet worden. Bij één between-subjects variabele is de [one-way ANOVA](05-One-way-ANOVA-R.html) de juiste toets en bij één within-subjects variabele is de [repeated measures ANOVA](04-Repeated-measures-ANOVA-R.html) de juiste toets. Bij meerdere variabelen wordt het iets complexer. Als alle variabelen between-subjects variabelen zijn is de [factoriële ANOVA](29-Factoriele-ANOVA-R.html) de juiste toets. Als alle variabelen within-subjects variabelen zijn, is de [factoriële repeated measures ANOVA](30-Factoriele-repeated-measures-ANOVA-R.html) de juiste toets. Als er een combinatie is van within-subjects en between-subjects variabelen, dan is de *mixed ANOVA* (de huidige toetspagina) de juiste toets. Bekijk dus van tevoren wat voor soort onafhankelijke variabelen worden gebruikt om de juiste toets te bepalen.
 
 # Hoofdeffecten en interacties
 
-Bij *mixed ANOVA* wordt onderzocht of er verschillen zijn tussen groepen die gemaakt worden op basis van meerdere categorische onafhankelijke variabelen met herhaalde metingen. Dit wordt toegelicht met een versimpelde vorm van de huidige casus met twee onafhankelijke variabelen Vaksoort en Periode en een afhankelijke variabele Cijfer. De onafhankelijke variabele Vaksoort bestaat uit twee groepen (theorie en praktijk) en de onafhankelijke variabele Periode bestaat ook uit twee groepen (1 en 2). Binnen *mixed ANOVA* wordt een onderscheid gemaakt tussen hoofdeffecten en interactie-effecten. Een hoofdeffect houdt in dat er een verschil is tussen de groepen van één van de onafhankelijke variabelen. In andere woorden, de onafhankelijke variabele heeft effect op de afhankelijke variabele. Voor het bedachte experiment houdt een hoofdeffect van de variabele Vaksoort in dat er een verschil is in het gemiddelde van groep theorie en groep praktijk. Een hoofdeffect van de variabele Periode houdt in dat er een verschil is in het gemiddelde van periode1 en peridoe 2.[^10]
+Bij *mixed ANOVA* wordt onderzocht of er verschillen zijn tussen groepen die gemaakt worden op basis van meerdere categorische onafhankelijke variabelen die between-subjects en within-subjects zijn. Dit wordt toegelicht met een versimpelde vorm van de huidige casus met twee onafhankelijke variabelen Vak en Premaster en een afhankelijke variabele Cijfer. De onafhankelijke variabele Vak bestaat uit twee groepen (theorie en praktijk) en de onafhankelijke variabele Periode bestaat ook uit twee groepen (A en B). Binnen *mixed ANOVA* wordt een onderscheid gemaakt tussen hoofdeffecten en interactie-effecten. Een hoofdeffect houdt in dat er een verschil is tussen de groepen van één van de onafhankelijke variabelen. In andere woorden, de onafhankelijke variabele heeft effect op de afhankelijke variabele. Voor het bedachte experiment houdt een hoofdeffect van de variabele Vak in dat er een verschil is in het gemiddelde van vak A en vak B. Een hoofdeffect van de variabele Premaster houdt in dat er een verschil is in het gemiddelde van de groep Premaster en de groep Geen Premaster.[^10]
 
-Een grafische weergave van hoofdeffecten is te zien in Figuur 1. In de figuur is de relatie tussen de variabelen Periode en Cijfer weergegeven voor de vaksoorten theorie en praktijk. Het hoofdeffect van de variabele Periode is te zien door het gemiddelde van periode 1 te vergelijken met het gemiddelde van periode 2. Beide gemiddelden zijn weergegeven met groene driehoeken: periode 1 heeft een gemiddelde van 6 en periode 2 een gemiddelde van 8. Er is dus een verschil in gemiddelde tussen de groepen van onafhankelijke variabele Periode, wat betekent dat er een hoofdeffect van de variabele Periode is. Op dezelfde manier kan een mogelijk hoofdeffect van de variabele Vaksoort onderzocht worden. Het gemiddelde van groep theorie is weergegeven met een oranje vierkant en het gemiddelde van groep praktijk met een blauw vierkant. Het gemiddelde van groep praktijk (8) ligt hoger dan het gemiddelde van groep theorie (6), dus er is ook een hoofdeffect van onafhankelijke variabele Vaksoort. Beide onafhankelijke variabelen hebben dus een effect op de afhankelijke variabele Cijfer.
+Een grafische weergave van hoofdeffecten is te zien in Figuur 1. In de figuur is de relatie tussen de variabelen Premaster en Cijfer weergegeven voor de vakken A en B. Het hoofdeffect van de variabele Premaster is te zien door het gemiddelde van de groep Premaster te vergelijken met het gemiddelde van de groep Geen Premaster. Beide gemiddelden zijn weergegeven met groene driehoeken: de groep Premaster heeft een gemiddelde van 6 en de groep Geen Premaster een gemiddelde van 8. Er is dus een verschil in gemiddelde tussen de groepen van onafhankelijke variabele Premaster, wat betekent dat er een hoofdeffect van de variabele Premaster is. Op dezelfde manier kan een mogelijk hoofdeffect van de variabele Vak onderzocht worden. Het gemiddelde van vak A is weergegeven met een oranje vierkant en het gemiddelde van vak B met een blauw vierkant. Het gemiddelde van vak A (8) ligt hoger dan het gemiddelde van vak B (6), dus er is ook een hoofdeffect van onafhankelijke variabele Vak. Beide onafhankelijke variabelen hebben dus een effect op de afhankelijke variabele Cijfer.
 
 <!-- ## CLOSEDBLOK: Uitleg1.R -->
 ```{r, echo = FALSE, message = FALSE}
-Periode <- c(1,3,1,3)
-Vaksoort <- c("Theorie", "Theorie","Praktijk", "Praktijk")
+Premaster <- c(1,3,1,3)
+Vak <- c("A", "A","B", "B")
 Cijfer <- c(5,7,7,9)
-dat <- cbind.data.frame(Periode,Vaksoort,Cijfer)
-ggplot(dat, aes(x = Periode, y = Cijfer, group = Vaksoort, colour = Vaksoort)) + geom_line() + geom_point(size = 2) + scale_color_manual(values = c("deepskyblue","darkorange")) + scale_x_continuous(breaks = c(1,3), labels = c("1", "2")) + annotate("point", x = 2, y = 8, colour = "deepskyblue", fill = "deepskyblue", shape = 22, size = 3) + annotate("point", x = 2, y = 6, colour = "darkorange", fill = "darkorange", shape = 22, size = 3) + annotate("point", x = 1, y = 6, colour = "forestgreen", fill = "forestgreen", shape = 24, size = 3) + annotate("point", x = 3, y = 8, colour = "forestgreen", fill = "forestgreen", shape = 24, size = 3) 
+dat <- cbind.data.frame(Premaster,Vak,Cijfer)
+ggplot(dat, aes(x = Premaster, y = Cijfer, group = Vak, colour = Vak)) + geom_line() + geom_point(size = 2) + scale_color_manual(values = c("darkorange","deepskyblue")) + scale_x_continuous(breaks = c(1,3), labels = c("Premaster", "Geen Premaster")) + annotate("point", x = 2, y = 8, colour = "deepskyblue", fill = "deepskyblue", shape = 22, size = 3) + annotate("point", x = 2, y = 6, colour = "darkorange", fill = "darkorange", shape = 22, size = 3) + annotate("point", x = 1, y = 6, colour = "forestgreen", fill = "forestgreen", shape = 24, size = 3) + annotate("point", x = 3, y = 8, colour = "forestgreen", fill = "forestgreen", shape = 24, size = 3) 
 
 ```
 <!-- ## /CLOSEDBLOK: Uitleg1.R -->
 
-*Figuur 1.  Illustratie van hoofdeffecten bij mixed ANOVA voor een casus met afhankelijke variabele Cijfer en onafhankelijke variabelen Vaksoort en Periode. In deze grafiek zijn er hoofdeffecten voor de variabelen Vaksoort en Periode, maar geen interactie-effecten.*
+*Figuur 1.  Illustratie van hoofdeffecten bij mixed ANOVA voor een casus met afhankelijke variabele Cijfer en onafhankelijke variabelen Vak en Premaster. In deze grafiek zijn er hoofdeffecten voor de variabelen Vak en Premaster., maar geen interactie-effecten.*
 
-Een interactie-effect houdt in dat het effect van de ene onafhankelijke variabele op de afhankelijke variabele afhangt van de andere onafhankelijke variabele(n). Er is als het ware een interactie tussen de onafhankelijke variabelen die het effect op de afhankelijke variabele bepaalt. In het bedachte experiment zou dit betekenen dat het effect van onafhankelijke variabele Periode op Cijfer verschillend is voor de groepen theorie en praktijk. Een voorbeeld van dit interactie-effect is te zien in Figuur 2. In deze figuur is zichtbaar dat er bij de groep theorie geen verschil is tussen de periode 1 en 2 wat betreft het cijfer, maar dat er voor de groep praktijk wel een verschil is. Bij de groep praktijk is er in periode 2 een hoger gemiddeld cijfer (9) dan in periode 1 (7). Het effect van de onafhankelijke variabele Periode op Cijfer hangt af van de variabele Vaksoort, dus er is een interactie-effect van de variabelen Periode en Vaksoort op de afhankelijke variabele Cijfer.
+Een interactie-effect houdt in dat het effect van de ene onafhankelijke variabele op de afhankelijke variabele afhangt van de andere onafhankelijke variabele(n). Er is als het ware een interactie tussen de onafhankelijke variabelen die het effect op de afhankelijke variabele bepaalt. In het bedachte experiment zou dit betekenen dat het effect van onafhankelijke variabele Premaster op Cijfer verschillend is voor vak A en vak B. Een voorbeeld van dit interactie-effect is te zien in Figuur 2. In deze figuur is zichtbaar dat er bij vak A geen verschil is tussen de groepen Premaster en Geen Premaster wat betreft het cijfer, maar dat er voor vak B wel een verschil is. Bij vak B is er voor de groep Geen Premaster een hoger gemiddeld cijfer (9) dan voor de groep Premaster (7). Het effect van de onafhankelijke variabele Premaster op Cijfer hangt af van de variabele Vak, dus er is een interactie-effect van de variabelen Premaster en Vak op de afhankelijke variabele Cijfer.
 
 <!-- ## CLOSEDBLOK: Uitleg2.R -->
 ```{r, echo = FALSE, message = FALSE}
-Periode <- c(1,3,1,3)
-Vaksoort <- c("Theorie", "Theorie","Praktijk", "Praktijk")
+Premaster <- c(1,3,1,3)
+Vak <- c("A", "A","B", "B")
 Cijfer <- c(6,6,7,9)
-dat <- cbind.data.frame(Periode,Vaksoort,Cijfer)
-ggplot(dat, aes(x = Periode, y = Cijfer, group = Vaksoort, colour = Vaksoort)) + geom_line() + geom_point(size = 2) + scale_color_manual(values = c("deepskyblue","darkorange")) + scale_x_continuous(breaks = c(1,3), labels = c("hbo-p", "vwo")) + annotate("point", x = 2, y = 8, colour = "deepskyblue", fill = "deepskyblue", shape = 22, size = 3) + annotate("point", x = 2, y = 6, colour = "darkorange", fill = "darkorange", shape = 22, size = 3) + annotate("point", x = 1, y = 6.5, colour = "forestgreen", fill = "forestgreen", shape = 24, size = 3) + annotate("point", x = 3, y = 7.5, colour = "forestgreen", fill = "forestgreen", shape = 24, size = 3) 
+dat <- cbind.data.frame(Premaster,Vak,Cijfer)
+ggplot(dat, aes(x = Premaster, y = Cijfer, group = Vak, colour = Vak)) + geom_line() + geom_point(size = 2) + scale_color_manual(values = c("darkorange","deepskyblue")) + scale_x_continuous(breaks = c(1,3), labels = c("Premaster", "Geen Premaster")) + annotate("point", x = 2, y = 8, colour = "deepskyblue", fill = "deepskyblue", shape = 22, size = 3) + annotate("point", x = 2, y = 6, colour = "darkorange", fill = "darkorange", shape = 22, size = 3) + annotate("point", x = 1, y = 6.5, colour = "forestgreen", fill = "forestgreen", shape = 24, size = 3) + annotate("point", x = 3, y = 7.5, colour = "forestgreen", fill = "forestgreen", shape = 24, size = 3) 
 ```
 <!-- ## /CLOSEDBLOK: Uitleg2.R -->
 
-*Figuur 2.  Illustratie van interactie-effecten bij mixed ANOVA voor een casus met de afhankelijke variabele Cijfer en de onafhankelijke variabelen Vaksoort en Periode. In deze grafiek is er een interactie-effect van de onafhankelijke variabelen Vaksoort en Periode op de afhankelijke variabele Cijfer.*
+*Figuur 2.  Illustratie van interactie-effecten bij mixed ANOVA voor een casus met de afhankelijke variabele Cijfer en de onafhankelijke variabelen Vak en Premaster. In deze grafiek is er een interactie-effect van de onafhankelijke variabelen Vak en Premaster op de afhankelijke variabele Cijfer.*
 
-In Figuur 1 waren er hoofdeffecten van de variabelen Vaksoort en Periode gevonden, maar was het interactie-effect nog niet onderzocht. In deze figuur is er geen sprake van een interactie-effect, omdat het effect van Periode op Cijfer hetzelfde is voor de groepen theorie en praktijk en dus niet afhangt van de variabele Vaksoort. Voor beide groepen (theorie en praktijk) is het verschil tussen periode 1 en 2 twee punten. Hier is dus geen sprake van een interactie-effect. Bij grafieken is er een interactie-effect als de twee (of meerdere) lijnen niet parallel lopen. Op deze manier kan snel onderzocht worden of er een interactie-effect is en wat de invloed van het interactie-effect is.
+In Figuur 1 waren er hoofdeffecten van de variabelen Vak en Premaster gevonden, maar was het interactie-effect nog niet onderzocht. In deze figuur is er geen sprake van een interactie-effect, omdat het effect van Premaster op Cijfer hetzelfde is voor vak A en vak B en dus niet afhangt van de variabele Vak. Voor beide vakken (A en B) is het verschil tussen de groepen Premaster en Geen Premaster twee punten. Hier is dus geen sprake van een interactie-effect. Bij grafieken is er een interactie-effect als de twee (of meerdere) lijnen niet parallel lopen. Op deze manier kan snel onderzocht worden of er een interactie-effect is en wat de invloed van het interactie-effect is.
 
-Bij *mixed ANOVA* worden bovenstaande grafieken gebruikt om de resultaten te interpreteren. De hoofdeffecten en interactie-effecten worden eerst statistisch getoetst en daarna geïnterpreteerd met onder andere deze grafieken. De aanpak is als volgt.[^10] Eerst wordt getoetst of er sprake is van een interactie-effect tussen de onafhankelijke variabelen. Als dit niet het geval is, kunnen de hoofdeffecten geïnterpreteerd worden. Als er wel een interactie-effect is, kunnen de hoofdeffecten niet geïnterpreteerd worden. De volgende stap is dan een *simple effects analyse* waarbij het effect van de ene onafhankelijke variabele op de afhankelijke variabele wordt getoetst voor alle groepen van de andere onafhankelijke variabele die deel uitmaakt van het interactie-effect. Voor Figuur 2 zou dit betekenen dat het effect van Periode op Gemiddeld_cijfer apart getoetst wordt voor de groepen theorie en praktijk van de variabele Vaksoort. Het interactie-effect kan op deze manier geïnterpreteerd worden, samen met de grafische weergave zoals te zien in Figuur 2.
+Bij *mixed ANOVA* worden bovenstaande grafieken gebruikt om de resultaten te interpreteren. De hoofdeffecten en interactie-effecten worden eerst statistisch getoetst en daarna geïnterpreteerd met onder andere deze grafieken. De aanpak is als volgt.[^10] Eerst wordt getoetst of er sprake is van een interactie-effect tussen de onafhankelijke variabelen. Als dit niet het geval is, kunnen de hoofdeffecten geïnterpreteerd worden. Als er wel een interactie-effect is, kunnen de hoofdeffecten niet geïnterpreteerd worden. De volgende stap is dan een *simple effects analyse* waarbij het effect van de ene onafhankelijke variabele op de afhankelijke variabele wordt getoetst voor alle groepen van de andere onafhankelijke variabele die deel uitmaakt van het interactie-effect. Voor Figuur 2 zou dit betekenen dat het effect van Premaster op Gemiddeld_cijfer apart getoetst wordt voor de vakken A en B van de variabele Vak. Het interactie-effect kan op deze manier geïnterpreteerd worden, samen met de grafische weergave zoals te zien in Figuur 2.
 
 # Assumpties
 
-Voor een valide toetsresultaat bij de *mixed ANOVA* moet er aan een aantal assumpties voldaan worden. De steekproef moet bestaan uit onafhankelijke observatie-eenheden, de afhankelijke variabele moet normaal verdeeld zijn voor elke combinatie van groepen van de onafhankelijke variabelen en er moet sphericiteit zijn.[^1]
+Voor een valide toetsresultaat bij de *mixed ANOVA* moet er aan een aantal assumpties voldaan worden. De steekproef moet bestaan uit onafhankelijke observatie-eenheden, de afhankelijke variabele moet normaal verdeeld zijn voor elke combinatie van groepen van de onafhankelijke variabelen. Daarnaast moet er sphericiteit zijn voor de within-subjects variabelen en homogeniteit van varianties voor de betwee-subjects variabelen bij elke combinatie van categorieën van de within-subjects variabelen.[^1]
 
 ## Normaliteit
 Controleer de assumptie van normaliteit voor elke groep met de volgende stappen:  
@@ -129,67 +129,52 @@ Controleer de assumptie van normaliteit voor elke groep met de volgende stappen:
 2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^7]<sup>, </sup>[^8]  
 
 <!-- ## TEKSTBLOK: Link1.R -->
-De *mixed ANOVA* is redelijk robuust ten opzichte van een schending van de assumptie van normaliteit. Als er kleine afwijkingen zijn, heeft dat relatief kleine gevolgen voor de validiteit van de toets. Bij grotere afwijkingen is het transformeren van de afhankelijke variabele een optie.[^2] Als dit niet werkt, dan is het een optie om [Friedman's ANOVA](09-Friedmans-ANOVA-I-R.html). Dit is een nonparametrische versie van de *repeated measures ANOVA* en hoeft niet te voldoen aan de assumptie van normaliteit en sphericiteit. De *mixed ANOVA* heeft echter een hoger onderscheidend vermogen als aan alle assumpties is voldaan, dus in dat geval heeft die toets de voorkeur.[^21]
+De *mixed ANOVA* is redelijk robuust ten opzichte van een schending van de assumptie van normaliteit. Als er kleine afwijkingen zijn, heeft dat relatief kleine gevolgen voor de validiteit van de toets. Bij grotere afwijkingen is het transformeren van de afhankelijke variabele een optie.[^2] Als dit niet werkt, dan is het een optie om de *mixed ANOVA* te splitsen door een losse *ANOVA* uit te voeren voor elke groep van de within-subjects variabele. Voor de groep waarin er afwijkingen van normaliteit zijn, kan dan de [Kruskal Wallis toets](10-Kruskal-Wallis-toets-I-R.html) uitgevoerd worden. Deze toets heeft minder onderscheidend vermogen dan de *ANOVA* maar hoeft niet aan de assumptie van normaliteit te voldoen.
 <!-- ## /TEKSTBLOK: Link1.R -->
 
 ## Sphericiteit
-De assumptie van sphericiteit houdt in dat de variantie van de verschilscores tussen groepen ongeveer aan elkaar gelijk zijn.[^11] Bij een *repeated measures ANOVA* met meerdere onafhankelijke variabelen zijn er verschilscores te maken voor elke individuele onafhankelijke variabelen en voor alle combinaties van interactie-effecten tussen de onafhankelijke variabelen. In de huidige casus zijn er voor de variabele Periode zes verschilscores te maken: periode 1 - periode 2, periode 1 - periode 3, periode 1 - periode 4, periode 2 - periode 3, periode 2 - periode 4 en periode 3 - periode 4. De variantie van deze zes verschilscores moet dus ongeveer gelijk zijn om aan de assumptie te voldoen.
+De assumptie van sphericiteit houdt in dat de variantie van de verschilscores tussen groepen ongeveer aan elkaar gelijk zijn.[^11] Bij een *mixed ANOVA* met meerdere onafhankelijke variabelen zijn er verschilscores te maken voor elke individuele onafhankelijke variabele en voor alle combinaties van interactie-effecten tussen de onafhankelijke variabelen. In de huidige casus zijn er voor de variabele Vak zes verschilscores te maken: Sustainable Innovation - Organizational Change Management, Sustainable Innovation - Organizational Psychology, Sustainable Innovation - masterthesis, Organizational Change Management - Organizational Psychology, Organizational Change Management - masterthesis en Organizational Psychology - masterthesis. De variantie van deze zes verschilscores moet dus ongeveer gelijk zijn om aan de assumptie te voldoen.
 
-Voor de variabele Vaksoort is er slechts één verschilscore (theorie - praktijk). Omdat er maar één verschilscore is, is de variantie per definitie gelijk voor alle verschilscores van deze variabele. Er is namelijk geen andere verschilscore om de variantie mee te vergelijken. Het interactie-effect tussen Vaksoort en Periode zorgt voor acht (4 perioden keer 2 vaksoorten) groepen op basis waarvan verschilscores zijn te maken voor alle combinaties van groepen. De variantie van al deze verschilscores moet ongeveer aan elkaar gelijk zijn.  
-
-Toets deze assumptie met *Mauchly's test*. Als de onafhankelijke variabelen niet aan de assumptie voldoen, geeft de gewone *repeated measures ANOVA* een verkeerd resultaat. Er zijn echter correcties die gebruikt kunnen worden als er niet aan sphericiteit voldaan is. Een voorbeeld van mogelijke output van *Mauchly's test* in R voor de huidige toetspagina is hieronder weergegeven.
+Toets deze assumptie met *Mauchly's test*. Als de onafhankelijke variabele niet aan de assumptie voldoet, geeft de gewone *mixed ANOVA* een verkeerd resultaat. Er zijn echter correcties die gebruikt kunnen worden als er niet aan sphericiteit voldaan is. Een voorbeeld van mogelijke output van *Mauchly's test* in R voor de huidige toetspagina is hieronder weergegeven.
 
 <!-- ## CLOSEDBLOK: Sphericiteit.R -->
 ```{r, echo=FALSE}
-cat("$ANOVA
-            Effect DFn DFd           F            p p<.05         ges
-2         Vaksoort   1 119 199.5442986 3.304785e-27     * 0.153803985
-3          Periode   3 357  32.6506324 1.133681e-18     * 0.086040949
-4 Vaksoort:Periode   3 357  12.17163   0.0538726     * 0.03945583
-
-$`Mauchly's Test for Sphericity`
-            Effect         W         p p<.05
-3          Periode 0.9839122 0.8615531      
-4 Vaksoort:Periode 0.9695177 0.0060169     * 
+cat("$`Mauchly's Test for Sphericity`
+  Effect         W           p p<.05
+2    Vak 0.8732982 0.005073887     *
 
 $`Sphericity Corrections`
-            Effect       GGe        p[GG] p[GG]<.05      HFe        p[HF] p[HF]<.05
-3          Periode 0.9892596 1.692938e-18         * 1.017342 1.133681e-18         *
-4 Vaksoort:Periode 0.9787132 0.0553387              1.006161 0.0430724          ")
+  Effect       GGe        p[GG] p[GG]<.05       HFe        p[HF] p[HF]<.05
+2    Vak   0.47683     0.05279         *   0.56298      0.04692         ")
 ```
 <!-- ## /CLOSEDBLOK: Sphericiteit.R -->
 
 <!-- ## TEKSTBLOK: Sphericiteit1.R -->
-
-De output bestaat uit drie delen die zijn aangegeven met een dollarteken ($). Het eerste deel (ANOVA) bestaat uit het resultaat van de *mixed ANOVA* als er aan de assumptie van sphericiteit is voldaan. Het tweede deel van de output (Mauchly's Test for Sphericity) bestaat uit het resultaat van *Mauchly's test* voor de variabele Periode en de interactieterm tussen variabelen Vaksoort en Periode (`Vaksoort:Periode`). Het derde deel (Sphericity Corrections) bestaat uit de resultaten gecorrigeerd voor het feit dat er niet is voldaan aan de assumptie van sphericiteit.
-
-Bij een p-waarde kleiner dan 0,05, toont *Mauchly's test* dat de assumptie van sphericiteit geschonden is. In de output is er wel voldaan aan de assumptie van sphericiteit voor de variabele Periode (*p* = 0,862), maar niet voor de interactieterm tussen Vaksoort en Periode (*p* = 0,006). Er is geen resultaat voor de variabele Vaksoort, omdat hier maar één verschilscore is en er dus per definitie aan de assumptie is voldaan. Voor de interactieterm moet dus een correctie gevonden worden.
-
-Er zijn twee mogelijke correcties als er geen sphericiteit is: de Greenhouse-Geisser (GG) en Huynh-Feldt (HF) correctie. De Greenhouse-Geisser correctie staat bekend als conservatief, wat betekent dat de correctie een relatief lage kans op een type I fout heeft. In andere woorden, het zal niet vaak gebeuren dat deze correctie een significant effect aantoont als dat er in werkelijkheid niet is. De Huynh-Feldt correctie staat echter bekend als liberaal, wat betekent dat er een relatief hoge kans op een type I fout is. De toetsstatistiek en p-waarde van beide correcties zijn in de output te vinden onder Sphericity Corrections.
+Bij een p-waarde kleiner dan 0,05, toont *Mauchly's test* dat de assumptie van sphericiteit geschonden is. In de output is dit te zien aan de p-waarde van 0,0051 onder ` $Mauchly's Test for Sphericity `. Er zijn twee mogelijke correcties wanneer er geen sphericiteit is: de Greenhouse-Geisser (GG) en Huynh-Feldt (HF) correctie. De Greenhouse-Geisser correctie staat bekend als conservatief, wat betekent dat de correctie een relatief lage kans op een type I fout heeft. In andere woorden, het zal niet vaak gebeuren dat deze correctie een significant effect aantoont wanneer dat er in werkelijkheid niet is. De Huynh-Feldt correctie staat echter bekend als liberaal, wat betekent dat er een relatief hoge kans op een type I fout is. De teststatistiek en p-waarde van beide correcties zijn in de output te vinden onder ` $Sphericity Corrections `.
 <!-- ## TEKSTBLOK: Sphericiteit1.R -->
 
-Houd de volgende richtlijnen aan bij het interpreteren van de *mixed ANOVA* als er niet aan sphericiteit is voldaan:
+Houd de volgende richtlijnen aan bij het interpreteren van de *repeated measures ANOVA* wanneer niet aan sphericiteit is voldaan:
 
-* Als beide correcties significant zijn, rapporteer de (conservatieve) Greenhouse-Geisser correctie.
-* Als beide correcties niet significant zijn, rapporteer de (liberale) Huynh-Feldt correctie.
-* Als de een significant is en de ander niet, bereken de gemiddelde p-waarde van beide correcties.
-    * Als deze p-waarde significant is, rapporteer dan de significante correctie.
-    * Als deze p-waarde niet significant is, rapporteer dan de niet significante correctie.
+* Wanneer beide correcties significant zijn, rapporteer de (conservatieve) Greenhouse-Geisser correctie.
+* Wanneer beide correcties niet significant zijn, rapporteer de (liberale) Huynh-Feldt correctie.
+* Wanneer de een significant is en de ander niet, bereken de gemiddelde p-waarde van beide correcties.
+    * Wanneer deze p-waarde significant is, rapporteer dan de significante correctie.
+    * Wanneer deze p-waarde niet significant is, rapporteer dan de niet significante correctie.
 
-In de voorbeeldoutput is de p-waarde van de Greenhouse-Geisser correctie groter dan 0,05 en de p-waarde van de Huynh-Feldt correctie kleiner dan 0,05. Het gemiddelde van beide p-waarden is 0,0492056, wat betekent dat er een significant resultaat is. Rapporteer in dit geval dus de (significante) Huynh-Feldt correctie, i.e. *F* = 1,01, *p* = 0,049.  
+In de voorbeeldoutput is de p-waarde van de Greenhouse-Geisser correctie groter dan 0,05 en de p-waarde van de Huynh-Feldt correctie kleiner dan 0,05. Het gemiddelde van beide p-waarden is 0,049855, wat betekent dat er een significant resultaat is. Rapporteer in dit geval dus de (significante) Huynh-Feldt correctie, i.e. *F* = 0,56, *p* < 0,05.  
 
 # Effectmaat
 De p-waarde geeft aan of het verschil tussen groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^11] Voor de *mixed ANOVA* wordt de effectmaat *partial eta squared* vaak gebruikt.[^4]
 
-De effectmaat *partial eta squared* (partial *η^2^*) berekent de proportie van de onverklaarde variantie (variantie die niet door de andere variabelen wordt verklaard) in de afhankelijke variabele die verklaard wordt door de onafhankelijke variabele.[^4] Voor de variabele Vooropleiding geeft de partial eta squared dus de proportie verklaarde variantie weer van de variantie die niet verklaard is door de variabele Geslacht en de interactie tussen de variabele Vooropleiding en Geslacht. De partial eta squared van alle termen van het model tellen dus niet per se op tot 1.[^4] Een indicatie om partial *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^5]
+De effectmaat *partial eta squared* (partial *η^2^*) berekent de proportie van de onverklaarde variantie (variantie die niet door de andere variabelen wordt verklaard) in de afhankelijke variabele die verklaard wordt door de onafhankelijke variabele.[^4] Voor de variabele Premaster geeft de partial eta squared dus de proportie verklaarde variantie weer van de variantie die niet verklaard is door de variabele Vak en de interactie tussen de variabele Premaster en Vak. De partial eta squared van alle termen van het model tellen dus niet per se op tot 1.[^4] Een indicatie om partial *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^5]
 
 # Post-hoc toetsen
 
-De eerste stap van de *mixed ANOVA* is het toetsen van hoofdeffecten en interactie-effecten. De volgende stap bestaat uit het bepalen welke groepen van elkaar verschillen, zowel bij *simple effects analyse* als bij het interpreteren van hoofdeffecten, en wordt gedaan met post-hoc toetsen. De post-hoc toetsen voeren meestal een correctie voor de p-waarden uit, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout. Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^11]
+De eerste stap van de *mixed ANOVA* is het toetsen van hoofdeffecten en interactie-effecten. De volgende stap bestaat uit het bepalen welke groepen van elkaar verschillen, zowel bij *simple effects analyse* als bij het interpreteren van hoofdeffecten, en wordt gedaan met post-hoc toetsen. De post-hoc toetsen voeren meestal een correctie voor de p-waarden uit, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout. Er zijn ook andere opties voor een correctie op de p-waarden. Let er bij de *mixed ANOVA* op dat de post-hoc toetsen afhangen van het soort onafhankelijke variabele. Bij within-subjects variabelen hoort een gepaarde post-hoc toets en bij between-subjects hoort een ongepaarde post-hoc toets.[^11]
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is een dataset ingeladen met de cijfers per periode per vaksoort voor eerstejaars studenten van de bachelor Leisure Management genaamd `Resultaten_Leisure_Management`. 
+Er is een dataset ingeladen met de cijfers per vak en informatie over het volgen van een premaster voor studenten van de master Sustainable Change Management. De dataset heet `Resultaten_SCM`. 
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
@@ -200,10 +185,10 @@ Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken, collapse = TRUE}
 ## Eerste 5 observaties
-head(Resultaten_Leisure_Management)
+head(Resultaten_SCM)
 
 ## Laatste 5 observaties
-tail(Resultaten_Leisure_Management)
+tail(Resultaten_SCM)
 ```
 
 
@@ -216,9 +201,9 @@ Inspecteer voor alle groepen het gemiddelde, de standaardafwijking, de mediaan e
 # Gemiddelde, standaardafwijking, mediaan en aantal observaties
 library(summarytools)
 
-with(Resultaten_Leisure_Management, 
-     stby(data = Cijfers, 
-          list(Vaksoort, Periode), 
+with(Resultaten_SCM, 
+     stby(data = Cijfer, 
+          list(Vak, Premaster), 
           descr, 
           stats = c("mean", "sd", "med", "n.valid")))
 ```
@@ -230,18 +215,18 @@ Maak vervolgens een grafiek met de gemiddelden voor de verschillende groepen.
 ```{r}
 library(ggplot2)
 
-ggplot(Resultaten_Leisure_Management, 
-       aes(x = Periode, y = Cijfers, group = Vaksoort, colour = Vaksoort)) + 
+ggplot(Resultaten_SCM, 
+       aes(x = Premaster, y = Cijfer, group = Vak, colour = Vak)) + 
   stat_summary(fun = mean, geom = "point") +  
-  stat_summary(fun = mean, geom = "line", aes(group = Vaksoort)) + 
-  scale_color_manual(values = c("darkorange", "deepskyblue")) 
+  stat_summary(fun = mean, geom = "line", aes(group = Vak)) + 
+  scale_color_manual(values = c("darkorange", "deepskyblue","darkgreen","purple")) 
 
 ```
 <!-- ## /OPENBLOK: Data-beschrijven2.R -->
 
-*Figuur 3.  Gemiddelde cijfers per groep op basis van Vaksoort en Periode voor de dataset Resultaten_Leisure_Management.*
+*Figuur 3.  Gemiddelde cijfers per groep op basis van de variabelen Vak en Premaster voor de dataset Resultaten_SCM.*
 
-Op basis van de beschrijvende statistieken en de grafiek (Figuur 3) lijken er verschillen tussen de groepen te zijn. De praktijkvakken hebben in elke periode een hoger gemiddelde dan de theorievakken. In periode 1 en 2 is het verschil tussen beide soorten vakken een stuk groter dan in periode 3 en 4. Voor theorievakken is het cijfer in periode 3 en 4 een stuk hoger dan in periode 1 en 2, maar voor praktijkvakken is dit verschil niet groot. De lijnen van de vaksoorten theorie en praktijk lopen niet parallel dus er lijkt een interactie-effect te zijn. De *mixed ANOVA* zal dit interactie-effect toetsen.
+Op basis van de beschrijvende statistieken en de grafiek (Figuur 3) lijken er verschillen tussen de groepen te zijn. Studenten vanuit de premaster hebben een lager gemiddeld cijfer voor de vakken Organizational Change Management en Organizational Psychologie en de masterthesis, maar een hoger gemiddeld cijfer voor het vak Sustainable Innovation. De lijnen van de vaksoorten theorie en praktijk lopen niet parallel dus er lijkt een interactie-effect te zijn. De *mixed ANOVA* zal dit interactie-effect toetsen.
 
 ## Normaliteit
 
@@ -254,19 +239,19 @@ Visualiseer de verdeling van de gemiddelde cijfers binnen elke groep met behulp 
 <!-- ## OPENBLOK: Histogram.R -->
 ```{r histogram}
 ## Histogram met ggplot
-ggplot(Resultaten_Leisure_Management,
-  aes(x = Cijfers)) +
+ggplot(Resultaten_SCM,
+  aes(x = Cijfer)) +
   geom_histogram(aes(y = ..density..),
                  binwidth = 0.5,
                  color = "grey30",
                  fill = "#0089CF") +
-  facet_wrap(~ Periode + Vaksoort) +
+  facet_wrap(~ Premaster + Vak) +
   geom_density(alpha = .2, adjust = 1) +
   ylab("Cijfer")
 ```
 <!-- ## /OPENBLOK: Histogram.R -->
 
-*Figuur 4.  Histogrammen van de verdelingen van de gemiddelde cijfers per groep op basis van Vooropleiding en Geslacht.*
+*Figuur 4.  Histogrammen van de verdelingen van de gemiddelde cijfers per groep op basis van de variabelen Vak en Premaster.*
 
 De verdelingen van de acht groepen, te zien in Figuur 4, zijn redelijk symmetrisch, hebben geen outliers en zijn allen eentoppig. De verdelingen zijn dus bij benadering normaal.
 
@@ -280,9 +265,9 @@ De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standa
 ```{r}
 library("nortest")
 
-with(Resultaten_Leisure_Management, 
-     by(data = Cijfers, 
-        list(Vaksoort, Periode), 
+with(Resultaten_SCM, 
+     by(data = Cijfer, 
+        list(Vak, Premaster), 
         lillie.test))
 
 ```
@@ -295,11 +280,9 @@ De *Shapiro-Wilk test* is een soortgelijke toets als de *Kolmogorov-Smirnov test
 
 <!-- ## OPENBLOK: Shapiro-Wilk-test.R -->
 ```{r}
-library("nortest")
-
-with(Resultaten_Leisure_Management, 
-     by(data = Cijfers, 
-        list(Vaksoort, Periode), 
+with(Resultaten_SCM, 
+     by(data = Cijfer, 
+        list(Vak, Premaster), 
         shapiro.test))
 
 
@@ -311,84 +294,140 @@ De p-waarde is groter dan 0,05 voor elke groep; er zijn dus geen significante ve
 ## Sphericiteit
 
 <!-- ## TEKSTBLOK: LeveneTest1.R -->
-Toets met *Mauchly's test* de assumptie van sphericiteit. Gebruik de functie `ezANOVA()$Mauchly's Test for Sphericity` van het package `ez` met als argumenten de dataset `Resultaten_Leisure_Management`, de afhankelijke variabele `dv = Cijfers`, de variabele die de observatie-eenheden aangeeft `wid = Studentnummer` en de onafhankelijke variabelen `within = list(Vaksoort, Periode)`.
+Toets met *Mauchly's test* de assumptie van sphericiteit. Gebruik de functie `ezANOVA()$Mauchly's Test for Sphericity` van het package `ez` met als argumenten de dataset `Resultaten_SCM`, de afhankelijke variabele `dv = Cijfer`, de variabele die de observatie-eenheden aangeeft `wid = Studentnummer`, de within-subjects variabele `within = Vak` en de between-subjects variabele `between = Premaster`.
 <!-- ## /TEKSTBLOK: LeveneTest1.R -->
 
 <!-- ## OPENBLOK: Levenes-test.R -->
 ```{r LeveneTest, warning = FALSE, message = FALSE}
 library(ez)
 
-ezANOVA(Resultaten_Leisure_Management, 
-        dv = Cijfers, 
+ezANOVA(Resultaten_SCM, 
+        dv = Cijfer, 
         wid = Studentnummer,
-        within = list(Vaksoort, Periode))$`Mauchly's Test for Sphericity`
+        within = Vak,
+        between = Premaster)$`Mauchly's Test for Sphericity`
 
 ```
 <!-- ## /OPENBLOK: Levenes-test.R -->
 
 <!-- ## CLOSEDBLOK: Levenes-test.R -->
-```{r Levenes test als object, echo = FALSE}
+```{r Levenes test als object, echo = FALSE, warning = FALSE}
 
-obj <- ezANOVA(Resultaten_Leisure_Management, 
-        dv = Cijfers, 
+obj <- ezANOVA(Resultaten_SCM, 
+        dv = Cijfer, 
         wid = Studentnummer,
-        within = list(Vaksoort, Periode))$`Mauchly's Test for Sphericity`
+        within = Vak,
+        between = Premaster)$`Mauchly's Test for Sphericity`
 
 Mauchly_W_Periode <- Round_and_format(obj$W[1])
-Mauchly_W_Int <- Round_and_format(obj$W[2])
 p_Periode <- Round_and_format(obj$p[1])
-p_Int <- Round_and_format(obj$p[2])
 ```
 <!-- ## /CLOSEDBLOK: Levenes-test.R -->
 
 <!-- ## TEKSTBLOK: Levenes-test.R -->
-* Voor de onafhankelijke variabele Periode is er voldaan aan de assumptie van sphericiteit, *W* = `r Mauchly_W_Periode`, *p* = `r p_Periode`[^18]
-* Voor de interactieterm van Periode en Vaksoort is er voldaan aan de assumptie van sphericiteit, *W* = `r Mauchly_W_Int`, *p* = `r p_Int`
-* Er hoeft in beide gevallen geen correctie uitgevoerd te worden voor de *mixed ANOVA*
+* Voor de onafhankelijke variabele Vak is er voldaan aan de assumptie van sphericiteit, *W* = `r Mauchly_W_Periode`, *p* = `r p_Periode`[^18]
+* Er hoeft geen correctie uitgevoerd te worden voor de *mixed ANOVA*
+* De interactieterm tussen de within-subjects variabele Vak en de between-subjects variabele Premaster wordt in de output weergegeven, maar hoeft niet geïnterpreteerd te worden. Alleen interactietermen tussen twee of meerdere within-subjects variabelen moeten geïnterpreteerd worden voor sphericiteit. De oplettende lezer ziet ook dat het resultaat van *Macuhly's test* precies hetzelfde is voor beide effecten.
+
 
 <!-- ## TEKSTBLOK: Levenes-test.R -->
+
+## Homogeniteit van varianties
+
+<!-- ## TEKSTBLOK: Levenes-test2.R -->
+Toets met de *Levene's test* de assumptie homogeniteit van varianties voor alle vier de vakken. Maak eerst per vak een dataset. Voer daarna de *Levene's test* uit met de functie `leveneTest` van het package `car` met het argument `Cijfer ~ Premaster` met daarin de afhankelijke variabele `Cijfer` en de onafhankelijke variabele `Premaster` en het argument `data = Resultaten_SCM_SI` om de dataset aan te geven.
+<!-- ## /TEKSTBLOK: Levenes-test2.R -->
+
+<!-- ## OPENBLOK: Levenes-test3.R -->
+```{r}
+library(car)
+
+# Maak een dataset voor de vier vakken
+Resultaten_SCM_SI <- Resultaten_SCM[Resultaten_SCM$Vak == "Sustainable Innovation",]
+Resultaten_SCM_OC <- Resultaten_SCM[Resultaten_SCM$Vak == "Organizational Change Management",]
+Resultaten_SCM_OP <- Resultaten_SCM[Resultaten_SCM$Vak == "Organizational Psychology",]
+Resultaten_SCM_TH <- Resultaten_SCM[Resultaten_SCM$Vak == "Thesis",]
+
+# Voer voor alle vier de vakken de Levene's test uit
+leveneTest(Cijfer ~ Premaster, data = Resultaten_SCM_SI)
+leveneTest(Cijfer ~ Premaster, data = Resultaten_SCM_OC)
+leveneTest(Cijfer ~ Premaster, data = Resultaten_SCM_OP)
+leveneTest(Cijfer ~ Premaster, data = Resultaten_SCM_TH)
+```
+<!-- ## /OPENBLOK: Levenes-test3.R -->
+
+Voor alle vier de vakken is de p-waarde groter dan 0,05, dus er zijn geen significante verschillen gevonden tussen de variantie in cijfers van de groep Premaster en de groep Geen Premaster.[^18] Dit betekent dat er voor alle vakken voldaan is aan de assumptie van homogeniteit van varianties. De *mixed ANOVA* kan uitgevoerd worden.
 
 # Mixed ANOVA 
 
 <!-- ## TEKSTBLOK: ANOVA-toets.R -->
-Voer de *mixed ANOVA* uit om de vraag te beantwoorden of er verschillen zijn tussen theorie- en praktijkvakken en tussen de vier onderwijsperioden wat betreft de cijfers van eerstejaars studenten van de bachelor Leisure Management. Gebruik de functie `ezANOVA()` van het package `ez` met als argumenten de dataset `Resultaten_Leisure_Management`, de afhankelijke variabele `dv = Cijfers`, de variabele die de observatie-eenheden aangeeft `wid = Studentnummer` en de onafhankelijke variabelen `within = list(Vaksoort, Periode)`.
+Voer de *mixed ANOVA* uit om de vraag te beantwoorden of er verschillen zijn tussen premasterstudenten en direct toelaatbare studenten en tussen de vakken Sustainable Innovation, Organizational Change Management, Organizational Psychology en de masterthesis voor de master Sustainable Change Management. Gebruik de functie `ezANOVA()` van het package `ez` met als argumenten de dataset `Resultaten_SCM`, de afhankelijke variabele `dv = Cijfer`, de variabele die de observatie-eenheden aangeeft `wid = Studentnummer`, de within-subjects variabele `within = Vak`, de between-subjects variabele `between = Premaster` en het argument `detailed = TRUE` dat nodig is om later de effectmaat te berekenen.
 <!-- ## /TEKSTBLOK: ANOVA-toets.R -->
 
-<!-- ## OPENBLOK: ANOVA-toets.R -->
-```{r ANOVA}
+<!-- ## OPENBLOK: ANOVA-toets1.R -->
+```{r ANOVA, warning = FALSE}
 library(ez)
 
-ezANOVA(Resultaten_Leisure_Management, 
-        dv = Cijfers, 
-        wid = Studentnummer,
-        within = list(Vaksoort, Periode))
+Mixed_ANOVA <- ezANOVA(Resultaten_SCM,
+                       dv = Cijfer, 
+                       wid = Studentnummer,
+                       within = Vak,
+                       between = Premaster,
+                       detailed = TRUE)
 
-
+Mixed_ANOVA
 ```
-<!-- ## /OPENBLOK: ANOVA-toets.R -->
+<!-- ## /OPENBLOK: ANOVA-toets1.R -->
+
+<!-- ## TEKSTBLOK: ANOVA-toets2.R -->
+Bereken de effectmaat partial eta squared met behulp van de functie `anova_out()` van het package `scoRsch` met als argument het ANOVA-object `Mixed_ANOVA`. Deze functie geeft de output van de *mixed ANOVA* op een andere manier weer en laat ook de partial eta squared zien.
+<!-- ## /TEKSTBLOK: ANOVA-toets2.R -->
+
+<!-- ## OPENBLOK: ANOVA-toets3.R -->
+```{r}
+library(schoRsch)
+
+anova_out(Mixed_ANOVA)
+```
+<!-- ## /OPENBLOK: ANOVA-toets3.R -->
 
 <!-- ## CLOSEDBLOK: ANOVA-toets4.R -->
 ```{r, echo=FALSE}
-FRM <- ezANOVA(Resultaten_Leisure_Management, 
-        dv = Cijfers, 
+MA <- ezANOVA(Resultaten_SCM, 
+        dv = Cijfer, 
         wid = Studentnummer,
-        within = list(Vaksoort, Periode))$ANOVA
+        within = Vak,
+        between = Premaster,
+        detailed = TRUE)$ANOVA
 
-vF_waarde <- Round_and_format(FRM$F[3])
-vDF1 <- Round_and_format(FRM$DFn[3])
-vDF2 <- Round_and_format(FRM$DFd[3])
-vEsq <- Round_and_format(FRM$ges[3])
+vF_waarde <- Round_and_format(MA$F[4])
+vDF1 <- Round_and_format(MA$DFn[4])
+vDF2 <- Round_and_format(MA$DFd[4])
+
+pes <- anova_out(Mixed_ANOVA)[[1]]
+
+vEsq <- Round_and_format(pes$petasq[4])
 ```
 <!-- ## /CLOSEDBLOK: ANOVA-toets4.R -->
 
 <!-- ## TEKSTBLOK: ANOVA-toets5.R -->
 
-* Er is een significant interactie-effect van Vaksoort en Periode op Cijfers, *F* (`r vDF1`,`r vDF2`) = `r vF_waarde`, *p* < 0,0001, *η^2^* = `r vEsq`.
+* Er is een significant interactie-effect van Vak en Premaster op Cijfer, *F* (`r vDF1`,`r vDF2`) = `r vF_waarde`, *p* < 0,0001, partial *η^2^* = `r vEsq`.
 * De p-waarde is kleiner dan 0,05, dus de nulhypothese dat er geen interactie-effect is wordt verworpen.[^18] 
-* Er is een klein tot gemiddeld effect van de interactie tussen Vaksoort en Periode op Cijfers
+* Er is een groot effect van de interactie tussen Vak en Premaster op Cijfer
 * Omdat er een significant interactie-effect is, hoeven de hoofdeffecten niet geïnterpreteerd te worden. De volgende stap is een *simple effects analyse* om te interactie verder te onderzoeken.
 
 <!-- ## /TEKSTBLOK: ANOVA-toets5.R -->
+
+
+
+
+
+
+
+
+
+
 
 ## Simple effects analyse
 
@@ -750,5 +789,5 @@ Sage. Pagina 507-542.
 [^18]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
 
 [^21]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage.
-
+[^22]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage. Pagina 591 - 622.
 

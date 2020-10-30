@@ -113,13 +113,13 @@ Gemiddeld_cijfer_WNS = r.Gemiddeld_cijfer_WNS
 ```
 
 ```{python, include=TRUE}
-# Eerste 6 observaties
-print(dfGemiddeld_cijfer_WNS.head(6))
+# Eerste 5 observaties
+print(dfGemiddeld_cijfer_WNS.head(5))
 ```
 
 ```{python, include=TRUE}
-# Laatste 6 observaties
-print(dfGemiddeld_cijfer_WNS.tail(6))
+# Laatste 5 observaties
+print(dfGemiddeld_cijfer_WNS.tail())
 ```
 <!-- ## /OPENBLOK: Data-bekijken.py -->
 <!-- ## TEKSTBLOK: Data-beschrijven.py-->
@@ -135,13 +135,13 @@ import numpy as np
 ## Gemiddelde en standaarddeviatie
 print(np.size(Gemiddeld_cijfer_WNS))
 print(np.mean(Gemiddeld_cijfer_WNS))
-print(np.sqrt(np.var(Gemiddeld_cijfer_WNS, ddof = 1)))
+print(np.std(Gemiddeld_cijfer_WNS))
 ```
 <!-- ## /OPENBLOK: Data-beschrijven.py -->
 <!-- ## CLOSEDBLOK: Data-beschrijven.py -->
 ```{python, include=FALSE}
 mean = np.mean(Gemiddeld_cijfer_WNS)
-sd = np.sqrt(np.var(Gemiddeld_cijfer_WNS, ddof = 1))
+sd = np.std(Gemiddeld_cijfer_WNS)
 N = np.size(Gemiddeld_cijfer_WNS)
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven.py -->

@@ -43,6 +43,10 @@ source(paste0(here::here(),"/01. Includes/data/03.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.py -->
 
+<!-- ## TEKSTBLOK: Link1.Python -->
+Als blijkt dat de afhankelijke variabele niet normaal verdeeld is voor één van of allebei de groepen, transformeer[^5] dan de afhankelijke variabele en bepaal daarna of deze wel normaal verdeeld is of gebruik de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html).[^6]<sup>, </sup>[^7]  
+<!-- ## /TEKSTBLOK: Link1.Python -->
+
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->
 Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap: `Cijfers_gemiddeld`. De data bevatten cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
 <!-- ## /TEKSTBLOK: Dataset-inladen.py -->
@@ -59,12 +63,12 @@ dfCijfers_gemiddeld = pd.DataFrame(r.Cijfers_gemiddeld)
 
 ```{python data bekijken-1, collapse = TRUE}
 ## Eerste 6 observaties
-print(dfCijfers_gemiddeld.head(6))
+print(dfCijfers_gemiddeld.head())
 ```
 
 ```{python data bekijken-2, collapse = TRUE}
 ## Laatste 6 observaties
-print(dfCijfers_gemiddeld.tail(6))
+print(dfCijfers_gemiddeld.tail())
 ```
 <!-- ## /OPENBLOK: Data-bekijken.py -->
 
@@ -76,7 +80,7 @@ Cijfers_2011 = dfCijfers_gemiddeld[dfCijfers_gemiddeld['Cohort'] == "2011"]['Cij
 <!-- ## /OPENBLOK: Data-selecteren.py -->
 
 <!-- ## TEKSTBLOK: Data-beschrijven.py -->
-Inspecteer de data met `np.size()`, `np.mean()` en `np.sqrt(np.var())`, door deze aan te roepen uit de library `numpy`.
+Inspecteer de data met `np.size()`, `np.mean()` en `np.std())`, door deze aan te roepen uit het package `numpy`.
 <!-- ## /TEKSTBLOK: Data-beschrijven.py -->
 
 <!-- ## OPENBLOK: Data-beschrijven-inladen.py -->
@@ -91,7 +95,7 @@ import numpy as np
 ## Aantallen, gemiddelde en standaarddeviatie 2010
 print(np.size(Cijfers_2010))
 print(np.mean(Cijfers_2010))
-print(np.sqrt(np.var(Cijfers_2010)))
+print(np.std(Cijfers_2010))
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-1.py -->
 
@@ -100,7 +104,7 @@ print(np.sqrt(np.var(Cijfers_2010)))
 ## Aantallen, gemiddelde en standaarddeviatie 2011
 print(np.size(Cijfers_2011))
 print(np.mean(Cijfers_2011))
-print(np.sqrt(np.var(Cijfers_2011)))
+print(np.std(Cijfers_2011))
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-2.py -->
 
@@ -108,10 +112,10 @@ print(np.sqrt(np.var(Cijfers_2011)))
 ```{python Var beschrijven t1, include=FALSE, echo=TRUE}
 vN_t0 = np.size(Cijfers_2010)
 vMean_t0 = np.mean(Cijfers_2010)
-vSD_t0 = np.sqrt(np.var(Cijfers_2010))
+vSD_t0 = np.std(Cijfers_2010)
 vN_t1 = np.size(Cijfers_2011)
 vMean_t1 = np.mean(Cijfers_2011)
-vSD_t1 = np.sqrt(np.var(Cijfers_2011))
+vSD_t1 = np.std(Cijfers_2011)
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven-3.py -->
 
@@ -142,7 +146,7 @@ plt.show()
 <!-- ## /OPENBLOK: Histogram.py -->
 
 <!-- ## TEKSTBLOK: QQplot.py -->
-Importeer `scipy.stats` om een Q-Q plot te maken en statistische testen uit te voeren. Voor een Q-Q plot kan de functie `scipy.stats.probplot()` worden gebruikt.
+Gebruik de functie `probplot` van het `scipy` package om een Q-Q plot te maken, met als datapunten kleine cirkels. 
 <!-- ## TEKSTBLOK: QQplot.py -->
 
 <!-- ## OPENBLOK: QQplot-t1.py -->
@@ -202,14 +206,15 @@ print(smod.lilliefors(Cijfers_2011, pvalmethod="table"))
 ``` {python Lilliefors Test-2 closed, warning=FALSE, include = FALSE}
 lilliefors2011 = smod.lilliefors(Cijfers_2011, pvalmethod="table")
 ```
-<!-- ## /OPENBLOK: Lilliefors-test-2.py -->
-
-<!-- ## TEKSTBLOK: Shapiro-Wilk-test.py -->
 ```{python, include=FALSE, echo = TRUE}
 Cijfers_2010_n30 = r.Cijfers_2010_n30
 Cijfers_2011_n30 = r.Cijfers_2011_n30
 n = len(Cijfers_2010_n30)
 ```
+
+<!-- ## /OPENBLOK: Lilliefors-test-2.py -->
+
+<!-- ## TEKSTBLOK: Shapiro-Wilk-test.py -->
 Er zijn twee subsets van `Cijfers_gemiddeld` ingeladen: `Cijfers_2010_n30` en `Cijfers_2011_n30`. Beide subsets bevatten `r py$n` studenten. Voor relatief kleine steekproeven als deze is de *Shapiro-Wilk Test* geschikt.
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test.py -->
 
@@ -226,7 +231,7 @@ print(stats.shapiro(Cijfers_2011_n30))
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-2.py -->
 
 <!-- ## TEKSTBLOK: T-test.py -->
-Voer een ongepaarde t-toets uit in twee stappen. Definieer eerst de vergelijking van de twee groepen met `CompareMeans()` met als argumenten de observaties uit 2010 `DescrStatsW(Cijfers_2010)` en de observaties uit 2011 `DescrStatsW(Cijfers_2011)`. Voer daarna de t-toets uit met `ttest_ind()` met de argumenten `alternative='two-sided'` vanwege de tweezijdige alternatieve hypothese en `usevar = 'unequal'` omdat er geen gepoolde variantie wordt gebruikt. Bereken daarna het 95%-betrouwbaarheidsinterval met `tconfint_diff()` met als nieuw argument `alpha = 0.05` om het significantieniveau aan te geven.
+Voer een ongepaarde t-toets uit in twee stappen. Definieer eerst de vergelijking van de twee groepen met `CompareMeans()` met als argumenten de observaties uit 2010 `DescrStatsW(Cijfers_2010)` en de observaties uit 2011 `DescrStatsW(Cijfers_2011)`. Voer daarna de t-toets uit met `ttest_ind()` met de argumenten `alternative='two-sided'` vanwege de tweezijdige alternatieve hypothese en `usevar = 'unequal'` omdat er geen gepoolde variantie wordt gebruikt. Bereken daarna het 95%-betrouwbaarheidsinterval met `tconfint_diff()` met als nieuw argument `alpha = 0.05` om het significantieniveau aan te geven. Deze functies zijn afkomstig van het package `statsmodels.stats.api`.
 <!-- ## /TEKSTBLOK: T-test.py -->
 
 <!-- ## OPENBLOK: T-test.py -->
@@ -254,7 +259,7 @@ mean2 = np.mean(Cijfers_2011)
 <!-- ## TEKSTBLOK: T-test2.py -->
 * *t* = `r Round_and_format(py$stat)`, *p* = `r Round_and_format(py$pval)`
 * Vrijheidsgraden, *df* = *n* -1 = `r py$n`-1 = `r py$df`  
-* p-waarde > 0,05, dus de H~0~ wordt niet verworpen [^11]
+* De p-waarde is groter dan 0,05, dus de H~0~ wordt niet verworpen [^11]
 * Vrijheidsgraden: *df* = `r Round_and_format(py$df)`, niet gelijk aan aantal observaties min één bij een ongepaarde t-toets zonder gepoolde varianties
 * 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95% van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het verschil tussen de hoogte van de cijfers voor en na de BSA  cursus, µ~verschil~ = µ~T2011~ - µ~T2010~. In deze casus is het interval tussen `r Round_and_format(py$lb)` en `r Round_and_format(py$ub)`. Aangezien 0 in dit interval zit, is er geen significant verschil tussen beide gemiddelden in 2010 en 2011.
 * Het gemiddelde van de steekproef is in 2010 `r Round_and_format(py$mean1)`

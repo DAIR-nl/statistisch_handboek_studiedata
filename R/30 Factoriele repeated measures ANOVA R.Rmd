@@ -394,7 +394,7 @@ Voer een *simple effects analyse* uit om het interactie-effect te interpreteren.
 ### Periode
 
 <!-- ## TEKSTBLOK: SimEff1.R -->
-Maak eerst een aparte dataset voor de groepen theorie en praktijk, voer vervolgens de post hoc toets uit en bereken de gemiddelden per onderwijsperiode. Gebruik voor de post-hoc toetsen de functie `pairwise.t.test()` met als argumenten de afhankelijk variabele `Theorie_Resultaten_Leisure_Management$Cijfers`, de onafhankelijke variabele `Theorie_Resultaten_Leisure_Management$Periode` en de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`.
+Maak eerst een aparte dataset voor de groepen theorie en praktijk, voer vervolgens de post-hoc toets uit en bereken de gemiddelden per onderwijsperiode. Gebruik voor de post-hoc toetsen de functie `pairwise.t.test()` met als argumenten de afhankelijk variabele `Theorie_Resultaten_Leisure_Management$Cijfers`, de onafhankelijke variabele `Theorie_Resultaten_Leisure_Management$Periode` en de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`.
 <!-- ## /TEKSTBLOK: SimEff1.R -->
 
 <!-- ## OPENBLOK: SimEff2.R -->
@@ -462,7 +462,7 @@ Voor de theorievakken  zijn de volgende vergelijkingen getoetst[^18]:
 
 * Onderwijsperiode 1 versus 2: het gemiddelde cijfer in periode 1 (`r Round_and_format(Mean_T[1])`) en periode 2 (`r Round_and_format(Mean_T[2])`) zijn niet significant verschillend (*p* = 1,00)
 * Onderwijsperiode 1 versus 3: het gemiddelde cijfer in periode 1 (`r Round_and_format(Mean_T[1])`) en periode 3 (`r Round_and_format(Mean_T[3])`) zijn significant verschillend (*p* < 0,0001)
-* Onderwijsperiode 1 versus 4: het gemiddelde cijfer in periode 1 (`r Round_and_format(Mean_T[1])`) en periode 5 (`r Round_and_format(Mean_T[4])`) zijn significant verschillend (*p* < 0,0001)
+* Onderwijsperiode 1 versus 4: het gemiddelde cijfer in periode 1 (`r Round_and_format(Mean_T[1])`) en periode 4 (`r Round_and_format(Mean_T[4])`) zijn significant verschillend (*p* < 0,0001)
 * Onderwijsperiode 2 versus 3: het gemiddelde cijfer in periode 2 (`r Round_and_format(Mean_T[2])`) en periode 3 (`r Round_and_format(Mean_T[3])`) zijn significant verschillend (*p* < 0,0001)
 * Onderwijsperiode 2 versus 4: het gemiddelde cijfer in periode 2 (`r Round_and_format(Mean_T[2])`) en periode 4 (`r Round_and_format(Mean_T[4])`) zijn significant verschillend (*p* < 0,0001)
 * Onderwijsperiode 3 versus 4: het gemiddelde cijfer in periode 3 (`r Round_and_format(Mean_T[3])`) en periode 4 (`r Round_and_format(Mean_T[4])`) zijn niet significant verschillend (*p* = 1,00)
@@ -472,7 +472,7 @@ Voor de praktijkvakken zijn de volgende vergelijkingen getoetst[^18]:
 
 * Onderwijsperiode 1 versus 2: het gemiddelde cijfer in periode 1 (`r Round_and_format(Mean_P[1])`) en periode 2 (`r Round_and_format(Mean_P[2])`) zijn niet significant verschillend (*p* = 1,00)
 * Onderwijsperiode 1 versus 3: het gemiddelde cijfer in periode 1 (`r Round_and_format(Mean_P[1])`) en periode 3 (`r Round_and_format(Mean_P[3])`) zijn significant verschillend (*p* = `r Round_and_format(Posthoc_Periode_Praktijk[2,1])`)
-* Onderwijsperiode 1 versus 4: het gemiddelde cijfer in periode 1 (`r Round_and_format(Mean_P[1])`) en periode 5 (`r Round_and_format(Mean_P[4])`) zijn significant verschillend (*p* = 1,00)
+* Onderwijsperiode 1 versus 4: het gemiddelde cijfer in periode 1 (`r Round_and_format(Mean_P[1])`) en periode 4 (`r Round_and_format(Mean_P[4])`) zijn significant verschillend (*p* = 1,00)
 * Onderwijsperiode 2 versus 3: het gemiddelde cijfer in periode 2 (`r Round_and_format(Mean_P[2])`) en periode 3 (`r Round_and_format(Mean_P[3])`) zijn significant verschillend (*p* = `r Round_and_format(Posthoc_Periode_Praktijk[2,2])`)
 * Onderwijsperiode 2 versus 4: het gemiddelde cijfer in periode 2 (`r Round_and_format(Mean_P[2])`) en periode 4 (`r Round_and_format(Mean_P[4])`) zijn significant verschillend (*p* = 1,00)
 * Onderwijsperiode 3 versus 4: het gemiddelde cijfer in periode 3 (`r Round_and_format(Mean_P[3])`) en periode 4 (`r Round_and_format(Mean_P[4])`) zijn niet significant verschillend (*p* = `r Round_and_format(Posthoc_Periode_Praktijk[3,3])`)
@@ -482,7 +482,7 @@ Voor de praktijkvakken zijn de volgende vergelijkingen getoetst[^18]:
 ### Vaksoort
 
 <!-- ## TEKSTBLOK: SimEff5.R -->
-Maak eerst aparte datasets voor periode 1, 2, 3 en 4 en voer vervolgens de post hoc toets uit. Gebruik voor de post-hoc toetsen de functie `pairwise.t.test()` met als argumenten de afhankelijk variabele `P1_Resultaten_Leisure_Management$Cijfers`, de onafhankelijke variabele `P1_Resultaten_Leisure_Management$Vaksoort` en de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`.
+Maak eerst aparte datasets voor periode 1, 2, 3 en 4 en voer vervolgens de post-hoc toets uit. Gebruik voor de post-hoc toetsen de functie `pairwise.t.test()` met als argumenten de afhankelijk variabele `P1_Resultaten_Leisure_Management$Cijfers`, de onafhankelijke variabele `P1_Resultaten_Leisure_Management$Vaksoort` en de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`.
 <!-- ## /TEKSTBLOK: SimEff5.R -->
 
 <!-- ## OPENBLOK: SimEff6.R -->
@@ -600,12 +600,15 @@ vF_waarde_H <- Round_and_format(FRM_H$F[3])
 vDF1_H <- Round_and_format(FRM_H$DFn[3])
 vDF2_H <- Round_and_format(FRM_H$DFd[3])
 vEsq_H <- Round_and_format(FRM_H$ges[3])
+vp_H <- Round_and_format(FRM_H$p[3])
 ```
 <!-- ## /CLOSEDBLOK: PHtest3.R -->
 
  
 <!-- ## TEKSTBLOK: PHtest4.R -->
-Er is een significant interactie-effect van Vaksoort en Periode op Cijfers, *F* (`r vDF1_H`,`r vDF2_H`) = `r vF_waarde_H`, *p* < 0,0001, *η^2^* = `r vEsq_H`.[^18] De hoofdeffecten van Vaksoort (*p* < 0,0001) en Periode (*p* < 0,0001) zijn wel significant.[^18] Voer daarom post-hoc toetsen uit voor beide variabelen. Gebruik voor de post-hoc toetsen de functie `pairwise.t.test()` met als argumenten de afhankelijk variabele `Hoofdeffecten_Resultaten_Leisure_Management$Cijfers`, de onafhankelijke variabele `Hoofdeffecten_Resultaten_Leisure_Management$Vaksoort` of `Hoofdeffecten_Resultaten_Leisure_Management$Periode` en de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`.
+Er is geen significant interactie-effect van Vaksoort en Periode op Cijfers, *F* (`r vDF1_H`,`r vDF2_H`) = `r vF_waarde_H`, *p* = `vp_H`, *η^2^* = `r vEsq_H`.[^18] De hoofdeffecten van Vaksoort (*p* < 0,0001) en Periode (*p* < 0,0001) zijn wel significant.[^18] Voer daarom post-hoc toetsen uit voor beide variabelen. 
+
+Gebruik voor de post-hoc toetsen de functie `pairwise.t.test()` met als argumenten de afhankelijk variabele `Hoofdeffecten_Resultaten_Leisure_Management$Cijfers`, de onafhankelijke variabele `Hoofdeffecten_Resultaten_Leisure_Management$Vaksoort` of `Hoofdeffecten_Resultaten_Leisure_Management$Periode` en de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`.
 
 <!-- ## /TEKSTBLOK: PHtest4.R -->
 
@@ -614,6 +617,7 @@ Er is een significant interactie-effect van Vaksoort en Periode op Cijfers, *F* 
 # Voer de post-hoc toetsen uit voor de variabele Vaksoort
 pairwise.t.test(Hoofdeffecten_Resultaten_Leisure_Management$Cijfers,
                 Hoofdeffecten_Resultaten_Leisure_Management$Vaksoort,
+                paired = TRUE,
                 p.adjust.method = "bonferroni")
 
 # Bereken het gemiddelde cijfer voor beide vaksoorten
@@ -625,6 +629,7 @@ with(Hoofdeffecten_Resultaten_Leisure_Management,
 # Voer de post-hoc toetsen uit voor de variabele Periode
 pairwise.t.test(Hoofdeffecten_Resultaten_Leisure_Management$Cijfers,
                 Hoofdeffecten_Resultaten_Leisure_Management$Periode,
+                paired = TRUE,
                 p.adjust.method = "bonferroni")
 
 # Bereken het gemiddelde cijfer voor de vier perioden
@@ -639,10 +644,12 @@ with(Hoofdeffecten_Resultaten_Leisure_Management,
 ````{r, echo=FALSE}
 PH_Vaksoort <- pairwise.t.test(Hoofdeffecten_Resultaten_Leisure_Management$Cijfers,
                 Hoofdeffecten_Resultaten_Leisure_Management$Vaksoort,
+                paired = TRUE,
                 p.adjust.method = "bonferroni")$p.value
 
 PH_Periode <- pairwise.t.test(Hoofdeffecten_Resultaten_Leisure_Management$Cijfers,
                 Hoofdeffecten_Resultaten_Leisure_Management$Periode,
+                paired = TRUE,
                 p.adjust.method = "bonferroni")$p.value
 
 # Bereken het gemiddelde cijfer voor beide vaksoorten

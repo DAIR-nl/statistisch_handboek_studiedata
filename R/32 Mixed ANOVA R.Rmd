@@ -121,7 +121,7 @@ Bij *mixed ANOVA* worden bovenstaande grafieken gebruikt om de resultaten te int
 
 # Assumpties
 
-Voor een valide toetsresultaat bij de *mixed ANOVA* moet er aan een aantal assumpties voldaan worden. De steekproef moet bestaan uit onafhankelijke observatie-eenheden, de afhankelijke variabele moet normaal verdeeld zijn voor elke combinatie van groepen van de onafhankelijke variabelen. Daarnaast moet er sphericiteit zijn voor de within-subjects variabelen en homogeniteit van varianties voor de betwee-subjects variabelen bij elke combinatie van categorieën van de within-subjects variabelen.[^1]
+Voor een valide toetsresultaat bij de *mixed ANOVA* moet er aan een aantal assumpties voldaan worden. De steekproef moet bestaan uit onafhankelijke observatie-eenheden, de afhankelijke variabele moet normaal verdeeld zijn voor elke combinatie van groepen van de onafhankelijke variabelen. Daarnaast moet er sphericiteit zijn voor de within-subjects variabelen en homogeniteit van varianties voor de betwee-subjects variabelen bij elke combinatie van categorieën van de within-subjects variabelen.[^1]<sup>,</sup>[^22]
 
 ## Normaliteit
 Controleer de assumptie van normaliteit voor elke groep met de volgende stappen:  
@@ -150,16 +150,16 @@ $`Sphericity Corrections`
 <!-- ## /CLOSEDBLOK: Sphericiteit.R -->
 
 <!-- ## TEKSTBLOK: Sphericiteit1.R -->
-Bij een p-waarde kleiner dan 0,05, toont *Mauchly's test* dat de assumptie van sphericiteit geschonden is. In de output is dit te zien aan de p-waarde van 0,0051 onder ` $Mauchly's Test for Sphericity `. Er zijn twee mogelijke correcties wanneer er geen sphericiteit is: de Greenhouse-Geisser (GG) en Huynh-Feldt (HF) correctie. De Greenhouse-Geisser correctie staat bekend als conservatief, wat betekent dat de correctie een relatief lage kans op een type I fout heeft. In andere woorden, het zal niet vaak gebeuren dat deze correctie een significant effect aantoont wanneer dat er in werkelijkheid niet is. De Huynh-Feldt correctie staat echter bekend als liberaal, wat betekent dat er een relatief hoge kans op een type I fout is. De teststatistiek en p-waarde van beide correcties zijn in de output te vinden onder ` $Sphericity Corrections `.
+Bij een p-waarde kleiner dan 0,05, toont *Mauchly's test* dat de assumptie van sphericiteit geschonden is. In de output is dit te zien aan de p-waarde van 0,0051 onder ` $Mauchly's Test for Sphericity `. Er zijn twee mogelijke correcties als er geen sphericiteit is: de Greenhouse-Geisser (GG) en Huynh-Feldt (HF) correctie. De Greenhouse-Geisser correctie staat bekend als conservatief, wat betekent dat de correctie een relatief lage kans op een type I fout heeft. In andere woorden, het zal niet vaak gebeuren dat deze correctie een significant effect aantoont wanneer dat er in werkelijkheid niet is. De Huynh-Feldt correctie staat echter bekend als liberaal, wat betekent dat er een relatief hoge kans op een type I fout is. De toetsstatistiek en p-waarde van beide correcties zijn in de output te vinden onder ` $Sphericity Corrections `.
 <!-- ## TEKSTBLOK: Sphericiteit1.R -->
 
-Houd de volgende richtlijnen aan bij het interpreteren van de *repeated measures ANOVA* wanneer niet aan sphericiteit is voldaan:
+Houd de volgende richtlijnen aan bij het interpreteren van de *repeated measures ANOVA* als er niet aan sphericiteit is voldaan:
 
-* Wanneer beide correcties significant zijn, rapporteer de (conservatieve) Greenhouse-Geisser correctie.
-* Wanneer beide correcties niet significant zijn, rapporteer de (liberale) Huynh-Feldt correctie.
-* Wanneer de een significant is en de ander niet, bereken de gemiddelde p-waarde van beide correcties.
-    * Wanneer deze p-waarde significant is, rapporteer dan de significante correctie.
-    * Wanneer deze p-waarde niet significant is, rapporteer dan de niet significante correctie.
+* Als beide correcties significant zijn, rapporteer de (conservatieve) Greenhouse-Geisser correctie.
+* Als beide correcties niet significant zijn, rapporteer de (liberale) Huynh-Feldt correctie.
+* Als de een significant is en de ander niet, bereken de gemiddelde p-waarde van beide correcties.
+    * Als deze p-waarde significant is, rapporteer dan de significante correctie.
+    * Als deze p-waarde niet significant is, rapporteer dan de niet significante correctie.
 
 In de voorbeeldoutput is de p-waarde van de Greenhouse-Geisser correctie groter dan 0,05 en de p-waarde van de Huynh-Feldt correctie kleiner dan 0,05. Het gemiddelde van beide p-waarden is 0,049855, wat betekent dat er een significant resultaat is. Rapporteer in dit geval dus de (significante) Huynh-Feldt correctie, i.e. *F* = 0,56, *p* < 0,05.  
 
@@ -388,7 +388,7 @@ anova_out(Mixed_ANOVA)
 <!-- ## /OPENBLOK: ANOVA-toets3.R -->
 
 <!-- ## CLOSEDBLOK: ANOVA-toets4.R -->
-```{r, echo=FALSE, warning = FALSE}
+```{r, echo=FALSE, warning = FALSE, results="hide"}
 MA <- ezANOVA(Resultaten_SCM, 
         dv = Cijfer, 
         wid = Studentnummer,
@@ -520,7 +520,7 @@ Maak eerst aparte datasets voor de vakken Organization Change Management (OC), O
 <!-- ## OPENBLOK: SimEff6.R -->
 
 ```{r}
-# Maak een dataset voor elke onderwijsperiode
+# Maak een dataset voor de vier vakken
 OC_Resultaten_SCM <- Resultaten_SCM[Resultaten_SCM$Vak == "Organizational Change Management",]
 OP_Resultaten_SCM <- Resultaten_SCM[Resultaten_SCM$Vak == "Organizational Psychology",]
 SI_Resultaten_SCM <- Resultaten_SCM[Resultaten_SCM$Vak == "Sustainable Innovation",]
@@ -559,7 +559,7 @@ with(Resultaten_SCM,
 <!-- ## CLOSEDBLOK: SimEff7.R -->
 
 ```{r, echo=FALSE}
-# Maak een dataset voor elke onderwijsperiode
+# Maak een dataset voor de vier vakken
 OC_Resultaten_SCM <- Resultaten_SCM[Resultaten_SCM$Vak == "Organizational Change Management",]
 OP_Resultaten_SCM <- Resultaten_SCM[Resultaten_SCM$Vak == "Organizational Psychology",]
 SI_Resultaten_SCM <- Resultaten_SCM[Resultaten_SCM$Vak == "Sustainable Innovation",]
@@ -633,7 +633,7 @@ anova_out(Mixed_ANOVA_H)
 <!-- ## /OPENBLOK: PHtest2.R -->
 
 <!-- ## CLOSEDBLOK: PHtest3.R -->
-```{r, echo=FALSE, warning = FALSE}
+```{r, echo=FALSE, warning = FALSE, results="hide"}
 MA_H <- ezANOVA(Hoofdeffecten_Resultaten_SCM, 
         dv = Cijfer, 
         wid = Studentnummer,
@@ -667,7 +667,7 @@ pairwise.t.test(Hoofdeffecten_Resultaten_SCM$Cijfer,
                 paired = TRUE,
                 p.adjust.method = "bonferroni")
 
-# Bereken het gemiddelde cijfer voor beide vaksoorten
+# Bereken het gemiddelde cijfer voor de vakken
 with(Hoofdeffecten_Resultaten_SCM, 
      by(data = Cijfer, 
         list(Vak), 
@@ -679,7 +679,7 @@ pairwise.t.test(Hoofdeffecten_Resultaten_SCM$Cijfer,
                 paired = FALSE,
                 p.adjust.method = "bonferroni")
 
-# Bereken het gemiddelde cijfer voor de vier perioden
+# Bereken het gemiddelde cijfer voor de groep Premaster en de groep Geen Premaster
 with(Hoofdeffecten_Resultaten_SCM, 
      by(data = Cijfer, 
         list(Premaster), 
@@ -697,13 +697,13 @@ PH_Premaster <- pairwise.t.test(Hoofdeffecten_Resultaten_SCM$Cijfer,
                 Hoofdeffecten_Resultaten_SCM$Premaster,
                 p.adjust.method = "bonferroni")$p.value
 
-# Bereken het gemiddelde cijfer voor beide vaksoorten
+# Bereken het gemiddelde cijfer voor
 H_mean_Vak <- with(Hoofdeffecten_Resultaten_SCM, 
      by(data = Cijfer, 
         list(Vak), 
         mean))
 
-# Bereken het gemiddelde cijfer voor de vier perioden
+# Bereken het gemiddelde cijfer voor de
 H_mean_Premaster <- with(Hoofdeffecten_Resultaten_SCM, 
      by(data = Cijfer, 
         list(Premaster), 
@@ -778,10 +778,7 @@ ggplot(Resultaten_SCM,
 ```
 <!-- ## /CLOSEDBLOK: Footer.R -->
 
-[^1]: Laerd statistics (2018). *Two-way repeated measures ANOVA using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/two-way-repeated-measures-anova-using-spss-statistics.php. 
-
-
-
+[^1]: Laerd statistics (2018). *Mixed ANOVA using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/mixed-anova-using-spss-statistics.php. 
 
 [^2]: Er zijn verschillende opties om variabelen te transformeren, zoals de logaritme, wortel of inverse (1 gedeeld door de variabele) nemen van de variabele. Zie *Discovering statistics using IBM SPSS statistics* van Field (2013) pagina 201-210 voor meer informatie over welke transformaties wanneer gebruikt kunnen worden.
 [^3]: Tabachnick, B.G. & Fidell, L.S. (2013). *Using multivariate statistics*. Sixth Edition, Pearson. Pagina 86.

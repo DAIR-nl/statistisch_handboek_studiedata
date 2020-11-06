@@ -718,13 +718,16 @@ Omdat er significante verschillen tussen de gemiddelde eindcijfers Methoden & St
 <!-- ## OPENBLOK: PHtest2.R -->
 ```{r}
 library(rstatix)
-
+#install.packages("emmeans")
+#install.packages("rstatix")
 emmeans_test(Studenten_Methoden_Statistiek,
              Eindcijfer_MS ~ Opleiding, 
              covariate = c(Aantal_Hoorcolleges, 
                            Eindexamencijfer),
              p.adjust.method = "fdr"
     )
+
+
 ```
 
 Bereken vervolgens de marginale gemiddelden voor elke opleiding. Het marginale gemiddelde is een gemiddelde dat gecorrigeerd is voor de covariaten. Gebruik de functie `get_emmeans()` van het package `rstatix` met als argument een object dat gemaakt wordt door de post-hoc toetsen uit te voeren.

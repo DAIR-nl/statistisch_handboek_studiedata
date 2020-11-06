@@ -256,7 +256,7 @@ paste("De effectmaat is", W)
 
 <!-- ## TEKSTBLOK: ANOVA-toets1.R -->
 * *&chi;^2^~3~* = `r vChi2`, *p* < 0,001, *W* = `r Round_and_format(W)`
-* De p-waarde < 0,05, dus de H~0~ wordt verworpen.[^10]
+* De p-waarde is kleiner dan 0,05, dus de H~0~ wordt verworpen.[^10]
 * Er is een significant verschil tussen de beoordelingen van de eetgelegenheden in de vier gebouwen; het effect van de verschillende gebouwen op de beoordelingen van studenten is klein tot gemiddeld
 
 <!-- ## /TEKSTBLOK: ANOVA-toets1.R -->

@@ -146,8 +146,8 @@ maak_html_r4 <- function() {
     tr(
       td(class = "header3 innercell", "nominaal ",tags$br(), "(>2 waarden)"),
       ## Toets 16 tm 19
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[17,]$InGebruik)),
-                         dfToetsen[17,]$Toets,
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[21,]$InGebruik)),
+                         dfToetsen[21,]$Toets,
                          sModus = sModus),
       ## McNemar
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[18,]$InGebruik)),  
@@ -178,8 +178,8 @@ maak_html_r5 <- function() {
       #maak_html_toetscel(F,  
       #                   "...", 
       #                   sModus = sModus),
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[17,]$InGebruik)),
-                         dfToetsen[17,]$Toets,
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[21,]$InGebruik)),
+                         dfToetsen[21,]$Toets,
                          sModus = sModus),
       ## Wilcoxon
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[22,]$InGebruik)),  

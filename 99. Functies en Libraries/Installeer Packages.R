@@ -48,6 +48,7 @@ Gebruikte_packages <- c(
     "graphics",
     "here",
     "htmltools",
+    "irr",
     #"klippy",
     "lmtest", # 41
     "lsr",

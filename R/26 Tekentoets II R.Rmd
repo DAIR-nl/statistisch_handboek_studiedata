@@ -50,7 +50,9 @@ source(paste0(here::here(),"/01. Includes/data/07.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
+<!-- ## TEKSTBLOK: link1.R -->
 Gebruik de *tekentoets* om te toetsen of de medianen van twee gepaarde groepen van elkaar verschillen.[^1] Deze toets is een alternatief voor de [gepaarde t-toets](02-Gepaarde-t-toets-R.html) als de verschilscores van de gepaarde groepen niet normaal verdeeld zijn. De [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-I-R.html) kan ook gebruikt worden om het verschil tussen medianen van gepaarde groepen te toetsen. Deze toets heeft een hoger onderscheidend vermogen[^2], maar vereist dat de verdeling van de verschilscores symmetrisch is.[^3] De *tekentoets* kan ook gebruikt worden als de verdeling niet symmetrisch is. 
+<!-- ## /TEKSTBLOK: link1.R -->
 
 # Onderwijscasus
 <div id ="casus">
@@ -89,10 +91,10 @@ tail(Alumni_jaarinkomens)
 ```
 <!-- ## /OPENBLOK: Data-bekijken.R -->
 
-<!-- ## OPENBLOK: Data-selecteren.R -->
-<!-- ## TEKSTBLOK: Data-beschrijven.R-->
+<!-- ## TEKSTBLOK: Data-beschrijven11.R-->
 Bekijk de grootte en de mediaan  van de data met `length()` en `median()`. Maak hiervoor twee vectoren met daarin de jaarinkomens op T~1~ en T~2~.
-<!-- ## /TEKSTBLOK: Data-beschrijven.R-->
+<!-- ## /TEKSTBLOK: Data-beschrijven11.R-->
+
 <!-- ## OPENBLOK: Data-selecteren.R-->
 ```{r data selecteren}
 Alumni_jaarinkomens_T1 <- Alumni_jaarinkomens$Inkomen[Alumni_jaarinkomens$Meetmoment == "T1"]
@@ -130,6 +132,7 @@ vN_T2 <- length(Alumni_jaarinkomens_T2)
 * Mediaan bruto jaarinkomen op T~1~: `r paste0("€",format(vMed_T1, scientific = FALSE))` 
 * Mediaan bruto jaarinkomen op T~2~: `r paste0("€",format(vMed_T2, scientific = FALSE))` 
 * Aangezien de gegevens gepaard zijn, zijn de groepsgroottes op beide meetmomenten gelijk: *n~T1~* = `r vN_T1` en *n~T2~* = `r vN_T2`
+
 <!-- ## /TEKSTBLOK: Data-beschrijven.R-->
 
 
@@ -191,9 +194,6 @@ SignTest(Alumni_jaarinkomens_T2, Alumni_jaarinkomens_T1, alternative = "two.side
 ```
 <!-- ## /OPENBLOK: Wilcoxon-signed-rank-toets.R -->
 
-
-
-
 <!-- ## CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
 ```{r wilcox test als object, include=FALSE, echo=TRUE}
 b <- SignTest(Alumni_jaarinkomens_T2, Alumni_jaarinkomens_T1, 
@@ -206,13 +206,14 @@ vconf.int2 <- Round_and_format(b$conf.int[2])
 vMed <- Round_and_format(b$estimate)
 ```
 <!-- ## /CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
-<!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
+
+<!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets2.R -->
 * Er is een significant verschil tussen het mediane inkomen vijf jaar en één jaar na afstuderen, *S* = `r vS`, *N* = `r vN`, *p* < 0.0001 [^4]
 * De toetsstatistiek *S* is het aantal positieve verschillen (inkomen vijf jaar na afstuderen hoger dan één jaar na afstuderen), *N* is het totaal aantal observatie-eenheden (alumni)
 * Van de `r vN` alumni verdienen `r vS` alumni meer vijf jaar na afstuderen dan één jaar na afstuderen
 * De geschatte mediaan van de verschilscores is `r vMed` met bijbehorend 96%-betrouwbaarheidsinterval[^5] van `r vconf.int1` tot `r vconf.int2`.
 
-<!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets.R -->
+<!-- ## /TEKSTBLOK: Wilcoxon-signed-rank-toets2.R -->
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->

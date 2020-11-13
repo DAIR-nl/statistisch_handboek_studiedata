@@ -64,18 +64,18 @@ Om wervingsactiviteiten beter af te stemmen op de aankomende studenten, wil het 
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
-*H~0~*: De gemiddelde reistijd van de studenten is per opleiding gelijk aan elkaar: µ~1~ = µ~2~ = µ~3~   
+*H~0~*: De reistijden van de studenten van de drie opleidingen komen uit dezelfde verdeling en hebben dus een gezamenlijk gemiddelde
 
-*H~A~*: Voor tenminste één opleiding is de gemiddelde reistijd niet gelijk aan de gemiddelde reistijd van studenten voor andere opleidingen, bijvoorbeeld: µ~1~ ≠ µ~2~ = µ~3~ 
-</div>
+*H~A~*: De reistijden van de studenten van de drie opleidingen komen niet uit dezelfde verdeling en hebben dus een verschillend gemiddelde
+
 
 # Assumpties
 Om een valide toetsresultaat te bereiken moeten de data aan een aantal voorwaarden voldoen. Controleer of de steekproef aan de volgende assumpties voldoet: normaliteit, homogeniteit van varianties en onafhankelijkheid.
 
-De *one-way ANOVA* is een robuuste toets: als er niet voldaan is aan de assumptie van normaliteit of homogeniteit van varianties, dan kan de *one-way ANOVA* nog steeds uitgevoerd en geïnterpreteerd worden.[^2] Hierdoor kan het wel zijn dat de toets minder onderscheidend vermogen heeft, dan wanneer de assumpties niet geschonden worden.[^3]<sup>, </sup>[^4] Als er grote afwijkingen zijn van normaliteit of homogeniteit van varianties, is de [Kruskal-Wallis toets](10-Kruskal-Wallis-toets-R.html) een alternatief voor de *one-way ANOVA*.[^5]<sup>, </sup>[^6]
+De *one-way ANOVA* is een robuuste toets: als er niet voldaan is aan de assumptie van normaliteit of homogeniteit van varianties, dan kan de *one-way ANOVA* in bepaalde gevallen nog steeds uitgevoerd en geïnterpreteerd worden.[^2] Hierdoor kan het wel zijn dat de toets minder onderscheidend vermogen heeft, dan wanneer de assumpties niet geschonden worden.[^3]<sup>, </sup>[^4] Als er grote afwijkingen zijn van normaliteit of homogeniteit van varianties, is de [Kruskal-Wallis toets](10-Kruskal-Wallis-toets-R.html) een alternatief voor de *one-way ANOVA*.[^5]<sup>, </sup>[^6]
 
 ## Normaliteit
-De assumptie van normaliteit houdt bij de *one-way ANOVA* in dat de afhankelijke variabele normaal verdeeld is voor elke groep van de onafhankelijke variabele. Controleer de assumptie van normaliteit voor elke groep met de volgende stappen:  
+De assumptie van normaliteit houdt bij de *one-way ANOVA* in dat de afhankelijke variabele normaal verdeeld is voor elke groep. Controleer de assumptie van normaliteit voor elke groep met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
 2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^7]<sup>, </sup>[^8]  
 
@@ -90,7 +90,7 @@ De p-waarde geeft aan of het verschil tussen groepen significant is. De grootte 
 De effectmaat eta squared (*η^2^*) berekent de proportie van de variantie in de afhankelijke variabele die verklaard wordt door de onafhankelijke variabele. In deze casus berekent het de proportie van de variantie in de lengte van de reistijd die verklaard kan worden door de opleiding. Een indicatie om *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^12]<sup>,</sup>[^13]
 
 # Post-hoc toetsen
-De *one-way ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Voer een post-hoc toets uit om te bepalen welke groepen significant verschillen. De post-hoc toetsen voeren meestal een correctie voor de p-waarden uit, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout).
+De *one-way ANOVA* toetst of de groepen afkomstig zijn van eenzelfde verdeling met een gezamenlijk gemiddelde of van verschillende verdeling met een eigen gemiddelde. Voer een post-hoc toets uit om te bepalen welke groepen significant verschillen. De post-hoc toetsen voeren meestal een correctie voor de p-waarden uit, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout).
 
 Er zijn meerdere post-hoc toetsen. De keuze voor een toets hangt onder andere af van het wel of niet schenden van de assumptie van homogeniteit van varianties:   
 * Gebruik de Tukey Honestly Significant Difference post-hoc toets bij gelijke variantie.[^14]  
@@ -107,7 +107,7 @@ Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 <!-- ## /TEKSTBLOK: Data-bekijken.R -->
 
 <!-- ## OPENBLOK: Data-bekijken.R -->
-```{r data bekijken, collapse = TRUE}
+```{r data bekijken}
 ## Eerste 5 observaties
 head(Reistijd_per_opleiding)
 
@@ -143,7 +143,7 @@ Bekijk de beschrijvende statistieken per groep om meer inzicht te krijgen in de 
 <!-- ## /OPENBLOK: Data-beschrijven-inladen.R -->
 
 <!-- ## OPENBLOK: Data-beschrijven-1.R -->
-```{r Data beschrijven 1, eval = FALSE, warning = FALSE}
+```{r Data beschrijven 1, warning = FALSE}
 library(summarytools)
 
 with(Reistijd_per_opleiding, 

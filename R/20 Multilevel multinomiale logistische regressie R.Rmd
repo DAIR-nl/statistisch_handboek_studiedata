@@ -68,7 +68,11 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 *Multilevel multinomiale logistische regressie* is een techniek waarbij een nominale afhankelijke variabele wordt voorspeld met behulp van één of meerdere onafhankelijke variabelen.[^1] De term *multilevel* houdt in dat rekening wordt gehouden met de hiërarchische structuur in de data. Elke student wordt gemeten in vijf onderwijsperiodes, wat betekent dat de observaties gekoppeld zijn aan een bepaalde student. Om met deze hiërarchie rekening te houden, wordt de multilevel variant van *multinomiale logistische regressie* uitgevoerd.[^1]<sup>,</sup>[^12]<sup>,</sup>[^13]
 
-Om de hypothese te toetsen dat er geen afhankelijkheid bestaat tussen de keuze voor een specialisatie en de onderwijsperiodes worden twee regressiemodellen geschat. In de eerste vergelijking wordt de afhankelijke variabele specialisatie voorspeld met behulp van een student specifieke intercept. Reden hiervoor is dat er op deze manier gecontroleerd wordt voor het feit dat de observaties gekoppeld zijn aan een bepaalde student, i.e. de hiërarchische structuur van de data. Het eerste model noemt men het *intercept-only model* en is als volgt geformuleerd[^2]:
+Om de hypothese te toetsen dat er geen afhankelijkheid bestaat tussen de keuze voor een specialisatie en de onderwijsperiodes worden twee regressiemodellen geschat. In het eerste model wordt de afhankelijke variabele specialisatie voorspeld met behulp van een student specifieke intercept. In het tweede model wordt worden de onderwijsperiodes als onafhankelijke variabele toegevoegd waardoor de afhankelijke variabele specialisatie wordt voorspeld met een student specifieke intercept en de onderwijsperiodes. Daarna worden beide modellen vergeleken waarbij in feite wordt getoetst of de toevoeging van de onderwijsperiodes zorgt voor een significante verbetering van het model. Bij een significant resultaat is er een afhankelijkheid tussen de onderwijsperiodes en de specialisatie. Bij een niet significant verschil resultaat is er geen afhankelijkheid.
+
+## Modellen
+
+In de eerste vergelijking wordt de afhankelijke variabele specialisatie voorspeld met behulp van een student specifieke intercept. Reden hiervoor is dat er op deze manier gecontroleerd wordt voor het feit dat de observaties gekoppeld zijn aan een bepaalde student, i.e. de hiërarchische structuur van de data. Het eerste model noemt men het *intercept-only model* en is als volgt geformuleerd[^2]:
 
 $$ Specialisatie_{it} = \beta_{0i} + e_{it}$$
 
@@ -77,9 +81,11 @@ met $t$ als indicator van de onderwijsperiode, $i$ als indicator van de student,
 In het tweede regressiemodel wordt de specialisatie voorspeld met behulp van een student specifiek intercept en variabelen voor de onderwijsperiodes. In dit model wordt de keuze voor een specialisatie voorspeld op basis van de onderwijsperiodes en een student specifiek intercept. Het model is als volgt geformuleerd[^2]:
 
 $$ Specialisatie_{it} = \beta_{0i} + \beta_1*P_2 + \beta_2*P_3 + \beta_3*P_4 + \beta_4*P_5 + e_{it}$$
-met $t$ als indicator van de onderwijsperiode, $i$ als indicator van de student, de afhankelijke variabele $Specialisatie_{it}$ die aangeeft welke specialisatie gekozen is, $\beta_{0i}$ als student specifiek intercept (vanwege de index $i$), $P_2$ als variabele voor onderwijsperiode 2 met bijbehorende regressiecoefficient $\beta_1$, $P_3$, $P_4$ en $P_5$ als variabelen voor onderwijsperiodes 3, 4 en 5 respectievelijke en $e_{it}$ als residu. 
+met $t$ als indicator van de onderwijsperiode, $i$ als indicator van de student, de afhankelijke variabele $Specialisatie_{it}$ die aangeeft welke specialisatie gekozen is, $\beta_{0i}$ als student specifiek intercept (vanwege de index $i$), $P_2$ als variabele voor onderwijsperiode 2 met bijbehorende regressiecoefficient $\beta_1$, $P_3$, $P_4$ en $P_5$ als variabelen voor respectievelijk onderwijsperiodes 3, 4 en 5  en $e_{it}$ als residu. 
 
 Model 1 en model 2 zijn geneste modellen. Bij geneste modellen is het ene model te schrijven als een versie van het andere model na het verwijderen van een aantal predictors. In deze casus zijn beide modellen genest, omdat model 1 te schrijven is als een versie van model 2 na het verwijderen van alle onderwijsperiodes uit de regressie-vergelijking van model 2. Het model waarbij de predictors verwijderd zijn, wordt als het ware gereduceerd. Daarom wordt dit het gereduceerde model genoemd. Het model waar de predictors niet verwijderd zijn, wordt het uitgebreide model genoemd. Model 1 is dus het gereduceerde model; model 2 het uitgebreide model.[^11]
+
+## Likelihood ratio toets
 
 De hypothese van afhankelijkheid tussen de keuze voor een specialisatie en de onderwijsperiodes wordt getoetst door beide modellen met elkaar te vergelijken met een *likelihood ratio toets*. Een *likelihood ratio toets* toetst of het verschil tussen twee geneste modellen significant is op basis van de log-likelihood van de modellen. De log-likelihood van een model is een maat voor de kwaliteit van het model en wordt berekend door voorspellingen en observaties te vergelijken. Deze toets wordt bij regressie-analyses gebruikt als meerdere predictors tegelijkertijd toegevoegd worden. Een niet significant resultaat bij de *likelihood ratio toets* betekent dat er geen significante verschil is tussen het gereduceerde en uitgebreide model. In andere woorden, het uitbreiden van het model is geen significante toevoeging en het gereduceerde model volstaat. Een significant resultaat bij de *likelihood ratio toets* betekent dat er wel een significant verschil is tussen het gereduceerde en uitgebreide model. In dat geval is het uitgebreide model een betere representatie van de werkelijkheid en heeft de toevoeging van predictors waarde.[^11]
 
@@ -92,7 +98,7 @@ Om de afhankelijkheid tussen de keuze voor een specialisatie en de onderwijsperi
 Om een *multilevel multinomiale logistische regressie* uit te voeren, moeten de data aan een aantal voorwaarden voldoen. Er dient een categorische afhankelijke variabele te zijn met meer dan twee categorieën zonder overlap: elke observatie past slechts in een van beide categorieën. Daarnaast zijn er drie of meer herhaalde metingen van één groep of zijn er drie of meer gepaarde groepen. In beide gevallen zijn de observationele eenheden een willekeurige steekproef van de populatie.[^4]
 
 ## Complete informatie
-Bij *multilevel multinomiale logistische regressie* is de keuze voor de specialisatie de afhankelijke variabele en de onderwijsperiode de onafhankelijke variabele. Om *multilevel multinomiale logistische regressie* uit te voeren, moet er voor elke combinatie van de afhankelijke variabele en onafhankelijke variabele minimaal één observatie zijn.[^13] Met betrekking tot deze casus betekent dat dat er minimaal één observatie is voor elke specialisatie in elke periode. Toets deze assumptie met behulp van een kruistabel: een tabel waarin de aantallen observaties worden weergegeven per combinatie van de categorieën van beide variabelen. De kruistabel van de data in de huidige casus is te vinden in Tabel 1.   
+Bij *multilevel multinomiale logistische regressie* is de keuze voor de specialisatie de afhankelijke variabele en de onderwijsperiode de onafhankelijke variabele. Om *multilevel multinomiale logistische regressie* uit te voeren, moet er voor elke combinatie van de afhankelijke variabele en onafhankelijke variabele minimaal één observatie zijn.[^13] Met betrekking tot deze casus betekent dat dat er minimaal één observatie is voor elke specialisatie in elke periode. Toets deze assumptie met behulp van een kruistabel: een tabel waarin de aantallen observaties worden weergegeven per combinatie van de categorieën van beide variabelen. Een voorbeeld van een kruistabel voor de huidige casus is te vinden in Tabel 1.   
 
 |          | Periode 1   | Periode 2 | Periode 3 | Periode 4 | Periode 5 | 
 | -------- | ---------| ------------| -------------| -------------| -------------| 
@@ -111,7 +117,7 @@ Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertij
 
 # De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken1.R -->
-Er is een dataset ingeladen genaamd `Data_Specialisatie`. In deze dataset is per onderwijsperiode aangegeven of een student wel of geen herkansingen heeft gemaakt.
+Er is een dataset ingeladen genaamd `Data_Specialisatie`. In deze dataset is per onderwijsperiode aangegeven welke specialisatie de student kiest.
 <!-- ## /TEKSTBLOK: Data-bekijken1.R -->
 
 <!-- ## OPENBLOK: Data-bekijken2.R -->
@@ -170,9 +176,9 @@ Elke cel van de kruistabel heeft meerdere observaties. Dit betekent dat er voor 
 <!-- ## TEKSTBLOK: MMLR1.R -->
 Voer een *multilevel multinomiale logistische regressie* uit om te onderzoeken of er een afhankelijkheid is tussen de keuze voor de specialisatie en de onderwijsperiodes bij eerstejaars studenten van de bachelor Psychologie. Fit eerst het gereduceerde en uitgebreide model met behulp van de functie `brm()` van het `brms` package. Bereken daarna van beide modellen de log-likelihood. Voer tenslotte de *likelihood ratio toets* uit.
 
-Fit het gereduceerde model met de functie `brm()` met als argument `formula = Specialisatie ~ (1 | Studentnummer)` met daarin de afhankelijke variabele `specialisatie` en `(1 | Studentnummer)` om een student specifiek intercept in te stellen, `data = Data_Specialisatie` voor de gebruikte dataset, `family = "categorical"` om aan te geven dat de afhankelijke variabele nominaal is, een seed `seed = 12345` zodat de uitkomsten bij opnieuw runnen van de code hetzelfde zijn en `save_all_pars = TRUE` om de loglikelihood te berekenen.
+Fit het gereduceerde model met de functie `brm()` met als argument `formula = Specialisatie ~ (1 | Studentnummer)` met daarin de afhankelijke variabele `specialisatie` en `(1 | Studentnummer)` om een student specifiek intercept in te stellen, `data = Data_Specialisatie` voor de gebruikte dataset, `family = "categorical"` om aan te geven dat de afhankelijke variabele nominaal is, een seed `seed = 12345` zodat de uitkomsten bij opnieuw runnen van de code hetzelfde zijn en `save_all_pars = TRUE` om de loglikelihood te berekenen. Voor de seed kan elk willekeurig getal gekozen worden, in deze casus is het getal 12345 gekozen.
 
-Fit het uitgebreide model met de functie `brm()` met als argument `formula = Specialisatie ~ Onderwijsperiode + (1 | Studentnummer)` met daarin de afhankelijke variabele `Specialisatie`, als onafhankelijke variabele `Onderwijsperiode` en `(1 | Studentnummer)` om een student specifiek intercept in te stellen, `data = Data_Specialisatie` voor de gebruikte dataset, `family = "categorical"` om aan te geven dat de afhankelijke variabele nominaal is, een seed `seed = 12345` zodat de uitkomsten bij opnieuw runnen van de code hetzelfde zijn en `save_all_pars = TRUE` om de loglikelihood te berekenen.
+Fit het uitgebreide model met de functie `brm()` met als argument `formula = Specialisatie ~ Onderwijsperiode + (1 | Studentnummer)` met daarin de afhankelijke variabele `Specialisatie`, als onafhankelijke variabele `Onderwijsperiode` en `(1 | Studentnummer)` om een student specifiek intercept in te stellen, `data = Data_Specialisatie` voor de gebruikte dataset, `family = "categorical"` om aan te geven dat de afhankelijke variabele nominaal is, een seed `seed = 12345` zodat de uitkomsten bij opnieuw runnen van de code hetzelfde zijn en `save_all_pars = TRUE` om de loglikelihood te berekenen.Voor de seed kan elk willekeurig getal gekozen worden, in deze casus is het getal 12345 gekozen.
 
 Bereken daarna de loglikelihood voor beide modellen met de zelfgemaakte functie `Loglikelihood_Functie` en voer de *likelihood ratio toets* uit. 
 
@@ -291,7 +297,7 @@ Er zijn tien vergelijkingen tussen de onderwijsperiodes getoets bij deze post-ho
 
 <!-- ## TEKSTBLOK: posthoc4.R -->
 * Er zijn significante verschillen gevonden tussen de verdeling van de keuzes voor specialisaties tussen onderwijsperiode 1 en 3 (*p* = `r Round_and_format(posthoc$Pairwise$p.adjust[2])`), onderwijsperiode 1 en 4 (*p* = `r Round_and_format(posthoc$Pairwise$p.adjust[3])`) en onderwijsperiode 1 en 5 (*p* = `r Round_and_format(posthoc$Pairwise$p.adjust[4])`). 
-* Tussen de overige onderwijsperiodes is geen significant verschil gevonden wat betreft de veredeling van keuzes voor specialisaties.
+* Tussen de overige onderwijsperiodes is geen significant verschil gevonden wat betreft de verdeling van keuzes voor specialisaties.
 
 <!-- ## TEKSTBLOK: posthoc4.R -->
 

@@ -89,15 +89,15 @@ maak_html_r2 <- function() {
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[36,]$InGebruik)),  
                    dfToetsen[36,]$Toets, 
                    sModus = sModus),
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[38,]$InGebruik)),  
-                   dfToetsen[38,]$Toets, 
-                   sModus = sModus),
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[38,]$InGebruik)),  
-                   dfToetsen[38,]$Toets, 
-                   sModus = sModus),
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[38,]$InGebruik)),  
-                   dfToetsen[38,]$Toets, 
-                   sModus = sModus)
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[62,]$InGebruik)),
+                         dfToetsen[62,]$Toets,
+                         sModus = sModus),
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[62,]$InGebruik)),
+                         dfToetsen[62,]$Toets,
+                         sModus = sModus),
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[62,]$InGebruik)),
+                         dfToetsen[62,]$Toets,
+                         sModus = sModus)
     )
   )
 }
@@ -198,17 +198,13 @@ maak_html_r6 <- function() {
       #maak_html_toetscel(F,  
       #                   "...", 
       #                   sModus = sModus),
-      maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[58,]$InGebruik)),  
-                   dfToetsen[58,]$Toets, 
-                   as.logical(as.numeric(dfToetsen[59,]$InGebruik)),  
-                   dfToetsen[59,]$Toets, 
-                   sModus = sModus),      
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[58,]$InGebruik)),
+                         dfToetsen[58,]$Toets,
+                         sModus = sModus),
       ## Wilcoxon
-      maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[60,]$InGebruik)),  
-                   dfToetsen[60,]$Toets, 
-                   as.logical(as.numeric(dfToetsen[61,]$InGebruik)),  
-                   dfToetsen[61,]$Toets, 
-                   sModus = sModus),      
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[60,]$InGebruik)),
+                         dfToetsen[60,]$Toets,
+                         sModus = sModus),
       ## Chi-kwadraat toets (trend)
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[62,]$InGebruik)),
                          dfToetsen[62,]$Toets,

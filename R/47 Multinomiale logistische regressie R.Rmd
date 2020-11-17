@@ -1,5 +1,5 @@
 ---
-title: "Logistische regressie"
+title: "Multinomiale logistische regressie"
 output:
   html_document:
     theme: lumen
@@ -45,14 +45,13 @@ if (!exists("Substitute_var")) {
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-set.seed(12345)
-source(paste0(here::here(),"/01. Includes/data/41.R"))
+source(paste0(here::here(),"/01. Includes/data/47.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
 
-Gebruik *logistische regressie* om te toetsen of een binaire afhankelijke variabele voorspeld kan worden met twee of meer onafhankelijke variabelen (predictors) en om te toetsen of er een relatie is tussen een predictor en de afhankelijke variabele in aanwezigheid van andere predictors.[^1]
+Gebruik *multinomiale logistische regressie* om te toetsen of een nominale afhankelijke variabele met meer dan twee categorieën voorspeld kan worden met twee of meer onafhankelijke variabelen (predictors) en om te toetsen of er een relatie is tussen een predictor en de afhankelijke variabele in aanwezigheid van andere predictors.[^1]
 
 
 # Onderwijscasus
@@ -60,7 +59,7 @@ Gebruik *logistische regressie* om te toetsen of een binaire afhankelijke variab
 
 Vanuit het tutoraat van de opleiding Elektrotechniek van een hogeschool wil de studieloopbaanbegeleider meer persoonsgerichte begeleiding aanbieden om studenten te helpen nominaal af te studeren. Op basis van achtergrondkenmerken van de student en resultaten in het eerste studiejaar wil hij een inschatting maken van de kans dat iemand uitvalt in het eerste studiejaar. De variabelen waarvan hij vermoedt dat er een relatie is met uitval zijn geslacht, gemiddeld eindexamencijfer middelbare school, wel of geen vooropleiding in het mbo en de leeftijd van een student aan het begin van het eerste studiejaar. De studieloopbaanbegeleider zou graag op basis van data uit willen zoeken welke van deze variabelen echt gerelateerd zijn aan uitval. Deze informatie kan hij gebruiken om studenten waar de kans op uitval groter is al vroeg in het vizier te krijgen en de juiste begeleiding aan te bieden.
 
-Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is. Bij *logistische regressie* wordt er een hypothese opgesteld voor het complete model en hypotheses voor de individuele predictors.
+Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is. Bij *multinomiale logistische regressie* wordt er een hypothese opgesteld voor het complete model en hypotheses voor de individuele predictors.
 
 Hypotheses regressiemodel:
 
@@ -76,20 +75,20 @@ Hypotheses individuele predictors (met als voorbeeld de predictor gemiddeld eind
 
 </div>
 
-# Logistische regressie
+# Multinomiale logistische regressie
 
-Het doel van *logistische regressie* is het voorspellen van een binaire afhankelijke variabele op basis van meerdere onafhankelijke variabelen, ook wel predictors genoemd.[^1] Bij *multipele lineaire regressie* wordt het voorspellen van een afhankelijke variabele gedaan met behulp van een regressievergelijking waarin de afhankelijke variabele een lineaire combinatie is van de predictors, i.e. 
+Het doel van *multinomiale logistische regressie* is het voorspellen van een binaire afhankelijke variabele op basis van meerdere onafhankelijke variabelen, ook wel predictors genoemd.[^1] Bij *multipele lineaire regressie* wordt het voorspellen van een afhankelijke variabele gedaan met behulp van een regressievergelijking waarin de afhankelijke variabele een lineaire combinatie is van de predictors, i.e. 
 
 $$ y_i = \beta_0 + \beta_1 * x_{1i} + \beta_2 * x_{2i} + e_i$$
 
 met $y_i$ als afhankelijke variabele, $\beta_0$ als intercept, $x_{1i}$ en $x_{2i}$ als predictors, $\beta_{1}$ en $\beta_{2}$ als regressiecoefficiënten van predictors, $e_i$ als residu of error en $i$ als indicator van de deelnemer uit de steekproef. De intercept $\beta_0$ geeft de waarde van de afhankelijke variabele weer als alle predictors gelijk aan nul zijn. De regressiecoefficiënten $\beta_1$ en $\beta_2$ geven de relatie tussen de afhankelijke variabele en de predictor weer. De residu of error $e_i$ is het verschil tussen de geobserveerde waarde van de afhankelijke variabele en de voorspelde waarde op basis van het regressiemodel. 
 
-Bij *logistische regressie* is de afhankelijke variabele echter binair en heeft dus twee mogelijkheden. Daarom wordt de regressievergelijking zo aangepast dat de kans op een van beide mogelijkheden voorspeld wordt. In deze casus wordt bijvoorbeeld de kans voorspeld dat een student uitvalt in het eerste jaar van de bachelor Elektrotechniek. In onderstaande paragraaf wordt in meer details aan de hand van een aantal wiskundige formules uitgelegd hoe *logistische regressie* werkt. Zonder deze paragraaf te lezen is de toetspagina ook goed te begrijpen. De geïnteresseerde lezer kan
-hier wat meer begrip op doen over de achtergrond van *logistische regressie*.
+Bij *multinomiale logistische regressie* is de afhankelijke variabele echter binair en heeft dus twee mogelijkheden. Daarom wordt de regressievergelijking zo aangepast dat de kans op een van beide mogelijkheden voorspeld wordt. In deze casus wordt bijvoorbeeld de kans voorspeld dat een student uitvalt in het eerste jaar van de bachelor Elektrotechniek. In onderstaande paragraaf wordt in meer details aan de hand van een aantal wiskundige formules uitgelegd hoe *multinomiale logistische regressie* werkt. Zonder deze paragraaf te lezen is de toetspagina ook goed te begrijpen. De geïnteresseerde lezer kan
+hier wat meer begrip op doen over de achtergrond van *multinomiale logistische regressie*.
 
-## De achtergrond van logistische regressie
+## De achtergrond van multinomiale logistische regressie
 
-Bij logistische regressie wordt de kans op een van beide mogelijkheden van de binaire afhankelijke variabele voorspeld op basis van de predictors. In deze casus gaat het bijvoorbeeld om de kans op uitval van een student Elektrotechniek in het eerste studiejaar. Voor een algemene logistische regressievergelijking is dit wiskundig te schrijven als
+Bij multinomiale logistische regressie wordt de kans op een van beide mogelijkheden van de binaire afhankelijke variabele voorspeld op basis van de predictors. In deze casus gaat het bijvoorbeeld om de kans op uitval van een student Elektrotechniek in het eerste studiejaar. Voor een algemene multinomiale logistische regressievergelijking is dit wiskundig te schrijven als
 
 $$ P(Y_i = 1) = \pi = \frac{1}{1 + \exp( - [\beta_0 + \beta_1 * x_{1i} + \beta_2 * x_{2i}])}$$
 wat inhoudt dat de kans dat de afhankelijke variabele voor persoon $i$ ($Y_i$) gelijk is aan 1 ($P(Y_i =1)$) gemodelleerd is als een (op het oog wat ingewikkelde) functie van de predictors $x_{1i}$ en $x_{2i}$. Deze kans wordt ook wel met het symbool $\pi$ aangegeven. 
@@ -97,11 +96,11 @@ wat inhoudt dat de kans dat de afhankelijke variabele voor persoon $i$ ($Y_i$) g
 Om de regressievergelijking duidelijker in beeld te hebben, kan bovenstaande vergelijking omgeschreven worden naar
 
 $$ \ln(\frac{\pi}{1 - \pi})  = \beta_0 + \beta_1 * x_{1i} + \beta_2 * x_{2i}$$
-waarin $\pi$ dus de kans is. Het omzetten van de kans $\pi$ naar $\ln(\frac{\pi}{1 - \pi})$ wordt de logit transformatie of simpelweg de logit genoemd. Dit laat zien wat er bij *logistische regressie* gebeurt. Met behulp van de regressievergelijking wordt de logit van de kans $\pi$ voorspeld en daarna wordt de logit van $\pi$ omgezet in de kans $\pi$ zelf. Op deze manier is het mogelijk om een regressievergelijking te gebruiken om de kans op een bepaalde uitkomst te bepalen. De logit transformatie wordt in de context van regressiemodellen ook wel een link-functie genoemd.[^10]
+waarin $\pi$ dus de kans is. Het omzetten van de kans $\pi$ naar $\ln(\frac{\pi}{1 - \pi})$ wordt de logit transformatie of simpelweg de logit genoemd. Dit laat zien wat er bij *multinomiale logistische regressie* gebeurt. Met behulp van de regressievergelijking wordt de logit van de kans $\pi$ voorspeld en daarna wordt de logit van $\pi$ omgezet in de kans $\pi$ zelf. Op deze manier is het mogelijk om een regressievergelijking te gebruiken om de kans op een bepaalde uitkomst te bepalen. De logit transformatie wordt in de context van regressiemodellen ook wel een link-functie genoemd.[^10]
 
 ## Maximum likelihood
 
-Bij *multipele lineaire regressie* worden de regressiecoëfficiënten bepaald door de som van de gekwadrateerde residuën zo klein mogelijk te maken. Deze methode heet *ordinary least squares* (OLS) en zorgt ervoor dat de voorspellingen van het regressiemodel zo dichtbij als mogelijk zitten bij de echte observaties. Voor meer informatie, zie de [toetspagina](28-Multipele-lineaire-regressie-R.html). Bij *logistische regressie* wordt ook geprobeerd om de voorspellingen van het regressiemodel zo dichtbij de observaties te krijgen als mogelijk, maar er wordt een andere methode gebruikt. Deze methode heet *maximum likelihood* schatting en heeft als gevolg dat er ook andere statistische toetsen gebruikt worden. Om modellen te vergelijken wordt bij *logistische regressie* de *likelihood ratio toets* gebruikt in plaats van de F-toets. Om regressiecoëfficiënten te toetsen, wordt de *Wald toets* gebruikt in plaats van de t-toets.[^2]<sup>,</sup>[^10]
+Bij *multipele lineaire regressie* worden de regressiecoëfficiënten bepaald door de som van de gekwadrateerde residuën zo klein mogelijk te maken. Deze methode heet *ordinary least squares* (OLS) en zorgt ervoor dat de voorspellingen van het regressiemodel zo dichtbij als mogelijk zitten bij de echte observaties. Voor meer informatie, zie de [toetspagina](28-Multipele-lineaire-regressie-R.html). Bij *multinomiale logistische regressie* wordt ook geprobeerd om de voorspellingen van het regressiemodel zo dichtbij de observaties te krijgen als mogelijk, maar er wordt een andere methode gebruikt. Deze methode heet *maximum likelihood* schatting en heeft als gevolg dat er ook andere statistische toetsen gebruikt worden. Om modellen te vergelijken wordt bij *multinomiale logistische regressie* de *likelihood ratio toets* gebruikt in plaats van de F-toets. Om regressiecoëfficiënten te toetsen, wordt de *Wald toets* gebruikt in plaats van de t-toets.[^2]<sup>,</sup>[^10]
 
 
 ## Likelihood ratio toets voor significantie regressiemodel
@@ -112,15 +111,15 @@ De eerste vraag bij *multipele lineaire regressie* is of het model betere voorsp
 
 De *likelihood ratio* toets kan ook gebruikt worden om verschillende regressiemodellen onderling te vergelijken. Hierbij wordt getoetst of er een verschil is tussen de likelihood (de kwaliteit van het model) van beide modellen. Er kan bijvoorbeeld in eerste instantie een model met twee predictors getoetst worden om vervolgens te toetsen of de voorspellingen van het regressiemodel nog beter worden met twee extra predictors. Het verschil in likelihood tussen het model met twee en vier predictors wordt dan getoetst met een F-toets. Hierbij is de nulhypothese dat de extra toegevoegde predictors een regressiecoëfficiënt van nul hebben en de alternatieve hypothese dat minimaal een van de regressiecoëfficiënten van de extra predictors niet gelijk aan nul is. Een eis voor deze toets is dat beide modellen genest zijn. Bij geneste modellen is het ene model te schrijven als een versie van het andere model na het verwijderen van een aantal predictors. In deze casus zou er een model opgesteld kunnen worden waarin alleen de variabelen Eindexamencijfer en Vooropleiding predictors zijn van uitval en een model waarin de de variabelen Geslacht, Eindexamencijfer, Vooropleiding en Leeftijd predictors zijn van uitval. Dit zijn geneste modellen, omdat het eerste model (alleen Eindexamencijfer en Vooropleiding als predictor) een versie is van het tweede model na het verwijderen van de predictors Geslacht en Leeftijd Het model waarbij de predictors verwijderd zijn, wordt als het ware gereduceerd. Daarom wordt dit het gereduceerde model genoemd. Het model waar de predictors niet verwijderd zijn, wordt het uitgebreide model genoemd. Om modellen met een *likelihood ratio* te vergelijken, moeten ze dus genest zijn. In andere woorden, het verschil tussen beide regressiemodellen moet dus toe te wijzen zijn aan het toevoegen of verwijderen van een of meerdere predictors.[^2]<sup>,</sup>[^10]
 
-Bij *logistische regressie* is de effectmaat gebaseerd op een vergelijking van de likelihood van het voorgestelde model ten opzichte van de likelihood van het interceptmodel. Een veelgebruikte versie hiervan is Nagelkerke's $R^2$ ($R_N^2$) welke waardes aanneemt tussen 0 en 1. Let op dat Nagelkerke's $R^2$ niet geïnterpreteerd kan worden als verklaarde variantie (zoals $R^2$ bij *multipele lineaire regressie*). Een juiste interpretatie is de verklaarde variatie of model fit.[^2]
+Bij *multinomiale logistische regressie* is de effectmaat gebaseerd op een vergelijking van de likelihood van het voorgestelde model ten opzichte van de likelihood van het interceptmodel. Een veelgebruikte versie hiervan is Nagelkerke's $R^2$ ($R_N^2$) welke waardes aanneemt tussen 0 en 1. Let op dat Nagelkerke's $R^2$ niet geïnterpreteerd kan worden als verklaarde variantie (zoals $R^2$ bij *multipele lineaire regressie*). Een juiste interpretatie is de verklaarde variatie of model fit.[^2]
 
 ## Individuele predictors toetsen en interpreteren met de Wald toets
 
 Als de *likelihood ratio* toets aantoont dat het regressiemodel betere voorspellingen geeft dan het interceptmodel, kunnen de predictors getoetst worden. De regressiecoefficiënten van de predictors en de intercept worden getoetst met een *Wald toets* waarbij de nulhypothese is dat de coefficiënt gelijk aan nul is ($\beta = 0$) en de (tweezijdige) alternatieve hypothese dat de coefficiënt niet gelijk aan nul is ($\beta \neq 0$). Er kan ook een eenzijdige alternatieve hypothese opgesteld worden, bijvoorbeeld als er de verwachting is dat de coefficiënt positief of negatief is. De *Wald-toets* toont in feite aan of er wel of geen relatie is tussen de predictor en afhankelijke variabele in de aanwezigheid van de andere predictoren van het regressiemodel. Bij de *Wald-toets* is de gebruikte toetsstatistiek de z-score.[^2]
 
-De regressiecoëfficiënten bij *logistische regressie* worden geïnterpreteerd in termen van odds ratios. Odds is een Engelse term en is een variant van kans, namelijk de kans op een gebeurtenis gedeeld door 1 minus de kans op een gebeurtenis ($\frac{\pi}{1 - \pi}$). Bij een kans van  2/3 is de odds $\frac{2/3}{1 - 2/3} = \frac{2/3}{1/3} = 2$. Bij het opgooien van een muntje is de kans op zowel kop als munt 0,5. De odds van zowel kop of munt zijn dus $\frac{1/2}{1 - 1/2} = \frac{1/2}{1/2} = 1$. Een odds ratio is een ratio van twee odds. In de huidige casus wordt onderzocht of geslacht gerelateerd is aan uitval. Stel dat de odds op uitval 1/2 is voor mannen en 1/4 is voor vrouwen. Dan is de odds ratio voor de variabele geslacht $\frac{1/2}{1/4} = 2$. De odds dat mannen uitvallen is dus twee keer zo hoog als de odds dat vrouwen uitvallen. Dit is de manier om de odds ratio te interpreteren.[^2]
+De regressiecoëfficiënten bij *multinomiale logistische regressie* worden geïnterpreteerd in termen van odds ratios. Odds is een Engelse term en is een variant van kans, namelijk de kans op een gebeurtenis gedeeld door 1 minus de kans op een gebeurtenis ($\frac{\pi}{1 - \pi}$). Bij een kans van  2/3 is de odds $\frac{2/3}{1 - 2/3} = \frac{2/3}{1/3} = 2$. Bij het opgooien van een muntje is de kans op zowel kop als munt 0,5. De odds van zowel kop of munt zijn dus $\frac{1/2}{1 - 1/2} = \frac{1/2}{1/2} = 1$. Een odds ratio is een ratio van twee odds. In de huidige casus wordt onderzocht of geslacht gerelateerd is aan uitval. Stel dat de odds op uitval 1/2 is voor mannen en 1/4 is voor vrouwen. Dan is de odds ratio voor de variabele geslacht $\frac{1/2}{1/4} = 2$. De odds dat mannen uitvallen is dus twee keer zo hoog als de odds dat vrouwen uitvallen. Dit is de manier om de odds ratio te interpreteren.[^2]
 
-Regressiecoëfficiënten zijn gelijk aan de logaritme van de odds ratio van de bijbehorende predictor. De odds ratio zelf wordt berekend door de exponent te nemen van de regressiecoëfficiënt. Let bij het interpreteren van odds ratios op dat de betekenis verschillend is voor continue en categorische predictors. In beide gevallen geldt echter dat een toename van één eenheid van de predictor resulteert in een odds die vermenigvuldigd wordt met de exponent van de regressiecoëfficiënt $\exp(\beta)$. De odds zijn dus $\exp(\beta)$ keer zo hoog na een toename van één eenheid van de predictor. Een voorbeeld van de interpretatie van regressiecoëfficiënten is handig voor de huidige casus. Voor elke predictor is een verzonnen waarde van de regressiecoëfficiënt gemaakt die geïnterpreteerd wordt. De intercept wordt bij *logistische regressie* meestal niet geïnterpreteerd.[^2]
+Regressiecoëfficiënten zijn gelijk aan de logaritme van de odds ratio van de bijbehorende predictor. De odds ratio zelf wordt berekend door de exponent te nemen van de regressiecoëfficiënt. Let bij het interpreteren van odds ratios op dat de betekenis verschillend is voor continue en categorische predictors. In beide gevallen geldt echter dat een toename van één eenheid van de predictor resulteert in een odds die vermenigvuldigd wordt met de exponent van de regressiecoëfficiënt $\exp(\beta)$. De odds zijn dus $\exp(\beta)$ keer zo hoog na een toename van één eenheid van de predictor. Een voorbeeld van de interpretatie van regressiecoëfficiënten is handig voor de huidige casus. Voor elke predictor is een verzonnen waarde van de regressiecoëfficiënt gemaakt die geïnterpreteerd wordt. De intercept wordt bij *multinomiale logistische regressie* meestal niet geïnterpreteerd.[^2]
 
 * Geslacht ($\beta = 0,405$): De regressiecoefficiënt van de variabele Geslacht is gelijk aan 0,405. De odds ratio van deze predictor is dus $exp(0,405) = 1,5$. De variabele Geslacht is zo opgesteld dat het mannen vergelijkt ten opzichte van vrouwen als referentiecategorie. Als de overige predictors gelijkblijven is de odds van uitval voor mannen 1,5 keer zo hoog als de odds van uitval van vrouwen. Let goed op hoe de categorieën gecodeerd zijn, i.e. welke categorie de waarde 1 en 0 hebben. Dit bepaalt namelijk de interpretatie.
 * Eindexamencijfer ($\beta = 0,182$): De coëfficient van de variabele Eindexamencijfer is gelijk aan 0,182. De odds ratio van deze predictor is dus $exp(0,182) = 1,2$. Als de overige predictors gelijkblijven is de odds van uitval 1,2 keer zo hoog bij een toename van het gemiddeld eindexamencijfer met één punt.
@@ -136,7 +135,7 @@ Op basis van de regressievergelijking en de Wald-toetsen kan bepaald worden of p
 
 Een regressiemodel maakt het mogelijk om een afhankelijke variabele te voorspellen op basis van een aantal predictors. Als van een student bekend is wat zijn geslacht, gemiddeld eindexamencijfer, vooropleiding en leeftijd is, kan een voorspelling gemaakt worden van de kans dat die student uitvalt in het eerste studiejaar. Voor alle deelnemers in de steekproef is er een voorspelling. De regressievergelijking maakt het echter ook mogelijk om voor nieuwe deelnemers een voorspelling te maken. Dit wordt een out-of-sample voorspelling genoemd omdat de nieuwe deelnemer niet in de steekproef zit waarop het regressiemodel wordt geschat. Als de studieloopbaanbegeleider een jaar later uitval wil voorspellen van de nieuwe studenten, kan hij de regressievergelijking van het jaar ervoor gebruiken. Een out-of-sample voorspelling geeft vaak een goede indicatie van de kwaliteit van het regressiemodel, omdat de nieuwe deelnemer niet gebruikt zijn om het model te schatten. Als het doel is om het regressiemodel te gebruiken voor het voorspellen van nieuwe deelnemers, dan is de kwaliteit van de out-of-sample voorspellingen van belang.[^2]
 
-Bij *logistische regressie* wordt de kans op een gebeurtenis voorspeld, in de huidige casus is dat de kans op uitval in het eerste studiejaar. Een kans kan waarden aannemen tussen 0 en 1. De geobserveerde waarden zijn echter binair: wel of geen uitval, dus een 0 of een 1 numeriek gezien. Het voorspellen van een categorische variabele wordt classificatie genoemd en is ook mogelijk met een logistisch regressiemodel. Met behulp van een grenswaarde kunnen de studenten geclassificeerd worden in de categorieën uitval en geen uitval op basis van hun voorspelde kans. Meestal wordt de grenswaarde 0,5 gebruikt om deelnemers te classificeren. Alle deelnemers met een voorspelde kans hoger dan 0,5 ($\pi > 0,5$) worden toegewezen aan de categorie met numerieke waarde 1; de deelnemers met een voorspelde kans van 0,5 of lager ($\pi \leq 0,5$) de waarde 0. Studenten met een voorspelde kans hoger dan 0,5 worden dan in de categorie uitval geclassificeerd en studenten met een voorspelde kans gelijk of lager dan 0,5 in de categorie geen uitval. Er kan natuurlijk ook een andere grenswaarde gebruikt worden om te classificeren op basis van de voorspelde kansen.[^12]
+Bij *multinomiale logistische regressie* wordt de kans op een gebeurtenis voorspeld, in de huidige casus is dat de kans op uitval in het eerste studiejaar. Een kans kan waarden aannemen tussen 0 en 1. De geobserveerde waarden zijn echter binair: wel of geen uitval, dus een 0 of een 1 numeriek gezien. Het voorspellen van een categorische variabele wordt classificatie genoemd en is ook mogelijk met een logistisch regressiemodel. Met behulp van een grenswaarde kunnen de studenten geclassificeerd worden in de categorieën uitval en geen uitval op basis van hun voorspelde kans. Meestal wordt de grenswaarde 0,5 gebruikt om deelnemers te classificeren. Alle deelnemers met een voorspelde kans hoger dan 0,5 ($\pi > 0,5$) worden toegewezen aan de categorie met numerieke waarde 1; de deelnemers met een voorspelde kans van 0,5 of lager ($\pi \leq 0,5$) de waarde 0. Studenten met een voorspelde kans hoger dan 0,5 worden dan in de categorie uitval geclassificeerd en studenten met een voorspelde kans gelijk of lager dan 0,5 in de categorie geen uitval. Er kan natuurlijk ook een andere grenswaarde gebruikt worden om te classificeren op basis van de voorspelde kansen.[^12]
 
 Op basis van de classificaties en de geobserveerde waarden kan een classificatietabel gemaakt worden. Hierin worden de geobserveerde waarden voor de variabele uitval uitgezet tegenover de geclassificeerde waarden. Een voorbeeld van een classificatietabel voor de huidige casus is te zien in Tabel 1. In de cel linksboven is te zien dat er 40 studenten zijn waarvoor uitval voorspeld is en die ook daadwerkelijk uitgevallen zijn, dit zijn de ware positieven. De cel rechtsonder bevat 150 studenten waarvoor geen uitval is voorspeld en die ook daadwerkelijk niet uitgevallen zijn, dit zijn de ware negatieven. Beide cellen bevatten dus alle studenten die correct geclassificeerd zijn. De cel rechtsboven bevat de studenten die wel uitgevallen zijn, maar waarvoor geen uitval was voorspeld. Dit zijn de vals negatieven aangezien ze als geen uitval (negatief) zijn voorspeld, maar uiteindelijk wel uitgevallen zijn. Ten slotte bevat de cel linksonder de studenten die niet uitgevallen zijn, maar waarvoor wel uitval was voorspeld. Dit zijn de vals positieven aangezien ze als uitval (positief) zijn voorspeld, maar uiteindelijk niet uitgevallen zijn.[^12]
 
@@ -160,15 +159,15 @@ Er is een maat die de kwaliteit van de classificaties weergeeft onafhankelijk va
 
 # Assumpties
 
-Om een valide resultaat te vinden met *logistische regressie*, dient er aan een aantal assumpties voldaan te worden.[^1]<sup>,</sup>[^2] De assumpties worden allen toegelicht en de opties bij het niet voldoen aan de assumptie worden weergegeven.
+Om een valide resultaat te vinden met *multinomiale logistische regressie*, dient er aan een aantal assumpties voldaan te worden.[^1]<sup>,</sup>[^2] De assumpties worden allen toegelicht en de opties bij het niet voldoen aan de assumptie worden weergegeven.
 
 ## Outliers
 
-Voordat gestart kan worden met *logistische regressie*, moet de data gescreend worden op de aanwezigheid van outliers. Outliers (uitbijters) zijn observaties die sterk afwijken van de overige observaties. Univariate outliers zijn observaties die afwijken voor één specifieke variabele, zoals een student die twintig jaar over zijn studie heeft gedaan. Multivariate outliers zijn observaties die afwijken door de combinatie van meerdere variabelen, zoals een persoon van 18 jaar met een inkomen van €100.000,-. De leeftijd van 18 jaar is geen outlier op zichzelf en een inkomen van €100.000,- is dat ook niet. Echter, de combinatie van beide zorgt ervoor dat de observatie vrij onwaarschijnlijk is.[^9]
+Voordat gestart kan worden met *multinomiale logistische regressie*, moet de data gescreend worden op de aanwezigheid van outliers. Outliers (uitbijters) zijn observaties die sterk afwijken van de overige observaties. Univariate outliers zijn observaties die afwijken voor één specifieke variabele, zoals een student die twintig jaar over zijn studie heeft gedaan. Multivariate outliers zijn observaties die afwijken door de combinatie van meerdere variabelen, zoals een persoon van 18 jaar met een inkomen van €100.000,-. De leeftijd van 18 jaar is geen outlier op zichzelf en een inkomen van €100.000,- is dat ook niet. Echter, de combinatie van beide zorgt ervoor dat de observatie vrij onwaarschijnlijk is.[^9]
 
 Na het vinden van een outlier is de volgende stap om een goede oplossing voor te outlier te bedenken. Het is van belang hier goed over na te denken en niet zomaar een outlier te verwijderen met als enige argument dat het een outlier is. In het algemeen kan er onderscheid gemaakt worden tussen onmogelijke en onwaarschijnlijke outliers.[^3] Een onmogelijke outlier is een observatie die technisch gezien niet kan kloppen, bijvoorbeeld een leeftijd van 1000 jaar, een negatief salaris of een man die zwanger is. Bij deze outliers is het een optie om de waarde te vervangen als er een overduidelijke fout bij het invoeren van de data is gemaakt. Een andere optie is de waarde te verwijderen. Een onwaarschijnlijke outlier is een observatie die technisch gezien wel kan, maar heel erg afwijkt van de overige observaties. De rijksten der aarde zijn in de stad of het dorp waar zij wonen qua vermogen waarschijnlijk een outlier. Maar het zijn bestaande personen dus het verwijderen van de observatie zou hier foutief zijn. Opties in deze situatie zijn om te overwegen de variabele(n) te transformeren, de outlier gewoon mee te nemen in de analyse of de analyse met en zonder de outlier uit te voeren en beide te rapporteren. Ook is het niet verboden om de outlier toch te verwijderen, maar het is in dat geval wel van belang dit transparant te rapporteren en op een goede wijze te beargumenteren.[^3]
 
-Bij *logistische regressie* zijn er vier nuttige methoden om outliers te vinden.[^9]
+Bij *multinomiale logistische regressie* zijn er vier nuttige methoden om outliers te vinden.[^9]
 
 ### Boxplots en standaardiseren
 
@@ -192,11 +191,11 @@ Hoewel de Mahalanobis afstand en Cook's afstand beide multivariate outliers iden
 
 ## Lineariteit: Box-Tidwell
 
-Bij *logistische regressie* is de regressievergelijking zo opgesteld dat er een lineaire relatie is tussen elke predictor en de logit van de afhankelijke variabele. Een lineaire relatie houdt in dat de toename of afname van de (logit van de) afhankelijke variabele als gevolg van de toename van de predictor constant is. In tegenstelling tot *multipele lineaire regressie* kan bij *logistische regressie* geen grafiek gemaakt worden om een lineaire relatie te onderzoeken. In plaats daarvan is er een statistische toets om te onderzoeken of er een lineaire relatie is tussen de predictor en de logit van de afhankelijke variabele. Bij deze *Box-Tidwell test* wordt er voor elke continue predictor een extra term toegevoegd die bestaat uit het product van de predictor en de logaritme van de predictor. Voor de predictor leeftijd zou dit dus betekenen dat er een extra variabele wordt (Leeftijd * ln[Leeftijd]). Voeg deze interactietermen voor alle continue predictors toe en toets of de regressiecoëfficiënten van deze interactietermen significant zijn. Als dit zo is, dan is er voor die predictor niet voldaan aan de assumptie van lineariteit. Een oplossing hiervoor is het transformeren[^5] van de variabele.[^6]
+Bij *multinomiale logistische regressie* is de regressievergelijking zo opgesteld dat er een lineaire relatie is tussen elke predictor en de logit van de afhankelijke variabele. Een lineaire relatie houdt in dat de toename of afname van de (logit van de) afhankelijke variabele als gevolg van de toename van de predictor constant is. In tegenstelling tot *multipele lineaire regressie* kan bij *multinomiale logistische regressie* geen grafiek gemaakt worden om een lineaire relatie te onderzoeken. In plaats daarvan is er een statistische toets om te onderzoeken of er een lineaire relatie is tussen de predictor en de logit van de afhankelijke variabele. Bij deze *Box-Tidwell test* wordt er voor elke continue predictor een extra term toegevoegd die bestaat uit het product van de predictor en de logaritme van de predictor. Voor de predictor leeftijd zou dit dus betekenen dat er een extra variabele wordt (Leeftijd * ln[Leeftijd]). Voeg deze interactietermen voor alle continue predictors toe en toets of de regressiecoëfficiënten van deze interactietermen significant zijn. Als dit zo is, dan is er voor die predictor niet voldaan aan de assumptie van lineariteit. Een oplossing hiervoor is het transformeren[^5] van de variabele.[^6]
 
 ## Multicollineariteit
 
-Multicollineariteit houdt in dat er een hoge correlatie tussen twee of meerdere predictors is. Er is perfecte multicollineariteit als één predictor een lineaire combinatie is van een of meerdere andere predictors. In andere woorden, de predictor is precies te berekenen op basis van andere predictor(s). In dat geval kan de regressievergelijking niet wiskundig bepaald worden en werkt *logistische regressie* niet. Dit komt zeer weinig voor en is vaak makkelijk op te lossen door goed naar de variabelen die het veroorzaken te kijken en een variabele te transformeren of te verwijderen.[^9]
+Multicollineariteit houdt in dat er een hoge correlatie tussen twee of meerdere predictors is. Er is perfecte multicollineariteit als één predictor een lineaire combinatie is van een of meerdere andere predictors. In andere woorden, de predictor is precies te berekenen op basis van andere predictor(s). In dat geval kan de regressievergelijking niet wiskundig bepaald worden en werkt *multinomiale logistische regressie* niet. Dit komt zeer weinig voor en is vaak makkelijk op te lossen door goed naar de variabelen die het veroorzaken te kijken en een variabele te transformeren of te verwijderen.[^9]
 
 Bij een hoog niveau van multicollineariteit kan de regressievergelijking wel geschat worden, maar zijn de uitkomsten minder betrouwbaar. De standaardfouten van de regressiecoëfficiënten worden groter bij meer multicollineariteit en dit levert bij hoge multicollineariteit problemen op. Ook is het lastig om te ontdekken wat per predictor de bijdrage is aan de voorspellingen van de afhankelijke variabele, omdat bepaalde predictors sterk gecorreleerd zijn en overlappen in het deel van de variantie dat ze verklaren.[^9] 
 
@@ -204,7 +203,7 @@ Multicollineariteit wordt getoetst met de Variance Inflation Factor (VIF) die me
 
 ## Observaties per variabele
 
-Bij *logistische regressie* is de afhankelijke variabele binair wat betekent dat de variabele twee mogelijkheden heeft. Dit kan een probleem opleveren als er categorische predictors zijn. Voor elke categorie van een categorische predictor moeten er observaties zijn voor beide mogelijkheden van de afhankelijke variabele. Deze assumptie kan onderzocht worden door een kruistabel te maken voor de combinatie van elke categorische predictor en de afhankelijke variabele. Een voorbeeld van een dergelijke kruistabel is te zien in Tabel 2 voor de afhankelijke variabele uitval en predictor vooropleiding. In deze kruistabel is te zien dat er binnen de categorie `mbo` van de predictor vooropleiding nul deelnemers zijn die uitvallen. Deze categorie bevat dus een lege cel en voldoet niet aan de assumptie.[^2]<sup>,</sup>[^6]
+Bij *multinomiale logistische regressie* is de afhankelijke variabele binair wat betekent dat de variabele twee mogelijkheden heeft. Dit kan een probleem opleveren als er categorische predictors zijn. Voor elke categorie van een categorische predictor moeten er observaties zijn voor beide mogelijkheden van de afhankelijke variabele. Deze assumptie kan onderzocht worden door een kruistabel te maken voor de combinatie van elke categorische predictor en de afhankelijke variabele. Een voorbeeld van een dergelijke kruistabel is te zien in Tabel 2 voor de afhankelijke variabele uitval en predictor vooropleiding. In deze kruistabel is te zien dat er binnen de categorie `mbo` van de predictor vooropleiding nul deelnemers zijn die uitvallen. Deze categorie bevat dus een lege cel en voldoet niet aan de assumptie.[^2]<sup>,</sup>[^6]
 
 ||                      | Vooropleiding    |
 |-------------| -------------------- | -------------| ------------| 
@@ -228,7 +227,7 @@ Het gevolg van de assumptie voor observaties per variabele zijn dat er extreem h
 
 ## Overdispersie
 
-Bij *logistische regressie* wordt aangenomen dat de residuën niet gecorreleerd zijn. Dit is in principe het geval als alle deelnemers willekeurig in de steekproef zijn opgenomen. Als deelnemers meerdere keren gemeten zijn of gematcht zijn met andere deelnemers, dan is hier geen sprake van en zijn er waarschijnlijk gecorreleerde residuën. *Logistische regressie* is dan niet de juiste analysemethoden, maar *multilevel logistische regressie* kan hiervoor wel gebruikt worden. Bij *logistische regressie* wordt daarom getoetst of er overdispersie is. Overdispersie betekent dat de variantie in de voorspelde kansen groter is dan op basis van het model wordt verwacht. Het gevolg is dat de standaardfouten te laag zijn en er een hogere kans is op type I fouten (onterecht verwerpen van de nulhypothese) bij het toetsen van de significantie van regressiecoëfficiënten.[^2]<sup>,</sup>[^6]
+Bij *multinomiale logistische regressie* wordt aangenomen dat de residuën niet gecorreleerd zijn. Dit is in principe het geval als alle deelnemers willekeurig in de steekproef zijn opgenomen. Als deelnemers meerdere keren gemeten zijn of gematcht zijn met andere deelnemers, dan is hier geen sprake van en zijn er waarschijnlijk gecorreleerde residuën. *multinomiale logistische regressie* is dan niet de juiste analysemethoden, maar *multilevel multinomiale logistische regressie* kan hiervoor wel gebruikt worden. Bij *multinomiale logistische regressie* wordt daarom getoetst of er overdispersie is. Overdispersie betekent dat de variantie in de voorspelde kansen groter is dan op basis van het model wordt verwacht. Het gevolg is dat de standaardfouten te laag zijn en er een hogere kans is op type I fouten (onterecht verwerpen van de nulhypothese) bij het toetsen van de significantie van regressiecoëfficiënten.[^2]<sup>,</sup>[^6]
 
 De dispersieparameter geeft aan of er sprake is van overdispersie. De dispersieparameter hoort in de buurt van 1 te zitten. Als de parameter hoger dan 2 is, is er sprake van overdispersie. De gevolgen van overdispersie kunnen verholpen worden door de standaardfouten van de regressiecoëfficiënten te herschalen op basis van de overdispersie. Het onderzoeken van de dispersieparameter en het corrigeren in het geval van overdispersie worden toegelicht bij het toetsen van de assumpties in deze toetspagina.[^2]
 
@@ -236,17 +235,24 @@ Er kan ook sprake zijn van onderdispersie: de situatie waarin de variantie in vo
 
 # Assumpties
 
-Voer *logistische regressie* uit om te onderzoeken of de uitval in het eerste jaar van de bachelor Elektrotechniek te voorspellen is op basis van het geslacht, gemiddeld eindexamencijfer, de vooropleiding en de leeftijd van studenten. Start met het toetsen van de assumpties en voer vervolgens de *logistische regressie* uit als hieraan voldaan is.
+Voer *multinomiale logistische regressie* uit om te onderzoeken of de uitval in het eerste jaar van de bachelor Elektrotechniek te voorspellen is op basis van het geslacht, gemiddeld eindexamencijfer, de vooropleiding en de leeftijd van studenten. Start met het toetsen van de assumpties en voer vervolgens de *multinomiale logistische regressie* uit als hieraan voldaan is.
 
 <!-- ## TEKSTBLOK: Uitvoering1.R -->
-Voer eerst de *logistische regressie* uit omdat deze nodig is voor het toetsen van assumpties en sla het resultaat op. Interpreteer de resultaten pas na het toetsen van de assumpties. Gebruik de functie `glm()` met als eerste argument de regressievergelijking `Uitval ~ Leeftijd + Geslacht + Vooropleiding + Eindexamencijfer` met links van de tilde de afhankelijke variabele `Uitval` en rechts de vier onafhankelijke variabelen `Geslacht`, `Eindexamencijfer`, `Vooropleiding` en `Leeftijd`. Het tweede argument is de dataset `Uitval_Elektrotechniek` en het derde argument `family = "binomial"` geeft aan dat er een *logistische regressie* uitgevoerd moet worden.
+Voer eerst de *multinomiale logistische regressie* uit omdat deze nodig is voor het toetsen van assumpties en sla het resultaat op. Interpreteer de resultaten pas na het toetsen van de assumpties. Gebruik de functie `glm()` met als eerste argument de regressievergelijking `Uitval ~ Leeftijd + Geslacht + Vooropleiding + Eindexamencijfer` met links van de tilde de afhankelijke variabele `Uitval` en rechts de vier onafhankelijke variabelen `Geslacht`, `Eindexamencijfer`, `Vooropleiding` en `Leeftijd`. Het tweede argument is de dataset `Uitval_Elektrotechniek` en het derde argument `family = "binomial"` geeft aan dat er een *multinomiale logistische regressie* uitgevoerd moet worden.
 <!-- ## /TEKSTBLOK: Uitvoering1.R -->
 
 <!-- ## OPENBLOK: Uitvoering2.R -->
 ```{r}
-Regressiemodel <- glm(Uitval ~ Geslacht + Eindexamencijfer + Vooropleiding + Leeftijd,
-    data = Uitval_Elektrotechniek,
-    family = "binomial")
+library(mlogit)
+
+Fysiotherapie_Uitstroom_geprepareerd <- dfidx(Fysiotherapie_Uitstroom, 
+                                              shape = "wide", 
+                                              choice = "Uitstroom")
+
+Regressiemodel <- mlogit(Uitstroom ~  1 |  1 + Studiepunten + Geslacht_dummy + Gemiddeld_cijfer,
+                         Fysiotherapie_Uitstroom_geprepareerd)
+
+summary(Regressiemodel)
 
 ```
 <!-- ## /OPENBLOK: Uitvoering2.R -->
@@ -262,10 +268,10 @@ Onderzoek of er univariate outliers zijn met behulp van boxplots en gestandaardi
 <!-- ## OPENBLOK: Outlier2.R -->
 ```{r}
 # Maak een boxplot van de continue variabelen in de dataset
-boxplot(Uitval_Elektrotechniek[,c("Leeftijd", 
-                                  "Eindexamencijfer")],
-        names = c("Leeftijd",
-                  "Eindexamencijfer"))
+boxplot(Fysiotherapie_Uitstroom[,c("Studiepunten", 
+                                  "Gemiddeld_cijfer")],
+        names = c("Studiepunten",
+                  "Gemiddeld cijfer"))
 
 ```
 <!-- ## /OPENBLOK: Outlier2.R -->
@@ -285,8 +291,8 @@ Outlier_standaardiseren <- function(variabele){
 }
 
 # Tel voor de continue variabelen het aantal observaties met een gestandaardiseerde score hoger dan 3 of lager dan -3
-Outlier_standaardiseren(Uitval_Elektrotechniek$Eindexamencijfer)
-Outlier_standaardiseren(Uitval_Elektrotechniek$Leeftijd)
+Outlier_standaardiseren(Fysiotherapie_Uitstroom$Studiepunten)
+Outlier_standaardiseren(Fysiotherapie_Uitstroom$Gemiddeld_cijfer)
 
 ```
 <!-- ## /OPENBLOK: Outlier3.R -->
@@ -298,10 +304,8 @@ Geslacht, Vooropleiding en Uitval zijn de categorische variabelen in deze datase
 
 <!-- ## OPENBLOK: Outlier4.R -->
 ```{r}
-table(Uitval_Elektrotechniek$Uitval)
-table(Uitval_Elektrotechniek$Geslacht)
-table(Uitval_Elektrotechniek$Vooropleiding)
-
+table(Fysiotherapie_Uitstroom$Uitstroom)
+table(Fysiotherapie_Uitstroom$Geslacht)
 ```
 <!-- ## /OPENBLOK: Outlier4.R -->
 
@@ -315,14 +319,41 @@ Onderzoek of er outliers zijn met behulp van de gestandaardiseerde residuën van
 
 <!-- ## OPENBLOK: Outlier6.R -->
 ```{r}
+## Maak datasets voor beide logistische regressievergelijkingen
+Fysiotherapie_Uitval_Niet_nominaal <- Fysiotherapie_Uitstroom[Fysiotherapie_Uitstroom$Uitstroom != "Nominaal",]
+Fysiotherapie_Uitval_Nominaal <- Fysiotherapie_Uitstroom[Fysiotherapie_Uitstroom$Uitstroom != "Niet nominaal",]
+Fysiotherapie_Nominaal_Niet_nominaal <- Fysiotherapie_Uitstroom[Fysiotherapie_Uitstroom$Uitstroom != "Uitval",]
+
+## Los voor logistische regressiemodellen
+Regressiemodel_Uitval_Niet_nominaal <- glm(Uitstroom ~ Studiepunten + Geslacht + Gemiddeld_cijfer,
+                                           data = Fysiotherapie_Uitval_Niet_nominaal,
+                                           family = "binomial")
+Regressiemodel_Uitval_Nominaal <- glm(Uitstroom ~ Studiepunten + Geslacht + Gemiddeld_cijfer,
+                                      data = Fysiotherapie_Uitval_Nominaal,
+                                      family = "binomial")
+Regressiemodel_Nominaal_Niet_nominaal <- glm(Uitstroom ~ Studiepunten + Geslacht + Gemiddeld_cijfer,
+                                             data = Fysiotherapie_Nominaal_Niet_nominaal,
+                                             family = "binomial")
+
+
 # Sla de gestandaardiseerde residuën op
-Residu_gestandaardiseerd <- rstandard(Regressiemodel)
+Residu_gestandaardiseerd_Uitval_Niet_nominaal <- rstandard(Regressiemodel_Uitval_Niet_nominaal)
+Residu_gestandaardiseerd_Uitval_Nominaal <- rstandard(Regressiemodel_Uitval_Nominaal)
+Residu_gestandaardiseerd_Nominaal_Niet_nominaal <- rstandard(Regressiemodel_Nominaal_Niet_nominaal)
 
 # Plot de gestandaardiseerde residuën
-plot(Residu_gestandaardiseerd, xlab = "Volgorde", ylab = "Gestandaardiseerde residuën")
+plot(Residu_gestandaardiseerd_Uitval_Niet_nominaal, 
+     xlab = "Volgorde", ylab = "Gestandaardiseerde residuën")
+plot(Residu_gestandaardiseerd_Uitval_Nominaal, 
+     xlab = "Volgorde", ylab = "Gestandaardiseerde residuën")
+plot(Residu_gestandaardiseerd_Nominaal_Niet_nominaal, 
+     xlab = "Volgorde", ylab = "Gestandaardiseerde residuën")
 
 # Tel het aantal gestandaardiseerde residuën met een absolute waarde groter dan 3
-sum(abs(Residu_gestandaardiseerd > 3))
+sum(abs(Residu_gestandaardiseerd_Uitval_Niet_nominaal > 3))
+sum(abs(Residu_gestandaardiseerd_Uitval_Nominaal > 3))
+sum(abs(Residu_gestandaardiseerd_Nominaal_Niet_nominaal > 3))
+
 ```
 <!-- ## /OPENBLOK: Outlier6.R -->
 
@@ -341,14 +372,12 @@ Bereken daarna de criteriumwaarde op basis van het gewenste significantieniveau 
 <!-- ## OPENBLOK: Outlier8.R -->
 ```{r}
 # Zet Geslacht om in een numerieke variabele met een 1 voor een vrouw en 0 voor een man
-Uitval_Elektrotechniek$Geslacht_dummy <- as.numeric(Uitval_Elektrotechniek$Geslacht == "Vrouw")
-Uitval_Elektrotechniek$Vooropleiding_dummy <- as.numeric(Uitval_Elektrotechniek$Vooropleiding == "havo")
+Fysiotherapie_Uitstroom$Geslacht_dummy <- as.numeric(Fysiotherapie_Uitstroom$Geslacht == "Vrouw")
 
 # Maak een subset van de dataset met alle predictors
-Subset <- Uitval_Elektrotechniek[,c("Geslacht_dummy",
-                                    "Eindexamencijfer",
-                                    "Vooropleiding_dummy",
-                                    "Leeftijd"
+Subset <- Fysiotherapie_Uitstroom[,c("Geslacht_dummy",
+                                    "Gemiddeld_cijfer",
+                                    "Studiepunten"
                                     )]
 
 # Bereken de Mahalanobis afstand voor elke deelnemer 
@@ -380,15 +409,39 @@ Onderzoek of er multivariate outliers zijn met behulp van Cook's afstand. Cook's
 
 <!-- ## OPENBLOK: Outlier11.R -->
 ```{r}
+## Maak datasets voor beide logistische regressievergelijkingen
+Fysiotherapie_Uitval_Niet_nominaal <- Fysiotherapie_Uitstroom[Fysiotherapie_Uitstroom$Uitstroom != "Nominaal",]
+Fysiotherapie_Uitval_Nominaal <- Fysiotherapie_Uitstroom[Fysiotherapie_Uitstroom$Uitstroom != "Niet nominaal",]
+Fysiotherapie_Nominaal_Niet_nominaal <- Fysiotherapie_Uitstroom[Fysiotherapie_Uitstroom$Uitstroom != "Uitval",]
+
+## Los voor logistische regressiemodellen
+Regressiemodel_Uitval_Niet_nominaal <- glm(Uitstroom ~ Studiepunten + Geslacht + Gemiddeld_cijfer,
+                                           data = Fysiotherapie_Uitval_Niet_nominaal,
+                                           family = "binomial")
+Regressiemodel_Uitval_Nominaal <- glm(Uitstroom ~ Studiepunten + Geslacht + Gemiddeld_cijfer,
+                                      data = Fysiotherapie_Uitval_Nominaal,
+                                      family = "binomial")
+Regressiemodel_Nominaal_Niet_nominaal <- glm(Uitstroom ~ Studiepunten + Geslacht + Gemiddeld_cijfer,
+                                             data = Fysiotherapie_Nominaal_Niet_nominaal,
+                                             family = "binomial")
+
 # Bepaal Cook's afstand voor elke deelnemer
-Cooks_afstand <-  cooks.distance(Regressiemodel)
+Cooks_afstand_Uitval_Niet_nominaal <- cooks.distance(Regressiemodel_Uitval_Niet_nominaal)
+Cooks_afstand_Uitval_Nominaal <- cooks.distance(Regressiemodel_Uitval_Nominaal)
+Cooks_afstand_Nominaal_Niet_nominaal <- cooks.distance(Regressiemodel_Nominaal_Niet_nominaal)
 
 # Plot Cook's afstanden
-plot(Cooks_afstand, xlab = "Volgorde", ylab = "Cook's afstanden")
+plot(Cooks_afstand_Uitval_Niet_nominaal, 
+     xlab = "Volgorde", ylab = "Cook's afstanden")
+plot(Cooks_afstand_Uitval_Nominaal, 
+     xlab = "Volgorde", ylab = "Cook's afstanden")
+plot(Cooks_afstand_Nominaal_Niet_nominaal, 
+     xlab = "Volgorde", ylab = "Cook's afstanden")
 
 # Tel het aantal Cook's afstanden groter dan de criteriumwaarde van 1
-sum(Cooks_afstand > 1)
-
+sum(abs(Cooks_afstand_Uitval_Niet_nominaal > 1))
+sum(abs(Cooks_afstand_Uitval_Nominaal > 1))
+sum(abs(Cooks_afstand_Nominaal_Niet_nominaal > 1))
 
 ```
 <!-- ## /OPENBLOK: Outlier11.R -->
@@ -397,7 +450,7 @@ Er zijn geen deelnemers met een Cook's afstand groter dan de criteriumwaarde van
 
 ## Lineariteit: Box-Tidwell
 
-Voer de *Box-Tidwell test* uit om te onderzoeken of er een lineaire relatie is tussen de continue predictors en de logit van de afhankelijke variabele. Maak eerst voor elke continue predictor een nieuwe variabele aan die bestaat uit het product van de predictor met de logaritme (`log()`) van de predictor. Voeg daarna deze nieuwe interactietermen toe aan de regressievergelijking en voer de *logistische regressie* uit. Gebruik de functie `glm()` met als eerste argument de regressievergelijking `Uitval ~ Geslacht + Eindexamencijfer + Vooropleiding + Leeftijd + Leeftijd_log_leeftijd + Eindexamencijfer_log_eindexamencijfer` met links van de tilde de afhankelijke variabele `Uitval` en rechts de vier onafhankelijke variabelen `Geslacht`, `Eindexamencijfer`, `Vooropleiding` en `Leeftijd` en de interactietermen `Leeftijd_log_leeftijd` en `Eindexamencijfer_log_eindexamencijfer`. Het tweede argument is de dataset `Uitval_Elektrotechniek` en het derde argument `family = "binomial"` geeft aan dat er een *logistische regressie* uitgevoerd moet worden.
+Voer de *Box-Tidwell test* uit om te onderzoeken of er een lineaire relatie is tussen de continue predictors en de logit van de afhankelijke variabele. Maak eerst voor elke continue predictor een nieuwe variabele aan die bestaat uit het product van de predictor met de logaritme (`log()`) van de predictor. Voeg daarna deze nieuwe interactietermen toe aan de regressievergelijking en voer de *multinomiale logistische regressie* uit. Gebruik de functie `glm()` met als eerste argument de regressievergelijking `Uitval ~ Geslacht + Eindexamencijfer + Vooropleiding + Leeftijd + Leeftijd_log_leeftijd + Eindexamencijfer_log_eindexamencijfer` met links van de tilde de afhankelijke variabele `Uitval` en rechts de vier onafhankelijke variabelen `Geslacht`, `Eindexamencijfer`, `Vooropleiding` en `Leeftijd` en de interactietermen `Leeftijd_log_leeftijd` en `Eindexamencijfer_log_eindexamencijfer`. Het tweede argument is de dataset `Uitval_Elektrotechniek` en het derde argument `family = "binomial"` geeft aan dat er een *multinomiale logistische regressie* uitgevoerd moet worden.
 
 <!-- ## OPENBLOK: AssLineariteit1.R -->
 ```{r}
@@ -445,8 +498,13 @@ Onderzoek of er sprake is van multicollineariteit met behulp van Variance Inflat
 ```{r}
 library(DescTools)
 
-# Bereken de VIF voor elke predictor
-VIF(Regressiemodel)
+Multicollineariteit <- lm(log(Studiepunten) ~ Studiepunten + Geslacht + Gemiddeld_cijfer,
+                           Fysiotherapie_Uitstroom)
+
+# Bereken de VIF voor de predictors Cijfers_P1, Cijfers_P2 en Cijfers_P3
+VIF(Multicollineariteit)
+
+
 ```
 <!-- ## /OPENBLOK: AssMulticollineariteit2.R -->
 
@@ -478,7 +536,7 @@ Voor alle categorieën van beide predictors zijn er studenten die wel en niet ui
 Bereken de dispersieparameter om te bepalen of er sprake is van overdispersie. 
 
 <!-- ## TEKSTBLOK: Dispersie1.R -->
-Bereken de dispersieparameter om te bepalen of er sprake is van overdispersie. Voer hiervoor de *logistische regressie* uit met behulp van de functie `glm()` met als derde argument `family = "quasibinomial"` die ervoor zorgt dat de resultaten gecorrigeerd worden voor de dispersie. Het eerste argument de regressievergelijking `Uitval ~ Geslacht + Eindexamencijfer +  Vooropleiding + Leeftijd` met links van de tilde de afhankelijke variabele `Uitval` en rechts de vier onafhankelijke variabelen `Geslacht`, `Eindexamencijfer`, `Vooropleiding` en `Leeftijd`. Het tweede argument is de dataset `Uitval_Elektrotechniek`.
+Bereken de dispersieparameter om te bepalen of er sprake is van overdispersie. Voer hiervoor de *multinomiale logistische regressie* uit met behulp van de functie `glm()` met als derde argument `family = "quasibinomial"` die ervoor zorgt dat de resultaten gecorrigeerd worden voor de dispersie. Het eerste argument de regressievergelijking `Uitval ~ Geslacht + Eindexamencijfer +  Vooropleiding + Leeftijd` met links van de tilde de afhankelijke variabele `Uitval` en rechts de vier onafhankelijke variabelen `Geslacht`, `Eindexamencijfer`, `Vooropleiding` en `Leeftijd`. Het tweede argument is de dataset `Uitval_Elektrotechniek`.
 <!-- ## /TEKSTBLOK: Dispersie1.R -->
 
 <!-- ## OPENBLOK: Dispersie2.R -->
@@ -494,13 +552,13 @@ summary(Regressiemodel_dispersie)$dispersion
 ```
 <!-- ## /OPENBLOK: Dispersie2.R -->
 
-Er is sprake van onderdispersie, aangezien de dispersieparameter (`r Round_and_format(summary(Regressiemodel_dispersie)$dispersion)`) kleiner dan 1 is. Het verschil met 1 is echter niet zo groot en bij onderdispersie wordt er in het algemeen geen correctie uitgevoerd. Voor de *logistische regressie* in deze casus wordt daarom geen correctie uitgevoerd vanwege onderdispersie.
+Er is sprake van onderdispersie, aangezien de dispersieparameter (`r Round_and_format(summary(Regressiemodel_dispersie)$dispersion)`) kleiner dan 1 is. Het verschil met 1 is echter niet zo groot en bij onderdispersie wordt er in het algemeen geen correctie uitgevoerd. Voor de *multinomiale logistische regressie* in deze casus wordt daarom geen correctie uitgevoerd vanwege onderdispersie.
 
 
 # Uitvoering
 
 <!-- ## TEKSTBLOK: Uitvoering1.R -->
-Als alle assumpties zijn getoetst en aan alle assumpties is voldaan, kan de *logistische regressie* uitgevoerd worden. Gebruik de functie `glm()` met als eerste argument de regressievergelijking `Uitval ~ Geslacht + Eindexamencijfer + Vooropleiding + Leeftijd` met links van de tilde de afhankelijke variabele `Uitval` en rechts de vier onafhankelijke variabelen `Geslacht`, `Eindexamencijfer`, `Vooropleiding` en `Leeftijd`. Het tweede argument is de dataset `Uitval_Elektrotechniek` en het derde argument `family = "binomial"` geeft aan dat er een *logistische regressie* uitgevoerd moet worden. Voer daarna de *likelihood ratio toets* uit met behulp van de functie `lrtest()` van het package `lmtest` met als argument het object van het regressiemodel (`Regressiemodel`). Sla het model op en presenteer vervolgens een overzicht van de resultaten met de functie `summary()`. Bepaal de 95%-betrouwbaarheidsintervallen van de regressiecoëfficiënten met de functie `confint()`. Bereken ten slotte de Nagelkerke $R^2$ met behulp van de functie `Nagelkerke()` van het package `fmsb`.
+Als alle assumpties zijn getoetst en aan alle assumpties is voldaan, kan de *multinomiale logistische regressie* uitgevoerd worden. Gebruik de functie `glm()` met als eerste argument de regressievergelijking `Uitval ~ Geslacht + Eindexamencijfer + Vooropleiding + Leeftijd` met links van de tilde de afhankelijke variabele `Uitval` en rechts de vier onafhankelijke variabelen `Geslacht`, `Eindexamencijfer`, `Vooropleiding` en `Leeftijd`. Het tweede argument is de dataset `Uitval_Elektrotechniek` en het derde argument `family = "binomial"` geeft aan dat er een *multinomiale logistische regressie* uitgevoerd moet worden. Voer daarna de *likelihood ratio toets* uit met behulp van de functie `lrtest()` van het package `lmtest` met als argument het object van het regressiemodel (`Regressiemodel`). Sla het model op en presenteer vervolgens een overzicht van de resultaten met de functie `summary()`. Bepaal de 95%-betrouwbaarheidsintervallen van de regressiecoëfficiënten met de functie `confint()`. Bereken ten slotte de Nagelkerke $R^2$ met behulp van de functie `Nagelkerke()` van het package `fmsb`.
 
 <!-- ## /TEKSTBLOK: Uitvoering1.R -->
 
@@ -571,7 +629,7 @@ Voor de intercept en de regressiecoëfficiënten van de predictors zijn de gesch
 ## Sterkte van de relatie tussen de predictor en afhankelijke variabele
 
 <!-- ## TEKSTBLOK: CoefficientenStd1.R -->
-De regressiecoëfficiënten van de predictors Eindexamencijfer_Wiskunde en Aantal_Hoorcolleges zijn significant verschillend van nul en dragen dus bij aan het voorspellen van het eindcijfer Methoden & Statistiek. Met behulp van de gestandaardiseerde regressiecoëfficiënten kan bepaald worden welke predictor het sterkst gerelateerd is aan de afhankelijke variabele. Gebruik hiervoor de functie `lm.beta()` van het package `QuantPsyc` met als argument `Regressiemodel_numeriek` (het object van het regressiemodel). Een voorwaarde voor de functie is dat alle variabelen numeriek zijn. Zet daarom eerst de variabele `Geslacht` om in een numerieke variabele met de waarde 1 voor vrouwen en 0 voor mannen. Het omzetten van een categorische variabele in een of meer numerieke variabele heet dummycoderen; de variabelen worden vaak dummies genoemd. Gebruik de numerieke variabele `Geslacht_numeriek` vervolgens om de *logistische regressie* uit te voeren met de functie `lm()` op dezelfde manier als eerder is gedaan.
+De regressiecoëfficiënten van de predictors Eindexamencijfer_Wiskunde en Aantal_Hoorcolleges zijn significant verschillend van nul en dragen dus bij aan het voorspellen van het eindcijfer Methoden & Statistiek. Met behulp van de gestandaardiseerde regressiecoëfficiënten kan bepaald worden welke predictor het sterkst gerelateerd is aan de afhankelijke variabele. Gebruik hiervoor de functie `lm.beta()` van het package `QuantPsyc` met als argument `Regressiemodel_numeriek` (het object van het regressiemodel). Een voorwaarde voor de functie is dat alle variabelen numeriek zijn. Zet daarom eerst de variabele `Geslacht` om in een numerieke variabele met de waarde 1 voor vrouwen en 0 voor mannen. Het omzetten van een categorische variabele in een of meer numerieke variabele heet dummycoderen; de variabelen worden vaak dummies genoemd. Gebruik de numerieke variabele `Geslacht_numeriek` vervolgens om de *multinomiale logistische regressie* uit te voeren met de functie `lm()` op dezelfde manier als eerder is gedaan.
 <!-- ## /TEKSTBLOK: CoefficientenStd1.R -->
 
 <!-- ## OPENBLOK: CoefficientenStd2.R -->
@@ -612,10 +670,10 @@ De gestandaardiseerde regressiecoëfficiënt is `r Round_and_format(Coefficiente
 
 # Uitvoering likelihood ratio toets voor vergelijking twee regressiemodellen
 
-De *likelihood ratio toets* wordt bij *logistische regressie* gebruikt om de significantie van het gehele regressiemodel te toetsen ten opzichte van het interceptmodel. Deze *likelihood ratio toets* kan ook gebruikt worden om te toetsen of twee geneste regressiemodellen onderling verschillen qua model fit. Hoewel deze vergelijking in de casus niet voorbijkomt, wordt deze toch geïllustreerd. Vergelijk hiervoor een model met de predictoren Eindexamencijfer en Vooropleiding met een model met de predictors Geslacht, Eindexamencijfer, Vooropleiding en Leeftijd.
+De *likelihood ratio toets* wordt bij *multinomiale logistische regressie* gebruikt om de significantie van het gehele regressiemodel te toetsen ten opzichte van het interceptmodel. Deze *likelihood ratio toets* kan ook gebruikt worden om te toetsen of twee geneste regressiemodellen onderling verschillen qua model fit. Hoewel deze vergelijking in de casus niet voorbijkomt, wordt deze toch geïllustreerd. Vergelijk hiervoor een model met de predictoren Eindexamencijfer en Vooropleiding met een model met de predictors Geslacht, Eindexamencijfer, Vooropleiding en Leeftijd.
 
 <!-- ## TEKSTBLOK: ModellenVergelijken1.R -->
-Voer de *likelihood ratio toets* uit met de functie `lrtest()` van het package `lmtest` met als argumenten de modelobjecten van de resultaten van de twee regressiemodellen die worden vergeleken (`Model_1` en `Model_2`). Voer eerst de *logistische regressie* uit voor beide modellen en vergelijk ze daarna. Bereken ten slotte de Nagelkerke $R^2$ met de functie `NagelkerkeR2(Model_1)$R2` met als argument het modelobject waarvan de verklaarde variatie berekend moet worden.
+Voer de *likelihood ratio toets* uit met de functie `lrtest()` van het package `lmtest` met als argumenten de modelobjecten van de resultaten van de twee regressiemodellen die worden vergeleken (`Model_1` en `Model_2`). Voer eerst de *multinomiale logistische regressie* uit voor beide modellen en vergelijk ze daarna. Bereken ten slotte de Nagelkerke $R^2$ met de functie `NagelkerkeR2(Model_1)$R2` met als argument het modelobject waarvan de verklaarde variatie berekend moet worden.
 <!-- ## /TEKSTBLOK: ModellenVergelijken1.R -->
 
 <!-- ## OPENBLOK: ModellenVergelijken2.R -->
@@ -749,7 +807,7 @@ De classificatietabel laat zien dat de meeste studenten correct geclassificeerd 
 # Rapportage
 
 <!-- ## TEKSTBLOK: Rapportage1.R -->
-Een *logistische regressie* is uitgevoerd om te onderzoeken of de vooropleiding, de leeftijd, het geslacht en het gemiddeld eindexamencijfer van studenten die starten met de bachelor Elektrotechniek gerelateerd is aan het wel of niet uitvallen in het eerste jaar van deze opleiding. Uit het toetsen van de assumpties van *logistische regressie* bleek dat er aan alle assumpties is voldaan. De resultaten van de *logistische regressie* zijn te vinden in Tabel 1. 
+Een *multinomiale logistische regressie* is uitgevoerd om te onderzoeken of de vooropleiding, de leeftijd, het geslacht en het gemiddeld eindexamencijfer van studenten die starten met de bachelor Elektrotechniek gerelateerd is aan het wel of niet uitvallen in het eerste jaar van deze opleiding. Uit het toetsen van de assumpties van *multinomiale logistische regressie* bleek dat er aan alle assumpties is voldaan. De resultaten van de *multinomiale logistische regressie* zijn te vinden in Tabel 1. 
 
 De *likelihood ratio toets* voor het regressiemodel laat zien dat het opgestelde regressiemodel minimaal één coëfficiënt heeft die significant verschilt van nul, *&chi;^2^* = `r Round_and_format(LR_test$Chisq[2])`, *df* = `r -1 * LR_test$Df[2]`, *p* < 0,0001, $R^2_N$ = `r Round_and_format(100 * R2)`. Het gemiddeld eindexamencijfer (*&beta;* = `r Round_and_format(Reg$coefficients[3,1])`, *z* = `r Round_and_format(Reg$coefficients[3,3])`, *p* < 0,0001), de leeftijd (*&beta;* = `r Round_and_format(Reg$coefficients[5,1])`, *z* = `r Round_and_format(Reg$coefficients[5,3])`, *p* < 0,0001) en het geslacht (*&beta;* = `r Round_and_format(Reg$coefficients[2,1])`, *z* = `r Round_and_format(Reg$coefficients[2,3])`, *p* < 0,0001) zijn significante predictors van het eindcijfer voor het vak, maar de vooropleiding van de student is dit niet (*&beta;* = `r Round_and_format(Reg$coefficients[4,1])`, *z* = `r Round_and_format(Reg$coefficients[4,3])`, *p* = `r Round_and_format(Reg$coefficients[4,4])`). De gestandaardiseerde coëfficiënten laten zien dat de leeftijd van de student het sterkst gerelateerd is aan de kans op uitval. Om in te schatten of een student extra ondersteuning kan krijgen omdat de kans op uitval hoger is, kan de studieloopbaanbegeleider dus rekening houden met het geslacht, de leeftijd en het gemiddeld eindexamencijfer van studenten, maar hoeft hij geen rekening te houden met de vooropleiding.
 <!-- ## /TEKSTBLOK: Rapportage1.R -->

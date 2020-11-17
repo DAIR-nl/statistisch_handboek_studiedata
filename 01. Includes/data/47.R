@@ -26,96 +26,93 @@
 ## 11-11-2020: EG: Aanmaak bestand
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-# covariate matrix
-mX = matrix(rnorm(1000), 200, 5)
+# https://stats.stackexchange.com/questions/103728/simulating-multinomial-logit-data-with-r
+# http://www.fedoa.unina.it/9889/1/Thesis.pdf
 
-# coefficients for each choice
-vCoef1 = rep(0, 5)
-vCoef2 = rnorm(5)
-vCoef3 = rnorm(5)
+set.seed(12345)
 
-# vector of probabilities
-vProb = cbind(exp(mX %*% vCoef1), exp(mX %*% vCoef2), exp(mX %*% vCoef3))
+# Maak studentnummer
+Studentnummer <- sample(300000:400000,
+                            250)
 
-# multinomial draws
-mChoices = t(apply(vProb, 1, rmultinom, n = 1, size = 1))
-dfM = cbind.data.frame(y = apply(mChoices, 1, function(x) which(x == 1)), mX)
-colnames(dfM) <- c("y","x1","x2","x3","x4","x5")
-dfM$y2 <- as.factor(as.character(dfM$y))
-dfM$idcase <- 1:nrow(dfM)
+# Studiepunten
+Studiepunten <- sample(c(25,30,35,40,45,50,55,60),
+                   250,
+                   replace = TRUE,
+                   prob = c(0.05,0.05,0.1,0.1,0.1,0.25,0.25,0.1
+                            )
+                   )
 
-
-install.packages("mlogit")
-library(mlogit)
-
-dfM2 <- dfidx(dfM, shape = "wide", choice = "y")
-
-bbb <- mlogit(y ~  1 |  1 + x1 + x2,
-       dfM2)
-
-summary(bbb)
+# Geslacht
+Geslacht <- c(rep("Vrouw", 
+                  150),
+              rep("Man", 
+                  100))[sample.int(250,250)]
+Geslacht_dummy <- rep(0,
+                      250)
+Geslacht_dummy[Geslacht == "Man"] <- 1
 
 
+# Eindexamencijfer wiskunde middelbare school
+Gemiddeld_cijfer <- round(rnorm(250,7,1),1)
+Gemiddeld_cijfer[Gemiddeld_cijfer < 5.0] <- 5.0
+Gemiddeld_cijfer[Gemiddeld_cijfer > 10.0] <- 10.0
+
+Logit_Uitval <- exp(11  - 0.1 * Studiepunten + 0.05 * Geslacht_dummy + -1.2 * Gemiddeld_cijfer) 
+Logit_Nominaal <- exp(-14  + 0.1 * Studiepunten + -0.05 * Geslacht_dummy + 1.2 * Gemiddeld_cijfer) 
+#Logit_Niet_nominaal <- 17  - 1.4 * Studiepunten + -0.5 * Geslacht_dummy + 1.2 * Gemiddeld_cijfer 
+
+p_Uitval <- Logit_Uitval / (1 + Logit_Uitval + Logit_Nominaal)
+p_Nominaal <- Logit_Nominaal / (1 + Logit_Uitval + Logit_Nominaal)
+p_Niet_nominaal <- 1 / (1 + Logit_Uitval + Logit_Nominaal)
+
+mChoices = t(apply(cbind(p_Uitval, 
+                         p_Nominaal, 
+                         p_Niet_nominaal), 
+                   1, 
+                   rmultinom, 
+                   n = 1, 
+                   size = 1))
+
+colSums(mChoices)
+
+Uitstroom <- rep(NA,250)
+Uitstroom[mChoices[,1] == 1] <- "Uitval"
+Uitstroom[mChoices[,2] == 1] <- "Nominaal"
+Uitstroom[mChoices[,3] == 1] <- "Niet-nominaal"
+
+Fysiotherapie_Uitstroom <- cbind.data.frame(Uitstroom, 
+                            Studentnummer,
+                            Gemiddeld_cijfer,
+                            Geslacht_dummy,
+                            Geslacht,
+                            Studiepunten
+                            )
 
 
-##################### OUD ####################
 
-data("Fishing", package = "mlogit")
-Fish <- dfidx(Fishing, varying = 2:9, shape = "wide", choice = "mode")
-?dfidx
-Fish$mode
+#dfM$y2 <- as.factor(as.character(dfM$y))
+#Fysiotherapie_Uitstroom$idcase <- 1:nrow(Fysiotherapie_Uitstroom)
 
-mlogit(mode ~ price + catch | income, Fishing, varying = 2:9,
-              rpar = c(price = 'n', catch = 'n'), correlation = TRUE,
-              alton = NA, R = 50)
+#library(mlogit)
 
-Fishing3 <- Fishing[,c(1,10)]
+#Dataset2 <- dfidx(Fysiotherapie_Uitstroom, shape = "wide", choice = "Uitstroom")
+#Dataset2 <- dfidx(Fysiotherapie_Uitstroom, shape = "wide", idx = c("Studentnummer","Uitstroom"))
 
-ggg <- mlogit(mode ~ 0  |  1 + income , Fishing, varying = 2:9)
+#bbb <- mlogit(Uitstroom ~  1 |  1 + Studiepunten + Geslacht_dummy + Gemiddeld_cijfer,
+#       Dataset2)
 
-summary(ggg)
+#summary(bbb)
 
-?glm
-
-
-
-library("mlogit")
-data("ModeCanada", package = "mlogit")
-MC <- dfidx(ModeCanada, subset = noalt == 4)
-ml.MC1 <- mlogit(choice ~ cost + freq + ovt | income | ivt, MC)
-ml.MC2 <- mlogit(choice ~  + freq + ovt |   income | ivt + cost, ModeCanada)
-summary(ml.MC2)
-
-bb <- ModeCanada$choice
-
-
-MC$choice
-?dfidx
-
-install.packages("AER")
-data("TravelMode", package = "AER")
-
-# the first two columns contain the index
-
-TM1 <- dfidx(TravelMode)
-
-# explicitely indicate the two indexes using either a vector or a
-# list of two characters
-
-TM2 <- dfidx(TravelMode, idx = c("individual", "mode"))
-
-TM3 <- dfidx(TravelMode, idx = list("individual", "mode"))
-
-######################################################
-
-library("mlogit")
-data("Heating", package = "mlogit")
-
-Heating2 <- Heating[,-c(3:12)]
-H2 <- dfidx(Heating2, idx = c("idcase","depvar"))
-m <- mlogit(depvar ~   1 + income, H2)
-
-H <- dfidx(Heating, choice = "depvar", varying = c(3:12))
-m <- mlogit(depvar ~ ic + oc | 0, H)
-summary(m)
-
+rm(mChoices,
+   Gemiddeld_cijfer,
+   Geslacht,
+   Geslacht_dummy,
+   Logit_Nominaal,
+   Logit_Uitval,
+   p_Niet_nominaal,
+   p_Nominaal,
+   p_Uitval,
+   Studentnummer,
+   Studiepunten,
+   Uitstroom)

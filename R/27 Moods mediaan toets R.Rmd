@@ -48,10 +48,10 @@ source(paste0(here::here(),"/01. Includes/data/08.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 # Toepassing
-Gebruik *Mood's mediaan toets* om te toetsen of de medianen van twee ongepaarde groepen van elkaar verschillen.[^1]<sup>,</sup>[^2] Deze toets is een alternatief voor de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html) als de verschilscores van de gepaarde groepen niet normaal verdeeld zijn. *Mood's mediaan toets* kan ook gebruikt worden om medianen van meer dan twee ongepaarde groepen te vergelijken. Deze toetspagina illustreert de toets echter voor twee ongepaarde groepen.
 
-Naast *Mood's mediaan toets* kan de [Mann-Whitney U toets](08-Mann-Whitney-U-toetsiI-R.html) ook gebruikt worden om het verschil tussen medianen van gepaarde groepen te toetsen. Deze toets heeft een hoger onderscheidend vermogen[^3]<sup>,</sup>[^1], maar vereist dat de verdelingen van beide ongepaarde groepen dezelfde vorm hebben.[^4] *Mood's mediaan toets* kan ook gebruikt worden als de verdelingen niet dezelfde vorm hebben. 
+Gebruik *Mood's mediaan toets* om te toetsen of de medianen van twee ongepaarde groepen van elkaar verschillen.[^1]<sup>,</sup>[^2] Deze toets is een alternatief voor de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html) als een van de of beide ongepaarde groepen niet normaal verdeeld zijn. *Mood's mediaan toets* kan ook gebruikt worden om medianen van meer dan twee ongepaarde groepen te vergelijken. Deze toetspagina illustreert de toets echter voor twee ongepaarde groepen.
 
+Naast *Mood's mediaan toets* kan de [Mann-Whitney U toets](08-Mann-Whitney-U-toetsI-R.html) ook gebruikt worden om het verschil tussen medianen van twee ongepaarde groepen te toetsen. Deze toets heeft een hoger onderscheidend vermogen[^3]<sup>,</sup>[^1], maar vereist dat de verdelingen van beide ongepaarde groepen dezelfde vorm hebben.[^4] *Mood's mediaan toets* kan ook gebruikt worden als de verdelingen niet dezelfde vorm hebben. 
 
 
 # Onderwijscasus
@@ -62,7 +62,7 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 *H~0~*: De verdeling van het behaalde aantal studiepunten in het tweede jaar van studenten met een buitenlandse vooropleiding is hetzelfde als de verdeling van studenten met een Nederlandse vooropleiding. 
 
-*H~A~*: De verdeling van het behaalde aantal studiepunten in het tweede jaar van studenten met een buitenlandse vooropleiding is anders als de verdeling van studenten met een Nederlandse vooropleiding.
+*H~A~*: De verdeling van het behaalde aantal studiepunten in het tweede jaar van studenten met een buitenlandse vooropleiding is anders dan de verdeling van studenten met een Nederlandse vooropleiding.
 </div>
 
 # Assumpties
@@ -71,13 +71,13 @@ Het meetniveau van de afhankelijke variabele is continu.[^5]<sup>,</sup>[^6]
 
 ## Groepsgroottes
 
-*Mood's mediaan toets* toetst het verschil tussen de medianen van twee ongepaarde groepen. Eerst wordt de mediaan berekend van de samengevoegde observaties van beide groepen. Daarna worden voor beide ongepaarde groepen het aantal observaties groter dan en kleiner of gelijk aan de mediaan geteld. Dit levert een kruistabel op die vervolgens getoetst kan worden met de [Chi-kwadraat toets voor onafhankelijkheid](13-Chi-kwadraat-toets-voor-onafhankelijkheid-en-Fishers-exact-toets-R.html). Een voorbeeld van zo'n kruistabel is te zien in Tabel 1.
+*Mood's mediaan toets* toetst het verschil tussen de medianen van twee ongepaarde groepen. Eerst wordt de mediaan berekend van de samengevoegde observaties van beide groepen. Daarna worden voor beide ongepaarde groepen het aantal observaties groter dan en kleiner dan of gelijk aan de mediaan geteld. Dit levert een kruistabel op die vervolgens getoetst kan worden met de [Chi-kwadraat toets voor onafhankelijkheid](13-Chi-kwadraat-toets-voor-onafhankelijkheid-en-Fishers-exact-toets-R.html). Een voorbeeld van zo'n kruistabel is te zien in Tabel 1.
 
 |                      | Groep 1    | Groep 2 | 
 | -------------------- | ---------- | ------------| 
 | Aantal observaties groter dan mediaan  | 20   | 25          | 
-| Aantal observaties kleiner of gelijk aan mediaan  | 30   | 40          |
-*Tabel 1. Kruistabel met aantal observaties groter dan en kleiner of gelijk aan mediaan voor twee ongepaarde groepen.*
+| Aantal observaties kleiner dan of gelijk aan mediaan  | 30   | 40          |
+*Tabel 1. Kruistabel met aantal observaties groter dan en kleiner dan of gelijk aan mediaan voor twee ongepaarde groepen.*
 
 Een assumptie van de *Chi-kwadraat toets voor onafhankelijk* is dat niet meer dan 20% van de cellen van de kruistabel een verwacht aantal observaties van vijf of minder heeft. Als dit niet het geval is, is *Fisher's exact toets* een beter alternatief. Zie de toetspagina van de [Chi-kwadraat toets voor onafhankelijkheid](13-Chi-kwadraat-toets-voor-onafhankelijkheid-en-Fishers-exact-toets-R.html) voor een uitgebreide uitleg over deze assumptie. 
 
@@ -263,16 +263,16 @@ HodgesLehmann(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands], S
 
 <!-- ## TEKSTBLOK: Moods-mediaan-toets-4.R -->
 * &chi;^2^ ~`r vdf`~ = `r vChi2`, *p* = < 0,0001
-* *p*-waarde < 0,05, dus de H~0~ wordt verworpen.[^9]
+* De p-waarde is kleiner dan 0,05, dus de H~0~ wordt verworpen.[^9]
 * De mediaan van de verschilscores is `r vW_est` met een 
-95%-betrouwbaarheidsinterval  van `r vW_lb` tot `r vW_ub`. De mediaan van de verschillen tussen  studenten met een Nederlandse en buitenlandse vooropleiding is dus 6 studiepunten.
+95%-betrouwbaarheidsinterval  van `r vW_lb` tot `r vW_ub`. De mediaan van de verschillen tussen  studenten met een Nederlandse en buitenlandse vooropleiding is dus `r vW_est` studiepunten.
 
 <!-- ## /TEKSTBLOK: Moods-mediaan-toets-4.R -->
 
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-*Mood's mediaan toets* is uitgevoerd om te toetsen de mediaan van het behaald aantal studiepunten in het tweede jaar van de bachelor Business Administration hetzelfde is voor studenten met buitenlandse vooropleiding als voor studenten met Nederlandse vooropleiding. De resultaten van de toets laten zien dat er een significant verschil is tussen beide medianen, &chi;^2^ ~`r vdf`~ = `r vChi2`, *p* = < 0,0001. Het geschatte mediaan van de verschilscores is `r vW_est` met bijbehorend 95%-betrouwbaarheidsinterval van `r vW_lb` tot `r vW_ub`. Studenten met een Nederlandse vooropleiding lijken dus meer studiepunten te behalen in het tweede jaar dan studenten met een buitenlandse vooropleiding.
+*Mood's mediaan toets* is uitgevoerd om te toetsen of de mediaan van het behaald aantal studiepunten in het tweede jaar van de bachelor Business Administration hetzelfde is voor studenten met buitenlandse vooropleiding als voor studenten met Nederlandse vooropleiding. De resultaten van de toets laten zien dat er een significant verschil is tussen beide medianen, &chi;^2^ ~`r vdf`~ = `r vChi2`, *p* = < 0,0001. Het geschatte mediaan van de verschilscores is `r vW_est` met bijbehorend 95%-betrouwbaarheidsinterval van `r vW_lb` tot `r vW_ub`. Studenten met een Nederlandse vooropleiding lijken dus meer studiepunten te behalen in het tweede jaar dan studenten met een buitenlandse vooropleiding.
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->
@@ -288,5 +288,5 @@ HodgesLehmann(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands], S
 [^5]: SPSS Tutorials. *SPSS Median Test for 2 Independent Medians*. Bezocht op 22 april 2020. [Statistics How to](https://www.statisticshowto.com/moods-median-test/).
 [^6]: *Mood's mediaan toets* kan ook uitgevoerd worden om de medianen te vergelijken van twee of meer ordinale variabelen. Echter, de [Mann-Whitney U toets](08-Mann-Whitney-U-toetsiI-R.html) of de [Kruskal Wallis toets](10-Kruskal-Wallis-toets-I-R.html) zijn dan alternatieven met een hoger onderscheidend vermogen.
 [^7]: De mediaan van de verschilscores kan bij twee ongepaarde steekproeven bijvoorbeeld geschat worden door alle *m x n* verschilscores te berekenen tussen *m* observaties uit de ene steekproef en *n* observaties uit de andere steekproef. De mediaan van deze *m x n* verschilscores is dan de schatting.
-[^8]: Wikipedia (10 maart 2020). *Hogdes-Lehmann estimator*.[https://en.wikipedia.org/wiki/Hodges%E2%80%93Lehmann_estimator](https://en.wikipedia.org/wiki/Hodges%E2%80%93Lehmann_estimator) 
+[^8]: Wikipedia (10 maart 2020). *Hogdes-Lehmann estimator. *[https://en.wikipedia.org/wiki/Hodges%E2%80%93Lehmann_estimator](https://en.wikipedia.org/wiki/Hodges%E2%80%93Lehmann_estimator) 
 [^9]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.

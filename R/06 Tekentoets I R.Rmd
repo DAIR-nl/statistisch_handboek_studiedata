@@ -122,7 +122,7 @@ De *tekentoets* is een alternatief voor de [one-sample t-toets](01-One-sample-t-
 <!-- ## /TEKSTBLOK: Link2.R -->
 
 ### Histogram
-Geef de verdeling van de data weer in een histogram. Focus bij het analyseren van een histogram op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.[^6]<sup>, </sup>[^7]
+Geef de verdeling van de data weer in een histogram[^18]. Focus bij het analyseren van een histogram op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.[^6]<sup>, </sup>[^7]
 <!-- ## OPENBLOK: Histogram.R -->
 ```{r histogram, warning=FALSE, message=FALSE}
 ## Histogram met ggplot2
@@ -226,3 +226,4 @@ De *tekentoets* is uitgevoerd om te toetsen of het mediane inkomen van alumni va
 [^8]: Statistics How To (27 mei 2018). *One Sample Median Test*. [Statistics How to](https://www.statisticshowto.datasciencecentral.com/one-sample-median-test/).
 [^9]: Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese waar is.
 [^10]: Miller, I. & Miller, C. (2012). *John E. Freund's Mathematical Statistics with Applications*. Pearson: eighth edition.
+[^18]: De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.

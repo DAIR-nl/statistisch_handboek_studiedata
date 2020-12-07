@@ -131,41 +131,38 @@ quantile(Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands])
 </div>
 <!-- ## CLOSEDBLOK: Data-beschrijven-3.R -->
 ``` {r data beschrijven als object, include=FALSE, echo=TRUE}
-## Onderstaand zijn de dynamische variabelen te vinden
-library(dplyr)
+Vooropleiding_Nederlands <- Studiepunten_studiejaar2$Vooropleiding == "Nederlands"
 
-x <- group_by(Studiepunten_studiejaar2, Vooropleiding) %>%
-  summarise(
-    N = n(),
-    Q1 = quantile(Studiepunten)[2],
-    Mediaan = median(Studiepunten),
-    Q3 = quantile(Studiepunten)[4]
-  )
+vN_NL <- length(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands])
+vQ_NL <- quantile(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands])
 
-vN_NL <- Round_and_format(x[2,2])
-vN_Inter <- Round_and_format(x[1,2])
+vN_Inter <- length(Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands])
+vQ_Inter <- quantile(Studiepunten_studiejaar2$Studiepunten[!Vooropleiding_Nederlands])
 
-vQ1_NL <- Round_and_format(x[2,3])
-vQ1_Inter <- Round_and_format(x[1,3])
+vN_NL <- Round_and_format(vN_NL)
+vN_Inter <- Round_and_format(vN_Inter)
 
-vMed_NL <- Round_and_format(x[2,4])
-vMed_Inter <- Round_and_format(x[1,4])
+vQ1_NL <- Round_and_format(vQ_NL[2])
+vQ1_Inter <- Round_and_format(vQ_Inter[2])
 
-vQ3_NL <- Round_and_format(x[2,5])
-vQ3_Inter <- Round_and_format(x[1,5])
+vMed_NL <- Round_and_format(vQ_NL[3])
+vMed_Inter <- Round_and_format(vQ_Inter[3])
+
+vQ3_NL <- Round_and_format(vQ_NL[4])
+vQ3_Inter <- Round_and_format(vQ_Inter[4])
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven-3.R -->
 
 <!-- ## TEKSTBLOK: Data-beschrijven2.R -->
-* Mediaan studenten Nederlandse vooropleiding: `r vMed_NL`. *n* = `r vN_NL`.
-* Mediaan studenten buitenlandse vooropleiding: `r vMed_Inter`. *n* = `r vN_Inter`.
+* Mediaan studenten Nederlandse vooropleiding: `r vMed_NL`, *n* = `r vN_NL`.
+* Mediaan studenten buitenlandse vooropleiding: `r vMed_Inter`, *n* = `r vN_Inter`.
 
 <!-- ## /TEKSTBLOK: Data-beschrijven2.R -->
 
 
 ## De data visualiseren
 
-Maak een histogram om de verdeling van het aantal studiepunten in het tweede jaar voor studenten met een Nederlandse en buitenlandse vooropleiding visueel weer te geven.
+Maak een histogram[^18] om de verdeling van het aantal studiepunten in het tweede jaar voor studenten met een Nederlandse en buitenlandse vooropleiding visueel weer te geven.
 
 <!-- ## OPENBLOK: Histogram1.R -->
 ```{r histogram, warnings=FALSE, message=FALSE}
@@ -290,3 +287,4 @@ HodgesLehmann(Studiepunten_studiejaar2$Studiepunten[Vooropleiding_Nederlands], S
 [^7]: De mediaan van de verschilscores kan bij twee ongepaarde steekproeven bijvoorbeeld geschat worden door alle *m x n* verschilscores te berekenen tussen *m* observaties uit de ene steekproef en *n* observaties uit de andere steekproef. De mediaan van deze *m x n* verschilscores is dan de schatting.
 [^8]: Wikipedia (10 maart 2020). *Hogdes-Lehmann estimator. *[https://en.wikipedia.org/wiki/Hodges%E2%80%93Lehmann_estimator](https://en.wikipedia.org/wiki/Hodges%E2%80%93Lehmann_estimator) 
 [^9]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
+[^18]: De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.

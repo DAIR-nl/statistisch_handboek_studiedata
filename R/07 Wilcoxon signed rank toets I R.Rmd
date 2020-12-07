@@ -75,7 +75,7 @@ De *Wilcoxon signed rank toets* is een alternatief voor de [gepaarde t-toets](02
 
 ## Verdeling steekproef
 
-De *Wilcoxon signed rank toets* schrijft geen assumpties voor over de verdeling van de verschilscores (verschillen tussen beide meetmomenten voor alle observatie-eenheden).[^5] In principe toetst de *Wilcoxon signed rank toets* een hypothese over het verschil tussen de verdelingen van twee gepaarde groepen. De *Wilcoxon signed rank toets* maakt een rangschikking van de absolute waarden van de verschilscores en telt vervolgens de rangnummers op voor de positieve en negatieve verschilscores. Het verschil tussen de som van de positieve en negatieve rangnummers bepaalt de significantie van de toets. 
+De *Wilcoxon signed rank toets* schrijft geen assumpties voor over de verdeling van de verschilscores (verschillen tussen beide meetmomenten voor alle deelnemers[^19]).[^5] In principe toetst de *Wilcoxon signed rank toets* een hypothese over het verschil tussen de verdelingen van twee gepaarde groepen. De *Wilcoxon signed rank toets* maakt een rangschikking van de absolute waarden van de verschilscores en telt vervolgens de rangnummers op voor de positieve en negatieve verschilscores. Het verschil tussen de som van de positieve en negatieve rangnummers bepaalt de significantie van de toets. 
 
 Als er geen symmetrische verdeling van verschilscores is, doet de *Wilcoxon signed rank toets* een uitspraak over het verschil tussen verdelingen. Een verschil tussen verdelingen kan meerdere oorzaken hebben. De top of toppen van de verdelingen kunnen verschillend zijn, maar ook de spreiding van de verdeling kan verschillen. In alle gevallen is er echter een verschil tussen de som van de rangnummers van de verdelingen. In andere woorden, de ene verdeling bevat hogere waarden dan de andere verdeling. Benoem daarom de sommen van positieve en negatieve rangnummers in de rapportage en visualiseer de verdeling van beide gepaarde groepen om duidelijk te maken op welke manier de verdelingen van elkaar verschillen.
 
@@ -87,7 +87,7 @@ Als de verschilscores echter symmetrisch zijn, toetst de *Wilcoxon signed rank t
 
 De p-waarde geeft aan of een (mogelijk) verschil tussen twee groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^6] 
 
-De *Wilcoxon signed rank toets* heeft als effectmaat *r*. Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^8] De effectmaat *r* wordt voor de *Wilcoxon signed rank toets* berekend door de *z*-waarde behorend bij de p-waarde van de toets te delen door de wortel van het aantal observatie-eenheden, i.e. $\frac{z}{\sqrt{N}}$.[^8] Een correlatie tussen twee variabelen wordt vaak ook aangeduid met het symbool *r*, maar beide varianten van *r* hebben een verschillende betekenis.
+De *Wilcoxon signed rank toets* heeft als effectmaat *r*. Een indicatie om *r* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^8] De effectmaat *r* wordt voor de *Wilcoxon signed rank toets* berekend door de *z*-waarde behorend bij de p-waarde van de toets te delen door de wortel van het aantal deelnemers, i.e. $\frac{z}{\sqrt{N}}$.[^8] Een correlatie tussen twee variabelen wordt vaak ook aangeduid met het symbool *r*, maar beide varianten van *r* hebben een verschillende betekenis.
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
@@ -153,11 +153,9 @@ vN_T2 <- length(Alumni_jaarinkomens_T2)
 
 <!-- ## /TEKSTBLOK: Data-beschrijven3.R-->
 
-
-
 ## De data visualiseren
 
-Maak een histogram om de verdeling van de bruto jaarinkomens van de alumni één jaar en vijf jaar na afstuderen visueel weer te geven.[^11]
+Maak een histogram[^18] om de verdeling van de bruto jaarinkomens van de alumni één jaar en vijf jaar na afstuderen visueel weer te geven.[^11]
 
 <!-- ## OPENBLOK: Histogram1.R -->
 ```{r histogram, warnings=FALSE, message=FALSE}
@@ -304,3 +302,5 @@ De *Wilcoxon signed rank toets* is uitgevoerd om de vraag te beantwoorden of de 
 [^10]: Een ordinale variabele is een categorische variabele waarbij de categorieën geordend kunnen worden. Een voorbeeld is de variabele beoordeling met de categorieën Onvoldoende, Voldoende, Goed en Uitstekend.
 [^11]: De breedte van de staven van het histogram worden hier automatisch bepaald, maar kunnen handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
 [^12]: Bij de *Wilcoxon signed rank toets* en andere nonparametrische toetsen wordt de data eerst gerangschikt zodat elke observatie een rangnummer toegewezen krijgt. Deze rangnummers worden vervolgens gebruikt om de toets uit te voeren.
+[^18]: De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
+[^19]: Met een deelnemer wordt het object bedoeld dat geobserveerd wordt, bijvoorbeeld een student, een inwoner van Nederland, een opleiding of een organisatie. Met een observatie wordt de waarde bedoeld die de deelnemer heeft voor een bepaalde variabele. Een deelnemer heeft dus meestal een observatie voor meerdere variabelen.

@@ -82,7 +82,7 @@ Het doel van *multipele lineaire regressie* is het voorspellen van een afhankeli
 
 $$ y_i = \beta_0 + \beta_1 * x_{1i} + \beta_2 * x_{2i} + e_i$$
 
-met $y_i$ als afhankelijke variabele, $\beta_0$ als intercept, $x_{1i}$ en $x_{2i}$ als predictors, $\beta_{1}$ en $\beta_{2}$ als regressiecoefficiënten van predictors, $e_i$ als residu of error en $i$ als indicator van de deelnemer uit de steekproef. De intercept $\beta_0$ geeft de waarde van de afhankelijke variabele weer als alle predictors gelijk aan nul zijn. De regressiecoefficiënten $\beta_1$ en $\beta_2$ geven de relatie tussen de afhankelijke variabele en de predictor weer. De residu of error $e_i$ is het verschil tussen de geobserveerde waarde van de afhankelijke variabele en de voorspelde waarde op basis van het regressiemodel. Voor de huidige casus is de volgende regressievergelijking op te stellen:
+met $y_i$ als afhankelijke variabele, $\beta_0$ als intercept, $x_{1i}$ en $x_{2i}$ als predictors, $\beta_{1}$ en $\beta_{2}$ als regressiecoefficiënten van predictors, $e_i$ als residu of error en $i$ als indicator van de deelnemer[^19] uit de steekproef. De intercept $\beta_0$ geeft de waarde van de afhankelijke variabele weer als alle predictors gelijk aan nul zijn. De regressiecoefficiënten $\beta_1$ en $\beta_2$ geven de relatie tussen de afhankelijke variabele en de predictor weer. De residu of error $e_i$ is het verschil tussen de geobserveerde waarde van de afhankelijke variabele en de voorspelde waarde op basis van het regressiemodel. Voor de huidige casus is de volgende regressievergelijking op te stellen:
 
 $$ EindcijferM\&S_i = \beta_0 + \beta_1 * Geslacht_i + \beta_2 * EindexamencijferWiskunde_i + \beta_3 * Aantal Hoorcolleges_i + e_i$$
 
@@ -155,10 +155,10 @@ Op basis van de geschatte regressiecoefficiënten kan de regressievergelijking i
 $$ EindcijferM\&S_i = 3 + 0,5 * Geslacht_i + 0,4 * EindexamencijferWiskunde_i + 0,3 * AantalHoorcolleges_i  +  e_i$$
 waarbij alle regressiecoefficiënten significant zijn. Neem aan dat de variabele Geslacht de waarde 1 heeft voor vrouwen en 0 voor mannen. De regressiecoefficiënten geven informatie over de relatie van predictoren met de afhankelijke variabele:
 
-* Intercept ($\beta_0$): De intercept geeft de waarde van de afhankelijke variabele weer als alle predictors gelijk aan nul zijn. Als een deelnemer dus de waarde 0 voor Geslacht heeft (dus een man is) en een 0 voor eindexamencijfer Wiskunde heeft, dan is het voorspelde eindcijfer Methoden & Statistiek een 3. De intercept geeft soms geen realistische waarde voor de afhankelijke variabele omdat het onwaarschijnlijk is dat de predictor gelijk is aan nul. Met een eindexamencijfer Wiskunde dat gelijk is aan een nul zou iemand nooit bij de bachelor Onderwijskunde terecht kunnen komen. An sich is dit geen groot probleem, omdat het niet altijd nodig is de intercept te kunnen interpreteren. Een oplossing is het centeren van de predictors wat inhoudt dat per predictor het gemiddelde van die predictor van alle waarden wordt afgehaald. Op die manier ontstaat een predictor met een gemiddelde van nul. In die situatie is de intercept gelijk aan de voorspelde waarde van de afhankelijke variabele voor een deelnemer die voor alle predictors gelijk is aan het gemiddelde. Het is in feite de voorspelde waarde voor een gemiddelde deelnemer en daarom erg interessant.
+* Intercept ($\beta_0$): De intercept geeft de waarde van de afhankelijke variabele weer als alle predictors gelijk aan nul zijn. Als een deelnemer dus de waarde 0 voor Geslacht heeft (dus een man is) en een 0 voor Eindexamencijfer_Wiskunde heeft, dan is het voorspelde eindcijfer Methoden & Statistiek een 3. De intercept geeft soms geen realistische waarde voor de afhankelijke variabele omdat het onwaarschijnlijk is dat de predictor gelijk is aan nul. Met een eindexamencijfer Wiskunde dat gelijk is aan een nul zou iemand nooit bij de bachelor Onderwijskunde terecht kunnen komen. An sich is dit geen groot probleem, omdat het niet altijd nodig is de intercept te kunnen interpreteren. Een oplossing is het centeren van de predictors wat inhoudt dat per predictor het gemiddelde van die predictor van alle waarden wordt afgehaald. Op die manier ontstaat een predictor met een gemiddelde van nul. In die situatie is de intercept gelijk aan de voorspelde waarde van de afhankelijke variabele voor een deelnemer die voor alle predictors gelijk is aan het gemiddelde. Het is in feite de voorspelde waarde voor een gemiddelde deelnemer en daarom erg interessant.
 * Geslacht ($\beta_1$): De coefficiënt van de variabele Geslacht is gelijk aan 0,5. Als de overige predictors gelijkblijven is het eindcijfer Methoden & Statistiek 0,5 punten hoger voor vrouwen dan voor mannen. Immers, het product van predictor en coëfficient is $0,5 * 0 = 0$ voor mannen en $0,5 * 1 = 0,5$ voor vrouwen. Bij een categorische predictor geeft de coefficiënt informatie over het verschil tussen de twee categorieën. Let daarom goed op hoe de categorieën gecodeerd zijn, i.e. welke categorie de waarde 1 en 0 hebben.
-* Eindexamencijfer Wiskunde: De coëfficient van de variabele Eindexamencijfer Wiskunde is gelijk aan 0,4. Dit betekent dat een toename van 1 van de variabele Eindexamencijfer Wiskunde zorgt voor een toename van 0,4 op de afhankelijke variabele Eindcijfer Methoden & Statistiek als de andere predictors gelijkblijven. Er is dus een positieve relatie tussen het eindexamencijfer Wiskunde en het eindcijfer Methoden & Statistiek. Een deelnemer met een eindexamencijfer Wiskunde dat één punt hoger is dan een andere deelnemer zal dus een voorspelde waarde voor het eindcijfer Methoden & Statistiek hebben van 0,4 punt hoger als de overige predictors gelijkblijven.
-* Aantal hoorcolleges: De coëfficient van de variabele Aantal hoorcolleges is gelijk aan 0,3. Dit betekent dat een toename van 1 van de variabele Aantal hoorcolleges zorgt voor een toename van 0,3 op de afhankelijke variabele Eindcijfer Methoden & Statistiek als de andere predictors gelijkblijven. Er is dus een positieve relatie tussen het aantal gevolgde hoorcolleges en het eindcijfer Methoden & Statistiek. Een deelnemer met een extra gevolgd hoorcollege dan een andere deelnemer zal dus een voorspelde waarde voor het eindcijfer Methoden & Statistiek hebben van 0,3 punt hoger als de overige predictors gelijkblijven.
+* Eindexamencijfer_Wiskunde: De coëfficient van de variabele Eindexamencijfer_Wiskunde is gelijk aan 0,4. Dit betekent dat een toename van 1 van de variabele Eindexamencijfer_Wiskunde zorgt voor een toename van 0,4 op de afhankelijke variabele Eindcijfer Methoden & Statistiek als de andere predictors gelijkblijven. Er is dus een positieve relatie tussen het eindexamencijfer Wiskunde en het eindcijfer Methoden & Statistiek. Een deelnemer met een eindexamencijfer Wiskunde dat één punt hoger is dan een andere deelnemer zal dus een voorspelde waarde voor het eindcijfer Methoden & Statistiek hebben van 0,4 punt hoger als de overige predictors gelijkblijven.
+* Aantal_Hoorcolleges: De coëfficient van de variabele Aantal_Hoorcolleges is gelijk aan 0,3. Dit betekent dat een toename van 1 van de variabele Aantal_Hoorcolleges zorgt voor een toename van 0,3 op de afhankelijke variabele Eindcijfer Methoden & Statistiek als de andere predictors gelijkblijven. Er is dus een positieve relatie tussen het aantal gevolgde hoorcolleges en het eindcijfer Methoden & Statistiek. Een deelnemer met een extra gevolgd hoorcollege dan een andere deelnemer zal dus een voorspelde waarde voor het eindcijfer Methoden & Statistiek hebben van 0,3 punt hoger als de overige predictors gelijkblijven.
 
 ## Predictors vergelijkingen door standaardisatie
 
@@ -386,7 +386,7 @@ Onderzoek of er outliers zijn met behulp van de gestandaardiseerde residuën van
 # Sla de gestandaardiseerde residuën op
 Residu_gestandaardiseerd <- rstandard(Regressiemodel)
 
-# Maak een histogram
+# Maak een plot
 plot(Residu_gestandaardiseerd, xlab = "Volgorde", ylab = "Gestandaardiseerde residuën")
 
 # Tel het aantal gestandaardiseerde residuën met een absolute waarde groter dan 3
@@ -413,8 +413,9 @@ Studenten_Methoden_Statistiek$Geslacht_numeriek <- as.numeric(Studenten_Methoden
 
 # Maak een subset van de dataset met alle predictors
 Subset <- Studenten_Methoden_Statistiek[,c("Eindexamencijfer_Wiskunde",
-                                         "Aantal_Hoorcolleges",
-                                         "Eindcijfer_MS","Geslacht_numeriek")]
+                                           "Aantal_Hoorcolleges",
+                                           "Eindcijfer_MS",
+                                           "Geslacht_numeriek")]
 
 # Bereken de Mahalanobis afstand voor elke deelnemer 
 Mahalanobis_afstanden <- mahalanobis(Subset,
@@ -488,7 +489,7 @@ Bij beide predictors lijkt er een lineaire relatie te zijn met de afhankelijke v
 ## Normaliteit
 
 <!-- ## TEKSTBLOK: AssNormaliteit1.R -->
-Onderzoek of de gestandaardiseerde residuën van het regressiemodel een normale verdeling volgen. Sla eerst de gestandaardiseerde residuën op met behulp van de functie `rstandard()` met als argument `Regressiemodel` (het object van het regressiemodel) en maak vervolgens een histogram om de verdeling te inspecteren. Het is ook mogelijk om normaliteit te onderzoeken met behulp van een QQ-plot.
+Onderzoek of de gestandaardiseerde residuën van het regressiemodel een normale verdeling volgen. Sla eerst de gestandaardiseerde residuën op met behulp van de functie `rstandard()` met als argument `Regressiemodel` (het object van het regressiemodel) en maak vervolgens een histogram[^18] om de verdeling te inspecteren. Het is ook mogelijk om normaliteit te onderzoeken met behulp van een QQ-plot.
 <!-- ## /TEKSTBLOK: AssNormaliteit1.R -->
 
 <!-- ## OPENBLOK: AssNormaliteit2.R -->
@@ -630,7 +631,7 @@ De gestandaardiseerde regressiecoëfficiënt is `r Round_and_format(Coefficiente
 
 # Uitvoering F-toets voor vergelijking twee regressiemodellen
 
-De F-toets wordt bij *multipele lineaire regressie* gebruikt om de significantie van het gehele regressiemodel te toetsen ten opzichte van het interceptmodel. Deze F-toets kan ook gebruikt worden om te toetsen of twee geneste regressiemodellen onderling verschillen qua verklaarde variantie. Hoewel deze vergelijking in de casus niet voorbijkomt, wordt deze toch geïllustreerd. Vergelijk hierbij een model met als enige predictor het geslacht van de student met een model met de predictors geslacht, eindexamencijfer Wiskunde en aantal gevolgde hoorcolleges.
+De F-toets wordt bij *multipele lineaire regressie* gebruikt om de significantie van het gehele regressiemodel te toetsen ten opzichte van het interceptmodel. Deze F-toets kan ook gebruikt worden om te toetsen of twee geneste regressiemodellen onderling verschillen qua verklaarde variantie. Hoewel deze vergelijking in de casus niet voorbijkomt, wordt deze toch geïllustreerd. Vergelijk hierbij een model met als enige predictor het geslacht van de student met een model met de predictors Geslacht, Eindexamencijfer_Wiskunde en Aantal_Hoorcolleges.
 
 <!-- ## TEKSTBLOK: ModellenVergelijken1.R -->
 Voer de F-toets uit met de functie `anova()` met als argumenten de modelobjecten van de resultaten van de twee regressiemodellen die worden vergeleken (`Model_1` en `Model_2`). Voer eerst de *multipele lineaire regressie* uit voor beide modellen en vergelijk ze daarna. Bereken ten slotte de verklaarde variantie met de functie `summary()$r.squared` met als argument het modelobject waarvan de verklaarde variantie berekend moet worden.
@@ -659,7 +660,7 @@ anova(Model_1, Model_2)
 
 <!-- ## CLOSEDBLOK: ModellenVergelijken3.R -->
 ```{r, echo = FALSE, message = FALSE}
-# Stel het regressiemodel op met alleen Aantal hoorcolleges als predictor
+# Stel het regressiemodel op met alleen Geslacht als predictor
 Model_1 <- lm(Eindcijfer_MS ~ Geslacht, 
               Studenten_Methoden_Statistiek)
 
@@ -744,4 +745,6 @@ Een *multipele lineaire regressie* is uitgevoerd om de vraag te beantwoorden of 
 [^5]: Er zijn verschillende opties om variabelen te transformeren, zoals de logaritme, wortel of inverse (1 gedeeld door de variabele) nemen van de variabele. Zie *Discovering statistics using IBM SPSS statistics* van Field (2013) pagina 201-210 voor meer informatie over welke transformaties wanneer gebruikt kunnen worden.
 [^6]: Universiteit van Amsterdam (7 juli 2014). *Lineariteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Lineariteit).  
 [^7]: Stat 501. *12.4 - Detecting Multicollinearity Using Variance Inflation Factors*. [PennState Eberly College of Science](https://online.stat.psu.edu/stat501/lesson/12/12.4).
-[^8]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten. 
+[^8]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
+[^18]: De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
+[^19]: Met een deelnemer wordt het object bedoeld dat geobserveerd wordt, bijvoorbeeld een student, een inwoner van Nederland, een opleiding of een organisatie. Met een observatie wordt de waarde bedoeld die de deelnemer heeft voor een bepaalde variabele. Een deelnemer heeft dus meestal een observatie voor meerdere variabelen.

@@ -72,7 +72,7 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 Om een valide resultaat te bereiken moet er, voordat de toets kan worden uitgevoerd, aan een aantal voorwaarden voldaan worden.
 
 ## Normaliteit
-De *gepaarde t-toets* gaat ervan uit dat de verschillen tussen de gepaarde observaties (verschilscores) normaal verdeeld zijn. Ga er bij een aantal observatie-eenheden *n* > 100 vanuit dat de *gepaarde t-toets* robuust genoeg is om uit te voeren zonder dat de verschilscores een normale verdeling volgen.[^2]   
+De *gepaarde t-toets* gaat ervan uit dat de verschillen tussen de gepaarde observaties (verschilscores) normaal verdeeld zijn. Ga er bij een aantal deelnemers[^13] *n* groter dan 100 vanuit dat de *gepaarde t-toets* robuust genoeg is om uit te voeren zonder dat de verschilscores een normale verdeling volgen.[^2]   
 
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. Controleer de verschilscores visueel met een histogram, een Q-Q plot en een boxplot.  
@@ -101,7 +101,7 @@ tail(Studielogboek)
 ```
 <!-- ## /OPENBLOK: Data-bekijken.R -->
 
-Selecteer beide groepen, sla deze op in een vector en bereken het verschil in de afhankelijke variabelen (het aantal studieuren) voor alle observatie-eenheden (de studenten).
+Selecteer beide groepen, sla deze op in een vector en bereken het verschil in de afhankelijke variabelen (het aantal studieuren) voor alle deelnemers (de studenten).
 <!-- ## OPENBLOK: Data-selecteren.R -->
 ```{r data selecteren}
 Uren_studeren_T0 <- Studielogboek[Studielogboek$Meetmoment == "T0", 2]
@@ -165,7 +165,7 @@ Geef de verdeling van de data visueel weer met een histogram, Q-Q plot en boxplo
 
 ### Histogram
 
-Focus bij het analyseren van een histogram op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.[^8]<sup>, </sup>[^9]
+Focus bij het analyseren van een histogram[^18] op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.[^8]<sup>, </sup>[^9]
 
 <!-- ## OPENBLOK: Histogram.R -->
 ```{r histogram}
@@ -368,7 +368,8 @@ Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddeld aantal uur s
 [^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen, houd hierbij rekening met type I en type II fouten.
 [^11]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^12]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf 
-
+[^13]: Met een deelnemer wordt het object bedoeld dat geobserveerd wordt, bijvoorbeeld een student, een inwoner van Nederland, een opleiding of een organisatie. Met een observatie wordt de waarde bedoeld die de deelnemer heeft voor een bepaalde variabele. Een deelnemer heeft dus meestal een observatie voor meerdere variabelen.
+[^18]: De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
 
 <!-- ## TEKSTBLOK: Extra-Bron.R -->
 

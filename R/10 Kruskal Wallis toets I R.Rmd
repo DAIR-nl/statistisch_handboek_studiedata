@@ -75,7 +75,7 @@ Het meetniveau van de afhankelijke variabele is ordinaal[^16] of continu.[^6] In
 De *Kruskal Wallis toets* toetst of twee of meerdere groepen van elkaar verschillen. Een post-hoc toets specificeert of groep significant van een andere groep verschilt. Gebruik de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-I-R.html) als post-hoc toets. Hoewel het minder gebruikelijk is, is *Moods'mediaan toets* ook een optie als post-hoc toets. Deze toets toetst het verschil tussen de medianen van twee ongepaarde groepen. De [Mann-Whitney U toets](08-Mann-Whitney-U-toets-I-R.html) toetst het verschil tussen de verdelingen van twee ongepaarde groepen.
 <!-- ## /TEKSTBLOK: link3.R -->
 
-Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout.[^9] Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^2]
+Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout.[^9] Er zijn ook andere opties voor een correctie op de p-waarden.
 
 # Effectmaat
 De p-waarde geeft aan of het verschil tussen groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^2] 
@@ -115,51 +115,49 @@ unique(Resultaten_Arbeidsrecht$Vooropleiding)
 <!-- ## /OPENBLOK: Data-bekijken-2.R -->
 
 <!-- ## TEKSTBLOK: Data-bekijken3.R-->
-Inspecteer om meer inzicht te krijgen in de data de groepen met `length()`, `median()` en `quantile()`. Groepeer hiervoor eerst met `group_by()`.
+Inspecteer voor het aantal EC per vooropleiding de mediaan, de kwartielen en het aantal observaties. Gebruik de mediaan en kwartielen omdat de beoordelingen waarschijnlijk niet normaal verdeeld zijn. Gebruik hiervoor de functie `descr` en `stby` van het package `summarytools` om de beschrijvende statistieken per groep weer te geven. Voer de gewenste statistieken in met het argument `stats = c("q1","med","q3","n.valid")`.
+
 <!-- ## /TEKSTBLOK: Data-bekijken3.R-->
 
 <!-- ## OPENBLOK: Data-beschrijven.R -->
 ``` {r data beschrijven, warning=FALSE, message=FALSE}
-## Groepsgrootes, mediaan en kwantielen
-library(dplyr)
-group_by(Resultaten_Arbeidsrecht, Vooropleiding) %>%
-  summarise(
-    N = length(EC_Jaar1),
-    Q1 = quantile(EC_Jaar1)[2], ## de eerste waarde is het minimum; Q1 is dus op de 2e positie
-    Mediaan = median(EC_Jaar1),
-    Q3 = quantile(EC_Jaar1)[4]
-  )
+library(summarytools)
+
+## Mediaan, kwartielen en groepsgroottes
+with(Resultaten_Arbeidsrecht, 
+     stby(data = EC_Jaar1, 
+          list(Vooropleiding), 
+          descr, 
+          stats = c("q1", "med", "q3", "n.valid")))
 ```
 <!-- ## /OPENBLOK: Data-beschrijven.R -->
 <!-- ## CLOSEDBLOK: Data-beschrijven.R -->
 ``` {r data beschrijven als object, include=FALSE, echo=TRUE}
-x <- group_by(Resultaten_Arbeidsrecht, Vooropleiding) %>%
-  summarise(
-    N = n(),
-    Q1 = quantile(EC_Jaar1)[2],
-    Mediaan = median(EC_Jaar1),
-    Q3 = quantile(EC_Jaar1)[4]
-  )
+x <- with(Resultaten_Arbeidsrecht,
+          stby(data = EC_Jaar1,
+               list(Vooropleiding),
+               descr,
+               stats = c("q1", "med", "q3", "n.valid")))
 
-vN_FIS <- Round_and_format(x[1,2])
-vN_NOT <- Round_and_format(x[2,2])
-vN_RCH <- Round_and_format(x[4,2])
-vN_PM <- Round_and_format(x[3,2])
+vN_FIS <- Round_and_format(x[[1]][4])
+vN_NOT <- Round_and_format(x[[2]][4])
+vN_RCH <- Round_and_format(x[[4]][4])
+vN_PM <- Round_and_format(x[[3]][4])
 
-vQ1_FIS <- Round_and_format(x[1,3])
-vQ1_NOT <- Round_and_format(x[2,3])
-vQ1_RCH <- Round_and_format(x[4,3])
-vQ1_PM <- Round_and_format(x[3,3])
+vQ1_FIS <- Round_and_format(x[[1]][1])
+vQ1_NOT <- Round_and_format(x[[2]][1])
+vQ1_RCH <- Round_and_format(x[[4]][1])
+vQ1_PM <- Round_and_format(x[[3]][1])
 
-vMed_FIS <- Round_and_format(x[1,4])
-vMed_NOT <- Round_and_format(x[2,4])
-vMed_RCH <- Round_and_format(x[4,4])
-vMed_PM <- Round_and_format(x[3,4])
+vMed_FIS <- Round_and_format(x[[1]][2])
+vMed_NOT <- Round_and_format(x[[2]][2])
+vMed_RCH <- Round_and_format(x[[4]][2])
+vMed_PM <- Round_and_format(x[[3]][2])
 
-vQ3_FIS <- Round_and_format(x[1,5])
-vQ3_NOT <- Round_and_format(x[2,5])
-vQ3_RCH <- Round_and_format(x[4,5])
-vQ3_PM <- Round_and_format(x[3,5])
+vQ3_FIS <- Round_and_format(x[[1]][3])
+vQ3_NOT <- Round_and_format(x[[2]][3])
+vQ3_RCH <- Round_and_format(x[[4]][3])
+vQ3_PM <- Round_and_format(x[[3]][3])
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven.R -->
 <!-- ## TEKSTBLOK: Data-beschrijven.R-->
@@ -354,6 +352,6 @@ De [Mann-Whitney U toets](08-Mann-Whitney-U-toets-I-R.html) is uitgevoerd als po
 [^15]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage.
 [^16]: Een ordinale variabele is een categorische variabele waarbij de categorieën geordend kunnen worden. Een voorbeeld is de variabele beoordeling met de categorieën Onvoldoende, Voldoende, Goed en Uitstekend.
 [^17]:  Laerd statistics (2018). *Kruskal-Wallis H Test using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/kruskal-wallis-h-test-using-spss-statistics.php.
-[^18]: De breedte van de staven van het histogram worden hier automatisch bepaald, maar kunnen handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
+[^18]: De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
 [^19]: Bij de *Kruskal Wallis toets* en andere nonparametrische toetsen wordt de data eerst gerangschikt zodat elke observatie een rangnummer toegewezen krijgt. Deze rangnummers worden vervolgens gebruikt om de toets uit te voeren.
 

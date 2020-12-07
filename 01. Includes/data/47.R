@@ -33,42 +33,34 @@ set.seed(12345)
 
 # Maak studentnummer
 Studentnummer <- sample(300000:400000,
-                            250)
+                            600)
 
-# Studiepunten
-Studiepunten <- sample(c(25,30,35,40,45,50,55,60),
-                   250,
-                   replace = TRUE,
-                   prob = c(0.05,0.05,0.1,0.1,0.1,0.25,0.25,0.1
-                            )
-                   )
-
-# Geslacht
-Geslacht <- c(rep("Vrouw", 
-                  150),
-              rep("Man", 
-                  100))[sample.int(250,250)]
-Geslacht_dummy <- rep(0,
-                      250)
-Geslacht_dummy[Geslacht == "Man"] <- 1
+# Nominaal
+Nominaal <- c(rep("Nominaal", 
+                  200),
+              rep("Niet nominaal", 
+                  400))[sample.int(600,600)]
+Nominaal_dummy <- rep(0,
+                      600)
+Nominaal_dummy[Nominaal == "Nominaal"] <- 1
 
 
-# Eindexamencijfer wiskunde middelbare school
-Gemiddeld_cijfer <- round(rnorm(250,7,1),1)
+# Gemiddeld cijfer
+Gemiddeld_cijfer <- round(rnorm(600,7,1),1)
 Gemiddeld_cijfer[Gemiddeld_cijfer < 5.0] <- 5.0
-Gemiddeld_cijfer[Gemiddeld_cijfer > 10.0] <- 10.0
+Gemiddeld_cijfer[Gemiddeld_cijfer >= 10.0] <- 9.6
 
-Logit_Uitval <- exp(11  - 0.1 * Studiepunten + 0.05 * Geslacht_dummy + -1.2 * Gemiddeld_cijfer) 
-Logit_Nominaal <- exp(-14  + 0.1 * Studiepunten + -0.05 * Geslacht_dummy + 1.2 * Gemiddeld_cijfer) 
-#Logit_Niet_nominaal <- 17  - 1.4 * Studiepunten + -0.5 * Geslacht_dummy + 1.2 * Gemiddeld_cijfer 
+Logit_WO_master <- exp(-8  + 0 * Nominaal_dummy + 1.0 * Gemiddeld_cijfer) 
+Logit_hbo_master <- exp(-4  + 0.9 * Nominaal_dummy + 0.4 * Gemiddeld_cijfer) 
+#Logit_werk <- 17  + -0.5 * Nominaal_dummy + 1.2 * Gemiddeld_cijfer 
 
-p_Uitval <- Logit_Uitval / (1 + Logit_Uitval + Logit_Nominaal)
-p_Nominaal <- Logit_Nominaal / (1 + Logit_Uitval + Logit_Nominaal)
-p_Niet_nominaal <- 1 / (1 + Logit_Uitval + Logit_Nominaal)
+p_WO_master <- Logit_WO_master / (1 + Logit_WO_master + Logit_hbo_master)
+p_hbo_master <- Logit_hbo_master / (1 + Logit_WO_master + Logit_hbo_master)
+p_werk <- 1 / (1 + Logit_WO_master + Logit_hbo_master)
 
-mChoices = t(apply(cbind(p_Uitval, 
-                         p_Nominaal, 
-                         p_Niet_nominaal), 
+mChoices = t(apply(cbind(p_WO_master, 
+                         p_hbo_master, 
+                         p_werk), 
                    1, 
                    rmultinom, 
                    n = 1, 
@@ -76,43 +68,64 @@ mChoices = t(apply(cbind(p_Uitval,
 
 colSums(mChoices)
 
-Uitstroom <- rep(NA,250)
-Uitstroom[mChoices[,1] == 1] <- "Uitval"
-Uitstroom[mChoices[,2] == 1] <- "Nominaal"
-Uitstroom[mChoices[,3] == 1] <- "Niet-nominaal"
+Vervolg <- rep(NA,600)
+Vervolg[mChoices[,1] == 1] <- "WO master"
+Vervolg[mChoices[,2] == 1] <- "hbo master"
+Vervolg[mChoices[,3] == 1] <- "werk"
 
-Fysiotherapie_Uitstroom <- cbind.data.frame(Uitstroom, 
+Vervolg <- relevel(as.factor(Vervolg), ref = "werk")
+
+Fysiotherapie_Vervolg <- cbind.data.frame(Vervolg, 
                             Studentnummer,
                             Gemiddeld_cijfer,
-                            Geslacht_dummy,
-                            Geslacht,
-                            Studiepunten
+                            Nominaal_dummy,
+                            Nominaal
                             )
 
+#library(mclogit)
+
+#Regressiemodel <- mblogit(Vervolg ~  Nominaal_dummy + Gemiddeld_cijfer,
+#                         Fysiotherapie_Vervolg
+#                         )
+
+#summary(Regressiemodel)
+#summary(Regressiemodel, dispersion = 1.35)
+
+#dispersion(Regressiemodel, method = "Pearson")
+
+#library(lmtest)
+#lrtest(Regressiemodel)
 
 
-#dfM$y2 <- as.factor(as.character(dfM$y))
-#Fysiotherapie_Uitstroom$idcase <- 1:nrow(Fysiotherapie_Uitstroom)
+
+
+
+
+
+
+
+
+#Fysiotherapie_Vervolg$idcase <- 1:nrow(Fysiotherapie_Vervolg)
 
 #library(mlogit)
 
-#Dataset2 <- dfidx(Fysiotherapie_Uitstroom, shape = "wide", choice = "Uitstroom")
-#Dataset2 <- dfidx(Fysiotherapie_Uitstroom, shape = "wide", idx = c("Studentnummer","Uitstroom"))
+#Dataset2 <- dfidx(Fysiotherapie_Vervolg, shape = "wide", choice = "Vervolg")
+#Dataset2 <- dfidx(Fysiotherapie_Vervolg, shape = "wide", idx = c("Studentnummer","Vervolg"))
 
-#bbb <- mlogit(Uitstroom ~  1 |  1 + Studiepunten + Geslacht_dummy + Gemiddeld_cijfer,
-#       Dataset2)
+#bbb <- mlogit(Vervolg ~  1 |  1 + Nominaal_dummy + Gemiddeld_cijfer,
+#       Dataset2,
+#       reflevel = "werk")
 
 #summary(bbb)
 
 rm(mChoices,
    Gemiddeld_cijfer,
-   Geslacht,
-   Geslacht_dummy,
-   Logit_Nominaal,
-   Logit_Uitval,
-   p_Niet_nominaal,
-   p_Nominaal,
-   p_Uitval,
+   Nominaal,
+   Nominaal_dummy,
+   Logit_WO_master,
+   Logit_hbo_master,
+   p_WO_master,
+   p_hbo_master,
+   p_werk,
    Studentnummer,
-   Studiepunten,
-   Uitstroom)
+   Vervolg)

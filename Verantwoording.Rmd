@@ -29,10 +29,10 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
-Het Statisch Handboek Studiedata is een initiatief van de zone Veilig en Betrouwbaar Benutten van Studiedata van het Versnellingsplan. 
+Het Statistisch Handboek Studiedata is een initiatief van de zone Veilig en Betrouwbaar Benutten van Studiedata van het Versnellingsplan. 
 
 # Doel
-Het doel van het Statisch Handboek Studiedata is om collega's in het hoger onderwijs met enige kennis van de statistiek van een stappenplan te voorzien:
+Het doel van het Statistisch Handboek Studiedata is om collega's in het hoger onderwijs met enige kennis van de statistiek van een stappenplan te voorzien:
 
 * hoe ze eenvoudig statistische toetsen kunnen kiezen bij een vraagstuk, 
 * weten aan welke voorwaarden hun data moet voldoen, 
@@ -57,6 +57,7 @@ Het handboek is nog volop in ontwikkeling en zal gedurende 2020 aangevuld worden
 * 20 april 2020: Begrippenlijst toegevoegd, Python toetsen verbeterd en nieuwe toetsen toegevoegd (Tekentoets, Friedman's ANOVA, Cochran's Q toets)
 * 29 juni 2020: Nieuwe toetsen toegevoegd voor R (Multilevel multinomiale logistische regressie, Wilcoxon II, Mann-Whitney U II en Kruskall Wallis II) en Python (Repeated measures ANOVA en Mann-Whitney U I)
 * 5 augustus 2020: Tweede toetsmatrix toegevoegd en toetspagina multipele lineaire regressie toegevoegd
+* 12 november 2020: Laatste toetsen eerste toetsmatrix toegevoegd
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer_simpel.R"))}

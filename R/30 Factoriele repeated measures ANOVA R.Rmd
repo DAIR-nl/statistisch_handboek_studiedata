@@ -51,7 +51,7 @@ source(paste0(here::here(),"/01. Includes/data/30.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *factoriële repeated measures ANOVA* om te toetsen of de gemiddelden van groepen op basis van twee of meer onafhankelijke categorische variabelen van elkaar verschillen waarbij de deelnemers gemeten zijn voor elke categorie van de onafhankelijke variabelen (herhaalde metingen).[^1] De onafhankelijke variabelen zijn bij de *factoriële  repeated measures ANOVA* allemaal within-subjects variabelen.
+Gebruik de *factoriële repeated measures ANOVA* om te toetsen of de gemiddelden van groepen op basis van twee of meer onafhankelijke categorische variabelen van elkaar verschillen waarbij de deelnemers[^19] gemeten zijn voor elke categorie van de onafhankelijke variabelen (herhaalde metingen).[^1] De onafhankelijke variabelen zijn bij de *factoriële  repeated measures ANOVA* allemaal within-subjects variabelen.
 
 
 # Onderwijscasus
@@ -120,7 +120,7 @@ Bij *factoriële repeated measures ANOVA* worden bovenstaande grafieken gebruikt
 
 # Assumpties
 
-Voor een valide toetsresultaat bij de *factoriële repeated measures ANOVA* moet er aan een aantal assumpties voldaan worden. De steekproef moet bestaan uit onafhankelijke observatie-eenheden, de afhankelijke variabele moet normaal verdeeld zijn voor elke combinatie van groepen van de onafhankelijke variabelen en er moet sphericiteit zijn.[^1]
+Voor een valide toetsresultaat bij de *factoriële repeated measures ANOVA* moet er aan een aantal assumpties voldaan worden. De steekproef moet bestaan uit onafhankelijke deelnemers, de afhankelijke variabele moet normaal verdeeld zijn voor elke combinatie van groepen van de onafhankelijke variabelen en er moet sphericiteit zijn.[^1]
 
 ## Normaliteit
 Controleer de assumptie van normaliteit voor elke groep met de volgende stappen:  
@@ -184,7 +184,7 @@ De effectmaat *partial eta squared* (partial *η^2^*) berekent de proportie van 
 
 # Post-hoc toetsen
 
-De eerste stap van de *factoriële repeated measures ANOVA* is het toetsen van hoofdeffecten en interactie-effecten. De volgende stap bestaat uit het bepalen welke groepen van elkaar verschillen, zowel bij *simple effects analyse* als bij het interpreteren van hoofdeffecten, en wordt gedaan met post-hoc toetsen. De post-hoc toetsen voeren meestal een correctie voor de p-waarden uit, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout. Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^11]
+De eerste stap van de *factoriële repeated measures ANOVA* is het toetsen van hoofdeffecten en interactie-effecten. De volgende stap bestaat uit het bepalen welke groepen van elkaar verschillen, zowel bij *simple effects analyse* als bij het interpreteren van hoofdeffecten, en wordt gedaan met post-hoc toetsen. De post-hoc toetsen voeren meestal een correctie voor de p-waarden uit, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout. Er zijn ook andere opties voor een correctie op de p-waarden. 
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
@@ -308,7 +308,7 @@ De p-waarde is groter dan 0,05 voor elke groep; er zijn dus geen significante ve
 ## Sphericiteit
 
 <!-- ## TEKSTBLOK: LeveneTest1.R -->
-Toets met *Mauchly's test* de assumptie van sphericiteit. Gebruik de functie `ezANOVA()$Mauchly's Test for Sphericity` van het package `ez` met als argumenten de dataset `Resultaten_Leisure_Management`, de afhankelijke variabele `dv = Cijfers`, de variabele die de observatie-eenheden aangeeft `wid = Studentnummer` en de onafhankelijke variabelen `within = list(Vaksoort, Periode)`.
+Toets met *Mauchly's test* de assumptie van sphericiteit. Gebruik de functie `ezANOVA()$Mauchly's Test for Sphericity` van het package `ez` met als argumenten de dataset `Resultaten_Leisure_Management`, de afhankelijke variabele `dv = Cijfers`, de variabele die de deelnemers aangeeft `wid = Studentnummer` en de onafhankelijke variabelen `within = list(Vaksoort, Periode)`.
 <!-- ## /TEKSTBLOK: LeveneTest1.R -->
 
 <!-- ## OPENBLOK: Levenes-test.R -->
@@ -348,7 +348,7 @@ p_Int <- Round_and_format(obj$p[2])
 # Factoriële repeated measures ANOVA 
 
 <!-- ## TEKSTBLOK: ANOVA-toets.R -->
-Voer de *factoriële repeated measures ANOVA* uit om de vraag te beantwoorden of er verschillen zijn tussen theorie- en praktijkvakken en tussen de vier onderwijsperioden wat betreft de cijfers van eerstejaars studenten van de bachelor Leisure Management. Gebruik de functie `ezANOVA()` van het package `ez` met als argumenten de dataset `Resultaten_Leisure_Management`, de afhankelijke variabele `dv = Cijfers`, de variabele die de observatie-eenheden aangeeft `wid = Studentnummer` en de onafhankelijke variabelen `within = list(Vaksoort, Periode)`.
+Voer de *factoriële repeated measures ANOVA* uit om de vraag te beantwoorden of er verschillen zijn tussen theorie- en praktijkvakken en tussen de vier onderwijsperioden wat betreft de cijfers van eerstejaars studenten van de bachelor Leisure Management. Gebruik de functie `ezANOVA()` van het package `ez` met als argumenten de dataset `Resultaten_Leisure_Management`, de afhankelijke variabele `dv = Cijfers`, de variabele die de deelnemers aangeeft `wid = Studentnummer` en de onafhankelijke variabelen `within = list(Vaksoort, Periode)`.
 <!-- ## /TEKSTBLOK: ANOVA-toets.R -->
 
 <!-- ## OPENBLOK: ANOVA-toets.R -->
@@ -744,7 +744,7 @@ ggplot(Resultaten_Leisure_Management,
 Sage. Pagina 458-460.
 [^7]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php. 
 [^8]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).
-[^9]: De breedte van de staven van het histogram worden hier automatisch bepaald, maar kunnen handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
+[^9]: De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
 [^10]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. 
 Sage. Pagina 507-542.
 [^11]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
@@ -752,6 +752,7 @@ Sage. Pagina 507-542.
 [^16]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 [^17]: Outliers kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de outliers valide outliers zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van outliers kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde outliers te melden in een rapport. 
 [^18]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
+[^19]: Met een deelnemer wordt het object bedoeld dat geobserveerd wordt, bijvoorbeeld een student, een inwoner van Nederland, een opleiding of een organisatie. Met een observatie wordt de waarde bedoeld die de deelnemer heeft voor een bepaalde variabele. Een deelnemer heeft dus meestal een observatie voor meerdere variabelen.
 
 [^21]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage.
 

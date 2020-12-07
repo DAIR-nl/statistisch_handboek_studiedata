@@ -55,30 +55,30 @@ Gebruik de *factoriële ANOVA* bij het toetsen of de gemiddelden van groepen op 
 
 # Onderwijscasus
 <div id = "casus">
-Bij de bacheloropleiding Psychologie van een universiteit is besloten om naast studenten met een vwo-opleiding studenten met een propedeuse voor de hbo-opleiding Psychologie ook toe te laten. De opleidingsdirecteur van de bachelor wil graag evalueren of deze hbo-p studenten het niveau van de opleiding aankunnen, maar is ook benieuwd of man-vrouw verschillen hierbij een rol spelen. Daarom vergelijkt zij de verschillen in gemiddeld cijfer van het eerste studiejaar voor studenten met een hbo-p vooropleiding, vwo vooropleiding en overige vooropleidingen en of dit verschillend is voor mannen en vrouwen.
+Bij de bacheloropleiding Psychologie van een universiteit is besloten om naast studenten met een vwo-opleiding studenten met een propedeuse voor de hbo-opleiding Psychologie ook toe te laten. De opleidingsdirecteur van de bachelor wil graag evalueren of deze hbo-p studenten het niveau van de opleiding aankunnen, maar is ook benieuwd of man-vrouw verschillen hierbij een rol spelen. Daarom vergelijkt zij de verschillen in het gemiddeld cijfer van het eerste studiejaar voor studenten met een hbo-p vooropleiding, vwo vooropleiding en overige vooropleidingen en of dit verschillend is voor mannen en vrouwen.
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is. Bij *factoriële ANOVA* zijn er hypotheses op te stellen voor de verschillen tussen groepen van elke onafhankelijke variabele apart (hoofdeffecten) en een hypothese voor de interactie tussen twee of meerdere onafhankelijke variabelen (interactie-effect).
 
-*H~0~*: Het gemiddelde cijfer is gelijk voor mannen en vrouwen, i.e. er is geen hoofdeffect van Geslacht op Gemiddeld cijfer.
+*H~0~*: Het gemiddelde cijfer is gelijk voor mannen en vrouwen, i.e. er is geen hoofdeffect van Geslacht op Gemiddeld_cijfer.
 
-*H~A~*: Het gemiddelde cijfer is niet gelijk voor mannen en vrouwen, i.e. er is een hoofdeffect van Geslacht op Gemiddeld cijfer.
+*H~A~*: Het gemiddelde cijfer is niet gelijk voor mannen en vrouwen, i.e. er is een hoofdeffect van Geslacht op Gemiddeld_cijfer.
 
-*H~0~*: Het gemiddelde cijfer is gelijk voor studenten met een hbo-p, vwo en overige vooropleiding, i.e. er is geen hoofdeffect van Vooropleiding op Gemiddeld cijfer.
+*H~0~*: Het gemiddelde cijfer is gelijk voor studenten met een hbo-p, vwo en overige vooropleiding, i.e. er is geen hoofdeffect van Vooropleiding op Gemiddeld_cijfer.
 
-*H~A~*: Het gemiddelde cijfer is niet gelijk voor studenten met een hbo-p, vwo en overige vooropleiding, i.e. er is een hoofdeffect van Vooropleiding op Gemiddeld cijfer.
+*H~A~*: Het gemiddelde cijfer is niet gelijk voor studenten met een hbo-p, vwo en overige vooropleiding, i.e. er is een hoofdeffect van Vooropleiding op Gemiddeld_cijfer.
 
-*H~0~*: Er is geen interactie-effect tussen de variabelen Geslacht en Vooropleiding op het gemiddeld cijfer.
+*H~0~*: Er is geen interactie-effect tussen de variabelen Geslacht en Vooropleiding op het gemiddelde cijfer.
 
-*H~A~*: Er is een interactie-effect tussen de variabelen Geslacht en Vooropleiding op het gemiddeld cijfer.
+*H~A~*: Er is een interactie-effect tussen de variabelen Geslacht en Vooropleiding op het gemiddelde cijfer.
 
 </div>
 
 
 # Hoofdeffecten en interacties
 
-Bij *factoriële ANOVA* wordt onderzocht of er verschillen zijn tussen groepen die gemaakt worden op basis van meerdere categorische onafhankelijke variabelen. Dit wordt toegelicht met een versimpelde vorm van de huidige casus met twee onafhankelijke variabelen Vooropleiding en Geslacht en een afhankelijke variabele Gemiddeld cijfer. De onafhankelijke variabele Vooropleiding bestaat uit twee groepen (hbo-p en vwo) en de onafhankelijke variabele Geslacht bestaat ook uit twee groepen (man en vrouw). Binnen *factoriële ANOVA* wordt een onderscheid gemaakt tussen hoofdeffecten en interactie-effecten. Een hoofdeffect houdt in dat er een verschil is tussen de groepen van één van de onafhankelijke variabelen. In andere woorden, de onafhankelijke variabele heeft effect op de afhankelijke variabele. Voor het bedachte experiment houdt een hoofdeffect van de variabele Vooropleiding in dat er een verschil is in het gemiddelde van groep hbo-p en groep vwo. Een hoofdeffect van de variabele Geslacht houdt in dat er een verschil is in het gemiddelde van groep man en groep vrouw.[^10]
+Bij *factoriële ANOVA* wordt onderzocht of er verschillen zijn tussen groepen die gemaakt worden op basis van meerdere categorische onafhankelijke variabelen. Dit wordt toegelicht met een versimpelde vorm van de huidige casus met twee onafhankelijke variabelen Vooropleiding en Geslacht en een afhankelijke variabele Gemiddeld_cijfer. De onafhankelijke variabele Vooropleiding bestaat uit twee groepen (hbo-p en vwo) en de onafhankelijke variabele Geslacht bestaat ook uit twee groepen (man en vrouw). Binnen *factoriële ANOVA* wordt een onderscheid gemaakt tussen hoofdeffecten en interactie-effecten. Een hoofdeffect houdt in dat er een verschil is tussen de groepen van één van de onafhankelijke variabelen. In andere woorden, de onafhankelijke variabele heeft effect op de afhankelijke variabele. Voor het bedachte experiment houdt een hoofdeffect van de variabele Vooropleiding in dat er een verschil is in het gemiddelde van groep hbo-p en groep vwo. Een hoofdeffect van de variabele Geslacht houdt in dat er een verschil is in het gemiddelde van groep man en groep vrouw.[^10]
 
-Een grafische weergave van hoofdeffecten is te zien in Figuur 1. In de figuur is de relatie tussen de variabelen Vooropleiding en Gemiddeld cijfer weergegeven voor mannen en vrouwen. Het hoofdeffect van de variabele Vooropleiding is te zien door het gemiddelde van groep hbo-p te vergelijken met het gemiddelde van groep vwo. Beide gemiddelden zijn weergegeven met groene driehoeken: groep hbo-p heeft een gemiddelde van 6 en groep vwo een gemiddelde van 8. Er is dus een verschil in gemiddelde tussen de groepen van onafhankelijke variabele Vooropleiding, wat betekent dat er een hoofdeffect van de variabele Vooropleiding is. Op dezelfde manier kan een mogelijk hoofdeffect van de variabele Geslacht onderzocht worden. Het gemiddelde van groep man is weergegeven met een oranje vierkant en het gemiddelde van groep vrouw met een blauw vierkant. Het gemiddelde van groep vrouw (8) ligt hoger dan het gemiddelde van groep man (6), dus er is ook een hoofdeffect van onafhankelijke variabele Geslacht. Beide onafhankelijke variabelen hebben dus een effect op de afhankelijke variabele Gemiddeld_cijfer.
+Een grafische weergave van hoofdeffecten is te zien in Figuur 1. In de figuur is de relatie tussen de variabelen Vooropleiding en Gemiddeld_cijfer weergegeven voor mannen en vrouwen. Het hoofdeffect van de variabele Vooropleiding is te zien door het gemiddelde van groep hbo-p te vergelijken met het gemiddelde van groep vwo. Beide gemiddelden zijn weergegeven met groene driehoeken: groep hbo-p heeft een gemiddelde van 6 en groep vwo een gemiddelde van 8. Er is dus een verschil in gemiddelde tussen de groepen van onafhankelijke variabele Vooropleiding, wat betekent dat er een hoofdeffect van de variabele Vooropleiding is. Op dezelfde manier kan een mogelijk hoofdeffect van de variabele Geslacht onderzocht worden. Het gemiddelde van groep man is weergegeven met een oranje vierkant en het gemiddelde van groep vrouw met een blauw vierkant. Het gemiddelde van groep vrouw (8) ligt hoger dan het gemiddelde van groep man (6), dus er is ook een hoofdeffect van onafhankelijke variabele Geslacht. Beide onafhankelijke variabelen hebben dus een effect op de afhankelijke variabele Gemiddeld_cijfer.
 
 <!-- ## CLOSEDBLOK: Uitleg1.R -->
 ```{r, echo = FALSE, message = FALSE}
@@ -113,7 +113,7 @@ Bij *factoriële ANOVA* worden bovenstaande grafieken gebruikt om de resultaten 
 
 # Assumpties
 
-Voor een valide toetsresultaat bij de *factoriële ANOVA* moet er aan een aantal assumpties voldaan worden. De steekproef moet bestaan uit onafhankelijke observatie-eenheden, de afhankelijke variabele moet normaal verdeeld zijn voor elke combinatie van groepen van de onafhankelijke variabelen en er moet homogeniteit van varianties zijn.[^1]
+Voor een valide toetsresultaat bij de *factoriële ANOVA* moet er aan een aantal assumpties voldaan worden. De steekproef moet bestaan uit onafhankelijke deelnemers[^19], de afhankelijke variabele moet normaal verdeeld zijn voor elke combinatie van groepen van de onafhankelijke variabelen en er moet homogeniteit van varianties zijn.[^1]
 
 ## Normaliteit
 Controleer de assumptie van normaliteit voor elke groep met de volgende stappen:  
@@ -138,7 +138,7 @@ De effectmaat *partial eta squared* (partial *η^2^*) berekent de proportie van 
 
 # Post-hoc toetsen
 
-De eerste stap van de *factoriële ANOVA* is het toetsen van hoofdeffecten en interactie-effecten. De volgende stap bestaat uit het bepalen welke groepen van elkaar verschillen, zowel bij *simple effects analyse* als het interpreteren van hoofdeffecten, en wordt gedaan met post-hoc toetsen. De post-hoc toetsen voeren meestal een correctie voor de p-waarden uit, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). Gebruik bij *factoriële ANOVA* de Games-Howell post-hoc toets, omdat deze te gebruiken is bij ongelijke varianties. De Bonferroni correctie is een optie als het doel is om de type I fout heel laag te houden.[^6] In deze toetspagina wordt de Games-Howell post-hoc toets gebruikt.
+De eerste stap van de *factoriële ANOVA* is het toetsen van hoofdeffecten en interactie-effecten. De volgende stap bestaat uit het bepalen welke groepen van elkaar verschillen, zowel bij *simple effects analyse* als het interpreteren van hoofdeffecten, en wordt gedaan met post-hoc toetsen. De post-hoc toetsen voeren meestal een correctie voor de p-waarden uit, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). Gebruik bij *factoriële ANOVA* de Games-Howell post-hoc toets, omdat deze te gebruiken is bij ongelijke varianties. De Bonferroni correctie is een optie als het doel is om de type I fout heel laag te houden.[^6] Er zijn ook nog andere opties voor een correctie op de p-waarden. In deze toetspagina wordt de Games-Howell post-hoc toets gebruikt.
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
@@ -344,7 +344,7 @@ Esq <- Round_and_format(pes[3,2])
 
 ## Simple effects analyse
 
-Voer een *simple effects analyse* uit om het interactie-effect te interpreteren. Vergelijk eerst de verschillen tussen de drie vooropleiding voor elke categorie van de variabele Geslacht (mannen en vrouwen dus). Vergelijk daarna de verschillen tussen mannen en vrouwen van elke categorie van de variabele Vooropleiding (hbo-p, vwo of overig).
+Voer een *simple effects analyse* uit om het interactie-effect te interpreteren. Vergelijk eerst de verschillen tussen de drie vooropleidingen voor elke categorie van de variabele Geslacht (mannen en vrouwen dus). Vergelijk daarna de verschillen tussen mannen en vrouwen van elke categorie van de variabele Vooropleiding (hbo-p, vwo of overig).
 
 ### Vooropleiding
 
@@ -623,7 +623,7 @@ ggplot(Gemiddelde_cijfers_psychologie, aes(x = Vooropleiding, y = Gemiddeld_cijf
 Sage. Pagina 458-460.
 [^7]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php. 
 [^8]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).
-[^9]: De breedte van de staven van het histogram worden hier automatisch bepaald, maar kunnen handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
+[^9]: De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
 [^10]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. 
 Sage. Pagina 507-542.
 [^11]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
@@ -631,6 +631,4 @@ Sage. Pagina 507-542.
 [^16]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 [^17]: Outliers kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de outliers valide outliers zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van outliers kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde outliers te melden in een rapport. 
 [^18]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
-
-
-
+[^19]: Met een deelnemer wordt het object bedoeld dat geobserveerd wordt, bijvoorbeeld een student, een inwoner van Nederland, een opleiding of een organisatie. Met een observatie wordt de waarde bedoeld die de deelnemer heeft voor een bepaalde variabele. Een deelnemer heeft dus meestal een observatie voor meerdere variabelen.

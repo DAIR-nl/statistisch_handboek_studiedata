@@ -145,7 +145,7 @@ Het staafdiagram (Figuur 1) laat zien dat de meeste studenten 3 voldoendes halen
 
 ## Friedman's ANOVA
 <!-- ## TEKSTBLOK: Kruskal-Wallis-test-1.R -->
-Voer de *Friedman's ANOVA* uit om te onderzoeken of er verschillen zijn tussen het aantal voldoendes in de vier onderwijsperioden in het eerste jaar van studenten van de bachelor Geschiedenis. Gebruik de functie `friedman.test()` met als eerste argument de formule `Voldoendes ~ Periode | Studentnummer` met daarin links van de tilde de afhankelijke variabele `Voldoendes` en rechts van de tilde de onafhankelijke variabele `Periode` en na het sluisteken de variabele `Studentnummer` die de observatie-eenheden aangeeft. Het tweede argument is de dataset `Voldoendes_Geschiedenis`. 
+Voer de *Friedman's ANOVA* uit om te onderzoeken of er verschillen zijn tussen het aantal voldoendes in de vier onderwijsperioden in het eerste jaar van studenten van de bachelor Geschiedenis. Gebruik de functie `friedman.test()` met als eerste argument de formule `Voldoendes ~ Periode | Studentnummer` met daarin links van de tilde de afhankelijke variabele `Voldoendes` en rechts van de tilde de onafhankelijke variabele `Periode` en na het sluisteken de variabele `Studentnummer` die de deelnemers[^19] aangeeft. Het tweede argument is de dataset `Voldoendes_Geschiedenis`. 
 <!-- ## /TEKSTBLOK: Kruskal-Wallis-test-1.R -->
 
 <!-- ## OPENBLOK: Kruskal-Wallis-test-2.R -->
@@ -162,7 +162,7 @@ Bereken de effectmaat *Kendall's W* vervolgens op basis van de *&chi;^2^*-waarde
 Chi2 <- friedman.test(Voldoendes ~ Periode | Studentnummer,
                       Voldoendes_Geschiedenis)$statistic
 
-# Sla het aantal observatie-eenheden op
+# Sla het aantal deelnemers op
 N <- length(unique(Voldoendes_Geschiedenis$Studentnummer))  
 
 # Sla het aantal groepen op
@@ -303,11 +303,12 @@ De [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html) is uitgevo
 [^1]:  Laerd statistics (2018). *Friedman Test using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/friedman-test-using-spss-statistics.php.
 [^5]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^6]: University of Sheffield. *Friedman test in SPSS*. [Mathematics and Statistics Help (MASH)](https://www.sheffield.ac.uk/polopoly_fs/1.714575!/file/stcp-marshall-FriedmanS.pdf). Bezocht op 13 maart 2020.
-[^7]: *Kendall's W* wordt berekend door de teststatistiek van *Friedman's ANOVA* (dit is de *&chi;^2^*) te delen door het aantal observatie-eenheden *N* en het aantal groepen *k* minus één, i.e. $W = \frac{\chi^2}{N(k-1)}$.
+[^7]: *Kendall's W* wordt berekend door de teststatistiek van *Friedman's ANOVA* (dit is de *&chi;^2^*) te delen door het aantal deelnemers *N* en het aantal groepen *k* minus één, i.e. $W = \frac{\chi^2}{N(k-1)}$.
 [^8]: Kassambara, A. (2020). *rstatix: Pipe-Friendly Framework for Basic Statistical Tests*. [R package version 0.4.0.](https://CRAN.R-project.org/package=rstatix).
 [^10]: De effectmaat *&eta;^2^* wordt voor de *Kruskal-Wallis toets* berekend door de *&chi;^2^*-waarde te delen door het totaal aantal observaties minus één, i.e. $\frac{\chi^2}{N-1} $.
 [^11]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
 [^14]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met Type I en Type II fouten. 
 [^15]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage.
 [^16]: Een ordinale variabele is een categorische variabele waarbij de categorieën geordend kunnen worden. Een voorbeeld is de variabele beoordeling met de categorieën Onvoldoende, Voldoende, Goed en Uitstekend.
+[^19]: Met een deelnemer wordt het object bedoeld dat geobserveerd wordt, bijvoorbeeld een student, een inwoner van Nederland, een opleiding of een organisatie. Met een observatie wordt de waarde bedoeld die de deelnemer heeft voor een bepaalde variabele. Een deelnemer heeft dus meestal een observatie voor meerdere variabelen.
 

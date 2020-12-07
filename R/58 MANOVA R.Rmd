@@ -104,7 +104,7 @@ Begin voor de analyse met het screenen van de variabelen in de dataset op de aan
 
 ### Mahalanobis afstand
 
-Multivariate outliers zijn deelnemers met een combinatie van observaties op verschillende variabelen die erg afwijken van de overige deelnemers. Deze multivariate outliers kunnen geïdentificeerd worden met de Mahalanobis afstand. De Mahalanobis afstand is een maat die aangeeft in hoeverre de observaties van een deelnemer voor alle afhankelijke variabelen afwijken van de gemiddeldes van de afhankelijke variabelen. Het is een maat voor een afstand tussen twee punten als meerdere variabelen worden gebruikt. Gebruik de Mahalanobis afstand om te onderzoeken of er multivariate outliers zijn bij de afhankelijke variabelen.[^23] Bereken de Mahalanobis afstand voor elke deelnemer en vergelijk deze met de criteriumwaarde. De criteriumwaarde wordt bepaald op basis van de chi-kwadraat score bij een aantal vrijheidsgraden dat gelijk is aan het aantal variabelen en een significantieniveau van 0,001 (of een zelf gekozen significantieniveau). In de code wordt toegelicht hoe de criteriumwaarde bepaald kan worden.[^4]
+Multivariate outliers zijn deelnemers[^19] met een combinatie van observaties op verschillende variabelen die erg afwijken van de overige deelnemers. Deze multivariate outliers kunnen geïdentificeerd worden met de Mahalanobis afstand. De Mahalanobis afstand is een maat die aangeeft in hoeverre de observaties van een deelnemer voor alle afhankelijke variabelen afwijken van de gemiddeldes van de afhankelijke variabelen. Het is een maat voor een afstand tussen twee punten als meerdere variabelen worden gebruikt. Gebruik de Mahalanobis afstand om te onderzoeken of er multivariate outliers zijn bij de afhankelijke variabelen.[^23] Bereken de Mahalanobis afstand voor elke deelnemer en vergelijk deze met de criteriumwaarde. De criteriumwaarde wordt bepaald op basis van de chi-kwadraat score bij een aantal vrijheidsgraden dat gelijk is aan het aantal variabelen en een significantieniveau van 0,001 (of een zelf gekozen significantieniveau). In de code wordt toegelicht hoe de criteriumwaarde bepaald kan worden.[^4]
 
 ## Aantal observaties per groep
 
@@ -357,7 +357,7 @@ De *MANOVA* vereist dat de verdeling van de afhankelijke variabele de normale ve
 
 ### Histogram
 
-Visualiseer de verdelingen van de gemiddelde cijfers in periode 1, 2 en 3 binnen elke groep met behulp van een histogram. Focus bij het analyseren van een histogram op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke outliers. Een normale verdeling is symmetrisch, heeft één top en geen outliers.[^16]<sup>, </sup>[^17]
+Visualiseer de verdelingen van de gemiddelde cijfers in periode 1, 2 en 3 binnen elke groep met behulp van een histogram[^24]. Focus bij het analyseren van een histogram op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke outliers. Een normale verdeling is symmetrisch, heeft één top en geen outliers.[^16]<sup>, </sup>[^17]
 
 <!-- ## OPENBLOK: AssLineariteit1.R -->
 ```{r}
@@ -766,7 +766,10 @@ Sage. Pagina 507-542.
 [^16]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 [^17]: Outliers kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de outliers valide outliers zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van outliers kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde outliers te melden in een rapport. 
 [^18]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
+[^19]: Met een deelnemer wordt het object bedoeld dat geobserveerd wordt, bijvoorbeeld een student, een inwoner van Nederland, een opleiding of een organisatie. Met een observatie wordt de waarde bedoeld die de deelnemer heeft voor een bepaalde variabele. Een deelnemer heeft dus meestal een observatie voor meerdere variabelen.
 [^20]: Tabachnick, B.G. & Fidell, L.S. (2013). *Using multivariate statistics*. Sixth Edition, Pearson. Pagina 285 - 354.
 [^21]: Wikipedia (2020). [Multivariate normal distribution](https://en.wikipedia.org/wiki/Multivariate_normal_distribution)
 [^22]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage. Pagina 623-664.
 [^23]: Tabachnick, B.G. & Fidell, L.S. (2013). *Using multivariate statistics*. Sixth Edition, Pearson. Pagina 72 - 77.
+[^24]: De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
+

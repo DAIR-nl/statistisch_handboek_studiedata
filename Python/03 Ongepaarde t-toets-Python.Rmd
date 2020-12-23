@@ -181,7 +181,7 @@ Geef de verdeling van de data visueel weer met een histogram, Q-Q plot en boxplo
 
 ### Histogram
 
-Focus bij het analyseren van een histogram op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.[^9]<sup>, </sup>[^10]
+Focus bij het analyseren van een histogram[^18] op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.[^9]<sup>, </sup>[^10]
 
 <!-- ## OPENBLOK: Histogram.py -->
 ```{python histogram}
@@ -422,6 +422,7 @@ Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamenc
 [^12]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^13]: Marshall, E., & Boggis, E. (2016). *The statistics tutor’s quick guide to commonly used statistical tests*. http://www.statstutor.ac.uk/resources/uploaded/tutorsquickguidetostatistics.pdf.
 [^14]: Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  
+[^18]: De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
 
 <!-- ## TEKSTBLOK: Extra-Bron.py -->
 [^15]: Navarro, D. J. (2015). *Learning statistics with R: A tutorial for psychology students

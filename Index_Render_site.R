@@ -71,8 +71,8 @@ dfToetsen <- tribble(
     "23 Mann-Whitney U toets II",                                                               1,          0,       0,               0,       
     "24 Friedmans ANOVA II",                                                                    1,          0,       0,               0,       
     "25 Kruskal Wallis toets II",                                                               1,          0,       0,               0,       
-    "26 Tekentoets II",                                                                         1,          0,       0,               0,       
-    "27 Moods mediaan toets",                                                                   1,          0,       0,               0,       
+    "26 Tekentoets II",                                                                         1,          0,       1,               0,       
+    "27 Moods mediaan toets",                                                                   1,          0,       1,               0,       
     
     ## Toetsmatrix II
     "28 Multipele lineaire regressie",                                                          1,          0,       0,               0,       

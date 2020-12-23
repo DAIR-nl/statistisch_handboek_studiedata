@@ -45,7 +45,7 @@ source(paste0(here::here(),"/01. Includes/data/21.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 # Toepassing
 
-Gebruik de *Chi-kwadraat toets voor goodness of fit* om te onderzoeken of de geobserveerde frequenties van de categorieën van één categorische variabele met meer dan twee categorieën overeenkomt met de verwachte frequenties van de categorische variabele.[^6]<sup>,</sup>[^7] Met deze toets kunnen geobserveerde percentages met bekende of verwachte percentages vergeleken worden. Gebruik de exacte *multinomiaaltoets* bij een laag aantal observaties.[^1] De *Chi-kwadraat toets voor goodness of fit* kan ook gebruikt worden voor een categorische variabele met twee categorieën. Voor de exacte *multinomiaaltoets* geldt dit ook, maar in dat geval is de toets gelijk aan de exacte *binomiaaltoets* die te vinden is in bijbehorende [toetspagina](11-Chi-kwadraat-toets-voor-goodness-of-fit-en-binomiaaltoets-R.html). De *Chi-kwadraat toets voor goodness of fit* en de exacte *multinomiaaltoets* zijn voor zowel nominale[^9] als ordinale[^8] variabelen te gebruiken.
+Gebruik de *Chi-kwadraat toets voor goodness of fit* om te onderzoeken of de geobserveerde frequenties van de categorieën van één categorische variabele met meer dan twee categorieën overeenkomt met de verwachte frequenties van de categorische variabele.[^6]<sup>,</sup>[^7] Met deze toets kunnen geobserveerde percentages met bekende of verwachte percentages vergeleken worden. Gebruik de exacte *multinomiaaltoets* bij een laag aantal observaties, dit wordt bij de assumpties toegelicht.[^1] De *Chi-kwadraat toets voor goodness of fit* kan ook gebruikt worden voor een categorische variabele met twee categorieën. Voor de exacte *multinomiaaltoets* geldt dit ook, maar in dat geval is de toets gelijk aan de exacte *binomiaaltoets* die te vinden is in bijbehorende [toetspagina](11-Chi-kwadraat-toets-voor-goodness-of-fit-en-binomiaaltoets-R.html). De *Chi-kwadraat toets voor goodness of fit* en de exacte *multinomiaaltoets* zijn voor zowel nominale[^9] als ordinale[^8] variabelen te gebruiken.
 
 # Onderwijscasus
 <div id = "casus">
@@ -62,7 +62,7 @@ H~A~: De verdeling van het BSA van de studenten Maritieme Techniek is niet gelij
 
 # Assumpties
 
-Om de *Chi-kwadraat toets voor goodness of fit* en de exacte *multinomiaaltoets*uit te voeren, moet de variabele nominaal[^9] of ordinaal[^8] zijn.[^6] In deze casus is de categorische variabele nominaal, maar bij een ordinale categorische variabele worden de toetsen op dezelfde manier uitgevoerd. 
+Om de *Chi-kwadraat toets voor goodness of fit* en de exacte *multinomiaaltoets*uit te voeren, moet de variabele nominaal[^9] of ordinaal[^8] zijn.[^6] In deze casus is de categorische variabele nominaal, bij een ordinale categorische variabele worden de toetsen op dezelfde manier uitgevoerd. 
 
 De categorieën van de variabele mogen niet overlappen, wat wil zeggen dat elke observatie slechts in een van de categorieën past. Voor de *Chi-kwadraat toets voor goodness of fit* mag in niet meer dan 20% van de categorieën van de variabele de verwachte frequentie minder dan vijf zijn. Als dit wel het geval is, gebruik dan de *multinomiaaltoets*.[^7]
 
@@ -109,7 +109,7 @@ Proptab <- 100*prop.table(table(BSA_Maritieme_techniek$BSA_advies))
 <!-- ## /OPENBLOK: Data-bekijken3.R -->
 
 <!-- ## TEKSTBLOK: Data-bekijken4.R -->
-Het aantal studenten met postief BSA is `r Round_and_format(Tab[2])` (`r Round_and_format(Proptab[2])`%), met een negatief BSA is `r Round_and_format(Tab[1])` (`r Round_and_format(Proptab[1])`%) en met een uitgesteld BSA is `r Round_and_format(Tab[3])` (`r Round_and_format(Proptab[3])`%). Het lijkt erop dat het percentage studenten met een positief BSA lager is dan het percentage van de gehele universiteit (70%) en dat het percentage studenten met een negatief BSA juist hoger is dan dat van de gehele universiteit (20%). De *Chi-kwadraat toets voor goodness of fit* of de *multinomiaaltoets* toetst of dit verschil significant is.
+Het aantal studenten met een positief BSA is `r Round_and_format(Tab[2])` (`r Round_and_format(Proptab[2])`%), met een negatief BSA is `r Round_and_format(Tab[1])` (`r Round_and_format(Proptab[1])`%) en met een uitgesteld BSA is `r Round_and_format(Tab[3])` (`r Round_and_format(Proptab[3])`%). Het lijkt erop dat het percentage studenten met een positief BSA lager is dan het percentage van de gehele universiteit (70%) en dat het percentage studenten met een negatief BSA juist hoger is dan dat van de gehele universiteit (20%). De *Chi-kwadraat toets voor goodness of fit* of de *multinomiaaltoets* toetst of dit verschil significant is.
 <!-- ## /TEKSTBLOK: Data-bekijken4.R -->
 
 # Chi-kwadraat toets voor goodness of fit
@@ -189,7 +189,7 @@ vdf <- chi2$parameter
 Voer post-hoc toetsen uit om te bepalen voor welke BSA mogelijkheden er verschillen zijn tussen de verdeling van de studenten Maritieme Techniek en de verdeling van de gehele universiteit. Inspecteer hiervoor de Pearson residuen van de *Chi-kwadraat toets voor onafhankelijkheid* op waarden groter dan 1,96 en kleiner dan -1,96. Let op dat hier nog geen correctie voor meerdere toetsen plaatsvindt.[^10]
 
 <!-- ## OPENBLOK: Chi2-toets post-hoc1.R -->
-```{r collapse=TRUE}
+```{r}
 # Maak een tabel met daarin de aantallen studenten per BSA mogelijkheid
 Tabel <- table(BSA_Maritieme_techniek$BSA_advies)
 
@@ -219,6 +219,7 @@ PH_res <- Resultaat$residuals
 <!-- ## /OPENBLOK: Chi2-toets post-hoc1.R -->
 De post-hoc toetsing op basis van de gestandaardiseerde residuën kan als volgt geïnterpreteerd worden:
 <!-- ## TEKSTBLOK: Chi2-toets post-hoc2.R-->
+
 * Significant lager aantal observaties bij een positief BSA , *z* = `r Round_and_format(PH_res[1])`
 * Significant hoger aantal observaties bij een negatief BSA , *z* = `r Round_and_format(PH_res[2])`
 * Geen significant verschillend aantal observaties bij een uitgesteld BSA , *z* = `r Round_and_format(PH_res[3])`
@@ -261,7 +262,7 @@ Proptab2 <- 100*prop.table(table(BSA_Maritieme_techniek_steekproef$BSA_advies))
 <!-- ## /OPENBLOK: Binomiaaltoets3.R -->
 
 <!-- ## TEKSTBLOK: Binomiaaltoets4.R -->
-Het aantal studenten met postief BSA is `r Round_and_format(Tab2[2])` (`r Round_and_format(Proptab2[2])`%), met een negatief BSA is `r Round_and_format(Tab2[1])` (`r Round_and_format(Proptab2[1])`%) en met een uitgesteld BSA is `r Round_and_format(Tab2[3])` (`r Round_and_format(Proptab2[3])`%). Het lijkt erop dat het percentage studenten met een positief BSA hoger is dan het percentage van de gehele universiteit (70%) en dat het percentage studenten met een negatief BSA juist lager is dan dat van de gehele universiteit (20%). De *multinomiaaltoets* toetst of dit verschil significant is.
+Het aantal studenten met een positief BSA is `r Round_and_format(Tab2[2])` (`r Round_and_format(Proptab2[2])`%), met een negatief BSA is `r Round_and_format(Tab2[1])` (`r Round_and_format(Proptab2[1])`%) en met een uitgesteld BSA is `r Round_and_format(Tab2[3])` (`r Round_and_format(Proptab2[3])`%). Het lijkt erop dat het percentage studenten met een positief BSA hoger is dan het percentage van de gehele universiteit (70%) en dat het percentage studenten met een negatief BSA juist lager is dan dat van de gehele universiteit (20%). De *multinomiaaltoets* toetst of dit verschil significant is.
 <!-- ## /TEKSTBLOK: Binomiaaltoets4.R -->
 
 <!-- ## TEKSTBLOK: Binomiaaltoets5.R -->
@@ -287,7 +288,7 @@ exp <- chisq.test(Tabel_volgorde, p = c(0.7, 0.2, 0.1))$expected
 ```
 <!-- ## /OPENBLOK: Binomiaaltoets6.R -->
 
-De verwachte frequentie voor studenten met een uitgesteld BSA is kleiner dan 5. Dit betekent dat er in meer dan 20% van de categorieën er een verwachte frequentie van minder dan 5 is en dat er dus niet voldaan is aan de assumptie van verwachte frequenties. Voer daarom de *multinomiaaltoets* uit.
+De verwachte frequentie voor studenten met een uitgesteld BSA is kleiner dan 5. Dit betekent dat er in meer dan 20% van de categorieën een verwachte frequentie van minder dan 5 is en dat er dus niet voldaan is aan de assumptie van verwachte frequenties. Voer daarom de *multinomiaaltoets* uit.
 
 <!-- ## TEKSTBLOK: Binomiaaltoets7.R -->
 Voer de *multinomiaaltoets* uit met de functie `multinomial.test()` van het package `RVAideMemoire` met als argument een vector met daarin de hoeveelheid studenten voor de drie mogelijkheden van het BSA `Vector_volgorde` en een vector die aangeeft wat de verwachte proporties[^4] zijn voor het aantal studenten met respectievelijk een positief, negatief of uitgesteld BSA `p = c(0.7, 0.2, 0.1)`. Deze functie vereist een vector wat de reden is dat de tabel met de aantallen observaties per categorie omgezet wordt in een vector. Let hierbij goed op dat de volgorde van de BSA mogelijkheden in de tabel overeenkomt met de volgorde van de proporties.
@@ -345,7 +346,7 @@ mp <- Round_and_format(multitoets$p.value)
 
 <!-- ## TEKSTBLOK: Rapportage2.R-->
 
-De *multinomiaaltoets* is uitgevoerd om te onderzoeken of de verdeling van het BSA van studenten Maritieme Techniek overeenkomt met de verdeling van de gehele universiteit waar deze opleiding onder valt (70% positief BSA, 20% negatief BSA en 10% uitgesteld BSA) voor een dataset met een laag aantal observaties. De verdeling van het BSA van de instromende studenten van de universiteit verschilt niet significant van de landelijke verdeling (*p* = `r mp`). Het aantal studenten met postief BSA is `r Round_and_format(Tab2[2])` (`r Round_and_format(Proptab2[2])`%), met een negatief BSA is `r Round_and_format(Tab2[1])` (`r Round_and_format(Proptab2[1])`%) en met een uitgesteld BSA is `r Round_and_format(Tab2[3])` (`r Round_and_format(Proptab2[3])`%). De resultaten suggereren dat de opleiding Maritieme Technieken qua BSA niet afwijkt van de gehele universiteit.
+De *multinomiaaltoets* is uitgevoerd om te onderzoeken of de verdeling van het BSA van studenten Maritieme Techniek overeenkomt met de verdeling van de gehele universiteit waar deze opleiding onder valt (70% positief BSA, 20% negatief BSA en 10% uitgesteld BSA) voor een dataset met een laag aantal observaties. De verdeling van het BSA van de instromende studenten van de universiteit verschilt niet significant van de landelijke verdeling (*p* = `r mp`). Het aantal studenten met een positief BSA is `r Round_and_format(Tab2[2])` (`r Round_and_format(Proptab2[2])`%), met een negatief BSA is `r Round_and_format(Tab2[1])` (`r Round_and_format(Proptab2[1])`%) en met een uitgesteld BSA is `r Round_and_format(Tab2[3])` (`r Round_and_format(Proptab2[3])`%). De resultaten suggereren dat de opleiding Maritieme Technieken qua BSA niet afwijkt van de gehele universiteit.
 
 <!-- ## /TEKSTBLOK: Rapportage2.R-->
 

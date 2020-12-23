@@ -1919,12 +1919,12 @@ body{ /* Normal  */
 <h1><span class="header-section-number">4</span> Post-hoc toets</h1>
 <!-- ## TEKSTBLOK: link3.py -->
 <p>De <em>Kruskal Wallis toets</em> toetst of twee of meerdere groepen van elkaar verschillen. Een post-hoc toets specificeert of groep significant van een andere groep verschilt. Gebruik de <a href="08-Mann-Whitney-U-toets-I-Python.html">Mann-Whitney U toets</a> als post-hoc toets. Hoewel het minder gebruikelijk is, is <em>Moods’mediaan toets</em> ook een optie als post-hoc toets. Deze toets toetst het verschil tussen de medianen van twee ongepaarde groepen. De <a href="08-Mann-Whitney-U-toets-I-Python.html">Mann-Whitney U toets</a> toetst het verschil tussen de verdelingen van twee ongepaarde groepen. <!-- ## /TEKSTBLOK: link3.py --></p>
-<p>Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de <em>Bonferroni correctie</em> gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
+<p>Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de <em>Bonferroni correctie</em> gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> Er zijn ook andere opties voor een correctie op de p-waarden.</p>
 </div>
 <div id="effectmaat" class="section level1">
 <h1><span class="header-section-number">5</span> Effectmaat</h1>
-<p>De p-waarde geeft aan of het verschil tussen groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
-<p>Bij de <em>Kruskal Wallis toets</em> wordt eta-squared (<em>η<sup>2</sup></em>) als effectmaat gebruikt.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> De effectmaat eta squared (<em>η<sup>2</sup></em>) berekent de proportie van de variantie in de afhankelijke variabele die verklaard wordt door de onafhankelijke variabele. In deze casus berekent het de proportie van de variantie in het aantal studiepunten wat verklaard kan worden door de vooropleiding. Een indicatie om <em>η<sup>2</sup></em> te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></p>
+<p>De p-waarde geeft aan of het verschil tussen groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
+<p>Bij de <em>Kruskal Wallis toets</em> wordt eta-squared (<em>η<sup>2</sup></em>) als effectmaat gebruikt.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> De effectmaat eta squared (<em>η<sup>2</sup></em>) berekent de proportie van de variantie in de afhankelijke variabele die verklaard wordt door de onafhankelijke variabele. In deze casus berekent het de proportie van de variantie in het aantal studiepunten wat verklaard kan worden door de vooropleiding. Een indicatie om <em>η<sup>2</sup></em> te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
 </div>
 <div id="uitvoering" class="section level1">
 <h1><span class="header-section-number">6</span> Uitvoering</h1>
@@ -2001,7 +2001,7 @@ print(dfResultaten_Arbeidsrecht[&#39;Vooropleiding&#39;].unique())</code></pre>
 </div>
 <div id="de-data-visualiseren" class="section level2">
 <h2><span class="header-section-number">6.2</span> De data visualiseren</h2>
-<p>Geef de verdeling van de verschillende vooropleidingen visueel weer met een histogram.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
+<p>Geef de verdeling van de verschillende vooropleidingen visueel weer met een histogram.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></p>
 <!-- ## OPENBLOK: Histogram.py -->
 <pre class="python"><code># Laad seaborn of facets te maken
 import seaborn as sb
@@ -2049,9 +2049,9 @@ print(Eta_squared)
 <ul>
 <li><em>df</em>: het aantal groepen - 1 = 3<br />
 </li>
-<li><em>H</em> = 33,07, <em>df</em> = 3, <em>p</em> &lt; 0,0001, <em>η<sup>2</sup></em> = 0,11 <a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a><br />
+<li><em>H</em> = 33,07, <em>df</em> = 3, <em>p</em> &lt; 0,0001, <em>η<sup>2</sup></em> = 0,11 <a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a><br />
 </li>
-<li>p-waarde &lt; 0,05, dus de H<sub>0</sub> wordt verworpen<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a></li>
+<li>p-waarde &lt; 0,05, dus de H<sub>0</sub> wordt verworpen<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></li>
 <li>Eta squared is 0,11 wat duidt op een gemiddeld tot groot effect</li>
 </ul>
 <!-- ## /TEKSTBLOK: Kruskal-Wallis-test-5.py -->
@@ -2059,7 +2059,7 @@ print(Eta_squared)
 <div id="post-hoc-toets-mann-whitney-u-toets" class="section level2">
 <h2><span class="header-section-number">6.4</span> Post-hoc toets: Mann-Whitney U toets</h2>
 <!-- ## TEKSTBLOK: Mann-Whitney-U-test.py -->
-<p>Gebruik de <em>Mann-Whitney U toets</em> als post-hoc toets om te bepalen wélke groepen significant verschillen. De <em>Mann-Whitney U toets</em> wordt ook wel de <em>Wilcoxon rank-sum toets</em> genoemd.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> Gebruik de functie <code>pg.mwu()</code>. <!-- ## /TEKSTBLOK: Mann-Whitney-U-test.py --> <!-- ## OPENBLOK: Mann-Whitney-U-test.py --></p>
+<p>Gebruik de <em>Mann-Whitney U toets</em> als post-hoc toets om te bepalen wélke groepen significant verschillen. De <em>Mann-Whitney U toets</em> wordt ook wel de <em>Wilcoxon rank-sum toets</em> genoemd.<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a> Gebruik de functie <code>pg.mwu()</code>. <!-- ## /TEKSTBLOK: Mann-Whitney-U-test.py --> <!-- ## OPENBLOK: Mann-Whitney-U-test.py --></p>
 <pre class="python"><code>import scikit_posthocs as skph
 
 skph.posthoc_mannwhitney(dfResultaten_Arbeidsrecht, val_col = &#39;EC_Jaar1&#39;, group_col = &#39;Vooropleiding&#39;, p_adjust = &#39;bonferroni&#39;)
@@ -2073,7 +2073,7 @@ skph.posthoc_mannwhitney(dfResultaten_Arbeidsrecht, val_col = &#39;EC_Jaar1&#39;
 <!-- ## CLOSEDBLOK: Mann-Whitney-U-test1.py -->
 <!-- ## /CLOSEDBLOK: Mann-Whitney-U-test1.py -->
 <!-- ## TEKSTBLOK: link4.py -->
-<p>De <a href="08-Mann-Whitney-U-toets-I-Python.html">Mann-Whitney U toets</a> gebruikt het gemiddelde rangnummer van twee ongepaarde groepen om de significantie van de toets te bepalen. Met behulp van het gemiddelde rangnummer kan bepaald worden welke groep hogere rangnummers heeft wat een benadering is voor het verschil tussen twee verdelingen.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> In deze casus heeft de vooropleiding met een hoger rangnummer dus over het algemeen studenten met een hoger aantal studiepunten. Bereken en rapporteer daarom het gemiddelde rangnummer. <!-- ## /TEKSTBLOK: link4.py --></p>
+<p>De <a href="08-Mann-Whitney-U-toets-I-Python.html">Mann-Whitney U toets</a> gebruikt het gemiddelde rangnummer van twee ongepaarde groepen om de significantie van de toets te bepalen. Met behulp van het gemiddelde rangnummer kan bepaald worden welke groep hogere rangnummers heeft wat een benadering is voor het verschil tussen twee verdelingen.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> In deze casus heeft de vooropleiding met een hoger rangnummer dus over het algemeen studenten met een hoger aantal studiepunten. Bereken en rapporteer daarom het gemiddelde rangnummer. <!-- ## /TEKSTBLOK: link4.py --></p>
 <!-- ## OPENBLOK: Mann-Whitney-U-test2.py -->
 <pre class="python"><code>def Gemiddelde_rangschikking(Vooropleiding_1, Vooropleiding_2):
   # Bind alle observaties in een variabele
@@ -2181,7 +2181,7 @@ Gem_PM_RG_1, Gem_PM_RG_2 = Gemiddelde_rangschikking(Studiepunten_Premaster, Stud
 <div id = "footer">
 Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 3.6.3; Python code is uitgevoerd in Python 3.7.
 <br/><br/>
-&copy; 2020 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:09-10-2020
+&copy; 2020 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:22-12-2020
 </div> <!-- ## /CLOSEDBLOK: Footer.R --></p>
 </div>
 <div class="footnotes">
@@ -2195,14 +2195,13 @@ Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikk
 <li id="fn6"><p>Van Geloven, N. (21 November 2017). <em>KEUZE TOETS</em>. <a href="https://wikistatistiek.amc.nl/index.php/KEUZE_TOETS">Wiki Statistiek Academisch Medisch Centrum</a>.<a href="#fnref6" class="footnote-back">↩</a></p></li>
 <li id="fn7"><p>Universiteit van Amsterdam (7 juli 2014). <em>Kruskal-Wallis Test</em>. <a href="https://wiki.uva.nl/methodologiewinkel/index.php/Kruskal-Wallis_Test">UvA Wiki Methodologiewinkel</a>.<a href="#fnref7" class="footnote-back">↩</a></p></li>
 <li id="fn8"><p>Van Geloven, N. (21 maart 2018). <em>Kruskal Wallis</em>. <a href="https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis">Wiki Statistiek Academisch Medisch Centrum</a>.<a href="#fnref8" class="footnote-back">↩</a></p></li>
-<li id="fn9"><p>Van Geloven, N. (21 maart 2018). <em>Kruskal Wallis</em>. <a href="https://wikistatistiek.amc.nl/index.php/Kruskal_Wallis">Wiki Statistiek Academisch Medisch Centrum</a>.<a href="#fnref9" class="footnote-back">↩</a></p></li>
-<li id="fn10"><p>De effectmaat <em>η<sup>2</sup></em> wordt voor de <em>Kruskal-Wallis toets</em> berekend door de <em>χ<sup>2</sup></em>-waarde te delen door het totaal aantal observaties minus één, i.e. $ $.<a href="#fnref10" class="footnote-back">↩</a></p></li>
-<li id="fn11"><p>Allen, P. &amp; Bennett, K. (2012). <em>SPSS A practical Guide version 20.0</em>. Cengage Learning Australia Pty Limited.<a href="#fnref11" class="footnote-back">↩</a></p></li>
-<li id="fn12"><p>De breedte van de staven van het histogram worden hier automatisch bepaald, maar kunnen handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.<a href="#fnref12" class="footnote-back">↩</a></p></li>
-<li id="fn13"><p>De test-statistiek <em>H</em> volgt bij benadering de chi-kwadraat verdeling. Onder deze hypothese is <em>H</em> chi-kwadraat, vandaar dat dit in de output uitgedrukt wordt in chi-kwadraat.<a href="#fnref13" class="footnote-back">↩</a></p></li>
-<li id="fn14"><p>In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met Type I en Type II fouten.<a href="#fnref14" class="footnote-back">↩</a></p></li>
-<li id="fn15"><p>De effectmaat <em>η<sup>2</sup></em> wordt voor de <em>Kruskal-Wallis toets</em> berekend door de <em>χ<sup>2</sup></em>-waarde te delen door het totaal aantal observaties minus één, i.e. $ $.<a href="#fnref15" class="footnote-back">↩</a></p></li>
-<li id="fn16"><p>Field, A. (2013). <em>Discovering statistics using IBM SPSS statistics</em>. Sage.<a href="#fnref16" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p>De effectmaat <em>η<sup>2</sup></em> wordt voor de <em>Kruskal-Wallis toets</em> berekend door de <em>χ<sup>2</sup></em>-waarde te delen door het totaal aantal observaties minus één, i.e. $ $.<a href="#fnref9" class="footnote-back">↩</a></p></li>
+<li id="fn10"><p>Allen, P. &amp; Bennett, K. (2012). <em>SPSS A practical Guide version 20.0</em>. Cengage Learning Australia Pty Limited.<a href="#fnref10" class="footnote-back">↩</a></p></li>
+<li id="fn11"><p>De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.<a href="#fnref11" class="footnote-back">↩</a></p></li>
+<li id="fn12"><p>De test-statistiek <em>H</em> volgt bij benadering de chi-kwadraat verdeling. Onder deze hypothese is <em>H</em> chi-kwadraat, vandaar dat dit in de output uitgedrukt wordt in chi-kwadraat.<a href="#fnref12" class="footnote-back">↩</a></p></li>
+<li id="fn13"><p>In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met Type I en Type II fouten.<a href="#fnref13" class="footnote-back">↩</a></p></li>
+<li id="fn14"><p>De effectmaat <em>η<sup>2</sup></em> wordt voor de <em>Kruskal-Wallis toets</em> berekend door de <em>χ<sup>2</sup></em>-waarde te delen door het totaal aantal observaties minus één, i.e. $ $.<a href="#fnref14" class="footnote-back">↩</a></p></li>
+<li id="fn15"><p>Field, A. (2013). <em>Discovering statistics using IBM SPSS statistics</em>. Sage.<a href="#fnref15" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 

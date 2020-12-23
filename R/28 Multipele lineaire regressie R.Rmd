@@ -45,7 +45,6 @@ if (!exists("Substitute_var")) {
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
-set.seed(12345)
 source(paste0(here::here(),"/01. Includes/data/28.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
@@ -303,7 +302,7 @@ Multicollineariteit wordt getoetst met de Variance Inflation Factor (VIF) die me
 
 Als er niet voldaan is aan de assumpties van normaliteit of  homoskedasticiteit, dan zijn de standaardfouten, betrouwbaarheidsintervallen en significantietoetsen van het regressiemodel incorrect. Bootstrappen is hier een oplossing voor. Bij bootstrappen wordt de verdelingen van de parameters van het regressiemodel nagebootst. Als eerste stap wordt de steekproef gezien als een populatie waaruit een nieuwe steekproef getrokken kan worden. Deze steekproef is even groot als de echte steekproef, maar toch verschillend omdat het mogelijk is dezelfde deelnemer meerdere keren in de steekproef te hebben. Op basis van de nieuwe steekproef wordt het regressiemodel opnieuw geschat en is er een schatting van de regressiecoëfficiënten. Deze procedure wordt een groot aantal keer (10000) herhaald, waardoor er 10000 keer regressiecoëfficiënten worden bepaald. Met behulp van deze 10000 waarden van de regressiecoëfficiënten is er een verdeling gemaakt voor elke regressiecoëfficiënt waaruit de standaardfout en de betrouwbaarheidsintervallen kunnen worden berekend. Op basis van de betrouwbaarheidsintervallen kunnen er ook significantietoetsen worden uitgevoerd. Op deze manier is bootstrappen de oplossing voor *multipele lineaire regressie* als er niet voldaan is aan normaliteit of homoskedasticiteit.[^2]
 
-# Uitvoering
+# Assumpties
 
 Voer *multipele lineaire regressie* uit om te onderzoeken of het eindcijfer voor het vak Methoden & Statistiek van de bachelor Onderwijskunde te voorspellen is op basis van het geslacht, eindexamencijfer Wiskunde en aantal gevolgde hoorcolleges. Start met het toetsen van de assumpties en voer vervolgens de *multipele lineaire regressie* uit als hieraan voldaan is.
 
@@ -339,7 +338,9 @@ boxplot(Studenten_Methoden_Statistiek[,c("Eindexamencijfer_Wiskunde",
 ```
 <!-- ## /OPENBLOK: Outlier2.R -->
 
-Voor alle drie de variabelen zijn er geen onmogelijke scores en zijn er geen grote afwijkingen. Bij het eindcijfer Methoden & Statistiek is er wel een punt dat buiten de boxplot valt. Op basis van de gestandaardiseerde scores kan onderzocht worden of dit een outlier is. Onderzoek de gestandaardiseerde scores door een functie te schrijven die het aantal observaties per variabele telt met een gestandaardiseerde score hoger dan 3 of lager dan -3. Pas deze functie vervolgens toe op de drie continue variabelen in de dataset.
+Voor alle drie de variabelen zijn er geen onmogelijke scores en zijn er geen grote afwijkingen.  
+
+Onderzoek de gestandaardiseerde scores door een functie te schrijven die het aantal observaties per variabele telt met een gestandaardiseerde score hoger dan 3 of lager dan -3. Pas deze functie vervolgens toe op de drie continue variabelen in de dataset.
 
 <!-- ## OPENBLOK: Outlier3.R -->
 ```{r}
@@ -360,7 +361,6 @@ Outlier_standaardiseren(Studenten_Methoden_Statistiek$Eindcijfer_MS)
 
 ```
 <!-- ## /OPENBLOK: Outlier3.R -->
-
 
 Alle drie de variabelen hebben nul observaties met een gestandaardiseerde score hoger dan 3 of lager dan -3. Er zijn in de stap voor de continue variabelen geen outliers gevonden.
 
@@ -396,7 +396,7 @@ sum(abs(Residu_gestandaardiseerd > 3))
 
 Er zijn geen gestandaardiseerde residuën met een score hoger dan 3 of lager dan -3 wat er op wijst dat er geen outliers in de data zijn.
 
-## Mahalanobis distance
+### Mahalanobis distance
 
 <!-- ## TEKSTBLOK: Outlier7.R -->
 Onderzoek of er multivariate outliers zijn met behulp van de Mahalanobis distance met behulp van de functie `mahalanobis()`. De Mahalanobis afstand geeft aan in hoeverre een deelnemer afwijkt van het gemiddelde van alle deelnemers voor alle predictors samen. Een voorwaarde voor de functie is dat alle variabelen numeriek zijn. Zet daarom eerst de variabele `Geslacht` om in een numerieke variabele met de waarde 1 voor vrouwen en 0 voor mannen. Het omzetten van een categorische variabele in een of meer numerieke variabele heet dummycoderen; de variabelen worden vaak dummies genoemd.
@@ -543,7 +543,7 @@ VIF(Regressiemodel)
 
 Geen enkele van de VIFs is hoger dan 10, dus er is voldaan aan de assumptie van multicollineariteit.
 
-## Uitvoering
+# Uitvoering
 
 <!-- ## TEKSTBLOK: Uitvoering1.R -->
 Als alle assumpties zijn getoetst en aan alle assumpties is voldaan, kan de *multipele lineaire regressie* uitgevoerd worden. Gebruik de functie `lm()` met als eerste argument de regressievergelijking `Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges` met links van het golfteken de afhankelijke variabele `Eindcijfer_MS` en rechts de drie onafhankelijke variabelen `Eindexamencijfer_Wiskunde`, `Aantal_Hoorcolleges` en `Eindcijfer_MS`. Het tweede argument is de dataset `Studenten_Methoden_Statistiek`. Sla het model op en presenteer vervolgens een overzicht van de resultaten met de functie `summary`. Bepaal de 95%-betrouwbaarheidsintervallen van de regressiecoëfficiënten met de functie `confint`.
@@ -588,7 +588,7 @@ Bepaal als eerste stap de significantie van het regressiemodel met behulp van de
 <!-- ## TEKSTBLOK: Coefficienten1.R -->
 Voor de intercept en de regressiecoëfficiënten van de predictors zijn de geschatte coëfficiënt (`Estimate`), de standaardfout van de geschatte coëfficiënt (`Std. Error`) en de t-statistiek (`t value`) en p-waarde (`Pr(>|t|)`) van de t-toets voor de regressiecoëfficiënt weergegeven:
 
-* Intercept: de geschatte waarde voor de intercept is `r Round_and_format(Reg$coefficients[1,1])` en is significant verschillend van 0 (*t* = `r Round_and_format(Reg$coefficients[1,3])`, *p* < 0,001)[^8]. De intercept staat voor het voorspelde eindcijfer Methoden & Statistiek als alle predictors een waarde van nul hebben. Een man met een 0 als eindexamencijfer Wiskunde die nul hoorcolleges volgt zal naar verwachting een `r Round_and_format(Reg$coefficients[1,1])` behalen als eindcijfer voor het vak Methoden & Statistiek.
+* Intercept: de geschatte waarde voor de intercept is `r Round_and_format(Reg$coefficients[1,1])` en is significant verschillend van 0 (*t* = `r Round_and_format(Reg$coefficients[1,3])`, *p* = `r Round_and_format(Reg$coefficients[1,4])`)[^8]. De intercept staat voor het voorspelde eindcijfer Methoden & Statistiek als alle predictors een waarde van nul hebben. Een man met een 0 als eindexamencijfer Wiskunde die nul hoorcolleges volgt zal naar verwachting een `r Round_and_format(Reg$coefficients[1,1])` behalen als eindcijfer voor het vak Methoden & Statistiek.
 * Geslacht: de geschatte waarde voor de regressiecoëfficiënt van de variabele Geslacht is `r Round_and_format(Reg$coefficients[2,1])` en is niet significant verschillend van 0 (*t* = `r Round_and_format(Reg$coefficients[2,3])`, *p* = `r Round_and_format(Reg$coefficients[2,4])`)[^8]. De coëfficiënt hoeft dus niet geïnterpreteerd te worden.
 * Eindexamencijfer_Wiskunde: de geschatte waarde voor de regressiecoëfficiënt van de variabele Eindexamencijfer_Wiskunde is `r Round_and_format(Reg$coefficients[3,1])` en is significant verschillend van 0 (*t* = `r Round_and_format(Reg$coefficients[3,3])`, *p* < 0,01)[^8]. Als het eindexamencijfer Wiskunde met één punt toeneemt, neemt de voorspelling voor het eindcijfer Methoden & Statistiek met `r Round_and_format(Reg$coefficients[3,1])` toe.
 * Aantal_Hoorcolleges: de geschatte waarde voor de regressiecoëfficiënt van de variabele Aantal_Hoorcolleges is `r Round_and_format(Reg$coefficients[4,1])` en is significant verschillend van 0 (*t* = `r Round_and_format(Reg$coefficients[4,3])`, *p* < 0,0001)[^8]. Als een student een extra hoorcollege volgt, neemt de voorspelling voor het eindcijfer Methoden & Statistiek met `r Round_and_format(Reg$coefficients[4,1])` toe.
@@ -726,7 +726,7 @@ Een *multipele lineaire regressie* is uitgevoerd om de vraag te beantwoorden of 
 <!-- ## TEKSTBLOK: Rapportage2.R -->
 |                           | Coëfficiënt   | Standaard- fout | t | p-waarde | 95%-betrouwbaarheids- interval | Gestandaardiseerde coëfficiënt  | 
 | ------------------------- | ---------| ---------| ---------| ---------| ---------| ---------| 
-| Intercept                 | `r Round_and_format(Reg$coefficients[1,1])` |  `r Round_and_format(Reg$coefficients[1,2])` |  `r Round_and_format(Reg$coefficients[1,3])` |  < 0,0001*  |  `r Round_and_format(CI[1,1])` - `r Round_and_format(CI[1,2])`  | - |
+| Intercept                 | `r Round_and_format(Reg$coefficients[1,1])` |  `r Round_and_format(Reg$coefficients[1,2])` |  `r Round_and_format(Reg$coefficients[1,3])` |  `r Round_and_format(Reg$coefficients[1,4])`  |  `r Round_and_format(CI[1,1])` - `r Round_and_format(CI[1,2])`  | - |
 | Geslacht (vrouw)          | `r Round_and_format(Reg$coefficients[2,1])`0 |  `r Round_and_format(Reg$coefficients[2,2])` |  `r Round_and_format(Reg$coefficients[2,3])` |  `r Round_and_format(Reg$coefficients[2,4])` |  `r Round_and_format(CI[2,1])` - `r Round_and_format(CI[2,2])`  | `r Round_and_format(Coefficienten_std[1])`|
 | Eindexamencijfer_Wiskunde | `r Round_and_format(Reg$coefficients[3,1])` |  `r Round_and_format(Reg$coefficients[3,2])` |  `r Round_and_format(Reg$coefficients[3,3])` |  < 0,01* |  `r Round_and_format(CI[3,1])` - `r Round_and_format(CI[3,2])` | `r Round_and_format(Coefficienten_std[2])`|
 | Aantal_Hoorcolleges       | `r Round_and_format(Reg$coefficients[4,1])` |  `r Round_and_format(Reg$coefficients[4,2])` |  `r Round_and_format(Reg$coefficients[4,3])` |  < 0,0001* |  `r Round_and_format(CI[4,1])` - `r Round_and_format(CI[4,2])` | `r Round_and_format(Coefficienten_std[3])`|

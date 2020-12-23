@@ -1,0 +1,232 @@
+---
+title: "Mood's mediaan toets"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+  keywords: [statistisch handboek, studiedata]
+---
+<!-- ## CLOSEDBLOK: Functies.py -->
+```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
+library(here)
+if (!exists("Substitute_var")) {
+  ## Installeer packages en functies
+  source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
+}
+```
+<!-- ## /CLOSEDBLOK: Functies.py -->
+
+<style>
+`r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
+</style>
+
+<!-- ## CLOSEDBLOK: Header.py -->
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Header.py -->
+
+<!-- ## CLOSEDBLOK: Status.py -->
+```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Status.py -->
+
+<!-- ## CLOSEDBLOK: Reticulate.py -->
+```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}
+library(reticulate)
+knitr::knit_engines$set(python = reticulate::eng_python)
+```
+<!-- ## /CLOSEDBLOK: Reticulate.py -->
+
+<!-- ## OPENBLOK: Data-aanmaken.py -->
+```{r aanmaken data, include=FALSE, echo=TRUE}
+source(paste0(here::here(),"/01. Includes/data/08.R"))
+```
+<!-- ## /OPENBLOK: Data-aanmaken.py -->
+
+<!-- ## TEKSTBLOK: link1.py-->
+Gebruik *Mood's mediaan toets* om te toetsen of de medianen van twee ongepaarde groepen van elkaar verschillen.[^1]<sup>,</sup>[^2] Deze toets is een alternatief voor de [ongepaarde t-toets](03-Ongepaarde-t-toets-Python.html) als een van de of beide ongepaarde groepen niet normaal verdeeld zijn. *Mood's mediaan toets* kan ook gebruikt worden om medianen van meer dan twee ongepaarde groepen te vergelijken. Deze toetspagina illustreert de toets echter voor twee ongepaarde groepen.
+
+Naast *Mood's mediaan toets* kan de [Mann-Whitney U toets](08-Mann-Whitney-U-toetsI-Python.html) ook gebruikt worden om het verschil tussen medianen van twee ongepaarde groepen te toetsen. Deze toets heeft een hoger onderscheidend vermogen[^3]<sup>,</sup>[^1], maar vereist dat de verdelingen van beide ongepaarde groepen dezelfde vorm hebben.[^4] *Mood's mediaan toets* kan ook gebruikt worden als de verdelingen niet dezelfde vorm hebben. 
+<!-- ## /TEKSTBLOK: link1.py-->
+
+
+<!-- ## TEKSTBLOK: link2.py-->
+*Mood's mediaan toets* toetst het verschil tussen de medianen van twee ongepaarde groepen. Eerst wordt de mediaan berekend van de samengevoegde observaties van beide groepen. Daarna worden voor beide ongepaarde groepen het aantal observaties groter dan en kleiner dan of gelijk aan de mediaan geteld. Dit levert een kruistabel op die vervolgens getoetst kan worden met de [Chi-kwadraat toets voor onafhankelijkheid](13-Chi-kwadraat-toets-voor-onafhankelijkheid-en-Fishers-exact-toets-Python.html). Een voorbeeld van zo'n kruistabel is te zien in Tabel 1.
+<!-- ## /TEKSTBLOK: link2.py-->
+
+<!-- ## TEKSTBLOK: link3.py-->
+Een assumptie van de *Chi-kwadraat toets voor onafhankelijk* is dat niet meer dan 20% van de cellen van de kruistabel een verwacht aantal observaties van vijf of minder heeft. Als dit niet het geval is, is *Fisher's exact toets* een beter alternatief. Zie de toetspagina van de [Chi-kwadraat toets voor onafhankelijkheid](13-Chi-kwadraat-toets-voor-onafhankelijkheid-en-Fishers-exact-toets-Python.html) voor een uitgebreide uitleg over deze assumptie. 
+<!-- ## /TEKSTBLOK: link3.py-->
+
+
+<!-- ## TEKSTBLOK: Dataset-inladen.py-->
+Er is een dataset `dfStudiepunten_studiejaar2` ingeladen met het aantal punten dat studenten in het tweede jaar halen.
+<!-- ## /TEKSTBLOK: Dataset-inladen.py-->
+
+<!-- ## TEKSTBLOK: Data-bekijken.py -->
+Gebruik `<dataframe>.head()` en `<dataframe>.tail()` om de structuur van de data te bekijken.
+<!-- ## /TEKSTBLOK: Data-bekijken.py -->
+<!-- ## OPENBLOK: Data-bekijken.py -->
+```{python, warning = FALSE}
+# Pandas library importeren
+import pandas as pd
+```
+```{python, include=FALSE}
+import pandas as pd
+dfStudiepunten_studiejaar2 = pd.DataFrame(r.Studiepunten_studiejaar2)
+```
+
+```{python, collapse = TRUE}
+## Eerste 6 observaties
+print(dfStudiepunten_studiejaar2.head(6))
+```
+
+```{python, collapse = TRUE}
+## Laatste 6 observaties
+print(dfStudiepunten_studiejaar2.tail(6))
+```
+<!-- ## /OPENBLOK: Data-bekijken.py -->
+<!-- ## TEKSTBLOK: Data-beschrijven.py -->
+Bekijk de grootte, de mediaan en de kwantielen van de data met `np.size()` en `np.quantile()`. De mediaan en kwantielen worden vaak gebruikt als maat wanneer een verdeling niet symmetrisch is.
+<!-- ## /TEKSTBLOK: Data-beschrijven.py -->
+<!-- ## OPENBLOK: Data-selecteren.py -->
+```{python data selecteren}
+Studiepunten_Nederlands = dfStudiepunten_studiejaar2[dfStudiepunten_studiejaar2["Vooropleiding"] == "Nederlands"]["Studiepunten"]
+Studiepunten_buitenlands = dfStudiepunten_studiejaar2[dfStudiepunten_studiejaar2["Vooropleiding"] == "buitenlands"]["Studiepunten"]
+```
+<!-- ## /OPENBLOK: Data-selecteren.py -->
+
+<!-- ## OPENBLOK: Numpy-inladen.py -->
+```{python}
+import numpy as np
+```
+<!-- ## /OPENBLOK: Numpy-inladen.py -->
+
+<!-- ## OPENBLOK: Data-beschrijven-1.py -->
+```{python, collapse=TRUE}
+print(np.size(Studiepunten_Nederlands))
+print(np.quantile(Studiepunten_Nederlands, [0, 0.25, 0.5, 0.75, 1]))
+```
+<!-- ## /OPENBLOK: Data-beschrijven-1.py -->
+
+<!-- ## OPENBLOK: Data-beschrijven-2.py -->
+```{python, collapse=TRUE}
+print(np.size(Studiepunten_buitenlands))
+print(np.quantile(Studiepunten_buitenlands, [0, 0.25, 0.5, 0.75, 1]))
+```
+<!-- ## /OPENBLOK: Data-beschrijven-2.py -->
+<!-- ## CLOSEDBLOK: Data-beschrijven-3.py -->
+``` {python data beschrijven als object, include=FALSE, echo=TRUE}
+## Onderstaand zijn de dynamische variabelen te vinden
+q_NL = np.quantile(Studiepunten_Nederlands, [0, 0.25, 0.5, 0.75, 1])
+q_Inter = np.quantile(Studiepunten_buitenlands, [0, 0.25, 0.5, 0.75, 1])
+
+vN_NL = len(Studiepunten_Nederlands)
+vN_Inter = len(Studiepunten_buitenlands)
+
+vQ1_NL = q_NL[1]
+vQ1_Inter = q_Inter[1]
+
+vQ2_NL = q_NL[2]
+vQ2_Inter = q_Inter[2]
+
+vQ3_NL = q_NL[3]
+vQ3_Inter = q_Inter[3]
+```
+<!-- ## /CLOSEDBLOK: Data-beschrijven-3.py -->
+
+<!-- ## TEKSTBLOK: Data-beschrijven2.py -->
+* Mediaan studenten Nederlandse vooropleiding: `r Round_and_format(py$vQ2_NL)`, *n* = `r py$vN_NL`.
+* Mediaan studenten buitenlandse vooropleiding: `r Round_and_format(py$vQ2_Inter)`, *n* = `r py$vN_Inter`.
+
+<!-- ## /TEKSTBLOK: Data-beschrijven2.py -->
+
+<!-- ## OPENBLOK: Histogram1.py -->
+```{python}
+## Histogram met matplotlib
+import matplotlib.pyplot as plt
+fig = plt.figure(figsize = (15, 10))
+sub1 = fig.add_subplot(1, 2, 1)
+title1 = plt.title("Nederlandse vooropleiding")
+hist1 = plt.hist(Studiepunten_Nederlands, density = True, edgecolor = "black", bins = 29)
+
+sub2 = fig.add_subplot(1, 2, 2)
+title2 = plt.title("Buitenlandse vooropleiding")
+hist2 = plt.hist(Studiepunten_buitenlands, density = True, edgecolor = "black", bins = 31)
+
+main = fig.suptitle('Studiepunten van studenten Business Administration in het tweede jaar')
+plt.show()
+```
+<!-- ## /OPENBLOK: Histogram1.py -->
+
+
+<!-- ## TEKSTBLOK: groepsgrootte1.py -->
+Maak een kruistabel met het aantal observaties hoger en lager dan de mediaan voor beide ongepaarde groepen. Bereken vervolgens de verwachte aantallen observaties met de functie `sps.contingency.expected_freq()` van het package `scipy` met als argument de kruistabel `Kruistabel`.
+<!-- ## /TEKSTBLOK: groepsgrootte1.py -->
+
+<!-- ## OPENBLOK: groepsgrootte2.py -->
+```{python}
+import scipy.stats as sps 
+
+# Bereken de mediaan van alle observaties samengevoegd
+Mediaan = np.median(dfStudiepunten_studiejaar2["Studiepunten"])
+
+# Bepaal voor elke observatie of deze hoger of lager/gelijk aan de mediaan is
+Index_hoger_lager = dfStudiepunten_studiejaar2["Studiepunten"] > Mediaan 
+
+# Maak een kruistabel
+Kruistabel = pd.crosstab(Index_hoger_lager, dfStudiepunten_studiejaar2["Vooropleiding"])
+
+# Bereken verwachte aantallen observaties
+sps.contingency.expected_freq(Kruistabel)
+```
+<!-- ## /OPENBLOK: groepsgrootte2.py -->
+
+
+<!-- ## TEKSTBLOK: Moods-mediaan-toets-1.py -->
+Gebruik de functie `median_test()` van het package `scipy.stats` om *Mood's mediaan toets* uit te voeren. De eerste twee argumenten zijn vectoren met het aantal studiepunten van studenten met een Nederlandse (`Studiepunten_Nederlands`) en buitenlandse (`Studiepunten_buitenlands`) vooropleiding. Het derde argument `ties = "below"` geeft aan dat de observaties die gelijk zijn aan de mediaan opgeteld worden bij de observaties die kleiner dan de mediaan zijn.
+<!-- ## /TEKSTBLOK: Moods-mediaan-toets-1.py -->
+
+<!-- ## OPENBLOK: Moods-mediaan-toets-2.py -->
+```{python}
+# Sla de studiepunten van beide groepen apart op in een vector
+Studiepunten_Nederlands = dfStudiepunten_studiejaar2[dfStudiepunten_studiejaar2["Vooropleiding"] == "Nederlands"]["Studiepunten"]
+Studiepunten_buitenlands = dfStudiepunten_studiejaar2[dfStudiepunten_studiejaar2["Vooropleiding"] == "buitenlands"]["Studiepunten"]
+
+# Voer Mood's mediaan toets uit
+Toetsstatistiek, p_waarde, Mediaan, Kruistabel = sps.median_test(Studiepunten_Nederlands, Studiepunten_buitenlands, ties = "below")
+
+Toetsstatistiek
+
+p_waarde
+
+Mediaan
+
+```
+<!-- ## /OPENBLOK: Moods-mediaan-toets-2.py -->
+
+<!-- ## CLOSEDBLOK: Moods-mediaan-toets-3.py -->
+
+<!-- ## /CLOSEDBLOK: Moods-mediaan-toets-3.py -->
+
+<!-- ## TEKSTBLOK: Moods-mediaan-toets-3.py -->
+<!-- ## /TEKSTBLOK: Moods-mediaan-toets-3.py -->
+
+<!-- ## OPENBLOK: Moods-mediaan-toets-4.py -->
+
+<!-- ## /OPENBLOK: Moods-mediaan-toets-4.py -->
+
+<!-- ## TEKSTBLOK: Moods-mediaan-toets-4.py -->
+* &chi;^2^ ~ 1 ~ = `r Round_and_format(py$Toetsstatistiek)`, *p* = < 0,0001
+* De p-waarde is kleiner dan 0,05, dus de H~0~ wordt verworpen.[^9]
+* De mediaan van de variabele studiepunten is `r Round_and_format_0decimals(py$Mediaan)`  
+
+<!-- ## /TEKSTBLOK: Moods-mediaan-toets-4.py -->
+
+
+<!-- ## TEKSTBLOK: Rapportage.py -->
+*Mood's mediaan toets* is uitgevoerd om te toetsen of de mediaan van het behaald aantal studiepunten in het tweede jaar van de bachelor Business Administration hetzelfde is voor studenten met buitenlandse vooropleiding als voor studenten met Nederlandse vooropleiding. De resultaten van de toets laten zien dat er een significant verschil is tussen beide medianen, &chi;^2^ ~1~ = `r Round_and_format(py$Toetsstatistiek)`, *p* = < 0,0001. Studenten met een Nederlandse vooropleiding lijken dus meer studiepunten te behalen in het tweede jaar dan studenten met een buitenlandse vooropleiding.
+<!-- ## /TEKSTBLOK: Rapportage.py -->

@@ -149,8 +149,6 @@ De *likelihood ratio* toets kan ook gebruikt worden om verschillende regressiemo
 
 Bij *multinomiale logistische regressie* is de effectmaat gebaseerd op een vergelijking van de likelihood van het voorgestelde model ten opzichte van de likelihood van het interceptmodel. Een veelgebruikte versie hiervan is Nagelkerke's $R^2$ ($R_N^2$) welke waardes aanneemt tussen 0 en 1. Let op dat Nagelkerke's $R^2$ niet geïnterpreteerd kan worden als verklaarde variantie (zoals $R^2$ bij *multipele lineaire regressie*). Een juiste interpretatie is de verklaarde variatie of model fit.[^2]
 
-EFFECTMAAT NAKIJKEN
-
 ## Individuele predictors toetsen en interpreteren met de Wald toets
 
 Als de *likelihood ratio* toets aantoont dat het regressiemodel betere voorspellingen geeft dan het interceptmodel, kunnen de predictors getoetst worden. De regressiecoefficiënten van de predictors en de intercept worden getoetst met een *Wald toets* waarbij de nulhypothese is dat de coefficiënt gelijk aan nul is ($\beta = 0$) en de (tweezijdige) alternatieve hypothese dat de coefficiënt niet gelijk aan nul is ($\beta \neq 0$). Er kan ook een eenzijdige alternatieve hypothese opgesteld worden, bijvoorbeeld als er de verwachting is dat de coefficiënt positief of negatief is. De *Wald-toets* toont in feite aan of er wel of geen relatie is tussen de predictor en afhankelijke variabele in de aanwezigheid van de andere predictoren van het regressiemodel. Bij de *Wald-toets* is de gebruikte toetsstatistiek de z-score.[^2]
@@ -281,7 +279,7 @@ Voer eerst de *multinomiale logistische regressie* uit omdat deze nodig is voor 
 <!-- ## /TEKSTBLOK: Uitvoering1.R -->
 
 <!-- ## OPENBLOK: Uitvoering2.R -->
-```{r}
+```{r, message = FALSE, warning = FALSE, results = 'hide'}
 library(mclogit)
 
 Regressiemodel <- mblogit(Vervolg ~  Nominaal + Gemiddeld_cijfer,
@@ -300,8 +298,7 @@ Onderzoek of er univariate outliers zijn met behulp van boxplots en gestandaardi
 <!-- ## OPENBLOK: Outlier2.R -->
 ```{r}
 # Maak een boxplot van de continue variabelen in de dataset
-boxplot(Fysiotherapie_Vervolg[,"Gemiddeld_cijfer"],
-        names = "Gemiddeld cijfer")
+boxplot(Fysiotherapie_Vervolg[,"Gemiddeld_cijfer"])
 
 ```
 <!-- ## /OPENBLOK: Outlier2.R -->
@@ -353,16 +350,16 @@ Fysiotherapie_WO_master_hbo_master <- Fysiotherapie_Vervolg[Fysiotherapie_Vervol
 Fysiotherapie_WO_master_werk <- Fysiotherapie_Vervolg[Fysiotherapie_Vervolg$Vervolg != "hbo master",]
 Fysiotherapie_hbo_master_werk <- Fysiotherapie_Vervolg[Fysiotherapie_Vervolg$Vervolg != "WO master",]
 
-## Los voor logistische regressiemodellen
+## Voer de logistische regressiemodellen uit
 Regressiemodel_WO_master_hbo_master <- glm(Vervolg ~ Nominaal + Gemiddeld_cijfer,
                                            data = Fysiotherapie_WO_master_hbo_master,
                                            family = "binomial")
 Regressiemodel_WO_master_werk <- glm(Vervolg ~ Nominaal + Gemiddeld_cijfer,
-                                      data = Fysiotherapie_WO_master_werk,
-                                      family = "binomial")
+                                     data = Fysiotherapie_WO_master_werk,
+                                     family = "binomial")
 Regressiemodel_hbo_master_werk <- glm(Vervolg ~ Nominaal + Gemiddeld_cijfer,
-                                             data = Fysiotherapie_hbo_master_werk,
-                                             family = "binomial")
+                                      data = Fysiotherapie_hbo_master_werk,
+                                      family = "binomial")
 
 
 # Sla de gestandaardiseerde residuën op
@@ -410,8 +407,8 @@ Subset <- Fysiotherapie_Vervolg[,c("Nominaal_dummy",
 
 # Bereken de Mahalanobis afstand voor elke deelnemer 
 Mahalanobis_afstanden <- mahalanobis(Subset,
-            colMeans(Subset),
-            cov(Subset))
+                                     colMeans(Subset),
+                                     cov(Subset))
 
 # Bepaal de criteriumwaarde voor de Mahalanobis afstand met de functie qchisq() met als eerste argument 1 - het significantieniveau en als tweede argument het aantal predictors. In deze casus is het significantieniveau voor de Mahalanobis afstand 0.001 en het aantal predictors berekend met ncol(Subset).
 (Criteriumwaarde <- qchisq(1 - 0.001, ncol(Subset)))
@@ -431,8 +428,6 @@ Er zijn geen deelnemers met een Mahalanobis afstand groter dan de criteriumwaard
 
 ### Cook's afstand
 
-
-
 <!-- ## TEKSTBLOK: Outlier10.R -->
 Onderzoek of er outliers zijn met behulp van de gestandaardiseerde residuën. Voer een [logistische regressie](41-Logistische-regressie-R.html) uit voor elke combinatie van twee mogelijkheden en onderzoek voor elke combinatie de Cook's afstanden. Maak eerst aparte datasets voor elke combinatie van twee mogelijkheden. Gebruik daarna om de logistische regressie uit te voeren de functie `glm()` met als eerste argument de regressievergelijking `Vervolg ~ Nominaal + Gemiddeld_cijfer` met links van de tilde de afhankelijke variabele `Vervolg` en rechts de twee onafhankelijke variabelen `Nominaal` en `Gemiddeld_cijfer`. Het tweede argument is de dataset (bijvoorbeeld `Fysiotherapie_Uitval_Niet_nominaal`) en het derde argument `family = "binomial"` geeft aan dat er een *logistische regressie* uitgevoerd moet worden. Bereken vervolgens de gestandaardiseerde residuën met de functie `cooks.distance()` en maak een plot en tel het aantal Cook's afstanden dat groter is dan de criteriumwaarde van 1.
 <!-- ## /TEKSTBLOK: Outlier10.R -->
@@ -444,16 +439,16 @@ Fysiotherapie_WO_master_hbo_master <- Fysiotherapie_Vervolg[Fysiotherapie_Vervol
 Fysiotherapie_WO_master_werk <- Fysiotherapie_Vervolg[Fysiotherapie_Vervolg$Vervolg != "hbo master",]
 Fysiotherapie_hbo_master_werk <- Fysiotherapie_Vervolg[Fysiotherapie_Vervolg$Vervolg != "WO master",]
 
-## Los voor logistische regressiemodellen
+## Voer de logistische regressiemodellen uit
 Regressiemodel_WO_master_hbo_master <- glm(Vervolg ~ Nominaal + Gemiddeld_cijfer,
                                            data = Fysiotherapie_WO_master_hbo_master,
                                            family = "binomial")
 Regressiemodel_WO_master_werk <- glm(Vervolg ~ Nominaal + Gemiddeld_cijfer,
-                                      data = Fysiotherapie_WO_master_werk,
-                                      family = "binomial")
+                                     data = Fysiotherapie_WO_master_werk,
+                                     family = "binomial")
 Regressiemodel_hbo_master_werk <- glm(Vervolg ~ Nominaal + Gemiddeld_cijfer,
-                                             data = Fysiotherapie_hbo_master_werk,
-                                             family = "binomial")
+                                      data = Fysiotherapie_hbo_master_werk,
+                                      family = "binomial")
 
 # Bepaal Cook's afstand voor elke deelnemer
 Cooks_afstand_WO_master_hbo_master <- cooks.distance(Regressiemodel_WO_master_hbo_master)
@@ -480,7 +475,7 @@ Er zijn geen deelnemers met een Cook's afstand groter dan de criteriumwaarde van
 
 ## Lineariteit: Box-Tidwell
 
-Voer de *Box-Tidwell test* uit om te onderzoeken of er een lineaire relatie is tussen de continue predictors en de logit van de afhankelijke variabele. Maak eerst voor elke continue predictor een nieuwe variabele aan die bestaat uit het product van de predictor met de logaritme (`log()`) van de predictor. Voeg daarna deze nieuwe interactietermen toe aan de regressievergelijking en voer de *multinomiale logistische regressie* uit. Gebruik de functie `glm()` met als eerste argument de regressievergelijking `Uitval ~ Geslacht + Eindexamencijfer + Vooropleiding + Leeftijd + Leeftijd_log_leeftijd + Eindexamencijfer_log_eindexamencijfer` met links van de tilde de afhankelijke variabele `Uitval` en rechts de vier onafhankelijke variabelen `Geslacht`, `Eindexamencijfer`, `Vooropleiding` en `Leeftijd` en de interactietermen `Leeftijd_log_leeftijd` en `Eindexamencijfer_log_eindexamencijfer`. Het tweede argument is de dataset `Uitval_Elektrotechniek` en het derde argument `family = "binomial"` geeft aan dat er een *multinomiale logistische regressie* uitgevoerd moet worden.
+Voer de *Box-Tidwell test* uit om te onderzoeken of er een lineaire relatie is tussen de continue predictors en de logit van de afhankelijke variabele. Maak eerst voor elke continue predictor een nieuwe variabele aan die bestaat uit het product van de predictor met de logaritme (`log()`) van de predictor. Voeg daarna deze nieuwe interactietermen toe aan de regressievergelijking en voer de *multinomiale logistische regressie* uit. Gebruik de functie `mblogit()` met als eerste argument de regressievergelijking `Vervolg ~ Nominaal + Gemiddeld_cijfer + Gemiddeld_cijfer_log` met links van de tilde de afhankelijke variabele `Vervolg` en rechts de twee onafhankelijke variabelen `Nominaal` en `Gemiddeld_cijfer` en de interactietermen `Gemiddeld_cijfer_log`. Het tweede argument is de dataset `Fysiotherapie_Vervolg`.
 
 <!-- ## OPENBLOK: AssLineariteit1.R -->
 ```{r}
@@ -587,22 +582,25 @@ Disp <- dispersion(Dispersie, method = "Pearson")
 <!-- ## /CLOSEDBLOK: Dispersie3.R -->
 
 <!-- ## TEKSTBLOK: Dispersie4.R -->
-Er is sprake van een onderdispersie, aangezien de dispersieparameter (`r Round_and_formatDisp)`) kleiner dan 1 is. Het verschil met 1 is echter niet zeer klein en bij onderdispersie wordt er in het algemeen geen correctie uitgevoerd. Voor de *multinomiale logistische regressie* in deze casus wordt daarom geen correctie uitgevoerd vanwege onderdispersie.
+Er is sprake van een onderdispersie, aangezien de dispersieparameter (`r Round_and_format(Disp)`) kleiner dan 1 is. Het verschil met 1 is echter niet zeer klein en bij onderdispersie wordt er in het algemeen geen correctie uitgevoerd. Voor de *multinomiale logistische regressie* in deze casus wordt daarom geen correctie uitgevoerd vanwege onderdispersie.
 <!-- ## /TEKSTBLOK: Dispersie4.R -->
 
 # Uitvoering
 
 <!-- ## TEKSTBLOK: Uitvoering1.R -->
-Als alle assumpties zijn getoetst en aan alle assumpties is voldaan, kan de *multinomiale logistische regressie* uitgevoerd worden. Gebruik de functie `glm()` met als eerste argument de regressievergelijking `Uitval ~ Geslacht + Eindexamencijfer + Vooropleiding + Leeftijd` met links van de tilde de afhankelijke variabele `Uitval` en rechts de vier onafhankelijke variabelen `Geslacht`, `Eindexamencijfer`, `Vooropleiding` en `Leeftijd`. Het tweede argument is de dataset `Uitval_Elektrotechniek` en het derde argument `family = "binomial"` geeft aan dat er een *multinomiale logistische regressie* uitgevoerd moet worden. Voer daarna de *likelihood ratio toets* uit met behulp van de functie `lrtest()` van het package `lmtest` met als argument het object van het regressiemodel (`Regressiemodel`). Sla het model op en presenteer vervolgens een overzicht van de resultaten met de functie `summary()`. Bepaal de 95%-betrouwbaarheidsintervallen van de regressiecoëfficiënten met de functie `confint()`. Bereken ten slotte de Nagelkerke $R^2$ met behulp van de functie `Nagelkerke()` van het package `fmsb`.
+Als alle assumpties zijn getoetst en aan alle assumpties is voldaan, kan de *multinomiale logistische regressie* uitgevoerd worden. Gebruik de functie `mblogit()` van het package `mclogit` met als eerste argument de regressievergelijking `Vervolg ~  Nominaal + Gemiddeld_cijfer` met links van de tilde de afhankelijke variabele `Vervolg` en rechts de twee onafhankelijke variabelen `Nominaal` en `Gemiddeld_cijfer`. Het tweede argument is de dataset `Fysiotherapie_Vervolg`. 
+
+Voer daarna de *likelihood ratio toets* uit met behulp van de functie `lrtest()` van het package `lmtest` met als argument het object van het regressiemodel (`Regressiemodel`). Sla het model op en presenteer vervolgens een overzicht van de resultaten met de functie `summary()`. Bepaal de 95%-betrouwbaarheidsintervallen van de regressiecoëfficiënten met de functie `confint()`. Bereken ten slotte de Nagelkerke $R^2$ met behulp van de functie `r2_nagelkerke()` van het package `performance`.
 
 <!-- ## /TEKSTBLOK: Uitvoering1.R -->
 
 <!-- ## OPENBLOK: Uitvoering2.R -->
 ```{r, message = FALSE, warning = FALSE}
+library(mclogit)
+
 # Voer de multipele lineaire regressie uit
-Regressiemodel <- glm(Uitval ~ Geslacht + Eindexamencijfer + Vooropleiding + Leeftijd,
-    data = Uitval_Elektrotechniek,
-    family = "binomial")
+Regressiemodel <- mblogit(Vervolg ~  Nominaal + Gemiddeld_cijfer,
+                          Fysiotherapie_Vervolg)
 
 # Voer de likelihood ratio toets uit
 library(lmtest)
@@ -618,35 +616,31 @@ confint(Regressiemodel)
 exp(coef(Regressiemodel))
 
 # Bepaal de Nagelkerke R2
-library(fmsb)
-NagelkerkeR2(Regressiemodel)
-
+library(performance)
+r2_nagelkerke(Regressiemodel)
 ```
 <!-- ## /OPENBLOK: Uitvoering2.R -->
 
 <!-- ## CLOSEDBLOK: Uitvoering3.R -->
-```{r, echo = FALSE, message = FALSE}
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
 # Voer de multipele lineaire regressie uit
-Regressiemodel <- glm(Uitval ~ Geslacht + Eindexamencijfer + Vooropleiding + Leeftijd,
-    data = Uitval_Elektrotechniek,
-    family = "binomial")
+Regressiemodel <- mblogit(Vervolg ~  Nominaal + Gemiddeld_cijfer,
+                          Fysiotherapie_Vervolg)
 
 # Voer de likelihood ratio toets uit
 LR_test <- lrtest(Regressiemodel)
 
 # Presenteer de resultaten
-Reg <- summary(Regressiemodel)
-F_toets <- Reg$fstatistic
-R2 <- NagelkerkeR2(Regressiemodel)[[2]]
+Reg <- summary(Regressiemodel)#$coefficients
+R2 <- r2_nagelkerke(Regressiemodel)
 CI <- confint(Regressiemodel)
-
 ```
 <!-- ## /CLOSEDBLOK: Uitvoering3.R -->
 
 ## Significantie regressiemodel
 
 <!-- ## TEKSTBLOK: Ftoets1.R -->
-Bepaal als eerste stap de significantie van het regressiemodel met behulp van de *likelihood ratio toets*. De *likelihood ratio toets* voor het regressiemodel laat een significant verschil zien tussen het voorgestelde model en een model met alleen een intercept, *&chi;^2^* = `r Round_and_format(LR_test$Chisq[2])`, *df* = `r -1 * LR_test$Df[2]`, *p* < 0,0001, $R^2_N$ = `r Round_and_format(100 * R2)`.[^8] De nulhypothese dat geen enkele predictor van de predictors Geslacht, Eindexamencijfer, Leeftijd en Vooropleiding is gerelateerd aan de afhankelijke variabele Uitval kan verworpen worden. De Nagelkerke $R^2$ is `r Round_and_format(100*R2)`. Omdat de *likelihood ratio toets* voor het gehele model significant is, kunnen de coëfficiënten geinterpreteerd worden.
+Bepaal als eerste stap de significantie van het regressiemodel met behulp van de *likelihood ratio toets*. De *likelihood ratio toets* voor het regressiemodel laat een significant verschil zien tussen het voorgestelde model en een model met alleen een intercept, *&chi;^2^* = `r Round_and_format(LR_test$Chisq[2])`, *df* = `r -1 * LR_test$Df[2]`, *p* < 0,0001, $R^2_N$ = `r Round_and_format(100 * R2)`.[^8] De nulhypothese dat geen enkele predictor van de predictors Nominaal en  Gemiddeld_cijfer gerelateerd is aan de afhankelijke variabele Vervolg kan verworpen worden. De Nagelkerke $R^2$ is `r Round_and_format(100*R2)`. Omdat de *likelihood ratio toets* voor het gehele model significant is, kunnen de coëfficiënten geinterpreteerd worden.
 <!-- ## TEKSTBLOK: Ftoets1.R -->
 
 ## Significantie en interpretatie coëfficiënten
@@ -654,35 +648,34 @@ Bepaal als eerste stap de significantie van het regressiemodel met behulp van de
 <!-- ## TEKSTBLOK: Coefficienten1.R -->
 Voor de intercept en de regressiecoëfficiënten van de predictors zijn de geschatte coëfficiënt (`Estimate`), de standaardfout van de geschatte coëfficiënt (`Std. Error`) en de z-statistiek (`z value`) en p-waarde (`Pr(>|z|)`) van de *Wald toets* voor de regressiecoëfficiënt weergegeven:
 
-* Geslacht: de geschatte waarde voor de regressiecoëfficiënt van de variabele Geslacht is `r Round_and_format(Reg$coefficients[2,1])` en is significant verschillend van 0 (*z* = `r Round_and_format(Reg$coefficients[2,3])`, *p* < 0,001).[^8] De hoofdcategorie van de variabele Geslacht is `Vrouw`, aangezien de variabele in de resultaten weergegeven is als `GeslachtVrouw`. Dit betekent dat de referentiecategorie `Man` is. Als de overige predictors gelijkblijven is de odds van uitval voor vrouwen `r Round_and_format(exp(Reg$coefficients[2,1]))` keer zo hoog als de odds van uitval voor mannen.
-* Eindexamencijfer: de geschatte waarde voor de regressiecoëfficiënt van de variabele Eindexamencijfer_Wiskunde is `r Round_and_format(Reg$coefficients[3,1])` en is significant verschillend van 0 (*z* = `r Round_and_format(Reg$coefficients[3,3])`, *p* < 0,0001).[^8] De odds ratio van deze predictor is `r Round_and_format(exp(Reg$coefficients[3,1]))`. Als de overige predictors gelijkblijven is de odds van uitval `r Round_and_format(exp(Reg$coefficients[3,1]))` keer zo hoog bij een toename van het gemiddeld eindexamencijfer met één punt.  De odds van uitval is dus eigenlijk `r Round_and_format(1 / exp(Reg$coefficients[3,1]))` (1 / `r Round_and_format(exp(Reg$coefficients[3,1]))`) keer zo laag bij een toename van het gemiddeld eindexamencijfer met één punt.
-* Vooropleiding: de geschatte waarde voor de regressiecoëfficiënt van de variabele Vooropleiding is `r Round_and_format(Reg$coefficients[4,1])` en is significant verschillend van 0 (*z* = `r Round_and_format(Reg$coefficients[4,3])`, *p* = `r Round_and_format(Reg$coefficients[4,4])`).[^8] Aangezien deze coëfficiënt niet significant is, hoeft hij niet geïnterpreteerd te worden.
-* Leeftijd: de geschatte waarde voor de regressiecoëfficiënt van de variabele Leeftijd is `r Round_and_format(Reg$coefficients[5,1])` en is significant verschillend van 0 (*z* = `r Round_and_format(Reg$coefficients[5,3])`, *p* < 0,0001).[^8] De odds ratio van deze predictor is `r Round_and_format(exp(Reg$coefficients[5,1]))`. Als de overige predictors gelijkblijven is de odds van uitval `r Round_and_format(exp(Reg$coefficients[5,1]))` keer zo hoog bij een toename van leeftijd met één jaar.
+* Nominaal; hbo master vs. werk: de geschatte waarde voor de regressiecoëfficiënt van de variabele Nominaal voor de vergelijking tussen hbo master en werk is `r Round_and_format(Reg$coefficients[3,1])` en is significant verschillend van 0 (*z* = `r Round_and_format(Reg$coefficients[3,3])`, *p* = 0,007).[^8] De hoofdcategorie van de variabele Nominaal is `Nominaal`, aangezien de variabele in de resultaten weergegeven is als `NominaalNominaal`. Dit betekent dat de referentiecategorie `Niet nominaal` is. Als de overige predictors gelijkblijven is de odds van het volgen van een hbo master versus direct aan het werk gaan voor nominaal afgestudeerden `r Round_and_format(exp(Reg$coefficients[3,1]))` keer zo hoog als de odds van het volgen van een hbo master versus direct aan het werk gaan voor niet nominaal afgestudeerden.
+* Nominaal; WO master vs. werk: de geschatte waarde voor de regressiecoëfficiënt van de variabele Nominaal voor de vergelijking tussen WO master en werk is `r Round_and_format(Reg$coefficients[4,1])` en is niet significant verschillend van 0 (*z* = `r Round_and_format(Reg$coefficients[4,3])`, *p* = `r Round_and_format(Reg$coefficients[4,4])`).[^8] De hoofdcategorie van de variabele Nominaal is `Nominaal`, aangezien de variabele in de resultaten weergegeven is als `NominaalNominaal`. Dit betekent dat de referentiecategorie `Niet nominaal` is. De odds ratio hoeft niet geïnterpreteerd te worden, omdat de regressiecoëfficiënt niet significant verschillend van nul is. Er is dus geen relatie tussen het wel of niet nominaal afstuderen en het volgen voor een WO master versus direct aan het werk gaan.
+* Gemiddeld_cijfer; hbo master vs. werk: de geschatte waarde voor de regressiecoëfficiënt van de variabele Gemiddeld_cijfer is `r Round_and_format(Reg$coefficients[5,1])` en is significant verschillend van 0 (*z* = `r Round_and_format(Reg$coefficients[5,3])`, *p* < 0,0001).[^8] De odds ratio van deze predictor is `r Round_and_format(exp(Reg$coefficients[5,1]))`. Als de overige predictors gelijkblijven is de odds van het volgen van een hbo master versus direct aan het werk gaan `r Round_and_format(exp(Reg$coefficients[5,1]))` keer zo hoog bij een toename van het gemiddelde cijfer met één punt.  
+* Gemiddeld_cijfer; WO master vs. werk: de geschatte waarde voor de regressiecoëfficiënt van de variabele Gemiddeld_cijfer is `r Round_and_format(Reg$coefficients[6,1])` en is significant verschillend van 0 (*z* = `r Round_and_format(Reg$coefficients[6,3])`, *p* < 0,0001).[^8] De odds ratio van deze predictor is `r Round_and_format(exp(Reg$coefficients[6,1]))`. Als de overige predictors gelijkblijven is de odds van het volgen van een WO master versus direct aan het werk gaan `r Round_and_format(exp(Reg$coefficients[6,1]))` keer zo hoog bij een toename van het gemiddelde cijfer met één punt.  
 
 <!-- ## /TEKSTBLOK: Coefficienten1.R -->
 
 ## Sterkte van de relatie tussen de predictor en afhankelijke variabele
 
 <!-- ## TEKSTBLOK: CoefficientenStd1.R -->
-De regressiecoëfficiënten van de predictors Eindexamencijfer_Wiskunde en Aantal_Hoorcolleges zijn significant verschillend van nul en dragen dus bij aan het voorspellen van het eindcijfer Methoden & Statistiek. Met behulp van de gestandaardiseerde regressiecoëfficiënten kan bepaald worden welke predictor het sterkst gerelateerd is aan de afhankelijke variabele. Gebruik hiervoor de functie `lm.beta()` van het package `QuantPsyc` met als argument `Regressiemodel_numeriek` (het object van het regressiemodel). Een voorwaarde voor de functie is dat alle variabelen numeriek zijn. Zet daarom eerst de variabele `Geslacht` om in een numerieke variabele met de waarde 1 voor vrouwen en 0 voor mannen. Het omzetten van een categorische variabele in een of meer numerieke variabele heet dummycoderen; de variabelen worden vaak dummies genoemd. Gebruik de numerieke variabele `Geslacht_numeriek` vervolgens om de *multinomiale logistische regressie* uit te voeren met de functie `lm()` op dezelfde manier als eerder is gedaan.
+De regressiecoëfficiënten van de predictors Nominaal en Gemiddeld_cijfer zijn significant verschillend van nul voor de keuze tussen het volgen van een hbo master versus direct aan het werk gaan. Voor de keuze tussen het volgen van een WO master en direct aan het werk gaan is alleen de predictor Gemiddeld_cijfer significant. In ieder geval dragen beide predictors bij aan het voorspellen van de variabele Vervolg in het algemeen. Met behulp van de gestandaardiseerde regressiecoëfficiënten kan bepaald worden welke predictor het sterkst gerelateerd is aan de afhankelijke variabele. 
+
+Standaardiseer alle predictors met de functie `scale()` met als argument de predictor. Een voorwaarde voor de functie is dat alle variabelen numeriek zijn. Zet daarom eerst de variabele `Nominaal` om in een numerieke variabele met de waarde 1 voor Nominaal en 0 voor Niet nominaal. Het omzetten van een categorische variabele in een of meer numerieke variabele heet dummycoderen; de variabelen worden vaak dummies genoemd. Voer nu de *multinomiale logistische regressie* uit met de gestandaardiseerde predictors en bekijk de regressiecoëfficiënten. Deze regressiecoëfficiënten zijn nu gestandaardiseerd.
 <!-- ## /TEKSTBLOK: CoefficientenStd1.R -->
 
 <!-- ## OPENBLOK: CoefficientenStd2.R -->
 ```{r, warning = FALSE, message = FALSE}
-# Zet de variabelen om in een numerieke variabele met een 1 voor een man en 0 voor een vrouw
-Uitval_Elektrotechniek$Geslacht_dummy <- as.numeric(Uitval_Elektrotechniek$Geslacht == "Vrouw")
-Uitval_Elektrotechniek$Vooropleiding_dummy <- as.numeric(Uitval_Elektrotechniek$Vooropleiding == "havo")
+# Zet de variabele Nominaal om in een numerieke variabele met een 1 voor Nominaal en 0 voor Niet nominaal
+Fysiotherapie_Vervolg$Nominaal_dummy <- as.numeric(Fysiotherapie_Vervolg$Nominaal == "Nominaal")
 
 # Standaardiseer de predictors
-Uitval_Elektrotechniek$Geslacht_dummy_stand <- scale(Uitval_Elektrotechniek$Geslacht_dummy)
-Uitval_Elektrotechniek$Vooropleiding_dummy_stand <- scale(Uitval_Elektrotechniek$Vooropleiding_dummy)
-Uitval_Elektrotechniek$Leeftijd_stand <- scale(Uitval_Elektrotechniek$Leeftijd)
-Uitval_Elektrotechniek$Eindexamencijfer_stand <- scale(Uitval_Elektrotechniek$Eindexamencijfer)
+Fysiotherapie_Vervolg$Nominaal_dummy_stand <- scale(Fysiotherapie_Vervolg$Nominaal_dummy)
+Fysiotherapie_Vervolg$Gemiddeld_cijfer_stand <- scale(Fysiotherapie_Vervolg$Gemiddeld_cijfer)
 
-# Stel het regressiemodel op met Geslacht als numerieke variabele
-Regressiemodel_gestandaardiseerd <- glm(Uitval ~ Geslacht_dummy_stand + Eindexamencijfer_stand +  Vooropleiding_dummy_stand + Leeftijd_stand,
-    data = Uitval_Elektrotechniek,
-    family = "binomial")
+# Stel het regressiemodel op
+library(mclogit)
+Regressiemodel_gestandaardiseerd <- mblogit(Vervolg ~  Nominaal_dummy_stand + Gemiddeld_cijfer_stand,
+                                            Fysiotherapie_Vervolg)
 
 # Laat de gestandaardiseerde coefficienten zien
 coefficients(Regressiemodel_gestandaardiseerd)
@@ -700,161 +693,131 @@ Coefficienten_std <- coefficients(Regressiemodel_gestandaardiseerd)
 <!-- ## /CLOSEDBLOK: CoefficientenStd3.R -->
 
 <!-- ## TEKSTBLOK: CoefficientenStd4.R -->
-De gestandaardiseerde regressiecoëfficiënt is `r Round_and_format(Coefficienten_std[3])` voor de predictor Geslacht, `r Round_and_format(Coefficienten_std[2])` voor de predictor Eindexamencijfer, `r Round_and_format(Coefficienten_std[4])` voor de predictor Vooropleiding en `r Round_and_format(Coefficienten_std[5])` voor de predictor Leeftijd. De leeftijd van een student heeft dus de meeste invloed op uitval. De invloed van Geslacht en Eindexamencijfer is ongeveer even groot. De gestandaardiseerde odds ratio van de predictor Leeftijd laat zien dat een toename van één standaardafwijking in de leeftijd van een student resulteert in een `r Round_and_format(exp(Coefficienten_std[5]))` zo hoge odds dat de student uitvalt, als de overige predictors gelijk blijven.
+Voor de vergelijking hbo master versus werk is de gestandaardiseerde regressiecoëfficiënt is `r Round_and_format(Coefficienten_std[3])` voor de predictor Nominaal en `r Round_and_format(Coefficienten_std[5])` voor de predictor Gemiddeld_cijfer. Voor de vergelijking WO master versus werk is de gestandaardiseerde regressiecoëfficiënt is `r Round_and_format(Coefficienten_std[4])` voor de predictor Nominaal en `r Round_and_format(Coefficienten_std[5])` voor de predictor Gemiddeld_cijfer. Voor beide vergelijkingen heeft de predictor Gemiddeld_cijfer dus meer invloed op het vervolg dan de predictor Nominaal. De invloed van Gemiddeld_cijfer is het sterkst bij de vergelijking WO master versus werk. De gestandaardiseerde odds ratio van de predictor Gemiddeld_cijfer laat zien dat een toename van één standaardafwijking in het gemiddelde cijfer van een student resulteert in een `r Round_and_format(exp(Coefficienten_std[5]))` zo hoge odds dat de student een WO master gaat volgen ten opzichte van direct aan het werk gaan, als de overige predictors gelijk blijven.
 <!-- ## /TEKSTBLOK: CoefficientenStd4.R -->
 
 # Uitvoering likelihood ratio toets voor vergelijking twee regressiemodellen
 
-De *likelihood ratio toets* wordt bij *multinomiale logistische regressie* gebruikt om de significantie van het gehele regressiemodel te toetsen ten opzichte van het interceptmodel. Deze *likelihood ratio toets* kan ook gebruikt worden om te toetsen of twee geneste regressiemodellen onderling verschillen qua model fit. Hoewel deze vergelijking in de casus niet voorbijkomt, wordt deze toch geïllustreerd. Vergelijk hiervoor een model met de predictoren Eindexamencijfer en Vooropleiding met een model met de predictors Geslacht, Eindexamencijfer, Vooropleiding en Leeftijd.
+De *likelihood ratio toets* wordt bij *multinomiale logistische regressie* gebruikt om de significantie van het gehele regressiemodel te toetsen ten opzichte van het interceptmodel. Deze *likelihood ratio toets* kan ook gebruikt worden om te toetsen of twee geneste regressiemodellen onderling verschillen qua model fit. Hoewel deze vergelijking in de casus niet voorbijkomt, wordt deze toch geïllustreerd. Vergelijk hiervoor een model met de predictor Nominaal met een model met de predictors Nominaal en Gemiddeld_cijfer.
 
 <!-- ## TEKSTBLOK: ModellenVergelijken1.R -->
-Voer de *likelihood ratio toets* uit met de functie `lrtest()` van het package `lmtest` met als argumenten de modelobjecten van de resultaten van de twee regressiemodellen die worden vergeleken (`Model_1` en `Model_2`). Voer eerst de *multinomiale logistische regressie* uit voor beide modellen en vergelijk ze daarna. Bereken ten slotte de Nagelkerke $R^2$ met de functie `NagelkerkeR2(Model_1)$R2` met als argument het modelobject waarvan de verklaarde variatie berekend moet worden.
+Voer de *likelihood ratio toets* uit met de functie `lrtest()` van het package `lmtest` met als argumenten de modelobjecten van de resultaten van de twee regressiemodellen die worden vergeleken (`Model_1` en `Model_2`). Voer eerst de *multinomiale logistische regressie* uit voor beide modellen en vergelijk ze daarna. Bereken ten slotte de Nagelkerke $R^2$ met de functie `r2_nagelkerke(Model_1)` van het package `performance` met als argument het modelobject waarvan de verklaarde variatie berekend moet worden.
 <!-- ## /TEKSTBLOK: ModellenVergelijken1.R -->
 
 <!-- ## OPENBLOK: ModellenVergelijken2.R -->
-```{r}
-# Stel het regressiemodel op met Vooropleiding en Eindexamencijfer als predictor
-Model_1 <- glm(Uitval ~ Eindexamencijfer + Vooropleiding,
-    data = Uitval_Elektrotechniek,
-    family = "binomial")
+```{r, warning = FALSE, message = FALSE}
+library(mclogit)
+
+# Stel het regressiemodel op met Nominaal als predictor
+Model_1 <- mblogit(Vervolg ~  Nominaal,
+                   Fysiotherapie_Vervolg)
 
 # Stel het regressiemodel op met alle predictors
-Model_2 <- glm(Uitval ~ Geslacht + Eindexamencijfer + Vooropleiding + Leeftijd,
-    data = Uitval_Elektrotechniek,
-    family = "binomial")
+Model_2 <- mblogit(Vervolg ~  Nominaal + Gemiddeld_cijfer,
+                   Fysiotherapie_Vervolg)
 
 # Voer de likelihood ratio toets uit
 library(lmtest)
-LR_test <- lrtest(Model_1, Model_2)
+lrtest(Model_1, Model_2)
 
-# Bereken de verklaarde variantie (%) van model 1
-library(fmsb)
-100*NagelkerkeR2(Model_1)$R2
+# Bereken de verklaarde variatie (%) van model 1
+library(performance)
+100*r2_nagelkerke(Model_1)
 
-# Bereken de verklaarde variantie (%) van model 2
-100*NagelkerkeR2(Model_2)$R2
+# Bereken de verklaarde variatie (%) van model 2
+100*r2_nagelkerke(Model_2)
 
 ```
 <!-- ## /OPENBLOK: ModellenVergelijken2.R -->
 
 <!-- ## CLOSEDBLOK: ModellenVergelijken3.R -->
-```{r, echo = FALSE, message = FALSE}
-# Stel het regressiemodel op met Vooropleiding en Eindexamencijfer als predictor
-Model_1 <- glm(Uitval ~ Eindexamencijfer + Vooropleiding,
-    data = Uitval_Elektrotechniek,
-    family = "binomial")
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(mclogit)
+
+# Stel het regressiemodel op met Nominaal als predictor
+Model_1 <- mblogit(Vervolg ~  Nominaal,
+                   Fysiotherapie_Vervolg)
 
 # Stel het regressiemodel op met alle predictors
-Model_2 <- glm(Uitval ~ Geslacht + Eindexamencijfer + Vooropleiding + Leeftijd,
-    data = Uitval_Elektrotechniek,
-    family = "binomial")
+Model_2 <- mblogit(Vervolg ~  Nominaal + Gemiddeld_cijfer,
+                   Fysiotherapie_Vervolg)
 
 # Voer de likelihood ratio toets uit
 library(lmtest)
 Vergelijking <- lrtest(Model_1, Model_2)
 
-# Bereken verklaarde variantie (%) van model 1
-library(fmsb)
-R2_model1 <- 100*NagelkerkeR2(Model_1)$R2
+# Bereken de verklaarde variatie (%) van model 1
+library(performance)
+R2_model1 <- 100*r2_nagelkerke(Model_1)
 
-# Bereken verklaarde variantie (%) van model 2
-R2_model2 <- 100*NagelkerkeR2(Model_2)$R2
+# Bereken de verklaarde variatie (%) van model 2
+R2_model2 <- 100*r2_nagelkerke(Model_2)
+
 
 ```
 <!-- ## /CLOSEDBLOK: ModellenVergelijken3.R -->
 
 <!-- ## TEKSTBLOK: ModellenVergelijken4.R -->
-De *likelihood ratio toets* toont aan dat er een significant verschil is in de model fit tussen beide modellen, *&chi;^2^* = `r Round_and_format(Vergelijking$Chisq[2])`, *df* = `r -1 * Vergelijking$Df[2]`, *p* < 0,0001.[^8] Het regressiemodel met predictors Vooropleiding en Eindexamencijfer verklaart slechts `r Round_and_format(R2_model1)`% van de variatie in uitval en het regressiemodel met vier predictoren verklaart `r Round_and_format(R2_model2)`% van de variatie. Het verschil in verklaarde variatie is `r Round_and_format(R2_model2 - R2_model1)`%. Het model met het Geslacht, Eindexamencijfer, Vooropleiding en Leeftijd heeft dus een significant betere model fit dan het model met alleen Vooropleiding en Eindexamencijfer als predictors.
+De *likelihood ratio toets* toont aan dat er een significant verschil is in de model fit tussen beide modellen, *&chi;^2^* = `r Round_and_format(Vergelijking$Chisq[2])`, *df* = `r -1 * Vergelijking$Df[2]`, *p* < 0,0001.[^8] Het regressiemodel met predictor Nominaal verklaart slechts `r Round_and_format(R2_model1)`% van de variatie in Vervolg en het regressiemodel met predictoren Nominaal en Gemiddeld_cijfer verklaart `r Round_and_format(R2_model2)`% van de variatie. Het verschil in verklaarde variatie is `r Round_and_format(R2_model2 - R2_model1)`%. Het model met Nominaal en Gemiddeld_cijfer als predictors heeft dus een significant betere model fit dan het model met alleen Nominaal als predictor.
 <!-- ## /TEKSTBLOK: ModellenVergelijken4.R -->
 
 # Voorspellen en classificeren
 
-Op basis van het logistisch regressiemodel kan voor iedere student de kans op uitval voorspeld worden. De voorspelde kans kan direct vergeleken worden met de observaties om te onderzoeken hoe goed het model voorspeld. Daarnaast is het ook mogelijk om de studenten te classificeren in de categorieën Uitval en Geen uitval op basis van de voorspelde kans. Met behulp van de classificaties kan een classificatietabel gemaakt worden waarmee de kwaliteit van de voorspelkracht van het model beoordeeld kan worden.
+Op basis van het regressiemodel kan voor iedere student de kans op het volgen van een hbo master, een WO master en het direct aan het werk gaan voorspeld worden. De voorspelde kans kan direct vergeleken worden met de observaties om te onderzoeken hoe goed het model voorspeld. Daarnaast is het ook mogelijk om de studenten te classificeren in de categorieën hbo master, WO master en werk op basis van de voorspelde kans. Met behulp van de classificaties kan een classificatietabel gemaakt worden waarmee de kwaliteit van de voorspelkracht van het model beoordeeld kan worden.
 
-Bepaal eerst de voorspelde kansen met de functie `predict()` met als argumenten het object van het regressie model `Regressiemodel` en `type = response` om aan te geven dat de voorspelde kans bepaald moet worden. Classificeer daarna de studenten op basis van de voorspelde kans met de functie `ifelse()` met als eerste argument de conditie die gecheckt wordt `Voorspelde_kans > 0.5`, als tweede argument de classificatie als de student aan de conditie voldoet (`"Uitval"`) en als derde argument de classificatie als de student niet aan de conditie voldoet (`"Geen uitval"`). De conditie stelt dat de voorspelde kans groter dan 0,5 moet zijn. In dat geval is Uitval de classificatie voor die student. Als de kans 0,5 of kleiner is, dan is Geen uitval de classificatie voor die student. Maak daarna een classificatietabel voor de classificaties en observaties van de studenten Elektrotechniek. Bereken op basis van de classificatietabel de accuraatheid, sensitiviteit en specificiteit van de classificaties. Bereken ten slotte de Area Under the Curve (AUC) van het logistisch regressiemodel met behulp van de functie `roc()$auc` van het package `pROC` met als argumenten de observaties `Uitval_Elektrotechniek$Uitval_dummy` en de voorspelde kansen `Voorspelde_kans`.
+Bepaal eerst de voorspelde kansen met de functie `predict()` met als argumenten het object van het regressie model `Regressiemodel` en `type = response` om aan te geven dat de voorspelde kans bepaald moet worden. Classificeer daarna de studenten op basis van de mogelijkheid met de hoogste voorspelde kans. Maak daarna een tabel met de frequenties per mogelijkheid van de classificaties en maak een classificatietabel voor de classificaties en observaties van de studenten Fysiotherapie. Bereken op basis van de classificatietabel de accuraatheid van de classificaties.
 
 ```{r, warning = FALSE, message = FALSE}
 # Bepaal de voorspelde kansen
 Voorspelde_kans <- predict(Regressiemodel,
                            type = "response")
 
-# Classificeer de studenten op basis van de voorspelde kans
-Classificaties <- ifelse(Voorspelde_kans > 0.5,
-                         "Uitval",
-                         "Geen uitval")
+# Classificeer de studenten op basis van de hoogste voorspelde kans
+Classificaties <- c()
+for (i in 1:nrow(Voorspelde_kans)) {
+  Vervolg_opties <- colnames(Voorspelde_kans)
+  Classificaties[i] <- Vervolg_opties[Voorspelde_kans[i,] == max(Voorspelde_kans[i,])]
+}
 
-# Maak een classificatietabel
-Tabel <- table(Classificaties = Classificaties,
-      Observaties = Uitval_Elektrotechniek$Uitval)
+# Tabelleer de frequenties per categorie van de classificaties
+table(Classificaties)
+
+# Maak een classificatietabel, gebruik de functie factor en het argument levels om aan te geven
+# welke categorieën er moeten worden weergegeven
+Tabel <- table(Classificaties = factor(Classificaties, levels = c("werk", "hbo master", "WO master")),
+               Observaties = Fysiotherapie_Vervolg$Vervolg)
 print(Tabel)
 
 # Bereken de accuraatheid
-Accuraatheid <- (Tabel["Uitval","Uitval"] + Tabel["Geen uitval","Geen uitval"]) / sum(Tabel)
+Accuraatheid <- (Tabel["werk","werk"] + Tabel["hbo master","hbo master"] + Tabel["WO master","WO master"]) / sum(Tabel)
+
 Accuraatheid
 
-# Bereken de sensitiviteit
-Sensitiviteit <- Tabel["Uitval","Uitval"] / (Tabel["Uitval","Uitval"] + Tabel["Geen uitval","Uitval"])
-Sensitiviteit
-
-# Bereken de specificiteit
-Specificiteit <- Tabel["Geen uitval","Geen uitval"] / (Tabel["Geen uitval","Geen uitval"] + Tabel["Uitval","Geen uitval"])
-Specificiteit
-
-# Maak een numerieke versie van de variabele Uitval met een 1 voor Uitval en een 0 voor Geen uitval
-Uitval_Elektrotechniek$Uitval_dummy <- as.numeric(Uitval_Elektrotechniek$Uitval == "Uitval")
-
-# Bereken de Area Under the Curve (AUC)
-library(pROC)
-roc(Uitval_Elektrotechniek$Uitval_dummy,
-    Voorspelde_kans)$auc
-```
-```{r, echo = FALSE, message = FALSE, warning = FALSE}
-# Bepaal de voorspelde kansen
-Voorspelde_kans <- predict(Regressiemodel,
-                           type = "response")
-
-# Classificeer de studenten op basis van de voorspelde kans
-Classificaties <- ifelse(Voorspelde_kans > 0.5,
-                         "Uitval",
-                         "Geen uitval")
-
-# Maak een classificatietabel
-Tabel <- table(Classificaties = Classificaties,
-      Observaties = Uitval_Elektrotechniek$Uitval)
-
-# Bereken accuraatheid
-Accuraatheid <- (Tabel["Uitval","Uitval"] + Tabel["Geen uitval","Geen uitval"]) / sum(Tabel)
-
-# Bereken sensitiviteit
-Sensitiviteit <- Tabel["Uitval","Uitval"] / (Tabel["Uitval","Uitval"] + Tabel["Geen uitval","Uitval"])
-
-# Bereken specificiteit
-Specificiteit <- Tabel["Geen uitval","Geen uitval"] / (Tabel["Geen uitval","Geen uitval"] + Tabel["Uitval","Geen uitval"])
-
-# Bereken de Area Under the Curve (AUC)
-library(pROC)
-AUC <- roc(Uitval_Elektrotechniek$Uitval_dummy,
-    Voorspelde_kans)$auc
 ```
 
-De classificatietabel laat zien dat de meeste studenten correct geclassificeerd zijn. De sensitiviteit is `r Round_and_format(Sensitiviteit)`, dus van de studenten die daadwerkelijk uitvallen is `r Round_and_format_0decimals(100 * Sensitiviteit)`% correct geclassificeerd. De specificiteit is `r Round_and_format(Specificiteit)`, dus van de studenten die niet uitvallen is `r Round_and_format_0decimals(100 * Specificiteit)`% correct geclassificeerd. Dit laat zien dat het model er beter in is om het niet uitvallen van studenten te classificeren dan het uitvallen van studenten. De Area Under the Curve van het logistisch regressiemodel is `r Round_and_format(AUC)`.
+De classificatietabel laat zien dat de meerderheid van de studenten correct geclassificeerd is, maar ook dat er veel verkeerde classificaties zijn. Ook valt het op dat er geen enkele student geclassificeerd is met de mogelijkheid hbo master. De accuraatheid van de classificaties van het regressiemodel is `r Round_and_format(100*Accuraatheid)`%.
+
 
 # Rapportage
 
-<!-- ## TEKSTBLOK: Rapportage1.R -->
-Een *multinomiale logistische regressie* is uitgevoerd om te onderzoeken of de vooropleiding, de leeftijd, het geslacht en het gemiddeld eindexamencijfer van studenten die starten met de bachelor Elektrotechniek gerelateerd is aan het wel of niet uitvallen in het eerste jaar van deze opleiding. Uit het toetsen van de assumpties van *multinomiale logistische regressie* bleek dat er aan alle assumpties is voldaan. De resultaten van de *multinomiale logistische regressie* zijn te vinden in Tabel 1. 
+Voer *multinomiale logistische regressie* uit om te onderzoeken of het vervolg na de bachelor Fysiotherapie (hbo master, WO master of direct aan het werk) te voorspellen is op basis van het wel of niet nominaal afstuderen en het gemiddelde cijfer van de bachelor van de studenten. Start met het toetsen van de assumpties en voer vervolgens de *multinomiale logistische regressie* uit als hieraan voldaan is.
 
-De *likelihood ratio toets* voor het regressiemodel laat zien dat het opgestelde regressiemodel minimaal één coëfficiënt heeft die significant verschilt van nul, *&chi;^2^* = `r Round_and_format(LR_test$Chisq[2])`, *df* = `r -1 * LR_test$Df[2]`, *p* < 0,0001, $R^2_N$ = `r Round_and_format(100 * R2)`. Het gemiddeld eindexamencijfer (*&beta;* = `r Round_and_format(Reg$coefficients[3,1])`, *z* = `r Round_and_format(Reg$coefficients[3,3])`, *p* < 0,0001), de leeftijd (*&beta;* = `r Round_and_format(Reg$coefficients[5,1])`, *z* = `r Round_and_format(Reg$coefficients[5,3])`, *p* < 0,0001) en het geslacht (*&beta;* = `r Round_and_format(Reg$coefficients[2,1])`, *z* = `r Round_and_format(Reg$coefficients[2,3])`, *p* < 0,0001) zijn significante predictors van het eindcijfer voor het vak, maar de vooropleiding van de student is dit niet (*&beta;* = `r Round_and_format(Reg$coefficients[4,1])`, *z* = `r Round_and_format(Reg$coefficients[4,3])`, *p* = `r Round_and_format(Reg$coefficients[4,4])`). De gestandaardiseerde coëfficiënten laten zien dat de leeftijd van de student het sterkst gerelateerd is aan de kans op uitval. Om in te schatten of een student extra ondersteuning kan krijgen omdat de kans op uitval hoger is, kan de studieloopbaanbegeleider dus rekening houden met het geslacht, de leeftijd en het gemiddeld eindexamencijfer van studenten, maar hoeft hij geen rekening te houden met de vooropleiding.
+<!-- ## TEKSTBLOK: Rapportage1.R -->
+Een *multinomiale logistische regressie* is uitgevoerd om te onderzoeken of het vervolg na de bachelor Fysiotherapie (hbo master, WO master of direct aan het werk) gerelateerd is aan het wel of niet nominaal afstuderen en het gemiddelde cijfer van de bachelor van de studenten. Uit het toetsen van de assumpties van *multinomiale logistische regressie* bleek dat er aan alle assumpties is voldaan. De resultaten van de *multinomiale logistische regressie* zijn te vinden in Tabel 1. 
+
+De *likelihood ratio toets* voor het regressiemodel laat zien dat het opgestelde regressiemodel minimaal één coëfficiënt heeft die significant verschilt van nul, *&chi;^2^* = `r Round_and_format(LR_test$Chisq[2])`, *df* = `r -1 * LR_test$Df[2]`, *p* < 0,0001, $R^2_N$ = `r Round_and_format(100 * R2)`. Voor de vergelijking tussen de mogelijkheden hbo master en direct aan het werk gaan zijn zowel het gemiddelde cijfer (*&beta;* = `r Round_and_format(Reg$coefficients[5,1])`, *z* = `r Round_and_format(Reg$coefficients[5,3])`, *p* < 0,0001) als (*&beta;* = `r Round_and_format(Reg$coefficients[3,1])`, *z* = `r Round_and_format(Reg$coefficients[3,3])`, *p* = 0,007) significante predictors. Voor de vergelijking tussen de mogelijkheden WO master en direct aan het werk gaan is het gemiddelde cijfer (*&beta;* = `r Round_and_format(Reg$coefficients[6,1])`, *z* = `r Round_and_format(Reg$coefficients[6,3])`, *p* < 0,0001) wel een significante predictor, maar het wel of niet nominaal afstuderen (*&beta;* = `r Round_and_format(Reg$coefficients[4,1])`, *z* = `r Round_and_format(Reg$coefficients[4,3])`, *p* = `r Round_and_format(Reg$coefficients[4,4])`) geen significante predictor. De gestandaardiseerde coëfficiënten laten zien dat het gemiddelde cijfer tijdens de bachelor het sterkst gerelateerd is aan het vervolg na de opleiding Fysiotherapie. Om in te schatten welke studenten in aanmerking komen voor een hbo master zijn het wel of niet nominaal afstuderen en het gemiddelde cijfer relevant, maar voor een WO master is alleen het gemiddelde cijfer in de bachelor relevant.
 <!-- ## /TEKSTBLOK: Rapportage1.R -->
 
 <!-- ## TEKSTBLOK: Rapportage2.R -->
 |                           | Coëfficiënt   | Standaard- fout | z | p-waarde | 95%-betrouwbaar- heidsinterval | Gestandaardiseerde coëfficiënt  | Odds ratio |
 | ------------------------- | ---------| ---------| ---------| ---------| ---------| ---------| ---------| 
-| Intercept                 | `r Round_and_format(Reg$coefficients[1,1])` |  `r Round_and_format(Reg$coefficients[1,2])` |  `r Round_and_format(Reg$coefficients[1,3])` |  < 0,0001*  |  `r Round_and_format(CI[1,1])` - `r Round_and_format(CI[1,2])`  | - | - |
-| Geslacht (Vrouw) | `r Round_and_format(Reg$coefficients[2,1])` |  `r Round_and_format(Reg$coefficients[2,2])` |  `r Round_and_format(Reg$coefficients[2,3])` |  < 0,01* |  `r Round_and_format(CI[2,1])` - `r Round_and_format(CI[2,2])` | `r Round_and_format(Coefficienten_std[2])`| `r Round_and_format(exp(Reg$coefficients[2,1]))` |
-| Eindexamencijfer       | `r Round_and_format(Reg$coefficients[3,1])` |  `r Round_and_format(Reg$coefficients[3,2])` |  `r Round_and_format(Reg$coefficients[3,3])` |  < 0,0001* |  `r Round_and_format(CI[3,1])` - `r Round_and_format(CI[3,2])` | `r Round_and_format(Coefficienten_std[3])`| `r Round_and_format(exp(Reg$coefficients[3,1]))` |
-| Vooropleiding (mbo)       | `r Round_and_format(Reg$coefficients[4,1])` |  `r Round_and_format(Reg$coefficients[4,2])` |  `r Round_and_format(Reg$coefficients[4,3])` |  < 0,0001* |  `r Round_and_format(CI[4,1])` - `r Round_and_format(CI[4,2])` | `r Round_and_format(Coefficienten_std[4])`| `r Round_and_format(exp(Reg$coefficients[4,1]))` |
-| Leeftijd          | `r Round_and_format(Reg$coefficients[5,1])`0 |  `r Round_and_format(Reg$coefficients[5,2])` |  `r Round_and_format(Reg$coefficients[5,3])` |  `r Round_and_format(Reg$coefficients[5,4])` |  `r Round_and_format(CI[5,1])` - `r Round_and_format(CI[5,2])`  | `r Round_and_format(Coefficienten_std[5])`| `r Round_and_format(exp(Reg$coefficients[5,1]))` |
+| Intercept; hbo master vs. werk         | `r Round_and_format(Reg$coefficients[1,1])` |  `r Round_and_format(Reg$coefficients[1,2])` |  `r Round_and_format(Reg$coefficients[1,3])` |  < 0,0001*  |  `r Round_and_format(CI[1,1])` - `r Round_and_format(CI[1,2])`  | - | - |
+| Intercept; WO master vs. werk         | `r Round_and_format(Reg$coefficients[2,1])` |  `r Round_and_format(Reg$coefficients[2,2])` |  `r Round_and_format(Reg$coefficients[2,3])` |  < 0,0001*  |  `r Round_and_format(CI[2,1])` - `r Round_and_format(CI[2,2])`  | - | - |
+| Nominaal (Nominaal); hbo master vs. werk | `r Round_and_format(Reg$coefficients[3,1])` |  `r Round_and_format(Reg$coefficients[3,2])` |  `r Round_and_format(Reg$coefficients[3,3])` |   0,007* |  `r Round_and_format(CI[3,1])` - `r Round_and_format(CI[3,2])` | `r Round_and_format(Coefficienten_std[3])`| `r Round_and_format(exp(Reg$coefficients[3,1]))` |
+| Nominaal (Nominaal); WO master vs. werk | `r Round_and_format(Reg$coefficients[4,1])` |  `r Round_and_format(Reg$coefficients[4,2])` |  `r Round_and_format(Reg$coefficients[4,3])` |  `r Round_and_format(Reg$coefficients[4,4])` |  `r Round_and_format(CI[4,1])` - `r Round_and_format(CI[4,2])` | `r Round_and_format(Coefficienten_std[4])`| `r Round_and_format(exp(Reg$coefficients[4,1]))` |
+| Gemiddeld_cijfer; hbo master vs. werk       | `r Round_and_format(Reg$coefficients[5,1])` |  `r Round_and_format(Reg$coefficients[5,2])` |  `r Round_and_format(Reg$coefficients[5,3])` |  < 0,0001* |  `r Round_and_format(CI[5,1])` - `r Round_and_format(CI[5,2])` | `r Round_and_format(Coefficienten_std[5])`| `r Round_and_format(exp(Reg$coefficients[5,1]))` |
+| Gemiddeld_cijfer; WO master vs. werk       | `r Round_and_format(Reg$coefficients[6,1])` |  `r Round_and_format(Reg$coefficients[6,2])` |  `r Round_and_format(Reg$coefficients[6,3])` |  < 0,0001* |  `r Round_and_format(CI[6,1])` - `r Round_and_format(CI[6,2])` | `r Round_and_format(Coefficienten_std[6])`| `r Round_and_format(exp(Reg$coefficients[6,1]))` |
+
 *Tabel 1. Regressiecoëfficiënten en bijbehorende standaardfouten, z-statistieken, p-waardes, 95%-betrouwbaarheidsintervallen, gestandaardiseerde coëfficiënten en odds ratios.*
 <!-- ## /TEKSTBLOK: Rapportage2.R -->
 

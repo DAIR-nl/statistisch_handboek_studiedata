@@ -69,20 +69,20 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 </div>
 
 # Assumpties
-Om een valide toetsresultaat te bereiken met de *repeated measures ANOVA* moeten de data aan een aantal voorwaarden voldoen: normaliteit, sphericiteit en onafhankelijkheid.[^1] Onafhankelijkheid houdt in dat bij herhaalde metingen van dezelfde observatie-eenheden, de groep observatie-eenheden drie of meer keren gemeten is en een willekeurige steekproef van de populatie is. Bij gepaarde groepen houdt onafhankelijkheid in dat elk paar bestaat uit drie of meer gepaarde observatie-eenheden en de steekproef met alle paren een willekeurige steekproef van de populatie is.
+Om een valide toetsresultaat te bereiken met de *repeated measures ANOVA* moet de data aan een aantal voorwaarden voldoen: normaliteit, sphericiteit en onafhankelijkheid.[^1] Onafhankelijkheid houdt in dat de herhaalde metingen van de deelnemers[^12] onafhankelijk van elkaar zijn.
 
 ## Normaliteit
 <!-- ## TEKSTBLOK: link1.R -->
 De assumptie van normaliteit houdt in dat er een normale
-verdeling van de afhankelijke variabele is in elke groep. Wanneer er duidelijke afwijkingen van normaliteit zijn,
+verdeling van de afhankelijke variabele is in elke groep van metingen. Wanneer er duidelijke afwijkingen van normaliteit zijn,
 is het transformeren van de data een optie.[^2] Een andere optie is het gebruik van de nonparametrische
-[Friedman's ANOVA](09-Friedmans-ANOVA-R.html) waar normaliteit geen assumptie is.[^3] Controleer de assumptie van normaliteit voor elke groep met de volgende stappen:  
+[Friedman's ANOVA](09-Friedmans-ANOVA-R.html) waar normaliteit geen assumptie is.[^3] Controleer de assumptie van normaliteit voor elke groep van metingen met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
-2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^4]<sup>, </sup>[^5]  
+2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^4]<sup>, </sup>[^5]  
 <!-- ## /TEKSTBLOK: link1.R -->
 
 ## Sphericiteit
-De assumptie van sphericiteit houdt in dat de variantie van de verschilscores tussen groepen ongeveer aan elkaar gelijk zijn.[^6] In deze casus zijn dat de verschilscores tussen de drie vakken: Lineaire Algebra minus Relativiteitstheorie, Relativiteitstheorie minus Kosmologie en Kosmologie minus Lineaire Algebra. Toets deze assumptie met *Mauchly's test*. Wanneer de data niet aan de assumptie voldoen, geeft de gewone *repeated measures ANOVA* een verkeerd resultaat. Er zijn echter correcties die gebruikt kunnen worden wanneer de data niet aan sphericiteit voldoen. Een voorbeeld van mogelijke output van *Mauchly's test* in R is hieronder weergegeven.
+De assumptie van sphericiteit houdt in dat de variantie van de verschilscores tussen groepen van metingen ongeveer aan elkaar gelijk zijn.[^6] In deze casus zijn dat de verschilscores tussen de drie vakken: Lineaire Algebra minus Relativiteitstheorie, Relativiteitstheorie minus Kosmologie en Kosmologie minus Lineaire Algebra. Toets deze assumptie met *Mauchly's test*. Wanneer de data niet aan de assumptie voldoen, geeft de gewone *repeated measures ANOVA* een verkeerd resultaat. Er zijn echter correcties die gebruikt kunnen worden wanneer de data niet aan sphericiteit voldoen. Een voorbeeld van mogelijke output van *Mauchly's test* in R is hieronder weergegeven.
 
 <!-- ## CLOSEDBLOK: Sphericiteit.py -->
 ```{r, echo=FALSE}
@@ -112,15 +112,15 @@ In de voorbeeldoutput is de p-waarde van de Greenhouse-Geisser correctie groter 
 
 
 # Effectmaat
-De p-waarde geeft aan of het verschil tussen groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^6] Voor de *repeated measures ANOVA* wordt de effectmaat eta squared vaak gebruikt.
+De p-waarde geeft aan of het verschil tussen groepen van metingen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^6] Voor de *repeated measures ANOVA* wordt de effectmaat eta squared vaak gebruikt.
 
 ## Eta squared
 De effectmaat eta squared (*η^2^*) berekent de proportie van de variantie in de afhankelijke variabele die verklaard wordt door de onafhankelijke variabele. In deze casus berekent het de proportie van de variantie in het aantal uren studeren die verklaard kan worden door het vak in de eerste onderwijsperiode. Een indicatie om *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^7]
 
 # Post-hoc toetsen
-De *repeated measures ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Voer een post-hoc toets uit om te bepalen welke groepen significant verschillen.
+De *repeated measures ANOVA* toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Voer een post-hoc toets uit om te bepalen welke groepen van metingen significant verschillen.
 
-Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout. Er zijn ook andere opties voor een correctie op de p-waarden. De keuze voor een correctie is afhankelijk van het onderzoek.[^6]
+Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout. Er zijn ook andere opties voor een correctie op de p-waarden.
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->
@@ -149,7 +149,7 @@ print(dfStudieuren_technische_natuurkunde.tail(5))
 ```
 <!-- ## /OPENBLOK: Data-bekijken1.py -->
 
-Selecteer de drie groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. 
+Selecteer de drie groepen van metingen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. 
 <!-- ## OPENBLOK: Data-selecteren.py -->
 ```{python data selecteren}
 Studieuren_lineaire_algebra = dfStudieuren_technische_natuurkunde[dfStudieuren_technische_natuurkunde['Vak'] == "Lineaire Algebra"]['Studieuren']
@@ -238,7 +238,7 @@ Geef de verdeling van de data visueel weer met een histogram, Q-Q plot en boxplo
 
 ### Histogram
 
-Focus bij het analyseren van een histogram op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.[^9]<sup>, </sup>[^10]
+Focus bij het analyseren van een histogram[^18] op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.[^9]<sup>, </sup>[^10]
 
 <!-- ## OPENBLOK: Histogram.py -->
 ```{python histogram}
@@ -305,11 +305,10 @@ plt.show()
   </div>
 </div>
 
-Bij de Q-Q plots van Lineaire Algebra en Kosmologie liggen de punten rond de lijn die normaliteit aangeeft; vermoedelijk zijn deze data normaal verdeeld. Bij Relativiteitstheorie echter zijn er afwijkingen van de lijn bij de staarten van de verdeling. De statistische toetsen wijzen uit of deze afwijking van de normale verdeling significant is.
-
+Bij alle drie de Q-Q plots liggen de punten rond de lijn die normaliteit aangeeft; vermoedelijk zijn deze data normaal verdeeld.
 
 ### Boxplot
-De box geeft de middelste 50% van het aantal studieuren per week weer. De zwarte lijn binnen de box is de mediaan. In de staarten of snorreharen zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9]<sup>, </sup>[^10] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
+De box geeft de middelste 50% van het aantal studieuren per week weer. De zwarte lijn binnen de box is de mediaan. In de staarten of snorreharen zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9]<sup>, </sup>[^10] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen van metingen. 
 
 <!-- ## OPENBLOK: Boxplot.py -->
 ```{python boxplot}
@@ -321,11 +320,11 @@ plt.show()
 ```
 <!-- ## /OPENBLOK: Boxplot.py -->
 
-De boxplotten geven de spreiding weer van het aantal studieuren voor de drie vakken in de eerste onderwijsperiode: Kosmologie, Lineaire Algebra en Relativiteitstheorie. Bij Kosmologie lijkt er enige asymmetrie te zijn: de boxen zijn niet even breed. Daarnaast liggen de medianen van Kosmologie en Lineaire Algebra een stuk lager dan de mediaan van Relativiteitstheorie. Kosmologie en Relativiteitstheorie hebben mogelijke uitbijters. In het algemeen lijken de vakken een symmetrische verdeling te hebben.
+De boxplotten geven de spreiding weer van het aantal studieuren voor de drie vakken in de eerste onderwijsperiode: Kosmologie, Lineaire Algebra en Relativiteitstheorie. In het algemeen lijken de vakken een symmetrische verdeling te hebben. De medianen van Kosmologie en Lineaire Algebra liggen een stuk lager dan de mediaan van Relativiteitstheorie. Kosmologie en Relativiteitstheorie hebben mogelijke uitbijters. 
 
 
 ## Toetsen van normaliteit
-Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
+Om te controleren of de verdelingen van de vakken normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is vereist als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn, wat meestal het geval is bij een steekproef. Als de p-waarde kleiner dan 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
@@ -363,7 +362,7 @@ print(statsmodels.stats.api.lilliefors(Studieuren_kosmologie, pvalmethod="table"
   </div>
 </div>
 
-De p-waarde is *p* > 0,05 voor elk vak; er is geen statistisch significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. [^11] De *repeated measures ANOVA* kan uitgevoerd worden.
+De p-waarde is groter dan 0,05 voor elk vak; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. [^11] De *repeated measures ANOVA* kan uitgevoerd worden.
 
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke toets als de *Kolmogorov-Smirnov test* en vooral geschikt bij kleine steekproeven (n < 50). Als de p-waarde kleiner dan 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
@@ -397,7 +396,7 @@ print(stats.shapiro(Studieuren_lineaire_algebra))
   </div>
 </div>
 
-De p-waarde is *p* > 0,05 voor elk vak, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling.[^11] De *repeated measures ANOVA* kan uitgevoerd worden.
+De p-waarde is groter dan 0,05 voor elk vak, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling.[^11] De *repeated measures ANOVA* kan uitgevoerd worden.
 
 
 ## Repeated measures ANOVA 
@@ -531,3 +530,6 @@ Een *repeated measures ANOVA* is uitgevoerd om te onderzoeken of er verschillen 
 [^9]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 [^10]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport. 
 [^11]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
+[^12]: Met een deelnemer wordt het object bedoeld dat geobserveerd wordt, bijvoorbeeld een student, een inwoner van Nederland, een opleiding of een organisatie. Met een observatie wordt de waarde bedoeld die de deelnemer heeft voor een bepaalde variabele. Een deelnemer heeft dus meestal een observatie voor meerdere variabelen.
+[^18]: De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
+

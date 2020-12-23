@@ -1915,16 +1915,16 @@ body{ /* Normal  */
 <p>De <em>Wilcoxon signed rank toets</em> is een alternatief voor de <a href="02-Gepaarde-t-toets-Python.html">gepaarde t-toets</a>. Een voordeel van de <em>Wilcoxon signed rank toets</em> is dat de data niet aan de assumptie van normaliteit hoeven te voldoen. Maar als de data wel normaal verdeeld is, heeft de <em>Wilcoxon signed rank toets</em> minder onderscheidend vermogen<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> dan de <a href="02-Gepaarde-t-toets-Python.html">gepaarde t-toets</a>.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> Vandaar dat ondanks het voordeel van de grotere robuustheid minder vaak voor de <em>Wilcoxon signed rank toets</em> gekozen wordt. <!-- ## /TEKSTBLOK: link2.py--></p>
 <div id="verdeling-steekproef" class="section level2">
 <h2><span class="header-section-number">3.1</span> Verdeling steekproef</h2>
-<p>De <em>Wilcoxon signed rank toets</em> schrijft geen assumpties voor over de verdeling van de verschilscores (verschillen tussen beide meetmomenten voor alle observatie-eenheden).<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> In principe toetst de <em>Wilcoxon signed rank toets</em> een hypothese over het verschil tussen de verdelingen van twee gepaarde groepen. De <em>Wilcoxon signed rank toets</em> maakt een rangschikking van de absolute waarden van de verschilscores en telt vervolgens de rangnummers op voor de positieve en negatieve verschilscores. Het verschil tussen de som van de positieve en negatieve rangnummers bepaalt de significantie van de toets.</p>
+<p>De <em>Wilcoxon signed rank toets</em> schrijft geen assumpties voor over de verdeling van de verschilscores (verschillen tussen beide meetmomenten voor alle deelnemers<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>).<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> In principe toetst de <em>Wilcoxon signed rank toets</em> een hypothese over het verschil tussen de verdelingen van twee gepaarde groepen. De <em>Wilcoxon signed rank toets</em> maakt een rangschikking van de absolute waarden van de verschilscores en telt vervolgens de rangnummers op voor de positieve en negatieve verschilscores. Het verschil tussen de som van de positieve en negatieve rangnummers bepaalt de significantie van de toets.</p>
 <p>Als er geen symmetrische verdeling van verschilscores is, doet de <em>Wilcoxon signed rank toets</em> een uitspraak over het verschil tussen verdelingen. Een verschil tussen verdelingen kan meerdere oorzaken hebben. De top of toppen van de verdelingen kunnen verschillend zijn, maar ook de spreiding van de verdeling kan verschillen. In alle gevallen is er echter een verschil tussen de som van de rangnummers van de verdelingen. In andere woorden, de ene verdeling bevat hogere waarden dan de andere verdeling. Benoem daarom de sommen van positieve en negatieve rangnummers in de rapportage en visualiseer de verdeling van beide gepaarde groepen om duidelijk te maken op welke manier de verdelingen van elkaar verschillen.</p>
 <!-- ## TEKSTBLOK: link3.R-->
-<p>Als de verschilscores echter symmetrisch zijn, toetst de <em>Wilcoxon signed rank toets</em> ook een hypothese over het verschil tussen de medianen van twee gepaarde groepen. In dat geval heeft de <em>Wilcoxon signed rank toets</em> een hoger onderscheidend vermogen<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> dan de <a href="06-Tekentoets-R.html">tekentoets</a> om medianen te toetsen.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> De <a href="06-Tekentoets-R.html">tekentoets</a> vereist niet dat de verschilscores symmetrisch zijn en toetst alleen een hypothese over het verschil tussen medianen van gepaarde groepen. <!-- ## /TEKSTBLOK: link3.R--></p>
+<p>Als de verschilscores echter symmetrisch zijn, toetst de <em>Wilcoxon signed rank toets</em> ook een hypothese over het verschil tussen de medianen van twee gepaarde groepen. In dat geval heeft de <em>Wilcoxon signed rank toets</em> een hoger onderscheidend vermogen<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> dan de <a href="06-Tekentoets-R.html">tekentoets</a> om medianen te toetsen.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> De <a href="06-Tekentoets-R.html">tekentoets</a> vereist niet dat de verschilscores symmetrisch zijn en toetst alleen een hypothese over het verschil tussen medianen van gepaarde groepen. <!-- ## /TEKSTBLOK: link3.R--></p>
 </div>
 </div>
 <div id="effectmaat" class="section level1">
 <h1><span class="header-section-number">4</span> Effectmaat</h1>
-<p>De p-waarde geeft aan of een (mogelijk) verschil tussen twee groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
-<p>De <em>Wilcoxon signed rank toets</em> heeft als effectmaat <em>r</em>. Een indicatie om <em>r</em> te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> De effectmaat <em>r</em> wordt voor de <em>Wilcoxon signed rank toets</em> berekend door de <em>z</em>-waarde behorend bij de p-waarde van de toets te delen door de wortel van het aantal observatie-eenheden, i.e. <span class="math inline">\(\frac{z}{\sqrt{N}}\)</span>.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a> Een correlatie tussen twee variabelen wordt vaak ook aangeduid met het symbool <em>r</em>, maar beide varianten van <em>r</em> hebben een verschillende betekenis.</p>
+<p>De p-waarde geeft aan of een (mogelijk) verschil tussen twee groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></p>
+<p>De <em>Wilcoxon signed rank toets</em> heeft als effectmaat <em>r</em>. Een indicatie om <em>r</em> te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a> De effectmaat <em>r</em> wordt voor de <em>Wilcoxon signed rank toets</em> berekend door de <em>z</em>-waarde behorend bij de p-waarde van de toets te delen door de wortel van het aantal deelnemers, i.e. <span class="math inline">\(\frac{z}{\sqrt{N}}\)</span>.<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a> Een correlatie tussen twee variabelen wordt vaak ook aangeduid met het symbool <em>r</em>, maar beide varianten van <em>r</em> hebben een verschillende betekenis.</p>
 </div>
 <div id="uitvoering" class="section level1">
 <h1><span class="header-section-number">5</span> Uitvoering</h1>
@@ -1992,7 +1992,7 @@ print(np.median(Alumni_jaarinkomens_T2))
 </div>
 <div id="de-data-visualiseren" class="section level2">
 <h2><span class="header-section-number">5.2</span> De data visualiseren</h2>
-<p>Maak een histogram om de verdeling van de bruto jaarinkomens van de alumni één jaar en vijf jaar na afstuderen visueel weer te geven.<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></p>
+<p>Maak een histogram<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a> om de verdeling van de bruto jaarinkomens van de alumni één jaar en vijf jaar na afstuderen visueel weer te geven.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a></p>
 <!-- ## OPENBLOK: Histogram1.py -->
 <pre class="python"><code>## Histogram met matplotlib
 import matplotlib.pyplot as plt
@@ -2073,7 +2073,7 @@ Som_negatief = np.sum(Rangnummers[Tekens == -1])</code></pre>
 <!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets4.py -->
 <ul>
 <li><em>V</em> = 447,5, <em>p</em> &lt; 0,0001 , <em>r</em> = 0,85</li>
-<li>p-waarde &lt; 0,05, dus de H<sub>0</sub> wordt verworpen<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a></li>
+<li>p-waarde &lt; 0,05, dus de H<sub>0</sub> wordt verworpen<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a></li>
 <li>De toetsstatistiek <em>V</em> is in deze casus gelijk aan de som van de negatieve rangnummers</li>
 <li>Het aantal positieve rangnummers is 281; de som is 45608</li>
 <li>Het aantal negatieve rangnummers is 22; de som is 448</li>
@@ -2093,7 +2093,7 @@ Som_negatief = np.sum(Rangnummers[Tekens == -1])</code></pre>
 <div id = "footer">
 Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 3.6.3; Python code is uitgevoerd in Python 3.7.
 <br/><br/>
-&copy; 2020 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:09-10-2020
+&copy; 2020 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:22-12-2020
 </div> <!-- ## /CLOSEDBLOK: Footer.R --></p>
 </div>
 <div class="footnotes">
@@ -2105,14 +2105,16 @@ Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikk
 <li id="fn4"><p>Laerd Statistics (2018). <em>Wilcoxon Signed-Rank Test using SPSS Statistics</em>. <a href="https://statistics.laerd.com/spss-tutorials/wilcoxon-signed-rank-test-using-spss-statistics.php" class="uri">https://statistics.laerd.com/spss-tutorials/wilcoxon-signed-rank-test-using-spss-statistics.php</a><a href="#fnref4" class="footnote-back">↩</a></p></li>
 <li id="fn5"><p>Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese waar is.<a href="#fnref5" class="footnote-back">↩</a></p></li>
 <li id="fn6"><p>Field, A. (2013). <em>Discovering statistics using IBM SPSS statistics</em>. Sage.<a href="#fnref6" class="footnote-back">↩</a></p></li>
-<li id="fn7"><p>Field, A. (2013). <em>Discovering statistics using IBM SPSS statistics</em>. Sage.<a href="#fnref7" class="footnote-back">↩</a></p></li>
-<li id="fn8"><p>Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese waar is.<a href="#fnref8" class="footnote-back">↩</a></p></li>
-<li id="fn9"><p>Field, A. (2013). <em>Discovering statistics using IBM SPSS statistics</em>. Sage.<a href="#fnref9" class="footnote-back">↩</a></p></li>
-<li id="fn10"><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. London: Sage publications.<a href="#fnref10" class="footnote-back">↩</a></p></li>
-<li id="fn11"><p>Allen, P. &amp; Bennett, K. (2012). <em>SPSS A practical Guide version 20.0</em>. Cengage Learning Australia Pty Limited.<a href="#fnref11" class="footnote-back">↩</a></p></li>
+<li id="fn7"><p>Met een deelnemer wordt het object bedoeld dat geobserveerd wordt, bijvoorbeeld een student, een inwoner van Nederland, een opleiding of een organisatie. Met een observatie wordt de waarde bedoeld die de deelnemer heeft voor een bepaalde variabele. Een deelnemer heeft dus meestal een observatie voor meerdere variabelen.<a href="#fnref7" class="footnote-back">↩</a></p></li>
+<li id="fn8"><p>Field, A. (2013). <em>Discovering statistics using IBM SPSS statistics</em>. Sage.<a href="#fnref8" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p>Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese waar is.<a href="#fnref9" class="footnote-back">↩</a></p></li>
+<li id="fn10"><p>Field, A. (2013). <em>Discovering statistics using IBM SPSS statistics</em>. Sage.<a href="#fnref10" class="footnote-back">↩</a></p></li>
+<li id="fn11"><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. London: Sage publications.<a href="#fnref11" class="footnote-back">↩</a></p></li>
 <li id="fn12"><p>Allen, P. &amp; Bennett, K. (2012). <em>SPSS A practical Guide version 20.0</em>. Cengage Learning Australia Pty Limited.<a href="#fnref12" class="footnote-back">↩</a></p></li>
-<li id="fn13"><p>De breedte van de staven van het histogram worden hier automatisch bepaald, maar kunnen handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.<a href="#fnref13" class="footnote-back">↩</a></p></li>
-<li id="fn14"><p>In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.<a href="#fnref14" class="footnote-back">↩</a></p></li>
+<li id="fn13"><p>Allen, P. &amp; Bennett, K. (2012). <em>SPSS A practical Guide version 20.0</em>. Cengage Learning Australia Pty Limited.<a href="#fnref13" class="footnote-back">↩</a></p></li>
+<li id="fn14"><p>De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.<a href="#fnref14" class="footnote-back">↩</a></p></li>
+<li id="fn15"><p>De breedte van de staven van het histogram worden hier automatisch bepaald, maar kunnen handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.<a href="#fnref15" class="footnote-back">↩</a></p></li>
+<li id="fn16"><p>In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.<a href="#fnref16" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 

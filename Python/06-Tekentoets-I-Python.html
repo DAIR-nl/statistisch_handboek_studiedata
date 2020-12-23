@@ -1969,7 +1969,7 @@ np.mean(dfJaarlijks_inkomen[&#39;Inkomen&#39;])</code></pre>
 <p>De <em>tekentoets</em> is een alternatief voor de <a href="01-One-sample-t-toets-Python.html">one-sample t-toets</a> wanneer de data geen normale verdeling volgt. Hoewel het visueel inspecteren en testen van normaliteit niet vereist is, is het nuttig om de verdeling van de data te visualiseren en te vergelijken met de normaalverdeling. <!-- ## /TEKSTBLOK: Link2.py --></p>
 <div id="histogram" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> Histogram</h3>
-<p>Geef de verdeling van de data weer in een histogram. Focus bij het analyseren van een histogram op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a><sup>, </sup><a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> <!-- ## OPENBLOK: Histogram.py --></p>
+<p>Geef de verdeling van de data weer in een histogram<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>. Focus bij het analyseren van een histogram op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a><sup>, </sup><a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> <!-- ## OPENBLOK: Histogram.py --></p>
 <pre class="python"><code> ## Histogram met matplotlib
 import matplotlib.pyplot as plt
 hist = plt.hist(dfJaarlijks_inkomen[&#39;Inkomen&#39;], density = True, edgecolor = &quot;black&quot;, bins = 9)
@@ -2004,7 +2004,7 @@ print(statsmodels.stats.api.lilliefors(dfJaarlijks_inkomen[&#39;Inkomen&#39;], p
 <div id="tekentoets" class="section level1">
 <h1><span class="header-section-number">5</span> Tekentoets</h1>
 <!-- ## TEKSTBLOK: Tekentoets0.py -->
-<p>Voer een tweezijdige <em>tekentoets</em> uit om te bepalen of het mediane jaarinkomen van de alumni Journalistiek hoger ligt dan het modale inkomen van €36.000. Gebruik van het <code>scipy.stats</code> package de functie <code>binom_test()</code> met de argumenten <code>x = Boven_mediaan</code> dat het aantal alumni aangeeft dat meer dan normaal verdient, <code>p = 0.5</code> om de nulhypothese aan te geven en <code>alternative = &#39;two-sided&#39;</code> om een tweezijdige alternatieve hypothese te toetsen. De nulhypothese stelt dat er geen verschil is met de opgestelde mediaan van €36.000 wat betekent dat (ongeveer) de helft van de alumni meer dan dit bedrag en de helft van de alumni minder dan dit bedrag verdienen. Vandaar dat de nulhypothese aangegeven kan worden door de verwachte proportie <code>p</code> gelijk te stellen aan <code>0.5</code>. <!-- ## /TEKSTBLOK: Tekentoets0.py --></p>
+<p>Voer een tweezijdige <em>tekentoets</em> uit om te bepalen of het mediane jaarinkomen van de alumni Journalistiek hoger ligt dan het modale inkomen van €36.000. Gebruik van het <code>scipy.stats</code> package de functie <code>binom_test()</code> met de argumenten <code>x = Boven_mediaan</code> dat het aantal alumni aangeeft dat meer dan normaal verdient, <code>n = Aantal_observaties</code> dat het totaal aantal alumni aangeeft, <code>p = 0.5</code> om de nulhypothese aan te geven en <code>alternative = &#39;two-sided&#39;</code> om een tweezijdige alternatieve hypothese te toetsen. De nulhypothese stelt dat er geen verschil is met de opgestelde mediaan van €36.000 wat betekent dat (ongeveer) de helft van de alumni meer dan dit bedrag en de helft van de alumni minder dan dit bedrag verdienen. Vandaar dat de nulhypothese aangegeven kan worden door de verwachte proportie <code>p</code> gelijk te stellen aan <code>0.5</code>. <!-- ## /TEKSTBLOK: Tekentoets0.py --></p>
 <!-- ## OPENBLOK: Tekentoets.py -->
 <pre class="python"><code>import scipy.stats as sps
 
@@ -2028,7 +2028,7 @@ print(Proportie_boven_mediaan)</code></pre>
 <!-- ## /CLOSEDBLOK: Tekentoets.py -->
 <!-- ## TEKSTBLOK: Tekentoets.py -->
 <ul>
-<li>De mediaan van de steekproef is significant verschillend van €36.000, <em>p</em> &lt; 0,0001. De nulhypothese kan worden verworpen. <a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></li>
+<li>De mediaan van de steekproef is significant verschillend van €36.000, <em>p</em> &lt; 0,0001. De nulhypothese kan worden verworpen. <a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></li>
 <li>Van de 2314 alumni verdienen 1467 alumni boven modaal</li>
 <li>De geschatte mediaan van de steekproef is €39942</li>
 </ul>
@@ -2044,7 +2044,7 @@ print(Proportie_boven_mediaan)</code></pre>
 <div id = "footer">
 Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 3.6.3; Python code is uitgevoerd in Python 3.7.
 <br/><br/>
-&copy; 2020 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:09-10-2020
+&copy; 2020 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:22-12-2020
 </div> <!-- ## /CLOSEDBLOK: Footer.R --></p>
 </div>
 <div class="footnotes">
@@ -2055,9 +2055,10 @@ Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikk
 <li id="fn3"><p>Statistics How To (27 mei 2018). <em>One Sample Median Test</em>. <a href="https://www.statisticshowto.datasciencecentral.com/one-sample-median-test/">Statistics How to</a>.<a href="#fnref3" class="footnote-back">↩</a></p></li>
 <li id="fn4"><p>Bruto modaal inkomen 2019, Centraal Planbureau.<a href="#fnref4" class="footnote-back">↩</a></p></li>
 <li id="fn5"><p>Miller, I. &amp; Miller, C. (2012). <em>John E. Freund’s Mathematical Statistics with Applications</em>. Pearson: eighth edition.<a href="#fnref5" class="footnote-back">↩</a></p></li>
-<li id="fn6"><p>Outliers (13 augustus 2016). <a href="https://wiki.uva.nl/methodologiewinkel/index.php/Outliers">UvA Wiki Methodologiewinkel</a>.<a href="#fnref6" class="footnote-back">↩</a></p></li>
-<li id="fn7"><p>Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport.<a href="#fnref7" class="footnote-back">↩</a></p></li>
-<li id="fn8"><p>In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.<a href="#fnref8" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.<a href="#fnref6" class="footnote-back">↩</a></p></li>
+<li id="fn7"><p>Outliers (13 augustus 2016). <a href="https://wiki.uva.nl/methodologiewinkel/index.php/Outliers">UvA Wiki Methodologiewinkel</a>.<a href="#fnref7" class="footnote-back">↩</a></p></li>
+<li id="fn8"><p>Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport.<a href="#fnref8" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p>In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.<a href="#fnref9" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 

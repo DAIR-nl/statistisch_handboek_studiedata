@@ -71,6 +71,25 @@ EMN_kruistabel <- as.table(EMN_kruistabel)
 rownames(EMN_kruistabel) <- c("FOS","geen FOS")
 colnames(EMN_kruistabel) <- c("December","Juni")
 
+library(exact2x2)
+?exact2x2
+?mcnemar.exact
+
+## Definieer de groepen
+December <- FOS_studenten$`FOS`[FOS_studenten$Maand == "december"]
+Juni <- FOS_studenten$`FOS`[FOS_studenten$Maand == "juni"]
+
+## Maak een frequentiematrix
+FOS_studenten_frequentiematrix <- table(December, Juni)
+
+# Voer McNemar toets uit
+mcnemar.exact(FOS_studenten_frequentiematrix)
+exact2x2(FOS_studenten_frequentiematrix,
+         paired = TRUE,
+         midp = TRUE)
+
+
+
 rm(
 Wel_vooraf, 
 Niet_vooraf, 

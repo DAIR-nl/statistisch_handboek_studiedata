@@ -48,10 +48,11 @@ source(paste0(here::here(),"/01. Includes/data/08.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 # Toepassing
-
+<!-- ## TEKSTBLOK: link1.R-->
 Gebruik *Mood's mediaan toets* om te toetsen of de medianen van twee ongepaarde groepen van elkaar verschillen.[^1]<sup>,</sup>[^2] Deze toets is een alternatief voor de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html) als een van de of beide ongepaarde groepen niet normaal verdeeld zijn. *Mood's mediaan toets* kan ook gebruikt worden om medianen van meer dan twee ongepaarde groepen te vergelijken. Deze toetspagina illustreert de toets echter voor twee ongepaarde groepen.
 
 Naast *Mood's mediaan toets* kan de [Mann-Whitney U toets](08-Mann-Whitney-U-toetsI-R.html) ook gebruikt worden om het verschil tussen medianen van twee ongepaarde groepen te toetsen. Deze toets heeft een hoger onderscheidend vermogen[^3]<sup>,</sup>[^1], maar vereist dat de verdelingen van beide ongepaarde groepen dezelfde vorm hebben.[^4] *Mood's mediaan toets* kan ook gebruikt worden als de verdelingen niet dezelfde vorm hebben. 
+<!-- ## /TEKSTBLOK: link1.R-->
 
 
 # Onderwijscasus
@@ -71,7 +72,9 @@ Het meetniveau van de afhankelijke variabele is continu.[^5]<sup>,</sup>[^6]
 
 ## Groepsgroottes
 
+<!-- ## TEKSTBLOK: link2.R-->
 *Mood's mediaan toets* toetst het verschil tussen de medianen van twee ongepaarde groepen. Eerst wordt de mediaan berekend van de samengevoegde observaties van beide groepen. Daarna worden voor beide ongepaarde groepen het aantal observaties groter dan en kleiner dan of gelijk aan de mediaan geteld. Dit levert een kruistabel op die vervolgens getoetst kan worden met de [Chi-kwadraat toets voor onafhankelijkheid](13-Chi-kwadraat-toets-voor-onafhankelijkheid-en-Fishers-exact-toets-R.html). Een voorbeeld van zo'n kruistabel is te zien in Tabel 1.
+<!-- ## /TEKSTBLOK: link2.R-->
 
 |                      | Groep 1    | Groep 2 | 
 | -------------------- | ---------- | ------------| 
@@ -79,7 +82,9 @@ Het meetniveau van de afhankelijke variabele is continu.[^5]<sup>,</sup>[^6]
 | Aantal observaties kleiner dan of gelijk aan mediaan  | 30   | 40          |
 *Tabel 1. Kruistabel met aantal observaties groter dan en kleiner dan of gelijk aan mediaan voor twee ongepaarde groepen.*
 
+<!-- ## TEKSTBLOK: link3.R-->
 Een assumptie van de *Chi-kwadraat toets voor onafhankelijk* is dat niet meer dan 20% van de cellen van de kruistabel een verwacht aantal observaties van vijf of minder heeft. Als dit niet het geval is, is *Fisher's exact toets* een beter alternatief. Zie de toetspagina van de [Chi-kwadraat toets voor onafhankelijkheid](13-Chi-kwadraat-toets-voor-onafhankelijkheid-en-Fishers-exact-toets-R.html) voor een uitgebreide uitleg over deze assumptie. 
+<!-- ## /TEKSTBLOK: link3.R-->
 
 # Uitvoering 
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
@@ -99,7 +104,7 @@ tail(Studiepunten_studiejaar2)
 ```
 <!-- ## /OPENBLOK: Data-bekijken.R -->
 <!-- ## TEKSTBLOK: Data-beschrijven.R -->
-Bekijk de grootte, de mediaan en de kwantielen van het aantal studiepunten met `length()` en `quantile()`.
+Bekijk de grootte, de mediaan en de kwantielen van het aantal studiepunten met `length()` en `quantile()`. De mediaan en kwantielen worden vaak gebruikt als maat wanneer een verdeling niet symmetrisch is.
 <!-- ## /TEKSTBLOK: Data-beschrijven.R -->
 <!-- ## OPENBLOK: Data-selecteren.R -->
 ```{r data selecteren}

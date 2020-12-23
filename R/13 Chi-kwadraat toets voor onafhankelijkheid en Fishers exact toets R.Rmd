@@ -54,7 +54,7 @@ source(paste0(here::here(),"/01. Includes/data/13.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *Chi-kwadraat toets voor onafhankelijkheid* of de *Fisher's exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde, binaire variabelen.[^1]<sup>, </sup>[^2] In tegenstelling tot de *Chi-kwadraat toets voor onafhankelijkheid* kan de *Fisher's exact toets* ook bij een laag aantal observaties gebruikt worden.[^4] De *Chi-kwadraat toets voor onafhankelijkheid* kan ook gebruikt worden wanneer de twee categorische variabelen meer dan twee categorieën bevatten, maar *Fisher's exact toets* vereist wel dat beide variabelen binair zijn. Deze toetspagina illustreert de toets echter voor twee ongepaarde binaire variabelen.
+Gebruik de *Chi-kwadraat toets voor onafhankelijkheid* of de *Fisher's exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde, binaire variabelen.[^1]<sup>, </sup>[^2] In tegenstelling tot de *Chi-kwadraat toets voor onafhankelijkheid* kan de *Fisher's exact toets* ook bij een laag aantal observaties gebruikt worden, dit wordt bij de assumpties toegelicht.[^4] De *Chi-kwadraat toets voor onafhankelijkheid* kan ook gebruikt worden wanneer de twee categorische variabelen meer dan twee categorieën bevatten, maar *Fisher's exact toets* vereist wel dat beide variabelen binair zijn. Deze toetspagina illustreert de toets echter voor twee ongepaarde binaire variabelen.
 
 
 # Onderwijscasus

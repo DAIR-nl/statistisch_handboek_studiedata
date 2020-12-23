@@ -42,7 +42,7 @@
 # bij te wonen.
 
 # seed
-set.seed(12345)
+set.seed(1234)
 
 ## Simuleer data
 
@@ -75,6 +75,7 @@ Eindexamencijfer_Wiskunde <- ceiling(2 * rnorm(100,
                                          7,
                                          1))/2
 Eindexamencijfer_Wiskunde[Eindexamencijfer_Wiskunde < 5.5] <- 5.5
+Eindexamencijfer_Wiskunde[Eindexamencijfer_Wiskunde > 10] <- 10.0
 
 # Maak afhankelijke variabele eindcijfer Methoden & Statistiek
 Eindcijfer_MS <- 2 + 0.4 * Aantal_Hoorcolleges + 0 * Geslacht_dummy + 0.25 * Eindexamencijfer_Wiskunde + rnorm(100,0,1)
@@ -98,9 +99,9 @@ Studenten_Methoden_Statistiek <- data.frame(Studentnummer,
                                             Eindcijfer_MS)
 
 # lm
-#model <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges,
-#   Studenten_Methoden_Statistiek)
-#summary(model)
+model <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges,
+   Studenten_Methoden_Statistiek)
+summary(model)
 
 # Bootstrap
 #library(car)

@@ -187,7 +187,7 @@ vQ3_CC = np.quantile(dfCC, 0.75)
 
 ## Histogram
 
-Geef de verdeling van de beoordelingen per gebouw visueel weer met een histogram.[^12]
+Geef de verdeling van de beoordelingen per gebouw visueel weer met een histogram[^18].[^12]
 
 <!-- ## OPENBLOK: Histogram.py -->
 ```{python histogram}
@@ -414,3 +414,5 @@ het aantal observatie-eenheden, i.e. $\frac{z}{\sqrt{N}}$.
 [^12]: De breedte van de staven van het histogram worden hier automatisch bepaald, maar kunnen handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
 [^13]: Bij *Friedman's ANOVA* en andere nonparametrische toetsen wordt de data eerst gerangschikt zodat elke observatie een rangnummer toegewezen krijgt. Deze rangnummers worden vervolgens gebruikt om de toets uit te voeren.
 [^14]: Een ordinale variabele is een categorische variabele waarbij de categorieën geordend kunnen worden. Een voorbeeld is de variabele beoordeling met de categorieën Onvoldoende, Voldoende, Goed en Uitstekend.
+[^18]: De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
+

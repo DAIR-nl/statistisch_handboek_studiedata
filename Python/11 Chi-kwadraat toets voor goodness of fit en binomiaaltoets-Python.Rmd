@@ -49,7 +49,7 @@ source(paste0(here::here(),"/01. Includes/data/11.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.py -->
 # Toepassing
 
-Gebruik de *Chi-kwadraat toets voor goodness of fit* om te onderzoeken of de geobserveerde frequenties van de categorieën van één categorische variabele overeenkomt met de verwachte frequenties van de categorische variabele.[^6]<sup>,</sup>[^7] Met deze toets kan een geobserveerd percentage met een bekend of verwacht percentage vergeleken worden. Gebruik de exacte *binomiaaltoets* bij een laag aantal observaties.[^1] 
+Gebruik de *Chi-kwadraat toets voor goodness of fit* om te onderzoeken of de geobserveerde frequenties van de categorieën van één categorische variabele overeenkomt met de verwachte frequenties van de categorische variabele.[^6]<sup>,</sup>[^7] Met deze toets kan een geobserveerd percentage met een bekend of verwacht percentage vergeleken worden. Gebruik de exacte *binomiaaltoets* bij een laag aantal observaties, dit wordt bij de assumpties toegelicht.[^1] 
 
 # Onderwijscasus
 <div id = "casus">

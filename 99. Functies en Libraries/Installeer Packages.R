@@ -54,6 +54,7 @@ Gebruikte_packages <- c(
     "lsr",
     "markdown",
     "nortest",
+    "performance", # 47
     "plotly",
     "pROC",
     "purrr",

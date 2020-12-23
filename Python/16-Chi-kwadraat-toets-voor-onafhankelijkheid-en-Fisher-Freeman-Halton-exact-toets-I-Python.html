@@ -1933,25 +1933,25 @@ body{ /* Normal  */
 <tbody>
 <tr class="odd">
 <td><strong>Negatief BSA</strong></td>
-<td>136</td>
-<td>40</td>
-<td>35</td>
-<td>8</td>
+<td>139</td>
+<td>41</td>
+<td>26</td>
 <td>6</td>
-<td>28</td>
-<td>77</td>
-<td><strong>330</strong></td>
+<td>5</td>
+<td>23</td>
+<td>82</td>
+<td><strong>322</strong></td>
 </tr>
 <tr class="even">
 <td><strong>Positief BSA</strong></td>
-<td>1151</td>
-<td>202</td>
-<td>46</td>
-<td>115</td>
-<td>43</td>
-<td>70</td>
-<td>243</td>
-<td><strong>1870</strong></td>
+<td>1148</td>
+<td>201</td>
+<td>55</td>
+<td>117</td>
+<td>44</td>
+<td>75</td>
+<td>238</td>
+<td><strong>1878</strong></td>
 </tr>
 <tr class="odd">
 <td><strong>Totaal</strong></td>
@@ -1969,14 +1969,14 @@ body{ /* Normal  */
 <p><em>Tabel 1. Geobserveerde aantallen casus BSA en land van hoogste vooropleiding.</em> <!-- ## TEKSTBLOK: Groepsgrootte1.R --></p>
 <p>De <em>Chi-kwadraat toets voor onafhankelijkheid</em> wordt onbetrouwbaar als er in meer dan 20% van de cellen van de kruistabel een verwacht aantal observaties van 5 of lager is.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a><sup>,</sup><a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> Gebruik in dat geval de <em>Fisher-Freeman-Halton toets</em>. Het verwachte aantal observaties in een cel is het aantal observaties dat zich volgens de nulhypothese in een cel zou moeten bevinden. Dit aantal kan worden berekend via kansrekening, uitgaande van de nulhypothese dat er geen afhankelijkheid tussen de twee variabelen is.</p>
 <!-- ## TEKSTBLOK: Groepsgrootte2.R -->
-<p>Een voorbeeldberekening van het het verwachte aantal observaties van de studenten met een Nederlandse vooropleiding met positief BSA werkt als volgt: vermenigvuldig het totaal aantal studenten met een Nederlandse vooropleiding (1287) met het totaal aantal studenten met een positief BSA (330) en deel dit door het totaal aantal studenten (2200).</p>
+<p>Een voorbeeldberekening van het het verwachte aantal observaties van de studenten met een Nederlandse vooropleiding met positief BSA werkt als volgt: vermenigvuldig het totaal aantal studenten met een Nederlandse vooropleiding (1287) met het totaal aantal studenten met een positief BSA (322) en deel dit door het totaal aantal studenten (2200).</p>
 <ul>
-<li>aantal studenten positief BSA: 330<br />
+<li>aantal studenten positief BSA: 322<br />
 </li>
 <li>aantal studenten met Nederlandse vooropleiding: 1287<br />
 </li>
 <li>totaal aantal studenten: 2200</li>
-<li>verwacht aantal studenten met Nederlandse vooropleiding met positief BSA: 330 * 1287/2200 ≈ 193.</li>
+<li>verwacht aantal studenten met Nederlandse vooropleiding met positief BSA: 322 * 1287/2200 ≈ 188.</li>
 </ul>
 <table>
 <thead>
@@ -1995,25 +1995,25 @@ body{ /* Normal  */
 <tbody>
 <tr class="odd">
 <td><strong>Negatief BSA</strong></td>
-<td>193</td>
-<td>36</td>
+<td>188</td>
+<td>35</td>
 <td>12</td>
 <td>18</td>
 <td>7</td>
-<td>15</td>
-<td>48</td>
-<td><strong>330</strong></td>
+<td>14</td>
+<td>47</td>
+<td><strong>322</strong></td>
 </tr>
 <tr class="even">
 <td><strong>Positief BSA</strong></td>
-<td>1094</td>
-<td>206</td>
+<td>1099</td>
+<td>207</td>
 <td>69</td>
 <td>105</td>
 <td>42</td>
-<td>83</td>
-<td>272</td>
-<td><strong>1870</strong></td>
+<td>84</td>
+<td>273</td>
+<td><strong>1878</strong></td>
 </tr>
 <tr class="odd">
 <td><strong>Totaal</strong></td>
@@ -2059,19 +2059,19 @@ import statsmodels.api as sma</code></pre>
 <pre class="python"><code>## Eerste 5 observaties
 print(dfBSA_antropologie.head(5))</code></pre>
 <pre><code>##   Studentnummer Landen_vooropleiding       BSA
-## 0       4000039                   NL  Positief
-## 1       4000582                   US  Positief
-## 2       4000618                   NL  Positief
-## 3       4000720                   GE  Positief
-## 4       4000859                   NL  Positief</code></pre>
+## 0       4000301                   US  Positief
+## 1       4000511                   US  Positief
+## 2       4000656                   NL  Positief
+## 3       4000679                   US  Positief
+## 4       4000818                   GE  Negatief</code></pre>
 <pre class="python"><code>## Laatste 5 observaties
 print(dfBSA_antropologie.tail(5))</code></pre>
 <pre><code>##      Studentnummer Landen_vooropleiding       BSA
-## 2195       4499005                   NL  Positief
-## 2196       4499139                   US  Positief
-## 2197       4499509                   BE  Negatief
-## 2198       4499564                   ES  Positief
-## 2199       4499591                   NL  Positief</code></pre>
+## 2195       4498997                   US  Positief
+## 2196       4499408                   NL  Positief
+## 2197       4499659                   US  Positief
+## 2198       4499702                   BE  Positief
+## 2199       4499731                   ES  Positief</code></pre>
 <!-- ## /OPENBLOK: Data-bekijken2.py -->
 <!-- ## TEKSTBLOK: Data-kruistabel1.py -->
 <p>Een kruistabel geeft de aantallen observaties weer voor de combinaties van de categorieën van de variabelen <code>Landen_vooropleiding</code> en <code>BSA</code>. Maak de kruistabel met de functie <code>.crosstable()</code> van het package <code>pandas</code> met als argumenten de variabele <code>dfBSA_antropologie[&#39;BSA&#39;]</code> (positief of negatief BSA) en <code>dfBSA_antropologie[&#39;Landen_vooropleiding&#39;]</code> (land van hoogst genoten vooropleiding). <!-- ## /TEKSTBLOK: Data-kruistabel1.py --></p>
@@ -2086,19 +2086,19 @@ print(BSA_antropologie_kruistabel)
 # per rij berekend worden</code></pre>
 <pre><code>## Landen_vooropleiding  BE  ES   GE  IT    NL   UK   US
 ## BSA                                                  
-## Negatief              28   6   40  35   136    8   77
-## Positief              70  43  202  46  1151  115  243</code></pre>
+## Negatief              23   5   41  26   139    6   82
+## Positief              75  44  201  55  1148  117  238</code></pre>
 <pre class="python"><code>Prop_BSA_antropologie_kruistabel = pd.crosstab(dfBSA_antropologie[&#39;BSA&#39;], dfBSA_antropologie[&#39;Landen_vooropleiding&#39;], normalize = &#39;columns&#39;)
 
 # Print de tabel met proporties met drie decimalen
 print(round(Prop_BSA_antropologie_kruistabel, 3))</code></pre>
 <pre><code>## Landen_vooropleiding     BE     ES     GE     IT     NL     UK     US
 ## BSA                                                                  
-## Negatief              0.286  0.122  0.165  0.432  0.106  0.065  0.241
-## Positief              0.714  0.878  0.835  0.568  0.894  0.935  0.759</code></pre>
+## Negatief              0.235  0.102  0.169  0.321  0.108  0.049  0.256
+## Positief              0.765  0.898  0.831  0.679  0.892  0.951  0.744</code></pre>
 <!-- ## /OPENBLOK: Data-kruistabel2.py -->
 <!-- ## TEKSTBLOK: Data-kruistabel3.py -->
-<p>De kruistabel en bijbehorende tabel met proporties laat zien dat de meerderheid van de studenten een positief BSA ontvangt voor elk land van vooropleiding. Van studenten uit het Verenigd Koninkrijk (UK) haalt verhoudingsgewijs het grootste deel een positief BSA. Het percentage studenten met een positief BSA is hier (93,5%). <!-- ## /TEKSTBLOK: Data-kruistabel3.py --></p>
+<p>De kruistabel en bijbehorende tabel met proporties laat zien dat de meerderheid van de studenten een positief BSA ontvangt voor elk land van vooropleiding. Van studenten uit het Verenigd Koninkrijk (UK) haalt verhoudingsgewijs het grootste deel een positief BSA. Het percentage studenten met een positief BSA is hier (95,12%). <!-- ## /TEKSTBLOK: Data-kruistabel3.py --></p>
 <div id="assumptie-groepsgrootte" class="section level2">
 <h2><span class="header-section-number">6.1</span> Assumptie groepsgrootte</h2>
 <!-- ## TEKSTBLOK: Assumptie.py -->
@@ -2109,8 +2109,10 @@ BSA_antropologie_kruistabel =  pd.crosstab(dfBSA_antropologie[&#39;BSA&#39;], df
 
 # Bereken verwachte aantallen observaties
 sps.contingency.expected_freq(BSA_antropologie_kruistabel)</code></pre>
-<pre><code>## array([[  14.7 ,    7.35,   36.3 ,   12.15,  193.05,   18.45,   48.  ],
-##        [  83.3 ,   41.65,  205.7 ,   68.85, 1093.95,  104.55,  272.  ]])</code></pre>
+<pre><code>## array([[  14.34363636,    7.17181818,   35.42      ,   11.85545455,
+##          188.37      ,   18.00272727,   46.83636364],
+##        [  83.65636364,   41.82818182,  206.58      ,   69.14454545,
+##         1098.63      ,  104.99727273,  273.16363636]])</code></pre>
 <!-- ## /OPENBLOK: Assumptie1.py -->
 <p>Geen van de verwachte aantallen observaties is gelijk of kleiner dan vijf, dus de <em>Chi-kwadraat toets voor onafhankelijkheid</em> kan worden uitgevoerd.</p>
 </div>
@@ -2124,8 +2126,10 @@ sps.contingency.expected_freq(BSA_antropologie_kruistabel)</code></pre>
 <!-- ## OPENBLOK: Chi2-toets.py -->
 <pre class="python"><code>import scipy.stats as sps
 sps.chi2_contingency(BSA_antropologie_kruistabel)</code></pre>
-<pre><code>## (112.85943129620993, 5.131695424334406e-22, 6, array([[  14.7 ,    7.35,   36.3 ,   12.15,  193.05,   18.45,   48.  ],
-##        [  83.3 ,   41.65,  205.7 ,   68.85, 1093.95,  104.55,  272.  ]]))</code></pre>
+<pre><code>## (83.14820995286932, 7.981714950464408e-16, 6, array([[  14.34363636,    7.17181818,   35.42      ,   11.85545455,
+##          188.37      ,   18.00272727,   46.83636364],
+##        [  83.65636364,   41.82818182,  206.58      ,   69.14454545,
+##         1098.63      ,  104.99727273,  273.16363636]]))</code></pre>
 <!-- ## /OPENBLOK: Chi2-toets.py -->
 <!-- ## CLOSEDBLOK: Chi2-toets.py-->
 <!-- ## /CLOSEDBLOK: Chi2-toets.py-->
@@ -2141,15 +2145,15 @@ Eta2 = np.sqrt(chi2 / N)
 
 # Print de effectgrootte
 print(Eta2)</code></pre>
-<pre><code>## 0.22649446240091</code></pre>
+<pre><code>## 0.19440843831394736</code></pre>
 <!-- ## /OPENBLOK: Chi2-toets-2.py -->
 <!-- ## TEKSTBLOK: Chi2-toets4.py-->
 <ul>
-<li><em>χ<sup>2</sup></em> <sub>6</sub> = 112,86, <em>p</em> &lt; 0,0001<br />
+<li><em>χ<sup>2</sup></em> <sub>6</sub> = 83,15, <em>p</em> &lt; 0,0001<br />
 </li>
 <li>Vrijheidsgraden: <em>df</em> = (<em>k</em>-1)(<em>r</em>-1), waar k staat voor kolom en r voor rij. In dit geval geldt <em>df</em> = 6.</li>
 <li>p-waarde &lt; 0,05, de H<sub>0</sub> wordt verworpen.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></li>
-<li>Effectmaat is 0,23, dus een klein tot gemiddeld effect</li>
+<li>Effectmaat is 0,19, dus een klein tot gemiddeld effect</li>
 </ul>
 <!-- ## /TEKSTBLOK: Chi2-toets4.py-->
 </div>
@@ -2167,25 +2171,25 @@ Residuen = sma.stats.Table(BSA_antropologie_kruistabel).resid_pearson
 print(round(Residuen,3))</code></pre>
 <pre><code>## Landen_vooropleiding     BE     ES     GE     IT     NL     UK     US
 ## BSA                                                                  
-## Negatief              3.469 -0.498  0.614  6.555 -4.106 -2.433  4.186
-## Positief             -1.457  0.209 -0.258 -2.754  1.725  1.022 -1.758</code></pre>
+## Negatief              2.286 -0.811  0.938  4.108 -3.597 -2.829  5.138
+## Positief             -0.946  0.336 -0.388 -1.701  1.489  1.171 -2.128</code></pre>
 <!-- ## /OPENBLOK: Chi2-toets post-hoc1.py -->
 <!-- ## TEKSTBLOK: Chi2-toets post-hoc2.py -->
 <ul>
-<li>Significant hoger aantal observaties bij negatief BSA België (BE), <em>z</em> = 3,47</li>
-<li>Significant hoger aantal observaties bij negatief BSA Italië (IT), <em>z</em> = 6,56</li>
-<li>Significant lager aantal observaties bij negatief BSA Nederland (NL), <em>z</em> = -4,11</li>
-<li>Significant lager aantal observaties bij negatief BSA Verenigd Koninkrijk (UK), <em>z</em> = -2,43</li>
-<li>Significant hoger aantal observaties bij negatief BSA Verenigde Staten (US), <em>z</em> = 4,19</li>
-<li>Significant lager aantal observaties bij positief BSA Italië (IT), <em>z</em> = -2,75</li>
+<li>Significant hoger aantal observaties bij negatief BSA België (BE), <em>z</em> = 2,29</li>
+<li>Significant hoger aantal observaties bij negatief BSA Italië (IT), <em>z</em> = 4,11</li>
+<li>Significant lager aantal observaties bij negatief BSA Nederland (NL), <em>z</em> = -3,6</li>
+<li>Significant lager aantal observaties bij negatief BSA Verenigd Koninkrijk (UK), <em>z</em> = -2,83</li>
+<li>Significant hoger aantal observaties bij negatief BSA Verenigde Staten (US), <em>z</em> = 5,14</li>
+<li>Significant lager aantal observaties bij positief BSA Italië (IT), <em>z</em> = -1,7</li>
 </ul>
 <!-- ## /TEKSTBLOK: Chi2-toets post-hoc2.py -->
 </div>
 <div id="rapportage" class="section level2">
 <h2><span class="header-section-number">7.3</span> Rapportage</h2>
 <!-- ## TEKSTBLOK: RapportageChi2.py -->
-<p>De <em>Chi-kwadraat toets voor onafhankelijkheid</em> is uitgevoerd om te onderzoeken of er een afhankelijkheid is tussen het land van hoogst genoten vooropleiding en het wel of niet behalen van een positief BSA. De resultaten illustreren dat de nulthypothese verworpen kan worden, <em>χ<sup>2</sup></em> <sub>6</sub> = 112,86, <em>p</em> &lt; 0,0001, <em>w</em> = 0,23. Het land van hoogst genoten vooropleiding en het behalen van een positief of negatief BSA zijn dus niet onafhankelijk van elkaar. Dat betekent dat er verschillen zijn tussen de landen wat betreft de proportie studenten met een positief BSA.</p>
-<p>De resultaten van de post-hoc toetsen van de <em>Chi-kwadraat toets voor onafhankelijkheid</em> zijn te vinden in Tabel 3, waarin geobserveerde aantallen met asterisk significant verschillend zijn van verwachte aantallen. De geobserveerde aantallen voor de verschillende landen van hoogste vooropleiding bij een positief BSA verschillen niet significant van de verwachte aantallen. Bij een negatief BSA is er echter een aantal landen waarbij significante verschillen van het verwachte aantal zijn op te merken. Nederland (NL; <em>z</em> = -4,11) en het Verenigd Koninkrijk (UK; <em>z</em> = -2,43) hebben een lager aantal studenten met een negatief BSA dan verwacht; Italië (IT; <em>z</em> = 6,56), België (BE; <em>z</em> = 3,47) en de Verenigde Staten (US; <em>z</em> = 4,19) een hoger aantal studenten met negatief BSA dan verwacht. Daarnaast heeft Italië (IT; <em>z</em> = -2,75) ook een lager aantal studenten met positief BSA dan verwacht. <!-- ## /TEKSTBLOK: RapportageChi2.py --></p>
+<p>De <em>Chi-kwadraat toets voor onafhankelijkheid</em> is uitgevoerd om te onderzoeken of er een afhankelijkheid is tussen het land van hoogst genoten vooropleiding en het wel of niet behalen van een positief BSA. De resultaten illustreren dat de nulthypothese verworpen kan worden, <em>χ<sup>2</sup></em> <sub>6</sub> = 83,15, <em>p</em> &lt; 0,0001, <em>w</em> = 0,19. Het land van hoogst genoten vooropleiding en het behalen van een positief of negatief BSA zijn dus niet onafhankelijk van elkaar. Dat betekent dat er verschillen zijn tussen de landen wat betreft de proportie studenten met een positief BSA.</p>
+<p>De resultaten van de post-hoc toetsen van de <em>Chi-kwadraat toets voor onafhankelijkheid</em> zijn te vinden in Tabel 3, waarin geobserveerde aantallen met asterisk significant verschillend zijn van verwachte aantallen. De geobserveerde aantallen voor de verschillende landen van hoogste vooropleiding bij een positief BSA verschillen niet significant van de verwachte aantallen. Bij een negatief BSA is er echter een aantal landen waarbij significante verschillen van het verwachte aantal zijn op te merken. Nederland (NL; <em>z</em> = -3,6) en het Verenigd Koninkrijk (UK; <em>z</em> = -2,83) hebben een lager aantal studenten met een negatief BSA dan verwacht; Italië (IT; <em>z</em> = 4,11), België (BE; <em>z</em> = 2,29) en de Verenigde Staten (US; <em>z</em> = 5,14) een hoger aantal studenten met negatief BSA dan verwacht. Daarnaast heeft Italië (IT; <em>z</em> = -1,7) ook een lager aantal studenten met positief BSA dan verwacht. <!-- ## /TEKSTBLOK: RapportageChi2.py --></p>
 <!-- ## TEKSTBLOK: RapportageChi3.R -->
 <table>
 <thead>
@@ -2204,25 +2208,25 @@ print(round(Residuen,3))</code></pre>
 <tbody>
 <tr class="odd">
 <td><strong>Positief BSA</strong></td>
-<td>136</td>
-<td>40</td>
-<td>35</td>
-<td>8</td>
+<td>139</td>
+<td>41</td>
+<td>26</td>
 <td>6</td>
-<td>28</td>
-<td>77*</td>
-<td><strong>330</strong></td>
+<td>5</td>
+<td>23</td>
+<td>82*</td>
+<td><strong>322</strong></td>
 </tr>
 <tr class="even">
 <td><strong>Negatief BSA</strong></td>
-<td>1151*</td>
-<td>202</td>
-<td>46*</td>
-<td>115*</td>
-<td>43</td>
-<td>70*</td>
-<td>243*</td>
-<td><strong>1870</strong></td>
+<td>1148*</td>
+<td>201</td>
+<td>55*</td>
+<td>117*</td>
+<td>44</td>
+<td>75*</td>
+<td>238*</td>
+<td><strong>1878</strong></td>
 </tr>
 <tr class="odd">
 <td><strong>Totaal</strong></td>
@@ -2344,7 +2348,7 @@ print(Tabel_p_waardes)</code></pre>
 <div id = "footer">
 Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 3.6.3; Python code is uitgevoerd in Python 3.7.
 <br/><br/>
-&copy; 2020 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:09-10-2020
+&copy; 2020 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:22-12-2020
 </div> <!-- ## /CLOSEDBLOK: Footer.R --></p>
 </div>
 </div>

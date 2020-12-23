@@ -152,7 +152,7 @@ vN_T2 = len(Alumni_jaarinkomens_T2)
 
 ### Histogram
 
-Maak een histogram om de verdeling van de bruto jaarinkomens van de alumni één jaar en vijf jaar na afstuderen visueel weer te geven.
+Maak een histogram[^18] om de verdeling van de bruto jaarinkomens van de alumni één jaar en vijf jaar na afstuderen visueel weer te geven.
 
 <!-- ## OPENBLOK: Histogram1.py -->
 ```{python histogram}
@@ -174,7 +174,7 @@ plt.show()
 
 Op beide meetmomenten is te zien dat de meeste alumni tussen de 0 en €60.000 euro per jaar verdienen en dat een paar alumni hier ver boven zit. Beide verdelingen hebben één top, maar zijn niet symmetrisch door de lange staart aan de rechterkant van de verdeling. Beide verdeling lijken qua vorm en spreiding sterk op elkaar.
 
-Maak vervolgens een histogram van de verschilscores.
+Maak vervolgens een histogram[^18] van de verschilscores.
 
 <!-- ## OPENBLOK: Histogram2.py -->
 ```{python histogram2, warnings=FALSE, message=FALSE}
@@ -258,6 +258,8 @@ De *tekentoets* is uitgevoerd om te onderzoeken of er een verschil is tussen het
 [^3]: Statistics How To (27 mei 2018). *One Sample Median Test*. [Statistics How to](https://www.statisticshowto.datasciencecentral.com/one-sample-median-test/).
 [^4]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
 [^5]: Omdat het betrouwbaarheidsinterval van de mediaan van verschilscores exact berekend wordt, kan het percentage van het betrouwbaarheidsinterval afwijken van 95%. In dit geval is het 96%.
+[^18]: De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
+[^19]: Met een deelnemer wordt het object bedoeld dat geobserveerd wordt, bijvoorbeeld een student, een inwoner van Nederland, een opleiding of een organisatie. Met een observatie wordt de waarde bedoeld die de deelnemer heeft voor een bepaalde variabele. Een deelnemer heeft dus meestal een observatie voor meerdere variabelen.
 
 
 

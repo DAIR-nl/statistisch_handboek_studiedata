@@ -54,14 +54,14 @@ Opslag <- round(Beta_verdeling * 5000)
 Alumni_inkomens_T2 <- Alumni_inkomens_T1 + Opslag
 
 ## Stel volgorde vast en hussel paargewijs
-volgorde <- sample(1:length(Alumni_inkomens_T1), length(Alumni_inkomens_T1))
+volgorde <- sample(1:length(Alumni_inkomens_T1), 29)
 Alumni_inkomens_T1 <- Alumni_inkomens_T1[volgorde]
 Alumni_inkomens_T2 <- Alumni_inkomens_T2[volgorde]
 
 ## link studentnummer aan vastgestelde volgorde en maak dataframe
 Studentnummer <- sample(3000000:4000000, length(Alumni_inkomens_T1))
 Studentnummer <- c(Studentnummer,Studentnummer)
-Inkomen<- c(Alumni_inkomens_T1, Alumni_inkomens_T2)
+Inkomen <- c(Alumni_inkomens_T1, Alumni_inkomens_T2)
 Meetmoment <- c(replicate(length(Alumni_inkomens_T1), "T1"), (replicate(length(Alumni_inkomens_T2), "T2")))
 Alumni_jaarinkomens <- data.frame(Studentnummer, Meetmoment, Inkomen)
 

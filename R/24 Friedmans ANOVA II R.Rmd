@@ -49,7 +49,7 @@ source(paste0(here::here(),"/01. Includes/data/24.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik *Friedman's ANOVA* om te toetsen of twee of meer gepaarde groepen van elkaar verschillen op een ordinale variabele.[^1] Een alternatief voor een vergelijking van twee of meer groepen op een ordinale variabele is de [multilevel multinomiale logistische regressie](20-Multilevel-multinomiale-logistische-regressie-R.html). Bij deze toets wordt echter geen rekening gehouden met de ordening van de categorieën van de ordinale variabele: de variabele wordt behandeld als een nominale variabele.
+Gebruik *Friedman's ANOVA* om te toetsen of twee of meer gepaarde groepen van elkaar verschillen op een ordinale[^16] variabele.[^1] Als de variabele beter als nominaal[^18] beschouwd kan worden, is de [multilevel multinomiale logistische regressie](20-Multilevel-multinomiale-logistische-regressie-R.html) een alternatief. Bij deze toets wordt echter geen rekening gehouden met de ordening van de categorieën van de ordinale variabele: de variabele wordt behandeld als een nominale variabele.
 
 # Onderwijscasus
 <div id="casus">
@@ -68,7 +68,7 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 Het meetniveau van de afhankelijke variabele is ordinaal[^16] of continu.[^1] In deze toetspagina staat een casus met een ordinale afhankelijke variabele centraal; een casus met een continue afhankelijke variabele met bijbehorende uitwerking is te vinden in de [Friedman's ANOVA I](9- Friedmans-ANOVA-I-R.html).
 
-Om *Friedman's ANOVA* uit te voeren met een ordinale afhankelijke variabele, moet deze variabele in sommige gevallen omgezet worden in getallen. Als een variabele bijvoorbeeld vier categorieën bevat, worden ze genummerd van 1 tot en met 4 op basis van de ordening van de variabele. De categorieën onvoldoende, voldoende, goed en uitstekend worden dan omgezet in respectievelijk 1, 2, 3 en 4. Bij de [multilevel multinomiale logistische regressie](20-Multilevel-multinomiale-logistische-regressie-R.html) wordt dit niet gedaan, maar wordt de ordinale afhankelijke variabele als nominaal beschouwd. 
+Om *Friedman's ANOVA* uit te voeren met een ordinale afhankelijke variabele, moet deze variabele in sommige gevallen omgezet worden in getallen. Als een variabele bijvoorbeeld vier categorieën bevat, worden ze genummerd van 1 tot en met 4 op basis van de ordening van de variabele. De categorieën onvoldoende, voldoende, goed en uitstekend worden dan omgezet in respectievelijk 1, 2, 3 en 4. Bij de [multilevel multinomiale logistische regressie](20-Multilevel-multinomiale-logistische-regressie-R.html) wordt dit niet gedaan, maar wordt de ordinale afhankelijke variabele als nominaal[^18] beschouwd. 
 
 *Friedman's ANOVA* maakt voor elke observatie-eenheid een rangschikking van alle observaties. Vervolgens wordt het gemiddelde rangnummer per groep berekend en vergeleken tussen de groepen. In de huidige casus wordt er dus voor elke student een rangschikking gemaakt van het aantal voldoendes in onderwijsperiode 1, 2, 3 en 4 en wordt het gemiddelde rangnummer berekend voor elk van de vier onderwijsperioden. Het verschil tussen de gemiddelde rangnummers van de groepen bepaalt de significantie van de toets.[^1]
 
@@ -310,5 +310,5 @@ De [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html) is uitgevo
 [^14]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met Type I en Type II fouten. 
 [^15]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage.
 [^16]: Een ordinale variabele is een categorische variabele waarbij de categorieën geordend kunnen worden. Een voorbeeld is de variabele beoordeling met de categorieën Onvoldoende, Voldoende, Goed en Uitstekend.
+[^18]: Een nominale variabele is een categorische variabele waarbij de categorieën niet geordend kunnen worden. Een voorbeeld is de variabele windstreek (noord, oost, zuid, west) en geslacht (man of vrouw).
 [^19]: Met een deelnemer wordt het object bedoeld dat geobserveerd wordt, bijvoorbeeld een student, een inwoner van Nederland, een opleiding of een organisatie. Met een observatie wordt de waarde bedoeld die de deelnemer heeft voor een bepaalde variabele. Een deelnemer heeft dus meestal een observatie voor meerdere variabelen.
-

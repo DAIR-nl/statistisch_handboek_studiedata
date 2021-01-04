@@ -30,7 +30,7 @@
 ## Een half jaar later maakt ze de balans op: doen studenten met een functiebeperking vaker een beroep op de FOS na een ingreep van de studentendecaan?
 
 ## Stel RNG seed vast
-RNGkind(sample.kind = "Rounding")
+#RNGkind(sample.kind = "Rounding")
 set.seed(1)
 
 ## Vooraf
@@ -59,36 +59,7 @@ colnames(FOS_studenten) <- c("Studentnummer", "FOS", "Maand")
 
 FOS_studenten <- FOS_studenten[order(FOS_studenten$Studentnummer),]
 
-### Exact McNemar toets
-EMN_confusiematrix <- as.table(matrix(c(20,3,4,25),2,2, byrow = TRUE))
-rownames(EMN_confusiematrix) <- c("December_ja","December_nee")
-colnames(EMN_confusiematrix) <- c("Juni_ja","Juni_nee")
-
-EMN_kruistabel <- matrix(NA,2,2)
-EMN_kruistabel[1:2,1] <- rowSums(EMN_confusiematrix)
-EMN_kruistabel[1:2,2] <- colSums(EMN_confusiematrix)
-EMN_kruistabel <- as.table(EMN_kruistabel)
-rownames(EMN_kruistabel) <- c("FOS","geen FOS")
-colnames(EMN_kruistabel) <- c("December","Juni")
-
-library(exact2x2)
-?exact2x2
-?mcnemar.exact
-
-## Definieer de groepen
-December <- FOS_studenten$`FOS`[FOS_studenten$Maand == "december"]
-Juni <- FOS_studenten$`FOS`[FOS_studenten$Maand == "juni"]
-
-## Maak een frequentiematrix
-FOS_studenten_frequentiematrix <- table(December, Juni)
-
-# Voer McNemar toets uit
-mcnemar.exact(FOS_studenten_frequentiematrix)
-exact2x2(FOS_studenten_frequentiematrix,
-         paired = TRUE,
-         midp = TRUE)
-
-
+#https://aaronschlegel.me/mcnemars-test-paired-data-python.html
 
 rm(
 Wel_vooraf, 

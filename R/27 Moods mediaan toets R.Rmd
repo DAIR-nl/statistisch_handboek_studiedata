@@ -49,9 +49,9 @@ source(paste0(here::here(),"/01. Includes/data/08.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 # Toepassing
 <!-- ## TEKSTBLOK: link1.R-->
-Gebruik *Mood's mediaan toets* om te toetsen of de medianen van twee ongepaarde groepen van elkaar verschillen.[^1]<sup>,</sup>[^2] Deze toets is een alternatief voor de [ongepaarde t-toets](03-Ongepaarde-t-toets-R.html) als een van de of beide ongepaarde groepen niet normaal verdeeld zijn. *Mood's mediaan toets* kan ook gebruikt worden om medianen van meer dan twee ongepaarde groepen te vergelijken. Deze toetspagina illustreert de toets echter voor twee ongepaarde groepen.
+Gebruik *Mood's mediaan toets* om de medianen van twee ongepaarde groepen te vergelijken.[^1]<sup>,</sup>[^2] Deze toets wordt gebruikt als er niet aan de assumpties is voldaan bij sterkere toetsen zoals de [ongepaarde t-toets](02-Ongepaarde-t-toets-R.html) en de [Mann-Whitney U toets](08-Mann-Whitney-U-toetsI-R.html). Als de verdelingen van beide groepen bij benadering normaal verdeeld zijn, dan kan de [ongepaarde t-toets](02-Ongepaarde-t-toets-R.html) gebruikt worden om de gemiddelden te vergelijken. Als de verdelingen van beide groepen dezelfde vorm hebben, kan de [Mann-Whitney U toets](08-Mann-Whitney-U-toetsI-R.html) gebruikt worden om de medianen te vergelijken.[^3] De [Mann-Whitney U toets](08-Mann-Whitney-U-toetsI-R.html) heeft in dat geval een hoger onderscheidend vermogen[^2].
 
-Naast *Mood's mediaan toets* kan de [Mann-Whitney U toets](08-Mann-Whitney-U-toetsI-R.html) ook gebruikt worden om het verschil tussen medianen van twee ongepaarde groepen te toetsen. Deze toets heeft een hoger onderscheidend vermogen[^3]<sup>,</sup>[^1], maar vereist dat de verdelingen van beide ongepaarde groepen dezelfde vorm hebben.[^4] *Mood's mediaan toets* kan ook gebruikt worden als de verdelingen niet dezelfde vorm hebben. 
+
 <!-- ## /TEKSTBLOK: link1.R-->
 
 

@@ -1,4 +1,3 @@
-
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 06.R ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -25,8 +24,9 @@
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## Geschiedenis:
 ## 29-06-2020: EG: Aanmaak bestand
+## 04-01-2021: EG: Aantal observaties gewijzigd nav feedback MM
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-set.seed(123)
+set.seed(1234)
 
 #Jaarlijks_inkomen <- rnorm()
 
@@ -42,11 +42,11 @@ p_2014 <- c(
   rep(0.1,  1000),    #5001-6000
   rep(0.01, 1000)     #6001-7000
 )
-Jaarlijks_inkomen <- replicate(2314, 13*(sample(Mogelijkheden, 1, replace = TRUE, p_2014)))
+Jaarlijks_inkomen <- 10000 + replicate(29, 13*(sample(Mogelijkheden, 1, replace = TRUE, p_2014)))
 
 # Simuleer studentnummers
 Studentnummers_opties <- c(4000000:4500000)
-Studentnummer <- sample(Studentnummers_opties, 2314)
+Studentnummer <- sample(Studentnummers_opties, 29)
 Studentnummer <- as.factor(Studentnummer)
 
 # Maak een dataset

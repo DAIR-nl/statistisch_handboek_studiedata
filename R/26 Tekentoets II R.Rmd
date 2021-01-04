@@ -51,12 +51,14 @@ source(paste0(here::here(),"/01. Includes/data/07.R"))
 
 # Toepassing
 <!-- ## TEKSTBLOK: link1.R -->
-Gebruik de *tekentoets* om te toetsen of de medianen van twee gepaarde groepen van elkaar verschillen.[^1] Deze toets is een alternatief voor de [gepaarde t-toets](02-Gepaarde-t-toets-R.html) als de verschilscores van de gepaarde groepen niet normaal verdeeld zijn. De [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-I-R.html) kan ook gebruikt worden om het verschil tussen medianen van gepaarde groepen te toetsen. Deze toets heeft een hoger onderscheidend vermogen[^2], maar vereist dat de verdeling van de verschilscores symmetrisch is.[^3] De *tekentoets* kan ook gebruikt worden als de verdeling niet symmetrisch is. 
+Gebruik de *tekentoets* om de medianen van twee gepaarde groepen te vergelijken.[^1] Deze toets wordt gebruikt als er niet aan de assumpties is voldaan bij sterkere toetsen zoals de [gepaarde t-toets](02-Gepaarde-t-toets-R.html) en de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-I-R.html). Als de verdeling van de steekproef bij benadering normaal verdeeld is, dan kan de [gepaarde t-toets](02-Gepaarde-t-toets-R.html) gebruikt worden om de gemiddelden te vergelijken. Als de verdeling symmetrisch is, kan de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-I-R.html) gebruikt worden om de medianen te vergelijken.[^3] De [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-I-R.html) heeft in dat geval een hoger onderscheidend vermogen[^2].
 <!-- ## /TEKSTBLOK: link1.R -->
+
+
 
 # Onderwijscasus
 <div id ="casus">
-De directeur van de Academie Mens & Maatschappij wil bekijken hoe het inkomen van zijn alumni zich ontwikkelt nadat zij zijn afgestudeerd. Deze informatie is interessant om te gebruiken bij voorlichtingsactiviteiten van de Academie. Hij bekijkt het bruto jaarinkomen van de alumni 1 jaar na afstuderen en vergelijkt het met het bruto jaarinkomen 5 jaar na afstuderen. 
+De directeur van de Academie Mens & Maatschappij wil bekijken hoe het inkomen van zijn alumni zich ontwikkelt nadat zij zijn afgestudeerd. Hij is nieuwsgierig of het inkomen gedurende deze jaren groeit of juist stagneert voor deze alumni. Deze informatie is interessant om te gebruiken bij voorlichtingsactiviteiten van de Academie. Hij bekijkt het bruto jaarinkomen van de alumni 1 jaar na afstuderen en vergelijkt het met het bruto jaarinkomen 5 jaar na afstuderen. 
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
@@ -136,7 +138,7 @@ vN_T2 <- length(Alumni_jaarinkomens_T2)
 <!-- ## /TEKSTBLOK: Data-beschrijven.R-->
 
 
-### Histogram
+## De data visualiseren
 
 Maak een histogram[^18] om de verdeling van de bruto jaarinkomens van de alumni één jaar en vijf jaar na afstuderen visueel weer te geven.
 
@@ -148,7 +150,8 @@ library(ggplot2)
 ggplot(Alumni_jaarinkomens,
   aes(x = Inkomen)) +
   geom_histogram(color = "grey30",
-                 fill = "#0089CF") +
+                 fill = "#0089CF",
+                 binwidth = 2000) +
   facet_wrap(~ Meetmoment, labeller = labeller(Meetmoment = c(T1 = "Een jaar na afstudereren", T2 = "Vijf jaar na afstuderen"))) +
   geom_density(alpha = .2, adjust = 1) +
   ylab("Frequentiedichtheid") +
@@ -156,7 +159,7 @@ ggplot(Alumni_jaarinkomens,
 ```
 <!-- ## /OPENBLOK: Histogram1.R -->
 
-Op beide meetmomenten is te zien dat de meeste alumni tussen de 0 en €60.000 euro per jaar verdienen en dat een paar alumni hier ver boven zit. Beide verdelingen hebben één top, maar zijn niet symmetrisch door de lange staart aan de rechterkant van de verdeling. Beide verdeling lijken qua vorm en spreiding sterk op elkaar.
+Op beide meetmomenten is te zien dat de meeste alumni tussen de 0 en €35.000 euro per jaar verdienen en dat een paar alumni hierboven zit. Beide verdelingen hebben één top, maar zijn niet symmetrisch omdat de meerderheid van de observaties links van de top ligt. Beide verdeling lijken niet echt op elkaar qua vorm en spreiding.
 
 Maak vervolgens een histogram[^18] van de verschilscores.
 
@@ -171,14 +174,15 @@ library(ggplot2)
 ggplot(Alumni_verschilscores,
   aes(x = Verschilscores)) +
   geom_histogram(color = "grey30",
-                 fill = "#0089CF") +
+                 fill = "#0089CF",
+                 binwidth = 250) +
   geom_density(alpha = .2, adjust = 1) +
   ylab("Frequentiedichtheid") +
   labs(title = "Verschilscores bruto jaarinkomen alumni Mens & Maatschappij")
 ```
 <!-- ## /OPENBLOK: Histogram2.R -->
 
-De verdeling van de verschilscores bevat voornamelijk positieve waarden en een paar negatieve waarden; de meeste alumni zijn er dus in bruto jaarinkomen op vooruitgegaan. De verdeling heeft een lange staart aan de rechterkant en is dus niet symmetrisch. 
+De verdeling van de verschilscores bevat voornamelijk positieve waarden en een paar negatieve waarden; de meeste alumni zijn er dus in bruto jaarinkomen op vooruitgegaan. De verdeling is niet symmetrisch. 
 
 
 
@@ -208,7 +212,7 @@ vMed <- Round_and_format(b$estimate)
 <!-- ## /CLOSEDBLOK: Wilcoxon-signed-rank-toets.R -->
 
 <!-- ## TEKSTBLOK: Wilcoxon-signed-rank-toets2.R -->
-* Er is een significant verschil tussen het mediane inkomen vijf jaar en één jaar na afstuderen, *S* = `r vS`, *N* = `r vN`, *p* < 0.0001 [^4]
+* Er is een significant verschil tussen het mediane inkomen vijf jaar en één jaar na afstuderen, *S* = `r vS`, *N* = `r vN`, *p* < 0,0001 [^4]
 * De toetsstatistiek *S* is het aantal positieve verschillen (inkomen vijf jaar na afstuderen hoger dan één jaar na afstuderen), *N* is het totaal aantal deelnemers[^19] (alumni)
 * Van de `r vN` alumni verdienen `r vS` alumni meer vijf jaar na afstuderen dan één jaar na afstuderen
 * De geschatte mediaan van de verschilscores is `r vMed` met bijbehorend 96%-betrouwbaarheidsinterval[^5] van `r vconf.int1` tot `r vconf.int2`.
@@ -218,7 +222,7 @@ vMed <- Round_and_format(b$estimate)
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
 
-De *tekentoets* is uitgevoerd om te onderzoeken of er een verschil is tussen het mediane bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij één jaar en vijf jaar na afstuderen. De resultaten van de toets laten zien dat er een significant verschil is tussen beide medianen, *S* = `r vS`, *N* = `r vN`, *p* < 0.0001. De geschatte mediaan van de verschilscores is €`r vMed` met bijbehorend 96%-betrouwbaarheidsinterval van €`r vconf.int1` tot €`r vconf.int2`. Van de `r vN` alumni verdienen `r vS` alumni meer vijf jaar na afstuderen. Deze resultaten duiden op een verschil in het mediane bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij waarbij de inkomens vijf jaar na afstuderen hoger lijken te liggen.
+De *tekentoets* is uitgevoerd om te onderzoeken of er een verschil is tussen het mediane bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij één jaar en vijf jaar na afstuderen. De resultaten van de toets laten zien dat er een significant verschil is tussen beide medianen, *S* = `r vS`, *N* = `r vN`, *p* < 0,0001. De geschatte mediaan van de verschilscores is €`r vMed` met bijbehorend 96%-betrouwbaarheidsinterval van €`r vconf.int1` tot €`r vconf.int2`. Van de `r vN` alumni verdienen `r vS` alumni meer vijf jaar na afstuderen. Deze resultaten duiden op een verschil in het mediane bruto jaarinkomen van de alumni van de Academie Mens & Maatschappij waarbij de inkomens vijf jaar na afstuderen hoger lijken te liggen.
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->
@@ -233,6 +237,3 @@ De *tekentoets* is uitgevoerd om te onderzoeken of er een verschil is tussen het
 [^5]: Omdat het betrouwbaarheidsinterval van de mediaan van verschilscores exact berekend wordt, kan het percentage van het betrouwbaarheidsinterval afwijken van 95%. In dit geval is het 96%.
 [^18]: De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
 [^19]: Met een deelnemer wordt het object bedoeld dat geobserveerd wordt, bijvoorbeeld een student, een inwoner van Nederland, een opleiding of een organisatie. Met een observatie wordt de waarde bedoeld die de deelnemer heeft voor een bepaalde variabele. Een deelnemer heeft dus meestal een observatie voor meerdere variabelen.
-
-
-

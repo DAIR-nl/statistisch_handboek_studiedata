@@ -94,14 +94,14 @@ dfToetsen <- tribble(
     "44 Multilevel logistische regressie",                                                      0,          0,       0,               0,       
     "45 Multilevel logistische regressie",                                                      0,          0,       0,               0,       
     "46 Multilevel logistische regressie",                                                      0,          0,       0,               0,       
-    "47 Multinomiale regressie",                                                                0,          0,       0,               0,       
+    "47 Multinomiale logistische regressie",                                                    1,          0,       0,               0,       
     "48 Loglineaire analyse",                                                                   0,          0,       0,               0,       
-    "49 Multinomiale regressie",                                                                0,          0,       0,               0,       
+    "49 Multinomiale logistische regressie",                                                    0,          0,       0,               0,       
     "50 Multilevel multinomiale regressie",                                                     0,          0,       0,               0,       
     "51 Multilevel multinomiale regressie",                                                     0,          0,       0,               0,       
     "52 Multilevel multinomiale regressie",                                                     0,          0,       0,               0,       
-    "53 Ordinale regressie",                                                                    0,          0,       0,               0,       
-    "54 Ordinale regressie",                                                                    0,          0,       0,               0,       
+    "53 Ordinale logistische regressie",                                                        0,          0,       0,               0,       
+    "54 Ordinale logistische regressie",                                                        0,          0,       0,               0,       
     "55 Multilevel ordinale regressie",                                                         0,          0,       0,               0,       
     "56 Multilevel ordinale regressie",                                                         0,          0,       0,               0,       
     "57 Multilevel ordinale regressie",                                                         0,          0,       0,               0,       
@@ -172,7 +172,7 @@ for (p in lProgrammeertalen) {
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## Loop over de toetsen die in gebruik zijn en genereer die pagina's
-for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_R == 1]) {
+for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_R == 2]) {
     sModus  <- "R"
     bStatus <- dfToetsen$Review_R[dfToetsen$Toets == sToets]
     rmarkdown::render(paste0("R/",sToets," R.Rmd"), 

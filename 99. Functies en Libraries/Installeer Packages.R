@@ -38,7 +38,7 @@ Gebruikte_packages <- c(
     "dplyr",
     "effsize", # misschien niet meer nodig door lsr
     "emmeans", # 31
-    "exact2x2",
+    "exact2x2", # 12, en misschien andere pagina's
     "ez",
     "fmsb", # 41
     "DescTools", # moet na package fmsb omdat functie VIF() overlapt

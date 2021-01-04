@@ -49,7 +49,7 @@ source(paste0(here::here(),"/01. Includes/data/25.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *Kruskal Wallis toets* om te toetsen of twee of meer ongepaarde groepen van elkaar verschillen op een ordinale variabele.[^17]<sup>, </sup>[^1] Een alternatief voor een vergelijking van twee of meer groepen op een ordinale variabele is de *chi-kwadraat toets voor onafhankelijkheid* of de *Fisher-Freeman-Halton exact toets* (bij een laag aantal observaties). Bij deze toetsen wordt echter geen rekening gehouden met de ordening van de categorieën van de ordinale variabele: de variabele wordt behandeld als een nominale variabele.
+Gebruik de *Kruskal Wallis toets* om te toetsen of twee of meer ongepaarde groepen van elkaar verschillen op een ordinale[^16] variabele.[^17]<sup>, </sup>[^1] Als de variabele beter als nominaal[^18] beschouwd kan worden, is de *chi-kwadraat toets voor onafhankelijkheid* of de *Fisher-Freeman-Halton exact toets* (bij een laag aantal observaties) een alternatief. Bij deze toetsen wordt echter geen rekening gehouden met de ordening van de categorieën van de ordinale variabele: de variabele wordt behandeld als een nominale variabele.
 
 # Onderwijscasus
 <div id="casus">
@@ -68,7 +68,7 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 Het meetniveau van de afhankelijke variabele is ordinaal[^16] of continu.[^17] In deze toetspagina staat een casus met een ordinale afhankelijke variabele centraal; een casus met een continue afhankelijke variabele met bijbehorende uitwerking is te vinden in de [Kruskal Wallis toets I](10-Kruskal-Wallis-toets-I-R.html).
 
-Om de *Kruskal Wallis toets* uit te voeren met een ordinale afhankelijke variabele, moet deze variabele omgezet worden in getallen. Wanneer er vier categorieën zijn, worden ze genummerd van 1 tot en met 4 op basis van de ordening van de variabele. De categorieën onvoldoende, voldoende, goed en uitstekend worden dan omgezet in respectievelijk 1, 2, 3 en 4. Bij de *chi-kwadraat toets voor onafhankelijkheid* en de *Fisher-Freeman_Halton exact toets* wordt dit niet gedaan, maar wordt de ordinale afhankelijke variabele als nominaal beschouwd. De *Kruskal Wallis toets* maakt een rangschikking van alle observaties van alle groepen samengevoegd en telt vervolgens apart de rangnummers op voor de observaties in alle groepen. Met behulp van de groepsgroottes kan ook het gemiddelde rangnummer van de groepen berekend worden. Het verschil tussen de gemiddelde rangnummers van de groepen bepaalt de significantie van de toets.[^17]
+Om de *Kruskal Wallis toets* uit te voeren met een ordinale afhankelijke variabele, moet deze variabele omgezet worden in getallen. Wanneer er vier categorieën zijn, worden ze genummerd van 1 tot en met 4 op basis van de ordening van de variabele. De categorieën onvoldoende, voldoende, goed en uitstekend worden dan omgezet in respectievelijk 1, 2, 3 en 4. Bij de *chi-kwadraat toets voor onafhankelijkheid* en de *Fisher-Freeman_Halton exact toets* wordt dit niet gedaan, maar wordt de ordinale afhankelijke variabele als nominaal[^18] beschouwd. De *Kruskal Wallis toets* maakt een rangschikking van alle observaties van alle groepen samengevoegd en telt vervolgens apart de rangnummers op voor de observaties in alle groepen. Met behulp van de groepsgroottes kan ook het gemiddelde rangnummer van de groepen berekend worden. Het verschil tussen de gemiddelde rangnummers van de groepen bepaalt de significantie van de toets.[^17]
 
 # Post-hoc toets 
 De *Kruskal Wallis toets* toetst of er een verschil is tussen de groepen op gebied van de afhankelijke variabele. De post-hoc toets wordt daarna gebruikt om te toetsen tussen welke specifieke groepen er een significant verschil is. Gebruik de [Mann-Whitney U toets](23-Mann-Whitney-U-toets-II-R.html) als post-hoc toets.
@@ -111,7 +111,7 @@ unique(Beoordelingen_presentatievaardigheden$Opleiding)
 <!-- ## /OPENBLOK: Data-bekijken-2.R -->
 
 <!-- ## TEKSTBLOK: Data-kruistabel1.R -->
-Een kruistabel geeft het aantal observaties weer voor de combinaties van de categorieën van de variabelen `Opleiding` en `Beoordeling`. In feite laat dit zien welke beoordelingen de studenten van de verschillende opleidingen krijgen. Maak de kruistabel met de functie `table()` met als argumenten de variabele `Beoordelingen_presentatievaardigheden$Opleiding` en de variabele `Beoordelingen_presentatievaardigheden$Beoordeling`.
+Een kruistabel geeft het aantal observaties weer voor de combinaties van de categorieën van de variabelen `Opleiding` en `Beoordeling`. In feite laat dit zien welke beoordelingen de studenten van de verschillende opleidingen krijgen. Maak de kruistabel met de functie `table()` met als argumenten de variabele `Beoordelingen_presentatievaardigheden$Opleiding` en de variabele `Beoordelingen_presentatievaardigheden$Beoordeling`. Zet de beoordelingen handmatig op de juiste volgorde, omdat `R` de alfabetische volgorde aanhoudt.
 <!-- ## /TEKSTBLOK: Data-kruistabel1.R -->
 
 <!-- ## OPENBLOK: Data-kruistabel2.R -->
@@ -326,4 +326,5 @@ De [Mann-Whitney U toets](23-Mann-Whitney-U-toets-II-R.html) is uitgevoerd als p
 [^15]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage.
 [^16]: Een ordinale variabele is een categorische variabele waarbij de categorieën geordend kunnen worden. Een voorbeeld is de variabele beoordeling met de categorieën Onvoldoende, Voldoende, Goed en Uitstekend.
 [^17]:  Laerd statistics (2018). *Kruskal-Wallis H Test using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/kruskal-wallis-h-test-using-spss-statistics.php.
+[^18]: Een nominale variabele is een categorische variabele waarbij de categorieën niet geordend kunnen worden. Een voorbeeld is de variabele windstreek (noord, oost, zuid, west) en geslacht (man of vrouw).
 

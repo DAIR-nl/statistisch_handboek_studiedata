@@ -86,9 +86,9 @@ Zeer waarschijnlijk wordt er voor één of meerdere afhankelijke variabelen een 
 
 Er zijn meerdere methoden om de toetsstatistiek van de *MANOVA* te berekenen. De vier meeste gebruikte versie zijn *Wilks's Lambda*, *Hotelling's Trace*, *Roy's Largest Root* en *Pillai's Trace*. Afhankelijk van allerlei karakteristieken van de data met betrekking tot bijvoorbeeld steekproefgroottes en assumpties is soms de ene toetsstatistiek en soms de andere toetsstatistiek de beste optie. Meer informatie hierover is te vinden in de boeken van Field[^22] en Tabachnick & Fidell[^20]. In het algemeen wordt *Wilks's Lambda* gebruikt, omdat deze in de meeste situaties het hoogste onderscheidend vermogen heeft. Bij een laag aantal observaties, verschillen in het aantal observaties per groep en afwijkingen van de assumptie van homogeniteit van variantie-covariantie matrices is *Pillai's Trace* vanwege zijn robuustheid een betere optie. De keuze voor een toetsstatistiek is echter iets om goed over na te denken en uiteindelijk aan de onderzoeker.[^20]
 
-# Assumpties
+# Uitleg assumpties
 
-Om een valide resultaat te vinden met de *MANOVA*, dient er aan een aantal assumpties voldaan te worden.[^1]<sup>,</sup>[^20] De assumpties worden toegelicht en de opties bij het niet voldoen aan de assumptie worden weergegeven.
+Om een valide resultaat te vinden met de *MANOVA*, dient er aan een aantal assumpties voldaan te worden.[^1]<sup>,</sup>[^20] In deze sectie worden de assumpties allen toegelicht en worden de opties bij het niet voldoen aan de assumptie weergegeven. Verderop in de toetspagina worden de assumpties getoetst met de dataset van de onderwijscasus.
 
 ## Outliers
 
@@ -244,7 +244,7 @@ ggplot(Gemiddelde_cijfers_bioinformatics_lang,
 
 Uit de beschrijvende statistieken en de visualisatie in Figuur 2 blijkt dat het gemiddelde cijfer in periode 1 en 2 voor de bacheloropleidingen Informatica en Wiskunde hoger ligt dan het gemiddelde cijfer voor de bacheloropleiding Biologie. In periode 3 is dit juist andersom.
 
-# Assumpties
+# Toetsing assumpties
 
 Gebruik de *MANOVA* om te onderzoeken of er een verschil is tussen de gemiddelde cijfers in periode 1, 2 en 3 voor studenten van de master Bioinformatics die afkomstig zijn van de vooropleidingen Wiskunde, Informatica en Biologie. Start met het toetsen van de assumpties en voer vervolgens de *ANCOVA* uit als hieraan voldaan is.
 

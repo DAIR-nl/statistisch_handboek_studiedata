@@ -49,7 +49,9 @@ source(paste0(here::here(),"/01. Includes/data/12.R"))
 
 # Toepassing
 
+<!-- ## TEKSTBLOK: Link1.R -->
 Gebruik de *McNemar toets* om te toetsen of er verschillen zijn voor de frequenties van een binaire[^1] variabele tussen twee gepaarde groepen.[^2]<sup>, </sup>[^3] De *McNemar toets* kan in theorie ook gebruikt worden om twee gepaarde groepen te vergelijken op een nominale variabele met meer dan twee categorieën. Deze toetspagina illustreert de toets echter voor een binaire variabele. Hoewel het dus mogelijk met de *McNemar toets* is om twee gepaarde groepen te vergelijken wat betreft een nominale variabele, wordt hiervoor echter de voorkeur gegeven aan de [Bhapkar toets](18-Bhapkar-toets-R.html).
+<!-- ## /TEKSTBLOK: Link1.R -->
 
 # Onderwijscasus
 <div id = "casus">
@@ -74,7 +76,10 @@ Om de *McNemar toets* uit te voeren, moet de data aan een aantal voorwaarden vol
 
 De *McNemar toets* gaat uit van een frequentiematrix, een matrix waarin de rijen de eerste meting van de steekproef bevat en de kolommen de tweede meting. Een voorbeeld bij de casus is weergegeven in Tabel 1.
 
-<!-- ## OPENBLOK: Groepsgrootte1.R -->
+<!-- ## CLOSEDBLOK: Groepsgrootte0.R -->
+<!-- ## /CLOSEDBLOK: Groepsgrootte0.R -->
+
+<!-- ## CLOSEDBLOK: Groepsgrootte1.R -->
 ```{r groepsgrootte, include=FALSE, echo=TRUE}
 ### Definieer de groepen
 December <- FOS_studenten$`FOS`[FOS_studenten$Maand == "december"]
@@ -83,7 +88,7 @@ Juni <- FOS_studenten$`FOS`[FOS_studenten$Maand == "juni"]
 ## Maak een frequentiematrix
 FOS_studenten_frequentiematrix <- table(December, Juni)
 ```
-<!-- ## /OPENBLOK: Groepsgrootte1.R -->
+<!-- ## /CLOSEDBLOK: Groepsgrootte1.R -->
 
 <!-- ## TEKSTBLOK: Groepsgrootte2.R -->
 
@@ -101,7 +106,7 @@ In de cel rechtsboven staat het aantal studenten dat wel in december maar niet i
 
 # De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken1.R -->
-Er is een dataset ingeladen genaamd `Beroep_FOS_functiebeperking`. In deze dataset is voor elke student aangegeven of ze wel of geen beroep op de FOS hebben gedaan in december en in juni. 
+Er is een dataset ingeladen genaamd `FOS_studenten`. In deze dataset is voor elke student aangegeven of ze wel of geen beroep op de FOS hebben gedaan in december en in juni. 
 <!-- ## /TEKSTBLOK: Data-bekijken1.R -->
 
 <!-- ## OPENBLOK: Data-bekijken2.R -->
@@ -119,7 +124,6 @@ Een kruistabel geeft de aantallen observaties weer voor de combinaties van de ca
 <!-- ## /TEKSTBLOK: Data-kruistabel1.R -->
 
 <!-- ## OPENBLOK: Data-kruistabel2.R -->
-
 ```{r kruistabel}
 ## Maak een kruistabel
 FOS_studenten_kruistabel <- table(FOS_studenten$`FOS`, FOS_studenten$Maand)
@@ -153,7 +157,9 @@ print(FOS_studenten_frequentiematrix)
 ```
 <!-- ## /OPENBLOK: Data-beschrijven.R -->
 
+<!-- ## TEKSTBLOK: Data-bekijken4.R -->
 De diagonale elementen bevatten `r FOS_studenten_frequentiematrix["ja","ja"]` en `r FOS_studenten_frequentiematrix["nee","nee"]` observaties. De niet-diagonale elementen bevatten `r FOS_studenten_frequentiematrix["ja","nee"]` en `r FOS_studenten_frequentiematrix["nee","ja"]` observaties.
+<!-- ## /TEKSTBLOK: Data-bekijken4.R -->
 
 # McNemar toets
 
@@ -181,9 +187,6 @@ exact2x2(FOS_studenten_frequentiematrix,
 ```
 <!-- ## /OPENBLOK: McNemar-toets2.R -->
 
-<!-- ## CLOSEDBLOK: McNemar-toets3.R -->
-<!-- ## /CLOSEDBLOK: McNemar-toets3.R -->
-
 Bereken het verschil tussen de proporties studenten dat een beroep doet op de FOS in december en juni. Op deze manier kan een (eventueel) significant resultaat geïnterpreteerd worden.
 
 <!-- ## OPENBLOK: McNemar-toets5.R -->
@@ -200,17 +203,16 @@ Verschil_proporties
 ```
 <!-- ## /OPENBLOK: McNemar-toets5.R -->
 
-
 <!-- ## TEKSTBLOK: McNemar-toets5.R -->
 * Er is een significant verschil tussen de frequenties van het aantal studenten dat wel of niet gebruik maakt van de FOS tussen december en juni, *p* < 0,0001  
-* p-waarde is kleiner dan 0,05, dus de H~0~ wordt verworpen.[^6]
+* De p-waarde is kleiner dan 0,05, dus de H~0~ wordt verworpen.[^6]
 * Het verschil in proporties is `r Round_and_format(Verschil_proporties)`, er zijn dus meer studenten die gebruik maken van de FOS in juni ten opzichte van december
 
 <!-- ## /TEKSTBLOK: McNemar-toets5.R -->
 
 ## Rapportage
 
-<!-- ## TEKSTBLOK: McNemar-toets5.R -->
+<!-- ## TEKSTBLOK: Rapportage.R -->
 De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in de frequenties van het aantal studenten dat wel of geen beroep doet op de FOS voor en na de interventie van de decaan. De interventie heeft als doel het aantal studenten met een functiebeperking dat een beroep doet op de FOS te verhogen. De resultaten laten een significant verschil zien tussen de frequenties voor en na de interventie (*p* <0,0001), wat betekent dat de nulhypothese verworpen kan worden. Het verschil in de proportie studenten dat een beroep doet op de FOS is `r Round_and_format(Verschil_proporties)` . Het verschil in proporties en de kruistabel (Tabel 2) illustreren dat het percentage studenten dat een beroep doet op de FOS is toegenomen na de interventie. 
 
 |                      | December | Juni |
@@ -218,12 +220,7 @@ De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in de fr
 | **FOS** | `r FOS_studenten_kruistabel["ja","december"]`    | `r FOS_studenten_kruistabel["ja","juni"]`     |
 | **geen FOS**  | `r FOS_studenten_kruistabel["nee","december"]`      | `r FOS_studenten_kruistabel["nee","juni"]`     |
 *Tabel 2. Kruistabel van het aantal studenten dat een beroep doet op de FOS in december en juni*
-
-<!-- ## /TEKSTBLOK: McNemar-toets5.R -->
-
-
-
-<!-- ## /TEKSTBLOK: exMcNemar-toets7.R -->
+<!-- ## /TEKSTBLOK: Rapportage.R -->
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
@@ -239,3 +236,7 @@ De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in de fr
 [^7]: Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese waar is.
 [^8]: Een type I fout is de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is.
 [^9]: Fagerland, M.W., Lydersen, S., & Laake, P. (2013). *The McNemar test for binary matched-pairs data: mid-p and asymptotic are better than exact conditional*. BMC medical research methodology, 13, 91. https://doi.org/10.1186/1471-2288-13-91
+
+<!-- ## TEKSTBLOK: Extra_bron.R -->
+<!-- ## /TEKSTBLOK: Extra_bron.R -->
+

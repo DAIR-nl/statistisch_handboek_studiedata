@@ -80,9 +80,9 @@ Voor de interpretatie en het gebruik van de *ANCOVA* is het van belang om rekeni
 
 Bij experimenteel onderzoek verschillen de groepen alleen wat betreft hun groepslidmaatschap. Omdat de deelnemers willekeurig zijn toegewezen, zouden de achtergrondvariabelen gelijk verdeeld moeten zijn voor de verschillende groepen. Het doel van de *ANCOVA* is in dat geval om ruis weg te nemen zodat er meer onderscheidend vermogen is om een verschil tussen groepen te vinden. Bij cross-sectioneel onderzoek verschillen de groepen mogelijk meer van elkaar dan alleen in hun groepslidmaatschap. Bepaalde achtergrondvariabelen kunnen ook verschillend zijn voor de verschillende groepen. Als deze variabelen gerelateerd zijn aan de afhankelijke variabele, dan heeft dit invloed op de groepsgemiddelden. In dat geval is het nuttig om te corrigeren voor deze variabelen, bijvoorbeeld met een *ANCOVA*. Bij cross-sectioneel onderzoek is het doel van de *ANCOVA* dus om ruis weg te nemen en rekening te houden met verschillen in achtergrondvariabelen. Let goed op bij de interpretatie van de *ANCOVA* bij cross-sectioneel onderzoek. Na het corrigeren voor achtergrondvariabelen is er nog steeds geen sprake van een experimenteel onderzoek. Een verschil in gemiddelde tussen de groepen wordt dus niet veroorzaakt door de groepen. In de huidige casus kan er een verschil tussen de opleidingen gevonden worden na het corrigeren voor het aantal gevolgde hoorcolleges en het gemiddeld eindexamencijfer. Dit betekent echter niet dat het lidmaatschap van een bepaalde opleiding ook de oorzaak is van verschillen in de eindcijfers Methoden & Statistiek. Let dus goed op dat de resultaten niet op deze manier geïnterpreteerd en gerapporteerd worden.[^3]
 
-# Assumpties
+# Uitleg assumpties
 
-Om een valide resultaat te vinden met de *ANCOVA*, dient er aan een aantal assumpties voldaan te worden.[^1]<sup>,</sup>[^3] De assumpties worden toegelicht en de opties bij het niet voldoen aan de assumptie worden weergegeven.
+Om een valide resultaat te vinden met de *ANCOVA*, dient er aan een aantal assumpties voldaan te worden.[^1]<sup>,</sup>[^3] In deze sectie worden de assumpties allen toegelicht en worden de opties bij het niet voldoen aan de assumptie weergegeven. Verderop in de toetspagina worden de assumpties getoetst met de dataset van de onderwijscasus.
 
 ## Outliers
 
@@ -350,7 +350,7 @@ with(Studenten_Methoden_Statistiek,
 
 Uit de beschrijvende statistieken blijkt dat het gemiddelde eindcijfer Methoden & Statistiek ongeveer gelijk is voor de opleidingen Psychologie en Sociologie en iets hoger is voor Onderwijskunde. Het aantal gevolgde hoorcolleges verschilt echter per opleiding waarbij opvalt dat het voor de opleiding Psychologie een stuk lager is. Het gemiddeld eindexamencijfer op de middelbare school is echter redelijk gelijk voor studenten van de drie opleidingen.
 
-# Assumpties
+# Toetsing assumpties
 
 Gebruik de *ANCOVA* om te onderzoeken of het eindcijfer voor het vak Methoden & Statistiek van de faculteit Sociale Wetenschappen verschilt voor studenten afkomstig van de opleidingen Psychologie, Onderwijskunde en Sociologie na corrigeren voor het aantal gevolgde hoorcolleges en het gemiddeld eindexamencijfer. Start met het toetsen van de assumpties en voer vervolgens de *ANCOVA* uit als hieraan voldaan is.
 

@@ -132,7 +132,7 @@ print(dfUitval_studenten_functiebeperking_leenstelsel.tail(5))
 
 
 <!-- ## TEKSTBLOK: Data-kruistabel1.py -->
-Een kruistabel geeft de aantallen observaties weer voor de combinaties van de categorieën van de variabelen `Periode` en `Uitval`. Maak de kruistabel met de functie `.crosstable()` van het package `pandas` met als argumenten de variabele `dfUitval_studenten_functiebeperking_leenstelsel['Periode']` (voor of na invoering leenstelsel) en `dfUitval_studenten_functiebeperking_leenstelsel['Uitval']` (wel of niet uitgevallen).
+Een kruistabel geeft de aantallen observaties weer voor de combinaties van de categorieën van de variabelen `Periode` en `Uitval`. Maak de kruistabel met de functie `.crosstab()` van het package `pandas` met als argumenten de variabele `dfUitval_studenten_functiebeperking_leenstelsel['Periode']` (voor of na invoering leenstelsel) en `dfUitval_studenten_functiebeperking_leenstelsel['Uitval']` (wel of niet uitgevallen).
 <!-- ## /TEKSTBLOK: Data-kruistabel1.py -->
 
 <!-- ## OPENBLOK: Data-kruistabel2.py -->

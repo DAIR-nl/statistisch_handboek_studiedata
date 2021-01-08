@@ -172,7 +172,7 @@ for (p in lProgrammeertalen) {
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## Loop over de toetsen die in gebruik zijn en genereer die pagina's
-for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_R == 2]) {
+for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_R == 1]) {
     sModus  <- "R"
     bStatus <- dfToetsen$Review_R[dfToetsen$Toets == sToets]
     rmarkdown::render(paste0("R/",sToets," R.Rmd"), 

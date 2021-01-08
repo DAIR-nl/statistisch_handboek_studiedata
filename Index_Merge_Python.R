@@ -51,7 +51,7 @@ dfToetsen <- tribble(
     "09 Friedmans ANOVA I",                                                                     "1", 
     "10 Kruskal Wallis toets I",                                                                "1", 
     "11 Chi-kwadraat toets voor goodness of fit en binomiaaltoets",                             "1", 
-    "12 McNemar toets",                                                                         "0", 
+    "12 McNemar toets",                                                                         "2", 
     "13 Chi-kwadraat toets voor onafhankelijkheid en Fishers exact toets",                      "1", 
     "14 NIET IN GEBRUIK; NIET VERWIJDEREN",                                                     "0", 
     "15 Cochran’s Q toets",                                                                     "0", 
@@ -78,7 +78,7 @@ sRegEx <- "## [/]{0,1}[A-Z]{4,6}BLOK: "
 # EG: snap ik niet
 
 ## Loop over de toetsen die in gebruik zijn
-for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
+for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 2]) {
 
     ## Bepaal de R Markdown en Python Markdown
     thisRmd_R      <- paste0("R/", paste0(sToets, " R.Rmd"))
@@ -205,7 +205,7 @@ for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
 }
 
 ## Loop over de toetsen die in gebruik zijn en genereer die pagina's
-for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
+for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 2]) {
     sModus <- "Python"
     #bStatus <- dfToetsen$Review_Python[dfToetsen$Toets == sToets]
     rmarkdown::render(paste0("Python/",sToets,"-Python.Rmd"), 

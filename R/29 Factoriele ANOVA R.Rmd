@@ -111,7 +111,7 @@ In Figuur 1 waren er hoofdeffecten van de variabelen Vooropleiding en Geslacht g
 
 Bij *factoriële ANOVA* worden bovenstaande grafieken gebruikt om de resultaten te interpreteren. De hoofdeffecten en interactie-effecten worden eerst statistisch getoetst en daarna geïnterpreteerd met onder andere deze grafieken. De aanpak is als volgt.[^10] Eerst wordt getoetst of er sprake is van een interactie-effect tussen de onafhankelijke variabelen. Als dit niet het geval is, kunnen de hoofdeffecten geïnterpreteerd worden. Als er wel een interactie-effect is, kunnen de hoofdeffecten niet geïnterpreteerd worden. De volgende stap is dan een *simple effects analyse* waarbij het effect van de ene onafhankelijke variabele op de afhankelijke variabele wordt getoetst voor alle groepen van de andere onafhankelijke variabele die deel uitmaakt van het interactie-effect. Voor Figuur 2 zou dit betekenen dat het effect van Vooropleiding op Gemiddeld_cijfer apart getoetst wordt voor mannen en vrouwen. Het interactie-effect kan op deze manier geïnterpreteerd worden, samen met de grafische weergave zoals te zien in Figuur 2.
 
-# Assumpties
+# Uitleg assumpties
 
 Voor een valide toetsresultaat bij de *factoriële ANOVA* moet er aan een aantal assumpties voldaan worden. De steekproef moet bestaan uit onafhankelijke deelnemers[^19], de afhankelijke variabele moet normaal verdeeld zijn voor elke combinatie van groepen van de onafhankelijke variabelen en er moet homogeniteit van varianties zijn.[^1]
 
@@ -194,7 +194,7 @@ ggplot(Gemiddelde_cijfers_psychologie,
 
 *Figuur 3.  Gemiddelde van de gemiddelde cijfers per groep op basis van Vooropleiding en Geslacht voor de dataset Gemiddelde_cijfers_psychologie.*
 
-Op basis van de beschrijvende statistieken en de grafiek (Figuur 3) lijken er verschillen tussen de groepen te zijn. Vrouwen hebben voor alle vooropleidingen een hoger gemiddeld cijfer dan mannen. Voor vrouwen zijn er kleine verschillen tussen de vooropleidingen, maar voor mannen zijn deze verschillen groter. De mannelijke studenten afkomstig van het hbo-p hebben een substantieel lager gemiddelde van mannelijke studenten afkomstig van het vwo of overige vooropleidingen. De lijnen van mannen en vrouwen lopen niet parallel dus er lijkt een interactie-effect te zijn. De *factoriële ANOVA* zal dit interactie-effect toetsen.
+Op basis van de beschrijvende statistieken en de grafiek (Figuur 3) lijken er verschillen tussen de groepen te zijn. Vrouwen hebben voor alle vooropleidingen een hoger gemiddeld cijfer dan mannen. Voor vrouwen zijn er kleine verschillen tussen de vooropleidingen, maar voor mannen zijn deze verschillen groter. De mannelijke studenten afkomstig van het hbo-p hebben een substantieel lager gemiddelde dan mannelijke studenten afkomstig van het vwo of overige vooropleidingen. De lijnen van mannen en vrouwen lopen niet parallel dus er lijkt een interactie-effect te zijn. De *factoriële ANOVA* zal dit interactie-effect toetsen.
 
 
 ## Normaliteit
@@ -486,8 +486,8 @@ GH_overig <- Games_Howell_overig$games.howell
 
 <!-- ## TEKSTBLOK: SimEff8.R -->
 * Hbo-p: het verschil in gemiddelde (vrouw - man) is `r Round_and_format(GH_hbo$diff[1])`, dit is een significant verschil (*p* < 0,0001).[^18]
-* Vwo: het verschil in gemiddelde (vrouw - man) is `r Round_and_format(GH_vwo$diff[1])`, dit is een significant verschil (*p* = `r Round_and_format(GH_vwo$p[1])`).[^18]
-* Overig: het verschil in gemiddelde (vrouw - man) is `r Round_and_format(GH_overig$diff[1])`, dit is een significant verschil (*p* = `r Round_and_format(GH_overig$p[1])`).[^18]
+* Vwo: het verschil in gemiddelde (vrouw - man) is `r Round_and_format(GH_vwo$diff[1])`, dit is geen significant verschil (*p* = `r Round_and_format(GH_vwo$p[1])`).[^18]
+* Overig: het verschil in gemiddelde (vrouw - man) is `r Round_and_format(GH_overig$diff[1])`, dit is geen significant verschil (*p* = `r Round_and_format(GH_overig$p[1])`).[^18]
 
 <!-- ## /TEKSTBLOK: SimEff8.R -->
 

@@ -58,6 +58,7 @@ Het handboek is nog volop in ontwikkeling en zal gedurende 2020 aangevuld worden
 * 29 juni 2020: Nieuwe toetsen toegevoegd voor R (Multilevel multinomiale logistische regressie, Wilcoxon II, Mann-Whitney U II en Kruskall Wallis II) en Python (Repeated measures ANOVA en Mann-Whitney U I)
 * 5 augustus 2020: Tweede toetsmatrix toegevoegd en toetspagina multipele lineaire regressie toegevoegd
 * 12 november 2020: Laatste toetsen eerste toetsmatrix toegevoegd
+* 8 januari: Multinomiale logistische regressie en McNemar toets Python toegevoegd, kleine wijzigingen vanwege veel verwerkte reviews
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer_simpel.R"))}

@@ -1,5 +1,5 @@
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## Index_Render_site.R ####
+## Index_Render_site_TB.R ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## R code voor het Statistisch Handboek van het Versnellingsplan
 ## Copyright 2019 VU
@@ -18,16 +18,7 @@
 ##
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## Geschiedenis:
-## 21-09-2019: TB: Aanmaak bestand
-## 04-12-2019: TB: Toevoeging aan statistisch_handboek_ho files
-## 06-02-2020: TB: Aanpassing zodat subfolder meegenomen worden
-## 12-02-2020: TB: Controle consistentie namen + Review kolommen
-## 22-02-2020: TB: Toevoeging sitemap + google bestanden
-## 08-03-2020: TB: Locatie van het aanmaken van images naar voren gehaald
-## 11-06-2020: EG: Nieuwe toetsen aan tibble toegevoed
-## 17-06-2020: EG: Toetsmatrix II toegevoegd
-## 04-08-2020: EG: Toetspagina 28 regressie toegevoegd
-## 03-09-2020: TB: tribble vereenvoudigd voor numerieke waarden en kopjes 
+## 12-01-2021: EG: Aanmaak bestand
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -75,8 +66,8 @@ dfToetsen <- tribble(
     "27 Moods mediaan toets",                                                                   1,          0,       1,               0,       
     
     ## Toetsmatrix II
-    "28 Multipele lineaire regressie",                                                          1,          0,       0,               0,       
-    "29 Factoriele ANOVA",                                                                      1,          0,       0,               0,       
+    "28 Multipele lineaire regressie",                                                          2,          0,       0,               0,       
+    "29 Factoriele ANOVA",                                                                      2,          0,       0,               0,       
     "30 Factoriele repeated measures ANOVA",                                                    1,          0,       0,               0,       
     "31 ANCOVA",                                                                                1,          0,       0,               0,       
     "32 Mixed ANOVA",                                                                           1,          0,       0,               0,       
@@ -172,50 +163,12 @@ for (p in lProgrammeertalen) {
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## Loop over de toetsen die in gebruik zijn en genereer die pagina's
-for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_R == 1]) {
+for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_R == 2]) {
     sModus  <- "R"
     bStatus <- dfToetsen$Review_R[dfToetsen$Toets == sToets]
     rmarkdown::render(paste0("R/",sToets," R.Rmd"), 
            output_file = paste0('_site/R/', gsub(" ", "-", sToets), '-R.html'))    
 }
-
-## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## 02.2 MAAK PYTHON BESTANDEN ####
-## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-## Loop over de toetsen die in gebruik zijn en genereer die pagina's
-for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_Python == 1]) {
-    sModus <- "Python"
-    bStatus <- dfToetsen$Review_Python[dfToetsen$Toets == sToets]
-    rmarkdown::render(paste0("Python/",sToets,"-Python.Rmd"), 
-           output_file = paste0('_site/Python/', gsub(" ", "-", sToets), '-Python.html'))    
-}
-
-## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## 02.3 KOPIEER SITEMAP EN GOOGLE VERIFICATIECODE ####
-## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-## Kopieer het html bestand voor Google
-current_folder <- "01. Includes/google/"
-new_folder     <- "_site"
-list_of_files  <- list.files(current_folder) 
-
-## Kopieer het html bestand naar deze folder
-file.copy(file.path(current_folder,list_of_files), new_folder, 
-          overwrite = TRUE, 
-          recursive = FALSE,
-          copy.mode = TRUE)
-
-## Kopieer de sitemap
-current_folder <- "01. Includes/sitemap/"
-new_folder     <- "_site"
-list_of_files  <- list.files(current_folder) 
-
-## Kopieer de sitemap naar deze folder
-file.copy(file.path(current_folder,list_of_files), new_folder, 
-          overwrite = TRUE, 
-          recursive = FALSE,
-          copy.mode = TRUE)
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 03 CONTROLEER DE UITKOMST ####

@@ -99,9 +99,9 @@ Studenten_Methoden_Statistiek <- data.frame(Studentnummer,
                                             Eindcijfer_MS)
 
 # lm
-model <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges,
-   Studenten_Methoden_Statistiek)
-summary(model)
+#model <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges,
+#   Studenten_Methoden_Statistiek)
+#summary(model)
 
 # Bootstrap
 #library(car)

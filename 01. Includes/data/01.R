@@ -40,8 +40,15 @@ Scheikunde_eindcijfer <- round(Decimalen_scheikunde, 1)[Decimalen_scheikunde <= 
 Decimalen_natuurkunde <- rnorm(160, 7.0, 2.4)
 Natuurkunde_eindcijfer <- round(Decimalen_natuurkunde, 1)[Decimalen_natuurkunde <= 10 & Decimalen_natuurkunde >= 4.5]
 
-WNS_eindcijfers <- cbind(Wiskunde_eindcijfer[], Scheikunde_eindcijfer, Natuurkunde_eindcijfer)
+WNS_eindcijfers <- cbind(Wiskunde_eindcijfer, Scheikunde_eindcijfer, Natuurkunde_eindcijfer)
 
 Gemiddeld_cijfer_WNS <- apply(WNS_eindcijfers, 1, mean)
 
 Gemiddeld_cijfer_WNS_n30 <- sample(Gemiddeld_cijfer_WNS, 30)
+
+#write.csv(Gemiddeld_cijfer_WNS,
+#          file = "05. Datasets/01_Gemiddeld_cijfer_WNS.csv")
+
+#write.csv(Gemiddeld_cijfer_WNS_n30,
+#          file = "05. Datasets/01_Gemiddeld_cijfer_WNS_n30.csv")
+

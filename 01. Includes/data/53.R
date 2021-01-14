@@ -131,33 +131,39 @@ Beoordelingen_eindproject <- cbind.data.frame(Beoordeling,
 #library(lmtest)
 #lrtest(Regressiemodel)
 
-library(MASS)
+#library(MASS)
 
-vvv <- polr(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
-     Beoordelingen_eindproject, Hess = TRUE)
+#vvv <- polr(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
+#     Beoordelingen_eindproject, Hess = TRUE)
 
-vvv2 <- polr(Beoordeling ~ 1,
-     Beoordelingen_eindproject, Hess = TRUE)
+#vvv2 <- polr(Beoordeling ~ 1,
+#     Beoordelingen_eindproject, Hess = TRUE)
 
-summary(vvv)
-vvv
-summary(vvv2)
+#summary(vvv)
+#vvv
+#summary(vvv2)
 
-library(lmtest)
-lrtest(vvv)
+#library(lmtest)
+#lrtest(vvv)
 
 
 
-library(mclogit)
+#library(mclogit)
 
 rm(mChoices,
-   Gemiddeld_cijfer,
-   Nominaal,
-   Nominaal_dummy,
-   Logit_WO_master,
-   Logit_hbo_master,
-   p_WO_master,
-   p_hbo_master,
-   p_werk,
+   Beoordeling,
+   Leeftijd,
+   Log_odds_1,
+   Log_odds_2,
+   Log_odds_3,
+   p_1,
+   p_2,
+   p_3,
+   p_4,
+   p_c1,
+   p_c2,
+   p_c3,
+   Vooropleiding,
+   Vooropleiding_dummy,
    Studentnummer,
-   Vervolg)
+   Gemiddeld_cijfer)

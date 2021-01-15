@@ -102,39 +102,41 @@ In onderstaande sectie wordt in meer details aan de hand van een aantal wiskundi
 
 ## De achtergrond van ordinale logistische regressie
 
-Bij *ordinale logistische regressie* wordt de kans op een van de mogelijkheden van de nominale afhankelijke variabele ten opzichte van de referentiecategorie voorspeld op basis van de predictors. In zekere zin is het regressiemodel een combinatie van meerdere [logistische regressie](41-Logistische-regressie-R.html)-vergelijkingen, waarbij het aantal vergelijkingen gelijk is aan het aantal categorieën van de nominale afhankelijke variabele minus één (de referentiecategorie). De vergelijkingen voor deze casus zijn al opgesteld in de vorige paragraaf en luiden
+Bij *ordinale logistische regressie* wordt een voorspelling gemaakt van de logaritme van de kans dat een deelnemer een observatie heeft die gelijk aan of lager dan een bepaalde mogelijkheid is gedeeld door de kans dat een deelnemer een observatie heeft die hoger dan een bepaalde mogelijkheid is. Wiskundig gezien is dit op te schrijven als
 
-$$ \log(\frac{P_{i,WO \ master }}{P_{i,werk }})  = \beta_{0,1} + \beta_{1,1} * Nominaal_{i} + \beta_{2,1} * Gemiddeld Cijfer_{i} + e_{i,1}$$
+$$ \log(\frac{P(y_i \leq j)}{P(y_i > j)}) = \beta_{0,j} + \beta_{1} * Vooropleiding_{i} + \beta_{2} * Gemiddeld Cijfer_{i} + \beta_{3} * Leeftijd_{i} + e_{i,j} $$
 
-$$ \log(\frac{P_{i,hbo \ master }}{P_{i,werk }}) = \beta_{0,2} + \beta_{1,2} * Nominaal_{i} + \beta_{2,2} * Gemiddeld Cijfer_{i} + e_{i,2}$$
-waarbij $P_{i,WO \ master }$ de kans op het volgen van een wo master is (en waarbij de andere kansen op vergelijkbare wijze zijn weergegeven),  $\beta_{0,1}$ als intercept van de eerste vergelijking, $Nominaal_{i}$ en $GemiddeldCijfer_{i}$ als predictors, $\beta_{1,1}$ en $\beta_{2,2}$ als regressiecoefficiënten van de predictors van de eerste vergelijking, $e_{i,1}$ als residu of error van de eerste vergelijking en $i$ als indicator van de deelnemer uit de steekproef. [^20]
+waarbij $y_i$ de observatie op de afhankelijke variabele $y$ voor deelnemer $i$ is, $j$ de mogelijkheid van de afhankelijke variabele is en $P()$ de kans aangeeft. De breuk van twee kansen wordt ook wel een odds genoemd, deze term wordt verderop in de toetspagina uitgewerkt in de sectie Individuele predictors toetsen en interpreteren met de Wald toets. Daarnaast wordt de kans dat een observatie gelijk aan kleiner is dan een bepaalde mogelijkheid een cumulatieve kans genoemd. Bij *ordinale logistische regressie* wordt dus de log-odds van de cumulatieve kans voorspeld met een regressievergelijking.
 
-De regressievergelijking geeft niet direct een voorspelling van de kans op de mogelijkheid van de nominale afhankelijke variabele, maar een voorspelling van de logaritme van de kans op de mogelijkheid gedeeld door de kans op de referentiecategorie. De kans op de mogelijkheid is getransformeerd met behulp van een logit-transformatie. Bij [multipele lineaire regressie](28-Multipele-lineaire-regressie-R.html) is er een directe lineaire relatie tussen de afhankelijke variabele en de predictors. Bij *ordinale logistische regressie* is er een lineaire relatie tussen de logit van de mogelijkheid en de predictors. De interesse gaat echter uit naar de kans op een bepaalde mogelijkheid van de nominale afhankelijke variabele en niet naar de logit. Er is dus geen directe lineaire relatie tussen de kans op een mogelijkheid en de predictors. De logit transformatie is als het ware de intermediair die zorgt voor de lineaire relatie en wordt daarom ook wel een link-functie genoemd.
+Voor elke mogelijkheid van de afhankelijke variabele behalve de hoogste mogelijkheid is er een regressievergelijking opgesteld. In de huidige casus zijn de regressievergelijkingen
 
-Op basis van de logits is het wel mogelijk om de kansen op de verschillende mogelijkheden van de nominale afhankelijke variabele uit te rekenen. Voor een algemene *ordinale logistische regressie* met twee predictoren is de formule voor de mogelijkheden 
+$$ \log(\frac{P(B_i \leq Onvoldoende)}{P(B_i > Onvoldoende)})  = \beta_{0,1} + \beta_{1} * Vooropleiding_{i} + \beta_{2} * Gemiddeld Cijfer_{i} + \beta_{3} * Leeftijd_{i} + e_{i,1}$$
+$$ \log(\frac{P(B_i \leq Voldoende)}{P(B_i > Voldoende)})  = \beta_{0,2} + \beta_{1} * Vooropleiding_{i} + \beta_{2} * Gemiddeld Cijfer_{i} + \beta_{3} * Leeftijd_{i} + e_{i,2}$$
 
-$$ P(Y_i = j) = \pi_{ij} = \frac{\exp( [\beta_{0j} + \beta_{1j} * x_{1i} + \beta_{2j} * x_{2i}])}{1 + \sum_{k \neq j^*} \exp( [\beta_{0k} + \beta_{1k} * x_{1i} + \beta_{2k} * x_{2i}])} $$
+$$ \log(\frac{P(B_i \leq Goed)}{P(B_i > Goed)})  = \beta_{0,3} + \beta_{1} * Vooropleiding_{i} + \beta_{2} * Gemiddeld Cijfer_{i} + \beta_{3} * Leeftijd_{i} + e_{i,3}$$
 
-en voor de referentiecategorie
-$$ P(Y_i = j^*) = \pi_{ij^*} = \frac{1}{1 + \sum_{k \neq j^*} \exp( [\beta_{0k} + \beta_{1k} * x_{1i} + \beta_{2k} * x_{2i}])} $$
+waarbij $P(B_i \leq Onvoldoende)$ de kans is dat de beoordeling $B_i$ van deelnemer $i$ gelijk of lager is dan een onvoelde (en waarbij de andere kansen op vergelijkbare wijze zijn weergegeven),  $\beta_{0,1}$ als intercept van de eerste vergelijking, $Vooropleiding_{i}$, $GemiddeldCijfer_{i}$ en $Leeftijd_{i}$ als predictors, $\beta_{1}$, $\beta_{2}$ en $\beta_{3}$ als regressiecoefficiënten van de predictors, $e_{i,1}$ als residu of error van de eerste vergelijking en $i$ als indicator van de deelnemer uit de steekproef. Dezelfde notatie geldt ook voor de tweede en derde vergelijking. In feite is er dus een [logistische regressie](41-Logistische-regressie-R.html)-vergelijking voor elke log-odds van de cumulatieve kans. De hoogste mogelijkheid heeft geen vergelijking omdat de cumulatieve kans daar gelijk is aan 1. Immers, de deelnemer heeft altijd een observatie die gelijk aan of lager is dan de hoogste mogelijkheid. Zoals eerder genoemd schrijft de *proportional odds assumptie* voor dat de regressiecoëfficiënten van de predictors voor elke vergelijking hetzelfde zijn. Bij elke cumulatieve kans heeft de predictor dus hetzelfde effect.
 
-waarbij $j$ de categorie/mogelijkheid van de nominale afhankelijke variabele aangeeft, $j^*$ de referentiecategorie aangeeft en $\pi_{ij}$ de kans voor deelnemer $i$ op mogelijkheid $j$ aangeeft.
+De regressievergelijking geeft niet direct een voorspelling van de cumulatievenkans op de mogelijkheid van de ordinale afhankelijke variabele, maar een voorspelling van de logaritme van de odds op de cumulatieve kans. De cumulatieve kans is getransformeerd met behulp van een logit-transformatie. Bij [multipele lineaire regressie](28-Multipele-lineaire-regressie-R.html) is er een directe lineaire relatie tussen de afhankelijke variabele en de predictors. Bij *ordinale logistische regressie* is er een lineaire relatie tussen de logit van de cumulatieve kans op de mogelijkheid en de predictors. De interesse gaat echter uit naar de kans op een bepaalde mogelijkheid van de ordinale afhankelijke variabele en niet naar de logit. Er is dus geen directe lineaire relatie tussen de kans op een mogelijkheid en de predictors. De logit transformatie is als het ware de intermediair die zorgt voor de lineaire relatie en wordt daarom ook wel een link-functie genoemd.
 
-Voor de huidige casus is de vergelijking voor de mogelijkheid wo master
+Op basis van de logits is het wel mogelijk om de cumulatieve kansen op de verschillende mogelijkheden en de 'gewone' kansen op de mogelijkheden van de ordinale afhankelijke variabele uit te rekenen. Voor een algemene *ordinale logistische regressie* met twee predictoren is de formule voor de cumulatieve kansen
 
-$$  \pi_{i, wo \ master} = \frac{\exp( \beta_{0,1} + \beta_{1,1} * Nom_{i} + \beta_{2,1} * GemCijfer_{i})}{1 + \exp( \beta_{0,1} + \beta_{1,1} * Nom_{i} + \beta_{2,1} * Gem Cijfer_{i}) + \exp(\beta_{0,2} + \beta_{1,2} * Nom_{i} + \beta_{2,2} * GemCijfer_{i})}, $$
+$$ P(Y_i \leq j) = \frac{\exp( \beta_{0,j} + \beta_{1} * Vooropleiding_{i} + \beta_{2} * Gemiddeld Cijfer_{i} + \beta_{3} * Leeftijd_{i})}{1 +  \exp( \beta_{0,j} + \beta_{1} * Vooropleiding_{i} + \beta_{2} * Gemiddeld Cijfer_{i} + \beta_{3} * Leeftijd_{i})} .$$
 
-de vergelijking voor de mogelijkheid hbo master
+De kans op een bepaalde mogelijkheid kan berekend worden door twee cumulatieve kansen van elkaar af te trekken. De kans op de beoordeling goed is te vinden door de cumulatieve kans op een beoordeling voldoende af te trekken van de cumulatieve kans op de beoordeling goed, i.e.
 
-$$  \pi_{i, hbo \ master} = \frac{\exp( \beta_{0,2} + \beta_{1,2} * Nom_{i} + \beta_{2,2} * GemCijfer_{i})}{1 + \exp( \beta_{0,1} + \beta_{1,1} * Nom_{i} + \beta_{2,1} * Gem Cijfer_{i}) + \exp(\beta_{0,2} + \beta_{1,2} * Nom_{i} + \beta_{2,2} * GemCijfer_{i})} $$
+$$ P(B_i = Goed) = P(B_i \leq Goed) - P(B_i \leq Voldoende) .$$
+Voor de laagste mogelijkheid is de cumulatieve kans gelijk aan de 'gewone' kans zelf. Immers, er is niets lager dan de laagste mogelijkheid. De kans op een onvoldoende of lager is dus gelijk aan de kans op een onvoldoende, omdat er niets lager is dan een onvoldoende.
 
-en de vergelijking voor de referentiecategorie 
+Hoewel de techniek van *ordinale logistische regressie* bedoeld is om de significantie van het model en de individuele regressiecoëfficiënten te toetsen, kunnen de berekende kansen ook gebruikt worden om een voorspelling of classificatie te maken van de mogelijkheid van de ordinale afhankelijke variabele die voor de deelnemer geobserveerd zal worden. De classificatie kan bijvoorbeeld de categorie met de hoogste voorspelde kans zijn. Op deze manier kan *ordinale logistische regressie* gebruikt worden om studenten te classificeren.
 
-$$  \pi_{i, Werk} = \frac{1}{1 + \exp( \beta_{0,1} + \beta_{1,1} * Nom_{i} + \beta_{2,1} * Gem Cijfer_{i}) + \exp(\beta_{0,2} + \beta_{1,2} * Nom_{i} + \beta_{2,2} * GemCijfer_{i})}. $$
 
-Merk hierbij op dat de referentiecategorie gekozen wordt door de onderzoeker en dat de vergelijkingen dus veranderen bij de keuze voor een andere referentiecategorie.[^20]
 
-Op basis van de vergelijkingen van de *ordinale logistische regressie* wordt er een kans berekend voor alle mogelijkheden van de nominale afhankelijke variabele. Hoewel de techniek van *ordinale logistische regressie* bedoeld is om de significantie van het model en de individuele regressiecoëfficiënten te toetsen, kunnen deze kansen ook gebruikt worden om een voorspelling of classificatie te maken van de categorie van de nominale afhankelijke variabele waar de student in terecht zal komen. De classificatie kan bijvoorbeeld de categorie met de hoogste voorspelde kans zijn. Op deze manier kan *ordinale logistische regressie* gebruikt worden om studenten te classificeren.
+
+
+
+
+
 
 
 ## Maximum likelihood

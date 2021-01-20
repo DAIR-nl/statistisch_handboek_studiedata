@@ -42,7 +42,10 @@
 
 
 # seed
-set.seed(12345)
+set.seed(12345, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 # Maak studentnummers
 Studentnummer <- sample(4000000:4500000, 

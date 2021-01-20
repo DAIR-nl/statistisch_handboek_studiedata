@@ -26,7 +26,10 @@
 ## Geschiedenis:
 ## 29-06-2020: EG: Aanmaak bestand
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-set.seed(1)
+set.seed(1, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 mu <- 6.3
 sigma <- 1.2

@@ -27,7 +27,10 @@
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## De studieadviseur van de bachelor Leisure & Events Management geeft halverwege het eerste studiejaar een voorlopig BSA-advies aan alle eerstejaars studenten. Studenten ontvangen een positief, negatief of uitgesteld BSA.  Daarnaast voert zij met alle studenten persoonlijke gesprekken om het advies toe te lichten en een plan voor de rest van het studiejaar te maken. De studieadviseur wil graag onderzoeken of er verschillen zijn tussen het voorlopige BSA-advies halverwege het jaar en het definitieve advies aan het einde van het jaar zodat ze de effectiviteit van de persoonlijke gesprekken kan beoordelen.
 
-set.seed(12345)
+set.seed(12345, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 Studentnummer <- sample(4000000:5000000, 
                         150)

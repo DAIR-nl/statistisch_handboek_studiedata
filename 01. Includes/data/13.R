@@ -27,7 +27,10 @@
 ## 29-06-2020: EG: Aanmaak bestand
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # set seed
-set.seed(1)
+set.seed(1, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 # Uitgangspunt:
 ## Voor leenstelsel: 375 uitval, 496 niet uitval, totaal is 871

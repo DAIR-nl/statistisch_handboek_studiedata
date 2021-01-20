@@ -27,7 +27,10 @@
 ## 29-06-2020: EG: Aanmaak bestand
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-set.seed(2)
+set.seed(2, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 # OUD
 ## stel parameters data vast

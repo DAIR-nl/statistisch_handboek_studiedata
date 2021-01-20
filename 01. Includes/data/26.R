@@ -27,7 +27,10 @@
 ## 29-06-2020: EG: Aanmaak bestand
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-set.seed(1)
+set.seed(1, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 Mogelijkheden <- c(1616:7000)
 p_2014 <- c(
   rep(0.4,  385),     #1616-2000

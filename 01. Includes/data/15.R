@@ -38,7 +38,10 @@
 # Dataset heeft drie kolommen: Studentnummer, Periode en Herkansingen
 
 # set seed
-set.seed(1234)
+set.seed(1234, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 # Simuleer studentnummers
 Studentnummers_opties <- c(4000000:4500000)

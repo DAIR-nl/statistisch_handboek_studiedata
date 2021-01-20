@@ -43,7 +43,10 @@
 # masterprogramma en waar eventuele tekortkomingen zitten.
 
 # seed
-set.seed(12)
+set.seed(12, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 # Maak studentnummers
 Studentnummer <- sample(4000000:4500000, 

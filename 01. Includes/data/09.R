@@ -44,7 +44,10 @@
 # nemen 20 eerstejaars studenten
 
 # set seed
-set.seed(1234)
+set.seed(1234, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 # Definieer aantal eerstejaars studenten
 N <- 20

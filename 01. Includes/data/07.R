@@ -27,7 +27,10 @@
 ## 29-06-2020: EG: Aanmaak bestand
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-set.seed(1)
+set.seed(1, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 ## Maak inkomens T1 aan
 Alumni_inkomens_T1 <- c(

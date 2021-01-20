@@ -26,7 +26,10 @@
 ## 29-06-2020: EG: Aanmaak bestand
 ## 04-01-2021: EG: Aantal observaties gewijzigd nav feedback MM
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-set.seed(1234)
+set.seed(1234, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 #Jaarlijks_inkomen <- rnorm()
 

@@ -28,7 +28,9 @@
 ## Bij de bacheloropleiding Psychologie van een universiteit is besloten om naast studenten met een vwo opleiding studenten met een propedeuse voor de hbo-opleiding Psychologie ook toe te laten. De opleidingsdirecteur van de bachelor wil graag evalueren of deze hbo-p studenten het niveau aankunnen, maar is ook benieuwd of man-vrouw verschillen hierbij een rol spelen. Daarom vergelijkt zij de verschillen in gemiddeld cijfer van het eerste studiejaar voor hbo-p en vwo studenten en of dit verschillend is voor mannen en vrouwen.
 
 # seed
-set.seed(12345)
+set.seed(12345, kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 # Maak studentnummers
 Studentnummer <- sample(4000000:4500000, 620)

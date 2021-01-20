@@ -41,7 +41,10 @@
 #v het eindcijfer van het vak Methoden & Statistiek rekening houdend met het 
 #v aantal gevolgde hoorcolleges. 
 # seed
-set.seed(12345)
+set.seed(12345, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 ## Simuleer data
 

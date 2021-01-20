@@ -36,7 +36,10 @@
 # gesprekstechnieken.
 
 # set seed
-set.seed(12345)
+set.seed(12345, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 ## Maak 80 studentnummers
 Studentnummer <- sample(3000000:4000000, 80)

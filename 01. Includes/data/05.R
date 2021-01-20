@@ -29,7 +29,10 @@
 ## Het hoofd communicatie wil in verband met wervingsactiviteiten weten wat de reistijd is van studenten aan verschillende opleidingen.
 
 ## Doel: tidy data met een kolom reistijd (value) en een kolom opleiding (factor)
-set.seed(3)
+set.seed(3, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 Studiegrootte <- 29
 reistijd_gem <- 35

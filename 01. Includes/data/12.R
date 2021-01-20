@@ -31,7 +31,10 @@
 
 ## Stel RNG seed vast
 #RNGkind(sample.kind = "Rounding")
-set.seed(1)
+set.seed(1, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 ## Vooraf
 Wel_vooraf <- replicate(1388, "ja")

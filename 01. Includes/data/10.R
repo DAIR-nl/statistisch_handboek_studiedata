@@ -26,7 +26,10 @@
 ## 29-06-2020: EG: Aanmaak bestand
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-set.seed(8)
+set.seed(8, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 # 3
 ## 300 waarnemingen voor Vooropleiding
 Seed <- sample(c(1, 2, 3, 4), 300, replace = TRUE)

@@ -29,7 +29,10 @@
 # https://stats.stackexchange.com/questions/103728/simulating-multinomial-logit-data-with-r
 # http://www.fedoa.unina.it/9889/1/Thesis.pdf
 
-set.seed(12345)
+set.seed(12345, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 # Maak studentnummer
 Studentnummer <- sample(300000:400000,

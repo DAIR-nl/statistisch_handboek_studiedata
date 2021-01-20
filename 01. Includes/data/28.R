@@ -42,7 +42,9 @@
 # bij te wonen.
 
 # seed
-set.seed(1234)
+set.seed(1234, kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 ## Simuleer data
 

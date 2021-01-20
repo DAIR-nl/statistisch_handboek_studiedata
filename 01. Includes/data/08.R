@@ -29,7 +29,10 @@
 ## Effectmaat niet gerapporteerd, ik zie geen overeenstemming van effectmaten bij de MW U 
 
 # effectmaat r, correlatie, zie Field blz. 57
-set.seed(0)
+set.seed(0, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 Goede_student_ec <- c(0, 3, 6, 6, 6, 6, 6, 6, 6)
 Matige_student_ec <- c(0, 0, 0, 3, 6, 6, 6, 6, 6)

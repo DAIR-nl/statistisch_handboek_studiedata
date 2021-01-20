@@ -43,7 +43,10 @@
 # is al vroeg in het vizier te krijgen en de juiste begeleiding aan te bieden.
 
 # seed
-set.seed(123)
+set.seed(123, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 ## Simuleer data
 

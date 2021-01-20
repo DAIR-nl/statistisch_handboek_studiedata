@@ -29,7 +29,10 @@
 ## De opleidingsdirecteur van de Bachelor Antropologie vraagt zich af wat de invloed is van de instroom van internationale studenten. Krijgen studenten uit bepaalde landen vaker een positief BSA dan studenten uit andere landen?
 
 # Nieuw
-set.seed(1)
+set.seed(1, 
+         kind = "Mersenne-Twister", 
+         normal.kind = "Inversion",
+         sample.kind = "Rejection")
 
 ######### Chi-kwadraat #############
 

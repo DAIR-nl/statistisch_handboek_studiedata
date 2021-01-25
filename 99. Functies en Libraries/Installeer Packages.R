@@ -71,6 +71,7 @@ Gebruikte_packages <- c(
     "stringr",
     "userfriendlyscience", # 29 
     "summarytools", # 29, LET OP: laad deze na package userfriendlyscience
+    "VGAM",
     "tidyverse"
 )
 

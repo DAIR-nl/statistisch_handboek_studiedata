@@ -79,10 +79,10 @@ Gemiddeld_cijfer <- round(rnorm(600,7,1),1)
 Gemiddeld_cijfer[Gemiddeld_cijfer < 5.0] <- 5.0
 Gemiddeld_cijfer[Gemiddeld_cijfer >= 10.0] <- 9.6
 
-Log_odds_1 <- -8 + 0.5 * Vooropleiding_dummy + 0 * Leeftijd + 0.8 * Gemiddeld_cijfer
-Log_odds_2 <- -6.5 + 0.5 * Vooropleiding_dummy + 0 * Leeftijd + 0.8 * Gemiddeld_cijfer
-Log_odds_3 <- -4 + 0.5 * Vooropleiding_dummy + 0 * Leeftijd + 0.8 * Gemiddeld_cijfer
-#Log_odds_4 <- -1.5 + 0.5 * Vooropleiding_dummy + 0 * Leeftijd + 0.8 * Gemiddeld_cijfer
+Log_odds_1 <- 4 - 0.5 * Vooropleiding_dummy + 0 * Leeftijd - 0.9 * Gemiddeld_cijfer
+Log_odds_2 <- 6 - 0.5 * Vooropleiding_dummy + 0 * Leeftijd - 0.9 * Gemiddeld_cijfer
+Log_odds_3 <- 9 - 0.5 * Vooropleiding_dummy + 0 * Leeftijd - 0.9 * Gemiddeld_cijfer
+#Log_odds_4 <- -1.5 - 0.5 * Vooropleiding_dummy + 0 * Leeftijd + 0.8 * Gemiddeld_cijfer
 
 p_c1 <- exp(Log_odds_1) / (1 + exp(Log_odds_1))
 p_c2 <- exp(Log_odds_2) / (1 + exp(Log_odds_2))
@@ -120,39 +120,6 @@ Beoordelingen_eindproject <- cbind.data.frame(Beoordeling,
                             Vooropleiding
                             )
 
-#library(mclogit)
-
-#Regressiemodel <- mblogit(Vervolg ~  Nominaal_dummy + Gemiddeld_cijfer,
-#                         Fysiotherapie_Vervolg
-#                         )
-
-#summary(Regressiemodel)
-#summary(Regressiemodel, dispersion = 1.35)
-
-#dispersion(Regressiemodel, method = "Pearson")
-
-#library(lmtest)
-#lrtest(Regressiemodel)
-
-#library(MASS)
-
-#vvv <- polr(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
-#     Beoordelingen_eindproject, Hess = TRUE)
-
-#vvv2 <- polr(Beoordeling ~ 1,
-#     Beoordelingen_eindproject, Hess = TRUE)
-
-#summary(vvv)
-#vvv
-#summary(vvv2)
-
-#library(lmtest)
-#lrtest(vvv)
-
-
-
-#library(mclogit)
-
 rm(mChoices,
    Beoordeling,
    Leeftijd,
@@ -170,3 +137,50 @@ rm(mChoices,
    Vooropleiding_dummy,
    Studentnummer,
    Gemiddeld_cijfer)
+
+library(VGAM)
+
+vvv3 <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer, 
+             family = cumulative(link = "logitlink", parallel = TRUE, reverse = FALSE),
+             data = Beoordelingen_eindproject)
+vvv4 <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer, 
+             family = cumulative(link = "logitlink", parallel = FALSE, reverse = FALSE),
+             data = Beoordelingen_eindproject)
+summary(vvv3)
+summary(vvv3, dispersion = 1.2)
+lrtest(vvv3)
+lrtest(vvv3,vvv4)
+deviance(vvv3)
+summary(vvv3, dispersion = 1.2)
+
+
+
+
+
+
+### OUD ####
+
+#library(MASS)
+
+#vvv <- polr(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
+#     Beoordelingen_eindproject, Hess = TRUE)
+
+#vvv2 <- polr(Beoordeling ~ 1,
+#     Beoordelingen_eindproject, Hess = TRUE)
+
+#summary(vvv)
+
+#library(ordinal)
+
+#vvv2 <- clm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
+#     data = Beoordelingen_eindproject)
+
+#summary(vvv2)
+#anova(vvv2)
+#lrtest(vvv2)
+#fitted(vvv2)
+#deviance(vvv2)
+
+#?clm
+#?PearsonTest
+

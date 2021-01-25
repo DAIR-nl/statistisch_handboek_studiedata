@@ -240,7 +240,7 @@ Multicollineariteit wordt getoetst met de Variance Inflation Factor (VIF) die me
 
 ## Observaties per variabele
 
-Bij *multinomiale logistische regressie* is de afhankelijke variabele nominaal wat betekent dat de variabele twee mogelijkheden heeft. Dit kan een probleem opleveren als er categorische predictors zijn. Voor elke categorie van een categorische predictor moeten er observaties zijn voor alle mogelijkheden van de afhankelijke variabele. Deze assumptie kan onderzocht worden door een kruistabel te maken voor de combinatie van elke categorische predictor en de afhankelijke variabele. Een voorbeeld van een dergelijke kruistabel is te zien in Tabel 2 voor de afhankelijke variabele Vervolg en predictor Nominaal. In deze kruistabel is te zien dat er binnen de categorie Niet-nominaal van de predictor Nominaal nul deelnemers zijn die een hbo master zijn gaan doen. Deze categorie bevat dus een lege cel en voldoet niet aan de assumptie.[^2]<sup>,</sup>[^6]
+Bij *multinomiale logistische regressie* is de afhankelijke variabele nominaal wat betekent dat de variabele meer dan twee mogelijkheden heeft. Dit kan een probleem opleveren als er categorische predictors zijn. Voor elke categorie van een categorische predictor moeten er observaties zijn voor alle mogelijkheden van de afhankelijke variabele. Deze assumptie kan onderzocht worden door een kruistabel te maken voor de combinatie van elke categorische predictor en de afhankelijke variabele. Een voorbeeld van een dergelijke kruistabel is te zien in Tabel 2 voor de afhankelijke variabele Vervolg en predictor Nominaal. In deze kruistabel is te zien dat er binnen de categorie Niet-nominaal van de predictor Nominaal nul deelnemers zijn die een hbo master zijn gaan doen. Deze categorie bevat dus een lege cel en voldoet niet aan de assumptie.[^2]<sup>,</sup>[^6]
 
 ||                      | Nominaal    | |
 |-------------| -------------------- | -------------| ------------| 
@@ -266,7 +266,7 @@ Het gevolg van de assumptie voor observaties per variabele zijn dat er extreem h
 
 ## Overdispersie
 
-Bij *multinomiale logistische regressie* wordt aangenomen dat de residuën niet gecorreleerd zijn. Dit is in principe het geval als alle deelnemers willekeurig in de steekproef zijn opgenomen. Als deelnemers meerdere keren gemeten zijn of gematcht zijn met andere deelnemers, dan is hier geen sprake van en zijn er waarschijnlijk gecorreleerde residuën. *multinomiale logistische regressie* is dan niet de juiste analysemethoden, maar *multilevel multinomiale logistische regressie* kan hiervoor wel gebruikt worden. Bij *multinomiale logistische regressie* wordt daarom getoetst of er overdispersie is. Overdispersie betekent dat de variantie in de voorspelde kansen groter is dan op basis van het model wordt verwacht. Het gevolg is dat de standaardfouten te laag zijn en er een hogere kans is op type I fouten (onterecht verwerpen van de nulhypothese) bij het toetsen van de significantie van regressiecoëfficiënten, de significantie van het hele model en de significantie van het vergelijken van verschillende modellen onderling met de *likelihood ratio toets*. [^20]<sup>,</sup>[^6]
+Bij *multinomiale logistische regressie* wordt aangenomen dat de residuën niet gecorreleerd zijn. Dit is in principe het geval als alle deelnemers willekeurig in de steekproef zijn opgenomen. Als deelnemers meerdere keren gemeten zijn of gematcht zijn met andere deelnemers, dan is hier geen sprake van en zijn er waarschijnlijk gecorreleerde residuën. *multinomiale logistische regressie* is dan niet de juiste analysemethode, maar *multilevel multinomiale logistische regressie* kan hiervoor wel gebruikt worden. Bij *multinomiale logistische regressie* wordt daarom getoetst of er overdispersie is. Overdispersie betekent dat de variantie in de voorspelde kansen groter is dan op basis van het model wordt verwacht. Het gevolg is dat de standaardfouten te laag zijn en er een hogere kans is op type I fouten (onterecht verwerpen van de nulhypothese) bij het toetsen van de significantie van regressiecoëfficiënten, de significantie van het hele model en de significantie van het vergelijken van verschillende modellen onderling met de *likelihood ratio toets*. [^20]<sup>,</sup>[^6]
 
 De dispersieparameter geeft aan of er sprake is van overdispersie. De dispersieparameter hoort in de buurt van 1 te zitten. Als de parameter hoger dan 2 is, is er sprake van overdispersie. De gevolgen van overdispersie voor het toetsen van regressiecoëfficiënten kunnen verholpen worden door de standaardfouten van de regressiecoëfficiënten te herschalen op basis van de overdispersie. Bij het toetsen van het gehele model of het vergelijken van modellen onderling worden de waarden van de chi-kwadraat toetsstatistiek gedeeld door de dispersieparameter en wordt de p-waarde berekend op basis van de herschaalde toetsstatistiek. Het onderzoeken van de dispersieparameter en het corrigeren in het geval van overdispersie worden toegelicht bij het toetsen van de assumpties in deze toetspagina.[^20]
 
@@ -399,7 +399,7 @@ Bereken daarna de criteriumwaarde op basis van het gewenste significantieniveau 
 
 <!-- ## OPENBLOK: Outlier8.R -->
 ```{r}
-# Zet Geslacht om in een numerieke variabele met een 1 voor een vrouw en 0 voor een man
+# Zet Nominaal om in een numerieke variabele met een 1 voor een vrouw en 0 voor een man
 Fysiotherapie_Vervolg$Nominaal_dummy <- as.numeric(Fysiotherapie_Vervolg$Nominaal == "Nominaal")
 
 # Maak een subset van de dataset met alle predictors
@@ -431,7 +431,7 @@ Er zijn geen deelnemers met een Mahalanobis afstand groter dan de criteriumwaard
 ### Cook's afstand
 
 <!-- ## TEKSTBLOK: Outlier10.R -->
-Onderzoek of er outliers zijn met behulp van de gestandaardiseerde residuën. Voer een [logistische regressie](41-Logistische-regressie-R.html) uit voor elke combinatie van twee mogelijkheden en onderzoek voor elke combinatie de Cook's afstanden. Maak eerst aparte datasets voor elke combinatie van twee mogelijkheden. Gebruik daarna om de logistische regressie uit te voeren de functie `glm()` met als eerste argument de regressievergelijking `Vervolg ~ Nominaal + Gemiddeld_cijfer` met links van de tilde de afhankelijke variabele `Vervolg` en rechts de twee onafhankelijke variabelen `Nominaal` en `Gemiddeld_cijfer`. Het tweede argument is de dataset (bijvoorbeeld `Fysiotherapie_Uitval_Niet_nominaal`) en het derde argument `family = "binomial"` geeft aan dat er een *logistische regressie* uitgevoerd moet worden. Bereken vervolgens de gestandaardiseerde residuën met de functie `cooks.distance()`, maak een plot en tel het aantal Cook's afstanden dat groter is dan de criteriumwaarde van 1.
+Onderzoek of er outliers zijn met behulp van de gestandaardiseerde residuën. Voer een [logistische regressie](41-Logistische-regressie-R.html) uit voor elke combinatie van twee mogelijkheden en onderzoek voor elke combinatie de Cook's afstanden. Maak eerst aparte datasets voor elke combinatie van twee mogelijkheden. Gebruik daarna om de logistische regressie uit te voeren de functie `glm()` met als eerste argument de regressievergelijking `Vervolg ~ Nominaal + Gemiddeld_cijfer` met links van de tilde de afhankelijke variabele `Vervolg` en rechts de twee onafhankelijke variabelen `Nominaal` en `Gemiddeld_cijfer`. Het tweede argument is de dataset (bijvoorbeeld `Fysiotherapie_Uitval_Niet_nominaal`) en het derde argument `family = "binomial"` geeft aan dat er een *logistische regressie* uitgevoerd moet worden. Bereken vervolgens de Cook's afstanden met de functie `cooks.distance()`, maak een plot en tel het aantal Cook's afstanden dat groter is dan de criteriumwaarde van 1.
 <!-- ## /TEKSTBLOK: Outlier10.R -->
 
 <!-- ## OPENBLOK: Outlier11.R -->
@@ -477,11 +477,11 @@ Er zijn geen deelnemers met een Cook's afstand groter dan de criteriumwaarde van
 
 ## Lineariteit: Box-Tidwell
 
-Voer de *Box-Tidwell test* uit om te onderzoeken of er een lineaire relatie is tussen de continue predictors en de logit van de afhankelijke variabele. Maak eerst voor elke continue predictor een nieuwe variabele aan die bestaat uit het product van de predictor met de logaritme (`log()`) van de predictor. Voeg daarna deze nieuwe interactietermen toe aan de regressievergelijking en voer de *multinomiale logistische regressie* uit. Gebruik de functie `mblogit()` met als eerste argument de regressievergelijking `Vervolg ~ Nominaal + Gemiddeld_cijfer + Gemiddeld_cijfer_log` met links van de tilde de afhankelijke variabele `Vervolg` en rechts de twee onafhankelijke variabelen `Nominaal` en `Gemiddeld_cijfer` en de interactietermen `Gemiddeld_cijfer_log`. Het tweede argument is de dataset `Fysiotherapie_Vervolg`.
+Voer de *Box-Tidwell test* uit om te onderzoeken of er een lineaire relatie is tussen de continue predictors en de logit van de afhankelijke variabele. Maak eerst voor elke continue predictor een nieuwe variabele aan die bestaat uit het product van de predictor met de logaritme (`log()`) van de predictor. Voeg daarna deze nieuwe interactietermen toe aan de regressievergelijking en voer de *multinomiale logistische regressie* uit. Gebruik de functie `mblogit()` van het package `mclogit` met als eerste argument de regressievergelijking `Vervolg ~ Nominaal + Gemiddeld_cijfer + Gemiddeld_cijfer_log` met links van de tilde de afhankelijke variabele `Vervolg` en rechts de twee onafhankelijke variabelen `Nominaal` en `Gemiddeld_cijfer` en de interactietermen `Gemiddeld_cijfer_log`. Het tweede argument is de dataset `Fysiotherapie_Vervolg`.
 
 <!-- ## OPENBLOK: AssLineariteit1.R -->
 ```{r}
-# Maak de interactievariabelen aan voor de continue predictor Gemiddeld_cijfer
+# Maak de interactievariabele aan voor de continue predictor Gemiddeld_cijfer
 Fysiotherapie_Vervolg$Gemiddeld_cijfer_log <- Fysiotherapie_Vervolg$Gemiddeld_cijfer * log(Fysiotherapie_Vervolg$Gemiddeld_cijfer)
 
 library(mclogit)
@@ -516,8 +516,6 @@ BT <- summary(Regressiemodel_Box_Tidwell)$coefficients
 De interactieterm van de predictor Gemiddeld_cijfer is voor zowel de vergelijking tussen hbo master en werk (*z* = `r Round_and_format(BT[7,3])`, *p* = `r Round_and_format(BT[7,4])`) als de vergelijking tussen wo master en werk (*z* = `r Round_and_format(BT[8,3])`, *p* = `r Round_and_format(BT[8,4])`) niet significant.[^8] Er is dus voldaan aan de assumptie van lineariteit.
 
 ## Multicollineariteit
-
-Voer het regressiemodel uit met de functie `lm()` met als eerste argument de vergelijking `log(Cijfers_P1*Cijfers_P3) ~ Cijfers_P1 + Cijfers_P2 + Cijfers_P3` met links van het tilde de zelfverzonnen afhankelijke variabele `log(Cijfers_P1*Cijfers_P3)` en rechts de predictors `Cijfers_P1`, `Cijfers_P2` en `Cijfers_P3`. Het tweede argument is de dataset `Gemiddelde_cijfers_bioinformatics`. De afhankelijke variabele is hier zelfverzonnen omdat de VIF niet afhankelijk is van deze variabele. De afhankelijke variabele kan dus ook op een andere manier gemaakt worden.
 
 <!-- ## TEKSTBLOK: AssMulticollineariteit1.R -->
 Onderzoek of er sprake is van multicollineariteit met behulp van Variance Inflation Factors (VIFs). Bereken de VIFs voor elke predictor met de functie `VIF()` van het package `DescTools` waarbij de functie als argument `Multicollineariteit` (het object van het regressiemodel) heeft. De functie `VIF()` werkt niet op het object van de *multinomiale logistische regressie* van het package `mclogit`. Voer daarom een regressiemodel uit met een zelfverzonnen afhankelijke variabele en de predictors van de *multinomiale logistische regressie*. Gebruik de functie `lm()` met als eerste argument de vergelijking `log(Gemiddeld_cijfer) ~ Nominaal + Gemiddeld_cijfer` met links van het tilde de zelfverzonnen afhankelijke variabele `log(Gemiddeld_cijfer)` en rechts de predictors `Nominaal` en `Gemiddeld_cijfer`. Het tweede argument is de dataset `Fysiotherapie_Vervolg`. De afhankelijke variabele is hier zelfverzonnen omdat de VIF niet afhankelijk is van deze variabele. De afhankelijke variabele kan dus ook op een andere manier gemaakt worden.
@@ -566,6 +564,21 @@ library(mclogit)
 
 Dispersie <- mblogit(Vervolg ~  Nominaal + Gemiddeld_cijfer,
                      Fysiotherapie_Vervolg)
+deviance(Dispersie)/1200
+deviance(Dispersie)/0.9101231
+
+Dispersie <- mblogit(Vervolg ~  as.factor(1:600),
+                     Fysiotherapie_Vervolg)
+summary(Dispersie)
+
+Dispersie$df.residual
+Dispersie$deviance
+Dispersie$
+getAnywhere(dispersion)
+UseMethod("dispersion")
+
+dispersion(Dispersie, method = "Deviance")
+deviance(Dispersie) / Dispersie$df.residual
 
 dispersion(Dispersie, method = "Pearson")
 ```

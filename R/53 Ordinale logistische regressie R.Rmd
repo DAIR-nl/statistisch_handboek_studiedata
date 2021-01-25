@@ -183,7 +183,7 @@ Op basis van de classificatietabel kan berekend worden welk percentage van de de
 |               | Goed         | 10         | 30        | **100** | 60 |
 |               | Uitstekend   | 20         | 40        | 10 | **80** |
 
-*Tabel 1. Classificatietabel van de observaties en classificaties van het vervolg van afgestudeerden na de bacheloropleiding Fysiotherapie.*
+*Tabel 1. Classificatietabel van de observaties en classificaties van de beoordelingen van het eindproject van de bacheloropleiding Industrieel Ontwerpen.*
 
 # Uitleg assumpties
 
@@ -207,7 +207,7 @@ Bij categorische variabelen hebben boxplots en standaardisatie geen zin, omdat h
 
 De residuën van een logistisch regressiemodel zijn de verschillen tussen de observaties van de afhankelijke variabele en de voorspelde kans. Bij *ordinale logistische regressie* zijn er echter meer dan twee mogelijkheden voor de afhankelijke variabele en worden er meerdere kansen berekend. Er wordt daarom gebruik gemaakt van de odds van cumulatieve kansen. Het is daarom ingewikkeld om de residuën te berekenen en vervolgens de gestandaardiseerde residuën te onderzoeken.
 
-Een oplossing hiervoor is het uitvoeren van een [logistische regressie](41-Logistische-regressie-R.html) voor elke cumulatieve kans en voor elke cumulatieve kans de gestandaardiseerde residuën te onderzoeken. In de huidige casus zijn er die cumulatieve : hbo master versus werk, wo master versus werk en hbo master versus wo master. Voer voor elke combinatie een logistisch regressiemodel uit en onderzoek de gestandaardiseerde residuën. Als er een groot verschil is tussen observatie en voorspelling, zou dat kunnen wijzen op een univariate outlier. Bekijk met een grafiek of er outliers zijn. Als het gestandaardiseerde residu een score van groter dan 3 of kleiner dan -3 heeft, wordt deze beschouwd als een outlier. Op deze manier kunnen outliers bij het regressiemodel kunnen worden geïdentificeerd.[^9]
+Een oplossing hiervoor is het uitvoeren van een [logistische regressie](41-Logistische-regressie-R.html) voor elke cumulatieve kans en voor elke cumulatieve kans de gestandaardiseerde residuën te onderzoeken. In de huidige casus zijn er drie cumulatieve kansen: kleiner dan of gelijk aan onvoldoende, kleiner dan of gelijk aan voldoende en kleiner dan of gelijk aan goed. Voer voor elke combinatie een logistisch regressiemodel uit en onderzoek de gestandaardiseerde residuën. Als er een groot verschil is tussen observatie en voorspelling, zou dat kunnen wijzen op een univariate outlier. Bekijk met een grafiek of er outliers zijn. Als het gestandaardiseerde residu een score van groter dan 3 of kleiner dan -3 heeft, wordt deze beschouwd als een outlier. Op deze manier kunnen outliers bij het regressiemodel kunnen worden geïdentificeerd.[^9]
 
 ### Mahalanobis afstand
 
@@ -219,11 +219,11 @@ De Mahalanobis afstand geeft aan in hoeverre een deelnemer afwijkt van de andere
 
 Hoewel de Mahalanobis afstand en Cook's afstand beide multivariate outliers identificeren, verschillen ze in het soort outlier waarop de focus ligt. Bij de Mahalanobis afstand worden afwijkende datapunten gevonden en bij Cook's distance invloedrijke datapunten. Het is echter niet zo dat een afwijkend datapunt ook tegelijkertijd invloedrijk is en dat een invloedrijk datapunt ook afwijkt. Een afwijkend datapunt kan ondanks zijn afwijking van de de overige datapunten toch op een juiste manier voorspeld worden. En een invloedrijk datapunt hoeft niet per se sterk af te wijken van de overige datapunten wat betreft de waardes voor de predictorvariabelen. Houdt hier rekening mee bij het bepalen hoe om te gaan met de gevonden outlier(s).[^9]
 
-Cook's afstand wordt berekend op basis van de residuën van het regressiemodel. Bij *ordinale logistische regressie* zijn er meer dan twee mogelijkheden voor de afhankelijke variabele en worden er meerdere kansen berekend. Er wordt daarom gebruik gemaakt van de odds ten opzichte van een referentiecategorie. Het is daarom ingewikkeld om de residuën te berekenen en vervolgens de gestandaardiseerde residuën te onderzoeken. Een oplossing hiervoor is het uitvoeren van een [logistische regressie](41-Logistische-regressie-R.html) voor elke combinatie van twee mogelijkheden en voor elke combinatie de Cook's afstanden te berekenen. In de huidige casus zijn er die combinaties: hbo master versus werk, wo master versus werk en hbo master versus wo master. Voer voor elke combinatie een logistisch regressiemodel uit en onderzoek de Cook's afstanden. Als Cook's afstand groter dan 1 is, wordt de deelnemer beschouwd als invloedrijk en zou er een outlier kunnen zijn.
+Cook's afstand wordt berekend op basis van de residuën van het regressiemodel. Bij *ordinale logistische regressie* zijn er meer dan twee mogelijkheden voor de afhankelijke variabele en worden er meerdere kansen berekend. Er wordt daarom gebruik gemaakt van de odds van cumulatieve kansen. Het is daarom ingewikkeld om de residuën te berekenen en vervolgens de gestandaardiseerde residuën te onderzoeken. Een oplossing hiervoor is het uitvoeren van een [logistische regressie](41-Logistische-regressie-R.html) voor elke cumulatieve kans en voor elke cumulatieve kans de gestandaardiseerde residuën te onderzoeken. In de huidige casus zijn er drie cumulatieve kansen: kleiner dan of gelijk aan onvoldoende, kleiner dan of gelijk aan voldoende en kleiner dan of gelijk aan goed. Voer voor elke combinatie een logistisch regressiemodel uit en onderzoek de Cook's afstanden. Als Cook's afstand groter dan 1 is, wordt de deelnemer beschouwd als invloedrijk en zou er een outlier kunnen zijn.
 
 ## Lineariteit: Box-Tidwell
 
-Bij *ordinale logistische regressie* is de regressievergelijking zo opgesteld dat er een lineaire relatie is tussen elke predictor en de logit van de mogelijkheden van de afhankelijke variabele ten opzichte van de referentiecategorie. Een lineaire relatie houdt in dat de toename of afname van de (logit van de) afhankelijke variabele als gevolg van de toename van de predictor constant is. In tegenstelling tot [multipele lineaire regressie](28-Multipele-lineaire-regressie-R.html) kan bij *ordinale logistische regressie* geen grafiek gemaakt worden om een lineaire relatie te onderzoeken. In plaats daarvan is er een statistische toets om te onderzoeken of er een lineaire relatie is tussen de predictor en de logit van de afhankelijke variabele. Bij deze *Box-Tidwell test* wordt er voor elke continue predictor een extra term toegevoegd die bestaat uit het product van de predictor en de logaritme van de predictor. Voor de predictor Gemiddeld_cijfer zou dit dus betekenen dat er een extra variabele wordt (Gemiddeld_cijfer * ln[Gemiddeld_cijfer]). Voeg deze interactietermen voor alle continue predictors toe en toets of de regressiecoëfficiënten van deze interactietermen significant zijn. Als dit zo is, dan is er voor die predictor niet voldaan aan de assumptie van lineariteit. Een oplossing hiervoor is het transformeren[^5] van de variabele.[^6]
+Bij *ordinale logistische regressie* is de regressievergelijking zo opgesteld dat er een lineaire relatie is tussen elke predictor en de logit van de cumulatieve kans op een mogelijkheid van de afhankelijke variabele. Een lineaire relatie houdt in dat de toename of afname van de (logit van de) cumulatieve kans als gevolg van de toename van de predictor constant is. In tegenstelling tot [multipele lineaire regressie](28-Multipele-lineaire-regressie-R.html) kan bij *ordinale logistische regressie* geen grafiek gemaakt worden om een lineaire relatie te onderzoeken. In plaats daarvan is er een statistische toets om te onderzoeken of er een lineaire relatie is tussen de predictor en de logit van de cumulatieve kans. Bij deze *Box-Tidwell test* wordt er voor elke continue predictor een extra term toegevoegd die bestaat uit het product van de predictor en de logaritme van de predictor. Voor de predictor Gemiddeld_cijfer zou dit dus betekenen dat er een extra variabele wordt (Gemiddeld_cijfer * ln[Gemiddeld_cijfer]). Voeg deze interactietermen voor alle continue predictors toe en toets of de regressiecoëfficiënten van deze interactietermen significant zijn. Als dit zo is, dan is er voor die predictor niet voldaan aan de assumptie van lineariteit. Een oplossing hiervoor is het transformeren[^5] van de variabele.[^6]
 
 ## Multicollineariteit
 
@@ -235,61 +235,55 @@ Multicollineariteit wordt getoetst met de Variance Inflation Factor (VIF) die me
 
 ## Observaties per variabele
 
-Bij *ordinale logistische regressie* is de afhankelijke variabele nominaal wat betekent dat de variabele twee mogelijkheden heeft. Dit kan een probleem opleveren als er categorische predictors zijn. Voor elke categorie van een categorische predictor moeten er observaties zijn voor alle mogelijkheden van de afhankelijke variabele. Deze assumptie kan onderzocht worden door een kruistabel te maken voor de combinatie van elke categorische predictor en de afhankelijke variabele. Een voorbeeld van een dergelijke kruistabel is te zien in Tabel 2 voor de afhankelijke variabele Vervolg en predictor Nominaal. In deze kruistabel is te zien dat er binnen de categorie Niet-nominaal van de predictor Nominaal nul deelnemers zijn die een hbo master zijn gaan doen. Deze categorie bevat dus een lege cel en voldoet niet aan de assumptie.[^2]<sup>,</sup>[^6]
+Bij *ordinale logistische regressie* is de afhankelijke variabele ordinaal wat betekent dat de variabele meer dan twee mogelijkheden heeft. Dit kan een probleem opleveren als er categorische predictors zijn. Voor elke categorie van een categorische predictor moeten er observaties zijn voor alle mogelijkheden van de afhankelijke variabele. Deze assumptie kan onderzocht worden door een kruistabel te maken voor de combinatie van elke categorische predictor en de afhankelijke variabele. Een voorbeeld van een dergelijke kruistabel is te zien in Tabel 2 voor de afhankelijke variabele Beoordeling en predictor Vooropleiding. In deze kruistabel is te zien dat er binnen de categorie hbo van de predictor Vooropleiding nul deelnemers zijn die een onvoldoende behalen. Deze categorie bevat dus een lege cel en voldoet niet aan de assumptie.[^2]<sup>,</sup>[^6]
 
 ||                      | Nominaal    | |
 |-------------| -------------------- | -------------| ------------| 
-|                |             | Nominaal | Niet-nominaal|
-|**Vervolg**     | Hbo master  | 50       | 0          |
-|                | wo master   | 40       | 200        |
-|                | Werk        | 80       | 160        |
+|                |             | hbo      | wo |
+|**Beoordeling** | Onvoldoende | 0        | 10        |
+|                | Voldoende   | 60       | 80        |
+|                | Goed        | 80       | 50        |
+|                | Uitstekend  | 20       | 40        |
 
-*Tabel 2. Kruistabel van de observaties voor de afhankelijke variabele Vervolg en predictor Nominaal waarbij voor de categorie niet-nominaal niet alle waarden van de afhankelijke variabele aanwezig zijn.*
+*Tabel 2. Kruistabel van de observaties voor de afhankelijke variabele Beoordeling en predictor Vooropleiding waarbij voor de categorie hbo niet alle waarden van de afhankelijke variabele aanwezig zijn.*
 
-Daarnaast is het met een nominale afhankelijke variabele mogelijk dat er een categorische predictor is die perfect de waarde van de afhankelijke variabele voorspelt. Een voorbeeld hiervan is te zien in Tabel 3, opnieuw voor de afhankelijke variabele Vervolg en predictor Nominaal. De categorie Nominaal  bevat alleen studenten die een hbo master zijn gaan doen en de categorie Niet-nominaal alleen studenten die een wo master zijn gaan doen of direct aan het werk zijn gegaan. De predictor Nominaal voorspelt dus perfect of een student wel of niet een hbo master gaat doen. Dit fenomeen wordt *complete separation* genoemd en komt af en toe voor als er heel veel predictors aanwezig zijn en weinig observaties. Als dit gebeurt, dan werkt de *maximum likelihood* methode niet.[^6]
+Daarnaast is het met een ordinale afhankelijke variabele mogelijk dat er een categorische predictor is die perfect de waarde van de afhankelijke variabele voorspelt. Een voorbeeld hiervan is te zien in Tabel 3, opnieuw voor de afhankelijke variabele Beoordeling en predictor Vooropleiding. De categorie Uitstekend bevat alleen studenten met een wo vooropleiding en de andere categorieën alleen studenten met een hbo vooropleiding. De predictor Vooropleiding voorspelt dus perfect of een student wel of niet een uitstekend als beoordeling krijgt. Dit fenomeen wordt *complete separation* genoemd en komt af en toe voor als er heel veel predictors aanwezig zijn en weinig observaties. Als dit gebeurt, dan werkt de *maximum likelihood* methode niet.[^6]
 
 ||                      | Nominaal    | |
 |-------------| -------------------- | -------------| ------------| 
-|                |             | Nominaal | Niet-nominaal|
-|**Vervolg**     | Hbo master  | 50       | 0          |
-|                | wo master   | 0        | 200        |
-|                | Werk        | 0        | 200        |
+|                |             | hbo      | wo |
+|**Beoordeling** | Onvoldoende | 20       | 0        |
+|                | Voldoende   | 50       | 0        |
+|                | Goed        | 70       | 0        |
+|                | Uitstekend  | 0        | 90        |
 
-*Tabel 3. Kruistabel van de observaties voor de afhankelijke variabele Vervolg en predictor Nominaal waarbij er sprake is van complete separation.*
+*Tabel 3. Kruistabel van de observaties voor de afhankelijke variabele Beoordeling en predictor Vooropleiding waarbij er sprake is van complete separation.*
 
 Het gevolg van de assumptie voor observaties per variabele zijn dat er extreem hoge regressiecoëfficiënten en standaardfouten worden gevonden of dat de *maximum likelihood* methode niet werkt. Toets daarom deze assumptie door voor elke categorische predictor een kruistabel te maken met de afhankelijke variabele en onderzoek of er lege cellen zijn en of er *complete separation* plaatsvindt. Als er niet aan deze assumptie voldaan is, dan zijn er meerdere oplossingen mogelijk. De categorie die problemen geeft bij de categorische predictor kan verwijderd worden of worden samengevoegd met een andere categorie. Daarnaast kan de hele predictor verwijderd worden. Ten slotte is meer data verzamelen ook een optie als dit mogelijk is.[^6]
 
 ## Overdispersie
 
-Bij *ordinale logistische regressie* wordt aangenomen dat de residuën niet gecorreleerd zijn. Dit is in principe het geval als alle deelnemers willekeurig in de steekproef zijn opgenomen. Als deelnemers meerdere keren gemeten zijn of gematcht zijn met andere deelnemers, dan is hier geen sprake van en zijn er waarschijnlijk gecorreleerde residuën. *ordinale logistische regressie* is dan niet de juiste analysemethoden, maar *multilevel ordinale logistische regressie* kan hiervoor wel gebruikt worden. Bij *ordinale logistische regressie* wordt daarom getoetst of er overdispersie is. Overdispersie betekent dat de variantie in de voorspelde kansen groter is dan op basis van het model wordt verwacht. Het gevolg is dat de standaardfouten te laag zijn en er een hogere kans is op type I fouten (onterecht verwerpen van de nulhypothese) bij het toetsen van de significantie van regressiecoëfficiënten, de significantie van het hele model en de significantie van het vergelijken van verschillende modellen onderling met de *likelihood ratio toets*. [^20]<sup>,</sup>[^6]
+Bij *ordinale logistische regressie* wordt aangenomen dat de residuën niet gecorreleerd zijn. Dit is in principe het geval als alle deelnemers willekeurig in de steekproef zijn opgenomen. Als deelnemers meerdere keren gemeten zijn of gematcht zijn met andere deelnemers, dan is hier geen sprake van en zijn er waarschijnlijk gecorreleerde residuën. *Ordinale logistische regressie* is dan niet de juiste analysemethode, maar *multilevel ordinale logistische regressie* kan hiervoor wel gebruikt worden. Bij *ordinale logistische regressie* wordt daarom getoetst of er overdispersie is. Overdispersie betekent dat de variantie in de voorspelde kansen groter is dan op basis van het model wordt verwacht. Het gevolg is dat de standaardfouten te laag zijn en er een hogere kans is op type I fouten (onterecht verwerpen van de nulhypothese) bij het toetsen van de significantie van regressiecoëfficiënten, de significantie van het hele model en de significantie van het vergelijken van verschillende modellen onderling met de *likelihood ratio toets*. [^20]<sup>,</sup>[^6]
 
 De dispersieparameter geeft aan of er sprake is van overdispersie. De dispersieparameter hoort in de buurt van 1 te zitten. Als de parameter hoger dan 2 is, is er sprake van overdispersie. De gevolgen van overdispersie voor het toetsen van regressiecoëfficiënten kunnen verholpen worden door de standaardfouten van de regressiecoëfficiënten te herschalen op basis van de overdispersie. Bij het toetsen van het gehele model of het vergelijken van modellen onderling worden de waarden van de chi-kwadraat toetsstatistiek gedeeld door de dispersieparameter en wordt de p-waarde berekend op basis van de herschaalde toetsstatistiek. Het onderzoeken van de dispersieparameter en het corrigeren in het geval van overdispersie worden toegelicht bij het toetsen van de assumpties in deze toetspagina.[^20]
 
 Er kan ook sprake zijn van onderdispersie: de situatie waarin de variantie in voorspelde kansen kleiner is dan op basis van het model wordt verwacht. Dit leidt tot meer conservatieve toetsen en een erg lage kans op type I fouten. Deze situatie is minder erg dan overdispersie en er wordt in dit geval meestal geen correctie uitgevoerd. Dezelfde correctie als bij overdispersie kan echter wel uitgevoerd worden en zorgt er in dit geval voor dat de significantietoetsen minder conservatief worden.[^20]<sup>,</sup>[^6]
 
+## Proportional odds
+
+NOG INVULLEN
+
+
 # Toetsing assumpties
 
-Voer *ordinale logistische regressie* uit om te onderzoeken of het vervolg na de bachelor Fysiotherapie (hbo master, wo master of direct aan het werk) te voorspellen is op basis van het wel of niet nominaal afstuderen en het gemiddelde cijfer van de bachelor van de studenten. Start met het toetsen van de assumpties en voer vervolgens de *ordinale logistische regressie* uit als hieraan voldaan is.
-
-<!-- ## TEKSTBLOK: Uitvoering1.R -->
-Voer eerst de *ordinale logistische regressie* uit omdat deze nodig is voor het toetsen van assumpties en sla het resultaat op. Interpreteer de resultaten pas na het toetsen van de assumpties. Gebruik de functie `mblogit()` van het package `mclogit` met als eerste argument de regressievergelijking `Vervolg ~  Nominaal + Gemiddeld_cijfer` met links van de tilde de afhankelijke variabele `Vervolg` en rechts de twee onafhankelijke variabelen `Nominaal` en `Gemiddeld_cijfer`. Het tweede argument is de dataset `Beoordelingen_eindproject`.
-<!-- ## /TEKSTBLOK: Uitvoering1.R -->
-
-<!-- ## OPENBLOK: Uitvoering2.R -->
-```{r, message = FALSE, warning = FALSE, results = 'hide'}
-library(mclogit)
-
-Regressiemodel <- mblogit(Vervolg ~  Nominaal + Gemiddeld_cijfer,
-                          Beoordelingen_eindproject)
-```
-<!-- ## /OPENBLOK: Uitvoering2.R -->
+Voer een *ordinale logistische regressie* uit om te onderzoeken of de beoordeling van het eindproject van de bachelor Industrieel Ontwerpen te voorspellen is op basis van het gemiddelde cijfer, de leeftijd en de vooropleiding van de studenten. Start met het toetsen van de assumpties en voer vervolgens de *ordinale logistische regressie* uit als hieraan voldaan is.
 
 ## Outliers
 
 ### Boxplots en standaardiseren
 
 <!-- ## TEKSTBLOK: Outlier1.R -->
-Onderzoek of er univariate outliers zijn met behulp van boxplots en gestandaardiseerde scores voor continue variabelen en tabellen voor categorische variabelen. Begin met de boxplot voor de variabele `Gemiddeld_cijfer`.
+Onderzoek of er univariate outliers zijn met behulp van boxplots en gestandaardiseerde scores voor continue variabelen en tabellen voor categorische variabelen. Begin met de boxplot voor de variabelen `Gemiddeld_cijfer` en `Leeftijd`.
 <!-- ## /TEKSTBLOK: Outlier1.R -->
 
 <!-- ## OPENBLOK: Outlier2.R -->
@@ -300,7 +294,7 @@ boxplot(Beoordelingen_eindproject[,c("Gemiddeld_cijfer","Leeftijd")])
 ```
 <!-- ## /OPENBLOK: Outlier2.R -->
 
-Voor de gemiddelde cijfers zijn er geen onmogelijke scores en zijn er geen grote afwijkingen. Op basis van de gestandaardiseerde scores kan onderzocht worden of er toch nog een outlier is. Onderzoek de gestandaardiseerde scores door een functie te schrijven die het aantal observaties per variabele telt met een gestandaardiseerde score hoger dan 3 of lager dan -3. Pas deze functie vervolgens toe op de gemiddelde cijfers.
+Voor beide variabelen zijn er geen onmogelijke scores en zijn er geen grote afwijkingen. Op basis van de gestandaardiseerde scores kan onderzocht worden of er toch nog een outlier is. Onderzoek de gestandaardiseerde scores door een functie te schrijven die het aantal observaties per variabele telt met een gestandaardiseerde score hoger dan 3 of lager dan -3. Pas deze functie vervolgens toe op de gemiddelde cijfers en de leeftijden.
 
 <!-- ## OPENBLOK: Outlier3.R -->
 ```{r}
@@ -322,9 +316,9 @@ Outlier_standaardiseren(Beoordelingen_eindproject$Leeftijd)
 <!-- ## /OPENBLOK: Outlier3.R -->
 
 
-Er zijn nul observaties met een gestandaardiseerde score hoger dan 3 of lager dan -3. Er zijn in deze stap voor de continue variabelen geen outliers gevonden.
+Er zijn nul observaties met een gestandaardiseerde score hoger dan 3 of lager dan -3 voor beide variabelen. Er zijn in deze stap voor de continue variabelen geen outliers gevonden.
 
-Nominaal en Vervolg zijn de categorische variabele in deze dataset. Maak een tabel met de frequenties voor alle categoriëen van deze variabelen om te onderzoeken of hier afwijkende waardes zijn.
+Beoordeling en Vooropleiding zijn de categorische variabele in deze dataset. Maak een tabel met de frequenties voor alle categoriëen van deze variabelen om te onderzoeken of hier afwijkende waardes zijn.
 
 <!-- ## OPENBLOK: Outlier4.R -->
 ```{r}
@@ -333,50 +327,49 @@ table(Beoordelingen_eindproject$Beoordeling)
 ```
 <!-- ## /OPENBLOK: Outlier4.R -->
 
-Voor alle drie de categorische variabelen zijn er geen categorieën met opmerkelijke waarden. Er zijn hier dus ook geen outliers.
+Voor beide categorische variabelen zijn er geen categorieën met opmerkelijke waarden. Er zijn hier dus ook geen outliers.
 
 ### Gestandaardiseerde residuën
 
 <!-- ## TEKSTBLOK: Outlier5.R -->
-Onderzoek of er outliers zijn met behulp van de gestandaardiseerde residuën. Voer een [logistische regressie](41-Logistische-regressie-R.html) uit voor elke combinatie van twee mogelijkheden en onderzoek voor elke combinatie de gestandaardiseerde residuën. Maak eerst aparte datasets voor elke combinatie van twee mogelijkheden. Gebruik daarna om de logistische regressie uit te voeren de functie `glm()` met als eerste argument de regressievergelijking `Vervolg ~ Nominaal + Gemiddeld_cijfer` met links van de tilde de afhankelijke variabele `Vervolg` en rechts de twee onafhankelijke variabelen `Nominaal` en `Gemiddeld_cijfer`. Het tweede argument is de dataset (bijvoorbeeld `Fysiotherapie_Uitval_Niet_nominaal`) en het derde argument `family = "binomial"` geeft aan dat er een *logistische regressie* uitgevoerd moet worden. Bereken vervolgens de gestandaardiseerde residuën met de functie `rstandard()`, maak een plot en tel het aantal gestandaardiseerde residuën met een waarde hoger dan 3 of lager dan -3.
+Onderzoek of er outliers zijn met behulp van de gestandaardiseerde residuën. Voer een [logistische regressie](41-Logistische-regressie-R.html) uit voor de cumulatieve kansen van de beoordeling onvoldoende, voldoende en goed en onderzoek voor elke cumulatieve kans de gestandaardiseerde residuën. Maak eerst aparte variabelen voor elke cumulatieve kans. Gebruik daarna om de logistische regressie uit te voeren de functie `glm()` met als eerste argument de regressievergelijking `Onvoldoende_en_lager ~ Vooropleiding + Gemiddeld_cijfer + Leeftijd` met links van de tilde de afhankelijke variabele `Onvoldoende_en_lager` (voor deze cumulatieve kans) en rechts de twee onafhankelijke variabelen `Vooropleiding`, `Gemiddeld_cijfer` en `Leeftijd`. Het tweede argument is de dataset `Beoordelingen_eindproject` en het derde argument `family = "binomial"` geeft aan dat er een *logistische regressie* uitgevoerd moet worden. Bereken vervolgens de gestandaardiseerde residuën met de functie `rstandard()`, maak een plot en tel het aantal gestandaardiseerde residuën met een waarde hoger dan 3 of lager dan -3.
 <!-- ## /TEKSTBLOK: Outlier5.R -->
 
 <!-- ## OPENBLOK: Outlier6.R -->
 ```{r}
 ## Maak datasets voor beide logistische regressievergelijkingen
-Fysiotherapie_WO_master_hbo_master <- Beoordelingen_eindproject[Beoordelingen_eindproject$Vervolg != "werk",]
-Fysiotherapie_WO_master_werk <- Beoordelingen_eindproject[Beoordelingen_eindproject$Vervolg != "hbo master",]
-Fysiotherapie_hbo_master_werk <- Beoordelingen_eindproject[Beoordelingen_eindproject$Vervolg != "WO master",]
+Beoordelingen_eindproject$Onvoldoende_en_lager <- Beoordelingen_eindproject$Beoordeling == "Onvoldoende"
+Beoordelingen_eindproject$Voldoende_en_lager <- Beoordelingen_eindproject$Beoordeling == "Onvoldoende" | Beoordelingen_eindproject$Beoordeling == "Voldoende"
+Beoordelingen_eindproject$Goed_en_lager <- Beoordelingen_eindproject$Beoordeling == "Onvoldoende" | Beoordelingen_eindproject$Beoordeling == "Voldoende" | Beoordelingen_eindproject$Beoordeling == "Goed"
 
 ## Voer de logistische regressiemodellen uit
-Regressiemodel_WO_master_hbo_master <- glm(Vervolg ~ Nominaal + Gemiddeld_cijfer,
-                                           data = Fysiotherapie_WO_master_hbo_master,
+Regressiemodel_Onvoldoende_en_lager <- glm(Onvoldoende_en_lager ~ Vooropleiding + Gemiddeld_cijfer + Leeftijd,
+                                           data = Beoordelingen_eindproject,
                                            family = "binomial")
-Regressiemodel_WO_master_werk <- glm(Vervolg ~ Nominaal + Gemiddeld_cijfer,
-                                     data = Fysiotherapie_WO_master_werk,
-                                     family = "binomial")
-Regressiemodel_hbo_master_werk <- glm(Vervolg ~ Nominaal + Gemiddeld_cijfer,
-                                      data = Fysiotherapie_hbo_master_werk,
-                                      family = "binomial")
-
+Regressiemodel_Voldoende_en_lager <- glm(Voldoende_en_lager ~ Vooropleiding + Gemiddeld_cijfer + Leeftijd,
+                                           data = Beoordelingen_eindproject,
+                                           family = "binomial")
+Regressiemodel_Goed_en_lager <- glm(Goed_en_lager ~ Vooropleiding + Gemiddeld_cijfer + Leeftijd,
+                                           data = Beoordelingen_eindproject,
+                                           family = "binomial")
 
 # Sla de gestandaardiseerde residuën op
-Residu_gestandaardiseerd_WO_master_hbo_master <- rstandard(Regressiemodel_WO_master_hbo_master)
-Residu_gestandaardiseerd_WO_master_werk <- rstandard(Regressiemodel_WO_master_werk)
-Residu_gestandaardiseerd_hbo_master_werk <- rstandard(Regressiemodel_hbo_master_werk)
+Residu_gestandaardiseerd_Onvoldoende_en_lager <- rstandard(Regressiemodel_Onvoldoende_en_lager)
+Residu_gestandaardiseerd_Voldoende_en_lager <- rstandard(Regressiemodel_Voldoende_en_lager)
+Residu_gestandaardiseerd_Goed_en_lager <- rstandard(Regressiemodel_Goed_en_lager)
 
 # Plot de gestandaardiseerde residuën
-plot(Residu_gestandaardiseerd_WO_master_hbo_master, 
+plot(Residu_gestandaardiseerd_Onvoldoende_en_lager, 
      xlab = "Volgorde", ylab = "Gestandaardiseerde residuën")
-plot(Residu_gestandaardiseerd_WO_master_werk, 
+plot(Residu_gestandaardiseerd_Voldoende_en_lager, 
      xlab = "Volgorde", ylab = "Gestandaardiseerde residuën")
-plot(Residu_gestandaardiseerd_hbo_master_werk, 
+plot(Residu_gestandaardiseerd_Goed_en_lager, 
      xlab = "Volgorde", ylab = "Gestandaardiseerde residuën")
 
 # Tel het aantal gestandaardiseerde residuën met een absolute waarde groter dan 3
-sum(abs(Residu_gestandaardiseerd_WO_master_hbo_master > 3))
-sum(abs(Residu_gestandaardiseerd_WO_master_werk > 3))
-sum(abs(Residu_gestandaardiseerd_hbo_master_werk > 3))
+sum(abs(Residu_gestandaardiseerd_Onvoldoende_en_lager > 3))
+sum(abs(Residu_gestandaardiseerd_Voldoende_en_lager > 3))
+sum(abs(Residu_gestandaardiseerd_Goed_en_lager > 3))
 
 ```
 <!-- ## /OPENBLOK: Outlier6.R -->
@@ -386,7 +379,7 @@ Er zijn geen gestandaardiseerde residuën met een score hoger dan 3 of lager dan
 ### Mahalanobis distance
 
 <!-- ## TEKSTBLOK: Outlier7.R -->
-Onderzoek of er multivariate outliers zijn met behulp van de Mahalanobis distance met behulp van de functie `mahalanobis()`. De Mahalanobis afstand geeft aan in hoeverre een deelnemer afwijkt van het gemiddelde van alle deelnemers voor alle predictors samen. Een voorwaarde voor de functie is dat alle variabelen numeriek zijn. Zet daarom eerst de variabele Nominaal om in een numerieke variabele met de waarde 1 voor Nominaal en 0 voor Niet nominaal. Het omzetten van een categorische variabele in een of meer numerieke variabele heet dummycoderen; de variabelen worden vaak dummies genoemd.
+Onderzoek of er multivariate outliers zijn met behulp van de Mahalanobis distance met behulp van de functie `mahalanobis()`. De Mahalanobis afstand geeft aan in hoeverre een deelnemer afwijkt van het gemiddelde van alle deelnemers voor alle predictors samen. Een voorwaarde voor de functie is dat alle variabelen numeriek zijn. Zet daarom eerst de variabele Vooropleiding om in een numerieke variabele met de waarde 1 voor vwo en 0 voor hbo-p. Het omzetten van een categorische variabele in een of meer numerieke variabele heet dummycoderen; de variabelen worden vaak dummies genoemd.
 
 Neem vervolgens een subset van de dataset met alleen de predictors en gebruik deze voor de Mahalanobis afstand. Gebruik de functie `mahalanobis()` met als argumenten de dataset `Subset`, de gemiddeldes van elke kolom berekend met `colMeans(Subset)` en de covariantiematrix van de dataset berekend met `cov(Subset)`.
 
@@ -395,12 +388,13 @@ Bereken daarna de criteriumwaarde op basis van het gewenste significantieniveau 
 
 <!-- ## OPENBLOK: Outlier8.R -->
 ```{r}
-# Zet Geslacht om in een numerieke variabele met een 1 voor een vrouw en 0 voor een man
-Beoordelingen_eindproject$Nominaal_dummy <- as.numeric(Beoordelingen_eindproject$Nominaal == "Nominaal")
+# Zet Vooropleiding om in een numerieke variabele met een 1 voor een vrouw en 0 voor een man
+Beoordelingen_eindproject$Vooropleiding_dummy <- as.numeric(Beoordelingen_eindproject$Vooropleiding == "vwo")
 
 # Maak een subset van de dataset met alle predictors
-Subset <- Beoordelingen_eindproject[,c("Nominaal_dummy",
-                                    "Gemiddeld_cijfer"
+Subset <- Beoordelingen_eindproject[,c("Vooropleiding_dummy",
+                                    "Gemiddeld_cijfer",
+                                    "Leeftijd"
                                     )]
 
 # Bereken de Mahalanobis afstand voor elke deelnemer 
@@ -427,44 +421,45 @@ Er zijn geen deelnemers met een Mahalanobis afstand groter dan de criteriumwaard
 ### Cook's afstand
 
 <!-- ## TEKSTBLOK: Outlier10.R -->
-Onderzoek of er outliers zijn met behulp van de gestandaardiseerde residuën. Voer een [logistische regressie](41-Logistische-regressie-R.html) uit voor elke combinatie van twee mogelijkheden en onderzoek voor elke combinatie de Cook's afstanden. Maak eerst aparte datasets voor elke combinatie van twee mogelijkheden. Gebruik daarna om de logistische regressie uit te voeren de functie `glm()` met als eerste argument de regressievergelijking `Vervolg ~ Nominaal + Gemiddeld_cijfer` met links van de tilde de afhankelijke variabele `Vervolg` en rechts de twee onafhankelijke variabelen `Nominaal` en `Gemiddeld_cijfer`. Het tweede argument is de dataset (bijvoorbeeld `Fysiotherapie_Uitval_Niet_nominaal`) en het derde argument `family = "binomial"` geeft aan dat er een *logistische regressie* uitgevoerd moet worden. Bereken vervolgens de gestandaardiseerde residuën met de functie `cooks.distance()`, maak een plot en tel het aantal Cook's afstanden dat groter is dan de criteriumwaarde van 1.
+Onderzoek of er outliers zijn met behulp van de gestandaardiseerde residuën. Voer een [logistische regressie](41-Logistische-regressie-R.html) uit voor de cumulatieve kansen van de beoordeling onvoldoende, voldoende en goed en onderzoek voor elke cumulatieve kans de Cook's afstanden. Maak eerst aparte variabelen voor elke cumulatieve kans. Gebruik daarna om de logistische regressie uit te voeren de functie `glm()` met als eerste argument de regressievergelijking `Onvoldoende_en_lager ~ Vooropleiding + Gemiddeld_cijfer + Leeftijd` met links van de tilde de afhankelijke variabele `Onvoldoende_en_lager` (voor deze cumulatieve kans) en rechts de twee onafhankelijke variabelen `Vooropleiding`, `Gemiddeld_cijfer` en `Leeftijd`. Het tweede argument is de dataset `Beoordelingen_eindproject` en het derde argument `family = "binomial"` geeft aan dat er een *logistische regressie* uitgevoerd moet worden. Bereken vervolgens de Cook's afstanden met de functie `cooks.distance()`, maak een plot en tel het aantal Cook's afstanden dat groter is dan de criteriumwaarde van 1.
+
 <!-- ## /TEKSTBLOK: Outlier10.R -->
 
 <!-- ## OPENBLOK: Outlier11.R -->
 ```{r}
 ## Maak datasets voor beide logistische regressievergelijkingen
-Fysiotherapie_WO_master_hbo_master <- Beoordelingen_eindproject[Beoordelingen_eindproject$Vervolg != "werk",]
-Fysiotherapie_WO_master_werk <- Beoordelingen_eindproject[Beoordelingen_eindproject$Vervolg != "hbo master",]
-Fysiotherapie_hbo_master_werk <- Beoordelingen_eindproject[Beoordelingen_eindproject$Vervolg != "WO master",]
+Beoordelingen_eindproject$Onvoldoende_en_lager <- Beoordelingen_eindproject$Beoordeling == "Onvoldoende"
+Beoordelingen_eindproject$Voldoende_en_lager <- Beoordelingen_eindproject$Beoordeling == "Onvoldoende" | Beoordelingen_eindproject$Beoordeling == "Voldoende"
+Beoordelingen_eindproject$Goed_en_lager <- Beoordelingen_eindproject$Beoordeling == "Onvoldoende" | Beoordelingen_eindproject$Beoordeling == "Voldoende" | Beoordelingen_eindproject$Beoordeling == "Goed"
 
 ## Voer de logistische regressiemodellen uit
-Regressiemodel_WO_master_hbo_master <- glm(Vervolg ~ Nominaal + Gemiddeld_cijfer,
-                                           data = Fysiotherapie_WO_master_hbo_master,
+Regressiemodel_Onvoldoende_en_lager <- glm(Onvoldoende_en_lager ~ Vooropleiding + Gemiddeld_cijfer + Leeftijd,
+                                           data = Beoordelingen_eindproject,
                                            family = "binomial")
-Regressiemodel_WO_master_werk <- glm(Vervolg ~ Nominaal + Gemiddeld_cijfer,
-                                     data = Fysiotherapie_WO_master_werk,
-                                     family = "binomial")
-Regressiemodel_hbo_master_werk <- glm(Vervolg ~ Nominaal + Gemiddeld_cijfer,
-                                      data = Fysiotherapie_hbo_master_werk,
-                                      family = "binomial")
+Regressiemodel_Voldoende_en_lager <- glm(Voldoende_en_lager ~ Vooropleiding + Gemiddeld_cijfer + Leeftijd,
+                                           data = Beoordelingen_eindproject,
+                                           family = "binomial")
+Regressiemodel_Goed_en_lager <- glm(Goed_en_lager ~ Vooropleiding + Gemiddeld_cijfer + Leeftijd,
+                                           data = Beoordelingen_eindproject,
+                                           family = "binomial")
 
 # Bepaal Cook's afstand voor elke deelnemer
-Cooks_afstand_WO_master_hbo_master <- cooks.distance(Regressiemodel_WO_master_hbo_master)
-Cooks_afstand_WO_master_werk <- cooks.distance(Regressiemodel_WO_master_werk)
-Cooks_afstand_hbo_master_werk <- cooks.distance(Regressiemodel_hbo_master_werk)
+Cooks_afstand_Onvoldoende_en_lager <- cooks.distance(Regressiemodel_Onvoldoende_en_lager)
+Cooks_afstand_Voldoende_en_lager <- cooks.distance(Regressiemodel_Voldoende_en_lager)
+Cooks_afstand_Goed_en_lager <- cooks.distance(Regressiemodel_Goed_en_lager)
 
 # Plot Cook's afstanden
-plot(Cooks_afstand_WO_master_hbo_master, 
+plot(Cooks_afstand_Onvoldoende_en_lager, 
      xlab = "Volgorde", ylab = "Cook's afstanden")
-plot(Cooks_afstand_WO_master_werk, 
+plot(Cooks_afstand_Voldoende_en_lager, 
      xlab = "Volgorde", ylab = "Cook's afstanden")
-plot(Cooks_afstand_hbo_master_werk, 
+plot(Cooks_afstand_Goed_en_lager, 
      xlab = "Volgorde", ylab = "Cook's afstanden")
 
 # Tel het aantal Cook's afstanden groter dan de criteriumwaarde van 1
-sum(abs(Cooks_afstand_WO_master_hbo_master > 1))
-sum(abs(Cooks_afstand_WO_master_werk > 1))
-sum(abs(Cooks_afstand_hbo_master_werk > 1))
+sum(abs(Cooks_afstand_Onvoldoende_en_lager > 1))
+sum(abs(Cooks_afstand_Voldoende_en_lager > 1))
+sum(abs(Cooks_afstand_Goed_en_lager > 1))
 
 ```
 <!-- ## /OPENBLOK: Outlier11.R -->
@@ -473,18 +468,22 @@ Er zijn geen deelnemers met een Cook's afstand groter dan de criteriumwaarde van
 
 ## Lineariteit: Box-Tidwell
 
-Voer de *Box-Tidwell test* uit om te onderzoeken of er een lineaire relatie is tussen de continue predictors en de logit van de afhankelijke variabele. Maak eerst voor elke continue predictor een nieuwe variabele aan die bestaat uit het product van de predictor met de logaritme (`log()`) van de predictor. Voeg daarna deze nieuwe interactietermen toe aan de regressievergelijking en voer de *ordinale logistische regressie* uit. Gebruik de functie `mblogit()` met als eerste argument de regressievergelijking `Vervolg ~ Nominaal + Gemiddeld_cijfer + Gemiddeld_cijfer_log` met links van de tilde de afhankelijke variabele `Vervolg` en rechts de twee onafhankelijke variabelen `Nominaal` en `Gemiddeld_cijfer` en de interactietermen `Gemiddeld_cijfer_log`. Het tweede argument is de dataset `Beoordelingen_eindproject`.
+Voer de *Box-Tidwell test* uit om te onderzoeken of er een lineaire relatie is tussen de continue predictors en de logit van de afhankelijke variabele. Maak eerst voor elke continue predictor een nieuwe variabele aan die bestaat uit het product van de predictor met de logaritme (`log()`) van de predictor. Voeg daarna deze nieuwe interactietermen toe aan de regressievergelijking en voer de *ordinale logistische regressie* uit. 
+
+Gebruik de functie `vglm()` van het package `VGAM` met als eerste argument de regressievergelijking `Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer + Leeftijd_log + Gemiddeld_cijfer_log` met links van de tilde de afhankelijke variabele `Beoordeling` en rechts de drie onafhankelijke variabelen `Vooropleiding`, `Leeftijd` en `Gemiddeld_cijfer` en de interactietermen `Leeftijd_log` en `Gemiddeld_cijfer_log`. Het tweede argument is `family = cumulative(link = "logitlink", parallel = TRUE, reverse = FALSE)` met daarin `cumulative()` om aan te geven dat de cumulatieve kansen gebruikt worden in het model, `link = "logitlink"` om aan te geven dat er een logistische (logit) link-functie gebruikt wordt, `parallel = TRUE` om aan te geven dat de assumptie van proportional odds wordt toegepast op de regressiecoëfficiënten en `reverse = FALSE` om aan te geven dat de volgorde van de ordinale afhankelijke variabele van laag naar hoog gaat. Het derde argument is de dataset `Beoordelingen_eindproject`.
 
 <!-- ## OPENBLOK: AssLineariteit1.R -->
 ```{r}
-# Maak de interactievariabelen aan voor de continue predictor Gemiddeld_cijfer
+# Maak de interactievariabelen aan voor de continue predictors Gemiddeld_cijfer en Leeftijd
 Beoordelingen_eindproject$Gemiddeld_cijfer_log <- Beoordelingen_eindproject$Gemiddeld_cijfer * log(Beoordelingen_eindproject$Gemiddeld_cijfer)
+Beoordelingen_eindproject$Leeftijd_log <- Beoordelingen_eindproject$Leeftijd * log(Beoordelingen_eindproject$Leeftijd)
 
-library(mclogit)
+library(VGAM)
 
 # Voeg deze interactievariabelen toe aan het regressiemodel en toets het regressiemodel
-Regressiemodel_Box_Tidwell <- mblogit(Vervolg ~  Nominaal + Gemiddeld_cijfer + Gemiddeld_cijfer_log,
-                                      Beoordelingen_eindproject)
+Regressiemodel_Box_Tidwell <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer + Leeftijd_log + Gemiddeld_cijfer_log, 
+                                   family = cumulative(link = "logitlink", parallel = TRUE, reverse = FALSE), 
+                                   data = Beoordelingen_eindproject)
 
 # Bekijk de significantie van de regressiecoëfficiënten
 summary(Regressiemodel_Box_Tidwell)
@@ -494,36 +493,36 @@ summary(Regressiemodel_Box_Tidwell)
 
 <!-- ## CLOSEDBLOK: AssLineariteit2.R -->
 ```{r, echo = FALSE}
-# Maak de interactievariabelen aan voor de continue predictor Gemiddeld_cijfer
+# Maak de interactievariabelen aan voor de continue predictors Gemiddeld_cijfer en Leeftijd
 Beoordelingen_eindproject$Gemiddeld_cijfer_log <- Beoordelingen_eindproject$Gemiddeld_cijfer * log(Beoordelingen_eindproject$Gemiddeld_cijfer)
+Beoordelingen_eindproject$Leeftijd_log <- Beoordelingen_eindproject$Leeftijd * log(Beoordelingen_eindproject$Leeftijd)
 
-library(mclogit)
+library(VGAM)
 
 # Voeg deze interactievariabelen toe aan het regressiemodel en toets het regressiemodel
-Regressiemodel_Box_Tidwell <- mblogit(Vervolg ~  Nominaal + Gemiddeld_cijfer + Gemiddeld_cijfer_log,
-                                      Beoordelingen_eindproject)
+Regressiemodel_Box_Tidwell <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer + Leeftijd_log + Gemiddeld_cijfer_log, 
+                                   family = cumulative(link = "logitlink", parallel = TRUE, reverse = FALSE), 
+                                   data = Beoordelingen_eindproject)
 
 # Bekijk de significantie van de regressiecoëfficiënten
-BT <- summary(Regressiemodel_Box_Tidwell)$coefficients
+BT_z <- wald.stat.vlm(Regressiemodel_Box_Tidwell)
 
 ```
 <!-- ## /CLOSEDBLOK: AssLineariteit2.R -->
 
-De interactieterm van de predictor Gemiddeld_cijfer is voor zowel de vergelijking tussen hbo master en werk (*z* = `r Round_and_format(BT[7,3])`, *p* = `r Round_and_format(BT[7,4])`) als de vergelijking tussen wo master en werk (*z* = `r Round_and_format(BT[8,3])`, *p* = `r Round_and_format(BT[8,4])`) niet significant.[^8] Er is dus voldaan aan de assumptie van lineariteit.
+De interactieterm van de predictor Leeftijd (*z* = `r Round_and_format(BT_z[4])`, *p* = 0,663) en de predictor Gemiddeld_cijfer (*z* = `r Round_and_format(BT_z[5])`, *p* = 0,212) zijn niet significant.[^8] Er is dus voldaan aan de assumptie van lineariteit.
 
 ## Multicollineariteit
 
-Voer het regressiemodel uit met de functie `lm()` met als eerste argument de vergelijking `log(Cijfers_P1*Cijfers_P3) ~ Cijfers_P1 + Cijfers_P2 + Cijfers_P3` met links van het tilde de zelfverzonnen afhankelijke variabele `log(Cijfers_P1*Cijfers_P3)` en rechts de predictors `Cijfers_P1`, `Cijfers_P2` en `Cijfers_P3`. Het tweede argument is de dataset `Gemiddelde_cijfers_bioinformatics`. De afhankelijke variabele is hier zelfverzonnen omdat de VIF niet afhankelijk is van deze variabele. De afhankelijke variabele kan dus ook op een andere manier gemaakt worden.
-
 <!-- ## TEKSTBLOK: AssMulticollineariteit1.R -->
-Onderzoek of er sprake is van multicollineariteit met behulp van Variance Inflation Factors (VIFs). Bereken de VIFs voor elke predictor met de functie `VIF()` van het package `DescTools` waarbij de functie als argument `Multicollineariteit` (het object van het regressiemodel) heeft. De functie `VIF()` werkt niet op het object van de *ordinale logistische regressie* van het package `mclogit`. Voer daarom een regressiemodel uit met een zelfverzonnen afhankelijke variabele en de predictors van de *ordinale logistische regressie*. Gebruik de functie `lm()` met als eerste argument de vergelijking `log(Gemiddeld_cijfer) ~ Nominaal + Gemiddeld_cijfer` met links van het tilde de zelfverzonnen afhankelijke variabele `log(Gemiddeld_cijfer)` en rechts de predictors `Nominaal` en `Gemiddeld_cijfer`. Het tweede argument is de dataset `Beoordelingen_eindproject`. De afhankelijke variabele is hier zelfverzonnen omdat de VIF niet afhankelijk is van deze variabele. De afhankelijke variabele kan dus ook op een andere manier gemaakt worden.
+Onderzoek of er sprake is van multicollineariteit met behulp van Variance Inflation Factors (VIFs). Bereken de VIFs voor elke predictor met de functie `VIF()` van het package `DescTools` waarbij de functie als argument `Multicollineariteit` (het object van het regressiemodel) heeft. De functie `VIF()` werkt niet op het object van de *ordinale logistische regressie* van het package `VGAM`. Voer daarom een regressiemodel uit met een zelfverzonnen afhankelijke variabele en de predictors van de *ordinale logistische regressie*. Gebruik de functie `lm()` met als eerste argument de vergelijking `log(Gemiddeld_cijfer) ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer` met links van het tilde de zelfverzonnen afhankelijke variabele `log(Gemiddeld_cijfer)` en rechts de predictors `Vooropleiding`, `Leeftijd` en `Gemiddeld_cijfer`. Het tweede argument is de dataset `Beoordelingen_eindproject`. De afhankelijke variabele is hier zelfverzonnen omdat de VIF niet afhankelijk is van deze variabele. De afhankelijke variabele kan dus ook op een andere manier gemaakt worden.
 <!-- ## /TEKSTBLOK: AssMulticollineariteit1.R -->
 
 <!-- ## OPENBLOK: AssMulticollineariteit2.R -->
 ```{r}
 library(DescTools)
 
-Multicollineariteit <- lm(log(Gemiddeld_cijfer) ~ Nominaal + Gemiddeld_cijfer,
+Multicollineariteit <- lm(log(Gemiddeld_cijfer) ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
                            Beoordelingen_eindproject)
 
 # Bereken de VIF voor de predictors Cijfers_P1, Cijfers_P2 en Cijfers_P3
@@ -541,47 +540,145 @@ Onderzoek met behulp van kruistabellen de assumptie over observaties per variabe
 ```{r}
 # Maak de kruistabel voor de predictor Nominaal
 with(Beoordelingen_eindproject,
-     table(Nominaal,
-           Vervolg))
+     table(Vooropleiding,
+           Beoordeling))
 
 ```
 <!-- ## /OPENBLOK: ObsperVar1.R -->
 
-Voor alle categorieën van beide predictors zijn er studenten die een hbo master gaan volgen, een wo master gaan volgen en direct aan het werk gaan. Dus alle waarden van de afhankelijke variabele zijn aanwezig in alle categorieën. Er is dus ook geen sprake van *complete separation* dus er is aan deze assumptie voldaan.
+Voor beide categorieën van de predictor Vooropleiding zijn alle vier de beoordelingen geobserveerd. Dus alle waarden van de afhankelijke variabele zijn aanwezig in alle categorieën. Er is dus ook geen sprake van *complete separation* dus er is aan deze assumptie voldaan.
 
 ## Overdispersie
 
 <!-- ## TEKSTBLOK: Dispersie1.R -->
-Bereken de dispersieparameter om te bepalen of er sprake is van overdispersie. Voer eerst de *ordinale logistische regressie* uit omdat deze nodig is voor het toetsen van assumpties en sla het resultaat op. Interpreteer de resultaten pas na het toetsen van de assumpties. Gebruik de functie `mblogit()` van het package `mclogit` met als eerste argument de regressievergelijking `Vervolg ~  Nominaal + Gemiddeld_cijfer` met links van de tilde de afhankelijke variabele `Vervolg` en rechts de twee onafhankelijke variabelen `Nominaal` en `Gemiddeld_cijfer`. Het tweede argument is de dataset `Beoordelingen_eindproject`. Bereken daarna de dispersieparameter met de functie `dispersion()` met als argumenten het object van het regressiemodel `Dispersie` en `method = "Pearson"` om de dispersie te berekenen op basis van de chi-kwadraat toetsstatistiek die ook voor de significantie van het gehele model gebruikt wordt.
+Bereken de dispersieparameter om te bepalen of er sprake is van overdispersie. Voer eerst de *ordinale logistische regressie* uit omdat deze nodig is voor het toetsen van assumpties en sla het resultaat op. Interpreteer de resultaten pas na het toetsen van de assumpties.
+
+Fit eerst het model om vervolgens de dispersieparameter te kunnen berekenen. Gebruik de functie `vglm()` van het package `VGAM` met als eerste argument de regressievergelijking `Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer` met links van de tilde de afhankelijke variabele `Beoordeling` en rechts de drie onafhankelijke variabelen `Vooropleiding`, `Leeftijd` en `Gemiddeld_cijfer`. Het tweede argument is `family = cumulative(link = "logitlink", parallel = TRUE, reverse = FALSE)` met daarin `cumulative()` om aan te geven dat de cumulatieve kansen gebruikt worden in het model, `link = "logitlink"` om aan te geven dat er een logistische (logit) link-functie gebruikt wordt, `parallel = TRUE` om aan te geven dat de assumptie van proportional odds wordt toegepast op de regressiecoëfficiënten en `reverse = FALSE` om aan te geven dat de volgorde van de ordinale afhankelijke variabele van laag naar hoog gaat. Het derde argument is de dataset `Beoordelingen_eindproject`.
+
+Bereken vervolgens de dispersieparameter door de deviance te delen door de vrijheidsgraden van de residuën.
 <!-- ## /TEKSTBLOK: Dispersie1.R -->
 
 <!-- ## OPENBLOK: Dispersie2.R -->
 ```{r}
-# Fit het regressiemodel
-library(mclogit)
+library(VGAM)
 
-Dispersie <- mblogit(Vervolg ~  Nominaal + Gemiddeld_cijfer,
-                     Beoordelingen_eindproject)
+# Fit het model
+Dispersie <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
+                  family = cumulative(link = "logitlink", parallel = TRUE, reverse = FALSE),
+                  data = Beoordelingen_eindproject)
 
-dispersion(Dispersie, method = "Pearson")
+# Bereken de dispersieparameter
+Dispersie_parameter <- deviance(Dispersie) / Dispersie@df.residual
+
+# Print de dispersieparameter
+Dispersie_parameter
+
+# Indien nodig, verkrijg de significantie van de regressiecoëfficiënten na correctie voor de dispersie
+summary(vvv3, dispersion = Dispersie_parameter)
+
 ```
 <!-- ## /OPENBLOK: Dispersie2.R -->
 
+
+<!-- ## TEKSTBLOK: Dispersie3.R -->
+Er is sprake van een onderdispersie, aangezien de dispersieparameter (`r Round_and_format(Dispersieparameter)`) kleiner dan 1 is. Het verschil met 1 is echter niet zeer klein en bij onderdispersie wordt er in het algemeen geen correctie uitgevoerd. Voor de *ordinale logistische regressie* in deze casus wordt daarom geen correctie uitgevoerd vanwege onderdispersie.
+<!-- ## /TEKSTBLOK: Dispersie3.R -->
+
+## Proportional odds
+
+<!-- ## TEKSTBLOK: ProportionalOdds1.R -->
+Toets de assumptie van proportional odds door een model dat wel rekening houdt met deze assumptie te vergelijken met een model dat er geen rekening mee houdt. Fit eerst het model dat er wel rekening mee houdt . Gebruik de functie `vglm()` van het package `VGAM` met als eerste argument de regressievergelijking `Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer` met links van de tilde de afhankelijke variabele `Beoordeling` en rechts de drie onafhankelijke variabelen `Vooropleiding`, `Leeftijd` en `Gemiddeld_cijfer`. Het tweede argument is `family = cumulative(link = "logitlink", parallel = TRUE, reverse = FALSE)` met daarin `cumulative()` om aan te geven dat de cumulatieve kansen gebruikt worden in het model, `link = "logitlink"` om aan te geven dat er een logistische (logit) link-functie gebruikt wordt, `parallel = TRUE` om aan te geven dat de assumptie van proportional odds wordt toegepast op de regressiecoëfficiënten en `reverse = FALSE` om aan te geven dat de volgorde van de ordinale afhankelijke variabele van laag naar hoog gaat. Het derde argument is de dataset `Beoordelingen_eindproject`.
+
+Fit daarna het model dat er geen rekening mee houdt. De procedure hiervoor is precies hetzelfde, behalve dat er nu in de functie `cumulative()` het argument `parallel = FALSE` in plaats van `parallel = TRUE` gebruikt wordt. Toets daarna het verschil tussen beide modellen met een *likelihood ratio toets* met behulp van de functie `lrtest()` van het package `lmtest` met als argumenten het model dat wel (`Proportional_odds`) en geen (`Geen_proportional_odds`) rekening houdt met proportional odds.
+<!-- ## /TEKSTBLOK: ProportionalOdds1.R -->
+
+<!-- ## OPENBLOK: ProportionalOdds2.R -->
+```{r}
+library(VGAM)
+
+# Fit het model met en zonder de assumptie van proportional odds voor alle predictors
+Proportional_odds <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
+                  family = cumulative(link = "logitlink", parallel = TRUE, reverse = FALSE),
+                  data = Beoordelingen_eindproject)
+
+Geen_proportional_odds <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
+                  family = cumulative(link = "logitlink", parallel = FALSE, reverse = FALSE),
+                  data = Beoordelingen_eindproject)
+
+# Laad het package voor de likelihood ratio toets
+library(lmtest)
+
+# Toets de significantie van het verschil tussen beide modellen
+lrtest(Proportional_odds, Geen_proportional_odds)
+
+```
+<!-- ## /OPENBLOK: ProportionalOdds2.R -->
+
 <!-- ## CLOSEDBLOK: Dispersie3.R -->
 ```{r, echo = FALSE, message = FALSE}
-# Fit het regressiemodel
-library(mclogit)
+library(VGAM)
 
-Dispersie <- mblogit(Vervolg ~  Nominaal + Gemiddeld_cijfer,
-                          Beoordelingen_eindproject)
+# Fit het model met en zonder de assumptie van proportional odds voor alle predictors
+Proportional_odds <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
+                  family = cumulative(link = "logitlink", parallel = TRUE, reverse = FALSE),
+                  data = Beoordelingen_eindproject)
 
-Disp <- dispersion(Dispersie, method = "Pearson")
+Geen_proportional_odds <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
+                  family = cumulative(link = "logitlink", parallel = FALSE, reverse = FALSE),
+                  data = Beoordelingen_eindproject)
+
+# Laad het package voor de likelihood ratio toets
+library(lmtest)
+
+# Toets de significantie van het verschil tussen beide modellen
+PO_toets <- lrtest(Proportional_odds, Geen_proportional_odds)@Body
+PO_toets$`Pr(>Chisq)`
+
 ```
 <!-- ## /CLOSEDBLOK: Dispersie3.R -->
 
-<!-- ## TEKSTBLOK: Dispersie4.R -->
-Er is sprake van een onderdispersie, aangezien de dispersieparameter (`r Round_and_format(Disp)`) kleiner dan 1 is. Het verschil met 1 is echter niet zeer klein en bij onderdispersie wordt er in het algemeen geen correctie uitgevoerd. Voor de *ordinale logistische regressie* in deze casus wordt daarom geen correctie uitgevoerd vanwege onderdispersie.
-<!-- ## /TEKSTBLOK: Dispersie4.R -->
+<!-- ## TEKSTBLOK: ProportionalOdds4.R -->
+Uit de *likelihood ratio toets* blijkt dat er geen significant verschil is tussen beide modellen, *&chi;^2^* = `r Round_and_format(PO_toets$Chisq[2])`, *df* = `-PO_toets$Df[2]`, *p* = `r Round_and_format(PO_toets$`Pr(>Chisq)`,3)`. Er is dus voldaan aan de assumptie van proportional odds.
+
+Hoewel het in de huidige casus dus niet nodig is, wordt nu geïllustreerd wat de vervolgstappen zijn als er niet voldaan is aan de assumptie van proportional odds. Onderzoek eerst voor welke predictor(s) er niet voldaan is aan de assumptie van proportional odds door het model met proportional odds voor alle predictors te vergelijken met de modellen waarbij steeds voor één predictor geen proportional odds zijn. Fit deze modellen op vergelijkbare manier als hierboven en vergelijk de modellen ook op de manier die hierboven is omschreven. Bij een significant resultaat is er sprake van een schending van de assumptie van proportional odds voor die assumptie.
+<!-- ## /TEKSTBLOK: ProportionalOdds4.R -->
+
+<!-- ## OPENBLOK: ProportionalOdds5.R -->
+```{r}
+# Fit het model met en zonder de assumptie van proportional odds voor alle predictors
+Proportional_odds <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
+                  family = cumulative(link = "logitlink", parallel = TRUE, reverse = FALSE),
+                  data = Beoordelingen_eindproject)
+
+Geen_proportional_odds_vooropleiding <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
+                                             family = cumulative(link = "logitlink", parallel = FALSE ~ 1 + Vooropleiding, reverse = FALSE),
+                                             data = Beoordelingen_eindproject)
+
+Geen_proportional_odds_leeftijd <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
+                                             family = cumulative(link = "logitlink", parallel = FALSE ~ 1 + Leeftijd, reverse = FALSE),
+                                             data = Beoordelingen_eindproject)
+
+Geen_proportional_odds_gemiddeld_cijfer <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
+                                             family = cumulative(link = "logitlink", parallel = FALSE ~ 1 + Gemiddeld_cijfer, reverse = FALSE),
+                                             data = Beoordelingen_eindproject)
+
+# Toets de significantie van het verschil tussen beide modellen
+lrtest(Proportional_odds, Geen_proportional_odds_vooropleiding)
+lrtest(Proportional_odds, Geen_proportional_odds_leeftijd)
+lrtest(Proportional_odds, Geen_proportional_odds_gemiddeld_cijfer)
+
+# Bekijk de regressiecoëfficiënten van het model om te onderzoeken hoe groot de verschillen zijn
+summary(Geen_proportional_odds_gemiddeld_cijfer)
+```
+<!-- ## OPENBLOK: ProportionalOdds5.R -->
+
+Voor alle drie de predictors geeft de *likelihood ratio toets* geen significant resultaat. Dit betekent dat alle drie de predictors voldoen aan de assumptie van proportional odds. Stel dat een van de predictors voor een significante *likelihood ratio toets* zorgt, onderzoek dan (met behulp van de functie `summary()`) de verschillen tussen de regressiecoëfficiënten van de predictors voor de verschillende vergelijkingen met behulp van de functie `summary()` door de regressiecoëfficiënten te vergelijken qua grootte.
+
+
+
+
+
+
 
 # Uitvoering
 

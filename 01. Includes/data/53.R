@@ -138,49 +138,17 @@ rm(mChoices,
    Studentnummer,
    Gemiddeld_cijfer)
 
-library(VGAM)
+#library(VGAM)
 
-vvv3 <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer, 
-             family = cumulative(link = "logitlink", parallel = TRUE, reverse = FALSE),
-             data = Beoordelingen_eindproject)
-vvv4 <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer, 
-             family = cumulative(link = "logitlink", parallel = FALSE, reverse = FALSE),
-             data = Beoordelingen_eindproject)
-summary(vvv3)
-summary(vvv3, dispersion = 1.2)
-lrtest(vvv3)
-lrtest(vvv3,vvv4)
-deviance(vvv3)
-summary(vvv3, dispersion = 1.2)
-
-
-
-
-
-
-### OUD ####
-
-#library(MASS)
-
-#vvv <- polr(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
-#     Beoordelingen_eindproject, Hess = TRUE)
-
-#vvv2 <- polr(Beoordeling ~ 1,
-#     Beoordelingen_eindproject, Hess = TRUE)
-
-#summary(vvv)
-
-#library(ordinal)
-
-#vvv2 <- clm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
-#     data = Beoordelingen_eindproject)
-
-#summary(vvv2)
-#anova(vvv2)
-#lrtest(vvv2)
-#fitted(vvv2)
-#deviance(vvv2)
-
-#?clm
-#?PearsonTest
-
+#vvv3 <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer, 
+#             family = cumulative(link = "logitlink", parallel = TRUE, reverse = FALSE),
+#             data = Beoordelingen_eindproject)
+#vvv4 <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer, 
+#             family = cumulative(link = "logitlink", parallel = FALSE, reverse = FALSE),
+#             data = Beoordelingen_eindproject)
+#summary(vvv3)
+#summary(vvv3, dispersion = 1.2)
+#lrtest(vvv3)
+#lrtest(vvv3,vvv4)
+#eviance(vvv3)
+#summary(vvv3, dispersion = 1.2)

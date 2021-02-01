@@ -149,6 +149,10 @@ rm(N, Studentnummers_opties, Studentnummer_uniek, Studentnummer, Eetgelegenheid,
    Indexen_hoofdgebouw, Indexen_bestuursgebouw, Indexen_sportcentrum,
    Indexen_cultuurcentrum, Beoordeling)
 
+## Sla de datasets op
+write.csv(Beoordelingen_eetgelegenheden,
+          file = "05. Datasets/09_Beoordelingen_eetgelegenheden.csv")
+
 # https://statistics.laerd.com/spss-tutorials/friedman-test-using-spss-statistics.php
 # https://www.datanovia.com/en/lessons/friedman-test-in-r/
 # https://www.sheffield.ac.uk/polopoly_fs/1.714575!/file/stcp-marshall-FriedmanS.pdf

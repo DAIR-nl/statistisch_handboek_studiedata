@@ -64,7 +64,7 @@ Uren_studeren <- c(Uren_studeren_t0, Uren_studeren_t1)
 #Uren_studeren <- c(Uren_studeren_t0, Uren_studeren_t1)
 
 ## Maak studentnummer aan en verdubbel
-Studentnummer <-sample(300000:400000, (length(Uren_studeren_t0)))
+Studentnummer <- sample(300000:400000, (length(Uren_studeren_t0)))
 Studentnummer <- c(Studentnummer, Studentnummer)
 
 ## Maak meetmoment aan en voeg samen als factor
@@ -83,3 +83,10 @@ Uren_studeren_verschil_n30 <- Studielogboek$Uren_studeren[indices + nrow(Studiel
 rm(MU_verschil, SD_verschil, Uren_studeren_verschillen, Uren_studeren_t0,
    Uren_studeren_t1, Uren_studeren, Studentnummer, Meetmoment_t0, Meetmoment_t1,
    Meetmoment, indices)
+
+## Sla de datasets op
+write.csv(Studielogboek,
+          file = "05. Datasets/02_Studielogboek.csv")
+
+write.csv(Uren_studeren_verschil_n30,
+          file = "05. Datasets/02_Uren_studeren_verschil_n30.csv")

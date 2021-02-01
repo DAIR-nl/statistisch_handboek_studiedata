@@ -73,3 +73,6 @@ Alumni_jaarinkomens <- data.frame(Studentnummer, Meetmoment, Inkomen)
 rm(Alumni_inkomens_T1, Alumni_inkomens_T2, Inkomen, Meetmoment, Beta_verdeling, Opslag, 
         Studentnummer, volgorde)
 
+## Sla de datasets op
+write.csv(Alumni_jaarinkomens,
+          file = "05. Datasets/07_Alumni_jaarinkomens.csv")

@@ -56,7 +56,7 @@ Cijfers_2011_n30 <- Cijfers_2011_n30[Cijfers_2011_n30 <= 10 & Cijfers_2011_n30 >
 Cijfers_2011_n30 <- sapply(Cijfers_2011_n30, round, 3)
 
 ## Maak studentnummer aan
-Studentnummer <-sample(300000:400000, (length(c(Cijfers_2010, Cijfers_2011))))
+Studentnummer <- sample(300000:400000, (length(c(Cijfers_2010, Cijfers_2011))))
 
 Cijfers <- c(Cijfers_2010, Cijfers_2011)
 Cohort <- as.character(c(replicate(180, 2010), replicate(160, 2011)))
@@ -64,3 +64,13 @@ Cijfers_gemiddeld <- data.frame(Studentnummer, Cohort, Cijfers)
 
 # Verwijder objecten die niet nodig zijn
 rm(Cijfers, Cijfers_2010, Cijfers_2011, Cohort, mu, sigma, Studentnummer)
+
+## Sla de datasets op
+write.csv(Cijfers_gemiddeld,
+          file = "05. Datasets/03_Cijfers_gemiddeld.csv")
+
+write.csv(Cijfers_2011_n30,
+          file = "05. Datasets/03_Cijfers_2011_n30.csv")
+
+write.csv(Cijfers_2010_n30,
+          file = "05. Datasets/03_Cijfers_2010_n30.csv")

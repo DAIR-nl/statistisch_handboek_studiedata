@@ -49,9 +49,10 @@ Gemiddeld_cijfer_WNS <- apply(WNS_eindcijfers, 1, mean)
 
 Gemiddeld_cijfer_WNS_n30 <- sample(Gemiddeld_cijfer_WNS, 30)
 
-#write.csv(Gemiddeld_cijfer_WNS,
-#          file = "05. Datasets/01_Gemiddeld_cijfer_WNS.csv")
+## Sla de datasets op
+write.csv(Gemiddeld_cijfer_WNS,
+          file = "05. Datasets/01_Gemiddeld_cijfer_WNS.csv")
 
-#write.csv(Gemiddeld_cijfer_WNS_n30,
-#          file = "05. Datasets/01_Gemiddeld_cijfer_WNS_n30.csv")
+write.csv(Gemiddeld_cijfer_WNS_n30,
+          file = "05. Datasets/01_Gemiddeld_cijfer_WNS_n30.csv")
 

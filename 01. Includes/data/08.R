@@ -67,3 +67,7 @@ Resultaten_internationale_studenten,
 Punten_jaar2_inter, 
 Studentnr 
 )
+
+## Sla de datasets op
+write.csv(Studiepunten_studiejaar2,
+          file = "05. Datasets/08_Studiepunten_studiejaar2.csv")

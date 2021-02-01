@@ -52,7 +52,11 @@ Resultaten_Arbeidsrecht$EC_Jaar1[Vooropleiding == "Fiscaal Recht" | Vooropleidin
 Resultaten_Arbeidsrecht$EC_Jaar1[Vooropleiding == "Rechtsgeleerdheid"] <-
   Resultaten_Arbeidsrecht$EC_Jaar1[Vooropleiding == "Rechtsgeleerdheid"] - 6
 
-# Verwijder niet benodigde objecten
+## Sla de datasets op
+write.csv(Resultaten_Arbeidsrecht,
+          file = "05. Datasets/10_Resultaten_Arbeidsrecht.csv")
+
+## Verwijder niet benodigde objecten
 rm(
 Seed, 
 Vooropleiding, 

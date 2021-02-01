@@ -564,21 +564,6 @@ library(mclogit)
 
 Dispersie <- mblogit(Vervolg ~  Nominaal + Gemiddeld_cijfer,
                      Fysiotherapie_Vervolg)
-deviance(Dispersie)/1200
-deviance(Dispersie)/0.9101231
-
-Dispersie <- mblogit(Vervolg ~  as.factor(1:600),
-                     Fysiotherapie_Vervolg)
-summary(Dispersie)
-
-Dispersie$df.residual
-Dispersie$deviance
-Dispersie$
-getAnywhere(dispersion)
-UseMethod("dispersion")
-
-dispersion(Dispersie, method = "Deviance")
-deviance(Dispersie) / Dispersie$df.residual
 
 dispersion(Dispersie, method = "Pearson")
 ```

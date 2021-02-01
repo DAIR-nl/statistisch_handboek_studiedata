@@ -1,5 +1,5 @@
 ---
-title: "ordinale logistische regressie"
+title: "Ordinale logistische regressie"
 output:
   html_document:
     theme: lumen
@@ -85,7 +85,7 @@ met $y_i$ als afhankelijke variabele, $\beta_0$ als intercept, $x_{1i}$ en $x_{2
 
 Bij [multipele lineaire regressie](28-Multipele-lineaire-regressie-R.html) wordt een continue afhankelijke variabele voorspeld op basis van een aantal predictors. Daarnaast is er [logistische regressie](41-Logistische-regressie-R.html) waarbij de afhankelijke variabele binair is. Bij [logistische regressie](41-Logistische-regressie-R.html) wordt de kans op een van beide mogelijkheden van de binaire variabele voorspeld. Als de afhankelijke variabele Uitval in het eerste studiejaar bestaat uit de mogelijkheden Uitval en Geen Uitval, dan kan met [logistische regressie](41-Logistische-regressie-R.html) de kans op het uitvallen van de student voorspeld worden. Voor meer informatie, zie de bijbehorende [toetspagina](41-Logistische-regressie-R.html).
 
-Ook als de afhankelijke variabele categorisch is en meer dan twee mogelijkheden bevat, is het mogelijk een vorm van regressie uit te voeren. De gebruikte techniek hangt dan echter af van het meetniveau van de afhankelijke variabele. Als het meetniveau nominaal[^14] is, is [multinomiale logistische regressie](47-Multinomiale-logistische-regressie-R.html) de juiste techniek. Een voorbeeld van een nominale afhankelijke variabele is het vervolg na een hbo bachelor met als mogelijkheden een hbo master, een wo master en direct aan het werk gaan. Als het meetniveau ordinaal is, dan is *ordinale logistische regressie* de juiste techniek. Bij *ordinale logistische regressie* wordt een ordinale afhankelijke variabele voorspeld op basis van een aantal predictors. Bij *ordinale logistische regressie* wordt er rekening gehouden met de volgorde in de mogelijkheden van de afhankelijke variabele. Technisch gezien wordt er voor elke mogelijkheid de kans voorspeld dat de deelnemer in in die mogelijkheid valt of in een mogelijkheid lager in de rangorde. Voor de huidige casus is er dus een regressievergelijking om de kans te voorspellen op een onvoldoende, een voldoende of lager (voldoende + onvoldoende) en een goed of lager (goed + voldoende + onvoldoende). Voor de hoogste mogelijkheid is er geen regressievergelijking, want de kans dat iemand in de hoogste mogelijkheid of lager valt is gelijk aan 1. Immers, een deelnemer valt altijd in één van de mogelijkheden en alle mogelijkheden zijn dan beschikbaar. In de huidige casus zou het gaan om de kans dat een student een uitstekend of lager, dus een uitstekend, goed, voldoende of onvoldoende behaald. Dit zijn alle mogelijke resultaten van het eindproject, dus is de kans altijd gelijk aan 1.
+Ook als de afhankelijke variabele categorisch is en meer dan twee mogelijkheden bevat, is het mogelijk een vorm van regressie uit te voeren. De gebruikte techniek hangt dan echter af van het meetniveau van de afhankelijke variabele. Als het meetniveau nominaal[^14] is, is [multinomiale logistische regressie](47-Multinomiale-logistische-regressie-R.html) de juiste techniek. Een voorbeeld van een nominale afhankelijke variabele is het vervolg na een hbo bachelor met als mogelijkheden een hbo master, een wo master en direct aan het werk gaan. Als het meetniveau ordinaal[^13] is, dan is *ordinale logistische regressie* de juiste techniek. Bij *ordinale logistische regressie* wordt een ordinale afhankelijke variabele voorspeld op basis van een aantal predictors. Bij *ordinale logistische regressie* wordt er rekening gehouden met de volgorde in de mogelijkheden van de afhankelijke variabele. Technisch gezien wordt er voor elke mogelijkheid de kans voorspeld dat de deelnemer in in die mogelijkheid valt of in een mogelijkheid lager in de rangorde. Voor de huidige casus is er dus een regressievergelijking om de kans te voorspellen op een onvoldoende, een voldoende of lager (voldoende + onvoldoende) en een goed of lager (goed + voldoende + onvoldoende). Voor de hoogste mogelijkheid is er geen regressievergelijking, want de kans dat iemand in de hoogste mogelijkheid of lager valt is gelijk aan 1. Immers, een deelnemer valt altijd in één van de mogelijkheden en alle mogelijkheden zijn dan beschikbaar. In de huidige casus zou het gaan om de kans dat een student een uitstekend of lager, dus een uitstekend, goed, voldoende of onvoldoende behaald. Dit zijn alle mogelijke resultaten van het eindproject, dus is de kans altijd gelijk aan 1.[^20]
 
 Voor de huidige casus worden de volgende drie regressievergelijkingen opgesteld:
 
@@ -106,7 +106,7 @@ Bij *ordinale logistische regressie* wordt een voorspelling gemaakt van de logar
 
 $$ \log(\frac{P(y_i \leq j)}{P(y_i > j)}) = \beta_{0,j} + \beta_{1} * Vooropleiding_{i} + \beta_{2} * Gemiddeld Cijfer_{i} + \beta_{3} * Leeftijd_{i} + e_{i,j} $$
 
-waarbij $y_i$ de observatie op de afhankelijke variabele $y$ voor deelnemer $i$ is, $j$ de mogelijkheid van de afhankelijke variabele is en $P()$ de kans aangeeft. De breuk van twee kansen wordt ook wel een odds genoemd, deze term wordt verderop in de toetspagina uitgewerkt in de sectie Individuele predictors toetsen en interpreteren met de Wald toets. Daarnaast wordt de kans dat een observatie gelijk aan kleiner is dan een bepaalde mogelijkheid een cumulatieve kans genoemd. Bij *ordinale logistische regressie* wordt dus de log-odds van de cumulatieve kans voorspeld met een regressievergelijking.
+waarbij $y_i$ de observatie op de afhankelijke variabele $y$ voor deelnemer $i$ is, $j$ de mogelijkheid van de afhankelijke variabele is en $P()$ de kans aangeeft. De breuk van twee kansen wordt ook wel een odds genoemd, deze term wordt verderop in de toetspagina uitgewerkt in de sectie Individuele predictors toetsen en interpreteren met de Wald toets. Daarnaast wordt de kans dat een observatie gelijk aan kleiner is dan een bepaalde mogelijkheid een cumulatieve kans genoemd. Bij *ordinale logistische regressie* wordt dus de log-odds van de cumulatieve kans voorspeld met een regressievergelijking.[^20]
 
 Voor elke mogelijkheid van de afhankelijke variabele behalve de hoogste mogelijkheid is er een regressievergelijking opgesteld. In de huidige casus zijn de regressievergelijkingen
 
@@ -117,7 +117,7 @@ $$ \log(\frac{P(B_i \leq Goed)}{P(B_i > Goed)})  = \beta_{0,3} + \beta_{1} * Voo
 
 waarbij $P(B_i \leq Onvoldoende)$ de kans is dat de beoordeling $B_i$ van deelnemer $i$ gelijk of lager is dan een onvoelde (en waarbij de andere kansen op vergelijkbare wijze zijn weergegeven),  $\beta_{0,1}$ als intercept van de eerste vergelijking, $Vooropleiding_{i}$, $GemiddeldCijfer_{i}$ en $Leeftijd_{i}$ als predictors, $\beta_{1}$, $\beta_{2}$ en $\beta_{3}$ als regressiecoefficiënten van de predictors, $e_{i,1}$ als residu of error van de eerste vergelijking en $i$ als indicator van de deelnemer uit de steekproef. Dezelfde notatie geldt ook voor de tweede en derde vergelijking. In feite is er dus een [logistische regressie](41-Logistische-regressie-R.html)-vergelijking voor elke log-odds van de cumulatieve kans. De hoogste mogelijkheid heeft geen vergelijking omdat de cumulatieve kans daar gelijk is aan 1. Immers, de deelnemer heeft altijd een observatie die gelijk aan of lager is dan de hoogste mogelijkheid. Zoals eerder genoemd schrijft de *proportional odds assumptie* voor dat de regressiecoëfficiënten van de predictors voor elke vergelijking hetzelfde zijn. Bij elke cumulatieve kans heeft de predictor dus hetzelfde effect.
 
-De regressievergelijking geeft niet direct een voorspelling van de cumulatievenkans op de mogelijkheid van de ordinale afhankelijke variabele, maar een voorspelling van de logaritme van de odds op de cumulatieve kans. De cumulatieve kans is getransformeerd met behulp van een logit-transformatie. Bij [multipele lineaire regressie](28-Multipele-lineaire-regressie-R.html) is er een directe lineaire relatie tussen de afhankelijke variabele en de predictors. Bij *ordinale logistische regressie* is er een lineaire relatie tussen de logit van de cumulatieve kans op de mogelijkheid en de predictors. De interesse gaat echter uit naar de kans op een bepaalde mogelijkheid van de ordinale afhankelijke variabele en niet naar de logit. Er is dus geen directe lineaire relatie tussen de kans op een mogelijkheid en de predictors. De logit transformatie is als het ware de intermediair die zorgt voor de lineaire relatie en wordt daarom ook wel een link-functie genoemd.
+De regressievergelijking geeft niet direct een voorspelling van de cumulatievenkans op de mogelijkheid van de ordinale afhankelijke variabele, maar een voorspelling van de logaritme van de odds op de cumulatieve kans. De cumulatieve kans is getransformeerd met behulp van een logit-transformatie. Bij [multipele lineaire regressie](28-Multipele-lineaire-regressie-R.html) is er een directe lineaire relatie tussen de afhankelijke variabele en de predictors. Bij *ordinale logistische regressie* is er een lineaire relatie tussen de logit van de cumulatieve kans op de mogelijkheid en de predictors. De interesse gaat echter uit naar de kans op een bepaalde mogelijkheid van de ordinale afhankelijke variabele en niet naar de logit. Er is dus geen directe lineaire relatie tussen de kans op een mogelijkheid en de predictors. De logit transformatie is als het ware de intermediair die zorgt voor de lineaire relatie en wordt daarom ook wel een link-functie genoemd.[^20]
 
 Op basis van de logits is het wel mogelijk om de cumulatieve kansen op de verschillende mogelijkheden en de 'gewone' kansen op de mogelijkheden van de ordinale afhankelijke variabele uit te rekenen. Voor een algemene *ordinale logistische regressie* met twee predictoren is de formule voor de cumulatieve kansen
 
@@ -175,8 +175,8 @@ Op basis van de classificaties en de geobserveerde waarden kan een classificatie
 
 Op basis van de classificatietabel kan berekend worden welk percentage van de deelnemers correct geclassificeerd is. Dit wordt de accuraatheid genoemd en is te berekenen door het aantal correct geclassificeerde deelnemers te delen door het totaal aantal deelnemers. In de huidige casus is de accuraatheid $\frac{70 + 60 + 100 + 80}{680} = 0,456$, dus 45,6% van de deelnemers is correct geclassificeerd.[^12]
 
-||                      | Voorspelling    | |
-|-------------| -------------------- | -------------| ------------| ------------| 
+||                      | Voorspelling    | | | |
+|-------------| -------------------- | -------------| ------------| ------------| ------------| 
 ||                            | Onvoldoende | Voldoende | Goed | Uitstekend |
 |**Observaties**| Onvoldoende  | **70**         | 40        | 20  | 30 |
 |               | Voldoende    | 10         | **60**        | 20  | 80 |
@@ -263,21 +263,21 @@ Het gevolg van de assumptie voor observaties per variabele zijn dat er extreem h
 
 ## Overdispersie
 
-Bij *ordinale logistische regressie* wordt aangenomen dat de residuën niet gecorreleerd zijn. Dit is in principe het geval als alle deelnemers willekeurig in de steekproef zijn opgenomen. Als deelnemers meerdere keren gemeten zijn of gematcht zijn met andere deelnemers, dan is hier geen sprake van en zijn er waarschijnlijk gecorreleerde residuën. *Ordinale logistische regressie* is dan niet de juiste analysemethode, maar *multilevel ordinale logistische regressie* kan hiervoor wel gebruikt worden. Bij *ordinale logistische regressie* wordt daarom getoetst of er overdispersie is. Overdispersie betekent dat de variantie in de voorspelde kansen groter is dan op basis van het model wordt verwacht. Het gevolg is dat de standaardfouten te laag zijn en er een hogere kans is op type I fouten (onterecht verwerpen van de nulhypothese) bij het toetsen van de significantie van regressiecoëfficiënten, de significantie van het hele model en de significantie van het vergelijken van verschillende modellen onderling met de *likelihood ratio toets*. [^20]<sup>,</sup>[^6]
+Bij *ordinale logistische regressie* wordt aangenomen dat de residuën niet gecorreleerd zijn. Dit is in principe het geval als alle deelnemers willekeurig in de steekproef zijn opgenomen. Als deelnemers meerdere keren gemeten zijn of gematcht zijn met andere deelnemers, dan is hier geen sprake van en zijn er waarschijnlijk gecorreleerde residuën. *Ordinale logistische regressie* is dan niet de juiste analysemethode, maar *multilevel ordinale logistische regressie* kan hiervoor wel gebruikt worden. Bij *ordinale logistische regressie* wordt daarom getoetst of er overdispersie is. Overdispersie betekent dat de variantie in de voorspelde kansen groter is dan op basis van het model wordt verwacht. Het gevolg is dat de standaardfouten te laag zijn en er een hogere kans is op type I fouten (onterecht verwerpen van de nulhypothese) bij het toetsen van de significantie van regressiecoëfficiënten, de significantie van het hele model en de significantie van het vergelijken van verschillende modellen onderling met de *likelihood ratio toets*.[^6]<sup>,</sup>[^22]
 
-De dispersieparameter geeft aan of er sprake is van overdispersie. De dispersieparameter hoort in de buurt van 1 te zitten. Als de parameter hoger dan 2 is, is er sprake van overdispersie. De gevolgen van overdispersie voor het toetsen van regressiecoëfficiënten kunnen verholpen worden door de standaardfouten van de regressiecoëfficiënten te herschalen op basis van de overdispersie. Bij het toetsen van het gehele model of het vergelijken van modellen onderling worden de waarden van de chi-kwadraat toetsstatistiek gedeeld door de dispersieparameter en wordt de p-waarde berekend op basis van de herschaalde toetsstatistiek. Het onderzoeken van de dispersieparameter en het corrigeren in het geval van overdispersie worden toegelicht bij het toetsen van de assumpties in deze toetspagina.[^20]
+De dispersieparameter geeft aan of er sprake is van overdispersie. De dispersieparameter hoort in de buurt van 1 te zitten. Als de parameter hoger dan 2 is, is er sprake van overdispersie. De gevolgen van overdispersie voor het toetsen van regressiecoëfficiënten kunnen verholpen worden door de standaardfouten van de regressiecoëfficiënten te herschalen op basis van de overdispersie. Bij het toetsen van het gehele model of het vergelijken van modellen onderling worden de waarden van de chi-kwadraat toetsstatistiek gedeeld door de dispersieparameter en wordt de p-waarde berekend op basis van de herschaalde toetsstatistiek. Het onderzoeken van de dispersieparameter en het corrigeren in het geval van overdispersie worden toegelicht bij het toetsen van de assumpties in deze toetspagina.[^6]<sup>,</sup>[^22]
 
-Er kan ook sprake zijn van onderdispersie: de situatie waarin de variantie in voorspelde kansen kleiner is dan op basis van het model wordt verwacht. Dit leidt tot meer conservatieve toetsen en een erg lage kans op type I fouten. Deze situatie is minder erg dan overdispersie en er wordt in dit geval meestal geen correctie uitgevoerd. Dezelfde correctie als bij overdispersie kan echter wel uitgevoerd worden en zorgt er in dit geval voor dat de significantietoetsen minder conservatief worden.[^20]<sup>,</sup>[^6]
+Er kan ook sprake zijn van onderdispersie: de situatie waarin de variantie in voorspelde kansen kleiner is dan op basis van het model wordt verwacht. Dit leidt tot meer conservatieve toetsen en een erg lage kans op type I fouten. Deze situatie is minder erg dan overdispersie en er wordt in dit geval meestal geen correctie uitgevoerd. Dezelfde correctie als bij overdispersie kan echter wel uitgevoerd worden en zorgt er in dit geval voor dat de significantietoetsen minder conservatief worden.[^6]<sup>,</sup>[^22]
 
 ## Proportional odds
 
-Bij *ordinale logistische regressie* is er voor elke cumulatieve kans een regressievergelijking. Voor elke regressievergelijking wordt een intercept en een regressiecoëfficiënt voor elke predictor geschat. De intercepten zijn verschillend voor elke regressievergelijking. De regressiecoëfficiënten kunnen echter hetzelfde zijn voor elke regressievergelijking. Dit betekent dat de predictor hetzelfde effect heeft op elke cumulatieve kans. Voor de huidige casus zou dit betekenen dat de predictors Vooropleiding, Leeftijd en Gemiddeld_cijfer hetzelfde effect hebben op de cumulatieve kans op een onvoldoende, een voldoende of een goed. Dit wordt de assumptie van proportional odds genoemd. Immers, elke predictor heeft hetzelfde effect op de odds (gebaseerd op de cumulatieve kans) voor elke mogelijkheid van de afhankelijke variabele.
+Bij *ordinale logistische regressie* is er voor elke cumulatieve kans een regressievergelijking. Voor elke regressievergelijking wordt een intercept en een regressiecoëfficiënt voor elke predictor geschat. De intercepten zijn verschillend voor elke regressievergelijking. De regressiecoëfficiënten kunnen echter hetzelfde zijn voor elke regressievergelijking. Dit betekent dat de predictor hetzelfde effect heeft op elke cumulatieve kans. Voor de huidige casus zou dit betekenen dat de predictors Vooropleiding, Leeftijd en Gemiddeld_cijfer hetzelfde effect hebben op de cumulatieve kans op een onvoldoende, een voldoende of een goed. Dit wordt de assumptie van proportional odds genoemd. Immers, elke predictor heeft hetzelfde effect op de odds (gebaseerd op de cumulatieve kans) voor elke mogelijkheid van de afhankelijke variabele.[^20]<sup>,</sup>[^23]
 
 Het alternatief voor de proportional odds assumptie is dat elke regressievergelijking een individuele regressiecoëfficiënt heeft voor een (of meerdere) predictor(s). Dit wordt het *partial proportional odds* model genoemd. De relatie tussen de predictor op de afhankelijke variabele hangt dan af van de mogelijkheid van de afhankelijke variabele, waardoor de relatie lastiger te interpreteren is.
 
 De assumptie van proportional odds wordt getoetst door een model dat voldoet aan de assumptie van proportional odds te vergelijken met een model waarin er voor alle predictors niet voldaan is aan de assumptie. Oftewel, het is te toetsen door een model met per vergelijking dezelfde regressiecoëfficiënten voor elke predictor te vergelijken met een model met per vergelijking individuele regressiecoëfficiënten voor elke predictor. De toetsing wordt gedaan met behulp van een *likelihood ratio toets*. Als deze significant is, betekent het dat het model met individuele regressiecoëfficiënten significant beter is. Als deze niet significant is, is er geen verschil tussen beide modellen en is er voldaan aan de assumptie van proportional odds.
 
-Bij een significante *likelihood ratio toets* zijn er een aantal vervolgstappen om de assumptie verder te onderzoeken. Voer eerst voor elke predictor een *likelihood ratio toets* uit waarin een model dat voldoet aan de assumptie van proportional odds vergeleken wordt met een model waarin alleen voor die specifieke predictor individuele regressiecoëfficiënten zijn voor elke vergelijking. Op deze manier kan onderzocht worden voor welke specifieke predictor(s) er niet voldaan is aan de assumptie van proportional odds. De predictors waarbij er een significante uitkomst van de *likelihood ratio toets* is, moeten nader onderzocht worden. Fit een model met individuele regressiecoëfficiënten voor alle predictors met een significante *likelihood ratio toets* en onderzoek de grootte van de regressiecoëfficiënten voor deze predictors. In het algemeen wordt aangenomen dat kleine verschillen tussen de waarden van de regressiecoëfficiënten geen reden zijn om van het *proportional odds* model af te wijken. De *likelihood ratio toets* kan namelijk ook voor kleine verschillen een significant resultaat geven, terwijl dat niet per se betekent dat het **proportional odds** model echt verkeerd is. Er zijn geen criteria voor wat een klein of groot verschil is, dit wordt overgelaten aan de beoordeling van de onderzoeker.
+Bij een significante *likelihood ratio toets* zijn er een aantal vervolgstappen om de assumptie verder te onderzoeken. Voer eerst voor elke predictor een *likelihood ratio toets* uit waarin een model dat voldoet aan de assumptie van proportional odds vergeleken wordt met een model waarin alleen voor die specifieke predictor individuele regressiecoëfficiënten zijn voor elke vergelijking. Op deze manier kan onderzocht worden voor welke specifieke predictor(s) er niet voldaan is aan de assumptie van proportional odds. De predictors waarbij er een significante uitkomst van de *likelihood ratio toets* is, moeten nader onderzocht worden. Fit een model met individuele regressiecoëfficiënten voor alle predictors met een significante *likelihood ratio toets* en onderzoek de grootte van de regressiecoëfficiënten voor deze predictors. In het algemeen wordt aangenomen dat kleine verschillen tussen de waarden van de regressiecoëfficiënten geen reden zijn om van het *proportional odds* model af te wijken. De *likelihood ratio toets* kan namelijk ook voor kleine verschillen een significant resultaat geven, terwijl dat niet per se betekent dat het *proportional odds* model echt verkeerd is. Er zijn geen criteria voor wat een klein of groot verschil is, dit wordt overgelaten aan de beoordeling van de onderzoeker.
 
 # Toetsing assumpties
 
@@ -342,7 +342,7 @@ Onderzoek of er outliers zijn met behulp van de gestandaardiseerde residuën. Vo
 
 <!-- ## OPENBLOK: Outlier6.R -->
 ```{r}
-## Maak datasets voor beide logistische regressievergelijkingen
+## Maak datasets voor de logistische regressievergelijkingen
 Beoordelingen_eindproject$Onvoldoende_en_lager <- Beoordelingen_eindproject$Beoordeling == "Onvoldoende"
 Beoordelingen_eindproject$Voldoende_en_lager <- Beoordelingen_eindproject$Beoordeling == "Onvoldoende" | Beoordelingen_eindproject$Beoordeling == "Voldoende"
 Beoordelingen_eindproject$Goed_en_lager <- Beoordelingen_eindproject$Beoordeling == "Onvoldoende" | Beoordelingen_eindproject$Beoordeling == "Voldoende" | Beoordelingen_eindproject$Beoordeling == "Goed"
@@ -393,7 +393,7 @@ Bereken daarna de criteriumwaarde op basis van het gewenste significantieniveau 
 
 <!-- ## OPENBLOK: Outlier8.R -->
 ```{r}
-# Zet Vooropleiding om in een numerieke variabele met een 1 voor een vrouw en 0 voor een man
+# Zet Vooropleiding om in een numerieke variabele met een 1 voor een vwo en 0 voor hbo-p
 Beoordelingen_eindproject$Vooropleiding_dummy <- as.numeric(Beoordelingen_eindproject$Vooropleiding == "vwo")
 
 # Maak een subset van de dataset met alle predictors
@@ -527,6 +527,7 @@ Onderzoek of er sprake is van multicollineariteit met behulp van Variance Inflat
 ```{r}
 library(DescTools)
 
+# Voer een lineaire regressie uit
 Multicollineariteit <- lm(log(Gemiddeld_cijfer) ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
                            Beoordelingen_eindproject)
 
@@ -543,7 +544,7 @@ Onderzoek met behulp van kruistabellen de assumptie over observaties per variabe
 
 <!-- ## OPENBLOK: ObsperVar1.R -->
 ```{r}
-# Maak de kruistabel voor de predictor Nominaal
+# Maak de kruistabel voor de predictor Vooropleiding
 with(Beoordelingen_eindproject,
      table(Vooropleiding,
            Beoordeling))
@@ -578,15 +579,15 @@ Dispersie_parameter <- deviance(Dispersie) / Dispersie@df.residual
 # Print de dispersieparameter
 Dispersie_parameter
 
-# Indien nodig, verkrijg de significantie van de regressiecoëfficiënten na correctie voor de dispersie
-summary(vvv3, dispersion = Dispersie_parameter)
+# Indien nodig, verkrijg de significantie van de regressiecoëfficiënten na een correctie voor de dispersie
+summary(Dispersie, dispersion = Dispersie_parameter)
 
 ```
 <!-- ## /OPENBLOK: Dispersie2.R -->
 
 
 <!-- ## TEKSTBLOK: Dispersie3.R -->
-Er is sprake van een onderdispersie, aangezien de dispersieparameter (`r Round_and_format(Dispersieparameter)`) kleiner dan 1 is. Het verschil met 1 is echter niet zeer klein en bij onderdispersie wordt er in het algemeen geen correctie uitgevoerd. Voor de *ordinale logistische regressie* in deze casus wordt daarom geen correctie uitgevoerd vanwege onderdispersie.
+Er is sprake van een onderdispersie, aangezien de dispersieparameter (`r Round_and_format(Dispersie_parameter)`) kleiner dan 1 is. Het verschil met 1 is echter niet zeer klein en bij onderdispersie wordt er in het algemeen geen correctie uitgevoerd. Voor de *ordinale logistische regressie* in deze casus wordt daarom geen correctie uitgevoerd vanwege onderdispersie.
 <!-- ## /TEKSTBLOK: Dispersie3.R -->
 
 ## Proportional odds
@@ -594,7 +595,7 @@ Er is sprake van een onderdispersie, aangezien de dispersieparameter (`r Round_a
 <!-- ## TEKSTBLOK: ProportionalOdds1.R -->
 Toets de assumptie van *proportional odds* door een model dat wel rekening houdt met deze assumptie te vergelijken met een model dat er geen rekening mee houdt. Fit eerst het model dat er wel rekening mee houdt . Gebruik de functie `vglm()` van het package `VGAM` met als eerste argument de regressievergelijking `Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer` met links van de tilde de afhankelijke variabele `Beoordeling` en rechts de drie onafhankelijke variabelen `Vooropleiding`, `Leeftijd` en `Gemiddeld_cijfer`. Het tweede argument is `family = cumulative(link = "logitlink", parallel = TRUE, reverse = FALSE)` met daarin `cumulative()` om aan te geven dat de cumulatieve kansen gebruikt worden in het model, `link = "logitlink"` om aan te geven dat er een logistische (logit) link-functie gebruikt wordt, `parallel = TRUE` om aan te geven dat de assumptie van *proportional odds* wordt toegepast op de regressiecoëfficiënten en `reverse = FALSE` om aan te geven dat de volgorde van de ordinale afhankelijke variabele van laag naar hoog gaat. Het derde argument is de dataset `Beoordelingen_eindproject`.
 
-Fit daarna het model dat er geen rekening mee houdt. De procedure hiervoor is precies hetzelfde, behalve dat er nu in de functie `cumulative()` het argument `parallel = FALSE` in plaats van `parallel = TRUE` gebruikt wordt. Toets daarna het verschil tussen beide modellen met een *likelihood ratio toets* met behulp van de functie `lrtest()` van het package `lmtest` met als argumenten het model dat wel (`Proportional_odds`) en geen (`Geen_proportional_odds`) rekening houdt met *proportional odds*.
+Fit daarna het model dat er geen rekening mee houdt. De procedure hiervoor is precies hetzelfde, behalve dat er nu in de functie `cumulative()` het argument `parallel = FALSE` in plaats van `parallel = TRUE` gebruikt wordt. Toets daarna het verschil tussen beide modellen met een *likelihood ratio toets* met behulp van de functie `VGAM::lrtest()` van het package `VGAM` met als argumenten het model dat wel (`Proportional_odds`) en geen (`Geen_proportional_odds`) rekening houdt met *proportional odds*.
 <!-- ## /TEKSTBLOK: ProportionalOdds1.R -->
 
 <!-- ## OPENBLOK: ProportionalOdds2.R -->
@@ -610,11 +611,8 @@ Geen_proportional_odds <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddel
                   family = cumulative(link = "logitlink", parallel = FALSE, reverse = FALSE),
                   data = Beoordelingen_eindproject)
 
-# Laad het package voor de likelihood ratio toets
-library(lmtest)
-
 # Toets de significantie van het verschil tussen beide modellen
-lrtest(Proportional_odds, Geen_proportional_odds)
+VGAM::lrtest(Proportional_odds, Geen_proportional_odds)
 
 ```
 <!-- ## /OPENBLOK: ProportionalOdds2.R -->
@@ -632,18 +630,17 @@ Geen_proportional_odds <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddel
                   family = cumulative(link = "logitlink", parallel = FALSE, reverse = FALSE),
                   data = Beoordelingen_eindproject)
 
-# Laad het package voor de likelihood ratio toets
-library(lmtest)
-
 # Toets de significantie van het verschil tussen beide modellen
-PO_toets <- lrtest(Proportional_odds, Geen_proportional_odds)@Body
-PO_toets$`Pr(>Chisq)`
+PO_toets <- VGAM::lrtest(Proportional_odds, Geen_proportional_odds)@Body
+PO_toets_chi <- PO_toets$Chisq[2]
+PO_toets_df <- -1 * PO_toets$Df[2]
+PO_toets_p <- PO_toets$`Pr(>Chisq)`[2]
 
 ```
 <!-- ## /CLOSEDBLOK: Dispersie3.R -->
 
 <!-- ## TEKSTBLOK: ProportionalOdds4.R -->
-Uit de *likelihood ratio toets* blijkt dat er geen significant verschil is tussen beide modellen, *&chi;^2^* = `r Round_and_format(PO_toets$Chisq[2])`, *df* = `-PO_toets$Df[2]`, *p* = `r Round_and_format(PO_toets$`Pr(>Chisq)`,3)`. Er is dus voldaan aan de assumptie van *proportional odds*.
+Uit de *likelihood ratio toets* blijkt dat er geen significant verschil is tussen beide modellen, *&chi;^2^* = `r Round_and_format(PO_toets$Chisq[2])`, *df* = `r PO_toets_df`, *p* = `r Round_and_format(PO_toets_p,3)`. Er is dus voldaan aan de assumptie van *proportional odds*.
 
 Hoewel het in de huidige casus dus niet nodig is, wordt nu geïllustreerd wat de vervolgstappen zijn als er niet voldaan is aan de assumptie van *proportional odds*. Onderzoek eerst voor welke predictor(s) er niet voldaan is aan de assumptie van *proportional odds* door het model met *proportional odds* voor alle predictors te vergelijken met de modellen waarbij steeds voor één predictor geen *proportional odds* zijn. Fit deze modellen op vergelijkbare manier als hierboven en vergelijk de modellen ook op de manier die hierboven is omschreven. Bij een significant resultaat is er sprake van een schending van de assumptie van *proportional odds* voor die assumptie.
 <!-- ## /TEKSTBLOK: ProportionalOdds4.R -->
@@ -668,9 +665,9 @@ Geen_proportional_odds_gemiddeld_cijfer <- vglm(Beoordeling ~ Vooropleiding + Le
                                              data = Beoordelingen_eindproject)
 
 # Toets de significantie van het verschil tussen beide modellen
-lrtest(Proportional_odds, Geen_proportional_odds_vooropleiding)
-lrtest(Proportional_odds, Geen_proportional_odds_leeftijd)
-lrtest(Proportional_odds, Geen_proportional_odds_gemiddeld_cijfer)
+VGAM::lrtest(Proportional_odds, Geen_proportional_odds_vooropleiding)
+VGAM::lrtest(Proportional_odds, Geen_proportional_odds_leeftijd)
+VGAM::lrtest(Proportional_odds, Geen_proportional_odds_gemiddeld_cijfer)
 
 # Bekijk de regressiecoëfficiënten van het model om te onderzoeken hoe groot de verschillen zijn
 summary(Geen_proportional_odds_gemiddeld_cijfer)
@@ -684,7 +681,7 @@ Voor alle drie de predictors geeft de *likelihood ratio toets* geen significant 
 <!-- ## TEKSTBLOK: Uitvoering1.R -->
 Als alle assumpties zijn getoetst en aan alle assumpties is voldaan, kan de *ordinale logistische regressie* uitgevoerd worden. Gebruik de functie `vglm()` van het package `VGAM` met als eerste argument de regressievergelijking `Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer` met links van de tilde de afhankelijke variabele `Beoordeling` en rechts de drie onafhankelijke variabelen `Vooropleiding`, `Leeftijd` en `Gemiddeld_cijfer`. Het tweede argument is `family = cumulative(link = "logitlink", parallel = TRUE, reverse = FALSE)` met daarin `cumulative()` om aan te geven dat de cumulatieve kansen gebruikt worden in het model, `link = "logitlink"` om aan te geven dat er een logistische (logit) link-functie gebruikt wordt, `parallel = TRUE` om aan te geven dat de assumptie van *proportional odds* wordt toegepast op de regressiecoëfficiënten en `reverse = FALSE` om aan te geven dat de volgorde van de ordinale afhankelijke variabele van laag naar hoog gaat. Het derde argument is de dataset `Beoordelingen_eindproject`. 
 
-Voer daarna de *likelihood ratio toets* uit met behulp van de functie `lrtest()` van het package `lmtest` met als argument het object van het regressiemodel (`Regressiemodel`). Sla het model op en presenteer vervolgens een overzicht van de resultaten met de functie `summary()`. Bepaal de 95%-betrouwbaarheidsintervallen van de regressiecoëfficiënten met de functie `confint()`. Bereken ten slotte de Nagelkerke $R^2$ met behulp van een zelfgeschreven functie[^15].
+Voer daarna de *likelihood ratio toets* uit met behulp van de functie `VGAM::lrtest()` van het package `VGAM` met als argument het object van het regressiemodel (`Regressiemodel`). Sla het model op en presenteer vervolgens een overzicht van de resultaten met de functie `summary()`. Bepaal de 95%-betrouwbaarheidsintervallen van de regressiecoëfficiënten met de functie `confint()`. Bereken ten slotte de Nagelkerke $R^2$ met behulp van een zelfgeschreven functie[^15].
 
 <!-- ## /TEKSTBLOK: Uitvoering1.R -->
 
@@ -698,8 +695,7 @@ Regressiemodel <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer
                   data = Beoordelingen_eindproject)
 
 # Voer de likelihood ratio toets uit
-library(lmtest)
-lrtest(Regressiemodel)
+VGAM::lrtest(Regressiemodel)
 
 # Presenteer de resultaten
 summary(Regressiemodel)
@@ -711,13 +707,17 @@ confint(Regressiemodel)
 exp(coef(Regressiemodel))
 
 # Bepaal de Nagelkerke R2
-LR_toets <- lrtest(Regressiemodel)@Body
+
+# Sla het resultaat van de likelihood ratio toets op
+LR_toets <- VGAM::lrtest(Regressiemodel)@Body
+# Bereken de deviance for het regressiemodel en voor een interceptmodel
 Deviance_interceptmodel <- -2*LR_toets$LogLik[2]
 Deviance_regressiemodel <- -2*LR_toets$LogLik[1]
-Aantal_observaties <- nrow(Beoordelingen_eindproject)
-
-Nagelkerke_R2 <- (1 - exp( (Deviance_regressiemodel - Deviance_interceptmodel) / Aantal_observaties) ) / (1 - exp( -Deviance_interceptmodel / Aantal_observaties) )
-
+# Sla het aantal deelnemers op
+Aantal_deelnemers <- nrow(Beoordelingen_eindproject)
+# Vul de formule in voor de Nagelkerke R2
+Nagelkerke_R2 <- (1 - exp( (Deviance_regressiemodel - Deviance_interceptmodel) / Aantal_deelnemers) ) / (1 - exp( -Deviance_interceptmodel / Aantal_deelnemers) )
+# Print de Nagelkerke R2
 Nagelkerke_R2
 ```
 <!-- ## /OPENBLOK: Uitvoering2.R -->
@@ -733,7 +733,7 @@ CI <- confint(Regressiemodel)
 ## Significantie regressiemodel
 
 <!-- ## TEKSTBLOK: Ftoets1.R -->
-Bepaal als eerste stap de significantie van het regressiemodel met behulp van de *likelihood ratio toets*. De *likelihood ratio toets* voor het regressiemodel laat een significant verschil zien tussen het voorgestelde model en een model met alleen een intercept, *&chi;^2^* = `r Round_and_format(LR_toets$Chisq[2])`, *df* = `r LR_test$Df[2]`, *p* < 0,0001, $R^2_N$ = `r Round_and_format(100 * Nagelkerke_R2)`.[^8] De nulhypothese dat geen enkele predictor van de predictors Vooropleiding, Leeftijd en  Gemiddeld_cijfer gerelateerd is aan de afhankelijke variabele Beoordeling kan verworpen worden. De Nagelkerke $R^2$ is `r Round_and_format(100*R2)`. Omdat de *likelihood ratio toets* voor het gehele model significant is, kunnen de coëfficiënten geinterpreteerd worden.
+Bepaal als eerste stap de significantie van het regressiemodel met behulp van de *likelihood ratio toets*. De *likelihood ratio toets* voor het regressiemodel laat een significant verschil zien tussen het voorgestelde model en een model met alleen een intercept, *&chi;^2^* = `r Round_and_format(LR_toets$Chisq[2])`, *df* = `r LR_toets$Df[2]`, *p* < 0,0001, $R^2_N$ = `r Round_and_format(100 * Nagelkerke_R2)`.[^8] De nulhypothese dat geen enkele predictor van de predictors Vooropleiding, Leeftijd en  Gemiddeld_cijfer gerelateerd is aan de afhankelijke variabele Beoordeling kan verworpen worden. De Nagelkerke $R^2$ is `r Round_and_format(100*Nagelkerke_R2)`. Omdat de *likelihood ratio toets* voor het gehele model significant is, kunnen de coëfficiënten geinterpreteerd worden.
 <!-- ## TEKSTBLOK: Ftoets1.R -->
 
 ## Significantie en interpretatie coëfficiënten
@@ -795,7 +795,7 @@ De gestandaardiseerde regressiecoëfficiënt is `r Round_and_format(Coefficiente
 De *likelihood ratio toets* wordt bij *ordinale logistische regressie* gebruikt om de significantie van het gehele regressiemodel te toetsen ten opzichte van het interceptmodel. Deze *likelihood ratio toets* kan ook gebruikt worden om te toetsen of twee geneste regressiemodellen onderling verschillen qua model fit. Hoewel deze vergelijking in de casus niet voorbijkomt, wordt deze toch geïllustreerd. Vergelijk hiervoor een model met de predictor Vooropleiding met een model met de predictors Vooropleiding, Leeftijd en Gemiddeld_cijfer.
 
 <!-- ## TEKSTBLOK: ModellenVergelijken1.R -->
-Voer de *likelihood ratio toets* uit met de functie `lrtest()` van het package `lmtest` met als argumenten de modelobjecten van de resultaten van de twee regressiemodellen die worden vergeleken (`Model_1` en `Model_2`). Voer eerst de *ordinale logistische regressie* uit voor beide modellen en vergelijk ze daarna. Bereken ten slotte de Nagelkerke $R^2$ met een zelfgeschreven functie.
+Voer de *likelihood ratio toets* uit met de functie `VGAM::lrtest()` van het package `VGAM` met als argumenten de modelobjecten van de resultaten van de twee regressiemodellen die worden vergeleken (`Model_1` en `Model_2`). Voer eerst de *ordinale logistische regressie* uit voor beide modellen en vergelijk ze daarna. Bereken ten slotte de Nagelkerke $R^2$ met een zelfgeschreven functie.
 <!-- ## /TEKSTBLOK: ModellenVergelijken1.R -->
 
 <!-- ## OPENBLOK: ModellenVergelijken2.R -->
@@ -812,26 +812,25 @@ Model_2 <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
                 data = Beoordelingen_eindproject)
 
 # Voer de likelihood ratio toets uit
-library(lmtest)
-lrtest(Model_1, Model_2)
+VGAM::lrtest(Model_1, Model_2)
 
-# Bereken de verklaarde variatie (%) van model 1
-LR_toets_model_1 <- lrtest(Model_1)@Body
+# Bereken de Nagelkerke R2 (%) van model 1
+LR_toets_model_1 <- VGAM::lrtest(Model_1)@Body
 Deviance_interceptmodel <- -2*LR_toets_model_1$LogLik[2]
 Deviance_model_1 <- -2*LR_toets_model_1$LogLik[1]
-Aantal_observaties <- nrow(Beoordelingen_eindproject)
+Aantal_deelnemers <- nrow(Beoordelingen_eindproject)
 
-Nagelkerke_R2_model_1 <- (1 - exp( (Deviance_model_1 - Deviance_interceptmodel) / Aantal_observaties) ) / (1 - exp( -Deviance_interceptmodel / Aantal_observaties) )
+Nagelkerke_R2_model_1 <- (1 - exp( (Deviance_model_1 - Deviance_interceptmodel) / Aantal_deelnemers) ) / (1 - exp( -Deviance_interceptmodel / Aantal_deelnemers) )
 
 Nagelkerke_R2_model_1
 
-# Bereken de verklaarde variatie (%) van model 2
-LR_toets_model_2 <- lrtest(Model_2)@Body
+# Bereken de Nagelkerke R2 (%) van model 2
+LR_toets_model_2 <- VGAM::lrtest(Model_2)@Body
 Deviance_interceptmodel <- -2*LR_toets_model_2$LogLik[2]
 Deviance_model_2 <- -2*LR_toets_model_2$LogLik[1]
-Aantal_observaties <- nrow(Beoordelingen_eindproject)
+Aantal_deelnemers <- nrow(Beoordelingen_eindproject)
 
-Nagelkerke_R2_model_2 <- (1 - exp( (Deviance_model_2 - Deviance_interceptmodel) / Aantal_observaties) ) / (1 - exp( -Deviance_interceptmodel / Aantal_observaties) )
+Nagelkerke_R2_model_2 <- (1 - exp( (Deviance_model_2 - Deviance_interceptmodel) / Aantal_deelnemers) ) / (1 - exp( -Deviance_interceptmodel / Aantal_deelnemers) )
 
 Nagelkerke_R2_model_2
 
@@ -853,28 +852,20 @@ Model_2 <- vglm(Beoordeling ~ Vooropleiding + Leeftijd + Gemiddeld_cijfer,
 
 # Voer de likelihood ratio toets uit
 library(lmtest)
-Vergelijking <- lrtest(Model_1, Model_2)
+Vergelijking <- VGAM::lrtest(Model_1, Model_2)@Body
+Vergelijking_chi <- Vergelijking$Chisq[2]
+Vergelijking_df <- -1 * Vergelijking$Df[2]
 
 ```
 <!-- ## /CLOSEDBLOK: ModellenVergelijken3.R -->
 
 <!-- ## TEKSTBLOK: ModellenVergelijken4.R -->
-De *likelihood ratio toets* toont aan dat er een significant verschil is in de model fit tussen beide modellen, *&chi;^2^* = `r Round_and_format(Vergelijking$Chisq[2])`, *df* = `r Vergelijking$Df[2]`, *p* < 0,0001.[^8] Het regressiemodel met predictor Vooropleiding verklaart slechts `r Round_and_format(100*Nagelkerke_R2_model_1)`% van de variatie in Beoordeling en het regressiemodel met predictoren Vooropleiding, Leeftijd en Gemiddeld_cijfer verklaart `r Round_and_format(100*Nagelkerke_R2_model_2)`% van de variatie. Het verschil in verklaarde variatie is `r Round_and_format(100*Nagelkerke_R2_model_2 - 100*Nagelkerke_R2_model_1)`%. Het model met Vooropleiding, Leeftijd en Gemiddeld_cijfer als predictors heeft dus een significant betere model fit dan het model met alleen Vooropleiding als predictor.
+De *likelihood ratio toets* toont aan dat er een significant verschil is in de model fit tussen beide modellen, *&chi;^2^* = `r Round_and_format(Vergelijking_chi)`, *df* = `r Vergelijking_df[2]`, *p* < 0,0001.[^8] Het regressiemodel met predictor Vooropleiding verklaart slechts `r Round_and_format(100*Nagelkerke_R2_model_1)`% van de variatie in Beoordeling en het regressiemodel met predictoren Vooropleiding, Leeftijd en Gemiddeld_cijfer verklaart `r Round_and_format(100*Nagelkerke_R2_model_2)`% van de variatie. Het verschil in verklaarde variatie is `r Round_and_format(100*Nagelkerke_R2_model_2 - 100*Nagelkerke_R2_model_1)`%. Het model met Vooropleiding, Leeftijd en Gemiddeld_cijfer als predictors heeft dus een significant betere model fit dan het model met alleen Vooropleiding als predictor.
 <!-- ## /TEKSTBLOK: ModellenVergelijken4.R -->
-
-
-
-
-
-
-
-
-
-
 
 # Voorspellen en classificeren
 
-Op basis van het regressiemodel kan voor iedere student de kans op het volgen van een hbo master, een wo master en het direct aan het werk gaan voorspeld worden. De voorspelde kans kan direct vergeleken worden met de observaties om te onderzoeken hoe goed het model voorspeld. Daarnaast is het ook mogelijk om de studenten te classificeren in de categorieën hbo master, wo master en werk op basis van de voorspelde kans. Met behulp van de classificaties kan een classificatietabel gemaakt worden waarmee de kwaliteit van de voorspelkracht van het model beoordeeld kan worden.
+Op basis van het regressiemodel kan voor iedere student de kans op een bepaalde beoordeling voorspeld worden. De voorspelde kans kan direct vergeleken worden met de observaties om te onderzoeken hoe goed het model voorspeld. Daarnaast is het ook mogelijk om de studenten te classificeren op een bepaalde beoordeling op basis van de voorspelde kans. Met behulp van de classificaties kan een classificatietabel gemaakt worden waarmee de kwaliteit van de voorspelkracht van het model beoordeeld kan worden.
 
 Bepaal eerst de voorspelde kansen met de functie `predict()` met als argumenten het object van het regressie model `Regressiemodel` en `type = response` om aan te geven dat de voorspelde kans bepaald moet worden. Classificeer daarna de studenten op basis van de mogelijkheid met de hoogste voorspelde kans. Maak daarna een tabel met de frequenties per mogelijkheid van de classificaties en maak een classificatietabel voor de classificaties en observaties van de studenten Fysiotherapie. Bereken op basis van de classificatietabel de accuraatheid van de classificaties.
 
@@ -895,37 +886,44 @@ table(Classificaties)
 
 # Maak een classificatietabel, gebruik de functie factor en het argument levels om aan te geven
 # welke categorieën er moeten worden weergegeven
-Tabel <- table(Classificaties = factor(Classificaties, levels = c("werk", "hbo master", "WO master")),
-               Observaties = Beoordelingen_eindproject$Vervolg)
+Tabel <- table(Classificaties = factor(Classificaties, levels = c("Onvoldoende", "Voldoende", "Goed","Uitstekend")),
+               Observaties = Beoordelingen_eindproject$Beoordeling)
 print(Tabel)
 
 # Bereken de accuraatheid
-Accuraatheid <- (Tabel["werk","werk"] + Tabel["hbo master","hbo master"] + Tabel["WO master","WO master"]) / sum(Tabel)
+Accuraatheid <- (Tabel["Onvoldoende","Onvoldoende"] + Tabel["Voldoende","Voldoende"] +  Tabel["Goed","Goed"] + Tabel["Uitstekend","Uitstekend"]) / sum(Tabel)
 
 Accuraatheid
 
 ```
 
-De classificatietabel laat zien dat de meerderheid van de studenten correct geclassificeerd is, maar ook dat er veel verkeerde classificaties zijn. Ook valt het op dat er geen enkele student geclassificeerd is met de mogelijkheid hbo master. De accuraatheid van de classificaties van het regressiemodel is `r Round_and_format(100*Accuraatheid)`%.
+De classificatietabel laat zien dat de meerderheid van de studenten correct geclassificeerd is, maar ook dat er veel verkeerde classificaties zijn. Ook valt het op dat er heel weinig studenten geclassificeerd zijn met de mogelijkheden Onvoldoende en Uitstekend. De accuraatheid van de classificaties van het regressiemodel is `r Round_and_format(100*Accuraatheid)`%.
 
 
 # Rapportage
 
 <!-- ## TEKSTBLOK: Rapportage1.R -->
-Een *ordinale logistische regressie* is uitgevoerd om te onderzoeken of het vervolg na de bachelor Fysiotherapie (hbo master, wo master of direct aan het werk) gerelateerd is aan het wel of niet nominaal afstuderen en het gemiddelde cijfer van de bachelor van de studenten. Uit het toetsen van de assumpties van *ordinale logistische regressie* bleek dat er aan alle assumpties is voldaan. De resultaten van de *ordinale logistische regressie* zijn te vinden in Tabel 4. 
+Een *ordinale logistische regressie* is uitgevoerd om te onderzoeken of de beoordeling van het eindproject van studenten van de bachelor Industrieel Ontwerpen gerelateerd is aan de vooropleiding (vwo of hbo-p), de leeftijd en het gemiddelde cijfer in het eerste jaar van de bachlor. Uit het toetsen van de assumpties van *ordinale logistische regressie* bleek dat er aan alle assumpties is voldaan. De resultaten van de *ordinale logistische regressie* zijn te vinden in Tabel 4. 
 
-De *likelihood ratio toets* voor het regressiemodel laat zien dat het opgestelde regressiemodel minimaal één coëfficiënt heeft die significant verschilt van nul, *&chi;^2^* = `r Round_and_format(LR_test$Chisq[2])`, *df* = `r -1 * LR_test$Df[2]`, *p* < 0,0001, $R^2_N$ = `r Round_and_format(100 * R2)`. Voor de vergelijking tussen de mogelijkheden hbo master en direct aan het werk gaan zijn zowel het gemiddelde cijfer (*&beta;* = `r Round_and_format(Reg[5,1])`, *z* = `r Round_and_format(Reg[5,3])`, *p* < 0,0001) als (*&beta;* = `r Round_and_format(Reg[3,1])`, *z* = `r Round_and_format(Reg[3,3])`, *p* = 0,007) significante predictors. Voor de vergelijking tussen de mogelijkheden wo master en direct aan het werk gaan is het gemiddelde cijfer (*&beta;* = `r Round_and_format(Reg[6,1])`, *z* = `r Round_and_format(Reg[6,3])`, *p* < 0,0001) wel een significante predictor, maar het wel of niet nominaal afstuderen (*&beta;* = `r Round_and_format(Reg[4,1])`, *z* = `r Round_and_format(Reg[4,3])`, *p* = `r Round_and_format(Reg[4,4])`) geen significante predictor. De gestandaardiseerde coëfficiënten laten zien dat het gemiddelde cijfer tijdens de bachelor het sterkst gerelateerd is aan het vervolg na de opleiding Fysiotherapie. Om in te schatten welke studenten in aanmerking komen voor een hbo master zijn het wel of niet nominaal afstuderen en het gemiddelde cijfer relevant, maar voor een wo master is alleen het gemiddelde cijfer in de bachelor relevant.
+De *likelihood ratio toets* voor het regressiemodel laat zien dat het opgestelde regressiemodel minimaal één coëfficiënt heeft die significant verschilt van nul, *&chi;^2^* = `r Round_and_format(LR_toets$Chisq[2])`, *df* = `r LR_toets$Df[2]`, *p* < 0,0001, $R^2_N$ = `r Round_and_format(100 * Nagelkerke_R2)`. De vooropleiding (*&beta;* = `r Round_and_format(Reg[4,1])` en is significant verschillend van 0 (*z* = `r Round_and_format(Reg[4,3])`, *p* = `r Round_and_format(Reg[4,4], 3)`) en het gemiddeld eindexamencijfer (*&beta;* = `r Round_and_format(Reg[6,1])`, *z* = `r Round_and_format(Reg[6,3])`, *p* < 0,0001), maar de leeftijd van de student is dit niet (*&beta;* = `r Round_and_format(Reg[5,1])`, *z* = `r Round_and_format(Reg[5,3])`, *p* = `r Round_and_format(Reg[5,4], 3)`). De 
+
+De gestandaardiseerde coëfficiënten laten zien dat het gemiddelde cijfer van de student het sterkst gerelateerd is aan de kans op uitval. Om in te schatten of een student extra ondersteuning kan krijgen omdat de kans op uitval hoger is, kan de studieloopbaanbegeleider dus rekening houden met het geslacht, de leeftijd en het gemiddeld eindexamencijfer van studenten, maar hoeft hij geen rekening te houden met de vooropleiding.
+
+`r Round_and_format(Reg[4,1])` en is significant verschillend van 0 (*z* = `r Round_and_format(Reg[4,3])`, *p* = `r Round_and_format(Reg[4,4], 3)`)
+
+
+Voor de vergelijking tussen de mogelijkheden hbo master en direct aan het werk gaan zijn zowel het gemiddelde cijfer (*&beta;* = `r Round_and_format(Reg[5,1])`, *z* = `r Round_and_format(Reg[5,3])`, *p* < 0,0001) als (*&beta;* = `r Round_and_format(Reg[3,1])`, *z* = `r Round_and_format(Reg[3,3])`, *p* = 0,007) significante predictors. Voor de vergelijking tussen de mogelijkheden wo master en direct aan het werk gaan is het gemiddelde cijfer (*&beta;* = `r Round_and_format(Reg[6,1])`, *z* = `r Round_and_format(Reg[6,3])`, *p* < 0,0001) wel een significante predictor, maar het wel of niet nominaal afstuderen (*&beta;* = `r Round_and_format(Reg[4,1])`, *z* = `r Round_and_format(Reg[4,3])`, *p* = `r Round_and_format(Reg[4,4])`) geen significante predictor. De gestandaardiseerde coëfficiënten laten zien dat het gemiddelde cijfer tijdens de bachelor het sterkst gerelateerd is aan het vervolg na de opleiding Fysiotherapie. Om in te schatten welke studenten in aanmerking komen voor een hbo master zijn het wel of niet nominaal afstuderen en het gemiddelde cijfer relevant, maar voor een wo master is alleen het gemiddelde cijfer in de bachelor relevant.
 <!-- ## /TEKSTBLOK: Rapportage1.R -->
 
 <!-- ## TEKSTBLOK: Rapportage2.R -->
 |                           | Coëfficiënt   | Standaard- fout | z | p-waarde | 95%-betrouwbaar- heidsinterval | Gestandaardiseerde coëfficiënt  | Odds ratio |
 | ------------------------- | ---------| ---------| ---------| ---------| ---------| ---------| ---------| 
-| Intercept; hbo master vs. werk         | `r Round_and_format(Reg[1,1])` |  `r Round_and_format(Reg[1,2])` |  `r Round_and_format(Reg[1,3])` |  < 0,0001*  |  `r Round_and_format(CI[1,1])` - `r Round_and_format(CI[1,2])`  | - | - |
-| Intercept; wo master vs. werk         | `r Round_and_format(Reg[2,1])` |  `r Round_and_format(Reg[2,2])` |  `r Round_and_format(Reg[2,3])` |  < 0,0001*  |  `r Round_and_format(CI[2,1])` - `r Round_and_format(CI[2,2])`  | - | - |
-| Nominaal (Nominaal); hbo master vs. werk | `r Round_and_format(Reg[3,1])` |  `r Round_and_format(Reg[3,2])` |  `r Round_and_format(Reg[3,3])` |   0,007* |  `r Round_and_format(CI[3,1])` - `r Round_and_format(CI[3,2])` | `r Round_and_format(Coefficienten_std[3])`| `r Round_and_format(exp(Reg[3,1]))` |
-| Nominaal (Nominaal); wo master vs. werk | `r Round_and_format(Reg[4,1])` |  `r Round_and_format(Reg[4,2])` |  `r Round_and_format(Reg[4,3])` |  `r Round_and_format(Reg[4,4])` |  `r Round_and_format(CI[4,1])` - `r Round_and_format(CI[4,2])` | `r Round_and_format(Coefficienten_std[4])`| `r Round_and_format(exp(Reg[4,1]))` |
-| Gemiddeld_cijfer; hbo master vs. werk       | `r Round_and_format(Reg[5,1])` |  `r Round_and_format(Reg[5,2])` |  `r Round_and_format(Reg[5,3])` |  < 0,0001* |  `r Round_and_format(CI[5,1])` - `r Round_and_format(CI[5,2])` | `r Round_and_format(Coefficienten_std[5])`| `r Round_and_format(exp(Reg[5,1]))` |
-| Gemiddeld_cijfer; wo master vs. werk       | `r Round_and_format(Reg[6,1])` |  `r Round_and_format(Reg[6,2])` |  `r Round_and_format(Reg[6,3])` |  < 0,0001* |  `r Round_and_format(CI[6,1])` - `r Round_and_format(CI[6,2])` | `r Round_and_format(Coefficienten_std[6])`| `r Round_and_format(exp(Reg[6,1]))` |
+| Intercept (Beoordeling <= Onvoldoende)                | `r Round_and_format(Reg[1,1])` |  `r Round_and_format(Reg[1,2])` |  `r Round_and_format(Reg[1,3])` |  < 0,0001*  |  `r Round_and_format(CI[1,1])` - `r Round_and_format(CI[1,2])`  | - | - |
+| Intercept (Beoordeling <= Voldoende)                 | `r Round_and_format(Reg[2,1])` |  `r Round_and_format(Reg[2,2])` |  `r Round_and_format(Reg[2,3])` |  < 0,0001*  |  `r Round_and_format(CI[2,1])` - `r Round_and_format(CI[2,2])`  | - | - |
+| Intercept (Beoordeling <= Goed)                | `r Round_and_format(Reg[3,1])` |  `r Round_and_format(Reg[3,2])` |  `r Round_and_format(Reg[3,3])` |  < 0,0001*  |  `r Round_and_format(CI[3,1])` - `r Round_and_format(CI[3,2])`  | - | - |
+| Vooropleiding (vwo)       | `r Round_and_format(Reg[4,1])` |  `r Round_and_format(Reg[4,2])` |  `r Round_and_format(Reg[4,3])` |  `r Round_and_format(Reg[4,4],3)`* |  `r Round_and_format(CI[4,1])` - `r Round_and_format(CI[4,2])` | `r Round_and_format(Coefficienten_std[4])`| `r Round_and_format(exp(Reg[4,1]))` |
+| Leeftijd          | `r Round_and_format(Reg[5,1])` |  `r Round_and_format(Reg[5,2])` |  `r Round_and_format(Reg[5,3])` |  `r Round_and_format(Reg[5,4],3)` |  `r Round_and_format(CI[5,1])` - `r Round_and_format(CI[5,2])`  | `r Round_and_format(Coefficienten_std[5])`| `r Round_and_format(exp(Reg[5,1]))` |
+| Gemiddeld cijfer       | `r Round_and_format(Reg[6,1])` |  `r Round_and_format(Reg[6,2])` |  `r Round_and_format(Reg[6,3])` |  < 0,0001* |  `r Round_and_format(CI[6,1])` - `r Round_and_format(CI[6,2])` | `r Round_and_format(Coefficienten_std[6])`| `r Round_and_format(exp(Reg[6,1]))` |
 
 *Tabel 4. Regressiecoëfficiënten en bijbehorende standaardfouten, z-statistieken, p-waardes, 95%-betrouwbaarheidsintervallen, gestandaardiseerde coëfficiënten en odds ratios.*
 <!-- ## /TEKSTBLOK: Rapportage2.R -->
@@ -935,7 +933,7 @@ De *likelihood ratio toets* voor het regressiemodel laat zien dat het opgestelde
 ```
 <!-- ## /CLOSEDBLOK: Footer.R -->
 
-[^1]: Laerd Statistics (2018). *Multinomial Logistic Regression using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/multinomial-logistic-regression-using-spss-statistics.php
+[^1]: Laerd Statistics (2018). *Ordinal Regression using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/ordinal-regression-using-spss-statistics.php
 [^2]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage. Pagina 760-813.
 [^3]: Universiteit van Amsterdam (13 augustus 2016). *Outliers*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).  
 [^4]: Standaardiseren houdt in dat de variabelen getransformeerd worden zodat ze een gemiddelde van 0 hebben en een standaardafwijking van 1. Dit wordt gedaan door voor alle observaties van een variabele eerst het gemiddelde af te trekken en daarna te delen door de standaardafwijking, i.e. $\frac{x_i - \mu}{\sigma}$.
@@ -948,10 +946,9 @@ De *likelihood ratio toets* voor het regressiemodel laat zien dat het opgestelde
 [^12]: James, G., Witten, D., Hastie, T. & Tibshirani, R. (2013). *Introduction to Statistical Learning with applications in R*. Springer. Pagina 127-174.
 [^13]: Een ordinale variabele is een categorische variabele waarbij de categorieën geordend kunnen worden. Een voorbeeld is de variabele beoordeling met de categorieën Onvoldoende, Voldoende, Goed en Uitstekend.
 [^14]: Een nominale variabele is een categorische variabele waarbij de categorieën niet geordend kunnen worden. Een voorbeeld is de variabele windstreek (noord, oost, zuid, west) en geslacht (man of vrouw).
-[^15]: De Nagelkerke $R^2$ is te berekenen met de formule $R^2_N = \frac{1 + exp([Dev_{model} - Dev_{null}]/N)}{1 + exp([- Dev_{null}]/N)}$ waarbij $Dev_{model}$ de deviance van het getoetste model is, $Dev_{null}$ de deviance van een interceptmodel (verschillend per vergelijking) is en $N$ het aantal deelnemers is. Voor meer informatie zie Tabachnick, B.G. & Fidell, L.S. (2013). *Using multivariate statistics*. Sixth Edition, Pearson. Pagina 443-446. 
-
-AANPASSEN
-
+[^15]: De Nagelkerke $R^2$ is te berekenen met de formule $R^2_N = \frac{1 + exp([Dev_{model} - Dev_{null}]/N)}{1 + exp([- Dev_{null}]/N)}$ waarbij $Dev_{model}$ de deviance van het getoetste model is, $Dev_{null}$ de deviance van een interceptmodel (verschillend per vergelijking) is en $N$ het aantal deelnemers is. Voor meer informatie zie Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage. Pagina 764-766. 
 [^19]: Met een deelnemer wordt het object bedoeld dat geobserveerd wordt, bijvoorbeeld een student, een inwoner van Nederland, een opleiding of een organisatie. Met een observatie wordt de waarde bedoeld die de deelnemer heeft voor een bepaalde variabele. Een deelnemer heeft dus meestal een observatie voor meerdere variabelen.
-[^20]: Stat 504. *8.2 - Baseline-Category Logit Model*. [PennState Eberly College of Science](https://online.stat.psu.edu/stat504/node/173/).
+[^20]: Stat 504. *8.4 - The Proportional-Odds Cumulative Logit Model*. [PennState Eberly College of Science](https://online.stat.psu.edu/stat504/lesson/8/8.4).
 [^21]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage. Pagina 293-356.
+[^22]: Field, A. (2013). *Discovering statistics using IBM SPSS statistics*. Sage. Pagina 772.
+[^23]: ReStore. *Module 5 - Ordinal Regression*. [National Centre for Research Methods - University of Southampton](https://www.restore.ac.uk/srme/www/fac/soc/wie/research-new/srme/modules/mod5/index.html)

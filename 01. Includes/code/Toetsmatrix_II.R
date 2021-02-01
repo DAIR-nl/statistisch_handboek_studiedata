@@ -202,8 +202,8 @@ maak_html_r6 <- function() {
                          dfToetsen[58,]$Toets,
                          sModus = sModus),
       ## Wilcoxon
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[60,]$InGebruik)),
-                         dfToetsen[60,]$Toets,
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[62,]$InGebruik)),
+                         dfToetsen[62,]$Toets,
                          sModus = sModus),
       ## Chi-kwadraat toets (trend)
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[62,]$InGebruik)),

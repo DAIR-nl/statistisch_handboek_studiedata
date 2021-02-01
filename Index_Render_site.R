@@ -100,7 +100,7 @@ dfToetsen <- tribble(
     "50 Multilevel multinomiale regressie",                                                     0,          0,       0,               0,       
     "51 Multilevel multinomiale regressie",                                                     0,          0,       0,               0,       
     "52 Multilevel multinomiale regressie",                                                     0,          0,       0,               0,       
-    "53 Ordinale logistische regressie",                                                        0,          0,       0,               0,       
+    "53 Ordinale logistische regressie",                                                        1,          0,       0,               0,       
     "54 Ordinale logistische regressie",                                                        0,          0,       0,               0,       
     "55 Multilevel ordinale regressie",                                                         0,          0,       0,               0,       
     "56 Multilevel ordinale regressie",                                                         0,          0,       0,               0,       

@@ -50,7 +50,6 @@ Gebruikte_packages <- c(
     "htmltools",
     "irr",
     #"klippy",
-    "lmtest", # 41
     "lsr",
     "markdown",
     "nortest",
@@ -71,7 +70,8 @@ Gebruikte_packages <- c(
     "stringr",
     "userfriendlyscience", # 29 
     "summarytools", # 29, LET OP: laad deze na package userfriendlyscience
-    "VGAM",
+    "VGAM", # 53
+    "lmtest", # 41, 47, 53 let op, na VGAM package
     "tidyverse"
 )
 

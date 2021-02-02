@@ -92,6 +92,9 @@ rm(Studentnummers_opties, Studentnummer_uniek, Studentnummer,
    Proportie_periode_4, Herkansingen_periode_1, Herkansingen_periode_2,
    Herkansingen_periode_3, Herkansingen_periode_4, Herkansingen)
 
+## Sla de datasets op
+write.csv(Herkansingen_kunstmatige_intelligentie,
+          file = "05. Datasets/15_Herkansingen_kunstmatige_intelligentie.csv")
 
 #### Toets
 

@@ -101,13 +101,6 @@ Fysiotherapie_Vervolg <- cbind.data.frame(Vervolg,
 
 
 
-
-
-
-
-
-
-
 #Fysiotherapie_Vervolg$idcase <- 1:nrow(Fysiotherapie_Vervolg)
 
 #library(mlogit)
@@ -132,3 +125,7 @@ rm(mChoices,
    p_werk,
    Studentnummer,
    Vervolg)
+
+## Sla de datasets op
+write.csv(Fysiotherapie_Vervolg,
+          file = "05. Datasets/47_Fysiotherapie_Vervolg.csv")

@@ -76,3 +76,6 @@ rm(
   BSA_adviezen
 )
 
+## Sla de datasets op
+write.csv(BSA_LEM,
+          file = "05. Datasets/18_BSA_LEM.csv")

@@ -119,7 +119,6 @@ Gemiddelde_cijfers_psychologie$Gemiddeld_cijfer[Gemiddelde_cijfers_psychologie$G
 Gemiddelde_cijfers_psychologie <- Gemiddelde_cijfers_psychologie[sample.int(620,620),]
 ################################################################################
 
-
 # geen interactie-effect
 
 set.seed(1234)
@@ -218,6 +217,14 @@ rm(Mannen_hbo,
    Vrouwen_vwo,
    Cijfers,
    Studentnummer)
+
+## Sla de datasets op
+write.csv(Gemiddelde_cijfers_psychologie,
+          file = "05. Datasets/29_Gemiddelde_cijfers_psychologie.csv")
+
+write.csv(Hoofdeffecten_Gemiddelde_cijfers_psychologie,
+          file = "05. Datasets/29_Hoofdeffecten_Gemiddelde_cijfers_psychologie.csv")
+
 
 #vvv <- aov(Gemiddeld_cijfer ~ Geslacht + Vooropleiding + Geslacht:Vooropleiding,
 #    data = Gemiddelde_cijfers_psychologie)

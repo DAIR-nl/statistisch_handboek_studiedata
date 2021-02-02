@@ -56,11 +56,11 @@ source(paste0(here::here(),"/01. Includes/data/05.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *one-way ANOVA* bij het toetsen of de gemiddelden van drie of meer onafhankelijke groepen verschillen.[^1] 
+Gebruik de *one-way ANOVA* bij het toetsen of de gemiddelden van twee of meer onafhankelijke groepen verschillen.[^1] 
 
 # Onderwijscasus
 <div id = "casus">
-Om wervingsactiviteiten beter af te stemmen op de aankomende studenten, wil het hoofd van de afdeling Communicatie weten wat de reistijd is van studenten van verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. 
+Om wervingsactiviteiten beter af te stemmen op de aankomende studenten, wil het hoofd van de afdeling Communicatie weten wat de reistijd (in minuten) is van studenten van verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. 
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
@@ -440,7 +440,7 @@ vpFILvsGSC <- Round_and_format(THSD$Opleiding[3,4])
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten per opleiding gelijk is aan elkaar. De opleidingen zijn Arabische Taal en Cultuur (*M~atc~* = `r vM_ATC`, *SD~atc~* = `r vSD_ATC`), Filosofie (*M~fil~* = `r vM_FIL`, *SD~fil~* = `r vSD_FIL`) en Geschiedenis (*M~gsc~* = `r vM_GSC`, *SD~fil~* = `r vSD_FIL`); beschrijvende statistieken zijn ook te vinden in Tabel 1. De gemiddelde reistijd van de groepen verschilt significant van elkaar, *F*(`r vDF1`, `r vDF2`) = `r vF_waarde`, *p* < 0,0001, *η^2^* = `r Esq`. De sterkte van het effect van de type opleiding op de reistijd is groot.
+Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de studenten per opleiding gelijk is aan elkaar. De opleidingen zijn Arabische Taal en Cultuur (*M~atc~* = `r vM_ATC`, *SD~atc~* = `r vSD_ATC`), Filosofie (*M~fil~* = `r vM_FIL`, *SD~fil~* = `r vSD_FIL`) en Geschiedenis (*M~gsc~* = `r vM_GSC`, *SD~fil~* = `r vSD_GSC`); beschrijvende statistieken zijn ook te vinden in Tabel 1. De gemiddelde reistijd van de groepen verschilt significant van elkaar, *F*(`r vDF1`, `r vDF2`) = `r vF_waarde`, *p* < 0,0001, *η^2^* = `r Esq`. De sterkte van het effect van de type opleiding op de reistijd is groot.
 
 | Opleiding     | N          | M          | SD          |
 | ------------- | ---------- | ---------- | ----------- |
@@ -468,7 +468,7 @@ De Tukey Honest Significant Differences post-hoc toets is uitgevoerd om te toets
 [^6]: De [Kruskal-Wallis toets](10-Kruskal-Wallis-toets-R.html) maakt een rangschikking van de data. Hierdoor is de toets verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze toets minder vaak gekozen, omdat bij het maken van een rankschikking de dataset informatie verliest. Als de data wel normaal verdeeld zijn, heeft de [Kruskal-Wallis toets](10-Kruskal-Wallis-toets-R.html) minder onderscheidend vermogen dan wanneer de *one-way ANOVA* uitgevoerd zou worden.
 [^7]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php. 
 [^8]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).
-[^9]: Bereken de logaritme van de variabele en de inverse (1 gedeeld door de variabele), en bekijk of deze normaal verdeeld zijn. Als dat zo is, mag je die gebruiken voor de analyse.
+[^9]: Er zijn verschillende opties om variabelen te transformeren, zoals de logaritme, wortel of inverse (1 gedeeld door de variabele) nemen van de variabele. Zie *Discovering statistics using IBM SPSS statistics* van Field (2013) pagina 201-210 voor meer informatie over welke transformaties wanneer gebruikt kunnen worden.
 [^10]: Wikipedia (7 september 2019). *Analysis of variance*. https://en.wikipedia.org/wiki/Analysis_of_variance.
 [^11]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^12]: Watson, P. (30 oktober 2019). *Rules of thumb on magnitudes of effect sizes*. [MRC Cognition and Brain Sciences Unit Wiki](http://imaging.mrc-cbu.cam.ac.uk/statswiki/FAQ/effectSize).

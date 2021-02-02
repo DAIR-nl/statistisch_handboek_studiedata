@@ -51,7 +51,7 @@ source(paste0(here::here(),"/01. Includes/data/04.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *repeated measures ANOVA* om gemiddelden te vergelijken van een groep bij drie of meer herhaalde metingen of om gemiddelden van drie of meer gepaarde groepen te vergelijken.[^1] 
+Gebruik de *repeated measures ANOVA* om gemiddelden te vergelijken van een groep bij twee of meer herhaalde metingen of om gemiddelden van twee of meer gepaarde groepen te vergelijken.[^1] 
 
 # Onderwijscasus
 <div id = "casus">
@@ -480,7 +480,7 @@ Een *repeated measures ANOVA* is uitgevoerd om te onderzoeken of er verschillen 
 <!-- ## /CLOSEDBLOK: Footer.R -->
 
 [^1]: Universiteit van Amsterdam (26 augustus 2014). *Repeated-Measures ANOVA*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Repeated-Measures_ANOVA).
-[^2]: Bereken de logaritme van de variabele en de inverse (1 gedeeld door de variabele), en bekijk of deze normaal verdeeld zijn. Als dat zo is, mag je die gebruiken voor de analyse.
+[^2]: Er zijn verschillende opties om variabelen te transformeren, zoals de logaritme, wortel of inverse (1 gedeeld door de variabele) nemen van de variabele. Zie *Discovering statistics using IBM SPSS statistics* van Field (2013) pagina 201-210 voor meer informatie over welke transformaties wanneer gebruikt kunnen worden.
 [^3]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
 [^4]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php. 
 [^5]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).

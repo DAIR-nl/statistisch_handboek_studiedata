@@ -26,7 +26,7 @@
 ## Geschiedenis:
 ## 29-06-2020: EG: Aanmaak bestand
 ## ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## De controller van een Universiteit is geïnteresseerd in de instroom van tweedekansstudenten. Zij vraagt zich af: Heeft onze Universiteit relatief veel tweedekansstudenten in vergelijking met het landelijke gemiddelde?
+
 set.seed(7, 
          kind = "Mersenne-Twister", 
          normal.kind = "Inversion",
@@ -50,4 +50,11 @@ rm(
   hbo_vooropleiding,
   indices
 )
+
+## Sla de datasets op
+write.csv(Instroom_2018_totaal,
+          file = "05. Datasets/11_Instroom_2018_totaal.csv")
+
+write.csv(Instroom_2018_totaal_steekproef,
+          file = "05. Datasets/11_Instroom_2018_totaal_steekproef.csv")
 

@@ -81,7 +81,7 @@ Beoordeling <- as.character(Beoordeling)
 Beoordelingen_speech_schrijven <- data.frame(Studentnummer,
                                              Meetmoment,
                                              Beoordeling,
-                                             stringsAsFactors=FALSE)
+                                             stringsAsFactors = FALSE)
 
 
 rm(Beoordeling, 
@@ -90,3 +90,8 @@ rm(Beoordeling,
    Beoordeling_verschil, 
    Meetmoment,
    Studentnummer)
+
+## Sla de datasets op
+write.csv(Beoordelingen_speech_schrijven,
+          file = "05. Datasets/22_Beoordelingen_speech_schrijven.csv")
+

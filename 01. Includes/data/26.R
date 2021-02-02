@@ -48,3 +48,7 @@ Jaarlijks_inkomen <- replicate(2314, 13*(sample(Mogelijkheden, 1, replace = TRUE
 # Verwijder objecten die niet nodig zijn voor de toetspagina
 rm(Mogelijkheden,
    p_2014)
+
+## Sla de datasets op
+write.csv(Jaarlijks_inkomen,
+          file = "05. Datasets/26_Jaarlijks_inkomen.csv")

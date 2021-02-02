@@ -85,6 +85,12 @@ rm(Studentnummers_opties, Studentnummer_uniek, Studentnummer, Onderwijsperiode,
    Specialisatie_P5, Indexen_P1, Indexen_P2, Indexen_P3, Indexen_P4,
     Indexen_P5, Specialisatie)
 
+## Sla de datasets op
+write.csv(Data_Specialisatie,
+          file = "05. Datasets/20_Data_Specialisatie.csv")
+
+
+
 
 #### Analyse
 
@@ -125,61 +131,6 @@ rm(Studentnummers_opties, Studentnummer_uniek, Studentnummer, Onderwijsperiode,
 
 
 #pkgbuild::has_build_tools(debug = TRUE)
-
-
-
-
-
-
-
-
-
-
-
-
-
-#
-#
-#
-#
-#
-#
-
-#
-#
-
-#
-
-#
-
-#
-#
-#
-
-#
-
-#
-
-#
-#
-
-#
-
-#
-
-#
-#
-#
-#
-
-#
-#
-#
-
-
-#
-#
-
 
 ## OUD
 

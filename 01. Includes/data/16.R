@@ -131,23 +131,13 @@ Fisher_Tabel_BSA_antropologie <- table(BSA_antropologie$BSA,
 # Verander volgorde tabel
 Fisher_BSA_kruistabel <- Fisher_Tabel_BSA_antropologie[, c("NL", "GE", "IT", "UK", "BE", "ES", "US")]
 
+## Sla de datasets op
+write.csv(BSA_antropologie,
+          file = "05. Datasets/16_BSA_antropologie.csv")
 
-# OUD
-#RNGkind(sample.kind = "Rounding")
-#set.seed(1) #noodzakelijk omdat we simulate.p.values gebruiken bij de fisher.test
-#Landen_vooropleiding <- c("NL", "GE", "IT", "UK", "BE", "ES", "US")  ##ISO-codes
-#Pos_bsa <- c(1171, 213,  60, 119,  45,  81, 270)
-#Verhouding <- c(0.1, 0.14, 0.36, 0.04, 0.12, 0.22, 0.19)
-#Neg_bsa <- round(Pos_bsa * Verhouding)
-#SA_kruistabel <- data.frame(Pos_bsa, Neg_bsa)
-#SA_kruistabel <- t(BSA_kruistabel)
-#colnames(BSA_kruistabel) <- Landen_vooropleiding
+write.csv(Fisher_BSA_antropologie,
+          file = "05. Datasets/16_Fisher_BSA_antropologie.csv")
 
-#Pos_bsa_n10 <- c(49, 37, 62, 67, 73, 70, 69)
-#Neg_bsa_n10 <- c(10, 7, 13, 14, 15, 19, 18)
-#BSA_kruistabel_n10 <- data.frame(Pos_bsa_n10, Neg_bsa_n10)
-#BSA_kruistabel_n10 <- t(BSA_kruistabel_n10)
-#colnames (BSA_kruistabel_n10) <- Landen_vooropleiding
 
 rm(Studentnummers_opties, 
 Studentnummer, 

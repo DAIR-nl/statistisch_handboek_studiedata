@@ -1,5 +1,5 @@
 ---
-title: "Chi-kwadraat toets voor onafhankelijkheid en Fisher's exact toets"
+title: "Chi-kwadraat toets voor onafhankelijkheid en Fisher's exacte toets"
 output:
   html_document:
     theme: lumen
@@ -54,7 +54,7 @@ source(paste0(here::here(),"/01. Includes/data/13.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing
-Gebruik de *Chi-kwadraat toets voor onafhankelijkheid* of de *Fisher's exact toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde, binaire variabelen.[^1]<sup>, </sup>[^2] In tegenstelling tot de *Chi-kwadraat toets voor onafhankelijkheid* kan de *Fisher's exact toets* ook bij een laag aantal observaties gebruikt worden, dit wordt bij de assumpties toegelicht.[^4] De *Chi-kwadraat toets voor onafhankelijkheid* kan ook gebruikt worden wanneer de twee categorische variabelen meer dan twee categorieën bevatten, maar *Fisher's exact toets* vereist wel dat beide variabelen binair zijn. Deze toetspagina illustreert de toets echter voor twee ongepaarde binaire variabelen.
+Gebruik de *Chi-kwadraat toets voor onafhankelijkheid* of de *Fisher's exacte toets* om te toetsen of er een afhankelijkheid bestaat tussen twee ongepaarde, binaire variabelen.[^1]<sup>, </sup>[^2] In tegenstelling tot de *Chi-kwadraat toets voor onafhankelijkheid* kan de *Fisher's exacte toets* ook bij een laag aantal observaties gebruikt worden, dit wordt bij de assumpties toegelicht.[^4] De *Chi-kwadraat toets voor onafhankelijkheid* kan ook gebruikt worden wanneer de twee categorische variabelen meer dan twee categorieën bevatten, maar *Fisher's exacte toets* vereist wel dat beide variabelen binair zijn. Deze toetspagina illustreert de toets echter voor twee ongepaarde binaire variabelen.
 
 
 # Onderwijscasus
@@ -103,10 +103,10 @@ En22 <- ((n21 + n22) * (n12 + n22) / NN)
 *Tabel 1. Geobserveerde aantallen casus uitval met of zonder leenstelsel*
 
 
-De *Chi-kwadraat toets voor onafhankelijkheid* wordt onbetrouwbaar als er in meer dan 20% van de cellen van de kruistabel een verwacht aantal observaties van 5 of lager is. Gebruik in dat geval *Fisher's exact toets*.[^8] Het verwacht aantal observaties in een cel is het aantal observaties dat zich in een cel op basis van kansrekening zou moeten bevinden wanneer er geen afhankelijkheid tussen de twee variabelen is. Op basis van de nulhypothese van onafhankelijkheid tussen de variabelen kunnen de verwachte aantallen observaties in elke cel berekend worden. Een voorbeeldberekening van het verwacht aantal observaties voor de cel linksboven (geen leenstelsel; geen uitval) werkt als volgt: vermenigvuldig het totaal aantal studenten in de groep geen leenstelsel (`r n11 + n12`) met het totaal aantal studenten dat uitvalt (`r n11 + n21`) en deel dit door het totaal aantal studenten (`r NN`).
+De *Chi-kwadraat toets voor onafhankelijkheid* wordt onbetrouwbaar als er in meer dan 20% van de cellen van de kruistabel een verwacht aantal observaties van 5 of lager is. Gebruik in dat geval *Fisher's exacte toets*.[^8] Het verwacht aantal observaties in een cel is het aantal observaties dat zich in een cel op basis van kansrekening zou moeten bevinden wanneer er geen afhankelijkheid tussen de twee variabelen is. Op basis van de nulhypothese van onafhankelijkheid tussen de variabelen kunnen de verwachte aantallen observaties in elke cel berekend worden. Een voorbeeldberekening van het verwacht aantal observaties voor de cel linksboven (geen leenstelsel; geen uitval) werkt als volgt: vermenigvuldig het totaal aantal studenten in de groep geen leenstelsel (`r n11 + n12`) met het totaal aantal studenten dat niet uitvalt (`r n11 + n21`) en deel dit door het totaal aantal studenten (`r NN`).
 
 * aantal studenten geen leenstelsel: `r n11 + n12`   
-* aantal studenten uitval: `r n11 + n21`  
+* aantal studenten geen uitval: `r n11 + n21`  
 * totaal aantal studenten: `r NN`
 * verwacht aantal uitgevallen studenten geen leenstelsel: `r n11 + n12` * `r n11 + n21` / `r NN` ≈ `r Round_and_format((n11 + n12) * (n11 + n21) / NN)` 
 
@@ -127,7 +127,7 @@ Alle verwachte aantallen observaties zijn te vinden in Tabel 2. Merk ook op dat 
 De p-waarde geeft aan of een (mogelijk) verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^7] 
 De *Chi-kwadraat toets voor onafhankelijkheid* heeft als effectmaat Cohen's *w*.[^9] Een indicatie om Cohen's *w* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^10]
 
-De odds ratio is een andere effectmaat die voor zowel de *Chi-kwadraat toets voor onafhankelijkheid* als de *Fisher's exact toets* kan worden gebruikt. Een voorwaarde is echter dat beide variabelen binair zijn. In andere woorden, er moet een 2x2 kruistabel gevormd kunnen worden. Odds is een Engelse term voor de verhouding van twee kansen, bijvoorbeeld de verhouding tussen het aantal studenten dat uitvalt en niet uitvalt. Een odds ratio is de verhouding tussen twee odds, dus de verhouding van de odds van studentenuitval voor de periode met leenstelsel en de periode zonder leenstelsel. De odds ratio geeft dus een interpretatie van het effect van een leenstelsel op het uitvallen van studenten.[^7]
+De odds ratio is een andere effectmaat die voor zowel de *Chi-kwadraat toets voor onafhankelijkheid* als de *Fisher's exacte toets* kan worden gebruikt. Een voorwaarde is echter dat beide variabelen binair zijn. In andere woorden, er moet een 2x2 kruistabel gevormd kunnen worden. Odds is een Engelse term voor de verhouding van twee kansen, bijvoorbeeld de verhouding tussen het aantal studenten dat uitvalt en niet uitvalt. Een odds ratio is de verhouding tussen twee odds, dus de verhouding van de odds van studentenuitval voor de periode met leenstelsel en de periode zonder leenstelsel. De odds ratio geeft dus een interpretatie van het effect van een leenstelsel op het uitvallen van studenten.[^7]
 
 
 # De data bekijken
@@ -255,7 +255,7 @@ ptable <- prop.table(Uitval_studenten_kruistabel, 1)
 
 
 <!-- ## TEKSTBLOK: Rapportage2.R -->
-De *Chi-kwadraat toets voor onafhankelijkheid* is uitgevoerd om te toetsen of er een afhankelijkheid is tussen het uitvallen van studenten met een functiebeperking en het wel of niet invoeren van het leenstelsel. De nulhypothese dat uitval en invoering van het leenstelsel onafhankelijk zijn kan verworpen worden, &chi;^2^ ~`r vDF`~ = `r vChi2`, *p* = `r vP`, *w* = `r Round_and_format(w)`. De propoties per rij in Tabel 3 laten zien dat er relatief meer studenten uitvallen wanneer er een leenstelsel is ingevoerd.
+De *Chi-kwadraat toets voor onafhankelijkheid* is uitgevoerd om te toetsen of er een afhankelijkheid is tussen het uitvallen van studenten met een functiebeperking en het wel of niet invoeren van het leenstelsel. De nulhypothese dat uitval en invoering van het leenstelsel onafhankelijk zijn kan verworpen worden, &chi;^2^ ~`r vDF`~ = `r vChi2`, *p* = `r vP`, *w* = `r Round_and_format(w)`. De propoties per rij in Tabel 3 laten zien dat er relatief meer studenten uitvallen nadat er een leenstelsel is ingevoerd.
 
 |                      | geen uitval   | uitval | 
 | -------------------- | ---------| ------------| 
@@ -266,10 +266,10 @@ De *Chi-kwadraat toets voor onafhankelijkheid* is uitgevoerd om te toetsen of er
 
 
 
-# Fisher's exact toets
+# Fisher's exacte toets
 ## Uitvoering 
 <!-- ## TEKSTBLOK: Data-inladen-Fisher.R -->
-*Fisher's exact toets* wordt uitgevoerd om de vraag te beantwoorden of er een afhankelijkheid is tussen het uitvallen van studenten met een functiebeperking en het wel of niet invoeren van het leenstelsel. Deze toets is ook betrouwbaar bij een laag aantal observaties. Om de toets te illustreren is een subset van de dataset `Uitval_studenten_functiebeperking_leenstelsel` ingeladen; de subset heet `Fisher_Uitval_studenten_functiebeperking_leenstelsel`.
+*Fisher's exacte toets* wordt uitgevoerd om de vraag te beantwoorden of er een afhankelijkheid is tussen het uitvallen van studenten met een functiebeperking en het wel of niet invoeren van het leenstelsel. Deze toets is ook betrouwbaar bij een laag aantal observaties. Om de toets te illustreren is een subset van de dataset `Uitval_studenten_functiebeperking_leenstelsel` ingeladen; de subset heet `Fisher_Uitval_studenten_functiebeperking_leenstelsel`.
 
 Een kruistabel geeft de aantallen observaties weer voor de combinaties van de categorieën van de variabelen `Periode` en `Uitval`. Maak de kruistabel met de functie `table()` met als argumenten de variabele `Fisher_Uitval_studenten_functiebeperking_leenstelsel$Periode` (voor of na invoering leenstelsel) en `Fisher_Uitval_studenten_functiebeperking_leenstelsel$Uitval` (wel of niet uitgevallen). 
 <!-- ## /TEKSTBLOK: Data-inladen-Fisher.R -->
@@ -291,7 +291,7 @@ prop.table(Fisher_Uitval_studenten_kruistabel, 1)
 <!-- ## /OPENBLOK: Data-kruistabel2Fisher.R -->
 
 <!-- ## TEKSTBLOK: Data-kruistabel3Fisher.R -->
-De kruistabel en bijbehorende tabel met proporties laat zien dat het percentage uitgevallen studenten lager is na invoering van het leenstelsel (`r Round_and_format(100 * prop.table(Fisher_Uitval_studenten_kruistabel, 1)[2,2])`%) dan voor invoering van het leenstelsel (`r Round_and_format(100 * prop.table(Fisher_Uitval_studenten_kruistabel, 1)[1,2])`%).
+De kruistabel en bijbehorende tabel met proporties laat zien dat het percentage uitgevallen studenten hoger is na invoering van het leenstelsel (`r Round_and_format(100 * prop.table(Fisher_Uitval_studenten_kruistabel, 1)[2,2])`%) dan voor invoering van het leenstelsel (`r Round_and_format(100 * prop.table(Fisher_Uitval_studenten_kruistabel, 1)[1,2])`%).
 <!-- ## /TEKSTBLOK: Data-kruistabel3Fisher.R -->
 
 
@@ -308,13 +308,13 @@ chisq.test(Fisher_Uitval_studenten_functiebeperking_leenstelsel$Periode,
 ```
 <!-- ## /OPENBLOK: Assumptie1Fisher.R -->
 
-Een van de verwachte aantallen observaties is kleiner dan vijf, dus de *Chi-kwadraat toets voor onafhankelijkheid* kan niet worden uitgevoerd. *Fisher's exact toets* moet inderdaad gebruikt worden voor deze dataset.
+Een van de verwachte aantallen observaties is kleiner dan vijf, dus de *Chi-kwadraat toets voor onafhankelijkheid* kan niet worden uitgevoerd. *Fisher's exacte toets* moet inderdaad gebruikt worden voor deze dataset.
 
 
-## Fisher's exact toets
+## Fisher's exacte toets
 
 <!-- ## TEKSTBLOK: Fisher1.R -->
-Voer *Fisher's exact toets* uit met de functie `fisher.test` met als argumenten de variabelen `Fisher_Uitval_studenten_functiebeperking_leenstelsel$Periode` (voor of na invoering leenstelsel) en `Fisher_Uitval_studenten_functiebeperking_leenstelsel$Uitval` (wel of niet uitgevallen). 
+Voer *Fisher's exacte toets* uit met de functie `fisher.test` met als argumenten de variabelen `Fisher_Uitval_studenten_functiebeperking_leenstelsel$Periode` (voor of na invoering leenstelsel) en `Fisher_Uitval_studenten_functiebeperking_leenstelsel$Uitval` (wel of niet uitgevallen). 
 <!-- ## /TEKSTBLOK: Fisher1.R -->
 
 
@@ -363,13 +363,13 @@ Fisher_ptable <- prop.table(Fisher_Uitval_studenten_kruistabel, 1)
 
 
 <!-- ## TEKSTBLOK: Rapportage2Fisher.R -->
-*Fisher's exact toets* is uitgevoerd om te toetsen of er een afhankelijkheid is tussen het uitvallen van studenten met een functiebeperking en het wel of niet invoeren van het leenstelsel. De nulhypothese dat uitval en invoering van het leenstelsel onafhankelijk zijn kan niet verworpen worden, *p* = `r vF_p`. De proporties per rij in Tabel 4 laten zien dat er relatief meer studenten uitvallen wanneer er een leenstelsel is ingevoerd, dit verschil is echter niet significant.
+*Fisher's exacte toets* is uitgevoerd om te toetsen of er een afhankelijkheid is tussen het uitvallen van studenten met een functiebeperking en het wel of niet invoeren van het leenstelsel. De nulhypothese dat uitval en invoering van het leenstelsel onafhankelijk zijn kan niet verworpen worden, *p* = `r vF_p`. De proporties per rij in Tabel 4 laten zien dat er relatief meer studenten uitvallen nadat er een leenstelsel is ingevoerd, dit verschil is echter niet significant.
 
 |                      | geen uitval   | uitval | 
 | -------------------- | ---------| ------------| 
 | **geen leenstelsel** |`r Round_and_format(Fisher_ptable[1,1])`   | `r Round_and_format(Fisher_ptable[1,2])`          | 
 | **wel leenstelsel**  |`r Round_and_format(Fisher_ptable[2,1])`   | `r Round_and_format(Fisher_ptable[2,2])`          |
-*Tabel 4. Proporties wel of niet uitvallen studenten met of zonder leenstelsel berekend per rij voor dataset Fisher's exact toets.*
+*Tabel 4. Proporties wel of niet uitvallen studenten met of zonder leenstelsel berekend per rij voor dataset Fisher's exacte toets.*
 <!-- ## /TEKSTBLOK: Rapportage2Fisher.R -->
 
 

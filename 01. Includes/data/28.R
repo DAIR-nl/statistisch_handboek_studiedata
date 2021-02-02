@@ -100,18 +100,6 @@ Studenten_Methoden_Statistiek <- data.frame(Studentnummer,
                                             Aantal_Hoorcolleges,
                                             Eindcijfer_MS)
 
-# lm
-#model <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges,
-#   Studenten_Methoden_Statistiek)
-#summary(model)
-
-# Bootstrap
-#library(car)
-#Regressiemodel <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges, Studenten_Methoden_Statistiek)
-#Bootstrap_resultaat <- Boot(Regressiemodel, R = 10000)
-#summary(Bootstrap_resultaat)
-#confint(Bootstrap_resultaat, type = "bca")
-
 rm(Studentnummer,
    Geslacht,
    Geslacht_dummy,
@@ -120,5 +108,6 @@ rm(Studentnummer,
    Eindcijfer_MS
    )
 
-#vv <- lm(Eindcijfer_MS ~ 1, Studenten_Methoden_Statistiek )
-#summary(vv)
+## Sla de datasets op
+write.csv(Studenten_Methoden_Statistiek,
+          file = "05. Datasets/28_Studenten_Methoden_Statistiek.csv")

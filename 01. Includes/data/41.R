@@ -99,7 +99,7 @@ Eindexamencijfer[Eindexamencijfer < 5.5] <- 5.5
 # Maak afhankelijke variabele eindcijfer Methoden & Statistiek
 
 Logit_y <- 17  - 1.1 * Leeftijd + 1.5 * Geslacht_dummy + 0 * Vooropleiding_dummy + 1.2 * Eindexamencijfer #+ rnorm(250,0,0.1)
-Kans_y <- 1/(1 + exp( - 1 * Logit_y))
+Kans_y <- 1/(1 + exp( -1 * Logit_y))
 
 hist(Kans_y)
 plot(Kans_y)
@@ -117,33 +117,6 @@ Uitval_Elektrotechniek <- data.frame(Studentnummer,
                                         Geslacht_dummy,
                                         Vooropleiding_dummy)
 
-#vvv <- glm(Uitval ~ Leeftijd + Geslacht + Vooropleiding + Eindexamencijfer,
-#    data = Uitval_Elektrotechniek,
-#    family = "quasibinomial")
-
-#summary(vvv)
-
-#exp(coefficients(vvv))
-
-#library(lmtest)
-#lrtest(vvv)
-
-
-
-
-
-# lm
-#model <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges,
-#   Studenten_Methoden_Statistiek)
-#summary(model)
-
-# Bootstrap
-#library(car)
-#Regressiemodel <- lm(Eindcijfer_MS ~ Geslacht + Eindexamencijfer_Wiskunde + Aantal_Hoorcolleges, Studenten_Methoden_Statistiek)
-#Bootstrap_resultaat <- Boot(Regressiemodel, R = 10000)
-#summary(Bootstrap_resultaat)
-#confint(Bootstrap_resultaat, type = "bca")
-
 rm(Studentnummer,
    Geslacht,
    Geslacht_dummy,
@@ -156,5 +129,6 @@ rm(Studentnummer,
    Vooropleiding_dummy
    )
 
-#vv <- lm(Eindcijfer_MS ~ 1, Studenten_Methoden_Statistiek )
-#summary(vv)
+## Sla de datasets op
+write.csv(Uitval_Elektrotechniek,
+          file = "05. Datasets/41_Uitval_Elektrotechniek.csv")

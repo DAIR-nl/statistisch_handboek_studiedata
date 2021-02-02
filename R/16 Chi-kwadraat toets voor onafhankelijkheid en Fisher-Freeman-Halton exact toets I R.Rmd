@@ -47,7 +47,7 @@ source(paste0(here::here(),"/01. Includes/data/16.R"))
 
 # Toepassing
 <!-- ## TEKSTBLOK: link1.R -->
-Gebruik de *Chi-kwadraat toets voor onafhankelijkheid*[^1] of de *Fisher-Freeman-Halton exact toets*[^2] om te toetsen of er een afhankelijkheid is tussen twee (ongepaarde) categorische variabelen. De *Fisher-Freeman-Halton exact toets* is een alternatief voor de *Chi-kwadraat toets voor onafhankelijkheid* bij een laag aantal observaties, dit wordt bij de assumpties toegelicht.[^2]<sup>,</sup>[^3] De *Fisher-Freeman-Halton exact toets* is een uitbreiding van de [Fisher's exact toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) welke gebruikt wordt om te toetsen of er een verband bestaat tussen twee ongepaarde binaire variabelen, oftewel een 2x2 tabel. 
+Gebruik de *Chi-kwadraat toets voor onafhankelijkheid*[^1] of de *Fisher-Freeman-Halton exact toets*[^2] om te toetsen of er een afhankelijkheid is tussen twee (ongepaarde) categorische variabelen. De *Fisher-Freeman-Halton exact toets* is een alternatief voor de *Chi-kwadraat toets voor onafhankelijkheid* bij een laag aantal observaties, dit wordt bij de assumpties toegelicht.[^2]<sup>,</sup>[^3] De *Fisher-Freeman-Halton exact toets* is een uitbreiding van de [Fisher's exacte toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) welke gebruikt wordt om te toetsen of er een verband bestaat tussen twee ongepaarde binaire variabelen, oftewel een 2x2 tabel. 
 <!-- ## /TEKSTBLOK: link1.R -->
 
 In de huidige casus worden de *Chi-kwadraat toets voor onafhankelijkheid* en de *Fisher-Freeman-Halton exact toets* gebruikt voor een casus met een categorische variabele bestaande uit twee categorieën en een categorische variabele bestaande uit meer dan twee categorieën. Beide toetsen zijn in het algemeen te gebruiken voor alle onderzoeksvragen waarbij twee categorische variabelen die beide twee of meer categorieën bevatten getoetst worden.
@@ -107,7 +107,7 @@ De *Chi-kwadraat toets voor onafhankelijkheid* en *Fisher-Freeman-Halton exact t
 Als post-hoc toets voor de *Chi-kwadraat toets voor onafhankelijkheid* wordt het gestandaardiseerde residu gebruikt. Dit is het gestandaardiseerde verschil tussen het (geobserveerde) aantal observaties en het verwachte aantal observaties, waarbij gestandaardiseerd betekent dat het een gemiddelde van 0 en standaardafwijking van 1 heeft. Op deze manier kunnen de verschillende residuen met elkaar vergeleken worden, omdat ze dezelfde schaal hebben. Voor elke cel in de kruistabel kan het gestandaardiseerde residu bepaald worden. Vergelijkbaar met z-scores[^11] zijn deze residuen significant bij een waarde groter dan ± 1,96 wanneer een significantieniveau (α) van 0,05 wordt gehanteerd. Op deze manier kan bepaald worden in welke cellen er afwijkingen van de verwachte aantallen zijn. [^5]
 
 <!-- ## TEKSTBLOK: link2.R -->
-Voor de *Fisher-Freeman-Halton exact toets* is er geen specifiek voorgeschreven post-hoc toets.[^3]<sup>,</sup>[^5] Een goede optie is het uitvoeren van losse [Fisher's exact toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) voor elke mogelijke combinatie van 2x2 tabellen. Gebruik een correctie op de p-waarden, omdat er meerdere testen tegelijk uitgevoerd worden. Een bekende correctie is de Bonferroni methode, andere opties zijn ook mogelijk. 
+Voor de *Fisher-Freeman-Halton exact toets* is er geen specifiek voorgeschreven post-hoc toets.[^3]<sup>,</sup>[^5] Een goede optie is het uitvoeren van losse [Fisher's exacte toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) voor elke mogelijke combinatie van 2x2 tabellen. Gebruik een correctie op de p-waarden, omdat er meerdere testen tegelijk uitgevoerd worden. Een bekende correctie is de Bonferroni methode, andere opties zijn ook mogelijk. 
 <!-- ## /TEKSTBLOK: link2.R -->
 
 # Effectmaat
@@ -116,7 +116,7 @@ De p-waarde geeft aan of het verschil tussen twee groepen statistisch significan
 De *Chi-kwadraat toets voor onafhankelijkheid* heeft als effectmaat *w*.[^6] Een indicatie om *w* te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.[^7]
 
 <!-- ## TEKSTBLOK: link3.R -->
-De *Fisher-Freeman-Halton exact toets* heeft geen specifieke effectmaat. De post-hoc toets van deze toets - [Fisher's exact toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) - gebruikt echter de odds ratio als effectmaat. De odds ratio is een effectmaat die voor zowel de *Chi-kwadraat toets voor onafhankelijkheid* als de [Fisher's exact toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) kan worden gebruikt. Een voorwaarde is echter dat beide variabelen binair zijn. In andere woorden, er moet een 2x2 kruistabel gevormd kunnen worden. Odds is een Engelse term voor de verhouding van twee kansen, bijvoorbeeld de verhouding tussen het aantal studenten met positief BSA en negatief BSA. Een odds ratio is de verhouding tussen twee odds, bijvoorbeeld de verhouding van de odds van studenten met Nederland als land van hoogste vooropleiding en studenten met Duitsland als land van hoogste vooropleiding. De odds ratio geeft dus een interpretatie van de verschillen tussen landen op het behalen van een positief of negatief BSA.[^5]
+De *Fisher-Freeman-Halton exact toets* heeft geen specifieke effectmaat. De post-hoc toets van deze toets - [Fisher's exacte toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) - gebruikt echter de odds ratio als effectmaat. De odds ratio is een effectmaat die voor zowel de *Chi-kwadraat toets voor onafhankelijkheid* als de [Fisher's exacte toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) kan worden gebruikt. Een voorwaarde is echter dat beide variabelen binair zijn. In andere woorden, er moet een 2x2 kruistabel gevormd kunnen worden. Odds is een Engelse term voor de verhouding van twee kansen, bijvoorbeeld de verhouding tussen het aantal studenten met positief BSA en negatief BSA. Een odds ratio is de verhouding tussen twee odds, bijvoorbeeld de verhouding van de odds van studenten met Nederland als land van hoogste vooropleiding en studenten met Duitsland als land van hoogste vooropleiding. De odds ratio geeft dus een interpretatie van de verschillen tussen landen op het behalen van een positief of negatief BSA.[^5]
 <!-- ## /TEKSTBLOK: link3.R -->
 
 # De data bekijken
@@ -225,7 +225,6 @@ paste("Effectgrootte is",w)
 * Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar k staat voor kolom en r voor rij. In dit geval geldt *df* = `r vDF`. 
 * p-waarde < 0,05, de H~0~ wordt verworpen.[^8]
 * Effectmaat is `r Round_and_format(w)`, dus een klein tot gemiddeld effect
-* 
 
 <!-- ## /TEKSTBLOK: Chi2-toets4.R-->
 
@@ -346,7 +345,7 @@ fish <- fisher.test(Fisher_BSA_antropologie$BSA, Fisher_BSA_antropologie$Landen_
 
 <!-- ## /TEKSTBLOK: Fisher-Freeman-Halton-exact-toets2.R-->
 
-## Post-hoc toets: Fisher's exact toets
+## Post-hoc toets: Fisher's exacte toets
 
 <!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets post-hoc1.R-->
 Omdat er geen afhankelijkheid is tussen het wel of niet halen van een positief BSA en het land van hoogste vooropleiding, hoeven er geen post-hoc toetsen uitgevoerd te worden. Indien dit wel nodig is, voer deze dan uit met de functie `fisher.multcomp()` met als eerste argument de kruistabel van de dataset en als tweede argument de gebruikte methode om te corrigeren voor meerdere testen, in dit geval `p.method = "bonferroni"`. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans dat er bij toeval een verband wordt ontdekt dat er niet is.[^5]    
@@ -365,7 +364,7 @@ fisher.multcomp(Fisher_BSA_antropologie_kruistabel, p.method = "bonferroni")
 <!-- ## /OPENBLOK: Fisher-Freeman-Halton-exact-toets post-hoc2.R -->
 
 <!-- ## TEKSTBLOK: link4.R -->
-De resultaten laten de significantie zien van de [Fisher's exact toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) voor elk mogelijke combinatie van 2x2 tabellen. Geen van de post-hoc toetsen is significant, wat logisch is aangezien de *Fisher-Freeman-Halton exact toets* niet significant was.  De eerste waarde is bijvoorbeeld de p-waarde van deze toets voor de kruistabel bestaande uit de aantallen positief en negatief BSA voor Nederland en Duitsland (NL:GE). De opmerkelijke p-waardes van 1 komen in een aantal gevallen door de Bonferroni correctie die de oorspronkelijke p-waarde met het aantal vergelijkingen (21) vermenigvuldigt. In andere gevallen zijn de verschillen zo klein dat dit leidt tot een p-waarde van 1.
+De resultaten laten de significantie zien van de [Fisher's exacte toets](13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html) voor elk mogelijke combinatie van 2x2 tabellen. Geen van de post-hoc toetsen is significant, wat logisch is aangezien de *Fisher-Freeman-Halton exact toets* niet significant was.  De eerste waarde is bijvoorbeeld de p-waarde van deze toets voor de kruistabel bestaande uit de aantallen positief en negatief BSA voor Nederland en Duitsland (NL:GE). De opmerkelijke p-waardes van 1 komen in een aantal gevallen door de Bonferroni correctie die de oorspronkelijke p-waarde met het aantal vergelijkingen (21) vermenigvuldigt. In andere gevallen zijn de verschillen zo klein dat dit leidt tot een p-waarde van 1.
 <!-- ## /TEKSTBLOK: link4.R -->
 
 

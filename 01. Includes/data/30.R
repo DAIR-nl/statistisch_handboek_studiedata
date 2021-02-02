@@ -131,11 +131,11 @@ Resultaten_Leisure_Management <- cbind.data.frame(Studentnummer,
 
 
 
-library(ez)
-ezANOVA(Resultaten_Leisure_Management, 
-        dv = Cijfers, 
-        wid = Studentnummer,
-        within = list(Vaksoort, Periode))
+#library(ez)
+#ezANOVA(Resultaten_Leisure_Management, 
+#        dv = Cijfers, 
+#        wid = Studentnummer,
+#        within = list(Vaksoort, Periode))
 
 rm(Cijfers,
    Vaksoort,
@@ -239,11 +239,11 @@ Hoofdeffecten_Resultaten_Leisure_Management <- cbind.data.frame(Studentnummer,
                                                   Vaksoort,
                                                   Cijfers)
 
-library(ez)
-ezANOVA(Hoofdeffecten_Resultaten_Leisure_Management, 
-        dv = Cijfers, 
-        wid = Studentnummer,
-        within = list(Vaksoort, Periode))
+#library(ez)
+#ezANOVA(Hoofdeffecten_Resultaten_Leisure_Management, 
+#        dv = Cijfers, 
+#        wid = Studentnummer,
+#        within = list(Vaksoort, Periode))
 
 rm(Cijfers,
    Vaksoort,
@@ -257,6 +257,13 @@ rm(Cijfers,
    Cijfers_P2,
    Cijfers_P3,
    Cijfers_P4)
+
+## Sla de datasets op
+write.csv(Resultaten_Leisure_Management,
+          file = "05. Datasets/30_Resultaten_Leisure_Management.csv")
+
+write.csv(Hoofdeffecten_Resultaten_Leisure_Management,
+          file = "05. Datasets/30_Hoofdeffecten_Resultaten_Leisure_Management.csv")
 
 
 #vvv <- aov(Gemiddeld_cijfer ~ Geslacht + Vooropleiding + Geslacht:Vooropleiding,

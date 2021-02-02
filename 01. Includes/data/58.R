@@ -96,22 +96,23 @@ Gemiddelde_cijfers_bioinformatics <- Gemiddelde_cijfers_bioinformatics[sample.in
 ################################################################################
 
 
-Dep <- cbind(Gemiddelde_cijfers_bioinformatics$Cijfers_P1, 
-             Gemiddelde_cijfers_bioinformatics$Cijfers_P2, 
-             Gemiddelde_cijfers_bioinformatics$Cijfers_P3)
+#Dep <- cbind(Gemiddelde_cijfers_bioinformatics$Cijfers_P1, 
+#             Gemiddelde_cijfers_bioinformatics$Cijfers_P2, 
+#             Gemiddelde_cijfers_bioinformatics$Cijfers_P3)
 
-MANOVA <- manova(Dep ~ Bacheloropleiding, data = Gemiddelde_cijfers_bioinformatics)
-summary(MANOVA)
+#MANOVA <- manova(Dep ~ Bacheloropleiding, data = Gemiddelde_cijfers_bioinformatics)
+#summary(MANOVA)
 
-summary.aov(MANOVA)
+#summary.aov(MANOVA)
 
-rm(Dep, 
-   MANOVA, 
-   Cijfers, 
+rm(Cijfers, 
    Studentnummer, 
    Cijfers_biologie,
    Cijfers_informatica,
    Cijfers_wiskunde,
    Bacheloropleiding)
 
+## Sla de datasets op
+write.csv(Gemiddelde_cijfers_bioinformatics,
+          file = "05. Datasets/58_Gemiddelde_cijfers_bioinformatics.csv")
 

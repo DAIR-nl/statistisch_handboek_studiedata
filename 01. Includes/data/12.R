@@ -75,3 +75,7 @@ Maand_vooraf,
 Maand_achteraf, 
 Studentnummer
 )
+
+## Sla de datasets op
+write.csv(FOS_studenten,
+          file = "05. Datasets/12_FOS_studenten.csv")

@@ -68,7 +68,7 @@ Beoordeling <- as.character(Beoordeling)
 Beoordelingen_gesprekstechnieken <- data.frame(Studentnummer,
                                              Geslacht,
                                              Beoordeling,
-                                             stringsAsFactors=FALSE)
+                                             stringsAsFactors = FALSE)
 
 
 rm(Beoordeling, 
@@ -76,3 +76,8 @@ rm(Beoordeling,
    Beoordeling_vrouw,    
    Geslacht,
    Studentnummer)
+
+## Sla de datasets op
+write.csv(Beoordelingen_gesprekstechnieken,
+          file = "05. Datasets/23_Beoordelingen_gesprekstechnieken.csv")
+

@@ -42,12 +42,14 @@ Maak_url <- function(published, sModus, sToets_dashed) {
 
 Corrigeer_toetsnaam <- function(sToetsnaam) {
   case_when(
-      sToetsnaam == "Chi-kwadraat toets voor onafhankelijkheid en Fishers exact toets" ~ "Chi-kwadraat toets voor onafhankelijkheid en Fisher's exact toets",
+      sToetsnaam == "Chi-kwadraat toets voor onafhankelijkheid en Fishers exacte toets" ~ "Chi-kwadraat toets voor onafhankelijkheid en Fisher's exacte toets",
       sToetsnaam == "Cochrans Q toets" ~ "Cochran's Q toets",
-      sToetsnaam == "Fisher-Freeman-Halton exact toets" ~ "Fisher-Freeman- Halton exact toets",
+      sToetsnaam == "Fisher-Freeman-Halton exact toets" ~ "Fisher-Freeman-Halton exact toets",
       sToetsnaam == "Friedmans ANOVA I" ~ "Friedman's ANOVA I",
       sToetsnaam == "Friedmans ANOVA II" ~ "Friedman's ANOVA II",
       sToetsnaam == "Moods mediaan toets" ~ "Mood's mediaan toets",
+      sToetsnaam == "Factoriele ANOVA" ~ "Factoriële ANOVA",
+      sToetsnaam == "Factoriele repeated measures ANOVA" ~ "Factoriële repeated measures ANOVA",
       #sToetsnaam == "Chi-kwadraat toets trend" ~ "Chi-kwadraat toets (trend)",
       TRUE ~ sToetsnaam
     )

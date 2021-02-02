@@ -75,8 +75,6 @@ Beoordeling[Beoordeling == 3] <- "Goed"
 Beoordeling[Beoordeling == 4] <- "Uitstekend"
 Beoordeling <- as.character(Beoordeling)
 
-
-
 # Maak dataset
 Beoordelingen_presentatievaardigheden <- data.frame(Studentnummer,
                                              Opleiding,
@@ -86,7 +84,6 @@ Beoordelingen_presentatievaardigheden <- data.frame(Studentnummer,
 # Hussel dataset door elkaar
 Beoordelingen_presentatievaardigheden <- Beoordelingen_presentatievaardigheden[sample.int(120, 120),]
 
-
 rm(Beoordeling, 
    Beoordeling_Economics,    
    Beoordeling_Entrepeneurship,    
@@ -95,3 +92,6 @@ rm(Beoordeling,
    Opleiding,
    Studentnummer)
 
+## Sla de datasets op
+write.csv(Beoordelingen_presentatievaardigheden,
+          file = "05. Datasets/25_Beoordelingen_presentatievaardigheden.csv")

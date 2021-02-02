@@ -138,6 +138,11 @@ Studenten_Methoden_Statistiek <- data.frame(Studentnummer,
                                             Eindexamencijfer,
                                             Eindcijfer_MS)
 
+## Sla de datasets op
+write.csv(Studenten_Methoden_Statistiek,
+          file = "05. Datasets/31_Studenten_Methoden_Statistiek.csv")
+
+
 # mean(Aantal_Hoorcolleges_Psychologie)
 # mean(Aantal_Hoorcolleges_Onderwijskunde)
 # mean(Aantal_Hoorcolleges_Sociologie)

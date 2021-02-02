@@ -133,14 +133,14 @@ Resultaten_SCM <- cbind.data.frame(Studentnummer,
                                    Vak,
                                    Cijfer)
 
-library(ez)
+#library(ez)
 
-ezANOVA(Resultaten_SCM, 
-        dv = Cijfer, 
-        wid = Studentnummer,
-        within = Vak,
-        between = Premaster,
-        detailed = TRUE)
+#ezANOVA(Resultaten_SCM, 
+#        dv = Cijfer, 
+#        wid = Studentnummer,
+#        within = Vak,
+#        between = Premaster,
+#       detailed = TRUE)
 
 
 
@@ -248,13 +248,13 @@ Hoofdeffecten_Resultaten_SCM <- cbind.data.frame(Studentnummer,
                                    Vak,
                                    Cijfer)
 
-library(ez)
-ezANOVA(Resultaten_SCM, 
-        dv = Cijfer, 
-        wid = Studentnummer,
-        within = Vak,
-        between = Premaster,
-        detailed = TRUE)
+#library(ez)
+#ezANOVA(Resultaten_SCM, 
+#        dv = Cijfer, 
+#        wid = Studentnummer,
+#        within = Vak,
+#        between = Premaster,
+#       detailed = TRUE)
 
 rm(Cijfer,
    Vak,
@@ -268,6 +268,13 @@ rm(Cijfer,
    Cijfers_P_OP,
    Cijfers_M_TH,
    Cijfers_P_TH)
+
+## Sla de datasets op
+write.csv(Resultaten_SCM,
+          file = "05. Datasets/32_Resultaten_SCM.csv")
+
+write.csv(Hoofdeffecten_Resultaten_SCM,
+          file = "05. Datasets/32_Hoofdeffecten_Resultaten_SCM.csv")
 
 
 #vvv <- aov(Gemiddeld_cijfer ~ Geslacht + Vooropleiding + Geslacht:Vooropleiding,

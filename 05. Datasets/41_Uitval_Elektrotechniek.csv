@@ -1,0 +1,251 @@
+"","Studentnummer","Uitval","Leeftijd","Geslacht","Vooropleiding","Eindexamencijfer","Geslacht_dummy","Vooropleiding_dummy"
+"1",351662,"Uitval",25,"Man","havo",5.5,1,1
+"2",357869,"Geen uitval",17,"Man","havo",6.5,1,1
+"3",302985,"Geen uitval",20,"Vrouw","havo",7.5,0,1
+"4",329924,"Geen uitval",21,"Vrouw","mbo",6.5,0,0
+"5",395245,"Geen uitval",23,"Man","havo",8,1,1
+"6",368292,"Geen uitval",22,"Man","havo",7.5,1,1
+"7",362554,"Geen uitval",17,"Man","havo",7,1,1
+"8",345403,"Geen uitval",23,"Man","havo",8,1,1
+"9",365160,"Geen uitval",16,"Man","mbo",7.5,1,0
+"10",346434,"Uitval",23,"Vrouw","mbo",7,0,0
+"11",309641,"Geen uitval",19,"Man","mbo",7.5,1,0
+"12",359133,"Uitval",23,"Vrouw","mbo",8,0,0
+"13",352131,"Geen uitval",23,"Man","havo",7.5,1,1
+"14",396848,"Uitval",25,"Man","mbo",6.5,1,0
+"15",314182,"Geen uitval",23,"Vrouw","havo",8,0,1
+"16",315179,"Geen uitval",17,"Man","havo",8.5,1,1
+"17",327167,"Geen uitval",18,"Man","havo",7.5,1,1
+"18",389708,"Geen uitval",19,"Man","havo",7.5,1,1
+"19",309096,"Geen uitval",21,"Man","havo",7,1,1
+"20",330537,"Geen uitval",17,"Vrouw","havo",9.5,0,1
+"21",356218,"Geen uitval",18,"Man","havo",7.5,1,1
+"22",394516,"Geen uitval",18,"Man","havo",7,1,1
+"23",307988,"Geen uitval",22,"Man","havo",5.5,1,1
+"24",313535,"Geen uitval",22,"Man","mbo",5.5,1,0
+"25",390076,"Geen uitval",20,"Vrouw","havo",7,0,1
+"26",306215,"Geen uitval",24,"Man","havo",7.5,1,1
+"27",383518,"Uitval",27,"Man","havo",7.5,1,1
+"28",329393,"Geen uitval",25,"Vrouw","havo",8,0,1
+"29",353240,"Geen uitval",25,"Man","mbo",7,1,0
+"30",328824,"Geen uitval",23,"Man","havo",8.5,1,1
+"31",300040,"Uitval",25,"Man","havo",6.5,1,1
+"32",314425,"Geen uitval",17,"Man","mbo",6,1,0
+"33",372819,"Uitval",23,"Man","havo",6,1,1
+"34",351655,"Geen uitval",19,"Man","mbo",8,1,0
+"35",394037,"Geen uitval",25,"Man","havo",7,1,1
+"36",358526,"Geen uitval",23,"Man","havo",8,1,1
+"37",377008,"Geen uitval",17,"Vrouw","havo",7,0,1
+"38",343041,"Geen uitval",19,"Man","havo",6.5,1,1
+"39",377836,"Geen uitval",23,"Man","havo",7,1,1
+"40",306133,"Uitval",23,"Man","havo",5.5,1,1
+"41",333522,"Geen uitval",18,"Man","mbo",6,1,0
+"42",321811,"Geen uitval",17,"Man","havo",6,1,1
+"43",339894,"Geen uitval",20,"Man","havo",8.5,1,1
+"44",309639,"Geen uitval",17,"Man","havo",6.5,1,1
+"45",385277,"Geen uitval",23,"Man","havo",8,1,1
+"46",309325,"Geen uitval",24,"Man","havo",9,1,1
+"47",326509,"Geen uitval",17,"Man","havo",7,1,1
+"48",320959,"Geen uitval",19,"Man","mbo",7.5,1,0
+"49",314402,"Uitval",25,"Man","mbo",5.5,1,0
+"50",364501,"Geen uitval",17,"Man","havo",6.5,1,1
+"51",371502,"Geen uitval",23,"Man","havo",7.5,1,1
+"52",345220,"Geen uitval",18,"Man","havo",7.5,1,1
+"53",394334,"Geen uitval",19,"Man","havo",6.5,1,1
+"54",392371,"Uitval",25,"Vrouw","havo",10,0,1
+"55",377584,"Geen uitval",19,"Man","mbo",7,1,0
+"56",380685,"Geen uitval",22,"Vrouw","havo",7.5,0,1
+"57",370562,"Geen uitval",25,"Man","havo",8,1,1
+"58",332605,"Geen uitval",18,"Man","havo",7,1,1
+"59",316151,"Geen uitval",23,"Vrouw","havo",6.5,0,1
+"60",325558,"Geen uitval",23,"Man","havo",8.5,1,1
+"61",314214,"Geen uitval",26,"Man","havo",9,1,1
+"62",314286,"Geen uitval",23,"Man","havo",7,1,1
+"63",323193,"Geen uitval",18,"Man","havo",8,1,1
+"64",390093,"Geen uitval",22,"Vrouw","havo",7,0,1
+"65",334975,"Geen uitval",22,"Man","mbo",8.5,1,0
+"66",314490,"Uitval",24,"Man","havo",6,1,1
+"67",382948,"Geen uitval",19,"Man","havo",9.5,1,1
+"68",377583,"Geen uitval",22,"Vrouw","havo",6.5,0,1
+"69",340502,"Geen uitval",20,"Man","havo",6,1,1
+"70",334723,"Geen uitval",19,"Vrouw","havo",7,0,1
+"71",386012,"Geen uitval",21,"Man","havo",7.5,1,1
+"72",317368,"Geen uitval",23,"Man","havo",9,1,1
+"73",331541,"Geen uitval",18,"Man","havo",8,1,1
+"74",359105,"Geen uitval",24,"Man","havo",7.5,1,1
+"75",386604,"Geen uitval",19,"Man","havo",6,1,1
+"76",340631,"Geen uitval",16,"Man","havo",6.5,1,1
+"77",396110,"Geen uitval",23,"Man","havo",7,1,1
+"78",343203,"Geen uitval",17,"Man","mbo",10,1,0
+"79",337543,"Geen uitval",21,"Vrouw","mbo",5.5,0,0
+"80",399288,"Geen uitval",26,"Man","havo",8.5,1,1
+"81",384426,"Geen uitval",17,"Man","mbo",6.5,1,0
+"82",376819,"Geen uitval",23,"Vrouw","havo",9,0,1
+"83",382114,"Uitval",26,"Man","mbo",6,1,0
+"84",344195,"Geen uitval",23,"Man","mbo",7.5,1,0
+"85",392336,"Uitval",23,"Man","havo",6,1,1
+"86",344982,"Geen uitval",19,"Man","mbo",8,1,0
+"87",391437,"Geen uitval",17,"Man","havo",8.5,1,1
+"88",336716,"Geen uitval",25,"Man","havo",9,1,1
+"89",328077,"Geen uitval",21,"Vrouw","havo",8,0,1
+"90",369368,"Uitval",23,"Man","havo",9,1,1
+"91",391563,"Geen uitval",22,"Man","havo",8.5,1,1
+"92",343405,"Geen uitval",16,"Man","mbo",7,1,0
+"93",341487,"Geen uitval",17,"Man","havo",7.5,1,1
+"94",347484,"Geen uitval",17,"Man","havo",6.5,1,1
+"95",363527,"Geen uitval",23,"Man","havo",7,1,1
+"96",314535,"Geen uitval",23,"Man","mbo",8.5,1,0
+"97",383068,"Uitval",25,"Vrouw","mbo",8,0,0
+"98",351464,"Uitval",25,"Vrouw","havo",7.5,0,1
+"99",326502,"Uitval",25,"Man","havo",6,1,1
+"100",388298,"Uitval",24,"Man","havo",6.5,1,1
+"101",332952,"Geen uitval",23,"Man","havo",6.5,1,1
+"102",300412,"Geen uitval",17,"Man","mbo",7.5,1,0
+"103",310761,"Uitval",25,"Man","mbo",6.5,1,0
+"104",348181,"Geen uitval",17,"Man","havo",8,1,1
+"105",330570,"Geen uitval",19,"Man","havo",6,1,1
+"106",342520,"Geen uitval",25,"Man","havo",9,1,1
+"107",374521,"Uitval",25,"Vrouw","havo",7.5,0,1
+"108",314744,"Geen uitval",23,"Man","mbo",6.5,1,0
+"109",325945,"Geen uitval",23,"Man","havo",7.5,1,1
+"110",380339,"Geen uitval",18,"Man","havo",7,1,1
+"111",343927,"Geen uitval",22,"Vrouw","havo",7.5,0,1
+"112",306600,"Geen uitval",19,"Man","mbo",7.5,1,0
+"113",357700,"Geen uitval",16,"Vrouw","mbo",6,0,0
+"114",353517,"Geen uitval",20,"Man","havo",6.5,1,1
+"115",372325,"Geen uitval",22,"Man","havo",7.5,1,1
+"116",352352,"Geen uitval",21,"Man","mbo",9,1,0
+"117",366153,"Geen uitval",23,"Man","mbo",8.5,1,0
+"118",347801,"Geen uitval",17,"Man","havo",6.5,1,1
+"119",331516,"Geen uitval",17,"Man","mbo",8,1,0
+"120",366074,"Geen uitval",18,"Man","mbo",7,1,0
+"121",332262,"Geen uitval",19,"Man","havo",7.5,1,1
+"122",395988,"Geen uitval",21,"Man","havo",7.5,1,1
+"123",369160,"Geen uitval",17,"Man","havo",10,1,1
+"124",381117,"Geen uitval",20,"Man","havo",6,1,1
+"125",356156,"Uitval",23,"Vrouw","havo",7.5,0,1
+"126",319391,"Geen uitval",19,"Man","mbo",5.5,1,0
+"127",346136,"Geen uitval",20,"Vrouw","havo",8,0,1
+"128",367746,"Geen uitval",18,"Man","mbo",8.5,1,0
+"129",302285,"Geen uitval",17,"Man","havo",8.5,1,1
+"130",359969,"Geen uitval",23,"Man","havo",5.5,1,1
+"131",384297,"Geen uitval",17,"Man","havo",7.5,1,1
+"132",354660,"Geen uitval",16,"Vrouw","mbo",9,0,0
+"133",332280,"Geen uitval",16,"Man","havo",7,1,1
+"134",364084,"Uitval",25,"Man","havo",7,1,1
+"135",307825,"Geen uitval",17,"Man","havo",7,1,1
+"136",380286,"Geen uitval",25,"Man","havo",7.5,1,1
+"137",389798,"Geen uitval",21,"Man","mbo",8,1,0
+"138",325448,"Geen uitval",18,"Vrouw","havo",8.5,0,1
+"139",363404,"Uitval",23,"Vrouw","havo",7,0,1
+"140",376222,"Geen uitval",17,"Man","mbo",7.5,1,0
+"141",364615,"Geen uitval",17,"Man","havo",9.5,1,1
+"142",327454,"Geen uitval",17,"Vrouw","havo",7.5,0,1
+"143",354739,"Geen uitval",18,"Man","havo",7.5,1,1
+"144",378172,"Geen uitval",17,"Man","havo",6,1,1
+"145",320192,"Geen uitval",23,"Man","havo",7.5,1,1
+"146",366700,"Geen uitval",23,"Man","mbo",7,1,0
+"147",397200,"Geen uitval",17,"Man","mbo",7,1,0
+"148",322466,"Uitval",27,"Man","havo",6.5,1,1
+"149",395361,"Geen uitval",25,"Man","havo",6.5,1,1
+"150",363166,"Uitval",25,"Man","havo",6.5,1,1
+"151",379224,"Geen uitval",22,"Man","havo",7,1,1
+"152",363657,"Geen uitval",22,"Man","havo",8.5,1,1
+"153",349861,"Geen uitval",23,"Man","mbo",8.5,1,0
+"154",384031,"Geen uitval",22,"Man","mbo",7,1,0
+"155",379330,"Geen uitval",17,"Vrouw","havo",5.5,0,1
+"156",384954,"Geen uitval",24,"Vrouw","mbo",6.5,0,0
+"157",351490,"Geen uitval",21,"Man","havo",7,1,1
+"158",315702,"Geen uitval",23,"Man","havo",7.5,1,1
+"159",306622,"Geen uitval",17,"Man","havo",6.5,1,1
+"160",308982,"Geen uitval",23,"Man","havo",9.5,1,1
+"161",337768,"Geen uitval",19,"Vrouw","mbo",7,0,0
+"162",329478,"Uitval",25,"Man","havo",6,1,1
+"163",370942,"Geen uitval",22,"Man","havo",7,1,1
+"164",398169,"Geen uitval",17,"Man","havo",6,1,1
+"165",378120,"Geen uitval",19,"Man","havo",7.5,1,1
+"166",386620,"Uitval",26,"Man","havo",7.5,1,1
+"167",301834,"Geen uitval",22,"Man","mbo",7.5,1,0
+"168",342220,"Geen uitval",23,"Vrouw","mbo",5.5,0,0
+"169",321098,"Geen uitval",18,"Man","mbo",7.5,1,0
+"170",341042,"Geen uitval",23,"Man","mbo",7.5,1,0
+"171",390977,"Geen uitval",17,"Man","havo",6,1,1
+"172",356528,"Geen uitval",22,"Man","mbo",8,1,0
+"173",336939,"Geen uitval",23,"Man","havo",8,1,1
+"174",397454,"Geen uitval",21,"Man","mbo",9.5,1,0
+"175",376098,"Geen uitval",18,"Man","havo",7.5,1,1
+"176",338264,"Uitval",22,"Vrouw","havo",7.5,0,1
+"177",376383,"Geen uitval",19,"Man","havo",7.5,1,1
+"178",346437,"Geen uitval",19,"Man","havo",7.5,1,1
+"179",375175,"Geen uitval",22,"Man","mbo",5.5,1,0
+"180",388460,"Geen uitval",19,"Man","havo",5.5,1,1
+"181",369349,"Geen uitval",17,"Man","havo",7,1,1
+"182",308175,"Geen uitval",23,"Man","havo",6.5,1,1
+"183",394118,"Uitval",27,"Man","havo",7.5,1,1
+"184",376368,"Uitval",22,"Man","mbo",5.5,1,0
+"185",317745,"Geen uitval",19,"Man","havo",6,1,1
+"186",353872,"Uitval",23,"Man","havo",6,1,1
+"187",329132,"Geen uitval",25,"Man","havo",8,1,1
+"188",300030,"Geen uitval",17,"Man","havo",6,1,1
+"189",307587,"Geen uitval",24,"Man","havo",6.5,1,1
+"190",304619,"Geen uitval",23,"Vrouw","mbo",7.5,0,0
+"191",345979,"Geen uitval",17,"Man","mbo",7,1,0
+"192",368782,"Geen uitval",23,"Man","havo",7.5,1,1
+"193",351572,"Geen uitval",17,"Vrouw","havo",9.5,0,1
+"194",389551,"Geen uitval",22,"Man","havo",6,1,1
+"195",370777,"Uitval",26,"Man","mbo",7,1,0
+"196",311666,"Geen uitval",22,"Man","havo",6.5,1,1
+"197",333026,"Geen uitval",25,"Man","havo",9,1,1
+"198",387904,"Geen uitval",18,"Man","havo",6.5,1,1
+"199",370944,"Geen uitval",16,"Man","havo",7,1,1
+"200",391466,"Uitval",23,"Man","mbo",8,1,0
+"201",376791,"Geen uitval",23,"Vrouw","havo",6,0,1
+"202",389435,"Geen uitval",24,"Vrouw","havo",9,0,1
+"203",302449,"Geen uitval",18,"Man","mbo",8,1,0
+"204",344499,"Geen uitval",23,"Man","havo",6,1,1
+"205",301672,"Geen uitval",19,"Man","mbo",7.5,1,0
+"206",319850,"Geen uitval",18,"Man","mbo",7,1,0
+"207",348433,"Geen uitval",19,"Vrouw","mbo",7.5,0,0
+"208",383528,"Geen uitval",17,"Man","havo",7,1,1
+"209",306006,"Geen uitval",23,"Man","havo",8.5,1,1
+"210",383679,"Geen uitval",23,"Man","mbo",6,1,0
+"211",355991,"Uitval",25,"Vrouw","mbo",6.5,0,0
+"212",390778,"Uitval",25,"Man","havo",7,1,1
+"213",378966,"Geen uitval",23,"Man","havo",6.5,1,1
+"214",366595,"Uitval",23,"Vrouw","havo",6,0,1
+"215",360905,"Geen uitval",21,"Man","havo",7,1,1
+"216",378714,"Geen uitval",25,"Man","havo",7,1,1
+"217",393288,"Uitval",24,"Man","havo",5.5,1,1
+"218",346467,"Geen uitval",22,"Man","havo",8.5,1,1
+"219",301203,"Uitval",23,"Vrouw","havo",7.5,0,1
+"220",397652,"Geen uitval",22,"Man","havo",9.5,1,1
+"221",353271,"Geen uitval",24,"Man","havo",8,1,1
+"222",324110,"Geen uitval",19,"Man","mbo",7,1,0
+"223",375454,"Geen uitval",23,"Man","havo",10,1,1
+"224",343693,"Geen uitval",16,"Man","havo",10,1,1
+"225",303983,"Geen uitval",22,"Man","havo",6,1,1
+"226",307879,"Geen uitval",23,"Man","havo",7.5,1,1
+"227",357721,"Geen uitval",22,"Man","havo",7,1,1
+"228",322118,"Geen uitval",16,"Man","mbo",7.5,1,0
+"229",367631,"Geen uitval",18,"Man","havo",7.5,1,1
+"230",386408,"Geen uitval",17,"Man","havo",6,1,1
+"231",352522,"Geen uitval",17,"Vrouw","mbo",7.5,0,0
+"232",353917,"Geen uitval",17,"Vrouw","mbo",9,0,0
+"233",324521,"Geen uitval",25,"Man","havo",7,1,1
+"234",306332,"Geen uitval",22,"Man","havo",7,1,1
+"235",368429,"Geen uitval",22,"Man","havo",8.5,1,1
+"236",390231,"Geen uitval",25,"Man","mbo",8,1,0
+"237",389418,"Geen uitval",20,"Vrouw","havo",5.5,0,1
+"238",355736,"Geen uitval",22,"Man","havo",7.5,1,1
+"239",319954,"Geen uitval",23,"Man","havo",9,1,1
+"240",355367,"Geen uitval",17,"Man","havo",8.5,1,1
+"241",347817,"Geen uitval",23,"Man","havo",7.5,1,1
+"242",314416,"Geen uitval",21,"Vrouw","havo",8,0,1
+"243",349285,"Geen uitval",16,"Man","havo",6,1,1
+"244",392915,"Geen uitval",25,"Man","mbo",7.5,1,0
+"245",325243,"Geen uitval",20,"Man","havo",6.5,1,1
+"246",305595,"Geen uitval",19,"Vrouw","mbo",7,0,0
+"247",340275,"Geen uitval",22,"Vrouw","havo",8,0,1
+"248",360100,"Uitval",25,"Vrouw","havo",6,0,1
+"249",337166,"Geen uitval",21,"Man","mbo",7.5,1,0
+"250",369231,"Uitval",24,"Vrouw","havo",7.5,0,1

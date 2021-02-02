@@ -122,10 +122,10 @@ hist(Beoordeling_bestuursgebouw)
 hist(Beoordeling_sportcentrum)
 hist(Beoordeling_cultuurcentrum)
 
-Indexen_hoofdgebouw <-sample.int(N, N)
-Indexen_bestuursgebouw <-sample.int(N, N)
-Indexen_sportcentrum <-sample.int(N, N)
-Indexen_cultuurcentrum <-sample.int(N, N)
+Indexen_hoofdgebouw <- sample.int(N, N)
+Indexen_bestuursgebouw <- sample.int(N, N)
+Indexen_sportcentrum <- sample.int(N, N)
+Indexen_cultuurcentrum <- sample.int(N, N)
 
 Beoordeling <- c(Beoordeling_hoofdgebouw[Indexen_hoofdgebouw],
                  Beoordeling_bestuursgebouw[Indexen_bestuursgebouw],
@@ -150,12 +150,12 @@ rm(N, Studentnummers_opties, Studentnummer_uniek, Studentnummer, Eetgelegenheid,
    Indexen_cultuurcentrum, Beoordeling)
 
 ## Sla de datasets op
-write.csv(Beoordelingen_eetgelegenheden,
-          file = "05. Datasets/09_Beoordelingen_eetgelegenheden.csv")
+#write.csv(Beoordelingen_eetgelegenheden,
+#          file = "05. Datasets/09_Beoordelingen_eetgelegenheden.csv")
 
 # https://statistics.laerd.com/spss-tutorials/friedman-test-using-spss-statistics.php
 # https://www.datanovia.com/en/lessons/friedman-test-in-r/
 # https://www.sheffield.ac.uk/polopoly_fs/1.714575!/file/stcp-marshall-FriedmanS.pdf
 # https://rdrr.io/cran/rstatix/man/friedman_effsize.html
 # https://www.sheffield.ac.uk/mash/statistics/nonparametric
-
+?write.csv

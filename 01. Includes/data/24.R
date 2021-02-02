@@ -94,3 +94,8 @@ rm(Voldoendes,
    Periode,
    Studentnummer)
 
+## Sla de datasets op
+write.csv(Voldoendes_Geschiedenis,
+          file = "05. Datasets/24_Voldoendes_Geschiedenis.csv")
+
+

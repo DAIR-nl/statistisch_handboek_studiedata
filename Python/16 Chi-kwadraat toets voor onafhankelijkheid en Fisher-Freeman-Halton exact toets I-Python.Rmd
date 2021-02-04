@@ -364,7 +364,7 @@ Voor zover bekend is er geen package om de Fisher-Freeman-Halton toets uit te vo
 <!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets2.py-->
 <!-- ## /TEKSTBLOK: Fisher-Freeman-Halton-exact-toets2.py-->
 
-## Post-hoc toets: Fisher's exact toets
+## Post-hoc toets: Fisher's exacte toets
 
 <!-- ## TEKSTBLOK: Fisher-Freeman-Halton-exact-toets post-hoc1.py-->
 Omdat er geen afhankelijkheid is tussen het wel of niet halen van een positief BSA en het land van hoogste vooropleiding, hoeven er geen post-hoc toetsen uitgevoerd te worden. Indien dit wel nodig is, toets uitvoert. Voer Fisher's exact toets uit met behulp van de functie `fisher_exact()` van het package `scipy.stats` met als argumenten de kruistabel `Fisher_BSA_antropologie_kruistabel.iloc[:, 

@@ -72,5 +72,5 @@ rm(namenlijst_atc, namenlijst_fil, namenlijst_gsc, Opleiding, Reistijd,
    Studentnummer, Studentnummers_opties, Studiegrootte)
 
 ## Sla de datasets op
-write.csv(Reistijd_per_opleiding,
-          file = "05. Datasets/05_Reistijd_per_opleiding.csv")
+#write.csv(Reistijd_per_opleiding,
+#          file = "05. Datasets/05_Reistijd_per_opleiding.csv")

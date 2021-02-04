@@ -1898,18 +1898,18 @@ body{ /* Normal  */
 <!-- ## /OPENBLOK: Data-aanmaken.py -->
 <div id="toepassing" class="section level1">
 <h1><span class="header-section-number">1</span> Toepassing</h1>
-<p>Gebruik de <em>one-way ANOVA</em> bij het toetsen of de gemiddelden van drie of meer onafhankelijke groepen verschillen.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>Gebruik de <em>one-way ANOVA</em> bij het toetsen of de gemiddelden van twee of meer onafhankelijke groepen verschillen.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 </div>
 <div id="onderwijscasus" class="section level1">
 <h1><span class="header-section-number">2</span> Onderwijscasus</h1>
 <div id="casus">
-<p>Om wervingsactiviteiten beter af te stemmen op de aankomende studenten, wil het hoofd van de afdeling Communicatie weten wat de reistijd is van studenten van verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis.</p>
+<p>Om wervingsactiviteiten beter af te stemmen op de aankomende studenten, wil het hoofd van de afdeling Communicatie weten wat de reistijd (in minuten) is van studenten van verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis.</p>
 <p>Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.</p>
 <p><em>H<sub>0</sub></em>: De reistijden van de studenten van de drie opleidingen komen uit dezelfde verdeling en hebben dus een gezamenlijk gemiddelde</p>
 <p><em>H<sub>A</sub></em>: De reistijden van de studenten van de drie opleidingen komen niet uit dezelfde verdeling en hebben dus een verschillend gemiddelde</p>
 </div>
-<div id="assumpties" class="section level1">
-<h1><span class="header-section-number">3</span> Assumpties</h1>
+<div id="uitleg-assumpties" class="section level1">
+<h1><span class="header-section-number">3</span> Uitleg assumpties</h1>
 <p>Om een valide toetsresultaat te bereiken moeten de data aan een aantal voorwaarden voldoen. Controleer of de steekproef aan de volgende assumpties voldoet: normaliteit, homogeniteit van varianties en onafhankelijkheid.</p>
 <p>De <em>one-way ANOVA</em> is een robuuste toets: als er niet voldaan is aan de assumptie van normaliteit of homogeniteit van varianties, dan kan de <em>one-way ANOVA</em> in bepaalde gevallen nog steeds uitgevoerd en geïnterpreteerd worden.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> Hierdoor kan het wel zijn dat de toets minder onderscheidend vermogen heeft, dan wanneer de assumpties niet geschonden worden.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a><sup>, </sup><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> Als er grote afwijkingen zijn van normaliteit of homogeniteit van varianties, is de <a href="10-Kruskal-Wallis-toets-R.html">Kruskal-Wallis toets</a> een alternatief voor de <em>one-way ANOVA</em>.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a><sup>, </sup><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
 <div id="normaliteit" class="section level2">
@@ -1936,8 +1936,8 @@ body{ /* Normal  */
 * Gebruik de Tukey Honestly Significant Difference post-hoc toets bij gelijke variantie.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a><br />
 * Gebruik de Games-Howell post-hoc toets bij ongelijke variantie.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a></p>
 </div>
-<div id="assumpties-1" class="section level1">
-<h1><span class="header-section-number">6</span> Assumpties</h1>
+<div id="toetsing-assumpties" class="section level1">
+<h1><span class="header-section-number">6</span> Toetsing assumpties</h1>
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->
 <p>Er is een dataset ingeladen met de reistijden van uitwonende studenten per opleiding genaamd <code>dfReistijd_per_opleiding</code>. <!-- ## /TEKSTBLOK: Dataset-inladen.py --></p>
 <div id="de-data-bekijken" class="section level2">
@@ -1948,19 +1948,19 @@ body{ /* Normal  */
 <pre class="python"><code>## Eerste 5 observaties
 print(dfReistijd_per_opleiding.head(5))
 ##   Studentnummer     Opleiding  Reistijd
-## 0       4145527     Filosofie      7.82
-## 1       4421066  Geschiedenis      9.56
-## 2       4244810     Filosofie     14.15
-## 3       4280957  Geschiedenis     14.19
-## 4       4007707     Filosofie     15.00</code></pre>
+## 0       4186262     Filosofie      7.82
+## 1       4495577  Geschiedenis      9.56
+## 2       4165973     Filosofie     14.15
+## 3       4113936  Geschiedenis     14.19
+## 4       4113263     Filosofie     15.00</code></pre>
 <pre class="python"><code>## Laatste 5 observaties
 print(dfReistijd_per_opleiding.tail(5))
 ##     Studentnummer                  Opleiding  Reistijd
-## 252       4156876               Geschiedenis     63.10
-## 253       4162942               Geschiedenis     63.90
-## 254       4275275               Geschiedenis     64.99
-## 255       4218783               Geschiedenis     65.44
-## 256       4234998  Arabische Taal en Cultuur     67.56</code></pre>
+## 252       4484281               Geschiedenis     63.10
+## 253       4393334               Geschiedenis     63.90
+## 254       4245767               Geschiedenis     64.99
+## 255       4086107               Geschiedenis     65.44
+## 256       4071131  Arabische Taal en Cultuur     67.56</code></pre>
 <!-- ## /OPENBLOK: Data-bekijken.py -->
 <!-- ## TEKSTBLOK: Data-bekijken2.py -->
 <p>De dataset bevat gegevens van studenten van verschillende opleidingen. Gebruik <code>.unique()</code> om te onderzoeken welke opleidingen er in de data aanwezig zijn. <!-- ## /TEKSTBLOK: Data-bekijken2.py --> <!-- ## OPENBLOK: Data-bekijken2.py --></p>
@@ -2276,7 +2276,7 @@ Het verschil tussen Geschiedenis en Filosofie is <em>MD</em> = -2,76, <em>p</em>
 <div id = "footer">
 Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 3.6.3; Python code is uitgevoerd in Python 3.7.
 <br/><br/>
-&copy; 2020 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:22-12-2020
+&copy; 2021 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:03-02-2021
 </div> <!-- ## /CLOSEDBLOK: Footer.R --></p>
 </div>
 <div class="footnotes">
@@ -2290,7 +2290,7 @@ Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikk
 <li id="fn6"><p>De <a href="10-Kruskal-Wallis-toets-R.html">Kruskal-Wallis toets</a> maakt een rangschikking van de data. Hierdoor is de toets verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze toets minder vaak gekozen, omdat bij het maken van een rankschikking de dataset informatie verliest. Als de data wel normaal verdeeld zijn, heeft de <a href="10-Kruskal-Wallis-toets-R.html">Kruskal-Wallis toets</a> minder onderscheidend vermogen dan wanneer de <em>one-way ANOVA</em> uitgevoerd zou worden.<a href="#fnref6" class="footnote-back">↩</a></p></li>
 <li id="fn7"><p>Laerd statistics (2018). <em>Testing for Normality using SPSS Statistics</em>. <a href="https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php" class="uri">https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php</a>.<a href="#fnref7" class="footnote-back">↩</a></p></li>
 <li id="fn8"><p>Universiteit van Amsterdam (14 juli 2014). <em>Normaliteit</em>. <a href="https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit">UvA Wiki Methodologiewinkel</a>.<a href="#fnref8" class="footnote-back">↩</a></p></li>
-<li id="fn9"><p>Bereken de logaritme van de variabele en de inverse (1 gedeeld door de variabele), en bekijk of deze normaal verdeeld zijn. Als dat zo is, mag je die gebruiken voor de analyse.<a href="#fnref9" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p>Er zijn verschillende opties om variabelen te transformeren, zoals de logaritme, wortel of inverse (1 gedeeld door de variabele) nemen van de variabele. Zie <em>Discovering statistics using IBM SPSS statistics</em> van Field (2013) pagina 201-210 voor meer informatie over welke transformaties wanneer gebruikt kunnen worden.<a href="#fnref9" class="footnote-back">↩</a></p></li>
 <li id="fn10"><p>Wikipedia (7 september 2019). <em>Analysis of variance</em>. <a href="https://en.wikipedia.org/wiki/Analysis_of_variance" class="uri">https://en.wikipedia.org/wiki/Analysis_of_variance</a>.<a href="#fnref10" class="footnote-back">↩</a></p></li>
 <li id="fn11"><p>Tabachnick, B.G. &amp; Fidell, L.S. (2013). <em>Using multivariate statistics</em>. Sixth Edition, Pearson. Pagina 86.<a href="#fnref11" class="footnote-back">↩</a></p></li>
 <li id="fn12"><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. London: Sage publications.<a href="#fnref12" class="footnote-back">↩</a></p></li>

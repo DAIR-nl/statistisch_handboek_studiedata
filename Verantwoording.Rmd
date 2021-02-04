@@ -44,6 +44,9 @@ We hebben ervoor gekozen om de stappen zo bondig mogelijk te beschrijven en waar
 # Casussen
 We hebben casussen verzameld die relevant kunnen zijn in het Hoger Onderwijs. Alle informatie bij de casussen is fictief en de data is gesimuleerd. De uitkomsten van de toetsen kunnen marginaal verschillen tussen de verschillende programmeertalen: R, SPSS of Python. 
 
+# Datasets
+Voor elke casus is er een gesimuleerde dataset die gebruikt wordt om de statistische toets te illustreren. De datasets bevatten dus geen echte gegevens over studenten uit het hoger onderwijs, maar zijn door de auteur gesimuleerd met behulp van code in R. Deze datasets zijn <a href="Datasets_zipbestand" download>hier</a> te downloaden.
+
 # Reviewproces
 Alle toetsen zijn gereviewd door wetenschappers, beleidsmedewekers en data specialisten uit het hoger onderwijs (zie *Over*). Desondanks kan het voorkomen dat u informatie aantreft die niet correct of onduidelijk is. Help ons de kwaliteit van de pagina te verbeteren door tips over onvolledigheden of onjuistheden door te geven via het [feedbackformulier](https://docs.google.com/forms/d/1UQcCVTNLpVAg7vSffJCPkBCklsfMlGB0QxyxLDgqosI/edit) in te vullen. We zullen feedback zo snel mogelijk verwerken.
 

@@ -126,7 +126,7 @@ Er is een dataset ingeladen genaamd `BSA_antropologie`. In deze dataset is voor 
 <!-- ## /TEKSTBLOK: Data-bekijken1.R -->
 
 <!-- ## OPENBLOK: Data-bekijken2.R -->
-```{r data bekijken, collapse=TRUE}
+```{r data bekijken}
 ## Eerste 6 observaties
 head(BSA_antropologie)
 
@@ -158,6 +158,38 @@ prop.table(BSA_antropologie_kruistabel, 2)
 <!-- ## TEKSTBLOK: Data-kruistabel3.R -->
 De kruistabel en bijbehorende tabel met proporties laat zien dat de meerderheid van de studenten een positief BSA ontvangt voor elk land van vooropleiding. Van studenten uit het Verenigd Koninkrijk (UK) haalt verhoudingsgewijs het grootste deel een positief BSA. Het percentage studenten met een positief BSA is hier `r Round_and_format(100 * prop.table(BSA_antropologie_kruistabel, 2)[2,6])`%.
 <!-- ## /TEKSTBLOK: Data-kruistabel3.R -->
+
+<!-- ## TEKSTBLOK: Data-kruistabel4.R -->
+Bekijk in aanvulling op de kruistabel de data ook met een staafdiagram. Maak een staafdiagram van de aantallen en percentages studenten met een positief en negatief BSA voor de verschillende landen van vooropleiding. Gebruik het argument `position = "dodge"` in de functie `geom_bar()` om de aantallen weer te geven en het argument `position = "fill"` in de functie `geom_bar()` om de proporties weer te geven.
+<!-- ## /TEKSTBLOK: Data-kruistabel4.R -->
+
+
+
+```{r}
+## Bereken de frequentie voor elke combinatie van BSA advies en land van vooropleiding
+Frequenties <- aggregate(Studentnummer ~ BSA + Landen_vooropleiding, 
+                         data = BSA_antropologie, 
+                         FUN = length)
+## Verander de kolomnaam voor de variabele met de frequenties
+colnames(Frequenties)[3] <- "Frequentie"
+
+## Maak een staafdiagram met ggplot2
+library(ggplot2)
+
+ggplot(Frequenties, 
+       aes(y = Frequentie, x = Landen_vooropleiding, fill = BSA)) + 
+  geom_bar(position = "dodge", stat = "identity") +
+  xlab("Landen vooropleiding") 
+
+ggplot(Frequenties, 
+       aes(y = Frequentie, x = Landen_vooropleiding, fill = BSA)) + 
+  geom_bar(position = "fill", stat = "identity") +
+  ylab("Proportie") +
+  xlab("Landen vooropleiding") 
+
+```
+
+De staafdiagram laat ook zien dat de meeste studenten in elk land van vooropleiding in de meerderheid een positief BSA behalen. De proportie negatieve BSA is het hoogst voor Italië en het laagst voor het Verenigd Koninkrijk.
 
 
 ## Assumptie groepsgrootte

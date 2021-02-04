@@ -2008,19 +2008,19 @@ import pandas as pd
 ## Eerste 5 observaties
 print(dfUitval_studenten_functiebeperking_leenstelsel.head(5))
 ##   Studentnummer           Periode       Uitval
-## 0       4000656  Geen leenstelsel       Uitval
-## 1       4000818  Geen leenstelsel  Geen uitval
-## 2       4000917  Geen leenstelsel       Uitval
-## 3       4000965  Geen leenstelsel       Uitval
-## 4       4001007  Geen leenstelsel  Geen uitval</code></pre>
+## 0       4000039  Geen leenstelsel  Geen uitval
+## 1       4000618  Geen leenstelsel       Uitval
+## 2       4000720  Geen leenstelsel       Uitval
+## 3       4000859  Geen leenstelsel  Geen uitval
+## 4       4001662  Geen leenstelsel  Geen uitval</code></pre>
 <pre class="python"><code>## Laatste 5 observaties
 print(dfUitval_studenten_functiebeperking_leenstelsel.tail(5))
 ##      Studentnummer      Periode       Uitval
-## 1629       4497439  Leenstelsel  Geen uitval
-## 1630       4497717  Leenstelsel  Geen uitval
-## 1631       4498950  Leenstelsel  Geen uitval
-## 1632       4498978  Leenstelsel       Uitval
-## 1633       4499408  Leenstelsel  Geen uitval</code></pre>
+## 1629       4497730  Leenstelsel       Uitval
+## 1630       4498419  Leenstelsel       Uitval
+## 1631       4498712  Leenstelsel       Uitval
+## 1632       4499005  Leenstelsel  Geen uitval
+## 1633       4499591  Leenstelsel  Geen uitval</code></pre>
 <!-- ## /OPENBLOK: Data-bekijken2.py -->
 <!-- ## TEKSTBLOK: Data-kruistabel1.py -->
 <p>Een kruistabel geeft de aantallen observaties weer voor de combinaties van de categorieën van de variabelen <code>Periode</code> en <code>Uitval</code>. Maak de kruistabel met de functie <code>.crosstable()</code> van het package <code>pandas</code> met als argumenten de variabele <code>dfUitval_studenten_functiebeperking_leenstelsel[&#39;Periode&#39;]</code> (voor of na invoering leenstelsel) en <code>dfUitval_studenten_functiebeperking_leenstelsel[&#39;Uitval&#39;]</code> (wel of niet uitgevallen). <!-- ## /TEKSTBLOK: Data-kruistabel1.py --></p>
@@ -2239,7 +2239,7 @@ sps.fisher_exact(Fisher_Uitval_studenten_kruistabel, alternative = &#39;two-side
 <div id = "footer">
 Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 3.6.3; Python code is uitgevoerd in Python 3.7.
 <br/><br/>
-&copy; 2020 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:22-12-2020
+&copy; 2021 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:03-02-2021
 </div> <!-- ## /CLOSEDBLOK: Footer.R --></p>
 <!-- ## TEKSTBLOK: Extra-Bron.py -->
 </div>

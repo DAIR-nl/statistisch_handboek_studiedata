@@ -1912,11 +1912,11 @@ body{ /* Normal  */
 </div>
 <div id="assumpties" class="section level1">
 <h1><span class="header-section-number">3</span> Assumpties</h1>
-<p>Om een valide toetsresultaat te bereiken, moeten de data aan een aantal assumpties voldoen. Het meetniveau van de afhankelijke variabele is ordinaal<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> of continu.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data met bijbehorende uitwerking is te vinden in een andere toetspagina. Bij herhaalde metingen van dezelfde observatie-eenheden, moet de groep observatie-eenheden drie of meer keren gemeten zijn en een willekeurige steekproef van de populatie zijn. Bij gepaarde groepen, moet elk paar bestaan uit drie of meer gepaarde observatie-eenheden en moet de steekproef met alle paren een willekeurige steekproef van de populatie zijn.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></p>
+<p>Om een valide toetsresultaat te bereiken, moeten de data aan een aantal assumpties voldoen. Het meetniveau van de afhankelijke variabele is ordinaal<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> of continu.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> In deze toetspagina staat een casus met continue data centraal; een casus met ordinale data met bijbehorende uitwerking is te vinden in <a href="24-Friedmans-ANOVA-II-R.html">deze toetspagina</a>. Bij herhaalde metingen van dezelfde observatie-eenheden, moet de groep observatie-eenheden drie of meer keren gemeten zijn en een willekeurige steekproef van de populatie zijn. Bij gepaarde groepen, moet elk paar bestaan uit drie of meer gepaarde observatie-eenheden en moet de steekproef met alle paren een willekeurige steekproef van de populatie zijn.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></p>
 </div>
 <div id="effectmaat" class="section level1">
 <h1><span class="header-section-number">4</span> Effectmaat</h1>
-<p>De p-waarde geeft aan of het verschil tussen groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> Voor <em>Friedman’s ANOVA</em> wordt de effectmaat <em>Kendall’s W</em> vaak gebruikt.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a><sup>, </sup><a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a><sup>, </sup><a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>. Een indicatie om <em>Kendall’s W</em> te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
+<p>De p-waarde geeft aan of het verschil tussen groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> Voor <em>Friedman’s ANOVA</em> wordt de effectmaat <em>Kendall’s W</em> vaak gebruikt.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a><sup>, </sup><a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a><sup>, </sup><a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> Een indicatie om <em>Kendall’s W</em> te interpreteren is: rond 0,1 is het een klein effect, rond 0,3 is het een gemiddeld effect en rond 0,5 is het een groot effect.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
 </div>
 <div id="post-hoc-toetsen" class="section level1">
 <h1><span class="header-section-number">5</span> Post-hoc toetsen</h1>
@@ -1937,21 +1937,21 @@ body{ /* Normal  */
 ## Eerste 6 observaties
 print(dfBeoordelingen_eetgelegenheden.head(6))
 ##   Studentnummer  Eetgelegenheid  Beoordeling
-## 0       4004747     Hoofdgebouw          6.0
-## 1       4004747  Bestuursgebouw          5.0
-## 2       4004747    Sportcentrum          6.0
-## 3       4004747  Cultuurcentrum          5.0
-## 4       4056851     Hoofdgebouw          6.0
-## 5       4056851  Bestuursgebouw          6.0</code></pre>
+## 0       4106389     Hoofdgebouw          8.0
+## 1       4106389  Bestuursgebouw          5.0
+## 2       4106389    Sportcentrum          8.0
+## 3       4106389  Cultuurcentrum          6.0
+## 4       4126054     Hoofdgebouw          8.0
+## 5       4126054  Bestuursgebouw          5.0</code></pre>
 <pre class="python"><code>## Laatste 6 observaties
 print(dfBeoordelingen_eetgelegenheden.tail(6))
 ##    Studentnummer  Eetgelegenheid  Beoordeling
-## 74       4430455    Sportcentrum          6.0
-## 75       4430455  Cultuurcentrum          4.0
-## 76       4461705     Hoofdgebouw          8.0
-## 77       4461705  Bestuursgebouw          4.0
-## 78       4461705    Sportcentrum         10.0
-## 79       4461705  Cultuurcentrum          3.0</code></pre>
+## 74       4461373    Sportcentrum          9.0
+## 75       4461373  Cultuurcentrum          4.0
+## 76       4494467     Hoofdgebouw          7.0
+## 77       4494467  Bestuursgebouw          7.0
+## 78       4494467    Sportcentrum          6.0
+## 79       4494467  Cultuurcentrum          8.0</code></pre>
 <!-- ## /OPENBLOK: Data-bekijken.py -->
 <!-- ## TEKSTBLOK: Data-bekijken2.py-->
 <p>De dataset bevat beoordelingen van studenten van eetgelegenheden in verschillende gebouwen. Gebruik <code>&lt;data.frame&gt;.&lt;kolomnaam&gt;.unique()</code> om te onderzoeken welke gebouwen er in de data aanwezig zijn. <!-- ## /TEKSTBLOK: Data-bekijken2.py--></p>
@@ -2031,7 +2031,7 @@ dfCC = np.array(dfBeoordelingen_eetgelegenheden[dfBeoordelingen_eetgelegenheden[
 # Voer de Kruskal Wallis toets uit
 import scipy.stats as sp
 print(sp.friedmanchisquare(dfHG, dfBG, dfSC, dfCC))</code></pre>
-<pre><code>## FriedmanchisquareResult(statistic=17.886486486486504, pvalue=0.0004642072224639873)</code></pre>
+<pre><code>## FriedmanchisquareResult(statistic=12.367021276595745, pvalue=0.006226044431771757)</code></pre>
 <!-- ## /OPENBLOK: ANOVA-toets.py -->
 <!-- ## CLOSEDBLOK: ANOVA-toets.py -->
 <!-- ## /CLOSEDBLOK: ANOVA-toets.py -->
@@ -2051,11 +2051,11 @@ W = Chi2 / (N * (k - 1))
 
 # Print de effectmaat
 print(W)</code></pre>
-<pre><code>## 0.2981081081081084</code></pre>
+<pre><code>## 0.20611702127659576</code></pre>
 <!-- ## /OPENBLOK: ANOVA-toets2.py -->
 <!-- ## TEKSTBLOK: ANOVA-toets1.py -->
 <ul>
-<li><em>χ<sup>2</sup><sub>3</sub></em> = 17,89, <em>p</em> = 0,006, <em>W</em> = 0,3</li>
+<li><em>χ<sup>2</sup><sub>3</sub></em> = 12,37, <em>p</em> = 0,006, <em>W</em> = 0,21</li>
 <li>De p-waarde is kleiner dan 0,05, dus de H<sub>0</sub> wordt verworpen.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a></li>
 <li>Er is een significant verschil tussen de beoordelingen van de eetgelegenheden in de vier gebouwen; het effect van de verschillende gebouwen op de beoordelingen van studenten is klein tot gemiddeld</li>
 </ul>
@@ -2070,10 +2070,10 @@ print(W)</code></pre>
 
 skph.posthoc_wilcoxon(dfBeoordelingen_eetgelegenheden, val_col = &#39;Beoordeling&#39;, group_col = &#39;Eetgelegenheid&#39;, p_adjust = &#39;bonferroni&#39;)</code></pre>
 <pre><code>##                 Hoofdgebouw  Bestuursgebouw  Sportcentrum  Cultuurcentrum
-## Hoofdgebouw       -1.000000        0.632309      0.905635        0.024398
-## Bestuursgebouw     0.632309       -1.000000      0.095891        1.000000
-## Sportcentrum       0.905635        0.095891     -1.000000        0.009838
-## Cultuurcentrum     0.024398        1.000000      0.009838       -1.000000</code></pre>
+## Hoofdgebouw       -1.000000        0.838683      1.000000        0.042711
+## Bestuursgebouw     0.838683       -1.000000      0.102046        1.000000
+## Sportcentrum       1.000000        0.102046     -1.000000        0.012359
+## Cultuurcentrum     0.042711        1.000000      0.012359       -1.000000</code></pre>
 <!-- ## /OPENBLOK: post-hoc2.py -->
 <p>Bereken de effectmaat <em>r</em> voor elke individuele post-hoc toets.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
 <!-- ## OPENBLOK: post-hoc4.py -->
@@ -2081,10 +2081,10 @@ skph.posthoc_wilcoxon(dfBeoordelingen_eetgelegenheden, val_col = &#39;Beoordelin
 pTabel = skph.posthoc_wilcoxon(dfBeoordelingen_eetgelegenheden, val_col = &#39;Beoordeling&#39;, group_col = &#39;Eetgelegenheid&#39;, p_adjust = &#39;bonferroni&#39;)
 print(pTabel)</code></pre>
 <pre><code>##                 Hoofdgebouw  Bestuursgebouw  Sportcentrum  Cultuurcentrum
-## Hoofdgebouw       -1.000000        0.632309      0.905635        0.024398
-## Bestuursgebouw     0.632309       -1.000000      0.095891        1.000000
-## Sportcentrum       0.905635        0.095891     -1.000000        0.009838
-## Cultuurcentrum     0.024398        1.000000      0.009838       -1.000000</code></pre>
+## Hoofdgebouw       -1.000000        0.838683      1.000000        0.042711
+## Bestuursgebouw     0.838683       -1.000000      0.102046        1.000000
+## Sportcentrum       1.000000        0.102046     -1.000000        0.012359
+## Cultuurcentrum     0.042711        1.000000      0.012359       -1.000000</code></pre>
 <pre class="python"><code>p_HG_BG = pTabel[&#39;Hoofdgebouw&#39;][&#39;Bestuursgebouw&#39;]
 p_HG_SC = pTabel[&#39;Hoofdgebouw&#39;][&#39;Sportcentrum&#39;]
 p_HG_CC = pTabel[&#39;Hoofdgebouw&#39;][&#39;Cultuurcentrum&#39;]
@@ -2137,7 +2137,7 @@ Beoordeling_CC = dfBeoordelingen_eetgelegenheden[dfBeoordelingen_eetgelegenheden
 N_HG_BG_positief, Som_HG_BG_positief, N_HG_BG_negatief, Som_HG_BG_negatief = Sommen_rangnummers(Beoordeling_HG, Beoordeling_BG)
 
 print(N_HG_BG_positief, Som_HG_BG_positief, N_HG_BG_negatief, Som_HG_BG_negatief)</code></pre>
-<pre><code>## 11 143.0 5 57.0</code></pre>
+<pre><code>## 11 140.5 6 63.5</code></pre>
 <pre class="python"><code>N_HG_SC_positief, Som_HG_SC_positief, N_HG_SC_negatief, Som_HG_SC_negatief = Sommen_rangnummers(Beoordeling_HG, Beoordeling_SC)
 
 N_HG_CC_positief, Som_HG_CC_positief, N_HG_CC_negatief, Som_HG_CC_negatief = Sommen_rangnummers(Beoordeling_HG, Beoordeling_CC)
@@ -2170,44 +2170,44 @@ N_SC_CC_positief, Som_SC_CC_positief, N_SC_CC_negatief, Som_SC_CC_negatief = Som
 <tr class="odd">
 <td>HG vs. BG</td>
 <td>0,878</td>
-<td>-0,11</td>
-<td>143</td>
-<td>57</td>
+<td>-0,05</td>
+<td>140,5</td>
+<td>63,5</td>
 </tr>
 <tr class="even">
 <td>HG vs. SC</td>
 <td>1,000</td>
-<td>-0,03</td>
-<td>56,5</td>
-<td>143,5</td>
+<td>0</td>
+<td>62,5</td>
+<td>141,5</td>
 </tr>
 <tr class="odd">
 <td>HG vs. CC</td>
 <td>0,046</td>
-<td>-0,5</td>
-<td>180,5</td>
-<td>26,5</td>
+<td>-0,45</td>
+<td>174,5</td>
+<td>32,5</td>
 </tr>
 <tr class="even">
 <td>BG vs. SC</td>
 <td>0,108</td>
 <td>-0,37</td>
-<td>39,5</td>
-<td>169,5</td>
+<td>41</td>
+<td>166</td>
 </tr>
 <tr class="odd">
 <td>BG vs. CC</td>
 <td>1,000</td>
 <td>0</td>
-<td>136</td>
-<td>71</td>
+<td>128</td>
+<td>79</td>
 </tr>
 <tr class="even">
 <td>SC vs. CC</td>
 <td>0,013</td>
-<td>-0,58</td>
-<td>188</td>
-<td>21</td>
+<td>-0,56</td>
+<td>187</td>
+<td>23</td>
 </tr>
 </tbody>
 </table>
@@ -2215,8 +2215,8 @@ N_SC_CC_positief, Som_SC_CC_positief, N_SC_CC_negatief, Som_SC_CC_negatief = Som
 <!-- ## TEKSTBLOK: posthoc7.py -->
 <p>De significante verschillen op de post-hoc toetsen zijn:</p>
 <ul>
-<li><p>De beoordelingen van het hoofdgebouw (Som = 180,5) verschillen significant van het cultuurcentrum (Som = 26,5), <em>p</em> = 0,043, <em>r</em> = -0,5. De hogere som van rangnummers voor het hoofdgebouw duidt erop dat de beoordelingen van het hoofdgebouw beter zijn dan die van het cultuurcentrum.</p></li>
-<li><p>De beoordelingen van het sportcentrum (Som = 188) verschillen significant van het cultuurcentrum (Som = 21), <em>p</em> = 0,012 , <em>r</em> = -0,58. De hogere som van rangnummers voor het sportcentrum duidt erop dat de beoordelingen van het sportcentrum beter zijn dan die van het cultuurcentrum.</p></li>
+<li><p>De beoordelingen van het hoofdgebouw (Som = 174,5) verschillen significant van het cultuurcentrum (Som = 32,5), <em>p</em> = 0,043, <em>r</em> = -0,45. De hogere som van rangnummers voor het hoofdgebouw duidt erop dat de beoordelingen van het hoofdgebouw beter zijn dan die van het cultuurcentrum.</p></li>
+<li><p>De beoordelingen van het sportcentrum (Som = 187) verschillen significant van het cultuurcentrum (Som = 23), <em>p</em> = 0,012 , <em>r</em> = -0,56. De hogere som van rangnummers voor het sportcentrum duidt erop dat de beoordelingen van het sportcentrum beter zijn dan die van het cultuurcentrum.</p></li>
 </ul>
 <!-- ## /TEKSTBLOK: posthoc7.py -->
 </div>
@@ -2224,7 +2224,7 @@ N_SC_CC_positief, Som_SC_CC_positief, N_SC_CC_negatief, Som_SC_CC_negatief = Som
 <div id="rapportage" class="section level1">
 <h1><span class="header-section-number">7</span> Rapportage</h1>
 <!-- ## TEKSTBLOK: rapportage.py -->
-<p><em>Friedman’s ANOVA</em> is uitgevoerd om te onderzoeken of de beoordeling van eetgelegenheden door studenten verschilt voor vier gebouwen op de campus van een hogeschool. De vier gebouwen zijn het hoofdgebouw, het bestuursgebouw, het sportcentrum en cultuurcentrum Rembrandt; beschrijvende statistieken zijn te vinden in Tabel 1. De beoordelingen van de vier gebouwen verschillen significant van elkaar (<em>χ<sup>2</sup><sub>3</sub></em> = 17,89, <em>p</em> = 0,006, <em>W</em> = 0,3). De sterkte van het effect van de verschillen in gebouwen op de beoordelingen van studenten is klein tot gemiddeld.</p>
+<p><em>Friedman’s ANOVA</em> is uitgevoerd om te onderzoeken of de beoordeling van eetgelegenheden door studenten verschilt voor vier gebouwen op de campus van een hogeschool. De vier gebouwen zijn het hoofdgebouw, het bestuursgebouw, het sportcentrum en cultuurcentrum Rembrandt; beschrijvende statistieken zijn te vinden in Tabel 1. De beoordelingen van de vier gebouwen verschillen significant van elkaar (<em>χ<sup>2</sup><sub>3</sub></em> = 12,37, <em>p</em> = 0,006, <em>W</em> = 0,21). De sterkte van het effect van de verschillen in gebouwen op de beoordelingen van studenten is klein tot gemiddeld.</p>
 <p>Post-hoc toetsen met een Bonferroni correctie voor meerdere toetsen zijn uitgevoerd voor alle vergelijkingen tussen twee gebouwen. Hieruit blijkt dat er alleen significante verschillen zijn tussen het hoofdgebouw en cultuurcentrum Rembrandt, en tussen het sportcentrum en cultuurcentrum Rembrandt. De eetgelegenheid van cultuurcentrum Rembrandt wordt slechter beoordeeld dan de eetgelegenheden in het hoofdgebouw en het sportcentrum; verder zijn er geen significante verschillen tussen de beoordelingen van de eetgelegenheden op de campus. <!-- ## /TEKSTBLOK: rapportage.py --></p>
 <!-- ## CLOSEDBLOK: Footer.R -->
 <p>
@@ -2232,7 +2232,7 @@ N_SC_CC_positief, Som_SC_CC_positief, N_SC_CC_negatief, Som_SC_CC_negatief = Som
 <div id = "footer">
 Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 3.6.3; Python code is uitgevoerd in Python 3.7.
 <br/><br/>
-&copy; 2020 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:22-12-2020
+&copy; 2021 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:03-02-2021
 </div> <!-- ## /CLOSEDBLOK: Footer.R --></p>
 </div>
 <div class="footnotes">

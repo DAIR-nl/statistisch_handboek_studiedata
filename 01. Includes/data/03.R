@@ -66,11 +66,11 @@ Cijfers_gemiddeld <- data.frame(Studentnummer, Cohort, Cijfers)
 rm(Cijfers, Cijfers_2010, Cijfers_2011, Cohort, mu, sigma, Studentnummer)
 
 ## Sla de datasets op
-write.csv(Cijfers_gemiddeld,
-          file = "05. Datasets/03_Cijfers_gemiddeld.csv")
+#write.csv(Cijfers_gemiddeld,
+#          file = "05. Datasets/03_Cijfers_gemiddeld.csv")
 
-write.csv(Cijfers_2011_n30,
-          file = "05. Datasets/03_Cijfers_2011_n30.csv")
+#write.csv(Cijfers_2011_n30,
+#          file = "05. Datasets/03_Cijfers_2011_n30.csv")
 
-write.csv(Cijfers_2010_n30,
-          file = "05. Datasets/03_Cijfers_2010_n30.csv")
+#write.csv(Cijfers_2010_n30,
+#          file = "05. Datasets/03_Cijfers_2010_n30.csv")

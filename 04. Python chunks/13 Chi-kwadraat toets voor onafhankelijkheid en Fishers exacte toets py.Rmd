@@ -1,0 +1,389 @@
+---
+title: "Chi-kwadraat toets voor onafhankelijkheid en Fisher's exact toets"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+  keywords: [statistisch handboek, studiedata]
+---
+
+<!-- ## CLOSEDBLOK: Functies.R -->
+```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
+library(here)
+if (!exists("Substitute_var")) {
+  ## Installeer packages en functies
+  source(paste0(here::here(), "/99. Functies en Libraries/00. Voorbereidingen.R"), echo = FALSE)
+}
+```
+<!-- ## /CLOSEDBLOK: Functies.R -->
+
+<style>
+`r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
+</style>
+
+<!-- ## CLOSEDBLOK: Header.R -->
+```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Header.R -->
+
+<!-- ## CLOSEDBLOK: Reticulate.py -->
+```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}
+library(reticulate)
+knitr::knit_engines$set(python = reticulate::eng_python)
+```
+<!-- ## /CLOSEDBLOK: Reticulate.py -->
+
+<!-- ## OPENBLOK: Data-aanmaken.py -->
+```{r opmerking TODO, include=FALSE, eval=FALSE}
+# TODO: Uitleg extra pagina: nominaal, ordinaal etc., afhanjeklijk en onafhankelijk  
+# TODO: Uitleg transformeren data 
+```
+```{r aanmaken data, include=FALSE, echo=TRUE}
+source(paste0(here::here(),"/01. Includes/data/13.R"))
+```
+<!-- ## /OPENBLOK: Data-aanmaken.py -->
+
+
+
+<!-- ## CLOSEDBLOK: Groepsgrootte2.py -->
+```{python opslaan tabel cellen, include=FALSE, echo=TRUE}
+import numpy as np
+import pandas as pd
+
+dfUitval_studenten_functiebeperking_leenstelsel = pd.DataFrame(r.Uitval_studenten_functiebeperking_leenstelsel)
+dfFisher_Uitval_studenten_functiebeperking_leenstelsel = pd.DataFrame(r.Fisher_Uitval_studenten_functiebeperking_leenstelsel)
+
+dfTabel_uitval_functiebeperking = np.array(r.Tabel_uitval_functiebeperking)
+dfFisher_Tabel_uitval_functiebeperking = np.array(r.Fisher_Tabel_uitval_functiebeperking)
+
+#print(dfTabel_uitval_functiebeperking)
+
+# Sla geobserveerde aantallen op
+n11 = dfTabel_uitval_functiebeperking[0,0]
+n12 = dfTabel_uitval_functiebeperking[0,1]
+n21 = dfTabel_uitval_functiebeperking[1,0]
+n22 = dfTabel_uitval_functiebeperking[1,1]
+NN = np.sum(dfTabel_uitval_functiebeperking)
+
+# Bereken verwachte aantallen
+En11 = ((n11 + n12) * (n11 + n21) / NN)
+En12 = ((n11 + n12) * (n12 + n22) / NN)
+En21 = ((n21 + n22) * (n11 + n21) / NN)
+En22 = ((n21 + n22) * (n12 + n22) / NN)
+#print(En11)
+```
+<!-- ## /CLOSEDBLOK: Groepsgrootte2.py -->
+
+
+<!-- ## TEKSTBLOK: Groepsgrootte1.py -->
+
+|                      | geen uitval   | uitval | totaal | 
+| -------------------- | ---------| ------------| -------------| 
+| **geen leenstelsel** |`r py$n11`   | `r py$n12`          | **`r py$n11 + py$n12`**|
+| **wel leenstelsel**  |`r py$n21`   | `r py$n22`          | **`r py$n21 + py$n22`**|
+|**totaal**            |**`r py$n11 + py$n21`**   | **`r py$n12 + py$n22`**     | **`r py$NN`** |
+*Tabel 1. Geobserveerde aantallen casus uitval met of zonder leenstelsel*
+
+
+De *Chi-kwadraat toets voor onafhankelijkheid* wordt onbetrouwbaar als er in meer dan 20% van de cellen van de kruistabel een verwacht aantal observaties van 5 of lager is. Gebruik in dat geval *Fisher's exact toets*.[^8] Het verwacht aantal observaties in een cel is het aantal observaties dat zich in een cel op basis van kansrekening zou moeten bevinden wanneer er geen afhankelijkheid tussen de twee variabelen is. Op basis van de nulhypothese van onafhankelijkheid tussen de variabelen kunnen de verwachte aantallen observaties in elke cel berekend worden. Een voorbeeldberekening van het verwacht aantal observaties voor de cel linksboven (geen leenstelsel; geen uitval) werkt als volgt: vermenigvuldig het totaal aantal studenten in de groep geen leenstelsel (`r py$n11 + py$n12`) met het totaal aantal studenten dat uitvalt (`r py$n11 + py$n21`) en deel dit door het totaal aantal studenten (`r py$NN`).
+
+* aantal studenten geen leenstelsel: `r py$n11 + py$n12`   
+* aantal studenten uitval: `r py$n11 + py$n21`  
+* totaal aantal studenten: `r py$NN`
+* verwacht aantal uitgevallen studenten geen leenstelsel: `r py$n11 + py$n12` * `r py$n11 + py$n21` / `r py$NN` ≈ `r Round_and_format((py$n11 + py$n12) * (py$n11 + py$n21) / py$NN)` 
+
+Alle verwachte aantallen observaties zijn te vinden in Tabel 2. Merk ook op dat de totalen in de rijen en kolommen gelijk zijn aan de totalen in Tabel 1, de kruistabel met de aantallen observaties. Geen van de verwachte aantallen is kleiner of gelijk aan vijf, dus er is voldaan aan de assumptie van groepsgrootte voor de *Chi-kwadraat toets voor onafhankelijkheid*.
+
+
+|                      | geen uitval   | uitval | totaal | 
+| -------------------- | ---------| ------------| -------------| 
+| **geen leenstelsel** |`r Round_and_format(py$En11)`   | `r Round_and_format(py$En12)`          | **`r Round_and_format(py$En11 + py$En12)`**|
+| **wel leenstelsel**  |`r Round_and_format(py$En21)`   | `r Round_and_format(py$En22)`          | **`r Round_and_format(py$En21 + py$En22)`**|
+|**totaal**            |**`r Round_and_format(py$En11 + py$En21)`**   | **`r Round_and_format(py$En12 + py$En22)`**     | **`r py$NN`** |
+*Tabel 2. Verwachte aantallen casus uitval met of zonder leenstelsel*
+<!-- ## /TEKSTBLOK: Groepsgrootte1.py -->
+
+<!-- ## TEKSTBLOK: Data-bekijken1.py -->
+Er is een dataset ingeladen genaamd `dfUitval_studenten_functiebeperking_leenstelsel`. In deze dataset is voor elke student met een functiebeperking aangegeven of ze studeerden voor of na invoering van het leenstelsel en of ze wel of niet uitgevallen zijn.
+<!-- ## /TEKSTBLOK: Data-bekijken1.py -->
+
+<!-- ## OPENBLOK: Data-bekijken2.py -->
+```{python data bekijken-1, collapse = TRUE}
+## Importeer nuttige packages
+import numpy as np
+import pandas as pd
+## Eerste 5 observaties
+print(dfUitval_studenten_functiebeperking_leenstelsel.head(5))
+```
+
+```{python data bekijken-2, collapse = TRUE}
+## Laatste 5 observaties
+print(dfUitval_studenten_functiebeperking_leenstelsel.tail(5))
+```
+<!-- ## /OPENBLOK: Data-bekijken2.py -->
+
+
+
+
+
+
+
+<!-- ## TEKSTBLOK: Data-kruistabel1.py -->
+Een kruistabel geeft de aantallen observaties weer voor de combinaties van de categorieën van de variabelen `Periode` en `Uitval`. Maak de kruistabel met de functie `.crosstab()` van het package `pandas` met als argumenten de variabele `dfUitval_studenten_functiebeperking_leenstelsel['Periode']` (voor of na invoering leenstelsel) en `dfUitval_studenten_functiebeperking_leenstelsel['Uitval']` (wel of niet uitgevallen).
+<!-- ## /TEKSTBLOK: Data-kruistabel1.py -->
+
+<!-- ## OPENBLOK: Data-kruistabel2.py -->
+```{python kruistabel}
+# Maak een kruistabel
+Uitval_studenten_kruistabel =  pd.crosstab(dfUitval_studenten_functiebeperking_leenstelsel['Periode'], dfUitval_studenten_functiebeperking_leenstelsel['Uitval'])
+
+# Print de kruistabel
+print(Uitval_studenten_kruistabel)
+
+# Maak een tabel met proporties, argument 'normalize = index' zorgt ervoor dat de proporties
+# per rij berekend worden
+Prop_Uitval_studenten_kruistabel = pd.crosstab(dfUitval_studenten_functiebeperking_leenstelsel['Periode'], dfUitval_studenten_functiebeperking_leenstelsel['Uitval'], normalize = 'index')
+
+# Print de tabel met proporties
+print(Prop_Uitval_studenten_kruistabel)
+
+```
+```{python, include=FALSE, echo=TRUE}
+voor = np.array(Prop_Uitval_studenten_kruistabel)[0,1]
+na = np.array(Prop_Uitval_studenten_kruistabel)[1,1]
+```
+<!-- ## /OPENBLOK: Data-kruistabel2.py -->
+
+<!-- ## TEKSTBLOK: Data-kruistabel3.py -->
+De kruistabel en bijbehorende tabel met proporties laat zien dat het percentage uitgevallen studenten hoger is na invoering van het leenstelsel (`r Round_and_format(100 *py$voor)`%) dan voor invoering van het leenstelsel (`r Round_and_format(100 * py$na)`%).
+<!-- ## /TEKSTBLOK: Data-kruistabel3.py -->
+
+
+
+<!-- ## TEKSTBLOK: Assumptie.py -->
+Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk of kleiner dan vijf is. Bereken het verwacht aantal observaties met de functie `.contingency.expected_freq()` van het `scipy.stats` package met als argument de kruistabel `Uitval_studenten_kruistabel`.
+<!-- ## /TEKSTBLOK: Assumptie.py -->
+
+<!-- ## OPENBLOK: Assumptie1.py -->
+```{python chi2 assumptie}
+import scipy.stats as sps 
+# Maak een kruistabel
+Uitval_studenten_kruistabel = pd.crosstab(dfUitval_studenten_functiebeperking_leenstelsel['Periode'], dfUitval_studenten_functiebeperking_leenstelsel['Uitval'])
+
+# Bereken verwachte aantallen observaties
+sps.contingency.expected_freq(Uitval_studenten_kruistabel)
+```
+<!-- ## /OPENBLOK: Assumptie1.py -->
+
+
+<!-- ## TEKSTBLOK: Chi2-toets-1.py -->
+De *Chi-kwadraat toets voor onafhankelijkheid* wordt uitgevoerd om de vraag te beantwoorden of er een afhankelijkheid is tussen het uitvallen van studenten met een functiebeperking en het wel of niet invoeren van het leenstelsel. Gebruik de functie `.stats.chi2_contingency()` van het `scipy` package met als argument de kruistabel `Uitval_studenten_kruistabel`. De weergegeven output bevat de teststatistiek, de p-waarde, het aantal vrijheidsgraden en een aantal met de verwachte aantallen observaties (in deze volgorde).
+<!-- ## /TEKSTBLOK: Chi2-toets-1.py -->
+
+<!-- ## OPENBLOK: Chi2-toets-2.py -->
+```{python}
+import scipy.stats as sps
+sps.chi2_contingency(Uitval_studenten_kruistabel)
+```
+<!-- ## /OPENBLOK: Chi2-toets-2.py -->
+
+Bereken de effectmaat *w* vervolgens op basis van de &chi;^2^-waarde van de *Chi-kwadraat toets voor onafhankelijkheid*.
+<!-- ## OPENBLOK: Chi2-toets-3.py -->
+```{python effectsize}
+# Sla de teststatistiek op
+chi2, pval, df, tab = sps.chi2_contingency(Uitval_studenten_kruistabel)
+
+# Bereken het totaal aantal observaties als som van de kruistabel
+N = np.sum(np.array(Uitval_studenten_kruistabel))
+
+# Bereken eta squared
+Eta2 = np.sqrt(chi2 / N)
+
+# Print de effectgrootte
+print(Eta2)
+
+
+```
+<!-- ## /OPENBLOK: Chi2-toets-3.py -->
+
+
+<!-- ## CLOSEDBLOK: Chi2-toets-4.py -->
+<!-- ## /CLOSEDBLOK: Chi2-toets-4.py -->
+
+<!-- ## TEKSTBLOK: Chi2-toets-5.py-->
+* &chi;^2^ ~1~ = `r Round_and_format(py$chi2)`, *p* = `r Round_and_format(py$pval)`, *w* = `r Round_and_format(py$Eta2)`  
+* Vrijheidsgraden: *df* = (*k*-1)(*r*-1), waar *k* staat voor kolom en *r* voor rij. In dit geval geldt *df* = `r Round_and_format(py$df)`.  
+* p-waarde < 0,05, dus de H~0~ wordt verworpen.[^11]
+* Effectmaat is `r Round_and_format(py$Eta2)`, dus een klein effect
+
+<!-- ## /TEKSTBLOK: Chi2-toets-5.py-->
+
+
+
+<!-- ## CLOSEDBLOK: Rapportage1.py -->
+```{python kruistabel rapportage, include=FALSE, echo=TRUE}
+
+# Maak een tabel met proporties, argument 'normalize = index' zorgt ervoor dat de proporties
+# per rij berekend worden
+Prop_Uitval_studenten_kruistabel = pd.crosstab(dfUitval_studenten_functiebeperking_leenstelsel['Periode'], dfUitval_studenten_functiebeperking_leenstelsel['Uitval'], normalize = 'index')
+
+# Sla vier waarden apart op
+gg = np.array(Prop_Uitval_studenten_kruistabel)[0,0]
+gu = np.array(Prop_Uitval_studenten_kruistabel)[0,1]
+wg = np.array(Prop_Uitval_studenten_kruistabel)[1,0]
+wu = np.array(Prop_Uitval_studenten_kruistabel)[1,1]
+
+```
+<!-- ## /CLOSEDBLOK: Rapportage1.py -->
+
+
+<!-- ## TEKSTBLOK: Rapportage2.py -->
+De *Chi-kwadraat toets voor onafhankelijkheid* is uitgevoerd om te toetsen of er een afhankelijkheid is tussen het uitvallen van studenten met een functiebeperking en het wel of niet invoeren van het leenstelsel. De nulhypothese dat uitval en invoering van het leenstelsel onafhankelijk zijn kan verworpen worden, &chi;^2^ ~1~ = `r Round_and_format(py$chi2)`, *p* = `r Round_and_format(py$pval)`, *w* = `r Round_and_format(py$Eta2)`. De propoties per rij in Tabel 3 laten zien dat er relatief meer studenten uitvallen wanneer er een leenstelsel is ingevoerd.
+
+|                      | geen uitval   | uitval | 
+| -------------------- | ---------| ------------| 
+| **geen leenstelsel** |`r Round_and_format(py$gg)`   | `r Round_and_format(py$gu)`          | 
+| **wel leenstelsel**  |`r Round_and_format(py$wg)`   | `r Round_and_format(py$wu)`          |
+*Tabel 3. Proporties wel of niet uitvallen studenten met of zonder leenstelsel berekend per rij.*
+<!-- ## /TEKSTBLOK: Rapportage2.py -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ## TEKSTBLOK: Data-inladen-Fisher.py -->
+*Fisher's exact toets* wordt uitgevoerd om de vraag te beantwoorden of er een afhankelijkheid is tussen het uitvallen van studenten met een functiebeperking en het wel of niet invoeren van het leenstelsel. Deze toets is ook betrouwbaar bij een laag aantal observaties. Om de toets te illustreren is een subset van de dataset `dfUitval_studenten_functiebeperking_leenstelsel` ingeladen; de subset heet `dfFisher_Uitval_studenten_functiebeperking_leenstelsel`.
+
+Een kruistabel geeft de aantallen observaties weer voor de combinaties van de categorieën van de variabelen `Periode` en `Uitval`. Maak de kruistabel met de functie `.crosstable()` van het package `pandas` met als argumenten de variabele `dfUitval_studenten_functiebeperking_leenstelsel['Periode']` (voor of na invoering leenstelsel) en `dfUitval_studenten_functiebeperking_leenstelsel['Uitval']` (wel of niet uitgevallen).
+<!-- ## /TEKSTBLOK: Data-inladen-Fisher.py -->
+
+<!-- ## OPENBLOK: Data-kruistabel2Fisher.py -->
+
+```{python kruistabel fisher}
+import pandas as pd
+
+# Maak een kruistabel
+Fisher_Uitval_studenten_kruistabel =  pd.crosstab(dfFisher_Uitval_studenten_functiebeperking_leenstelsel['Periode'], dfFisher_Uitval_studenten_functiebeperking_leenstelsel['Uitval'])
+
+# Print de kruistabel
+print(Fisher_Uitval_studenten_kruistabel)
+
+# Maak een tabel met proporties, argument 'normalize = index' zorgt ervoor dat de proporties
+# per rij berekend worden
+Fisher_Prop_Uitval_studenten_kruistabel = pd.crosstab(dfFisher_Uitval_studenten_functiebeperking_leenstelsel['Periode'], dfFisher_Uitval_studenten_functiebeperking_leenstelsel['Uitval'], normalize = 'index')
+
+# Print de tabel met proporties
+print(Fisher_Prop_Uitval_studenten_kruistabel)
+
+
+```
+```{python, include=FALSE, echo=TRUE}
+voor = np.array(Fisher_Prop_Uitval_studenten_kruistabel)[0,1]
+na = np.array(Fisher_Prop_Uitval_studenten_kruistabel)[1,1]
+```
+
+<!-- ## /OPENBLOK: Data-kruistabel2Fisher.py -->
+
+<!-- ## TEKSTBLOK: Data-kruistabel3Fisher.py -->
+De kruistabel en bijbehorende tabel met proporties laat zien dat het percentage uitgevallen studenten lager is na invoering van het leenstelsel (`r Round_and_format(100 * py$na)`%) dan voor invoering van het leenstelsel (`r Round_and_format(100 * py$voor)`%).
+<!-- ## /TEKSTBLOK: Data-kruistabel3Fisher.py -->
+
+
+<!-- ## TEKSTBLOK: AssumptieFisher.py -->
+Toets de assumptie dat niet meer dan 20% van de verwachte aantallen observaties gelijk of kleiner dan vijf is. Bereken het verwachte aantal observaties met de functie `.contingency.expected_freq()` van het `scipy.stats` package met als argument de kruistabel `Fisher_Uitval_studenten_kruistabel`.
+<!-- ## /TEKSTBLOK: AssumptieFisher.py -->
+
+<!-- ## OPENBLOK: Assumptie1Fisher.py -->
+```{python chi2 fisher}
+import scipy.stats as sps 
+# Maak een kruistabel
+Fisher_Uitval_studenten_kruistabel = pd.crosstab(dfFisher_Uitval_studenten_functiebeperking_leenstelsel['Periode'], dfFisher_Uitval_studenten_functiebeperking_leenstelsel['Uitval'])
+
+# Bereken verwachte aantallen observaties
+sps.contingency.expected_freq(Fisher_Uitval_studenten_kruistabel)
+```
+<!-- ## /OPENBLOK: Assumptie1Fisher.py -->
+
+
+
+<!-- ## TEKSTBLOK: Fisher1.py -->
+Voer *Fisher's exact toets* uit met de functie `.fisher_exact()` van het package `scipy.stats` met als argumenten de kruistabel `Fisher_Uitval_studenten_kruistabel` en `alternative = 'two-sided'` om tweezijdig te toetsen. De output geeft de odds ratio en de p-waarde weer.
+<!-- ## /TEKSTBLOK: Fisher1.py -->
+
+
+<!-- ## OPENBLOK: Fishers-Exact-toets.py -->
+```{python fishers exact}
+import scipy.stats as sps
+sps.fisher_exact(Fisher_Uitval_studenten_kruistabel, alternative = 'two-sided')
+```
+<!-- ## /OPENBLOK: Fishers-Exact-toets.py -->
+
+
+<!-- ## CLOSEDBLOK: Fishers-Exact-toets.py -->
+```{python fishers exact als object, include=FALSE, echo=TRUE}
+OR, pval = sps.fisher_exact(Fisher_Uitval_studenten_kruistabel, alternative = 'two-sided')
+
+```
+<!-- ## /CLOSEDBLOK: Fishers-Exact-toets.py -->
+
+<!-- ## TEKSTBLOK: Fishers-Exact-toets.py -->
+* *p* = `r Round_and_format(py$pval)`; p-waarde > 0,05, dus de H~0~ wordt niet verworpen.[^11]  
+* De odds ratio is `r Round_and_format(py$OR)`. De kans op uitval van studenten met een functiebeperking met leenstelsel is dus `r Round_and_format(py$OR)` keer zo groot is als de kans op uitval van studenten met een functiebeperking zonder het leenstelsel. Deze relatie is echter niet significant.
+
+<!-- ## /TEKSTBLOK: Fishers-Exact-toets.py -->
+
+
+<!-- ## CLOSEDBLOK: Rapportage1Fisher.py -->
+```{python kruistabel rapportage fisher, include=FALSE, echo=TRUE}
+# Maak een tabel met proporties, argument 'normalize = index' zorgt ervoor dat de proporties
+# per rij berekend worden
+Fisher_Prop_Uitval_studenten_kruistabel = pd.crosstab(dfFisher_Uitval_studenten_functiebeperking_leenstelsel['Periode'], dfFisher_Uitval_studenten_functiebeperking_leenstelsel['Uitval'], normalize = 'index')
+
+# Sla vier waarden apart op
+fgg = np.array(Fisher_Prop_Uitval_studenten_kruistabel)[0,0]
+fgu = np.array(Fisher_Prop_Uitval_studenten_kruistabel)[0,1]
+fwg = np.array(Fisher_Prop_Uitval_studenten_kruistabel)[1,0]
+fwu = np.array(Fisher_Prop_Uitval_studenten_kruistabel)[1,1]
+```
+<!-- ## /CLOSEDBLOK: Rapportage1Fisher.py -->
+
+
+<!-- ## TEKSTBLOK: Rapportage2Fisher.py -->
+*Fisher's exact toets* is uitgevoerd om te toetsen of er een afhankelijkheid is tussen het uitvallen van studenten met een functiebeperking en het wel of niet invoeren van het leenstelsel. De nulhypothese dat uitval en invoering van het leenstelsel onafhankelijk zijn kan niet verworpen worden, *p* = `r py$pval`. De proporties per rij in Tabel 4 laten zien dat er relatief meer studenten uitvallen wanneer er een leenstelsel is ingevoerd, dit verschil is echter niet significant.
+
+|                      | geen uitval   | uitval | 
+| -------------------- | ---------| ------------| 
+| **geen leenstelsel** |`r Round_and_format(py$fgg)`   | `r Round_and_format(py$fgu)`          | 
+| **wel leenstelsel**  |`r Round_and_format(py$fwg)`   | `r Round_and_format(py$fwu)`          |
+*Tabel 4. Proporties wel of niet uitvallen studenten met of zonder leenstelsel berekend per rij voor dataset Fisher's exact toets.*
+<!-- ## /TEKSTBLOK: Rapportage2Fisher.py -->
+
+
+<!-- ## TEKSTBLOK: Extra-Bron.py -->
+[^12]: Het 95%-betrouwbaarheidsinterval van de odds ratio wordt bij deze Python functie niet weergegeven. Bij de uitvoering van *Fisher's exact toets* in R zit het betrouwbaarheidsinterval wel in de output.
+<!-- ## /TEKSTBLOK: Extra-Bron.py -->
+
+
+
+
+
+

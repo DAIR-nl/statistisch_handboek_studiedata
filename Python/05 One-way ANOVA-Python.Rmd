@@ -58,11 +58,11 @@ source(paste0(here::here(),"/01. Includes/data/05.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.py -->
 
 # Toepassing
-Gebruik de *one-way ANOVA* bij het toetsen of de gemiddelden van drie of meer onafhankelijke groepen verschillen.[^1] 
+Gebruik de *one-way ANOVA* bij het toetsen of de gemiddelden van twee of meer onafhankelijke groepen verschillen.[^1] 
 
 # Onderwijscasus
 <div id = "casus">
-Om wervingsactiviteiten beter af te stemmen op de aankomende studenten, wil het hoofd van de afdeling Communicatie weten wat de reistijd is van studenten van verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. 
+Om wervingsactiviteiten beter af te stemmen op de aankomende studenten, wil het hoofd van de afdeling Communicatie weten wat de reistijd (in minuten) is van studenten van verschillende opleidingen. Hij heeft daarom data verzameld over de reistijd van uitwonende studenten voor de opleidingen: Arabische Taal en Cultuur, Filosofie en Geschiedenis. 
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
@@ -71,7 +71,7 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 *H~A~*: De reistijden van de studenten van de drie opleidingen komen niet uit dezelfde verdeling en hebben dus een verschillend gemiddelde
 
 
-# Assumpties
+# Uitleg assumpties
 Om een valide toetsresultaat te bereiken moeten de data aan een aantal voorwaarden voldoen. Controleer of de steekproef aan de volgende assumpties voldoet: normaliteit, homogeniteit van varianties en onafhankelijkheid.
 
 De *one-way ANOVA* is een robuuste toets: als er niet voldaan is aan de assumptie van normaliteit of homogeniteit van varianties, dan kan de *one-way ANOVA* in bepaalde gevallen nog steeds uitgevoerd en geïnterpreteerd worden.[^2] Hierdoor kan het wel zijn dat de toets minder onderscheidend vermogen heeft, dan wanneer de assumpties niet geschonden worden.[^3]<sup>, </sup>[^4] Als er grote afwijkingen zijn van normaliteit of homogeniteit van varianties, is de [Kruskal-Wallis toets](10-Kruskal-Wallis-toets-R.html) een alternatief voor de *one-way ANOVA*.[^5]<sup>, </sup>[^6]
@@ -98,7 +98,7 @@ Er zijn meerdere post-hoc toetsen. De keuze voor een toets hangt onder andere af
 * Gebruik de Tukey Honestly Significant Difference post-hoc toets bij gelijke variantie.[^14]  
 * Gebruik de Games-Howell post-hoc toets bij ongelijke variantie.[^15]  
 
-# Assumpties
+# Toetsing assumpties
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->
 Er is een dataset ingeladen met de reistijden van uitwonende studenten per opleiding genaamd `dfReistijd_per_opleiding`. 
 <!-- ## /TEKSTBLOK: Dataset-inladen.py -->
@@ -501,7 +501,7 @@ Een *one-way ANOVA* is uitgevoerd om te toetsen of de gemiddelde reistijd van de
 [^6]: De [Kruskal-Wallis toets](10-Kruskal-Wallis-toets-R.html) maakt een rangschikking van de data. Hierdoor is de toets verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze toets minder vaak gekozen, omdat bij het maken van een rankschikking de dataset informatie verliest. Als de data wel normaal verdeeld zijn, heeft de [Kruskal-Wallis toets](10-Kruskal-Wallis-toets-R.html) minder onderscheidend vermogen dan wanneer de *one-way ANOVA* uitgevoerd zou worden.
 [^7]: Laerd statistics (2018). *Testing for Normality using SPSS Statistics*. https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php. 
 [^8]: Universiteit van Amsterdam (14 juli 2014). *Normaliteit*. [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit).
-[^9]: Bereken de logaritme van de variabele en de inverse (1 gedeeld door de variabele), en bekijk of deze normaal verdeeld zijn. Als dat zo is, mag je die gebruiken voor de analyse.
+[^9]: Er zijn verschillende opties om variabelen te transformeren, zoals de logaritme, wortel of inverse (1 gedeeld door de variabele) nemen van de variabele. Zie *Discovering statistics using IBM SPSS statistics* van Field (2013) pagina 201-210 voor meer informatie over welke transformaties wanneer gebruikt kunnen worden.
 [^10]: Wikipedia (7 september 2019). *Analysis of variance*. https://en.wikipedia.org/wiki/Analysis_of_variance.
 [^11]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^12]: Watson, P. (30 oktober 2019). *Rules of thumb on magnitudes of effect sizes*. [MRC Cognition and Brain Sciences Unit Wiki](http://imaging.mrc-cbu.cam.ac.uk/statswiki/FAQ/effectSize).

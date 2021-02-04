@@ -30,6 +30,8 @@
 lVars <- list(
   var_VersieR = paste(R.Version()$major, R.Version()$minor, sep = "."),
   var_VersiePython = "3.7",
+  #var_zip = paste0("<a href=\"",sRoot,"Datasets_zipbestand\" download>hier</a>"),
+  ##var_zip = paste0(getwd(),"/Datasets_zipbestand"),
   var_Copyright = 
     paste0(
         "&copy; ",
@@ -39,13 +41,13 @@ lVars <- list(
         "Laatst gewijzigd op:", format(Sys.time(), '%d-%m-%Y')
     )
 )
-
+lVars
 ## Plaats deze nu in een footer; gebruik htmltools::htmlPreserve om
 ## HTML te behouden. Nodig om in markdown HTML te tonen.
 thisFooter <- Substitute_var(htmltools::htmlPreserve('
 <div id = "footerborder"><hr/></div>
 <div id = "footer">
-Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie `var_VersieR`; Python code is uitgevoerd in Python `var_VersiePython`.
+Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie `var_VersieR`; Python code is uitgevoerd in Python `var_VersiePython`. De gesimuleerde datasets zijn hier te downloaden.
 <br/><br/>
 `var_Copyright`
 </div>'), lVars)

@@ -85,8 +85,8 @@ rm(MU_verschil, SD_verschil, Uren_studeren_verschillen, Uren_studeren_t0,
    Meetmoment, indices)
 
 ## Sla de datasets op
-write.csv(Studielogboek,
-          file = "05. Datasets/02_Studielogboek.csv")
+#write.csv(Studielogboek,
+#          file = "05. Datasets/02_Studielogboek.csv")
 
-write.csv(Uren_studeren_verschil_n30,
-          file = "05. Datasets/02_Uren_studeren_verschil_n30.csv")
+#write.csv(Uren_studeren_verschil_n30,
+#          file = "05. Datasets/02_Uren_studeren_verschil_n30.csv")

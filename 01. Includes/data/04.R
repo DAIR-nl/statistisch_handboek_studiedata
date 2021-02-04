@@ -88,5 +88,5 @@ Studieuren
 )
 
 ## Sla de datasets op
-write.csv(Studieuren_technische_natuurkunde,
-          file = "05. Datasets/04_Studieuren_technische_natuurkunde.csv")
+#write.csv(Studieuren_technische_natuurkunde,
+#          file = "05. Datasets/04_Studieuren_technische_natuurkunde.csv")

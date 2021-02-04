@@ -49,7 +49,7 @@ Corrigeer_toetsnaam <- function(sToetsnaam) {
       sToetsnaam == "Friedmans ANOVA II" ~ "Friedman's ANOVA II",
       sToetsnaam == "Moods mediaan toets" ~ "Mood's mediaan toets",
       sToetsnaam == "Factoriele ANOVA" ~ "Factoriële ANOVA",
-      sToetsnaam == "Factoriele repeated measures ANOVA" ~ "Factoriële repeated measures ANOVA",
+      sToetsnaam == "Factoriele repeated measures ANOVA" ~ "Factoriele repeated measures ANOVA",
       #sToetsnaam == "Chi-kwadraat toets trend" ~ "Chi-kwadraat toets (trend)",
       TRUE ~ sToetsnaam
     )

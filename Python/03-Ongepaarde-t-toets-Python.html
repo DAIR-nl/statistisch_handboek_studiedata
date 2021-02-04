@@ -1938,19 +1938,19 @@ body{ /* Normal  */
 <pre class="python"><code>## Eerste 6 observaties
 print(dfCijfers_gemiddeld.head())
 ##    Studentnummer Cohort  Cijfers
-## 0         385869   2010    5.548
-## 1         303443   2010    6.520
-## 2         397098   2010    5.297
-## 3         374509   2010    8.214
-## 4         327324   2010    6.695</code></pre>
+## 0         302256   2010    5.548
+## 1         344374   2010    6.520
+## 2         302078   2010    5.297
+## 3         325370   2010    8.214
+## 4         362912   2010    6.695</code></pre>
 <pre class="python"><code>## Laatste 6 observaties
 print(dfCijfers_gemiddeld.tail())
 ##      Studentnummer Cohort  Cijfers
-## 335         317640   2011    7.185
-## 336         326484   2011    7.264
-## 337         365733   2011    7.132
-## 338         381330   2011    5.763
-## 339         341976   2011    4.814</code></pre>
+## 335         317635   2011    7.185
+## 336         396683   2011    7.264
+## 337         393299   2011    7.132
+## 338         362510   2011    5.763
+## 339         335445   2011    4.814</code></pre>
 <!-- ## /OPENBLOK: Data-bekijken.py -->
 <p>Selecteer beide groepen en sla deze op in een vector om deze makkelijker aan te kunnen roepen. <!-- ## OPENBLOK: Data-selecteren.py --></p>
 <pre class="python"><code>Cijfers_2010 = dfCijfers_gemiddeld[dfCijfers_gemiddeld[&#39;Cohort&#39;] == &quot;2010&quot;][&#39;Cijfers&#39;]
@@ -2200,7 +2200,7 @@ print(d)</code></pre>
 <div id = "footer">
 Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 3.6.3; Python code is uitgevoerd in Python 3.7.
 <br/><br/>
-&copy; 2020 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:22-12-2020
+&copy; 2021 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:03-02-2021
 </div> <!-- ## /CLOSEDBLOK: Footer.R --></p>
 <!-- ## TEKSTBLOK: Extra-Bron.py -->
 </div>
@@ -2211,7 +2211,7 @@ Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikk
 <li id="fn2"><p>Lumley, T., Diehr, P., Emerson, S., &amp; Chen, L. (2002). The importance of the normality assumption in large public health data sets. <em>Annu Rev Public Health, 23</em>, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 <a href="http://rctdesign.org/techreports/arphnonnormality.pdf" class="uri">http://rctdesign.org/techreports/arphnonnormality.pdf</a><a href="#fnref2" class="footnote-back">↩</a></p></li>
 <li id="fn3"><p>Laerd statistics. (2018). <a href="https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php">Testing for Normality using SPSS Statistics</a>.<a href="#fnref3" class="footnote-back">↩</a></p></li>
 <li id="fn4"><p>Normaliteit. (14 juli 2014). <a href="https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit">UvA Wiki Methodologiewinkel</a>.<a href="#fnref4" class="footnote-back">↩</a></p></li>
-<li id="fn5"><p>Bereken de logaritme van de variabele en de inverse (1 gedeeld door de variabele), en bekijk of deze normaal verdeeld is. Als dat zo is, mag je die gebruiken voor de analyse.<a href="#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>Er zijn verschillende opties om variabelen te transformeren, zoals de logaritme, wortel of inverse (1 gedeeld door de variabele) nemen van de variabele. Zie <em>Discovering statistics using IBM SPSS statistics</em> van Field (2013) pagina 201-210 voor meer informatie over welke transformaties wanneer gebruikt kunnen worden.<a href="#fnref5" class="footnote-back">↩</a></p></li>
 <li id="fn6"><p>Van Geloven, N. (13 maart 2018). <em>Mann-Whitney U toets</em> <a href="https://wikistatistiek.amc.nl/index.php/Mann-Whitney_U_toets">Wiki Statistiek Academisch Medisch Centrum</a>.<a href="#fnref6" class="footnote-back">↩</a></p></li>
 <li id="fn7"><p>De <a href="08-Mann-Whitney-U-toets-R.html">Mann-Whitney U toets</a> maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld is, heeft de <a href="08-Mann-Whitney-U-toets-R.html">Mann-Whitney U toets</a> minder onderscheidend vermogen dan wanneer de <em>ongepaarde t-toets</em> uitgevoerd zou worden.<a href="#fnref7" class="footnote-back">↩</a></p></li>
 <li id="fn8"><p>Lakens, D. (26 januari 2015). <em>Always use Welch’s t-test instead of Student’s t-test</em>. <a href="http://daniellakens.blogspot.com/2015/01/always-use-welchs-t-test-instead-of.html">The 20% Statistician</a>.<a href="#fnref8" class="footnote-back">↩</a></p></li>

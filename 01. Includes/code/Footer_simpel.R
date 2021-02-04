@@ -37,12 +37,14 @@ lVars <- list(
     )
 )
 
+## CODE voor downloaden datasets: <a href="Datasets_zipbestand" download>hier</a>
+  
 ## Plaats deze nu in een footer; gebruik htmltools::htmlPreserve om
 ## HTML te behouden. Nodig om in markdown HTML te tonen.
 thisFooter <- Substitute_var(htmltools::htmlPreserve('
 <div id = "footerborder"><hr/></div>
 <div id = "footer">
-Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. 
+Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. De gesimuleerde datasets zijn hier te downloaden.
 <br/><br/>
 `var_Copyright`
 </div>'), lVars)

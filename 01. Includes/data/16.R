@@ -132,11 +132,11 @@ Fisher_Tabel_BSA_antropologie <- table(BSA_antropologie$BSA,
 Fisher_BSA_kruistabel <- Fisher_Tabel_BSA_antropologie[, c("NL", "GE", "IT", "UK", "BE", "ES", "US")]
 
 ## Sla de datasets op
-write.csv(BSA_antropologie,
-          file = "05. Datasets/16_BSA_antropologie.csv")
+#write.csv(BSA_antropologie,
+#          file = "05. Datasets/16_BSA_antropologie.csv")
 
-write.csv(Fisher_BSA_antropologie,
-          file = "05. Datasets/16_Fisher_BSA_antropologie.csv")
+#write.csv(Fisher_BSA_antropologie,
+#          file = "05. Datasets/16_Fisher_BSA_antropologie.csv")
 
 
 rm(Studentnummers_opties, 

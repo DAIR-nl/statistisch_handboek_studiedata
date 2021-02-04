@@ -2035,10 +2035,10 @@ print(statsmodels.stats.api.lilliefors(Gemiddeld_cijfer_WNS, pvalmethod = &quot;
 <p>Er is een subset van <code>Gemiddeld_cijfer_WNS</code> ingeladen: <code>Gemiddeld_cijfer_WNS_n30</code>. De steekproef bevat 30 studenten. <!-- ## TEKSTBLOK: Shapiro-Wilk-test.py --> <!-- ## OPENBLOK: Shapiro-Wilk-test.py --></p>
 <pre class="python"><code>#Shapiro-Wilk test
 print(stats.shapiro(Gemiddeld_cijfer_WNS_n30))</code></pre>
-<pre><code>## (0.9815859198570251, 0.8659763336181641)</code></pre>
+<pre><code>## (0.9289001822471619, 0.04591239243745804)</code></pre>
 <!-- ## /OPENBLOK: Shapiro-Wilk-test.py -->
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test2.py -->
-<p>De p-waarde is 0,87, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De <em>one sample-t-toets</em> kan uitgevoerd worden. <!-- ## /TEKSTBLOK: Shapiro-Wilk-test2.py --></p>
+<p>De p-waarde is 0,05, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De <em>one sample-t-toets</em> kan uitgevoerd worden. <!-- ## /TEKSTBLOK: Shapiro-Wilk-test2.py --></p>
 </div>
 </div>
 <div id="one-sample-t-toets" class="section level2">
@@ -2093,7 +2093,7 @@ print(Ondergrens, Bovengrens)</code></pre>
 <div id = "footer">
 Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 3.6.3; Python code is uitgevoerd in Python 3.7.
 <br/><br/>
-&copy; 2020 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:22-12-2020
+&copy; 2021 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:03-02-2021
 </div> <!-- ## /CLOSEDBLOK: Footer.R --></p>
 </div>
 <div class="footnotes">
@@ -2104,7 +2104,7 @@ Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikk
 <li id="fn3"><p>Lumley, T., Diehr, P., Emerson, S., &amp; Chen, L. (2002). The importance of the normality assumption in large public health data sets. Annu Rev Public Health, 23, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 <a href="http://rctdesign.org/techreports/arphnonnormality.pdf" class="uri">http://rctdesign.org/techreports/arphnonnormality.pdf</a><a href="#fnref3" class="footnote-back">↩</a></p></li>
 <li id="fn4"><p>Laerd statistics (2018). <a href="https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php">Testing for Normality using SPSS Statistics</a>.<a href="#fnref4" class="footnote-back">↩</a></p></li>
 <li id="fn5"><p>Normaliteit. (14 juli 2014). <a href="https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit">UvA Wiki Methodologiewinkel</a>.<a href="#fnref5" class="footnote-back">↩</a></p></li>
-<li id="fn6"><p>Bereken de logaritme van de variabele en de inverse (1 gedeeld door de variabele), en bekijk of deze normaal verdeeld zijn. Als dat zo is, mag je die gebruiken voor de analyse.<a href="#fnref6" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>Er zijn verschillende opties om variabelen te transformeren, zoals de logaritme, wortel of inverse (1 gedeeld door de variabele) nemen van de variabele. Zie <em>Discovering statistics using IBM SPSS statistics</em> van Field (2013) pagina 201-210 voor meer informatie over welke transformaties wanneer gebruikt kunnen worden.<a href="#fnref6" class="footnote-back">↩</a></p></li>
 <li id="fn7"><p>De <a href="07-Wilcoxon-signed-rank-toets-R.html">Wilcoxon signed rank toets</a> maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld zijn heeft de <a href="07-Wilcoxon-signed-rank-toets-R.html">Wilcoxon signed rank toets</a> minder onderscheidend vermogen dan wanneer de <em>one sample t-toets</em> uitgevoerd zou worden.<a href="#fnref7" class="footnote-back">↩</a></p></li>
 <li id="fn8"><p>Prabhakaran, S. (2016-2017). <em>Statistical Tests</em>. <a href="http://r-statistics.co/Statistical-Tests-in-R.html" class="uri">http://r-statistics.co/Statistical-Tests-in-R.html</a><a href="#fnref8" class="footnote-back">↩</a></p></li>
 <li id="fn9"><p>De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.<a href="#fnref9" class="footnote-back">↩</a></p></li>

@@ -1933,19 +1933,19 @@ body{ /* Normal  */
 <pre class="python"><code>## Eerste 5 observaties
 print(dfStudielogboek.head())
 ##    Studentnummer  Uren_studeren Meetmoment
-## 0         315397           18.6         T0
-## 1         303483           14.4         T0
-## 2         399794           18.6         T0
-## 3         383555           19.0         T0
-## 4         358654           18.2         T0</code></pre>
+## 0         302282           18.6         T0
+## 1         322224           14.4         T0
+## 2         352914           18.6         T0
+## 3         346243           19.0         T0
+## 4         304732           18.2         T0</code></pre>
 <pre class="python"><code>## Laatste 5 observaties
 print(dfStudielogboek.tail())
 ##      Studentnummer  Uren_studeren Meetmoment
-## 263         395441           17.4         T1
-## 264         397201           16.0         T1
-## 265         313997           21.5         T1
-## 266         367691           21.1         T1
-## 267         379015           13.3         T1</code></pre>
+## 263         391173           17.4         T1
+## 264         392386           16.0         T1
+## 265         302040           21.5         T1
+## 266         330079           21.1         T1
+## 267         340162           13.3         T1</code></pre>
 <!-- ## /OPENBLOK: Data-bekijken.py -->
 <p>Selecteer beide groepen, sla deze op in een vector en bereken het verschil in de afhankelijke variabelen (het aantal studieuren) voor alle deelnemers (de studenten). <!-- ## OPENBLOK: Data-selecteren.py --></p>
 <pre class="python"><code>Uren_studeren_T0 = dfStudielogboek[dfStudielogboek[&#39;Meetmoment&#39;] == &quot;T0&quot;][&#39;Uren_studeren&#39;]
@@ -2069,10 +2069,10 @@ plt.show()</code></pre>
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test.py -->
 <p>Er is een subset van de verschillen tussen het aantal studieuren op T<sub>0</sub> en T<sub>1</sub> ingeladen, <code>Uren_studeren_verschil_n30</code> met daarin 30 observaties. Voor een relatief kleine steekproef als deze is de <em>Shapiro-Wilk Test</em> geschikt. <!-- ## /TEKSTBLOK: Shapiro-Wilk-test.py --> <!-- ## OPENBLOK: Shapiro-Wilk-test-1.py --></p>
 <pre class="python"><code>print(stats.shapiro(Uren_studeren_verschil_n30))</code></pre>
-<pre><code>## (0.9457250833511353, 0.12976154685020447)</code></pre>
+<pre><code>## (0.9690262675285339, 0.5128865838050842)</code></pre>
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-1.py -->
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test-2.py -->
-<p>Voor deze subset is de p-waarde 0,13, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De <em>gepaarde t-toets</em> kan uitgevoerd worden.<br />
+<p>Voor deze subset is de p-waarde 0,51, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De <em>gepaarde t-toets</em> kan uitgevoerd worden.<br />
 <!-- ## /TEKSTBLOK: Shapiro-Wilk-test-2.py --></p>
 </div>
 </div>
@@ -2163,7 +2163,7 @@ print(absoluut_verschil)</code></pre>
 <div id = "footer">
 Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 3.6.3; Python code is uitgevoerd in Python 3.7.
 <br/><br/>
-&copy; 2020 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:22-12-2020
+&copy; 2021 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:03-02-2021
 </div> <!-- ## /CLOSEDBLOK: Footer.R --></p>
 <!-- ## TEKSTBLOK: Extra-Bron.py -->
 </div>
@@ -2175,7 +2175,7 @@ Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikk
 <li id="fn3"><p>Lumley, T., Diehr, P., Emerson, S., &amp; Chen, L. (2002). The importance of the normality assumption in large public health data sets. <em>Annu Rev Public Health, 23</em>, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 <a href="http://rctdesign.org/techreports/arphnonnormality.pdf" class="uri">http://rctdesign.org/techreports/arphnonnormality.pdf</a><a href="#fnref3" class="footnote-back">↩</a></p></li>
 <li id="fn4"><p>Van Geloven, N. (25 september2013). <em>Wilcoxon signed rank toets</em>. <a href="https://wikistatistiek.amc.nl/index.php/Wilcoxon_signed_rank_toets">Wiki Statistiek Academisch Medisch Centrum</a>.<a href="#fnref4" class="footnote-back">↩</a></p></li>
 <li id="fn5"><p>Laerd statistics (2018). <em>Testing for Normality using SPSS Statistics</em>. <a href="https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php">Testing for Normality using SPSS Statistics</a>.<a href="#fnref5" class="footnote-back">↩</a></p></li>
-<li id="fn6"><p>Bereken de logaritme van de variabele en de inverse (1 gedeeld door de variabele), en bekijk of deze normaal verdeeld is. Als dat zo is, mag je die gebruiken voor de analyse.<a href="#fnref6" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>Er zijn verschillende opties om variabelen te transformeren, zoals de logaritme, wortel of inverse (1 gedeeld door de variabele) nemen van de variabele. Zie <em>Discovering statistics using IBM SPSS statistics</em> van Field (2013) pagina 201-210 voor meer informatie over welke transformaties wanneer gebruikt kunnen worden.<a href="#fnref6" class="footnote-back">↩</a></p></li>
 <li id="fn7"><p>Universiteit van Amsterdam (14 juli 2014). <em>Normaliteit</em>. <a href="https://wiki.uva.nl/methodologiewinkel/index.php/Normaliteit">UvA Wiki Methodologiewinkel</a>.<a href="#fnref7" class="footnote-back">↩</a></p></li>
 <li id="fn8"><p>De <a href="07-Wilcoxon-signed-rank-toets-R.html">Wilcoxon signed rank toets</a> maakt een rangschikking van de data. Hierdoor is de test verdelingsvrij en is normaliteit geen assumptie. Ook zijn uitbijters minder van invloed op het eindresultaat. Toch wordt er voor deze test minder vaak gekozen, doordat bij het maken van een rankschikking de data informatie verliest. Als de data wel normaal verdeeld is, heeft de <a href="07-Wilcoxon-signed-rank-toets-R.html">Wilcoxon signed rank toets</a> minder onderscheidend vermogen dan wanneer de <em>gepaarde t-toets</em> uitgevoerd zou worden.<a href="#fnref8" class="footnote-back">↩</a></p></li>
 <li id="fn9"><p>De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.<a href="#fnref9" class="footnote-back">↩</a></p></li>

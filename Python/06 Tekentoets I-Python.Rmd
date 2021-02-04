@@ -58,7 +58,6 @@ source(paste0(here::here(),"/01. Includes/data/06.R"))
 Gebruik de *tekentoets* om de mediaan van een steekproef te vergelijken met een bekende mediaan of norm in een populatie.[^1] Deze toets is een alternatief voor de [one sample t-toets](01-One-sample-t-toets-Python.html) wanneer de data niet normaal verdeeld is. De [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-I-Python.html) kan ook gebruikt worden om de mediaan van een steekproef te vergelijken met een bekende mediaan. Deze toets heeft een hoger onderscheidend vermogen[^9], maar vereist dat de verdeling van de data symmetrisch is.[^8] De *tekentoets* kan ook gebruikt worden als de verdeling van de data niet symmetrisch is.
 <!-- ## /TEKSTBLOK: Link1.py -->
 
-
 # Onderwijscasus
 <div id ="casus">
 De opleidingsdirecteur van de school voor Journalistiek is benieuwd wat alumni verdienen ten opzichte van de gemiddelde Nederlander. Daarom wil zij de jaarinkomens van oud-studenten vergelijken met het modale inkomen van €36.000.[^2] Op deze manier vergaart zij meer informatie over het succes op de arbeidsmarkt na de opleiding Journalistiek.
@@ -133,14 +132,10 @@ vN = len(dfJaarlijks_inkomen['Inkomen'])
 Het gemiddelde jaarinkomen van de alumni is `r paste("€", Round_and_format_0decimals(py$vMean), sep="")` met een standaardafwijking van `r paste("€", Round_and_format(py$vSD), sep="")` (*n* = `r py$vN`). De mediaan van het inkomen is `r paste("€", Round_and_format_0decimals(py$vMed), sep="")`.
 <!-- ## /TEKSTBLOK: Datatekst-beschrijven2.py -->
 
-## Normaliteit visualiseren en testen
+## De data visualiseren
 
-<!-- ## TEKSTBLOK: Link2.py -->
-De *tekentoets* is een alternatief voor de [one-sample t-toets](01-One-sample-t-toets-Python.html) wanneer de data geen normale verdeling volgt. Hoewel het visueel inspecteren en testen van normaliteit niet vereist is, is het nuttig om de verdeling van de data te visualiseren en te vergelijken met de normaalverdeling.
-<!-- ## /TEKSTBLOK: Link2.py -->
+Visualiseer de data om een goed beeld van de jaarinkomens van de alumni te krijgen. Geef de verdeling van de data weer in een histogram[^18]. Focus bij het analyseren van een histogram op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters.[^6]<sup>, </sup>[^7]
 
-### Histogram
-Geef de verdeling van de data weer in een histogram[^18]. Focus bij het analyseren van een histogram op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.[^6]<sup>, </sup>[^7]
 <!-- ## OPENBLOK: Histogram.py -->
 ```{python histogram}
  ## Histogram met matplotlib
@@ -157,29 +152,6 @@ plt.show()
 <!-- ## TEKSTBLOK: Link3.py -->
 De verdeling heeft één top en geen uitbijters. De histogram laat echter ook zien dat de verdeling een langere staart aan de rechterkant heeft en dus enigszins afwijkt van de (symmetrische) normaalverdeling. Aangezien de verdeling niet symmetrisch is, kan de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-I-Python.html) niet gebruikt worden om een hypothese over de mediaan te toetsen.
 <!-- ## /TEKSTBLOK: Link3.py -->
-
-## Toetsen van normaliteit
-Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*. Toets normaliteit met de *Kolmogorov-Smirnov test* omdat er een groot aantal observaties in de steekproef zit. De *Shapiro-Wilk test* wordt voornamelijk gebruikt voor kleine steekproeven (*n* < 50).
-
-### Kolmogorov-Smirnov test
-
-De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is vereist als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn, wat meestal het geval is bij een steekproef. Als de p-waarde kleiner dan 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
-
-<!-- ## TEKSTBLOK: Lilliefors-test1.py -->
-De standaard interpretatie van een statistische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`. Gebruik bij deze toets het argument `pvalmethod = "table"` om een betrouwbare p-waarde te krijgen.
-<!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
-
-<!-- ## OPENBLOK: Library-nortest.py -->
-```{python normaliteit, warning=FALSE}
-## Kolmogorov-Smirnov test
-import statsmodels.stats.api
-print(statsmodels.stats.api.lilliefors(dfJaarlijks_inkomen['Inkomen'], pvalmethod = "table"))
-```
-<!-- ## /OPENBLOK: Library-nortest.py -->
-
-<!-- ## TEKSTBLOK: Link4.py -->
-De p-waarde van de *Kolmogorov-Smirnov test* is kleiner dan 0,001, dus de jaarinkomens zijn niet normaal verdeeld. Naast deze test, kan de *Shapiro-Wilk test* ook gebruikt worden om normaliteit te testen. Gebruik bij normaal verdeelde data de [one-sample t-toets](01-One-sample-t-toets-Python.html).
-<!-- ## /TEKSTBLOK: Link4.py -->
 
 # Tekentoets 
 
@@ -224,9 +196,6 @@ print(Proportie_boven_mediaan)
 <!-- ## TEKSTBLOK: Rapportage.py -->
 De *tekentoets* is uitgevoerd om te toetsen of het mediane inkomen van alumni van de opleiding Journalistiek veschilt van het modale inkomen in Nederland van €36.000. Het mediane inkomen van alumni verschilt significant van €36.000 (*p* < 0,0001). De geschatte mediaan van de alumni-inkomens is `r paste("€", Round_and_format_0decimals(py$vMed), sep="")`. Van de `r py$Aantal_observaties` alumni verdienen `r py$Boven_mediaan` alumni boven modaal. Deze resultaten duiden op een verschil tussen het mediane jaarinkomen van alumni van de opleiding Journalistiek en het mediane jaarinkomen van de gemiddelde Nederlander waarbij de inkomens van de alumni hoger lijken te liggen.
 <!-- ## /TEKSTBLOK: Rapportage.py -->
-
-
-
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}

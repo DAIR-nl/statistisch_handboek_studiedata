@@ -56,7 +56,7 @@ Gebruik de *MANOVA* om te toetsen of groepen gebaseerd op één of meer onafhank
 # Onderwijscasus
 <div id = "casus">
 
-Bij de masteropleiding Bioinformatics worden studenten met een bachelor Biologie, Wiskunde en Informatica toegelaten. De decaan van de faculteit wil deze toelatingseisen evalueren en onderzoeken of het curriculum aansluit bij de studenten van deze vooropleidingen. Daarom vergelijkt zij de studenten van de drie vooropleidingen wat betreft hun gemiddelde cijfers in periode 1, 2 en 3. Op basis hiervan kan zij de toelaatbaarheid voor de drie bacheloropleidingen heroverwegen of overwegen om een aantal verplicht te volgen bachelorvakken in te stellen als ingangseis.
+Bij de masteropleiding Bioinformatics worden studenten met een bachelor Biologie, Wiskunde en Informatica toegelaten. De decaan van de faculteit wil deze toelatingseisen evalueren en onderzoeken of het curriculum aansluit bij de studenten van deze vooropleidingen. Daarom vergelijkt zij de studenten van de drie vooropleidingen wat betreft hun gemiddelde cijfers in periode 1, 2 en 3. Op basis hiervan kan zij de toelaatbaarheid voor de drie bacheloropleidingen heroverwegen of overwegen om daarnaast een aantal specifiek te volgen bachelorvakken op te nemen in de ingangseisen.
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
@@ -76,11 +76,11 @@ Net zoals bij de *ANOVA* is de *MANOVA* uit te voeren voor één of meerdere ona
 
 # Procedure
 
-De procedure bij de *MANOVA* bestaat uit meerdere stappen. De eerste stap is de *MANOVA* zelf: hierbij wordt onderzocht of er een verschil tussen de groepen is voor minimaal één van de afhankelijke variabelen. Als er geen significant resultaat oplevert, dan is de conclusie dat er geen enkele afhankelijke variabele een verschil lijkt te zijn tussen de groepen. Als de *MANOVA* wel significant is, dan is de volgende stap om te onderzoeken voor welke afhankelijke variabele(n) er een verschil tussen de groepen is. 
+De procedure bij de *MANOVA* bestaat uit meerdere stappen. De eerste stap is de *MANOVA* zelf: hierbij wordt onderzocht of er een verschil tussen de groepen is voor minimaal één van de afhankelijke variabelen. Als er in deze stap geen significant resultaat is, dan is de conclusie dat er voor geen enkele afhankelijke variabele een verschil lijkt te zijn tussen de groepen. Als de *MANOVA* wel significant is, dan is de volgende stap om te onderzoeken voor welke afhankelijke variabele(n) er een verschil tussen de groepen is. 
 
-Voer hiervoor een *ANOVA* uit voor elke afhankelijke variabele apart. Omdat er meerdere toetsen tegelijkertijd worden uitgevoerd, is de overall type I fout hoger. Daarom is het nuttig om een correctie op de p-waarde van de *ANOVA's* uit te voeren. Aangezien dit niet in R gedaan kan worden, moet dit handmatig. Een simpel uit te voeren correctie is de Bonferroni correctie. Hierbij wordt het significantieniveau gedeeld door het aantal toetsen wat leidt tot een lager significantieniveau en dus een strengere toets. In de huidige casus wordt het significantieniveau van 0,05 gedeeld door drie (gemiddelde cijfers van periode 1, 2 en 3) wat leidt tot een nieuw significantieniveau van 0,017.[^20]
+Voer hiervoor een *ANOVA* uit voor elke afhankelijke variabele apart. Omdat er meerdere toetsen tegelijkertijd worden uitgevoerd, is de overall type I fout hoger. Daarom is het nuttig om een correctie op de p-waarde van de *ANOVA's* uit te voeren. Aangezien dit niet in de ANOVA-functie in R gedaan kan worden, moet dit handmatig. Een simpel uit te voeren correctie is de Bonferroni correctie. Hierbij wordt het significantieniveau gedeeld door het aantal toetsen wat leidt tot een lager significantieniveau en dus een strengere toets. In de huidige casus wordt het significantieniveau van 0,05 gedeeld door drie (gemiddelde cijfers van periode 1, 2 en 3) wat leidt tot een nieuw significantieniveau van 0,017.[^20]
 
-Zeer waarschijnlijk wordt er voor één of meerdere afhankelijke variabelen een significant verschil in gemiddelde van de groepen gevonden. De derde stap is in dat geval om voor deze significante *ANOVA's* post-hoc toetsen uit te voeren. Met post-hoc toetsen wordt bepaald welke specifieke groepen van elkaar verschillen voor die afhankelijke variabele. Hierbij worden er opnieuw meerdere toetsen tegelijkertijd uitgevoerd wat de overall type I fout verhoogt. Voer daarom weer een correctie voor meerdere toetsenuit. Bij de *one-way MANOVA* is de Tukey HSD correctie hiervoor nuttig; bij de *factoriële MANOVA* is de Games-Howell correctie nuttig. Er zijn ook andere opties voor een correctie op de p-waarden.
+Zeer waarschijnlijk wordt er voor één of meerdere afhankelijke variabelen een significant verschil in gemiddelde van de groepen gevonden. De derde stap is in dat geval om voor deze significante *ANOVA's* post-hoc toetsen uit te voeren. Met post-hoc toetsen wordt bepaald welke specifieke groepen van elkaar verschillen voor die afhankelijke variabele. Hierbij worden er opnieuw meerdere toetsen tegelijkertijd uitgevoerd wat de overall type I fout verhoogt. Voer daarom weer een correctie voor meerdere toetsenuit. Bij de *one-way ANOVA* is de Tukey HSD correctie hiervoor een gebruikelijke optie; bij de *factoriële ANOVA* is de Games-Howell correctie een gebruikelijke optie. Er zijn ook andere opties voor een correctie op de p-waarden.
 
 # Toetsstatistiek
 
@@ -351,7 +351,7 @@ table(Gemiddelde_cijfers_bioinformatics$Bacheloropleiding)
 
 Alle drie de groepen hebben meer dan 3 osbervaties, dus er is voldaan aan de assumptie van het aantal observaties per groep.
 
-## Normaliteit
+## Multivariate normaliteit
 
 De *MANOVA* vereist dat de verdeling van de afhankelijke variabele de normale verdeling benaderd in elke groep die gevormd wordt door de onafhankelijke variabelen. Onderzoek deze assumptie door per groep een histogram te maken van elke afhankelijke variabele.
 

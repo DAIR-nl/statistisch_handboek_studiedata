@@ -259,11 +259,11 @@ rm(Cijfers,
    Cijfers_P4)
 
 ## Sla de datasets op
-write.csv(Resultaten_Leisure_Management,
-          file = "05. Datasets/30_Resultaten_Leisure_Management.csv")
+#write.csv(Resultaten_Leisure_Management,
+#          file = "05. Datasets/30_Resultaten_Leisure_Management.csv")
 
-write.csv(Hoofdeffecten_Resultaten_Leisure_Management,
-          file = "05. Datasets/30_Hoofdeffecten_Resultaten_Leisure_Management.csv")
+#write.csv(Hoofdeffecten_Resultaten_Leisure_Management,
+#          file = "05. Datasets/30_Hoofdeffecten_Resultaten_Leisure_Management.csv")
 
 
 #vvv <- aov(Gemiddeld_cijfer ~ Geslacht + Vooropleiding + Geslacht:Vooropleiding,

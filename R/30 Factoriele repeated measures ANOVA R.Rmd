@@ -128,7 +128,7 @@ Controleer de assumptie van normaliteit voor elke groep met de volgende stappen:
 2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^7]<sup>, </sup>[^8]  
 
 <!-- ## TEKSTBLOK: Link1.R -->
-De *factoriële repeated measures ANOVA* is redelijk robuust ten opzichte van een schending van de assumptie van normaliteit. Als er kleine afwijkingen zijn, heeft dat relatief kleine gevolgen voor de validiteit van de toets. Bij grotere afwijkingen is het transformeren van de afhankelijke variabele een optie.[^2] Als dit niet werkt, dan is het een optie om [Friedman's ANOVA](09-Friedmans-ANOVA-I-R.html). Dit is een nonparametrische versie van de *repeated measures ANOVA* en hoeft niet te voldoen aan de assumptie van normaliteit en sphericiteit. De *factoriële repeated measures ANOVA* heeft echter een hoger onderscheidend vermogen als aan alle assumpties is voldaan, dus in dat geval heeft die toets de voorkeur.[^21]
+De *factoriële repeated measures ANOVA* is redelijk robuust ten opzichte van een schending van de assumptie van normaliteit. Als er kleine afwijkingen zijn, heeft dat relatief kleine gevolgen voor de validiteit van de toets. Bij grotere afwijkingen is het transformeren van de afhankelijke variabele een optie.[^2] Als dit niet werkt, dan is het een optie om [Friedman's ANOVA](09-Friedmans-ANOVA-I-R.html). Dit is een nonparametrische versie van de *repeated measures ANOVA* en hoeft niet te voldoen aan de assumptie van normaliteit en sphericiteit. De *factoriële repeated measures ANOVA* heeft echter een hoger onderscheidend vermogen als aan alle assumpties is voldaan, dus in dat geval heeft deze toets de voorkeur.[^21]
 <!-- ## /TEKSTBLOK: Link1.R -->
 
 ## Sphericiteit
@@ -162,7 +162,7 @@ $`Sphericity Corrections`
 
 De output bestaat uit drie delen die zijn aangegeven met een dollarteken ($). Het eerste deel (ANOVA) bestaat uit het resultaat van de *factoriële repeated measures ANOVA* als er aan de assumptie van sphericiteit is voldaan. Het tweede deel van de output (Mauchly's Test for Sphericity) bestaat uit het resultaat van *Mauchly's test* voor de variabele Periode en de interactieterm tussen variabelen Vaksoort en Periode (`Vaksoort:Periode`). Het derde deel (Sphericity Corrections) bestaat uit de resultaten gecorrigeerd voor het feit dat er niet is voldaan aan de assumptie van sphericiteit.
 
-Bij een p-waarde kleiner dan 0,05, toont *Mauchly's test* dat de assumptie van sphericiteit geschonden is. In de output is er wel voldaan aan de assumptie van sphericiteit voor de variabele Periode (*p* = 0,862), maar niet voor de interactieterm tussen Vaksoort en Periode (*p* = 0,006). Er is geen resultaat voor de variabele Vaksoort, omdat hier maar één verschilscore is en er dus per definitie aan de assumptie is voldaan. Voor de interactieterm moet dus een correctie gevonden worden.
+Bij een p-waarde kleiner dan 0,05, toont *Mauchly's test* dat de assumptie van sphericiteit geschonden is. In de output is er voldaan aan de assumptie van sphericiteit voor de variabele Periode (*p* = 0,862). Voor deze onafhankelijke variabele hoeft er dus geen correctie gebruikt te worden en kan de output bij `$ANOVA` bekeken worden om de significantie te bepalen. Er is geen resultaat van *Mauchly's test* voor de variabele Vaksoort, omdat hier maar één verschilscore is en er dus per definitie aan de assumptie is voldaan. Voor de interactieterm moet dus een correctie gevonden worden. *Mauchly's test* laat ten slotte zien dat er niet voldaan is aan de assumptie van sphericiteit voor de interactieterm tussen Vaksoort en Periode (*p* = 0,006). 
 
 Er zijn twee mogelijke correcties als er geen sphericiteit is: de Greenhouse-Geisser (GG) en Huynh-Feldt (HF) correctie. De Greenhouse-Geisser correctie staat bekend als conservatief, wat betekent dat de correctie een relatief lage kans op een type I fout heeft. In andere woorden, het zal niet vaak gebeuren dat deze correctie een significant effect aantoont als dat er in werkelijkheid niet is. De Huynh-Feldt correctie staat echter bekend als liberaal, wat betekent dat er een relatief hoge kans op een type I fout is. De toetsstatistiek en p-waarde van beide correcties zijn in de output te vinden onder Sphericity Corrections.
 <!-- ## TEKSTBLOK: Sphericiteit1.R -->
@@ -175,16 +175,16 @@ Houd de volgende richtlijnen aan bij het interpreteren van de *factoriële repea
     * Als deze p-waarde significant is, rapporteer dan de significante correctie.
     * Als deze p-waarde niet significant is, rapporteer dan de niet significante correctie.
 
-In de voorbeeldoutput is de p-waarde van de Greenhouse-Geisser correctie groter dan 0,05 en de p-waarde van de Huynh-Feldt correctie kleiner dan 0,05. Het gemiddelde van beide p-waarden is 0,0492056, wat betekent dat er een significant resultaat is. Rapporteer in dit geval dus de (significante) Huynh-Feldt correctie, i.e. *F* = 1,01, *p* = 0,049.  
+In de voorbeeldoutput is voor het interactie-effect tussen Vaksoort en Periode de p-waarde van de Greenhouse-Geisser correctie (`0.0553387`) groter dan 0,05 en de p-waarde van de Huynh-Feldt correctie (`0.0430724`) kleiner dan 0,05. Het gemiddelde van beide p-waarden is 0,0492056, wat betekent dat er een significant resultaat is. Rapporteer in dit geval dus de (significante) Huynh-Feldt correctie, i.e. *F* = 1,01, *p* = 0,049.  
 
 # Effectmaat
 De p-waarde geeft aan of het verschil tussen groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^11] Voor de *factoriële repeated measures ANOVA* wordt de effectmaat *partial eta squared* vaak gebruikt.[^4]
 
-De effectmaat *partial eta squared* (partial *η^2^*) berekent de proportie van de onverklaarde variantie (variantie die niet door de andere variabelen wordt verklaard) in de afhankelijke variabele die verklaard wordt door de onafhankelijke variabele.[^4] Voor de variabele Vooropleiding geeft de partial eta squared dus de proportie verklaarde variantie weer van de variantie die niet verklaard is door de variabele Geslacht en de interactie tussen de variabele Vooropleiding en Geslacht. De partial eta squared van alle termen van het model tellen dus niet per se op tot 1.[^4] Een indicatie om partial *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^5]
+De effectmaat *partial eta squared* (partial *η^2^*) berekent de proportie van de onverklaarde variantie (variantie die niet door de andere variabelen wordt verklaard) in de afhankelijke variabele die verklaard wordt door de onafhankelijke variabele.[^4] Voor de variabele Vooropleiding geeft de partial eta squared dus de proportie verklaarde variantie weer van de variantie die niet verklaard is door de variabele Geslacht en de interactie tussen de variabelen Vooropleiding en Geslacht. De partial eta squared van alle termen van het model tellen dus niet per se op tot 1.[^4] Een indicatie om partial *η^2^* te interpreteren is: rond 0,01 is een klein effect, rond 0,06 is een gemiddeld effect en rond 0,14 is een groot effect.[^5]
 
 # Post-hoc toetsen
 
-De eerste stap van de *factoriële repeated measures ANOVA* is het toetsen van hoofdeffecten en interactie-effecten. De volgende stap bestaat uit het bepalen welke groepen van elkaar verschillen, zowel bij *simple effects analyse* als bij het interpreteren van hoofdeffecten, en wordt gedaan met post-hoc toetsen. De post-hoc toetsen voeren meestal een correctie voor de p-waarden uit, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout. Er zijn ook andere opties voor een correctie op de p-waarden. 
+De eerste stap van de *factoriële repeated measures ANOVA* is het toetsen van hoofdeffecten en interactie-effecten. De volgende stap bestaat uit het bepalen welke groepen van elkaar verschillen, zowel bij *simple effects analyse* als bij het interpreteren van hoofdeffecten, en wordt gedaan met post-hoc toetsen. De post-hoc toetsen voeren meestal een correctie voor de p-waarden uit, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout. Een andere uitleg hiervan is dat het significantieniveau gedeeld wordt door het aantal toetsen wat leidt tot een lager significantieniveau en dus een strengere toets. Er zijn ook andere opties voor een correctie op de p-waarden.
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
@@ -394,7 +394,7 @@ Voer een *simple effects analyse* uit om het interactie-effect te interpreteren.
 ### Periode
 
 <!-- ## TEKSTBLOK: SimEff1.R -->
-Maak eerst een aparte dataset voor de groepen theorie en praktijk, voer vervolgens de post-hoc toets uit en bereken de gemiddelden per onderwijsperiode. Gebruik voor de post-hoc toetsen de functie `pairwise.t.test()` met als argumenten de afhankelijk variabele `Theorie_Resultaten_Leisure_Management$Cijfers`, de onafhankelijke variabele `Theorie_Resultaten_Leisure_Management$Periode` en de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`.
+Maak eerst een aparte dataset voor de groepen theorie en praktijk, voer vervolgens de post-hoc toets uit en bereken de gemiddelden per onderwijsperiode. Gebruik voor de post-hoc toetsen de functie `pairwise.t.test()` met als argumenten de afhankelijk variabele `Theorie_Resultaten_Leisure_Management$Cijfers`, de onafhankelijke variabele `Theorie_Resultaten_Leisure_Management$Periode`, het argument `paired = TRUE` omdat er een gepaarde vergelijking gemaakt wordt  en de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`.
 <!-- ## /TEKSTBLOK: SimEff1.R -->
 
 <!-- ## OPENBLOK: SimEff2.R -->
@@ -407,10 +407,12 @@ Praktijk_Resultaten_Leisure_Management <- Resultaten_Leisure_Management[Resultat
 # Voer de post-hoc toetsen uit
 pairwise.t.test(Theorie_Resultaten_Leisure_Management$Cijfers,
                 Theorie_Resultaten_Leisure_Management$Periode,
+                paired = TRUE,
                 p.adjust.method = "bonferroni")
 
 pairwise.t.test(Praktijk_Resultaten_Leisure_Management$Cijfers,
                 Praktijk_Resultaten_Leisure_Management$Periode,
+                paired = TRUE,
                 p.adjust.method = "bonferroni")
 
 # Bereken het gemiddelde per groep voor beide datasets
@@ -437,10 +439,12 @@ Praktijk_Resultaten_Leisure_Management <- Resultaten_Leisure_Management[Resultat
 # Voer de post-hoc toetsen uit
 Posthoc_Periode_Theorie <- pairwise.t.test(Theorie_Resultaten_Leisure_Management$Cijfers,
                 Theorie_Resultaten_Leisure_Management$Periode,
+                paired = TRUE,
                 p.adjust.method = "bonferroni")$p.value
 
 Posthoc_Periode_Praktijk <- pairwise.t.test(Praktijk_Resultaten_Leisure_Management$Cijfers,
                 Praktijk_Resultaten_Leisure_Management$Periode,
+                paired = TRUE,
                 p.adjust.method = "bonferroni")$p.value
 
 # Bereken het gemiddelde per groep voor beide datasets
@@ -471,18 +475,18 @@ Voor de theorievakken  zijn de volgende vergelijkingen getoetst[^18]:
 Voor de praktijkvakken zijn de volgende vergelijkingen getoetst[^18]:
 
 * Onderwijsperiode 1 versus 2: het gemiddelde cijfer in periode 1 (`r Round_and_format(Mean_P[1])`) en periode 2 (`r Round_and_format(Mean_P[2])`) zijn niet significant verschillend (*p* = 1,00)
-* Onderwijsperiode 1 versus 3: het gemiddelde cijfer in periode 1 (`r Round_and_format(Mean_P[1])`) en periode 3 (`r Round_and_format(Mean_P[3])`) zijn significant verschillend (*p* = `r Round_and_format(Posthoc_Periode_Praktijk[2,1])`)
-* Onderwijsperiode 1 versus 4: het gemiddelde cijfer in periode 1 (`r Round_and_format(Mean_P[1])`) en periode 4 (`r Round_and_format(Mean_P[4])`) zijn significant verschillend (*p* = 1,00)
-* Onderwijsperiode 2 versus 3: het gemiddelde cijfer in periode 2 (`r Round_and_format(Mean_P[2])`) en periode 3 (`r Round_and_format(Mean_P[3])`) zijn significant verschillend (*p* = `r Round_and_format(Posthoc_Periode_Praktijk[2,2])`)
-* Onderwijsperiode 2 versus 4: het gemiddelde cijfer in periode 2 (`r Round_and_format(Mean_P[2])`) en periode 4 (`r Round_and_format(Mean_P[4])`) zijn significant verschillend (*p* = 1,00)
-* Onderwijsperiode 3 versus 4: het gemiddelde cijfer in periode 3 (`r Round_and_format(Mean_P[3])`) en periode 4 (`r Round_and_format(Mean_P[4])`) zijn niet significant verschillend (*p* = `r Round_and_format(Posthoc_Periode_Praktijk[3,3])`)
+* Onderwijsperiode 1 versus 3: het gemiddelde cijfer in periode 1 (`r Round_and_format(Mean_P[1])`) en periode 3 (`r Round_and_format(Mean_P[3])`) zijn niet significant verschillend (*p* = `r Round_and_format(Posthoc_Periode_Praktijk[2,1],3)`)
+* Onderwijsperiode 1 versus 4: het gemiddelde cijfer in periode 1 (`r Round_and_format(Mean_P[1])`) en periode 4 (`r Round_and_format(Mean_P[4])`) zijn niet significant verschillend (*p* = 1,00)
+* Onderwijsperiode 2 versus 3: het gemiddelde cijfer in periode 2 (`r Round_and_format(Mean_P[2])`) en periode 3 (`r Round_and_format(Mean_P[3])`) zijn niet significant verschillend (*p* = `r Round_and_format(Posthoc_Periode_Praktijk[2,2],3)`)
+* Onderwijsperiode 2 versus 4: het gemiddelde cijfer in periode 2 (`r Round_and_format(Mean_P[2])`) en periode 4 (`r Round_and_format(Mean_P[4])`) zijn niet significant verschillend (*p* = 1,00)
+* Onderwijsperiode 3 versus 4: het gemiddelde cijfer in periode 3 (`r Round_and_format(Mean_P[3])`) en periode 4 (`r Round_and_format(Mean_P[4])`) zijn niet significant verschillend (*p* = `r Round_and_format(Posthoc_Periode_Praktijk[3,3],3)`)
 
 <!-- ## /TEKSTBLOK: SimEff4.R -->
 
 ### Vaksoort
 
 <!-- ## TEKSTBLOK: SimEff5.R -->
-Maak eerst aparte datasets voor periode 1, 2, 3 en 4 en voer vervolgens de post-hoc toets uit. Gebruik voor de post-hoc toetsen de functie `pairwise.t.test()` met als argumenten de afhankelijk variabele `P1_Resultaten_Leisure_Management$Cijfers`, de onafhankelijke variabele `P1_Resultaten_Leisure_Management$Vaksoort` en de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`.
+Maak eerst aparte datasets voor periode 1, 2, 3 en 4 en voer vervolgens de post-hoc toets uit. Gebruik voor de post-hoc toetsen de functie `pairwise.t.test()` met als argumenten de afhankelijk variabele `P1_Resultaten_Leisure_Management$Cijfers`, de onafhankelijke variabele `P1_Resultaten_Leisure_Management$Vaksoort`, het argument `paired = TRUE` omdat er een gepaarde vergelijking gemaakt wordt  en de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`.
 <!-- ## /TEKSTBLOK: SimEff5.R -->
 
 <!-- ## OPENBLOK: SimEff6.R -->
@@ -500,18 +504,22 @@ P4_Resultaten_Leisure_Management <- Resultaten_Leisure_Management[Resultaten_Lei
 # voer de post-hoc toetsen uit
 pairwise.t.test(P1_Resultaten_Leisure_Management$Cijfers,
                 P1_Resultaten_Leisure_Management$Vaksoort,
+                paired = TRUE,
                 p.adjust.method = "bonferroni")
 
 pairwise.t.test(P2_Resultaten_Leisure_Management$Cijfers,
                 P2_Resultaten_Leisure_Management$Vaksoort,
+                paired = TRUE,
                 p.adjust.method = "bonferroni")
 
 pairwise.t.test(P3_Resultaten_Leisure_Management$Cijfers,
                 P3_Resultaten_Leisure_Management$Vaksoort,
+                paired = TRUE,
                 p.adjust.method = "bonferroni")
 
 pairwise.t.test(P4_Resultaten_Leisure_Management$Cijfers,
                 P4_Resultaten_Leisure_Management$Vaksoort,
+                paired = TRUE,
                 p.adjust.method = "bonferroni")
 
 # Bereken het gemiddelde per groep
@@ -538,18 +546,22 @@ P4_Resultaten_Leisure_Management <- Resultaten_Leisure_Management[Resultaten_Lei
 # voer de post-hoc toetsen uit
 posthoc_P1 <- pairwise.t.test(P1_Resultaten_Leisure_Management$Cijfers,
                 P1_Resultaten_Leisure_Management$Vaksoort,
+                paired = TRUE,
                 p.adjust.method = "bonferroni")$p.value
 
 posthoc_P2 <- pairwise.t.test(P2_Resultaten_Leisure_Management$Cijfers,
                 P2_Resultaten_Leisure_Management$Vaksoort,
+                paired = TRUE,
                 p.adjust.method = "bonferroni")$p.value
 
 posthoc_P3 <- pairwise.t.test(P3_Resultaten_Leisure_Management$Cijfers,
                 P3_Resultaten_Leisure_Management$Vaksoort,
+                paired = TRUE,
                 p.adjust.method = "bonferroni")$p.value
 
 posthoc_P4 <- pairwise.t.test(P4_Resultaten_Leisure_Management$Cijfers,
                 P4_Resultaten_Leisure_Management$Vaksoort,
+                paired = TRUE,
                 p.adjust.method = "bonferroni")$p.value
 
 # Bereken het gemiddelde per groep voor beide datasets
@@ -564,8 +576,8 @@ Mean_Vaksoort <- with(Resultaten_Leisure_Management,
 <!-- ## TEKSTBLOK: SimEff8.R -->
 * Onderwijsperiode 1: het gemiddelde cijfer voor het theorievak (`r Round_and_format(Mean_Vaksoort[1,2])`) en voor het praktijkvak (`r Round_and_format(Mean_Vaksoort[1,1])`) zijn significant verschillend (*p* < 0,0001)
 * Onderwijsperiode 2: het gemiddelde cijfer voor het theorievak (`r Round_and_format(Mean_Vaksoort[2,2])`) en voor het praktijkvak (`r Round_and_format(Mean_Vaksoort[2,1])`) zijn significant verschillend (*p* < 0,0001)
-* Onderwijsperiode 3: het gemiddelde cijfer voor het theorievak (`r Round_and_format(Mean_Vaksoort[3,2])`) en voor het praktijkvak (`r Round_and_format(Mean_Vaksoort[3,1])`) zijn significant verschillend (*p* = `r Round_and_format(posthoc_P3)`)
-* Onderwijsperiode 4: het gemiddelde cijfer voor het theorievak (`r Round_and_format(Mean_Vaksoort[4,2])`) en voor het praktijkvak (`r Round_and_format(Mean_Vaksoort[4,1])`) zijn significant verschillend (*p* = `r Round_and_format(posthoc_P4)`)
+* Onderwijsperiode 3: het gemiddelde cijfer voor het theorievak (`r Round_and_format(Mean_Vaksoort[3,2])`) en voor het praktijkvak (`r Round_and_format(Mean_Vaksoort[3,1])`) zijn niet significant verschillend (*p* = `r Round_and_format(posthoc_P3,3)`)
+* Onderwijsperiode 4: het gemiddelde cijfer voor het theorievak (`r Round_and_format(Mean_Vaksoort[4,2])`) en voor het praktijkvak (`r Round_and_format(Mean_Vaksoort[4,1])`) zijn niet significant verschillend (*p* = `r Round_and_format(posthoc_P4,3)`)
 
 <!-- ## /TEKSTBLOK: SimEff8.R -->
 
@@ -608,7 +620,7 @@ vp_H <- Round_and_format(FRM_H$p[3])
 <!-- ## TEKSTBLOK: PHtest4.R -->
 Er is geen significant interactie-effect van Vaksoort en Periode op Cijfers, *F* (`r vDF1_H`,`r vDF2_H`) = `r vF_waarde_H`, *p* = `vp_H`, *η^2^* = `r vEsq_H`.[^18] De hoofdeffecten van Vaksoort (*p* < 0,0001) en Periode (*p* < 0,0001) zijn wel significant.[^18] Voer daarom post-hoc toetsen uit voor beide variabelen. 
 
-Gebruik voor de post-hoc toetsen de functie `pairwise.t.test()` met als argumenten de afhankelijk variabele `Hoofdeffecten_Resultaten_Leisure_Management$Cijfers`, de onafhankelijke variabele `Hoofdeffecten_Resultaten_Leisure_Management$Vaksoort` of `Hoofdeffecten_Resultaten_Leisure_Management$Periode` en de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`.
+Gebruik voor de post-hoc toetsen de functie `pairwise.t.test()` met als argumenten de afhankelijk variabele `Hoofdeffecten_Resultaten_Leisure_Management$Cijfers`, de onafhankelijke variabele `Hoofdeffecten_Resultaten_Leisure_Management$Vaksoort` of `Hoofdeffecten_Resultaten_Leisure_Management$Periode`, het argument `paired = TRUE` omdat er een gepaarde vergelijking gemaakt wordt en de gebruikte methode om te corrigeren voor meerdere toetsen `p.adjust.method = "bonferroni"`.
 
 <!-- ## /TEKSTBLOK: PHtest4.R -->
 
@@ -675,10 +687,10 @@ De verschillen voor de groepen van de onafhankelijke variabele Vaksoort zijn[^18
 De verschillen voor de groepen van de onafhankelijke variabele Periode zijn[^18]:
 
 * Onderwijsperiode 1 versus 2: het gemiddelde cijfer in periode 1 (`r Round_and_format(H_mean_Periode[1])`) en periode 2 (`r Round_and_format(H_mean_Periode[2])`) zijn niet significant verschillend (*p* = 1,00)
-* Onderwijsperiode 1 versus 3: het gemiddelde cijfer in periode 1 (`r Round_and_format(H_mean_Periode[1])`) en periode 3 (`r Round_and_format(H_mean_Periode[3])`) zijn niet significant verschillend (*p* < 0,0001)
-* Onderwijsperiode 1 versus 4: het gemiddelde cijfer in periode 1 (`r Round_and_format(H_mean_Periode[1])`) en periode 4 (`r Round_and_format(H_mean_Periode[4])`) zijn niet significant verschillend (*p* < 0,0001)
-* Onderwijsperiode 2 versus 3: het gemiddelde cijfer in periode 2 (`r Round_and_format(H_mean_Periode[2])`) en periode 3 (`r Round_and_format(H_mean_Periode[3])`) zijn niet significant verschillend (*p* < 0,0001)
-* Onderwijsperiode 2 versus 4: het gemiddelde cijfer in periode 2 (`r Round_and_format(H_mean_Periode[2])`) en periode 4 (`r Round_and_format(H_mean_Periode[4])`) zijn niet significant verschillend (*p* < 0,0001)
+* Onderwijsperiode 1 versus 3: het gemiddelde cijfer in periode 1 (`r Round_and_format(H_mean_Periode[1])`) en periode 3 (`r Round_and_format(H_mean_Periode[3])`) zijn significant verschillend (*p* < 0,0001)
+* Onderwijsperiode 1 versus 4: het gemiddelde cijfer in periode 1 (`r Round_and_format(H_mean_Periode[1])`) en periode 4 (`r Round_and_format(H_mean_Periode[4])`) zijn significant verschillend (*p* < 0,0001)
+* Onderwijsperiode 2 versus 3: het gemiddelde cijfer in periode 2 (`r Round_and_format(H_mean_Periode[2])`) en periode 3 (`r Round_and_format(H_mean_Periode[3])`) zijn significant verschillend (*p* < 0,0001)
+* Onderwijsperiode 2 versus 4: het gemiddelde cijfer in periode 2 (`r Round_and_format(H_mean_Periode[2])`) en periode 4 (`r Round_and_format(H_mean_Periode[4])`) zijn significant verschillend (*p* < 0,0001)
 * Onderwijsperiode 3 versus 4: het gemiddelde cijfer in periode 3 (`r Round_and_format(H_mean_Periode[3])`) en periode 4 (`r Round_and_format(H_mean_Periode[4])`) zijn niet significant verschillend (*p* = 1,00)
 
 <!-- ## /TEKSTBLOK: PHtest7.R -->

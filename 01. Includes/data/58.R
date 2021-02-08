@@ -35,7 +35,7 @@
 ## volgen bachelorvakken in te stellen als ingangseis.
 
 # Laad packages in
-#library(MASS)
+library(MASS)
 
 # seed
 set.seed(1234, 
@@ -113,6 +113,6 @@ rm(Cijfers,
    Bacheloropleiding)
 
 ## Sla de datasets op
-write.csv(Gemiddelde_cijfers_bioinformatics,
-          file = "05. Datasets/58_Gemiddelde_cijfers_bioinformatics.csv")
+#write.csv(Gemiddelde_cijfers_bioinformatics,
+#          file = "05. Datasets/58_Gemiddelde_cijfers_bioinformatics.csv")
 

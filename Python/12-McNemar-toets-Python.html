@@ -1949,16 +1949,16 @@ import numpy as np
 import pandas as pd
 
 ## Eerste 5 observaties
-print(dfFOS_studenten.head(5))
-##    Studentnummer FOS     Maand
+print(dfFOS_studenten.head(5))</code></pre>
+<pre><code>##    Studentnummer FOS     Maand
 ## 0        4000039  ja  december
 ## 1        4000039  ja      juni
 ## 2        4000582  ja  december
 ## 3        4000582  ja      juni
 ## 4        4000720  ja  december</code></pre>
 <pre class="python"><code>## Laatste 5 observaties
-print(dfFOS_studenten.tail(5))
-##       Studentnummer  FOS     Maand
+print(dfFOS_studenten.tail(5))</code></pre>
+<pre><code>##       Studentnummer  FOS     Maand
 ## 5681        4999145  nee      juni
 ## 5682        4999933   ja  december
 ## 5683        4999933   ja      juni
@@ -2032,6 +2032,9 @@ def McNemar_toets(Frequentiematrix, p_waarde):
   n12 = Frequentiematrix[0,1]
   n21 = Frequentiematrix[1,0]
   
+  ## Bereken de som van de niet-diagonale elementen
+  n = n12 + n21
+  
   ## Bepaal het minimum van beide niet-diagonale elementen 
   n_min = min(n12,n21)
   
@@ -2057,7 +2060,7 @@ p_waarde = McNemar_toets(FOS_studenten_frequentiematrix, &#39;mid&#39;)
 ## Print de p-waarde
 print(p_waarde)
     </code></pre>
-<pre><code>## 9.313225746154777e-10</code></pre>
+<pre><code>## 6.46234853557052e-27</code></pre>
 <!-- ## /OPENBLOK: McNemar-toets2.py -->
 <p>Bereken het verschil tussen de proporties studenten dat een beroep doet op de FOS in december en juni. Op deze manier kan een (eventueel) significant resultaat geïnterpreteerd worden.</p>
 <!-- ## OPENBLOK: McNemar-toets5.py -->
@@ -2091,7 +2094,7 @@ print(Verschil_proporties)</code></pre>
 <div id="rapportage" class="section level2">
 <h2><span class="header-section-number">7.2</span> Rapportage</h2>
 <!-- ## TEKSTBLOK: Rapportage.py -->
-<p>De <em>McNemar toets</em> is uitgevoerd om uit te vinden of er een verschil is in de frequenties van het aantal studenten dat wel of geen beroep doet op de FOS voor en na de interventie van de decaan. De interventie heeft als doel het aantal studenten met een functiebeperking dat een beroep doet op de FOS te verhogen. De resultaten laten een significant verschil zien tussen de frequenties voor en na de interventie (<em>p</em> &lt;0,0001), wat betekent dat de nulhypothese verworpen kan worden. Het verschil in de proportie studenten dat een beroep doet op de FOS is 0,03 . Het verschil in proporties en de kruistabel (Tabel 2) illustreren dat het percentage studenten dat een beroep doet op de FOS is toegenomen na de interventie.</p>
+<p>De <em>McNemar toets</em> is uitgevoerd om uit te vinden of er een verschil is in de frequenties van het aantal studenten dat wel of geen beroep doet op de FOS voor en na de interventie van de decaan. De interventie heeft als doel het aantal studenten met een functiebeperking dat een beroep doet op de FOS te verhogen. De resultaten laten een significant verschil zien tussen de frequenties voor en na de interventie (<em>p</em> &lt; 0,0001), wat betekent dat de nulhypothese verworpen kan worden. Het verschil in de proportie studenten dat een beroep doet op de FOS is 0,03 . Het verschil in proporties en de kruistabel (Tabel 2) illustreren dat het percentage studenten dat een beroep doet op de FOS is toegenomen na de interventie.</p>
 <table>
 <thead>
 <tr class="header">
@@ -2118,9 +2121,9 @@ print(Verschil_proporties)</code></pre>
 <p>
 <div id = "footerborder"><hr/></div>
 <div id = "footer">
-Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 3.6.3; Python code is uitgevoerd in Python 3.7.
+Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 3.6.3; Python code is uitgevoerd in Python 3.7. De gesimuleerde datasets zijn <a href="../Datasets_zipbestand" download>hier</a> te downloaden.
 <br/><br/>
-&copy; 2021 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:03-02-2021
+&copy; 2021 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:08-02-2021
 </div> <!-- ## /CLOSEDBLOK: Footer.R --></p>
 <!-- ## TEKSTBLOK: Extra_bron.py -->
 <!-- ## /TEKSTBLOK: Extra_bron.py -->

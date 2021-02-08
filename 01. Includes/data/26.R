@@ -50,5 +50,5 @@ rm(Mogelijkheden,
    p_2014)
 
 ## Sla de datasets op
-write.csv(Jaarlijks_inkomen,
-          file = "05. Datasets/26_Jaarlijks_inkomen.csv")
+#write.csv(Jaarlijks_inkomen,
+#          file = "05. Datasets/26_Jaarlijks_inkomen.csv")

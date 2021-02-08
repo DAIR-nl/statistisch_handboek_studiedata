@@ -92,6 +92,6 @@ rm(Beoordeling,
    Studentnummer)
 
 ## Sla de datasets op
-write.csv(Beoordelingen_speech_schrijven,
-          file = "05. Datasets/22_Beoordelingen_speech_schrijven.csv")
+#write.csv(Beoordelingen_speech_schrijven,
+#          file = "05. Datasets/22_Beoordelingen_speech_schrijven.csv")
 

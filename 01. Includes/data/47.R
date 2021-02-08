@@ -127,5 +127,5 @@ rm(mChoices,
    Vervolg)
 
 ## Sla de datasets op
-write.csv(Fysiotherapie_Vervolg,
-          file = "05. Datasets/47_Fysiotherapie_Vervolg.csv")
+#write.csv(Fysiotherapie_Vervolg,
+#          file = "05. Datasets/47_Fysiotherapie_Vervolg.csv")

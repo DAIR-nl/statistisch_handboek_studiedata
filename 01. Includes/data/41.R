@@ -130,5 +130,5 @@ rm(Studentnummer,
    )
 
 ## Sla de datasets op
-write.csv(Uitval_Elektrotechniek,
-          file = "05. Datasets/41_Uitval_Elektrotechniek.csv")
+#write.csv(Uitval_Elektrotechniek,
+#          file = "05. Datasets/41_Uitval_Elektrotechniek.csv")

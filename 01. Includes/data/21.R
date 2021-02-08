@@ -73,9 +73,9 @@ rm(
 )
 
 ## Sla de datasets op
-write.csv(BSA_Maritieme_techniek,
-          file = "05. Datasets/21_BSA_Maritieme_techniek.csv")
+#write.csv(BSA_Maritieme_techniek,
+#          file = "05. Datasets/21_BSA_Maritieme_techniek.csv")
 
-write.csv(BSA_Maritieme_techniek_steekproef,
-          file = "05. Datasets/21_BSA_Maritieme_techniek_steekproef.csv")
+#write.csv(BSA_Maritieme_techniek_steekproef,
+#          file = "05. Datasets/21_BSA_Maritieme_techniek_steekproef.csv")
 

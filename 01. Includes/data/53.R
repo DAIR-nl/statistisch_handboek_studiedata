@@ -139,8 +139,8 @@ rm(mChoices,
    Gemiddeld_cijfer)
 
 ## Sla de datasets op
-write.csv(Beoordelingen_eindproject,
-          file = "05. Datasets/53_Beoordelingen_eindproject.csv")
+#write.csv(Beoordelingen_eindproject,
+#          file = "05. Datasets/53_Beoordelingen_eindproject.csv")
 
 
 #library(VGAM)

@@ -32,7 +32,10 @@
 
 ## Maak een vector met de nummers van de data simulatiescripts waarvan datasets
 ## opgeslagen moeten worden
-Bestanden <- c("01","02","03","04","05")
+Bestanden <- c("01","02","03","04","05","06","07","08","09","10",
+               "11","12","13","15","16","18","20",
+               "21","22","23","24","25","26","28","29","30",
+               "31","32","41","47","53","58")
 
 ## Run over alle data opgegeven data simulatiescripts
 for (i in 1:length(Bestanden)) {

@@ -109,5 +109,5 @@ rm(Studentnummer,
    )
 
 ## Sla de datasets op
-write.csv(Studenten_Methoden_Statistiek,
-          file = "05. Datasets/28_Studenten_Methoden_Statistiek.csv")
+#write.csv(Studenten_Methoden_Statistiek,
+#          file = "05. Datasets/28_Studenten_Methoden_Statistiek.csv")

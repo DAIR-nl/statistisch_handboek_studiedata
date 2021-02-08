@@ -270,11 +270,11 @@ rm(Cijfer,
    Cijfers_P_TH)
 
 ## Sla de datasets op
-write.csv(Resultaten_SCM,
-          file = "05. Datasets/32_Resultaten_SCM.csv")
+#write.csv(Resultaten_SCM,
+#          file = "05. Datasets/32_Resultaten_SCM.csv")
 
-write.csv(Hoofdeffecten_Resultaten_SCM,
-          file = "05. Datasets/32_Hoofdeffecten_Resultaten_SCM.csv")
+#write.csv(Hoofdeffecten_Resultaten_SCM,
+#          file = "05. Datasets/32_Hoofdeffecten_Resultaten_SCM.csv")
 
 
 #vvv <- aov(Gemiddeld_cijfer ~ Geslacht + Vooropleiding + Geslacht:Vooropleiding,

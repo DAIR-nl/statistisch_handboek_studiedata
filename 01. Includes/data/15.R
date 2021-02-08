@@ -93,8 +93,8 @@ rm(Studentnummers_opties, Studentnummer_uniek, Studentnummer,
    Herkansingen_periode_3, Herkansingen_periode_4, Herkansingen)
 
 ## Sla de datasets op
-write.csv(Herkansingen_kunstmatige_intelligentie,
-          file = "05. Datasets/15_Herkansingen_kunstmatige_intelligentie.csv")
+#write.csv(Herkansingen_kunstmatige_intelligentie,
+#          file = "05. Datasets/15_Herkansingen_kunstmatige_intelligentie.csv")
 
 #### Toets
 

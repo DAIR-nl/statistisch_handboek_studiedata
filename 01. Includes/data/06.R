@@ -64,5 +64,5 @@ rm(
 )
 
 ## Sla de datasets op
-write.csv(Jaarlijks_inkomen,
-          file = "05. Datasets/06_Jaarlijks_inkomen.csv")
+#write.csv(Jaarlijks_inkomen,
+#          file = "05. Datasets/06_Jaarlijks_inkomen.csv")

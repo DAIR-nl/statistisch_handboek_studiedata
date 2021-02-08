@@ -219,11 +219,11 @@ rm(Mannen_hbo,
    Studentnummer)
 
 ## Sla de datasets op
-write.csv(Gemiddelde_cijfers_psychologie,
-          file = "05. Datasets/29_Gemiddelde_cijfers_psychologie.csv")
+#write.csv(Gemiddelde_cijfers_psychologie,
+#          file = "05. Datasets/29_Gemiddelde_cijfers_psychologie.csv")
 
-write.csv(Hoofdeffecten_Gemiddelde_cijfers_psychologie,
-          file = "05. Datasets/29_Hoofdeffecten_Gemiddelde_cijfers_psychologie.csv")
+#write.csv(Hoofdeffecten_Gemiddelde_cijfers_psychologie,
+#          file = "05. Datasets/29_Hoofdeffecten_Gemiddelde_cijfers_psychologie.csv")
 
 
 #vvv <- aov(Gemiddeld_cijfer ~ Geslacht + Vooropleiding + Geslacht:Vooropleiding,

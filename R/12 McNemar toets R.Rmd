@@ -213,7 +213,7 @@ Verschil_proporties
 ## Rapportage
 
 <!-- ## TEKSTBLOK: Rapportage.R -->
-De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in de frequenties van het aantal studenten dat wel of geen beroep doet op de FOS voor en na de interventie van de decaan. De interventie heeft als doel het aantal studenten met een functiebeperking dat een beroep doet op de FOS te verhogen. De resultaten laten een significant verschil zien tussen de frequenties voor en na de interventie (*p* <0,0001), wat betekent dat de nulhypothese verworpen kan worden. Het verschil in de proportie studenten dat een beroep doet op de FOS is `r Round_and_format(Verschil_proporties)` . Het verschil in proporties en de kruistabel (Tabel 2) illustreren dat het percentage studenten dat een beroep doet op de FOS is toegenomen na de interventie. 
+De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in de frequenties van het aantal studenten dat wel of geen beroep doet op de FOS voor en na de interventie van de decaan. De interventie heeft als doel het aantal studenten met een functiebeperking dat een beroep doet op de FOS te verhogen. De resultaten laten een significant verschil zien tussen de frequenties voor en na de interventie (*p* < 0,0001), wat betekent dat de nulhypothese verworpen kan worden. Het verschil in de proportie studenten dat een beroep doet op de FOS is `r Round_and_format(Verschil_proporties)` . Het verschil in proporties en de kruistabel (Tabel 2) illustreren dat het percentage studenten dat een beroep doet op de FOS is toegenomen na de interventie. 
 
 |                      | December | Juni |
 | -------------------- | -------------| ------------| 

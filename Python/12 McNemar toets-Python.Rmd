@@ -121,7 +121,7 @@ Er is een dataset ingeladen genaamd `dfFOS_studenten`. In deze dataset is voor e
 <!-- ## /TEKSTBLOK: Data-bekijken1.py -->
 
 <!-- ## OPENBLOK: Data-bekijken2.py -->
-```{python data bekijken-1, collapse = TRUE}
+```{python data bekijken-1}
 ## Importeer nuttige packages
 import numpy as np
 import pandas as pd
@@ -130,7 +130,7 @@ import pandas as pd
 print(dfFOS_studenten.head(5))
 ```
 
-```{python data bekijken-2, collapse = TRUE}
+```{python data bekijken-2}
 ## Laatste 5 observaties
 print(dfFOS_studenten.tail(5))
 ```
@@ -212,6 +212,9 @@ def McNemar_toets(Frequentiematrix, p_waarde):
   n12 = Frequentiematrix[0,1]
   n21 = Frequentiematrix[1,0]
   
+  ## Bereken de som van de niet-diagonale elementen
+  n = n12 + n21
+  
   ## Bepaal het minimum van beide niet-diagonale elementen 
   n_min = min(n12,n21)
   
@@ -270,7 +273,7 @@ print(Verschil_proporties)
 ## Rapportage
 
 <!-- ## TEKSTBLOK: Rapportage.py -->
-De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in de frequenties van het aantal studenten dat wel of geen beroep doet op de FOS voor en na de interventie van de decaan. De interventie heeft als doel het aantal studenten met een functiebeperking dat een beroep doet op de FOS te verhogen. De resultaten laten een significant verschil zien tussen de frequenties voor en na de interventie (*p* <0,0001), wat betekent dat de nulhypothese verworpen kan worden. Het verschil in de proportie studenten dat een beroep doet op de FOS is `r Round_and_format(py$Verschil_proporties)` . Het verschil in proporties en de kruistabel (Tabel 2) illustreren dat het percentage studenten dat een beroep doet op de FOS is toegenomen na de interventie. 
+De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in de frequenties van het aantal studenten dat wel of geen beroep doet op de FOS voor en na de interventie van de decaan. De interventie heeft als doel het aantal studenten met een functiebeperking dat een beroep doet op de FOS te verhogen. De resultaten laten een significant verschil zien tussen de frequenties voor en na de interventie (*p* < 0,0001), wat betekent dat de nulhypothese verworpen kan worden. Het verschil in de proportie studenten dat een beroep doet op de FOS is `r Round_and_format(py$Verschil_proporties)` . Het verschil in proporties en de kruistabel (Tabel 2) illustreren dat het percentage studenten dat een beroep doet op de FOS is toegenomen na de interventie. 
 
 |                      | December | Juni |
 | -------------------- | -------------| ------------| 

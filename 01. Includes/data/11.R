@@ -52,9 +52,9 @@ rm(
 )
 
 ## Sla de datasets op
-write.csv(Instroom_2018_totaal,
-          file = "05. Datasets/11_Instroom_2018_totaal.csv")
+#write.csv(Instroom_2018_totaal,
+#          file = "05. Datasets/11_Instroom_2018_totaal.csv")
 
-write.csv(Instroom_2018_totaal_steekproef,
-          file = "05. Datasets/11_Instroom_2018_totaal_steekproef.csv")
+#write.csv(Instroom_2018_totaal_steekproef,
+#          file = "05. Datasets/11_Instroom_2018_totaal_steekproef.csv")
 

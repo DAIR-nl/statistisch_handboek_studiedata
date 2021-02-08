@@ -158,4 +158,3 @@ rm(N, Studentnummers_opties, Studentnummer_uniek, Studentnummer, Eetgelegenheid,
 # https://www.sheffield.ac.uk/polopoly_fs/1.714575!/file/stcp-marshall-FriedmanS.pdf
 # https://rdrr.io/cran/rstatix/man/friedman_effsize.html
 # https://www.sheffield.ac.uk/mash/statistics/nonparametric
-?write.csv

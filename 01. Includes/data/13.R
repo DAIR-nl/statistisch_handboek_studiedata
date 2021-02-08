@@ -109,15 +109,22 @@ Fisher_Tabel_uitval_functiebeperking <- table(Fisher_Uitval_studenten_functiebep
                                        Fisher_Uitval_studenten_functiebeperking_leenstelsel$Uitval)
 
 
-rm(Periode, Studentnummer, Studentnummers_opties, Uitval, Uitval_na_leenstelsel, 
-   Uitval_voor_leenstelsel)
+rm(Periode, 
+   Studentnummer, 
+   Studentnummers_opties, 
+   Uitval, 
+   Uitval_na_leenstelsel, 
+   Uitval_voor_leenstelsel#,
+   #Fisher_Tabel_uitval_functiebeperking,
+   #Tabel_uitval_functiebeperking
+   )
 
 ## Sla de datasets op
-write.csv(Uitval_studenten_functiebeperking_leenstelsel,
-          file = "05. Datasets/13_Uitval_studenten_functiebeperking_leenstelsel.csv")
+#write.csv(Uitval_studenten_functiebeperking_leenstelsel,
+#          file = "05. Datasets/13_Uitval_studenten_functiebeperking_leenstelsel.csv")
 
-write.csv(Fisher_Uitval_studenten_functiebeperking_leenstelsel,
-          file = "05. Datasets/13_Fisher_Uitval_studenten_functiebeperking_leenstelsel.csv")
+#write.csv(Fisher_Uitval_studenten_functiebeperking_leenstelsel,
+#          file = "05. Datasets/13_Fisher_Uitval_studenten_functiebeperking_leenstelsel.csv")
 
 #Geen_leenstelsel <- c(375, 496)
 #Leenstelsel <- c(369, 394)

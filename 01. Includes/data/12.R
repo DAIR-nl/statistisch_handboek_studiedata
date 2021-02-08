@@ -77,5 +77,5 @@ Studentnummer
 )
 
 ## Sla de datasets op
-write.csv(FOS_studenten,
-          file = "05. Datasets/12_FOS_studenten.csv")
+#write.csv(FOS_studenten,
+#          file = "05. Datasets/12_FOS_studenten.csv")

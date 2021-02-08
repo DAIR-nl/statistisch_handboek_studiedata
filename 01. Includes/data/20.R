@@ -86,8 +86,8 @@ rm(Studentnummers_opties, Studentnummer_uniek, Studentnummer, Onderwijsperiode,
     Indexen_P5, Specialisatie)
 
 ## Sla de datasets op
-write.csv(Data_Specialisatie,
-          file = "05. Datasets/20_Data_Specialisatie.csv")
+#write.csv(Data_Specialisatie,
+#          file = "05. Datasets/20_Data_Specialisatie.csv")
 
 
 

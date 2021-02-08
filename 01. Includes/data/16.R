@@ -155,5 +155,7 @@ BSA,
 Tabel_BSA_antropologie, 
 Pos, 
 Neg, 
-Fisher_Tabel_BSA_antropologie
+Fisher_Tabel_BSA_antropologie#,
+#BSA_kruistabel,
+#Fisher_BSA_kruistabel
 )

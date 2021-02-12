@@ -108,20 +108,22 @@ print(Verwacht_aantal_observaties)
 
 
 <!-- ## TEKSTBLOK: Chi-kwadraat1.py -->
-Bereken eerst de aantallen observaties en verwachte aantallen observaties. Gebruik daarna de functie `chisquare()` van het `scipy` package met als argumenten de aantallen observaties `Aantal_observaties`, de verwachte aantallen observaties `Verwacht_aantal_observaties` en `axis = None` om aan te geven dat alle waarden in de twee vorige argumenten van dezelfde dataset afkomstig zijn. Let goed op dat de volgorde van de aantallen observaties en de verwachte aantallen observaties dezelfde volgorde hebben zodat de toets de goede vergelijking maakt.
+Bereken eerst de aantallen observaties en verwachte aantallen observaties. Gebruik daarna de functie `chisquare()` van het `scipy.stats` package met als argumenten de aantallen observaties `Aantal_observaties`, de verwachte aantallen observaties `Verwacht_aantal_observaties` en `axis = None` om aan te geven dat alle waarden in de twee vorige argumenten van dezelfde dataset afkomstig zijn. Let goed op dat de volgorde van de aantallen observaties en de verwachte aantallen observaties dezelfde volgorde hebben zodat de toets de goede vergelijking maakt.
 <!-- ## /TEKSTBLOK: Chi-kwadraat1.py -->
 
 <!-- ## OPENBLOK: Chi-kwadraat2.py-->
 ```{python chi-kwadraat}
-# Bereken de aantallen observaties
+## Bereken de aantallen observaties
 Aantal_observaties = pd.crosstab(dfInstroom_2018_totaal['hbo_vooropleiding'], columns = 'count')
-#Aantal_observaties = np.array(Aantal_observaties)
 
-# Bereken de verwachte aantallen observaties
+## Zet het aantal observaties om in een numpy array. Gebruik de toevoeging .T om de array om te zetten in een rij
+Aantal_observaties = np.array(Aantal_observaties).T
+
+## Bereken de verwachte aantallen observaties
 Verwachte_proporties = np.array([0.113, 1- 0.113])
 Verwacht_aantal_observaties = Verwachte_proporties * len(dfInstroom_2018_totaal)
 
-# Voer de chi-kwadraat toets voor goodness of fit uit
+## voer de chi-kwadraat toets uit
 sps.chisquare(Aantal_observaties, Verwacht_aantal_observaties, axis = None)
 
 ```
@@ -130,11 +132,13 @@ sps.chisquare(Aantal_observaties, Verwacht_aantal_observaties, axis = None)
 
 <!-- ## CLOSEDBLOK: Chi-kwadraat3.py-->
 ```{python chi-kwadraat verstopt, include=FALSE, echo=TRUE}
-# Bereken de aantallen observaties
+## Bereken de aantallen observaties
 Aantal_observaties = pd.crosstab(dfInstroom_2018_totaal['hbo_vooropleiding'], columns = 'count')
-#Aantal_observaties = np.array(Aantal_observaties)
 
-# Bereken de verwachte aantallen observaties
+## Zet het aantal observaties om in een numpy array. Gebruik de toevoeging .T om de array om te zetten in een rij
+Aantal_observaties = np.array(Aantal_observaties).T
+
+## Bereken de verwachte aantallen observaties
 Verwachte_proporties = np.array([0.113, 1- 0.113])
 Verwacht_aantal_observaties = Verwachte_proporties * len(dfInstroom_2018_totaal)
 
@@ -152,7 +156,7 @@ normalize = 'columns')
 
 <!-- ## TEKSTBLOK: Chi-kwadraat4.py-->
 * &chi;^2^~`r Round_and_format(py$vdf)`~ = `r Round_and_format(py$chi2)`, *p* < 0,0001
-* p-waarde < 0,05, dus de H~0~ wordt verworpen.[^5]
+* De p-waarde is kleiner dan 0,05, dus de H~0~ wordt verworpen.[^5]
 
 <!-- ## /TEKSTBLOK: Chi-kwadraat4.py-->
 

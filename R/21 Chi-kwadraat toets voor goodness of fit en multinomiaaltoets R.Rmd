@@ -33,6 +33,11 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
+<!-- ## CLOSEDBLOK: Reticulate.R -->
+
+<!-- ## /CLOSEDBLOK: Reticulate.R -->
+
+
 <!-- ## CLOSEDBLOK: Status.R -->
 ```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
 ```
@@ -43,9 +48,12 @@ if (!exists("Substitute_var")) {
 source(paste0(here::here(),"/01. Includes/data/21.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
+
 # Toepassing
 
+<!-- ## TEKSTBLOK: Link1.R -->
 Gebruik de *Chi-kwadraat toets voor goodness of fit* om te onderzoeken of de geobserveerde frequenties van de categorieën van één categorische variabele met meer dan twee categorieën overeenkomt met de verwachte frequenties van de categorische variabele.[^6]<sup>,</sup>[^7] Met deze toets kunnen geobserveerde percentages met bekende of verwachte percentages vergeleken worden. Gebruik de exacte *multinomiaaltoets* bij een laag aantal observaties, dit wordt bij de assumpties toegelicht.[^1] De *Chi-kwadraat toets voor goodness of fit* kan ook gebruikt worden voor een categorische variabele met twee categorieën. Voor de exacte *multinomiaaltoets* geldt dit ook, maar in dat geval is de toets gelijk aan de exacte *binomiaaltoets* die te vinden is in bijbehorende [toetspagina](11-Chi-kwadraat-toets-voor-goodness-of-fit-en-binomiaaltoets-R.html). De *Chi-kwadraat toets voor goodness of fit* en de exacte *multinomiaaltoets* zijn voor zowel nominale[^9] als ordinale[^8] variabelen te gebruiken.
+<!-- ## /TEKSTBLOK: Link1.R -->
 
 # Onderwijscasus
 <div id = "casus">
@@ -93,11 +101,13 @@ Het is informatief om de frequenties en de percentages van de drie mogelijkheden
 
 <!-- ## OPENBLOK: Data-bekijken3.R -->
 ```{r }
+## Bepaal de frequenties
 table(BSA_Maritieme_techniek$BSA_advies)
 
 ```
 
 ```{r }
+## Bepaal de percentages
 100*prop.table(table(BSA_Maritieme_techniek$BSA_advies))
 
 ```
@@ -180,13 +190,15 @@ vdf <- chi2$parameter
 * &chi;^2^~`r vdf`~ = `r vchi2`, *p* < 0,001
 * De p-waarde is kleiner dan 0,05, dus de nulhypothese wordt verworpen.[^5]
 
-
 <!-- ## /TEKSTBLOK: Chi-kwadraat4.R-->
 
 
-## Post-hoc toets: gestandaardiseerde residuen
+## Post-hoc toets: gestandaardiseerde residuën
 
 Voer post-hoc toetsen uit om te bepalen voor welke BSA mogelijkheden er verschillen zijn tussen de verdeling van de studenten Maritieme Techniek en de verdeling van de gehele universiteit. Inspecteer hiervoor de Pearson residuen van de *Chi-kwadraat toets voor onafhankelijkheid* op waarden groter dan 1,96 en kleiner dan -1,96. Let op dat hier nog geen correctie voor meerdere toetsen plaatsvindt.[^10]
+
+<!-- ## TEKSTBLOK: Chi2-toets post-hoc0.R -->
+<!-- ## /TEKSTBLOK: Chi2-toets post-hoc0.R -->
 
 <!-- ## OPENBLOK: Chi2-toets post-hoc1.R -->
 ```{r}
@@ -202,6 +214,9 @@ Resultaat <- chisq.test(Tabel_volgorde, p = c(0.7, 0.2, 0.1))
 # Bekijk de gestandaardiseerde residuën
 Resultaat$residuals
 ```
+<!-- ## /OPENBLOK: Chi2-toets post-hoc1.R -->
+
+<!-- ## CLOSEDBLOK: Chi2-toets post-hoc1_1.R -->
 ```{r collapse=TRUE, echo = FALSE}
 # Maak een tabel met daarin de aantallen studenten per BSA mogelijkheid
 Tabel <- table(BSA_Maritieme_techniek$BSA_advies)
@@ -216,7 +231,8 @@ Resultaat <- chisq.test(Tabel_volgorde, p = c(0.7, 0.2, 0.1))
 PH_res <- Resultaat$residuals
 
 ```
-<!-- ## /OPENBLOK: Chi2-toets post-hoc1.R -->
+<!-- ## CLOSEDBLOK: Chi2-toets post-hoc1_1.R -->
+
 De post-hoc toetsing op basis van de gestandaardiseerde residuën kan als volgt geïnterpreteerd worden:
 <!-- ## TEKSTBLOK: Chi2-toets post-hoc2.R-->
 
@@ -254,12 +270,14 @@ table(BSA_Maritieme_techniek_steekproef$BSA_advies)
 100*prop.table(table(BSA_Maritieme_techniek_steekproef$BSA_advies))
 
 ```
+<!-- ## /OPENBLOK: Binomiaaltoets3.R -->
+
+<!-- ## CLOSEDNBLOK: Binomiaaltoets3_3.R -->
 ```{r, echo = FALSE}
 Tab2 <- table(BSA_Maritieme_techniek_steekproef$BSA_advies)
 Proptab2 <- 100*prop.table(table(BSA_Maritieme_techniek_steekproef$BSA_advies))
 ```
-
-<!-- ## /OPENBLOK: Binomiaaltoets3.R -->
+<!-- ## /CLOSEDNBLOK: Binomiaaltoets3_3.R -->
 
 <!-- ## TEKSTBLOK: Binomiaaltoets4.R -->
 Het aantal studenten met een positief BSA is `r Round_and_format(Tab2[2])` (`r Round_and_format(Proptab2[2])`%), met een negatief BSA is `r Round_and_format(Tab2[1])` (`r Round_and_format(Proptab2[1])`%) en met een uitgesteld BSA is `r Round_and_format(Tab2[3])` (`r Round_and_format(Proptab2[3])`%). Het lijkt erop dat het percentage studenten met een positief BSA hoger is dan het percentage van de gehele universiteit (70%) en dat het percentage studenten met een negatief BSA juist lager is dan dat van de gehele universiteit (20%). De *multinomiaaltoets* toetst of dit verschil significant is.
@@ -281,12 +299,15 @@ Tabel <- table(BSA_Maritieme_techniek_steekproef$BSA_advies)
 chisq.test(Tabel_volgorde, p = c(0.7, 0.2, 0.1))$expected
 
 ```
+<!-- ## /OPENBLOK: Binomiaaltoets6.R -->
+
+<!-- ## CLOSEDBLOK: Binomiaaltoets6_1.R -->
 ```{r, echo = FALSE, warning = FALSE}
 exp <- chisq.test(Tabel_volgorde, p = c(0.7, 0.2, 0.1))$expected
 
 
 ```
-<!-- ## /OPENBLOK: Binomiaaltoets6.R -->
+<!-- ## /CLOSEDBLOK: Binomiaaltoets6_1.R -->
 
 De verwachte frequentie voor studenten met een uitgesteld BSA is kleiner dan 5. Dit betekent dat er in meer dan 20% van de categorieën een verwachte frequentie van minder dan 5 is en dat er dus niet voldaan is aan de assumptie van verwachte frequenties. Voer daarom de *multinomiaaltoets* uit.
 

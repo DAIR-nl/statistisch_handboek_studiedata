@@ -184,11 +184,17 @@ De *Chi-kwadraat toets voor goodness of fit* is uitgevoerd om te onderzoeken of 
 <!-- ## TEKSTBLOK: Binomiaaltoets1.py -->
 Voer de *binomiaaltoets*  uit om te onderzoeken of de verdeling van het aantal studenten met en zonder hbo vooropleiding overeenkomt met de landelijke verdeling waarbij het percentage studenten met hbo vooropleiding 11,13% is. Deze toets is een alternatief voor de *Chi-kwadraat toets voor goodness of fit* bij lage verwachte aantallen observaties. Er is een subset `dfInstroom_2018_totaal_steekproef` van de dataset `dfInstroom_2018_totaal` ingeladen met daarin een lager aantal observaties.
 
-Het verwacht aantal observaties mag niet vijf of minder zijn in 20% van de categorieën van de categorische variabele. Aangezien er een binaire variabele getoetst wordt, mag geen van beide categorieën dus vijf of minder verwachte observaties hebben. Bereken het verwacht aantal observaties door de proporties van de nulhyothese (11,3% met hbo vooropleiding, dus 0,113 en 1 - 0,113) te vermenigvuldigen met het totaal aantal observaties in de dataset (`len(dfInstroom_2018_totaal)`).
+Maak een tabel van de variabele `hbo_vooropleiding` om het aantal observaties per categorie te tellen. Bereken het verwacht aantal observaties door de proporties van de nulhyothese (11,3% met hbo vooropleiding, dus 0,113 en 1 - 0,113) te vermenigvuldigen met het totaal aantal observaties in de dataset (`len(dfInstroom_2018_totaal)`).
 <!-- ## /TEKSTBLOK: Binomiaaltoets1.py -->
 
 <!-- ## OPENBLOK: Binomiaaltoets2.py -->
 ```{python chi2 assumptie binomiaaltoets}
+# Bereken de aantallen observaties
+Aantal_observaties = pd.crosstab(dfInstroom_2018_totaal_steekproef['hbo_vooropleiding'], columns = 'count')
+
+# Print het aantal observaties
+print(Aantal_observaties)
+
 # Sla de verwachte proporties op in een vector
 Verwachte_proporties = np.array([0.113, 1 - 0.113])
 
@@ -197,10 +203,6 @@ Verwacht_aantal_observaties = Verwachte_proporties * len(dfInstroom_2018_totaal_
 
 # Print het verwachte aantal observaties
 print(Verwacht_aantal_observaties)
-```
-```{python, include=FALSE, echo=TRUE}
-Aantal_observaties = pd.crosstab(dfInstroom_2018_totaal_steekproef['hbo_vooropleiding'], columns = 'count')
-
 ```
 <!-- ## /OPENBLOK: Binomiaaltoets2.py -->
 
@@ -226,6 +228,10 @@ sps.binom_test(x = Aantal_hbo_vooropleiding, n = Aantal_observaties, p = 0.113, 
 
 # Bereken de proportie studenten met een hbo vooropleiding
 Proportie_hbo_vooropleiding = Aantal_hbo_vooropleiding / Aantal_observaties
+
+# Print de proportie
+print(Proportie_hbo_vooropleiding)
+
 ```
 <!-- ## /OPENBLOK: Binomiaaltoets5.py -->
 

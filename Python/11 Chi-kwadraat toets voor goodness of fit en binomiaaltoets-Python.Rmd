@@ -143,21 +143,23 @@ Geen van de verwachte frequenties is kleiner dan vijf, dus de *Chi-kwadraat toet
 Voer de *Chi-kwadraat toets voor goodness of fit*  uit om te onderzoeken of de verdeling van het aantal studenten met en zonder hbo vooropleiding overeenkomt met de landelijke verdeling waarbij het percentage studenten met hbo vooropleiding 11,13% is.
 
 <!-- ## TEKSTBLOK: Chi-kwadraat1.py -->
-Bereken eerst de aantallen observaties en verwachte aantallen observaties. Gebruik daarna de functie `chisquare()` van het `scipy` package met als argumenten de aantallen observaties `Aantal_observaties`, de verwachte aantallen observaties `Verwacht_aantal_observaties` en `axis = None` om aan te geven dat alle waarden in de twee vorige argumenten van dezelfde dataset afkomstig zijn. Let goed op dat de volgorde van de aantallen observaties en de verwachte aantallen observaties dezelfde volgorde hebben zodat de toets de goede vergelijking maakt.
+Bereken eerst de aantallen observaties en verwachte aantallen observaties. Gebruik daarna de functie `chisquare()` van het `scipy.stats` package met als argumenten de aantallen observaties `Aantal_observaties`, de verwachte aantallen observaties `Verwacht_aantal_observaties` en `axis = None` om aan te geven dat alle waarden in de twee vorige argumenten van dezelfde dataset afkomstig zijn. Let goed op dat de volgorde van de aantallen observaties en de verwachte aantallen observaties dezelfde volgorde hebben zodat de toets de goede vergelijking maakt.
 <!-- ## /TEKSTBLOK: Chi-kwadraat1.py -->
 
 
 <!-- ## OPENBLOK: Chi-kwadraat2.py-->
 ```{python chi-kwadraat}
-# Bereken de aantallen observaties
+## Bereken de aantallen observaties
 Aantal_observaties = pd.crosstab(dfInstroom_2018_totaal['hbo_vooropleiding'], columns = 'count')
-#Aantal_observaties = np.array(Aantal_observaties)
 
-# Bereken de verwachte aantallen observaties
+## Zet het aantal observaties om in een numpy array. Gebruik de toevoeging .T om de array om te zetten in een rij
+Aantal_observaties = np.array(Aantal_observaties).T
+
+## Bereken de verwachte aantallen observaties
 Verwachte_proporties = np.array([0.113, 1- 0.113])
 Verwacht_aantal_observaties = Verwachte_proporties * len(dfInstroom_2018_totaal)
 
-# Voer de chi-kwadraat toets voor goodness of fit uit
+## voer de chi-kwadraat toets uit
 sps.chisquare(Aantal_observaties, Verwacht_aantal_observaties, axis = None)
 
 ```
@@ -166,11 +168,13 @@ sps.chisquare(Aantal_observaties, Verwacht_aantal_observaties, axis = None)
 
 <!-- ## CLOSEDBLOK: Chi-kwadraat3.py-->
 ```{python chi-kwadraat verstopt, include=FALSE, echo=TRUE}
-# Bereken de aantallen observaties
+## Bereken de aantallen observaties
 Aantal_observaties = pd.crosstab(dfInstroom_2018_totaal['hbo_vooropleiding'], columns = 'count')
-#Aantal_observaties = np.array(Aantal_observaties)
 
-# Bereken de verwachte aantallen observaties
+## Zet het aantal observaties om in een numpy array. Gebruik de toevoeging .T om de array om te zetten in een rij
+Aantal_observaties = np.array(Aantal_observaties).T
+
+## Bereken de verwachte aantallen observaties
 Verwachte_proporties = np.array([0.113, 1- 0.113])
 Verwacht_aantal_observaties = Verwachte_proporties * len(dfInstroom_2018_totaal)
 
@@ -188,7 +192,7 @@ normalize = 'columns')
 
 <!-- ## TEKSTBLOK: Chi-kwadraat4.py-->
 * &chi;^2^~`r Round_and_format(py$vdf)`~ = `r Round_and_format(py$chi2)`, *p* < 0,0001
-* p-waarde < 0,05, dus de H~0~ wordt verworpen.[^5]
+* De p-waarde is kleiner dan 0,05, dus de H~0~ wordt verworpen.[^5]
 
 <!-- ## /TEKSTBLOK: Chi-kwadraat4.py-->
 
@@ -209,11 +213,17 @@ De *Chi-kwadraat toets voor goodness of fit* is uitgevoerd om te onderzoeken of 
 <!-- ## TEKSTBLOK: Binomiaaltoets1.py -->
 Voer de *binomiaaltoets*  uit om te onderzoeken of de verdeling van het aantal studenten met en zonder hbo vooropleiding overeenkomt met de landelijke verdeling waarbij het percentage studenten met hbo vooropleiding 11,13% is. Deze toets is een alternatief voor de *Chi-kwadraat toets voor goodness of fit* bij lage verwachte aantallen observaties. Er is een subset `dfInstroom_2018_totaal_steekproef` van de dataset `dfInstroom_2018_totaal` ingeladen met daarin een lager aantal observaties.
 
-Het verwacht aantal observaties mag niet vijf of minder zijn in 20% van de categorieën van de categorische variabele. Aangezien er een binaire variabele getoetst wordt, mag geen van beide categorieën dus vijf of minder verwachte observaties hebben. Bereken het verwacht aantal observaties door de proporties van de nulhyothese (11,3% met hbo vooropleiding, dus 0,113 en 1 - 0,113) te vermenigvuldigen met het totaal aantal observaties in de dataset (`len(dfInstroom_2018_totaal)`).
+Maak een tabel van de variabele `hbo_vooropleiding` om het aantal observaties per categorie te tellen. Bereken het verwacht aantal observaties door de proporties van de nulhyothese (11,3% met hbo vooropleiding, dus 0,113 en 1 - 0,113) te vermenigvuldigen met het totaal aantal observaties in de dataset (`len(dfInstroom_2018_totaal)`).
 <!-- ## /TEKSTBLOK: Binomiaaltoets1.py -->
 
 <!-- ## OPENBLOK: Binomiaaltoets2.py -->
 ```{python chi2 assumptie binomiaaltoets}
+# Bereken de aantallen observaties
+Aantal_observaties = pd.crosstab(dfInstroom_2018_totaal_steekproef['hbo_vooropleiding'], columns = 'count')
+
+# Print het aantal observaties
+print(Aantal_observaties)
+
 # Sla de verwachte proporties op in een vector
 Verwachte_proporties = np.array([0.113, 1 - 0.113])
 
@@ -222,10 +232,6 @@ Verwacht_aantal_observaties = Verwachte_proporties * len(dfInstroom_2018_totaal_
 
 # Print het verwachte aantal observaties
 print(Verwacht_aantal_observaties)
-```
-```{python, include=FALSE, echo=TRUE}
-Aantal_observaties = pd.crosstab(dfInstroom_2018_totaal_steekproef['hbo_vooropleiding'], columns = 'count')
-
 ```
 <!-- ## /OPENBLOK: Binomiaaltoets2.py -->
 
@@ -251,6 +257,10 @@ sps.binom_test(x = Aantal_hbo_vooropleiding, n = Aantal_observaties, p = 0.113, 
 
 # Bereken de proportie studenten met een hbo vooropleiding
 Proportie_hbo_vooropleiding = Aantal_hbo_vooropleiding / Aantal_observaties
+
+# Print de proportie
+print(Proportie_hbo_vooropleiding)
+
 ```
 <!-- ## /OPENBLOK: Binomiaaltoets5.py -->
 

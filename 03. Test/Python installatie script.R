@@ -17,7 +17,6 @@ py_install("pingouin")
 py_install("seaborn")
 py_install("scikit-posthocs", pip = TRUE)
 py_install("FisherExact", pip = TRUE)
-py_install("met", pip = TRUE)
 
 # https://github.com/rstudio/reticulate/issues/578
 # https://cran.r-project.org/web/packages/reticulate/vignettes/python_packages.html
@@ -28,4 +27,6 @@ py_install("met", pip = TRUE)
 # https://pingouin-stats.org/index.html (pingouin)
 # https://docs.scipy.org/doc/scipy/reference/stats.html (scipy)
 # https://pypi.org/project/met/
+# https://stackoverflow.com/questions/53159043/multinomial-test-in-python-with-met-module
+# https://pythonhosted.org/met/#:~:text=met%20%2D%2D%20Multinomial%20Exact%20Tests&text=met.py%20is%20a%20Python,to%20the%20'control'%20distribution.
 # https://stackoverflow.com/questions/53159043/multinomial-test-in-python-with-met-module

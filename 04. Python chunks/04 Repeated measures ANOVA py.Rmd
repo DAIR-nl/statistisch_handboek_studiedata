@@ -251,19 +251,19 @@ import statsmodels.stats.api as smod
 
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
-print(statsmodels.stats.api.lilliefors(Studieuren_lineaire_algebra, pvalmethod="table"))
+print(smod.lilliefors(Studieuren_lineaire_algebra, pvalmethod="table"))
 ```
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
 
 <!-- ## OPENBLOK: Lilliefors-test-2.py -->
 ``` {python Lilliefors Test-2, warning=FALSE}
-print(statsmodels.stats.api.lilliefors(Studieuren_relativiteitstheorie, pvalmethod="table"))
+print(smod.lilliefors(Studieuren_relativiteitstheorie, pvalmethod="table"))
 ```
 <!-- ## OPENBLOK: Lilliefors-test-2.py -->
 
 <!-- ## OPENBLOK: Lilliefors-test-3.py -->
 ``` {python Lilliefors Test-3, warning=FALSE}
-print(statsmodels.stats.api.lilliefors(Studieuren_kosmologie, pvalmethod="table"))
+print(smod.lilliefors(Studieuren_kosmologie, pvalmethod="table"))
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-3.py -->
 

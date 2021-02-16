@@ -231,7 +231,7 @@ Resultaat <- chisq.test(Tabel_volgorde, p = c(0.7, 0.2, 0.1))
 PH_res <- Resultaat$residuals
 
 ```
-<!-- ## CLOSEDBLOK: Chi2-toets post-hoc1_1.R -->
+<!-- ## /CLOSEDBLOK: Chi2-toets post-hoc1_1.R -->
 
 De post-hoc toetsing op basis van de gestandaardiseerde residuën kan als volgt geïnterpreteerd worden:
 <!-- ## TEKSTBLOK: Chi2-toets post-hoc2.R-->
@@ -240,7 +240,7 @@ De post-hoc toetsing op basis van de gestandaardiseerde residuën kan als volgt 
 * Significant hoger aantal observaties bij een negatief BSA , *z* = `r Round_and_format(PH_res[2])`
 * Geen significant verschillend aantal observaties bij een uitgesteld BSA , *z* = `r Round_and_format(PH_res[3])`
 
-<!-- ## TEKSTBLOK: Chi2-toets post-hoc2.R-->
+<!-- ## /TEKSTBLOK: Chi2-toets post-hoc2.R-->
 
 ## Rapportage
 <!-- ## TEKSTBLOK: Chi-kwadraat5.R-->
@@ -272,12 +272,12 @@ table(BSA_Maritieme_techniek_steekproef$BSA_advies)
 ```
 <!-- ## /OPENBLOK: Binomiaaltoets3.R -->
 
-<!-- ## CLOSEDNBLOK: Binomiaaltoets3_3.R -->
+<!-- ## CLOSEDBLOK: Binomiaaltoets3_3.R -->
 ```{r, echo = FALSE}
 Tab2 <- table(BSA_Maritieme_techniek_steekproef$BSA_advies)
 Proptab2 <- 100*prop.table(table(BSA_Maritieme_techniek_steekproef$BSA_advies))
 ```
-<!-- ## /CLOSEDNBLOK: Binomiaaltoets3_3.R -->
+<!-- ## /CLOSEDBLOK: Binomiaaltoets3_3.R -->
 
 <!-- ## TEKSTBLOK: Binomiaaltoets4.R -->
 Het aantal studenten met een positief BSA is `r Round_and_format(Tab2[2])` (`r Round_and_format(Proptab2[2])`%), met een negatief BSA is `r Round_and_format(Tab2[1])` (`r Round_and_format(Proptab2[1])`%) en met een uitgesteld BSA is `r Round_and_format(Tab2[3])` (`r Round_and_format(Proptab2[3])`%). Het lijkt erop dat het percentage studenten met een positief BSA hoger is dan het percentage van de gehele universiteit (70%) en dat het percentage studenten met een negatief BSA juist lager is dan dat van de gehele universiteit (20%). De *multinomiaaltoets* toetst of dit verschil significant is.

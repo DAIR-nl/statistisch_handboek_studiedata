@@ -334,7 +334,7 @@ De standaard interpretatie van een statitische toets in Python is: `(<teststatis
 
 <!-- ## OPENBLOK: Library-nortest.py -->
 ```{python}
-import statsmodels.stats.api as smod
+import statsmodels.stats.api
 ```
 <!-- ## /OPENBLOK: Library-nortest.py -->
 
@@ -342,21 +342,21 @@ import statsmodels.stats.api as smod
   <div class="col">
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
 ``` {python Lilliefors Test-1, warning=FALSE}
-print(smod.lilliefors(Studieuren_lineaire_algebra, pvalmethod="table"))
+print(statsmodels.stats.api.lilliefors(Studieuren_lineaire_algebra, pvalmethod="table"))
 ```
 <!-- ## OPENBLOK: Lilliefors-test-1.py -->
   </div>
   <div class = "col">
 <!-- ## OPENBLOK: Lilliefors-test-2.py -->
 ``` {python Lilliefors Test-2, warning=FALSE}
-print(smod.lilliefors(Studieuren_relativiteitstheorie, pvalmethod="table"))
+print(statsmodels.stats.api.lilliefors(Studieuren_relativiteitstheorie, pvalmethod="table"))
 ```
 <!-- ## OPENBLOK: Lilliefors-test-2.py -->
   </div>
   <div class = "col">
 <!-- ## OPENBLOK: Lilliefors-test-3.py -->
 ``` {python Lilliefors Test-3, warning=FALSE}
-print(smod.lilliefors(Studieuren_kosmologie, pvalmethod="table"))
+print(statsmodels.stats.api.lilliefors(Studieuren_kosmologie, pvalmethod="table"))
 ```
 <!-- ## /OPENBLOK: Lilliefors-test-3.py -->
   </div>

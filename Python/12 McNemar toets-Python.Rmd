@@ -110,9 +110,9 @@ FOS_studenten_frequentiematrix =  np.array(pd.crosstab(December, Juni))
 |            | Geen FOS | `r py$FOS_studenten_frequentiematrix[2,1]` | `r py$FOS_studenten_frequentiematrix[2,2]`     |
 *Tabel 1. Frequentiematrix van het aantal studenten dat een beroep doet op de FOS in december en juni.*
 
-De cel linksboven bevat het aantal studenten dat zowel in december als juni een beroep heeft gedaan op de FOS; dit zijn er `r py$FOS_studenten_frequentiematrix[0,0]`. De cel rechtsonder bevat het aantal studenten dat zowel in december als juni geen beroep heeft gedaan op de FOS; dit zijn er `r py$FOS_studenten_frequentiematrix[1,1]`. Beide cellen staan op de diagonaal van de tabel en worden daarom de diagonale elementen genoemd.
+De cel linksboven bevat het aantal studenten dat zowel in december als juni een beroep heeft gedaan op de FOS; dit zijn er `r py$FOS_studenten_frequentiematrix[1,1]`. De cel rechtsonder bevat het aantal studenten dat zowel in december als juni geen beroep heeft gedaan op de FOS; dit zijn er `r py$FOS_studenten_frequentiematrix[2,2]`. Beide cellen staan op de diagonaal van de tabel en worden daarom de diagonale elementen genoemd.
 
-In de cel rechtsboven staat het aantal studenten dat wel in december maar niet in juni een beroep op de FOS heeft gedaan; dit zijn er `r py$FOS_studenten_frequentiematrix[0,1]`. In de cel linksonder staat het aantal studenten dat niet in december maar wel in juni een beroep op de FOS heeft gedaan; dit zijn er `r py$FOS_studenten_frequentiematrix[1,0]`. Deze cellen zijn geen onderdeel van de diagonaal van de tabel en worden daarom de niet-diagonale elementen genoemd.
+In de cel rechtsboven staat het aantal studenten dat wel in december maar niet in juni een beroep op de FOS heeft gedaan; dit zijn er `r py$FOS_studenten_frequentiematrix[1,2]`. In de cel linksonder staat het aantal studenten dat niet in december maar wel in juni een beroep op de FOS heeft gedaan; dit zijn er `r py$FOS_studenten_frequentiematrix[2,1]`. Deze cellen zijn geen onderdeel van de diagonaal van de tabel en worden daarom de niet-diagonale elementen genoemd.
 <!-- ## /TEKSTBLOK: Groepsgrootte2.py -->
 
 # De data bekijken
@@ -182,7 +182,7 @@ print(FOS_studenten_frequentiematrix)
 <!-- ## /OPENBLOK: Data-beschrijven.py -->
 
 <!-- ## TEKSTBLOK: Data-bekijken4.py -->
-De diagonale elementen bevatten `r py$FOS_studenten_frequentiematrix[0,0]` en `r py$FOS_studenten_frequentiematrix[1,1]` observaties. De niet-diagonale elementen bevatten `r py$FOS_studenten_frequentiematrix[1,0]` en `r py$FOS_studenten_frequentiematrix[0,1]` observaties.
+De diagonale elementen bevatten `r py$FOS_studenten_frequentiematrix[1,1]` en `r py$FOS_studenten_frequentiematrix[2,2]` observaties. De niet-diagonale elementen bevatten `r py$FOS_studenten_frequentiematrix[2,1]` en `r py$FOS_studenten_frequentiematrix[1,2]` observaties.
 <!-- ## /TEKSTBLOK: Data-bekijken4.py -->
 
 # McNemar toets

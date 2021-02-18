@@ -60,13 +60,13 @@ Gebruik de *tekentoets* om de mediaan van een steekproef te vergelijken met een 
 
 # Onderwijscasus
 <div id ="casus">
-De opleidingsdirecteur van de school voor Journalistiek is benieuwd wat alumni verdienen ten opzichte van de gemiddelde Nederlander. Daarom wil zij de jaarinkomens van oud-studenten vergelijken met het modale inkomen van €36.000.[^2] Op deze manier vergaart zij meer informatie over het succes op de arbeidsmarkt na de opleiding Journalistiek.
+De opleidingsdirecteur van de school voor Journalistiek is benieuwd wat alumni verdienen ten opzichte van de gemiddelde Nederlander. Daarom wil zij de jaarinkomens van oud-studenten vergelijken met het mediane jaarinkomen van werknemers in Nederland van €35.200.[^2] Op deze manier vergaart zij meer informatie over het succes op de arbeidsmarkt na de opleiding Journalistiek.
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
-*H~0~*: De mediaan van het jaarinkomen van alumni Journalistiek is gelijk aan €36.000, het modale jaarinkomen in Nederland.
+*H~0~*: De mediaan van het jaarinkomen van alumni Journalistiek is gelijk aan €35.200, het mediane jaarinkomen in Nederland.
 
-*H~A~*: De mediaan van het jaarinkomen van alumni Journalistiek is niet gelijk aan €36.000, het modale jaarinkomen in Nederland. 
+*H~A~*: De mediaan van het jaarinkomen van alumni Journalistiek is niet gelijk aan €35.200, het mediane jaarinkomen in Nederland.
 </div>
 
 # Assumpties
@@ -203,7 +203,7 @@ De *tekentoets* is uitgevoerd om te toetsen of het mediane inkomen van alumni va
 <!-- ## /CLOSEDBLOK: Footer.R -->
 
 [^1]: Van Geloven, N. (25 mei 2016). *Tekentoets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/Tekentoets). 
-[^2]: Bruto modaal inkomen 2019, Centraal Planbureau. 
+[^2]: Doorsnee inkomen werkenden al 10 jaar vrijwel constant (22 maart 2019). [Centraal Bureau voor de Statistiek](https://www.cbs.nl/nl-nl/nieuws/2019/12/doorsnee-inkomen-werkenden-al-10-jaar-vrijwel-constant)
 [^5]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.
 [^6]: Outliers (13 augustus 2016). [UvA Wiki Methodologiewinkel](https://wiki.uva.nl/methodologiewinkel/index.php/Outliers).
 [^7]: Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport.

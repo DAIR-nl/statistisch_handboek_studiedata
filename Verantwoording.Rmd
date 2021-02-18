@@ -64,6 +64,7 @@ Het handboek is nog volop in ontwikkeling en zal gedurende 2020 aangevuld worden
 * 8 januari: Multinomiale logistische regressie en McNemar toets Python toegevoegd, kleine wijzigingen vanwege veel verwerkte reviews
 * 1 februari: Ordinale logistische regressie toegevoegd
 * 8 februari: Datasets te downloaden op website en Cochran's Q toets Python toegevoegd
+* 18 februari: Bhapkar toets Python toegevoegd en andere Python toetsen geüpdatet
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer_simpel.R"))}

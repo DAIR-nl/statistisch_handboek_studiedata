@@ -46,7 +46,7 @@ dfToetsen <- tribble(
     "15 Cochrans Q toets",                                                                    "1",          "0",       "0",               "0",       
     "16 Chi-kwadraat toets voor onafhankelijkheid en Fisher-Freeman-Halton exacte toets I",   "1",          "0",       "0",               "0",       
     "17 Chi-kwadraat toets voor goodness of fit en multinomiaaltoets",                        "0",          "0",       "0",               "0",       
-    "18 Bhapkar toets",                                                                       "0",          "0",       "0",               "0",      
+    "18 Bhapkar toets",                                                                       "1",          "0",       "1",               "0",      
     "19 Chi-kwadraat toets voor onafhankelijkheid en Fisher-Freeman-Halton exacte toets II",  "0",          "0",       "0",               "0",       
     "20 Multilevel multinomiale logistische regressie",                                       "1",          "0",       "0",               "0",       
     "21 Chi-kwadraat toets voor goodness of fit en multinomiaaltoets",                        "1",          "0",       "0",               "0",       

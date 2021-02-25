@@ -30,3 +30,6 @@ py_install("FisherExact", pip = TRUE)
 # https://stackoverflow.com/questions/53159043/multinomial-test-in-python-with-met-module
 # https://pythonhosted.org/met/#:~:text=met%20%2D%2D%20Multinomial%20Exact%20Tests&text=met.py%20is%20a%20Python,to%20the%20'control'%20distribution.
 # https://stackoverflow.com/questions/53159043/multinomial-test-in-python-with-met-module
+# https://peterstatistics.com/CrashCourse/4-TwoVarPair/NomNom/NomNomPair3.html
+# https://www.statsmodels.org/devel/generated/statsmodels.stats.contingency_tables.Table2x2.homogeneity.html
+# https://www.statsmodels.org/stable/contingency_tables.html

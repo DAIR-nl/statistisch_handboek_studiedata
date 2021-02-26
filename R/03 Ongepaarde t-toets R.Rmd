@@ -74,14 +74,16 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 </div>
 
 # Assumpties
-Voor een valide resultaat moeten de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
+Voor een valide resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
 
 ## Normaliteit 
-De *ongepaarde t-toets* gaat ervan uit dat de afhankelijke variabele normaal verdeeld is voor alle groepen. Ga er bij een aantal observaties *n* > 100 in een groep ervanuit dat de *ongepaarde t-toets* voor die groep robuust genoeg is om uit te voeren zonder dat de afhankelijke variabele een normale verdeling volgt.[^2] 
+De *ongepaarde t-toets* gaat ervan uit dat de afhankelijke variabele normaal verdeeld is voor alle groepen. Als elke groep een aantal observaties (*n*) heeft dat groter dan 100 is,  ga er dan vanuit dat de *ongepaarde t-toets* robuust genoeg is om uit te voeren zonder dat de afhankelijke variabele een normale verdeling volgt.
 
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. Controleer de afhankelijke variabele per groep visueel met een histogram, een boxplot en een Q-Q plot.   
 2. Toets of de afhankelijke variabele voor beide groepen normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (*n* < 50) met de *Shapiro-Wilk test*.[^3]<sup>, </sup>[^4]  
+
+De eerste stap heeft als doel een goede indruk te krijgen van de verdeling van de steekproef. In de tweede stap wordt de assumptie van normaliteit getoetst. De statistische toets laat zien of de verdeling van de observaties van een groep voldoet aan de assumptie van normaliteit. Voor beide groepen moet er voldaan zijn aan de assumptie van normaliteit.
 
 <!-- ## TEKSTBLOK: Link1.R-->
 Als blijkt dat de afhankelijke variabele niet normaal verdeeld is voor één van of allebei de groepen, transformeer[^5] dan de afhankelijke variabele en bepaal daarna of deze wel normaal verdeeld is of gebruik de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html).[^6]<sup>, </sup>[^7]  
@@ -92,7 +94,7 @@ De *ongepaarde t-toets* kan met en zonder gepoolde variantie uitgevoerd worden. 
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
-Er is een dataset ingeladen met gemiddelde cijfers van eerstejaarsstudenten bij de opleiding Taalwetenschap: `Cijfers_gemiddeld`. De data bevatten cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
+Er is een dataset ingeladen met gemiddelde cijfers van eerstejaarsstudenten bij de opleiding Taalwetenschap: `Cijfers_gemiddeld`. De dataset bevat cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
 
 ## De data bekijken
@@ -165,7 +167,7 @@ vSD_t1 <- Round_and_format(sd(Cijfers_2011))
 <!-- ## /TEKSTBLOK: Data-beschrijven-4.R -->
 
 ## Visuele inspectie van normaliteit
-Geef de verdeling van de data visueel weer met een histogram, Q-Q plot en boxplot.
+Geef de verdeling van de tentamencijfers van beide groepen visueel weer met een histogram, Q-Q plot en boxplot.
 
 ### Histogram
 

@@ -71,13 +71,14 @@ Om een valide toetsresultaat te bereiken met de *repeated measures ANOVA* moet d
 
 ## Normaliteit
 <!-- ## TEKSTBLOK: link1.R -->
-De assumptie van normaliteit houdt in dat er een normale
-verdeling van de afhankelijke variabele is in elke groep van metingen. Wanneer er duidelijke afwijkingen van normaliteit zijn,
-is het transformeren van de data een optie.[^2] Een andere optie is het gebruik van de nonparametrische
-[Friedman's ANOVA](09-Friedmans-ANOVA-R.html) waar normaliteit geen assumptie is.[^3] Controleer de assumptie van normaliteit voor elke groep van metingen met de volgende stappen:  
+De assumptie van normaliteit houdt in dat er een normale verdeling van de afhankelijke variabele is in elke groep van metingen. Controleer daarom de assumptie van normaliteit voor elke groep van metingen met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
 2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^4]<sup>, </sup>[^5]  
 <!-- ## /TEKSTBLOK: link1.R -->
+
+De eerste stap heeft als doel een goede indruk te krijgen van de verdeling van de steekproef. In de tweede stap wordt de assumptie van normaliteit getoetst. De statistische toets laat zien of de verdeling van de observaties van een groep voldoet aan de assumptie van normaliteit. Voor alle groepen moet er voldaan zijn aan de assumptie van normaliteit.
+
+Als er duidelijke afwijkingen van normaliteit zijn, is het transformeren van de data een optie.[^2] Een andere optie is het gebruik van de nonparametrische [Friedman's ANOVA](09-Friedmans-ANOVA-R.html) waar normaliteit geen assumptie is.[^3] De *repeated measures ANOVA* is echter ook een robuuste toets ten opzichte van de assumptie van normaliteit. Als elke groep een aantal observaties (*n*) heeft dat groter dan 100 is,  ga er dan vanuit dat de *repeated measures ANOVA* robuust genoeg is om uit te voeren zonder dat de afhankelijke variabele een normale verdeling volgt.
 
 ## Sphericiteit
 De assumptie van sphericiteit houdt in dat de variantie van de verschilscores tussen groepen van metingen ongeveer aan elkaar gelijk zijn.[^6] In deze casus zijn dat de verschilscores tussen de drie vakken: Lineaire Algebra minus Relativiteitstheorie, Relativiteitstheorie minus Kosmologie en Kosmologie minus Lineaire Algebra. Toets deze assumptie met *Mauchly's test*. Wanneer de data niet aan de assumptie voldoen, geeft de gewone *repeated measures ANOVA* een verkeerd resultaat. Er zijn echter correcties die gebruikt kunnen worden wanneer de data niet aan sphericiteit voldoen. Een voorbeeld van mogelijke output van *Mauchly's test* in R is hieronder weergegeven.
@@ -217,11 +218,12 @@ vN_KL  <- Round_and_format(length(Studieuren_kosmologie))
 <!-- ## TEKSTBLOK: Datatekst-beschrijven.R -->
 * Gemiddeld aantal studieuren Lineaire Algebra (standaarddeviatie): `r vM_LA` (`r vSD_LA`), *n* = `r vN_LA`  
 * Gemiddeld aantal studieuren Relativiteitstheorie (standaarddeviatie): `r vM_RT` (`r vSD_RT`), *n* = `r vN_RT`  
-* Gemiddeld aantal studieuren Kosmologie (standaarddeviatie): `r vM_KL` (`r vSD_KL`), *n* = `r vN_KL`  
+* Gemiddeld aantal studieuren Kosmologie (standaarddeviatie): `r vM_KL` (`r vSD_KL`), *n* = `r vN_KL`
+
 <!-- ## /TEKSTBLOK: Datatekst-beschrijven.R -->
 
 ## Visuele inspectie van normaliteit
-Geef de verdeling van de data visueel weer met een histogram, Q-Q plot en boxplot.
+Geef de verdeling van de studieuren voor elke groep visueel weer met een histogram, Q-Q plot en boxplot.
 
 ### Histogram
 
@@ -294,7 +296,7 @@ qqline(Studieuren_kosmologie)
   </div>
 </div>
 
-Bij alle drie de Q-Q plots liggen de punten rond de lijn die normaliteit aangeeft; vermoedelijk zijn deze data normaal verdeeld.
+Bij alle drie de Q-Q plots liggen de punten rond de lijn die normaliteit aangeeft; vermoedelijk zijn de studieuren voor elke groep normaal verdeeld.
 
 ### Boxplot
 De box geeft de middelste 50% van het aantal studieuren per week weer. De zwarte lijn binnen de box is de mediaan. In de staarten of snorreharen zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9]<sup>, </sup>[^10] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen van metingen. 
@@ -310,7 +312,7 @@ De boxplotten geven de spreiding weer van het aantal studieuren voor de drie vak
 
 
 ## Toetsen van normaliteit
-Om te controleren of de verdelingen van de vakken normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
+Om te controleren of de verdelingen van de studieuren voor elk vak normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is vereist als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn, wat meestal het geval is bij een steekproef. Als de p-waarde kleiner dan 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.

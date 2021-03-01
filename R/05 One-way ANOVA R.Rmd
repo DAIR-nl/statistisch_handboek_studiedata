@@ -70,7 +70,7 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 
 # Uitleg assumpties
-Om een valide toetsresultaat te bereiken moeten de data aan een aantal voorwaarden voldoen. Controleer of de steekproef aan de volgende assumpties voldoet: normaliteit, homogeniteit van varianties en onafhankelijkheid.
+Om een valide toetsresultaat te bereiken moet de data aan een aantal voorwaarden voldoen. Controleer of de steekproef aan de volgende assumpties voldoet: normaliteit, homogeniteit van varianties en onafhankelijkheid.
 
 De *one-way ANOVA* is een robuuste toets: als er niet voldaan is aan de assumptie van normaliteit of homogeniteit van varianties, dan kan de *one-way ANOVA* in bepaalde gevallen nog steeds uitgevoerd en geïnterpreteerd worden.[^2] Hierdoor kan het wel zijn dat de toets minder onderscheidend vermogen heeft, dan wanneer de assumpties niet geschonden worden.[^3]<sup>, </sup>[^4] Als er grote afwijkingen zijn van normaliteit of homogeniteit van varianties, is de [Kruskal-Wallis toets](10-Kruskal-Wallis-toets-R.html) een alternatief voor de *one-way ANOVA*.[^5]<sup>, </sup>[^6]
 
@@ -79,7 +79,9 @@ De assumptie van normaliteit houdt bij de *one-way ANOVA* in dat de afhankelijke
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
 2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^7]<sup>, </sup>[^8]  
 
-Als blijkt dat de data niet normaal verdeeld zijn, is het transformeren van de data ook een optie [^9]. Bepaal of de data daarna wel normaal verdeeld zijn. Voer de [Kruskal-Wallis toets](10-Kruskal-Wallis-toets-R.html) toets uit als transformeren niet werkt.
+De eerste stap heeft als doel een goede indruk te krijgen van de verdeling van de steekproef. In de tweede stap wordt de assumptie van normaliteit getoetst. De statistische toets laat zien of de verdeling van de observaties van een groep voldoet aan de assumptie van normaliteit. Voor alle groepen moet er voldaan zijn aan de assumptie van normaliteit.
+
+Als er niet voldaan is aan normaliteit, is het transformeren van de data een optie.[^2] Een andere optie is het gebruik van de nonparametrische [Kruskal-Wallis toets](10-Kruskal-Wallis-toets-R.html) waar normaliteit geen assumptie is.[^3] De *one-way ANOVA* is echter ook een robuuste toets ten opzichte van de assumptie van normaliteit. Als elke groep een aantal observaties (*n*) heeft dat groter dan 100 is,  ga er dan vanuit dat de *one-way ANOVA* robuust genoeg is om uit te voeren zonder dat de afhankelijke variabele een normale verdeling volgt.
 
 ## Homogeniteit van varianties
 Toets met de *Levene's Test (for equality of variance)* of de variantie van iedere groep ongeveer hetzelfde is. Bij een p-waarde kleiner dan 0,05 is de variantie van de groepen significant verschillend.[^10] De *one-way ANOVA* is in bepaalde gevallen robuust als er geen homogeniteit van varianties is. Als de ratio van de grootste en kleinste steekproefgrootte van alle groepen kleiner dan 10 is en de ratio van de grootste en kleinste variantie van alle groepen kleiner dan 4 is, dan kan de *one-way ANOVA* gewoon uitgevoerd worden.[^19] Voer de [Kruskal-Wallis toets](10-Kruskal-Wallis-toets-R.html) toets uit als er niet aan deze voorwaarden voor robuustheid is voldaan.
@@ -183,7 +185,7 @@ vN_GSC  <- Round_and_format(length(Reistijd_GSC))
 <!-- ## /TEKSTBLOK: Datatekst-beschrijven.R -->
 
 ## Visuele inspectie van normaliteit
-Geef de verdeling van de data visueel weer met een histogram, Q-Q plot en boxplot.
+Geef de verdeling van de reistijd voor elke opleiding visueel weer met een histogram, Q-Q plot en boxplot.
 
 ### Histogram
 
@@ -214,7 +216,7 @@ De verdelingen van de opleidingen Filosofie en Geschiedenis lijken twee toppen t
 Gebruik `qqnorm()` en `qqline()` met `pch = 1`om een Q-Q plot te maken, met als datapunten kleine cirkels.
 <!-- ## /TEKSTBLOK: QQplot.R-->
 
-Als over het algemeen de meeste datapunten op de lijn liggen, neem dan aan dat de data normaal verdeeld zijn.
+Als over het algemeen de meeste datapunten op de lijn liggen, neem dan aan dat de data normaal verdeeld is.
 <div class = "col-container">
   <div class="col">
 <!-- ## OPENBLOK: QQplot1.R -->
@@ -272,7 +274,7 @@ boxplot(Reistijd ~ Opleiding, Reistijd_per_opleiding)
 De boxplotten geven de spreiding weer van de gemiddelde reistijd van uitwonende studenten voor de opleidingen Arabische Taal en Cultuur, Filosofie en Geschiedenis. De boxplotten Arabische Taal en Cultuur en Geschiedenis zien er symmetrisch uit; de boxen zijn even hoog boven als onder de mediaan en de snorreharen zijn onder en boven even groot. De boxplot van Filosofie is boven de mediaan groter dan onder de mediaan, de data kan wat scheef verdeeld zijn. De mediaan Arabische Taal en Cultuur ligt hoger dan de twee andere opleidingen.
 
 ## Toetsen van normaliteit
-Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
+Om te controleren of de data normaal verdeeld is, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze toets het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is vereist als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn, wat meestal het geval is bij een steekproef. Als de p-waarde kleiner dan 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.

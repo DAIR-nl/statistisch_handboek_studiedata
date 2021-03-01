@@ -43,7 +43,7 @@ dfToetsen <- tribble(
     "01 One sample t-toets",                                                                    "1", 
     "02 Gepaarde t-toets",                                                                      "1", 
     "03 Ongepaarde t-toets",                                                                    "1", 
-    "04 Repeated measures ANOVA",                                                               "0", 
+    "04 Repeated measures ANOVA",                                                               "1", 
     "05 One-way ANOVA",                                                                         "1", 
     "06 Tekentoets I",                                                                          "1", 
     "07 Wilcoxon signed rank toets I",                                                          "1", 

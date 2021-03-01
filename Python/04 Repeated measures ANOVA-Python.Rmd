@@ -72,14 +72,18 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 Om een valide toetsresultaat te bereiken met de *repeated measures ANOVA* moet de data aan een aantal voorwaarden voldoen: normaliteit, sphericiteit en onafhankelijkheid.[^1] Onafhankelijkheid houdt in dat de herhaalde metingen van de deelnemers[^12] onafhankelijk van elkaar zijn.
 
 ## Normaliteit
-<!-- ## TEKSTBLOK: link1.R -->
+<!-- ## TEKSTBLOK: link1.py -->
 De assumptie van normaliteit houdt in dat er een normale
-verdeling van de afhankelijke variabele is in elke groep van metingen. Wanneer er duidelijke afwijkingen van normaliteit zijn,
+verdeling van de afhankelijke variabele is in elke groep. Wanneer er duidelijke afwijkingen van normaliteit zijn,
 is het transformeren van de data een optie.[^2] Een andere optie is het gebruik van de nonparametrische
-[Friedman's ANOVA](09-Friedmans-ANOVA-R.html) waar normaliteit geen assumptie is.[^3] Controleer de assumptie van normaliteit voor elke groep van metingen met de volgende stappen:  
+[Friedman's ANOVA](09-Friedmans-ANOVA-Python.html) waar normaliteit geen assumptie is.[^3] Controleer de assumptie van normaliteit voor elke groep met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
-2. Toets of de data normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^4]<sup>, </sup>[^5]  
-<!-- ## /TEKSTBLOK: link1.R -->
+2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^4]<sup>, </sup>[^5]  
+<!-- ## /TEKSTBLOK: link1.py -->
+
+De eerste stap heeft als doel een goede indruk te krijgen van de verdeling van de steekproef. In de tweede stap wordt de assumptie van normaliteit getoetst. De statistische toets laat zien of de verdeling van de observaties van een groep voldoet aan de assumptie van normaliteit. Voor alle groepen moet er voldaan zijn aan de assumptie van normaliteit.
+
+Als er niet voldaan is aan normaliteit, is het transformeren van de data een optie.[^2] Een andere optie is het gebruik van de nonparametrische [Friedman's ANOVA](09-Friedmans-ANOVA-R.html) waar normaliteit geen assumptie is.[^3] De *repeated measures ANOVA* is echter ook een robuuste toets ten opzichte van de assumptie van normaliteit. Als elke groep een aantal observaties (*n*) heeft dat groter dan 100 is,  ga er dan vanuit dat de *repeated measures ANOVA* robuust genoeg is om uit te voeren zonder dat de afhankelijke variabele een normale verdeling volgt.
 
 ## Sphericiteit
 De assumptie van sphericiteit houdt in dat de variantie van de verschilscores tussen groepen van metingen ongeveer aan elkaar gelijk zijn.[^6] In deze casus zijn dat de verschilscores tussen de drie vakken: Lineaire Algebra minus Relativiteitstheorie, Relativiteitstheorie minus Kosmologie en Kosmologie minus Lineaire Algebra. Toets deze assumptie met *Mauchly's test*. Wanneer de data niet aan de assumptie voldoen, geeft de gewone *repeated measures ANOVA* een verkeerd resultaat. Er zijn echter correcties die gebruikt kunnen worden wanneer de data niet aan sphericiteit voldoen. Een voorbeeld van mogelijke output van *Mauchly's test* in R is hieronder weergegeven.
@@ -98,7 +102,7 @@ $`Sphericity Corrections`
 
 <!-- ## TEKSTBLOK: Sphericiteit1.py -->
 Bij een p-waarde < 0,05, toont *Mauchly's test* dat de assumptie van sphericiteit geschonden is. In de output is dit te zien aan de p-waarde van 0,0051 onder ` $Mauchly's Test for Sphericity `. Er zijn twee mogelijke correcties wanneer er geen sphericiteit is: de Greenhouse-Geisser (GG) en Huynh-Feldt (HF) correctie. De Greenhouse-Geisser correctie staat bekend als conservatief, wat betekent dat de correctie een relatief lage kans op een type I fout heeft. In andere woorden, het zal niet vaak gebeuren dat deze correctie een significant effect aantoont wanneer dat er in werkelijkheid niet is. De Huynh-Feldt correctie staat echter bekend als liberaal, wat betekent dat er een relatief hoge kans op een type I fout is. De teststatistiek en p-waarde van beide correcties zijn in de output te vinden onder ` $Sphericity Corrections `.
-<!-- ## TEKSTBLOK: Sphericiteit1.py -->
+<!-- ## /TEKSTBLOK: Sphericiteit1.py -->
 
 Houd de volgende richtlijnen aan bij het interpreteren van de *repeated measures ANOVA* wanneer niet aan sphericiteit is voldaan:
 
@@ -181,7 +185,7 @@ print(np.std(Studieuren_lineaire_algebra))
 # Aantal observaties
 print(len(Studieuren_lineaire_algebra))
 ```
-<!-- ## OPENBLOK: Data-beschrijven1.py -->
+<!-- ## /OPENBLOK: Data-beschrijven1.py -->
   </div>
   <div class = "col">
 <!-- ## OPENBLOK: Data-beschrijven2.py -->
@@ -193,7 +197,7 @@ print(np.std(Studieuren_relativiteitstheorie))
 # Aantal observaties
 print(len(Studieuren_relativiteitstheorie))
 ```
-<!-- ## OPENBLOK: Data-beschrijven2.py -->
+<!-- ## /OPENBLOK: Data-beschrijven2.py -->
   </div>
   <div class = "col">
 <!-- ## OPENBLOK: Data-beschrijven3.py -->
@@ -234,7 +238,7 @@ vN_KL = np.size(Studieuren_kosmologie)
 <!-- ## /TEKSTBLOK: Datatekst-beschrijven.py -->
 
 ## Visuele inspectie van normaliteit
-Geef de verdeling van de data visueel weer met een histogram, Q-Q plot en boxplot.
+Geef de verdeling van de studieuren voor elke groep visueel weer met een histogram, Q-Q plot en boxplot.
 
 ### Histogram
 
@@ -301,11 +305,11 @@ ylab = plt.ylabel("Kwantielen in data")
 plt.show()
 
 ```
-<!-- ## OPENBLOK: QQplot3.py -->
+<!-- ## /OPENBLOK: QQplot3.py -->
   </div>
 </div>
 
-Bij alle drie de Q-Q plots liggen de punten rond de lijn die normaliteit aangeeft; vermoedelijk zijn deze data normaal verdeeld.
+Bij alle drie de Q-Q plots liggen de punten rond de lijn die normaliteit aangeeft; vermoedelijk zijn de studieuren voor elke groep normaal verdeeld.
 
 ### Boxplot
 De box geeft de middelste 50% van het aantal studieuren per week weer. De zwarte lijn binnen de box is de mediaan. In de staarten of snorreharen zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9]<sup>, </sup>[^10] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen van metingen. 
@@ -324,10 +328,11 @@ De boxplotten geven de spreiding weer van het aantal studieuren voor de drie vak
 
 
 ## Toetsen van normaliteit
-Om te controleren of de verdelingen van de vakken normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
+Om te controleren of de verdelingen van de studieuren voor elk vak normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov
 De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is vereist als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn, wat meestal het geval is bij een steekproef. Als de p-waarde kleiner dan 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
+
 <!-- ## TEKSTBLOK: Lilliefors-test1.py -->
 De standaard interpretatie van een statitische toets in Python is: `(<teststatistiek>, <p-waarde>)`. Verder toetst Python standaard tweezijdig.
 <!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
@@ -351,7 +356,7 @@ print(smod.lilliefors(Studieuren_lineaire_algebra, pvalmethod="table"))
 ``` {python Lilliefors Test-2, warning=FALSE}
 print(smod.lilliefors(Studieuren_relativiteitstheorie, pvalmethod="table"))
 ```
-<!-- ## OPENBLOK: Lilliefors-test-2.py -->
+<!-- ## /OPENBLOK: Lilliefors-test-2.py -->
   </div>
   <div class = "col">
 <!-- ## OPENBLOK: Lilliefors-test-3.py -->
@@ -370,11 +375,12 @@ De *Shapiro-Wilk test* is een soortgelijke toets als de *Kolmogorov-Smirnov test
 <div class="col-container"> 
   <div class="col">
 <!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
-``` {python Shapiro-Wilk Test-3, warning=FALSE}
+``` {python Shapiro-Wilk Test-1, warning=FALSE}
 import scipy.stats as stats
-print(stats.shapiro(Studieuren_kosmologie))
+print(stats.shapiro(Studieuren_lineaire_algebra))
+
 ```
-<!-- ## OPENBLOK: Shapiro-Wilk-test-1.py -->
+<!-- ## /OPENBLOK: Shapiro-Wilk-test-1.py -->
   </div>
   <div class= "col">
 <!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
@@ -383,14 +389,13 @@ import scipy.stats as stats
 print(stats.shapiro(Studieuren_relativiteitstheorie))
 
 ```
-<!-- ## OPENBLOK: Shapiro-Wilk-test-2.py -->
+<!-- ## /OPENBLOK: Shapiro-Wilk-test-2.py -->
   </div>
   <div class= "col"> 
 <!-- ## OPENBLOK: Shapiro-Wilk-test-3.py -->
-``` {python Shapiro-Wilk Test-1, warning=FALSE}
+``` {python Shapiro-Wilk Test-3, warning=FALSE}
 import scipy.stats as stats
-print(stats.shapiro(Studieuren_lineaire_algebra))
-
+print(stats.shapiro(Studieuren_kosmologie))
 ```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-3.py -->
   </div>
@@ -402,7 +407,8 @@ De p-waarde is groter dan 0,05 voor elk vak, dus er is geen significant verschil
 ## Repeated measures ANOVA 
 
 <!-- ## TEKSTBLOK: repeatedmeasuresANOVA1.py -->
-Voer de *repeated measures ANOVA* uit om de vraag te beantwoorden of er verschillen zijn tussen het aantal studieuren voor de vakken in de eerste onderwijsperiode van het eerste jaar van de bachelor Technische Natuurkunde. Gebruik de functie `rm_anova` van het package `pingouin` met als argumenten de dataset `dfStudieuren_technische_natuurkunde`, de afhankelijke variabele `dv = 'Studieuren'`, de onafhankelijke variabele `within = 'Vak'`, de variabele die de observaties aangeeft `subject = 'Studentnummer'` en `detailed = True` om een uitgebreide tabel met resultaten te verkrijgen.
+Voer de *repeated measures ANOVA* uit om de vraag te beantwoorden of er verschillen zijn tussen het aantal studieuren voor de vakken in de eerste onderwijsperiode van het eerste jaar van de bachelor Technische Natuurkunde. Gebruik de functie `rm_anova` van het package `pingouin` met als argumenten de dataset `dfStudieuren_technische_natuurkunde`, de afhankelijke variabele `dv = 'Studieuren'`, de onafhankelijke variabele `within = 'Vak'`, de variabele die de observaties aangeeft `subject = 'Studentnummer'`, `correction = True` om ook *Mauchly's test* uit te voeren en de resultaten voor de Greenhouse-Geisser correctie te laten, en `effsize = 'n2'` om *eta squared* als effectmaat te gebruiken.
+
 <!-- ## /TEKSTBLOK: repeatedmeasuresANOVA1.py -->
 
 <!-- ## OPENBLOK: repeatedmeasuresANOVA2.py -->
@@ -414,14 +420,13 @@ import pingouin as pg
 aov = pg.rm_anova(data = dfStudieuren_technische_natuurkunde, 
 dv = 'Studieuren', 
 within = 'Vak',
-subject = 'Studentnummer')
+subject = 'Studentnummer',
+correction = True,
+effsize = 'n2')
 
-# Print de resultaten van Mauchly's test
-print(aov[['eps','p-GG-corr','W-spher','p-spher','sphericity']])
-
-# Print de resultaten van repeated measures ANOVA
-print(aov[['Source','ddof1','ddof2','F','p-unc','np2']])
-#aov['p-GG-corr']
+# Print de resultaten van repeated measures ANOVA. Omdat de output veel kolommen heeft, wordt het in twee helften geprint zodat alles zichtbaar is in de output
+print(aov.iloc[:,:7])
+print(aov.iloc[:,7:])
 ```
 <!-- ## /OPENBLOK: repeatedmeasuresANOVA2.py -->
 
@@ -431,20 +436,23 @@ import pingouin as pg
 aov2 = pg.rm_anova(data = dfStudieuren_technische_natuurkunde, 
 dv = 'Studieuren', 
 within = 'Vak',
-subject = 'Studentnummer')
+subject = 'Studentnummer',
+correction = True,
+effsize = 'n2')
 
 Mauchly_W = aov2['W-spher']
+Mauchly_p = aov2['p-spher']
 GG_F = aov2['eps']
-eta2 = aov2['np2']
+eta2 = aov2['n2']
 ```
 <!-- ## /CLOSEDBLOK: repeatedmeasuresANOVA3.py -->
 
 <!-- ## TEKSTBLOK: repeatedmeasuresANOVA4.py -->
 
-* *Mauchly's test* toont aan dat de assumptie van sphericiteit niet standthoudt in deze casus ($\chi^2$ = `r Round_and_format(py$Mauchly_W)`, p < 0,0001); gebruik in dit geval een van de correcties. In Python is alleen de (conservatieve) Greenhouse-Geisser correctie mogelijk, dus rapporteer deze.
-* De data voldoet niet aan de assumptie van sphericiteit, $\chi^2$ = `r Round_and_format(py$Mauchly_W)`, p < 0,0001
+* *Mauchly's test* toont aan dat de assumptie van sphericiteit niet standthoudt in deze casus ($\chi^2$ = `r Round_and_format(py$Mauchly_W)`, p < 0,0001); gebruik in dit geval een van de correcties. In Python is alleen de (conservatieve) Greenhouse-Geisser correctie mogelijk, dus rapporteer deze. Wil je de toets op de geadviseerde manier (zowel de Greenhouse-Geisser als de Huynh-Feldt correctie uitvoeren en daarna vergelijken), dan moet de toets uitgevoerd worden in de programmeertaal R.
+* De data voldoet aan de assumptie van sphericiteit, $\chi^2$ = `r Round_and_format(py$Mauchly_W)`, p = `r Round_and_format(py$Mauchly_p, 3)`
 * De resultaten van de Greenhouse-Geisser correctie zijn *F* = `r Round_and_format(py$GG_F)`, p < 0,0001, *η^2^* = `r Round_and_format(py$eta2)`
-* De p-waarde < 0,05, dus de H~0~ wordt verworpen.[^11]
+* De p-waarde is kleiner dan 0,05, dus de H~0~ wordt verworpen.[^11]
 * Er is een significant verschil tussen het aantal studieuren voor de drie vakken in de eerste onderwijsperiode; het effect van de verschillende vakken op het aantal studieuren is groot
 
 <!-- ## /TEKSTBLOK: repeatedmeasuresANOVA4.py -->
@@ -471,7 +479,6 @@ parametric = True)
 
 # Print de benodigde resultaten
 print(post_hoc[['A', 'B', 'T', 'p-corr']])
-
 ```
 <!-- ## /OPENBLOK: posthoc2.py -->
 
@@ -487,7 +494,7 @@ parametric = True)
 
 # Sla de p-waarde van niet significante toets op
 pwaardes = phtest['p-corr']
-pwaarde_niet_significant = pwaardes[1]
+pwaarde_niet_significant = pwaardes[0]
 
 ```
 <!-- ## /CLOSEDBLOK: posthoc3.py -->
@@ -495,7 +502,7 @@ pwaarde_niet_significant = pwaardes[1]
 <!-- ## /TEKSTBLOK: posthoc4.py -->
 * Er is een significant verschil tussen Lineaire algebra en Relativiteitstheorie, *MD* = `r Round_and_format(py$Verschil_gemiddelde_LA_RT)`, p < 0,0001
 * Er is een significant verschil tussen Relativiteitstheorie en Kosmologie, *MD* = `r Round_and_format(py$Verschil_gemiddelde_RT_KL)`, p < 0,0001
-* Er is geen significant verschil tussen Kosmologie en Lineaire algebra, *MD* = `r Round_and_format(py$Verschil_gemiddelde_KL_LA)`, p = `r Round_and_format(py$pwaarde_niet_significant)`
+* Er is geen significant verschil tussen Kosmologie en Lineaire algebra, *MD* = `r Round_and_format(py$Verschil_gemiddelde_KL_LA)`, p = `r Round_and_format(py$pwaarde_niet_significant, 3)`
 
 <!-- ## /TEKSTBLOK: posthoc4.py -->
 
@@ -503,7 +510,8 @@ pwaarde_niet_significant = pwaardes[1]
 # Rapportage
 
 <!-- ## TEKSTBLOK: rapportage.py -->
-Een *repeated measures ANOVA* is uitgevoerd om te onderzoeken of er verschillen zijn tussen het aantal studieuren dat eerstejaars studenten van de bachelor Technische Natuurkunde besteden aan de vakken in de eerste onderwijsperiode. De vakken zijn Lineaire Algebra, Relativiteitstheorie en Kosmologie; beschrijvende statistieken zijn te vinden in Tabel 1. De data voldoen niet aan de assumptie van sphericiteit ($\chi^2$ = `r Round_and_format(py$Mauchly_W)`, p < 0,0001), daarom is de Greenhouse-Geisser correctie gebruikt. Het aantal studieuren voor de drie vakken in de eerste onderwijsperiode verschilt significant van elkaar, *F* = `r Round_and_format(py$GG_F)`, p < 0,0001, *η^2^* = `r Round_and_format(py$eta2)`. De sterkte van het effect van het vak op het aantal studieuren is groot. Post-hoc toetsen - waarbij een Bonferroni correctie is toegepast om te corrigeren voor meerdere toetsen -  tonen aan dat het aantal studieuren voor het vak Relativiteitstheorie significant verschilt van het aantal studieuren voor zowel het vak Lineaire Algebra als Kosmologie (voor beide p < 0,0001), maar dat er geen significant verschil is tussen de vakken Lineaire Algebra en Kosmologie (p = `r Round_and_format(py$pwaarde_niet_significant)`. De resultaten suggereren dat eerstejaars studenten van de bachelor Technische Natuurkunde een hoger aantal uren steken in het vak Relativiteitstheorie dan in de vakken Lineaire Algebra en Kosmologie.
+Een *repeated measures ANOVA* is uitgevoerd om te onderzoeken of er verschillen zijn tussen het aantal studieuren dat eerstejaars studenten van de bachelor Technische Natuurkunde besteden aan de vakken in de eerste onderwijsperiode. De vakken zijn Lineaire Algebra, Relativiteitstheorie en Kosmologie; beschrijvende statistieken zijn te vinden in Tabel 1. De data voldoet aan de assumptie van sphericiteit ($\chi^2$ = `r Round_and_format(py$Mauchly_W)`,  p = `r Round_and_format(py$Mauchly_p, 3)`), daarom is er geen correctie gebruikt. Het aantal studieuren voor de drie vakken in de eerste onderwijsperiode verschilt significant van elkaar, *F* = `r Round_and_format(py$GG_F)`, p < 0,0001, *η^2^* = `r Round_and_format(py$eta2)`. De sterkte van het effect van het vak op het aantal studieuren is groot. Post-hoc toetsen - waarbij een Bonferroni correctie is toegepast om te corrigeren voor meerdere toetsen -  tonen aan dat het aantal studieuren voor het vak Relativiteitstheorie significant verschilt van het aantal studieuren voor zowel het vak Lineaire Algebra als Kosmologie (voor beide p < 0,0001) en dat er een significant verschil is tussen de vakken Lineaire Algebra en Kosmologie (p = `r Round_and_format(py$pwaarde_niet_significant, 3)`). De resultaten suggereren dat eerstejaars studenten van de bachelor Technische Natuurkunde de meeste uren steken in het vak Relativiteitstheorie en daarna iets meer uren in het vak Kosmologie dan dan in het vak Lineaire Algebra.
+
 
 | Opleiding     | M          | SD          | N          |
 | ------------- | ---------- | ---------- | ----------- |

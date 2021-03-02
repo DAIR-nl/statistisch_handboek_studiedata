@@ -66,7 +66,7 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 
 # McNemar toets
 
-De *McNemar toets* of er verschillen zijn tussen de frequenties van een binaire variabele tussen twee gepaarde groepen. In de huidige casus gaat het om de frequenties van studenten die wel of niet gebruik maken van de Financiële Ondersteuning Studenten (FOS). De twee gepaarde groepen zijn het meetmoment in december en het meetmoment in juni. Er zijn meerdere methoden om de p-waarde van de *McNemar toets* te berekenen. De *mid p-value* methode is het beste qua onderscheidend vermogen[^7] en type I fout[^8]. Bij deze methode wordt de p-waarde op een exacte manier berekend waarna een correctie wordt toegepast.[^9] Meer informatie over de verschillende methoden van de *McNemar toets* is te vinden in [dit artikel](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3716987/).
+De *McNemar toets* toetst of er verschillen zijn tussen de frequenties van een binaire variabele tussen twee gepaarde groepen. In de huidige casus gaat het om de frequenties van studenten die wel of niet gebruik maken van de Financiële Ondersteuning Studenten (FOS). De twee gepaarde groepen zijn het meetmoment in december en het meetmoment in juni. Er zijn meerdere methoden om de p-waarde van de *McNemar toets* te berekenen. De *mid p-value* methode is het beste qua onderscheidend vermogen[^7] en type I fout[^8]. Bij deze methode wordt de p-waarde op een exacte manier berekend waarna een correctie wordt toegepast.[^9] Meer informatie over de verschillende methoden van de *McNemar toets* is te vinden in [dit artikel](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3716987/).
 
 # Assumpties
 
@@ -191,12 +191,15 @@ Bereken het verschil tussen de proporties studenten dat een beroep doet op de FO
 
 <!-- ## OPENBLOK: McNemar-toets5.R -->
 ```{r verschil proportie}
-# Bereken de proporties FOS voor juni en december
-Proportie_FOS_juni <- sum(FOS_studenten_frequentiematrix[,"ja"])/sum(FOS_studenten_frequentiematrix)
-Proportie_FOS_december <- sum(FOS_studenten_frequentiematrix["ja",])/sum(FOS_studenten_frequentiematrix)
+## Maak een kruistabel
+FOS_studenten_kruistabel <- table(FOS_studenten$`FOS`, FOS_studenten$Maand)
+
+## Print een tabel met proporties, tweede argument 2 zorgt ervoor dat de 
+## proporties per kolom berekend worden
+FOS_studenten_kruistabel_proporties <- prop.table(FOS_studenten_kruistabel, 2)
 
 # Bereken het verschil in proporties
-Verschil_proporties <- Proportie_FOS_juni - Proportie_FOS_december
+Verschil_proporties <- FOS_studenten_kruistabel_proporties["ja", "juni"] - FOS_studenten_kruistabel_proporties["ja", "december"]
 
 # Print het verschil in proporties
 Verschil_proporties
@@ -230,8 +233,6 @@ De *McNemar toets* is uitgevoerd om uit te vinden of er een verschil is in de fr
 [^1]: Binaire variabelen: twee elkaar uitsluitende waarden, zoals ja of nee, 0 of 1, aan of uit. 
 [^2]: Van Geloven, N., & Holman, R., (4 juni 2014). *McNemar toets*. [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/McNemar_toets). 
 [^3]: Laerd statistics (2018). *McNemar's test using SPSS Statistics*. [Laerd statistics](https://statistics.laerd.com/spss-tutorials/mcnemars-test-using-spss-statistics.php) 
-[^4]: Agresti, A. (2003). *Categorical data analysis*. Vol. 482, John Wiley & Sons.
-[^5]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
 [^6]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten. 
 [^7]: Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese waar is.
 [^8]: Een type I fout is de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is.

@@ -60,9 +60,9 @@ De opleidingsdirecteur van de bachelor Technische Natuurkunde van een universite
 
 Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.
 
-*H~0~*: Het aantal studieuren per week van eerstejaars studenten van de bachelor Technische Natuurkunde is hetzelfde voor de drie vakken in de eerste onderwijsperiode
+*H~0~*: Het gemiddeld aantal studieuren per week van eerstejaars studenten van de bachelor Technische Natuurkunde is hetzelfde voor de drie vakken in de eerste onderwijsperiode
 
-*H~A~*: Het aantal studieuren per week van eerstejaars studenten van de bachelor Technsiche Natuurkunde is niet hetzelfde voor de drie vakken in de eerste onderwijsperiode
+*H~A~*: Het gemiddeld aantal studieuren per week van eerstejaars studenten van de bachelor Technsiche Natuurkunde is niet hetzelfde voor de drie vakken in de eerste onderwijsperiode
 
 </div>
 

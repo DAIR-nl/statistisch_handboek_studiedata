@@ -158,6 +158,7 @@ head(Gemiddelde_cijfers_psychologie)
 ## Laatste 5 observaties
 tail(Gemiddelde_cijfers_psychologie)
 ```
+<!-- ## /OPENBLOK: Data-bekijken.R -->
 
 
 <!-- ## TEKSTBLOK: Data-beschrijven.R -->

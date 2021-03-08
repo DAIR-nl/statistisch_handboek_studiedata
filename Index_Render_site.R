@@ -28,7 +28,15 @@
 ## 17-06-2020: EG: Toetsmatrix II toegevoegd
 ## 04-08-2020: EG: Toetspagina 28 regressie toegevoegd
 ## 03-09-2020: TB: tribble vereenvoudigd voor numerieke waarden en kopjes 
+## 08-03-2021: EG: Toelichting toegevoegd en uitgebreid commentaar
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Toelichting: in dit script wordt een map klaargemaakt die gebruikt wordt om de
+## website aan te maken en te updaten. Dit is daarom een erg belangrijk script. 
+## De website is in feite een verzameling html-documenten in een map. De map die
+## aangemaakt wordt heet _site, hierin staan alle bestanden die op de website 
+## komen. De map staat direct in de map SHHO. De map _site wordt in WINSCP 
+## geüpload, op deze manier kan de website gewijzigd worden.
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 00 VOORBEREIDINGEN ####
@@ -40,6 +48,19 @@ source("99. Functies en Libraries/00. Voorbereidingen.R")
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 01 BEPAAL WELKE TOETSEN GEMAAKT MOETEN WORDEN ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Maak een lijst met alle toetsen waarvoor een html-toetspagina gemaakt moet
+## worden voor op de website. De rijen zijn gelijk aan alle toetspagina's die er
+## zijn. De kolommen bestaan uit ~InGebruik_R, ~Review_R, ~InGebruik_Python en 
+## ~Review_Python. Geef voor de kolom ~InGebruik_R met een 1 aan dat voor die
+## toets een html-document gemaakt moet worden en met 0 aan dat dit niet hoeft.
+## Dit geldt hetzelfde voor ~InGebruik_Python. Geef in de kolom ~Review_R aan
+## met een 1 dat de toetspagina al door alle reviewrondes heen is gegaan en met
+## een 0 aan dat dit niet zo is. Als de toetspagina nog niet door alle review-
+## rondes heen is, komt er bovenaan de html-toetspagina een disclaimer te staan.
+## Voor de kolom ~Review_Python geldt weer hetzelfde. Let dus op dat bij een 
+## nieuwe toets de lijst dus gewijzigd moet worden.
+
 
 ## Bepaal de lijst van toetsen; wijzig 0 in 1 om in gebruik te nemen
 dfToetsen <- tribble(
@@ -116,18 +137,22 @@ dfToetsen <- tribble(
 ## 01.1 MAAK WEBSITE ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+## In dit deel worden instellingen bepaald, wordt de map _site eerst verwijderd
+## en daarna opnieuw opgebouwd.
+
 ## Bepaal de modus; deze bepaalt de opbouw van de paden
 sModus <- "Root"
 
 ## lProgrammeertalen
 lProgrammeertalen <- c("R","Python")
 
-## Verwijder de site root
+## Verwijder de map _site in SHHO
 rmarkdown::clean_site(preview = FALSE,
                       quiet = FALSE,
                       encoding = "UTF-8")
 
-# Maak de nieuwe website
+## Maak een nieuwe map _site en render daarin een aantal markdown-bestanden om
+## daarmee html-pagina's aan te maken voor in de map _site
 rmarkdown::render_site(
   output_format = "html_document",
   envir = parent.frame(),
@@ -139,14 +164,18 @@ rmarkdown::render_site(
 ## 01.2 MAAK IMAGE FOLDER ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-## Als images folder niet bestaat, maak deze dan aan
+## In dit deel worden de images uit de map SHHO/01. Includes/images 
+## gekopieerd naar de map _site/images. De images zijn nodig voor op de website.
+
+## Als images folder nog niet bestaat, maak deze dan aan in de map _site
 ifelse(!dir.exists("_site/images"), dir.create("_site/images"), FALSE)
 
+## Benoem de oude map, nieuwe map en een lijst met images
 current_folder <- "01. Includes/images/"
 new_folder     <- "_site/images"
 list_of_files  <- list.files(current_folder) 
 
-## Kopieer het logo naar deze folder
+## Kopieer de images van de oude naar de nieuwe map
 file.copy(file.path(current_folder,list_of_files), new_folder, 
           overwrite = TRUE, 
           recursive = FALSE,
@@ -156,9 +185,10 @@ file.copy(file.path(current_folder,list_of_files), new_folder,
 ## 01.3 MAAK DE TOETSMATRIX ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-## We maken 2x de toetsmatrix: 1x voor R en 1x voor Python.
-## Als de R of Python folder niet bestaan, maak deze dan aan
-## en maak vervolgens de bijbehorende toetsmatrix op basis van de modus
+## We maken 2x de pagina met de toetsmatrices: 1x voor R en 1x voor Python.
+## Als de R of Python map nog niet bestaan in de map _site, maak deze dan aan
+## en maak vervolgens het bijbehorende html-document voor de bijbehorende 
+## pagina met daarop de toetsmatrices en de uitleg daaromheen
 
 for (p in lProgrammeertalen) {
   ifelse(!dir.exists(paste0("_site/", p)), dir.create(paste0("_site/", p)), FALSE)
@@ -170,6 +200,11 @@ for (p in lProgrammeertalen) {
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 02.1 MAAK R BESTANDEN ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## In dit blok wordt voor elk markdown document in de map SHHO/R waarvan in
+## dfToetsen is aangegeven dat de toets in gebruik is een html-pagina gemaakt
+## op basis van het markdown document. De html-documenten komen te staan in de 
+## map _site/R .
 
 ## Loop over de toetsen die in gebruik zijn en genereer die pagina's
 for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_R == 1]) {
@@ -183,6 +218,11 @@ for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_R == 1]) {
 ## 02.2 MAAK PYTHON BESTANDEN ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+## In dit blok wordt voor elk markdown document in de map SHHO/Python waarvan in
+## dfToetsen is aangegeven dat de toets in gebruik is een html-pagina gemaakt
+## op basis van het markdown document. De html-documenten komen te staan in de 
+## map _site/Python .
+
 ## Loop over de toetsen die in gebruik zijn en genereer die pagina's
 for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_Python == 1]) {
     sModus <- "Python"
@@ -194,6 +234,10 @@ for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_Python == 1]) {
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 02.3 KOPIEER SITEMAP EN GOOGLE VERIFICATIECODE ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## In dit deel worden twee bestanden naar de map _site gekopieerd die ervoor
+## zorgen dat de website beter gevonden kan worden via google doordat ie hoger
+## in de lijst met zoekresultaten komt te staan.
 
 ## Kopieer het html bestand voor Google
 current_folder <- "01. Includes/google/"
@@ -221,9 +265,20 @@ file.copy(file.path(current_folder,list_of_files), new_folder,
 ## 03 CONTROLEER DE UITKOMST ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-# Bekijk de nieuwe website
+## In dit deel kan de website alvast bekeken worden. Door deze regels te runnen
+## opent er een webpagina in je browser waarin te zien is hoe de website eruit
+## komt te zien. Hier kan je ook op de verschillende onderdelen van de website
+## klikken en onderzoeken of het allemaal werkt zoals het zou moeten werken.
+
+## Bekijk de nieuwe website
 output_file <- file.path(here::here(), "_site/index.html")
 browseURL(output_file)
+
+## Nu is de map _site compleet gevuld met alle documenten die nodig zijn. De map
+## kan nu in het programma WINSP geüpload worden, op deze manier wordt de
+## website gewijzigd. Ndata de map _site via WINSCP is geüpload, moet het script
+## Index_Sitemap.R gerund worden. In dat bestand wordt de sitemap aangepast op
+## basis van de vernieuwde website.
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 04 RUIM OP ####

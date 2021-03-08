@@ -285,7 +285,7 @@ De significante verschillen op de post-hoc toetsen zijn:
 * Het aantal voldoendes in periode 2 (Som = `r Round_and_format(Som_2_3[[1]])`) verschilt significant van het aantal voldoendes in periode 3 (Som = `r Round_and_format(Som_2_3[[2]])`), *p* = 0,031. De hogere som van rangnummers in periode 2 duidt erop dat het aantal voldoendes hoger is in periode 2 ten opzichte van periode 3.
 * Het aantal voldoendes in periode 3 (Som = `r Round_and_format(Som_3_4[[1]])`) verschilt significant van het aantal voldoendes in periode 4 (Som = `r Round_and_format(Som_3_4[[2]])`), *p* < 0,0001. De hogere som van rangnummers in periode 4 duidt erop dat het aantal voldoendes hoger is in periode 4 ten opzichte van periode 3.
 
-<!-- ## /TEKSTBLOK: Mann-Whitney-U-test3.R -->
+<!-- ## /TEKSTBLOK: posthoc7.R -->
 
 
 # Rapportage

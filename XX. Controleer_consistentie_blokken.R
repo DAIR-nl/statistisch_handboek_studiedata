@@ -2,7 +2,7 @@
 ## Controleer_consistentie_blokken.R ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## R code voor het Statistisch Handboek van het Versnellingsplan
-## Copyright 2020 VU
+## Copyright 2021 VU
 ## Web Page: http://www.vu.nl
 ## Contact: Theo Bakker (t.c.bakker@vu.nl)
 ##
@@ -20,6 +20,14 @@
 ## Geschiedenis:
 ## 26-01-2020: TB: Aanmaak bestand
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Toelichting: Dit bestand onderzoekt of er blokken zijn gemaakt waarvan de naam
+## niet compleet gedefinieerd is. Elk blok wordt eerst geopend en daarna gesloten.
+## In dit script wordt voor alle toetspagina's gecheckt of er blokken zijn waarbij
+## de opening of de sluiting ontbreekt. Deze worden met bijbehorende toetspagina
+## en regelnummer opgeslagen in een dataframe. Op deze manier kunnen alle
+## toetspagina's hierop gecontroleerd worden. Het is handig om dit eens in de
+## zoveel tijd te checken.
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 00 VOORBEREIDINGEN ####
@@ -65,12 +73,13 @@ Bepaal_code_wezen <- function(Bestandsnaam) {
 ## 02 BEPAAL DE FOUTEN DIE VOORKOMEN IN R EN PYTHON ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-## Bepaal de Python bestanden
+## Bepaal de Python chunk bestanden
 Bestanden <- dir(path = "04. Python chunks", 
              pattern = "*.Rmd",
              full.names = TRUE)
 
-dfFouten_Python <- Bestanden %>%
+## Maak een dataset met fouten in Python chunk bestanden
+dfFouten_Python_chunks <- Bestanden %>%
   map(Bepaal_code_wezen) %>%    
   reduce(rbind)
 
@@ -79,6 +88,7 @@ Bestanden <- dir(path = "R",
              pattern = "*.Rmd",
              full.names = TRUE)
 
+## Maak een dataset met fouten in R bestanden
 dfFouten_R <- Bestanden %>%
   map(Bepaal_code_wezen) %>%    
   reduce(rbind)
@@ -86,4 +96,4 @@ dfFouten_R <- Bestanden %>%
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 02 RUIM OP ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-rm(Bestanden, sRegEx, Bepaal_code_wezen)
+rm(Bestanden, sRegEx, Bepaal_code_wezen, dfFouten_Python_chunks, dfFouten_R)

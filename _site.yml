@@ -6,4 +6,4 @@ output:
   html_document:
     theme: lumen
     highlight: textmate
-exclude: ["01. Includes", "02. Rapportages", "03. Test", "04. Python chunks", "05. Datasets", "99. Functies en Libraries","999. Archief", "R", "Python", "SPSS", "*.R", "*.csv"]
+exclude: ["01. Includes", "02. Overdracht", "04. Python chunks", "05. Datasets", "99. Functies en Libraries","999. Archief", "R", "Python", "SPSS", "*.R", "*.csv"]

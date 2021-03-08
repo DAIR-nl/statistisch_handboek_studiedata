@@ -190,6 +190,8 @@ head(Resultaten_SCM)
 ## Laatste 5 observaties
 tail(Resultaten_SCM)
 ```
+<!-- ## /OPENBLOK: Data-bekijken.R -->
+
 
 
 <!-- ## TEKSTBLOK: Data-beschrijven.R -->

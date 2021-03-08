@@ -21,7 +21,20 @@
 ## 11-01-2020: TB: Aanmaak bestand
 ## 25-01-2020: TB: Aanvulling voor verschillende codeblokken
 ## 28-01-2020: TB: Nieuwe versie zonder het wegschrijven van snippets
+## 08-03-2021: EG: Toelichting toevoegen en uitgebreider commenten
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Toelichting: in dit script worden de Python chunks omgezet in Python 
+## toetspagina's. In de Python chunks is voor alle blokken alternatieve tekst
+## of code ingevuld die de tekst of code in de blokken van de R toetspagina
+## moet vervangen. In dit script wordt een markdown document gemaakt om
+## Python toetspagina's te kunnen maken. Dit wordt gedaan door in het markdown-
+## document voor de toetspagina's in R de blokken te vervangen door de blokken
+## gedefinieerd in de Python chunks bestanden. De Python toetspagina's zijn
+## markdown documenten die later weer gerund worden om zo html-documenten met
+## Python code voor de site te hebben. De Python chunks staan in de map 
+## SHHO/04. Python chunks, de Python toetspagina's worden opgeslagen in de map
+## SHHO/Python.
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 00 VOORBEREIDINGEN ####
@@ -37,7 +50,11 @@ bDebug <- F
 ## 01 BEPAAL DE TOETSEN DIE GEMERGED MOETEN WORDEN ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-## Bepaal de lijst van toetsen; wijzig 0 in 1 om in gebruik te nemen
+## Geef in de lijst de toetsen aan waarvoor de Python markdown documenten 
+## aangemaakt moeten worden. Met een 1 wordt aangegeven dat voor deze toets een
+## Python markdown document aangemaakt moet worden op basis van de Python 
+## chunks. Voor de toetsen met een 0 wordt deze niet aangemaakt. Bij een nieuwe
+## toets moet de lijst dus gewijzigd worden.
 dfToetsen <- tribble(
     ~Toets, ~InGebruik,
     "01 One sample t-toets",                                                                    "1", 
@@ -70,17 +87,19 @@ dfToetsen <- tribble(
 )
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## 02 LEES R MARKDOWN EN PYTHON ####
+## 02 MAAK PYTHON TOETSPAGINA'S ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## In dit deel van de code wordt voor elke toets uit de lijst een Python
+## markdown document aangemaakt op basis van de Python chunks.
 
 ## Verwerk codeblokken met OPENBLOK, TEKSTBLOK
 sRegEx <- "## [/]{0,1}[A-Z]{4,6}BLOK: "
-# EG: snap ik niet
 
-## Loop over de toetsen die in gebruik zijn
+## Loop over de toetsen die in gebruik zijn op basis van de lijst hierboven
 for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
 
-    ## Bepaal de R Markdown en Python Markdown
+    ## Bepaal de R Markdown en Python chunk Markdown
     thisRmd_R      <- paste0("R/", paste0(sToets, " R.Rmd"))
     thisRmd_Python <- paste0("04. Python chunks/", paste0(sToets, " py.Rmd"))
     
@@ -95,8 +114,7 @@ for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
       lRegelnummers <- grep(paste0(sRegEx), 
                             readLines(con = thisRmd_R, warn = F))
       lCodeblokken <- thisRmd_R_file[lRegelnummers]
-      # EG: ik volg dit niet helemaal
-      
+
       ## Verwijder regels met /BLOK en verwijder begin + einde string (<--! -->)
       ## en trim
       lCodeblokken <- lCodeblokken[!str_detect(lCodeblokken, pattern = "## /")] %>% 
@@ -145,7 +163,6 @@ for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
         print(paste0("VERWIJDERD OM OPNIEUW OP TE BOUWEN: ", sPythonFile_Merged))
       }
       
-      # EG: hieronder raak ik 'm ook even kwijt  
       ## Loop over de .py bestanden en vervang de .R code blokken met de .py code blokken
       ## Maak een teller, zodat na de 1e loop het bestand dat gemaakt is kan gebruikt
       ## worden als basis in plaats van het originel R rmd file.
@@ -204,7 +221,17 @@ for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
 
 }
 
-## Loop over de toetsen die in gebruik zijn en genereer die pagina's
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## 03 RUN PYTHON TOETSPAGINA'S ####
+## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## In dit deel van de code wordt voor elke Python toetspagina die hierboven is
+## aangemaakt een html-bestand gemaakt. Op deze manier kan er voor elke Python
+## toetspagina een controle uitgevoerd worden op de html-documenten die later
+## op de website gezet worden. Als er een nieuwe toetspagina in Python af is,
+## is dit handig om even te controleren om zo kleine foutjes eruit te halen.
+
+## Loop over de toetsen die in gebruik zijn en genereer die html-pagina's
 for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
     sModus <- "Python"
     #bStatus <- dfToetsen$Review_Python[dfToetsen$Toets == sToets]
@@ -213,7 +240,6 @@ for (sToets in dfToetsen$Toets[dfToetsen$InGebruik == 1]) {
 }
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## 02 RUIM OP ####
+## 04 RUIM OP ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 rm(list = ls())
-

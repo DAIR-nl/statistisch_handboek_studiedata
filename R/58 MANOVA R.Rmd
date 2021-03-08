@@ -192,6 +192,8 @@ head(Gemiddelde_cijfers_bioinformatics)
 ## Laatste 5 observaties
 tail(Gemiddelde_cijfers_bioinformatics)
 ```
+<!-- ## /OPENBLOK: Data-bekijken.R -->
+
 
 
 <!-- ## TEKSTBLOK: Data-beschrijven.R -->
@@ -531,6 +533,7 @@ Geen enkele van de VIFs is hoger dan 10, dus er is voldaan aan de assumptie van 
 
 # MANOVA
 
+<!-- ## TEKSTBLOK: Uitvoering1.R -->
 Voer de *MANOVA* uit om te onderzoeken of er verschillen zijn tussen studenten afkomstig van de bacheloropleidingen Biologie, Informatica en Wiskunde wat betreft hun gemiddelde cijfers in periode 1, 2 en 3 voor de master Bioinformatics. Maak eerst een matrix met daarin de drie afhankelijke variabelen `Gemiddelde_cijfers_bioinformatics$Cijfers_P1`, `Gemiddelde_cijfers_bioinformatics$Cijfers_P2` en `Gemiddelde_cijfers_bioinformatics$Cijfers_P3`. Voer daarna de *MANOVA* uit met de functie `manova()` met als eerste argument de formule `Afhankelijke_variabelen ~ Bacheloropleiding` met links van de tilde de matrix met afhankelijke variabelen `Afhankelijke_variabelen` en rechts van de tilde de onafhankelijke variabele `Bacheloropleiding` en als tweede argument de dataset `data = Gemiddelde_cijfers_bioinformatics` en sla het resultaat op in het object `MANOVA`. Geef vervolgens de resultaten weer met de toetsstatistiek *Wilks's Lambda* met behulp van de functie `summary.manova()` met als argumenten het MANOVA object `MANOVA` en `test = "Wilks"` om aan te geven dat *Wilks's Lambda* gebruikt moet worden.
 
 <!-- ## /TEKSTBLOK: Uitvoering1.R -->
@@ -586,10 +589,13 @@ vDF2 <- Round_and_format(Res_MANOVA[1, 5])
 
 # ANOVA's voor elke afhankelijke variabele
 
+<!-- ## TEKSTBLOK: ANOVA-toets2_1.R -->
 Voer voor de afhankelijke variabelen Cijfers_P1, Cijfers_P2 en Cijfers_P3 apart een *ANOVA* uit. Om de *ANOVA* uit te voeren, moeten eerst de assumptie van normaliteit en homogeniteit van varianties getoetst worden, voor meer informatie zie de toetspagina's van de [one-way ANOVA](05-One-way-ANOVA-R.html) en de [factoriële ANOVA](29-Factoriele-ANOVA-R.html). De assumptie van normaliteit is al getoetst voordat de *MANOVA* is uitgevoerd. Hieruit bleek dat de verdeling voor elke groep voor elke afhankelijke variabele de normaalverdeling benaderd, dus er is ook voor de *ANOVA* aan deze assumptie voldaan. De assumptie van homogeniteit van varianties moet wel getoetst worden, omdat bij de *MANOVA* de homogeniteit van variantie-covariantie matrices getoetst wordt.
 
 Toets de assumptie van homogeniteit van varianties met de *Levene's test*. Gebruik hiervoor de functie `leveneTest()` van het package `car` met als eerste argument de vergelijking `Cijfers_P1 ~ Bacheloropleiding` met links van de tilde de afhankelijke variabele `Cijfers_P1` (of `Cijfers_P2` of `Cijfers_P3`) en rechts van de tilde de onafhankelijke variabele `Bacheloropleiding` en als tweede argument de dataset `Gemiddelde_cijfers_bioinformatics`.
+<!-- ## /TEKSTBLOK: ANOVA-toets2_1.R -->
 
+<!-- ## OPENBLOK: ANOVA-toets2_2.R -->
 ```{r}
 library(car)
 
@@ -598,11 +604,16 @@ leveneTest(Cijfers_P2 ~ Bacheloropleiding, Gemiddelde_cijfers_bioinformatics)
 leveneTest(Cijfers_P3 ~ Bacheloropleiding, Gemiddelde_cijfers_bioinformatics)
 
 ```
+<!-- ## /OPENBLOK: ANOVA-toets2_2.R -->
+
 
 Voor alle drie de afhankelijke variabelen is de *Levene's test* niet significant, dus alle variabelen voldoen aan de assumptie van homogeniteit van varianties. De *ANOVA's* kunnen uitgevoerd worden.
 
+<!-- ## TEKSTBLOK: ANOVA-toets2_3.R -->
 Gebruik hiervoor de functie `aov()` met als eerste argument de vergelijking `Cijfers_P1 ~ Bacheloropleiding` met links van de tilde de afhankelijke variabele `Cijfers_P1` (of `Cijfers_P2` of `Cijfers_P3`) en rechts van de tilde de onafhankelijke variabele `Bacheloropleiding` en als tweede argument de dataset `Gemiddelde_cijfers_bioinformatics` en sla het resultaat op. Om te corrigeren voor het feit dat er drie toetsen tegelijkertijd uitgevoerd worden, wordt een Bonferroni correctie uitgevoerd door het significantieniveau van 0,05 door het aantal toetsen (drie) te delen. Dit levert een nieuw significantieniveau van 0,017 (0,05 / 3 = 0,017) op. Waar normaliter de p-waarde van de *ANOVA* met het significantieniveau 0,05 vergeleken wordt, wordt de p-waarde nu met het significantieniveau 0,017 vergeleken. Laat vervolgens de resultaten zien met de functie `summary()` met als argument het ANOVA object. Bereken daarna de effectmaat *partial eta squared* met de functie `EtaSq()` van het package `DescTools` als argument het ANOVA object.
+<!-- ## /TEKSTBLOK: ANOVA-toets2_3.R -->
 
+<!-- ## OPENBLOK: ANOVA-toets3.R -->
 ```{r}
 library(DescTools)
 
@@ -661,6 +672,8 @@ DF2_P3 <- Res_P3$Df[2]
 * Er is een significant verschil tussen de bacheloropleidingen wat betreft het gemiddelde cijfer in periode 2, *F* (`r DF1_P2`,`r DF2_P2`) = `r F_P2`, *p* < 0,0001, *η^2^* = `r Eta_P2`
 * Er is een significant verschil tussen de bacheloropleidingen wat betreft het gemiddelde cijfer in periode 3, *F* (`r DF1_P3`,`r DF2_P3`) = `r F_P3`, *p* < 0,0001, *η^2^* = `r Eta_P3`
 * Voor alle drie de perioden is er een significant verschil tussen de gemiddelde cijfers van de drie bacheloropleidingen. Er kunnen voor iedere periode dus post-hoc toetsen uitgevoerd worden
+
+<!-- ## /TEKSTBLOK: ANOVA-toets5.R -->
 
 # Post-hoc toetsen
 

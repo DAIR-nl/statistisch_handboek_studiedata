@@ -204,6 +204,8 @@ head(Resultaten_Leisure_Management)
 ## Laatste 5 observaties
 tail(Resultaten_Leisure_Management)
 ```
+<!-- ## /OPENBLOK: Data-bekijken.R -->
+
 
 
 <!-- ## TEKSTBLOK: Data-beschrijven.R -->

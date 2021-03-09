@@ -21,6 +21,16 @@
 ## 22-02-2020: TB: Aanmaak bestand
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+## Toelichting: in dit script wordt een xml-bestand aangemaakt wat vervolgens
+## via WINSCP aan de website wordt toegevoegd. Het xml-bestand zorgt ervoor dat
+## de website van het Statistisch Handboek beter te vinden is via google. 
+## Daarom is het belangrijk dit script te runnen. Na het updaten van de website
+## via het script Index_Render_site.R wordt de map _site geüpload via WINSCP om
+## de website te updaten. Als dit gedaan is, run dan dit script. Dat zorgt 
+## ervoor dat de meest recente versie van de website gebruikt wordt voor het
+## maken van het xml-bestand en in dit script wordt het xml-bestand ook
+## met code geüpload naar de website via WINSCP.
+
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 00 VOORBEREIDINGEN ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -86,11 +96,22 @@ map_links <- function(l) {
 ## 01 BEPAAL DE TOETSEN ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+## In dit deel wordt een overzicht gemaakt van alle toetsen die nu op de website
+## staan. Dit overzicht komt uit het bestand Toetsen.R uit de map 
+## SHHO/01. Includes/code . Het is daarom belangrijk om op te letten dat het
+## overzicht met toetsen in het script Index_Render_site.R en het overzicht in
+## Toetsen.R hetzelfde is. Houdt dit bij en ga dit na.
+
 source("01. Includes/code/Toetsen.R")
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 02 BEPAAL DE PAGINAS WAARVAN EEN SITEMAP GEMAAKT MOET WORDEN ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## In dit deel wordt een overzicht gemaakt van alle onderdelen van de website.
+## De website heeft verschillende onderdelen waarop je kan doorklikken. Om
+## het xml-bestand aan te maken, zijn alle onderdelen nodig, in dit deel worden
+## deze verzameld.
 
 ## Maak een lijst van standaard urls
 lPaginas <- c(
@@ -118,6 +139,9 @@ for (sToets in dfToetsen$Toets[dfToetsen$InGebruik_Python == 1]) {
 ## 03 PAS DE FUNCTIE map_links TOE OP DE PAGINALIJST EN CREËER EEN SITEMAP ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+## In dit deel wordt de sitemap aangemaakt door de functie map_links toe te
+## passen op alle onderdelen van de website (de onderdelen zijn opgeslagen in
+## lPaginas). Het xml-bestand komt te staan in de map _site.
 
 lPaginas <- lapply(lPaginas, map_links)
 
@@ -135,6 +159,10 @@ sink()
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 04 FTP DE SITEMAP NAAR DE LIVE SITE ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## In dit deel wordt het nieuwe xml-bestand geüpload via WINSCP. In de code
+## wordt dit FTP genoemd, hier is een klein verschil tussen, maar het resultaat
+## is hetzelfde.
 
 ## Plaats het bestand op de FTP server; gebruik verbose = TRUE om te zien 
 ## wat de server antwoordt

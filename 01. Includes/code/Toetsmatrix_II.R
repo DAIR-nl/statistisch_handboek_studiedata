@@ -20,7 +20,12 @@
 ## Geschiedenis:
 ## 17-06-2020: EG: Aanmaak bestand
 ## 10-09-2020: EG: Functies in aparte R-code gezet
+## 11-03-2021: EG: Toelichting toegevoegd
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Toelichting: In dit script wordt toetsmatrix II aangemaakt. De toetsmatrix
+## wordt opgebouwd door een combinatie van R en html code. Elke toetscel wordt
+## gevuld met url's naar de toetsen die in die toetscel horen te staan.
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 00 VOORBEREIDINGEN ####
@@ -44,57 +49,69 @@ source(paste0(here::here(),"/01. Includes/code/Toetsmatrix_functies.R"))
 ## 01 FUNCTIES ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-## Functies om de toetsmatrix in HTML per regel op te bouwen
-## Regel 1:
+## In dit deel wordt een functie geschreven voor elke regel van de toetsmatrix.
+
+## Regel 1
 maak_html_r1 <- function() {
   htmltools::withTags(
     tr(
       td(rowspan = 6, class = "header1 innercell", "Afhankelijke variabele"),
       td(rowspan = 1, class = "header2 innercell", "continu",tags$br(),"(interval en ratio)"),
-      ## Toets 01 tm 05
+      ## Multipele lineaire regressie / Factoriële ANOVA
       maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[28,]$InGebruik)),  
                    dfToetsen[28,]$Toets, 
                    as.logical(as.numeric(dfToetsen[29,]$InGebruik)),  
                    dfToetsen[29,]$Toets, 
                    sModus = sModus),      
+      ## Multipele lineaire regressie / ANCOVA
       maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[28,]$InGebruik)),  
                    dfToetsen[28,]$Toets, 
                    as.logical(as.numeric(dfToetsen[31,]$InGebruik)),  
                    dfToetsen[31,]$Toets, 
                    sModus = sModus),      
-      maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[30,]$InGebruik)),  
+      ## Factoriële repeated measures ANOVA / Mixed ANOVA / Multilevel lineaire
+      ## regressie
+      maak_html_toetscel_tri(as.logical(as.numeric(dfToetsen[30,]$InGebruik)),  
                    dfToetsen[30,]$Toets, 
                    as.logical(as.numeric(dfToetsen[32,]$InGebruik)),  
                    dfToetsen[32,]$Toets, 
+                   as.logical(as.numeric(dfToetsen[33,]$InGebruik)),  
+                   dfToetsen[33,]$Toets, 
                    sModus = sModus),      
+      ## Multilevel lineaire regressie
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[33,]$InGebruik)),  
                    dfToetsen[33,]$Toets, 
                    sModus = sModus),
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[33,]$InGebruik)),  
-                   dfToetsen[33,]$Toets, 
+      ## Multilevel lineaire regressie
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[35,]$InGebruik)),  
+                   dfToetsen[35,]$Toets, 
                    sModus = sModus)
     )
   )
 }
 
-## Regel 2:
+## Regel 2
 maak_html_r2 <- function() {
   htmltools::withTags(
     tr(
       td(class = "header2 innercell", "gecensureerd",tags$br(),"continu"),
-      ## Toets 06 tm 10
+      ## Survival analyse
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[36,]$InGebruik)),  
                    dfToetsen[36,]$Toets, 
                    sModus = sModus),
+      ## Survival analyse
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[36,]$InGebruik)),  
                    dfToetsen[36,]$Toets, 
                    sModus = sModus),
+      ## Leeg
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[62,]$InGebruik)),
                          dfToetsen[62,]$Toets,
                          sModus = sModus),
+      ## Leeg
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[62,]$InGebruik)),
                          dfToetsen[62,]$Toets,
                          sModus = sModus),
+      ## Leeg
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[62,]$InGebruik)),
                          dfToetsen[62,]$Toets,
                          sModus = sModus)
@@ -102,135 +119,136 @@ maak_html_r2 <- function() {
   )
 }
 
-## Regel 3:
+## Regel 3
 maak_html_r3 <- function() {
   htmltools::withTags(
     tr(
       td(class = "header2 innercell", "binair",tags$br(),""),
-      ## Toets 11 tm 15
+      ## Logistische regressie / Loglineaire analyse
       maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[41,]$InGebruik)),  
                    dfToetsen[41,]$Toets, 
                    as.logical(as.numeric(dfToetsen[42,]$InGebruik)),  
                    dfToetsen[42,]$Toets, 
                    sModus = sModus),      
+      ## Logistische regressie
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[41,]$InGebruik)),  
                    dfToetsen[41,]$Toets, 
                    sModus = sModus),
+      ## Multilevel logistische regressie
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[44,]$InGebruik)),  
                    dfToetsen[44,]$Toets,
                    sModus = sModus),
+      ## Multilevel logistische regressie
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[44,]$InGebruik)),  
                    dfToetsen[44,]$Toets,
                    sModus = sModus),
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[44,]$InGebruik)),  
-                   dfToetsen[44,]$Toets,
+      ## Multilevel logistische regressie
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[46,]$InGebruik)),  
+                   dfToetsen[46,]$Toets,
                    sModus = sModus)
     )
   )
 }
 
-## Regel 4:
+## Regel 4
 maak_html_r4 <- function() {
   htmltools::withTags(
     tr(
       td(class = "header2 innercell", "nominaal ",tags$br(), ""),
-      ## Toets 16 tm 19
+      ## Multinomiale logistische regressie / Loglineaire analyse
       maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[47,]$InGebruik)),  
                    dfToetsen[47,]$Toets, 
                    as.logical(as.numeric(dfToetsen[48,]$InGebruik)),  
                    dfToetsen[48,]$Toets, 
-                   sModus = sModus),      
+                   sModus = sModus),
+      ## Multinomiale logistische regressie
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[47,]$InGebruik)),  
                          dfToetsen[47,]$Toets, 
                          sModus = sModus),
+      ## Multilevel multinomiale regressie
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[50,]$InGebruik)),  
                          dfToetsen[50,]$Toets,
                          sModus = sModus),
+      ## Multilevel multinomiale regressie
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[50,]$InGebruik)),  
                          dfToetsen[50,]$Toets,
                          sModus = sModus),
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[50,]$InGebruik)),  
-                         dfToetsen[50,]$Toets,
+      ## Multilevel multinomiale regressie
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[52,]$InGebruik)),  
+                         dfToetsen[52,]$Toets,
                          sModus = sModus)
     )
   )
 }
 
-## Regel 5:
+## Regel 5
 maak_html_r5 <- function() {
   htmltools::withTags(
     tr(
       td(class = "header2 innercell", "ordinaal"),
-      ## Toets 16 tm 19
-      #maak_html_toetscel(F,  
-      #                   "...", 
-      #                   sModus = sModus),
+      ## Ordinale logistische regressie
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[53,]$InGebruik)),
                          dfToetsen[53,]$Toets,
                          sModus = sModus),
-      ## Wilcoxon
+      ## Ordinale logistische regressie
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[53,]$InGebruik)),  
                          dfToetsen[53,]$Toets, 
                          sModus = sModus),
-      ## Chi-kwadraat toets (trend)
+      ## Multilevel ordinale regressie
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[55,]$InGebruik)),
                          dfToetsen[55,]$Toets,
                          sModus = sModus),
-      ## Friedman's ANOVA
+      ## Multilevel ordinale regressie
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[55,]$InGebruik)),  
                          dfToetsen[55,]$Toets, 
                          sModus = sModus),
-      ## Chi-kwadraat toets (trend)
-      maak_html_toetscel(as.logical(as.numeric(dfToetsen[55,]$InGebruik)),
-                         dfToetsen[55,]$Toets,
+      ## Multilevel ordinale regressie
+      maak_html_toetscel(as.logical(as.numeric(dfToetsen[57,]$InGebruik)),
+                         dfToetsen[57,]$Toets,
                          sModus = sModus)
     )
   )
 }
 
-
-## Regel 6:
+## Regel 6
 maak_html_r6 <- function() {
   htmltools::withTags(
     tr(
       td(class = "header2 innercell", "Meerdere continue",tags$br(), "variabelen"),
-      ## Toets 16 tm 19
-      #maak_html_toetscel(F,  
-      #                   "...", 
-      #                   sModus = sModus),
+      ## MANOVA
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[58,]$InGebruik)),
                          dfToetsen[58,]$Toets,
                          sModus = sModus),
-      ## Wilcoxon
+      ## Leeg
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[62,]$InGebruik)),
                          dfToetsen[62,]$Toets,
                          sModus = sModus),
-      ## Chi-kwadraat toets (trend)
+      ## Leeg
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[62,]$InGebruik)),
                          dfToetsen[62,]$Toets,
                          sModus = sModus),
-      ## Friedman's ANOVA
+      ## Leeg
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[62,]$InGebruik)),  
                          dfToetsen[62,]$Toets, 
                          sModus = sModus),
-      ## Chi-kwadraat toets (trend)
+      ## Leeg
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[62,]$InGebruik)),
                          dfToetsen[62,]$Toets,
                          sModus = sModus)
     )
   )
 }
-
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 03.1 BOUW HTML ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-## Bouw nu de 4 rijen op
+## In dit deel worden de functies uitgevoerd en wordt de toetsmatrix opgebouwd.
+
+## Bouw nu de 6 rijen op
 maak_html_r1()
 maak_html_r2()
 maak_html_r3()
 maak_html_r4()
 maak_html_r5()
 maak_html_r6()
-

@@ -26,7 +26,12 @@
 ## 11-06-2020: EG: Veranderingen toetsmatrix (onafhankelijke en afhankelijke
 ## variabele)
 ## 10-09-2020: EG: Functies in aparte R-code gezet
+## 11-03-2021: EG: Toelichting toegevoegd
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Toelichting: In dit script wordt toetsmatrix I aangemaakt. De toetsmatrix
+## wordt opgebouwd door een combinatie van R en html code. Elke toetscel wordt
+## gevuld met url's naar de toetsen die in die toetscel horen te staan.
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 00 VOORBEREIDINGEN ####
@@ -50,27 +55,32 @@ source(paste0(here::here(),"/01. Includes/code/Toetsmatrix_functies.R"))
 ## 01 FUNCTIES ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-## Functies om de toetsmatrix in HTML per regel op te bouwen
-## Regel 1: 01-05
+## In dit deel wordt een functie geschreven voor elke regel van de toetsmatrix.
+
+## Regel 1
 maak_html_r1 <- function() {
   htmltools::withTags(
     tr(
       td(rowspan = 5, class = "header1 innercell", "Afhankelijke variabele"),
       td(rowspan = 2, class = "header2 innercell", "continu",tags$br(),"(interval en ratio)"),
       td(class = "header3 innercell", "normaal",tags$br(),"verdeeld"),
-      ## Toets 01 tm 05
+      ## One-sample t-toets
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[1,]$InGebruik)),  
                    dfToetsen[1,]$Toets, 
                    sModus = sModus),
+      ## Gepaarde t-toets
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[2,]$InGebruik)),  
                    dfToetsen[2,]$Toets, 
                    sModus = sModus),
+      ## Ongepaarde t-toets
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[3,]$InGebruik)),  
                    dfToetsen[3,]$Toets, 
                    sModus = sModus),
+      ## Repeated measures ANOVA
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[4,]$InGebruik)),  
                    dfToetsen[4,]$Toets, 
                    sModus = sModus),
+      ## One-way ANOVA
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[5,]$InGebruik)),  
                    dfToetsen[5,]$Toets, 
                    sModus = sModus)
@@ -78,33 +88,32 @@ maak_html_r1 <- function() {
   )
 }
 
-## Regel 2: 06-10
+## Regel 2
 maak_html_r2 <- function() {
   htmltools::withTags(
     tr(
       td(class = "header3 innercell", "niet normaal",tags$br(),"verdeeld"),
-      ## Toets 06 tm 10
+      ## Tekentoets I
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[6,]$InGebruik)),  
                    dfToetsen[6,]$Toets, 
                    sModus = sModus),
-#      maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[13,]$InGebruik)),  
-#                               dfToetsen[13,]$Toets, 
-#                               as.logical(as.numeric(dfToetsen[16,]$InGebruik)),  
-#                               dfToetsen[16,]$Toets, 
-#                               sModus = sModus)
+      ## Tekentoets I / Wilcoxon signed rank toets I
       maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[7,]$InGebruik)),  
                    dfToetsen[7,]$Toets, 
                    as.logical(as.numeric(dfToetsen[26,]$InGebruik)),  
                    dfToetsen[26,]$Toets, 
                    sModus = sModus),      
+      ## Mann-Whitney U toets I / Mood's mediaan toets
       maak_html_toetscel_combi(as.logical(as.numeric(dfToetsen[8,]$InGebruik)),  
                    dfToetsen[8,]$Toets, 
                    as.logical(as.numeric(dfToetsen[27,]$InGebruik)),  
                    dfToetsen[27,]$Toets, 
                    sModus = sModus),      
+      ## Friedman's ANOVA I
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[9,]$InGebruik)),  
                    dfToetsen[9,]$Toets, 
                    sModus = sModus),
+      ## Kruskal Wallis toets I
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[10,]$InGebruik)),  
                    dfToetsen[10,]$Toets, 
                    sModus = sModus)
@@ -112,27 +121,29 @@ maak_html_r2 <- function() {
   )
 }
 
-## Regel 3: 11-15
+## Regel 3
 maak_html_r3 <- function() {
   htmltools::withTags(
     tr(
       td(rowspan = 3, class = "header2 innercell", "categorisch",tags$br(),""),
       td(class = "header3 innercell", "binair", tags$br(), "(2 waarden)"),
-      ## Toets 11 tm 15
+      ## Chi-kwadraat toets voor goodness of fit en binomiaaltoets
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[11,]$InGebruik)),  
                    dfToetsen[11,]$Toets, 
                    sModus = sModus),
+      ## McNemar toets
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[12,]$InGebruik)),  
                    dfToetsen[12,]$Toets, 
                    sModus = sModus),
-      ## Combinatie: Chi-kwadraat toets / Fisher's exact toets
+      ## Chi-kwadraat toets voor onafhankelijkheid en Fisher's exacte toets
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[13,]$InGebruik)),  
                    dfToetsen[13,]$Toets,
                    sModus = sModus),
+      ## Cochran's Q toets
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[15,]$InGebruik)),  
                    dfToetsen[15,]$Toets, 
                    sModus = sModus),
-      ## Chi-kwadraat toets / Fisher-Freeman-Halton exact toets
+      ## Chi-kwadraat toets voor onafhankelijkheid en Fisher-Freeman-Halton exact toets
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[16,]$InGebruik)),  
                          dfToetsen[16,]$Toets,
                          sModus = sModus)
@@ -140,28 +151,28 @@ maak_html_r3 <- function() {
   )
 }
 
-## Regel 4: 12,16-19
+## Regel 4
 maak_html_r4 <- function() {
   htmltools::withTags(
     tr(
       td(class = "header3 innercell", "nominaal ",tags$br(), "(>2 waarden)"),
-      ## Toets 16 tm 19
+      ## Chi-kwadraat toets voor goodness of fit en multinomiaaltoets
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[21,]$InGebruik)),
                          dfToetsen[21,]$Toets,
                          sModus = sModus),
-      ## McNemar
+      ## Bhapkar toets
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[18,]$InGebruik)),  
                          dfToetsen[18,]$Toets, 
                          sModus = sModus),
-      ## Chi-kwadraat toets / Fisher-Freeman-Halton exact toets
+      ## Chi-kwadraat toets voor onafhankelijkheid en Fisher-Freeman-Halton exact toets
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[16,]$InGebruik)),  
                          dfToetsen[16,]$Toets,
                          sModus = sModus),
-      ## GLMM
+      ## Multilevel multinomiale logistische regressie
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[20,]$InGebruik)),
                    dfToetsen[20,]$Toets,
                    sModus = sModus),
-      ## Chi-kwadraat toets / Fisher-Freeman-Halton exact toets
+      ## Chi-kwadraat toets voor onafhankelijkheid en Fisher-Freeman-Halton exact toets
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[16,]$InGebruik)),  
                          dfToetsen[16,]$Toets,
                          sModus = sModus)
@@ -169,31 +180,28 @@ maak_html_r4 <- function() {
   )
 }
 
-## Regel 5: 20-23, 25
+## Regel 5
 maak_html_r5 <- function() {
   htmltools::withTags(
     tr(
       td(class = "header3 innercell", "ordinaal"),
-      ## Toets 16 tm 19
-      #maak_html_toetscel(F,  
-      #                   "...", 
-      #                   sModus = sModus),
+      ## Chi-kwadraat toets voor goodness of fit en multinomiaaltoets
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[21,]$InGebruik)),
                          dfToetsen[21,]$Toets,
                          sModus = sModus),
-      ## Wilcoxon
+      ## Wilcoxon signed rank toets II
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[22,]$InGebruik)),  
                          dfToetsen[22,]$Toets, 
                          sModus = sModus),
-      ## Chi-kwadraat toets (trend)
+      ## Mann-Whitney U toets II
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[23,]$InGebruik)),
                          dfToetsen[23,]$Toets,
                          sModus = sModus),
-      ## Friedman's ANOVA
+      ## Friedman's ANOVA II
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[24,]$InGebruik)),  
                          dfToetsen[24,]$Toets, 
                          sModus = sModus),
-      ## Chi-kwadraat toets (trend)
+      ## Kruskal Wallis toets II
       maak_html_toetscel(as.logical(as.numeric(dfToetsen[25,]$InGebruik)),
                          dfToetsen[25,]$Toets,
                          sModus = sModus)
@@ -201,12 +209,13 @@ maak_html_r5 <- function() {
   )
 }
 
-
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 03.1 BOUW HTML ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-## Bouw nu de 4 rijen op
+## In dit deel worden de functies uitgevoerd en wordt de toetsmatrix opgebouwd.
+
+## Bouw nu de 5 rijen op
 maak_html_r1()
 maak_html_r2()
 maak_html_r3()
@@ -216,6 +225,9 @@ maak_html_r5()
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 3.2 DOEL ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Dit is een oud deel van de code. Het is door Theo Bakker geschreven bij het 
+## opbouwen van de site. Het wordt nu niet meer gebruikt.
 
 ## De regels die we opbouwen moeten er als volgt uit komen te zien:
 ## Regel 1

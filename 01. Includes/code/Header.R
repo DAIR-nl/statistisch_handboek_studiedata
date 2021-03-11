@@ -20,8 +20,19 @@
 ## Geschiedenis:
 ## 22-09-2019: TB: Aanmaak bestand
 ## 08-02-2020: TB: Verbetering verwijzing naar Root
-
+## 11-03-2021: EG: Toelichting toegevoegd
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Toelichting: In dit script wordt de header van de website aangemaakt. Via 
+## deze header kan de bezoeker van de website klikken op de verschillende
+## onderdelen van de website. Op dit moment bestaat de header van de website
+## uit de onderdelen Toetsmatrix (R), Toetsmatrix (Python), Begrippenlijst,
+## Over, Verantwoording, Feedback en Nieuwsbrief. Feedback en Nieuwsbrief
+## linken door naar een google form. Het google form voor Feedback dient om 
+## gebruikers de mogelijkheid te geven feedback op de toetspagina te geven. Het
+## google form voor Nieuwsbrief dient om je op te geven voor de nieuwsbrief van
+## het Statistisch Handboek. Dit script is een combinatie van R 
+## code en html code.
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 01 MAAK HTML ####

@@ -20,7 +20,17 @@
 ## Geschiedenis:
 ## 29-09-2019: TB: Aanmaak bestand
 ## 04-08-2020: EG: http in https veranderd site versnellingsplan
+## 10-02-2021: EG: Datasets downloaden toegevoegd
+## 10-03-2021: EG: Toelichting toegevoegd
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Toelichting: In dit script wordt de footer die onderaan de toetspagina's 
+## staat aangemaakt. De footer onder de toetspagina's is iets uitgebreider dan
+## de footer onder de andere webpagina's, daarvan wordt de footer gemaakt
+## met het script Footer_simpel.R, ook in de map SSHO/01. Includes/code . Het
+## verschil tussen beide is dat bij de uitgebreidere footer de programmeertalen
+## en bijbehorende versies genoemd worden. Dit script is een combinatie van R 
+## code en html code.
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 01 MAAK HTML ####

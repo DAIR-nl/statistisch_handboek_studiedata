@@ -21,7 +21,14 @@
 ## Geschiedenis:
 ## 06-02-2020: TB: Aanmaak bestand
 ## 12-02-2020: TB: Aanmaak voorwaardelijkheid
+## 11-03-2021: EG: Toelichting toegevoegd
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Toelichting: In dit script wordt aangegeven of er wel of niet een disclaimer
+## bovenaan de toetspagina gezet moet worden. De disclaimer geeft aan dat de
+## toetspagina nog niet door het gehele reviewproces is gegaan. Als dat voor
+## die toetspagina het geval is, dan komt de disclaimer onder de titel te staan.
+## Dit script is een combinatie van R code en html code.
 
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 01 MAAK HTML ####

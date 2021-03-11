@@ -61,6 +61,10 @@ source("99. Functies en Libraries/00. Voorbereidingen.R")
 ## Voor de kolom ~Review_Python geldt weer hetzelfde. Let dus op dat bij een 
 ## nieuwe toets de lijst dus gewijzigd moet worden.
 
+## Dit overzicht wordt ook gemaakt in het bestand Toetsen.R uit de map 
+## SHHO/01. Includes/code . Het is daarom belangrijk om op te letten dat het
+## overzicht met toetsen in het script Index_Render_site.R en het overzicht in
+## Toetsen.R hetzelfde is. Houdt dit bij en ga dit na.
 
 ## Bepaal de lijst van toetsen; wijzig 0 in 1 om in gebruik te nemen
 dfToetsen <- tribble(
@@ -80,7 +84,7 @@ dfToetsen <- tribble(
     "11 Chi-kwadraat toets voor goodness of fit en binomiaaltoets",                             1,          1,       1,               0,       
     "12 McNemar toets",                                                                         1,          0,       1,               0,       
     "13 Chi-kwadraat toets voor onafhankelijkheid en Fishers exacte toets",                     1,          1,       1,               0,       
-    "14 NIET IN GEBRUIK; NIET VERWIJDEREN",                                                     0,          0,       0,               0,       
+    "14 LEEG; NIET VERWIJDEREN",                                                                0,          0,       0,               0,       
     "15 Cochrans Q toets",                                                                      1,          0,       1,               0,       
     "16 Chi-kwadraat toets voor onafhankelijkheid en Fisher-Freeman-Halton exacte toets I",     1,          1,       1,               0,       
     "17 Chi-kwadraat toets voor goodness of fit en multinomiaaltoets",                          0,          0,       0,               0,       
@@ -95,41 +99,41 @@ dfToetsen <- tribble(
     "26 Tekentoets II",                                                                         1,          1,       1,               0,       
     "27 Moods mediaan toets",                                                                   1,          0,       1,               0,       
     
-    ## Toetsmatrix II
+   ## Toetsmatrix II
     "28 Multipele lineaire regressie",                                                          1,          0,       0,               0,       
     "29 Factoriele ANOVA",                                                                      1,          0,       0,               0,       
     "30 Factoriele repeated measures ANOVA",                                                    1,          0,       0,               0,       
     "31 ANCOVA",                                                                                1,          0,       0,               0,       
     "32 Mixed ANOVA",                                                                           1,          0,       0,               0,       
     "33 Multilevel lineaire regressie",                                                         0,          0,       0,               0,       
-    "34 Multilevel lineaire regressie",                                                         0,          0,       0,               0,       
+    "34 LEEG; NIET VERWIJDEREN",                                                                0,          0,       0,               0,       
     "35 Multilevel lineaire regressie",                                                         0,          0,       0,               0,       
     "36 Survival analyse",                                                                      0,          0,       0,               0,       
-    "37 Survival analyse",                                                                      0,          0,       0,               0,       
-    "38 Multilevel survival analyse",                                                           0,          0,       0,               0,       
-    "39 Multilevel survival analyse",                                                           0,          0,       0,               0,       
-    "40 Multilevel survival analyse",                                                           0,          0,       0,               0,       
+    "38 LEEG; NIET VERWIJDEREN",                                                                0,          0,       0,               0,       
+    "38 LEEG; NIET VERWIJDEREN",                                                                0,          0,       0,               0,       
+    "39 LEEG; NIET VERWIJDEREN",                                                                0,          0,       0,               0,       
+    "40 LEEG; NIET VERWIJDEREN",                                                                0,          0,       0,               0,       
     "41 Logistische regressie",                                                                 1,          0,       0,               0,       
     "42 Loglineaire analyse",                                                                   0,          0,       0,               0,       
     "43 Logistische regressie",                                                                 0,          0,       0,               0,       
-    "44 Multilevel logistische regressie",                                                      0,          0,       0,               0,       
-    "45 Multilevel logistische regressie",                                                      0,          0,       0,               0,       
-    "46 Multilevel logistische regressie",                                                      0,          0,       0,               0,       
+    "44 Multilevel logistische regressie I",                                                    0,          0,       0,               0,       
+    "45 LEEG; NIET VERWIJDEREN",                                                                0,          0,       0,               0,       
+    "46 Multilevel logistische regressie II",                                                   0,          0,       0,               0,       
     "47 Multinomiale logistische regressie",                                                    1,          0,       0,               0,       
     "48 Loglineaire analyse",                                                                   0,          0,       0,               0,       
     "49 Multinomiale logistische regressie",                                                    0,          0,       0,               0,       
-    "50 Multilevel multinomiale regressie",                                                     0,          0,       0,               0,       
-    "51 Multilevel multinomiale regressie",                                                     0,          0,       0,               0,       
-    "52 Multilevel multinomiale regressie",                                                     0,          0,       0,               0,       
+    "50 Multilevel multinomiale logistische regressie I",                                       0,          0,       0,               0,       
+    "51 LEEG; NIET VERWIJDEREN",                                                                0,          0,       0,               0,       
+    "52 Multilevel multinomiale logistische regressie II",                                      0,          0,       0,               0,       
     "53 Ordinale logistische regressie",                                                        1,          0,       0,               0,       
     "54 Ordinale logistische regressie",                                                        0,          0,       0,               0,       
-    "55 Multilevel ordinale regressie",                                                         0,          0,       0,               0,       
-    "56 Multilevel ordinale regressie",                                                         0,          0,       0,               0,       
-    "57 Multilevel ordinale regressie",                                                         0,          0,       0,               0,       
+    "55 Multilevel ordinale logistische regressie I",                                           0,          0,       0,               0,       
+    "56 LEEG; NIET VERWIJDEREN",                                                                0,          0,       0,               0,       
+    "57 Multilevel ordinale logistische regressie II",                                          0,          0,       0,               0,       
     "58 MANOVA",                                                                                1,          0,       0,               0,       
-    "59 Multivariate regressie",                                                                0,          0,       0,               0,       
+    "59 LEEG; NIET VERWIJDEREN",                                                                0,          0,       0,               0,       
     "60 MANCOVA",                                                                               0,          0,       0,               0,       
-    "61 Multivariate regressie",                                                                0,          0,       0,               0,       
+    "61 LEEG; NIET VERWIJDEREN",                                                                0,          0,       0,               0,       
     "62 ",                                                                                      0,          0,       0,               0,       
 )
 

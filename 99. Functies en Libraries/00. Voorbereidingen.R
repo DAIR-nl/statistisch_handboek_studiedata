@@ -26,21 +26,29 @@
 ## Geschiedenis:
 ## 11-09-2017: TB: Aanmaak bestand
 ## 11-01-2020: TB: Aanpassing code; directory Handboek wordt niet meer aangemaakt
-
+## 12-03-2021: EG: Toelichting toegevoegd
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Toelichting: In dit script worden alle benodigde voorbereidingen gedaan voor
+## het schrijven van toetspagina's. De packages worden ingeladen en de
+## zelfgeschreven functies die nodig zijn ook. Dit script wordt gerund aan het
+## begin van de meeste scripten in deze repository.
 
 ## xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ## Lees packages in
 source(paste0(here::here(),"/99. Functies en Libraries/Installeer Packages.R"))
 
 ## xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-## Functie om af te ronden en te formatteren
+## Functie om af te ronden en te formatteren. Zorgt ervoor dat decimaalteken 
+## punt in een komma veranderd en rond af. Afronding is automatisch op twee
+## decimalen, maar dit kan handmatig veranderd worden.
 Round_and_format <- function(x, digits = 2) {
   x <- as.character(round(x, digits))
   x <- str_replace(x, "[.]", ",")
   return(x)
 }
 
+## Zelfde functie, maar dan voor afronding op 0 decimalen
 Round_and_format_0decimals <- function(x, digits = 0) {
   x <- as.character(round(x, digits))
   x <- str_replace(x, "[.]", ",")
@@ -53,13 +61,13 @@ Substitute_var <- function(placeholder, list_args) {
 }
 
 ## Functies om strings te trimmen
-# Returns string w/o leading whitespace
+## Returns string w/o leading whitespace
 trim.leading <- function(x)  sub("^\\s+", "", x)
 
-# Returns string w/o trailing whitespace
+## Returns string w/o trailing whitespace
 trim.trailing <- function(x) sub("\\s+$", "", x)
 
-# Returns string w/o leading or trailing whitespace
+## Returns string w/o leading or trailing whitespace
 trim <- function(x) gsub("^\\s+|\\s+$", "", x)
 
 ## ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

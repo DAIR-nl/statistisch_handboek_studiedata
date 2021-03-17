@@ -19,6 +19,7 @@
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## Geschiedenis:
 ## 26-01-2020: TB: Aanmaak bestand
+## 16-03-2021: EG: Toelichting toegevoegd
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ## Toelichting: Dit bestand onderzoekt of er blokken zijn gemaakt waarvan de naam

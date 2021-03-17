@@ -1,21 +1,14 @@
 .Rproj.user/
 .Rhistory
 *.pdf
-*proporties.html
-*toets.html
-*ANOVA.html
 *template.html
-*exact.html
-*cohen.d--.html
-*continu.html
 *.md
 *.Rdata
-*R.html
-XX. Hulpmiddelen/functie bekijk_voortgang.R
 _site
-*1.png
+*R.html
 *py.html
 *SHHO.html
+*Python.html
 !toetsmatrix_footer.html
 !toetsmatrix_header.html
 !toetsmatrix_II_footer.html
@@ -24,3 +17,4 @@ _site
 !*favicon.html
 !*footer.html
 !*nocache.html
+!google633b5604f5492782.html

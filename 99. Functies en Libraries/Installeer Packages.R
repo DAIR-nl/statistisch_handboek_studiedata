@@ -25,12 +25,20 @@
 ## Geschiedenis:
 ## 11-09-2019: TB: Aanmaak bestand
 ## 29-09-2019: TB: Klippy toegevoegd
+## 12-03-2021: EG: Toelichting toegevoegd
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-# install.packages("devtools")
-# devtools::install_github("RLesur/klippy")
+## Toelichting: In dit script worden alle packages die gebruikt worden in het
+## Statistisch Handboek geïnstalleerd en ingeladen. Als er nieuwe packages
+## gebruikt worden in een nieuwe toetspagina, voeg die dan toe aan de lijst.
+## Noteer ook achter het package in een comment het nummer van de toetspagina
+## waarin de package gebruikt wordt, dat is handig voor de administratie. Soms
+## kan het voorkomen dat een bepaald package na een ander package moet staan in
+## de lijst, omdat bepaalde functies hetzelfde zijn. Het ene overschrijft dan 
+## het andere, wat voor errors kan zorgen als de volgorde verkeerd is.
 
-## Bepaal de gebruikte packages
+## Bepaal de gebruikte packages. Update deze lijst als er nieuwe packages
+## gebruikt worden en noteer in een comment het nummer van de toetspagina
 Gebruikte_packages <- c(
     "brms",
     "car",
@@ -75,10 +83,7 @@ Gebruikte_packages <- c(
     "tidyverse"
 )
 
-## TB: Niet meer inladen
-## ,"xlsx"
-
-# Installeer alleen de packages die nog niet geinstalleerd zijn.
+## Installeer alleen de packages die nog niet geinstalleerd zijn.
 Nieuwe_packages <-
     Gebruikte_packages[!(Gebruikte_packages %in% installed.packages()[, "Package"])]
 if (length(Nieuwe_packages) > 0) {
@@ -89,7 +94,7 @@ if (length(Nieuwe_packages) > 0) {
                      repos = "https://cloud.r-project.org/")
 }
 
-# Laad de packages in de library
+## Laad de packages in de library
 lapply(Gebruikte_packages, library, character.only = TRUE, quietly = TRUE)
 
 # Ruim op

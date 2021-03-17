@@ -19,6 +19,11 @@ output:
   word_document:
     toc: yes
 ---
+*In dit document wordt uitgelegd hoe een toetspagina geschreven wordt. Het is gebaseerd op een echte toetspagina (de ongepaarde t-toets) waar met schuine tekst in alinea's een toelichting wordt gegeven op alle onderdelen van de toetspagina. De schuine tekst is dus toelichting, de normale tekst is de oorsponkelijk toetspagina.*
+
+*Hierboven wordt de titel van het document neergezet en worden een aantal instellingen opgesteld. Voorbeelden hiervan zijn de drie documenten nocache.html (om te voorkomen dat de website in het cache geheugen komt), favicon.html (om de favicon bij het webadres te hebben) en analytics.html (de Matomo tracker die het aantal bezoekers bijhoudt).*
+
+*Hieronder is het eerste CLOSEDBLOK zichtbaar. In het CLOSEDBLOK Functies.R wordt met code ervoor gezorgd dat het script 00. Voorbereidingen.R gerund wordt, zodat alle voorbereidingen voor het schrijven van een toetspagina gedaan worden. Dit bestaat onder andere uit het laden en indien nodig installeren van packages en het laden van zelfgeschreven functies.*
 
 <!-- ## CLOSEDBLOK: Functies.R -->
 ```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
@@ -30,25 +35,37 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Functies.R -->
 
+*Hieronder is er het tweede CLOSEDBLOK. In dit CLOSEDBLOK met de naam CSS wordt de stijlsheet Stylesheet_SHHO.css uit de map SHHO/01. Includes/css ingelezen. Deze stylesheet zorgt voor de opmaak van de toetspagina.*
+
 <!-- ## CLOSEDBLOK: CSS -->
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 <!-- ## /CLOSEDBLOK: CSS -->
 
+*Hieronder is het CLOSEDBLOK met de naam Header.R te vinden. Dit CLOSEDBLOK zorgt ervoor dat het script Header.R uit de map SHHO/01. Includes/code wordt ingeladen. Dit script zorgt ervoor dat er bovenaan de toetspagina een header komt te staan met daarin de kopjes die ook op de website zichtbaar zijn. Voor een toelichting, zie het script Header.R.*
+
 <!-- ## CLOSEDBLOK: Header.R -->
 ```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
+
+*Hieronder is het CLOSEDBLOK met de naam Status.R te vinden. Dit CLOSEDBLOK zorgt ervoor dat het script Status.R uit de map SHHO/01. Includes/code wordt ingeladen. Dit script zorgt ervoor dat er een disclaimer onder de titel komt te staan als de toetspagina nog niet door het hele reviewproces heen is gegaan. Als dat wel zo, komt de disclaimer er niet te staan.*
 
 <!-- ## CLOSEDBLOK: Status.R -->
 ```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
 ```
 <!-- ## /CLOSEDBLOK: Status.R -->
 
+*Hieronder is het CLOSEDBLOK Reticulate.R te vinden. Dit CLOSEDBLOK heeft voor de R toetspagina geen functie, maar in de Python toetspagina wordt hier het package reticulate ingeladen. Dit package zorgt voor een verbinding tussen R en Python. Het is ook in de R toetspagina zichtbaar, omdat het dus nodig is in de Python toetspagina.*
+
 <!-- ## CLOSEDBLOK: Reticulate.R -->
 
 <!-- ## /CLOSEDBLOK: Reticulate.R -->
+
+*De CLOSEDBLOKKEN hierboven zijn allemaal precies hetzelfde in elke toetspagina. Elke toetspagina begint hiermee.*
+
+*Hieronder is het eerste OPENBLOK te vinden. Het OPENBLOK heet Data-aanmaken.R en runt het script 03.R in de map SHHO/01. Includes/data. In dit script wordt een dataset gesimuleerd die gebruikt wordt om de toets mee te illustreren. Dit is ooit een OPENBLOK genoemd, maar zou beter een CLOSEDBLOK genoemdn kunnen worden, omdat de code niet zichtbaar is in de toetspagina. Dit blok is in elke toetspagina aanwezig, maar het script dat aangeroepen wordt is specifiek voor elke toetspagina. Elke toetspagina heeft een eigen data simulatiescript.*
 
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
@@ -56,8 +73,12 @@ source(paste0(here::here(),"/01. Includes/data/03.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
+*Nu begint de tekst van de toetspagina. Het eerste hoofdstuk is de toepassing. Hier wordt in een paar zinnen uitgelegd waarvoor de statistische toets gebruikt kan worden. Merk hier op dat de naam van de toets van de toetspagina altijd schuingedrukt is. Er is ook een voetnoot opgesteld. Een voetnoot kan je aanmaken met `[^1]`, waarbij deze voetnoot verwijst naar voetnoot 1 onderaan de toetspagina.*
+
 # Toepassing
 Gebruik de *ongepaarde t-toets* om de gemiddelden van twee onafhankelijke groepen te vergelijken.[^1]
+
+*Nu komt de onderwijscasus. Met `<div id = "casus">` wordt aangegeven dat er een speciaal vak voor deze tekst gemaakt moet worden. Dit wordt afgesloten met `</div>`. De eerste alinea van de casus bevat de opgestelde casus voor de toets die door de directe begeleider is gereviewd. Daarna komt een alinea die voor elke toetspagina hetzelfde is. Hierin wordt uitgelegd hoe er hypotheses worden opgesteld. Daarna worden de nulhypothese en alternatieve hypothese uitgeschreven.*
 
 # Onderwijscasus
 <div id = "casus">
@@ -70,8 +91,12 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 *H~A~*: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taalwetenschap is veranderd na de invoer van het BSA, µ~0~ ≠ µ~1~
 </div>
 
+*Nu worden de assumpties van de ongepaarde t-toets behandeld. Dit hoofdstuk bestaat uit verschillende subparagrafen, aangegeven met een dubbel hekje (`##`).*
+
 # Assumpties
 Voor een valide resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
+
+*De eerste subparagraaf behandeld de assumptie van normaliteit. Merk hier op dat andere toetsen dus ook weer schuingedrukt zijn, net als het symbool n voor het aantal observaties.*
 
 ## Normaliteit 
 De *ongepaarde t-toets* gaat ervan uit dat de afhankelijke variabele normaal verdeeld is voor alle groepen. Als elke groep een aantal observaties (*n*) heeft dat groter dan 100 is,  ga er dan vanuit dat de *ongepaarde t-toets* robuust genoeg is om uit te voeren zonder dat de afhankelijke variabele een normale verdeling volgt.
@@ -82,22 +107,36 @@ Controleer de assumptie van normaliteit met de volgende stappen:
 
 De eerste stap heeft als doel een goede indruk te krijgen van de verdeling van de steekproef. In de tweede stap wordt de assumptie van normaliteit getoetst. De statistische toets laat zien of de verdeling van de observaties van een groep voldoet aan de assumptie van normaliteit. Voor beide groepen moet er voldaan zijn aan de assumptie van normaliteit.
 
+*Hier is het eerste TEKSTBLOK van de toetspagina. Het heeft de naam Link1.R. Dit is een tekstblok omdat er een link in is opgenomen. Er wordt verwezen naar de Mann-Whitney U toets. Dit is een toets die wordt behandeld in een andere toetspagina en daarom kan er een link naar gemaakt worden. Zo kan er door de gebruiker direct doorgeklikt worden naar die toetspagina op de website. Een link in markdown is te maken met `[Tekst](link)` waarin tussen blokhaken de tekst wordt gezet en tussen gewone haken de link. Hier wordt gelinkt naar de pagina `08-Mann-Whitney-U-toets-R.html` wat het html-bestand van de toetspagina is. Dit is dus een tekstblok, omdat dit voor de Python toetspagina anders moet zijn. Op de Python toetspagina moet gelinkt worden naar de Python toetspagina van de Mann-Whitney U toets, dus `08-Mann-Whitney-U-toets-Python.html`. Deze alinea verschilt dus tussen de R en Python toetspagina en wordt daarom in een TEKSTBLOK gezet. Merk verder op dat hier een dubbele bronvermelding is. Er kunnen twee voetnoten naast elkaar worden gezet door ze te scheiden met `<sup>, </sup>`. Er komt dan een komma tussen beide voetnoten te staan.* 
+
 <!-- ## TEKSTBLOK: Link1.R-->
 Als blijkt dat de afhankelijke variabele niet normaal verdeeld is voor één van of allebei de groepen, transformeer[^5] dan de afhankelijke variabele en bepaal daarna of deze wel normaal verdeeld is of gebruik de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html).[^6]<sup>, </sup>[^7]  
 <!-- ## /TEKSTBLOK: Link1.R-->
 
+*Dit is de tweede subparagraaf. Hierin wordt een uitleg gegeven over het wel of niet gebruiken van gepoolde variantie.*
+
 ## Wel of geen gepoolde variantie
 De *ongepaarde t-toets* kan met en zonder gepoolde variantie uitgevoerd worden. Bij een gepoolde variantie is de berekening van de variantie van het verschil in gemiddelden anders en wordt aangenomen dat de varianties van beide steekproeven even groot zijn. Deze aanname is te toetsen met de *Levene's test*, waarbij een significant resultaat aangeeft dat er een verschil is in de varianties van beide groepen. De hedendaagse consensus is echter om altijd deze aanname niet te toetsen en de *ongepaarde t-toets* zonder gepoolde variantie uit te voeren.[^8] Een gepoolde variantie zorgt ervoor dat het onderscheidend vermogen[^14] van de *ongepaarde t-toets* iets hoger is als de varianties van beide groepen ongeveer gelijk zijn, maar geeft verkeerde resultaten als de varianties van elkaar afwijken. Daarnaast heeft *Levene's test* een laag onderscheidend vermogen, wat betekent dat het lastig is om ongelijke varianties goed te toetsen. Gebruik daarom de *ongepaarde t-toets* zonder gepoolde variantie; deze staat ook wel bekend als *Welch's t-toets*.[^8]
 
+*Nu begint de uitvoering. In dit hoofdstuk wordt de toets uitgevoerd met programmeercode, in dit geval in programmeertaal R.*
+
 # Uitvoering
+
+*In het begin wordt de dataset geïntroduceerd. Dit is een tekstblok omdat de dataset in Python code een andere naam heeft.*
+
 <!-- ## TEKSTBLOK: Dataset-inladen.R-->
 Er is een dataset ingeladen met gemiddelde cijfers van eerstejaarsstudenten bij de opleiding Taalwetenschap: `Cijfers_gemiddeld`. De dataset bevat cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
 <!-- ## /TEKSTBLOK: Dataset-inladen.R-->
+
+*De data wordt altijd even bekeken met de functies `head()` en `tail()`.*
 
 ## De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken.R -->
 Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
 <!-- ## /TEKSTBLOK: Data-bekijken.R -->
+
+*Hier wordt weer een OPENBLOK gemaakt om de data te bekijken. Een codeblok is in het algemeen te maken door te beginnen met drie keer een apostrof aansluitend met gekromde haken `{}` . Het codeblok wordt weer afgesloten met drie keer een apostrof. In de gekromde haken staat eerst de programmeertaal (r of python) en daarna kan een titel voor het codeblok toegevoegd worden. Deze titel is echter niet per se nodig. Als twee codeblokken in de gekromde haken dezelfde titel hebben, dan geeft het markdown document bij het knitten een foutmelding, dat mag namelijk niet. Leg in comments in de code uit wat je doet, zet voor eeen comment twee hekjes (`##`).*
+
 <!-- ## OPENBLOK: Data-bekijken.R -->
 ```{r data bekijken}
 ## Eerste 6 observaties
@@ -116,6 +155,8 @@ Cijfers_2011 <- Cijfers_gemiddeld$Cijfers[Cijfers_gemiddeld$Cohort == "2011"]
 ```
 <!-- ## /OPENBLOK: Data-selecteren.R -->
 
+*Aan het begin van de toetspagina worden vaak wat beschrijvende statistieken genoemd om meer inzicht in de data te krijgen. Per soort toets verschilt het welke beschrijvende statistieken er gepresenteerd worden.*
+
 <!-- ## TEKSTBLOK: Data-beschrijven.R-->
 Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen in de data.
 <!-- ## /TEKSTBLOK: Data-beschrijven.R-->
@@ -123,6 +164,8 @@ Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen 
 <!-- ## OPENBLOK: Data-beschrijven-inladen.R -->
 
 <!-- ## OPENBLOK: Data-beschrijven-inladen.R -->
+
+*Met `<div class="col-container">` wordt er aangegeven dat er met kolommen gewerkt moet worden. `  <div class="col">` geeft aan dat er gestart wordt met het vullen van een kolom, `</div>` dat er kolom afgesloten kan worden.*
 
 <div class="col-container">
   <div class="col">
@@ -146,8 +189,11 @@ sd(Cijfers_2011)
 <!-- ## /OPENBLOK: Data-beschrijven-2.R -->
   </div>
 </div>
+
+*Hier wordt een CLOSEDBLOK gemaakt met daarin code waarin een aantal beschrijvende statistieken worden opgeslagen. Voor het jaar 2010 en 2011 worden het gemiddelde, de standaardafwijking en het aantal observaties van de afhankelijke variabele opgeslagen. Dit wordt gedaan zodat deze getallen in het vervolg met inline code aangeroepen kunnen worden. Dit wordt hierna toegelicht. Een closedblok wordt op dezelfde manier opgesteld als een openblok. Een verschil is alleen de inhoud van de kromme haken. Naast de programmeertaal r en de titel Var beschrijven t1 is er nog include=FALSE toegevoegd. In markdown zijn er een heleboel opties om codeblokken in te stellen. include=FALSE houdt in dat de code en de output niet weergegeven worden in het html-document, maar dat de code wel gerund wordt. Op deze manier worden de beschrijvende statistieken opgeslagen in objecten die later in de toetspagina gebruikt worden. Hier komt ook de functie Round_and_format() voorbij. Dit is een zelfgeschreven functie die objecten afrondt en het decimaalteken van een punt (.) naar een komma (,) verandert. De functie rondt standaard op twee decimalen af, maar dit kan veranderd worden door als tweede argument van de functie het aantal gewenste decimalen aan te geven.*
+
 <!-- ## CLOSEDBLOK: Data-beschrijven-3.R -->
-```{r Var beschrijven t1, include=FALSE, echo=TRUE}
+```{r Var beschrijven t1, include=FALSE}
 vN_t0 <- Round_and_format(length(Cijfers_2010))
 vMean_t0 <- Round_and_format(mean(Cijfers_2010))
 vSD_t0 <- Round_and_format(sd(Cijfers_2010))
@@ -157,6 +203,7 @@ vSD_t1 <- Round_and_format(sd(Cijfers_2011))
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven-3.R -->
 
+*In dit TEKSTBLOK wordt gewerkt met inline code. Inline code is R code die gerund kan worden, maar gewoon in een tekstregel verschijnt. Inline code wordt gemaakt door te beginnen en te eindigen met één apostrof, daarbinnen te beginnen met de programmeertaal (R in dit geval) en daarna de code die gerund moet worden op te schrijven. Bijvoorbeeld r vMean_t0 betekent dat programmeertaal R gebruikt wordt en dat de uit te voeren code het object vMean_t0 is. Je kan ook functies in de uit te voeren code zetten, een voorbeeld hiervan zou zijn Round_and_format(vMean_t0) om het object te bewerken met de zelfgeschreven functie Round_and_format().*
 <!-- ## TEKSTBLOK: Data-beschrijven-4.R -->
 * Gemiddeld tentamencijfer 2010 (standaarddeviatie): `r vMean_t0` (`r vSD_t0`). *n* = `r vN_t0`.
 * Gemiddeld tentamencijfer 2011 (standaarddeviatie): `r vMean_t1` (`r vSD_t1`). *n* = `r vN_t1`.
@@ -166,7 +213,11 @@ vSD_t1 <- Round_and_format(sd(Cijfers_2011))
 ## Visuele inspectie van normaliteit
 Geef de verdeling van de tentamencijfers van beide groepen visueel weer met een histogram, Q-Q plot en boxplot.
 
+*In deze sectie worden visualisaties weergegeven. In het SH houden we aan dat er geen tidyverse code gebruikt wordt, maar zoveel mogelijk base R code. Visualisaties is echter een uitzondering, hier kan ook tidyverse code gebruikt worden. Hier zijn er bijvoorbeeld visualisaties met ggplot gemaakt, maar ook met de gebruikelijke base R functies.*
+
 ### Histogram
+
+*De twee zinnen hieronder zijn standaardzinnen die bij een histogram gebruikt worden. Ze zijn zo opgesteld naar aanleiding van feedback van verschillende reviewers.*
 
 Focus bij het analyseren van een histogram[^18] op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.[^9]<sup>, </sup>[^10]
 

@@ -1,5 +1,5 @@
 ---
-title: "01 One sample t-toets Python"
+title: "One sample t-toets "
 output:
   html_document:
     keep_md: yes

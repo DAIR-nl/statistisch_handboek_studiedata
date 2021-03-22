@@ -1813,7 +1813,7 @@ body{ /* Normal  */
 <p><em>H<sub>0</sub></em>: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taalwetenschap is niet veranderd na de invoer van het BSA, µ<sub>0</sub> = µ<sub>1</sub></p>
 <p><em>H<sub>A</sub></em>: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taalwetenschap is veranderd na de invoer van het BSA, µ<sub>0</sub> ≠ µ<sub>1</sub></p>
 </div>
-<p><em>Nu worden de assumpties van de ongepaarde t-toets behandeld. Dit hoofdstuk bestaat uit verschillende subparagrafen, aangegeven met een dubbel hekje (<code>##</code>).</em></p>
+<p><em>Nu worden de assumpties van de ongepaarde t-toets behandeld. Dit hoofdstuk bestaat uit verschillende subparagrafen, aangegeven met een dubbel hekje (<code>##</code>). Bij de uitleg over de assumpties wordt uitgelegd wat de assumptie is, hoe je het toetst/onderzoekt en wat je moet doen als er niet voldaan is aan de assumptie.</em></p>
 </div>
 <div id="assumpties" class="section level1">
 <h1><span class="header-section-number">3</span> Assumpties</h1>
@@ -1903,8 +1903,10 @@ length(Cijfers_2011)</code></pre>
 <!-- ## /OPENBLOK: Data-beschrijven-2.R -->
 </div>
 </div>
-<p>*Hier wordt een CLOSEDBLOK gemaakt met daarin code waarin een aantal beschrijvende statistieken worden opgeslagen. Voor het jaar 2010 en 2011 worden het gemiddelde, de standaardafwijking en het aantal observaties van de afhankelijke variabele opgeslagen. Dit wordt gedaan zodat deze getallen in het vervolg met inline code aangeroepen kunnen worden. Dit wordt hierna toegelicht. Een closedblok wordt op dezelfde manier opgesteld als een openblok. Een verschil is alleen de inhoud van de kromme haken. Naast de programmeertaal r en de titel Var beschrijven t1 is er nog include=FALSE en echo=TRUE toegevoegd. In markdown zijn er een heleboel opties om codeblokken in te stellen. include=FALSE <!-- ## CLOSEDBLOK: Data-beschrijven-3.R --></p>
+<p><em>Hier wordt een CLOSEDBLOK gemaakt met daarin code waarin een aantal beschrijvende statistieken worden opgeslagen. Voor het jaar 2010 en 2011 worden het gemiddelde, de standaardafwijking en het aantal observaties van de afhankelijke variabele opgeslagen. Dit wordt gedaan zodat deze getallen in het vervolg met inline code aangeroepen kunnen worden. Dit wordt hierna toegelicht. Een closedblok wordt op dezelfde manier opgesteld als een openblok. Een verschil is alleen de inhoud van de kromme haken. Naast de programmeertaal r en de titel Var beschrijven t1 is er nog include=FALSE toegevoegd. In markdown zijn er een heleboel opties om codeblokken in te stellen. include=FALSE houdt in dat de code en de output niet weergegeven worden in het html-document, maar dat de code wel gerund wordt. Op deze manier worden de beschrijvende statistieken opgeslagen in objecten die later in de toetspagina gebruikt worden. Hier komt ook de functie Round_and_format() voorbij. Dit is een zelfgeschreven functie die objecten afrondt en het decimaalteken van een punt (.) naar een komma (,) verandert. De functie rondt standaard op twee decimalen af, maar dit kan veranderd worden door als tweede argument van de functie het aantal gewenste decimalen aan te geven.</em></p>
+<!-- ## CLOSEDBLOK: Data-beschrijven-3.R -->
 <!-- ## /CLOSEDBLOK: Data-beschrijven-3.R -->
+<p><em>In dit TEKSTBLOK wordt gewerkt met inline code. Inline code is R code die gerund kan worden, maar gewoon in een tekstregel verschijnt. Inline code wordt gemaakt door te beginnen en te eindigen met één apostrof, daarbinnen te beginnen met de programmeertaal (R in dit geval) en daarna de code die gerund moet worden op te schrijven. Bijvoorbeeld r vMean_t0 betekent dat programmeertaal R gebruikt wordt en dat de uit te voeren code het object vMean_t0 is. Je kan ook functies in de uit te voeren code zetten, een voorbeeld hiervan zou zijn Round_and_format(vMean_t0) om het object te bewerken met de zelfgeschreven functie Round_and_format().</em></p>
 <!-- ## TEKSTBLOK: Data-beschrijven-4.R -->
 <ul>
 <li>Gemiddeld tentamencijfer 2010 (standaarddeviatie): 6,37 (1,12). <em>n</em> = 180.</li>
@@ -1915,8 +1917,10 @@ length(Cijfers_2011)</code></pre>
 <div id="visuele-inspectie-van-normaliteit" class="section level2">
 <h2><span class="header-section-number">4.2</span> Visuele inspectie van normaliteit</h2>
 <p>Geef de verdeling van de tentamencijfers van beide groepen visueel weer met een histogram, Q-Q plot en boxplot.</p>
+<p><em>In deze sectie worden visualisaties weergegeven. In het SH houden we aan dat er geen tidyverse code gebruikt wordt, maar zoveel mogelijk base R code. Visualisaties is echter een uitzondering, hier kan ook tidyverse code gebruikt worden. Hier zijn er bijvoorbeeld visualisaties met ggplot gemaakt, maar ook met de gebruikelijke base R functies.</em></p>
 <div id="histogram" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> Histogram</h3>
+<p><em>De twee zinnen hieronder zijn standaardzinnen die bij een histogram gebruikt worden. Ze zijn zo opgesteld naar aanleiding van feedback van verschillende reviewers.</em></p>
 <p>Focus bij het analyseren van een histogram<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a><sup>, </sup><a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
 <!-- ## OPENBLOK: Histogram.R -->
 <pre class="r"><code>## Histogram met ggplot2
@@ -2015,7 +2019,10 @@ qqline(Cijfers_2011)</code></pre>
 </div>
 <div id="shapiro-wilk-test" class="section level3">
 <h3><span class="header-section-number">4.3.2</span> Shapiro-Wilk Test</h3>
-<p>De <em>Shapiro-Wilk test</em> is een soortgelijke test als de <em>Kolmogorov-Smirnov test</em> en vooral geschikt bij kleine steekproeven (<em>n</em> &lt; 50). Als de p-waarde kleiner dan 0,05 is, is de verdeling van de steekproef significant verschillend van de normale verdeling. <!-- ## TEKSTBLOK: Shapiro-Wilk-test.R --> Er zijn twee subsets van <code>Cijfers_gemiddeld</code> ingeladen: <code>Cijfers_2010_n30</code> en <code>Cijfers_2011_n30</code>. Beide subsets bevatten 30 studenten. Voor relatief kleine steekproeven als deze is de <em>Shapiro-Wilk Test</em> geschikt.</p>
+<p>De <em>Shapiro-Wilk test</em> is een soortgelijke test als de <em>Kolmogorov-Smirnov test</em> en vooral geschikt bij kleine steekproeven (<em>n</em> &lt; 50). Als de p-waarde kleiner dan 0,05 is, is de verdeling van de steekproef significant verschillend van de normale verdeling.</p>
+<p><em>Hier worden subsets van de data ingeladen die speciaal gemaakt zijn voor de Shapiro-Wilk test omdat deze geschikt is voor kleine datasets Deze zijn ook in het data simuatie script gesimuleerd. Het maken van extra datasets hiervoor wordt alleen gedaan bij de drie toetspagina’s voor de t-toetsen. Bij de andere toetspagina’s gebeurt dat niet.</em></p>
+<!-- ## TEKSTBLOK: Shapiro-Wilk-test.R -->
+<p>Er zijn twee subsets van <code>Cijfers_gemiddeld</code> ingeladen: <code>Cijfers_2010_n30</code> en <code>Cijfers_2011_n30</code>. Beide subsets bevatten 30 studenten. Voor relatief kleine steekproeven als deze is de <em>Shapiro-Wilk Test</em> geschikt.</p>
 <!-- ## /TEKSTBLOK: Shapiro-Wilk-test.R -->
 <div class="col-container">
 <div class="col">
@@ -2040,13 +2047,14 @@ qqline(Cijfers_2011)</code></pre>
 </div>
 </div>
 <p>De p-waarde is groter dan 0,05 voor beide groepen, dus er zijn geen significante verschillen gevonden tussen de verdeling van de steekproef en de normale verdeling. De <em>ongepaarde t-toets</em> kan uitgevoerd worden.</p>
+<p><em>Er is aan alle assumpties voldaan, dus nu begint de uitvoering van de toets. Hier worden zoveel mogelijk de base R functies voor gebruikt, maar dit kan niet voor elke toets. Bij de uitvoering wordt de functie genoemd en een eventueel package waar het vandaan komt (als het niet base R is) en worden de argumenten uitgeschreven en uitgelegd.</em></p>
 </div>
 </div>
 <div id="ongepaarde-t-toets" class="section level2">
 <h2><span class="header-section-number">4.4</span> Ongepaarde t-toets</h2>
 <!-- ## TEKSTBLOK: T-test.R -->
 <p>Voer een ongepaarde <code>t.test()</code> uit met <code>paired = FALSE</code> (vanwege de ongepaarde groepen) en <code>var.equal = FALSE</code> (omdat de varianties niet per se aan elkaar gelijk zijn). Het eerste argument bestaat uit de afhankelijke variabele <code>Cijfers</code> en de groepvariabele <code>Cohort</code>. <!-- ## /TEKSTBLOK: T-test.R --></p>
-<!-- ## OPENBLOK: T-test.R -->
+<p><em>Maak een OPENBLOK waarin de code voor de uitvoering zichtbaar is.</em> <!-- ## OPENBLOK: T-test.R --></p>
 <pre class="r"><code>t.test(Cijfers ~ Cohort, Cijfers_gemiddeld, 
        paired = FALSE,
        alternative = &quot;two.sided&quot;,
@@ -2063,11 +2071,12 @@ qqline(Cijfers_2011)</code></pre>
 ## mean in group 2010 mean in group 2011 
 ##           6.369189           6.462363</code></pre>
 <!-- ## /OPENBLOK: T-test.R -->
-<!-- ## CLOSEDBLOK: T-test.R -->
+<p><em>Maak een CLOSEDBLOK waarin onjecten worden opgeslagen die nodig zijn voor de resultaten later echo = FALSE betekent hier dat de code niet zichtbaar is, maar eventuele resultaten wel en dat de code gewoon gerund wordt. Hier zou dus ook include = FALSE gebruikt kunnen worden. Er zijn echter geen resultaten na het runnen van deze code, dus beide werken hier.</em> <!-- ## CLOSEDBLOK: T-test.R --></p>
 <!-- ## /CLOSEDBLOK: T-test.R -->
+<p><em>Bij de uitvoering van een toets worden de resultaten altijd puntsgewijs opgesomd met bullets. In de rapportage worden ze netjes gerapporteerd, maar hier gaat op deze manier. Je ziet de volgende elementen daarin. Als eerste een regel met daarin de toetsstatistiek, vrijheidsgraden en p-waarde. Daarna een interpretatie van het resultaat wat betreft significantie, dit is altijd in de vorm van De p-waarde is groter/kleiner dan 0,05, dus de H<sub>0</sub> wordt niet/wel verworpen. Bij deze zin staat ook een voetnoot die hetzelfde is in elke toetspagina. In deze voetnoot wordt vermeldt dat het significantieniveau 0,05 is. Vrijheidsgraden worden hier in een aparte bullet behandeld, maar dat is niet per se nodig, ze kunnen ook in de eerste bullet als getal aanwezig zijn. Er wordt ook indien mogelijk een effectmaat genoemd, maar die staat in deze toetspagina hierna vermeld. Verder horen betrouwbaarheidsintervallen aanwezig te zijn als dat mogelijk is. Getallen worden in de toetspagina altijd op twee decimalen afgerond, behalve voor de p-waarde die op drie getallen afgerond wordt. Als een p-waarde echter kleiner is dan 0,001 dan wordt er p &lt; 0,001 geschreven. Als de p-waarde zelfs kleiner dan 0,0001 is, dan is de notatie p &lt; 0,0001. Wederom is hier inline code gebruikt.</em></p>
 <!-- ## TEKSTBLOK: T-test2.R -->
 <ul>
-<li><em>t</em> = -0,74, <em>p</em> = 0,46</li>
+<li><em>t</em> = -0,74, <em>p</em> = 0,461</li>
 <li>De p-waarde is groter dan 0,05, dus de H<sub>0</sub> wordt niet verworpen <a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a></li>
 <li>Vrijheidsgraden: <em>df</em> = 326,37, niet gelijk aan aantal observaties min één bij een ongepaarde t-toets zonder gepoolde varianties</li>
 <li>95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95% van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het verschil tussen de hoogte van de cijfers voor en na de BSA cursus, µ<sub>verschil</sub> = µ<sub>T2011</sub> - µ<sub>T2010</sub>. In deze casus is het interval tussen -0,34 en 0,16. Aangezien 0 in dit interval zit, is er geen significant verschil tussen beide gemiddelden in 2010 en 2011.</li>
@@ -2075,12 +2084,10 @@ qqline(Cijfers_2011)</code></pre>
 <li>Het gemiddelde van de steekproef is in 2011 6,46</li>
 </ul>
 <!-- ## /TEKSTBLOK: T-test2.R -->
-<div id="effectmaat-cohens-d" class="section level3">
-<h3><span class="header-section-number">4.4.1</span> Effectmaat: Cohen’s d</h3>
+<p><em>In de toetspagina wordt altijd een uitleg gegeven over de effectmaat, deze staat hieronder. De eerste paar zinnen zijn overal ongeveer hetzelfde en zijn na reviews van de reviewers opgesteld. Daarna wordt de specifieke effectmaat voor de toets geïntroduceerd. Er worden ook altijd criteria genoemd om de effectmaat te interpreteren.</em></p>
 <p>De p-waarde geeft aan of het verschil tussen twee groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> Een veel gebruikte effectmaat is Cohen’s <em>d</em>. Cohen’s <em>d</em> geeft een gestandaardiseerd verschil weer: het verschil in gemiddelden tussen twee groepen gecorrigeerd voor de gecombineerde standaardafwijking van de twee groepen. Een indicatie om <em>d</em> te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect.<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></p>
 <p>In dit voorbeeld is de p-waarde groter dan 0,05, dus is een effectmaat uitrekenen onnodig. Pas de volgende stappen toe bij een p-waarde kleiner dan 0,05.</p>
-<!-- ## TEKSTBLOK: Cohen-d.R -->
-<p>Gebruik de functie <code>cohensD()</code> van het package <code>lsr</code> met de argumenten <code>Cijfers ~ Cohort</code> waarbij <code>Cijfers</code> de afhankelijke variabele is en <code>Cohort</code> de onafhankelijke variabele die de groepen aangeeft, het argument <code>Cijfers_gemiddeld</code> dat de dataset aangeeft en het argument <code>method = unequal</code> omdat er niet aangenomen wordt dat de varianties aan elkaar gelijk zijn. <!-- ## /TEKSTBLOK: Cohen-d.R --></p>
+<p><em>Hier wordt de effectmaat berekend met bijbehorende toelichting.</em> <!-- ## TEKSTBLOK: Cohen-d.R --> Gebruik de functie <code>cohensD()</code> van het package <code>lsr</code> met de argumenten <code>Cijfers ~ Cohort</code> waarbij <code>Cijfers</code> de afhankelijke variabele is en <code>Cohort</code> de onafhankelijke variabele die de groepen aangeeft, het argument <code>Cijfers_gemiddeld</code> dat de dataset aangeeft en het argument <code>method = unequal</code> omdat er niet aangenomen wordt dat de varianties aan elkaar gelijk zijn. <!-- ## /TEKSTBLOK: Cohen-d.R --></p>
 <!-- ## OPENBLOK: Cohens-d-test.R -->
 <pre class="r"><code>library(lsr)
 cohensD(Cijfers ~ Cohort, Cijfers_gemiddeld, method = &quot;unequal&quot;)</code></pre>
@@ -2092,11 +2099,11 @@ cohensD(Cijfers ~ Cohort, Cijfers_gemiddeld, method = &quot;unequal&quot;)</code
 <p><em>d</em> = 0.0803533. De sterkte van het effect van het BSA op het cijfer is verwaarloosbaar. <!-- ## /TEKSTBLOK: Cohens-d-test.R --></p>
 </div>
 </div>
-</div>
 <div id="rapportage" class="section level1">
 <h1><span class="header-section-number">5</span> Rapportage</h1>
+<p><em>Aan het einde van de toetspagina bevindt zich de rapportage. In de rapportage wordt de conclusie van het onderzoek uit de casus opgeschreven. Eerst worden de resultaten van de statistische toets genoemd (op een zoveel mogelijk APA manier) samen met beschrijvende statistieken, bijvoorbeeld in een Tabel. Daarna wordt de conclusie getrokken met betrekking tot de casus. Let op dat de conclusie niet te stellig is. In deze rapportage is de conclusie “Het gemiddelde tentamencijfer lijkt niet veranderd te zijn na de invoering van het BSA”. Omdat een statistische toets gedaan wordt op basis van een steekproef, is er altijd onzekerheid. Vandaar dat er een voorbehoud is gemaakt door het woord “lijkt” te gebruiken.</em></p>
 <!-- ## TEKSTBLOK: Rapportage.R -->
-<p>Een <em>ongepaarde t-toets</em> is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (<em>M<sub>2010</sub></em> = 6,37, <em>SD<sub>2010</sub></em> = 1,12) en het gemiddelde tentamencijfer van cohort 2011 (<em>M<sub>2011</sub></em> = 6,46, <em>SD<sub>2011</sub></em> = 1,2) is niet significant, <em>t</em> = -0,74, <em>p</em> = 0,46. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen loopt van -0,34 tot 0,16. Het gemiddelde tentamencijfer lijkt niet veranderd te zijn na de invoering van het BSA.</p>
+<p>Een <em>ongepaarde t-toets</em> is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (<em>M<sub>2010</sub></em> = 6,37, <em>SD<sub>2010</sub></em> = 1,12) en het gemiddelde tentamencijfer van cohort 2011 (<em>M<sub>2011</sub></em> = 6,46, <em>SD<sub>2011</sub></em> = 1,2) is niet significant, <em>t</em> = -0,74, <em>p</em> = 0,461. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen loopt van -0,34 tot 0,16. Het gemiddelde tentamencijfer lijkt niet veranderd te zijn na de invoering van het BSA.</p>
 <table>
 <thead>
 <tr class="header">
@@ -2123,15 +2130,17 @@ cohensD(Cijfers ~ Cohort, Cijfers_gemiddeld, method = &quot;unequal&quot;)</code
 </table>
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 <p><em>Tabel 1. Groepsgrootte, gemiddeld tentamencijfer en standaarddeviatie per cohort</em></p>
+<p><em>Hier is de footer. In de footer staat uitleg over het Statistisch Handboek als project van de zone studiedata. Ook kunnen alle datasets hier gedownload worden. De precieze inhoud is te vinden in het script dat wordt aangeroepen, Footer.R in de map SHHO/01. Includes/code.</em></p>
 <!-- ## CLOSEDBLOK: Footer.R -->
 <p>
 <div id = "footerborder"><hr/></div>
 <div id = "footer">
 Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 3.6.3; Python code is uitgevoerd in Python 3.7. De gesimuleerde datasets zijn <a href="Datasets_zipbestand" download>hier</a> te downloaden.
 <br/><br/>
-&copy; 2021 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="Licentie.html">Licentie</a> Laatst gewijzigd op:17-03-2021
+&copy; 2021 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="Licentie.html">Licentie</a> Laatst gewijzigd op:18-03-2021
 </div> <!-- ## /CLOSEDBLOK: Footer.R --></p>
-<!-- ## TEKSTBLOK: Extra-Bron.R -->
+<p><em>Hier begint de referentielijst, op de manier zoals dat in markdown documenten gedaan wordt. De voetnoten uit de tekst verwijzen naar de voetnoten hier en dat gaat via het nummer. Voetnoten kunnen een verwijzing naar een artikel, website of boek bevatten, dan wordt deze zoveel mogelijk APA uitgewerkt. Ook kan een begrip nader worden toegelicht, dan bevat de voetnoot een stuk tekst, zoals bij voetnoot 5.</em></p>
+<p><em>Soms is er een bron die wel in de Python toetspagina voorkomt, maar niet in de R toetspagina. Bijvoorbeeld als er in de Python toetspagina iets is wat nader toegelicht moet worden, of een andere bron die gebruikt moet worden. Als dit zo is, dan wordt er een tekstblok aangemaakt om deze voetnoot in de referentielijst te zetten. Dat zie je hieronder.</em> <!-- ## TEKSTBLOK: Extra-Bron.R --></p>
 <!-- ## /TEKSTBLOK: Extra-Bron.R -->
 </div>
 <div class="footnotes">

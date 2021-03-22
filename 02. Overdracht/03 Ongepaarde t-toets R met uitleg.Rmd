@@ -91,7 +91,7 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 *H~A~*: Het gemiddelde tentamencijfer dat de studenten halen aan de opleiding Taalwetenschap is veranderd na de invoer van het BSA, µ~0~ ≠ µ~1~
 </div>
 
-*Nu worden de assumpties van de ongepaarde t-toets behandeld. Dit hoofdstuk bestaat uit verschillende subparagrafen, aangegeven met een dubbel hekje (`##`).*
+*Nu worden de assumpties van de ongepaarde t-toets behandeld. Dit hoofdstuk bestaat uit verschillende subparagrafen, aangegeven met een dubbel hekje (`##`). Bij de uitleg over de assumpties wordt uitgelegd wat de assumptie is, hoe je het toetst/onderzoekt en wat je moet doen als er niet voldaan is aan de assumptie.*
 
 # Assumpties
 Voor een valide resultaat moet de data aan een aantal voorwaarden voldoen voordat de toets uitgevoerd kan worden.
@@ -204,6 +204,7 @@ vSD_t1 <- Round_and_format(sd(Cijfers_2011))
 <!-- ## /CLOSEDBLOK: Data-beschrijven-3.R -->
 
 *In dit TEKSTBLOK wordt gewerkt met inline code. Inline code is R code die gerund kan worden, maar gewoon in een tekstregel verschijnt. Inline code wordt gemaakt door te beginnen en te eindigen met één apostrof, daarbinnen te beginnen met de programmeertaal (R in dit geval) en daarna de code die gerund moet worden op te schrijven. Bijvoorbeeld r vMean_t0 betekent dat programmeertaal R gebruikt wordt en dat de uit te voeren code het object vMean_t0 is. Je kan ook functies in de uit te voeren code zetten, een voorbeeld hiervan zou zijn Round_and_format(vMean_t0) om het object te bewerken met de zelfgeschreven functie Round_and_format().*
+
 <!-- ## TEKSTBLOK: Data-beschrijven-4.R -->
 * Gemiddeld tentamencijfer 2010 (standaarddeviatie): `r vMean_t0` (`r vSD_t0`). *n* = `r vN_t0`.
 * Gemiddeld tentamencijfer 2011 (standaarddeviatie): `r vMean_t1` (`r vSD_t1`). *n* = `r vN_t1`.
@@ -330,6 +331,9 @@ Bij deze casus is van beide groepen de p-waarde groter dan 0,05, dus er zijn gee
 
 ### Shapiro-Wilk Test
 De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en vooral geschikt bij kleine steekproeven (*n* < 50). Als de p-waarde kleiner dan 0,05 is, is de verdeling van de steekproef significant verschillend van de normale verdeling. 
+
+*Hier worden subsets van de data ingeladen die speciaal gemaakt zijn voor de Shapiro-Wilk test omdat deze geschikt is voor kleine datasets Deze zijn ook in het data simuatie script gesimuleerd. Het maken van extra datasets hiervoor wordt alleen gedaan bij de drie toetspagina's voor de t-toetsen. Bij de andere toetspagina's gebeurt dat niet.*
+
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test.R -->
 Er zijn twee subsets van `Cijfers_gemiddeld` ingeladen: `Cijfers_2010_n30` en `Cijfers_2011_n30`. Beide subsets bevatten `r length(Cijfers_2010_n30)` studenten. Voor relatief kleine steekproeven als deze is de *Shapiro-Wilk Test* geschikt.
 
@@ -350,13 +354,17 @@ shapiro.test(Cijfers_2011_n30)
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-2.R -->
   </div>
 </div>
+
 De p-waarde is groter dan 0,05 voor beide groepen, dus er zijn geen significante verschillen gevonden tussen de verdeling van de steekproef en de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
+
+*Er is aan alle assumpties voldaan, dus nu begint de uitvoering van de toets. Hier worden zoveel mogelijk de base R functies voor gebruikt, maar dit kan niet voor elke toets. Bij de uitvoering wordt de functie genoemd en een eventueel package waar het vandaan komt (als het niet base R is) en worden de argumenten uitgeschreven en uitgelegd.*
 
 ## Ongepaarde t-toets
 <!-- ## TEKSTBLOK: T-test.R -->
 Voer een ongepaarde `t.test()` uit met `paired = FALSE` (vanwege de ongepaarde groepen) en `var.equal = FALSE` (omdat de varianties niet per se aan elkaar gelijk zijn). Het eerste argument bestaat uit de afhankelijke variabele `Cijfers` en de groepvariabele `Cohort`.
 <!-- ## /TEKSTBLOK: T-test.R -->
 
+*Maak een OPENBLOK waarin de code voor de uitvoering zichtbaar is.*
 <!-- ## OPENBLOK: T-test.R -->
 ```{r statistische toets}
 t.test(Cijfers ~ Cohort, Cijfers_gemiddeld, 
@@ -365,6 +373,8 @@ t.test(Cijfers ~ Cohort, Cijfers_gemiddeld,
        var.equal = FALSE)
 ```
 <!-- ## /OPENBLOK: T-test.R -->
+
+*Maak een CLOSEDBLOK waarin onjecten worden opgeslagen die nodig zijn voor de resultaten later echo = FALSE betekent hier dat de code niet zichtbaar is, maar eventuele resultaten wel en dat de code gewoon gerund wordt. Hier zou dus ook include = FALSE gebruikt kunnen worden. Er zijn echter geen resultaten na het runnen van deze code, dus beide werken hier.*
 <!-- ## CLOSEDBLOK: T-test.R -->
 ```{r T-test als object, echo = FALSE}
 t <- t.test(Cijfers ~ Cohort, Cijfers_gemiddeld, paired = FALSE, var.equal = FALSE)
@@ -373,9 +383,11 @@ vN <- t$parameter + 1
 vDF <- Round_and_format(t$parameter)
 vConf.int1 <- Round_and_format(t$conf.int[1])
 vConf.int2 <- Round_and_format(t$conf.int[2])
-vP <- Round_and_format(t$p.value)
+vP <- Round_and_format(t$p.value, 3)
 ```
 <!-- ## /CLOSEDBLOK: T-test.R -->
+
+*Bij de uitvoering van een toets worden de resultaten altijd puntsgewijs opgesomd met bullets. In de rapportage worden ze netjes gerapporteerd, maar hier gaat op deze manier. Je ziet de volgende elementen daarin. Als eerste een regel met daarin de toetsstatistiek, vrijheidsgraden en p-waarde. Daarna een interpretatie van het resultaat wat betreft significantie, dit is altijd in de vorm van De p-waarde is groter/kleiner dan 0,05, dus de H~0~ wordt niet/wel verworpen. Bij deze zin staat ook een voetnoot die hetzelfde is in elke toetspagina. In deze voetnoot wordt vermeldt dat het significantieniveau 0,05 is. Vrijheidsgraden worden hier in een aparte bullet behandeld, maar dat is niet per se nodig, ze kunnen ook in de eerste bullet als getal aanwezig zijn. Er wordt ook indien mogelijk een effectmaat genoemd, maar die staat in deze toetspagina hierna vermeld. Verder horen betrouwbaarheidsintervallen aanwezig te zijn als dat mogelijk is. Getallen worden in de toetspagina altijd op twee decimalen afgerond, behalve voor de p-waarde die op drie getallen afgerond wordt. Als een p-waarde echter kleiner is dan 0,001 dan wordt er p < 0,001 geschreven. Als de p-waarde zelfs kleiner dan 0,0001 is, dan is de notatie p < 0,0001. Wederom is hier inline code gebruikt.*
 
 <!-- ## TEKSTBLOK: T-test2.R -->
 * *t* = `r vT_waarde`, *p* = `r vP`
@@ -387,10 +399,13 @@ vP <- Round_and_format(t$p.value)
 
 <!-- ## /TEKSTBLOK: T-test2.R -->
 
-### Effectmaat: Cohen's d 
+*In de toetspagina wordt altijd een uitleg gegeven over de effectmaat, deze staat hieronder. De eerste paar zinnen zijn overal ongeveer hetzelfde en zijn na reviews van de reviewers opgesteld. Daarna wordt de specifieke effectmaat voor de toets geïntroduceerd. Er worden ook altijd criteria genoemd om de effectmaat te interpreteren.*
+
 De p-waarde geeft aan of het verschil tussen twee groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^12] Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft een gestandaardiseerd verschil weer: het verschil in gemiddelden tussen twee groepen gecorrigeerd voor de gecombineerde standaardafwijking van de twee groepen. Een indicatie om *d* te interpreteren is: rond 0,3 is het een klein effect, rond 0,5 is het een gemiddeld effect en rond 0,8 is het een groot effect.[^13]
 
 In dit voorbeeld is de p-waarde groter dan 0,05, dus is een effectmaat uitrekenen onnodig. Pas de volgende stappen toe bij een p-waarde kleiner dan 0,05.
+
+*Hier wordt de effectmaat berekend met bijbehorende toelichting.*
 
 <!-- ## TEKSTBLOK: Cohen-d.R -->
 Gebruik de functie `cohensD()` van het package `lsr` met de argumenten `Cijfers ~ Cohort` waarbij `Cijfers` de afhankelijke variabele is en `Cohort` de onafhankelijke variabele die de groepen aangeeft, het argument `Cijfers_gemiddeld` dat de dataset aangeeft en het argument `method = unequal` omdat er niet aangenomen wordt dat de varianties aan elkaar gelijk zijn.
@@ -413,6 +428,9 @@ vD_waarde <- cohensD(Cijfers ~ Cohort, Cijfers_gemiddeld, method = "unequal")
 <!-- ## /TEKSTBLOK: Cohens-d-test.R -->
 
 # Rapportage
+
+*Aan het einde van de toetspagina bevindt zich de rapportage. In de rapportage wordt de conclusie van het onderzoek uit de casus opgeschreven. Eerst worden de resultaten van de statistische toets genoemd (op een zoveel mogelijk APA manier) samen met beschrijvende statistieken, bijvoorbeeld in een Tabel. Daarna wordt de conclusie getrokken met betrekking tot de casus. Let op dat de conclusie niet te stellig is. In deze rapportage is de conclusie "Het gemiddelde tentamencijfer lijkt niet veranderd te zijn na de invoering van het BSA". Omdat een statistische toets gedaan wordt op basis van een steekproef, is er altijd onzekerheid. Vandaar dat er een voorbehoud is gemaakt door het woord "lijkt" te gebruiken.*
+
 <!-- ## TEKSTBLOK: Rapportage.R -->
 Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamencijfer is veranderd na de invoer van het BSA. Het verschil tussen het gemiddelde tentamencijfer van cohort 2010 (*M~2010~* = `r vMean_t0`,  *SD~2010~* = `r vSD_t0`) en het gemiddelde tentamencijfer van cohort 2011 (*M~2011~* = `r vMean_t1`,  *SD~2011~* = `r vSD_t1`) is niet significant, *t* = `r vT_waarde`, *p* = `r vP`. Het 95% betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen loopt van `r vConf.int1` tot `r vConf.int2`. Het gemiddelde tentamencijfer lijkt niet veranderd te zijn na de invoering van het BSA. 
 
@@ -423,10 +441,15 @@ Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamenc
 <!-- ## /TEKSTBLOK: Rapportage.R -->
 *Tabel 1. Groepsgrootte, gemiddeld tentamencijfer en standaarddeviatie per cohort*
 
+*Hier is de footer. In de footer staat uitleg over het Statistisch Handboek als project van de zone studiedata. Ook kunnen alle datasets hier gedownload worden. De precieze inhoud is te vinden in het script dat wordt aangeroepen, Footer.R in de map SHHO/01. Includes/code.*
+
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
 ```
 <!-- ## /CLOSEDBLOK: Footer.R -->
+
+*Hier begint de referentielijst, op de manier zoals dat in markdown documenten gedaan wordt. De voetnoten uit de tekst verwijzen naar de voetnoten hier en dat gaat via het nummer. Voetnoten kunnen een verwijzing naar een artikel, website of boek bevatten, dan wordt deze zoveel mogelijk APA uitgewerkt. Ook kan een begrip nader worden toegelicht, dan bevat de voetnoot een stuk tekst, zoals bij voetnoot 5.*
+
 
 [^1]: Van Geloven, N. (25 mei 2016). *T-toets* [Wiki Statistiek Academisch Medisch Centrum](https://wikistatistiek.amc.nl/index.php/T-toets#ongepaarde_t-toets).
 [^2]: Lumley, T., Diehr, P., Emerson, S., & Chen, L. (2002). The importance of the normality assumption in large public health data sets. *Annu Rev Public Health, 23*, 151-69. doi: 10.1146/annurev.publheath.23.100901.140546 http://rctdesign.org/techreports/arphnonnormality.pdf 
@@ -444,6 +467,7 @@ Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamenc
 [^14]: Onderscheidend vermogen, in het Engels power genoemd, is de kans dat de nulhypothese verworpen wordt wanneer de alternatieve hypothese 'waar' is.  
 [^18]: De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.
 
+*Soms is er een bron die wel in de Python toetspagina voorkomt, maar niet in de R toetspagina. Bijvoorbeeld als er in de Python toetspagina iets is wat nader toegelicht moet worden, of een andere bron die gebruikt moet worden. Als dit zo is, dan wordt er een tekstblok aangemaakt om deze voetnoot in de referentielijst te zetten. Dat zie je hieronder.*
 <!-- ## TEKSTBLOK: Extra-Bron.R -->
 
 <!-- ## /TEKSTBLOK: Extra-Bron.R -->

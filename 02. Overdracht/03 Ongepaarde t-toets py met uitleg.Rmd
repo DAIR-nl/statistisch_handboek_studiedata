@@ -1,3 +1,8 @@
+*Dit is een Python chunk document van de ongepaarde t-toets. In dit document wordt uitgelegd hoe je een Python chunk toetspagina maakt. Het is een vervolg op het voorbeeld 03 Ongepaarde t-toets R met uitleg.Rmd, lees deze eerst. Met schuine tekst in alinea's wordt een toelichting gegeven op alle onderdelen van de toetspagina. De schuine tekst is dus toelichting, de normale tekst is de oorsponkelijk toetspagina.*
+
+*Er hoeft geen titel in het Python chunk document opgenomen te worden, deze staat namelijk niet in blokken. Bij veel Python chunk toetspagina's staat de titel er nog wel in, maar dit is niet nodig en heeft geen invloed op de uiteindelijke toetspagina.*
+
+*De blokken Functies.R, CSS, Header.R en Status.R zijn precies hetzelfde als in de R markdown toetspagina van deze toets. Deze moeten dus letterlijk overgenomen worden.*
 <!-- ## CLOSEDBLOK: Functies.R -->
 ```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
 library(here)
@@ -8,14 +13,23 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Functies.R -->
 
+<!-- ## CLOSEDBLOK: CSS -->
 <style>
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
+<!-- ## /CLOSEDBLOK: CSS -->
 
 <!-- ## CLOSEDBLOK: Header.R -->
 ```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
+
+<!-- ## CLOSEDBLOK: Status.R -->
+```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Status.R -->
+
+*Hier is het eerste blok waarvoor er een verschil is tussen de R en Python chunk toetspagina. In het CLOSEDBLOK Reticulate wordt het package reticulate ingeladen. Als de inhoud van een blok gewijzigd wordt, dan moet de titel van het blok ook aangepast worden. Dit wordt gedaan door het achtervoegsel te vervangen. In de R toetspagina heet dit blok Reticulate.R, in de Python chunk toetspagina heet het Reticulate.py.*
 
 <!-- ## CLOSEDBLOK: Reticulate.py -->
 ```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}
@@ -24,11 +38,11 @@ knitr::knit_engines$set(python = reticulate::eng_python)
 ```
 <!-- ## /CLOSEDBLOK: Reticulate.py -->
 
-<!-- ## OPENBLOK: Data-aanmaken.py -->
+<!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 source(paste0(here::here(),"/01. Includes/data/03.R"))
 ```
-<!-- ## /OPENBLOK: Data-aanmaken.py -->
+<!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 <!-- ## TEKSTBLOK: Link1.py -->
 Als blijkt dat de afhankelijke variabele niet normaal verdeeld is voor één van of allebei de groepen, transformeer[^5] dan de afhankelijke variabele en bepaal daarna of deze wel normaal verdeeld is of gebruik de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html).[^6]<sup>, </sup>[^7]  
@@ -75,7 +89,7 @@ Inspecteer de data met `np.size()`, `np.mean()` en `np.std())`, door deze aan te
 # Om het gemiddelde en de standaard deviatie te berekenen, hebben we de library 'numpy' nodig
 import numpy as np
 ```
-<!-- ## /OPENBLOK: Data-beschrijven-inladen.py -->
+<!-- ## OPENBLOK: Data-beschrijven-inladen.py -->
 
 <!-- ## OPENBLOK: Data-beschrijven-1.py -->
 ```{python Data beschrijven 1, collapse=TRUE}
@@ -290,11 +304,6 @@ Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamenc
 | 2010     | `r py$vN_t0` | `r Round_and_format(py$vMean_t0)` | `r Round_and_format(py$vSD_t0)` |
 | 2011     | `r py$vN_t1` | `r Round_and_format(py$vMean_t1)` | `r Round_and_format(py$vSD_t1)` |
 <!-- ## /TEKSTBLOK: Rapportage.py -->
-
-<!-- ## CLOSEDBLOK: Footer.R -->
-```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
-```
-<!-- ## /CLOSEDBLOK: Footer.R -->
 
 <!-- ## TEKSTBLOK: Extra-Bron.py -->
 [^15]: Navarro, D. J. (2015). *Learning statistics with R: A tutorial for psychology students

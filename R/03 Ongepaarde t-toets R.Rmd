@@ -122,7 +122,7 @@ Inspecteer de data met `length()`, `mean()`en `sd()` om meer inzicht te krijgen 
 
 <!-- ## OPENBLOK: Data-beschrijven-inladen.R -->
 
-<!-- ## OPENBLOK: Data-beschrijven-inladen.R -->
+<!-- ## /OPENBLOK: Data-beschrijven-inladen.R -->
 
 <div class="col-container">
   <div class="col">
@@ -322,7 +322,7 @@ vN <- t$parameter + 1
 vDF <- Round_and_format(t$parameter)
 vConf.int1 <- Round_and_format(t$conf.int[1])
 vConf.int2 <- Round_and_format(t$conf.int[2])
-vP <- Round_and_format(t$p.value)
+vP <- Round_and_format(t$p.value, 3)
 ```
 <!-- ## /CLOSEDBLOK: T-test.R -->
 

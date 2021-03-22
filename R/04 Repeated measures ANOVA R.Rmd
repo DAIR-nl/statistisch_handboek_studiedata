@@ -47,7 +47,6 @@ if (!exists("Substitute_var")) {
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 source(paste0(here::here(),"/01. Includes/data/04.R"))
 ```
-
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
 # Toepassing

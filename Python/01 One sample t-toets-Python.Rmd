@@ -79,18 +79,18 @@ Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de
 </div>
 
 # Assumpties
-Om een valide resultaat te bereiken moeten, voordat de toets kan worden uitgevoerd, de data aan een aantal voorwaarden voldoen. 
+Om een valide resultaat te bereiken moeten, voordat de toets kan worden uitgevoerd, de data aan een aantal voorwaarden voldoet. 
 
 ## Normaliteit 
-De *t-toets* gaat ervan uit dat de data van de steekproef normaal verdeeld zijn. Ga er bij meer dan 100 observaties vanuit dat de t-toets robuust genoeg is om uit te voeren zonder dat de data een normale verdeling volgen.[^3] 
+De *one sample t-toets* gaat ervan uit dat de data van de steekproef normaal verdeeld is. Ga er bij meer dan 100 observaties vanuit dat de *one sample t-toets* robuust genoeg is om uit te voeren zonder dat de steekproef een normale verdeling volgt.[^3] 
 
 Controleer de assumptie van normaliteit met de volgende stappen:  
 1. Controleer de data visueel met een histogram, een boxplot of een Q-Q plot.   
-2. Toets of de data normaal verdeeld zijn met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^4]<sup>, </sup>[^5]  
+2. Toets of de steekproef normaal verdeeld is met de *Kolmogorov-Smirnov test* of bij een kleinere steekproef (n < 50) met de *Shapiro-Wilk test*.[^4]<sup>, </sup>[^5]  
 
-Als blijkt dat de data niet normaal verdeeld zijn, transformeer dan de data eventueel en bepaal daarna of deze wel normaal verdeeld zijn.[^6]
+De eerste stap heeft als doel een goede indruk te krijgen van de verdeling van de steekproef. In de tweede stap wordt de assumptie van normaliteit getoetst. De statistische toets laat zien of de verdeling van de steekproef voldoet aan de assumptie van normaliteit.
 
-Als er geen sprake is van normaliteit, gebruik de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html).[^7]<sup>, </sup>[^8]
+Als blijkt dat de steekproef niet normaal verdeeld is en de steekproefgrootte te laag is voor een robuuste toets, transformeer dan de observaties en bepaal daarna of deze wel normaal verdeeld zijn.[^6] Een andere optie in dit geval is het gebruiken van de [Wilcoxon signed rank toets](07-Wilcoxon-signed-rank-toets-R.html).[^7]<sup>, </sup>[^8]
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->
@@ -150,7 +150,7 @@ N = np.size(Gemiddeld_cijfer_WNS)
 <!-- ## /TEKSTBLOK: Data-beschrijven2.py -->
 
 ## Visuele inspectie van normaliteit
-Geef de verdeling van de data visueel weer met een histogram, Q-Q plot en boxplot.
+Geef de verdeling van de steekproef visueel weer met een histogram, Q-Q plot en boxplot.
 
 ### Histogram
 
@@ -168,14 +168,14 @@ plt.show()
 ```
 <!-- ## /OPENBLOK: Histogram.py -->
 
-De histogram lijkt symmetrisch, heeft één top en geen outliers. De data is dus bij benadering normaal verdeeld.
+De histogram lijkt symmetrisch, heeft één top en geen outliers. De steekproef is dus bij benadering normaal verdeeld.
 
 ### Q-Q plot
 <!-- ## TEKSTBLOK: QQplot.py-->
 Importeer `scipy.stats` om een Q-Q plot te maken en statistische testen uit te voeren. Voor een Q-Q plot kan de functie `scipy.stats.probplot()` worden gebruikt.
 <!-- ## /TEKSTBLOK: QQplot.py-->
 
-Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld zijn.
+Als over het algemeen de meeste datapunten op de lijn liggen, kan aangenomen worden dat de data normaal verdeeld is.
 <!-- ## OPENBLOK: QQplot.py -->
 ```{python}
 import scipy.stats as stats
@@ -193,7 +193,7 @@ plt.show()
 In deze casus liggen de meeste punten op de lijn. Bij de uiteinden liggen de punten dichtbij de lijn. Deze Q-Q plot duidt dus op een goede benadering van de normaalverdeling.
 
 ### Boxplot
-De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten of snorreharen zitten de eerste 25% en de laatste 25%.. Cirkels visualiseren mogelijke uitbijters.[^9] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
+De box geeft de middelste 50% van de tentamencijfers weer. De zwarte lijn binnen de box is de mediaan. In de staarten of snorreharen zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.[^9] Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen. 
 
 <!-- ## OPENBLOK: Boxplot.py -->
 ``` {python boxplot}
@@ -208,10 +208,10 @@ plt.show()
 De boxplot geeft de spreiding van het gemiddelde eindexamencijfer voor de exacte vakken weer van de studenten Werktuigbouwkunde. De box en staarten zien er symmetrisch uit, wat een indicatie is van een normale verdeling.[^10]  
 
 ## Toetsen van normaliteit
-Om te controleren of de data normaal verdeeld zijn, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
+Om te controleren of de steekproef aan de assumptie van normaliteit voldoet, kan de normaliteit getoetst worden. Twee veelgebruikte toetsen zijn: de *Kolmogorov-Smirnov test* en de *Shapiro-Wilk test*.
 
 ### Kolmogorov-Smirnov
-De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef.De Lilliefors correctie is vereist als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn, wat meestal het geval is bij een steekproef. Als de p < 0,05 is, is de verdeling van de data statistisch significant verschillend van de normale verdeling.
+De *Kolmogorov-Smirnov test* toetst het verschil tussen twee verdelingen. Standaard toetst deze test het verschil tussen een normale verdeling en de verdeling van de steekproef. De Lilliefors correctie is vereist als het gemiddelde en de standaardafwijking niet van tevoren bekend of bepaald zijn, wat meestal het geval is bij een steekproef. Als de p-waarde kleiner dan 0,05 is, is de verdeling van de steekproef significant verschillend van een normale verdeling.
 
 <!-- ## TEKSTBLOK: Lilliefors-test1.py -->
 De standaard interpretatie van een statistische toets in Python is als volgt: `(<teststatistiek>, <p-waarde>)`. Gebruik bij deze toets het argument `pvalmethod = "table"` om een betrouwbare p-waarde te krijgen.
@@ -235,7 +235,7 @@ De p-waarde is `r Round_and_format(unlist(py$lillieforstest[2]))`, dus er is gee
 <!-- ## /TEKSTBLOK: Lilliefors-test2.py -->
 
 ### Shapiro-Wilk Test
-De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en vooral geschikt bij kleine steekproeven (n < 50). Als de p < 0,05 is, is de verdeling van de data significant verschillend van de normale verdeling.
+De *Shapiro-Wilk test* is een soortgelijke test als de *Kolmogorov-Smirnov test* en vooral geschikt bij kleine steekproeven (n < 50). Als de p-waarde kleiner dan 0,05 is, is de verdeling van de steekproef significant verschillend van de normale verdeling.
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test.py -->
 ```{python, include=FALSE}
 Gemiddeld_cijfer_WNS_n30 = r.Gemiddeld_cijfer_WNS_n30
@@ -311,7 +311,7 @@ print(Ondergrens, Bovengrens)
 <!-- ## TEKSTBLOK: Rapportage.py -->
 De *one sample t-toets* is uitgevoerd om te toetsen of het gemiddelde eindexamencijfer voor de exacte vakken van vwo studenten die Werktuigbouwkunde zijn gaan studeren anders is dan het landelijk gemiddelde. Het gemiddelde van de steekproef (*M* = `r Round_and_format(py$mean)`, *SD* = `r Round_and_format(py$sd)`) is statistisch significant hoger dan het landelijk gemiddelde van 6,8, *t* ~`r py$par`~ = `r Round_and_format(py$stat)`, *p* < 0,05.
 <!-- ## /TEKSTBLOK: Rapportage.py -->
-De resultaten ondersteunen de conclusie dat het gemiddelde eindexamencijfer voor de exacte vakken van studenten Werktuigbouwkunde met een vwo vooropleiding hoger ligt dan het landelijk gemiddelde.
+De resultaten suggereren dat het gemiddelde eindexamencijfer voor de exacte vakken van studenten Werktuigbouwkunde met een vwo vooropleiding hoger ligt dan het landelijk gemiddelde.
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}

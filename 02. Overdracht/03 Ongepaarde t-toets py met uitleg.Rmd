@@ -38,23 +38,35 @@ knitr::knit_engines$set(python = reticulate::eng_python)
 ```
 <!-- ## /CLOSEDBLOK: Reticulate.py -->
 
+*Het OPENBLOK waarin het script dat de gesimuleerde data aanmaakt wordt ingeladen staat ook in deze pagina. Dit blok kan letter overgenomen worden vanuit de R toetspagina, er hoeft niets aan veranderd te worden.*
+
 <!-- ## OPENBLOK: Data-aanmaken.R -->
 ```{r aanmaken data, include=FALSE, echo=TRUE}
 source(paste0(here::here(),"/01. Includes/data/03.R"))
 ```
 <!-- ## /OPENBLOK: Data-aanmaken.R -->
 
+*In de R toetspagina staat hier tekst voor het hoofdstuk Toepassing en de onderwijscasus. Omdat deze tekst niet in blokken staat, hoeft het niet in de Python chunk toetspagina opgenomen te worden. Alle tekst die niet in blokken staat, hoeft niet in de Python chunk toetspagina opgenomen te worden.*
+
+*Voor inhoud van de blokken die wel vervangen wordt, geldt dat er zoveel mogelijk hetzelfde gedaan wordt als in de R toetspagina. Zo is het verschil zo minimaal mogelijk. Vooral bij de teksten is het goed te doen om alleen de noodzakelijke veranderingen door te voeren en de rest hetzelfde te laten.*
+
+*Het eerstvolgende blok is het TEKSTBLOK Link1. Hierin is een link opgenomen naar een andere toetspagina, de Mann-Whitney U toets. Deze link is in de R toetspagina naar de R toetspagina van de Mann-Whitney U toets. Maar voor de Python toetspagina moet het natuurlijk naar bijbehorende Python toetspagina linken. Zoals je in het TEKSTBLOK hieronder ziet, is de link gewijzigd naar Python.html aan het einde. Om ervoor te zorgen dat de inhoud in dit TEKSTBLOK de inhoud van dit TEKSTBLOK in de R toetspagina vervangt, moet het achtervoegsel bij de naam gewijzigd worden naar py. Link1.R wordt dus Link1.py.*
+
 <!-- ## TEKSTBLOK: Link1.py -->
-Als blijkt dat de afhankelijke variabele niet normaal verdeeld is voor één van of allebei de groepen, transformeer[^5] dan de afhankelijke variabele en bepaal daarna of deze wel normaal verdeeld is of gebruik de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html).[^6]<sup>, </sup>[^7]  
+Als blijkt dat de afhankelijke variabele niet normaal verdeeld is voor één van of allebei de groepen, transformeer[^5] dan de afhankelijke variabele en bepaal daarna of deze wel normaal verdeeld is of gebruik de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-Python.html).[^6]<sup>, </sup>[^7]  
 <!-- ## /TEKSTBLOK: Link1.py -->
 
+*Ook dit TEKSTBLOK wordt gewijzigd. In dit TEKSTBLOK wordt de dataset geïntroduceerd. Bij Python toetspagina's is het belangrijk om op te merken dat de dataset een andere naam heeft dan bij de R toetspagina's. De dataset in Python heeft dezelfde naam als de dataset in R, maar met `df` ervoor. Cijfers_gemiddeld wordt in Python dus dfCijfers_gemiddeld.*
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->
-Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap: `Cijfers_gemiddeld`. De data bevatten cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
+Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap: `dfCijfers_gemiddeld`. De data bevatten cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
 <!-- ## /TEKSTBLOK: Dataset-inladen.py -->
 
+*In onderstaand TEKSTBLOK wordt de data geïnspecteerd. Dit gebeurt op dezelfde manier als in de R-code, maar dan met Python functies.*
 <!-- ## TEKSTBLOK: Data-bekijken.py -->
 Gebruik `<dataframe>.head()` en `<dataframe>.tail()` om de structuur van de data te bekijken.
 <!-- ## /TEKSTBLOK: Data-bekijken.py -->
+
+*Dit OPENBLOK bevat een aantal code chunks met Python code erin. Het vervangt de R code die in de R toetspagina staat. Een code chunk is op dezelfde manier op te stellen als de R code chunks, namelijk door te beginnen met drie apostrofen, daarna twee gekromde haken ({}) en weer te eindigen met drie apostrofen. Een belangrijk verschil is dat er binnen de kromme haken de programmeertaal genoemd moet worden. Voor R code is dit `r`, voor Python code is dit `python`. In de eerste code chunk zit een stap die in elke Python toetspagina gedaan moet worden. In deze stap wordt de dataset naar Python omgezet met de volgende regel: `dfCijfers_gemiddeld = pd.DataFrame(r.Cijfers_gemiddeld)`. Door `r.` voor de naam van de dataset (`Cijfers_gemiddeld`) te zetten, geef je aan dat de dataset uit R gehaald moet worden. Vervolgens kan de dataset in Python gedefinieerd worden op de manier zoals hier te zien is. De dataset heet nu in Python `dfCijfers_gemiddeld`, deze dataset wordt in de rest van de toetspagina gebruikt. Hiervoor wordt het Python package pandas gebruikt. Een Python package wordt geïmporteerd met de regel `import pandas as pd`. Een gebruikt package moet ook geïnstalleerd worden. Het installeren van alle packages gebeurt in het script Python_Installatie_packages.R. Als je een nieuw package wilt gebruiken, installeer dat dan in dit script. De eerste code chunk heeft als argument include = FALSE zodat het niet in de toetspagina opgenomen wordt. Het is voor de gebruiker namelijk niet relevant dat de dataset vanuit R naar Python wordt getransporteerd. De code chunks hierna zijn wel zichtbaar voor de gebruiker en laten de eerste en laatste vijf observaties van de dataset zien.*
 
 <!-- ## OPENBLOK: Data-bekijken.py -->
 ```{python, include=FALSE}
@@ -62,12 +74,12 @@ import pandas as pd
 dfCijfers_gemiddeld = pd.DataFrame(r.Cijfers_gemiddeld)
 ```
 
-```{python data bekijken-1, collapse = TRUE}
+```{python data bekijken-1}
 ## Eerste 6 observaties
 print(dfCijfers_gemiddeld.head())
 ```
 
-```{python data bekijken-2, collapse = TRUE}
+```{python data bekijken-2}
 ## Laatste 6 observaties
 print(dfCijfers_gemiddeld.tail())
 ```
@@ -84,6 +96,8 @@ Cijfers_2011 = dfCijfers_gemiddeld[dfCijfers_gemiddeld['Cohort'] == "2011"]['Cij
 Inspecteer de data met `np.size()`, `np.mean()` en `np.std())`, door deze aan te roepen uit het package `numpy`.
 <!-- ## /TEKSTBLOK: Data-beschrijven.py -->
 
+*Hier wordt het package numpy aangeroepen, dit package wordt net als pandas veel gebruikt bij Python toetspagina's. Er is hier een comment boven het inladen van numpy geschreven met een toelichting, maar dit wordt meestal niet gedaan bij het inladen van packages.*
+
 <!-- ## OPENBLOK: Data-beschrijven-inladen.py -->
 ```{python}
 # Om het gemiddelde en de standaard deviatie te berekenen, hebben we de library 'numpy' nodig
@@ -91,8 +105,10 @@ import numpy as np
 ```
 <!-- ## OPENBLOK: Data-beschrijven-inladen.py -->
 
+*In de R toetspagina worden om deze OPENBLOKKEN heen kolommen aangemaakt met html-code. Deze code voor het aanmaken van kolommen staat niet in blokken, dus hoeft ook niet in deze Python chunk toetspagina gebruikt te worden. De kolommen worden nog steeds gemaakt in de uiteindelijke toetspagina, omdat ze al in de R toetspagina staan.*
+
 <!-- ## OPENBLOK: Data-beschrijven-1.py -->
-```{python Data beschrijven 1, collapse=TRUE}
+```{python Data beschrijven 1}
 ## Aantallen, gemiddelde en standaarddeviatie 2010
 print(np.size(Cijfers_2010))
 print(np.mean(Cijfers_2010))
@@ -101,7 +117,7 @@ print(np.std(Cijfers_2010))
 <!-- ## /OPENBLOK: Data-beschrijven-1.py -->
 
 <!-- ## OPENBLOK: Data-beschrijven-2.py -->
-```{python Data beschrijven 2, collapse=TRUE}
+```{python Data beschrijven 2}
 ## Aantallen, gemiddelde en standaarddeviatie 2011
 print(np.size(Cijfers_2011))
 print(np.mean(Cijfers_2011))
@@ -109,6 +125,7 @@ print(np.std(Cijfers_2011))
 ```
 <!-- ## /OPENBLOK: Data-beschrijven-2.py -->
 
+*Dit is een CLOSEDBLOK waarin een aantal variabelen wordt opgeslagen zodat ze gebruikt kunnen worden bij inline code. Een verschil tussen Python code en R code is dat het `=` teken gebruikt wordt om variabelen te definiëren in Python en de tekens `<-` om variabelen te definiëren in R.*
 <!-- ## CLOSEDBLOK: Data-beschrijven-3.py -->
 ```{python Var beschrijven t1, include=FALSE, echo=TRUE}
 vN_t0 = np.size(Cijfers_2010)
@@ -120,10 +137,15 @@ vSD_t1 = np.std(Cijfers_2011)
 ```
 <!-- ## /CLOSEDBLOK: Data-beschrijven-3.py -->
 
+*In het TEKSTBLOK hieronder wordt inline code gebruikt. Hierbij is het goed om uit te leggen hoe dit voor Python code werkt. De variabelen zijn gedefinieerd in Python en moeten weer naar R omgezet worden. Dit gebeurd door voor de naam van de variabele `py$` te voegen. De variabele `vMean_t0` in Python wordt dus naar R omgezet met `py$vMean_t0`. Daarna is het een R object en kan het ook gebruikt worden in functies. Dit is te zien hieronder waarbij de inline code `Round_and_format(py$vMean_t0)` gebruikt.*
+
 <!-- ## TEKSTBLOK: Data-beschrijven-4.py -->
 * Gemiddeld tentamencijfer 2010 (standaarddeviatie): `r Round_and_format(py$vMean_t0)` (`r Round_and_format(py$vSD_t0)`). *n* = `r py$vN_t0`.
 * Gemiddeld tentamencijfer 2011 (standaarddeviatie): `r Round_and_format(py$vMean_t1)` (`r Round_and_format(py$vSD_t1)`). *n* = `r py$vN_t1`.
+
 <!-- ## /TEKSTBLOK: Data-beschrijven-4.py -->
+
+*Hier zijn de visualisaties van normaliteit met Python code. Er wordt geprobeerd de visualisaties zoveel mogelijk hetzelfde te krijgen.*
 
 <!-- ## OPENBLOK: Histogram.py -->
 ```{python histogram}
@@ -181,6 +203,8 @@ plt.show()
 ```
 <!-- ## /OPENBLOK: Boxplot.py -->
 
+*Nu komen de toetsen van normaliteit. Het is goed om de resultaten te vergelijken met de resultaten van de R code. Dit zou overeen moeten komen, maar soms zitten er verschillen tussen. Dit moet dan even uitgezocht worden. In de documentatie van de functies is vaak meer info te vinden, soms worden bepaalde stappen in een berekening in de functie genomen die niet meteen duidelijk zijn. Streef ernaar om de uitkomsten zoveel mogelijk gelijk te krijgen. En probeer goed uit te leggen wat alle argumenten doen en waarom ze gebruikt worden. Als het verschil toch groot blijkt te zijn, is dit handig even te overleggen met de leidinggevende.*
+
 <!-- ## TEKSTBLOK: Lilliefors-test1.py -->
 De standaard interpretatie van de statistische toetsen van normaliteit in Python is: `(<teststatistiek>, <p-waarde>)`. Verder toetst Python hierbij tweezijdig. Gebruik bij deze toets het argument `pvalmethod = "table"` om een betrouwbare p-waarde te krijgen.
 <!-- ## /TEKSTBLOK: Lilliefors-test1.py -->
@@ -207,6 +231,9 @@ print(smod.lilliefors(Cijfers_2011, pvalmethod="table"))
 ``` {python Lilliefors Test-2 closed, warning=FALSE, include = FALSE}
 lilliefors2011 = smod.lilliefors(Cijfers_2011, pvalmethod="table")
 ```
+
+*Hier worden weer andere datasets vanuit R in Python geladen, op dezelfde manier als eerder beschreven. Nu wordt alleen niet het pandas package gebruikt.*
+
 ```{python, include=FALSE, echo = TRUE}
 Cijfers_2010_n30 = r.Cijfers_2010_n30
 Cijfers_2011_n30 = r.Cijfers_2011_n30
@@ -230,6 +257,8 @@ print(stats.shapiro(Cijfers_2010_n30))
 print(stats.shapiro(Cijfers_2011_n30))
 ```
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-2.py -->
+
+*Hier wordt de ongepaarde t-toets uitgevoerd. De code is anders, maar net als in de R toetspagina wordt de functie en bijbehorend package genoemd en worden de argumenten toegelicht.*
 
 <!-- ## TEKSTBLOK: T-test.py -->
 Voer een ongepaarde t-toets uit in twee stappen. Definieer eerst de vergelijking van de twee groepen met `CompareMeans()` met als argumenten de observaties uit 2010 `DescrStatsW(Cijfers_2010)` en de observaties uit 2011 `DescrStatsW(Cijfers_2011)`. Voer daarna de t-toets uit met `ttest_ind()` met de argumenten `alternative='two-sided'` vanwege de tweezijdige alternatieve hypothese en `usevar = 'unequal'` omdat er geen gepoolde variantie wordt gebruikt. Bereken daarna het 95%-betrouwbaarheidsinterval met `tconfint_diff()` met als nieuw argument `alpha = 0.05` om het significantieniveau aan te geven. Deze functies zijn afkomstig van het package `statsmodels.stats.api`.
@@ -267,6 +296,7 @@ mean2 = np.mean(Cijfers_2011)
 * Het gemiddelde van de steekproef is in 2011 `r Round_and_format(py$mean2)`
 <!-- ## /TEKSTBLOK: T-test2.py -->
 
+*Het kan voorkomen dat er geen Python functie is voor een bepaald deel van de statistische analyse. Python heeft minder functies beschikbaar voor statistische toetsen dan R, dus dit is niet gek. In dat geval moet je onderzoeken of het makkelijk zelf te berekenen is. Als dat zo is, kan je zelf een berekening maken of een functie schrijven die dit doet. Dat is hieronder ook gedaan. Als dat niet zo is, dan is het handig even daarover te overleggen met de leidinggevende.*
 
 <!-- ## TEKSTBLOK: Cohen-d.py -->
 Er is geen Python functie voor Cohen's d. Bereken daarom de effectmaat zelf door het verschil tussen de gemiddelden van beide groepen te delen door de ongepoolde standaardafwijking.[^15] Neem de absolute waarde omdat het gebruikelijk is om een effectmaat als positief getal weer te geven.
@@ -305,6 +335,7 @@ Een *ongepaarde t-toets* is uitgevoerd om te toetsen of het gemiddelde tentamenc
 | 2011     | `r py$vN_t1` | `r Round_and_format(py$vMean_t1)` | `r Round_and_format(py$vSD_t1)` |
 <!-- ## /TEKSTBLOK: Rapportage.py -->
 
+*Soms is er een bron die alleen in de Python toetspagina gebruikt wordt. In dat geval komt de bron in een TEKSTBLOK met de naam Extra-Bron. Dit tekstblokt staat ook in R, waar het leeg is qua inhoud. De bronnen kunnen hier op onderstaande manier ingevoerd worden. Let op dat er andere nummers dan de bronnen in de R toetspagina gebruikt worden, omdat ze samengevoegd worden. De manier van refereren is hetzelfde als in de R toetspagina.*
 <!-- ## TEKSTBLOK: Extra-Bron.py -->
 [^15]: Navarro, D. J. (2015). *Learning statistics with R: A tutorial for psychology students
   and other beginners. (Version 0.5)* University of Adelaide. Adelaide, Australia. 

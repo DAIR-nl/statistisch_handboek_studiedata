@@ -1,14 +1,4 @@
----
-title: "Chi-kwadraat toets voor goodness of fit en binomiaaltoets"
-output:
-  html_document:
-    theme: lumen
-    toc: yes
-    toc_float: 
-      collapsed: FALSE 
-    number_sections: true
-  keywords: [statistisch handboek, studiedata]
----
+
 
 <!-- ## CLOSEDBLOK: Functies.R -->
 ```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
@@ -28,6 +18,11 @@ if (!exists("Substitute_var")) {
 ```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
+
+<!-- ## CLOSEDBLOK: Status.R -->
+```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Status.R -->
 
 <!-- ## CLOSEDBLOK: Reticulate.py -->
 ```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}
@@ -260,27 +255,11 @@ De *binomiaaltoets* is uitgevoerd om te onderzoeken of de verdeling van het inst
 
 <!-- ## /TEKSTBLOK: Binomiaaltoets8.py-->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
+```
+<!-- ## /CLOSEDBLOK: Footer.R -->
 
 <!-- ## TEKSTBLOK: Extra-Bron.py -->
 [^8]: De proportie studenten met hbo vooropleiding en bijbehorend 95%-betrouwbaarheidsinterval worden bij deze Python functie niet weergegeven. Bij de uitvoering van *binomiaaltoets* in R zitten beide wel in de output.
 <!-- ## /TEKSTBLOK: Extra-Bron.py -->
-
-
-
-
-
-

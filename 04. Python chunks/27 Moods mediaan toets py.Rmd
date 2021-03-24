@@ -1,14 +1,5 @@
----
-title: "Mood's mediaan toets"
-output:
-  html_document:
-    theme: lumen
-    toc: yes
-    toc_float: 
-      collapsed: FALSE 
-    number_sections: true
-  keywords: [statistisch handboek, studiedata]
----
+
+
 <!-- ## CLOSEDBLOK: Functies.py -->
 ```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
 library(here)
@@ -23,15 +14,15 @@ if (!exists("Substitute_var")) {
 `r htmltools::includeHTML(paste0(here::here(),"/01. Includes/css/Stylesheet_SHHO.css"))`
 </style>
 
-<!-- ## CLOSEDBLOK: Header.py -->
+<!-- ## CLOSEDBLOK: Header.R -->
 ```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
-<!-- ## /CLOSEDBLOK: Header.py -->
+<!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## CLOSEDBLOK: Status.py -->
+<!-- ## CLOSEDBLOK: Status.R -->
 ```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
 ```
-<!-- ## /CLOSEDBLOK: Status.py -->
+<!-- ## /CLOSEDBLOK: Status.R -->
 
 <!-- ## CLOSEDBLOK: Reticulate.py -->
 ```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}
@@ -230,3 +221,8 @@ Mediaan
 <!-- ## TEKSTBLOK: Rapportage.py -->
 *Mood's mediaan toets* is uitgevoerd om te toetsen of de mediaan van het behaald aantal studiepunten in het tweede jaar van de bachelor Business Administration hetzelfde is voor studenten met buitenlandse vooropleiding als voor studenten met Nederlandse vooropleiding. De resultaten van de toets laten zien dat er een significant verschil is tussen beide medianen, &chi;^2^ ~1~ = `r Round_and_format(py$Toetsstatistiek)`, *p* = < 0,0001. Studenten met een Nederlandse vooropleiding lijken dus meer studiepunten te behalen in het tweede jaar dan studenten met een buitenlandse vooropleiding.
 <!-- ## /TEKSTBLOK: Rapportage.py -->
+
+<!-- ## CLOSEDBLOK: Footer.R -->
+```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
+```
+<!-- ## /CLOSEDBLOK: Footer.R -->

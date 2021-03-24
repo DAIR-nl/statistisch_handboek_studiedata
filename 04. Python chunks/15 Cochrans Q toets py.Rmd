@@ -1,15 +1,3 @@
----
-title: "Cochran's Q toets"
-output:
-  html_document:
-    theme: lumen
-    toc: yes
-    toc_depth: 2
-    toc_float: 
-      collapsed: FALSE 
-    number_sections: true
-  keywords: [statistisch handboek, studiedata]
----
 
 <!-- ## CLOSEDBLOK: Functies.R -->
 ```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
@@ -324,24 +312,7 @@ Om te bepalen tussen welke onderwijsperiodes er verschillen zijn, is de [McNemar
 *Tabel 1. Het percentage eerstejaars studenten van de bachelor Kunstmatige Intelligentie dat wel of geen herkansingen heeft voor de vakken in de vier onderwijsperiodes.*
 <!-- ## /TEKSTBLOK: rapportage3.py -->
 
-
-
-
-
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer.R"))}
 ```
 <!-- ## /CLOSEDBLOK: Footer.R -->
-
-[^1]: Binaire variabelen: twee elkaar uitsluitende waarden, zoals ja of nee, 0 of 1, aan of uit.
-[^2]: Allen, P. & Bennett, K. (2012). *SPSS A practical Guide version 20.0*. Cengage Learning Australia Pty Limited.
-[^3]: Laerd statistics (2018). *Cochran's Q test using SPSS Statistics*. [Laerd statistics](https://statistics.laerd.com/spss-tutorials/cochrans-q-test-in-spss-statistics.php#assumption4) 
-[^4]: Statistics How To (18 juli 2016). *Cochran’s Q Test*. [Statistics How to](https://www.statisticshowto.datasciencecentral.com/cochrans-q-test/).
-[^5]: Er is geen package gevonden om de exacte versie van *Cochran's Q toets* uit te voeren in R. De exacte versie is echter wel uit te voeren in SPSS.
-[^6]: De exacte [McNemar toets](12-McNemar-toets-Python.html) wordt gebruikt wanneer het aantal observaties in de niet-diagonale elementen van de frequentiematrix kleiner dan 11 is. Voor meer informatie, zie de toetspagina van de [McNemar toets](12 McNemar toets R.Rmd).
-[^7]: Statistics How To (29 oktober 2017). *False Discovery Rate: Simple Definition, Adjusting for FDR*. [Statistics How to](https://www.statisticshowto.datasciencecentral.com/false-discovery-rate/). 
-[^8]: Statistics How To (12 oktober 2015). *Benjamini-Hochberg Procedure*. [Statistics How to](https://www.statisticshowto.datasciencecentral.com/benjamini-hochberg-procedure/). 
-[^9]: Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. London: Sage publications.
-[^10]: In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten. 
-[^11]: Met een deelnemer wordt het object bedoeld dat geobserveerd wordt, bijvoorbeeld een student, een inwoner van Nederland, een opleiding of een organisatie. Met een observatie wordt de waarde bedoeld die de deelnemer heeft voor een bepaalde variabele. Een deelnemer heeft dus meestal een observatie voor meerdere variabelen.
-[^12]: Additional file 1 van Fagerland, M.W., Lydersen, S., & Laake, P. (2013). *The McNemar test for binary matched-pairs data: mid-p and asymptotic are better than exact conditional*. BMC medical research methodology, 13, 91. https://doi.org/10.1186/1471-2288-13-91 . Te vinden op https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3716987/#S1

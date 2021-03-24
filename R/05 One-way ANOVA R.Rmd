@@ -34,14 +34,14 @@ if (!exists("Substitute_var")) {
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## CLOSEDBLOK: Reticulate.R -->
-
-<!-- ## /CLOSEDBLOK: Reticulate.R -->
-
 <!-- ## CLOSEDBLOK: Status.R -->
 ```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
 ```
 <!-- ## /CLOSEDBLOK: Status.R -->
+
+<!-- ## CLOSEDBLOK: Reticulate.R -->
+
+<!-- ## /CLOSEDBLOK: Reticulate.R -->
 
 ```{r set-options, echo=FALSE, cache=FALSE}
 options(width = 80)

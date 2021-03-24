@@ -1,14 +1,4 @@
----
-title: "Chi-kwadraat toets voor onafhankelijkheid en Fisher's exact toets"
-output:
-  html_document:
-    theme: lumen
-    toc: yes
-    toc_float: 
-      collapsed: FALSE 
-    number_sections: true
-  keywords: [statistisch handboek, studiedata]
----
+
 
 <!-- ## CLOSEDBLOK: Functies.R -->
 ```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
@@ -28,6 +18,11 @@ if (!exists("Substitute_var")) {
 ```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
+
+<!-- ## CLOSEDBLOK: Status.R -->
+```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Status.R -->
 
 <!-- ## CLOSEDBLOK: Reticulate.py -->
 ```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}
@@ -357,23 +352,6 @@ De *Fisher-Freeman-Halton exact toets* is uitgevoerd om te onderzoeken of er een
 ```
 <!-- ## /CLOSEDBLOK: Footer.R -->
 
-
-
-
-
-
-
-
-
-
-
-
 <!-- ## TEKSTBLOK: Extra-Bron.py -->
 [^12]: Het 95%-betrouwbaarheidsinterval van de odds ratio wordt bij deze Python functie niet weergegeven. Bij de uitvoering van *Fisher's exact toets* in R zit het betrouwbaarheidsinterval wel in de output.
 <!-- ## /TEKSTBLOK: Extra-Bron.py -->
-
-
-
-
-
-

@@ -1,17 +1,4 @@
----
-title: "Chi-kwadraat toets voor goodness of fit en multinomiaaltoets"
-output:
-  html_document:
-    theme: lumen
-    toc: yes
-    toc_depth: 2
-    toc_float: 
-      collapsed: FALSE 
-    number_sections: true
-    includes:
-      in_header: ["../01. Includes/html/nocache.html", "../01. Includes/html/favicon.html", "../01. Includes/html/analytics.html"]
-  keywords: [statistisch handboek, studiedata]
----
+
 <!-- ## CLOSEDBLOK: Functies.R -->
 ```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
 library(here)
@@ -32,6 +19,11 @@ if (!exists("Substitute_var")) {
 ```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
 <!-- ## /CLOSEDBLOK: Header.R -->
+
+<!-- ## CLOSEDBLOK: Status.R -->
+```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
+```
+<!-- ## /CLOSEDBLOK: Status.R -->
 
 <!-- ## CLOSEDBLOK: Reticulate.py -->
 ```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}
@@ -319,8 +311,6 @@ De *multinomiaaltoets* is uitgevoerd om te onderzoeken of de verdeling van het B
 ```
 <!-- ## /CLOSEDBLOK: Footer.R -->
 
-
 <!-- ## TEKSTBLOK: Extra-Bron.py -->
 
 <!-- ## /TEKSTBLOK: Extra-Bron.py -->
-

@@ -1,15 +1,4 @@
----
-title: "Bhapkar toets"
-output:
-  html_document:
-    theme: lumen
-    toc: yes
-    toc_depth: 2
-    toc_float: 
-      collapsed: FALSE 
-    number_sections: true
-  keywords: [statistisch handboek, studiedata]
----
+
 
 <!-- ## CLOSEDBLOK: Functies.R -->
 ```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}

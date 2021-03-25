@@ -28,15 +28,15 @@ if (!exists("Substitute_var")) {
 </style>
 <!-- ## /CLOSEDBLOK: CSS -->
 
-<!-- ## CLOSEDBLOK: Header.py -->
+<!-- ## CLOSEDBLOK: Header.R -->
 ```{r header, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Header.R"))} 
 ```
-<!-- ## /CLOSEDBLOK: Header.py -->
+<!-- ## /CLOSEDBLOK: Header.R -->
 
-<!-- ## CLOSEDBLOK: Status.py -->
+<!-- ## CLOSEDBLOK: Status.R -->
 ```{r status, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Status.R"))} 
 ```
-<!-- ## /CLOSEDBLOK: Status.py -->
+<!-- ## /CLOSEDBLOK: Status.R -->
 
 <!-- ## CLOSEDBLOK: Reticulate.py -->
 ```{r reticulate, include = TRUE, echo = FALSE, warning=FALSE, message=FALSE}

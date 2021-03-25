@@ -113,7 +113,7 @@ In Tabel 1 is te zien dat er voor elke combinatie van onderwijsperiode en specia
 
 Met *multilevel multinomiale logistische regressie* wordt getoetst of er een afhankelijkheid is tussen de keuze voor een specialisatie en de verschillende onderwijsperiodes. Voer een post-hoc toets uit om daarna te bepalen welke onderwijsperiodes van elkaar verschillen wat betreft de keuze voor specialisaties. Gebruik hiervoor de [Bhapkar toets](18-Bhapkar-toets-R.html) als post-hoc toets.[^6] 
 
-Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout.[^8] Er zijn ook nog andere opties voor een correctie op de p-waarden. 
+Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de *Bonferroni correctie* gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout.[^8] Een andere uitleg hiervan is dat het significantieniveau gedeeld wordt door het aantal toetsen wat leidt tot een lager significantieniveau en dus een strengere toets. Er zijn ook nog andere opties voor een correctie op de p-waarden.[^9] 
 
 # De data bekijken
 <!-- ## TEKSTBLOK: Data-bekijken1.R -->
@@ -354,6 +354,3 @@ Om te bepalen tussen welke onderwijsperiodes deze percentages verschillen, is de
 [^12]: Stat 504. *8.1 - Polytomous (Multinomial) Logistic Regression*. [PennState Eberly College of Science](https://online.stat.psu.edu/stat504/node/172/).
 [^13]: Stat 504. *8.2 - Baseline-Category Logit Model*. [PennState Eberly College of Science](https://online.stat.psu.edu/stat504/node/173/).
 [^19]: Met een deelnemer wordt het object bedoeld dat geobserveerd wordt, bijvoorbeeld een student, een inwoner van Nederland, een opleiding of een organisatie. Met een observatie wordt de waarde bedoeld die de deelnemer heeft voor een bepaalde variabele. Een deelnemer heeft dus meestal een observatie voor meerdere variabelen.
-
-
-

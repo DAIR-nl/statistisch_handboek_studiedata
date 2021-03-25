@@ -86,7 +86,7 @@ Controleer de assumptie van normaliteit met de volgende stappen:
 De eerste stap heeft als doel een goede indruk te krijgen van de verdeling van de steekproef. In de tweede stap wordt de assumptie van normaliteit getoetst. De statistische toets laat zien of de verdeling van de observaties van een groep voldoet aan de assumptie van normaliteit. Voor beide groepen moet er voldaan zijn aan de assumptie van normaliteit.
 
 <!-- ## TEKSTBLOK: Link1.py -->
-Als blijkt dat de afhankelijke variabele niet normaal verdeeld is voor één van of allebei de groepen, transformeer[^5] dan de afhankelijke variabele en bepaal daarna of deze wel normaal verdeeld is of gebruik de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-R.html).[^6]<sup>, </sup>[^7]  
+Als blijkt dat de afhankelijke variabele niet normaal verdeeld is voor één van of allebei de groepen, transformeer[^5] dan de afhankelijke variabele en bepaal daarna of deze wel normaal verdeeld is of gebruik de [Mann-Whitney U toets](08-Mann-Whitney-U-toets-Python.html).[^6]<sup>, </sup>[^7]  
 <!-- ## /TEKSTBLOK: Link1.py -->
 
 ## Wel of geen gepoolde variantie
@@ -94,7 +94,7 @@ De *ongepaarde t-toets* kan met en zonder gepoolde variantie uitgevoerd worden. 
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->
-Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap: `Cijfers_gemiddeld`. De data bevatten cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
+Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap: `dfCijfers_gemiddeld`. De data bevatten cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011.
 <!-- ## /TEKSTBLOK: Dataset-inladen.py -->
 
 ## De data bekijken
@@ -107,12 +107,12 @@ import pandas as pd
 dfCijfers_gemiddeld = pd.DataFrame(r.Cijfers_gemiddeld)
 ```
 
-```{python data bekijken-1, collapse = TRUE}
+```{python data bekijken-1}
 ## Eerste 6 observaties
 print(dfCijfers_gemiddeld.head())
 ```
 
-```{python data bekijken-2, collapse = TRUE}
+```{python data bekijken-2}
 ## Laatste 6 observaties
 print(dfCijfers_gemiddeld.tail())
 ```
@@ -140,7 +140,7 @@ import numpy as np
 <div class="col-container">
   <div class="col">
 <!-- ## OPENBLOK: Data-beschrijven-1.py -->
-```{python Data beschrijven 1, collapse=TRUE}
+```{python Data beschrijven 1}
 ## Aantallen, gemiddelde en standaarddeviatie 2010
 print(np.size(Cijfers_2010))
 print(np.mean(Cijfers_2010))
@@ -150,7 +150,7 @@ print(np.std(Cijfers_2010))
   </div>
   <div class ="col">
 <!-- ## OPENBLOK: Data-beschrijven-2.py -->
-```{python Data beschrijven 2, collapse=TRUE}
+```{python Data beschrijven 2}
 ## Aantallen, gemiddelde en standaarddeviatie 2011
 print(np.size(Cijfers_2011))
 print(np.mean(Cijfers_2011))

@@ -51,7 +51,7 @@ Voor elke casus is er een gesimuleerde dataset die gebruikt wordt om de statisti
 Alle toetsen zijn gereviewd door wetenschappers, beleidsmedewekers en data specialisten uit het hoger onderwijs (zie *Over*). Desondanks kan het voorkomen dat u informatie aantreft die niet correct of onduidelijk is. Help ons de kwaliteit van de pagina te verbeteren door tips over onvolledigheden of onjuistheden door te geven via het [feedbackformulier](https://docs.google.com/forms/d/1UQcCVTNLpVAg7vSffJCPkBCklsfMlGB0QxyxLDgqosI/edit) in te vullen. We zullen feedback zo snel mogelijk verwerken.
 
 # Ontwikkeling
-Het handboek is nog volop in ontwikkeling en zal gedurende 2020 aangevuld worden met nieuwe toetsvormen:
+Het handboek is nog volop in ontwikkeling en zal gedurende 2021 aangevuld worden met nieuwe toetsvormen:
 
 * 13 januari 2020: Lancering eerste versie website
 * 21 februari 2020: Verbeteringen inhoud en tekstueel
@@ -61,10 +61,10 @@ Het handboek is nog volop in ontwikkeling en zal gedurende 2020 aangevuld worden
 * 29 juni 2020: Nieuwe toetsen toegevoegd voor R (Multilevel multinomiale logistische regressie, Wilcoxon II, Mann-Whitney U II en Kruskall Wallis II) en Python (Repeated measures ANOVA en Mann-Whitney U I)
 * 5 augustus 2020: Tweede toetsmatrix toegevoegd en toetspagina multipele lineaire regressie toegevoegd
 * 12 november 2020: Laatste toetsen eerste toetsmatrix toegevoegd
-* 8 januari: Multinomiale logistische regressie en McNemar toets Python toegevoegd, kleine wijzigingen vanwege veel verwerkte reviews
-* 1 februari: Ordinale logistische regressie toegevoegd
-* 8 februari: Datasets te downloaden op website en Cochran's Q toets Python toegevoegd
-* 18 februari: Bhapkar toets Python toegevoegd en andere Python toetsen geüpdatet
+* 8 januari 2021: Multinomiale logistische regressie en McNemar toets Python toegevoegd, kleine wijzigingen vanwege veel verwerkte reviews
+* 1 februari 2021: Ordinale logistische regressie toegevoegd
+* 8 februari 2021: Datasets te downloaden op website en Cochran's Q toets Python toegevoegd
+* 18 februari 2021: Bhapkar toets Python toegevoegd en andere Python toetsen geüpdatet
 
 <!-- ## CLOSEDBLOK: Footer.R -->
 ```{r footer, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Footer_simpel.R"))}

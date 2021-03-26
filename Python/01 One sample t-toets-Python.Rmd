@@ -94,7 +94,7 @@ Als blijkt dat de steekproef niet normaal verdeeld is en de steekproefgrootte te
 
 # Uitvoering
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->
-Er is een dataset ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde: `Gemiddeld_cijfer_WNS`.
+Er is een dataset ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde: `dfGemiddeld_cijfer_WNS`.
 <!-- ## /TEKSTBLOK: Dataset-inladen.py -->
 
 ## De data bekijken

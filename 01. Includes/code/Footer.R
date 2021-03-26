@@ -39,7 +39,7 @@
 ## Plaats  variabelen in een lijst: de root van de site
 lVars <- list(
   var_VersieR = paste(R.Version()$major, R.Version()$minor, sep = "."),
-  var_VersiePython = "3.7",
+  var_VersiePython = "3.6.13",
   #var_zip = paste0("<a href=\"",sRoot,"Datasets_zipbestand\" download>hier</a>"),
   ##var_zip = paste0(getwd(),"/Datasets_zipbestand"),
   var_Copyright = 

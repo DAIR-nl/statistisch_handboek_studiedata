@@ -72,7 +72,7 @@ Gebruikte_packages <- c(
     "reticulate",
     "reshape", # 58
     "rstatix", # 29
-    "RVAideMemoire",
+    "RVAideMemoire", # let op, deze moet misschien apart gedownload worden via Bioconductor
     "rlist",
     "stringi",
     "stringr",

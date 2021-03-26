@@ -34,7 +34,7 @@ source(paste0(here::here(),"/01. Includes/data/01.R"))
 <!-- ## /OPENBLOK: Data-aanmaken.py -->
 
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->
-Er is een dataset ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde: `Gemiddeld_cijfer_WNS`.
+Er is een dataset ingeladen met de gemiddelde eindexamencijfers van WNS van eerstejaars Werktuigbouwkunde: `dfGemiddeld_cijfer_WNS`.
 <!-- ## /TEKSTBLOK: Dataset-inladen.py -->
 
 <!-- ## TEKSTBLOK: Data-bekijken.py -->

@@ -1920,7 +1920,7 @@ body{ /* Normal  */
 2. Toets of de afhankelijke variabele voor beide groepen normaal verdeeld is met de <em>Kolmogorov-Smirnov test</em> of bij een kleinere steekproef (<em>n</em> &lt; 50) met de <em>Shapiro-Wilk test</em>.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a><sup>, </sup><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 <p>De eerste stap heeft als doel een goede indruk te krijgen van de verdeling van de steekproef. In de tweede stap wordt de assumptie van normaliteit getoetst. De statistische toets laat zien of de verdeling van de observaties van een groep voldoet aan de assumptie van normaliteit. Voor beide groepen moet er voldaan zijn aan de assumptie van normaliteit.</p>
 <!-- ## TEKSTBLOK: Link1.py -->
-<p>Als blijkt dat de afhankelijke variabele niet normaal verdeeld is voor één van of allebei de groepen, transformeer<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> dan de afhankelijke variabele en bepaal daarna of deze wel normaal verdeeld is of gebruik de <a href="08-Mann-Whitney-U-toets-R.html">Mann-Whitney U toets</a>.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a><sup>, </sup><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a><br />
+<p>Als blijkt dat de afhankelijke variabele niet normaal verdeeld is voor één van of allebei de groepen, transformeer<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> dan de afhankelijke variabele en bepaal daarna of deze wel normaal verdeeld is of gebruik de <a href="08-Mann-Whitney-U-toets-Python.html">Mann-Whitney U toets</a>.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a><sup>, </sup><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a><br />
 <!-- ## /TEKSTBLOK: Link1.py --></p>
 </div>
 <div id="wel-of-geen-gepoolde-variantie" class="section level2">
@@ -1931,22 +1931,22 @@ body{ /* Normal  */
 <div id="uitvoering" class="section level1">
 <h1><span class="header-section-number">4</span> Uitvoering</h1>
 <!-- ## TEKSTBLOK: Dataset-inladen.py -->
-<p>Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap: <code>Cijfers_gemiddeld</code>. De data bevatten cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011. <!-- ## /TEKSTBLOK: Dataset-inladen.py --></p>
+<p>Er is een dataset ingeladen met gemiddelde cijfers van tweedejaarsstudenten bij de opleiding Taalwetenschap: <code>dfCijfers_gemiddeld</code>. De data bevatten cijfers van 180 studenten begonnen in 2010 en cijfers van 160 studenten begonnen in 2011. <!-- ## /TEKSTBLOK: Dataset-inladen.py --></p>
 <div id="de-data-bekijken" class="section level2">
 <h2><span class="header-section-number">4.1</span> De data bekijken</h2>
 <!-- ## TEKSTBLOK: Data-bekijken.py -->
 <p>Gebruik <code>&lt;dataframe&gt;.head()</code> en <code>&lt;dataframe&gt;.tail()</code> om de structuur van de data te bekijken. <!-- ## /TEKSTBLOK: Data-bekijken.py --> <!-- ## OPENBLOK: Data-bekijken.py --></p>
 <pre class="python"><code>## Eerste 6 observaties
-print(dfCijfers_gemiddeld.head())
-##    Studentnummer Cohort  Cijfers
+print(dfCijfers_gemiddeld.head())</code></pre>
+<pre><code>##    Studentnummer Cohort  Cijfers
 ## 0         302256   2010    5.548
 ## 1         344374   2010    6.520
 ## 2         302078   2010    5.297
 ## 3         325370   2010    8.214
 ## 4         362912   2010    6.695</code></pre>
 <pre class="python"><code>## Laatste 6 observaties
-print(dfCijfers_gemiddeld.tail())
-##      Studentnummer Cohort  Cijfers
+print(dfCijfers_gemiddeld.tail())</code></pre>
+<pre><code>##      Studentnummer Cohort  Cijfers
 ## 335         317635   2011    7.185
 ## 336         396683   2011    7.264
 ## 337         393299   2011    7.132
@@ -1967,23 +1967,23 @@ import numpy as np</code></pre>
 <div class="col">
 <!-- ## OPENBLOK: Data-beschrijven-1.py -->
 <pre class="python"><code>## Aantallen, gemiddelde en standaarddeviatie 2010
-print(np.size(Cijfers_2010))
-## 180
-print(np.mean(Cijfers_2010))
-## 6.369188888888889
-print(np.std(Cijfers_2010))
-## 1.1145533025930108</code></pre>
+print(np.size(Cijfers_2010))</code></pre>
+<pre><code>## 180</code></pre>
+<pre class="python"><code>print(np.mean(Cijfers_2010))</code></pre>
+<pre><code>## 6.369188888888889</code></pre>
+<pre class="python"><code>print(np.std(Cijfers_2010))</code></pre>
+<pre><code>## 1.1145533025930108</code></pre>
 <!-- ## /OPENBLOK: Data-beschrijven-1.py -->
 </div>
 <div class="col">
 <!-- ## OPENBLOK: Data-beschrijven-2.py -->
 <pre class="python"><code>## Aantallen, gemiddelde en standaarddeviatie 2011
-print(np.size(Cijfers_2011))
-## 160
-print(np.mean(Cijfers_2011))
-## 6.4623625
-print(np.std(Cijfers_2011))
-## 1.1962198506519401</code></pre>
+print(np.size(Cijfers_2011))</code></pre>
+<pre><code>## 160</code></pre>
+<pre class="python"><code>print(np.mean(Cijfers_2011))</code></pre>
+<pre><code>## 6.4623625</code></pre>
+<pre class="python"><code>print(np.std(Cijfers_2011))</code></pre>
+<pre><code>## 1.1962198506519401</code></pre>
 <!-- ## /OPENBLOK: Data-beschrijven-2.py -->
 </div>
 </div>
@@ -2199,9 +2199,9 @@ print(d)</code></pre>
 <p>
 <div id = "footerborder"><hr/></div>
 <div id = "footer">
-Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 3.6.3; Python code is uitgevoerd in Python 3.7. De gesimuleerde datasets zijn <a href="../Datasets_zipbestand" download>hier</a> te downloaden.
+Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 3.6.3; Python code is uitgevoerd in Python 3.6.13. De gesimuleerde datasets zijn <a href="../Datasets_zipbestand" download>hier</a> te downloaden.
 <br/><br/>
-&copy; 2021 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:19-03-2021
+&copy; 2021 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:28-03-2021
 </div> <!-- ## /CLOSEDBLOK: Footer.R --></p>
 <!-- ## TEKSTBLOK: Extra-Bron.py -->
 </div>

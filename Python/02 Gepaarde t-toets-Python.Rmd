@@ -118,7 +118,6 @@ Selecteer beide groepen, sla deze op in een vector en bereken het verschil in de
 ```{python data selecteren}
 Uren_studeren_T0 = dfStudielogboek[dfStudielogboek['Meetmoment'] == "T0"]['Uren_studeren']
 Uren_studeren_T1 = dfStudielogboek[dfStudielogboek['Meetmoment'] == "T1"]['Uren_studeren']
-Uren_studeren_verschil = Uren_studeren_T1 - Uren_studeren_T0
 ```
 <!-- ## /OPENBLOK: Data-selecteren.py -->
 
@@ -312,7 +311,7 @@ Gebruik de functie `.DescrStatsW().ttest_mean()` van het package `statsmodels.st
 import statsmodels.stats.api as smod
 
 ## Bereken verschil in uren studeren met numpy
-Uren_studeren_verschil = np.array(Uren_studeren_T0) - np.array(Uren_studeren_T1)
+Uren_studeren_verschil = np.array(Uren_studeren_T1) - np.array(Uren_studeren_T0)
 
 # Voer gepaarde t-toets uit
 print(smod.DescrStatsW(Uren_studeren_verschil).ttest_mean(value = 0, alternative = 'two-sided'))
@@ -323,7 +322,7 @@ print(smod.DescrStatsW(Uren_studeren_verschil).tconfint_mean(alpha = 0.05, alter
 ```
 ```{python}
 # Absoluut gemiddeld verschil berekenen
-absoluut_verschil = np.mean(np.abs(np.array(Uren_studeren_T1) - np.array(Uren_studeren_T0)))
+absoluut_verschil = np.abs(np.mean(np.array(Uren_studeren_T1) - np.array(Uren_studeren_T0)))
 print(absoluut_verschil)
 ```
 <!-- ## /OPENBLOK: T-toets.py -->
@@ -338,11 +337,12 @@ lb, ub = smod.DescrStatsW(Uren_studeren_verschil).tconfint_mean(alpha = 0.05, al
 * *t*~`r py$df`~ = `r Round_and_format(py$stat)`, *p* < 0,0001`
 * Vrijheidsgraden, *df* = *n* -1 = `r py$N_tot`-1 = `r py$df`  
 * De p-waarde is kleiner dan 0,05, dus de H~0~ wordt verworpen [^10]
-* 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95% van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het verschil tussen het aantal studieuren voor en na de cursus,  µ~verschil~ = µ~T0~ - µ~T1~. In deze casus is het interval tussen `r Round_and_format(py$lb)` en `r Round_and_format(py$ub)`. Aangezien 0 niet in dit interval zit, is er een significant verschil tussen µ~T1~ en µ~T0~.
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95% van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het verschil tussen het aantal studieuren voor en na de cursus,  µ~verschil~ = µ~T1~ - µ~T0~. In deze casus is het interval tussen `r Round_and_format(py$lb)` en `r Round_and_format(py$ub)`. Aangezien 0 niet in dit interval zit, is er een significant verschil tussen µ~T1~ en µ~T0~.
 * het absolute verschil tussen de twee groepen is `r Round_and_format(py$absoluut_verschil)` 
+
 <!-- ## TEKSTBLOK: T-test2.py -->
 
-De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^11] Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft een gestandaardiseerd verschil weer: het verschil in gemiddelden tussen twee groepen gecorrigeerd voor de gecombineerde standaardafwijking van de twee groepen. Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.[^12]  
+De p-waarde geeft aan of het verschil tussen twee groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^11] Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft een gestandaardiseerd verschil weer: het verschil in gemiddelden tussen twee groepen gecorrigeerd voor de standaardafwijking van de eerste meting (T~0~). Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.[^12]  
 
 <!-- ## TEKSTBLOK: Cohen-d.py -->
 Er is geen Python functie voor Cohen's d. Bereken daarom de effectmaat zelf door het gemiddelde van de verschilscores `Uren_studeren_verschil` te delen door de standaardafwijking van de scores van de studenten voor de cursus `Uren_studeren_T0`. Neem de absolute waarde omdat het gebruikelijk is om een effectmaat als positief getal weer te geven.[^11]
@@ -367,7 +367,7 @@ d = abs(np.mean(Uren_studeren_verschil)/np.std(Uren_studeren_T0))
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.py -->
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddeld aantal uur studeren van de studenten is veranderd na deelname aan de cursus Plannen. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r Round_and_format(py$vMean_t0)`, *SD~T0~* = `r Round_and_format(py$vSD_t0)`) en het gemiddelde van T~1~ (*M~T1~* =`r Round_and_format(py$vMean_t1)`, *SD~T1~* = `r Round_and_format(py$vSD_t1)`) is significant, *t* ~`r py$df`~ = `r Round_and_format(py$stat)`, *p* < 0,0001. Gemiddeld studeren de studenten `r Round_and_format(py$absoluut_verschil)` uur meer na deelname aan de cursus, dit is een groot effect. Het 95%-betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen (T~0~ - T~1~) loopt van `r Round_and_format(py$lb)` tot `r Round_and_format(py$ub)`. Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na deelname aan de cursus Plannen, meer tijd besteden aan hun studie dan daarvoor.
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddeld aantal uur studeren van de studenten is veranderd na deelname aan de cursus Plannen. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r Round_and_format(py$vMean_t0)`, *SD~T0~* = `r Round_and_format(py$vSD_t0)`) en het gemiddelde van T~1~ (*M~T1~* =`r Round_and_format(py$vMean_t1)`, *SD~T1~* = `r Round_and_format(py$vSD_t1)`) is significant, *t* ~`r py$df`~ = `r Round_and_format(py$stat)`, *p* < 0,0001. Gemiddeld studeren de studenten `r Round_and_format(py$absoluut_verschil)` uur meer na deelname aan de cursus, dit is een groot effect. Het 95%-betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen (T~1~ - T~0~) loopt van `r Round_and_format(py$lb)` tot `r Round_and_format(py$ub)`. Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na deelname aan de cursus Plannen, meer tijd besteden aan hun studie dan daarvoor.
 
 
 

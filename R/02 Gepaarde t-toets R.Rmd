@@ -302,8 +302,8 @@ t <- t.test(Uren_studeren ~ Meetmoment, Studielogboek, paired = TRUE)
 vT_waarde <- Round_and_format(t$statistic)
 vN <- t$parameter + 1
 vDF <- t$parameter
-vconf.int1 <- Round_and_format(t$conf.int[1])
-vconf.int2 <- Round_and_format(t$conf.int[2])
+vconf.int1 <- Round_and_format(-t$conf.int[1])
+vconf.int2 <- Round_and_format(-t$conf.int[2])
 vDiffMean <- Round_and_format(t$estimate*-1)
 ```
 <!-- ## /CLOSEDBLOK: T-test.R -->
@@ -311,15 +311,16 @@ vDiffMean <- Round_and_format(t$estimate*-1)
 * *t*~`r vDF`~ = `r vT_waarde`, *p* < 0,0001
 * Vrijheidsgraden, *df* = *n* -1 = `r vN`-1 = `r vDF`  
 * De p-waarde is kleiner dan 0,05, dus de H~0~ wordt verworpen [^10]
-* 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95% van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het verschil tussen het aantal studieuren voor en na de cursus,  µ~verschil~ = µ~T0~ - µ~T1~. In deze casus is het interval tussen `r vconf.int1` en `r vconf.int2`. Aangezien 0 niet in dit interval zit, is er een significant verschil tussen µ~T1~ en µ~T0~.
+* De output van deze functie berekend het verschil in gemiddelde als µ~verschil~ = µ~T0~ - µ~T1~. Om het duidelijker te maken wordt in deze toetspagina het verschil andersom berekend, dus µ~verschil~ = µ~T1~ - µ~T0~.
+* 95%-betrouwbaarheidsinterval: bij het herhalen van het experiment met verschillende steekproeven van de populatie zal 95% van de betrouwbaarheidsintervallen de daadwerkelijke parameter bevatten, het verschil tussen het aantal studieuren voor en na de cursus,  µ~verschil~ = µ~T1~ - µ~T0~. In deze casus is het interval tussen `r vconf.int1` en `r vconf.int2`. Aangezien 0 niet in dit interval zit, is er een significant verschil tussen µ~T1~ en µ~T0~.
 * Het absolute gemiddelde verschil tussen de twee groepen is `r vDiffMean`.
 
 <!-- ## /TEKSTBLOK: T-test2.R -->
 
-De p-waarde geeft aan of het verschil tussen twee groepen statistisch significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^11] Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft een gestandaardiseerd verschil weer: het verschil in gemiddelden tussen twee groepen gecorrigeerd voor de gecombineerde standaardafwijking van de twee groepen. Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.[^12]  
+De p-waarde geeft aan of het verschil tussen twee groepen significant is. De grootte van het verschil of effect is echter ook relevant. Een effectmaat is een gestandaardiseerde maat die de grootte van een effect weergeeft, zodat effecten van verschillende onderzoeken met elkaar vergeleken kunnen worden.[^11] Een veel gebruikte effectmaat is Cohen's *d*. Cohen's *d* geeft een gestandaardiseerd verschil weer: het verschil in gemiddelden tussen twee groepen gecorrigeerd voor de standaardafwijking van de eerste meting (T~0~). Een indicatie om *d* te interpreteren is: rond 0,3 is een klein effect, rond 0,5 is een gemiddeld effect en rond 0,8 is een groot effect.[^12]  
 
 <!-- ## TEKSTBLOK: Cohen-d.R -->
-Gebruik de functie `cohensD()` van het package `lsr` om de effectmaat te berekenen. Het eerste argument bestaat uit de afhankelijke variabele `Uren_studeren` en de groepvariabele `Meetmoment` en het tweede argument is de dataset `Studielogboek`. Gebruik het argument `method = x.sd` om de effectmaat te berekenen op basis van de standaardafwijking van de observaties voor de cursus.
+Gebruik de functie `cohensD()` van het package `lsr` om de effectmaat te berekenen. Het eerste argument bestaat uit de afhankelijke variabele `Uren_studeren` en de groepvariabele `Meetmoment` en het tweede argument is de dataset `Studielogboek`. Gebruik het argument `method = x.sd` om de effectmaat te berekenen op basis van de standaardafwijking van de observaties voor de cursus (T~0~).
 <!-- ## /TEKSTBLOK: Cohen-d.R  -->
 
 <!-- ## OPENBLOK: Cohens-d-test.R -->
@@ -342,7 +343,7 @@ vD_waarde <- cohensD(Uren_studeren ~ Meetmoment, Studielogboek, method = "x.sd")
 
 # Rapportage
 <!-- ## TEKSTBLOK: Rapportage.R -->
-Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddeld aantal uur studeren van de studenten is veranderd na deelname aan de cursus Plannen. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r vMean_t0`, *SD~T0~* = `r vSD_t0`) en het gemiddelde van T~1~ (*M~T1~* =`r vMean_t1`, *SD~T1~* = `r vSD_t1`) is significant, *t* ~`r vDF`~ = `r vT_waarde`, *p* < 0,0001. Gemiddeld studeren de studenten `r vDiffMean` uur meer na deelname aan de cursus, dit is een groot effect. Het 95%-betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen (T~0~ - T~1~) loopt van `r vconf.int1` tot `r vconf.int2`. Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na deelname aan de cursus Plannen, meer tijd besteden aan hun studie dan daarvoor.
+Een *gepaarde t-toets* is uitgevoerd om te toetsen of het gemiddeld aantal uur studeren van de studenten is veranderd na deelname aan de cursus Plannen. Het verschil tussen het gemiddelde van T~0~ (*M~T0~* = `r vMean_t0`, *SD~T0~* = `r vSD_t0`) en het gemiddelde van T~1~ (*M~T1~* =`r vMean_t1`, *SD~T1~* = `r vSD_t1`) is significant, *t* ~`r vDF`~ = `r vT_waarde`, *p* < 0,0001. Gemiddeld studeren de studenten `r vDiffMean` uur meer na deelname aan de cursus, dit is een groot effect. Het 95%-betrouwbaarheidsinterval voor het verschil tussen het gemiddelde van beide groepen (T~1~ - T~0~) loopt van `r vconf.int1` tot `r vconf.int2`. Aan de hand van de resultaten kan geconcludeerd worden dat de studenten, na deelname aan de cursus Plannen, meer tijd besteden aan hun studie dan daarvoor.
 
 
 | Meting     | N         | M            | SD         |

@@ -1889,11 +1889,11 @@ body{ /* Normal  */
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div> <!-- ## /CLOSEDBLOK: Header.R --></p>
-<!-- ## CLOSEDBLOK: Reticulate.py -->
-<!-- ## /CLOSEDBLOK: Reticulate.py -->
 <!-- ## CLOSEDBLOK: Status.R -->
 <p>
    <div class="concept">Disclaimer: Het peer review proces voor deze toets is nog niet afgerond; daarom is deze pagina nog in concept.</div> <!-- ## /CLOSEDBLOK: Status.R --></p>
+<!-- ## CLOSEDBLOK: Reticulate.py -->
+<!-- ## /CLOSEDBLOK: Reticulate.py -->
 <!-- ## OPENBLOK: Data-aanmaken.py -->
 <!-- ## /OPENBLOK: Data-aanmaken.py -->
 <div id="toepassing" class="section level1">
@@ -1905,8 +1905,8 @@ body{ /* Normal  */
 <div id="casus">
 <p>De opleidingsdirecteur van de bachelor Technische Natuurkunde van een universiteit hoort vanuit de opleidingscommissie dat de eerstejaars studenten de studielast van de eerste onderwijsperiode als erg hoog ervaren. Om te onderzoeken hoe deze ervaren studielast verminderd kan worden, wil hij onderzoeken hoeveel tijd de studenten per week besteden aan hun vakken. Met behulp van een vragenlijst over de studiebelasting in het eerste jaar verzamelt hij gegevens van het aantal uur per week dat eerstejaars studenten besteden aan de vakken in de eerste onderwijsperiode: Lineaire Algebra, Relativiteitstheorie en Kosmologie. Op deze manier kan hij onderzoeken of er verschillen in de tijdsbesteding aan de verschillende vakken zijn en om te bepalen van welke vakken de studielast aangepast moet worden.</p>
 <p>Dit onderzoek vertaalt zich in de volgende combinatie van hypothesen, waarbij de nulhypothese zo geformuleerd is dat er geen effect of verschil is en de alternatieve hypothese zo geformuleerd is dat er wel een effect of verschil is.</p>
-<p><em>H<sub>0</sub></em>: Het aantal studieuren per week van eerstejaars studenten van de bachelor Technische Natuurkunde is hetzelfde voor de drie vakken in de eerste onderwijsperiode</p>
-<p><em>H<sub>A</sub></em>: Het aantal studieuren per week van eerstejaars studenten van de bachelor Technsiche Natuurkunde is niet hetzelfde voor de drie vakken in de eerste onderwijsperiode</p>
+<p><em>H<sub>0</sub></em>: Het gemiddeld aantal studieuren per week van eerstejaars studenten van de bachelor Technische Natuurkunde is hetzelfde voor de drie vakken in de eerste onderwijsperiode</p>
+<p><em>H<sub>A</sub></em>: Het gemiddeld aantal studieuren per week van eerstejaars studenten van de bachelor Technsiche Natuurkunde is niet hetzelfde voor de drie vakken in de eerste onderwijsperiode</p>
 </div>
 </div>
 <div id="assumpties" class="section level1">
@@ -1960,7 +1960,7 @@ body{ /* Normal  */
 <div id="post-hoc-toetsen" class="section level1">
 <h1><span class="header-section-number">5</span> Post-hoc toetsen</h1>
 <p>De <em>repeated measures ANOVA</em> toetst of één of meerdere van de gemiddelden anders is dan de andere gemiddelden. Voer een post-hoc toets uit om te bepalen welke groepen van metingen significant verschillen.</p>
-<p>Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de <em>Bonferroni correctie</em> gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout. Er zijn ook andere opties voor een correctie op de p-waarden.</p>
+<p>Gebruik een correctie voor de p-waarden, omdat er meerdere toetsen tegelijkertijd worden gebruikt. Meerdere toetsen tegelijkertijd uitvoeren verhoogt de kans dat een van de nulhypotheses onterecht wordt verworpen en er bij toeval een verband wordt ontdekt dat er niet is (type I fout). In deze toetspagina wordt de <em>Bonferroni correctie</em> gebruikt. Deze correctie past de p-waarde aan door de p-waarde te vermenigvuldigen met het aantal uitgevoerde toetsen en verlaagt hiermee de kans op een type I fout. Een andere uitleg hiervan is dat het significantieniveau gedeeld wordt door het aantal toetsen wat leidt tot een lager significantieniveau en dus een strengere toets. Er zijn ook andere opties voor een correctie op de p-waarden.<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></p>
 </div>
 <div id="uitvoering" class="section level1">
 <h1><span class="header-section-number">6</span> Uitvoering</h1>
@@ -2055,7 +2055,7 @@ print(len(Studieuren_kosmologie))
 <p>Geef de verdeling van de studieuren voor elke groep visueel weer met een histogram, Q-Q plot en boxplot.</p>
 <div id="histogram" class="section level3">
 <h3><span class="header-section-number">6.2.1</span> Histogram</h3>
-<p>Focus bij het analyseren van een histogram<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a> op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a><sup>, </sup><a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a></p>
+<p>Focus bij het analyseren van een histogram<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a> op de symmetrie van de verdeling, de hoeveelheid toppen (modaliteit) en mogelijke uitbijters. Een normale verdeling is symmetrisch, heeft één top en geen uitbijters.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a><sup>, </sup><a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a></p>
 <!-- ## OPENBLOK: Histogram.py -->
 <pre class="python"><code># Laad seaborn of facets te maken
 import seaborn as sb
@@ -2112,7 +2112,7 @@ plt.show()</code></pre>
 </div>
 <div id="boxplot" class="section level3">
 <h3><span class="header-section-number">6.2.3</span> Boxplot</h3>
-<p>De box geeft de middelste 50% van het aantal studieuren per week weer. De zwarte lijn binnen de box is de mediaan. In de staarten of snorreharen zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a><sup>, </sup><a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen van metingen.</p>
+<p>De box geeft de middelste 50% van het aantal studieuren per week weer. De zwarte lijn binnen de box is de mediaan. In de staarten of snorreharen zitten de eerste 25% en de laatste 25%. Cirkels visualiseren mogelijke uitbijters.<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a><sup>, </sup><a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a> Hoe meer de boxen overlappen, hoe waarschijnlijker er geen significant verschil is tussen de groepen van metingen.</p>
 <!-- ## OPENBLOK: Boxplot.py -->
 <pre class="python"><code>fig, ax = plt.subplots()
 box = ax.boxplot([Studieuren_lineaire_algebra, Studieuren_relativiteitstheorie, Studieuren_kosmologie], labels = [&quot;Lineaire algebra&quot;, &quot;Relativiteitstheorie&quot;, &quot;Kosmologie&quot;])
@@ -2154,7 +2154,7 @@ plt.show()</code></pre>
 <!-- ## /OPENBLOK: Lilliefors-test-3.py -->
 </div>
 </div>
-<p>De p-waarde is groter dan 0,05 voor elk vak; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. <a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a> De <em>repeated measures ANOVA</em> kan uitgevoerd worden.</p>
+<p>De p-waarde is groter dan 0,05 voor elk vak; er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. <a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a> De <em>repeated measures ANOVA</em> kan uitgevoerd worden.</p>
 </div>
 <div id="shapiro-wilk-test" class="section level3">
 <h3><span class="header-section-number">6.3.2</span> Shapiro-Wilk Test</h3>
@@ -2182,7 +2182,7 @@ print(stats.shapiro(Studieuren_kosmologie))</code></pre>
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-3.py -->
 </div>
 </div>
-<p>De p-waarde is groter dan 0,05 voor elk vak, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a> De <em>repeated measures ANOVA</em> kan uitgevoerd worden.</p>
+<p>De p-waarde is groter dan 0,05 voor elk vak, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling.<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> De <em>repeated measures ANOVA</em> kan uitgevoerd worden.</p>
 </div>
 </div>
 <div id="repeated-measures-anova" class="section level2">
@@ -2217,7 +2217,7 @@ print(aov.iloc[:,:7])</code></pre>
 <li><em>Mauchly’s test</em> toont aan dat de assumptie van sphericiteit niet standthoudt in deze casus (<span class="math inline">\(\chi^2\)</span> = 0,97, p &lt; 0,0001); gebruik in dit geval een van de correcties. In Python is alleen de (conservatieve) Greenhouse-Geisser correctie mogelijk, dus rapporteer deze. Wil je de toets op de geadviseerde manier (zowel de Greenhouse-Geisser als de Huynh-Feldt correctie uitvoeren en daarna vergelijken), dan moet de toets uitgevoerd worden in de programmeertaal R.</li>
 <li>De data voldoet aan de assumptie van sphericiteit, <span class="math inline">\(\chi^2\)</span> = 0,97, p = 0,297</li>
 <li>De resultaten van de Greenhouse-Geisser correctie zijn <em>F</em> = 0,97, p &lt; 0,0001, <em>η<sup>2</sup></em> = 0,79</li>
-<li>De p-waarde is kleiner dan 0,05, dus de H<sub>0</sub> wordt verworpen.<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a></li>
+<li>De p-waarde is kleiner dan 0,05, dus de H<sub>0</sub> wordt verworpen.<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a></li>
 <li>Er is een significant verschil tussen het aantal studieuren voor de drie vakken in de eerste onderwijsperiode; het effect van de verschillende vakken op het aantal studieuren is groot</li>
 </ul>
 <!-- ## /TEKSTBLOK: repeatedmeasuresANOVA4.py -->
@@ -2297,9 +2297,9 @@ print(post_hoc[[&#39;A&#39;, &#39;B&#39;, &#39;T&#39;, &#39;p-corr&#39;]])</code
 <p>
 <div id = "footerborder"><hr/></div>
 <div id = "footer">
-Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 3.6.3; Python code is uitgevoerd in Python 3.7. De gesimuleerde datasets zijn <a href="../Datasets_zipbestand" download>hier</a> te downloaden.
+Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 3.6.3; Python code is uitgevoerd in Python 3.6.13. De gesimuleerde datasets zijn <a href="../Datasets_zipbestand" download>hier</a> te downloaden.
 <br/><br/>
-&copy; 2021 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:01-03-2021
+&copy; 2021 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:28-03-2021
 </div> <!-- ## /CLOSEDBLOK: Footer.R --></p>
 </div>
 <div class="footnotes">
@@ -2317,14 +2317,15 @@ Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikk
 <li id="fn10"><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. London: Sage publications.<a href="#fnref10" class="footnote-back">↩</a></p></li>
 <li id="fn11"><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. London: Sage publications.<a href="#fnref11" class="footnote-back">↩</a></p></li>
 <li id="fn12"><p>Allen, P. &amp; Bennett, K. (2012). <em>SPSS A practical Guide version 20.0</em>. Cengage Learning Australia Pty Limited.<a href="#fnref12" class="footnote-back">↩</a></p></li>
-<li id="fn13"><p>De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.<a href="#fnref13" class="footnote-back">↩</a></p></li>
-<li id="fn14"><p>Outliers (13 augustus 2016). <a href="https://wiki.uva.nl/methodologiewinkel/index.php/Outliers">UvA Wiki Methodologiewinkel</a>.<a href="#fnref14" class="footnote-back">↩</a></p></li>
-<li id="fn15"><p>Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport.<a href="#fnref15" class="footnote-back">↩</a></p></li>
-<li id="fn16"><p>Outliers (13 augustus 2016). <a href="https://wiki.uva.nl/methodologiewinkel/index.php/Outliers">UvA Wiki Methodologiewinkel</a>.<a href="#fnref16" class="footnote-back">↩</a></p></li>
-<li id="fn17"><p>Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport.<a href="#fnref17" class="footnote-back">↩</a></p></li>
-<li id="fn18"><p>In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.<a href="#fnref18" class="footnote-back">↩</a></p></li>
+<li id="fn13"><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. London: Sage publications.<a href="#fnref13" class="footnote-back">↩</a></p></li>
+<li id="fn14"><p>De breedte van de staven van het histogram wordt vaak automatisch bepaald, maar kan handmatig aangepast worden. Aangezien de breedte van de staven bepalend zijn voor de indruk die de visualisatie geeft, is het verstandig om hier goed op te letten.<a href="#fnref14" class="footnote-back">↩</a></p></li>
+<li id="fn15"><p>Outliers (13 augustus 2016). <a href="https://wiki.uva.nl/methodologiewinkel/index.php/Outliers">UvA Wiki Methodologiewinkel</a>.<a href="#fnref15" class="footnote-back">↩</a></p></li>
+<li id="fn16"><p>Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport.<a href="#fnref16" class="footnote-back">↩</a></p></li>
+<li id="fn17"><p>Outliers (13 augustus 2016). <a href="https://wiki.uva.nl/methodologiewinkel/index.php/Outliers">UvA Wiki Methodologiewinkel</a>.<a href="#fnref17" class="footnote-back">↩</a></p></li>
+<li id="fn18"><p>Uitbijters kunnen bepalend zijn voor de uitkomst van toetsen. Bekijk of de uitbijters valide uitbijters zijn en niet een meetfout of op een andere manier incorrect verkregen data. Het weghalen van uitbijters kan de uitkomst ook vertekenen, daarom is het belangrijk om verwijderde uitbijters te melden in een rapport.<a href="#fnref18" class="footnote-back">↩</a></p></li>
 <li id="fn19"><p>In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.<a href="#fnref19" class="footnote-back">↩</a></p></li>
 <li id="fn20"><p>In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.<a href="#fnref20" class="footnote-back">↩</a></p></li>
+<li id="fn21"><p>In dit voorbeeld wordt uitgegaan van een waarschijnlijkheid van 95% c.q. een p-waardegrens van 0,05. De grens is naar eigen inzicht aan te passen; houd hierbij rekening met type I en type II fouten.<a href="#fnref21" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 

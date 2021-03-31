@@ -168,7 +168,7 @@ sink()
 ## wat de server antwoordt
 
 user      <- "jlweb32049"
-password  <- "k35xDLUYUAIeRUZIDdej"
+password  <- "eFeez9se9ree%doh"
 server    <- "ftp://jlweb320.prolocation.net/html"
 
 ftpUpload(what = "_site/sitemap.xml",

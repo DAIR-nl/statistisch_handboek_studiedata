@@ -1,13 +1,13 @@
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## 25.R ####
+## 24.R ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## R code voor Student Analytics Vrije Universiteit Amsterdam
 ## Copyright 2020 VU
 ## Web Page: http://www.vu.nl
 ## Contact: Theo Bakker (t.c.bakker@vu.nl)
-## Verspreiding buiten de VU: Ja
+## Verspreiding buiten de VU: Nee
 ##
-## Doel: Data genereren voor script 25 Kruskal Wallis toets II R.Rmd
+## Doel: Doel
 ##
 ## Afhankelijkheden: Geen
 ##

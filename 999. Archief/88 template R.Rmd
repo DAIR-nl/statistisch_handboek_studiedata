@@ -1,0 +1,82 @@
+---
+title: "Template"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: 
+      collapsed: FALSE 
+    number_sections: true
+  keywords: [statistisch handboek, studiedata]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r functiedefinities,include=FALSE, echo=TRUE}
+Round_and_format <- function(x, digits = 2) {
+  x <- as.character(round(x, digits))
+  x <- str_replace(x, "[.]", ",")
+  return(x)
+}
+```
+
+<!-- ## OPENBLOK: Data-aanmaken.R -->
+```{r aanmaken data, include=FALSE, echo=TRUE}
+
+```
+<!-- ## /OPENBLOK: Data-aanmaken.R -->
+
+# Toepassing
+
+# Onderwijscasus
+
+# Assumpties
+
+# Uitvoering in R
+Er is een dataset ingeladen genaamd
+
+## De data bekijken
+<!-- ## TEKSTBLOK: Data-bekijken.R -->
+Gebruik `head()` en `tail()` om de structuur van de data te bekijken.
+<!-- ## /TEKSTBLOK: Data-bekijken.R -->
+<!-- ## OPENBLOK: Data-bekijken.R -->
+```{r data bekijken, collapse = TRUE}
+## Eerste 10 observaties
+head(Reistijd_per_opleiding)
+
+## Laatste 10 observaties
+tail(Reistijd_per_opleiding)
+```
+<!-- ## /OPENBLOK: Data-bekijken.R -->
+
+<!-- ## OPENBLOK: Data-beschrijven.R -->
+```{r Data beschrijven 1, collapse=TRUE}
+## Aantallen, gemiddelde en standaarddeviatie 
+length()
+mean()
+sd()
+```
+<!-- ## /OPENBLOK: Data-beschrijven.R -->
+
+* Gemiddelde (standaarddeviatie): `r vMean` (`r vSD`). n = `r vN`.
+
+## Assumpties testen in R
+
+```{r}
+
+```
+
+## Statistische toets in R
+
+```{r}
+
+```
+
+# Toelichting op de output
+
+# Rapportage
+
+
+

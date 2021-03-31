@@ -1,4 +1,3 @@
-
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 15.R ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -6,7 +5,7 @@
 ## Copyright 2020 VU
 ## Web Page: http://www.vu.nl
 ## Contact: Theo Bakker (t.c.bakker@vu.nl)
-## Verspreiding buiten de VU: Ja
+## Verspreiding buiten de VU: Nee
 ##
 ## Doel: Doel
 ##

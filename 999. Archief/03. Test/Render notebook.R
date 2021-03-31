@@ -5,7 +5,7 @@
 ## Copyright 2020 VU
 ## Web Page: http://www.vu.nl
 ## Contact: Theo Bakker (t.c.bakker@vu.nl)
-## Verspreiding buiten de VU: Ja
+## Verspreiding buiten de VU: Nee
 ##
 ## Doel: Dit script voert het renderen van het notebook uit. De output is een
 ## html pagina met alle plots. Na het renderen wordt deze output weggeschreven

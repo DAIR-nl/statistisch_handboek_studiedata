@@ -299,6 +299,7 @@ shapiro.test(Cijfers_2011_n30)
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-2.R -->
   </div>
 </div>
+
 De p-waarde is groter dan 0,05 voor beide groepen, dus er zijn geen significante verschillen gevonden tussen de verdeling van de steekproef en de normale verdeling. De *ongepaarde t-toets* kan uitgevoerd worden.
 
 ## Ongepaarde t-toets

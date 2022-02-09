@@ -53,6 +53,10 @@ lVars <- list(
   sRoot = sRoot
 )
 
+## Fix for rmarkdown 2.6
+## https://github.com/yihui/xaringan/issues/293#issuecomment-761973964
+options(htmltools.preserve.raw = FALSE)
+
 ## Plaats deze nu in een header; gebruik htmltools::htmlPreserve om
 ## HTML te behouden. Nodig om in markdown HTML te tonen.
 thisHeader <- Substitute_var(htmltools::htmlPreserve('

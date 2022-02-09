@@ -55,7 +55,7 @@ Maak_url <- function(published, sModus, sToets_dashed) {
 ## dat er in de website output niet goed uit. Dit is iets waar nog geen
 ## oplossing voor is.
 Corrigeer_toetsnaam <- function(sToetsnaam) {
-  dplyr::case_when(
+  case_when(
       sToetsnaam == "Chi-kwadraat toets voor onafhankelijkheid en Fishers exacte toets" ~ "Chi-kwadraat toets voor onafhankelijkheid en Fisher's exacte toets",
       sToetsnaam == "Cochrans Q toets" ~ "Cochran's Q toets",
       sToetsnaam == "Fisher-Freeman-Halton exact toets" ~ "Fisher-Freeman-Halton exact toets",

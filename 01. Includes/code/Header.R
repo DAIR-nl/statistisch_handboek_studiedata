@@ -44,7 +44,7 @@
 if (!exists("sModus")) {
   sModus <- "Root"
 }
-sRoot <- dplyr::case_when(
+sRoot <- case_when(
   sModus %in% c("R","Python") ~ "../",
   TRUE ~ ""
 ) 

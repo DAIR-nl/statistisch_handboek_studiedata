@@ -60,7 +60,7 @@ Maak_url <- function(published, sModus, sToets_dashed) {
 }
 
 Corrigeer_toetsnaam <- function(sToetsnaam) {
-  dplyr::case_when(
+  case_when(
       sToetsnaam == "Fishers exact toets" ~ "Fisher's exact toets",
       sToetsnaam == "Cochrans Q toets" ~ "Cochran's Q toets",
       sToetsnaam == "Fisher-Freeman-Halton exact toets" ~ "Fisher-Freeman- Halton exact toets",

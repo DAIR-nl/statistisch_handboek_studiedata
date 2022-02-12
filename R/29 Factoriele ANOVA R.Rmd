@@ -355,7 +355,7 @@ Maak eerst een aparte dataset voor mannen en vrouwen aan en voer vervolgens de G
 
 <!-- ## OPENBLOK: SimEff2.R -->
 ```{r, message = FALSE}
-library(userfriendlyscience)
+library(rosetta)
 
 # Maak een dataset met mannen en een dataset met vrouwen
 Mannen_Gemiddelde_cijfers_psychologie <- Gemiddelde_cijfers_psychologie[Gemiddelde_cijfers_psychologie$Geslacht == "Man",]
@@ -425,7 +425,7 @@ Maak eerst aparte datasets voor studenten met een hbo-p, vwo en overige voorople
 <!-- ## OPENBLOK: SimEff6.R -->
 
 ```{r}
-library(userfriendlyscience)
+library(rosetta)
 
 # Maak een dataset met studenten met een hbo-p, vwo en overige vooropleiding
 Hbo_Gemiddelde_cijfers_psychologie <- Gemiddelde_cijfers_psychologie[Gemiddelde_cijfers_psychologie$Vooropleiding == "hbo",]
@@ -528,7 +528,7 @@ Er is geen significant interactie-effect van Vooropleiding en Geslacht op Gemidd
 
 <!-- ## OPENBLOK: PHtest5.R -->
 ```{r}
-library(userfriendlyscience)
+library(rosetta)
 
 # Voer de post-hoc toets uit voor de onafhankelijke variabele Vooropleiding
 Games_Howell_vooropleiding <- posthocTGH(Hoofdeffecten_Gemiddelde_cijfers_psychologie$Gemiddeld_cijfer,

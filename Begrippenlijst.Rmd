@@ -11,7 +11,7 @@ output:
       in_header: ["01. Includes/html/nocache.html", "01. Includes/html/favicon.html", "01. Includes/html/analytics.html"] 
 ---
 
-<!-- ## CLOSEDBLOK: Functies.R -->
+<!-- ## CLOSEDBLOK: ROLAND::: Functies.R -->
 ```{r functies, include = TRUE, echo = FALSE, results='asis', warning=FALSE, message=FALSE}
 library(here)
 if (!exists("Substitute_var")) {

@@ -212,7 +212,7 @@ swtest = stats.shapiro(Uren_studeren_verschil_n30)
 <!-- ## /OPENBLOK: Shapiro-Wilk-test-1.py -->
 
 <!-- ## TEKSTBLOK: Shapiro-Wilk-test-2.py -->
-Voor deze subset is de p-waarde `r Round_and_format(unlist(py$swtest[2]))`, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden.  
+Voor deze subset is de p-waarde `r Round_and_format(unlist(py$swtest[1]))`, dus er is geen significant verschil gevonden tussen de verdeling van de steekproef en de normale verdeling. De *gepaarde t-toets* kan uitgevoerd worden.
 <!-- ## /TEKSTBLOK: Shapiro-Wilk-test-2.py -->
 
 <!-- ## TEKSTBLOK: T-test.py -->

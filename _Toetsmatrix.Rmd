@@ -61,7 +61,7 @@ Onder de toetsmatrix staat een uitgebreide beschrijving van de verschillende opt
 ```{r, echo = FALSE}
 htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/R/toetsmatrix_II_header.html"))
 ```
-```{r toetsmatrix, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Toetsmatrix_II.R"))} 
+```{r toetsmatrix_II, include = TRUE, echo = FALSE, results='asis', code =  readLines(paste0(here::here(),"/01. Includes/code/Toetsmatrix_II.R"))}
 ```
 ```{r, echo = FALSE}
 htmltools::includeHTML(paste0(here::here(),"/01. Includes/html/R/toetsmatrix_II_footer.html"))

@@ -65,7 +65,7 @@ Gebruikte_packages <- c(
     "plotly",
     "pROC",
     "purrr",
-    "QuantPsyc", # 28 
+    "QuantPsyc", # 28
     "rapport",
     "rcompanion",
     "readxl",
@@ -76,12 +76,12 @@ Gebruikte_packages <- c(
     "rlist",
     "stringi",
     "stringr",
-    # "userfriendlyscience", # 29, 
+    # "userfriendlyscience", # 29,
      "rosetta",
     "summarytools", # 29, LET OP: laad deze na package userfriendlyscience
     "VGAM", # 53
     "lmtest" # 41, 47, 53 let op, na VGAM package
-  
+
 )
 
 ## Installeer alleen de packages die nog niet geinstalleerd zijn.

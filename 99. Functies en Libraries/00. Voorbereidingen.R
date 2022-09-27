@@ -38,6 +38,8 @@ if (!require("here", quietly = TRUE)) {
     install.packages("here", repos = "http://cloud.r-project.org/")
 }
 
+options("gsubfn.engine" = "R")
+
 ## xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ## Lees packages in
 source(paste0(here::here(),"/99. Functies en Libraries/Installeer Packages.R"))

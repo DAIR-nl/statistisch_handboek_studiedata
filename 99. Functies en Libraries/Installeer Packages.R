@@ -34,7 +34,7 @@
 ## Noteer ook achter het package in een comment het nummer van de toetspagina
 ## waarin de package gebruikt wordt, dat is handig voor de administratie. Soms
 ## kan het voorkomen dat een bepaald package na een ander package moet staan in
-## de lijst, omdat bepaalde functies hetzelfde zijn. Het ene overschrijft dan 
+## de lijst, omdat bepaalde functies hetzelfde zijn. Het ene overschrijft dan
 ## het andere, wat voor errors kan zorgen als de volgorde verkeerd is.
 
 ## Bepaal de gebruikte packages. Update deze lijst als er nieuwe packages
@@ -76,13 +76,24 @@ Gebruikte_packages <- c(
     "rlist",
     "stringi",
     "stringr",
-    # "userfriendlyscience", # 29,
-     "rosetta",
+    # "userfriendlyscience", # 29
+    "rosetta", # is verwijderd van cran.
     "summarytools", # 29, LET OP: laad deze na package userfriendlyscience
     "VGAM", # 53
-    "lmtest" # 41, 47, 53 let op, na VGAM package
-
+    "lmtest", # 41, 47, 53 let op, na VGAM package
+    "schoRsch", # 41
+    "mclogit" # 47
 )
+
+## Installeer rosetta vanaf de microsoft cran
+## Rosetta is namelijk niet meer op cran beschikbaar.
+if (!require("rosetta", quietly = TRUE)) {
+    install.packages(
+        "rosetta",
+        repos=unique(c(
+            getOption("repos"),
+            repos="https://cran.microsoft.com/snapshot/2022-07-01/")))
+}
 
 ## Installeer alleen de packages die nog niet geinstalleerd zijn.
 Nieuwe_packages <-

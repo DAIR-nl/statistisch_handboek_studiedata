@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>http://www.sh-studiedata.nl/</loc>
+  <lastmod>2020-02-21T12:14:45+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/Index.html</loc>
+  <lastmod>2020-02-21T12:14:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/R/Toetsmatrix.html</loc>
+  <lastmod>2020-02-21T12:14:55+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/Python/Toetsmatrix.html</loc>
+  <lastmod>2020-02-21T12:14:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/Over.html</loc>
+  <lastmod>2020-02-21T12:14:48+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/Verantwoording.html</loc>
+  <lastmod>2020-02-21T12:14:49+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/Licentie.html</loc>
+  <lastmod>2020-02-21T12:14:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/R/01-One-sample-t-toets-R.html</loc>
+  <lastmod>2020-02-21T12:15:03+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/R/02-Gepaarde-t-toets-R.html</loc>
+  <lastmod>2020-02-21T12:15:07+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/R/03-Ongepaarde-t-toets-R.html</loc>
+  <lastmod>2020-02-21T12:15:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/R/05-One-way-ANOVA-R.html</loc>
+  <lastmod>2020-02-21T12:15:17+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/R/06-Tekentoets-R.html</loc>
+  <lastmod>2020-02-21T12:15:20+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/R/08-Mann-Whitney-U-toets-R.html</loc>
+  <lastmod>2020-02-21T12:15:23+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/R/10-Kruskal-Wallis-toets-R.html</loc>
+  <lastmod>2020-02-21T12:15:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/R/13-Chi-kwadraat-toets-en-Fishers-exact-toets-R.html</loc>
+  <lastmod>2020-02-21T12:15:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/Python/01-One-sample-t-toets-Python.html</loc>
+  <lastmod>2020-02-21T12:16:42+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/Python/02-Gepaarde-t-toets-Python.html</loc>
+  <lastmod>2020-02-21T12:16:47+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/Python/03-Ongepaarde-t-toets-Python.html</loc>
+  <lastmod>2020-02-21T12:16:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/Python/05-One-way-ANOVA-Python.html</loc>
+  <lastmod>2020-02-21T12:17:02+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/Python/08-Mann-Whitney-U-toets-Python.html</loc>
+  <lastmod>2020-02-21T12:17:05+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/Python/10-Kruskal-Wallis-toets-Python.html</loc>
+  <lastmod>2020-02-21T12:17:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.sh-studiedata.nl/Python/13-Chi-kwadraat-toets-en-Fishers-exact-toets-Python.html</loc>
+  <lastmod>2020-02-21T12:17:12+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>

@@ -1,0 +1,57 @@
+Package: handboek
+Title: statistisch Handboek
+Version: 2.0.5.9000
+Authors@R: c(
+    person("RStudio", role = c("cph", "fnd"))
+  )
+Description: Generate an attractive and useful website for handboek
+License: proprietary
+URL: https://github.com/rvanlaar/R-build-tests
+BugReports: https://github.com/rvanlaar/R-build-tests/issues
+Depends: 
+    R (>= 4.2.0)
+Imports: 
+    brms,
+    car,
+    checkmate,
+    dplyr,
+    effsize,
+    exact2x2,
+    ez,
+    fmsb,
+    DescTools,
+    ggplot2,
+    ggridges,
+    gsubfn,
+    graphics,
+    here,
+    htmltools,
+    irr,
+    lsr,
+    markdown,
+    nortest,
+    performance,
+    plotly,
+    pROC,
+    purrr,
+    QuantPsyc,
+    rapport,
+    rcompanion,
+    readxl,
+    reticulate,
+    reshape,
+    rstatix,
+    rlist,
+    RVAideMemoire,
+    stringi,
+    stringr,
+    summarytools,
+    VGAM,
+    lmtest,
+    mclogit,
+    emmeans,
+    schoRsch
+Config/testthat/edition: 3
+Config/potools/style: explicit
+Config/Needs/website: usethis, servr
+Encoding: UTF-8

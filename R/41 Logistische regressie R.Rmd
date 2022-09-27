@@ -694,7 +694,7 @@ Classificaties <- ifelse(Voorspelde_kans > 0.5,
 
 # Maak een classificatietabel
 Tabel <- table(Classificaties = Classificaties,
-      Observaties = Uitval_Elektrotechniek$Uitval)
+      Observaties = Uitval_Elektrotechniek$UitvalTekst)
 print(Tabel)
 
 # Bereken de accuraatheid
@@ -710,7 +710,7 @@ Specificiteit <- Tabel["Geen uitval","Geen uitval"] / (Tabel["Geen uitval","Geen
 Specificiteit
 
 # Maak een numerieke versie van de variabele Uitval met een 1 voor Uitval en een 0 voor Geen uitval
-Uitval_Elektrotechniek$Uitval_dummy <- as.numeric(Uitval_Elektrotechniek$Uitval == "Uitval")
+Uitval_Elektrotechniek$Uitval_dummy <- as.numeric(Uitval_Elektrotechniek$UitvalTekst == "Uitval")
 
 # Bereken de Area Under the Curve (AUC)
 library(pROC)
@@ -729,7 +729,7 @@ Classificaties <- ifelse(Voorspelde_kans > 0.5,
 
 # Maak een classificatietabel
 Tabel <- table(Classificaties = Classificaties,
-      Observaties = Uitval_Elektrotechniek$Uitval)
+      Observaties = Uitval_Elektrotechniek$UitvalTekst)
 
 # Bereken accuraatheid
 Accuraatheid <- (Tabel["Uitval","Uitval"] + Tabel["Geen uitval","Geen uitval"]) / sum(Tabel)
@@ -786,4 +786,4 @@ De *likelihood ratio toets* voor het regressiemodel laat zien dat het opgestelde
 [^12]: James, G., Witten, D., Hastie, T. & Tibshirani, R. (2013). *Introduction to Statistical Learning with applications in R*. Springer. Pagina 127-174.
 [^19]: Met een deelnemer wordt het object bedoeld dat geobserveerd wordt, bijvoorbeeld een student, een inwoner van Nederland, een opleiding of een organisatie. Met een observatie wordt de waarde bedoeld die de deelnemer heeft voor een bepaalde variabele. Een deelnemer heeft dus meestal een observatie voor meerdere variabelen.
 [^20]: De reden hiervoor is wiskundig van aard.
-[^21]: Een Receiver Operating Characteristic curve (ROC-curve) is een grafiek met op de x-as 1 minus de specificiteit en op de y-as de sensitiviteit van een classificatiemodel. De ROC-curve is de lijn met daarop punten voor alle combinaties van de sensitiviteit en 1 minus de specificiteit voor verschillende criteriumwaarden op basis waarvan geclassificeerd wordt. Het oppervlak onder de curve (Area Under the Curve; AUC) laat zien hoe goed het model in staat is te classificeren onafhankelijk van de criteriumwaarde die gebruikt wordt. 
+[^21]: Een Receiver Operating Characteristic curve (ROC-curve) is een grafiek met op de x-as 1 minus de specificiteit en op de y-as de sensitiviteit van een classificatiemodel. De ROC-curve is de lijn met daarop punten voor alle combinaties van de sensitiviteit en 1 minus de specificiteit voor verschillende criteriumwaarden op basis waarvan geclassificeerd wordt. Het oppervlak onder de curve (Area Under the Curve; AUC) laat zien hoe goed het model in staat is te classificeren onafhankelijk van de criteriumwaarde die gebruikt wordt.

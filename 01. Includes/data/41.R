@@ -105,11 +105,14 @@ hist(Kans_y)
 plot(Kans_y)
 Uitval <- rbinom(250,1,Kans_y)
 table(Uitval)
-Uitval[Uitval == 1] <- "Geen uitval" 
-Uitval[Uitval == 0] <- "Uitval" 
+UitvalTekst <- rep(0,
+                   250)
+UitvalTekst[Uitval == 1] <- "Geen uitval"
+UitvalTekst[Uitval == 0] <- "Uitval"
 
 Uitval_Elektrotechniek <- data.frame(Studentnummer, 
                                      Uitval,
+                                     UitvalTekst,
                                         Leeftijd,
                                         Geslacht,
                                         Vooropleiding,

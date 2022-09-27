@@ -148,7 +148,7 @@ dfToetsen <- tribble(
 sModus <- "Root"
 
 ## lProgrammeertalen
-lProgrammeertalen <- c("R","Python")
+lProgrammeertalen <- c("Python", "R")
 
 ## Verwijder de map _site in SHHO
 rmarkdown::clean_site(preview = FALSE,
@@ -275,8 +275,8 @@ file.copy(file.path(current_folder,list_of_files), new_folder,
 ## klikken en onderzoeken of het allemaal werkt zoals het zou moeten werken.
 
 ## Bekijk de nieuwe website
-output_file <- file.path(here::here(), "_site/index.html")
-browseURL(output_file)
+## output_file <- file.path(here::here(), "_site/Index.html")
+## browseURL(output_file)
 
 ## Nu is de map _site compleet gevuld met alle documenten die nodig zijn. De map
 ## kan nu in het programma WINSP geüpload worden, op deze manier wordt de
@@ -288,3 +288,4 @@ browseURL(output_file)
 ## 04 RUIM OP ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 rm(list = ls())
+print(warnings())

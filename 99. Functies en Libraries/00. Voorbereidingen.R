@@ -34,6 +34,10 @@
 ## zelfgeschreven functies die nodig zijn ook. Dit script wordt gerund aan het
 ## begin van de meeste scripten in deze repository.
 
+if (!require("here", quietly = TRUE)) {
+    install.packages("here", repos = "http://cloud.r-project.org/")
+}
+
 ## xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ## Lees packages in
 source(paste0(here::here(),"/99. Functies en Libraries/Installeer Packages.R"))

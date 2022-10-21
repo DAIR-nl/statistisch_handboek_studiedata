@@ -39,10 +39,22 @@ Vervang_spaties_door_dashes <- function(sToets) {
   gsub(' ', '-', sToets)
 }
 
-Maak_url <- function(published, sModus, sToets_dashed) {
-  if_else(published,
-          paste0(sToets_dashed, "-", sModus, ".html"),
-          "")
+## De python toetsen staan de python repository.
+## De toetsmatrix is in de R code.
+rPythonURL <- "https://rvanlaar.github.io/shs-python/toetsen/"
+
+
+Maak_url <- function(published, sModus, sToets) {
+  if (published) {
+    if (sModus == "Python") {
+      paste0(rPythonURL, sToets, "-", sModus, ".html")
+    } else {
+      sToets_dashed  <- Vervang_spaties_door_dashes(sToets)
+      paste0(sToets_dashed, "-", sModus, ".html")
+    }
+  } else {
+    ""
+  }
 }
 ## In deze functie kan de naam van een toetspagina aangepast worden. De naam
 ## van de toetspagina wordt normaliter gemaakt op basis van de naam van het
@@ -77,8 +89,7 @@ maak_html_toetscel <- function(published, sToets, sModus) {
   # Verwijder voorloopcijfers van de naam
   # Vervang de spaties door dashes
   sToets_naam    <- Corrigeer_toetsnaam(Verwijder_voorloop_cijfers(sToets))
-  sToets_dashed  <- Vervang_spaties_door_dashes(sToets)
-  sToets_url     <- Maak_url(published, sModus, sToets_dashed)
+  sToets_url     <- Maak_url(published, sModus, sToets)
   ## Als de toets gepubliceerd is, gebruik dan published + a,
   ## anders unpublished en geen a.
   if (published) {
@@ -95,17 +106,15 @@ maak_html_toetscel <- function(published, sToets, sModus) {
 }
 
 ## Functie om een toetscel te maken met daarin twee toetsen
-maak_html_toetscel_combi <- function(published_1, sToets_1, 
+maak_html_toetscel_combi <- function(published_1, sToets_1,
                                      published_2, sToets_2,
                                      sModus) {
   # Verwijder voorloopcijfers van de namen
   # Vervang de spaties door dashes
   sToets_naam_1    <- Corrigeer_toetsnaam(Verwijder_voorloop_cijfers(sToets_1))
-  sToets_dashed_1  <- Vervang_spaties_door_dashes(sToets_1)
-  sToets_url_1     <- Maak_url(published_1, sModus, sToets_dashed_1)
+  sToets_url_1     <- Maak_url(published_1, sModus, sToets_1)
   sToets_naam_2    <- Corrigeer_toetsnaam(Verwijder_voorloop_cijfers(sToets_2))
-  sToets_dashed_2  <- Vervang_spaties_door_dashes(sToets_2)
-  sToets_url_2     <- Maak_url(published_2, sModus, sToets_dashed_2)
+  sToets_url_2     <- Maak_url(published_2, sModus, sToets_2)
   ## Als de toets gepubliceerd is, gebruik dan published + a-tag,
   ## anders unpublished en geen a-tag.
   ## TODO: deze code onafhankelijk maken voor published_1 en published_2
@@ -131,21 +140,18 @@ maak_html_toetscel_combi <- function(published_1, sToets_1,
 }
 
 ## Functie om een toetscel te maken met daarin drie toetsen
-maak_html_toetscel_tri <- function(published_1, sToets_1, 
+maak_html_toetscel_tri <- function(published_1, sToets_1,
                                      published_2, sToets_2,
                                      published_3, sToets_3,
                                      sModus) {
   # Verwijder voorloopcijfers van de namen
   # Vervang de spaties door dashes
   sToets_naam_1    <- Corrigeer_toetsnaam(Verwijder_voorloop_cijfers(sToets_1))
-  sToets_dashed_1  <- Vervang_spaties_door_dashes(sToets_1)
-  sToets_url_1     <- Maak_url(published_1, sModus, sToets_dashed_1)
+  sToets_url_1     <- Maak_url(published_1, sModus, sToets_1)
   sToets_naam_2    <- Corrigeer_toetsnaam(Verwijder_voorloop_cijfers(sToets_2))
-  sToets_dashed_2  <- Vervang_spaties_door_dashes(sToets_2)
-  sToets_url_2     <- Maak_url(published_2, sModus, sToets_dashed_2)
+  sToets_url_2     <- Maak_url(published_2, sModus, sToets_2)
   sToets_naam_3    <- Corrigeer_toetsnaam(Verwijder_voorloop_cijfers(sToets_3))
-  sToets_dashed_3  <- Vervang_spaties_door_dashes(sToets_3)
-  sToets_url_3     <- Maak_url(published_3, sModus, sToets_dashed_3)
+  sToets_url_3     <- Maak_url(published_3, sModus, sToets_3)
   ## Als de toets gepubliceerd is, gebruik dan published + a-tag,
   ## anders unpublished en geen a-tag.
   ## TODO: deze code onafhankelijk maken voor published_1 en published_2

@@ -95,6 +95,17 @@ if (!require("rosetta", quietly = TRUE)) {
             repos="https://cran.microsoft.com/snapshot/2022-07-01/")))
 }
 
+## Installeer mixOmics from bioc manager
+## mixOmics is a dependency for RVAideMemoire
+if (!require("mixOmics", quietly = TRUE)) {
+    if (!require("BiocManager", quietly = TRUE)) {
+        install.packages("BiocManager")
+    }
+    BiocManager::install("mixOmics")
+}
+
+BiocManager::install("mixOmics")
+
 ## Installeer alleen de packages die nog niet geinstalleerd zijn.
 Nieuwe_packages <-
     Gebruikte_packages[!(Gebruikte_packages %in% installed.packages()[, "Package"])]

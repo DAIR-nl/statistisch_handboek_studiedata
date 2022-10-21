@@ -46,7 +46,7 @@ Maak_url <- function(published, sModus, sToets_dashed) {
 }
 ## In deze functie kan de naam van een toetspagina aangepast worden. De naam
 ## van de toetspagina wordt normaliter gemaakt op basis van de naam van het
-## markdown-document. Het komt echter niet altijd helemaal overeen. In de 
+## markdown-document. Het komt echter niet altijd helemaal overeen. In de
 ## naamgeving van het markdown document is het bijvoorbeeld niet mogelijk om een
 ## apostrof (') te schrijven. De naam wordt dan in deze functie aangepast
 ## zodat het wel goed op de website verschijnt. Houdt dit dus zelf bij als er
@@ -109,9 +109,9 @@ maak_html_toetscel_combi <- function(published_1, sToets_1,
   ## Als de toets gepubliceerd is, gebruik dan published + a-tag,
   ## anders unpublished en geen a-tag.
   ## TODO: deze code onafhankelijk maken voor published_1 en published_2
-  
+
     htmltools::withTags(td(class = "innercell",
-      if (published_1) {            
+      if (published_1) {
       a(href = sToets_url_1,
         title = sToets_naam_1,
         class = "published",
@@ -120,7 +120,7 @@ maak_html_toetscel_combi <- function(published_1, sToets_1,
         span(class = "unpublished", sToets_naam_1)
         },
       "/",
-      if (published_2) {            
+      if (published_2) {
       a(href = sToets_url_2,
         title = sToets_naam_2,
         class = "published",
@@ -149,9 +149,9 @@ maak_html_toetscel_tri <- function(published_1, sToets_1,
   ## Als de toets gepubliceerd is, gebruik dan published + a-tag,
   ## anders unpublished en geen a-tag.
   ## TODO: deze code onafhankelijk maken voor published_1 en published_2
-  
+
     htmltools::withTags(td(class = "innercell",
-      if (published_1) {            
+      if (published_1) {
       a(href = sToets_url_1,
         title = sToets_naam_1,
         class = "published",
@@ -160,7 +160,7 @@ maak_html_toetscel_tri <- function(published_1, sToets_1,
         span(class = "unpublished", sToets_naam_1)
         },
       "/",
-      if (published_2) {            
+      if (published_2) {
       a(href = sToets_url_2,
         title = sToets_naam_2,
         class = "published",
@@ -169,7 +169,7 @@ maak_html_toetscel_tri <- function(published_1, sToets_1,
         span(class = "unpublished", sToets_naam_2)
         },
       "/",
-      if (published_3) {            
+      if (published_3) {
       a(href = sToets_url_3,
         title = sToets_naam_3,
         class = "published",

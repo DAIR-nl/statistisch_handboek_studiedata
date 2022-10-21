@@ -12,6 +12,7 @@ Depends:
     R (>= 4.2.0)
 Imports: 
     brms,
+    BiocManager,
     car,
     checkmate,
     dplyr,

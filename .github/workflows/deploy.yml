@@ -28,6 +28,8 @@ jobs:
         run: Rscript Index_Merge_Python.R
       - name: build
         run: Rscript Index_Render_site.R 
+      - name: generate sitemap
+        run: Rscript Index_Sitemap.R
       # Deploy the book's HTML to gh-pages branch
       - name: GitHub Pages action
         uses: peaceiris/actions-gh-pages@v3.6.1

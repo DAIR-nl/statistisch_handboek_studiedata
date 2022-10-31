@@ -154,35 +154,8 @@ sink("_site/sitemap.xml")
 cat(whisker.render(xmltemplate))
 sink()
 
-# browseURL("_site/sitemap.xml")
-
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## 04 FTP DE SITEMAP NAAR DE LIVE SITE ####
-## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-## In dit deel wordt het nieuwe xml-bestand geüpload via WINSCP. In de code
-## wordt dit FTP genoemd, hier is een klein verschil tussen, maar het resultaat
-## is hetzelfde.
-
-## Plaats het bestand op de FTP server; gebruik verbose = TRUE om te zien 
-## wat de server antwoordt
-
-user      <- "jlweb32049"
-password  <- "eFeez9se9ree%doh"
-server    <- "ftp://jlweb320.prolocation.net/html"
-
-ftpUpload(what = "_site/sitemap.xml",
-          to = glue("{server}/sitemap.xml"),
-          verbose = TRUE,
-          userpwd = glue("{user}:{password}"), 
-          ftp.ssl = TRUE, 
-          ssl.verifypeer = FALSE, 
-          ssl.verifyhost = FALSE,
-          prequote="CWD /var/www/virtual/jlweb32049/html/"
-          )
-
-## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## 05 RUIM LOKALE OBJECTEN OP ####
+## 04 RUIM LOKALE OBJECTEN OP ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 rm(dfToetsen, lPaginas, xmltemplate, p, sToets, password, server, user, map_links)

@@ -41,7 +41,7 @@ Vervang_spaties_door_dashes <- function(sToets) {
 
 ## De python toetsen staan de python repository.
 ## De toetsmatrix is in de R code.
-rPythonURL <- "https://rvanlaar.github.io/shs-python/toetsen/"
+rPythonURL <- "https://zone-studiedata.github.io/statistisch_handboek_python/toetsen/"
 
 
 Maak_url <- function(published, sModus, sToets) {

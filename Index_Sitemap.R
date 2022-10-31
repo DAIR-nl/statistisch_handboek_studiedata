@@ -116,7 +116,7 @@ source("01. Includes/code/Toetsen.R")
 ## Maak een lijst van standaard urls
 lPaginas <- c(
   "", # De root
-  "Index",
+  "index",
   "Licentie",
   "Over",
   "Verantwoording",

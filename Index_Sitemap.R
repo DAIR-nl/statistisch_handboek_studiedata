@@ -158,4 +158,4 @@ sink()
 ## 04 RUIM LOKALE OBJECTEN OP ####
 ## +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-rm(dfToetsen, lPaginas, xmltemplate, p, sToets, password, server, user, map_links)
+rm(dfToetsen, lPaginas, xmltemplate, p, sToets, map_links)

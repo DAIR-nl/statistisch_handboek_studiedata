@@ -51,7 +51,10 @@ Imports:
     lmtest,
     mclogit,
     emmeans,
-    schoRsch
+    schoRsch,
+    whisker,
+    httr,
+    RCurl
 Config/testthat/edition: 3
 Config/potools/style: explicit
 Config/Needs/website: usethis, servr

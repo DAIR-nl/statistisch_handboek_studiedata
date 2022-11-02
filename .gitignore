@@ -3,7 +3,6 @@
 .RData
 *.pdf
 #*template.html
-*.md
 *.Rdata
 *_R_cache/
 _site

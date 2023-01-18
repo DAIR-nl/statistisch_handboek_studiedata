@@ -2054,7 +2054,7 @@ sps.contingency.expected_freq(Uitval_studenten_kruistabel)</code></pre>
 <!-- ## OPENBLOK: Chi2-toets-2.py -->
 <pre class="python"><code>import scipy.stats as sps
 sps.chi2_contingency(Uitval_studenten_kruistabel)</code></pre>
-<pre><code>## (4.408606562876835, 0.0357580385423724, 1, array([[474.4124847, 396.5875153],
+<pre><code>## Chi2ContingencyResult(statistic=4.408606562876835, pvalue=0.0357580385423724, dof=1, expected_freq=array([[474.4124847, 396.5875153],
 ##        [415.5875153, 347.4124847]]))</code></pre>
 <!-- ## /OPENBLOK: Chi2-toets-2.py -->
 <p>Bereken de effectmaat Cohen’s <em>w</em> vervolgens op basis van de χ<sup>2</sup>-waarde van de <em>Chi-kwadraat toets voor onafhankelijkheid</em>. <!-- ## OPENBLOK: Chi2-toets-3.py --></p>
@@ -2173,7 +2173,7 @@ sps.contingency.expected_freq(Fisher_Uitval_studenten_kruistabel)</code></pre>
 <!-- ## OPENBLOK: Fishers-Exact-toets.py -->
 <pre class="python"><code>import scipy.stats as sps
 sps.fisher_exact(Fisher_Uitval_studenten_kruistabel, alternative = &#39;two-sided&#39;)</code></pre>
-<pre><code>## (1.3333333333333333, 1.0)</code></pre>
+<pre><code>## SignificanceResult(statistic=1.3333333333333333, pvalue=1.0)</code></pre>
 <!-- ## /OPENBLOK: Fishers-Exact-toets.py -->
 <!-- ## CLOSEDBLOK: Fishers-Exact-toets.py -->
 <!-- ## /CLOSEDBLOK: Fishers-Exact-toets.py -->
@@ -2219,7 +2219,7 @@ sps.fisher_exact(Fisher_Uitval_studenten_kruistabel, alternative = &#39;two-side
 <div id = "footer">
 Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 4.2.2; Python code is uitgevoerd in Python 3.6.13. De gesimuleerde datasets zijn <a href="../Datasets_zipbestand" download>hier</a> te downloaden.
 <br/><br/>
-&copy; 2022 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:02-11-2022
+&copy; 2023 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:18-01-2023
 </div> <!-- ## /CLOSEDBLOK: Footer.R --></p>
 <!-- ## TEKSTBLOK: Extra-Bron.py -->
 </div>

@@ -2034,7 +2034,9 @@ Aantal_observaties = len(dfInstroom_2018_totaal_steekproef)
 sps.binom_test(x = Aantal_hbo_vooropleiding, n = Aantal_observaties, p = 0.113, alternative = &#39;two-sided&#39;)
 
 # Bereken de proportie studenten met een hbo vooropleiding</code></pre>
-<pre><code>## 1.0</code></pre>
+<pre><code>## 1.0
+## 
+## &lt;string&gt;:1: DeprecationWarning: &#39;binom_test&#39; is deprecated in favour of &#39;binomtest&#39; from version 1.7.0 and will be removed in Scipy 1.12.0.</code></pre>
 <pre class="python"><code>Proportie_hbo_vooropleiding = Aantal_hbo_vooropleiding / Aantal_observaties
 
 # Print de proportie
@@ -2061,7 +2063,7 @@ print(Proportie_hbo_vooropleiding)</code></pre>
 <div id = "footer">
 Deze pagina maakt onderdeel uit van het Statistisch Handboek Studiedata, ontwikkeld binnen de zone Veilig en betrouwbaar benutten van studiedata van het Versnellingsplan. R code is uitgevoerd met R versie 4.2.2; Python code is uitgevoerd in Python 3.6.13. De gesimuleerde datasets zijn <a href="../Datasets_zipbestand" download>hier</a> te downloaden.
 <br/><br/>
-&copy; 2022 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:02-11-2022
+&copy; 2023 <a href="https://www.versnellingsplan.nl" target="_blank">Versnellingsplan</a> - Statistisch Handboek Studiedata - <a href="../Licentie.html">Licentie</a> Laatst gewijzigd op:18-01-2023
 </div> <!-- ## /CLOSEDBLOK: Footer.R --></p>
 <!-- ## TEKSTBLOK: Extra-Bron.py -->
 </div>

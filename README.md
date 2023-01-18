@@ -1,3 +1,3 @@
 # R toetsen voor Statistisch Handboek Studiedata
 
-https://zone-studiedata.github.io/statistisch_handboek_studiedata/
+https://dair-nl.github.io/statistisch_handboek_studiedata/
